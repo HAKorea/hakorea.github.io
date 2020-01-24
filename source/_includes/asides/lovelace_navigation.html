@@ -1,0 +1,33 @@
+<section class="aside-module grid__item one-whole lap-one-half">
+  <!-- {% include edit_github.html %} -->
+  {% assign cards = site.lovelace | sort_natural: 'title' %}
+
+  <div class='section'>
+    <h1 class="title delta">Lovelace UI</h1>
+    <ul class='divided sidebar-menu'>
+      <li>{% active_link /lovelace/ 소개 %}</li>
+      <li>{% active_link /lovelace/changelog/ Changelog %}</li>
+    </ul>
+  </div>
+
+  <div class='section'>
+    <h1 class="title delta">Advanced</h1>
+    <ul class='divided sidebar-menu'>
+      <li>{% active_link /lovelace/how-it-works/ 동작 원리 %}</li>
+      <li>{% active_link /lovelace/header-footer/ 헤더 & 푸터 %}</li>
+      <li>{% active_link /lovelace/yaml-mode/ YAML 모드 %}</li>
+      <li>{% active_link /lovelace/views/ Views %}</li>
+      <li><a href='https://developers.home-assistant.io/docs/en/lovelace_custom_card.html'>커스텀 카드 제작 <i icon='icon-external-link'></i></a></li>
+    </ul>
+  </div>
+
+  <div class='section'>
+    <h1 class="title delta">Cards</h1>
+    <ul class='divided sidebar-menu'>
+      {% for card in cards %}
+        <li>{% active_link {{card.url}} {{card.sidebar_label}} %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</section>

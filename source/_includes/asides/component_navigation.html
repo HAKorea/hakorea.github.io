@@ -1,0 +1,71 @@
+{%- assign github_main_repo = 'https://github.com/home-assistant/home-assistant/blob/dev/homeassistant' -%}
+<section class="aside-module grid__item one-whole lap-one-half">
+  {%- include edit_github.html -%}
+
+  <div class='brand-logo-container section'>
+    {%- if page.logo -%}
+      <img src='/images/supported_brands/{{ page.logo }}' />
+    {%- endif -%}
+  </div>
+
+  {%- assign file_parts = page.url | split: '/' | last | split: '.' -%}
+  {%- assign imp_name = file_parts | last -%}
+  {%- assign imp_url = imp_name | prepend: '/components/' | append: '/' -%}
+
+  <div class="section">
+    <kb-alert-link integration="{{ imp_name }}"></kb-alert-link>
+  </div>
+
+  {%- if page.ha_iot_class -%}
+    <div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: {{ page.ha_iot_class }}
+    </div>
+  {%- endif -%}
+
+  {%- if page.ha_quality_scale -%}
+    <div class='section'>
+      Quality Scale: <a href='/docs/quality_scale/'>
+        {%- if page.ha_quality_scale == 'platinum' -%}
+          🏆 (platinum)
+        {%- elsif page.ha_quality_scale == 'gold' -%}
+          🥇 (gold)
+        {%- elsif page.ha_quality_scale == 'silver' -%}
+          🥈 (silver)
+        {%- elsif page.ha_quality_scale == 'internal' -%}
+          🏠 (internal)
+        {%- endif -%}
+      </a>
+    </div>
+  {%- endif -%}
+
+  {%- if page.ha_release -%}
+    <div class='section'>
+      Introduced in release: {{ page.ha_release }}
+    </div>
+  {%- endif -%}
+
+  {%- if page.ha_config_flow -%}
+    <div class='section'>
+      This integration is configurable via UI
+    </div>
+  {%- endif -%}
+
+  <div class='section'>
+    Source: <a href='{{github_main_repo}}{{imp_url}}'>{{imp_url}}</a>
+  </div>
+
+  {%- if page.ha_category.first -%}
+    <div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'>
+    {%- for category in page.ha_category -%}
+      <li>
+        <a href='/integrations/#{{ category | slugify }}'>{{ category }}</a>
+      </li>
+    {%- endfor -%}
+    </ul>
+    </div>
+  {%- endif -%}
+</section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
