@@ -1,0 +1,38 @@
+I"v<p>The <code>iZone</code> integration allows access of control of a local <a href="https://izone.com.au/">iZone</a> ducted reverse-cycle climate control devices. These are largely available in Australia.</p>
+<h2>Supported hardware</h2>
+<p>Any current iZone unit with ducted reverse cycle airconditioning and the CB wired or wireless bridge device installed should currently work. There is currently no support for the iZone lights, reticulation, or other devices.</p>
+<h2>Configuration</h2>
+<p>The iZone component can be configured in two ways.</p>
+<ul>
+<li>Via the integrations configuration of the Home Assistant user interface.</li>
+<li>Or via the <code>configuration.yaml</code> file by adding the following:</li>
+</ul>
+<p>If you load the integration from the integrations window, all local iZone instances are added. The integration will discover any new instances added to the local area later on as well.</p>
+<p>Alternately if there is more than one iZone system on the local network and one or more must be excluded use manual configuration:</p>
+<pre><code class="language-yaml"># Full manual example configuration.yaml entry
+izone:
+  exclude:
+    - &quot;000013170&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Exclude particular units from integration with Home Assistant.</p>
+</span></p></dd></dl>
+</div>
+<h2>Network settings</h2>
+<p>The iZone system uses UDP broadcasts over the local network to find and communicate with iZone devices. For this to work properly, UDP port  12107 must be able to be broadcasted on, 7005 needs to be listened to for broadcasted messages, and TCP port 80 for HTTP data to the bridge. The integration currently listens on <code>0.0.0.0</code> and broadcasts to all broadcast IPv4 local addresses, which is not configurable.</p>
+<h2>Master controller</h2>
+<p>Unit modes off, heat, cool, dry, and fan only are supported. For units fitted with the ‘iSave’ system, which vents in external air into the house, this is available as ‘eco’ mode.</p>
+<h2>Zones</h2>
+<p>Zones have three modes available, closed, open, and auto. These are mapped to Home Assistant modes off, fan only, and auto, respectively. Only the auto mode supports setting the temperature.</p>
+<h2>Debugging</h2>
+<p>If you’re trying to track down issues with the component, set up logging for it:</p>
+<pre><code class="language-yaml"># Example configuration.yaml with logging for iZone
+logger:
+  default: warning
+  logs:
+    homeassistant.components.izone: debug
+    pizone: debug
+</code></pre>
+<p>This will help you to find network connection issues etc.</p>
+:ET

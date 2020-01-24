@@ -1,0 +1,391 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Emulated Hue - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to emulate a Hue Bridge within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/emulated_hue/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Emulated Hue">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/emulated_hue/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to emulate a Hue Bridge within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Emulated Hue">
+    <meta name="twitter:description" content="Instructions on how to emulate a Hue Bridge within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/emulated_hue.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Emulated Hue
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <div class="note warning">
+<p>Be aware that <code>emulated_hue</code> doesn’t work for new users of <strong>Google Home</strong> with <code>emulated_hue</code>. If you’ve not previously set this up and had it working, use the <a href="/integrations/google_assistant/">Google Assistant component</a> or <a href="/integrations/cloud">Nabu Casa cloud</a> component.</p>
+</div>
+<p>The <code>emulated_hue</code> integration provides a virtual Philips Hue bridge, written entirely in software that allows services that work with the Hue API to interact with Home Assistant
+entities. The driving use case behind for functionality is to allow Home Assistant to work with an Amazon Echo or Google Home with no setup cost outside of configuration changes.
+The virtual bridge can turn entities on/off or change the brightness of dimmable lights. The volume level of media players can be controlled as brightness.</p>
+<div class="note">
+A physical Hue Bridge is required for Philips Hue lights to function - this virtual bridge will not replace a physical bridge. Instead, it allows Home Assistant to represent non-Philips Hue devices to Amazon Echo as Philips Hue devices, which Amazon Echo can control with built-in support.
+</div>
+<div class="note">
+It is recommended to assign a static IP address to the computer running Home Assistant. This is because the Amazon Echo discovers devices by IP addresses, and if the IP changes, the Echo won't be able to control it. This is easiest done from your router, see your router's manual for details.
+</div>
+<div class="note">
+<p>Both Google Home and Alexa use the device they were initially set up with for communication with <code>emulated_hue</code>. In other words: if you remove/replace this device you will also break <code>emulated_hue</code>. To recover your <code>emulated_hue</code> functionality, backup your <code>config/emulated_hue_ids.json</code> file, delete the original one and reboot your Home Assistant instance.</p>
+<p>If you added or upgraded to a newer Alexa device and devices are not found, you must change to listen_port: 80. If Alexa responds with “value is out of range for device…” it means switches were automatically added as lights in discovery. Remove each device in the Alexa app. Turn on all the switches in Home Assistant. In the Alexa app go to “Add New Device” select “Switch” and then “other” to add them correctly.</p>
+</div>
+<div class="note">
+<p><a href="https://www.sleepcycle.com" rel="external nofollow">Sleep Cycle</a> and <a href="https://sleep.urbandroid.org" rel="external nofollow">Sleep as Android</a>: smart alarm clock app can use emulated_hue to turn on and off entities. Sleep Cycle only has it implemented in the iOS app, see <a href="https://support.sleepcycle.com/hc/en-us/articles/207670385-Does-Sleep-Cycle-integrates-with-Phillips-Hue-" rel="external nofollow">Sleep Cycle support</a>. The app requires the same configuration as Google Home and does not work if the type is defined as Alexa in the configuration.</p>
+</div>
+<h3>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<p>To enable the emulated Hue bridge, add one of the following configs to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Google Home example configuration.yaml entry
+emulated_hue:
+  listen_port: 80
+  # Google Home does not work on different ports.
+</code></pre>
+<pre><code class="language-yaml"># Amazon Echo example configuration.yaml entry
+emulated_hue:
+  listen_port: 80
+  # Amazon Echo/Alexa stopped working on different ports. Search for "Philips Hue Bridge V1 (round)" in the Alexa App to discover devices.
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The type of assistant which we are emulating. Either <code>alexa</code> or <code>google_home</code>. <strong>This configuration option is deprecated and will be removed in a future release. It is no longer necessary to define type.</strong></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>google_home</p>
+</dd>
+<dt>
+<a class="title-link" name="host_ip" href="#host_ip"></a> host_ip</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IP address that your Home Assistant installation is running on. If you do not specify this option, the integration will attempt to determine the IP address on its own.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="listen_port" href="#listen_port"></a> listen_port</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port the Hue bridge API web server will run on. This can be any free port on your system. However, all new Alexa devices require listen_port: 80. See <code>setcap</code> note below if this is set below <code>1024</code> when Home Assistant is ran as a non-root user.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>8300</p>
+</dd>
+<dt>
+<a class="title-link" name="advertise_ip" href="#advertise_ip"></a> advertise_ip</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>If you need to override the IP address used for UPnP discovery. (For example, using network isolation in Docker)</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="advertise_port" href="#advertise_port"></a> advertise_port</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>If you need to specifically override the advertised UPnP port.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="upnp_bind_multicast" href="#upnp_bind_multicast"></a> upnp_bind_multicast</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Whether or not to bind the UPnP (SSDP) listener to the multicast address (239.255.255.250) or instead to the (unicast) host_ip address specified above (or automatically determined). In special circumstances, like running in a FreeBSD or FreeNAS jail, you may need to disable this.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="off_maps_to_on_domains" href="#off_maps_to_on_domains"></a> off_maps_to_on_domains</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The domains that maps an “off” command to an “on” command. For example, if <code>script</code> is included in the list, and you ask Alexa to “turn off the <em>water plants</em> script,” the command will be handled as if you asked her to turn on the script.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>[“script”, “scene”]</p>
+</dd>
+<dt>
+<a class="title-link" name="expose_by_default" href="#expose_by_default"></a> expose_by_default</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Whether or not entities should be exposed via the bridge by default instead of explicitly (see the ‘emulated_hue’ customization below). Warning: If you have a lot of devices (more than 49 total across all exposed domains), you should be careful with this option. Exposing more devices than Alexa supports can result in it not seeing any of them. If you are having trouble getting any devices to show up, try disabling this, and explicitly exposing just a few devices at a time to see if that fixes it.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="exposed_domains" href="#exposed_domains"></a> exposed_domains</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The domains that are exposed by default if <code>expose_by_default</code> is set to true.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>[“switch”, “light”, “group”, “input_boolean”, “media_player”, “fan”]</p>
+</dd>
+<dt>
+<a class="title-link" name="entities" href="#entities"></a> entities</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Customization for entities.</p>
+</span></p></dd>
+</dl>
+</div>
+<p>A full configuration sample looks like the one below.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+emulated_hue:
+  host_ip: 192.168.1.186
+  listen_port: 8300
+  advertise_ip: 10.0.0.10
+  advertise_port: 8080
+  off_maps_to_on_domains:
+    - script
+    - scene
+  expose_by_default: true
+  exposed_domains:
+    - light
+  entities:
+    light.bedroom_light:
+      name: "Bedside Lamp"
+    light.ceiling_lights:
+      hidden: true
+</code></pre>
+<p>The following are attributes that can be applied in the <code>entities</code> section:</p>
+<ul>
+<li>
+<strong>name</strong> (<em>Optional</em>): The name that the emulated Hue will use. The default for this is the entity’s friendly name.</li>
+<li>
+<strong>hidden</strong> (<em>Optional</em>): Whether or not the emulated Hue bridge should expose the entity. Adding <code>hidden: false</code> will expose the entity to Alexa. The default value for this attribute is controlled by the <code>expose_by_default</code> option.</li>
+</ul>
+<div class="note">
+<p>These attributes used to be found under the <code>customize</code> section of <code>homeassistant</code>, however, they have now been moved to <code>entities</code>. Emulated Hue configuration under <code>homeassistant.customize</code> will be deprecated in the near future.</p>
+</div>
+<h3>
+<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h3>
+<p>You can verify that the <code>emulated_hue</code> integration has been loaded and is responding by pointing a local browser to the following URL:</p>
+<ul>
+<li>
+<code>http://&lt;HA IP Address&gt;:80/description.xml</code> - This URL should return a descriptor file in the form of an XML file.</li>
+<li>
+<code>http://&lt;HA IP Address&gt;:80/api/pi/lights</code> - This will return a list of devices, lights, scenes, groups, etc.. that <code>emulated_hue</code> is exposing to Alexa.</li>
+</ul>
+<p>Verify that the URLs above are using port 80, rather than port 8300 (i.e. <code>http://&lt;HA IP Address&gt;:80/description.xml</code>). Both Google Home and Amazon Alexa/Echo (as of the 2019-08 firmware) require port 80.</p>
+<h3>
+<a class="title-link" name="platform-specific-instructions" href="#platform-specific-instructions"></a> Platform specific instructions</h3>
+<h4>
+<a class="title-link" name="hassio-and-docker" href="#hassio-and-docker"></a> Hass.io and Docker</h4>
+<p>No further actions are required</p>
+<h4>
+<a class="title-link" name="python-venv" href="#python-venv"></a> Python venv</h4>
+<p>An additional step is required to run Home Assistant as a non-root user and use port 80.</p>
+<h5>
+<a class="title-link" name="linux" href="#linux"></a> Linux</h5>
+<p>On Linux systems (Ubuntu, Debian, etc) execute the following command to allow <code>emulated_hue</code> to use port 80 as a non-root user:</p>
+<pre><code class="language-bash">sudo setcap 'cap_net_bind_service=+ep' /srv/homeassistant/homeassistant_venv/bin/python3
+</code></pre>
+<p>Please note that your path may be different depending on your installation method. For example, if you followed the <a href="/docs/installation/virtualenv/">Virtualenv instructions</a>, your path will be <code>/srv/homeassistant/bin/python3</code>.</p>
+<h5>
+<a class="title-link" name="freebsd-and-freenas" href="#freebsd-and-freenas"></a> FreeBSD and FreeNAS</h5>
+<p>On FreeBSD based systems, including FreeNAS, execute the following to allow <code>emulated_hue</code> to use port 80 as a non-root user:</p>
+<pre><code class="language-bash">sysctl net.inet.ip.portrange.reservedhigh=0
+</code></pre>
+<p>You can make this persist by adding the following to <code>/etc/sysctl.conf</code>:</p>
+<pre><code class="language-bash">net.inet.ip.portrange.reservedhigh=0
+</code></pre>
+<h3>
+<a class="title-link" name="license" href="#license"></a> License</h3>
+<p>Much of this code is based on work done by Bruce Locke on his <a href="https://github.com/blocke/ha-local-echo" rel="external nofollow">ha-local-echo</a> project, originally released under the MIT License. The license is located <a href="https://github.com/blocke/ha-local-echo/blob/b9bf5dcaae6d8e305e2283179ffba64bde9ed29e/LICENSE" rel="external nofollow">here</a>.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/emulated_hue.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/home-assistant.png' /></div><div class="section">
+    <kb-alert-link integration="emulated_hue"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Push
+    </div><div class='section'>
+      Quality Scale: <a href='/docs/quality_scale/'>🏠 (internal)</a>
+    </div><div class='section'>
+      Introduced in release: 0.27
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/emulated_hue/'>/components/emulated_hue/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#hub'>Hub</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,37 @@
+I" 
+<p>Particulate matter sensors measure the amount of very small particles in the air. A short introduction how these sensors work can be found on <a href="https://www.open-homeautomation.com/2016/07/19/measuring-air-quality/">Open Home Automation</a>.</p>
+<p>Cheap LED based sensors usually use a GPIO interface that is hard to attach to computers. However, there are a lot of laser LED based sensors on the market that use a serial interface and can be <a href="https://www.open-homeautomation.com/2016/07/20/connecting-an-particulate-matter-sensor-to-your-pc-or-mac/">connected to your Home Assistant system easily with an USB to serial converter</a>.</p>
+<h2>Supported Sensors</h2>
+<p>At this time, the following sensors are supported:</p>
+<ul>
+<li>oneair,s3</li>
+<li>novafitness,sds021</li>
+<li>novafitness,sds011</li>
+<li>plantower,pms1003</li>
+<li>plantower,pms5003</li>
+<li>plantower,pms7003</li>
+<li>plantower,pms2003</li>
+<li>plantower,pms3003</li>
+</ul>
+<h2>Configuration</h2>
+<p>To use your PM sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: serial_pm
+    serial_device: /dev/tty.SLAB_USBtoUART
+    brand: oneair,s3
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='serial_device' href='#serial_device'></a> serial_device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The serial port to use. On *nix systems, it can often be identified by <code>$ ls /dev/tty*</code></p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name displayed in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='brand' href='#brand'></a> brand</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Manufacturer and type of the sensor. (Use a value from the supported sensors list.).</p>
+</span></p></dd></dl>
+</div>
+<h3>Named Sensor Configuration Example</h3>
+<pre><code class="language-yaml">sensor:
+  - platform: serial_pm
+    serial_device: /dev/tty.SLAB_USBtoUART
+    name: Nova
+    brand: novafitness,sds011
+</code></pre>
+:ET

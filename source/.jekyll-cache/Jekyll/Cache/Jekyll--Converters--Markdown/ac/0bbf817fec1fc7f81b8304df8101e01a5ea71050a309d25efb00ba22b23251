@@ -1,0 +1,192 @@
+I"�<p>The HEOS integration adds support for <a href="http://heosbydenon.denon.com">HEOS</a> capable products, such as speakers, amps, and receivers (Denon and Marantz) into Home Assistant. Features currently include:</p>
+<ul>
+<li>Each device is represented as a media player entity</li>
+<li>View the currently playing media</li>
+<li>Control play mode (play, pause, stop, next and previous), volume, mute and shuffle</li>
+<li>Clear playlist</li>
+<li>Select source from device physical inputs and HEOS favorites</li>
+</ul>
+<h2>Configuration</h2>
+<p>HEOS devices are discovered and setup automatically when the <a href="/integrations/discovery">discovery</a> integration is enabled. Alternatively, the integration can be setup through the frontend control panel integrations page or manually by adding the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+heos:
+  host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Address of the device. Example: 192.168.1.32.</p>
+</span></p></dd></dl>
+</div>
+<div class='note info'>
+A connection to a single device enables control for all devices on the network. If you have multiple HEOS devices, enter the host of one that is connected to the LAN via wire or has the strongest wireless signal.
+</div>
+<h2>Services</h2>
+<h3>Service <code>heos.sign_in</code></h3>
+<p>Use the sign-in service to sign the connected controller into a HEOS account so that it can retrieve and play HEOS favorites and playlists. An error message is logged if sign-in is unsuccessful. Example service data payload:</p>
+<pre><code class="language-json">{
+  &quot;username&quot;: &quot;example@example.com&quot;,
+  &quot;password&quot;: &quot;password&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>username</code></td>
+<td>The username or email of the HEOS account. [Required]</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>The password of the HEOS account. [Required]</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>heos.sign_out</code></h3>
+<p>Use the sign-out service to sign the connected controller out of a HEOS account. An error message is logged if sign-out is unsuccessful. There are no parameters to this service.</p>
+<h3>Service <code>media_player.play_media</code></h3>
+<h4>Play Favorite</h4>
+<p>You can play a HEOS favorite by number or name with the <code>media_player.play_media</code> service. Example service data payload:</p>
+<pre><code class="language-json">{
+  &quot;entity_id&quot;: &quot;media_player.office&quot;,
+  &quot;media_content_type&quot;: &quot;favorite&quot;,
+  &quot;media_content_id&quot;: &quot;1&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td><code>entity_id</code> of the player</td>
+</tr>
+<tr>
+<td><code>media_content_type</code></td>
+<td>Set to the value <code>favorite</code></td>
+</tr>
+<tr>
+<td><code>media_content_id</code></td>
+<td>The nubmer (i.e. <code>1</code>) or name (i.e. <code>Thumbprint Radio</code>) of the HEOS favorite</td>
+</tr>
+</tbody>
+</table>
+<h4>Play Playlist</h4>
+<p>You can play a HEOS playlist with the <code>media_player.play_media</code> service. Example service data payload:</p>
+<pre><code class="language-json">{
+  &quot;entity_id&quot;: &quot;media_player.office&quot;,
+  &quot;media_content_type&quot;: &quot;playlist&quot;,
+  &quot;media_content_id&quot;: &quot;Awesome Music&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td><code>entity_id</code> of the player</td>
+</tr>
+<tr>
+<td><code>media_content_type</code></td>
+<td>Set to the value <code>playlist</code></td>
+</tr>
+<tr>
+<td><code>media_content_id</code></td>
+<td>The name of the HEOS playlist</td>
+</tr>
+</tbody>
+</table>
+<h4>Play Quick Select</h4>
+<p>You can play a HEOS Quick Select by nubmer or name with the <code>media_player.play_media</code> service. Example service data payload:</p>
+<pre><code class="language-json">{
+  &quot;entity_id&quot;: &quot;media_player.office&quot;,
+  &quot;media_content_type&quot;: &quot;quick_select&quot;,
+  &quot;media_content_id&quot;: &quot;1&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td><code>entity_id</code> of the player</td>
+</tr>
+<tr>
+<td><code>media_content_type</code></td>
+<td>Set to the value <code>quick_select</code></td>
+</tr>
+<tr>
+<td><code>media_content_id</code></td>
+<td>The quick select number (i.e. <code>1</code>) or name (i.e. <code>Quick Select 1</code>)</td>
+</tr>
+</tbody>
+</table>
+<h4>Play Url</h4>
+<p>You can play a URL through a HEOS media player using the <code>media_player.play_media</code> service. The HEOS player must be able to reach the URL. Example service data payload:</p>
+<pre><code class="language-json">{
+  &quot;entity_id&quot;: &quot;media_player.office&quot;,
+  &quot;media_content_type&quot;: &quot;url&quot;,
+  &quot;media_content_id&quot;: &quot;http://path.to/stream.mp3&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td><code>entity_id</code> of the player to play the URL</td>
+</tr>
+<tr>
+<td><code>media_content_type</code></td>
+<td>Set to the value <code>url</code></td>
+</tr>
+<tr>
+<td><code>media_content_id</code></td>
+<td>The full URL to the stream</td>
+</tr>
+</tbody>
+</table>
+<h2>Notes</h2>
+<ul>
+<li>HEOS groups are not currently supported.</li>
+<li>Receivers with multiple zones are represented as a single media player. They will be turned on when playback is started, but cannot be turned off by the integration at this time.</li>
+</ul>
+<h2>Troubleshooing</h2>
+<h3>Debugging</h3>
+<p>The HEOS integration will log additional information about commands, events, and other messages when the log level is set to <code>debug</code>. Add the the relevant line below to the <code>configuration.yaml</code> to enable debug logging:</p>
+<pre><code class="language-yaml">logger:
+  default: info
+  logs:
+    homeassistant.components.heos: debug
+    pyheos: debug
+</code></pre>
+<h3>Missing Favorites</h3>
+<p>If the HEOS controller is not signed in to a HEOS account, HEOS favorites will not be populated in the media player source selection and the service <code>media_player.play_media</code> for <code>favorite</code> and <code>playlist</code> will fail. Additionally, the following warning will be logged at startup:</p>
+<blockquote>
+<p>IP_ADDRESS is not logged in to a HEOS account and will be unable to retrieve HEOS favorites: Use the ‘heos.sign_in’ service to sign-in to a HEOS account</p>
+</blockquote>
+<p>To resolve this issue, use the <code>heos.sign_in</code> service to sign the controller into an account as documented above. This only needs to be performed once, as the controller will remain signed in while the account credentials are valid.</p>
+:ET

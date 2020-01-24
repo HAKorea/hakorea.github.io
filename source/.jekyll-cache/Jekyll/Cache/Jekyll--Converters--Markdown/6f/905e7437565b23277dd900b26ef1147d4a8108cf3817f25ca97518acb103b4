@@ -1,0 +1,29 @@
+I"!<p>The <code>harman_kardon_avr</code> platform allows you to control Harman Kardon Network Receivers from Home Assistant.</p>
+<p>Supported devices:</p>
+<ul>
+<li>Harman Kardon AVR-151S</li>
+<li>Other Harman Kardon AVR receivers (untested)</li>
+</ul>
+<p>To add a Harman Kardon Network Receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: harman_kardon_avr
+    host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of the device, e.g., 192.168.1.32.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the device. If not set, Harman Kardon AVR is used.</p>
+</span></p><p class='default'>
+Default value: <p>Harman Kardon AVR</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port to talk to the receiver. If not set, 10025 is used.</p>
+</span></p><p class='default'>
+Default value: <p>10025</p>
+</p></dd></dl>
+</div>
+<p>A few notes:</p>
+<ul>
+<li>The newest firmware automatically shuts down the AVR after a certain amount of time. The AVR is then not available on the network anymore, so the ‘on’ command will not work.</li>
+<li>The AVR has no endpoints to determine the volume, muted, playing etc., so if the remote control is used, HA will not know the new states of the device.</li>
+</ul>
+:ET

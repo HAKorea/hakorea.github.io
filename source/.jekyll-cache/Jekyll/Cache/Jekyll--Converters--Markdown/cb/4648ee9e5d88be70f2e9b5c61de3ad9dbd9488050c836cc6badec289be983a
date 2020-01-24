@@ -1,0 +1,66 @@
+I"�,<p><code>Traccar</code> uses GPS for tracking and has support for over 1500 different types of devices. One option is to track the <a href="https://www.traccar.org/client/">Traccar Client</a> app on a smartphone via <code>webhook</code>. The other option is to connect to an existing <a href="https://www.traccar.org/server/">Traccar Server</a> installation which is also available as Hass.io addon.</p>
+<h2>Traccar Client</h2>
+<p>To configure Traccar Client, you must set it up via the integrations panel in the configuration screen. This will give you the webhook URL to use during mobile device configuration. This URL has to be set in the Traccar app.</p>
+<h2>Traccar Server</h2>
+<p>To integrate Traccar Server in Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: traccar
+    host: IP_ADDRESS
+    username: USERNAME
+    password: PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The DNS name or IP Address of the server running Traccar.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for the Traccar server.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for your given account on the Traccar server.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port of your Traccar server.</p>
+</span></p><p class='default'>
+Default value: <p>8082</p>
+</p></dd><dt><a class='title-link' name='ssl' href='#ssl'></a> ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Use HTTPS to connect to Traccar server. <em>NOTE</em> A host <em>cannot</em> be an IP address when this option is enabled.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Verify the certification of the system.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='max_accuracy' href='#max_accuracy'></a> max_accuracy</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Filter positions with higher accuracy than specified.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='skip_accuracy_filter_on' href='#skip_accuracy_filter_on'></a> skip_accuracy_filter_on</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Skip filter position by “max_accuracy filter” if any of specified attributes are pressent on the traccar message.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Additional traccar computed attributes or device-related attributes to include in the scan.</p>
+</span></p></dd><dt><a class='title-link' name='event' href='#event'></a> event</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Traccar events to include in the scan and fire within Home Assistant. <em>NOTE</em> For more info regarding Traccar events please refer to Traccar’s documentation: <a href="https://www.traccar.org/documentation/events/">https://www.traccar.org/documentation/events/</a>.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='device_moving' href='#device_moving'></a> device_moving</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceMoving</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='command_result' href='#command_result'></a> command_result</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>commandResult</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='device_fuel_drop' href='#device_fuel_drop'></a> device_fuel_drop</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceFuelDrop</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='geofence_enter' href='#geofence_enter'></a> geofence_enter</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>geofenceEnter</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='device_offline' href='#device_offline'></a> device_offline</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceOffline</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='driver_changed' href='#driver_changed'></a> driver_changed</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>driverChanged</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='geofence_exit' href='#geofence_exit'></a> geofence_exit</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>geofenceExit</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='device_overspeed' href='#device_overspeed'></a> device_overspeed</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceOverspeed</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='device_online' href='#device_online'></a> device_online</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceOnline</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='device_stopped' href='#device_stopped'></a> device_stopped</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceStopped</strong> event</p>
+</span></p></dd><dt><a class='title-link' name='maintenance' href='#maintenance'></a> maintenance</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>maintenance</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='alarm' href='#alarm'></a> alarm</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>alarm</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='text_message' href='#text_message'></a> text_message</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>textMessage</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='device_unknown' href='#device_unknown'></a> device_unknown</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>deviceUnknown</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='ignition_off' href='#ignition_off'></a> ignition_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>ignitionOff</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='ignition_on' href='#ignition_on'></a> ignition_on</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>ignitionOff</strong> event.</p>
+</span></p></dd><dt><a class='title-link' name='all_events' href='#all_events'></a> all_events</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><strong>allEvents</strong> catchall for all event types.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>The parameter <code>monitored_conditions</code> allows you to track non standard attributes from the traccar platform and use them in your Home Assistant. For example if you need to monitor the state of the non standard attribute <code>alarm</code> and a custom computed attribute <code>mycomputedattribute</code> just fill the configuration with:</p>
+<pre><code class="language-yaml">device_tracker:
+  - platform: traccar
+    ...
+    monitored_conditions: ['alarm', 'mycomputedattribute']
+</code></pre>
+<p>The parameter <code>event</code> allows you to import events from the traccar platform (<a href="https://www.traccar.org/documentation/events/">https://www.traccar.org/documentation/events/</a>) and fire them in your Home Assistant. It accepts a list of events to be monitored and imported and each event must be listed in lowercase snakecase. The events will be fired with the same event name defined in the abovementioned list preceded by the prefix <code>traccar_</code>. For example if you need to import the Traccar events <code>deviceOverspeed</code> and <code>deviceFuelDrop</code> in Home Assistant, you need to fill the <code>event</code> parameter with:</p>
+<pre><code class="language-yaml">device_tracker:
+  - platform: traccar
+    ...
+    event: ['device_overspeed', 'device_fuel_drop']
+</code></pre>
+<p>and as soon as Home Assistant receives those events from the platform, they will be fired as <code>traccar_device_overspeed</code> and <code>traccar_device_fuel_drop</code>.
+<em>NOTE</em> Specify <code>all_events</code> if you want to import all events.</p>
+:ET

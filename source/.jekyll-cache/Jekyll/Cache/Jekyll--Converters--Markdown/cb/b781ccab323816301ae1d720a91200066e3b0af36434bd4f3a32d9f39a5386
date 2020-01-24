@@ -1,0 +1,33 @@
+I" 
+<p>Home Assistant has a built-in integration called <code>device_sun_light_trigger</code> to help you automate your lights. The integration will:</p>
+<ul>
+<li>Fade in the lights when the sun is setting and there are people home</li>
+<li>Turn on the lights when people get home after the sun has set</li>
+<li>Turn off the lights when all people leave the house</li>
+</ul>
+<p>This integration requires the integrations <a href="/integrations/sun/">sun</a>, <a href="/integrations/device_tracker/">device_tracker</a>, <a href="/integrations/person/">person</a> and <a href="/integrations/light/">light</a> to be enabled.</p>
+<p>To enable this integration, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_sun_light_trigger:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='light_group' href='#light_group'></a> light_group</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify a specific light/group of lights that has to be turned on.</p>
+</span></p></dd><dt><a class='title-link' name='light_profile' href='#light_profile'></a> light_profile</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify which light profile to use when turning lights on.</p>
+</span></p><p class='default'>
+Default value: <p>relax</p>
+</p></dd><dt><a class='title-link' name='device_group' href='#device_group'></a> device_group</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify which group to track. The group can contain device_trackers or persons.</p>
+</span></p></dd><dt><a class='title-link' name='disable_turn_off' href='#disable_turn_off'></a> disable_turn_off</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Disable lights being turned off when everybody leaves the house.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>A full configuration example could look like this:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_sun_light_trigger:
+  light_group: group.living_room
+  light_profile: relax
+  device_group: group.my_devices
+  disable_turn_off: 1
+</code></pre>
+:ET

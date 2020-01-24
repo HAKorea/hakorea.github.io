@@ -1,0 +1,35 @@
+I"¢	<p>The <code>awair</code> sensor platform will fetch data from your <a href="https://getawair.com">Awair device(s)</a>.</p>
+<p>You will need to request access to the Awair API and obtain an access token from the Awair <a href="https://developer.getawair.com/">Developer Console</a>.</p>
+<h2>Configuring the Platform</h2>
+<p>To enable these sensors, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: awair
+    access_token: ACCESS_TOKEN
+</code></pre>
+<p>The Awair API has stringent usage quotas. The API method to discover devices in your account is
+limited to only 6 calls per 24 hours. If you find that youâ€™ve exceeded this quota, you may optionally
+append device information to your configuration to bypass this call:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: awair
+    access_token: ACCESS_TOKEN
+    devices:
+      - uuid: UUID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The access token for the Awair API.</p>
+</span></p></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An optional list to manually configure devices rather than relying upon API discovery.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='uuid' href='#uuid'></a> uuid</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>UUID of the Awair sensor to monitor.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Available Sensors</h2>
+<p>The platform will fetch all available sensors from each Awair device linked to your account. Supported sensors:</p>
+<ul>
+<li>Temperature</li>
+<li>Humidity</li>
+<li>CO2</li>
+<li>VOC</li>
+<li>Dust, PM2.5, PM10: varies according to Awair model</li>
+</ul>
+<p>This platform refreshes at an interval based on a 300 API call per-day quota, and the number of devices you have configured.</p>
+:ET

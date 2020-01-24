@@ -1,0 +1,54 @@
+I"ò	<p>There are <em>multiple</em> ways of integrating an OpenWRT router for presence detection. A broad distinction can be made between presence detection methods which actively scan for devices (by default every 12 seconds) and those that are notified by some external service on changes. It is essentially a problem of synchronizing states between two remote machines.</p>
+<ul>
+<li><strong>active scanning</strong><br />
+Scan for devices regularly.
+<ul>
+<li>Advantages:
+<ul>
+<li>robust on an unreliable set-up where the the router may not be reachable occasionally</li>
+</ul>
+</li>
+<li>Disadvantages:
+<ul>
+<li>average six-second delay between connecting and being registered as <code>home</code></li>
+<li>lots of unnecessary network requests</li>
+</ul>
+</li>
+<li>Examples:
+<ul>
+<li><a href="/integrations/ubus">ubus</a></li>
+<li><a href="/integrations/luci">luci</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>passive/event-based</strong><br />
+External services which notify Home Assistant of devices via the <a href="https://developers.home-assistant.io/docs/en/external_api_rest.html">REST API endpoint</a>.
+<ul>
+<li>Advantages:
+<ul>
+<li>devices typically registered in under one second when they connect</li>
+<li>very few network requests</li>
+</ul>
+</li>
+<li>Disadvantages:
+<ul>
+<li>prone to missed events when connectivity between Home Assistant and the router is not guaranteed</li>
+</ul>
+</li>
+<li>Examples:
+<ul>
+<li><a href="https://github.com/mueslo/openwrt_hass_devicetracker">openwrt_hass_devicetracker</a></li>
+<li>your own custom script</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Event-based device tracker</h3>
+<p>This can be achieved by running a simple shell script on the OpenWRT router which calls the appropriate Home Assistant service. An OpenWRT package which does this is listed above. As this method directly calls the <a href="https://developers.home-assistant.io/docs/en/external_api_rest.html#post-api-services-lt-domain-lt-service">service API</a>, no special configuration is necessary on the Home Assistant side, except for ensuring the device_tracker API is running, which is achieved by adding the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">device_tracker:
+</code></pre>
+<p>To get the best of both worlds, you can combine the two approaches, running both a periodic device scanner and an event-based device tracker.</p>
+<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+:ET

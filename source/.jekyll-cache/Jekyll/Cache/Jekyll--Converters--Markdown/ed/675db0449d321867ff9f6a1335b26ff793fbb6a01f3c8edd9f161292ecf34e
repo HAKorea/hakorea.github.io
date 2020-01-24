@@ -1,0 +1,75 @@
+I"Æ<p>The <code>bloomsky</code> integration allows you to access your <a href="https://www.bloomsky.com/">BloomSky</a> weather stationâ€™s.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#camera">Camera</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Setup</h2>
+<p>Obtain your API key from your <a href="https://dashboard.bloomsky.com">BloomSky dashboard</a>. Click <code>developers</code> in the bottom left of the screen.</p>
+<h2>Configuration</h2>
+<p>To integrate your BloomSky hub with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+bloomsky:
+  api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your BloomSky API key.</p>
+</span></p></dd></dl>
+</div>
+<h2>Binary Sensor</h2>
+<p>The <code>bloomsky</code> binary sensor platform allows you to get data from your BloomSky device.</p>
+<p>To get your BloomSky binary sensors working with Home Assistant, follow the instructions above first.</p>
+<h3>Configuration</h3>
+<p>To use your BloomSky binary sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: bloomsky
+    monitored_conditions:
+      - Night
+      - Rain
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensors that you wish to monitor on all of your devices. Select from these options:</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='night' href='#night'></a> night</dt><dd><p class='desc'><span class='description'><p>Night</p>
+</span></p></dd><dt><a class='title-link' name='rain' href='#rain'></a> rain</dt><dd><p class='desc'><span class='description'><p>Rain</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Camera</h2>
+<p>The <code>bloomsky</code> camera integration allows you to view the current photo created by the camera in the <a href="https://www.bloomsky.com">BloomSky</a> weather station. This can work in concert with <a href="#sensor">BloomSky sensors</a>.</p>
+<h3>Configuration</h3>
+<p>To enable this camera in your installation, set up the BloomSky integration with your API key and add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: bloomsky
+</code></pre>
+<h2>Sensor</h2>
+<p>The <code>bloomsky</code> sensor integration allows you to view the measurements made by sensors in the <a href="https://www.bloomsky.com">BloomSky</a> weather station. This can work in concert with the <a href="#camera">BloomSky camera</a>.</p>
+<h3>Configuration</h3>
+<p>To enable these sensors in your installation, set up the BloomSky integration with your API key add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  platform: bloomsky
+  monitored_conditions:
+    - Temperature
+    - Humidity
+    - Pressure
+    - UVIndex
+    - Luminance
+    - Voltage
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensors that you wish to monitor on all of your devices. Select from these options:</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='humidity' href='#humidity'></a> humidity</dt><dd><p class='desc'><span class='description'><p>Humidity</p>
+</span></p></dd><dt><a class='title-link' name='luminance' href='#luminance'></a> luminance</dt><dd><p class='desc'><span class='description'><p>Luminance</p>
+</span></p></dd><dt><a class='title-link' name='pressure' href='#pressure'></a> pressure</dt><dd><p class='desc'><span class='description'><p>Pressure</p>
+</span></p></dd><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>Temperature</p>
+</span></p></dd><dt><a class='title-link' name='uvindex' href='#uvindex'></a> uvindex</dt><dd><p class='desc'><span class='description'><p>UVIndex</p>
+</span></p></dd><dt><a class='title-link' name='voltage' href='#voltage'></a> voltage</dt><dd><p class='desc'><span class='description'><p>Voltage</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>More conditions are available using the <a href="#binary-sensor">BloomSky binary sensor</a> component.</p>
+:ET

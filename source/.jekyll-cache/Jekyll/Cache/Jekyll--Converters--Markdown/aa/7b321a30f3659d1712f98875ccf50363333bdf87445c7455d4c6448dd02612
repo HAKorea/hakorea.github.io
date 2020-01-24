@@ -1,0 +1,126 @@
+I"%<p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
+<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
+<p>After configuring the RFLink hub, covers will be automatically discovered and added. Except the Somfy RTS devices.</p>
+<h3>Setting up a Somfy RTS device</h3>
+<p>You have to add the Somfy RTS manually with the supplied RFlinkLoader (Windows only).</p>
+<p>Press the Learn button on the original Somfy remote enter the following code within 3 seconds. Your blinds will go up and down shortly:</p>
+<pre><code class="language-text">10;RTS;02FFFF;0412;3;PAIR;
+</code></pre>
+<p>Your blinds will go up and down again. This means your RFLink is now paired with your RTS motor.
+To check this enter the following code again and see if there is a record.</p>
+<pre><code class="language-text">10;RTSSHOW;
+</code></pre>
+<pre><code class="language-text">RTS Record: 0 Address: FFFFFF RC: FFFF
+RTS Record: 1 Address: FFFFFF RC: FFFF
+RTS Record: 2 Address: FFFFFF RC: FFFF
+RTS Record: 3 Address: 02FFFF RC: 0018
+RTS Record: 4 Address: FFFFFF RC: FFFF
+RTS Record: 5 Address: FFFFFF RC: FFFF
+RTS Record: 6 Address: FFFFFF RC: FFFF
+RTS Record: 7 Address: FFFFFF RC: FFFF
+RTS Record: 8 Address: FFFFFF RC: FFFF
+RTS Record: 9 Address: FFFFFF RC: FFFF
+RTS Record: 10 Address: FFFFFF RC: FFFF
+RTS Record: 11 Address: FFFFFF RC: FFFF
+RTS Record: 12 Address: FFFFFF RC: FFFF
+RTS Record: 13 Address: FFFFFF RC: FFFF
+RTS Record: 14 Address: FFFFFF RC: FFFF
+RTS Record: 15 Address: FFFFFF RC: FFFF
+</code></pre>
+<p>After configuring the RFLink Somfy RTS you have to add the cover to the <code>configuration.yaml</code> file like any other RFlink device.</p>
+<p>RFLink cover ID’s are composed of: protocol, id, and gateway. For example: <code>RTS_0100F2_0</code>.</p>
+<p>Once the ID of a cover is known, it can be used to configure the cover in Home Assistant, for example, to add it to a different group, hide it or set a nice name.</p>
+<p>Configuring devices as a cover:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: rflink
+    devices:
+      RTS_0100F2_0: {}
+      bofumotor_455201_0f: {}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device_defaults' href='#device_defaults'></a> device_defaults</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The defaults for the devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set default <code>fire_event</code> for RFLink cover devices.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='signal_repetitions' href='#signal_repetitions'></a> signal_repetitions</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set default <code>signal_repetitions</code> for RFLink cover devices.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd></dl></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of covers.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='rflink_ids' href='#rflink_ids'></a> rflink_ids</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>RFLink ID of the device</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name for the device.</p>
+</span></p><p class='default'>
+Default value: <p>RFLink ID</p>
+</p></dd><dt><a class='title-link' name='aliases' href='#aliases'></a> aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Alternative RFLink ID’s this device is known by.</p>
+</span></p></dd><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Fire a <code>button_pressed</code> event if this device is turned on or off.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='signal_repetitions' href='#signal_repetitions'></a> signal_repetitions</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number of times every RFLink command should repeat.</p>
+</span></p></dd><dt><a class='title-link' name='group' href='#group'></a> group</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allow light to respond to group commands (ALLON/ALLOFF).</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='group_aliases' href='#group_aliases'></a> group_aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The <code>aliases</code> which only respond to group commands.</p>
+</span></p></dd><dt><a class='title-link' name='no_group_aliases' href='#no_group_aliases'></a> no_group_aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The <code>aliases</code> which do not respond to group commands.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The option to invert (<code>inverted</code>) on/off commands sent to the RFLink device or not (<code>standard</code>).</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<h3>Setting up a KAKU ASUN-650 device</h3>
+<p>In RFLink, the ON and DOWN command are used to close the cover and the OFF and UP command are used to open the cover. The KAKU (COCO) ASUN-650 works the other way around, it uses the ON command to open the cover and the OFF command to close the cover.</p>
+<p>The RFLink cover device has a property named <code>type</code> that takes 2 values:</p>
+<ul>
+<li><code>standard</code>: Do not invert the on/off commands sent to the RFLink device.</li>
+<li><code>inverted</code>: Invert the on/off commands sent to the RFLink device.</li>
+</ul>
+<p>The following configuration example shows how to use the <code>type</code> property:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry that shows how to
+# use the type property.
+cover:
+  - platform: rflink
+    devices:
+      newkaku_xxxxxxxx_x:
+        name: kaku_inverted_by_type
+        type: inverted
+      newkaku_xxxxxxxx_y:
+        name: kaku_not_inverted_by_type
+        type: standard
+      newkaku_xxxxxxxx_z:
+        name: kaku_inverted_by_default
+      nonkaku_yyyyyyyy_x:
+        name: non_kaku_inverted_by_type
+        type: inverted
+      nonkaku_yyyyyyyy_y:
+        name: non_kaku_not_inverted_by_type
+        type: standard
+      nonkaku_yyyyyyyy_z:
+        name: non_kaku_not_inverted_by_default
+</code></pre>
+<p>The configuration above shows that the <code>type</code> property may be omitted. When the ID starts with <code>newkaku</code>, the component will make sure that the on and off commands are inverted. When the ID does not start with <code>newkaku</code>, the on and off commands are not inverted.</p>
+<h3>Device support</h3>
+<p>See <a href="/integrations/rflink/#device-support">device support</a>.</p>
+<h3>Additional configuration examples</h3>
+<p>Multiple covers with custom names and aliases</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: rflink
+    devices:
+      RTS_0A8720_0:
+        name: enanos
+        aliases:
+          - rts_31e53f_01
+          - rts_32e53f_01
+      RTS_30E542_0:
+        name: comedor
+        aliases:
+          - rts_33e53f_01
+          - rts_fa872e_01
+      RTS_33E542_0:
+        name: dormitorio
+        aliases:
+          - rts_30e53f_01
+          - rts_32e53f_01
+      RTS_32E542_0:
+        name: habitaciones
+        fire_event: true
+</code></pre>
+:ET

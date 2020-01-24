@@ -1,0 +1,77 @@
+I"f<p>You can’t import an existing configuration, you’ll need re-learn it into Home Assistant. There is an experimental WebUI alias Regahss support since 9.0. Before it was required to use a third-party tool.</p>
+<p>Follow devices will be supported and tested:</p>
+<ul>
+<li><a href="https://www.elv.ch/homematic-funkmodul-fuer-raspberry-pi-bausatz.html">HM-MOD-RPI-PCB</a></li>
+<li><a href="https://www.elv.ch/elv-homematic-ip-rf-usb-stick-hmip-rfusb-fuer-alternative-steuerungsplattformen-arr-bausatz.html">HmIP-RFUSB</a></li>
+</ul>
+<pre><code class="language-json">{
+  &quot;rf_enable&quot;: true,
+  &quot;rf&quot;: [
+    {
+      &quot;type&quot;: &quot;CCU2&quot;,
+      &quot;device&quot;: &quot;/dev/ttyAMA0&quot;
+    }
+  ],
+  &quot;wired_enable&quot;: false,
+  &quot;wired&quot;: [
+    {
+      &quot;serial&quot;: &quot;xy&quot;,
+      &quot;key&quot;: &quot;abc&quot;,
+      &quot;ip&quot;: &quot;192.168.0.0&quot;
+    }
+  ],
+  &quot;hmip_enable&quot;: false,
+  &quot;hmip&quot;: [
+    {
+      &quot;type&quot;: &quot;HMIP_CCU2&quot;,
+      &quot;device&quot;: &quot;/dev/ttyUSB0&quot;
+    }
+  ]
+}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='rf_enable' href='#rf_enable'></a> rf_enable</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Required)</span><span class='description'><p>Enable or disable BidCoS-RF.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='rf' href='#rf'></a> rf</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>RF devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Device type for RFD service. Look into the manual of your device.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Device on the host.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='wired_enable' href='#wired_enable'></a> wired_enable</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Required)</span><span class='description'><p>Enable or disable BidCoS-Wired.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='wired' href='#wired'></a> wired</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Wired devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='serial' href='#serial'></a> serial</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Serial number of the device.</p>
+</span></p></dd><dt><a class='title-link' name='key' href='#key'></a> key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The encrypted key.</p>
+</span></p></dd><dt><a class='title-link' name='ip' href='#ip'></a> ip</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of LAN gateway.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='hmip_enable' href='#hmip_enable'></a> hmip_enable</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Required)</span><span class='description'><p>Enable or disable hmip.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='hmip' href='#hmip'></a> hmip</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>HMIP devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Device type for RFD service. Look into the manual of your device.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Device on the host.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Home Assistant configuration</h2>
+<p>Use the following configuration in Home Assistant to use it:</p>
+<pre><code class="language-yaml">homematic:
+  interfaces:
+    rf:
+      host: core-homematic
+      port: 2001
+    wired:
+      host: core-homematic
+      port: 2000
+    hmip:
+      host: core-homematic
+      port: 2010
+</code></pre>
+<h2>Raspberry Pi3</h2>
+<p>With HM-MOD-RPI-PCB you need to add follow into your <code>config.txt</code> on boot partition:</p>
+<pre><code class="language-text">dtoverlay=pi3-miniuart-bt
+</code></pre>
+<h2>HmIP-RFUSB</h2>
+<p>HassOS &gt; 1.11 support HmIP-RFUSB by default and don’t need any configuration. If you run a Linux installation, you need to follow the installation guide from the documentation to set up the UART USB interface on your computer.</p>
+<h2>Web UI</h2>
+<p>To enable the experimental WebUI for built-in CCU specify a port number for “Regahss Webinterface” on the addon configuration page under the network section. After saving the changes, click on the “Open Web UI” button and proceed with the <a href="https://www.eq-3.de/downloads/download/handbuecher/WebUI_Handbuch_eQ-3.pdf">Homematic WebUI</a> configuration.</p>
+:ET

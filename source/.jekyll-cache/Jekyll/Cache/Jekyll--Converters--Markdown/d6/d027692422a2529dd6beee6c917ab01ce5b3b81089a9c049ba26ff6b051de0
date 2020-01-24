@@ -1,0 +1,76 @@
+I"[<p>The <code>serial</code> sensor platform is using the data provided by a device connected to the serial port of the system where Home Assistant is running. With <a href="http://ser2net.sourceforge.net/"><code>ser2net</code></a> and <a href="http://www.dest-unreach.org/socat/"><code>socat</code></a> would it also work for sensors connected to a remote system.</p>
+<p>To check what kind of data is arriving at your serial port, use a command-line tool like <code>minicom</code> or <code>picocom</code> on Linux, on a macOS you can use <code>screen</code> or on Windows <code>putty</code>.</p>
+<pre><code class="language-bash">sudo minicom -D /dev/ttyACM0
+</code></pre>
+<h2>Configuration</h2>
+<p>To setup a serial sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: serial
+    serial_port: /dev/ttyACM0
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='serial_port' href='#serial_port'></a> serial_port</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Local serial port where the sensor is connected and access is granted.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Friendly name to use for the frontend. Default to “Serial sensor”.</p>
+</span></p></dd><dt><a class='title-link' name='baudrate' href='#baudrate'></a> baudrate</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Baudrate of the serial port.</p>
+</span></p><p class='default'>
+Default value: <p>9600 Bps</p>
+</p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the serial line.</p>
+</span></p></dd></dl>
+</div>
+<h2><code>value_template</code> for Template sensor</h2>
+<h3>TMP36</h3>
+<pre><code class="language-yaml">&quot;{{ (((states('sensor.serial_sensor') | float * 5 / 1024 ) - 0.5) * 100) | round(1) }}&quot;
+</code></pre>
+<h2>Examples</h2>
+<h3>Arduino</h3>
+<p>For controllers of the Arduino family, a possible sketch to read the temperature and the humidity could look like the sample below.The returned data is in JSON format and can be split into the individual sensor values using a <a href="/docs/configuration/templating/#processing-incoming-data">template</a>.</p>
+<pre><code class="language-c">#include &lt;ArduinoJson.h&gt;
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  StaticJsonDocument&lt;100&gt; jsonBuffer;
+
+  jsonBuffer[&quot;temperature&quot;] = analogRead(A0);
+  jsonBuffer[&quot;humidity&quot;] = analogRead(A1);
+
+  serializeJson(jsonBuffer, Serial);
+  Serial.println();
+  
+  delay(1000);
+}
+</code></pre>
+<h3>Devices returning multiple sensors as a text string</h3>
+<p>For devices that return multiple sensors as a concatenated string of values with a delimiter, (i.e., the returned string is not JSON formatted) you can make several template sensors, all using the same serial response. For example, a stream from the <a href="https://www.sparkfun.com/products/retired/9800">Sparkfun USB Weather Board</a> includes temperature, humidity and barometric pressure within it returned text string. Sample returned data:</p>
+<pre><code class="language-c">$,24.1,50,12.9,1029.83,0.0,0.00,*
+$,24.3,51,12.8,1029.76,0.0,0.00,*
+</code></pre>
+<p>To parse this into individual sensors, split using the comma delimiter and then create a template sensor for each item of interest.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: serial
+    serial_port: /dev/ttyUSB0
+    baudrate: 9600
+
+  - platform: template
+    sensors:
+      my_temperature_sensor:
+        friendly_name: Temperature
+        unit_of_measurement: &quot;°C&quot;
+        value_template: &quot;{{ states('sensor.serial_sensor').split(',')[1] | float }}&quot;
+      my_humidity_sensor:
+        friendly_name: Humidity
+        unit_of_measurement: &quot;%&quot;
+        value_template: &quot;{{ states('sensor.serial_sensor').split(',')[2] | float }}&quot;
+      my_barometer:
+        friendly_name: Barometer
+        unit_of_measurement: &quot;mbar&quot;
+        value_template: &quot;{{ states('sensor.serial_sensor').split(',')[4] | float }}&quot;
+</code></pre>
+<h3>Digispark USB Development Board</h3>
+<p>This <a href="/blog/2017/10/23/simple-analog-sensor/">blog post</a> describes the setup with a Digispark USB Development Board.</p>
+:ET

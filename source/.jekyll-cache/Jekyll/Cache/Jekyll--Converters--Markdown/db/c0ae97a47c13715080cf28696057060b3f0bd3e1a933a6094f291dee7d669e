@@ -1,0 +1,21 @@
+I"Ù<p>Conditions are an optional part of an automation rule and can be used to prevent an action from happening when triggered. When a condition does not return true, the automation will stop executing. Conditions look very similar to triggers but are very different. A trigger will look at events happening in the system while a condition only looks at how the system looks right now. A trigger can observe that a switch is being turned on. A condition can only see if a switch is currently on or off.</p>
+<p>The available conditions for an automation are the same as for the script syntax so see that page for a <a href="/docs/scripts/conditions/">full list of available conditions</a>.</p>
+<p>Example of using condition:</p>
+<pre><code class="language-yaml">automation:
+- alias: 'Enciende Despacho'
+  trigger:
+    platform: state
+    entity_id: sensor.mini_despacho
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: template
+        value_template: &quot;{{ state_attr('sun.sun', 'elevation') &lt; 4 }}&quot;
+      - condition: template
+        value_template: &quot;{{ states('sensor.sensorluz_7_0') &lt; 10 }}&quot;
+  action:
+    - service: scene.turn_on
+      entity_id: scene.DespiertaDespacho
+</code></pre>
+:ET

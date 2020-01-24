@@ -1,0 +1,72 @@
+I"-<p>The <code>daikin</code> integration integrates Daikin air conditioning systems into Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#climate">Climate</a></li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Supported hardware</h2>
+<ul>
+<li>The European versions of the Wifi Controller Unit (BRP069A41, 42, 43, 45), which is powered by the <a href="https://play.google.com/store/apps/details?id=eu.daikin.remoapp">Daikin Online Controller</a> application. The new versions of WiFi Controller Unit (BRP069Bxx) also should work but it have to be confirmed by users. Tested and working device is BRP069B45.</li>
+<li>The Australian version of the Daikin Wifi Controller Unit BRP072A42. Confirmed working on a Daikin Cora Series Reverse Cycle Split System Air Conditioner 2.5kW Cooling FTXM25QVMA with operation mode, temp, fan swing (3d, horizontal, vertical) which is powered by the <a href="https://itunes.apple.com/au/app/daikin-mobile-controller/id917168708?mt=8">DAIKIN Mobile Controller</a> (<a href="https://play.google.com/store/apps/details?id=eu.daikin.remoapp">Android version</a>) application.</li>
+<li>The Australian version of the Daikin Wifi Controller for <strong>AirBase</strong> units (BRP15B61), which is powered by the <a href="https://play.google.com/store/apps/details?id=au.com.daikin.airbase">Daikin Airbase</a> application.</li>
+</ul>
+<h2>Configuration</h2>
+<p>The Daikin integration can be configured in three ways.</p>
+<ul>
+<li>Automatically via the <a href="/integrations/discovery/">discovery</a> integration.</li>
+<li>Via the Home Assistant user interface where it will let you enter the IP-address of your Daikin AC.</li>
+<li>Or via the <code>configuration.yaml</code> file by adding the following:</li>
+</ul>
+<pre><code class="language-yaml"># Full manual example configuration.yaml entry
+daikin:
+  hosts:
+    - 192.168.4.161
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='hosts' href='#hosts'></a> hosts</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of IP addresses or hostnames.</p>
+</span></p><p class='default'>
+Default value: <p>All discovered hosts</p>
+</p></dd></dl>
+</div>
+<h2>Climate</h2>
+<p>The <code>daikin</code> climate platform integrates Daikin air conditioning systems into Home Assistant, enabling control of setting the following parameters:</p>
+<ul>
+<li><a href="/integrations/climate/#service-climateset_hvac_mode"><strong>set_hvac_mode</strong></a> (<code>off</code>, <code>heat</code>, <code>cool</code>, <code>heat_cool</code>, or <code>fan_only</code>)</li>
+<li><a href="/integrations/climate#service-climateset_temperature"><strong>target temperature</strong></a></li>
+<li><a href="/integrations/climate#service-climateturn_on"><strong>turn on/off</strong></a></li>
+<li><a href="/integrations/climate#service-climateset_fan_mode"><strong>fan mode</strong></a> (speed)</li>
+<li><a href="/integrations/climate#service-climateset_swing_mode"><strong>swing mode</strong></a></li>
+<li><a href="/integrations/climate#service-climateset_preset_mode"><strong>set_preset_mode</strong></a> (away, none)</li>
+</ul>
+<p>Current inside temperature is displayed.</p>
+<div class='note'>
+<p>Some models do not support setting of <strong>fan speed</strong> or <strong>swing mode</strong>.</p>
+</div>
+<div class='note'>
+<p>Preset mode <strong>away</strong> translates to Daikin’s “Holiday Mode”:<br/>
+<br>
+<em>“Holiday mode” is used when you want to turn off your units when you leave you home for a longer time.</em><br>
+<br>
+<em>When “Holiday mode” is enabled, the following action take place:</em></p>
+<ul>
+<li><em>All connected units are turned OFF.</em></li>
+<li><em>All schedule timers are disabled.</em></li>
+</ul>
+</div>
+<h2>Sensor</h2>
+<p>The <code>daikin</code> sensor platform integrates Daikin air conditioning systems into Home Assistant, enabling displaying the following parameters:</p>
+<ul>
+<li>Inside temperature</li>
+<li>Outside temperature</li>
+</ul>
+<div class='note'>
+Some models only report outside temperature when they are turned on.
+</div>
+<h2>Switch</h2>
+<p>Daikin AirBase units exposes zones (typically rooms) that can be switched on/off individually.</p>
+<div class='note'>
+<p>Zones with the name <code>-</code> will be ignored, just as the AirBase application is working.</p>
+</div>
+:ET

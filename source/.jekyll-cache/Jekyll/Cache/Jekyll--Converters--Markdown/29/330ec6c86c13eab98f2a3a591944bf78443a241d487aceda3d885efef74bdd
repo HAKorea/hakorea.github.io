@@ -1,0 +1,24 @@
+I"7<p>This <code>openevse</code> sensor platform pulls data from an <a href="https://www.openevse.com/">OpenEVSE</a> Charging station equipped with an ESP8266-based wifi connection.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: openevse
+    host: IP_ADDRESS
+    monitored_variables:
+      - status
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of your charger.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_variables' href='#monitored_variables'></a> monitored_variables</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to display on the frontend.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='status' href='#status'></a> status</dt><dd><p class='desc'><span class='description'><p>The status of the charger (i.e., “Connected”, “Charging”, etc.).</p>
+</span></p></dd><dt><a class='title-link' name='charge_time' href='#charge_time'></a> charge_time</dt><dd><p class='desc'><span class='description'><p>The number of minutes the charging has been charging, or 0 if it is not charging.</p>
+</span></p></dd><dt><a class='title-link' name='rtc_temp' href='#rtc_temp'></a> rtc_temp</dt><dd><p class='desc'><span class='description'><p>The temperature reported by the real time clock sensor, or 0 if the sensor is not installed.</p>
+</span></p></dd><dt><a class='title-link' name='ir_temp' href='#ir_temp'></a> ir_temp</dt><dd><p class='desc'><span class='description'><p>The temperature reported by the IR remote sensor, or 0 if the sensor is not installed.</p>
+</span></p></dd><dt><a class='title-link' name='ambient_temp' href='#ambient_temp'></a> ambient_temp</dt><dd><p class='desc'><span class='description'><p>The temperature reported by the ambient sensor, or 0 if the sensor is not installed.</p>
+</span></p></dd><dt><a class='title-link' name='usage_session' href='#usage_session'></a> usage_session</dt><dd><p class='desc'><span class='description'><p>The energy usage for the current charging session.</p>
+</span></p></dd><dt><a class='title-link' name='usage_total' href='#usage_total'></a> usage_total</dt><dd><p class='desc'><span class='description'><p>The total energy usage for the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

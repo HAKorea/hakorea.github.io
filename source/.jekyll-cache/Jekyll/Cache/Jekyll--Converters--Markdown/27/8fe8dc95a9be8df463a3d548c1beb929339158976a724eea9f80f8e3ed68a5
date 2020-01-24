@@ -1,0 +1,76 @@
+I"i<p>Keeps track which locks are in your environment, their state and allows you to control them.</p>
+<ul>
+<li>Maintains a state per lock and a combined state <code>all_locks</code>.</li>
+<li>Registers services <code>lock.lock</code>, <code>lock.unlock</code> and <code>lock.open</code> (unlatch) to control locks.</li>
+</ul>
+<h3>Services</h3>
+<p>A lock integration provides the following services:</p>
+<h4>Service <code>lock.lock</code></h4>
+<p>Lock your door, the attribute should appear under a ‘data’ attribute for the service.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Entity of the relevant lock.</td>
+</tr>
+</tbody>
+</table>
+<h5>Example</h5>
+<pre><code class="language-yaml">action:
+  service: lock.lock
+  data:
+    entity_id: lock.my_place
+</code></pre>
+<h4>Service <code>lock.unlock</code></h4>
+<p>Unlock your door, the attribute should appear under a ‘data’ attribute for the service.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Entity of the relevant lock.</td>
+</tr>
+</tbody>
+</table>
+<h5>Example</h5>
+<pre><code class="language-yaml">action:
+  service: lock.unlock
+  data:
+    entity_id: lock.my_place
+</code></pre>
+<h3>Use the services</h3>
+<p>Go to the <strong>Developer Tools</strong>, then to <strong>Call Service</strong> in the frontend, and choose <code>lock.lock</code>, <code>lock.unlock</code> or <code>lock.open</code> from the list of available services (<strong>Services:</strong> on the left). Enter something like the sample below into the <strong>Service Data</strong> field and hit <strong>CALL SERVICE</strong>.</p>
+<pre><code class="language-json">{&quot;entity_id&quot;:&quot;lock.front_door&quot;}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific lock. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+:ET

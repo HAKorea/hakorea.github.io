@@ -1,0 +1,29 @@
+I"³<p>The <code>aprs</code> <a href="https://en.wikipedia.org/wiki/Automatic_Packet_Reporting_System">(Automatic Packet Reporting System)</a> device tracker integration connects to the <a href="http://aprs-is.net/">APRS-IS</a> network for tracking amateur radio devices.</p>
+<h2>Configuration</h2>
+<p>To enable APRS tracking in Home Assistant, add the following section to <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: aprs
+    username: FO0BAR  # or FO0BAR-1 to FO0BAR-15
+    callsigns:
+      - 'XX0FOO*'
+      - 'YY0BAR-1'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your callsign (or callsign-SSID combination). This is used to connect to the host. Note: Do not use the same callsign or callsign-SSID combination as a device you intend to track: the APRS-IS network will not route the packets to Home Assistant. This is a known limitation of APRS packet routing.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your APRS password. This will verify the connection.</p>
+</span></p><p class='default'>
+Default value: <p>-1</p>
+</p></dd><dt><a class='title-link' name='callsigns' href='#callsigns'></a> callsigns</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of callsigns you wish to track. Wildcard <code>*</code> is allowed. Any callsigns that match will be added as devices.</p>
+</span></p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The APRS server to connect to.</p>
+</span></p><p class='default'>
+Default value: <p>rotate.aprs2.net</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number of seconds to wait to connect to the APRS-IS network before giving up.</p>
+</span></p><p class='default'>
+Default value: <p>30.0</p>
+</p></dd></dl>
+</div>
+<p>Verified connections are only required to send data to the APRS-IS network, which the <code>aprs</code> platform does not yet do.
+However, you are free to verify your connection if you know your APRS password.</p>
+:ET

@@ -1,0 +1,96 @@
+I"N<p>The <code>rest</code> binary sensor platform is consuming a given endpoint which is exposed
+by a
+<a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
+of a device, an application, or a web service.
+The binary sensor has support for GET and POST requests.</p>
+<p>The JSON messages can contain different values like <code>1</code>, <code>&quot;1&quot;</code>,
+<code>TRUE</code>, <code>true</code>, <code>on</code>, or <code>open</code>. If the value is nested then use a
+<a href="/docs/configuration/templating/#processing-incoming-data">template</a>.</p>
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;Binary sensor&quot;,
+    &quot;state&quot;: {
+        &quot;open&quot;: &quot;true&quot;,
+        &quot;timestamp&quot;: &quot;2016-06-20 15:42:52.926733&quot;
+    }
+}
+</code></pre>
+<h2>Configuration</h2>
+<p>To enable this sensor,
+add the following lines to your <code>configuration.yaml</code> file for a GET request:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS/ENDPOINT
+</code></pre>
+<p>or for a POST request:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS/ENDPOINT
+    method: POST
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='resource' href='#resource'></a> resource</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The resource or endpoint that contains the value.</p>
+</span></p><p class='default'>
+Default value: <p>string</p>
+</p></dd><dt><a class='title-link' name='method' href='#method'></a> method</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The method of the request.</p>
+</span></p><p class='default'>
+Default value: <p>GET</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the REST binary sensor.</p>
+</span></p><p class='default'>
+Default value: <p>REST Binary Sensor</p>
+</p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the value.</p>
+</span></p></dd><dt><a class='title-link' name='payload' href='#payload'></a> payload</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send with a POST request. Usually formed as a dictionary.</p>
+</span></p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Verify the certification of the endpoint.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines max time to wait data from the endpoint.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd><dt><a class='title-link' name='authentication' href='#authentication'></a> authentication</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of the HTTP authentication. <code>basic</code> or <code>digest</code>.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The username for accessing the REST endpoint.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The password for accessing the REST endpoint.</p>
+</span></p></dd><dt><a class='title-link' name='headers' href='#headers'></a> headers</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The headers for the requests.</p>
+</span></p></dd></dl>
+</div>
+<div class='note warning'>
+Make sure that the URL exactly matches your endpoint or resource.
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>aREST sensor</h3>
+<p>Instead of using an <a href="/integrations/arest#binary-sensor">aREST</a> binary sensor,
+you could retrieve the value of a device supporting
+aREST directly with a REST binary sensor.</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: rest
+    resource: http://192.168.0.5/digital/9
+    method: GET
+    name: Light
+    device_class: light
+    value_template: '{{ value_json.return_value }}'
+</code></pre>
+<h3>Accessing an HTTP authentication protected endpoint</h3>
+<p>The REST sensor supports HTTP authentication and customized headers.</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS:5000/binary_sensor
+    username: ha1
+    password: test1
+    authentication: basic
+    headers:
+      User-Agent: Home Assistant
+      Content-Type: application/json
+</code></pre>
+<p>The headers will contain all relevant details. This will also give
+you the ability to access endpoints that are protected by tokens.</p>
+<pre><code class="language-bash">Content-Length: 1024
+Host: IP_ADDRESS1:5000
+Authorization: Basic aGExOnRlc3Qx
+Accept-Encoding: identity
+Content-Type: application/json
+User-Agent: Home Assistant
+</code></pre>
+:ET

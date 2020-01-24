@@ -1,0 +1,85 @@
+I"�<p>The <code>garadget</code> cover platform lets you control <a href="https://www.garadget.com/">Garadget</a> garage door futurizers through Home Assistant.</p>
+<h2>Configuration</h2>
+<p>To enable Garadget Covers in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+
+ cover:
+  - platform: garadget
+    covers:
+      first_garage:
+        device: 190028001947343412342341
+        username: YOUR_USERNAME
+        password: YOUR_PASSWORD
+        name: first_garage
+      second_garage:
+        device: 4c003f001151353432134214
+        access_token: df4cc785ff818f2b01396c44142342fccdef
+        name: second_garage
+
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='covers' href='#covers'></a> covers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of your doors.</p>
+</span></p></dd></dl>
+</div>
+<p>If provided, the <strong>access_token</strong> will be used, otherwise the <strong>username</strong> and <strong>password</strong> will be used to automatically generate an access token at start time.</p>
+<h2>Example</h2>
+<p class='img'>
+  <img src='/images/integrations/garadget/cover_garadget_details.png' />
+</p>
+<pre><code class="language-yaml"># Related configuration.yaml entry
+cover:
+  - platform: garadget
+    covers:
+      garadget:
+        device: 190028001947343412342341
+        access_token: !secret garadget_access_token
+        name: Garage door
+
+sensor:
+  - platform: template
+    sensors:
+      garage_door_status:
+        friendly_name: 'State of the door'
+        value_template: &quot;{{ states('cover.garage_door') }}&quot;
+      garage_door_time_in_state:
+        friendly_name: 'Since'
+        value_template: &quot;{{ state_attr('cover.garage_door', 'time_in_state') }}&quot;
+      garage_door_wifi_signal_strength:
+        friendly_name: 'WiFi strength'
+        value_template: &quot;{{ state_attr('cover.garage_door', 'wifi_signal_strength') }}&quot;
+        unit_of_measurement: 'dB'
+
+group:
+  garage_door:
+    name: Garage door
+    entities:
+      - cover.garage_door
+      - sensor.garage_door_status
+      - sensor.garage_door_time_in_state
+      - sensor.garage_door_wifi_signal_strength
+
+customize:
+  sensor.garage_door_time_in_state:
+    icon: mdi:timer-sand
+  sensor.garage_door_wifi_signal_strength:
+    icon: mdi:wifi
+</code></pre>
+<p>Some of the Garadget sensors can create a lot of clutter in the logbook.  Use this section of code in your <code>configuration.yaml</code> to exclude those entries.</p>
+<pre><code class="language-yaml">logbook:
+  exclude:
+    entities:
+      - sensor.garage_door_time_in_state
+      - sensor.garage_door_wifi_signal_strength
+</code></pre>
+<p>As of firmware release 1.17 the garadget device has native support for MQTT. The options allow the end-user to configure the device in the following ways ‘cloud only’, ‘cloud and MQTT’ or ‘MQTT only’.</p>
+<p>For configuration of the garadget as a MQTT cover:</p>
+<pre><code class="language-yaml">cover:
+  - platform: mqtt
+    name: &quot;Garage Door&quot;
+    command_topic: &quot;garadget/device_name/command&quot;
+    state_topic: &quot;garadget/device_name/status&quot;
+    payload_open: &quot;open&quot;
+    payload_close: &quot;close&quot;
+</code></pre>
+:ET

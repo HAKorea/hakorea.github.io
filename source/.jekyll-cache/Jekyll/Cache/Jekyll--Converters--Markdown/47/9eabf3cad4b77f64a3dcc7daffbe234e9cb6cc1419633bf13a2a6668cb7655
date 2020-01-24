@@ -1,0 +1,76 @@
+I"“<p>The <a href="https://www.pushsafer.com/">Pushsafer service</a> is a platform for the notify component. This allows you to send messages to the user using Pushsafer.</p>
+<p>In order to get a private or alias key you need to go to the <a href="https://www.pushsafer.com">Pushsafer website</a> and register.</p>
+<p>To use Pushsafer notifications, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: pushsafer
+    private_key: YOUR_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='private_key' href='#private_key'></a> private_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your private or alias key. Private key = send the notification to all devices with standard params, alias key send the notification to the devices stored in the alias with predefined params.</p>
+</span></p></dd></dl>
+</div>
+<h3>Examples</h3>
+<p>Message to two devices with formatted text.</p>
+<pre><code class="language-yaml">action:
+  service: notify.notify
+  data:
+    title: &quot;Test to 2 devices&quot;
+    message: &quot;Attention [b]bold[/b] text[br][url=https://www.pushsafer.com]Link to Pushsafer[/url]&quot;
+    data:
+      icon: &quot;2&quot;
+      iconcolor: &quot;#FF0000&quot;
+      sound: &quot;2&quot;
+      vibration: &quot;1&quot;
+      url: &quot;https://www.home-assistant.io/&quot;
+      urltitle: &quot;Open Home Assistant&quot;
+      time2live: &quot;0&quot;
+</code></pre>
+<p>Message to one device with formatted text and image from an external URL.</p>
+<pre><code class="language-yaml">action:
+  service: notify.notify
+  data:
+    title: &quot;Test to 1 device with image from an url&quot;
+    message: &quot;Attention [i]italic[/i] Text[br][url=https://www.home-assistant.io/]Testlink[/url]&quot;
+    data:
+      icon: &quot;14&quot;
+      iconcolor: &quot;#FFFF00&quot;
+      sound: &quot;22&quot;
+      vibration: &quot;31&quot;
+      url: &quot;https://www.home-assistant.io/&quot;
+      urltitle: &quot;Open Home Assistant&quot;
+      time2live: &quot;60&quot;
+      picture1:
+        url: &quot;https://www.home-assistant.io/images/integrations/alexa/alexa-512x512.png&quot;
+</code></pre>
+<p>Message to two devices and one device group with formatted text and local image.</p>
+<pre><code class="language-yaml">action:
+  service: notify.notify
+  data:
+    title: &quot;Test to 3 devices with local image&quot;
+    message: &quot;Attention [i]italic[/i] Text[br][url=https://www.home-assistant.io/]Testlink[/url]&quot;
+    target: [&quot;1111&quot;,&quot;2222&quot;,&quot;gs3333&quot;],
+    data:
+      icon: &quot;20&quot;
+      iconcolor: &quot;#FF00FF&quot;
+      sound: &quot;33&quot;
+      vibration: &quot;0&quot;
+      url: &quot;https://www.home-assistant.io/&quot;
+      urltitle: &quot;Open Home Assistant&quot;
+      time2live: &quot;10&quot;
+      priority: &quot;2&quot;
+      retry: &quot;60&quot;
+      expire: &quot;600&quot;
+      answer: &quot;1&quot;
+      picture1: {
+        path: &quot;C:\\Users\\Kevin\\AppData\\Roaming\\.homeassistant\\image-760-testimage.jpg&quot;
+</code></pre>
+<p>To customize your push-notification you can take a look at the <a href="https://www.pushsafer.com/en/pushapi">Pushsafer API description</a>.</p>
+<p>When setting up the application you can use this <a href="/images/favicon-192x192.png">icon</a>.</p>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+:ET

@@ -1,0 +1,26 @@
+I"à<p>Keeps track which switches are in your environment, their state and allows you to control them.</p>
+<ul>
+<li>Maintains a state per switch and a combined state <code>all_switches</code>.</li>
+<li>Registers services <code>switch.turn_on</code>, <code>switch.turn_off</code>, and <code>switch.toggle</code> to control switches.</li>
+</ul>
+<h2>Use the services</h2>
+<p>In the frontend open the sidebar. At the bottom, under <strong>Developer Tools</strong>, click <strong>Services</strong>. From the Service dropdown menu choose <code>switch.turn_on</code> or <code>switch.turn_off</code> from the list of available services. In the Entity dropdown menu choose or enter the entity ID you want to work with. This will enter something like the sample below into the <strong>Service Data</strong> field. Now hit <strong>CALL SERVICE</strong>.</p>
+<pre><code class="language-json">{&quot;entity_id&quot;:&quot;switch.livingroom_pin2&quot;}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>The entity ID of the switch to control. To target all switches, set the entity ID to <code>all</code></td>
+</tr>
+</tbody>
+</table>
+:ET

@@ -1,0 +1,42 @@
+I"•<p>The <code>volkszaehler</code> sensor platform is consuming the system information provided by the <a href="https://wiki.volkszaehler.org/">Volkszaehler</a> API.</p>
+<h2>Configuration</h2>
+<p>To enable the Volkszaehler sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: volkszaehler
+    uuid: DEVICE_UUID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='uuid' href='#uuid'></a> uuid</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The UUID of the device to track.</p>
+</span></p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of the host where Volkszaehler is running.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port where Volkszaehler is listening.</p>
+</span></p><p class='default'>
+Default value: <p>80</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The prefix for the sensors.</p>
+</span></p><p class='default'>
+Default value: <p>Volkszaehler</p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entries to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>average</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='average' href='#average'></a> average</dt><dd><p class='desc'><span class='description'><p>The average power.</p>
+</span></p></dd><dt><a class='title-link' name='consumption' href='#consumption'></a> consumption</dt><dd><p class='desc'><span class='description'><p>The power consumption.</p>
+</span></p></dd><dt><a class='title-link' name='max' href='#max'></a> max</dt><dd><p class='desc'><span class='description'><p>The maximum power.</p>
+</span></p></dd><dt><a class='title-link' name='min' href='#min'></a> min</dt><dd><p class='desc'><span class='description'><p>The minimum power.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Full examples</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: volkszaehler
+    host: demo.volkszaehler.org
+    uuid: '57acbef0-88a9-11e4-934f-6b0f9ecd95a8'
+    monitored_conditions:
+      - average
+      - consumption
+      - min
+      - max
+</code></pre>
+:ET

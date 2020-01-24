@@ -1,0 +1,117 @@
+I"+'<p>The <code>android_ip_webcam</code> integration turns any Android phone or tablet into a network camera with multiple viewing options.</p>
+<p>It’s setup as an MJPEG camera and all settings as switches inside of Home Assistant. You can also expose the sensors. If you have multiple phones, you can use all options inside a list.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Camera</li>
+<li>Sensor</li>
+<li>Switch</li>
+</ul>
+<h2>Setup</h2>
+<p>Download <a href="https://play.google.com/store/apps/details?id=com.pas.webcam">the IP Webcam app</a> and launch the app. When you press ‘Start Server’, it will start streaming video from your phone and the IP address of the device will be shown on screen.</p>
+<h2>Configuration</h2>
+<p>To set up the component, add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+android_ip_webcam:
+  - host: 192.168.1.10
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the phone on the network.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port the IP Webcam listens on.</p>
+</span></p><p class='default'>
+Default value: <p>8080</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the name of the phone.</p>
+</span></p><p class='default'>
+Default value: <p>IP Webcam</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Inclusive)</span><span class='description'><p>The username to access the phone.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Inclusive)</span><span class='description'><p>The password to access the phone.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the update interval of the phone.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display sensor in the frontend. See the list of supported sensors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='audio_connections' href='#audio_connections'></a> audio_connections</dt><dd><p class='desc'><span class='description'><p>The audio connections</p>
+</span></p></dd><dt><a class='title-link' name='battery_level' href='#battery_level'></a> battery_level</dt><dd><p class='desc'><span class='description'><p>The battery level</p>
+</span></p></dd><dt><a class='title-link' name='battery_temp' href='#battery_temp'></a> battery_temp</dt><dd><p class='desc'><span class='description'><p>The battery temperature</p>
+</span></p></dd><dt><a class='title-link' name='battery_voltage' href='#battery_voltage'></a> battery_voltage</dt><dd><p class='desc'><span class='description'><p>The battery voltage</p>
+</span></p></dd><dt><a class='title-link' name='light' href='#light'></a> light</dt><dd><p class='desc'><span class='description'><p>The light level</p>
+</span></p></dd><dt><a class='title-link' name='motion' href='#motion'></a> motion</dt><dd><p class='desc'><span class='description'><p>Motion detection</p>
+</span></p></dd><dt><a class='title-link' name='pressure' href='#pressure'></a> pressure</dt><dd><p class='desc'><span class='description'><p>The current pressure</p>
+</span></p></dd><dt><a class='title-link' name='proximity' href='#proximity'></a> proximity</dt><dd><p class='desc'><span class='description'><p>The proximity</p>
+</span></p></dd><dt><a class='title-link' name='sound' href='#sound'></a> sound</dt><dd><p class='desc'><span class='description'><p>The sound detection</p>
+</span></p></dd><dt><a class='title-link' name='video_connections' href='#video_connections'></a> video_connections</dt><dd><p class='desc'><span class='description'><p>The video connections</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='switches' href='#switches'></a> switches</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display settings in the frontend. See the list of supported switches.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='exposure_lock' href='#exposure_lock'></a> exposure_lock</dt><dd><p class='desc'><span class='description'><p>Control the exposure lock</p>
+</span></p></dd><dt><a class='title-link' name='ffc' href='#ffc'></a> ffc</dt><dd><p class='desc'><span class='description'><p>Control the front-facing camera.</p>
+</span></p></dd><dt><a class='title-link' name='focus' href='#focus'></a> focus</dt><dd><p class='desc'><span class='description'><p>Control the focus.</p>
+</span></p></dd><dt><a class='title-link' name='gps_active' href='#gps_active'></a> gps_active</dt><dd><p class='desc'><span class='description'><p>Control the GPS.</p>
+</span></p></dd><dt><a class='title-link' name='night_vision' href='#night_vision'></a> night_vision</dt><dd><p class='desc'><span class='description'><p>Control the night vision.</p>
+</span></p></dd><dt><a class='title-link' name='overlay' href='#overlay'></a> overlay</dt><dd><p class='desc'><span class='description'><p>Control the overlay.</p>
+</span></p></dd><dt><a class='title-link' name='torch' href='#torch'></a> torch</dt><dd><p class='desc'><span class='description'><p>Control the torch.</p>
+</span></p></dd><dt><a class='title-link' name='whitebalance_lock' href='#whitebalance_lock'></a> whitebalance_lock</dt><dd><p class='desc'><span class='description'><p>Control the white balance lock.</p>
+</span></p></dd><dt><a class='title-link' name='video_recording' href='#video_recording'></a> video_recording</dt><dd><p class='desc'><span class='description'><p>Control the video recording.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='motion_sensor' href='#motion_sensor'></a> motion_sensor</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Activate motion sensor if <code>auto_discovery</code> is disabled.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<div class='note'>
+<p>You need to enable logging in the Android app (<code>Data logging</code> &gt; <code>Enable data logging</code>), if you wish to see the sensor states in Home Assistant. The sensor states stays as <code>unknown</code>, until it’s enabled.</p>
+</div>
+<h2>Full example</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+android_ip_webcam:
+  - host: 192.168.1.202
+    port: 8000
+    sensors:
+      - audio_connections
+      - battery_level
+      - battery_temp
+      - battery_voltage
+      - light
+      - motion
+      - pressure
+      - proximity
+      - sound
+      - video_connections
+    switches:
+      - exposure_lock
+      - ffc
+      - focus
+      - gps_active
+      - night_vision
+      - overlay
+      - torch
+      - whitebalance_lock
+      - video_recording
+  - host: 192.168.1.203
+    port: 8000
+    sensors:
+      - light
+    switches:
+      - torch
+</code></pre>
+<h2>Binary Sensor</h2>
+<p>The <code>android_ip_webcam</code> binary sensor platform lets you observe the motion state of <a href="https://play.google.com/store/apps/details?id=com.pas.webcam">Android IP webcam</a> sensors through Home Assistant. Devices will be configured automatically.</p>
+<h2>Examples</h2>
+<p>You can also setup the binary motion sensor with the following script:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: rest
+    name: Kitchen Motion
+    sensor_class: motion
+    resource: http://IP:8080/sensors.json?sense=motion_active
+    value_template: '{{ value_json.motion_active.data[0][1][0] | round(0) }}'
+</code></pre>
+<h2>Camera</h2>
+<p>The <code>android_ip_webcam</code> integration adds a camera by default if you choose not to use the integration but still want to see the video feed then the <a href="/integrations/mjpeg"><code>mjpeg</code> camera</a> platform can be used.</p>
+<h2>Configuration</h2>
+<p>To enable only the camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://IP_ADDRESS:8080/video
+</code></pre>
+<h2>Sensor</h2>
+<p>The <code>android_ip_webcam</code> sensor platform lets you observe states of <a href="https://play.google.com/store/apps/details?id=com.pas.webcam">Android IP webcam</a> sensors through Home Assistant. Devices will be configured automatically.</p>
+<p>You can setup your own sensors by examining the JSON file from the webcam server: <code>http://IP:8080/sensors.json</code></p>
+:ET

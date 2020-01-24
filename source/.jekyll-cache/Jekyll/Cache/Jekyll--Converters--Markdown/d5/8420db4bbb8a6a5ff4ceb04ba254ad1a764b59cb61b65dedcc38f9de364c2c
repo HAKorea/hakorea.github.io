@@ -1,0 +1,44 @@
+I"x<p>The <code>push</code> camera platform allows you to integrate images sent over HTTP POST to Home Assistant as a camera. External applications/daemons/scripts are therefore able to “stream” images through Home Assistant.</p>
+<p>Optionally the Push Camera can <strong>buffer</strong> a given number of images, creating an animation of the detected motion after the event has been recorded.</p>
+<p>Images are cleared on new events, and events are separated by a soft (configurable) <strong>timeout</strong>.</p>
+<h2>Integration with motionEye</h2>
+<p>The <code>push</code> camera can as an example be used with <a href="https://github.com/ccrisan/motioneye/wiki">motionEye</a> a web frontend for the motion daemon. motionEye is usually configured to save/record files <em><strong>only</strong></em> when motion is detected. It provides a hook to run a command whenever an image is saved, which can be used together with cURL to send the motion detected images to the <code>push</code> camera, as shown in this example:</p>
+<p>In motionEye, under <strong>File Storage -&gt; Run A Command</strong> type in:</p>
+<pre><code class="language-bash">curl -X POST -F &quot;image=@%f&quot; http://my.hass.server.com:8123/api/webhoo\k/my_custom_webhook_id
+# inserting a backslash in the middle of &quot;webhook&quot; stops Motion to move the command to a webhook
+</code></pre>
+<p>Optionally configure motionEye to save only motion triggered images by going into <strong>Still Images -&gt; Capture Mode</strong> and setting <strong>Motion Triggered</strong>. Tune your preferences under <strong>Motion Detection</strong>.</p>
+<p>In this setup, you can configure the push camera to continuously replay the last motion triggered event using a configuration such as:</p>
+<pre><code class="language-yaml">camera:
+  - platform: push
+    name: MotionEye Outdoor
+    buffer: 3
+    timeout: 5
+    webhook_id: my_custom_webhook_id
+</code></pre>
+<h2>Configuration</h2>
+<p>To enable this camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: push
+    name: My Push Camera
+    webhook_id: my_custom_webhook_id
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you would like to give to the camera.</p>
+</span></p><p class='default'>
+Default value: <p>Push Camera</p>
+</p></dd><dt><a class='title-link' name='buffer' href='#buffer'></a> buffer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Number of images to buffer per event. Be conservative, large buffers will starve your system memory.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Amount of time after which the event is considered to have finished.</p>
+</span></p><p class='default'>
+Default value: <p>5 seconds</p>
+</p></dd><dt><a class='title-link' name='webhook_id' href='#webhook_id'></a> webhook_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>User provided string acting as camera identifier and access control, should be a large string (more then 8 chars).</p>
+</span></p></dd><dt><a class='title-link' name='field' href='#field'></a> field</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>HTTP POST field containing the image file</p>
+</span></p><p class='default'>
+Default value: <p>image</p>
+</p></dd></dl>
+</div>
+:ET

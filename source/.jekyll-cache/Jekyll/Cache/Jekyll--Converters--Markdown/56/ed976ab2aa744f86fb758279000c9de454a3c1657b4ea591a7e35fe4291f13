@@ -1,0 +1,108 @@
+I".<p>The <code>google_travel_time</code> sensor provides travel time from the <a href="https://developers.google.com/maps/documentation/distance-matrix/">Google Distance Matrix API</a>.</p>
+<h2>Setup</h2>
+<p>You need to register for an API key by following the instructions <a href="https://github.com/googlemaps/google-maps-services-python#api-keys">here</a>. You only need to turn on the Distance Matrix API.</p>
+<p><a href="https://mapsplatform.googleblog.com/2018/05/introducing-google-maps-platform.html">Google now requires billing</a> to be enabled (and a valid credit card loaded) to access Google Maps APIs. The Distance Matrix API is billed at US$10 per 1000 requests, however, a US$200 per month credit is applied (20,000 requests). By default, the sensor will update the travel time every 5 minutes, making approximately 288 calls per day. Note that at this rate, more than 2 sensors will likely exceed the free credit amount. If you need to run more than 2 sensors, consider changing the <a href="/docs/configuration/platform_options/#scan-interval">scan interval</a> to something longer than 5 minutes to stay within the free credit limit or update the sensors on-demand using an automation (see example below).</p>
+<p>A quota can be set against the API to avoid exceeding the free credit amount. Set the ‘Elements per day’ to a limit of 645 or less. Details on how to configure a quota can be found <a href="https://developers.google.com/maps/documentation/distance-matrix/usage-and-billing#set-caps">here</a></p>
+<h2>Configuration</h2>
+<p>To enable the sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  - platform: google_travel_time
+    api_key: XXXX_XXXXX_XXXXX
+    origin: Trondheim, Norway
+    destination: Paris, France
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your application’s API key (get one by following the instructions above). This key identifies your application for purposes of quota management.</p>
+</span></p></dd><dt><a class='title-link' name='origin' href='#origin'></a> origin</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The starting point for calculating travel distance and time. You can supply one or more locations separated by the pipe character, in the form of an address, latitude/longitude coordinates, or a <a href="https://developers.google.com/places/place-id">Google place ID</a>. When specifying the location using a Google place ID, the ID must be prefixed with <code>place_id:</code>.</p>
+</span></p></dd><dt><a class='title-link' name='destination' href='#destination'></a> destination</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>One or more locations to use as the finishing point for calculating travel distance and time. The options for the destinations parameter are the same as for the origins parameter, described above.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name to display on the sensor. The default is “Google Travel Time - [Travel Mode]” where [Travel Mode] is the mode set in options for the sensor (see option “mode” below).</p>
+</span></p></dd><dt><a class='title-link' name='travel_mode' href='#travel_mode'></a> travel_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can choose between: <code>driving</code>, <code>walking</code>, <code>bicycling</code> or <code>transit</code>. This method is now deprecated, use <code>mode</code> under <code>options</code>.</p>
+</span></p></dd><dt><a class='title-link' name='options' href='#options'></a> options</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A dictionary containing parameters to add to all requests to the Distance Matrix API. A full listing of available options can be found <a href="https://developers.google.com/maps/documentation/distance-matrix/intro#RequestParameters">here</a>.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='mode' href='#mode'></a> mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The travel mode used to calculate the directions/time. Can be <code>driving</code>, <code>bicycling</code>, <code>transit</code> or <code>walking</code>.</p>
+</span></p><p class='default'>
+Default value: <p>driving</p>
+</p></dd><dt><a class='title-link' name='language' href='#language'></a> language</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can choose from a lot of languages: <code>ar</code>, <code>bg</code>, <code>bn</code>, <code>ca</code>, <code>cs</code>, <code>da</code>, <code>de</code>, <code>el</code>, <code>en</code>, <code>es</code>, <code>eu</code>, <code>fa</code>, <code>fi</code>, <code>fr</code>, <code>gl</code>, <code>gu</code>, <code>hi</code>, <code>hr</code>, <code>hu</code>, <code>id</code>, <code>it</code>, <code>iw</code>, <code>ja</code>, <code>kn</code>, <code>ko</code>, <code>lt</code>, <code>lv</code>, <code>ml</code>, <code>mr</code>, <code>nl</code>, <code>no</code>, <code>pl</code>, <code>pt</code>, <code>pt-BR</code>, <code>pt-PT</code>, <code>ro</code>, <code>ru</code>, <code>sk</code>, <code>sl</code>, <code>sr</code>, <code>sv</code>, <code>ta</code>, <code>te</code>, <code>th</code>, <code>tl</code>, <code>tr</code>, <code>uk</code>, <code>vi</code>, <code>zh-CN</code> and <code>zh-TW</code>.</p>
+</span></p></dd><dt><a class='title-link' name='departure_time' href='#departure_time'></a> departure_time</dt><dd><p class='desc'><span class='type'>(<span class='time string'>time | string</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>Can be <code>now</code>, a Unix timestamp, or a 24 hour time string like <code>08:00:00</code>. If you provide a time string, it will be combined with the current date to get travel time for that moment.</p>
+</span></p></dd><dt><a class='title-link' name='arrival_time' href='#arrival_time'></a> arrival_time</dt><dd><p class='desc'><span class='type'>(<span class='time string'>time | string</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>See notes above for <code>departure_time</code>. <code>arrival_time</code> cannot be <code>now</code>, only a Unix timestamp or time string. You can not provide both <code>departure_time</code> and <code>arrival_time</code>. If you do provide both, <code>arrival_time</code> will be removed from the request.</p>
+</span></p></dd><dt><a class='title-link' name='avoid' href='#avoid'></a> avoid</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Indicate what google should avoid when calculating the travel time, you can choose from: <code>tolls</code>, <code>highways</code>, <code>ferries</code>, <code>indoor</code>.</p>
+</span></p></dd><dt><a class='title-link' name='transit_mode' href='#transit_mode'></a> transit_mode</dt><dd><p class='desc'><span class='description'><p>If you opted for <code>transit</code> at <code>travel_mode</code>, you can use this variable to specify which public transport you want to use: <code>bus</code>, <code>subway</code>, <code>train</code>, <code>tram</code> or <code>rail</code>.</p>
+</span></p></dd><dt><a class='title-link' name='transit_routing_preference' href='#transit_routing_preference'></a> transit_routing_preference</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>for the travel time calculation for public transport you can also specify the preference for: <code>less_walking</code> or <code>fewer_transfers</code>.</p>
+</span></p></dd><dt><a class='title-link' name='units' href='#units'></a> units</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set the unit for the sensor in metric or imperial, otherwise the default unit the same as the unit set in <code>unit_system:</code>.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Dynamic Configuration</h2>
+<p>Tracking can be setup to track entities of type <code>device_tracker</code>, <code>zone</code>, <code>sensor</code> and <code>person</code>. If an entity is placed in the origin or destination then every 5 minutes when the platform updates it will use the latest location of that entity.</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  # Tracking entity to entity
+  - platform: google_travel_time
+    name: Phone To Home
+    api_key: XXXX_XXXXX_XXXXX
+    origin: device_tracker.mobile_phone
+    destination: zone.home
+
+  # Tracking entity to zone friendly name
+  - platform: google_travel_time
+    name: Home To Eddie's House
+    api_key: XXXX_XXXXX_XXXXX
+    origin: zone.home
+    destination: Eddies House    # Friendly name of a zone
+
+  # Tracking entity in imperial unit
+  - platform: google_travel_time
+    api_key: XXXX_XXXXX_XXXXX
+    destination: zone.home
+    options:
+      units: imperial    # 'metric' for Metric, 'imperial' for Imperial
+</code></pre>
+<h2>Entity Tracking</h2>
+<ul>
+<li><strong>device_tracker</strong>
+<ul>
+<li>If state is a zone then the zone location will be used</li>
+<li>If state is not a zone it will look for the longitude and latitude attributes</li>
+</ul>
+</li>
+<li><strong>zone</strong>
+<ul>
+<li>Uses the longitude and latitude attributes</li>
+<li>Can also be referenced by just the zone’s friendly name found in the attributes.</li>
+</ul>
+</li>
+<li><strong>sensor</strong>
+<ul>
+<li>If state is a zone or zone friendly name then will use the zone location</li>
+<li>All other states will be passed directly into the Google API
+<ul>
+<li>This includes all valid locations listed in the <em>Configuration Variables</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Updating sensors on-demand using Automation</h2>
+<p>You can also use the <code>homeassistant.update_entity</code> service to update the sensor on-demand. For example, if you want to update <code>sensor.morning_commute</code> every 2 minutes on weekday mornings, you can use the following automation:</p>
+<pre><code class="language-yaml">- id: update_morning_commute_sensor
+  alias: &quot;Commute - Update morning commute sensor&quot;
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    - condition: time
+      after: '08:00:00'
+      before: '11:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.morning_commute
+</code></pre>
+:ET

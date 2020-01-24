@@ -1,0 +1,104 @@
+I"�0<div class='note'>
+<p>The <code>knx</code> integration must be configured correctly to use this integration, see <a href="/integrations/knx">KNX Integration</a>.</p>
+</div>
+<p>The <code>knx</code> climate platform is used as an interface to KNX thermostats and room controllers.</p>
+<p>To use your KNX thermostats in your installation, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+climate:
+   - platform: knx
+     name: HASS-Kitchen.Temperature
+     temperature_address: '5/1/1'
+     setpoint_shift_address: '5/1/2'
+     setpoint_shift_state_address: '5/1/3'
+     target_temperature_state_address: '5/1/4'
+     operation_mode_address: '5/1/5'
+     operation_mode_state_address: '5/1/6'
+</code></pre>
+<p>Alternatively, if your device has dedicated binary group addresses for frost/night/comfort mode:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+climate:
+  - platform: knx
+    name: HASS-Kitchen.Temperature
+    temperature_address: '5/1/1'
+    setpoint_shift_address: '5/1/2'
+    setpoint_shift_state_address: '5/1/3'
+    target_temperature_state_address: '5/1/4'
+    operation_mode_frost_protection_address: '5/1/5'
+    operation_mode_night_address: '5/1/6'
+    operation_mode_comfort_address: '5/1/7'
+    operation_mode_state_address: '5/1/8'
+</code></pre>
+<p>If your device doesn’t support setpoint_shift calculations (i.e. if you don’t provide a <code>setpoint_shift_address</code> value) please set the <code>min_temp</code> and <code>max_temp</code>
+attributes of the climate device to avoid issues with exceeding valid temperature values in the frontend. Please do also make sure to add the <code>target_temperature_address</code>
+to the config in this case.:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+climate:
+  - platform: knx
+    name: HASS-Kitchen.Temperature
+    temperature_address: '5/1/2'
+    target_temperature_address: '5/1/4'
+    target_temperature_state_address: '5/1/1'
+    operation_mode_frost_protection_address: '5/1/5'
+    operation_mode_night_address: '5/1/6'
+    operation_mode_comfort_address: '5/1/7'
+    operation_mode_state_address: '5/1/8'
+    min_temp: 7.0
+    max_temp: 32.0
+</code></pre>
+<p><code>operation_mode_frost_protection_address</code> / <code>operation_mode_night_address</code> / <code>operation_mode_comfort_address</code> are not necessary if <code>operation_mode_address</code> is specified.
+If the actor doesn’t support explicit state communication objects the *_state_address can be configured with the same group address as the writeable *_address. The Read-Flag for the *_state_address communication object has to be set in ETS to support initial reading eg. when starting home-assistant.</p>
+<p>The following values are valid for the <code>hvac_mode</code> attribute:</p>
+<ul>
+<li>Off (maps internally to HVAC_MODE_OFF within Home Assistant)</li>
+<li>Auto (maps internally to HVAC_MODE_AUTO within Home Assistant)</li>
+<li>Heat (maps internally to HVAC_MDOE_HEAT within Home Assistant)</li>
+<li>Cool (maps internally to HVAC_MDOE_COOL within Home Assistant)</li>
+<li>Fan only (maps internally to HVAC_MODE_FAN_ONLY within Home Assistant)</li>
+<li>Dry (maps internally to HVAC_MODE_DRY within Home Assistant)</li>
+</ul>
+<p>The following presets are valid for the <code>preset_mode</code> attribute:</p>
+<ul>
+<li>Comfort (maps internally to PRESET_COMFORT within Home Assistant)</li>
+<li>Standby (maps internally to PRESET_AWAY within Home Assistant)</li>
+<li>Night (maps internally to PRESET_SLEEP within Home Assistant)</li>
+<li>Frost Protection (maps internally to PRESET_ECO within Home Assistant)</li>
+</ul>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for this device used within Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>KNX Climate</p>
+</p></dd><dt><a class='title-link' name='temperature_address' href='#temperature_address'></a> temperature_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>KNX group address for reading current room temperature from KNX bus. <em>DPT 9.001</em></p>
+</span></p></dd><dt><a class='title-link' name='target_temperature_address' href='#target_temperature_address'></a> target_temperature_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX group address for setting target temperature. <em>DPT 9.001</em></p>
+</span></p></dd><dt><a class='title-link' name='target_temperature_state_address' href='#target_temperature_state_address'></a> target_temperature_state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>KNX group address for reading current target temperature from KNX bus. <em>DPT 9.001</em></p>
+</span></p></dd><dt><a class='title-link' name='setpoint_shift_address' href='#setpoint_shift_address'></a> setpoint_shift_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for setpoint_shift. <em>DPT 6.010</em></p>
+</span></p></dd><dt><a class='title-link' name='setpoint_shift_state_address' href='#setpoint_shift_state_address'></a> setpoint_shift_state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for reading setpoint_shift. <em>DPT 6.010</em></p>
+</span></p></dd><dt><a class='title-link' name='setpoint_shift_step' href='#setpoint_shift_step'></a> setpoint_shift_step</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the step size in Kelvin for each step of setpoint_shift.</p>
+</span></p><p class='default'>
+Default value: <p>0.5</p>
+</p></dd><dt><a class='title-link' name='setpoint_shift_min' href='#setpoint_shift_min'></a> setpoint_shift_min</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minimum value of setpoint shift.</p>
+</span></p><p class='default'>
+Default value: <p>-6</p>
+</p></dd><dt><a class='title-link' name='setpoint_shift_max' href='#setpoint_shift_max'></a> setpoint_shift_max</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Maximum value of setpoint shift.</p>
+</span></p><p class='default'>
+Default value: <p>6</p>
+</p></dd><dt><a class='title-link' name='operation_mode_address' href='#operation_mode_address'></a> operation_mode_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for setting operation mode (Frost protection/night/comfort). <em>DPT 20.102</em></p>
+</span></p></dd><dt><a class='title-link' name='operation_mode_state_address' href='#operation_mode_state_address'></a> operation_mode_state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for reading operation mode. <em>DPT 20.102</em></p>
+</span></p></dd><dt><a class='title-link' name='controller_status_address' href='#controller_status_address'></a> controller_status_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for HVAC controller status (in accordance with KNX AN 097/07 rev 3).</p>
+</span></p></dd><dt><a class='title-link' name='controller_status_state_address' href='#controller_status_state_address'></a> controller_status_state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for reading HVAC controller status.</p>
+</span></p></dd><dt><a class='title-link' name='controller_mode_address' href='#controller_mode_address'></a> controller_mode_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for setting HVAC controller modes. <em>DPT 20.105</em></p>
+</span></p></dd><dt><a class='title-link' name='controller_mode_state_address' href='#controller_mode_state_address'></a> controller_mode_state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for reading HVAC Control Mode. <em>DPT 20.105</em></p>
+</span></p></dd><dt><a class='title-link' name='operation_mode_frost_protection_address' href='#operation_mode_frost_protection_address'></a> operation_mode_frost_protection_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for switching on/off frost/heat protection mode.</p>
+</span></p></dd><dt><a class='title-link' name='operation_mode_night_address' href='#operation_mode_night_address'></a> operation_mode_night_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for switching on/off night mode.</p>
+</span></p></dd><dt><a class='title-link' name='operation_mode_comfort_address' href='#operation_mode_comfort_address'></a> operation_mode_comfort_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for switching on/off comfort mode.</p>
+</span></p></dd><dt><a class='title-link' name='operation_modes' href='#operation_modes'></a> operation_modes</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overrides the supported operation modes.</p>
+</span></p></dd><dt><a class='title-link' name='on_off_address' href='#on_off_address'></a> on_off_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for switching the climate device on/off.</p>
+</span></p></dd><dt><a class='title-link' name='on_off_invert' href='#on_off_invert'></a> on_off_invert</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Value for switching the climate device on/off is inverted.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='on_off_state_address' href='#on_off_state_address'></a> on_off_state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>KNX address for gathering the current state (on/off) of the climate device.</p>
+</span></p></dd><dt><a class='title-link' name='min_temp' href='#min_temp'></a> min_temp</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the minimum temperature.</p>
+</span></p></dd><dt><a class='title-link' name='max_temp' href='#max_temp'></a> max_temp</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the maximum temperature.</p>
+</span></p></dd></dl>
+</div>
+:ET

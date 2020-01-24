@@ -1,0 +1,171 @@
+I"PM<p>The <code>wunderground</code> platform uses <a href="https://www.wunderground.com/">Weather Underground</a> as a source for current weather information.</p>
+<div class='note warning'>
+<p>Obtain a WUnderground API key <a href="https://www.wunderground.com/weather/api">here</a>. They no longer offer free API keys, and all keys must be paid for. At this time existing free keys will continue to work, but will be disabled Dec 31, 2018, except you own a personal weather station and provide your data to WU (PWS Uploader). As of Sept 6, 2018 Weather Underground states they are declaring the <a href="https://apicommunity.wunderground.com/weatherapi/topics/end-of-service-for-the-weather-underground-api">End of Service for the Weather Underground API</a>. They say they will develop new plans for non-commercial users. No timeline for this has been announced.</p>
+<p>Please consider this when using the following information.</p>
+</div>
+<p>Configuration</p>
+<p>To add Wunderground to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: wunderground
+    api_key: YOUR_API_KEY
+    monitored_conditions:
+      - alerts
+      - dewpoint_c
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API key for Weather Underground. See above for details.</p>
+</span></p></dd><dt><a class='title-link' name='pws_id' href='#pws_id'></a> pws_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can enter a Personal Weather Station ID. The current list of Wunderground PWS stations is available <a href="https://www.wunderground.com/weatherstation/ListStations.asp">here</a>. If you do not enter a PWS ID, the current location information (latitude and longitude) from your <code>configuration.yaml</code> will be used to display weather conditions.</p>
+</span></p></dd><dt><a class='title-link' name='lang' href='#lang'></a> lang</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify the language that the API returns. The current list of all Wunderground language codes is available <a href="https://www.wunderground.com/weather/api/d/docs?d=language-support">here</a>. If not specified, it defaults to English (EN).</p>
+</span></p><p class='default'>
+Default value: <p>EN</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude coordinate to monitor weather of (required if <strong>longitude</strong> is specified).</p>
+</span></p><p class='default'>
+Default value: <p>Coordinates defined in your <code>configuration.yaml</code></p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude coordinate to monitor weather of (required if <strong>latitude</strong> is specified).</p>
+</span></p><p class='default'>
+Default value: <p>Coordinates defined in your <code>configuration.yaml</code></p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+</span></p><p class='default'>
+Default value: <p>symbol</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='alerts' href='#alerts'></a> alerts</dt><dd><p class='desc'><span class='description'><p>Current severe weather advisories</p>
+</span></p></dd><dt><a class='title-link' name='dewpoint_c' href='#dewpoint_c'></a> dewpoint_c</dt><dd><p class='desc'><span class='description'><p>Temperature in Celsius below which water droplets begin to condense and dew can form</p>
+</span></p></dd><dt><a class='title-link' name='dewpoint_f' href='#dewpoint_f'></a> dewpoint_f</dt><dd><p class='desc'><span class='description'><p>Temperature in Fahrenheit below which water droplets begin to condense and dew can form</p>
+</span></p></dd><dt><a class='title-link' name='dewpoint_string' href='#dewpoint_string'></a> dewpoint_string</dt><dd><p class='desc'><span class='description'><p>Text summary of dew point</p>
+</span></p></dd><dt><a class='title-link' name='feelslike_c' href='#feelslike_c'></a> feelslike_c</dt><dd><p class='desc'><span class='description'><p>Feels like (or apparent) temperature in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='feelslike_f' href='#feelslike_f'></a> feelslike_f</dt><dd><p class='desc'><span class='description'><p>Feels like (or apparent) temperature in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='feelslike_string' href='#feelslike_string'></a> feelslike_string</dt><dd><p class='desc'><span class='description'><p>Text summary of how the current temperature feels like</p>
+</span></p></dd><dt><a class='title-link' name='heat_index_c' href='#heat_index_c'></a> heat_index_c</dt><dd><p class='desc'><span class='description'><p>Heat index (combined effects of the temperature and humidity of the air) in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='heat_index_f' href='#heat_index_f'></a> heat_index_f</dt><dd><p class='desc'><span class='description'><p>Heat index (combined effects of the temperature and humidity of the air) in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='heat_index_string' href='#heat_index_string'></a> heat_index_string</dt><dd><p class='desc'><span class='description'><p>Text summary of current heat index</p>
+</span></p></dd><dt><a class='title-link' name='elevation' href='#elevation'></a> elevation</dt><dd><p class='desc'><span class='description'><p>Elevation in feet</p>
+</span></p></dd><dt><a class='title-link' name='location' href='#location'></a> location</dt><dd><p class='desc'><span class='description'><p>City and State</p>
+</span></p></dd><dt><a class='title-link' name='observation_time' href='#observation_time'></a> observation_time</dt><dd><p class='desc'><span class='description'><p>Text summary of observation time</p>
+</span></p></dd><dt><a class='title-link' name='precip_today_in' href='#precip_today_in'></a> precip_today_in</dt><dd><p class='desc'><span class='description'><p>Total precipitation in inches</p>
+</span></p></dd><dt><a class='title-link' name='precip_today_metric' href='#precip_today_metric'></a> precip_today_metric</dt><dd><p class='desc'><span class='description'><p>Total precipitation in metric units</p>
+</span></p></dd><dt><a class='title-link' name='precip_today_string' href='#precip_today_string'></a> precip_today_string</dt><dd><p class='desc'><span class='description'><p>Text summary of precipitation today</p>
+</span></p></dd><dt><a class='title-link' name='precip_1d_mm' href='#precip_1d_mm'></a> precip_1d_mm</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted precipitation intensity in millimeters</p>
+</span></p></dd><dt><a class='title-link' name='precip_1d_in' href='#precip_1d_in'></a> precip_1d_in</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted precipitation intensity in inches</p>
+</span></p></dd><dt><a class='title-link' name='precip_1d' href='#precip_1d'></a> precip_1d</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted precipitation probability in %</p>
+</span></p></dd><dt><a class='title-link' name='pressure_in' href='#pressure_in'></a> pressure_in</dt><dd><p class='desc'><span class='description'><p>Atmospheric air pressure in inches</p>
+</span></p></dd><dt><a class='title-link' name='pressure_mb' href='#pressure_mb'></a> pressure_mb</dt><dd><p class='desc'><span class='description'><p>Atmospheric air pressure in millibars</p>
+</span></p></dd><dt><a class='title-link' name='pressure_trend' href='#pressure_trend'></a> pressure_trend</dt><dd><p class='desc'><span class='description'><p>Atmospheric air pressure trend signal <code>(+/-)</code></p>
+</span></p></dd><dt><a class='title-link' name='relative_humidity' href='#relative_humidity'></a> relative_humidity</dt><dd><p class='desc'><span class='description'><p>Relative humidity</p>
+</span></p></dd><dt><a class='title-link' name='station_id' href='#station_id'></a> station_id</dt><dd><p class='desc'><span class='description'><p>Your personal weather station (PWS) ID</p>
+</span></p></dd><dt><a class='title-link' name='solarradiation' href='#solarradiation'></a> solarradiation</dt><dd><p class='desc'><span class='description'><p>Current levels of solar radiation</p>
+</span></p></dd><dt><a class='title-link' name='temperature_string' href='#temperature_string'></a> temperature_string</dt><dd><p class='desc'><span class='description'><p>Temperature text combining Fahrenheit and Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_c' href='#temp_c'></a> temp_c</dt><dd><p class='desc'><span class='description'><p>Current temperature in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_f' href='#temp_f'></a> temp_f</dt><dd><p class='desc'><span class='description'><p>Current temperature in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='temp_high_record_c' href='#temp_high_record_c'></a> temp_high_record_c</dt><dd><p class='desc'><span class='description'><p>Maximum temperature measured in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_high_record_f' href='#temp_high_record_f'></a> temp_high_record_f</dt><dd><p class='desc'><span class='description'><p>Maximum temperature measured in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='temp_low_record_c' href='#temp_low_record_c'></a> temp_low_record_c</dt><dd><p class='desc'><span class='description'><p>Minimal temperature measured in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_low_record_f' href='#temp_low_record_f'></a> temp_low_record_f</dt><dd><p class='desc'><span class='description'><p>Minimal temperature measured in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='temp_high_avg_c' href='#temp_high_avg_c'></a> temp_high_avg_c</dt><dd><p class='desc'><span class='description'><p>Average high for today in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_high_avg_f' href='#temp_high_avg_f'></a> temp_high_avg_f</dt><dd><p class='desc'><span class='description'><p>Average high for today in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='temp_low_avg_c' href='#temp_low_avg_c'></a> temp_low_avg_c</dt><dd><p class='desc'><span class='description'><p>Average low for today in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_low_avg_f' href='#temp_low_avg_f'></a> temp_low_avg_f</dt><dd><p class='desc'><span class='description'><p>Average low for today in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='temp_high_1d_c' href='#temp_high_1d_c'></a> temp_high_1d_c</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted high temperature in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_high_1d_f' href='#temp_high_1d_f'></a> temp_high_1d_f</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted high temperature in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='temp_low_1d_c' href='#temp_low_1d_c'></a> temp_low_1d_c</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted low temperature in Celsius</p>
+</span></p></dd><dt><a class='title-link' name='temp_low_1d_f' href='#temp_low_1d_f'></a> temp_low_1d_f</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted low temperature in Fahrenheit</p>
+</span></p></dd><dt><a class='title-link' name='uv' href='#uv'></a> UV</dt><dd><p class='desc'><span class='description'><p>Current levels of UV radiation. See <a href="https://www.wunderground.com/resources/health/uvindex.asp">here</a> for explanation.</p>
+</span></p></dd><dt><a class='title-link' name='visibility_km' href='#visibility_km'></a> visibility_km</dt><dd><p class='desc'><span class='description'><p>Average visibility in km</p>
+</span></p></dd><dt><a class='title-link' name='visibility_mi' href='#visibility_mi'></a> visibility_mi</dt><dd><p class='desc'><span class='description'><p>Average visibility in miles</p>
+</span></p></dd><dt><a class='title-link' name='weather' href='#weather'></a> weather</dt><dd><p class='desc'><span class='description'><p>A human-readable text summary with picture from Wunderground.</p>
+</span></p></dd><dt><a class='title-link' name='weather_1d' href='#weather_1d'></a> weather_1d</dt><dd><p class='desc'><span class='description'><p><a href="#12h"><sup>[12h]</sup></a>: A human-readable weather forecast using imperial units.</p>
+</span></p></dd><dt><a class='title-link' name='weather_1d_metric' href='#weather_1d_metric'></a> weather_1d_metric</dt><dd><p class='desc'><span class='description'><p><a href="#12h"><sup>[12h]</sup></a>: A human-readable weather forecast using metric units.</p>
+</span></p></dd><dt><a class='title-link' name='weather_1h' href='#weather_1h'></a> weather_1h</dt><dd><p class='desc'><span class='description'><p><a href="#1h"><sup>[1h]</sup></a>: Weather conditions in 1 hour. (e.g., “Thunderstorm” etc.)</p>
+</span></p></dd><dt><a class='title-link' name='wind_degrees' href='#wind_degrees'></a> wind_degrees</dt><dd><p class='desc'><span class='description'><p>Wind degrees</p>
+</span></p></dd><dt><a class='title-link' name='wind_dir' href='#wind_dir'></a> wind_dir</dt><dd><p class='desc'><span class='description'><p>Wind direction</p>
+</span></p></dd><dt><a class='title-link' name='wind_gust_kph' href='#wind_gust_kph'></a> wind_gust_kph</dt><dd><p class='desc'><span class='description'><p>Wind gusts speed in kph</p>
+</span></p></dd><dt><a class='title-link' name='wind_gust_mph' href='#wind_gust_mph'></a> wind_gust_mph</dt><dd><p class='desc'><span class='description'><p>Wind gusts speed in mph</p>
+</span></p></dd><dt><a class='title-link' name='wind_gust_1d_kph' href='#wind_gust_1d_kph'></a> wind_gust_1d_kph</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Max. forecasted Wind in kph</p>
+</span></p></dd><dt><a class='title-link' name='wind_gust_1d_mph' href='#wind_gust_1d_mph'></a> wind_gust_1d_mph</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Max. forecasted Wind in mph</p>
+</span></p></dd><dt><a class='title-link' name='wind_kph' href='#wind_kph'></a> wind_kph</dt><dd><p class='desc'><span class='description'><p>Current wind speed in kph</p>
+</span></p></dd><dt><a class='title-link' name='wind_mph' href='#wind_mph'></a> wind_mph</dt><dd><p class='desc'><span class='description'><p>Current wind speed in mph</p>
+</span></p></dd><dt><a class='title-link' name='wind_1d_kph' href='#wind_1d_kph'></a> wind_1d_kph</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted wind speed in kph</p>
+</span></p></dd><dt><a class='title-link' name='wind_1d_mph' href='#wind_1d_mph'></a> wind_1d_mph</dt><dd><p class='desc'><span class='description'><p><a href="#1d"><sup>[1d]</sup></a>: Forecasted wind speed in mph</p>
+</span></p></dd><dt><a class='title-link' name='wind_string' href='#wind_string'></a> wind_string</dt><dd><p class='desc'><span class='description'><p>Text summary of current wind conditions</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>All the conditions listed above will be updated every 5 minutes.</p>
+<h2>Forecasts</h2>
+<h3>12 hour forecasts</h3>
+<p>Monitored conditions marked above with <a name="12h">[12h]</a> are 12 hour forecasts. To get a forecast for different period/daytime replace the <code>_1d_</code> part of the sensor name.  e.g., <code>weather_2n</code> will give you forecast for tomorrow night. Valid values for day are <code>1</code> to <code>4</code> and valid values for daytime are <code>d</code> or <code>n</code>.</p>
+<h3>Daily forecasts</h3>
+<p>Conditions above marked with <a name="1d">[1d]</a> are daily forecasts. To get forecast for different day, replace the number
+in <code>_1d_</code> part of the sensor name. Valid values are from <code>1</code> to <code>4</code>.</p>
+<h3>Hourly forecasts</h3>
+<p>Conditions marked with <a name="1h">[1h]</a> are hourly forecasts. To get forecast for different hour, replace the number
+in the <code>_1h_</code> part of the sensor name with <code>1</code> to <code>36</code>. e.g., <code>weather_24h</code> will give you weather in 24 hours.</p>
+<h2>Additional examples</h2>
+<h3>Daily forecast</h3>
+<pre><code class="language-yaml">sensor:
+  - platform: wunderground
+    api_key: YOUR_API_KEY
+    monitored_conditions:
+      - weather_1d_metric
+      - weather_1n_metric
+      - weather_2d_metric
+      - weather_2n_metric
+      - weather_3d_metric
+      - weather_3n_metric
+      - weather_4d_metric
+      - weather_4n_metric
+
+group:
+  daily_forecast:
+    name: Daily Forecast
+    entities:
+      - sensor.pws_weather_1d_metric
+      - sensor.pws_weather_1n_metric
+      - sensor.pws_weather_2d_metric
+      - sensor.pws_weather_2n_metric
+      - sensor.pws_weather_3d_metric
+      - sensor.pws_weather_3n_metric
+      - sensor.pws_weather_4d_metric
+      - sensor.pws_weather_4n_metric
+</code></pre>
+<p><img src="/images/screenshots/wunderground_daily_forecast.png" alt="Daily Forecast" /></p>
+<h3>Weather overview</h3>
+<pre><code class="language-yaml">sensor:
+  - platform: wunderground
+    api_key: YOUR_API_KEY
+    monitored_conditions:
+      - temp_high_record_c
+      - temp_high_1d_c
+      - temp_c
+      - temp_low_1d_c
+      - temp_low_record_c
+      - precip_1d
+      - precip_1d_mm
+      - wind_kph
+      - wind_1d_kph
+      - alerts
+
+group:
+  weather_overview:
+    name: Weather overview
+    entities:
+      - sensor.pws_weather_1d_metric
+      - sensor.pws_temp_high_record_c
+      - sensor.pws_temp_high_1d_c
+      - sensor.pws_temp_c
+      - sensor.pws_temp_low_1d_c
+      - sensor.pws_temp_low_record_c
+      - sensor.pws_precip_1d
+      - sensor.pws_precip_1d_mm
+      - sensor.pws_wind_kph
+      - sensor.pws_wind_1d_kph
+      - sensor.pws_alerts
+</code></pre>
+<p><img src="/images/screenshots/wunderground_weather_overview.png" alt="Weather overview" /></p>
+<div class='note warning'>
+Note: While the platform is called “wunderground” the sensors will show up in Home Assistant as “PWS” (eg: sensor.pws_weather).
+</div>
+<p>Note that the Weather Underground sensor is added to the entity_registry, so second and subsequent Personal Weather Station ID (pws_id) will have their monitored conditions suffixed with an index number e.g.</p>
+<pre><code class="language-yaml">- sensor.pws_weather_1d_metric_2
+</code></pre>
+<p>Additional details about the API are available <a href="https://www.wunderground.com/weather/api/d/docs">here</a>.</p>
+:ET

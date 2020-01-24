@@ -1,0 +1,144 @@
+I"�4<p><a href="https://zigbee.org/what-is-zigbee/">Zigbee</a> integration for Home Assistant allows you to utilize modules such as the <a href="https://www.digi.com/xbee">XBee</a> as wireless General Purpose Input/Output (GPIO) devices. The integration requires a local Zigbee device to be connected to a serial port. Through this, it will send and receive commands to and from other devices on the Zigbee mesh network.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a> - Digital input pins</li>
+<li><a href="#sensor">Sensor</a> - Analog input pins and temperature sensor</li>
+<li><a href="#light">Light</a> - Digital output pins</li>
+<li><a href="#switch">Switch</a> - Digital output pins</li>
+</ul>
+<h2>Configuration</h2>
+<p>The local Zigbee device (assuming XBee) must have an up to date Router or Coordinator API firmware installed.</p>
+<p>A <code>zigbee</code> section must be present in the <code>configuration.yaml</code> file and contain the following options as required:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+zigbee:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The serial port to which the local Zigbee device is connected.</p>
+</span></p><p class='default'>
+Default value: <p><code>/dev/ttyUSB0</code></p>
+</p></dd><dt><a class='title-link' name='baud' href='#baud'></a> baud</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The baud rate at which to communicate with the local Zigbee device.</p>
+</span></p><p class='default'>
+Default value: <p>9600</p>
+</p></dd></dl>
+</div>
+<p>To find the possible serial port names of your device, run:</p>
+<pre><code class="language-bash">ls /dev/ttyUSB*
+</code></pre>
+<div class='note'>
+The port may also appear as /dev/ttyACM* if you're communicating with the Zigbee device through an Arduino.
+</div>
+<h3>Example</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+zigbee:
+  device: /dev/ttyACM1
+  baud: 115200
+</code></pre>
+<h2>Binary Sensor</h2>
+<p>A <code>zigbee</code> binary sensor in this context is a device connected to one of the digital input pins on a <a href="https://zigbee.org/">Zigbee</a> module. The states reported by such a device are limited to <code>on</code> or <code>off</code>. By default, a binary sensor is considered <code>on</code> when the Zigbee device’s digital input pin is held ‘high’ and considered <code>off</code> when it is held <code>low</code>. This behavior can be inverted by setting the <code>on_state</code> configuration variable to <code>low</code>.</p>
+<h3>Configuration</h3>
+<p>To enable a digital input pin as binary sensor in your installation, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: zigbee
+    name: Hallway PIR Sensor
+    pin: 0
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name you would like to give the binary sensor in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='pin' href='#pin'></a> pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The number identifying which pin to use.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The long 64-bit address of the remote Zigbee device whose digital input pin you’d like to sample. Do not include this variable if you want to sample the local Zigbee device’s pins.</p>
+</span></p></dd><dt><a class='title-link' name='on_state' href='#on_state'></a> on_state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Either <code>high</code> or <code>low</code>, depicting whether the binary sensor is considered <code>on</code> when the pin is <code>high</code> or <code>low</code>.</p>
+</span></p><p class='default'>
+Default value: <p>high</p>
+</p></dd></dl>
+</div>
+<h2>Light</h2>
+<p>A Zigbee light in this context is a light connected to one of the digital output pins on a Zigbee module. It can simply be switched on and off. By default, a light is considered <code>on</code> when the Zigbee device’s digital output is held <code>high</code> and considered <code>off</code> when it is held <code>low</code>. This behavior can be inverted by setting the <code>on_state</code> configuration variable to <code>low</code>.</p>
+<p>To configure a digital output pin as light, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">light:
+  - name: Desk Lamp
+    platform: zigbee
+    pin: 0
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name you would like to give the light in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='pin' href='#pin'></a> pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The number identifying which pin to use.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The long 64-bit address of the remote Zigbee device whose digital output pin you would like to switch. Do not include this variable if you want to switch the local Zigbee device’s pins.</p>
+</span></p></dd><dt><a class='title-link' name='on_state' href='#on_state'></a> on_state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Either <code>high</code> or <code>low</code>, depicting whether the digital output pin is pulled <code>high</code> or <code>low</code> when the light is turned on.</p>
+</span></p><p class='default'>
+Default value: <p>high</p>
+</p></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>There are two types of <a href="https://zigbee.org/">Zigbee</a> sensor available to Home Assistant:</p>
+<ul>
+<li><a href="#analog-input-pin">Analog input pin</a></li>
+<li><a href="#temperature-sensor">Temperature sensor</a> (XBee Pro)</li>
+</ul>
+<p>To configure an analog input pin sensor, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: zigbee
+    name: My Analog Zigbee Input
+    type: analog
+    pin: 0
+    address: 0013A2004233D138
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name you would like to give the sensor in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Set to <code>analog</code> or <code>temperature</code>.</p>
+</span></p></dd><dt><a class='title-link' name='pin' href='#pin'></a> pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number identifying which pin to sample.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The long 64-bit address of the remote Zigbee device whose pin you would like to sample. Do not include this variable if you want to sample the local Zigbee device’s pins.</p>
+</span></p></dd><dt><a class='title-link' name='max_volts' href='#max_volts'></a> max_volts</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum voltage which the input pin is able to read.</p>
+</span></p><p class='default'>
+Default value: <p>1.2</p>
+</p></dd></dl>
+</div>
+<h3>Examples</h3>
+<h4>Analog Input Pin</h4>
+<p>The analog input pins on an XBee (non-Pro) will read 0V to 1.2 V. This is translated by the <a href="https://github.com/flyte/xbee-helper">xbee-helper</a> library into a percentage. The maximum voltage your Zigbee device will read is configurable using the <code>max_volts</code> configuration variable.</p>
+<p>To configure an analog input pin sensor, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">## Example configuration.yaml entry
+sensor:
+  - platform: zigbee
+    name: My Analog Zigbee Input
+    type: analog
+    pin: 0
+    address: 0013A2004233D138
+</code></pre>
+<p>See the <a href="http://knowledge.digi.com/articles/Knowledge_Base_Article/Digital-and-analog-sampling-using-XBee-radios">Digi knowledge base</a> for more XBee sampling details.</p>
+<h4>Temperature Sensor</h4>
+<p>The XBee Pro (and perhaps other third party modules) contains a thermometer device which can be read by using the <code>TP</code> AT command.</p>
+<p>To configure a temperature sensor device, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: zigbee
+    name: Living Room Temperature Zigbee
+    type: temperature
+    address: 0013A20050E752C5
+</code></pre>
+<h2>Switch</h2>
+<p>A Zigbee switch in this context is a device connected to one of the digital output pins on a Zigbee module. It can simply be switched on and off. By default, a switch is considered <code>on</code> when the Zigbee device’s digital output is held <code>high</code> and considered <code>off</code> when it is held <code>low</code>. This behavior can be inverted by setting the <code>on_state</code> configuration variable to <code>low</code>.</p>
+<p>To configure a digital output pin as switch, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">switch:
+  - name: Pond Fountain
+    platform: zigbee
+    pin: 0
+    address: 0013A20040791FA2
+    on_state: low
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name you would like to give the switch in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='pin' href='#pin'></a> pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The number identifying which pin to use.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The long 64-bit address of the remote Zigbee device whose digital output pin you would like to switch. Do not include this variable if you want to switch the local Zigbee device’s pins.</p>
+</span></p></dd><dt><a class='title-link' name='on_state' href='#on_state'></a> on_state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Either <code>high</code> or <code>low</code>, depicting whether the digital output pin is pulled <code>high</code> or <code>low</code> when the switch is turned on.</p>
+</span></p><p class='default'>
+Default value: <p>high</p>
+</p></dd></dl>
+</div>
+:ET

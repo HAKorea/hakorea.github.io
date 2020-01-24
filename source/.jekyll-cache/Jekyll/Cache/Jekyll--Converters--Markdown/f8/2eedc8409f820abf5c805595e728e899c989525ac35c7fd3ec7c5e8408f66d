@@ -1,0 +1,183 @@
+I"0B<p>The <code>life360</code> integration allows you to detect presence using the <a href="#disclaimer">unofficial API</a> of <a href="https://www.life360.com/">Life360</a>.</p>
+<h2>Life360 Account</h2>
+<p>You must first <a href="https://www.life360.com/websignup">create a Life360 account</a>.</p>
+<p>Then in the Home Assistant user interface (UI), click on Configuration in the left pane, then on Integrations and then on the yellow circle in the lower-right corner to “Set up a new integration.” Scroll through the list and click on Life360. Enter your Life360 username and password and click SUBMIT. You can add as many Life360 accounts as you like.</p>
+<p>If you would like to set any advanced options, see the following section. You may want to do this before entering your Life360 account information in the UI, or you can change it at any time. Any of the advanced options you want to set from the section below will need to be set manually in your configuration.yaml file. They are not able to be set from the UI. You can also enter your account information in the configuration file (in addition to, or instead of, the UI) if you prefer.</p>
+<p>After configuring, it is expected for the Life360 integration page to show “This integration has no devices”. You should see a new Life360 device tracker entity showing up on the States page. If it does not:</p>
+<ul>
+<li>Check the <a href="/integrations/device_tracker">device tracker documentation</a>, especially the <code>new_device_defaults</code> setting.</li>
+<li>Check your <code>known_devices.yaml</code>; <code>tracking</code> should be <code>true</code> for your Life360 device.</li>
+<li>In the Life360 app, Location Sharing should be enabled.</li>
+</ul>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='accounts' href='#accounts'></a> accounts</dt><dd><p class='desc'><span class='type'>(<span class='list map'>list | map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your Life360 account information.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Life360 username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Life360 password.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='circles' href='#circles'></a> circles</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>See <a href="#filtering">Filtering</a> for a detailed description. Must specify <strong>include</strong> or <strong>exclude</strong>, but not both.</p>
+</span></p><p class='default'>
+Default value: <p>Include all Circles.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Circles to include.</p>
+</span></p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Circles to exclude.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='driving_speed' href='#driving_speed'></a> driving_speed</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The minimum speed at which the device is considered to be “driving” (which can also set the <code>driving</code> <a href="#additional-attributes">attribute</a> to <code>true</code>.) MPH or KPH, depending on Home Assistant’s unit system configuration.</p>
+</span></p><p class='default'>
+Default value: <p>“Driving” determined strictly by Life360.</p>
+</p></dd><dt><a class='title-link' name='error_threshold' href='#error_threshold'></a> error_threshold</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>See <a href="#communication-errors">Communication Errors</a> for a detailed description.</p>
+</span></p></dd><dt><a class='title-link' name='interval_seconds' href='#interval_seconds'></a> interval_seconds</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This defines how often the Life360 server will be queried (in seconds.) The resulting device_tracker entities will actually only be updated when the Life360 server provides new location information for each member.</p>
+</span></p><p class='default'>
+Default value: <p>12</p>
+</p></dd><dt><a class='title-link' name='max_gps_accuracy' href='#max_gps_accuracy'></a> max_gps_accuracy</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If specified, and the reported GPS accuracy is larger (i.e., <em>less</em> accurate), then update is ignored.</p>
+</span></p></dd><dt><a class='title-link' name='max_update_wait' href='#max_update_wait'></a> max_update_wait</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If specified and Life360 does not provide an update for a member within that maximum time window, an event named <code>life360_update_overdue</code> will be fired with the <code>entity_id</code> of the corresponding member’s device_tracker entity. Once an update does come, an event named <code>life360_update_restored</code> will be fired with the <code>entity_id</code> of the corresponding member’s device_tracker entity and another data item named <code>wait</code> that will indicate the amount of time spent waiting for the update. You can use these events in automations to be notified when they occur. See <a href="#example-overdue-update-automations">example automations</a> below.</p>
+</span></p></dd><dt><a class='title-link' name='members' href='#members'></a> members</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>See <a href="#filtering">Filtering</a> for a detailed description. Must specify <strong>include</strong> or <strong>exclude</strong>, but not both.</p>
+</span></p><p class='default'>
+Default value: <p>Include all Members from all included Circles.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Members to include.</p>
+</span></p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Members to exclude.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='prefix' href='#prefix'></a> prefix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Device ID prefix. Entity IDs will be in the form of <code>device_tracker.PREFIX_FIRST_LAST</code>, or <code>device_tracker.PREFIX_NAME</code> if the Member has only one name. To use no prefix, specify <code>''</code>.</p>
+</span></p><p class='default'>
+Default value: <p>life360</p>
+</p></dd><dt><a class='title-link' name='show_as_state' href='#show_as_state'></a> show_as_state</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If device is not in a Home Assistant zone, it is determined to be driving (see attribute of same name) and <code>driving</code> is specified, the state of entity will be set to <code>driving</code>. If device is not in a zone, it is determined to be moving and <code>moving</code> is specified, then state of entity will be set to <code>moving</code>.</p>
+</span></p></dd><dt><a class='title-link' name='warning_threshold' href='#warning_threshold'></a> warning_threshold</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>See <a href="#communication-errors">Communication Errors</a> for a detailed description.</p>
+</span></p></dd></dl>
+</div>
+<h2>Additional attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>address</td>
+<td>Address of the current location, or <code>none</code>.</td>
+</tr>
+<tr>
+<td>at_loc_since</td>
+<td>Date and time when first at current location (in UTC.)</td>
+</tr>
+<tr>
+<td>battery_charging</td>
+<td>Device is charging (<code>true</code>/<code>false</code>.)</td>
+</tr>
+<tr>
+<td>driving</td>
+<td>Device movement indicates driving (<code>true</code>/<code>false</code>.)</td>
+</tr>
+<tr>
+<td>last_seen</td>
+<td>Date and time when Life360 last updated device location (in UTC.)</td>
+</tr>
+<tr>
+<td>moving</td>
+<td>Device is moving (<code>true</code>/<code>false</code>.)</td>
+</tr>
+<tr>
+<td>place</td>
+<td>Name of Life360 Place where the device is located, or <code>none</code> if not located within one.</td>
+</tr>
+<tr>
+<td>raw_speed</td>
+<td>“Raw” speed value provided by Life360 server. (Units unknown.)</td>
+</tr>
+<tr>
+<td>speed</td>
+<td>Estimated speed of device (in MPH or KPH depending on Home Assistant’s unit system configuration.)</td>
+</tr>
+<tr>
+<td>wifi_on</td>
+<td>Device WiFi is turned on (<code>true</code>/<code>false</code>.)</td>
+</tr>
+</tbody>
+</table>
+<h2>Filtering</h2>
+<p>For most users, filtering is not needed, and in such cases, the corresponding configuration variables should not be used.</p>
+<p>However, in some circumstances, it might be helpful to limit which Life360 Circles and/or Members are used. For these cases <a href="#circles"><strong>circles</strong></a> and/or <a href="#members"><strong>members</strong></a> can be used.</p>
+<p><strong>circles</strong> can limit which Life360 Circles are used.</p>
+<p><strong>members</strong> can limit which Life360 Members will be tracked.</p>
+<p>For a particular Member to be tracked, they must be included (or at least not excluded), and must be in at least one of the included Circles. See <a href="#circle-and-member-filtering-example">example configuration</a> below.</p>
+<p>Note that Life360’s app and website typically only show Members’ first names. However, you must use their <em>full</em> names here. If you’re not sure what a Member’s full name (i.e., first and last) is in Life360, ask them. Alternatively, you can set the  <a href="/integrations/logger/"><code>logger</code></a> to <code>debug</code> and look in <code>home-assistant.log</code>. The full names of all Life360 Circles &amp; Members will be logged.</p>
+<h2>Home - Home Assistant vs. Life360</h2>
+<p>Normally Home Assistant device trackers are “Home” when they enter <code>zone.home</code>. Also, Life360 normally considers your device “Home” when it enters the Place that coincides with your home. Since the definitions of these areas can be different, this can lead to a disagreement between Home Assistant and Life360 as to whether or not you’re “Home.” To avoid this, make sure these two areas are defined the same – i.e., same location and radius. (See next section.)</p>
+<h2>Home Assistant Zones &amp; Life360 Places</h2>
+<p>See <a href="/integrations/zone/#home-zone">Zone documentation</a> for details about how HA zones are defined. If you’d like to create HA zones from Life360 Places (e.g., to make HA’s <code>zone.home</code> be identical to Life360’s “Home Place”), make sure <code>logger</code> is set to <code>debug</code>. Then when HA starts the details of all the Places defined in the included Circles will be written to <code>home-assistant.log</code> in a format that can be copied into your configuration under <code>zone:</code>. E.g., you would see something like this:</p>
+<pre><code class="language-text">2019-05-31 12:16:58 DEBUG (SyncWorker_3) [homeassistant.components.life360.device_tracker] My Family Circle: will be included, id=xxxxx
+2019-05-31 12:16:58 DEBUG (SyncWorker_3) [homeassistant.components.life360.device_tracker] Circle's Places:
+- name: Home
+  latitude: XX.XXX
+  longitude: YY.YYY
+  radius: ZZZ
+</code></pre>
+<h2>Communication Errors</h2>
+<p>It is not uncommon for communication errors to occur between Home Assistant and the Life360 server. This can happen for many reasons, including Internet connection issues, Life360 server load, etc. However, in most cases, they are temporary and do not significantly affect the ability to keep device_tracker entities up to date.</p>
+<p>Therefore, an optional filtering mechanism has been implemented to prevent inconsequential communication errors from filling the log, while still logging unusual error activity. Two thresholds are defined: <a href="#warning_threshold"><strong>warning_threshold</strong></a> and <a href="#error_threshold"><strong>error_threshold</strong></a>. When a particular type of communication error happens on consecutive update cycles, it will not be logged until the number of occurrences reaches these thresholds. When the number reaches <strong>warning_threshold</strong> (but does not exceed <strong>error_threshold</strong>, and only if <strong>warning_threshold</strong> is defined), it will be logged as a WARNING. Once the number reaches <strong>error_threshold</strong>, it will be logged as an ERROR. Only two consecutive communication errors of a particular type will be logged as an ERROR, after which it will no longer be logged until it stops occurring and then happens again.</p>
+<h2>Examples</h2>
+<h3>Typical configuration</h3>
+<pre><code class="language-yaml">life360:
+  # MPH, assuming imperial units.
+  # If using metric (KPH), the equivalent would be 29.
+  driving_speed: 18
+  interval_seconds: 10
+  max_gps_accuracy: 200
+  max_update_wait:
+    minutes: 45
+  show_as_state:
+    - driving
+    - moving
+  # Set comm error thresholds so first is not logged,
+  # second is logged as a WARNING, and third and fourth
+  # are logged as ERRORs.
+  warning_threshold: 2
+  error_threshold: 3
+</code></pre>
+<h3>Circle and Member Filtering Example</h3>
+<pre><code class="language-yaml">life360:
+  # Only track Members that are in these Circles.
+  circles:
+    include: [My Family, Friends]
+  # But do not track this Member.
+  members:
+    exclude: John Doe
+</code></pre>
+<h3>Entering accounts in configuration</h3>
+<pre><code class="language-yaml">life360:
+  accounts:
+    - username: LIFE360_USERNAME
+      password: LIFE360_PASSWORD
+</code></pre>
+<h3>Example overdue update automations</h3>
+<pre><code class="language-yaml">automation:
+  - alias: Life360 Overdue Update
+    trigger:
+      platform: event
+      event_type: life360_update_overdue
+    action:
+      service: notify.email_me
+      data_template:
+        title: Life360 update overdue
+        message: &gt;
+          Update for {{
+            state_attr(trigger.event.data.entity_id, 'friendly_name') or
+            trigger.event.data.entity_id
+          }} is overdue.
+
+  - alias: Life360 Update Restored
+    trigger:
+      platform: event
+      event_type: life360_update_restored
+    action:
+      service: notify.email_me
+      data_template:
+        title: Life360 update restored
+        message: &gt;
+          Update for {{
+            state_attr(trigger.event.data.entity_id, 'friendly_name') or
+            trigger.event.data.entity_id
+          }} restored after {{ trigger.event.data.wait }}.
+</code></pre>
+<h2>Disclaimer</h2>
+<p>It does not appear that Life360 officially supports its REST API for use with other than its own apps. This integration is based on reverse engineering that has been done by the open source community, and an API token that was somehow discovered by the same community. At any time Life360 could disable that token or otherwise change its REST API such that this integration would no longer work.</p>
+:ET

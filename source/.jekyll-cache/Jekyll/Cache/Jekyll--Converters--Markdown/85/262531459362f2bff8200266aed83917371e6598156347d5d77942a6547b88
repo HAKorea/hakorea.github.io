@@ -1,0 +1,32 @@
+I"Q<p>The <code>xiaomi_miio</code> sensor platform is observing your Xiaomi Mi Air Quality Monitor (PM2.5) and reporting the air quality index.</p>
+<p>Currently, the supported features are:</p>
+<ul>
+<li>Air Quality Index (AQI)</li>
+<li>Attributes
+<ul>
+<li>power</li>
+<li>charging</li>
+<li>battery</li>
+<li>time_stat</li>
+</ul>
+</li>
+</ul>
+<p>Please follow the instructions on <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> to get the API token.</p>
+<h2>Configuration</h2>
+<p>To add a Xiaomi Mi Air Quality Monitor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: xiaomi_miio
+    host: IP_ADDRESS
+    token: YOUR_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your miio device.</p>
+</span></p></dd><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API token of your miio device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of your miio device.</p>
+</span></p><p class='default'>
+Default value: <p>Xiaomi Miio Sensor</p>
+</p></dd></dl>
+</div>
+:ET

@@ -1,0 +1,135 @@
+I"�+<p>The <code>arlo</code> implementation allows you to integrate your <a href="https://arlo.netgear.com/">Arlo</a> devices in Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#alarm">Alarm</a></li>
+<li><a href="#camera">Camera</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable device linked in your <a href="https://arlo.netgear.com/">Arlo</a> account, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+arlo:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing your Arlo account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing your Arlo account.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>How frequently to query for new data. Defaults to 60 seconds.</p>
+</span></p></dd></dl>
+</div>
+<p>It is recommended to create a dedicated user on Arlo website to be used within Home Assistant and then share your Arlo cameras.</p>
+<p>Finish its configuration by visiting the <a href="/integrations/arlo#sensor">Arlo sensor page</a> or <a href="/integrations/arlo#camera">Arlo camera page</a> or <a href="/integrations/arlo">Arlo control panel page</a>. Arlo also has a service call <code>arlo.update</code> that can be manually called to force an update prior to the regular scheduled interval.</p>
+<p>The Arlo integration also provides a camera service to enable/disable the motion detection sensor. The example below enables the motion detection every time the Home Assistant service starts.</p>
+<pre><code class="language-yaml">#automation.yaml
+- alias: Enable Arlo upon HA start'
+  initial_state: 'on'
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: camera.enable_motion_detection
+    entity_id: camera.arlo_frontdoor
+</code></pre>
+<h2>Alarm</h2>
+<h3>Configuration</h3>
+<p>Once you have enabled the <a href="/integrations/arlo">Arlo component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alarm_control_panel:
+  - platform: arlo
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='home_mode_name' href='#home_mode_name'></a> home_mode_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Arlo base station does not have a built-in home mode. You can map one of your custom modes to Home Assistant’s home mode by setting the name of the custom mode in this configuration variable. The name of the custom mode should match exactly as you set it up in the Arlo app.</p>
+</span></p></dd><dt><a class='title-link' name='away_mode_name' href='#away_mode_name'></a> away_mode_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Arlo base station does not have a built-in away mode. You can map one of your custom modes to Home Assistant’s away mode by setting the name of the custom mode in this configuration variable. The name of the custom mode should match eactly as you set it up in the Arlo app.</p>
+</span></p><p class='default'>
+Default value: <p><code>Armed</code> mode in Arlo</p>
+</p></dd><dt><a class='title-link' name='night_mode_name' href='#night_mode_name'></a> night_mode_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Arlo base station does not have a built-in night mode. You can map one of your custom modes to Home Assistant’s night mode by setting the name of the custom mode in this configuration variable. The name of the custom mode should match eactly as you set it up in the Arlo app.</p>
+</span></p><p class='default'>
+Default value: <p><code>Armed</code> mode in Arlo</p>
+</p></dd></dl>
+</div>
+<h3>Examples</h3>
+<p>These examples are based on an Arlo base station named <code>my_arlo_base_station</code>. Replace this with the name of your base station’s <code>entity_id</code>.</p>
+<p>Arming the Arlo Base Station when leaving.</p>
+<pre><code class="language-yaml">- id: arm_arlo_when_leaving
+  alias: Arm Arlo cameras when leaving
+  trigger:
+    platform: state
+    entity_id: group.family
+    from: home
+    to: not_home
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.my_arlo_base_station
+</code></pre>
+<p>Setting Arlo to a custom mode (mapped to <code>home_mode_name</code> in <code>configuration.yaml</code>) when arriving.</p>
+<pre><code class="language-yaml">- id: disarm_arlo_when_arriving
+  alias: Set Arlo cameras to Home mode when arriving
+  trigger:
+    platform: state
+    entity_id: group.family
+    from: not_home
+    to: home
+  action:
+    service: alarm_control_panel.alarm_arm_home
+    entity_id: alarm_control_panel.my_arlo_base_station
+</code></pre>
+<p>You can also completely disarm the Arlo base station by calling the <code>alarm_control_panel.alarm_disarm</code> service, and trigger the alarm by calling the <code>alarm_control_panel.alarm_trigger</code> service.</p>
+<p>More examples and configuration options can be found on the <a href="/integrations/manual#examples">Manual Alarm Control page</a>.</p>
+<h2>Camera</h2>
+<p>This integration is not yet able to live stream from your Arlo camera, but it will be able to playback the last video capture.</p>
+<h3>Configuration</h3>
+<p>Once you have enabled the <a href="/integrations/arlo">Arlo component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: arlo
+    ffmpeg_arguments: '-pred 1 -q:v 2'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ffmpeg_arguments' href='#ffmpeg_arguments'></a> ffmpeg_arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Extra options to pass to ffmpeg, e.g., image quality or video filter options.</p>
+</span></p></dd></dl>
+</div>
+<p><strong>Note:</strong> To be able to playback the last capture, it is required to install the <code>ffmpeg</code> component. Make sure to follow the steps mentioned at <a href="/integrations/ffmpeg/">FFMPEG</a> documentation.</p>
+<h2>Sensor</h2>
+<p>To get your <a href="https://arlo.netgear.com/">Arlo</a> sensors working within Home Assistant, please follow the instructions for the general <a href="/integrations/arlo">Arlo component</a>.</p>
+<p>This platform does not support Arlo Q.</p>
+<h3>Configuration</h3>
+<p>Once you have enabled the <a href="/integrations/arlo">Arlo component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: arlo
+    monitored_conditions:
+      - captured_today
+      - last_capture
+      - total_cameras
+      - battery_level
+      - signal_strength
+</code></pre>
+<p>Additionally, for Arlo Baby cameras that have additional sensors, you can add them to the <code>monitored_conditions</code> collection:</p>
+<pre><code class="language-yaml"># Additional sensors available for Arlo Baby cameras
+sensor:
+  - platform: arlo
+    monitored_conditions:
+      # ...
+      - temperature
+      - humidity
+      - air_quality
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='captured_today' href='#captured_today'></a> captured_today</dt><dd><p class='desc'><span class='description'><p>Return the number of videos captured on the current day.</p>
+</span></p></dd><dt><a class='title-link' name='last_capture' href='#last_capture'></a> last_capture</dt><dd><p class='desc'><span class='description'><p>Return the timestamp from the last video captured by your Arlo camera.</p>
+</span></p></dd><dt><a class='title-link' name='total_cameras' href='#total_cameras'></a> total_cameras</dt><dd><p class='desc'><span class='description'><p>Return the number of recognized and active cameras linked on your Arlo account.</p>
+</span></p></dd><dt><a class='title-link' name='battery_level' href='#battery_level'></a> battery_level</dt><dd><p class='desc'><span class='description'><p>Return the battery level of your Arlo camera.</p>
+</span></p></dd><dt><a class='title-link' name='signal_strength' href='#signal_strength'></a> signal_strength</dt><dd><p class='desc'><span class='description'><p>Return the wireless signal strength of your Arlo camera.</p>
+</span></p></dd><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>Return the ambient temperature detected by your Arlo Baby camera.</p>
+</span></p></dd><dt><a class='title-link' name='humidity' href='#humidity'></a> humidity</dt><dd><p class='desc'><span class='description'><p>Return the ambient relative humidity detected by your Arlo Baby camera.</p>
+</span></p></dd><dt><a class='title-link' name='air_quality' href='#air_quality'></a> air_quality</dt><dd><p class='desc'><span class='description'><p>Return the ambient air quality (a reading of volatile organic compounds (VOCs) in parts per million) detected by your Arlo Baby camera.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>If no <strong>monitored_conditions</strong> are specified, all of above will be enabled by default.</p>
+:ET

@@ -1,0 +1,45 @@
+I"�<p>The Islamic Prayer Times (<code>islamic_prayer_times</code>) sensor platform displays the various prayer times for Muslims as sensors.</p>
+<p>This platform calculates prayer times using the following calculation methods:</p>
+<ul>
+<li>University of Islamic Sciences in Karachi</li>
+<li>Islamic Society of North America</li>
+<li>Muslim World League</li>
+<li>Umm Al-Qura University in Makkah</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: islamic_prayer_times
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of available sensors.</p>
+</span></p><p class='default'>
+Default value: <p>[‘fajr’, ‘dhuhr’, ‘asr’, ‘maghrib’, ‘isha’]</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='fajr' href='#fajr'></a> fajr</dt><dd><p class='desc'><span class='description'><p>Show the fajr prayer time for today.</p>
+</span></p></dd><dt><a class='title-link' name='sunrise' href='#sunrise'></a> sunrise</dt><dd><p class='desc'><span class='description'><p>Show the sunrise for today which is the end of fajr prayer.  This is a calculated field and may not necessarily be the same as the astronomical sunrise.</p>
+</span></p></dd><dt><a class='title-link' name='dhuhr' href='#dhuhr'></a> dhuhr</dt><dd><p class='desc'><span class='description'><p>Show the dhuhr prayer time for today.</p>
+</span></p></dd><dt><a class='title-link' name='asr' href='#asr'></a> asr</dt><dd><p class='desc'><span class='description'><p>Show the asr prayer time for today.</p>
+</span></p></dd><dt><a class='title-link' name='maghrib' href='#maghrib'></a> maghrib</dt><dd><p class='desc'><span class='description'><p>Show the maghrib prayer time for today.</p>
+</span></p></dd><dt><a class='title-link' name='isha' href='#isha'></a> isha</dt><dd><p class='desc'><span class='description'><p>Show the isha prayer time for today.</p>
+</span></p></dd><dt><a class='title-link' name='midnight' href='#midnight'></a> midnight</dt><dd><p class='desc'><span class='description'><p>Show the midnight for today which is the end of isha prayer.  This is a calculated field and is not the same as 12AM.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='calculation_method' href='#calculation_method'></a> calculation_method</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The calculation method used for prayer times.  Must be one of: <code>karachi</code>, <code>isna</code>, <code>mwl</code>, <code>makkah</code>.</p>
+</span></p><p class='default'>
+Default value: <p>isna</p>
+</p></dd></dl>
+</div>
+<pre><code class="language-yaml"># Example configuration.yaml entry for all available sensors using a non-default calculation method
+sensor:
+  - platform: islamic_prayer_times
+    calculation_method: makkah
+    sensors:
+      - fajr
+      - sunrise
+      - dhuhr
+      - asr
+      - maghrib
+      - isha
+      - midnight
+</code></pre>
+:ET

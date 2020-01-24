@@ -1,0 +1,23 @@
+I":<p>This is a <a href="https://facebook.github.io/react/">React</a> implementation of <a href="http://todomvc.com/">TodoMVC</a> but instead of checking off to do items, you are turning lights and switches on/off.</p>
+<ul>
+<li>It uses React to render the data.</li>
+<li>It hooks into Home Assistant JS which means updates pushed from the server are instantly rendered.</li>
+<li>It accesses properties made available from Polymer.</li>
+<li>It uses the user configuration for the integration in the <code>configuration.yaml</code> file for rendering.</li>
+<li>It allows toggling the sidebar.</li>
+</ul>
+<p><a href="https://github.com/home-assistant/custom-panel-starter-kit-react">Download the source for React Starter Kit here</a>. Copy the file to <code>&lt;config dir&gt;/panels/</code> (you might have to create the directory if it doesn’t exist).</p>
+<p>Create an entry for the panel in your <code>configuration.yaml</code> file to enable it.</p>
+<pre><code class="language-yaml">panel_custom:
+  - name: react
+    sidebar_title: TodoMVC
+    sidebar_icon: mdi:work
+    url_path: todomvc
+    config:
+      title: hello
+</code></pre>
+<p>This video shows the example in action.</p>
+<div class='videoWrapper'>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2200UutdXlo" frameborder="0" allowfullscreen></iframe>
+</div>
+:ET

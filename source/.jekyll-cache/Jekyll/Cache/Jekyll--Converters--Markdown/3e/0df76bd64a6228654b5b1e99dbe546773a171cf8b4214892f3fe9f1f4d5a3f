@@ -1,0 +1,90 @@
+I"<p>The <code>wake_on_lan</code> integration enables the ability to send <em>magic packets</em> to <a href="https://en.wikipedia.org/wiki/Wake-on-LAN">Wake on LAN</a> capable devices to turn them on.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To use this integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+wake_on_lan:
+</code></pre>
+<h3>Component services</h3>
+<p>Available services: <code>send_magic_packet</code>.</p>
+<h4>Service <code>wake_on_lan/send_magic_packet</code></h4>
+<p>Send a <em>magic packet</em> to wake up a device with ‘Wake-On-LAN’ capabilities.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mac</code></td>
+<td>no</td>
+<td>MAC address of the device to wake up.</td>
+</tr>
+<tr>
+<td><code>broadcast_address</code></td>
+<td>yes</td>
+<td>Optional broadcast IP where to send the magic packet.</td>
+</tr>
+</tbody>
+</table>
+<p>Sample service data:</p>
+<pre><code class="language-json">{
+   &quot;mac&quot;:&quot;00:40:13:ed:f1:32&quot;
+}
+</code></pre>
+<h2>Switch</h2>
+<p>The <code>wake_on_lan</code> (WOL) switch platform allows you to turn on a <a href="https://en.wikipedia.org/wiki/Wake-on-LAN">WOL</a> enabled computer.</p>
+<h3>Switch configuration</h3>
+<p>The WOL switch can only turn on your computer and monitor the state. There is no universal way to turn off a computer remotely. The <code>turn_off</code> variable is there to help you call a script when you have figured out how to remotely turn off your computer. See below for suggestions on how to do this.</p>
+<p>It’s required that the binary <code>ping</code> is in your <code>$PATH</code>.</p>
+<p>To enable this switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: wake_on_lan
+    mac: MAC_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MAC address to send the wake up command to, e.g, <code>00:01:02:03:04:05</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the switch.</p>
+</span></p><p class='default'>
+Default value: <p>Wake on LAN</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address or hostname to check the state of the device (on/off).</p>
+</span></p></dd><dt><a class='title-link' name='turn_off' href='#turn_off'></a> turn_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an <a href="/getting-started/automation/">action</a> to run when the switch is turned off.</p>
+</span></p></dd><dt><a class='title-link' name='broadcast_address' href='#broadcast_address'></a> broadcast_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of the host to send the magic packet to.</p>
+</span></p><p class='default'>
+Default value: <p>255.255.255.255</p>
+</p></dd></dl>
+</div>
+<h3>Examples</h3>
+<p>Here are some real-life examples of how to use the <strong>turn_off</strong> variable.</p>
+<h4>Suspending Linux</h4>
+<p>Suggested recipe for letting the <code>turn_off</code> script suspend a Linux computer (the <strong>target</strong>)
+from Home Assistant running on another Linux computer (the <strong>server</strong>).</p>
+<ol>
+<li>On the <strong>server</strong>, log in as the user account Home Assistant is running under. In this exampleit’s <code>hass</code>.</li>
+<li>On the <strong>server</strong>, create SSH keys by running <code>ssh-keygen</code>. Just press enter on all questions.</li>
+<li>On the <strong>target</strong>, create a new account that Home Assistant can ssh into: <code>sudo adduser hass</code>. Just press enter on all questions except password. It’s recommended using the same user name as on the server. If you do, you can leave out <code>hass@</code> in the SSH commands below.</li>
+<li>On the <strong>server</strong>, transfer your public SSH key by <code>ssh-copy-id hass@TARGET</code> where TARGET is your target machine’s name or IP address. Enter the password you created in step 3.</li>
+<li>On the <strong>server</strong>, verify that you can reach your target machine without password by <code>ssh TARGET</code>.</li>
+<li>On the <strong>target</strong>, we need to let the <code>hass</code> user execute the program needed to suspend/shut down the target computer. Here is it <code>pm-suspend</code>, use <code>poweroff</code> to turn off the computer. First, get the full path: <code>which pm-suspend</code>. On my system, this is <code>/usr/sbin/pm-suspend</code>.</li>
+<li>On the <strong>target</strong>, using an account with sudo access (typically your main account), <code>sudo visudo</code>. Add this line last in the file: <code>hass ALL=NOPASSWD:/usr/sbin/pm-suspend</code>, where you replace <code>hass</code> with the name of your user on the target, if different, and <code>/usr/sbin/pm-suspend</code> with the command of your choice, if different.</li>
+<li>On the <strong>server</strong>, add the following to your configuration, replacing TARGET with the target’s name:</li>
+</ol>
+<pre><code class="language-yaml">switch:
+  - platform: wake_on_lan
+    name: &quot;TARGET&quot;
+    ...
+    turn_off:
+      service: shell_command.turn_off_TARGET
+
+shell_command:
+  turn_off_TARGET: 'ssh hass@TARGET sudo pm-suspend'
+</code></pre>
+:ET

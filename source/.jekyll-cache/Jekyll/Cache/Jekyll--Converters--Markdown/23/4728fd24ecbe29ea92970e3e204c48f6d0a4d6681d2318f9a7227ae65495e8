@@ -1,0 +1,42 @@
+I"w<p>The <code>epson workforce</code> platform allows you to monitor the ink levels of a Epson Workforce printer from Home
+Assistant.</p>
+<p>To add Epson Workforce to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+   - platform: epsonworkforce
+     host: IP_ADDRESS
+     monitored_conditions:
+     - black
+     - photoblack
+     - yellow
+     - magenta
+     - cyan
+     - clean   
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The host name or address of the Epson workforce printer</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The cartridge colours to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='black' href='#black'></a> black</dt><dd><p class='desc'><span class='description'><p>The black ink cartridge</p>
+</span></p></dd><dt><a class='title-link' name='photoblack' href='#photoblack'></a> photoblack</dt><dd><p class='desc'><span class='description'><p>The photo black ink cartridge (not supported by all printers).</p>
+</span></p></dd><dt><a class='title-link' name='yellow' href='#yellow'></a> yellow</dt><dd><p class='desc'><span class='description'><p>The yellow ink cartridge.</p>
+</span></p></dd><dt><a class='title-link' name='magenta' href='#magenta'></a> magenta</dt><dd><p class='desc'><span class='description'><p>The magenta (=red) ink cartridge.</p>
+</span></p></dd><dt><a class='title-link' name='cyan' href='#cyan'></a> cyan</dt><dd><p class='desc'><span class='description'><p>The cyan (=blue) ink cartridge.</p>
+</span></p></dd><dt><a class='title-link' name='clean' href='#clean'></a> clean</dt><dd><p class='desc'><span class='description'><p>The cleaning cartridge.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>Supported devices:</p>
+<ul>
+<li>Epson Workforce (and some EcoTank) printers who publish a HTTP page containing the ink cardridge levels</li>
+</ul>
+<p>Tested devices:</p>
+<ul>
+<li>Epson WF3540</li>
+<li>Epson WF3620</li>
+<li>Epson WF3640</li>
+<li>Epson EcoTank ET-77x0</li>
+<li>Epson ET-2650</li>
+</ul>
+<p>To make this module work you need to connect your printer to your LAN.
+The best is to navigate to the status page of the printer to check if it shows the page with the ink levels on the URL http://&lt;IP_ADDRESS&gt;/PRESENTATION/HTML/TOP/PRTINFO.HTML</p>
+:ET

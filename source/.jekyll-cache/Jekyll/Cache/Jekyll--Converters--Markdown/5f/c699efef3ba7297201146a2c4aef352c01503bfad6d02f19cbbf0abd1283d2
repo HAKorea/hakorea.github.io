@@ -1,0 +1,90 @@
+I"³<p>The <code>template</code> platform creates vacuums that combine integrations and provides the
+ability to run scripts or invoke services for each of the start, pause, stop,
+return_to_base, clean_spot, locate and set_fan_speed commands of a vacuum.</p>
+<p>To enable Template Vacuums in your installation, add the following to your
+<code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vacuum:
+  - platform: template
+    vacuums:
+      living_room_vacuum:
+        start:
+          service: script.vacuum_start
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='vacuums' href='#vacuums'></a> vacuums</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of your vacuums.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='friendly_name' href='#friendly_name'></a> friendly_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to use in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a template to get the state of the vacuum. Valid value: <code>docked</code>/<code>cleaning</code>/<code>idle</code>/<code>paused</code>/<code>returning</code>/<code>error</code></p>
+</span></p></dd><dt><a class='title-link' name='battery_level_template' href='#battery_level_template'></a> battery_level_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a template to get the battery level of the vacuum. Legal values are numbers between <code>0</code> and <code>100</code>.</p>
+</span></p></dd><dt><a class='title-link' name='fan_speed_template' href='#fan_speed_template'></a> fan_speed_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a template to get the fan speed of the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='availability_template' href='#availability_template'></a> availability_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a template to get the <code>available</code> state of the component. If the template returns <code>true</code>, the device is <code>available</code>. If the template returns any other value, the device will be <code>unavailable</code>. If <code>availability_template</code> is not configured, the component will always be <code>available</code>.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='start' href='#start'></a> start</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Required)</span><span class='description'><p>Defines an action to run when the vacuum is started.</p>
+</span></p></dd><dt><a class='title-link' name='pause' href='#pause'></a> pause</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run when the vacuum is paused.</p>
+</span></p></dd><dt><a class='title-link' name='stop' href='#stop'></a> stop</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run when the vacuum is stopped.</p>
+</span></p></dd><dt><a class='title-link' name='return_to_base' href='#return_to_base'></a> return_to_base</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run when the vacuum is given a return to base command.</p>
+</span></p></dd><dt><a class='title-link' name='clean_spot' href='#clean_spot'></a> clean_spot</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run when the vacuum is given a clean spot command.</p>
+</span></p></dd><dt><a class='title-link' name='locate' href='#locate'></a> locate</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run when the vacuum is given a locate command.</p>
+</span></p></dd><dt><a class='title-link' name='set_fan_speed' href='#set_fan_speed'></a> set_fan_speed</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run when the vacuum is given a command to set the fan speed.</p>
+</span></p></dd><dt><a class='title-link' name='fan_speeds' href='#fan_speeds'></a> fan_speeds</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of fan speeds supported by the vacuum.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Examples</h2>
+<h3>Control vacuum with Harmony Hub</h3>
+<p>This example shows how you can use a Template Vacuum to control an IR vacuum cleaner using the <a href="/integrations/harmony">Harmony Hub Remote component</a>.</p>
+<pre><code class="language-yaml">vacuum:
+  - platform: template
+    vacuums:
+      living_room_vacuum:
+        start:
+          - service: remote.send_command
+            data:
+              entity_id: remote.harmony_hub
+              command: Clean
+              device: 52840686
+        return_to_base:
+          - service: remote.send_command
+            data:
+              entity_id: remote.harmony_hub
+              command: Home
+              device: 52840686
+        clean_spot:
+          - service: remote.send_command
+            data:
+              entity_id: remote.harmony_hub
+              command: SpotCleaning
+              device: 52840686
+</code></pre>
+<h3>Vacuum with state</h3>
+<p>This example shows how to use templates to specify the state of the vacuum.</p>
+<pre><code class="language-yaml">vacuum:
+  - platform: template
+    vacuums:
+      living_room_vacuum:
+        value_template: &quot;{{ states('sensor.vacuum_state') }}&quot;
+        battery_level_template: &quot;{{ states('sensor.vacuum_battery_level')|int }}&quot;
+        fan_speed_template: &quot;{{ states('sensor.vacuum_fan_speed') }}&quot;
+        start:
+            service: script.vacuum_start
+        pause:
+            service: script.vacuum_pause
+        stop:
+            service: script.vacuum_stop
+        return_to_base:
+            service: script.vacuum_return_to_base
+        clean_spot:
+            service: script.vacuum_clean_spot
+        locate:
+            service: script.vacuum_locate_vacuum
+        set_fan_speed:
+            service: script.vacuum_set_fan_speed
+            data_template:
+              speed: &quot;{{ fan_speed }}&quot;
+        fan_speeds:
+            - Low
+            - Medium
+            - High
+</code></pre>
+:ET

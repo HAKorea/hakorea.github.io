@@ -1,0 +1,60 @@
+I"š<p>The <code>rpi_pfio</code> integration is the base for all related <a href="http://www.piface.org.uk/">PiFace Digital I/O (PFIO)</a> platforms in Home Assistant. There is no setup needed for the integration itself; for the platforms, please check their corresponding pages.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<p>Set the jumpers on the PiFace board for address 0 (JP1: 1-2, JP2: 1-2).</p>
+<h2>Use with HassOS</h2>
+<p>Note that the PiFace Digital 2 uses the Raspberry Pi SPI port, which is disabled by default when using <a href="https://github.com/home-assistant/hassos">HassOS</a>. When using HassOS, you must mount the SD card on another computer and access the boot partition on the card. Edit the <code>config.txt</code> file and add the line <code>dtparam=spi=on</code> to the end. This should enable SPI when HassOS is booted and allow Home Assistant to access the PiFace Digital 2 board.</p>
+<h2>Binary Sensor</h2>
+<p>The <code>rpi_pfio</code> binary sensor platform allows you to read sensor values of the <a href="http://www.piface.org.uk/products/piface_digital/">PiFace Digital I/O</a> .</p>
+<p>To use your PiFace Digital I/O module in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: rpi_pfio
+    ports:
+      0:
+        name: PIR Office
+        invert_logic: true
+      1:
+        name: Doorbell
+        settle_time: 50
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='num' href='#num'></a> num</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port number.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port name.</p>
+</span></p></dd><dt><a class='title-link' name='settle_time' href='#settle_time'></a> settle_time</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time in milliseconds for port debouncing.</p>
+</span></p><p class='default'>
+Default value: <p>20</p>
+</p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code>, inverts the output logic to ACTIVE LOW.</p>
+</span></p><p class='default'>
+Default value: <p><code>false</code> (ACTIVE HIGH)</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h2>Switch</h2>
+<p>The <code>rpi_pfio</code> switch platform allows you to control the <a href="http://www.piface.org.uk/products/piface_digital/">PiFace Digital I/O</a> module.</p>
+<p>To use your PiFace Digital I/O module in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: rpi_pfio
+    ports:
+      0:
+        name: Doorlock
+        invert_logic: true
+      1:
+        name: Light Desk
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Array of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='num' href='#num'></a> num</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Port number.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Port name.</p>
+</span></p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If true, inverts the output logic to ACTIVE LOW.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+:ET

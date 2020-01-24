@@ -1,0 +1,60 @@
+I"�<p>The <code>bbb_gpio</code> integration is the base for all <a href="https://beagleboard.org/black">BeagleBone Black</a> related GPIO platforms in Home Assistant.
+There is no setup needed for the integration itself.</p>
+<h2>Binary Sensor</h2>
+<p>The <code>bbb_gpio</code> binary sensor platform allows you to read sensor values of the GPIOs of your <a href="https://beagleboard.org/black">BeagleBone Black</a>.</p>
+<h2>Configuration</h2>
+<p>To use your BeagleBone Black’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: bbb_gpio
+    pins:
+      P8_12:
+        name: Door
+      GPIO0_26:
+        name: Window
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='pins' href='#pins'></a> pins</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of used pins.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='pin_name' href='#pin_name'></a> pin_name</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Port numbers and corresponding names.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Friendly name to use for the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='bouncetime' href='#bouncetime'></a> bouncetime</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Debounce time for reading input pin defined in milliseconds [ms].</p>
+</span></p><p class='default'>
+Default value: <p>50</p>
+</p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code>, inverts the input logic to ACTIVE LOW</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='pull_mode' href='#pull_mode'></a> pull_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of internal pull resistor connected to input. Options are <code>UP</code> - pull-up resistor and <code>DOWN</code> - pull-down resistor.</p>
+</span></p><p class='default'>
+Default value: <p>UP</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<p>For more details about the GPIO layout, visit the <a href="https://elinux.org/Beagleboard:BeagleBoneBlack">article</a> about the BeagleBone Black.</p>
+<h2>Switch</h2>
+<p>The <code>bbb_gpio</code> switch platform allows you to control the GPIOs of your <a href="https://beagleboard.org/black">BeagleBone Black</a>.</p>
+<h2>Configuration</h2>
+<p>To use your BeagleBone Black’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: bbb_gpio
+    pins:
+      GPIO0_7:
+        name: LED Red
+      P9_12:
+        name: LED Green
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='pins' href='#pins'></a> pins</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of used pins.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='pin_name' href='#pin_name'></a> pin_name</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Port numbers and corresponding names.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Friendly name to use for the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='initial' href='#initial'></a> initial</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Initial state of the pin.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code>, inverts the input logic to ACTIVE LOW</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<p>For more details about the GPIO layout, visit the <a href="https://elinux.org/Beagleboard:BeagleBoneBlack">article</a> about the BeagleBone Black.</p>
+:ET

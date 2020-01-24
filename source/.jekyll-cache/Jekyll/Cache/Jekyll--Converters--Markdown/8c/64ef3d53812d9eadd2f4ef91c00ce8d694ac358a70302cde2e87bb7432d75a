@@ -1,0 +1,33 @@
+I"�	<p>The <code>vlc</code> platform allows you to control <a href="https://www.videolan.org/vlc/index.html">VLC media player</a>.</p>
+<p>To add a VLC media player to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: vlc
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='arguments' href='#arguments'></a> arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Additional arguments to be passed to VLC.</p>
+</span></p></dd></dl>
+</div>
+<p>Only the “music” media type is supported for now.</p>
+<p>This service will control a background VLC instance, therefore you cannot use this to control a VLC instance launched on your desktop, unlike the Kodi media player for example.</p>
+<h2>Full configuration</h2>
+<p>A full configuration for VLC could look like the one below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: vlc
+    name: speaker_1
+    arguments: '--alsa-audio-device=hw:1,0'
+</code></pre>
+<h5>Additional configuration on macOS</h5>
+<p>On macOS <code>python-vlc</code> won’t find the VLC plugin directory unless you add this to the user’s <code>.bash_profile</code> that is running Home Assistant:</p>
+<pre><code class="language-bash">export VLC_PLUGIN_PATH=$VLC_PLUGIN_PATH:/Applications/VLC.app/Contents/MacOS/plugins
+</code></pre>
+<h5>Additional configuration for Rasperry Pi</h5>
+<p>You need to add the <code>homeassistant</code> user to the <code>audio</code> group:</p>
+<pre><code class="language-bash">sudo usermod -a -G audio homeassistant
+</code></pre>
+<h5>VLC currently not supported with Hass.io</h5>
+<p>According to the forum topic <a href="https://community.home-assistant.io/t/how-to-add-vlc-into-my-hassio/23000/5">“How to add VLC into my Hassio”</a>, it is not possible to install packages like VLC on Hass.io.</p>
+:ET

@@ -1,0 +1,540 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sony PlayStation 4 - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate a Sony PlayStation 4 into Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/ps4/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Sony PlayStation 4">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/ps4/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate a Sony PlayStation 4 into Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Sony PlayStation 4">
+    <meta name="twitter:description" content="Instructions on how to integrate a Sony PlayStation 4 into Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/ps4.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Sony PlayStation 4
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>ps4</code> integration allows you to control a
+<a href="https://www.playstation.com/en-us/explore/ps4/" rel="external nofollow">Sony PlayStation 4 console</a>.</p>
+<h2>
+<a class="title-link" name="requirements" href="#requirements"></a> Requirements</h2>
+<ul>
+<li>Android or iOS device</li>
+<li>PS4 Second Screen App for <a href="https://play.google.com/store/apps/details?id=com.playstation.mobile2ndscreen&amp;hl=en_US" rel="external nofollow">Android</a> or <a href="https://itunes.apple.com/us/app/ps4-second-screen/id1201372796?mt=8" rel="external nofollow">iOS</a> installed on device.</li>
+</ul>
+<h2>
+<a class="title-link" name="set-up" href="#set-up"></a> Set up</h2>
+<ol>
+<li>Download the Second Screen App and make sure that you can find and control your PlayStation 4 normally.</li>
+</ol>
+<div class="note">
+  Read the section "Granting Port Access" below before continuing.
+</div>
+<ol start="2">
+<li>
+<p>Navigate to <code>Configuration -&gt; Integrations</code> and press the plus button in the bottom right corner. Select <code>PlayStation 4</code> from the list of integrations.</p>
+</li>
+<li>
+<p>Follow instructions displayed to generate user credentials. You will know this step is completed when a form with fields appears.</p>
+</li>
+<li>
+<p>Pair Home Assistant to your PlayStation 4 by filling in the fields.</p>
+</li>
+</ol>
+<ul>
+<li>
+<strong>Note:</strong> To find your correct region refer to the section <a href="#regions">Regions</a>
+</li>
+</ul>
+<h2>
+<a class="title-link" name="granting-port-access" href="#granting-port-access"></a> Granting Port Access</h2>
+<p>The PlayStation 4 integration requires the use of privileged ports to work correctly, specifically UDP port 987 and TCP port 997. Depending on your OS of your Home Assistant instance, you may need to allow usage of privileged ports manually.</p>
+<div class="note warning">
+  Do not run your <b>Home Assistant</b> instance itself as <b>root</b> or with <b>root/sudo privileges</b> to accomplish this. This would create a security risk for your host system.
+</div>
+<p>There are varying methods to perform this, dependent on your OS that is running Home Assistant. Specifically, your <em>Python Interpreter</em>, which runs your Home Assistant instance, needs access to the mentioned ports.</p>
+<div class="note">
+<p>If your Home Assistant device is running <strong>Hass.io</strong> on <strong>HassOS</strong>, it does not require additional configuration.</p>
+</div>
+<h3>
+<a class="title-link" name="debian-based" href="#debian-based"></a> Debian-based</h3>
+<p>Home Assistant installed on a Debian-type OS may require configuration. This section is applicable but not limited to the following operating systems:</p>
+<ul>
+<li>Debian</li>
+<li>Raspbian</li>
+<li>Armbian</li>
+<li>Ubuntu</li>
+</ul>
+<p>In terminal run the following command:</p>
+<pre><code class="language-bash">sudo setcap 'cap_net_bind_service=+ep' &lt;python&gt;
+</code></pre>
+<p>Replace <code>&lt;python&gt;</code> with your <strong>system path</strong> to Python that is running Home Assistant and/or your virtual environment if used. The path <strong>should not</strong> be a <strong>symlink</strong> or be <strong>inside of a virtual environment</strong>.</p>
+<p>Example:</p>
+<pre><code class="language-bash">sudo setcap 'cap_net_bind_service=+ep' /usr/bin/python3.5
+</code></pre>
+<p>To find your system Python path:</p>
+<ul>
+<li>
+<p>Add the <a href="/integrations/system_health/">System Health</a> integration to your <code>configuration.yaml</code>. In a web browser, access your frontend and navigate to the about/logs page “http://<yourhomeassistanturl>/developer-tools/info). In the System Health box, locate the item <strong>python_version</strong> and note the value that is displayed. Then in a terminal run:</yourhomeassistanturl></p>
+<pre><code class="language-bash">whereis python&lt;version&gt;
+</code></pre>
+<p>Replace <code>&lt;version&gt;</code> with the value for <code>python_version</code> that is shown in the System Health box.</p>
+<p>Example:</p>
+<pre><code class="language-bash">whereis python3.5.3
+</code></pre>
+<p>The output which has the directory <code>/bin/</code> is likely your system python path which should look like this <code>/usr/bin/python3.5</code></p>
+</li>
+<li>
+<p>If Home Assistant is installed in a virtual environment, use terminal to <code>cd</code> to the root/top directory of your environment and run:</p>
+<pre><code class="language-bash">readlink -f bin/python3
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">readlink -f bin/python
+</code></pre>
+<p>The output will be your system Python path.</p>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="docker" href="#docker"></a> Docker</h3>
+<p>When running Home Assistant using Docker, make sure that the Home Assistant container is discoverable by the PS4. This can be achieved by ensuring that the Home Assistant container uses the <code>host</code> network driver (by passing <code>--net=host</code> to the container when creating, or adding <code>network_mode: "host"</code> to your compose file when using <code>docker-compose</code>).</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<div class="note">
+<p>The PlayStation 4 integration does not use entries from <code>configuration.yaml</code>. You must configure this integration by using <code>Integrations</code></p>
+</div>
+<h2>
+<a class="title-link" name="regions" href="#regions"></a> Regions</h2>
+<p>Some titles will have different SKUs in the PlayStation Store database, depending on your <a href="https://www.playstation.com/country-selector/index.html" rel="external nofollow">region</a>. You must select your specific region in the setup in order to retrieve the cover art for such titles correctly. The integration will attempt to search other databases for the correct title if it cannot be found, although it will take longer to do so and may fetch an incorrect cover.</p>
+<table>
+<thead>
+<tr>
+<th>Available Regions</th>
+<th>Unavailable Regions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Argentina, Australia, Austria, Bahrain, Belgium, Brazil, Bulgaria,</td>
+<td>China, Japan, Philippines,</td>
+</tr>
+<tr>
+<td>Canada, Chile, Columbia, Costa Rica, Croatia, Cyprus, Czech Republic,</td>
+<td>Serbia, Ukraine, Vietnam</td>
+</tr>
+<tr>
+<td>Denmark, Ecuador, El Salvador, Finland, France, Germany, Greece, Guatemala,</td>
+<td></td>
+</tr>
+<tr>
+<td>Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Ireland, Israel,</td>
+<td></td>
+</tr>
+<tr>
+<td>Italy, Korea, Kuwait, Lebanon, Luxembourg, Malta, Malaysia, Mexico,</td>
+<td></td>
+</tr>
+<tr>
+<td>Middle East, Nederland, New Zealand, Nicaragua, Norway, Oman, Panama,</td>
+<td></td>
+</tr>
+<tr>
+<td>Peru, Poland, Portugal, Qatar, Romania, Russia, Saudi Arabia, Singapore,</td>
+<td></td>
+</tr>
+<tr>
+<td>Slovakia, Slovenia, South Africa, Spain, Sweden, Switzerland, Taiwan,</td>
+<td></td>
+</tr>
+<tr>
+<td>Thailand, Turkey, United Arab Emirates, United Kingdom, United States</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+  The regions which are unavailable have no database or have formatting in the database, which can not be used by the component.
+</div>
+<h2>
+<a class="title-link" name="media-data" href="#media-data"></a> Media Data</h2>
+<p>The PlayStation 4 integration will fetch information about the game or app that is currently running from your region’s <a href="https://store.playstation.com" rel="external nofollow">PlayStation Store</a> database.</p>
+<p>Occasionally, the integration may fail to get the data at all, or may get incorrect data. To correct this issue, the integration allows for manual editing via any text editor.</p>
+<h3>
+<a class="title-link" name="formatting" href="#formatting"></a> Formatting</h3>
+<p>When the integration retrieves data from the PlayStation Store, it stores it in a JSON file named <code>.ps4-games.json</code> in the same directory as where your <code>configuration.yaml</code> file is located. The first line in the file will be <code>{</code> and the last line will be <code>}</code>. Between these lines, there will be indented entries for each game or app the integration finds. See the following example and table:</p>
+<pre><code class="language-json">{
+    "CUSA00129": {
+        "locked": true,
+        "media_content_type": "app",
+        "media_image_url": "http://localhost:8123/local/image.jpg",
+        "media_title": "Some App"
+    },
+    "CUSA00123": {
+        "locked": false,
+        "media_content_type": "game",
+        "media_image_url": "https://somerandomurl.com/image.jpg",
+        "media_title": "Some Game"
+    }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locked</code></td>
+<td>boolean</td>
+<td>Must be <code>true</code> or <code>false</code>
+</td>
+</tr>
+<tr>
+<td><code>media_content_type</code></td>
+<td>string</td>
+<td>Must be <code>game</code> or <code>app</code>
+</td>
+</tr>
+<tr>
+<td><code>media_image_url</code></td>
+<td>string</td>
+<td>Any valid url for an image</td>
+</tr>
+<tr>
+<td><code>media_title</code></td>
+<td>string</td>
+<td>The title of the game or app</td>
+</tr>
+</tbody>
+</table>
+<p>The data in the example shows 2 entries.</p>
+<p>Each entry will begin with the SKU ID of the title, e.g., <code>CUSA00000</code> and will have a field named <code>locked</code> with a value of <code>true</code> or <code>false</code> associated with it. The default value will be <code>false</code> for each entry. If <code>locked</code> is <code>true</code>, the integration will not overwrite the data pertaining to that game or app.</p>
+<p>The <code>media_image_url</code> value can be any valid URL. This includes the <code>local directory</code> of your Home Assistant instance. The first entry in the example directs to a file named <code>image.jpg</code> located in the <code>config/www/</code> directory.</p>
+<h3>
+<a class="title-link" name="editing-with-text-editor" href="#editing-with-text-editor"></a> Editing with Text Editor</h3>
+<div class="note">
+  Backup a copy of your <b>.ps4-games.json</b> file before continuing. If there are errors in the formatting, your file may be deleted.
+</div>
+<p>To edit, simply open the file in a text editor, find the game or app you would like to edit, and edit the value(s) you wish to change and then save the file. The changes will appear the next time you play the game or app on your console.</p>
+<h2>
+<a class="title-link" name="services" href="#services"></a> Services</h2>
+<h3>
+<a class="title-link" name="service-select_source" href="#service-select_source"></a> Service select_source</h3>
+<p>Opens new application/game and closes currently running application/game. The game/app must be in the entity’s source list. Games will be added automatically when you open them normally.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>No</td>
+<td><code>media_player.playstation_4</code></td>
+<td>The entity id for your PlayStation 4.</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>No</td>
+<td>
+<code>Some Game</code> or <code>CUSA00123</code>
+</td>
+<td>The game/app you want to open. You can use the title or SKU ID. Using the SKU ID will be the most reliable.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-send_command" href="#service-send_command"></a> Service send_command</h3>
+<p>Emulate button press on PlayStation 4. This emulates the commands available for the PS4 Second Screen App. This is not to be confused with DualShock 4 controller buttons.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>No</td>
+<td><code>media_player.playstation_4</code></td>
+<td>The entity id for your PlayStation 4.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>No</td>
+<td><code>ps</code></td>
+<td>The command you want to send.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="available-commands" href="#available-commands"></a> Available Commands</h4>
+<p>Full list of supported commands.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Button Emulated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ps</code></td>
+<td>PS (PlayStation)</td>
+</tr>
+<tr>
+<td><code>option</code></td>
+<td>Option</td>
+</tr>
+<tr>
+<td><code>enter</code></td>
+<td>Enter</td>
+</tr>
+<tr>
+<td><code>back</code></td>
+<td>Back</td>
+</tr>
+<tr>
+<td><code>up</code></td>
+<td>Swipe Up</td>
+</tr>
+<tr>
+<td><code>down</code></td>
+<td>Swipe Down</td>
+</tr>
+<tr>
+<td><code>left</code></td>
+<td>Swipe Left</td>
+</tr>
+<tr>
+<td><code>right</code></td>
+<td>Swipe Right</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h2>
+<h3>
+<a class="title-link" name="cover-art-issues" href="#cover-art-issues"></a> Cover Art Issues</h3>
+<p>If you are running a game/title on your PS4 that does not display a cover or displays the incorrect cover, post an issue <a href="https://github.com/ktnrg45/pyps4-2ndscreen/issues" rel="external nofollow">here</a>.</p>
+<p>Be sure to include the following information:</p>
+<ul>
+<li>Your Country</li>
+</ul>
+<p>As well as the exact values for the following attributes found in the state of your PS4 entity.</p>
+<ul>
+<li>media_title</li>
+<li>media_content_id</li>
+</ul>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/ps4.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/ps4.png' /></div><div class="section">
+    <kb-alert-link integration="ps4"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: 0.89
+    </div><div class='section'>
+      This integration is configurable via UI
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/ps4/'>/components/ps4/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#media-player'>Media Player</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

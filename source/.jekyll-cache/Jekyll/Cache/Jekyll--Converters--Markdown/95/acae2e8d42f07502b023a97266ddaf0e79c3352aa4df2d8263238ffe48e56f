@@ -1,0 +1,73 @@
+I"�<p>The <code>mqtt_statestream</code> integration publishes state changes in Home Assistant to individual MQTT topics.</p>
+<h2>Configuration</h2>
+<p>To enable MQTT Statestream in Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+mqtt_statestream:
+  base_topic: homeassistant
+  publish_attributes: true
+  publish_timestamps: true
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='base_topic' href='#base_topic'></a> base_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Base topic used to generate the actual topic used to publish.</p>
+</span></p></dd><dt><a class='title-link' name='publish_attributes' href='#publish_attributes'></a> publish_attributes</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Publish attributes of the entity as well as the state.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='publish_timestamps' href='#publish_timestamps'></a> publish_timestamps</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Publish the last_changed and last_updated timestamps for the entity.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Configure which integrations should be excluded from recordings. See <em>Include/Exclude</em> section below for details.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of entity ids to be excluded from recordings.</p>
+</span></p></dd><dt><a class='title-link' name='domains' href='#domains'></a> domains</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of domains to be excluded from recordings.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Configure which integrations should be included in recordings. If set, all other entities will not be recorded.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of entity ids to be included from recordings.</p>
+</span></p></dd><dt><a class='title-link' name='domains' href='#domains'></a> domains</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of domains to be included from recordings.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Operation</h2>
+<p>When any Home Assistant entity changes, this integration will publish that change to MQTT.</p>
+<p>The topic for each entity is different, so you can easily subscribe other systems to just the entities you are interested in.
+The topic will be in the form <code>base_topic/domain/entity/state</code>.</p>
+<p>For example, with the example configuration above, if an entity called ‘light.master_bedroom_dimmer’ is turned on, this integration will publish <code>on</code> to <code>homeassistant/light/master_bedroom_dimmer/state</code>.</p>
+<p>If that entity also has an attribute called <code>brightness</code>, the integration will also publish the value of that attribute to <code>homeassistant/light/master_bedroom_dimmer/brightness</code>.</p>
+<p>All states and attributes are passed through JSON serialization before publishing. <strong>Please note</strong> that this causes strings to be quoted (e.g., the string ‘on’ will be published as ‘“on”’). You can access the JSON deserialized values (as well as unquoted strings) at many places by using <code>value_json</code> instead of <code>value</code>.</p>
+<p>The last_updated and last_changed values for the entity will be published to <code>homeassistant/light/master_bedroom_dimmer/last_updated</code> and <code>homeassistant/light/master_bedroom_dimmer/last_changed</code>, respectively. The timestamps are in ISO 8601 format - for example, <code>2017-10-01T23:20:30.920969+00:00</code>.</p>
+<h2>Include/exclude</h2>
+<p>The <strong>exclude</strong> and <strong>include</strong> configuration variables can be used to filter the items that are published to MQTT.</p>
+<p>1. If neither <strong>exclude</strong> or <strong>include</strong> are specified, all entities are published.</p>
+<p>2. If only <strong>exclude</strong> is specified, then all entities except the ones listed are published.</p>
+<pre><code class="language-yaml"># Example of excluding entities
+mqtt_statestream:
+  base_topic: homeassistant
+  exclude:
+    domains:
+      - switch
+    entities:
+      - sensor.nopublish
+</code></pre>
+<p>In the above example, all entities except for <em>switch.x</em> and <em>sensor.nopublish</em> will be published to MQTT.</p>
+<p>3. If only <strong>include</strong> is specified, then only the specified entries are published.</p>
+<pre><code class="language-yaml"># Example of excluding entities
+mqtt_statestream:
+  base_topic: homeassistant
+  include:
+    domains:
+      - sensor
+    entities:
+      - lock.important
+</code></pre>
+<p>In this example, only <em>sensor.x</em> and <em>lock.important</em> will be published.</p>
+<p>4. If both <strong>include</strong> and <strong>exclude</strong> are specified then all entities specified by <strong>include</strong> are published except for the ones
+specified by <strong>exclude</strong>.</p>
+<pre><code class="language-yaml"># Example of excluding entities
+mqtt_statestream:
+  base_topic: homeassistant
+  include:
+    domains:
+      - sensor
+  exclude:
+    entities:
+      - sensor.noshow
+</code></pre>
+<p>In this example, all sensors except for <em>sensor.noshow</em> will be published.</p>
+:ET

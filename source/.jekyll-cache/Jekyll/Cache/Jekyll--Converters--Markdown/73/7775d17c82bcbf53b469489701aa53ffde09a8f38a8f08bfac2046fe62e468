@@ -1,0 +1,248 @@
+I"�<p>The <code>nuheat</code> integration lets control your connected <a href="https://www.nuheat.com/products/thermostats/signature-thermostat">NuHeat Signature</a> floor heating thermostats from <a href="https://www.nuheat.com/">NuHeat</a>.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Climate</li>
+</ul>
+<p>First, you will need to obtain your thermostat’s numeric serial number or ID by logging into <a href="https://mynuheat.com/">MyNuHeat.com</a> and selecting your thermostat(s).</p>
+<p>Once you have the Thermostat ID(s), add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+nuheat:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+  devices: 12345
+
+# Example configuration.yaml entry with multiple thermostats
+nuheat:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+  devices:
+    - 12345
+    - 67890
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing your MyNuHeat account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing your MyNuHeat account.</p>
+</span></p></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='string integer'>string | integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The serial number/ID of each thermostat you would like to integrate.</p>
+</span></p></dd></dl>
+</div>
+<h2>Concepts</h2>
+<p>The NuHeat Thermostat supports the following key concepts.</p>
+<p>The <code>target temperature</code> is the temperature that the device attempts to achieve. The target temperature is either determined by the schedule programmed into the thermostat (<code>auto mode</code>) or may be overridden. When the target temperature is set by Home Assistant, the thermostat will hold this temperature until the schedule is resumed.</p>
+<h2>Attributes</h2>
+<p>The following attributes are provided by the NuHeat thermostat: <code>name</code>, <code>temperature_unit</code>, <code>current_temperature</code>, <code>target_temperature</code>, <code>current_hold_mode</code>, <code>current_operation</code>, <code>operation_list</code>, <code>min_temp</code> and <code>max_temp</code>.</p>
+<h3>Attribute <code>name</code></h3>
+<p>Returns the name of the NuHeat Thermostat.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>Name of the thermostat</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>temperature_unit</code></h3>
+<p>Returns the unit of measurement used for temperature by the thermostat.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>Name of the temperature unit</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>current_temperature</code></h3>
+<p>Returns the current temperature measured by the thermostat.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>Currently measured temperature</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>target_temperature</code></h3>
+<p>Returns the target temperature of the thermostat, when the thermostat is
+not in auto operation mode.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>Target temperature</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>preset_mode</code></h3>
+<p>Returns the current temperature hold, if any.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>‘temperature’, ‘temporary_temperature’, ‘auto’, etc.</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>hvac_action</code></h3>
+<p>Returns the current HVAC mode of the thermostat.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>‘heat’, ‘idle’</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>preset_modes</code></h3>
+<p>Returns the list of available preset modes.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List of String</td>
+<td>Available preset modes</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>min_temp</code></h3>
+<p>Returns the minimum supported temperature by the thermostat</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>Minimum supported temperature</td>
+</tr>
+</tbody>
+</table>
+<h3>Attribute <code>max_temp</code></h3>
+<p>Returns the maximum supported temperature by the thermostat</p>
+<table>
+<thead>
+<tr>
+<th>Attribute type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>Maximum supported temperature</td>
+</tr>
+</tbody>
+</table>
+<h2>Services</h2>
+<p>The following services are provided by the NuHeat Thermostat: <code>set_temperature</code>, <code>set_hvac_mode</code>, <code>set_preset_mode</code>, <code>resume_program</code>.</p>
+<p>The services <code>fan_min_on_time</code>, <code>set_aux_heat</code>, <code>set_away_mode</code>, <code>set_humidity</code>, <code>set_fan_mode</code>, and <code>set_swing_mode</code> offered by the <a href="/integrations/climate/">Climate component</a> are not implemented for this thermostat.</p>
+<h3>Service <code>set_temperature</code></h3>
+<p>Puts the thermostat into an indefinite hold at the given temperature.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of climate devices to control. Else targets all.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>no</td>
+<td>Desired target temperature (when not in auto mode)</td>
+</tr>
+</tbody>
+</table>
+<p>Only the target temperatures relevant for the current operation mode need to
+be provided.</p>
+<h3>Service <code>set_preset_mode</code></h3>
+<p>Sets the thermostat’s preset mode. Without a preset mode set it run the thermostat’s programmed schedule, “temperature” (to indefinitely hold the thermostat’s current target temperature), or “temporary_temperature” (to hold the thermostat’s current target temperature until the thermostat’s next scheduled event).</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of climate devices to control. Else targets all.</td>
+</tr>
+<tr>
+<td><code>hold_mode</code></td>
+<td>no</td>
+<td>New value of hold mode.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>nuheat.resume_program</code></h3>
+<p>Resumes the currently active schedule.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of climate devices to control. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+:ET

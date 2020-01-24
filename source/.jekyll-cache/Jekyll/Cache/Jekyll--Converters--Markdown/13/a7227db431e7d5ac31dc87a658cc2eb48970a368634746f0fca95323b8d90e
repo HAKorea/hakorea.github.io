@@ -1,0 +1,52 @@
+I"9<p>The <code>digital_ocean</code> integration allows you to access the information about your <a href="https://www.digitalocean.com/">Digital Ocean</a> droplets from Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="/integrations/digital_ocean/#binary-sensor">Binary Sensor</a></li>
+<li><a href="/integrations/digital_ocean/#switch">Switch</a></li>
+</ul>
+<h2>Setup</h2>
+<p>Obtain your API key from your <a href="https://cloud.digitalocean.com/settings/api/tokens">Digital Ocean dashboard</a>.</p>
+<h2>Configuration</h2>
+<p>To integrate your Digital Ocean droplets with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+digital_ocean:
+  access_token: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Digital Ocean API access token.</p>
+</span></p></dd></dl>
+</div>
+<h2>Binary Sensor</h2>
+<p>The <code>digital_ocean</code> binary sensor platform allows you to monitor your Digital Ocean droplets.</p>
+<h3>Configuration</h3>
+<p>To use your Digital Ocean droplets, you first have to set up your <a href="/integrations/digital_ocean/">Digital Ocean hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: digital_ocean
+    droplets:
+      - 'fedora-512mb-nyc3-01'
+      - 'coreos-512mb-nyc3-01'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='droplets' href='#droplets'></a> droplets</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of droplets you want to monitor.</p>
+</span></p></dd></dl>
+</div>
+<h2>Switch</h2>
+<p>The <code>digital_ocean</code> switch platform allows you to control (start/stop) your Digital Ocean droplets.</p>
+<h3>Configuration</h3>
+<p>To use your Digital Ocean droplets, you first have to set up your <a href="/integrations/digital_ocean/">Digital Ocean hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: digital_ocean
+    droplets:
+      - 'fedora-512mb-nyc3-01'
+      - 'coreos-512mb-nyc3-01'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='droplets' href='#droplets'></a> droplets</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of droplets you want to control.</p>
+</span></p></dd></dl>
+</div>
+:ET

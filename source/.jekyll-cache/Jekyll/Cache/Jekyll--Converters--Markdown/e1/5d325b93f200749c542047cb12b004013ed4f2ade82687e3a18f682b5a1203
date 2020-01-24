@@ -1,0 +1,58 @@
+I"À<p>The <code>wsdot</code> sensor will give you travel time information from the <a href="https://wsdot.com/">Washington State Department of Transportation (WSDOT)</a>.</p>
+<h2>Setup</h2>
+<p>First, you need to get a free Traveler Information <code>api_key</code> from the <a href="https://wsdot.com/traffic/api/">WSDOT API webpage</a>. Just enter your email address to instantly get the key.</p>
+<h2>Configuration</h2>
+<p>Once you have the code, create <code>wsdot</code> sensors by editing your <code>configuration.yaml</code> file as follows:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: wsdot
+    api_key: YOUR_API_KEY
+    travel_time:
+     - id: 95
+       name: I-90 Eastbound HOV
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your API key from WSDOT.</p>
+</span></p></dd><dt><a class='title-link' name='travel_time' href='#travel_time'></a> travel_time</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of routes.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>ID of the route.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the route.</p>
+</span></p><p class='default'>
+Default value: <p>Just uses <code>id</code></p>
+</p></dd></dl></dd></dl>
+</div>
+<p>Figuring out which Travel Time ID (<code>id</code>) is associated with your routes is a bit of a challenge. If you visit <code>https://wsdot.com/Traffic/api/TravelTimes/TravelTimesREST.svc/GetTravelTimesAsJson?AccessCode=[your_api_key_here]</code> substituting your <code>api_key</code>, you will get a list of all available routes. Search through it and then find the key <code>TravelTimeID</code>. That tells you the number you need.</p>
+<p>Some common examples include:</p>
+<pre><code class="language-text"> 73 Issaquah-Seattle (WB PM)
+ 74 Seattle-Issaquah (EB AM)
+ 75 HOV Issaquah-Seattle (WB REV)
+ 76 Issaquah-Seattle (WB REV)
+ 77 HOV Redmond-Seattle (WB PM)
+ 78 HOV Seattle-Redmond (EB AM)
+ 79 Redmond-Seattle (WB PM)
+ 80 Seattle-Redmond (EB AM)
+ 81 HOV Redmond-Seattle via I-90 (WB PM)
+ 82 HOV Seattle-Redmond via I-90 (EB AM)
+ 83 Redmond-Seattle via I-90 (WB PM)
+ 84 Seattle-Redmond via I-90 (EB AM)
+ 85 HOV Redmond-Seattle via I-90 (WB REV)
+ 86 Redmond-Seattle via I-90 (WB REV)
+ 89 Bellevue-Seattle via 520 (WB PM)
+ 90 HOV Bellevue-Seattle via 520 (WB PM)
+ 91 HOV Seattle-Bellevue via 520 (EB AM)
+ 92 Seattle-Bellevue via 520 (EB AM)
+ 93 Bellevue-Seattle via I-90 (WB PM)
+ 94 HOV Bellevue-Seattle via I-90 (WB PM)
+ 95 HOV Seattle-Bellevue via I-90 (EB AM)
+ 96 Seattle-Bellevue via I-90 (EB AM)
+ 97 Bellevue-Seattle via I-90 (WB REV)
+ 98 HOV Bellevue-Seattle via I-90 (WB REV)
+</code></pre>
+<div class='note info'>
+WSDOT does provide information about ferry schedules, mountain passes, tolls, etc. but so far only Travel Time data is available in this platform.
+</div>
+<p>Hereâ€™s an example of the sensor in use:</p>
+<p class='img'>
+  <img src='/images/screenshots/wsdot_sensor.png' />
+</p>
+:ET

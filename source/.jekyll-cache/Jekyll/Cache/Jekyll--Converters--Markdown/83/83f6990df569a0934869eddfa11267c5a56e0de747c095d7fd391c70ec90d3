@@ -1,0 +1,26 @@
+I"<p>The <code>rtorrent</code> platform allows you to monitor your downloads with <a href="https://rakshasa.github.io/rtorrent/">rtorrent</a> from within Home Assistant and setup automations based on the information.</p>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rtorrent
+    url: 'http://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/RPC2'
+    monitored_variables:
+      - 'current_status'
+      - 'download_speed'
+      - 'upload_speed'
+</code></pre>
+<p>This sensor requires the rtorrent XMLRPC API exposed on an HTTP interface.
+Note that for security reasons, simply using the SCGI interface (default <code>localhost:5000</code>) of rtorrent won’t work.
+The <a href="https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC">official reference</a> describes how to set up that HTTP interface.</p>
+<p>Alternatively, the <a href="https://github.com/binhex/arch-rtorrentvpn">arch-rtorrentvpn</a> container can be used with <code>url</code> set to <code>http://admin:rutorrent@127.0.0.1:9080/RPC2</code>.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL to the HTTP endpoint of the rtorrent XMLRPC API.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use when displaying this rtorrent instance.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_variables' href='#monitored_variables'></a> monitored_variables</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to be monitored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='current_status' href='#current_status'></a> current_status</dt><dd><p class='desc'><span class='description'><p>The status of your rtorrent daemon.</p>
+</span></p></dd><dt><a class='title-link' name='download_speed' href='#download_speed'></a> download_speed</dt><dd><p class='desc'><span class='description'><p>The current download speed.</p>
+</span></p></dd><dt><a class='title-link' name='upload_speed' href='#upload_speed'></a> upload_speed</dt><dd><p class='desc'><span class='description'><p>The current upload speed.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

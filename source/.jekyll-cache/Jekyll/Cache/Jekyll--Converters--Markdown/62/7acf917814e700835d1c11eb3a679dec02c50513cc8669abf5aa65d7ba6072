@@ -1,0 +1,57 @@
+I"‘<p>The <code>london_air</code> integration <a href="https://api.erg.kcl.ac.uk/AirQuality/Hourly/MonitoringIndex/GroupName=London/Json">queries</a> the London air quality <a href="https://www.londonair.org.uk/LondonAir/API/">data feed</a> provided by Kings College London. A single sensor will be added for each <code>location</code> (<a href="https://en.wikipedia.org/wiki/List_of_London_boroughs">local authority district or borough</a>) specified in the configuration file. The state of each sensor is the overall air quality in that borough. Note that only 28 of the 32 boroughs have data available.</p>
+<p>Boroughs can have multiple monitoring sites at different geographical positions within the borough, and each of those sites can monitor up to six different kinds of pollutant. The pollutants are described <a href="https://api.erg.kcl.ac.uk/AirQuality/Information/Species/Json">here</a> and are Carbon Monoxide (<a href="https://www.londonair.org.uk/LondonAir/guide/WhatIsCO.aspx">CO2</a>), Nitrogen Dioxide (<a href="https://www.londonair.org.uk/LondonAir/guide/WhatIsNO2.aspx">NO2</a>), Ozone (<a href="https://www.londonair.org.uk/LondonAir/guide/WhatIsO3.aspx">O3</a>), Sulfur Dioxide (<a href="https://www.londonair.org.uk/LondonAir/guide/WhatIsSO2.aspx">SO2</a>), PM2.5 &amp; PM10 <a href="https://www.londonair.org.uk/LondonAir/guide/WhatIsPM.aspx">particulates</a>. The <code>latitude</code> and <code>longitude</code> of each site is accessible through a <code>data</code> attribute of the sensor, as are details about the pollutants monitored at that site. The <code>sites</code> attribute of a sensor displays how many monitoring sites that sensor covers. The <code>updated</code> attribute of a sensor states when the data was last published. Nominally data is published hourly, but in my experience this can vary. To limit the number of requests made by the sensor, a single API request is made every 30 minutes.</p>
+<p>To add sensors to Home-assistant for all possible areas/boroughs add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for a single sensor
+sensor:
+  - platform: london_air
+    locations:
+      - Barking and Dagenham
+      - Bexley
+      - Brent
+      - Camden
+      - City of London
+      - Croydon
+      - Ealing
+      - Enfield
+      - Greenwich
+      - Hackney
+      - Haringey
+      - Harrow
+      - Havering
+      - Hillingdon
+      - Islington
+      - Kensington and Chelsea
+      - Kingston
+      - Lambeth
+      - Lewisham
+      - Merton
+      - Redbridge
+      - Richmond
+      - Southwark
+      - Sutton
+      - Tower Hamlets
+      - Wandsworth
+      - Westminster
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='locations' href='#locations'></a> locations</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Areas/boroughs in London to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>All location with data available.</p>
+</p></dd></dl>
+</div>
+<p>To explore the data available within the <code>data</code> attribute of a sensor use the <code>dev-template</code> tool on the Home-assistant frontend. <code>data</code> contains a list of monitored sites, where the number of monitored sites are given by the <code>sites</code> attribute. If a sensor has four sites, access the fourth site by indexing the list of sites using data[3]. Each site is a dictionary with multiple fields, with entries for the <code>latitude</code> and <code>longitude</code> of that site, a <code>pollution_status</code>, <code>site_code</code>, <code>site_name</code> and <code>site_type</code>. The field <code>number_of_pollutants</code> states how many pollutants are monitored (of the possible six) and the field <code>pollutants</code> returns a list with data for each pollutant. To access the first pollutant in the list for site zero use <code>attributes.data[0].pollutants[0]</code>. Each entry in <code>pollutants</code> is a dictionary with fields for the pollutant <code>code</code>, <code>description</code>, <code>index</code>, <code>quality</code> and a <code>summary</code>. <a href="/integrations/template">Template sensors</a> can then be added to display these attributes, for example:</p>
+<pre><code class="language-yaml"># Example template sensors
+- platform: template
+  sensors:
+    updated:
+      friendly_name: 'Updated'
+      value_template: '{{state_attr('sensor.merton', 'updated')}}'
+    merton_pm10:
+      friendly_name: 'Merton PM10'
+      value_template: '{{state_attr('sensor.merton', 'data')[0].pollutants[0].summary}}'
+    westminster_s02:
+      friendly_name: 'Westminster S02'
+      value_template: '{{state_attr('sensor.westminster', 'data')[0].pollutants[3].summary}}'
+</code></pre>
+:ET

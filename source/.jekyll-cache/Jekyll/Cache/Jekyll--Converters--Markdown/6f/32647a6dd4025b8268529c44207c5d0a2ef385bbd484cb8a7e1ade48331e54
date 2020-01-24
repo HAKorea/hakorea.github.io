@@ -1,0 +1,27 @@
+I"¡<p>The <code>spider</code> integration is the main integration to integrate all <a href="https://www.ithodaalderop.nl/spider-thermostaat">Itho Daalderop Spider</a> related platforms. You will need your Spider account information (username, password) to discover and control devices which are related to your account.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Climate</li>
+<li>Switch</li>
+</ul>
+<h2>Configuration</h2>
+<p>To add your Spider devices into your Home Assistant installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">spider:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Account username of mijn.ithodaalderop.nl</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Account password of mijn.ithodaalderop.nl</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>How frequently to query for new data. Defaults to 120 seconds.</p>
+</span></p></dd></dl>
+</div>
+<div class='note warning'>
+This integration is not affiliated with Itho Daalderop Spider and retrieves data from the endpoints of the mobile application. Use at your own risk.
+</div>
+<h3>Climate</h3>
+<div class='note'>
+Although this integration lets you change the operation mode to heating or cooling, it doesn't necessarily mean your boiler can. Spider is not aware of your current situation.
+</div>
+:ET

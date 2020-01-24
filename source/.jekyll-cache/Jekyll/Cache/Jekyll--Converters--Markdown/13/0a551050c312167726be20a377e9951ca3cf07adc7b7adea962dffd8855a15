@@ -1,0 +1,26 @@
+I"9	<p>The <code>brottsplatskartan</code> sensor allows one to track reported incidents occurring in a given area. Incidents include anything reported to <a href="https://brottsplatskartan.se">Brottsplatskartan</a>. The sensor only counts incidents from the current day.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: brottsplatskartan
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Custom name for the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Brottsplatskartan</p>
+</p></dd><dt><a class='title-link' name='area' href='#area'></a> area</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Area for sensor to monitor</p>
+</span></p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude for sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Your home zone latitude defined in your configuration.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude for sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Your home zone longitude defined in your configuration.</p>
+</p></dd></dl>
+</div>
+<h2>Notes</h2>
+<h3>Area</h3>
+<p>Brottsplatskartan captures all incidents in a region, e.g Stockholms län. If area parameter is defined, any latitude and longitude parameters are ignored.</p>
+<h3>Latitude and Longitude</h3>
+<p>The radius is set to 5 km when using latitude and longitude to monitor an area. It’s not possible to explicitly set radius to another value.</p>
+:ET

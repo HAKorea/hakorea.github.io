@@ -1,0 +1,44 @@
+I"]<p>To run Python 3.x on <a href="https://www.centos.org/">CentOS</a> or RHEL (Red Hat Enterprise Linux), <a href="https://www.softwarecollections.org/en/scls/rhscl/rh-python36/">Software Collections</a> needs to be activated first.</p>
+<h3>Using Software Collections</h3>
+<p>First of all install the software collection repository as root and <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Developer_Toolset/1/html-single/Software_Collections_Guide/">scl utils</a>. For example, on CentOS:</p>
+<pre><code class="language-bash">sudo yum install centos-release-scl
+sudo yum-config-manager --enable centos-sclo-rh-testing
+sudo yum install -y scl-utils
+</code></pre>
+<p>Install some dependencies you’ll need later.</p>
+<pre><code class="language-bash">sudo yum install gcc gcc-c++ systemd-devel
+</code></pre>
+<p>Then install the Python 3.6 package. If you are using CentOS 7 then you may have to install the packages for Python 3.6 using RHEL Methods listed here: <a href="https://www.softwarecollections.org/en/scls/rhscl/rh-python36/">https://www.softwarecollections.org/en/scls/rhscl/rh-python36/</a>) for this to work as mentioned above.</p>
+<pre><code class="language-bash">sudo yum install rh-python36
+</code></pre>
+<p>This is part of the slight change when trying to install Python 3.6 and running the command <code>python36 --version</code> which will after install give you the correct version, but won’t allow you to set the software collection using the <code>scl</code> command. This command downloads the RH collection of Python to allow you to run <code>scl</code> command to enable the environment in <code>bash</code> and then run the automate command using the template.</p>
+<pre><code class="language-bash">yum install rh-python36
+</code></pre>
+<h3>Start using software collections</h3>
+<pre><code class="language-bash">scl enable rh-python36 bash
+</code></pre>
+<p>Once installed, switch to your <code>homeassistant</code> user (if you’ve set one up), enable the software collection and check that it has set up the new version of Python:</p>
+<pre><code class="language-bash">$ python --version
+Python 3.6.3
+</code></pre>
+<p>You will be in a command shell set up with Python 3.6 as your default version. The <code>virtualenv</code> and <code>pip</code> commands will be correct for this version, so you can now create a virtual environment and install Home Assistant following the main <a href="/docs/installation/virtualenv/#step-4-set-up-the-virtualenv">instructions</a>.</p>
+<p>You will need to enable the software collection each time you log on before you activate your virtual environment.</p>
+<h3>Systemd with Software Collections</h3>
+<p>To autostart Home Assistant using systemd and a python36 (from SCL) virtual environment, follow the main <a href="/docs/autostart/systemd/">instructions</a> and adjust the template as follows:</p>
+<p>Filename: <code>/etc/systemd/system/home-assistant@homeassistant.service</code></p>
+<pre><code class="language-txt">[Unit]
+Description=Home Assistant
+After=network-online.target
+
+[Service]
+Type=simple
+# %i means the username is derrived from the filename.
+User=%i
+# a python venv for hass exists in /opt/hass/venv
+ExecStart=/srv/homeassistant/bin/hass
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>This works because the Python virtual environment was created using the SCL environment, thus there is no need to activate SCL.</p>
+:ET

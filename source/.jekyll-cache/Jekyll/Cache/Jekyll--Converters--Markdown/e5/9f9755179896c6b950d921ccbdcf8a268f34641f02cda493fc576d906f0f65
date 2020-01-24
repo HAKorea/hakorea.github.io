@@ -1,0 +1,42 @@
+I"�<p>The <code>vasttrafik</code> sensor will provide you traveling details for the larger Göteborg area in Sweden from the <a href="https://vasttrafik.se/">Västtrafik</a> public transportation service.</p>
+<p>You must create an application <a href="https://developer.vasttrafik.se/portal/#/applications">here</a> to obtain a <code>key</code> and a <code>secret</code>.</p>
+<p>Add the data to your <code>configuration.yaml</code> file as shown in the example:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: vasttrafik
+    key: YOUR_API_KEY
+    secret: YOUR_API_SECRET
+    departures:
+      - from: Musikvägen
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='key' href='#key'></a> key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API key to access your Västtrafik account.</p>
+</span></p></dd><dt><a class='title-link' name='secret' href='#secret'></a> secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API secret to access your Västtrafik account.</p>
+</span></p></dd><dt><a class='title-link' name='departures' href='#departures'></a> departures</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of travel routes.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the route.</p>
+</span></p></dd><dt><a class='title-link' name='from' href='#from'></a> from</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The start station.</p>
+</span></p></dd><dt><a class='title-link' name='heading' href='#heading'></a> heading</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Direction of the traveling.</p>
+</span></p></dd><dt><a class='title-link' name='lines' href='#lines'></a> lines</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Only consider these lines.</p>
+</span></p></dd><dt><a class='title-link' name='delay' href='#delay'></a> delay</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Delay in minutes.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd></dl></dd></dl>
+</div>
+<p>The data are coming from <a href="https://vasttrafik.se/">Västtrafik</a>.</p>
+<p>A full configuration example could look like this:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: vasttrafik
+    key: YOUR_API_KEY
+    secret: YOUR_API_SECRET
+    departures:
+      - name: Mot järntorget
+        from: Musikvägen
+        heading: Järntorget
+        lines:
+          - 7
+          - GRÖN
+        delay: 10
+</code></pre>
+:ET

@@ -1,0 +1,90 @@
+I"8<h2>Adding Non-Secure Devices</h2>
+<p>To add (include) a non-secure Z-Wave <a href="/docs/z-wave/devices/">device</a> to your system:</p>
+<ol>
+<li>Go to the <a href="/docs/z-wave/control-panel/">Z-Wave control panel</a> in the Home Assistant frontend</li>
+<li>Click the <strong>Add Node</strong> button in the <em>Z-Wave Network Management</em> card - this will place the controller in inclusion mode</li>
+<li>Activate your device to be included by following the instructions provided with the device</li>
+<li>With the device in its final location, run a <em>Heal Network</em></li>
+</ol>
+<p>Don’t use this for <a href="/docs/z-wave/adding/#adding-secure-devices">secure devices</a>, since this is likely to limit the features the device supports.</p>
+<div class='note warning'>
+<p>Don’t use the OpenZWave control panel (OZWCP), <strong>or the physical button on a controller</strong>, to add or remove devices. Many devices will only send the information about their capabilities at the time you include them. If you use the OpenZWave control panel, or the button on a device, then Home Assistant won’t have that information. Using the physical button on a controller will also result in a non-security inclusion being performed, which may limit the features the device supports.</p>
+</div>
+<p>When you add a device, it may initially appear without a specific entity ID (e.g., <code>zwave.__</code>) and without other identifying information. Running a <em>Heal</em> should help speed this process up, and you’ll need to run a <em>Heal</em> anyway so that all the devices in your Z-Wave network learn about the new device. You <em>might</em> need to restart Home Assistant (not reboot the system) to have the entity ID fully visible.</p>
+<h2>Network Key</h2>
+<p>Security Z-Wave devices require a network key. Some devices only expose their full capabilities when included this way. You should always read the manual for your device to find out the recommended inclusion method. Note, secure devices that had been connected to another hub/network in the past may have a “theft protection” feature which requires to first exclude the device successfully from the previous hub using the previous hub/Software setup before it can be enrolled in a new hub/network.</p>
+<p>A valid network key will be a 16 byte value, defined in the zwave section of your configuration, such as the following example:</p>
+<pre><code class="language-yaml">zwave:
+  usb_path: /dev/ttyACM0
+  network_key: &quot;0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10&quot;
+</code></pre>
+<p>Each individual value in the defined key can be anywhere from 0x00 to 0xFF. Define your own key by making changes to the above example key or for additional security try one of the two scripts mentioned below.</p>
+<h3>Network Key</h3>
+<p>An easy script to generate a random key:</p>
+<pre><code class="language-bash">$ cat /dev/urandom | tr -dc '0-9A-F' | fold -w 32 | head -n 1 | sed -e 's/\(..\)/0x\1, /g' -e 's/, $//'
+</code></pre>
+<p>On macOS, this script will generate a random key:</p>
+<pre><code class="language-bash">$ cat /dev/urandom | LC_CTYPE=C tr -dc '0-9A-F' | fold -w 32 | head -n 1 | sed -e 's/\(..\)/0x\1, /g' -e 's/, $//'
+</code></pre>
+<p>If the above command doesn’t work then replace <code>LC_CTYPE=C</code> with <code>LC_ALL=C</code>:</p>
+<pre><code class="language-bash">$ cat /dev/urandom | LC_ALL=C tr -dc '0-9A-F' | fold -w 32 | head -n 1 | sed -e 's/\(..\)/0x\1, /g' -e 's/, $//'
+</code></pre>
+<div class='note warning'>
+Ensure you keep a backup of this key. If you have to rebuild your system and don't have a backup of this key, you won't be able to reconnect to any security devices. This may mean you have to do a factory reset on those devices, and your controller, before rebuilding your Z-Wave network.
+</div>
+<h2>Adding Secure Devices</h2>
+<p>After defining your network key, follow these steps to add (include) a secure Z-Wave device:</p>
+<ol>
+<li>Go to the <a href="/docs/z-wave/control-panel/">Z-Wave control panel</a> in the Home Assistant frontend</li>
+<li>Click the <strong>Add Node Secure</strong> button in the <em>Z-Wave Network Management</em> card - this will place the controller in inclusion mode</li>
+<li>Activate your device to be included by following the instructions provided with the device</li>
+<li>With the device in its final location, run a <em>Heal Network</em></li>
+</ol>
+<div class='note warning'>
+Secure devices require additional bandwidth, and too many secure devices can slow down your Z-Wave network. We recommend only using secure inclusion for devices that require it, such as locks.
+</div>
+<h2>Removing Devices</h2>
+<p>To remove (exclude) a Z-Wave device from your system:</p>
+<ol>
+<li>Go to the Z-Wave control panel in the Home Assistant frontend</li>
+<li>Click the <strong>Remove Node</strong> button in the <em>Z-Wave Network Management</em> card - this will place the controller in exclusion mode</li>
+<li>Activate your device to be excluded by following the instructions provided with the device</li>
+<li>The device will now be removed, but that won’t show until you restart Home Assistant</li>
+<li>Run a <em>Heal Network</em> so all the other nodes learn about its removal</li>
+</ol>
+<p>If your device isn’t responding to this process, possibly because you’ve factory reset it or it has failed, you can remove it using <strong>Remove Failed Node</strong>. This only works for devices marked as <code>&quot;is_failed&quot;: true</code>, but you can trick the system into thinking that this the case:</p>
+<ol>
+<li>
+<p>Go to the <em>States</em> menu under <em>Developer tools</em> in the Home Assistant frontend</p>
+</li>
+<li>
+<p>Click on the name of the <code>zwave.</code> entity you want to remove</p>
+</li>
+<li>
+<p>Make note of the entity’s “node_id” value as you will need to re-add the “node_id” attribute and value in step 4.</p>
+</li>
+<li>
+<p>At the top, edit the JSON attributes to replace <code>false</code> with <code>true</code> for <code>&quot;is_failed&quot;: false,</code> so that it reads <code>&quot;is_failed&quot;: true.</code> Also add the “node_id” value to the number listed in the entity’s attribute. The JSON attributes should look something like below:</p>
+<pre><code class="language-yaml">{&quot;node_id&quot;:6, &quot;is_failed&quot;:true}
+</code></pre>
+</li>
+<li>
+<p>Click <strong>Set State</strong></p>
+</li>
+<li>
+<p>Go to the Z-Wave control panel in the Home Assistant frontend</p>
+</li>
+<li>
+<p>Click the <strong>Remove Failed Node</strong> button in the <em>Z-Wave Node Management</em> card</p>
+</li>
+<li>
+<p>The device will now be removed, but that won’t show until you restart Home Assistant</p>
+</li>
+</ol>
+<h2>Troubleshooting</h2>
+<p>Sometimes devices won’t add to Home Assistant. There are a couple of possible problems.</p>
+<ol>
+<li>You’re not using all Z-Wave Plus devices, in which case the device can’t use the mesh to be added, and must be in the same room as your controller.</li>
+<li>The device was previously added to another controller, and not removed. You’ll need to follow the process above for removing devices first, then try adding it again.</li>
+</ol>
+:ET

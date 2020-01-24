@@ -1,0 +1,133 @@
+I"�<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#light">Light</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Light</h2>
+<p>The <code>sensehat</code> light platform lets you control the <a href="https://www.raspberrypi.org/products/sense-hat/">Sense HAT</a> board’s 8x8 RGB LED matrix on your Raspberry Pi from within Home Assistant.</p>
+<p>To add <code>sensehat</code> light to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: sensehat
+</code></pre>
+<h2>Sensor</h2>
+<p>The <code>sensehat</code> sensor platform allows you to display information collected by a <a href="https://www.raspberrypi.org/products/sense-hat/">Sense HAT</a> add-on board for Raspberry Pi.</p>
+<p>To add this platform to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: sensehat
+    display_options:
+      - temperature
+      - humidity
+      - pressure
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='display_options' href='#display_options'></a> display_options</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of details to monitor.</p>
+</span></p><p class='default'>
+Default value: <p><code>memory_free</code></p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>Temperature</p>
+</span></p></dd><dt><a class='title-link' name='humidity' href='#humidity'></a> humidity</dt><dd><p class='desc'><span class='description'><p>Humidity</p>
+</span></p></dd><dt><a class='title-link' name='pressure' href='#pressure'></a> pressure</dt><dd><p class='desc'><span class='description'><p>Pressure</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Change the name of te sensor, for in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='is_hat_attached' href='#is_hat_attached'></a> is_hat_attached</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Declaring that the SenseHAT <em>is</em> physically on the Raspberry Pi.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<h3>Customizing the Sense HAT data</h3>
+<h4>Format the sensor values</h4>
+<p>Add the following to your <code>sensor</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: sensehat
+    display_options:
+        - temperature
+        - humidity
+        - pressure
+
+  - platform: template
+    sensors:
+      sensehat_temperature:
+        value_template: '{{ states('sensor.temperature') | round(1) }}'
+        unit_of_measurement: '°C'
+      sensehat_pressure:
+        value_template: '{{ states('sensor.pressure') | round(1) }}'
+        unit_of_measurement: 'mb'
+      sensehat_humidity:
+        value_template: '{{ states('sensor.humidity') | round(1) }}'
+        unit_of_measurement: '%'
+</code></pre>
+<h4>Give the values friendly names &amp; icons</h4>
+<p>Add the following to your <code>customize</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+customize:
+  sensor.sensehat_temperature:
+    icon: mdi:thermometer
+    friendly_name: &quot;Temperature&quot;
+  sensor.sensehat_humidity:
+    icon: mdi:weather-rainy
+    friendly_name: &quot;Humidity&quot;
+  sensor.sensehat_pressure:
+    icon: mdi:gauge
+    friendly_name: &quot;Pressure&quot;
+</code></pre>
+<h4>Create a group</h4>
+<p>Add the following to your <code>groups</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+group:
+  sense_hat:
+    name: Sense HAT
+    entities:
+      - sensor.sensehat_temperature
+      - sensor.sensehat_humidity
+      - sensor.sensehat_pressure
+</code></pre>
+<p>Add the sense_hat group (<em>Kitchen for example</em>)</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+group:
+  kitchen:
+    - group.sense_hat
+</code></pre>
+<h3>Directions for installing on Raspberry Pi Raspbian Based installation:</h3>
+<p>Here are the steps to make the <em>SenseHAT</em> sensor work <em>successfully</em> with the virtual environment versions.</p>
+<h4>Install SenseHAT package to <em>homeassistant_venv</em></h4>
+<pre><code class="language-bash"># switch to the homeassistant_venv environment
+sudo -u homeassistant -H -s
+source /srv/homeassistant/homeassistant_venv/bin/activate
+
+# install the sense-hat lib
+pip3 install sense-hat
+# be patient, this will take a long while
+</code></pre>
+<h4>Return to <code>pi</code></h4>
+<p>Type <code>exit</code> to quit out of the <em>homeassistant_venv</em> back to your <code>pi</code> environment.</p>
+<p>As all of the following steps should be under the <code>pi</code> user environment.</p>
+<h4>Install <em>RTIMU</em></h4>
+<pre><code class="language-bash"># pi user environment: Install RTIMU
+pip3 install rtimulib
+
+# pi user environment: Add _homeassistant_ user to the _input_, _video_ and the _i2c_ groups
+sudo addgroup homeassistant input
+sudo addgroup homeassistant i2c
+sudo addgroup homeassistant video
+
+# HA environment: Add symlink to RTIMU
+ln -s /usr/lib/python3/dist-packages/RTIMU.cpython-35m-arm-linux-gnueabihf.so /srv/homeassistant/lib/python3.5/site-packages/
+
+# pi user environment: Reboot Raspberry Pi to apply changes
+sudo reboot
+</code></pre>
+<p>Unfortunately enabling the SenseHAT Sensor integration for a Virtual Environment install of Home Assistant fails with errors.
+<em>(The Raspberry Pi All-In-One installer run Home Assistant in an virtual environment).</em>
+These issues have been discussed in the repository issue <a href="https://github.com/home-assistant/home-assistant/issues/5093">#5093</a></p>
+<p>This fix has been tested with a clean install of:</p>
+<ul>
+<li><a href="https://downloads.raspberrypi.org/raspbian/images/raspbian-2017-01-10/">Raspbian Jessie - version January 2017</a></li>
+</ul>
+<p>and</p>
+<ul>
+<li><a href="/getting-started/installation-raspberry-pi-all-in-one/">Home Assistant 0.37.1</a></li>
+</ul>
+<p>For setting up the Sense HAT’s RGB LED matrix as lights within Home Assistant, please see the <a href="#light">Sense HAT light component</a>.</p>
+:ET

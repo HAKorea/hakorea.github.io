@@ -1,0 +1,29 @@
+I"¹<p>The <code>picotts</code> text-to-speech platform uses offline pico Text-to-Speech engine to read a text with natural sounding voices.
+This requires to install the pico tts library on the system, typically on debian just do <code>sudo apt-get install libttspico-utils</code>
+On some Raspbian release, this package is missing but you can just copy the arm deb package from debian.</p>
+<p>On Debian Buster, the package is missing, use the following commands to install it:</p>
+<pre><code class="language-bash">wget http://ftp.us.debian.org/debian/pool/non-free/s/svox/libttspico0_1.0+git20130326-9_armhf.deb
+wget http://ftp.us.debian.org/debian/pool/non-free/s/svox/libttspico-utils_1.0+git20130326-9_armhf.deb
+sudo apt-get install -f ./libttspico0_1.0+git20130326-9_armhf.deb ./libttspico-utils_1.0+git20130326-9_armhf.deb
+</code></pre>
+<h2>Configuration</h2>
+<p>To enable text-to-speech with Pico, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: picotts
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='language' href='#language'></a> language</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The language to use. Supported languages are <code>en-US</code>, <code>en-GB</code>, <code>de-DE</code>, <code>es-ES</code>, <code>fr-FR</code> and <code>it-IT</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>en-US</code></p>
+</p></dd></dl>
+</div>
+<h2>Full configuration example</h2>
+<p>The configuration sample below shows how an entry can look like:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: picotts
+    language: 'fr-FR'
+</code></pre>
+:ET

@@ -1,0 +1,42 @@
+I"�<p>The <code>enigma2</code> platform allows you to control a Linux based set-top box which is running <a href="https://github.com/oe-alliance/oe-alliance-enigma2">Enigma2</a> with the OpenWebif plugin installed.</p>
+<p><a href="https://github.com/E2OpenPlugins/e2openplugin-OpenWebif">OpenWebif</a> is an open source web interface for Enigma2 based set-top boxes.</p>
+<p>Enigma2 devices should be discovered automatically by using the <a href="/integrations/discovery/">the discovery component</a>.</p>
+<p>To manually add a set-top box to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: enigma2
+    host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP/hostname of the Enigma2 set-top box on your home network.</p>
+</span></p></dd><dt><a class='title-link' name='use_channel_icon' href='#use_channel_icon'></a> use_channel_icon</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>By default, a screen grab of the current channel is shown. If you prefer the channel icon to be shown instead, set this to true.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='deep_standby' href='#deep_standby'></a> deep_standby</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If set to true, when the user selects Turn Off, the box will go into “deep standby” mode, meaning it can be only awoken by the remote control or via Wake On Lan (if box supports that).</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='mac_address' href='#mac_address'></a> mac_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If specified, a Wake On Lan packet is sent to this MAC address, when Turn On is selected.</p>
+</span></p><p class='default'>
+Default value: <p>empty</p>
+</p></dd><dt><a class='title-link' name='source_bouquet' href='#source_bouquet'></a> source_bouquet</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Provide a specific bouquet reference for the bouquet you would like to see loaded into the media player “Sources” interface.</p>
+</span></p><p class='default'>
+Default value: <p>empty</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port which OpenWebif is listening on.</p>
+</span></p><p class='default'>
+Default value: <p>80</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The username of a user with privileges to access the box. This is only required if you have enabled the setting “Enable HTTP Authentication” in OpenWebif settings. <em>(e.g., on the remote by pressing <code>Menu</code>&gt;<code>Plugins</code>&gt;<code>OpenWebif</code>)</em>.</p>
+</span></p><p class='default'>
+Default value: <p>root</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The password for your given account. Again, this is only required if you have enabled the setting “Enable HTTP Authentication” in OpenWebif settings. <em>(e.g., on the remote by pressing <code>Menu</code>&gt;<code>Plugins</code>&gt;<code>OpenWebif</code>)</em>.</p>
+</span></p><p class='default'>
+Default value: <p>dreambox</p>
+</p></dd><dt><a class='title-link' name='ssl' href='#ssl'></a> ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Use HTTPS instead of HTTP to connect. This is only required if you have enabled the setting “Enable HTTPS” in OpenWebif settings. <em>(e.g., on the remote by pressing <code>Menu</code>&gt;<code>Plugins</code>&gt;<code>OpenWebif</code>)</em>. You will need to ensure you have a valid CA certificate in place or SSL verification will fail with this component.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for easy identification of the device.</p>
+</span></p><p class='default'>
+Default value: <p>Enigma2 Media Player</p>
+</p></dd></dl>
+</div>
+:ET

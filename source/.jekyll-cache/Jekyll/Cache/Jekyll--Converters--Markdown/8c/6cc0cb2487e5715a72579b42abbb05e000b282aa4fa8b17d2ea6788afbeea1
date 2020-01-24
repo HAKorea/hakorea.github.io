@@ -1,0 +1,55 @@
+I"r<p>The <code>canary</code> integration allows you to integrate your <a href="https://canary.is">Canary</a> devices in Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Alarm</li>
+<li><a href="#camera">Camera</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>You will need your Canary login information (username, usually your email address, and password) to use this module.</p>
+<p>To set it up, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+canary:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing your Canary account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing your Canary account.</p>
+</span></p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Timeout to wait for connections.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd></dl>
+</div>
+<p>Once loaded, your front end will have the following integrations:</p>
+<ul>
+<li>A camera image triggered by motion for each camera.</li>
+<li>An alarm control panel for each location.</li>
+<li>A sensor per camera that reports temperature.</li>
+<li>A sensor per camera that reports humidity.</li>
+<li>A sensor per camera that reports air quality.</li>
+</ul>
+<h2>Camera</h2>
+<p>The <code>canary</code> camera platform allows you to watch the live stream of your <a href="https://canary.is">Canary</a> camera in Home Assistant. This requires the <a href="/integrations/ffmpeg/"><code>ffmpeg</code> integration</a> to be already configured.</p>
+<p>Once you have <a href="/integrations/canary/">Canary integration</a> setup, your <a href="https://canary.is">Canary</a> camera(s) should show up automatically.</p>
+<h2>Configuration</h2>
+<p>You can add the following to your <code>configuration.yaml</code> file to configure <code>canary</code> camera with optional settings:</p>
+<pre><code class="language-yaml">camera:
+  - platform: canary
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ffmpeg_arguments' href='#ffmpeg_arguments'></a> ffmpeg_arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Extra options to pass to <code>ffmpeg</code>, e.g., image quality or video filter options. More details in <a href="/integrations/ffmpeg">FFmpeg integration</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>The <code>canary</code> sensor platform allows you to integrate the sensors of your <a href="https://canary.is">Canary</a> devices in Home Assistant.</p>
+<p>To add <code>canary</code> sensors to your installation, follow instructions above.</p>
+<p>Once loaded, you will see following sensors:</p>
+<ul>
+<li>A sensor per camera that reports temperature.</li>
+<li>A sensor per camera that reports humidity.</li>
+<li>A sensor per camera that reports air quality.</li>
+</ul>
+:ET

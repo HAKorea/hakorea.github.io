@@ -1,0 +1,408 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HERE Travel Time - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to add HERE travel time to Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/here_travel_time/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="HERE Travel Time">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/here_travel_time/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to add HERE travel time to Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="HERE Travel Time">
+    <meta name="twitter:description" content="Instructions on how to add HERE travel time to Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/here_travel_time.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      HERE Travel Time
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>here_travel_time</code> sensor provides travel time from the <a href="https://developer.here.com/documentation/routing/topics/introduction.html" rel="external nofollow">HERE Routing API</a>.</p>
+<h2>
+<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
+<p>You need to register for an API key (REST &amp; XYZ HUB API/CLI) by following the instructions <a href="https://developer.here.com/documentation/routing/topics/introduction.html?create=Freemium-Basic&amp;keepState=true&amp;step=account" rel="external nofollow">here</a>.</p>
+<p>HERE offers a Freemium Plan which includes 250,000 free Transactions per month. For the Routing API, one transaction equals one request with one starting point (no multi stop). More information can be found <a href="https://developer.here.com/faqs#payment-subscription" rel="external nofollow">here</a></p>
+<p>By default HERE will deactivate your account if you exceed the free Transaction limit for the month. You can add payment details to reenable your account as described <a href="https://developer.here.com/faqs" rel="external nofollow">here</a></p>
+<h3>
+<a class="title-link" name="migrate-from-app_code-to-api_key" href="#migrate-from-app_code-to-api_key"></a> Migrate from app_code to api_key</h3>
+<p>HERE has changed its authentication mechanism. It is no longer possible to use <code>app_id</code> and <code>app_code</code>. Existing users have to follow the <a href="https://developer.here.com/documentation/authentication/dev_guide/topics/api-key-credentials.html" rel="external nofollow">migration guide</a> in order to retrieve the now needed <code>api_key</code>.</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To enable the sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  - platform: here_travel_time
+    api_key: "YOUR_API_KEY"
+    origin_latitude: "51.222975"
+    origin_longitude: "9.267577"
+    destination_latitude: "51.257430"
+    destination_longitude: "9.335892"
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your application’s API key (get one by following the instructions above).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="origin_latitude" href="#origin_latitude"></a> origin_latitude</dt>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>The starting latitude for calculating travel distance and time. Must be used in combination with origin_longitude. Cannot be used in combination with <code>origin_entity_id</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="origin_longitude" href="#origin_longitude"></a> origin_longitude</dt>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>The starting longitude for calculating travel distance and time. Must be used in combination with origin_latitude. Cannot be used in combination with <code>origin_entity_id</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="destination_latitude" href="#destination_latitude"></a> destination_latitude</dt>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>The finishing latitude for calculating travel distance and time. Must be used in combination with destination_longitude. Cannot be used in combination with <code>destination_entity_id</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="destination_longitude" href="#destination_longitude"></a> destination_longitude</dt>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>The finishing longitude for calculating travel distance and time. Must be used in combination with destination_latitude. Cannot be used in combination with <code>destination_entity_id</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="origin_entity_id" href="#origin_entity_id"></a> origin_entity_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>The entity_id holding the starting point for calculating travel distance and time. Cannot be used in combination with <code>origin_latitude</code>/<code>origin_longitude</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="destination_entity_id" href="#destination_entity_id"></a> destination_entity_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>The entity_id holding the finishing point for calculating travel distance and time. Cannot be used in combination with <code>destination_latitude</code>/<code>destination_longitude</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A name to display on the sensor. The default is “HERE Travel Time”.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>HERE Travel Time</p>
+</dd>
+<dt>
+<a class="title-link" name="mode" href="#mode"></a> mode</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>You can choose between: <code>bicycle</code>, <code>car</code>, <code>pedestrian</code>, <code>publicTransport</code>, <code>publicTransportTimeTable</code> or <code>truck</code>. The default is <code>car</code>. For public transport <code>publicTransportTimeTable</code> is recommended. You can find more information on the modes <a href="https://developer.here.com/documentation/routing/topics/transport-modes.html" rel="external nofollow">here</a> and on the public modes <a href="https://developer.here.com/documentation/routing/topics/public-transport-routing.html" rel="external nofollow">here</a></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>car</p>
+</dd>
+<dt>
+<a class="title-link" name="route_mode" href="#route_mode"></a> route_mode</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>You can choose between: <code>fastest</code>, or <code>shortest</code>. This will determine whether the route is optimized to be the shortest and completely disregard traffic and speed limits or the fastest route according to the current traffic information. The default is <code>fastest</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>fastest</p>
+</dd>
+<dt>
+<a class="title-link" name="traffic_mode" href="#traffic_mode"></a> traffic_mode</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>You can choose between: <code>true</code>, or <code>false</code>. Decide whether you want to take the current traffic condition into account. Default is <code>false</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="unit_system" href="#unit_system"></a> unit_system</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>You can choose between <code>metric</code> or <code>imperial</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Defaults to <code>metric</code> or <code>imperial</code> based on the Home Assistant configuration.</p>
+</dd>
+<dt>
+<a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the update interval of the sensor in seconds. Defaults to 300 (5 minutes).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>300</p>
+</dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="dynamic-configuration" href="#dynamic-configuration"></a> Dynamic Configuration</h2>
+<p>Tracking can be set up to track entities of type <code>device_tracker</code>, <code>zone</code>, <code>sensor</code> and <code>person</code>. If an entity is placed in the origin or destination then every 5 minutes when the platform updates, it will use the latest location of that entity.</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  # Tracking entity to entity
+  - platform: here_travel_time
+    api_key: "YOUR_API_KEY"
+    name: Phone To Home
+    origin_entity_id: device_tracker.mobile_phone
+    destination_entity_id: zone.home
+  # Full config
+  - platform: here_travel_time
+    api_key: "YOUR_API_KEY"
+    name: Work to Home By Bike
+    origin_entity_id: zone.work
+    destination_latitude: 59.2842
+    destination_longitude: 59.2642
+    mode: bicycle
+    route_mode: fastest
+    traffic_mode: false
+    unit_system: imperial
+    scan_interval: 2678400 # 1 month
+    
+
+</code></pre>
+<h2>
+<a class="title-link" name="entity-tracking" href="#entity-tracking"></a> Entity Tracking</h2>
+<ul>
+<li>
+<strong>device_tracker</strong>
+<ul>
+<li>If the state is a zone, then the zone location will be used</li>
+<li>If the state is not a zone, it will look for the longitude and latitude attributes</li>
+</ul>
+</li>
+<li>
+<strong>zone</strong>
+<ul>
+<li>Uses the longitude and latitude attributes</li>
+</ul>
+</li>
+<li>
+<strong>sensor</strong>
+<ul>
+<li>If the state is a zone, then will use the zone location</li>
+<li>All other states will be passed directly into the HERE API
+<ul>
+<li>This includes all valid locations listed in the <em>Configuration Variables</em>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>
+<a class="title-link" name="updating-sensors-on-demand-using-automation" href="#updating-sensors-on-demand-using-automation"></a> Updating sensors on-demand using Automation</h2>
+<p>You can also use the <code>homeassistant.update_entity</code> service to update the sensor on-demand. For example, if you want to update <code>sensor.morning_commute</code> every 2 minutes on weekday mornings, you can use the following automation:</p>
+<pre><code class="language-yaml">automation:
+- id: update_morning_commute_sensor
+  alias: "Commute - Update morning commute sensor"
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    - condition: time
+      after: '08:00:00'
+      before: '11:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.morning_commute
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/here_travel_time.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/HERE_logo.svg' /></div><div class="section">
+    <kb-alert-link integration="here_travel_time"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Introduced in release: 0.100
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/here_travel_time/'>/components/here_travel_time/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#transport'>Transport</a>
+      </li><li>
+        <a href='/integrations/#sensor'>Sensor</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

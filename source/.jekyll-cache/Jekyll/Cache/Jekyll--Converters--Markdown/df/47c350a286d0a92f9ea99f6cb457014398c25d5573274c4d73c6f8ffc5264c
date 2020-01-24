@@ -1,0 +1,34 @@
+I"�<p>This requires a <a href="/integrations/darksky">Dark Sky</a> sensor with the condition <code>precip_intensity</code> that tells if it’s raining or not. You could also experiment with other attributes such as <code>cloud_cover</code>.</p>
+<p>Turn on a light in the living room when it starts raining, someone is home, and it’s afternoon or later.</p>
+<pre><code class="language-yaml">automation:
+  - alias: 'Rainy Day'
+    trigger:
+      - platform: state
+        entity_id: sensor.precip_intensity
+        to: 'rain'
+    condition:
+      - condition: state
+        entity_id: all
+        state: 'home'
+      - condition: time
+        after: '14:00'
+        before: '23:00'
+    action:
+      service: light.turn_on
+      entity_id: light.couch_lamp
+</code></pre>
+<p>And then of course turn off the lamp when it stops raining but only if it’s within an hour before sunset.</p>
+<pre><code class="language-yaml">  - alias: 'Rain is over'
+    trigger:
+      - platform: state
+        entity_id: sensor.precip_intensity
+        to: 'None'
+    condition:
+      - condition: sun
+        after: 'sunset'
+        after_offset: '-01:00:00'
+    action:
+      service: light.turn_off
+      entity_id: light.couch_lamp
+</code></pre>
+:ET

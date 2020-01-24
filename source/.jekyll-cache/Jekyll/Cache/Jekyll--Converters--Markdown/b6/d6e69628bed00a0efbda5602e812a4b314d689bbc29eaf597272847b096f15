@@ -1,0 +1,57 @@
+I"<p>The <code>wunderlist</code> integration allows you to create tasks in <a href="https://www.wunderlist.com">Wunderlist</a> from Home Assistant. You can use this if you want Home Assistant to send you a task that you should not forget, e.g., Congratulate Dani.</p>
+<h2>Setup</h2>
+<p>Wunderlist API uses OAuth2, so you need to obtain a <code>client_id</code> and an <code>access_token</code>.
+There are two ways:</p>
+<ol>
+<li>Go to the <a href="https://wunderlist-iot.herokuapp.com">Wunderlist IOT app page</a>, log in with your Wunderlist account and accept the application permissions.
+It will print for you the <code>client_id</code> and the <code>access_token</code>.</li>
+<li>Or you can create your own application and <code>access_token</code> following the instructions at the <a href="https://developer.wunderlist.com/">Wunderlist developer page</a>.</li>
+</ol>
+<p>Store the parameters in your Home Assistant configuration:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+wunderlist:
+  client_id: YOUR_CLIENT_ID
+  access_token: YOUR_ACCESS_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The ID of your Wunderlist application (OAuth2).</p>
+</span></p></dd><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A token for your Wunderlist personal account (For the <code>client_id</code> application).</p>
+</span></p></dd></dl>
+</div>
+<h2>Creating tasks with service <code>create_task</code></h2>
+<p>This integration offers a new service domain <code>wunderlist</code> with the service <code>create_task</code>.
+You can call this service with the argument  <code>list_name</code> the argument <code>name</code> and the optional parameter <code>starred</code> to create a new task.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list_name</td>
+<td>no</td>
+<td>Name of the list</td>
+<td>“Shopping list”</td>
+</tr>
+<tr>
+<td>name</td>
+<td>no</td>
+<td>Name of the new task</td>
+<td>“Spanish Jam”</td>
+</tr>
+<tr>
+<td>starred</td>
+<td>yes</td>
+<td>Create the task starred or not</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2>Disclaimer</h2>
+<p>This product uses the Wunderlist API but is not endorsed or certified by Wunderlist.</p>
+:ET

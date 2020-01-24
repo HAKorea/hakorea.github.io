@@ -1,0 +1,347 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simulated - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Component for simulating a numerical sensor.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/simulated/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Simulated">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/simulated/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Component for simulating a numerical sensor.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Simulated">
+    <meta name="twitter:description" content="Component for simulating a numerical sensor.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/simulated.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Simulated
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>simulated</code> sensor platform provides a simulated sensor that generates a time-varying signal <code>V(t)</code> given by the <a href="https://en.wikipedia.org/wiki/Sine_wave" rel="external nofollow">function</a>:</p>
+<pre><code class="language-text">V(t) = M + A sin((2 pi (t - t_0) / w) + P) + N(s)
+</code></pre>
+<p>where:</p>
+<ul>
+<li>
+<strong>M</strong> = the <a href="https://en.wikipedia.org/wiki/Mean" rel="external nofollow">mean</a> value of the sensor</li>
+<li>
+<strong>A</strong> = the <a href="https://en.wikipedia.org/wiki/Amplitude" rel="external nofollow">amplitude</a> of the periodic contribution</li>
+<li>
+<strong>t</strong> = the time when a value is generated</li>
+<li>
+<strong>t_0</strong> = the time when the sensor is started</li>
+<li>
+<strong>w</strong> = the time <a href="https://en.wikipedia.org/wiki/Periodic_function" rel="external nofollow">period</a> in seconds for a single complete cycle of the periodic contribution</li>
+<li>
+<strong>P</strong> = the <a href="https://en.wikipedia.org/wiki/Phase_(waves)" rel="external nofollow">phase</a> offset to add to the periodic contribution, in units of degrees</li>
+<li>
+<strong>N(s)</strong> = the random <a href="https://en.wikipedia.org/wiki/Gaussian_noise" rel="external nofollow">Gaussian noise</a> with spread <strong>s</strong>
+</li>
+</ul>
+<p>The output will be limited to 3 decimals.</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To add a simulated sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: simulated
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the sensor.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>simulated</p>
+</dd>
+<dt>
+<a class="title-link" name="unit" href="#unit"></a> unit</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The unit to apply.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>value</p>
+</dd>
+<dt>
+<a class="title-link" name="amplitude" href="#amplitude"></a> amplitude</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The amplitude of periodic contribution.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>1</p>
+</dd>
+<dt>
+<a class="title-link" name="mean" href="#mean"></a> mean</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The mean level of the sensor.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="period" href="#period"></a> period</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The time in seconds for one complete oscillation of the periodic contribution.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="phase" href="#phase"></a> phase</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The phase offset (in degrees) to apply to the periodic component.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="seed" href="#seed"></a> seed</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The <a href="https://docs.python.org/3.6/library/random.html#random.seed" rel="external nofollow">seed</a> value for the random noise component.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>999</p>
+</dd>
+<dt>
+<a class="title-link" name="spread" href="#spread"></a> spread</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The spread is the range of the randomly distributed values about their mean. This is sometimes referred to as the Full Width at Half Maximum (<a href="https://en.wikipedia.org/wiki/Full_width_at_half_maximum" rel="external nofollow">FWHM</a>) of the random distribution.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>None</p>
+</dd>
+<dt>
+<a class="title-link" name="relative_to_epoch" href="#relative_to_epoch"></a> relative_to_epoch</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Whether to simulate from epoch time (00:00:00, 1970-01-01), or relative to when the sensor was started.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="example" href="#example"></a> Example</h2>
+<p>To give an example of simulating real world data, a simulated relative humidity sensor (in %) can be added using the following configuration:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: simulated
+    name: 'simulated relative humidity'
+    unit: '%'
+    amplitude: 0 # Turns off the periodic contribution
+    mean: 50
+    spread: 10
+    seed: 999
+    relative_to_epoch: false
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/simulated.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/home-assistant.png' /></div><div class="section">
+    <kb-alert-link integration="simulated"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Quality Scale: <a href='/docs/quality_scale/'>🏠 (internal)</a>
+    </div><div class='section'>
+      Introduced in release: 0.65
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/simulated/'>/components/simulated/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#utility'>Utility</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

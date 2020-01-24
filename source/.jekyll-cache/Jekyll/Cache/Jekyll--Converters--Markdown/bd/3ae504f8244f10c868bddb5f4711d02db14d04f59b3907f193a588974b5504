@@ -1,0 +1,122 @@
+I"�<p>The <code>onkyo</code> platform allows you to control a <a href="http://www.onkyo.com/">Onkyo</a>, <a href="http://www.integrahometheater.com/">Integra</a>
+and some recent <a href="http://www.pioneerelectronics.com">Pioneer</a> receivers from Home Assistant.
+Please be aware that you need to enable “Network Standby” for this integration to work in your Hardware.</p>
+<h2>Configuration</h2>
+<p>To add an Onkyo or Pioneer receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: onkyo
+    host: 192.168.1.2
+    name: receiver
+    sources:
+      pc: 'HTPC'
+</code></pre>
+<p>If your receiver has second or third zone’s available, they are displayed as additional media players with the same functionality as the main zone.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>IP address of the device. Example:<code>192.168.1.2</code>. If not specified, the platform will load any discovered receivers.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the device. (<em>Required if host is specified</em>)</p>
+</span></p></dd><dt><a class='title-link' name='max_volume' href='#max_volume'></a> max_volume</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Maximum volume as a percentage. Often the maximum volume of the receiver is far too loud. Setting this wil set Home Assistant’s 100% volume to be this setting on the amp. i.e. if you set this to 50% when you set Home Assistant to be 100% then your receiver will be set to 50% of it’s maximum volume.</p>
+</span></p><p class='default'>
+Default value: <p>100</p>
+</p></dd><dt><a class='title-link' name='receiver_max_volume' href='#receiver_max_volume'></a> receiver_max_volume</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum volume of the receiver. For older Onkyo receivers this was 80, newer Onkyo receivers use 200.</p>
+</span></p><p class='default'>
+Default value: <p>80</p>
+</p></dd><dt><a class='title-link' name='sources' href='#sources'></a> sources</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of mappings from source to source name. Valid sources can be found below. A default list will be used if no source mapping is specified.</p>
+</span></p></dd></dl>
+</div>
+<p>List of source names:</p>
+<ul>
+<li>video1</li>
+<li>video2</li>
+<li>video3</li>
+<li>video4</li>
+<li>video5</li>
+<li>video6</li>
+<li>video7</li>
+<li>dvd</li>
+<li>bd-dvd</li>
+<li>tape1</li>
+<li>tv-tape</li>
+<li>tape2</li>
+<li>phono</li>
+<li>cd</li>
+<li>tv-cd</li>
+<li>fm</li>
+<li>am</li>
+<li>tuner</li>
+<li>dlna</li>
+<li>internet-radio</li>
+<li>usb</li>
+<li>network</li>
+<li>universal-port</li>
+<li>multi-ch</li>
+<li>xm</li>
+<li>sirius</li>
+</ul>
+<p>If your source is not listed above, and you want to figure out how to format that source name so you can map its entry, you can use the <code>onkyo-eiscp</code> Python module to discover the exact naming needed. First, change your receiver’s source to the one that you need to define, and then run:</p>
+<pre><code class="language-bash">onkyo --host 192.168.0.100 source=query
+</code></pre>
+<p>To find your receivers max volume use the onkyo-eiscp python module set the receiver to its maximum volume
+(don’t do this whilst playing something!) and run:</p>
+<pre><code class="language-bash">onkyo --host 192.168.0.100 volume=query
+unknown-model: master-volume = 191
+</code></pre>
+<h3>Service <code>onkyo_select_hdmi_output</code></h3>
+<p>Changes HDMI output of your receiver</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of a single <code>entity_id</code> that will change output.</td>
+</tr>
+<tr>
+<td><code>hdmi_output</code></td>
+<td>no</td>
+<td>The desired output code.</td>
+</tr>
+</tbody>
+</table>
+<p>Accepted values are:
+‘no’, ‘analog’, ‘yes’, ‘out’, ‘out-sub’, ‘sub’, ‘hdbaset’, ‘both’, ‘up’
+which one to use seems to vary depending on model so you will have to try them out.
+( For model TX-NR676E it seems to be ‘out’ for main, ‘out-sub’ for sub, and ‘sub’ for both )</p>
+<h3>Example <code>play_media</code> script</h3>
+<p>The <code>play_media</code> function can be used in script to play radio station by preset number.
+Not working for NET radio.</p>
+<pre><code class="language-yaml"># Example play_media script
+#
+script:
+ radio1:
+    alias: &quot;Radio 1&quot;
+    sequence:
+      - service: media_player.turn_on
+        data:
+          entity_id: media_player.onkyo
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.onkyo
+          media_content_type: &quot;radio&quot;
+          media_content_id: &quot;1&quot;
+</code></pre>
+<h3>Example <code>onkyo_select_hdmi_output</code> script</h3>
+<pre><code class="language-yaml"># Example onkyo_select_hdmi_output script
+#
+script:
+ hdmi_sub:
+    alias: &quot;Hdmi out projector&quot;
+    sequence:
+      - service: media_player.onkyo_select_hdmi_output
+        service_data:
+          entity_id: media_player.onkyo
+          hdmi_output: out-sub
+</code></pre>
+:ET

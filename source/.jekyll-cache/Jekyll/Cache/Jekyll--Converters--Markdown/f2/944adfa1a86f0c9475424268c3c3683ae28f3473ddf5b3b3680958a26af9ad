@@ -1,0 +1,20 @@
+I"<<p>The <code>atome</code> sensor platform is retrieving the consumption of your home from the <a href="https://total.direct-energie.com/particuliers/electricite/compteur-linky/atome">Direct Energy Atome electric meter</a>.
+This special little device is connected to a Linky Electric Meter, and sends live data to a cloud platform.</p>
+<p>As there is no official documentation for the API, the component retrieves data from the API used in the Atome mobile app, <a href="https://esoftlink.esoftthings.com/">hosted here</a>.</p>
+<h2>Configuration</h2>
+<p>To use it, you need to order the device directly from “Total Direct Energie” Mobile App. Then you need to follow up the installation (covered in the Atome App).
+The configuration (see below) needs your Atome username &amp; password you created during the initialization of the Atome device.</p>
+<p>Next, add the Atome sensor to your <code>configuration.yaml</code> file like below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: atome
+    username: YOUR_ATOME_USERNAME
+    password: YOUR_ATOME_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Atome account username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Atome account password.</p>
+</span></p></dd></dl>
+</div>
+:ET

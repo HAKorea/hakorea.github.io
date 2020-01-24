@@ -1,0 +1,383 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Jabber (XMPP) - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to add Jabber (XMPP) notifications to Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/xmpp/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Jabber (XMPP)">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/xmpp/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to add Jabber (XMPP) notifications to Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Jabber (XMPP)">
+    <meta name="twitter:description" content="Instructions on how to add Jabber (XMPP) notifications to Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/xmpp.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Jabber (XMPP)
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>xmpp</code> notification platform allows you to deliver notifications from Home Assistant to a <a href="https://xmpp.org/" rel="external nofollow">Jabber (XMPP)</a> account.</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To enable Jabber notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME  # e.g. jabber
+    platform: xmpp
+    sender: YOUR_JID
+    password: YOUR_JABBER_ACCOUNT_PASSWORD
+    recipient: YOUR_RECIPIENT
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The default value is <code>notify</code>. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>notify</p>
+</dd>
+<dt>
+<a class="title-link" name="sender" href="#sender"></a> sender</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The Jabber ID (JID) that will act as origin of the messages. Add your JID including the domain, e.g. <a href="mailto:your_name@jabber.org">your_name@jabber.org</a>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="resource" href="#resource"></a> resource</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Resource part of JID, e.g., <a href="mailto:your_name@jabber.org">your_name@jabber.org</a>/<code>HA-cabin</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>home-assistant</p>
+</dd>
+<dt>
+<a class="title-link" name="password" href="#password"></a> password</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password for your given Jabber account.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="recipient" href="#recipient"></a> recipient</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The Jabber ID (JID) that will receive the messages.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="tls" href="#tls"></a> tls</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Force TLS.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="verify" href="#verify"></a> verify</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Allow disabling SSL certificate validity check, e.g., self-signed certificate.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="room" href="#room"></a> room</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Room’s name (e.g., <a href="mailto:example@conference.jabber.org">example@conference.jabber.org</a>). If set, send a message to chatroom instead of the recipient.</p>
+</span></p></dd>
+</dl>
+</div>
+<div class="note">
+<p>Pre Home Assistant 0.81 <code>sleekxmpp</code> was used to connect to XMPP servers. <code>sleekxmpp</code> as of version 1.3.2, does not support &gt; TLS v1. If you are running your own XMPP server (e.g., Prosody, ejabberd) make sure to allow using TLS v1.</p>
+<p>Home Assistant after 0.81 uses <code>slixmpp</code>, which also supports TLS v1.1 and TLS v1.2.</p>
+</div>
+<p>All Jabber IDs (JID) must include the domain. Make sure that the password matches the account provided as sender.</p>
+<p>You can send text messages and images as well as other files through Jabber.</p>
+<h3>
+<a class="title-link" name="jabber-text-message" href="#jabber-text-message"></a> Jabber Text Message</h3>
+<p>Here are some examples on how to set up a script, that can be run from an automation.</p>
+<p>Number 1 shows a classical, text-only message. The Title is optional, although if omitted,
+<code>Home-Assistant</code> will be set. To keep it empty set it to <code>""</code>.</p>
+<pre><code class="language-yaml"># Example script.yaml entry
+1_send_jabber_message:
+  alias: "Text only Jabber message"
+  sequence:
+    - service: notify.jabber  # from notify.NOTIFIER_NAME
+      data:
+        title: "Optional Title"
+        message: "My funny or witty message"
+</code></pre>
+<h3>
+<a class="title-link" name="jabber-image-message" href="#jabber-image-message"></a> Jabber Image Message</h3>
+<p>You can send images or files from locally stored files or remote web locations via Jabber’s HTTP Upload feature.
+To send files and images, your jabber server must support <a href="https://xmpp.org/extensions/xep-0363.html" rel="external nofollow">XEP_0363</a>.</p>
+<div class="note">
+<p>Be aware that images are uploaded onto the Jabber server of your provider. They reside there un-encrypted and could be accessed by the server admins. Usually images are deleted after a few days.<br>
+<br>
+Home-Assistant supports TLS encryption to ensure transport encryption. TLS is enforced by default. You can disable it  with the <a href="#tls"><code>tls</code></a> flag – which is not recommended.</p>
+</div>
+<p>Number 2 sends only an image, retrieved from the URL. The TLS connection to get the image is also not verified (use with caution).</p>
+<pre><code class="language-yaml"># Example script.yaml entry
+2_send_jabber_message_with_image_url:
+  alias: "Send Image via Jabber from website"
+  sequence:
+    - service: notify.jabber
+      data:
+        title: ""
+        message: ""
+        data:
+          url: "https://www.graz.at:8443/webcam_neu/getimg.php"
+          verify: false
+</code></pre>
+<p>Number 3 sends an image from a local path.</p>
+<pre><code class="language-yaml"># Example script.yaml entry
+3_send_jabber_message_with_local_image_path:
+  alias: "Send Image via Jabber from local file"
+  sequence:
+    - service: notify.jabber
+      data:
+        title: ""
+        message: ""
+        data:
+          path: "/home/homeassistant/super_view.jpg"
+</code></pre>
+<h3>
+<a class="title-link" name="jabber-file-message" href="#jabber-file-message"></a> Jabber File Message</h3>
+<p>Number 4 sends a text-file, retrieved from Github, renamed to <code>Hass_Cheatsheet.txt</code> to be viewable on a mobile Android device, as most don’t offer any application to view <code>.md</code> files. Optionally you can add a timeout for the HTTP upload in seconds.</p>
+<pre><code class="language-yaml"># Example script.yaml entry
+4_send_jabber_message_with_file:
+  alias: "Send text file via Jabber"
+  sequence:
+    - service: notify.jabber
+      data:
+        title: ""
+        message: ""
+        data:
+          url: "https://raw.githubusercontent.com/arsaboo/homeassistant-config/master/HASS%20Cheatsheet.md"
+          path: "Hass_Cheatsheet.txt"
+          timeout: 10
+</code></pre>
+<h3>
+<a class="title-link" name="templating" href="#templating"></a> Templating</h3>
+<p>Number 5 sends an image retrieved from a URL, and an additional text message with <code>title</code> and <code>message</code>.</p>
+<pre><code class="language-yaml"># Example script.yaml entry
+5_send_jabber_message_with_image_and_text:
+  alias: "Send Image and Text via Jabber"
+  sequence:
+    - service: notify.jabber
+      data:
+        title: "The Time is now"
+        message: " {{ now() }} , templating works as well..."
+        data:
+          url: "https://github.com/home-assistant/home-assistant.io/raw/next/source/images/favicon-192x192.png"
+</code></pre>
+<p>Number 6 sends an image from a templated URL.</p>
+<pre><code class="language-yaml"># Example script.yaml entry
+6_send_jabber_message_with_image_from_url_template:
+  alias: "Send Image from template URL via Jabber"
+  sequence:
+    - service: notify.jabber
+      data:
+        title: ""
+        message: ""
+        data:
+          url_template: "https://www.foto-webcam.eu/webcam/dornbirn/{{ now().year }}/{{ '%02d' % now().month }}/{{ '%02d' % now().day }}/{{ '%02d' % now().hour }}{{ (now().minute + 58) % 60 // 10}}0_hd.jpg"
+</code></pre>
+<p>The possible source of a file is prioritized and only one will be picked up. <code>url_template</code> has the hightest priority; next is <code>url</code> then <code>path_template</code> and finally if none of them are defined <code>path</code> would be used. <code>path</code> will be used to eliminate file extension guessing for unknown URL downloads. Only the file extension will be left, as Home Assistant changes the filename to a random string for added privacy.</p>
+<p>To find out more about notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/xmpp.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/xmpp.png' /></div><div class="section">
+    <kb-alert-link integration="xmpp"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: pre 0.7
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/xmpp/'>/components/xmpp/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#notifications'>Notifications</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

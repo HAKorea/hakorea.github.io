@@ -1,0 +1,91 @@
+I"¦<p>Integrates MySensors device trackers into Home Assistant. See the <a href="/integrations/mysensors/">main component</a> for configuration instructions.</p>
+<p>The following sensor types are supported:</p>
+<h5>MySensors version 2.0 and higher</h5>
+<table>
+<thead>
+<tr>
+<th>S_TYPE</th>
+<th>V_TYPE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_GPS</td>
+<td>V_POSITION</td>
+</tr>
+</tbody>
+</table>
+<p>For more information, visit the <a href="https://www.mysensors.org/download">serial api</a> of MySensors.</p>
+<h3>MySensors 2.x example sketch</h3>
+<pre><code class="language-cpp">/**
+ * Documentation: https://www.mysensors.org
+ * Support Forum: https://forum.mysensors.org
+ *
+ * https://www.mysensors.org/build/gps
+ */
+
+// Enable debug prints to serial monitor
+#define MY_DEBUG
+// Enable and select radio type attached
+#define MY_RADIO_NRF24
+//#define MY_RADIO_RFM69
+
+#include &lt;MySensors.h&gt;
+
+#define SN &quot;GPS Sensor&quot;
+#define SV &quot;1.0&quot;
+
+// GPS position send interval (in milliseconds)
+#define GPS_SEND_INTERVAL 30000
+// The child id used for the gps sensor
+#define CHILD_ID_GPS 1
+
+MyMessage msg(CHILD_ID_GPS, V_POSITION);
+
+// Last time GPS position was sent to controller
+unsigned long lastGPSSent = -31000;
+
+// Some buffers
+char latBuf[11];
+char lngBuf[11];
+char altBuf[6];
+char payload[30];
+
+// Dummy values. Implementation of real GPS device is not done.
+float gpsLocationLat = 40.741895;
+float gpsLocationLng = -73.989308;
+float gpsAltitudeMeters = 12.0;
+
+void setup() {
+
+}
+
+void presentation() {
+  sendSketchInfo(SN, SV);
+  present(CHILD_ID_GPS, S_GPS);
+}
+
+void loop()
+{
+  unsigned long currentTime = millis();
+
+  // Evaluate if it is time to send a new position
+  bool timeToSend = currentTime - lastGPSSent &gt; GPS_SEND_INTERVAL;
+
+  if (timeToSend) {
+    // Send current gps location
+    // Build position and altitude string to send
+    dtostrf(gpsLocationLat, 1, 6, latBuf);
+    dtostrf(gpsLocationLng, 1, 6, lngBuf);
+    dtostrf(gpsAltitudeMeters, 1, 0, altBuf);
+    sprintf(payload, &quot;%s,%s,%s&quot;, latBuf, lngBuf, altBuf);
+
+    Serial.print(F(&quot;Position: &quot;));
+    Serial.println(payload);
+
+    send(msg.set(payload));
+    lastGPSSent = currentTime;
+  }
+}
+</code></pre>
+:ET

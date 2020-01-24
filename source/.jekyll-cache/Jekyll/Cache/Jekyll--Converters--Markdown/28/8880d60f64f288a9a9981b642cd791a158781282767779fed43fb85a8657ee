@@ -1,0 +1,52 @@
+I"ú<p>The <code>bmw_connected_drive</code> integration lets you retrieve data of your BMW vehicle from the BMW Connected Drive portal. You need to have a working BMW Connected Drive account, and a Connected Drive enabled vehicle for this to work.</p>
+<p>The <code>bmw_connected_drive</code> integration also works with (recent) Mini vehicles. You need to have a working Mini Connected account, and a Mini Connected enabled vehicle for this to work.</p>
+<p>For compatibility with your BMW vehicle check the <a href="https://github.com/bimmerconnected/bimmer_connected">bimmer_connected page</a> on GitHub.</p>
+<p>This integration provides the following platforms:</p>
+<ul>
+<li>Binary Sensors: Doors, windows, condition based services, check control messages, parking lights, door lock state, charging status (electric cars) and connections status (electric cars).</li>
+<li>Device tracker: The location of your car.</li>
+<li>Lock: Control the lock of your car.</li>
+<li>Sensors: Mileage, remaining range, remaining fuel, charging time remaining (electric cars), charging status (electric cars), remaining range electric (electric cars).</li>
+<li>Services: Turn on air condition, sound the horn, flash the lights and update the state. More details can be found <a href="/integrations/bmw_connected_drive/#services">here</a>.</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this integration in your installation, add the following to your
+<code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+bmw_connected_drive:
+  name:
+    username: USERNAME_BMW_CONNECTED_DRIVE
+    password: PASSWORD_BMW_CONNECTED_DRIVE
+    region: one of &quot;north_america&quot;, &quot;china&quot;, &quot;rest_of_world&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='bmw_connected_drive' href='#bmw_connected_drive'></a> bmw_connected_drive</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>configuration</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of your account in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your BMW Connected Drive username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your BMW Connected Drive password.</p>
+</span></p></dd><dt><a class='title-link' name='region' href='#region'></a> region</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The region of your Connected Drive account. Please use one of these values: <code>north_america</code>, <code>china</code>, <code>rest_of_world</code></p>
+</span></p></dd><dt><a class='title-link' name='read_only' href='#read_only'></a> read_only</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>In read only mode, all services including the lock of the vehicle are disabled.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl>
+</div>
+<h2>Services</h2>
+<p>The <code>bmw_connected_drive</code> integration offers several services. In case you need to provide the vehicle identification number (VIN) as a parameter, you can see the VIN in the attributes of the device tracker for the vehicle. The VIN is a 17 digit alphanumeric string, e.g., <code>WBANXXXXXX1234567</code>.</p>
+<p>Using these services will impact the state of your vehicle. So use these services with care!</p>
+<h3>Locking and unlocking</h3>
+<p>The vehicle can be locked and unlocked via the lock integration that is created automatically for each vehicle. Before invoking these services, make sure itâ€™s safe to lock/unlock the vehicle in the current situation.</p>
+<h3>Air condition</h3>
+<p>The air condition of the vehicle can be activated with the service <code>bmw_connected_drive.activate_air_conditioning</code>.</p>
+<p>What exactly is started here depends on the type of vehicle. It might range from just ventilation over auxiliary heating to real air conditioning. If your vehicle is equipped with auxiliary heating, only trigger this service if the vehicle is parked in a location where it is safe to use it (e.g., not in an underground parking or closed garage).</p>
+<p>The vehicle is identified via the parameter <code>vin</code>.</p>
+<h3>Sound the horn</h3>
+<p>The service <code>bmw_connected_drive.sound_horn</code> sounds the horn of the vehicle. This option is not available in some countries (among which  the UK). Use this feature responsibly, as it might annoy your neighbors. The vehicle is identified via the parameter <code>vin</code>.</p>
+<h3>Flash the lights</h3>
+<p>The service <code>bmw_connected_drive.light_flash</code> flashes the lights of the vehicle. The vehicle is identified via the parameter <code>vin</code>.</p>
+<h3>Update the state</h3>
+<p>The service <code>bmw_connected_drive.update_state</code> fetches the last state of the vehicles of all your accounts from the BMW server. This does <em>not</em> trigger an update from the vehicle; it gets the data from the BMW servers. So this service does <em>not</em> interact with your vehicles.</p>
+<p>This service does not require any attributes.</p>
+<h2>Disclaimer</h2>
+<p>This software is not affiliated with or endorsed by BMW Group.</p>
+:ET

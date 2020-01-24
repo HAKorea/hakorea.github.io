@@ -1,0 +1,159 @@
+I"2E<p>The <code>buienradar</code> platform uses <a href="https://buienradar.nl/">buienradar.nl</a> as a source for current meteorological data for your location. The weather forecast is delivered by Buienradar, who provides a webservice that provides detailed weather information for users in The Netherlands. The relevant weather station used will be automatically selected based on the location specified in the Home Assistant configuration (or in the buienradar weather/sensor component). A map of all available weather stations can be found <a href="https://www.google.com/maps/d/embed?mid=1NivHkTGQUOs0dwQTnTMZi8Uatj0">here</a>.</p>
+<p>The selected weather station will provide all weather data, with the exception of the forecasted precipitation. The forecasted precipitation data will be retrieved from buienradar using your actual gps-location (and not the location of the nearest weather station).</p>
+<p>To integrate <code>buienradar</code> with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: buienradar
+    monitored_conditions:
+      - symbol
+      - humidity
+      - temperature
+      - windspeed
+      - pressure
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can specify a name of the component, but do not have to. See more info below.</p>
+</span></p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude to use for selection of data source location. Longitude and latitude will be taken from Home Assistant configuration, but can be overridden/changed in this integration to select a different location for buienradar.nl.</p>
+</span></p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude to use for selection of data source location. Longitude and latitude will be taken from Home Assistant configuration, but can be overridden/changed in this integration to select a different location for buienradar.nl.</p>
+</span></p></dd><dt><a class='title-link' name='timeframe' href='#timeframe'></a> timeframe</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minutes to look ahead for precipitation forecast (minimum 5, maximum 120).</p>
+</span></p><p class='default'>
+Default value: <p>60</p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>One or more conditions to display in the frontend. See <a href="https://www.buienradar.nl/overbuienradar/legenda">the Buienradar.nl website</a> for a detailed explanation of each one.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='stationname' href='#stationname'></a> stationname</dt><dd><p class='desc'><span class='description'><p>The name of the selected meteo-station.</p>
+</span></p></dd><dt><a class='title-link' name='barometerfc' href='#barometerfc'></a> barometerfc</dt><dd><p class='desc'><span class='description'><p>A numeric barametric forecast (1 to 7)</p>
+</span></p></dd><dt><a class='title-link' name='barometerfcname' href='#barometerfcname'></a> barometerfcname</dt><dd><p class='desc'><span class='description'><p>A textual representation of the barometer forecast (eg: Thunderstorms, Stable, etc.).</p>
+</span></p></dd><dt><a class='title-link' name='conditioncode' href='#conditioncode'></a> conditioncode</dt><dd><p class='desc'><span class='description'><p>A symbol and a unique code identifying the current weather condition ([a..z]).</p>
+</span></p></dd><dt><a class='title-link' name='condition' href='#condition'></a> condition</dt><dd><p class='desc'><span class='description'><p>A symbol and the current weather condition (<code>clear</code>, <code>cloudy</code>, <code>fog</code>, <code>rainy</code>, <code>snowy</code> or <code>lightning</code>).</p>
+</span></p></dd><dt><a class='title-link' name='conditiondetailed' href='#conditiondetailed'></a> conditiondetailed</dt><dd><p class='desc'><span class='description'><p>A symbol and detailed current weather condition (<code>clear</code>, <code>partlycloudy</code>, <code>cloudy</code>, <code>partlycloudy-fog</code>, <code>partlycloudy-light-rain</code>, <code>partlycloudy-rain</code>, <code>light-rain</code>, <code>rainy</code>, <code>snowy-rainy</code>, <code>partlycloudy-light-snow</code>, <code>partlycloudy-snow</code>, <code>light-snow</code>, <code>snowy</code>, <code>partlycloudy-lightning</code> or <code>lightning</code>).</p>
+</span></p></dd><dt><a class='title-link' name='conditionexact' href='#conditionexact'></a> conditionexact</dt><dd><p class='desc'><span class='description'><p>A symbol with the full current weather condition (in English).</p>
+</span></p></dd><dt><a class='title-link' name='symbol' href='#symbol'></a> symbol</dt><dd><p class='desc'><span class='description'><p>A symbol for the current weather with the full current condition (in Dutch).</p>
+</span></p></dd><dt><a class='title-link' name='feeltemperature' href='#feeltemperature'></a> feeltemperature</dt><dd><p class='desc'><span class='description'><p>The current feel temperature (in <a href="https://en.wikipedia.org/wiki/Celsius">C</a>).</p>
+</span></p></dd><dt><a class='title-link' name='humidity' href='#humidity'></a> humidity</dt><dd><p class='desc'><span class='description'><p>The relative humidity (%).</p>
+</span></p></dd><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>The current temperature (in <a href="https://en.wikipedia.org/wiki/Celsius">C</a>).</p>
+</span></p></dd><dt><a class='title-link' name='groundtemperature' href='#groundtemperature'></a> groundtemperature</dt><dd><p class='desc'><span class='description'><p>The current ground temperature (in <a href="https://en.wikipedia.org/wiki/Celsius">C</a>).</p>
+</span></p></dd><dt><a class='title-link' name='windspeed' href='#windspeed'></a> windspeed</dt><dd><p class='desc'><span class='description'><p>The wind speed in <a href="https://en.wikipedia.org/wiki/M/s">m/s</a>.</p>
+</span></p></dd><dt><a class='title-link' name='windforce' href='#windforce'></a> windforce</dt><dd><p class='desc'><span class='description'><p>The wind speed/force in <a href="https://en.wikipedia.org/wiki/Beaufort_scale">Bft</a>.</p>
+</span></p></dd><dt><a class='title-link' name='winddirection' href='#winddirection'></a> winddirection</dt><dd><p class='desc'><span class='description'><p>Where the wind is coming from: N (North), Z (south), NO (North-East), etc.</p>
+</span></p></dd><dt><a class='title-link' name='windazimuth' href='#windazimuth'></a> windazimuth</dt><dd><p class='desc'><span class='description'><p>Where the wind is coming from in degrees, with true north at 0° and progressing clockwise.</p>
+</span></p></dd><dt><a class='title-link' name='pressure' href='#pressure'></a> pressure</dt><dd><p class='desc'><span class='description'><p>The sea-level air pressure in <a href="https://en.wikipedia.org/wiki/Hectopascal">hPa</a>.</p>
+</span></p></dd><dt><a class='title-link' name='visibility' href='#visibility'></a> visibility</dt><dd><p class='desc'><span class='description'><p>Visibility in meters (<a href="https://en.wikipedia.org/wiki/Metre">m</a>).</p>
+</span></p></dd><dt><a class='title-link' name='windgust' href='#windgust'></a> windgust</dt><dd><p class='desc'><span class='description'><p>The wind speed of wind gusts (<a href="https://en.wikipedia.org/wiki/M/s">m/s</a>).</p>
+</span></p></dd><dt><a class='title-link' name='precipitation' href='#precipitation'></a> precipitation</dt><dd><p class='desc'><span class='description'><p>The amount of precipitation/rain in mm/h.</p>
+</span></p></dd><dt><a class='title-link' name='precipitation_forecast_average' href='#precipitation_forecast_average'></a> precipitation_forecast_average</dt><dd><p class='desc'><span class='description'><p>The average expected precipitation/rain in mm/h within the given time-frame.</p>
+</span></p></dd><dt><a class='title-link' name='precipitation_forecast_total' href='#precipitation_forecast_total'></a> precipitation_forecast_total</dt><dd><p class='desc'><span class='description'><p>The total expected precipitation/rain in mm within the given time-frame. The total expected rain in the configured time-frame will be equal to <em>precipitation_forecast_total</em>/<em>timeframe</em> mm/min. So, with time-frame configured to 30 minutes and a value of 5, the expected rain is 5 mm in 30 minutes, which is the same as 10 mm/h. If time-frame is set to 90 minutes and a value of 5, the expected rain is 5 mm in 90 minutes, which is equal to 3.3 mm/h.</p>
+</span></p></dd><dt><a class='title-link' name='irradiance' href='#irradiance'></a> irradiance</dt><dd><p class='desc'><span class='description'><p>Sun intensity in Watt per square meter (<a href="https://en.wikipedia.org/wiki/W/m2">W/m2</a>).</p>
+</span></p></dd><dt><a class='title-link' name='rainlast24hour' href='#rainlast24hour'></a> rainlast24hour</dt><dd><p class='desc'><span class='description'><p>The rail over the last 24 hours (in mm).</p>
+</span></p></dd><dt><a class='title-link' name='rainlasthour' href='#rainlasthour'></a> rainlasthour</dt><dd><p class='desc'><span class='description'><p>The rail over the last hour (in mm).</p>
+</span></p></dd><dt><a class='title-link' name='temperature_1d' href='#temperature_1d'></a> temperature_1d</dt><dd><p class='desc'><span class='description'><p>The forecasted temperature (in <a href="https://en.wikipedia.org/wiki/Celsius">C</a>).</p>
+</span></p></dd><dt><a class='title-link' name='mintemp_1d' href='#mintemp_1d'></a> mintemp_1d</dt><dd><p class='desc'><span class='description'><p>The forecasted minimum temperature (in <a href="https://en.wikipedia.org/wiki/Celsius">C</a>).</p>
+</span></p></dd><dt><a class='title-link' name='rainchance_1d' href='#rainchance_1d'></a> rainchance_1d</dt><dd><p class='desc'><span class='description'><p>The forecasted chance for rain (%).</p>
+</span></p></dd><dt><a class='title-link' name='sunchance_1d' href='#sunchance_1d'></a> sunchance_1d</dt><dd><p class='desc'><span class='description'><p>The forecasted chance for sun (%).</p>
+</span></p></dd><dt><a class='title-link' name='rain_1d' href='#rain_1d'></a> rain_1d</dt><dd><p class='desc'><span class='description'><p>The forecasted amount of rain in <a href="https://en.wikipedia.org/wiki/Millimetre">mm</a>; the average of minrain_1d and maxrain_1d.</p>
+</span></p></dd><dt><a class='title-link' name='minrain_1d' href='#minrain_1d'></a> minrain_1d</dt><dd><p class='desc'><span class='description'><p>The minimum forecasted amount of rain in <a href="https://en.wikipedia.org/wiki/Millimetre">mm</a>.</p>
+</span></p></dd><dt><a class='title-link' name='maxrain_1d' href='#maxrain_1d'></a> maxrain_1d</dt><dd><p class='desc'><span class='description'><p>The maximum forecasted amount of rain in <a href="https://en.wikipedia.org/wiki/Millimetre">mm</a>.</p>
+</span></p></dd><dt><a class='title-link' name='windazimuth_1d' href='#windazimuth_1d'></a> windazimuth_1d</dt><dd><p class='desc'><span class='description'><p>Where the wind is coming from in degrees, with true north at 0° and progressing clockwise. (derived from winddirection_1d)</p>
+</span></p></dd><dt><a class='title-link' name='winddirection_1d' href='#winddirection_1d'></a> winddirection_1d</dt><dd><p class='desc'><span class='description'><p>Where the wind will be coming from: N (North), Z (south), NO (North-East), etc.</p>
+</span></p></dd><dt><a class='title-link' name='windforce_1d' href='#windforce_1d'></a> windforce_1d</dt><dd><p class='desc'><span class='description'><p>The expected windforce in <a href="https://en.wikipedia.org/wiki/Beaufort_scale">Bft</a>.</p>
+</span></p></dd><dt><a class='title-link' name='windspeed_1d' href='#windspeed_1d'></a> windspeed_1d</dt><dd><p class='desc'><span class='description'><p>The expected windspeed in <a href="https://en.wikipedia.org/wiki/M/s">m/s</a> (derived from windforce_1d).</p>
+</span></p></dd><dt><a class='title-link' name='conditioncode_1d' href='#conditioncode_1d'></a> conditioncode_1d</dt><dd><p class='desc'><span class='description'><p>Symbol and condition code of the expected condition.</p>
+</span></p></dd><dt><a class='title-link' name='condition_1d' href='#condition_1d'></a> condition_1d</dt><dd><p class='desc'><span class='description'><p>Symbol and expected condition.</p>
+</span></p></dd><dt><a class='title-link' name='conditiondetailed_1d' href='#conditiondetailed_1d'></a> conditiondetailed_1d</dt><dd><p class='desc'><span class='description'><p>Symbol and detailed expected condition.</p>
+</span></p></dd><dt><a class='title-link' name='conditionexact_1d' href='#conditionexact_1d'></a> conditionexact_1d</dt><dd><p class='desc'><span class='description'><p>Symbol and full expected condition (in English).</p>
+</span></p></dd><dt><a class='title-link' name='symbol_1d' href='#symbol_1d'></a> symbol_1d</dt><dd><p class='desc'><span class='description'><p>Symbol and full expected condition (in Dutch).</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>The <code>Name</code> Variable</h2>
+<p>If you specify a name, the sensors will get an entity name of <code>sensor.[name]_[default sensor display name]</code>, for example:</p>
+<ul>
+<li><code>sensor.lopik_temperature</code>, since the name of the sensor is set to <code>lopik</code> and the default display name for monitored condition <code>temperature</code> is <code>Temperature</code>.</li>
+<li><code>sensor.lopik_wind_force</code>, since the name of the sensor is set to <code>lopik</code> and the default display name for monitored condition <code>windforce</code> is <code>Wind force</code>.</li>
+</ul>
+<p>If no name is specified the sensors will be called <code>sensor.br_[default sensor display name]</code>, for example:</p>
+<ul>
+<li><code>sensor.br_wind_speed</code>, since no name has been set for the sensor and the default display name for monitored condition <code>windspeed</code> is <code>Wind speed</code>.</li>
+<li><code>sensor.br_ground_temperature</code>, since no name has been set for the sensor and the default display name for monitored condition <code>groundtemperature</code> is <code>Ground Temperature</code>.</li>
+</ul>
+<h2>Daily forecasts</h2>
+<p>Conditions above marked with <code>1d</code> are daily forecasts. To get forecast for different day, replace the number
+in <code>_1d</code> part of the sensor name. Valid values are from <code>1</code> to <code>5</code>.</p>
+<h2>Configuration examples</h2>
+<p>Full configuration example (excluding forecasted conditions) where location is manually specified:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+- platform: buienradar
+    name: 'volkel'
+    # Force 'Meetstation Volkel' to be used:
+    latitude: 51.65
+    longitude: 5.70
+    monitored_conditions:
+      - stationname
+      - barometerfc
+      - barometerfcname
+      - conditioncode
+      - condition
+      - conditiondetailed
+      - conditionexact
+      - symbol
+      - feeltemperature
+      - humidity
+      - temperature
+      - groundtemperature
+      - windspeed
+      - windforce
+      - winddirection
+      - windazimuth
+      - pressure
+      - visibility
+      - windgust
+      - precipitation
+      - irradiance
+      - precipitation_forecast_average
+      - precipitation_forecast_total
+      - rainlast24hour
+      - rainlasthour
+</code></pre>
+<p>Configuration example with current condition and (some) forecasted values:</p>
+<pre><code class="language-yaml"># Weather prediction
+sensor:
+  - platform: buienradar
+    monitored_conditions:
+      # current condition:
+      - condition
+      - conditioncode
+      - conditiondetailed
+      - conditionexact
+      - symbol
+      # conditions for forecasted data:
+      - symbol_1d
+      - symbol_2d
+      - symbol_3d
+      - symbol_4d
+      - symbol_5d
+      - temperature_1d
+      - temperature_2d
+      - temperature_3d
+      - temperature_4d
+      - temperature_5d
+      - mintemp_1d
+      - rainchance_1d
+      - rainchance_2d
+      - sunchance_1d
+      - sunchance_2d
+      - rain_1d
+      - rain_2d
+      - minrain_1d
+      - maxrain_1d
+      - windforce_1d
+      - windforce_2d
+      - windspeed_1d
+      - windspeed_2d
+      - winddirection_1d
+      - winddirection_2d
+      - windazimuth_1d
+      - windazimuth_2d
+</code></pre>
+<p><a href="https://www.buienradar.nl/overbuienradar/gratis-weerdata">Usage statement:</a></p>
+<blockquote>
+<p>Buienradar makes free weather-data available for use by individuals and businesses (website/intranet). The use of the weather-data is allowed for <strong>non-commercial purposes</strong>. Please refer to the full usage statement linked above to confirm your usage or to request permission.</p>
+</blockquote>
+:ET

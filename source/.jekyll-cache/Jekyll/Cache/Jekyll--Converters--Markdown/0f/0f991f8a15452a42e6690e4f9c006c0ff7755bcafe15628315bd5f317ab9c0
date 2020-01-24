@@ -1,0 +1,74 @@
+I"o<p>To be able to receive webhooks from Mailgun, your Home Assistant instance needs to be accessible from the web (<a href="/addons/duckdns/">Hass.io instructions</a>) and you need to have the <code>base_url</code> configured for the HTTP integration (<a href="/integrations/http/#base_url">docs</a>).</p>
+<p>To set it up, go to the integrations page in the configuration screen and find Mailgun. Click on configure. Follow the instructions on the screen to configure Mailgun.</p>
+<p>You will get a URL of the following format: <code>https://&lt;home-assistant-domain&gt;/api/webhook/9940e99a26fae4dcf6fe0a478124b6b58b578ea4c55c9a584beb1c9f5057bb91</code>. To receive webhooks from Mailgun, you need to provide that url as a callback URL in the Webhooks tab of the Mailgun Control Panel.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#notifications">Notifications</a>.</li>
+</ul>
+<h2>Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+mailgun:
+  domain: EXAMPLE.COM
+  api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='domain' href='#domain'></a> domain</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>This is the domain name to be used when sending out mail. Needs to be the first custom domain you have set up.</p>
+</span></p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>This is the API token that has been generated in your Mailgun account.</p>
+</span></p></dd><dt><a class='title-link' name='sandbox' href='#sandbox'></a> sandbox</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>(<strong>Deprecated</strong>) Whether to use the sandboxed domain for outgoing mail. Since the <code>domain</code> item is required, it should be set to the sandbox domain name, so this isn’t needed.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>Events coming in from Mailgun will be available as events in Home Assistant and are fired as <code>mailgun_message_received</code>. The <a href="https://documentation.mailgun.com/en/latest/api-events.html#event-structure">data specified by Mailgun</a> will be available as the event data. You can use this event to trigger automations.</p>
+<p>You can then consume that information with the following automation:</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: event
+    event_type: mailgun_message_received
+    event_data:
+      action: call_service
+  action:
+    service: light.turn_on
+    entity_id: light.office
+</code></pre>
+<h2>Notifications</h2>
+<p>The Mailgun notification service allows you to send emails via Mailgun’s REST API. It requires the <a href="#configuration">Mailgun component</a> to be set up.</p>
+<h3>Notifications configuration</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: mailgun
+    platform: mailgun
+    recipient: CHANGE@EXAMPLE.COM
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='domain' href='#domain'></a> domain</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>This is the domain name to be used when sending out mail.</p>
+</span></p></dd><dt><a class='title-link' name='sandbox' href='#sandbox'></a> sandbox</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>(<strong>Deprecated</strong>) If a sandboxed domain is used, specify it in <code>domain</code>.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>This is the API Key that has been generated in your Mailgun account.</p>
+</span></p></dd><dt><a class='title-link' name='recipient' href='#recipient'></a> recipient</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The email address of the recipient.</p>
+</span></p></dd><dt><a class='title-link' name='sender' href='#sender'></a> sender</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The sender’s email address.</p>
+</span></p><p class='default'>
+Default value: <p><code>hass@DOMAIN</code>, where <code>DOMAIN</code> is the outgoing mail domain, as defined by the <code>domain</code> configuration entry.</p>
+</p></dd></dl>
+</div>
+<h3>Example automation</h3>
+<p>The following automation reacts to an event by sending out an email with two attachments.</p>
+<pre><code class="language-yaml"># Example automation using Mailgun notifications
+automation:
+  trigger:
+    platform: event
+    event_type: SPECIAL_EVENT
+  action:
+    service: notify.mailgun
+    data:
+      title: &quot;Something special has happened&quot;
+      message: &quot;This a test message from Home Assistant&quot;
+      data:
+        images:
+          - /home/pi/pic_test1.png
+          - /home/pi/pic_test2.png
+</code></pre>
+:ET

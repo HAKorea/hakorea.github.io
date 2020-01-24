@@ -1,0 +1,33 @@
+I"ó<p>The <code>intent_script</code> integration allows users to configure actions and responses to intents. Intents can be fired by any integration that supports it. Examples are <a href="/integrations/alexa/">Alexa</a> (Amazon Echo), <a href="/integrations/dialogflow/">Dialogflow</a> (Google Assistant) and <a href="/integrations/snips/">Snips</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+intent_script:
+  GetTemperature:  # Intent type
+    speech:
+      text: We have {{ states.sensor.temperature }} degrees
+    action:
+      service: notify.notify
+      data_template:
+        message: Hello from an intent!
+</code></pre>
+<p>Inside an intent we can define these variables:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='intent' href='#intent'></a> intent</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the intent. Multiple entries are possible.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='action' href='#action'></a> action</dt><dd><p class='desc'><span class='type'>(<span class='action'><a href="/docs/scripts/">action</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines an action to run to intents.</p>
+</span></p></dd><dt><a class='title-link' name='async_action' href='#async_action'></a> async_action</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to True to have Home Assistant not wait for the script to finish before returning the intent response.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='card' href='#card'></a> card</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Card to display.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of card to display.</p>
+</span></p><p class='default'>
+Default value: <p>simple</p>
+</p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Required)</span><span class='description'><p>Title of the card to display.</p>
+</span></p></dd><dt><a class='title-link' name='content' href='#content'></a> content</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Required)</span><span class='description'><p>Contents of the card to display.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='speech' href='#speech'></a> speech</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Text or template to return.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of speech.</p>
+</span></p><p class='default'>
+Default value: <p>plain</p>
+</p></dd><dt><a class='title-link' name='text' href='#text'></a> text</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Required)</span><span class='description'><p>Text to speech.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+:ET

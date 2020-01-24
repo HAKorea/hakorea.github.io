@@ -1,0 +1,518 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Space API - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to configure the SpaceAPI for Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/spaceapi/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Space API">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/spaceapi/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to configure the SpaceAPI for Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Space API">
+    <meta name="twitter:description" content="Instructions on how to configure the SpaceAPI for Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/spaceapi.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Space API
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>spaceapi</code> integration allow Hackerspaces to expose information to web apps or any other application with the <a href="http://spaceapi.net/" rel="external nofollow">SpaceAPI</a>.</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To setup the <code>spaceapi</code> integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+spaceapi:
+  space: HACKERSPACE_NAME
+  logo: URL_FOR_LOGO
+  url: URL
+  location:
+    address: ADDRESS
+  contact:
+    email: EMAIL_ADDRESS
+  issue_report_channels:
+    - email
+  state:
+    entity_id: binary_sensor.front_door
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="space" href="#space"></a> space</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="logo" href="#logo"></a> logo</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>URL which is publicly accessible of the logo.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>URL of the hackerspace’s web site.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="location" href="#location"></a> location</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Location of the Hackerspace.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="address" href="#address"></a> address</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The physical address of the Hackerspace.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="contact" href="#contact"></a> contact</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Contact information of the Hackerspace. At least one entry is mandatory.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="phone" href="#phone"></a> phone</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The phone number of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="sip" href="#sip"></a> sip</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The SIP URI for Voice-over-IP of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="keymasters" href="#keymasters"></a> keymasters</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Persons who carry a key and are able to open the space upon request. One of the fields must be specified.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Real Name of the keymaster.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="irc_nick" href="#irc_nick"></a> irc_nick</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Contact the person with this nickname directly in irc if available. The irc channel to be used is defined in the contact/irc field.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="phone" href="#phone"></a> phone</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Phone number of the keymaster.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="email" href="#email"></a> email</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Email address of the keymaster.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="twitter" href="#twitter"></a> twitter</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Twitter username of the keymaster.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="irc" href="#irc"></a> irc</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IRC channel of the Hackerspace</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="twitter" href="#twitter"></a> twitter</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Twitter account of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="facebook" href="#facebook"></a> facebook</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The facebook URL of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="identica" href="#identica"></a> identica</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Identi.ca or StatusNet account of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="foursquare" href="#foursquare"></a> foursquare</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Foursquare ID of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="email" href="#email"></a> email</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The email address of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="ml" href="#ml"></a> ml</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The mailing list of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="jabber" href="#jabber"></a> jabber</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The public Jabber/XMPP multi-user chatroom of the Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="issue_mail" href="#issue_mail"></a> issue_mail</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A separate email address for issue reports.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="issue_report_channels" href="#issue_report_channels"></a> issue_report_channels</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The reporting channel for issues. Valid values are email, issue_mail, twitter or ml</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="state" href="#state"></a> state</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The current state of the Hackerspace.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The <code>entity_id</code> of a binary sensor that represents the current state.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="icon_open" href="#icon_open"></a> icon_open</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The URL which is publicly accessible of the icon for the open Hackerspace.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="icon_closed" href="#icon_closed"></a> icon_closed</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The URL which is publicly accessible of the icon for the closed Hackerspace.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="feeds" href="#feeds"></a> feeds</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Feeds where users can get updates of your space.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="blog" href="#blog"></a> blog</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The blog of your Hackerspace.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of the feed, for example rss, atom, ical</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Feed URL</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="wiki" href="#wiki"></a> wiki</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The wiki of your Hackerspace.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of the feed, for example rss, atom, ical</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Feed URL</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="calendar" href="#calendar"></a> calendar</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The calendar of your Hackerspace.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of the feed, for example rss, atom, ical</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Feed URL</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="flicker" href="#flicker"></a> flicker</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Flicker stream of your Hackerspace.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of the feed, for example rss, atom, ical</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Feed URL</p>
+</span></p></dd>
+</dl></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="cache" href="#cache"></a> cache</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Specifies options about caching of your SpaceAPI endpoint. Use this if you want to avoid hundreds/thousands of application instances crawling your status.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="schedule" href="#schedule"></a> schedule</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Cache update cycle. Valid values are m.02 | m.05 | m.10 | m.15 | m.30 | h.01 | h.02 | h.04 | h.08 | h.12 | d.01 |</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="projects" href="#projects"></a> projects</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Your project sites (links to GitHub, wikis or wherever your projects are hosted).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="radio_show" href="#radio_show"></a> radio_show</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of radio shows that your hackerspace might broadcast.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name of the radio show.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The stream URL of the radio show.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The stream encoder. Valid values are mp3 or ogg</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="start" href="#start"></a> start</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Specify the start time by using the ISO 8601 standard.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="end" href="#end"></a> end</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Specify the end time by using the ISO 8601 standard.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="sensors" href="#sensors"></a> sensors</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of sensors to expose.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="temperature" href="#temperature"></a> temperature</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>List of temperature sensors.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="humidity" href="#humidity"></a> humidity</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>List of humidity sensors.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<p>The list of sensors can be any sensor, not just temperature or humidity.</p>
+<h2>
+<a class="title-link" name="sensor-specific-location" href="#sensor-specific-location"></a> Sensor specific location</h2>
+<p>The <a href="http://spaceapi.net/documentation" rel="external nofollow">SpaceAPI specification</a> requires every sensor to provide a location.
+In order to set a sensor specific location do the following steps:</p>
+<ol>
+<li>Go to Configuration -&gt; Customization</li>
+<li>Select the sensor entity</li>
+<li>Pick “Other” from the attribute override pulldown</li>
+<li>Set the attribute name to location and the attribute value to your desired location</li>
+</ol>
+<p>If no location is set, the location defined in the HA config is used.</p>
+<h2>
+<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<p>In this section you find some real-life examples of how to use this component.</p>
+<h3>
+<a class="title-link" name="eastermundigen" href="#eastermundigen"></a> Eastermundigen</h3>
+<p>A possible configuration entry for <a href="https://www.eastermundigen.ch/" rel="external nofollow">Eastermundigen</a>, a Hackerspace in Switzerland, could look like this.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+spaceapi:
+  space: Eastermundigen
+  logo: https://eastermundigen.ch/logo.png
+  url: https://eastermundigen.ch
+  location:
+    address: "Steinbruchweg 16, 3072 Ostermundigen, Schweiz"
+  contact:
+    phone: "+41311111111"
+    twitter: "@eastermundigen"
+    email: "info@eastermundigen.ch"
+  issue_report_channels:
+    - email
+  state:
+    entity_id: binary_sensor.front_door"
+    icon_open: https://eastermundigen.ch/open.png
+    icon_closed: https://eastermundigen.ch/close.png
+  sensors:
+    temperature:
+      - "sensor.temperature_in"
+      - "sensor.temperature_out"
+    humidity:
+      - "sensor.humidity_in"
+      - "sensor.humidity_out"
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/spaceapi.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/spaceapi.png' /></div><div class="section">
+    <kb-alert-link integration="spaceapi"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.70
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/spaceapi/'>/components/spaceapi/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#social'>Social</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

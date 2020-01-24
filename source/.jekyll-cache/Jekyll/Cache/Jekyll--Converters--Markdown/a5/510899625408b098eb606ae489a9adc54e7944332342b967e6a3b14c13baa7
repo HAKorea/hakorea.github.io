@@ -1,0 +1,27 @@
+I"		<p><a href="https://www.sigfox.com/en">SigFox</a> integration adding a sensor for each Sigfox device registered with your account. The default name of sensors is <code>sigfox_{DEVICE_ID}</code> where <code>DEVICE_ID</code> is the devices Sigfox ID. The state of an added Sigfox sensor is the payload of the last message published by that device. Additionally, there are attributes for the latitude and longitude coordinates of the device, as well as the signal-to-noise ratio (<a href="https://en.wikipedia.org/wiki/Signal-to-noise_ratio">snr</a>).</p>
+<h2>Setup</h2>
+<p>Note that <code>your_api_login</code> and <code>your_api_password</code> are your <strong>API access credentials</strong> which can be accessed by following:</p>
+<ol>
+<li>Log into <a href="https://backend.sigfox.com">Sigfox backend</a></li>
+<li>Select <code>GROUP</code></li>
+<li>Select <code>API ACCESS</code></li>
+<li>Click on <code>new</code> and create new access entry</li>
+</ol>
+<h2>Configuration</h2>
+<p>To use this sensor, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: sigfox
+    api_login: your_api_login
+    api_password: your_api_password
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_login' href='#api_login'></a> api_login</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Sigfox API login.</p>
+</span></p></dd><dt><a class='title-link' name='api_password' href='#api_password'></a> api_password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Sigfox API password.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to prepend to the device ID.</p>
+</span></p><p class='default'>
+Default value: <p>sigfox</p>
+</p></dd></dl>
+</div>
+:ET

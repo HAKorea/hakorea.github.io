@@ -1,0 +1,81 @@
+I"K<p>The <code>downloader</code> integration provides a service to download files. It will raise an error and not continue to set itself up when the download directory does not exist. The directory needs to be writable for the user that is running Home Assistant.</p>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+downloader:
+  download_dir: downloads
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='download_dir' href='#download_dir'></a> download_dir</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>If the path is not absolute, it’s assumed to be relative to the Home Assistant configuration directory (eg. <code>.homeassistant/downloads</code>).</p>
+</span></p></dd></dl>
+</div>
+<h3>Use the service</h3>
+<p>Go to the “Developer Tools”, then to “Call Service”, and choose <code>downloader/download_file</code> from the list of available services. Fill the “Service Data” field as shown in the example below and hit “CALL SERVICE”.</p>
+<pre><code class="language-json">{&quot;url&quot;:&quot;http://domain.tld/path/to/file&quot;}
+</code></pre>
+<p>This will download the file from the given URL.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>no</td>
+<td>The URL of the file to download.</td>
+</tr>
+<tr>
+<td><code>subdir</code></td>
+<td>yes</td>
+<td>Download into subdirectory of <strong>download_dir</strong></td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>yes</td>
+<td>Determine the filename.</td>
+</tr>
+<tr>
+<td><code>overwrite</code></td>
+<td>yes</td>
+<td>Whether to overwrite the file or not, defaults to <code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Download Status Events</h3>
+<p>When a download finished successfully, Home Assistant will emit a ‘downloader_download_completed’ event to the event bus which you can use to write automations against.
+In case download failed another event ‘downloader_download_failed’ is emitted to indicate that the download did not complete successfully.</p>
+<p>Along with the event the following payload parameters are available:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>The <code>url</code> that was requested.</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>The <code>name</code> of the file that was being downloaded.</td>
+</tr>
+</tbody>
+</table>
+<h4>Example Automation:</h4>
+<pre><code class="language-yaml">- alias: Download Failed Notification
+  trigger:
+    platform: event
+    event_type: downloader_download_failed
+  action:
+    service: persistent_notification.create
+    data_template:
+      message: &quot; download failed&quot;
+      title: &quot;Download Failed&quot;
+</code></pre>
+:ET

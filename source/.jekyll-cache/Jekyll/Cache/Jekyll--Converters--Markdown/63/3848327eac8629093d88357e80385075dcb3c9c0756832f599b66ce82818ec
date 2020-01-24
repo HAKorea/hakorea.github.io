@@ -1,0 +1,35 @@
+I"Ô	<p>The <code>twilio_call</code> notification platform enables sending notifications via Voice, powered by <a href="https://twilio.com">Twilio</a>.
+Passed message will be read by Text-To-Speech service.</p>
+<p>The requirement is that you have setup <a href="/integrations/twilio/">Twilio</a>.</p>
+<p>To use this notification platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: twilio_call
+    from_number: E164_PHONE_NUMBER
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='from_number' href='#from_number'></a> from_number</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>An <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> formatted phone number, like +14151234567. See <a href="https://www.twilio.com/help/faq/phone-numbers/how-do-i-format-phone-numbers-to-work-internationally">Twilioâ€™s guide to formatting phone numbers</a> for more information.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>notify</code></p>
+</p></dd></dl>
+</div>
+<h3>Usage</h3>
+<p>Twilio is a notify platform and thus can be controlled by calling the notify service <a href="/integrations/notify/">as described here</a>. It will send a notification to all E.164 phone numbers in the notification <strong>target</strong>. See the notes above regarding the <code>from_number</code> configuration variable for information about formatting phone numbers.</p>
+<pre><code class="language-yaml"># Example automation notification entry
+automation:
+  - alias: The sun has set
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      service: notify.twilio_call
+      data:
+        message: 'The sun has set'
+        target:
+          - +14151234567
+          - +15105555555
+</code></pre>
+:ET

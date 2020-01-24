@@ -1,0 +1,230 @@
+I"]N<h2>Amazon Alexa Smart Home</h2>
+<p>While the Skills API described above allows for arbitrary intents, all
+utterances must begin with “Alexa, tell $invocation_name …”</p>
+<p>The <a href="/integrations/emulated_hue/">Emulated Hue integration</a> provides a simpler
+interface such as, “Alexa, turn on the kitchen light”. However, it has some
+limitations since everything looks like a light bulb.</p>
+<p>Amazon provides a Smart Home API for richer home automation control. It takes
+considerable effort to configure. The easy solution is to use
+<a href="/integrations/cloud/">Home Assistant Cloud</a>.</p>
+<p>However, config Amazon Alexa Smart Home Skill is not an easy job, you have to allow
+your Home Assistant accessible from Internet, and you need to create Amazon Developer
+account and an Amazon Web Service account.</p>
+<div class='note'>
+<p>With <a href="/cloud/">Home Assistant Cloud</a>, you can connect your Home Assistant instance in a few simple clicks to Amazon Alexa. With Home Assistant Cloud you don’t have to deal with dynamic DNS, SSL certificates or opening ports on your router. Just log in via the user interface and a secure connection with the cloud will be established. Home Assistant Cloud requires a paid subscription after a 30-day free trial.
+<br/>
+<br/>
+For Home Assistant Cloud Users, documentation can be found <a href="https://www.nabucasa.com/config/amazon_alexa/">here</a>.</p>
+</div>
+<h3>Requirements</h3>
+<ul>
+<li>Amazon Developer Account. You can sign on <a href="https://developer.amazon.com">here</a>.</li>
+<li>An <a href="https://aws.amazon.com/free/">AWS account</a> is need if you want to use Smart Home Skill API. Part of your Smart Home Skill will be hosted on <a href="https://aws.amazon.com/lambda/pricing/">AWS Lambda</a>. However you don’t need worry the cost, AWS Lambda allow free to use up to 1 millions requests and 1GB outbound data transfer per month.</li>
+<li>The Smart Home API also needs your Home Assistant instance to be accessible from the internet via HTTPS on port 443 using a certificate signed by <a href="https://ccadb-public.secure.force.com/mozilla/IncludedCACertificateReport">an Amazon approved certificate authority</a>, this is so account linking can take place. Read more on <a href="/blog/2015/12/13/setup-encryption-using-lets-encrypt/">our blog</a> about how to set up encryption for Home Assistant. When running Hass.io using the <a href="/addons/duckdns/">Duck DNS</a> add-on is the easiest method.</li>
+</ul>
+<h3>Create Your Amazon Alexa Smart Home Skill</h3>
+<ul>
+<li>Sign in <a href="https://developer.amazon.com/alexa/console/ask">Alexa Developer Console</a>, you can create your free account on the sign in page.</li>
+<li>Go to <code>Alexa Skills</code> page if you are not, click <code>Create Skill</code> button to start the process.</li>
+<li>Input <code>Skill name</code> as you like, select your skill’s <code>Default language</code>.</li>
+<li>Select <code>Smart Home</code> and <code>Provision your own</code>, then click <code>Create skill</code> button at top right corner.</li>
+</ul>
+<p class='img'>
+  <img src='/images/integrations/alexa/create_a_new_skill.png' alt='Screenshot: Create Smart Home skill'>
+</p>
+<ul>
+<li>In next screen, make sure <em>v3</em> is selected in <code>Payload version</code>.</li>
+<li>Now, you have created a skeleton of Smart Home skill. Next step we will do some “real” developer work. You can keep Alex Developer Console opened, we need change the skill configuration later.</li>
+</ul>
+<h3>Create Your Lambda Function</h3>
+<p>Alexa Smart Home skill will trigger a AWS Lambda function to process the request, we will write a small piece of code hosted as an Lambda function basically redirect the request to your Home Assistant instance, then Alexa integration integration in Home Assistant will process the request and send back the response. Your Lambda function will delivery the response back to Alexa.</p>
+<div class='info'>
+<p>There already are some great tutorials and solutions in our community to achieve same goal “Create your Alexa Smart Home Skill to connect Home Assistant”, for example: <a href="https://github.com/mike-grant/haaska/wiki">Haaska</a>.</p>
+<p>You can follow this document or others, but you cannot mixed-match different solutions since they may have different design.</p>
+<p>Amazon also provided a <a href="https://developer.amazon.com/docs/smarthome/steps-to-build-a-smart-home-skill.html">step-by-step guide</a> to create a Smart Home Skill, however you have to adapt its sample code to match Home Assistant API.</p>
+</div>
+<p>OK, let’s go. You first need sign in your <a href="https://console.aws.amazon.com/">AWS console</a>, if you don’t have an AWS account yet, you can create a new user <a href="https://aws.amazon.com/free/">here</a> with 12-month free tire benefit. You don’t need worry the cost if your account already pass the first 12 months, AWS provides up to 1 million Lambda request, 1GB outbound data and all inbound data for free, every month, all users. See <a href="https://aws.amazon.com/lambda/pricing/">Lambda pricing</a> for details.</p>
+<h4>Create an IAM Role for Lambda</h4>
+<p>First thing you need to do after sing in <a href="https://console.aws.amazon.com/">AWS console</a> is to create an IAM Role for Lambda execution. AWS has very strict access control, you have to specific define and assign the permissions.</p>
+<ul>
+<li>Click <code>Service</code> in top navigation bar, expand the menu to display all AWS services, click <code>IAM</code> under <code>Security, Identity, &amp; Compliance</code> section to navigate to IAM console. Or you may use this <a href="https://console.aws.amazon.com/iam/home">link</a></li>
+<li>Click <code>Roles</code> in the left panel, then click <code>Create role</code>, select <code>AWS Service</code> -&gt; <code>Lambda</code> in the first page of the wizard, then click <code>Next: Permissions</code></li>
+<li>Select <code>AWSLambdaBasicExecutionRole</code> policy, then click <code>Next: Tags</code>. (Tips: you can use the search box to filter the policy)</li>
+</ul>
+<p class='img'>
+  <img src='/images/integrations/alexa/create_iam_role_attach_permission.png' alt='Screenshot: Attach permission policy to IAM role'>
+</p>
+<ul>
+<li>You can skip <code>Add tags</code> page, click <code>Next: Review</code>.</li>
+<li>Give your new role a name, such as <code>AWSLambdaBasicExecutionRole-SmartHome</code>, then click <code>Create role</code> button. You should be able to find your new role in the roles list now.</li>
+</ul>
+<h4>Create a Lambda function and add code</h4>
+<p>Next you need create a Lambda function.</p>
+<ul>
+<li>Click <code>Service</code> in top navigation bar, expand the menu to display all AWS services, click <code>Lambda</code> under <code>Compute</code> section to navigate to Lambda console. Or you may use this <a href="https://console.aws.amazon.com/lambda/home">link</a></li>
+<li><strong>IMPORTANT</strong> Your current region will be displayed on the top right corner, make sure you select right region base on your Amazon account’s country:
+<ul>
+<li><strong>US East (N.Virginia)</strong> region for English (US) or English (CA) skills</li>
+<li><strong>EU (Ireland)</strong> region for English (UK), English (IN), German (DE), Spanish (ES) or French (FR) skills</li>
+<li><strong>US West (Oregon)</strong> region for Japanese and English (AU) skills.</li>
+</ul>
+</li>
+<li>Click <code>Functions</code> in the left navigation bar, display list of your Lambda functions.</li>
+<li>Click <code>Create function</code>, select <code>Author from scratch</code>, then input a <code>Function name</code>.</li>
+<li>Select <em>Python 3.6</em> or <em>Python 3.7</em> as <code>Runtime</code>.</li>
+<li>Make sure select <em>Use an existing role</em> as <code>Execution role</code>, then select the role you just created from <code>Existing role</code> list.</li>
+<li>Click <code>Create function</code>, then you can config detail of Lambda function.</li>
+<li>Under <code>Configuration</code> tab, expand <code>Designer</code>, then click <code>Alexa Smart Home</code> in the left part of the panel to add a Alexa Smart Home trigger to your Lambda function.</li>
+<li>Scroll down little bit, you need input the <code>Skill ID</code> from the skill you created in previous step. (tips: you may need switch back to Alexa Developer Console to copy the <code>Skill ID</code>.</li>
+<li>Click your Lambda Function icon in the middle of the diagram, scroll down you will see a <code>Function code</code> window.</li>
+<li>Clear the example code, copy the Python script from: <a href="https://gist.github.com/matt2005/744b5ef548cc13d88d0569eea65f5e5b">https://gist.github.com/matt2005/744b5ef548cc13d88d0569eea65f5e5b</a> (modified code to support Alexa’s proactive mode, see details below)</li>
+<li>Scroll down a little bit, you will find <code>Environment variables</code>, you need add 4 environment variables:
+<ul>
+<li>BASE_URL <em>(required)</em>: your Home Assistant instance’s Internet accessible URL with port if needed. <em>Do not include the trailing <code>/</code></em>.</li>
+<li>NOT_VERIFY_SSL <em>(optional)</em>: you can set it to <em>True</em> to ignore the SSL issue, if you don’t have a valid SSL certificate or you are using self-signed certificate.</li>
+<li>DEBUG <em>(optional)</em>: set to <em>True</em> to log the debug message</li>
+<li>LONG_LIVED_ACCESS_TOKEN <em>(optional, not recommend)</em>: you will connect your Alexa Smart Home skill with your Home Assistant user account in the later steps, so that you don’t need to use long-lived access token here. However, the access token you got from login flow is only valid for 30 minutes. It will be hard for you to test lambda function with the access token in test data. So for your convinces, you can remove the access token from the test data, <a href="https://developers.home-assistant.io/docs/en/auth_api.html#long-lived-access-token">generate a long-lived access token</a> put here, then the function will fall back to read token from environment variables. (tips: You did not enable the security storage for your environment variables, so your token saved here is not that safe. You should only use it for debugging and testing purpose. You should remove and delete the long-lived access token after you finish the debugging.)</li>
+</ul>
+</li>
+</ul>
+<p class='img'>
+  <img src='/images/integrations/alexa/lambda_function_env_var.png' alt='Screenshot: Environment variables in Lambda function'>
+</p>
+<ul>
+<li>Now scroll up to the top, click <code>Save</code> button.</li>
+<li>You need copy the ARN displayed in the top of the page, which is the identify of this Lambda function. You will need this ARN to continue Alexa Smart Home skill configuration later.</li>
+</ul>
+<h4>Test the Lambda function</h4>
+<p>Now, you have created the Lambda function, before you can test it, you have to set up your Home Assistant. Put following minimal configuration to your configuration.yaml, it will exposures all of your supported device and automation to Alexa. Check the <a href="#alexa-component-configuration">configuration section</a> if you want more control of the exposure.</p>
+<pre><code class="language-yaml">alexa:
+  smart_home:
+</code></pre>
+<p>After your Home Assistant restarted, back to <code>AWS Lambda Console</code>, you are going to do some tests.</p>
+<p>On the top of your Lambda function configuration page, there is a <code>Test</code> button, click the drop down button at left of <code>Test</code> button, click <code>Configure test events</code>, you can <code>Create new test event</code> using following data:</p>
+<pre><code class="language-json">{
+  &quot;directive&quot;: {
+    &quot;header&quot;: {
+      &quot;namespace&quot;: &quot;Alexa.Discovery&quot;,
+      &quot;name&quot;: &quot;Discover&quot;,
+      &quot;payloadVersion&quot;: &quot;3&quot;,
+      &quot;messageId&quot;: &quot;1bd5d003-31b9-476f-ad03-71d471922820&quot;
+    },
+    &quot;payload&quot;: {
+      &quot;scope&quot;: {
+        &quot;type&quot;: &quot;BearerToken&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>This test event is a <code>Discovery</code> directive, Home Assistant will response with a list of your devices Alexa can interact with. This test data is lack of <code>token</code> in <code>payload.scope</code>, your Lambda function will read the <code>LONG_LIVED_ACCESS_TOKEN</code> from environment variable.</p>
+<p>Click <code>Test</code> button. If you don’t have <code>LONG_LIVED_ACCESS_TOKEN</code>, you will get a <code>INVALID_AUTHORIZATION_CREDENTIAL</code> response as the execution result.</p>
+<p>Now, you can login to your Home Assistant and <a href="https://developers.home-assistant.io/docs/en/auth_api.html#long-lived-access-token">generate a long-lived access token</a>. After you put your long-lived access token to the <code>Environment variable</code>, do not forget click <code>Save</code> button before you <code>Test</code> again.</p>
+<p>This time, you will get a list of your devices as the response. 🎉</p>
+<h3>Config the Smart Home Service Endpoint</h3>
+<p>Now removed the long-lived access token if you want, copied the ARN of your Lambda function, then back to <a href="https://developer.amazon.com/alexa/console/ask">Alexa Developer Console</a>. You will finish the configuration of the Smart Home skill.</p>
+<ul>
+<li>Sign in <a href="https://developer.amazon.com/alexa/console/ask">Alexa Developer Console</a>, go to <code>Alexa Skills</code> page if you are not.</li>
+<li>Find the skill you just created, click <code>Edit</code> link in the <code>Actions</code> column.</li>
+<li>Click <code>SMART HOME</code> in the left navigation bar of build page.</li>
+<li>Fill in <code>Default endpoint</code> under <code>2. Smart Home service endpoint</code> using the <code>ARN</code> you copied from your Lambda function configuration.</li>
+</ul>
+<h3>Account Linking</h3>
+<p>Alexa can link your Amazon account to your Home Assistant account. Therefore Home Assistant can make sure only authenticated Alexa request be able to access your home’s devices. In order to link the account, you have to make sure your Home Assistant can be accessed from Internet.</p>
+<ul>
+<li>Sign in <a href="https://developer.amazon.com/alexa/console/ask">Alexa Developer Console</a>, go to <code>Alexa Skills</code> page if you are not.</li>
+<li>Find the skill you just created, click <code>Edit</code> link in the <code>Actions</code> column.</li>
+<li>Click <code>ACCOUNT LINKING</code> in the left navigation bar of build page</li>
+<li>Input all information required. Assuming your Home Assistant can be accessed by https://[YOUR HOME ASSISTANT URL:PORT]
+<ul>
+<li>
+<p><code>Authorization URI</code>: https://[YOUR HOME ASSISTANT URL]/auth/authorize</p>
+</li>
+<li>
+<p><code>Access Token URI</code>: https://[YOUR HOME ASSISTANT URL]/auth/token</p>
+<ul>
+<li>Note: you must use a valid/trusted SSL Certificate and port 443 for account linking to work</li>
+</ul>
+</li>
+<li>
+<p><code>Client ID</code>:</p>
+<ul>
+<li><a href="https://pitangui.amazon.com/">https://pitangui.amazon.com/</a> if you are in US</li>
+<li><a href="https://layla.amazon.com/">https://layla.amazon.com/</a> if you are in EU</li>
+<li><a href="https://alexa.amazon.co.jp/">https://alexa.amazon.co.jp/</a> if you are in JP and AU (not verified yet)</li>
+</ul>
+<p>The trailing slash is important here.</p>
+</li>
+<li>
+<p><code>Client Secret</code>: input anything you like, Home Assistant does not check this field</p>
+</li>
+<li>
+<p><code>Client Authentication Scheme</code>: make sure you selected <em>Credentials in request body</em>. Home Assistant does not support <em>HTTP Basic</em>.</p>
+</li>
+<li>
+<p><code>Scope</code>: input <code>smart_home</code>, Home Assistant is not using it yet, we may use it in the future when we allow more fine-grained access control.</p>
+</li>
+</ul>
+</li>
+<li>You can leave <code>Domain List</code> and <code>Default Access Token Expiration Time</code> as empty.</li>
+</ul>
+<p class='img'>
+  <img src='/images/integrations/alexa/account_linking.png' alt='Screenshot: Account Linking'>
+</p>
+<ul>
+<li>Click <code>Save</code> button in the top right corner.</li>
+<li>Next, you will use Alexa Mobile App or <a href="#alexa-web-based-app">Alexa web-based app</a> to link your account.
+<ul>
+<li>Open the Alexa app, navigate to <code>Skills</code> -&gt; <code>Your Skills</code> -&gt; <code>Dev Skills</code></li>
+<li>Click the Smart Home skill you just created.</li>
+<li>Click <code>Enable</code>.</li>
+<li>A new window will open to direct you to your Home Assistant’s login screen.</li>
+<li>After you success login, you will be redirected back to Alexa app.</li>
+<li>You can discovery your devices now.</li>
+</ul>
+</li>
+<li>Now, you can ask your Echo or in Alexa App, <em>turn on bedroom</em> 🎉</li>
+</ul>
+<h3>Alexa Component Configuration</h3>
+<p>Example configuration:</p>
+<pre><code class="language-yaml">alexa:
+  smart_home:
+    locale: en-US
+    endpoint: https://api.amazonalexa.com/v3/events
+    client_id: !secret alexa_client_id
+    client_secret: !secret alexa_client_secret
+    filter:
+      include_entities:
+        - light.kitchen
+        - light.kitchen_left
+      include_domains:
+        - switch
+      exclude_entities:
+        - switch.outside
+    entity_config:
+      light.kitchen:
+        name: Custom Name for Alexa
+        description: The light in the kitchen
+      switch.stairs:
+        display_categories: LIGHT
+</code></pre>
+<p>Set the <code>locale</code> to the locale of your Alexa devices. Supported locales are: <code>de-DE</code>,  <code>en-AU</code>, <code>en-CA</code>, <code>en-GB</code>, <code>en-IN</code>, <code>en-US</code>, <code>es-ES</code>, <code>es-MX</code>, <code>fr-CA</code>, <code>fr-FR</code>, <code>it-IT</code>, <code>ja-JP</code>. Default is <code>en-US</code>.</p>
+<p>The <code>endpoint</code>, <code>client_id</code> and <code>client_secret</code> are optional, and are only required if you want to enable Alexa’s proactive mode (i.e. “Send Alexa Events” enabled). Please note the following if you want to enable proactive mode:</p>
+<ul>
+<li>There are different endpoint URLs, depending on the region of your skill. Please check the available endpoints at <a href="https://developer.amazon.com/docs/smarthome/send-events-to-the-alexa-event-gateway.html#endpoints">https://developer.amazon.com/docs/smarthome/send-events-to-the-alexa-event-gateway.html#endpoints</a></li>
+<li>The <code>client_id</code> and <code>client_secret</code> are not the ones used by the skill that have been set up using “Login with Amazon” (in the [Alexa Developer Console][amazon-dev-console]: Build &gt; Account Linking), but rather from the “Alexa Skill Messaging” (in the Alexa Developer Console: Build &gt; Permissions &gt; Alexa Skill Messaging). To get them, you need to enable the “Send Alexa Events” permission.</li>
+<li>If the “Send Alexa Events” permission was not enabled previously, you need to unlink and relink the skill using the Alexa App, or else Home Assistant will show the following error: “Token invalid and no refresh token available. Also, you need to restart your Home Assistant after each disabling/enabling the skill in Alexa.”</li>
+</ul>
+<h3>Alexa web-based app</h3>
+<p>The following is a list of regions and the corresponding URL for the web-based Alexa app:</p>
+<ul>
+<li>United States: <a href="https://alexa.amazon.com">https://alexa.amazon.com</a></li>
+<li>United Kingdom: <a href="https://alexa.amazon.co.uk">https://alexa.amazon.co.uk</a></li>
+<li>Germany: <a href="https://alexa.amazon.de">https://alexa.amazon.de</a></li>
+<li>Japan: <a href="https://alexa.amazon.co.jp">https://alexa.amazon.co.jp</a></li>
+<li>Canada: <a href="https://alexa.amazon.ca">https://alexa.amazon.ca</a></li>
+<li>Australia: <a href="https://alexa.amazon.com.au">https://alexa.amazon.com.au</a></li>
+<li>India: <a href="https://alexa.amazon.in">https://alexa.amazon.in</a></li>
+<li>Spain: <a href="https://alexa.amazon.es">https://alexa.amazon.es</a></li>
+</ul>
+:ET

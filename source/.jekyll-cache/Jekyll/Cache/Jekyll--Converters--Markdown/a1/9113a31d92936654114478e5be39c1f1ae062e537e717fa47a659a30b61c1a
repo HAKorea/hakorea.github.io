@@ -1,0 +1,53 @@
+I"/<p>The <code>nello</code> platform allows you to control <a href="https://www.nello.io">Nello</a> intercoms.</p>
+<p>To get started you need to create a secondary Nello account and authorize it to access your lock(s).</p>
+<div class="note warning">
+Be aware that if you use your main account for Home Assistant you may not be able to use it with the App.
+</div>
+<h2>Configuration</h2>
+<p>To add your Nello locks to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+lock:
+  - platform: nello
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username of your Nello account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password of your Nello account.</p>
+</span></p></dd></dl>
+</div>
+<h2>Events</h2>
+<h3>Event <code>nello_bell_ring</code></h3>
+<p>Every time someone rings the bell, a <code>nello_bell_ring</code> event will be fired.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>address</code></td>
+<td>Postal address of the lock.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>Date when the event occurred.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Human readable string describing the event.</td>
+</tr>
+<tr>
+<td><code>location_id</code></td>
+<td>Nello ID of the location where the bell has been rung.</td>
+</tr>
+<tr>
+<td><code>short_id</code></td>
+<td>Shorter Nello ID.</td>
+</tr>
+</tbody>
+</table>
+:ET

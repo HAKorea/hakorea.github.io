@@ -1,0 +1,55 @@
+I"1<p>The <a href="http://www.hlktech.net/product_detail.php?ProId=48">HLK-SW16</a> by <a href="http://www.hlktech.net/">Hi-Link</a> is a simple networkable 16 port relay device.</p>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+hlk_sw16:
+  relay1:
+    host: 10.225.225.53
+    switches:
+      0:
+        name: relay1-0
+      1:
+        name: relay1-1
+      2:
+        name: relay1-2
+      3:
+        name: relay1-3
+      4:
+        name: relay1-4
+      5:
+        name: relay1-5
+      6:
+        name: relay1-6
+      7:
+        name: relay1-7
+      8:
+        name: relay1-8
+      9:
+        name: relay1-9
+      a:
+        name: relay1-a
+      b:
+        name: relay1-b
+      c:
+        name: relay1-c
+      d:
+        name: relay1-d
+      e:
+        name: relay1-e
+      f:
+        name: relay1-f
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='deviceid' href='#deviceid'></a> deviceid</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>The array that contains the HLK-SW16 devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of the HLK-SW16.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The control port for the relays.</p>
+</span></p><p class='default'>
+Default value: <p>8080</p>
+</p></dd><dt><a class='title-link' name='switches' href='#switches'></a> switches</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>The array that contains the relays.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='relayid' href='#relayid'></a> relayid</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The array that contains the HLK-SW16 relays, each must be a number between 0 and 9 or letter between a and f which each corresponds to a labeled relay switch on the HLK-SW16.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name used to display the switch in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>relayid</p>
+</p></dd></dl></dd></dl></dd></dl></dd></dl>
+</div>
+:ET

@@ -1,0 +1,28 @@
+I"Z	<p>The <code>suez_water</code> sensor platform fetches your last day consumption of water from the French water provider <a href="https://www.toutsurmoneau.fr">Tout Sur Mon Eau</a> website.</p>
+<p>It also gets the following data:</p>
+<ul>
+<li>Daily consumption for the current month</li>
+<li>Daily consumption for the previous month</li>
+<li>Monthly consumption for the last 26 months</li>
+<li>Highest monthly consumption</li>
+<li>Last year total consumption</li>
+<li>Current year total consumption</li>
+</ul>
+<h2>Configuration</h2>
+<p>To add the Suez Water sensor to your installation, add your <em>Tout Sur Mon Eau</em> account credentials and your <code>counter_id</code> to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: suez_water
+    username: YOUR_SUEZ_USERNAME
+    password: YOUR_SUEZ_PASSWORD
+    counter_id: YOUR_SUEZ_COUNTER_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Tout Sur Mon Eau account username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Tout Sur Mon Eau account password.</p>
+</span></p></dd><dt><a class='title-link' name='counter_id' href='#counter_id'></a> counter_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Tout Sur Mon Eau counter id.</p>
+</span></p></dd></dl>
+</div>
+<p><code>counter_id</code> is the water counter id. It can be found on your <em>Tout Sur Mon Eau</em> <a href="https://www.toutsurmoneau.fr/mon-compte-en-ligne/historique-de-consommation-tr">user account</a>. Look in the source code of the page for something similar to <code>url: '/mon-compte-en-ligne/statMData' + '/123456789'</code>. The <code>counter_id</code> in this case is <code>123456789</code>.</p>
+:ET

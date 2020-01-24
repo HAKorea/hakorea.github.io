@@ -1,0 +1,86 @@
+I"�<p>This installation of Home Assistant requires the Raspberry Pi to run <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian Lite</a>. The installation will be installed in a <a href="/docs/installation/virtualenv">Virtual Environment</a> with minimal overhead. Instructions assume this is a new installation of Raspbian Lite.</p>
+<p>You must have Python 3.7 or later installed (including the package <code>python3-dev</code>) which is <em>not</em> the case for Raspbian Stretch.</p>
+<div class='note'>
+Although these installation steps specifically mention a Raspberry Pi, you can go ahead and proceed on any Linux install as well. This guide is also referred to as the "Advanced Guide" for a virtual environment install.
+</div>
+<div class='note warning'>
+<p>Please remember to ensure you’re using an <a href="https://www.raspberrypi.org/documentation/faqs/#pi-power">appropriate power supply</a> with your Pi. Mobile chargers may not be suitable, since some are designed to only provide the full power with that manufacturer’s handsets. USB ports on your computer also will not supply enough power and must not be used.</p>
+</div>
+<p>Connect to the Raspberry Pi over SSH. Default password is <code>raspberry</code>.
+You will need to enable SSH access. The Raspberry Pi website has instructions <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/">here</a>.</p>
+<pre><code class="language-bash">$ ssh pi@ipaddress
+</code></pre>
+<p>Changing the default password is encouraged.</p>
+<pre><code class="language-bash">passwd
+</code></pre>
+<p>Update the system.</p>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get upgrade -y
+</code></pre>
+<p>Install the dependencies.</p>
+<pre><code class="language-bash">sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev
+</code></pre>
+<p>Add an account for Home Assistant called <code>homeassistant</code>.
+Since this account is only for running Home Assistant the extra arguments of <code>-rm</code> is added to create a system account and create a home directory. The arguments <code>-G dialout,gpio,i2c</code> adds the user to the <code>dialout</code>, <code>gpio</code> and the <code>i2c</code> group. The first is required for using Z-Wave and Zigbee controllers, while the second is required to communicate with Raspberry’s GPIO.</p>
+<pre><code class="language-bash">sudo useradd -rm homeassistant -G dialout,gpio,i2c
+</code></pre>
+<p>Next we will create a directory for the installation of Home Assistant and change the owner to the <code>homeassistant</code> account.</p>
+<pre><code class="language-bash">cd /srv
+sudo mkdir homeassistant
+sudo chown homeassistant:homeassistant homeassistant
+</code></pre>
+<p>Next up is to create and change to a virtual environment for Home Assistant. This will be done as the <code>homeassistant</code> account.</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+cd /srv/homeassistant
+python3 -m venv .
+source bin/activate
+</code></pre>
+<p>Once you have activated the virtual environment (notice the prompt change to <code>(homeassistant) homeassistant@raspberrypi:/srv/homeassistant $</code>) you will need to run the following command to install a required python package.</p>
+<pre><code class="language-bash">python3 -m pip install wheel
+</code></pre>
+<p>Once you have installed the required python package it is now time to install Home Assistant!</p>
+<pre><code class="language-bash">pip3 install homeassistant
+</code></pre>
+<p>Start Home Assistant for the first time. This will complete the installation for you, automatically creating the <code>.homeassistant</code> configuration directory in the <code>/home/homeassistant</code> directory, and installing any basic dependencies.</p>
+<pre><code class="language-bash">hass
+</code></pre>
+<p>You can now reach your installation on your Raspberry Pi over the web interface on <code>http://ipaddress:8123</code>.</p>
+<div class='note'>
+<p>When you run the <code>hass</code> command for the first time, it will download, install and cache the necessary libraries/dependencies. This procedure may take anywhere between 5 to 10 minutes. During that time, you may get “site cannot be reached” error when accessing the web interface. This will only happen for the first time, and subsequent restarts will be much faster.</p>
+</div>
+<p>If you want to setup <code>hass</code> as a daemon and autostart it on boot please refer to <a href="/docs/autostart/">Autostart Home Assistant</a>.</p>
+<h3>Updating</h3>
+<p>To update to the latest version of Home Assistant follow these simple steps:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --upgrade homeassistant
+</code></pre>
+<p>Once the last command executes, restart the Home Assistant service to apply the latest updates. Please keep in mind that some updates may take longer to start up than others. If Home Assistant fails to start, make sure you check the <strong>Breaking Changes</strong> from the <a href="https://github.com/home-assistant/home-assistant/releases">Release Notes</a>.</p>
+<h3>Run a specific version</h3>
+<p>In the event that a Home Assistant version doesn’t play well with your hardware setup, you can downgrade to a previous release. For example:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install homeassistant==0.XX.X
+</code></pre>
+<h3>Run the beta version</h3>
+<p>If you would like to test next release before anyone else, you can install the beta version released every two weeks, for example:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --pre --upgrade homeassistant
+</code></pre>
+<h3>Run the development version</h3>
+<p>If you want to stay on the bleeding-edge Home Assistant development branch, you can upgrade to <code>dev</code>.</p>
+<div class='note warning'>
+  The "dev" branch is likely to be unstable. Potential consequences include loss of data and instance corruption.
+</div>
+<p>For example:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
+</code></pre>
+<h3>Activating the virtual environment</h3>
+<p>When instructions tell you to activate the virtual environment, the following commands will do this:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+</code></pre>
+:ET

@@ -1,0 +1,42 @@
+I"#<p>The <code>mqtt</code> device tracker platform allows you to detect presence by monitoring an MQTT topic for new locations. To use this platform, you specify a unique topic for each device.</p>
+<h2>Configuration</h2>
+<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: mqtt
+    devices:
+      paulus_oneplus: 'location/paulus'
+      annetherese_n4: 'location/annetherese'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of devices with their topic.</p>
+</span></p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The QoS level of the topic.</p>
+</span></p></dd><dt><a class='title-link' name='payload_home' href='#payload_home'></a> payload_home</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload value that represents the ‘home’ state for the device.</p>
+</span></p><p class='default'>
+Default value: <p>home</p>
+</p></dd><dt><a class='title-link' name='payload_not_home' href='#payload_not_home'></a> payload_not_home</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload value that represents the ‘not_home’ state for the device.</p>
+</span></p><p class='default'>
+Default value: <p>not_home</p>
+</p></dd><dt><a class='title-link' name='source_type' href='#source_type'></a> source_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Attribute of a device tracker that affects state when being used to track a <a href="/integrations/person/">person</a>. Valid options are <code>gps</code>, <code>router</code>, <code>bluetooth</code>, or <code>bluetooth_le</code>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Complete example configuration</h2>
+<pre><code class="language-yaml"># Complete configuration.yaml entry
+device_tracker:
+  devices:
+    paulus_oneplus: 'location/paulus'
+    annetherese_n4: 'location/annetherese'
+  qos: 1
+  payload_home: 'present'
+  payload_not_home: 'not present'
+  source_type: bluetooth
+</code></pre>
+<h2>Usage</h2>
+<p>Example JSON you can publish to the topic (e.g., via mqtt.publish service):</p>
+<pre><code class="language-json">{
+  &quot;topic&quot;: &quot;location/paulus&quot;,
+  &quot;payload&quot;: &quot;home&quot;
+}
+</code></pre>
+:ET

@@ -1,0 +1,430 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>fail2ban - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Setting up fail2ban to read Home Assistant's log files to improve security.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/cookbook/fail2ban/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="fail2ban">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/cookbook/fail2ban/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Setting up fail2ban to read Home Assistant's log files to improve security.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="fail2ban">
+    <meta name="twitter:description" content="Setting up fail2ban to read Home Assistant's log files to improve security.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      fail2ban
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>This is a quick guide on how to set up <code>fail2ban</code> for Home Assistant. Contains extracts from <a href="https://community.home-assistant.io/t/is-there-a-log-file-for-invalid-logins-blocking-hackers/2892">Is there a log file for invalid logins? (Blocking hackers)</a>.</p>
+<h2>
+<a class="title-link" name="installing-fail2ban" href="#installing-fail2ban"></a> Installing fail2ban</h2>
+<p>Debian/Ubuntu:</p>
+<pre><code class="language-bash">sudo apt-get install fail2ban
+</code></pre>
+<p>CentOS/RHEL:</p>
+<pre><code class="language-bash">sudo yum install epel-release
+sudo yum install -y fail2ban
+</code></pre>
+<p>Fedora:</p>
+<pre><code class="language-bash">sudo dnf install -y fail2ban
+</code></pre>
+<p>For other package managers use the appropriate commands.</p>
+<h2>
+<a class="title-link" name="enable-home-assistant-logging" href="#enable-home-assistant-logging"></a> Enable Home Assistant Logging</h2>
+<p>First, enable <code>http.ban</code> logging in <code>configuration.yaml</code> file for your Home Assistant instance:</p>
+<pre><code class="language-yaml">logger:
+  default: critical
+  logs:
+    homeassistant.components.http.ban: warning
+</code></pre>
+<p>Restart Home Assistant to activate the changes:</p>
+<pre><code class="language-bash">sudo systemctl restart home-assistant
+</code></pre>
+<p>Tail the Home Assistant log then log out of the Home Assistant web interface and attempt logging in with an incorrect password, look for a line like <code>Login attempt or request with invalid authentication from xxx.xxx.xxx.xxx</code>:</p>
+<pre><code class="language-bash">$ tail -f /home/homeassistant/.homeassistant/home-assistant.log | grep WARNING
+2018-08-29 14:28:15 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from xxx.xxx.xxx.xxx
+</code></pre>
+<h2>
+<a class="title-link" name="configure-fail2ban" href="#configure-fail2ban"></a> Configure fail2ban</h2>
+<p>Next we will create a filter and jail file for <code>fail2ban</code>:</p>
+<ul>
+<li><code>/etc/fail2ban/filter.d/ha.conf</code></li>
+<li><code>/etc/fail2ban/jail.d/ha.conf</code></li>
+</ul>
+<p>Contents of <code>/etc/fail2ban/filter.d/ha.conf</code>:</p>
+<pre><code class="language-ini">[INCLUDES]
+before = common.conf
+
+[Definition]
+failregex = ^%(__prefix_line)s.*Login attempt or request with invalid authentication from &lt;HOST&gt;.*$
+ignoreregex =
+</code></pre>
+<p>Contents of <code>/etc/fail2ban/jail.d/ha.conf</code>. Note that you’ll need to change the <code>logpath</code> to match your logfile which will be different from the path listed.:</p>
+<pre><code class="language-ini">[DEFAULT]
+# Email config
+sender = email@address.com
+destemail = email@address.com
+
+# Action "%(action_mwl)s" will ban the IP and send an email notification including whois data and log entries.
+action = %(action_mwl)s
+
+[ha]
+enabled = true
+filter = ha
+logpath = /home/homeassistant/.homeassistant/home-assistant.log
+
+# 3600 seconds = 1 hour
+bantime = 30 # during testing it is useful to have a short ban interval, change this to 3600 later
+
+# Maximum amount of login attempts before IP is blocked
+maxretry = 3
+</code></pre>
+<p>Restart <code>fail2ban</code>:</p>
+<pre><code class="language-bash">sudo systemctl restart fail2ban
+</code></pre>
+<p>Confirm <code>fail2ban</code> is running:</p>
+<pre><code class="language-bash">sudo systemctl status fail2ban
+</code></pre>
+<p>Check that the ha jail is active:</p>
+<pre><code class="language-bash">sudo fail2ban-client status
+Status
+|- Number of jail:	1
+`- Jail list:	ha
+</code></pre>
+<h2>
+<a class="title-link" name="testing-fail2ban" href="#testing-fail2ban"></a> Testing fail2ban</h2>
+<p>Tail the fail2ban log file then log out of the Home Assistant web interface and attempt to log in again with an incorrect password.</p>
+<pre><code class="language-bash">sudo tail -f -n 20 /var/log/fail2ban.log
+2018-08-29 13:25:37,907 fail2ban.server         [10208]: INFO    Starting Fail2ban v0.10.3.fix1
+2018-08-29 13:25:37,916 fail2ban.database       [10208]: INFO    Connected to fail2ban persistent database '/var/lib/fail2ban/fail2ban.sqlite3'
+2018-08-29 13:25:37,918 fail2ban.jail           [10208]: INFO    Creating new jail 'ha'
+2018-08-29 13:25:37,922 fail2ban.jail           [10208]: INFO    Jail 'ha' uses poller {}
+2018-08-29 13:25:37,922 fail2ban.jail           [10208]: INFO    Initiated 'polling' backend
+2018-08-29 13:25:37,932 fail2ban.filter         [10208]: INFO    Added logfile: '/home/homeassistant/.homeassistant/home-assistant.log' (pos = 5873, hash = 02ec3aefc005465a6cd8db91eff2d5e57c45757e)
+2018-08-29 13:25:37,932 fail2ban.filter         [10208]: INFO      encoding: UTF-8
+2018-08-29 13:25:37,933 fail2ban.filter         [10208]: INFO      maxRetry: 3
+2018-08-29 13:25:37,934 fail2ban.filter         [10208]: INFO      findtime: 600
+2018-08-29 13:25:37,934 fail2ban.actions        [10208]: INFO      banTime: 30
+2018-08-29 13:25:37,938 fail2ban.jail           [10208]: INFO    Jail 'ha' started
+2018-08-29 13:27:49,125 fail2ban.filter         [10208]: INFO    [ha] Found xxx.xxx.xxx.xxx - 2018-08-29 13:27:48
+2018-08-29 13:27:51,330 fail2ban.filter         [10208]: INFO    [ha] Found xxx.xxx.xxx.xxx - 2018-08-29 13:27:51
+2018-08-29 13:27:52,533 fail2ban.filter         [10208]: INFO    [ha] Found xxx.xxx.xxx.xxx - 2018-08-29 13:27:52
+2018-08-29 13:27:52,678 fail2ban.actions        [10208]: NOTICE  [ha] Ban xxx.xxx.xxx.xxx
+2018-08-29 13:28:23,941 fail2ban.actions        [10208]: NOTICE  [ha] Unban xxx.xxx.xxx.xxx
+</code></pre>
+<p>Now that fail2ban is working it can be enabled for startup at boot time, also raise the bantime from 30 seconds to what ever you would like. 8 hours is 28800 seconds.</p>
+<pre><code class="language-bash">sudo sed -i 's/bantime = 30/bantime = 28800/g' /etc/fail2ban/jail.d/ha.conf
+sudo systemctl enable fail2ban
+sudo systemctl restart fail2ban
+</code></pre>
+<p>A final note, if you need to unban an IP it can be done with <code>fail2ban-client</code>:</p>
+<pre><code class="language-bash">sudo fail2ban-client set JAILNAME unbanip IPADDRESS
+</code></pre>
+<p>eg:</p>
+<pre><code class="language-bash">sudo fail2ban-client set ha unbanip xxx.xxx.xxx.xxx
+</code></pre>
+<p>Fail2ban should now be configured and running, if an IP address is banned you will receive an email with WHOIS details about the IP address that attempted to connect, if not you will need configure Postfix or another MTA (Mail Transport Agent).</p>
+<p>If you want to read more about <code>fail2ban</code>, some links are below:</p>
+<ul>
+<li><a href="http://www.fail2ban.org/wiki/index.php/FEATURE_Split_config" rel="external nofollow">fail2ban Split config</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-protect-ssh-with-fail2ban-on-ubuntu-14-04" rel="external nofollow">How To Protect SSH with Fail2Ban on Ubuntu 14.04</a></li>
+</ul>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_cookbook/fail2ban.markdown'>깃허브 편집</a></div>
+
+
+  
+
+  <div class='section'>
+    <a href='/cookbook'>쿡북</a>
+  </div>
+
+  <div class='section'>
+    <h1 class="title delta">Infrastructure</h1>
+    <ul class='divided'>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li>
+            
+              fail2ban
+            
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/owntracks_two_mqtt_broker/'>OwnTracks with two MQTT brokers</a>
+            
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

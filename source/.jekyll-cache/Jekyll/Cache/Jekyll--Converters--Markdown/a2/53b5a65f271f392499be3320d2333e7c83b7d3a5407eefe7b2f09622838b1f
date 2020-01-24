@@ -1,0 +1,78 @@
+I"ê<p>With the <code>route53</code> integration can you keep your AWS Route53 DNS records up to date.</p>
+<p>The integration will run every hour, but can also be started manually by using the service <code>route53.update_records</code> under services.</p>
+<p>Please note that this platform uses the API from <a href="https://www.ipify.org/">ipify.org</a> to set the public IP address.</p>
+<h2>Setup</h2>
+<p>You will need to configure your AWS Account with a suitable IAM policy and API keys for this to function.</p>
+<p>If you are familiar with this process, you can skip the next section and head directly to the configuration section.</p>
+<p>On the AWS side, you need to do the following;</p>
+<ol>
+<li>
+<p>Create a suitable zone for a domain that you own and manage in Route53, the domain <code>home.yourdomain.com</code> is used as an example.</p>
+</li>
+<li>
+<p>Once created, write down the Hosted Zone ID value for the domain. This is needed for the plugin and IAM configuration.</p>
+</li>
+<li>
+<p>Create an IAM Policy that provides update and query access to this domain explicitly and has no other permissions to the AWS account.</p>
+</li>
+</ol>
+<p>Here is an IAM Policy sample, don‚Äôt forget to update your Zone ID on the Resource line.</p>
+<pre><code class="language-json">{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Sid&quot;: &quot;VisualEditor0&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;route53:GetHostedZone&quot;,
+                &quot;route53:ChangeResourceRecordSets&quot;,
+                &quot;route53:ListResourceRecordSets&quot;
+            ],
+            &quot;Resource&quot;: &quot;arn:aws:route53:::hostedzone/YOURZONEIDGOESHERE&quot;
+        },
+        {
+            &quot;Sid&quot;: &quot;VisualEditor1&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: &quot;route53:TestDNSAnswer&quot;,
+            &quot;Resource&quot;: &quot;*&quot;
+        }
+    ]
+}
+</code></pre>
+<ol start="4">
+<li>
+<p>Once this has been done, create a new user called <code>homeassistant</code> and add the IAM policy to the user, allowing it to manage this DNS resource.</p>
+</li>
+<li>
+<p>Under the security credentials tab for the <code>homeassistant</code> user, create a set of access keys for placement in the integration definition YAML.</p>
+</li>
+</ol>
+<h2>Configuration</h2>
+<p>To use the integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+route53:
+  aws_access_key_id: ABC123
+  aws_secret_access_key: DEF456
+  zone: ZONEID678
+  domain: yourdomain.com
+  records:
+    - vpn
+    - hassio
+    - home
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='aws_access_key_id' href='#aws_access_key_id'></a> aws_access_key_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The AWS access key ID for the account that has IAM access to the domain.</p>
+</span></p></dd><dt><a class='title-link' name='aws_secret_access_key' href='#aws_secret_access_key'></a> aws_secret_access_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The AWS secret access key for the account that has IAM access to the domain.</p>
+</span></p></dd><dt><a class='title-link' name='zone' href='#zone'></a> zone</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The AWS zone ID for the domain in Route53.</p>
+</span></p></dd><dt><a class='title-link' name='domain' href='#domain'></a> domain</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The domain name for the domain in Route53.</p>
+</span></p></dd><dt><a class='title-link' name='records' href='#records'></a> records</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of records you want to update.</p>
+</span></p></dd><dt><a class='title-link' name='ttl' href='#ttl'></a> ttl</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The TTL value for the DNS records.</p>
+</span></p><p class='default'>
+Default value: <p>300</p>
+</p></dd></dl>
+</div>
+<h2>Services</h2>
+<h3>Service <code>route53.update_records</code></h3>
+<p>Use this service to manually trigger an update of the DNS records.</p>
+:ET

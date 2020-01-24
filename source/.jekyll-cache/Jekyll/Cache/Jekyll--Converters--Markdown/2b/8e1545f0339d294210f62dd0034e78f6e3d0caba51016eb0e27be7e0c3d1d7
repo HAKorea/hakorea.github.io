@@ -1,0 +1,30 @@
+I"m
+<p>The <code>Tesla</code> integration offers integration with the <a href="https://auth.tesla.com/login">Tesla</a> cloud service and provides presence detection as well as sensors such as charger state and temperature.</p>
+<p>This integration provides the following platforms:</p>
+<ul>
+<li>Binary sensors - such as parking and charger connection.</li>
+<li>Sensors - such as Battery level, Inside/Outside temperature, odometer, estimated range, and charging rate.</li>
+<li>Device tracker - to track location of your car</li>
+<li>Lock - Door lock. Enables you to control Tesla’s door lock</li>
+<li>Climate - HVAC control. Allow you to control (turn on/off, set target temperature) your Tesla’s HVAC system.</li>
+<li>Switch - Charger and max range switch to allow you to start/stop charging and set max range charging. Update switch to allow you to disable polling of vehicles to conserve battery</li>
+</ul>
+<h2>Configuration</h2>
+<p>Home Assistant offers the Tesla integration through <strong>Configuration</strong> -&gt; <strong>Integrations</strong> -&gt; <strong>Tesla</strong>.</p>
+<p>Enter username and password and then continue.</p>
+<p>Alternatively, Home Assistant will also load Tesla via the  <code>configuration.yaml</code>. Add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tesla:
+  username: YOUR_EMAIL_ADDRESS
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The email address associated with your Tesla account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password associated with your Tesla account.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>API polling interval in seconds. Minimum value can’t be less than 300 (5 minutes). Very frequent polling can use battery.</p>
+</span></p><p class='default'>
+Default value: <p>300</p>
+</p></dd></dl>
+</div>
+:ET

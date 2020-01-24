@@ -1,0 +1,20 @@
+I"˜<p>The <code>switchbot</code> switch platform allows you to control Switchbot <a href="https://www.switch-bot.com/">devices</a>.</p>
+<h2>Manual Configuration</h2>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml">switch:
+  - platform: switchbot
+    mac: 'MAC_ADDRESS'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The device MAC address with lower-case letters.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name used to display the switch in the frontend.</p>
+</span></p></dd></dl>
+</div>
+<h2>Switchbot Entity</h2>
+<p>There are two attributes available on the Switchbot entity to give you more information about your device.</p>
+<ul>
+<li><code>last_run_success</code>: If <code>true</code> if the last action sent to the Switchbot succeeded. This attribute is useful for error trapping when Bluetooth connectivity is intermittent. If <code>false</code>, see home-assistant.log for specific error messgages.</li>
+<li><code>assumed_state</code>: Always <code>true</code>. If the state of the Switchbot entity cannot be determined, it is assumed to be <code>on</code>.</li>
+</ul>
+:ET

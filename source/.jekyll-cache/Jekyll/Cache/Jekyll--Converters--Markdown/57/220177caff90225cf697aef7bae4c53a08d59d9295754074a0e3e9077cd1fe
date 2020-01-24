@@ -1,0 +1,33 @@
+I"÷<p>Sets up an SSL proxy with NGINX and redirect port 80 to 443. Make sure you have generated a certificate before you start this add-on.</p>
+<p>In the <code>http</code> section of the <code>configuration.yaml</code> file remove <code>ssl_certificate</code>, <code>ssl_key</code> and <code>server_port</code> and donâ€™t enter the port in the <code>base_url</code> to avoid an HTTP 502 error.</p>
+<pre><code class="language-json">{
+  &quot;domain&quot;: &quot;home.example.com&quot;,
+  &quot;certfile&quot;: &quot;fullchain.pem&quot;,
+  &quot;keyfile&quot;: &quot;privkey.pem&quot;,
+  &quot;hsts&quot;: &quot;max-age=31536000; includeSubDomains&quot;,
+  &quot;customize&quot;: {
+    &quot;active&quot;: false,
+    &quot;default&quot;: &quot;nginx_proxy_default*.conf&quot;,
+    &quot;servers&quot;: &quot;nginx_proxy/*.conf&quot;
+  },
+  &quot;cloudflare&quot;: false
+}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='domain' href='#domain'></a> domain</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Domain to use for the proxy.</p>
+</span></p></dd><dt><a class='title-link' name='certfile' href='#certfile'></a> certfile</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The certificate file to use in the <code>/ssl</code> directory.</p>
+</span></p></dd><dt><a class='title-link' name='keyfile' href='#keyfile'></a> keyfile</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Private key file to use in the <code>/ssl</code> directory.</p>
+</span></p></dd><dt><a class='title-link' name='hsts' href='#hsts'></a> hsts</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Value for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security"><code>Strict-Transport-Security</code></a> HTTP header to send. If empty, the header is not sent.</p>
+</span></p></dd><dt><a class='title-link' name='customize' href='#customize'></a> customize</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If true, additional NGINX configuration files for the default server and additional servers are read from files in the <code>/share</code> directory specified by the <code>default</code> and <code>servers</code> variables.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='cloudflare' href='#cloudflare'></a> cloudflare</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If enabled, configure Nginx with a list of IP addresses directly from Cloudflare that will be used for <code>set_real_ip_from</code> directive Nginx config.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<div class='note'>
+<p>It is possible to deactivate port 80 if you need this for things like <code>emulated_hue</code>. Remove the host port from Network option of this add-on.</p>
+</div>
+:ET

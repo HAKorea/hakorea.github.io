@@ -1,0 +1,46 @@
+I"‡<p>The <code>alpha_vantage</code> sensor platform uses <a href="https://www.alphavantage.co">Alpha Vantage</a> to monitor the stock market. This platform also provides detail about exchange rates.</p>
+<p>To enable the <code>alpha_vantage</code> platform, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: alpha_vantage
+    api_key: YOUR_API_KEY
+    symbols:
+      - symbol: GOOGL
+        name: Google
+    foreign_exchange:
+      - name: USD_EUR
+        from: USD
+        to: EUR
+</code></pre>
+<p>Either a symbol or a foreign exchange must be configured, otherwise you will not get any data.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API Key from <a href="https://www.alphavantage.co">Alpha Vantage</a>.</p>
+</span></p></dd><dt><a class='title-link' name='symbols' href='#symbols'></a> symbols</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of stock market symbols for given companies.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor to use for the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='currency' href='#currency'></a> currency</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor to use for the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>USD</p>
+</p></dd><dt><a class='title-link' name='symbol' href='#symbol'></a> symbol</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The stock market symbol for the given company.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='foreign_exchange' href='#foreign_exchange'></a> foreign_exchange</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of currencies.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor to use for the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='from' href='#from'></a> from</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The source currency.</p>
+</span></p></dd><dt><a class='title-link' name='to' href='#to'></a> to</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The target currency.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>Google and the exchange rate for Bitcoin</h3>
+<pre><code class="language-yaml">sensor:
+  - platform: alpha_vantage
+    api_key: YOUR_API_KEY
+    symbols:
+      - name: Google
+        currency: USD
+        symbol: GOOGL
+    foreign_exchange:
+      - from: BTC
+        to: USD
+        name: Bitcoin
+</code></pre>
+:ET

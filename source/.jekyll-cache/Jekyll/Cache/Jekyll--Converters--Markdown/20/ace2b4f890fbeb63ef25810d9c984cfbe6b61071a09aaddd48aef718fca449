@@ -1,0 +1,47 @@
+I"�<p><a href="http://www.lutron.com/">Lutron</a> is an American lighting control company. They have several lines of home automation devices that manage light switches/dimmers, occupancy sensors, HVAC controls, etc. The <code>lutron</code> integration in Home Assistant is responsible for communicating with the main hub for these systems.</p>
+<p>Presently, there’s only support for communicating with the <a href="http://www.lutron.com/en-US/Products/Pages/WholeHomeSystems/RadioRA2/Overview.aspx">RadioRA 2</a> Main Repeater and only handle light switches, dimmers, and seeTouch keypad scenes.</p>
+<h2>Configuration</h2>
+<p>When configured, the <code>lutron</code> integration will automatically discover the rooms and their associated switches/dimmers as configured by the RadioRA 2 software from Lutron. Each room will be treated as a separate group.</p>
+<p>To use Lutron RadioRA 2 devices in your installation, add the following to your <code>configuration.yaml</code> file using the IP address of your RadioRA 2 main repeater:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+lutron:
+  host: IP_ADDRESS
+  username: lutron
+  password: integration
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the Main Repeater.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The login name of the user. The user <code>lutron</code> always exists, but other users can be added via RadioRA 2 software.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for the user specified above. <code>integration</code> is the password for the always-present <code>lutron</code> user.</p>
+</span></p></dd></dl>
+</div>
+<div class='note'>
+<p>It is recommended to assign a static IP address to your main repeater. This ensures that it won’t change IP addresses, so you won’t have to change the <code>host</code> if it reboots and comes up with a different IP address.</p>
+</div>
+<h2>Keypad buttons</h2>
+<p>Individual buttons on keypads are not represented as entities. Instead, they fire events called <code>lutron_event</code> whose payloads include <code>id</code> and <code>action</code> attributes.</p>
+<p>The <code>id</code> attribute includes the name of the keypad and the name of the button, normalized the same way entity names are. For example, if the keypad is called “Kitchen Keypad” and the button is called “Dinner” the event’s <code>id</code> will be <code>kitchen_keypad_dinner</code>.</p>
+<p>The <code>action</code> attribute varies depending on the button type.</p>
+<p>For raise/lower buttons (dimmer buttons, shade controls, etc.) there will be two values, <code>pressed</code> and <code>released</code>, fired when the button is pressed and when it’s released, respectively.</p>
+<p>For single-action buttons (scene selection, etc.), <code>action</code> will be <code>single</code>, and there will only be one event fired. This is a limitation of the Lutron controller which doesn’t give Home Assistant any way of knowing when a single-action button is released.</p>
+<h2>Scene</h2>
+<p>This integration uses keypad programming to identify scenes.  Currently, it works with seeTouch, hybrid seeTouch, main repeater, homeowner, Pico, and seeTouch RF tabletop keypads.
+The Lutron scene platform allows you to control scenes programmed into your SeeTouch keypads.</p>
+<p>After setup, scenes will appear in Home Assistant using the area, keypad and button name.</p>
+<h2>Occupancy Sensors</h2>
+<p>Any configured Powr Savr occuancy sensors will be added as occupancy binary sensors. Lutron reports occupancy for an area, rather than reporting individual sensors. Sensitivity and timeouts are controlled on the sensors themselves, not in software.</p>
+<h2>Example Automations</h2>
+<pre><code class="language-yaml">- alias: &quot;keypad button pressed notification&quot;
+  trigger:
+    - platform: event
+      event_type: lutron_event
+      event_data:
+        id: office_pico_on
+        action: single
+  action:
+    - service: notify.telegram
+      data:
+        message: &quot;pico just turned on!&quot;
+</code></pre>
+:ET

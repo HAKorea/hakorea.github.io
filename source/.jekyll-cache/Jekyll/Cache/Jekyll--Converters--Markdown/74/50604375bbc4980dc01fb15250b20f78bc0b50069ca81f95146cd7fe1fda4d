@@ -1,0 +1,237 @@
+I"+%<p>The <code>rainmachine</code> integration is the main integration to integrate all platforms related to <a href="https://www.rainmachine.com/">RainMachine smart Wi-Fi sprinkler controllers</a>.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Sensor</li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Base Configuration</h2>
+<p>To connect to your RainMachine device, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">rainmachine:
+  controllers:
+    - ip_address: 192.168.1.100
+      password: YOUR_PASSWORD
+</code></pre>
+<p>To configure additional functionality, add configuration options beneath a <code>binary_sensor</code>, <code>sensor</code>, and/or <code>switches</code> key within the <code>rainmachine</code> sections of <code>configuration.yaml</code> as below:</p>
+<pre><code class="language-yaml">rainmachine:
+  controllers:
+    - ip_address: 192.168.1.100
+      password: YOUR_PASSWORD
+      binary_sensors:
+        # binary sensor configuration options...
+      sensors:
+        # sensor configuration options...
+      switches:
+        # switch configuration options...
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ip_address' href='#ip_address'></a> ip_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address or hostname of your RainMachine unit.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your RainMachine password.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The TCP port used by your unit for the REST API.</p>
+</span></p><p class='default'>
+Default value: <p>8080</p>
+</p></dd><dt><a class='title-link' name='ssl' href='#ssl'></a> ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Whether communication with the local device should occur over HTTPS.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The frequency (in seconds) between data updates.</p>
+</span></p><p class='default'>
+Default value: <p>60</p>
+</p></dd><dt><a class='title-link' name='binary_sensors' href='#binary_sensors'></a> binary_sensors</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Binary sensor-related configuration options.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The conditions to create sensors from.</p>
+</span></p><p class='default'>
+Default value: <p>all (<code>extra_water_on_hot_days</code>, <code>flow_sensor</code>, <code>freeze</code>, <code>freeze_protection</code>, <code>hourly</code>, <code>month</code>, <code>raindelay</code>, <code>rainsensor</code>, <code>weekday</code>)</p>
+</p></dd></dl></dd><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sensor-related configuration options.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The conditions to create sensors from.</p>
+</span></p><p class='default'>
+Default value: <p>all (<code>flow_sensor_clicks_cubic_meter</code>, <code>flow_sensor_consumed_liters</code>, <code>flow_sensor_start_index</code>, <code>flow_sensor_watering_clicks</code>,<code>freeze_protect_temp</code>)</p>
+</p></dd></dl></dd><dt><a class='title-link' name='switches' href='#switches'></a> switches</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Switch-related configuration options.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='zone_run_time' href='#zone_run_time'></a> zone_run_time</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The default number of seconds that a zone should run when turned on.</p>
+</span></p><p class='default'>
+Default value: <p>600</p>
+</p></dd></dl></dd></dl>
+</div>
+<h2>Services</h2>
+<h3><code>rainmachine.disable_program</code></h3>
+<p>Disable a RainMachine program. This will mark the program switch as
+<code>Unavailable</code> in the UI.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>program_id</code></td>
+<td>no</td>
+<td>The program to disable</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.disable_zone</code></h3>
+<p>Disable a RainMachine zone. This will mark the zone switch as
+<code>Unavailable</code> in the UI.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zone_id</code></td>
+<td>no</td>
+<td>The zone to disable</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.enable_program</code></h3>
+<p>Enable a RainMachine program.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>program_id</code></td>
+<td>no</td>
+<td>The program to enable</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.enable_zone</code></h3>
+<p>Enable a RainMachine zone.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zone_id</code></td>
+<td>no</td>
+<td>The zone to enable</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.pause_watering</code></h3>
+<p>Pause all watering activities for a number of seconds.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seconds</code></td>
+<td>no</td>
+<td>The number of seconds to pause</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.start_program</code></h3>
+<p>Start a RainMachine program.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>program_id</code></td>
+<td>no</td>
+<td>The program to start</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.start_zone</code></h3>
+<p>Start a RainMachine zone for a set number of seconds.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zone_id</code></td>
+<td>no</td>
+<td>The zone to start</td>
+</tr>
+<tr>
+<td><code>zone_run_time</code></td>
+<td>yes</td>
+<td>The number of seconds to run; defaults to 60 seconds</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.stop_all</code></h3>
+<p>Stop all watering activities.</p>
+<h3><code>rainmachine.stop_program</code></h3>
+<p>Stop a RainMachine program.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>program_id</code></td>
+<td>no</td>
+<td>The program to stop</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.stop_zone</code></h3>
+<p>Stop a RainMachine zone.</p>
+<table>
+<thead>
+<tr>
+<th>Service Data Attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zone_id</code></td>
+<td>no</td>
+<td>The zone to stop</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rainmachine.unpause_watering</code></h3>
+<p>Unpause all watering activities.</p>
+<h2>Switch</h2>
+<p>The <code>rainmachine</code> switch platform allows you to control programs and zones within a <a href="https://www.rainmachine.com/">RainMachine smart Wi-Fi sprinkler controller</a>.</p>
+<h3>Controlling Your Device</h3>
+<p>After Home Assistant loads, new switches will be added for every enabled program and zone. These work as expected:</p>
+<ul>
+<li>Program On/Off: starts/stops a program</li>
+<li>Zone On/Off: starts/stops a zone (using the <code>zone_run_time</code> parameter to determine how long to run for)</li>
+</ul>
+<p>Programs and zones are linked. While a program is running, you will see both the program and zone switches turned on; turning either one off will turn the other one off (just like in the web app).</p>
+:ET

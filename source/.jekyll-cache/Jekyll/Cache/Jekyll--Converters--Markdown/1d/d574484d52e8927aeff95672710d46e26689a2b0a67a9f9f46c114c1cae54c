@@ -1,0 +1,97 @@
+I"�<p>The <code>qld_bushfire</code> platform lets you integrate a
+<a href="https://www.ruralfire.qld.gov.au/map/Pages/default.aspx">GeoRSS feed</a>
+containing bushfire alerts for Queensland. It retrieves alerts from a feed
+and shows information of those alerts filtered by distance to Home Assistant’s
+location.</p>
+<p>Entities are generated, updated and removed automatically with each update
+from the feed. Each entity defines latitude and longitude and will be shown
+on the default map automatically, or on a map card by defining the source
+<code>qld_bushfire</code>. The distance in kilometers is available as the state
+of each entity.</p>
+<p class='img'>
+  <img src='/images/screenshots/qld-bushfire-feed-map.png' />
+</p>
+<p>The data is updated every 5 minutes.</p>
+<div class='note'>
+<p>The material used by this integration is provided under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 license</a>.
+It has only been modified for the purpose of presenting the material in Home Assistant.
+Please refer to the <a href="https://www.qfes.qld.gov.au/Pages/copyright.aspx">creator’s copyright notice</a> for more information.</p>
+</div>
+<h2>Configuration</h2>
+<p>To integrate the Queensland Bushfire Alert feed, add the following lines to
+your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geo_location:
+  - platform: qld_bushfire
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='categories' href='#categories'></a> categories</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of category names found in the feed. Only alerts from the feed that match any of these categories are included. Valid categories are ‘Emergency Warning’, ‘Watch and Act’, ‘Advice’, ‘Notification’ and ‘Information’.</p>
+</span></p></dd><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The distance in kilometers around Home Assistant’s coordinates in which bushfire alerts are included.</p>
+</span></p><p class='default'>
+Default value: <p>20.0</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude of the coordinates around which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Latitude defined in your configuration</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude of the coordinates around which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Longitude defined in your configuration</p>
+</p></dd></dl>
+</div>
+<h2>State Attributes</h2>
+<p>The following state attributes are available for each entity in addition to
+the standard ones:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latitude</td>
+<td>Latitude of the bushfire alert.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Longitude of the bushfire alert.</td>
+</tr>
+<tr>
+<td>source</td>
+<td><code>qld_bushfire</code> to be used in conjunction with <code>geo_location</code> automation trigger.</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>The external ID used in the feed to identify the bushfire alert in the feed.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Original title from the feed.</td>
+</tr>
+<tr>
+<td>publication_date</td>
+<td>Date and time when this alert was first published.</td>
+</tr>
+<tr>
+<td>updated_date</td>
+<td>Date and time when this alert was last updated.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Status of the alert, for example, “Patrolled”, “Going”, “Contained”</td>
+</tr>
+</tbody>
+</table>
+<h2>Full Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geo_location:
+  - platform: qld_bushfire
+    radius: 30
+    categories:
+      - 'Emergency Warning'
+      - 'Watch and Act'
+    latitude: -24.85
+    longitude: 152.35
+</code></pre>
+:ET

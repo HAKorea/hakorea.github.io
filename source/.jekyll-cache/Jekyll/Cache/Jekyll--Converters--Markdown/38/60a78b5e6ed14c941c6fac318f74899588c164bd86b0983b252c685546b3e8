@@ -1,0 +1,38 @@
+I"Ú	<p>The <code>iss</code> platform uses the
+<a href="http://open-notify.org/Open-Notify-API/ISS-Location-Now/">Open Notify API</a>
+to let you know if the station is above your home location.
+This means that ISS is 10Â° above the horizon of your home.</p>
+<p>You can check in the attributes of the sensor to see the timestamp for the next
+rise of the station, its current coordinates, and the number of people in space.</p>
+<h2>Configuration</h2>
+<p>To add ISS binary sensor to your installation,
+add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: iss
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name for this sensor in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>ISS</p>
+</p></dd><dt><a class='title-link' name='show_on_map' href='#show_on_map'></a> show_on_map</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Option to show the position of the ISS on the map.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<div class='note warning'>
+<p>If you set <code>show_on_map: true</code> then the location attributes are named <code>latitude</code> and <code>longitude</code>.
+The default name of the location attributes is <code>lat</code> and <code>long</code> to avoid showing them on the map.</p>
+</div>
+<h3>Show position on map with camera platform</h3>
+<p>The <a href="/integrations/mjpeg">generic camera platform</a> offers
+the possibility to show the location of the ISS on OpenStreetMap.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: generic
+    name: ISS
+    still_image_url: http://staticmap.openstreetmap.de/staticmap.php?center={{ state_attr('binary_sensor.iss', 'lat') }},{{ state_attr('binary_sensor.iss', 'long') }}&amp;zoom=4&amp;size=865x512&amp;maptype=mapnik&amp;markers={{ state_attr('binary_sensor.iss', 'lat') }},{{ state_attr('binary_sensor.iss', 'long') }},lightblue
+    limit_refetch_to_url_change: true
+</code></pre>
+:ET

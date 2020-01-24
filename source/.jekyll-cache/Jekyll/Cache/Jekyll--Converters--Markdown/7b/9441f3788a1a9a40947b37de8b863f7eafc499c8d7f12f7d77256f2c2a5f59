@@ -1,0 +1,236 @@
+I"�?<p>The <code>rest</code> sensor platform is consuming a given endpoint which is exposed by a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a> of a device, an application, or a web service. The sensor has support for GET and POST requests.</p>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file for a GET request:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS/ENDPOINT
+</code></pre>
+<p>or for a POST request:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS/ENDPOINT
+    method: POST
+    payload: '{ &quot;device&quot; : &quot;heater&quot; }'
+</code></pre>
+<p>or a template based request:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rest
+    resource_template: http://IP_ADDRESS/{{ now().strftime('%Y-%m-%d') }}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='resource' href='#resource'></a> resource</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The resource or endpoint that contains the value.</p>
+</span></p></dd><dt><a class='title-link' name='resource_template' href='#resource_template'></a> resource_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Required)</span><span class='description'><p>The resource or endpoint that contains the value with template support.</p>
+</span></p></dd><dt><a class='title-link' name='method' href='#method'></a> method</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The method of the request. Either <code>POST</code> or <code>GET</code>.</p>
+</span></p><p class='default'>
+Default value: <p>GET</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the REST sensor.</p>
+</span></p><p class='default'>
+Default value: <p>REST Sensor</p>
+</p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets the <a href="/integrations/sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the value.</p>
+</span></p></dd><dt><a class='title-link' name='payload' href='#payload'></a> payload</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send with a POST request. Depends on the service, but usually formed as JSON.</p>
+</span></p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Verify the SSL certificate of the endpoint.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines max time to wait data from the endpoint.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the units of measurement of the sensor, if any.</p>
+</span></p></dd><dt><a class='title-link' name='authentication' href='#authentication'></a> authentication</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of the HTTP authentication. <code>basic</code> or <code>digest</code>.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The username for accessing the REST endpoint.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The password for accessing the REST endpoint.</p>
+</span></p></dd><dt><a class='title-link' name='headers' href='#headers'></a> headers</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The headers for the requests.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes' href='#json_attributes'></a> json_attributes</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='description'><p>A list of keys to extract values from a JSON dictionary result and then set as sensor attributes.</p>
+</span></p></dd><dt><a class='title-link' name='force_update' href='#force_update'></a> force_update</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='description'><p>Sends update events even if the value hasn’t changed. Useful if you want to have meaningful value graphs in history.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<div class='note warning'>
+Make sure that the URL exactly matches your endpoint or resource.
+</div>
+<div class='note'>
+<p>Use either <code>resource</code> or <code>resource_template</code>.</p>
+</div>
+<p><code>curl</code> can help you identify the variable you want to display in your Home Assistant frontend. The example below shows the JSON response of a device that is running with <a href="https://arest.io/">aREST</a>.</p>
+<pre><code class="language-bash">$ curl -X GET http://192.168.1.31/temperature/
+{&quot;temperature&quot;: 77, &quot;id&quot;: &quot;sensor02&quot;, &quot;name&quot;: &quot;livingroom&quot;, &quot;connected&quot;: true}
+</code></pre>
+<p>The response is expected to be a dictionary or a list with a dictionary as its 0th element.</p>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>External IP address</h3>
+<p>You can find your external IP address using the service <a href="https://www.jsontest.com/">JSON Test</a> at their <a href="http://ip.jsontest.com/">http://ip.jsontest.com/</a> URL.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: http://ip.jsontest.com
+    name: External IP
+    value_template: '{{ value_json.ip }}'
+</code></pre>
+<h3>Single value from a local Glances instance</h3>
+<p>The <a href="/integrations/glances">glances</a> sensor is doing the exact same thing for all exposed values.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: http://IP_ADRRESS:61208/api/2/mem/used
+    name: Used mem
+    value_template: '{{ value_json.used| multiply(0.000000954) | round(0) }}'
+    unit_of_measurement: MB
+</code></pre>
+<h3>Value from another Home Assistant instance</h3>
+<p>The Home Assistant <a href="/developers/rest_api/">API</a> exposes the data from your attached sensors. If you are running multiple Home Assistant instances which are not <a href="/developers/architecture/#multiple-connected-instances">connected</a> you can still get information from them.</p>
+<p>If the Home Assistant instance in the resource variable is protected by an API password, you can append <code>?api_password=YOUR_PASSWORD</code> to the resource URL to authenticate or use <code>headers:</code>.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS:8123/api/states/sensor.weather_temperature
+    name: Temperature
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: &quot;°C&quot;
+</code></pre>
+<h3>Accessing an HTTP authentication protected endpoint</h3>
+<p>The REST sensor supports HTTP authentication and customized headers.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS:5000/sensor
+    username: ha1
+    password: test1
+    authentication: basic
+    headers:
+      User-Agent: Home Assistant
+      Content-Type: application/json
+</code></pre>
+<p>The headers will contain all relevant details. This will also give you the ability to access endpoints that are protected by tokens.</p>
+<pre><code class="language-bash">Content-Length: 1024
+Host: IP_ADDRESS1:5000
+Authorization: Basic aGExOnRlc3Qx
+Accept-Encoding: identity
+Content-Type: application/json
+User-Agent: Home Assistant
+</code></pre>
+<p>If you are accessing a resource protected by a <code>Bearer</code> token in an <code>Authorization</code> header, you can either put the token in the header field of the sensor configuration (not recommended) or store the token in your <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> file. In that case, be sure to include the word <code>Bearer</code> in the <code>secrets</code> file.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: http://IP_ADDRESS:5000/sensor
+    headers:
+      Authorization: !secret my_sensor_secret_token
+</code></pre>
+<p>Example entry for the <code>secrets.yaml</code> file:</p>
+<pre><code class="language-yaml">my_sensor_secret_token: Bearer gh_DHQIXKVf6Pr4H8Yqz8uhApk_mnV6Zje6Pr4H8Yqz8A8nCxz6SBghQdS51
+</code></pre>
+<h3>Use GitHub to get the latest release of Home Assistant</h3>
+<p>This sample is very similar to the <a href="/integrations/updater/"><code>updater</code></a> integration but the information is received from GitHub.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
+    username: YOUR_GITHUB_USERNAME
+    password: YOUR_GITHUB_ACCESS_TOKEN
+    authentication: basic
+    value_template: '{{ value_json.tag_name }}'
+    headers:
+      Accept: application/vnd.github.v3+json
+      Content-Type: application/json
+      User-Agent: Home Assistant REST sensor
+</code></pre>
+<h3>Fetch multiple JSON values and present them as attributes</h3>
+<p><a href="https://www.jsontest.com/">JSON Test</a> returns the current time, date and milliseconds since epoch from <a href="http://date.jsontest.com/">http://date.jsontest.com/</a>.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    name: JSON time
+    json_attributes:
+      - date
+      - milliseconds_since_epoch
+    resource: http://date.jsontest.com/
+    value_template: '{{ value_json.time }}'
+  - platform: template
+    sensors:
+      date:
+        friendly_name: 'Date'
+        value_template: '{{ states.sensor.json_time.attributes[&quot;date&quot;] }}'
+      milliseconds:
+        friendly_name: 'milliseconds'
+        value_template: '{{ states.sensor.json_time.attributes[&quot;milliseconds_since_epoch&quot;] }}'
+</code></pre>
+<p>This sample fetches a weather report from <a href="https://openweathermap.org/">OpenWeatherMap</a>, maps the resulting data into attributes of the RESTful sensor and then creates a set of <a href="/integrations/template">template</a> sensors that monitor the attributes and present the values in a usable form.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    name: OWM_report
+    json_attributes:
+      - main
+      - weather
+    value_template: '{{ value_json[&quot;weather&quot;][0][&quot;description&quot;].title() }}'
+    resource: https://api.openweathermap.org/data/2.5/weather?zip=80302,us&amp;APPID=VERYSECRETAPIKEY
+  - platform: template
+    sensors:
+      owm_weather:
+        value_template: '{{ state_attr('sensor.owm_report', 'weather')[0][&quot;description&quot;].title() }}'
+        entity_picture_template: '{{ &quot;https://openweathermap.org/img/w/&quot;+state_attr('sensor.owm_report', 'weather')[0][&quot;icon&quot;].lower()+&quot;.png&quot; }}'
+        entity_id: sensor.owm_report
+      owm_temp:
+        friendly_name: 'Outside temp'
+        value_template: '{{ state_attr('sensor.owm_report', 'main')[&quot;temp&quot;]-273.15 }}'
+        unit_of_measurement: &quot;°C&quot;
+        entity_id: sensor.owm_report
+      owm_pressure:
+        friendly_name: 'Outside pressure'
+        value_template: '{{ state_attr('sensor.owm_report', 'main')[&quot;pressure&quot;] }}'
+        unit_of_measurement: &quot;hP&quot;
+        entity_id: sensor.owm_report
+      owm_humidity:
+        friendly_name: 'Outside humidity'
+        value_template: '{{ state_attr('sensor.owm_report', 'main')[&quot;humidity&quot;] }}'
+        unit_of_measurement: &quot;%&quot;
+        entity_id: sensor.owm_report
+</code></pre>
+<p>This config shows how to extract multiple values from a dictionary with <code>json_attributes</code> and <code>template</code>. It helps you to avoid flooding the REST service and only ask once the results and separate them in multiple templates referring to it. (No need for a specific state on the REST sensor and it’s default state will be the full JSON value which will be longer than the 255 max length. It’s why we’ll used a static value)</p>
+<pre><code class="language-json">{
+    &quot;bedroom1&quot;: {
+        &quot;temperature&quot;: 15.79,
+        &quot;humidity&quot;: 55.78,
+        &quot;battery&quot;: 5.26,
+        &quot;timestamp&quot;: &quot;2019-02-27T22:21:37Z&quot;
+    },
+    &quot;bedroom2&quot;: {
+        &quot;temperature&quot;: 18.99,
+        &quot;humidity&quot;: 49.81,
+        &quot;battery&quot;: 5.08,
+        &quot;timestamp&quot;: &quot;2019-02-27T22:23:44Z&quot;
+    },
+    &quot;bedroom3&quot;: {
+        &quot;temperature&quot;: 18.58,
+        &quot;humidity&quot;: 47.95,
+        &quot;battery&quot;: 5.15,
+        &quot;timestamp&quot;: &quot;2019-02-27T22:21:22Z&quot;
+    }
+}
+</code></pre>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    name: room_sensors
+    resource: http://&lt;address_to_rest_service&gt;
+    json_attributes:
+      - bedroom1
+      - bedroom2
+      - bedroom3
+    value_template: 'OK'
+  - platform: template
+    sensors:
+      bedroom1_temperature:
+        value_template: '{{ states.sensor.room_sensors.attributes[&quot;bedroom1&quot;][&quot;temperature&quot;] }}'
+        device_class: temperature
+        unit_of_measurement: '°C'
+      bedroom1_humidity:
+        value_template: '{{ states.sensor.room_sensors.attributes[&quot;bedroom1&quot;][&quot;humidity&quot;] }}'
+        device_class: humidity
+        unit_of_measurement: '%'
+      bedroom1_battery:
+        value_template: '{{ states.sensor.room_sensors.attributes[&quot;bedroom1&quot;][&quot;battery&quot;] }}'
+        device_class: battery
+        unit_of_measurement: 'V'
+      bedroom2_temperature:
+        value_template: '{{ states.sensor.room_sensors.attributes[&quot;bedroom2&quot;][&quot;temperature&quot;] }}'
+        device_class: temperature
+        unit_of_measurement: '°C'
+</code></pre>
+:ET

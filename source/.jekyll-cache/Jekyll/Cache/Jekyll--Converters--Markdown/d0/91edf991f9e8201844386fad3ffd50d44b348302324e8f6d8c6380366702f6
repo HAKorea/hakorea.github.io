@@ -1,0 +1,20 @@
+I"2<p><a href="http://www.idteck.com">IDTECK</a> makes ID systems used to control access and identify users.  This integration works with <a href="http://www.idteck.com/en/products/proximity-reader-__-card-%26-tag-__125khz">Proximity Readers</a> (RFID card readers). The device is connected to Home Assistant through a serial to ethernet converter (NPort).</p>
+<p>An <code>idteck_prox_keycard</code> event is fired whenever a card or key sequence has been entered.  The event contains ‘card’ - the card/key sequence, and the ‘name’ of the card reader.  Checking ‘card’ against known card numbers can be used as the basis of an entry control system, or as part of a check-in/check-out system.</p>
+<h2>Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+idteck_prox:
+  - host: host1.domain.com
+    port: 4001
+    name: &quot;Lower Door&quot;
+  - host: host2.domain.com
+    port: 4001
+    name: &quot;Upper Door&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The hostname or IP address of the ethernet to serial adapter that is connected to the proximity reader.  It is assumed that the adapter has been preconfigured.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port of the ethernet to serial adapter</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the prox card reader</p>
+</span></p></dd></dl>
+</div>
+:ET

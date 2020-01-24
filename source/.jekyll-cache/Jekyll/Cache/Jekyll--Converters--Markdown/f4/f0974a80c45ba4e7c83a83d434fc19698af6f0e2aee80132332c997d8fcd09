@@ -1,0 +1,66 @@
+I"É<p>The <code>lacrosse</code> sensor platform is using the data provided by a <a href="https://www.digitalsmarties.net/products/jeelink">Jeelink</a> USB dongle or this <a href="https://svn.fhem.de/trac/browser/trunk/fhem/contrib/arduino/36_LaCrosse-LaCrosseITPlusReader.zip">Arduino sketch</a>.</p>
+<h2>Tested Devices</h2>
+<ul>
+<li>Technoline TX 29 IT (temperature only)</li>
+<li>Technoline TX 29 DTH-IT (including humidity)</li>
+</ul>
+<h2>Setup</h2>
+<p>Since the sensor change their ID after each powercycle/battery change you can check what sensor IDs are available by using the command-line tool <code>pylacrosse</code> from the pylacrosse package.</p>
+<pre><code class="language-bash">sudo pylacrosse -d /dev/ttyUSB0 scan
+</code></pre>
+<p>Or, when using Docker containers:</p>
+<pre><code class="language-bash">docker exec -it &lt;containername&gt; pylacrosse -d /dev/ttyUSB0 scan
+</code></pre>
+<h2>Configuration</h2>
+<p>To use your <code>lacrosse</code> compatible sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: lacrosse
+    sensors:
+      sensor_identifier:
+        type: SENSOR_TYPE
+        id: SENSOR_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The serial device.</p>
+</span></p><p class='default'>
+Default value: <p>/dev/ttyUSB0</p>
+</p></dd><dt><a class='title-link' name='baud' href='#baud'></a> baud</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The serial baudrate.</p>
+</span></p><p class='default'>
+Default value: <p>57600</p>
+</p></dd><dt><a class='title-link' name='led' href='#led'></a> led</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Activate or deactivate the Jeelink LED.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='frequency' href='#frequency'></a> frequency</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Initial frequency in 5kHz steps.</p>
+</span></p></dd><dt><a class='title-link' name='datarate' href='#datarate'></a> datarate</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set the data rate in kbps. Special values for well-known settings are: <code>0</code>: 17.241 kbps, <code>1</code>: 9.579 kbps, <code>2</code>: 8.842 kbps.</p>
+</span></p></dd><dt><a class='title-link' name='toggle_mask' href='#toggle_mask'></a> toggle_mask</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The following values can be combined bitwise: <code>1</code> = 17.241 kbps, <code>2</code> = 9.579 kbps, <code>4</code> = 8.842 kbps</p>
+</span></p></dd><dt><a class='title-link' name='toggle_interval' href='#toggle_interval'></a> toggle_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable the toggle mode and set the interval in seconds.</p>
+</span></p></dd><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of your sensors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The type of the sensor. Options: <code>battery</code>, <code>humidity</code>, <code>temperature</code></p>
+</span></p></dd><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The LaCrosse Id of the sensor.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>To setup a lacrosse sensor with multiple sensors, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: lacrosse
+    device: /dev/ttyUSB0
+    baud: 57600
+    sensors:
+      kitchen_humidity:
+        name: Kitchen Humidity
+        type: humidity
+        id: 72
+      kitchen_temperature:
+        name: Kitchen Temperature
+        type: temperature
+        id: 72
+      kitchen_lacrosse_battery:
+        name: Kitchen Sensor Battery
+        type: battery
+        id: 72
+</code></pre>
+:ET

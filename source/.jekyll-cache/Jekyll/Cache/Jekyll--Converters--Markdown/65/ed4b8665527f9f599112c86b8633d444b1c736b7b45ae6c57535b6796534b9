@@ -1,0 +1,147 @@
+I"�<p>The <code>dyson</code> integration is the main integration to integrate all <a href="https://www.dyson.com">Dyson</a> related platforms.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Climate</li>
+<li>Fan</li>
+<li>Sensor</li>
+<li>Vacuum</li>
+<li>Air Quality</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this component, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+dyson:
+  username: YOUR_DYSON_USERNAME
+  password: YOUR_DYSON_PASSWORD
+  language: YOUR_DYSON_ACCOUNT_LANGUAGE
+  devices:
+    - device_id: DEVICE_ID_1 # e.g., Serial number: XXX-XX-XXXXXXXX
+      device_ip: DEVICE_IP_1
+    - device_id: DEVICE_ID_2
+      device_ip: DEVICE_IP_2
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Dyson account username (email address).</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Dyson account password.</p>
+</span></p></dd><dt><a class='title-link' name='language' href='#language'></a> language</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Dyson account language country code. Known working codes: <code>FR</code>, <code>NL</code>, <code>GB</code>, <code>AU</code>. Other codes should be supported.</p>
+</span></p></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='device_id' href='#device_id'></a> device_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Device ID. The Serial Number of the device. Found in the smart phone app device settings page.</p>
+</span></p></dd><dt><a class='title-link' name='device_ip' href='#device_ip'></a> device_ip</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Device IP address.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>The <code>devices</code> list is optional, but you’ll have to provide them if discovery is not working (warnings in the logs and the devices are not available in Home Assistant web interface).</p>
+<div class='note warning'>
+<p>Discovery is not yet supported for any robot vacuum models (Dyson 360 Eye). For these devices, you will need to provide them in the <code>devices</code> list.</p>
+</div>
+<p>To find a devices IP address, you can use your router or <code>nmap</code>:</p>
+<pre><code class="language-bash">$ nmap -p 1883 XXX.XXX.XXX.XXX/YY --open
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><strong>XXX.XXX.XXX.XXX</strong> is your network address</li>
+<li><strong>YY</strong> is your network mask</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-bash">$ nmap -p 1883 192.168.0.0/24 --open
+</code></pre>
+<h2>Vacuum</h2>
+<p>The <code>dyson</code> vacuum platform allows you to control your Dyson 360 Eye robot vacuum.</p>
+<h3>Component services</h3>
+<p>This integration support the following services (see <a href="/integrations/vacuum/">Vacuum Cleaner Robots</a>):</p>
+<ul>
+<li><a href="/integrations/vacuum/#service-vacuumturn_on"><code>turn_on</code></a></li>
+<li><a href="/integrations/vacuum/#service-vacuumturn_off"><code>turn_off</code></a></li>
+<li><a href="/integrations/vacuum/#service-vacuumstart_pause"><code>start_pause</code></a></li>
+<li><a href="/integrations/vacuum/#service-vacuumstop"><code>stop</code></a></li>
+<li><a href="/integrations/vacuum/#service-vacuumreturn_to_home"><code>return_to_home</code></a></li>
+<li><a href="/integrations/vacuum/#service-vacuumset_fanspeed"><code>set_fan_speed</code></a>. Fan speed values:
+<ul>
+<li><code>Quiet</code></li>
+<li><code>Max</code></li>
+</ul>
+</li>
+</ul>
+<h2>Climate</h2>
+<p>The <code>dyson</code> climate platform allows you to control your Dyson Pure Hot+Cool Fan thermal control. For controlling the fan functionality, see the Dyson fan part on this page.</p>
+<h3>Component services</h3>
+<p>This integration supports the following services (see <a href="/integrations/climate/">Climate</a>):</p>
+<ul>
+<li><a href="/integrations/climate/#service-climateturn_on"><code>turn_on</code></a></li>
+<li><a href="/integrations/climate/#service-climateturn_off"><code>turn_off</code></a></li>
+<li><a href="/integrations/climate/#service-climateset_temperature"><code>set_temperature</code></a></li>
+<li><a href="/integrations/climate/#service-climateset_fan_mode"><code>set_fan_mode</code></a></li>
+<li><a href="/integrations/climate/#service-climateset_hvac_mode"><code>set_hvac_mode</code></a></li>
+</ul>
+<h2>Fan</h2>
+<p>The <code>dyson</code> fan platform allows you to control your Dyson Purifier fans.</p>
+<h3>Supported fan devices</h3>
+<ul>
+<li>Pure Cool link (desk and tower)</li>
+<li>Pure Hot+cool link (see climate part) for thermal control</li>
+<li>Pure Cool 2018 (DP04 and TP04)</li>
+</ul>
+<h3>Attributes</h3>
+<p>There are several attributes which can be used for automations and templates.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>night_mode</code></td>
+<td>A boolean that indicates if the night mode of the fan device is on.</td>
+</tr>
+<tr>
+<td><code>auto_mode</code></td>
+<td>A boolean that indicates if the auto mode of the fan device is on.</td>
+</tr>
+<tr>
+<td><code>angle_low</code></td>
+<td>Int (between 5 and 355) that indicates the low angle of oscillation (only for DP04 and TP04).</td>
+</tr>
+<tr>
+<td><code>angle_high</code></td>
+<td>Int (between 5 and 355) that indicates the high angle of oscillation (only for DP04 and TP04).</td>
+</tr>
+<tr>
+<td><code>flow_direction_front</code></td>
+<td>Boolean that indicates if the frontal flow direction is enabled (only for DP04 and TP04).</td>
+</tr>
+<tr>
+<td><code>timer</code></td>
+<td>Attribute that indicates the status of the auto power off timer, can be either ‘OFF’ or an integer representing the time remaining until shutdown in minutes (only for DP04 and TP04).</td>
+</tr>
+<tr>
+<td><code>hepa filter</code></td>
+<td>State of the fan’s HEPA filter in % (only for DP04 and TP04).</td>
+</tr>
+<tr>
+<td><code>carbon filter</code></td>
+<td>State of the fan’s carbon filter in % (only for DP04 and TP04).</td>
+</tr>
+</tbody>
+</table>
+<h2>Sensor</h2>
+<p>The <code>dyson</code> sensor platform provides temperature and humidity sensors.</p>
+<h2>Air Quality</h2>
+<p>The <code>dyson</code> air quality platform provides the following levels:</p>
+<ul>
+<li>Particulate matter 2.5 (&lt;= 2.5 μm) level.</li>
+<li>Particulate matter 10 (&lt;= 10 μm) level.</li>
+<li>Air Quality Index (AQI).</li>
+<li>NO2 (nitrogen dioxide) level.</li>
+<li>VOC (Volatile organic compounds) level.</li>
+</ul>
+<p>Note: currently only the 2018 dyson fans are supported(TP04 and DP04).</p>
+<h3>Supported fan devices</h3>
+<ul>
+<li>Pure Cool link (desk and tower)</li>
+<li>Pure Hot+cool link (see climate part) for thermal control</li>
+<li>Pure Cool 2018 Models (TP04 and DP04)</li>
+<li>Pure Cool Cryptomic (TP06)</li>
+</ul>
+:ET

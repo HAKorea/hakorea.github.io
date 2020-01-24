@@ -1,0 +1,138 @@
+I"�A<p>This <code>mqtt</code> sensor platform uses the MQTT message payload as the sensor value. If messages in this <code>state_topic</code> are published with <em>RETAIN</em> flag, the sensor will receive an instant update with last known value. Otherwise, the initial state will be undefined.</p>
+<h2>Configuration</h2>
+<p>To use your MQTT sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt
+    state_topic: &quot;home/bedroom/temperature&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MQTT topic subscribed to receive sensor values.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the MQTT sensor.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT Sensor</p>
+</p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the units of measurement of the sensor, if any.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='icon'><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>The icon for the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='expire_after' href='#expire_after'></a> expire_after</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the number of seconds after the value expires if it’s not updated.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the value.</p>
+</span></p></dd><dt><a class='title-link' name='force_update' href='#force_update'></a> force_update</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='description'><p>Sends update events even if the value hasn’t changed. Useful if you want to have meaningful value graphs in history.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Implies <code>force_update</code> of the current sensor state when a message is received on this topic.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes_template' href='#json_attributes_template'></a> json_attributes_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes' href='#json_attributes'></a> json_attributes</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>(Deprecated, replaced by json_attributes_topic) A list of keys to extract values from a JSON dictionary payload and then set as sensor attributes.</p>
+</span></p></dd><dt><a class='title-link' name='unique_id' href='#unique_id'></a> unique_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An ID that uniquely identifies this sensor. If two sensors have the same unique ID, Home Assistant will raise an exception.</p>
+</span></p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='device_class'><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>The <a href="/integrations/sensor/#device-class">type/class</a> of the sensor to set the icon in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the device this sensor is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifiers' href='#identifiers'></a> identifiers</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd><dt><a class='title-link' name='connections' href='#connections'></a> connections</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>&quot;connections&quot;: [[&quot;mac&quot;, &quot;02:5b:26:a8:dc:12&quot;]]</code>.</p>
+</span></p></dd><dt><a class='title-link' name='manufacturer' href='#manufacturer'></a> manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The manufacturer of the device.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of the device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device.</p>
+</span></p></dd><dt><a class='title-link' name='sw_version' href='#sw_version'></a> sw_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The firmware version of the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>JSON attributes topic configuration</h3>
+<p>The example sensor below shows a configuration example which uses a JSON dict: <code>{&quot;ClientName&quot;: &lt;string&gt;, &quot;IP&quot;: &lt;string&gt;, &quot;MAC&quot;: &lt;string&gt;, &quot;RSSI&quot;: &lt;string&gt;, &quot;HostName&quot;: &lt;string&gt;, &quot;ConnectedSSID&quot;: &lt;string&gt;}</code> in a separate topic <code>home/sensor1/attributes</code> to add extra attributes. It also makes use of the <code>availability</code> topic. Extra attributes will be displayed in the frontend and can also be extracted in <a href="/docs/configuration/templating/#attributes">Templates</a>. For example, to extract the <code>ClientName</code> attribute from the sensor below, use a template similar to: <code>{{ state_attr('sensor.bs_rssi', 'ClientName') }}</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt
+    name: &quot;RSSI&quot;
+    state_topic: &quot;home/sensor1/infojson&quot;
+    unit_of_measurement: 'dBm'
+    value_template: &quot;{{ value_json.RSSI }}&quot;
+    availability_topic: &quot;home/sensor1/status&quot;
+    payload_available: &quot;online&quot;
+    payload_not_available: &quot;offline&quot;
+    json_attributes_topic: &quot;home/sensor1/attributes&quot;
+</code></pre>
+<h3>JSON attributes template configuration</h3>
+<p>The example sensor below shows a configuration example which uses a JSON dict: <code>{&quot;Timer1&quot;:{&quot;Arm&quot;: &lt;status&gt;, &quot;Time&quot;: &lt;time&gt;}, &quot;Timer2&quot;:{&quot;Arm&quot;: &lt;status&gt;, &quot;Time&quot;: &lt;time&gt;}}</code> on topic <code>tele/sonoff/sensor</code> with a template to add <code>Timer1.Arm</code> and <code>Timer1.Time</code> as extra attributes.  Extra attributes will be displayed in the frontend and can also be extracted in <a href="/docs/configuration/templating/#attributes">Templates</a>. For example, to extract the <code>Arm</code> attribute from the sensor below, use a template similar to: <code>{{ state_attr('sensor.timer1', 'Arm') }}</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt
+    name: &quot;Timer 1&quot;
+    state_topic: &quot;tele/sonoff/sensor&quot;
+    value_template: &quot;{{ value_json.Timer1.Arm }}&quot;
+    json_attributes_topic: &quot;tele/sonoff/sensor&quot;
+    json_attributes_template: &quot;{{ value_json.Timer1 | tojson }}&quot;
+  - platform: mqtt
+    name: &quot;Timer 2&quot;
+    state_topic: &quot;tele/sonoff/sensor&quot;
+    value_template: &quot;{{ value_json.Timer2.Arm }}&quot;
+    json_attributes_topic: &quot;tele/sonoff/sensor&quot;
+    json_attributes_template: &quot;{{ value_json.Timer2 | tojson }}&quot;
+</code></pre>
+<p>The state and the attributes of the sensor by design do not update in a synchronous manner if they share the same MQTT topic. Temporal mismatches between the state and the attribute data may occur if both the state and the attributes are changed simultaneously by the same MQTT message. An automation that triggers on any state change of the sensor will also trigger both on the change of the state or a change of the attributes. Such automations will be triggered twice if both the state and the attributes change. Please use a <a href="/docs/automation/trigger/#mqtt-trigger">MQTT trigger</a> and process the JSON in the automation directly via the <code>{{ trigger.payload_json }}</code> <a href="/docs/automation/templating/#mqtt">trigger data</a> for automations that must synchronously handle multiple JSON values within the same MQTT message.</p>
+<h3>Get battery level</h3>
+<p>If you are using the <a href="/integrations/owntracks">OwnTracks</a> and enable the reporting of the battery level then you can use a MQTT sensor to keep track of your battery. A regular MQTT message from OwnTracks looks like this:</p>
+<pre><code class="language-bash">owntracks/tablet/tablet {&quot;_type&quot;:&quot;location&quot;,&quot;lon&quot;:7.21,&quot;t&quot;:&quot;u&quot;,&quot;batt&quot;:92,&quot;tst&quot;:144995643,&quot;tid&quot;:&quot;ta&quot;,&quot;acc&quot;:27,&quot;lat&quot;:46.12}
+</code></pre>
+<p>Thus the trick is extracting the battery level from the payload.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt
+    name: &quot;Battery Tablet&quot;
+    state_topic: &quot;owntracks/tablet/tablet&quot;
+    unit_of_measurement: '%'
+    value_template: &quot;{{ value_json.batt }}&quot;
+</code></pre>
+<h3>Get temperature and humidity</h3>
+<p>If you are using a DHT sensor and a NodeMCU board (esp8266), you can retrieve temperature and humidity with a MQTT sensor. A code example can be found <a href="https://github.com/mertenats/open-home-automation/tree/master/ha_mqtt_sensor_dht22">here</a>. A regular MQTT message from this example looks like this:</p>
+<pre><code class="language-json">office/sensor1
+  {
+    &quot;temperature&quot;: 23.20,
+    &quot;humidity&quot;: 43.70
+  }
+</code></pre>
+<p>Then use this configuration example to extract the data from the payload:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt
+    name: &quot;Temperature&quot;
+    state_topic: &quot;office/sensor1&quot;
+    unit_of_measurement: '°C'
+    value_template: &quot;{{ value_json.temperature }}&quot;
+  - platform: mqtt
+    name: &quot;Humidity&quot;
+    state_topic: &quot;office/sensor1&quot;
+    unit_of_measurement: '%'
+    value_template: &quot;{{ value_json.humidity }}&quot;
+</code></pre>
+<h3>Get sensor value from a device with ESPEasy</h3>
+<p>Assuming that you have flashed your ESP8266 unit with <a href="https://github.com/letscontrolit/ESPEasy">ESPEasy</a>. Under “Config” set a name (“Unit Name:”) for your device (here it’s “bathroom”). A “Controller” for MQTT with the protocol “OpenHAB MQTT” is present and the entries (“Controller Subscribe:” and “Controller Publish:”) are adjusted to match your needs. In this example the topics are prefixed with “home”. Please keep in mind that the ESPEasy default topics start with a <code>/</code> and only contain the name when writing your entry for the <code>configuration.yaml</code> file.</p>
+<ul>
+<li><strong>Controller Subscribe</strong>: <code>home/%sysname%/#</code> (instead of <code>/%sysname%/#</code>)</li>
+<li><strong>Controller Publish</strong>: <code>home/%sysname%/%tskname%/%valname%</code> (instead of <code>/%sysname%/%tskname%/%valname%</code>)</li>
+</ul>
+<p>Also, add a sensor in the “Devices” tap with the name “analog” and “brightness” as value.</p>
+<p>As soon as the unit is online, you will get the state of the sensor.</p>
+<pre><code class="language-bash">home/bathroom/status Connected
+...
+home/bathroom/analog/brightness 290.00
+</code></pre>
+<p>The configuration will look like the example below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt
+    name: &quot;Brightness&quot;
+    state_topic: &quot;home/bathroom/analog/brightness&quot;
+</code></pre>
+:ET

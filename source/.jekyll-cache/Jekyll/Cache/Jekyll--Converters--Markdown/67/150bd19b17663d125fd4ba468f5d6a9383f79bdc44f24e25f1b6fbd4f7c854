@@ -1,0 +1,87 @@
+I"ž<p>Using HAProxy to proxy for Home Assistant allows you to serve Home Assistant securely over standard ports with HTTP to HTTPS redirection.</p>
+<h3>Install HAProxy on your server</h3>
+<p>This will vary depending on your OS. Check out Google for this.</p>
+<h3>Obtain an SSL certificate</h3>
+<p>There are multiple ways of obtaining an SSL certificate. Letâ€™s Encrypt is one method.
+Use Google for this, but a good example of using Certbot can be found <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-ubuntu-14-04">here</a>.</p>
+<h3>HAPRoxy Configuration</h3>
+<p>The following configuration updates HAProxy defaults for more secure ciphers for SSL and logging and connection
+timeouts.</p>
+<p>Items to update for your deployment:</p>
+<ul>
+<li><code>bind</code>: Update the ports HAProxy listens on for forwarding.</li>
+<li><code>subdomain.domain.com</code>: Your domain to use</li>
+<li><code>ssl crt</code>: The path to your SSL certificate.</li>
+<li><code>server hass 127.0.0.1:8123</code>: The IP and port location of your Home Assistant instance.</li>
+</ul>
+<pre><code class="language-text">global
+	log /dev/log	local0
+	log /dev/log	local1 notice
+	chroot /var/lib/haproxy
+	stats socket /run/haproxy/admin.sock mode 660 level admin
+	stats timeout 30s
+	user haproxy
+	group haproxy
+	daemon
+
+	# Default SSL material locations
+	ca-base /etc/ssl/certs
+	crt-base /etc/ssl/private
+
+	# Default ciphers to use on SSL-enabled listening sockets.
+	# For more information, see ciphers(1SSL). This list is from:
+	#  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+	ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS
+	ssl-default-bind-options no-sslv3
+	maxconn 2048
+	tune.ssl.default-dh-param 2048
+
+defaults
+	log	global
+	mode	http
+	option	httplog
+	option	dontlognull
+	timeout connect 5000
+	timeout client  50000
+	timeout server  50000
+	timeout tunnel  60000    # long enough for websocket pings every 55 seconds
+	timeout http-request 5s  # protection from Slowloris attacks
+
+frontend www-http
+	bind *:80
+	redirect scheme https
+
+frontend www-https
+	log /dev/log	local0 debug
+	bind *:443 ssl crt /etc/haproxy/certs/MYCERT.pem
+	acl hass-acl hdr(host) -i SUBDOMAIN.DOMAIN.COM
+	use_backend hass-backend if hass-acl
+
+backend hass-backend
+	server hass &lt;Home Assistant Server IP&gt;:8123
+
+	mode http
+	option forwardfor
+	http-request add-header X-Forwarded-Proto https
+	http-request add-header X-Forwarded-Port 443
+</code></pre>
+<h3>Forward Ports</h3>
+<p>Forward ports 443 and (optionally) 80 to your server on your router.</p>
+<p>Do not forward port 8123, HAProxy takes care of securing the connection with HTTPS on 443.
+If 8123 is forwarded then it will not be secured.</p>
+<p>Replace 443 with whatever port you chose to bind to in the config if different.</p>
+<h3>Configure Home Assistant HTTP Component</h3>
+<p>In your <code>configuration.yaml</code> file, edit the <a href="/integrations/http/">http component</a>.</p>
+<pre><code class="language-text">http:
+  # For extra security set this to only accept connection on localhost if HAProxy is on the same machine
+  # server_host: 127.0.0.1
+  # Update this line to be your domain
+  base_url: https://example.com
+  use_x_forwarded_for: true
+  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
+  # Set this to your HAProxy machine IP, or localhost if hosted on the same machine.
+  trusted_proxies: &lt;HAProxy IP address here, 127.0.0.1 if same machine&gt;
+</code></pre>
+<h3>Restart or Reload HAProxy</h3>
+<p>Use your OS method of restarting or reloading HAProxy. Use Google for this.</p>
+:ET

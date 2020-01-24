@@ -1,0 +1,109 @@
+I"|!<p>The <code>scrape</code> sensor platform is scraping information from websites. The sensor loads a HTML page and gives you the option to search and split out a value. As this is not a full-blown web scraper like <a href="https://scrapy.org/">scrapy</a>, it will most likely only work with simple web pages and it can be time-consuming to get the right section.</p>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: https://www.home-assistant.io
+    select: &quot;.current-version h1&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='resource' href='#resource'></a> resource</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL to the website that contains the value.</p>
+</span></p></dd><dt><a class='title-link' name='select' href='#select'></a> select</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Defines the HTML tag to search for. Check Beautifulsoup’s <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#css-selectors">CSS selectors</a> for details.</p>
+</span></p></dd><dt><a class='title-link' name='attribute' href='#attribute'></a> attribute</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Get value of an attribute on the selected tag.</p>
+</span></p></dd><dt><a class='title-link' name='index' href='#index'></a> index</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines which of the elements returned by the CSS selector to use.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Web scrape</p>
+</p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a template to get the state of the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the units of measurement of the sensor, if any.</p>
+</span></p></dd><dt><a class='title-link' name='authentication' href='#authentication'></a> authentication</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of the HTTP authentication. Either <code>basic</code> or <code>digest</code>.</p>
+</span></p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enables/disables verification of SSL-certificate, for example if it is self-signed.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The username for accessing the website.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The password for accessing the website.</p>
+</span></p></dd><dt><a class='title-link' name='headers' href='#headers'></a> headers</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Headers to use for the web request.</p>
+</span></p></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor. There is also a <a href="https://nbviewer.jupyter.org/github/home-assistant/home-assistant-notebooks/blob/master/other/web-scraping.ipynb">Jupyter notebook</a> available for this example to give you a bit more insight.</p>
+<h3>Home Assistant</h3>
+<p>The current release Home Assistant is published on <a href="/">https://www.home-assistant.io/</a></p>
+<pre><code class="language-yaml">sensor:
+# Example configuration.yaml entry
+  - platform: scrape
+    resource: https://www.home-assistant.io
+    name: Release
+    select: &quot;.current-version h1&quot;
+    value_template: '{{ value.split(&quot;:&quot;)[1] }}'
+</code></pre>
+<h3>Available implementations</h3>
+<p>Get the counter for all our implementations from the <a href="/integrations/">Component overview</a> page.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: https://www.home-assistant.io/integrations/
+    name: Home Assistant impl.
+    select: 'a[href=&quot;#all&quot;]'
+    value_template: '{{ value.split(&quot;(&quot;)[1].split(&quot;)&quot;)[0] }}'
+</code></pre>
+<h3>Get a value out of a tag</h3>
+<p>The German <a href="http://www.bfs.de/">Federal Office for Radiation protection (Bundesamt für Strahlenschutz)</a> is publishing various details about optical radiation including an UV index. This example is getting the index for a region in Germany.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: http://www.bfs.de/DE/themen/opt/uv/uv-index/prognose/prognose_node.html
+    name: Coast Ostsee
+    select: 'p'
+    index: 19
+    unit_of_measurement: 'UV Index'
+</code></pre>
+<h3>IFTTT status</h3>
+<p>If you make heavy use of the <a href="/integrations/ifttt/">IFTTT</a> web service for your automations and are curious about the <a href="https://status.ifttt.com/">status of IFTTT</a> then you can display the current state of IFTTT in your frontend.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: https://status.ifttt.com/
+    name: IFTTT status
+    select: '.component-status'
+</code></pre>
+<h3>Get the latest podcast episode file URL</h3>
+<p>If you want to get the file URL for the latest episode of your <a href="https://hasspodcast.io/">favorite podcast</a>, so you can pass it on to a compatible media player.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: https://hasspodcast.io/feed/podcast
+    name: Home Assistant Podcast
+    select: 'enclosure'
+    index: 1
+    attribute: url
+</code></pre>
+<h3>Energy price</h3>
+<p>This example tries to retrieve the price for electricity.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: https://elen.nu/timpriser-pa-el-for-elomrade-se3-stockholm/
+    name: Electricity price
+    select: &quot;.elspot-content&quot;
+    value_template: '{{ ((value.split(&quot; &quot;)[0]) | replace (&quot;,&quot;, &quot;.&quot;)) }}'
+    unit_of_measurement: &quot;öre/kWh&quot;
+</code></pre>
+<h3>BOM Weather</h3>
+<p>The Australian Bureau of Meteorology website returns an error if the User Agent header is not sent.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: scrape
+    resource: http://www.bom.gov.au/vic/forecasts/melbourne.shtml
+    name: Melbourne Forecast Summary
+    select: &quot;.main .forecast p&quot;
+    value_template: '{{ value | truncate(255) }}'
+    # Request every hour
+    scan_interval: 3600
+    headers:
+      User-Agent: Mozilla/5.0
+</code></pre>
+:ET

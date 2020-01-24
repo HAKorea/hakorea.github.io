@@ -1,0 +1,81 @@
+I"<p>The <code>miflora</code> sensor platform allows one to monitor plant soil and air conditions. The <a href="https://gadget-freakz.com/product/xiaomi-mi-flora-plant-sensor/">Mi Flora plant sensor</a> is a small Bluetooth Low Energy device that monitors the moisture and conductivity of the soil as well as ambient light and temperature. Since only one BLE device can be polled at a time, the library implements locking to prevent polling more than one device at a time.</p>
+<p>There are “Chinese” and “International” versions available and there is a <a href="https://community.home-assistant.io/t/miflora-showing-data-unknown/19550/8">report</a> that only the “International” works.</p>
+<h2>Install a Bluetooth Backend</h2>
+<p>Before configuring Home Assistant you need a Bluetooth backend and the MAC address of your sensor. Depending on your operating system, you may have to configure the proper Bluetooth backend for your system:</p>
+<ul>
+<li>On <a href="/hassio/installation/">Hass.io</a>: Miflora will work out of the box.</li>
+<li>On a <a href="/docs/installation/docker/">generic Docker installation</a>: Works out of the box with <code>--net=host</code> and properly configured Bluetooth on the host.</li>
+<li>On other Linux systems:
+<ul>
+<li>Preferred solution: Install the <code>bluepy</code> library (via pip). When using a virtual environment, make sure to install the library in the right one.
+ - Fallback solution: Install <code>gatttool</code> via your package manager. Depending on the distribution, the package name might be: <code>bluez</code>, <code>bluetooth</code>, <code>bluez-deprecated</code></li>
+</ul>
+</li>
+<li>On Windows and MacOS there is currently no support for the <a href="https://github.com/open-homeautomation/miflora/">miflora library</a>.</li>
+</ul>
+<h2>Scan for devices</h2>
+<p>Start a scan to determine the MAC addresses of the sensor (you can identify your sensor by looking for <code>Flower care</code> or <code>Flower mate</code> entries) using this command:</p>
+<pre><code class="language-bash">$ sudo hcitool lescan
+LE Scan ...
+F8:04:33:AF:AB:A2 [TV] UE48JU6580
+C4:D3:8C:12:4C:57 Flower mate
+[...]
+</code></pre>
+<p>Or, if your distribution is using bluetoothctl use the following commands:</p>
+<pre><code class="language-bash">$ bluetoothctl
+[bluetooth]# scan on
+[NEW] Controller &lt;your Bluetooth adapter&gt; [default]
+[NEW] F8:04:33:AF:AB:A2 [TV] UE48JU6580
+[NEW] C4:D3:8C:12:4C:57 Flower mate
+</code></pre>
+<p>If you can’t use <code>hcitool</code> or <code>bluetoothctl</code> but have access to an Android phone you can try <code>BLE Scanner</code> or similar scanner applications from the Play Store to easily find your sensor MAC address. If you are using Windows 10, try the <code>Microsoft Bluetooth LE Explorer</code> app from the Windows Store.</p>
+<h2>Configuration</h2>
+<p>To use your Mi Flora plant sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: miflora
+    mac: 'xx:xx:xx:xx:xx:xx'
+    monitored_conditions:
+      - moisture
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MAC address of your sensor.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The parameters that should be monitored.</p>
+</span></p><p class='default'>
+Default value: <p>[“moisture”, “light”, “temperature”, “conductivity”, “battery”]</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='moisture' href='#moisture'></a> moisture</dt><dd><p class='desc'><span class='description'><p>Moisture in the soil.</p>
+</span></p></dd><dt><a class='title-link' name='light' href='#light'></a> light</dt><dd><p class='desc'><span class='description'><p>Brightness at the sensor’s location.</p>
+</span></p></dd><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>Temperature at the sensor’s location.</p>
+</span></p></dd><dt><a class='title-link' name='conductivity' href='#conductivity'></a> conductivity</dt><dd><p class='desc'><span class='description'><p>Conductivity in the soil.</p>
+</span></p></dd><dt><a class='title-link' name='battery' href='#battery'></a> battery</dt><dd><p class='desc'><span class='description'><p>Battery details. Cached and only updated once a day.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name displayed in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='force_update' href='#force_update'></a> force_update</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sends update events even if the value hasn’t changed.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='median' href='#median'></a> median</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sometimes the sensor measurements show spikes. Using this parameter, the poller will report the median of the last 3 (you can also use larger values) measurements. This filters out single spikes. Median: 5 will also filter double spikes. If you never have problems with spikes, <code>median: 1</code> will work fine.</p>
+</span></p></dd><dt><a class='title-link' name='adapter' href='#adapter'></a> adapter</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Define the Bluetooth adapter to use. Run <code>hciconfig</code> to get a list of available adapters.</p>
+</span></p><p class='default'>
+Default value: <p>hci0</p>
+</p></dd></dl>
+</div>
+<div class='note warning'>
+<p>By default the sensor is only polled once every 20 minutes (<code>scan_interval</code> is 1200 seconds by default). On a Home Assistant restart sensor will report initial value. If you set <code>median: 3</code>, it will take <em>at least</em> 40 minutes before the sensor will report an average value. Keep in mind though that reducing polling intervals will have a negative effect on the battery life.</p>
+</div>
+<h2>Full example</h2>
+<p>A full configuration example could look like the one below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: miflora
+    mac: 'xx:xx:xx:xx:xx:xx'
+    name: Flower 1
+    force_update: true    
+    median: 3
+    monitored_conditions:
+      - moisture
+      - light
+      - temperature
+      - conductivity
+      - battery
+</code></pre>
+:ET

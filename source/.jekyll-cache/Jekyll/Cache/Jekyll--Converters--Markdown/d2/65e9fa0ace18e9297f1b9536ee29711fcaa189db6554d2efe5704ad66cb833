@@ -1,0 +1,26 @@
+I"v<p>The <code>foobot</code> sensor platform will fetch air quality data from your or yours <a href="https://foobot.io/features/">Foobot device(s)</a>.</p>
+<p>This sensor requires an API token. Please obtain one at <a href="https://api.foobot.io/apidoc/index.html">Foobot API site</a>.</p>
+<h2>Configuring the Platform</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: foobot
+    token: FOOBOT_SECRET_KEY
+    username: FOOBOT_USERNAME
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The token for the Foobot API.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Foobot username, used to fetch devices associated with an account.</p>
+</span></p></dd></dl>
+</div>
+<h2>Available Metrics</h2>
+<p>Every ten minutes, it’ll fetch the last ten minutes average of the following measurements:</p>
+<ul>
+<li>Temperature</li>
+<li>Humidity</li>
+<li>Co2</li>
+<li>VOC</li>
+<li>PM2.5</li>
+<li><a href="https://help.foobot.io/hc/en-us/articles/204814371-What-does-central-number-mean-">Index</a></li>
+</ul>
+:ET

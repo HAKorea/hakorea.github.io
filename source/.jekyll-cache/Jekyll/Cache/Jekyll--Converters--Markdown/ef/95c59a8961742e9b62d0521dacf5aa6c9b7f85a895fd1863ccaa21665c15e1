@@ -1,0 +1,93 @@
+I"<p>The <code>vizio</code> integration allows you to control <a href="https://www.vizio.com/smartcast-app">SmartCast</a>-compatible TVs and sound bars (2016+ models).</p>
+<h2>Find your device</h2>
+<p>Install the command line tool using <code>pip</code> (or download it manually):</p>
+<pre><code class="language-bash">$ pip3 install pyvizio
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">$ pip3 install git+https://github.com/vkorn/pyvizio.git@master
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">$ pip3 install -I .
+</code></pre>
+<p>Find your device using the following command:</p>
+<pre><code class="language-txt">pyvizio --ip=0 discover
+</code></pre>
+<p>and note its IP address. If using the IP address by itself does not work, you may need to append <code>:9000</code> or <code>:7345</code> to it when using it as a parameter in future commands.</p>
+<h2>Pairing</h2>
+<p>Before adding your device to Home Assistant, you may need to pair it manually. In particular, it is unclear how a sound bar would notify you of a valid auth token. In this case, it might be best to first skip the pairing process entirely, specify a <code>device_class</code> of <code>speaker</code> in your configuration, and try interacting with the entity to see if you have any success. If the media player controls aren’t working, and if specifying different ports as mentioned above doesn’t work, you will need to find a way to obtain the auth token during this process.</p>
+<p>To obtain an auth token, follow these steps:</p>
+<p>Make sure that your device is on before continuing.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Parameter</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>ip</code></td>
+<td align="left">IP address (possibly including port) obtained from the previous section</td>
+</tr>
+<tr>
+<td align="left"><code>device_type</code></td>
+<td align="left">The type of device you are connecting to. Options are <code>tv</code> or <code>speaker</code></td>
+</tr>
+</tbody>
+</table>
+<p>Enter the following command to initiate pairing:</p>
+<pre><code class="language-bash">$ pyvizio --ip={ip} --device_type={device_type} pair
+</code></pre>
+<p>Initiation will show you two different values:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Challenge type</td>
+<td align="left">Usually it should be <code>&quot;1&quot;</code>. If not, use the additional parameter <code>--ch_type=your_type</code> in the next step</td>
+</tr>
+<tr>
+<td align="left">Challenge token</td>
+<td align="left">Token required to finalize pairing in the next step</td>
+</tr>
+</tbody>
+</table>
+<p>At this point, a PIN code should be displayed at the top of your TV. With all these values, you can now finish pairing:</p>
+<pre><code class="language-bash">$ pyvizio --ip={ip} --device_type={device_type} pair-finish --token={challenge_token} --pin={pin}
+</code></pre>
+<p>You will need the authentication token returned by this command to configure Home Assistant.</p>
+<h2>Configuration</h2>
+<p>To add your Vizio TV to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vizio:
+  - host: IP_ADDRESS
+    access_token: AUTH_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of your device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Nickname for your device that will be used to generate the device’s entity ID. If multiple Vizio devices are configured, the value must be unique for each entry.</p>
+</span></p><p class='default'>
+Default value: <p>Vizio SmartCast</p>
+</p></dd><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Authentication token you received in the last step of the pairing process (if applicable).</p>
+</span></p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The class of your device. Valid options are <code>tv</code> or <code>speaker</code></p>
+</span></p><p class='default'>
+Default value: <p>tv</p>
+</p></dd><dt><a class='title-link' name='volume_step' href='#volume_step'></a> volume_step</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number of steps that the volume will be increased or decreased by at a time.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd></dl>
+</div>
+<h2>Notes and limitations</h2>
+<h3>Turning device on</h3>
+<p>If the <code>Power Mode</code> of your device is set to <code>Eco Mode</code>, turning the device on won’t work.</p>
+<h3>Changing tracks</h3>
+<p>Changing tracks works like switching channels. If the current input is anything other than regular TV, this command might not do anything.</p>
+<h3>Sources</h3>
+<p>The source list shows all external devices connected to the Vizio device through HDMI, plus a list of internal devices (TV mode, Chromecast, etc.)</p>
+:ET

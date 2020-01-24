@@ -1,0 +1,196 @@
+I"}<p>The camera integration allows you to use IP cameras with Home Assistant.</p>
+<h3>Streaming Video</h3>
+<p>If your camera supports it, and the <a href="/integrations/stream"><code>stream</code></a> integration is setup, you will be able to stream your cameras in the frontend and on supported media players.</p>
+<p>This option will keep the stream alive, and preload the feed on Home Assistant startup. This will result in reduced latency when opening the stream in the frontend, as well as when using the <code>play_stream</code> service or Google Assistant integration. It does, however, utilize more resources on your machine, so it is recommended to check CPU usage if you plan to use this feature.</p>
+<p class='img'>
+  <img src='/images/integrations/camera/preload-stream.png' alt='Screenshot showing Preload Stream option in Home Assistant front end.'>
+  Example showing the Preload Stream option in the camera dialog.
+</p>
+<h3>Services</h3>
+<p>Once loaded, the <code>camera</code> platform will expose services that can be called to perform various actions.</p>
+<p>Available services: <code>enable_motion_detection</code>, <code>disable_motion_detection</code>, <code>play_stream</code>, <code>record</code>, <code>snapshot</code>, <code>turn_off</code> and <code>turn_on</code>.</p>
+<h4>Service <code>enable_motion_detection</code></h4>
+<p>Enable the motion detection in a camera.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Name(s) of entities to enable motion detection, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>disable_motion_detection</code></h4>
+<p>Disable the motion detection in a camera.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Name(s) of entities to disable motion detection, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>play_stream</code></h4>
+<p>Play a live stream from a camera to selected media player(s). Requires <a href="/integrations/stream"><code>stream</code></a> integration to be set up.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name of entity to fetch stream from, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+<tr>
+<td><code>media_player</code></td>
+<td>no</td>
+<td>Name of media player to play stream on, e.g., <code>media_player.living_room_tv</code>.</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>yes</td>
+<td>Stream format supported by <code>stream</code> integration and selected <code>media_player</code>. Default: <code>hls</code></td>
+</tr>
+</tbody>
+</table>
+<p>For example, the following action in an automation would send an <code>hls</code> live stream to your chromecast.</p>
+<pre><code class="language-yaml">action:
+  service: camera.play_stream
+  data:
+    entity_id: camera.yourcamera
+    media_player: media_player.chromecast
+</code></pre>
+<h4>Service <code>record</code></h4>
+<p>Make a <code>.mp4</code> recording from a camera stream. Requires <code>stream</code> integration to be set up.</p>
+<p>Both <code>duration</code> and <code>lookback</code> options are suggestions, but should be consistent per camera.  The actual length of the recording may vary. It is suggested that you tweak these settings to fit your needs.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities to create a snapshot from, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>no</td>
+<td>Template of a file name. Variable is <code>entity_id</code>, e.g., <code>/tmp/{{ entity_id }}.mp4</code>.</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>yes</td>
+<td>Target recording length (in seconds). Default: 30</td>
+</tr>
+<tr>
+<td><code>lookback</code></td>
+<td>yes</td>
+<td>Target lookback period (in seconds) to include in addition to duration.  Only available if there is currently an active HLS stream. Default: 0</td>
+</tr>
+</tbody>
+</table>
+<p>The path part of <code>filename</code> must be an entry in the <code>whitelist_external_dirs</code> in your <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> section of your <code>configuration.yaml</code> file.</p>
+<p>For example, the following action in an automation would take a recording from “yourcamera” and save it to /tmp with a timestamped filename.</p>
+<pre><code class="language-yaml">action:
+  service: camera.record
+  data:
+    entity_id: camera.yourcamera
+    filename: '/tmp/{{ entity_id }}_{{ now().strftime(&quot;%Y%m%d-%H%M%S&quot;) }}.mp4'
+</code></pre>
+<h4>Service <code>snapshot</code></h4>
+<p>Take a snapshot from a camera.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities to create a snapshot from, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>no</td>
+<td>Template of a file name. Variable is <code>entity_id</code>, e.g., <code>/tmp/snapshot_{{ entity_id }}</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The path part of <code>filename</code> must be an entry in the <code>whitelist_external_dirs</code> in your <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> section of your <code>configuration.yaml</code> file.</p>
+<p>For example, the following action in an automation would take a snapshot from “yourcamera” and save it to /tmp with a timestamped filename.</p>
+<pre><code class="language-yaml">action:
+  service: camera.snapshot
+  data:
+    entity_id: camera.yourcamera
+    filename: '/tmp/yourcamera_{{ now().strftime(&quot;%Y%m%d-%H%M%S&quot;) }}.jpg'
+</code></pre>
+<h4>Service <code>turn_off</code></h4>
+<p>Turn off camera. Not all camera models support this service, please consult individual camera page.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Name(s) of entities to turn off, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>turn_on</code></h4>
+<p>Turn on camera. Not all camera models support this service, please consult individual camera page.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Name(s) of entities to turn on, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Test if it works</h3>
+<p>A simple way to test if you have set up your <code>camera</code> platform correctly, is to use <img src='/images/screenshots/developer-tool-services-icon.png' alt='service developer tool icon' class="no-shadow" height="38" /> <strong>Services</strong> from the <strong>Developer Tools</strong>. Choose your service from the dropdown menu <strong>Service</strong>, enter something like the sample below into the <strong>Service Data</strong> field, and hit <strong>CALL SERVICE</strong>.</p>
+<pre><code class="language-yaml">entity_id: camera.living_room_camera
+</code></pre>
+:ET

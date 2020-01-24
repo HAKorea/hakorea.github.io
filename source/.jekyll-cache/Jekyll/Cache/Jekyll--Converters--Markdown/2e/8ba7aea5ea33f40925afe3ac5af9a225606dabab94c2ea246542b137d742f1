@@ -1,0 +1,65 @@
+I"f<p>The <code>flux</code> switch platform will change the temperature of your lights similar to the way flux works on your computer, using circadian rhythm. They will be bright during the day, and gradually fade to a red/orange at night. The <code>flux</code> switch restores its last state after startup.</p>
+<p>The integration will update your lights based on the time of day. It will only affect lights that are turned on and listed in the flux configuration.</p>
+<p>During the day (in between <code>start time</code> and <code>sunset time</code>), it will fade the lights from the <code>start_colortemp</code> to the <code>sunset_colortemp</code>.  After sunset (between <code>sunset_time</code> and <code>stop_time</code>), the lights will fade from the <code>sunset_colortemp</code> to the <code>stop_colortemp</code>. If the lights are still on after the <code>stop_time</code> it will continue to change the light to the <code>stop_colortemp</code> until the light is turned off. The fade effect is created by updating the lights periodically.</p>
+<p>The color temperature is specified kelvin, and accepted values are between 1000 and 40000 kelvin. Lower values will seem more red, while higher will look more white.</p>
+<p>If you want to update at variable intervals, you can leave the switch turned off and use automation rules that call the service <code>switch.&lt;name&gt;_update</code> whenever you want the lights updated, where <code>&lt;name&gt;</code> equals the <code>name:</code> property in the switch configuration.</p>
+<p>To use the Flux switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: flux
+    lights:
+      - light.desk
+      - light.lamp
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='lights' href='#lights'></a> lights</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>array list of light entities.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use when displaying this switch.</p>
+</span></p><p class='default'>
+Default value: <p>Flux</p>
+</p></dd><dt><a class='title-link' name='start_time' href='#start_time'></a> start_time</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The start time.</p>
+</span></p></dd><dt><a class='title-link' name='stop_time' href='#stop_time'></a> stop_time</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The stop time.</p>
+</span></p></dd><dt><a class='title-link' name='start_colortemp' href='#start_colortemp'></a> start_colortemp</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The color temperature at the start.</p>
+</span></p><p class='default'>
+Default value: <p>4000</p>
+</p></dd><dt><a class='title-link' name='sunset_colortemp' href='#sunset_colortemp'></a> sunset_colortemp</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The sun set color temperature.</p>
+</span></p><p class='default'>
+Default value: <p>3000</p>
+</p></dd><dt><a class='title-link' name='stop_colortemp' href='#stop_colortemp'></a> stop_colortemp</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The color temperature at the end.</p>
+</span></p><p class='default'>
+Default value: <p>1900</p>
+</p></dd><dt><a class='title-link' name='brightness' href='#brightness'></a> brightness</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The brightness of the lights.</p>
+</span></p></dd><dt><a class='title-link' name='disable_brightness_adjust' href='#disable_brightness_adjust'></a> disable_brightness_adjust</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If true, brightness will not be adjusted besides color temperature.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='mode' href='#mode'></a> mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Select how color temperature is passed to lights. Valid values are <code>xy</code>, <code>mired</code> and <code>rgb</code>.</p>
+</span></p><p class='default'>
+Default value: <p>xy</p>
+</p></dd><dt><a class='title-link' name='transition' href='#transition'></a> transition</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Transition time in seconds for the light changes (high values may not be supported by all light models).</p>
+</span></p><p class='default'>
+Default value: <p>30</p>
+</p></dd><dt><a class='title-link' name='interval' href='#interval'></a> interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Frequency in seconds at which the lights should be updated.</p>
+</span></p><p class='default'>
+Default value: <p>30</p>
+</p></dd></dl>
+</div>
+<p>Full example:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: flux
+    lights:
+      - light.desk
+      - light.lamp
+    name: Fluxer
+    start_time: '7:00'
+    stop_time: '23:00'
+    start_colortemp: 4000
+    sunset_colortemp: 3000
+    stop_colortemp: 1900
+    brightness: 200
+    disable_brightness_adjust: true
+    mode: xy
+    transition: 30
+    interval: 60
+</code></pre>
+:ET

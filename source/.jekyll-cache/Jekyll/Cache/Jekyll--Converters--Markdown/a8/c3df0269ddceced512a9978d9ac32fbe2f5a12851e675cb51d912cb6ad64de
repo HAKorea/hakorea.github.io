@@ -1,0 +1,66 @@
+I"[<p>The <code>rpi_gpio</code> integration is the base for all related GPIO platforms in Home Assistant. For the platform configurations, please check their corresponding sections.</p>
+<p>The remote RPi and the control computer where Home Assistant is running must be prepared to run remote_rpi_gpio, see details <a href="https://gpiozero.readthedocs.io/en/stable/remote_gpio.html">here</a>.</p>
+<p>Note that for virtual environments you may need to set an environment variable when starting the environment to set the pin factory, example:</p>
+<p><code>Environment =  GPIOZERO_PIN_FACTORY=pigpio PIGPIO_ADDR=YOUR_RPi_IP_ADDRESS</code></p>
+<h2>Binary Sensor</h2>
+<p>The <code>remote_rpi_gpio</code> binary sensor platform allows you to read sensor values of the GPIOs of a <a href="https://www.raspberrypi.org/">Remote Raspberry Pi</a>.</p>
+<p>To use your Remote Raspberry Pi’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: remote_rpi_gpio
+    host: IP_ADDRESS_OF_REMOTE_PI
+    ports:
+      11: PIR Office
+      12: PIR Bedroom
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP Address of remote Raspberry Pi.</p>
+</span></p></dd><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='port-name' href='#port-name'></a> port: name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port numbers (BCM mode pin numbers) and corresponding names.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code>, inverts the output logic</p>
+</span></p><p class='default'>
+Default value: <p><code>false</code> (ACTIVE HIGH)</p>
+</p></dd><dt><a class='title-link' name='pull_mode' href='#pull_mode'></a> pull_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of internal pull resistor to use. Options are <code>UP</code> - pull-up resistor and <code>DOWN</code> - pull-down resistor. Pull-Up defaults to active LOW and Pull-down defaults to active HIGH.  This can be adjusted with invert_logic</p>
+</span></p><p class='default'>
+Default value: <p><code>UP</code></p>
+</p></dd></dl>
+</div>
+<p>For more details about the GPIO layout, visit the Wikipedia <a href="https://en.wikipedia.org/wiki/Raspberry_Pi#GPIO_connector">article</a> about the Raspberry Pi.</p>
+<h2>Switch</h2>
+<p>The <code>remote_rpi_gpio</code> switch platform allows you to control the GPIOs of a <a href="https://www.raspberrypi.org/">Remote Raspberry Pi</a>.</p>
+<p>To use your Remote Raspberry Pi’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: remote_rpi_gpio
+    host: IP_ADDRESS_OF_REMOTE_PI
+    ports:
+      11: Fan Office
+      12: Light Desk
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP Address of remote Raspberry Pi.</p>
+</span></p></dd><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Array of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer string'>integer | string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Port numbers and corresponding names (GPIO</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If true, inverts the output logic to ACTIVE LOW.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>For more details about the GPIO layout, visit the Wikipedia <a href="https://en.wikipedia.org/wiki/Raspberry_Pi#GPIO_connector">article</a> about the Raspberry Pi.</p>
+<div class='note warning'>
+Note that a pin managed by Home Assistant is expected to be exclusive to Home Assistant.
+</div>
+<p>A common question is what does port refer to, this number is the actual GPIO #, not the pin #.
+For example, if you have a relay connected to pin 11 its GPIO # is 17.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: remote_rpi_gpio
+    host: 192.168.0.123
+    ports:
+      17: Speaker Relay
+</code></pre>
+<h3>Troubleshooting</h3>
+<p>If you receive an error such as <code>gpiozero.exc.BadPinFactory: Unable to load any default pin factory!</code> try changing the pinfactory from <code>pigpio</code> to <code>mock</code>, this addresses a <a href="https://www.raspberrypi.org/forums/viewtopic.php?p=1417922">known issue</a>.</p>
+:ET

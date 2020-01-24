@@ -1,0 +1,448 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Vacuum - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to setup and use vacuum's in Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/vacuum/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Vacuum">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/vacuum/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to setup and use vacuum's in Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Vacuum">
+    <meta name="twitter:description" content="Instructions on how to setup and use vacuum's in Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/vacuum.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Vacuum
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>vacuum</code> integration enables the ability to control home cleaning robots within Home Assistant.</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To use this integration in your installation, add a <code>vacuum</code> platform to your <code>configuration.yaml</code> file, like the <a href="/integrations/vacuum.xiaomi_miio/">Xiaomi</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vacuum:
+  - platform: xiaomi_miio
+    name: Living room
+    host: 192.168.1.2
+</code></pre>
+<h3>
+<a class="title-link" name="component-services" href="#component-services"></a> Component services</h3>
+<p>Available services: <code>turn_on</code>, <code>turn_off</code>, <code>start_pause</code>, <code>start</code>, <code>pause</code>, <code>stop</code>, <code>return_to_base</code>, <code>locate</code>, <code>clean_spot</code>, <code>set_fanspeed</code> and <code>send_command</code>.</p>
+<p>Before calling one of these services, make sure your vacuum platform supports it.</p>
+<h4>
+<a class="title-link" name="service-vacuumturn_on" href="#service-vacuumturn_on"></a> Service vacuum.turn_on</h4>
+<p>Start a new cleaning task. For the Xiaomi Vacuum and Neato use <code>vacuum.start</code> instead.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumturn_off" href="#service-vacuumturn_off"></a> Service vacuum.turn_off</h4>
+<p>Stop the current cleaning task and return to the dock. For the Xiaomi Vacuum and Neato use <code>vacuum.stop</code> instead.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumstart_pause" href="#service-vacuumstart_pause"></a> Service vacuum.start_pause</h4>
+<p>Start, pause or resume a cleaning task.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumstart" href="#service-vacuumstart"></a> Service vacuum.start</h4>
+<p>Start or resume a cleaning task.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumpause" href="#service-vacuumpause"></a> Service vacuum.pause</h4>
+<p>Pause a cleaning task.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumstop" href="#service-vacuumstop"></a> Service vacuum.stop</h4>
+<p>Stop the current activity of the vacuum.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumreturn_to_base" href="#service-vacuumreturn_to_base"></a> Service vacuum.return_to_base</h4>
+<p>Tell the vacuum to return home.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumlocate" href="#service-vacuumlocate"></a> Service vacuum.locate</h4>
+<p>Locate the vacuum cleaner robot.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumclean_spot" href="#service-vacuumclean_spot"></a> Service vacuum.clean_spot</h4>
+<p>Tell the vacuum cleaner to do a spot clean-up.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumset_fan_speed" href="#service-vacuumset_fan_speed"></a> Service vacuum.set_fan_speed</h4>
+<p>Set the fan speed of the vacuum. The <code>fanspeed</code> can be a label, as <code>balanced</code> or <code>turbo</code>, or be a number; it depends on the <code>vacuum</code> platform.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+<tr>
+<td><code>fan_speed</code></td>
+<td>no</td>
+<td>Platform dependent vacuum cleaner fan speed, with speed steps, like ‘medium’, or by percentage, between 0 and 100.</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-vacuumsend_command" href="#service-vacuumsend_command"></a> Service vacuum.send_command</h4>
+<p>Send a platform-specific command to the vacuum cleaner.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on specific vacuum. Else targets all.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>no</td>
+<td>Command to execute.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>yes</td>
+<td>Parameters for the command.</td>
+</tr>
+</tbody>
+</table>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/vacuum.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'></div><div class="section">
+    <kb-alert-link integration="vacuum"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.51
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/vacuum/'>/components/vacuum/</a>
+  </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

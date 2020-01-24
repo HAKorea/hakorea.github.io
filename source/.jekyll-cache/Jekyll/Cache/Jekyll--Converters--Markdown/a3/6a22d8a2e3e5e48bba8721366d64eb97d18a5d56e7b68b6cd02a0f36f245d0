@@ -1,0 +1,71 @@
+I"G<p>The <code>amazon_polly</code> text-to-speech platform that works with <a href="https://aws.amazon.com/polly/">Amazon Polly</a> to create the spoken output.
+Polly is a paid service via Amazon Web Services.  There is a <a href="https://aws.amazon.com/polly/pricing/">free tier</a> for the first 12 months and then a charge per million characters afterwards.</p>
+<h2>Setup</h2>
+<p>For more information, please read the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html">AWS General Reference regarding Security Credentials</a> to get the needed details. Also, check the <a href="https://boto3.readthedocs.io/en/latest/guide/configuration.html#shared-credentials-file">boto3 Documentation</a> about the profiles and the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#pol_region">AWS Regions and Endpoints Reference</a> for available regions.</p>
+<p>Available voices are listed in the <a href="https://docs.aws.amazon.com/polly/latest/dg/voicelist.html">Amazon Documentation</a>.</p>
+<h2>Configuration</h2>
+<p>To get started, add the following lines to your <code>configuration.yaml</code> (example for Amazon Polly):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: amazon_polly
+    aws_access_key_id: AWS_ACCESS_KEY_ID
+    aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='aws_access_key_id' href='#aws_access_key_id'></a> aws_access_key_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your AWS Access Key ID. If provided, you must also provide an <code>aws_secret_access_key</code> and must <strong>not</strong> provide a <code>profile_name</code>.</p>
+</span></p></dd><dt><a class='title-link' name='aws_secret_access_key' href='#aws_secret_access_key'></a> aws_secret_access_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your AWS Secret Access Key. If provided, you must also provide an <code>aws_access_key_id</code> and must <strong>not</strong> provide a <code>profile_name</code>.</p>
+</span></p></dd><dt><a class='title-link' name='profile_name' href='#profile_name'></a> profile_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A credentials profile name.</p>
+</span></p></dd><dt><a class='title-link' name='region_name' href='#region_name'></a> region_name</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The region identifier to connect to.</p>
+</span></p><p class='default'>
+Default value: <p>us-east-1</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The default value is <code>notify</code>. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p></dd><dt><a class='title-link' name='text_type' href='#text_type'></a> text_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify wherever to use text (default) or ssml markup by default.</p>
+</span></p><p class='default'>
+Default value: <p>text</p>
+</p></dd><dt><a class='title-link' name='voice' href='#voice'></a> voice</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Voice name to be used.</p>
+</span></p></dd><dt><a class='title-link' name='output_format' href='#output_format'></a> output_format</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the default output format. Either <code>mp3</code>, <code>ogg_vorbis</code> or <code>pcm</code>.</p>
+</span></p><p class='default'>
+Default value: <p>mp3</p>
+</p></dd><dt><a class='title-link' name='sample_rate' href='#sample_rate'></a> sample_rate</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the default sample rate. Possible values are: 8000, 16000, 22050, 24000.</p>
+</span></p><p class='default'>
+Default value: <p>22050 for MP3 and Ogg Vorbis, 16000 for pcm</p>
+</p></dd><dt><a class='title-link' name='engine' href='#engine'></a> engine</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the default engine. Can be either of <code>standard</code> or <code>neural</code>. See Amazon documentation for compatible regions and voices.</p>
+</span></p><p class='default'>
+Default value: <p>standard</p>
+</p></dd></dl>
+</div>
+<h2>Usage</h2>
+<p>Say to all <code>media_player</code> device entities:</p>
+<pre><code class="language-yaml">- service: tts.amazon_polly_say
+  data_template:
+    message: '&lt;speak&gt;Hello from Amazon Polly&lt;/speak&gt;'
+</code></pre>
+<p>or</p>
+<pre><code class="language-yaml">- service: tts.amazon_polly_say
+  data_template:
+    message: &gt;
+      &lt;speak&gt;
+          Hello from Amazon Polly
+      &lt;/speak&gt;
+</code></pre>
+<p>Say to the <code>media_player.living_room</code> device entity:</p>
+<pre><code class="language-yaml">- service: tts.amazon_polly_say
+  data_template:
+    entity_id: media_player.living_room
+    message: &gt;
+      &lt;speak&gt;
+          Hello from Amazon Polly
+      &lt;/speak&gt;
+</code></pre>
+<p>Say with break:</p>
+<pre><code class="language-yaml">- service: tts.amazon_polly_say
+  data_template:
+    message: &gt;
+      &lt;speak&gt;
+          Hello from
+          &lt;break time=&quot;.9s&quot; /&gt;
+          Amazon Polly
+      &lt;/speak&gt;
+</code></pre>
+:ET

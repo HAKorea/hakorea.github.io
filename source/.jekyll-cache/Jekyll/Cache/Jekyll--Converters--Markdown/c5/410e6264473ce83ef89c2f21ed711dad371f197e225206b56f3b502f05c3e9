@@ -1,0 +1,22 @@
+I"›	<p>The <code>ialarm</code> platform provides connectivity with the <a href="https://www.antifurtocasa365.it/">Antifurto365</a> iAlarm alarm systems.</p>
+<p>This platform supports the following services: <code>alarm_arm_away</code>, <code>alarm_arm_home</code> and <code>alarm_disarm</code>.</p>
+<h2>Configuration</h2>
+<p>To enable this, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alarm_control_panel:
+  - platform: ialarm
+    host: ALARM_SYSTEM_IP
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the iAlarm device on your home network.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Username used to sign into the iAlarm web client (should be admin by default).</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Password used to sign into the iAlarm web client. If it has a leading zero you need to put the password within quotes.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of device in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='code' href='#code'></a> code</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specifies a code to enable or disable the alarm in the frontend.</p>
+</span></p></dd></dl>
+</div>
+<p>This platform has also been confirmed to work with the alarm system brands Meian and Emooluxr.</p>
+:ET

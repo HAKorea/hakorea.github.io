@@ -1,0 +1,27 @@
+I"ù<p>Integrate your <a href="https://sense.com">Sense</a> meter information into Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Sensor</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sense:
+  email: CLIENT_ID
+  password: CLIENT_SECRET
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='email' href='#email'></a> email</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The email associated with your Sense account/application.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for your Sense account/application.</p>
+</span></p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Seconds for timeout of API requests.</p>
+</span></p></dd></dl>
+</div>
+<p>Sensors are added for both usage and production with the following names:</p>
+<ul>
+<li><strong>Active Usage/Production</strong>: Current active power usage/production in Watts. Updated every 60 seconds.</li>
+<li><strong>Daily/Weekly/Monthly Usage/Production</strong>: Daily/Weekly/Monthly power usage/production in kWh. Updated every 5 minutes.</li>
+</ul>
+<p>Binary sensors are created for each of the devices detected by your Sense monitor to show their power state.</p>
+:ET

@@ -1,0 +1,46 @@
+I"¯<p>The <code>synology</code> camera platform allows you to watch the live streams of your <a href="https://www.synology.com/">Synology</a> Surveillance Station based IP cameras in Home Assistant.</p>
+<div class='note'>
+<p>Synology has disabled the livestreaming API and the integration is currently broken if you are using Surveillance Station version 8.2.3-5828.
+There is an unsupported preview fix available. (8.2.3-5829) - Instructions can be found <a href="https://www.vcloudinfo.com/2019/04/how-to-manually-upgrade-your-synology-surveillance-system-firmware.html">here</a> for updating manually.</p>
+</div>
+<h2>Configuration</h2>
+<p>To enable your Surveillance Station cameras in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Minimum configuration.yaml entry
+camera:
+  - platform: synology
+    url: IP_ADDRESS_OF_SYNOLOGY_NAS
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for this Synology camera.</p>
+</span></p><p class='default'>
+Default value: <p>Synology Camera</p>
+</p></dd><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL to your Synology, including port.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing Surveillance Station.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing Surveillance Station.</p>
+</span></p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The timeout in seconds used when connecting to the Surveillance Station.</p>
+</span></p><p class='default'>
+Default value: <p>5</p>
+</p></dd><dt><a class='title-link' name='whitelist' href='#whitelist'></a> whitelist</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of which cameras you want to add, the names must be the same as in Surveillance Station. If omitted all cameras are added.</p>
+</span></p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Verify SSL/TLS certificate for HTTPS request.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<h2>Full example</h2>
+<p>A full sample configuration for the <code>synology</code> camera platform is shown below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: synology
+    url: https://192.168.1.120:5001
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    timeout: 15
+    verify_ssl: false
+</code></pre>
+<div class='note'>
+<p>Most users will need to set <code>verify_ssl</code> to false unless they have installed a valid SSL/TLS certificate in place of the built in self-signed certificate.</p>
+</div>
+:ET

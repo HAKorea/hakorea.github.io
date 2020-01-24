@@ -1,0 +1,1199 @@
+I"� <h2>Device Categories</h2>
+<h3>Motion or alarm sensors</h3>
+<p>In order for Home Assistant to recognize the sensor properly, you will need to change its configuration from <code>Basic Set (default)</code> to <code>Binary Sensor report</code> or <code>Alarm report</code>.
+These devices will either show as a binary sensor or a sensor called <code>Alarm xxxx</code> and will report a numeric value. Test to see what value is what. Sometimes this is noted in the device manual.</p>
+<p>You can set the settings of the Z-Wave device through the Z-Wave control panel.</p>
+<h3>Locks and other secure devices</h3>
+<p>These devices require a network key to be set for the Z-Wave network before they are paired, using the <strong>Add Node Secure</strong> option.</p>
+<p>Home Assistant stores logs from Z-Wave in <code>OZW_log.txt</code> in the Home Assistant config directory, when you pair a secure device you should see communication from the node with lines starting with <code>info: NONCES</code> in <code>OZW_log.txt</code> when the device is paired successfully with a secure connection.</p>
+<h3>Specific Devices</h3>
+<h3>Aeotec Z-Stick</h3>
+<p>It’s totally normal for your Z-Wave stick to cycle through its LEDs (Yellow, Blue and Red) while plugged into your system. If you don’t like this behavior it can be turned off.</p>
+<p>Use the following example commands from a terminal session on your Pi where your Z-Wave stick is connected.</p>
+<p><strong>Note:</strong> You should only do this when Home Assistant has been stopped.</p>
+<p>Turn off “Disco lights”:</p>
+<pre><code class="language-bash">$ echo -e -n &quot;\x01\x08\x00\xF2\x51\x01\x00\x05\x01\x51&quot; &gt; /dev/serial/by-id/usb-0658_0200-if00
+</code></pre>
+<p>Turn on “Disco lights”:</p>
+<pre><code class="language-bash">$ echo -e -n &quot;\x01\x08\x00\xF2\x51\x01\x01\x05\x01\x50&quot; &gt; /dev/serial/by-id/usb-0658_0200-if00
+</code></pre>
+<p>If the above two commands give errors about not having that device, you should try replacing the <code>/dev/serial/by-id/usb-0658_0200-if00</code> with <code>/dev/ttyACM0</code> or <code>/dev/ttyACM1</code> (depending on which tty your Aeotec stick is addressed to).</p>
+<p>On some systems, such as macOS, you need to pipe the output of the <code>echo</code> command, rather than redirecting to the serial device, to something like <code>cu</code> (replacing <code>/dev/zstick</code> acccordingly) to properly set the baud rate to 115200 bps:</p>
+<pre><code class="language-bash">echo -e -n &quot;...turn on/off string from examples above...&quot; | cu -l /dev/zstick -s 115200
+</code></pre>
+<h3>Razberry Board</h3>
+<p>You need to disable the on-board Bluetooth since the board requires the use of the hardware UART (and there’s only one on the Pi3). You do this by adding the following to the end of <code>/boot/config.txt</code>:</p>
+<pre><code class="language-text">dtoverlay=pi3-disable-bt
+</code></pre>
+<p>Then disable the Bluetooth modem service:</p>
+<pre><code class="language-bash">$ sudo systemctl disable hciuart
+</code></pre>
+<p>Once Bluetooth is off, enable the serial interface via the <code>raspi-config</code> tool. After reboot run:</p>
+<pre><code class="language-bash">$ sudo systemctl mask serial-getty@ttyAMA0.service
+</code></pre>
+<p>so that your serial interface looks like:</p>
+<pre><code class="language-text">crw-rw---- 1 root dialout 204, 64 Sep  2 14:38 /dev/ttyAMA0
+</code></pre>
+<p>at this point simply add your user (homeassistant) to the dialout group:</p>
+<pre><code class="language-bash">$ sudo usermod -a -G dialout homeassistant
+</code></pre>
+<div class='note'>
+<p>If you’ve installed the Z-Way software, you’ll need to ensure you disable it before you install Home Assistant or you won’t be able to access the board. Do this with <code>sudo /etc/init.d/z-way-server stop; sudo update-rc.d z-way-server disable</code>.</p>
+</div>
+<h3>Aeon Minimote</h3>
+<p>Here’s a handy configuration for the Aeon Labs Minimote that defines all possible button presses. Put it into <code>automation.yaml</code>.</p>
+<pre><code class="language-yaml">  - id: mini_1_pressed
+    alias: 'Minimote Button 1 Pressed'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 1
+  - id: mini_1_held
+    alias: 'Minimote Button 1 Held'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 2
+  - id: mini_2_pressed
+    alias: 'Minimote Button 2 Pressed'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 3
+  - id: mini_2_held
+    alias: 'Minimote Button 2 Held'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 4
+  - id: mini_3_pressed
+    alias: 'Minimote Button 3 Pressed'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 5
+  - id: mini_3_held
+    alias: 'Minimote Button 3 Held'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 6
+  - id: mini_4_pressed
+    alias: 'Minimote Button 4 Pressed'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 7
+  - id: mini_4_held
+    alias: 'Minimote Button 4 Held'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.aeon_labs_minimote_1
+          scene_id: 8
+</code></pre>
+<h3>Zooz Toggle Switches</h3>
+<p>Some models of the Zooz Toggle switches ship with an instruction manual with incorrect instruction for Z-Wave inclusion/exclusion. The instructions say that the switch should be quickly switched on-off-on for inclusion and off-on-off for exclusion. However, the correct method is on-on-on for inclusion and off-off-off for exclusion.</p>
+<h2>Central Scene configuration</h2>
+<p>To provide Central Scene support you need to <strong>shutdown Home Assistant</strong> and modify your <code>zwcfg_*.xml</code> file according to the following guides.</p>
+<h3>Inovelli Scene Capable On/Off and Dimmer Wall Switches</h3>
+<p>For Inovelli switches, you’ll need to update (or possibly add) the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">			&lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+				&lt;Instance index=&quot;1&quot; /&gt;
+				&lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;2&quot; /&gt;
+				&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Bottom Button Scene&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;3&quot; /&gt;
+				&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Top Button Scene&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;3&quot; /&gt;
+			&lt;/CommandClass&gt;
+</code></pre>
+<p>Once this is complete, you should see the follow <code>zwave.scene_activated</code> events:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Double tap off</td>
+<td align="center">1</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Double tap on</td>
+<td align="center">2</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Triple tap off</td>
+<td align="center">1</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">Triple tap on</td>
+<td align="center">2</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">4x tap off</td>
+<td align="center">1</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">4x tap on</td>
+<td align="center">2</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">5x tap off</td>
+<td align="center">1</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">5x tap on</td>
+<td align="center">2</td>
+<td align="center">6</td>
+</tr>
+</tbody>
+</table>
+<h3>Zooz Scene Capable On/Off and Dimmer Wall Switches (Zen26 &amp; Zen27 - Firmware 2.0+)</h3>
+<p>Many Zooz Zen26/27 switches that have been sold do not have firmware 2.0+. Contact Zooz to obtain the over the air firmware update instructions and new user manual for the switches.</p>
+<p>Once the firmware is updated, the the new configuration parameters will have to be added to the <code>zwcfg</code> file. Replace the existing <code>COMMAND_CLASS_CONFIGURATION</code> with the one of the following options (depending on your model of switch):</p>
+<p>Zen26 (On/Off Switch):</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;112&quot; name=&quot;COMMAND_CLASS_CONFIGURATION&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot;&gt;
+	&lt;Instance index=&quot;1&quot; /&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Paddle Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;2&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Normal mode: Upper paddle turns the light on, lower paddle turns the light off. Reverse will reverse those functions. Any will toggle the light regardless of which button is pushed.&lt;/Help&gt;
+		&lt;Item label=&quot;Normal&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Reverse&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Any&quot; value=&quot;2&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;LED Indication Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;3&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;LED Indication light function. Normal has the LED Indication on when the switch is off, off when the switch is on.&lt;/Help&gt;
+		&lt;Item label=&quot;Normal&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Reverse&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Always Off&quot; value=&quot;2&quot; /&gt;
+		&lt;Item label=&quot;Always On&quot; value=&quot;3&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Enable Turn-Off Timer&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable or disable the auto turn-off timer function.&lt;/Help&gt;
+		&lt;Item label=&quot;Disabled (Default)&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Turn-Off Timer Duration&quot; units=&quot;minutes&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;65535&quot; value=&quot;1&quot;&gt;
+		&lt;Help&gt;Time, in seconds, for auto-off timer delay. 60 (default).&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Enable Turn-On Timer&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable or disable the auto turn-on timer function.&lt;/Help&gt;
+		&lt;Item label=&quot;Disabled (Default)&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;6&quot; label=&quot;Turn-On Timer Duration&quot; units=&quot;minutes&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;65535&quot; value=&quot;55&quot;&gt;
+		&lt;Help&gt;Time, in minutes, for auto-on timer delay. 60 (default).&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;8&quot; label=&quot;On Off Status After Power Failure&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;2&quot; vindex=&quot;2&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Status after power on after power failure. OFF will always turn light off. ON will always turn light on. Restore will remember the latest state and restore that state.&lt;/Help&gt;
+		&lt;Item label=&quot;OFF&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;ON&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Restore&quot; value=&quot;2&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;10&quot; label=&quot;Scene Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable or disable scene control functionality for quick double tap triggers.&lt;/Help&gt;
+		&lt;Item label=&quot;Disabled (Default)&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;11&quot; label=&quot;Enable/Disable Paddle Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;1&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable or disable local on/off control. If enabled, you&amp;apos;ll only be able to control the connected light via Z-Wave.&lt;/Help&gt;
+		&lt;Item label=&quot;Disabled&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled (Default)&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+<p>Zen27 (Dimmer):</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;112&quot; name=&quot;COMMAND_CLASS_CONFIGURATION&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot;&gt;
+	&lt;Instance index=&quot;1&quot; /&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Paddle Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;2&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Normal mode: Upper paddle turns the light on, lower paddle turns the light off. Reverse will reverse those functions. Any will toggle the light regardless of which button is pushed.&lt;/Help&gt;
+		&lt;Item label=&quot;Normal&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Reverse&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Any&quot; value=&quot;2&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;LED Indication Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;3&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;LED Indication light function. Normal has the LED Indication on when the switch is off, off when the switch is on.&lt;/Help&gt;
+		&lt;Item label=&quot;Normal&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Reverse&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Always Off&quot; value=&quot;2&quot; /&gt;
+		&lt;Item label=&quot;Always On&quot; value=&quot;3&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Enable Auto Turn-Off Timer&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Item label=&quot;Disabled&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Auto Turn-Off Timer Duration&quot; units=&quot;minutes&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;65535&quot; value=&quot;60&quot;&gt;
+		&lt;Help&gt;Time, in minutes, for auto-off timer delay.&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Enable Auto Turn-On Timer&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Item label=&quot;Disabled&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;6&quot; label=&quot;Auto Turn-On Timer Duration&quot; units=&quot;minutes&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;65535&quot; value=&quot;60&quot;&gt;
+		&lt;Help&gt;Time, in minutes, for auto-off timer delay.&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;8&quot; label=&quot;On Off Status After Power Failure&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;2&quot; vindex=&quot;2&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Status after power on after power failure. OFF will always turn light off. ON will always turn light on. Restore will remember the latest state and restore that state.&lt;/Help&gt;
+		&lt;Item label=&quot;OFF&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;ON&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Restore&quot; value=&quot;2&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;byte&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;9&quot; label=&quot;Ramp Rate Control&quot; units=&quot;seconds&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;99&quot; value=&quot;3&quot;&gt;
+		&lt;Help&gt;Adjust the ramp rate for your dimmer (fade-in / fade-out effect for on / off operation). Values correspond to the number of seconds it take for the dimmer to reach full brightness or turn off when operated manually.&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;byte&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;10&quot; label=&quot;Minimum Brightness&quot; units=&quot;%&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;99&quot; value=&quot;99&quot;&gt;
+		&lt;Help&gt;Set the minimum brightness level for your dimmer. You won&amp;apos;t be able to dim the light below the set value.&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;byte&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;11&quot; label=&quot;Maximum Brightness&quot; units=&quot;%&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;1&quot; max=&quot;99&quot; value=&quot;99&quot;&gt;
+		&lt;Help&gt;Set the maximum brightness level for your dimmer. You won&amp;apos;t be able to add brightness to the light beyond the set value. Note: if Parameter 12 is set to value &amp;quot;Full&amp;quot;, Parameter 11 is automatically disabled.&lt;/Help&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;12&quot; label=&quot;Double Tap Function Brightness&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Double Tap action. When set to Full, turns light on to 100%. If set to Maximum Level, turns light on to % set in Parameter 11.&lt;/Help&gt;
+		&lt;Item label=&quot;Full&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Maximum Level&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;				
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;13&quot; label=&quot;Scene Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable or disable scene control functionality for quick double tap triggers.&lt;/Help&gt;
+		&lt;Item label=&quot;Disabled&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;14&quot; label=&quot;Enable Double Tap Function&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;2&quot; vindex=&quot;0&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable the double tap or disable the double tap function and assign brightness level to single tap.&lt;/Help&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Disabled - Single Tap To Last Brightness&quot; value=&quot;1&quot; /&gt;
+		&lt;Item label=&quot;Disabled - Single Tap To Max Brightness&quot; value=&quot;2&quot; /&gt;
+	&lt;/Value&gt;
+	&lt;Value type=&quot;list&quot; genre=&quot;config&quot; instance=&quot;1&quot; index=&quot;15&quot; label=&quot;Enable/Disable Paddle Control&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;0&quot; max=&quot;1&quot; vindex=&quot;1&quot; size=&quot;1&quot;&gt;
+		&lt;Help&gt;Enable or disable local on/off control. If enabled, light will only be able to be controlled via Z-Wave.&lt;/Help&gt;
+		&lt;Item label=&quot;Disabled&quot; value=&quot;0&quot; /&gt;
+		&lt;Item label=&quot;Enabled&quot; value=&quot;1&quot; /&gt;
+	&lt;/Value&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+<p>For Zooz switches, you’ll need to update (or possibly add) the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+	&lt;Instance index=&quot;1&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;2&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Bottom Button Scene&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;3&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Top Button Scene&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;3&quot; /&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+<p>Go to the Z-Wave Network Management section in the Home Assistant Configuration, select the node which has just been updated and enable the scene support configuration parameter.</p>
+<p>Once this is complete, you should see the following <code>zwave.scene_activated</code> events:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Single tap off</td>
+<td align="center">1</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Single tap on</td>
+<td align="center">2</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Double tap off</td>
+<td align="center">1</td>
+<td align="center">7860</td>
+</tr>
+<tr>
+<td align="center">Double tap on</td>
+<td align="center">2</td>
+<td align="center">7860</td>
+</tr>
+<tr>
+<td align="center">Triple tap off</td>
+<td align="center">1</td>
+<td align="center">7920</td>
+</tr>
+<tr>
+<td align="center">Triple tap on</td>
+<td align="center">2</td>
+<td align="center">7920</td>
+</tr>
+<tr>
+<td align="center">4x tap off</td>
+<td align="center">1</td>
+<td align="center">7980</td>
+</tr>
+<tr>
+<td align="center">4x tap on</td>
+<td align="center">2</td>
+<td align="center">7980</td>
+</tr>
+<tr>
+<td align="center">5x tap off</td>
+<td align="center">1</td>
+<td align="center">8040</td>
+</tr>
+<tr>
+<td align="center">5x tap on</td>
+<td align="center">2</td>
+<td align="center">8040</td>
+</tr>
+</tbody>
+</table>
+<h3>HomeSeer Switches</h3>
+<p>For the HomeSeer devices specifically, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+  &lt;Instance index=&quot;1&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot;   verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;2&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Top Button Scene&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Bottom Button Scene&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the HomeSeer devices (as a reference for other similar devices):</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Single tap on</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Single tap off</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Double tap on</td>
+<td align="center">1</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Double tap off</td>
+<td align="center">2</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Triple tap on</td>
+<td align="center">1</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">Triple tap off</td>
+<td align="center">2</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">Tap and hold on</td>
+<td align="center">1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Tap and hold off</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+</tbody>
+</table>
+<p>Some installations will see those details:</p>
+<p><strong>Top button ID: 1, Bottom ID: 2</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Single Press</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Hold Button</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">2x Tap</td>
+<td align="center">7860</td>
+</tr>
+<tr>
+<td align="center">3x Tap</td>
+<td align="center">7920</td>
+</tr>
+<tr>
+<td align="center">4x Tap</td>
+<td align="center">7980</td>
+</tr>
+<tr>
+<td align="center">5x Tap</td>
+<td align="center">8040</td>
+</tr>
+</tbody>
+</table>
+<h3>Fibaro Button FGPB-101-6 v3.2</h3>
+<!-- from https://hastebin.com/esodiweduq.cs -->
+<p>For the Button, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">      &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+        &lt;Instance index=&quot;1&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;3&quot; /&gt;
+      &lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the Button (as a reference for other similar devices):</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Single tap on</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Double tap on</td>
+<td align="center">1</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Triple tap on</td>
+<td align="center">1</td>
+<td align="center">4</td>
+</tr>
+</tbody>
+</table>
+<p>Tap and hold wakes up the Button.</p>
+<h3>Fibaro Keyfob FGKF-601</h3>
+<p>For the Fibaro Keyfob, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">      &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;6&quot;&gt;
+	&lt;Instance index=&quot;1&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;6&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Square&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Circle&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;X&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Triangle&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Minus&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+	&lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;6&quot; label=&quot;Plus&quot; units=&quot;&quot; read_only=&quot;false&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the Keyfob (as a reference for other similar devices):</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Button one (Square) single tap</td>
+<td align="center">1</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button one (Square) hold</td>
+<td align="center">1</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button one (Square) release</td>
+<td align="center">1</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button two (Circle) single tap</td>
+<td align="center">2</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button two (Circle) hold</td>
+<td align="center">2</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button two (Circle) release</td>
+<td align="center">2</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button three (X) single tap</td>
+<td align="center">3</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button three (X) hold</td>
+<td align="center">3</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button three (X) release</td>
+<td align="center">3</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button four (Triangle) single tap</td>
+<td align="center">4</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button four (Triangle) hold</td>
+<td align="center">4</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button four (Triangle) release</td>
+<td align="center">4</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button five (Triangle) single tap</td>
+<td align="center">5</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button five (Triangle) hold</td>
+<td align="center">5</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button five (Triangle) release</td>
+<td align="center">5</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button six (Triangle) single tap</td>
+<td align="center">6</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button six (Triangle) hold</td>
+<td align="center">6</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button six (Triangle) release</td>
+<td align="center">6</td>
+<td align="center">7740</td>
+</tr>
+</tbody>
+</table>
+<p>Press circle and plus simultaneously to wake up the device.</p>
+<h3>Aeotec NanoMote Quad</h3>
+<!-- from https://products.z-wavealliance.org/products/2817 -->
+<p>Once you’ve added the NanoMote to your z-wave network, you’ll need to update your zwcfg_*.xml file with the below xml data. Stop Home Assistant and open your zwcfg_*.xml file (located in your config folder). Find the NanoMote device section and then its corresponding <code>CommandClass</code> section with id=“91”. Replace the entire CommandClass section with the below xml data. Save the file and restart Home Assistant.</p>
+<pre><code class="language-xml">    &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+        &lt;Instance index=&quot;1&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button One&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Button Two&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Button Three&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Button Four&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the NanoMote Quad:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Button one single tap</td>
+<td align="center">1</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button one hold</td>
+<td align="center">1</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button one release</td>
+<td align="center">1</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button two single tap</td>
+<td align="center">2</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button two hold</td>
+<td align="center">2</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button two release</td>
+<td align="center">2</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button three single tap</td>
+<td align="center">3</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button three hold</td>
+<td align="center">3</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button three release</td>
+<td align="center">3</td>
+<td align="center">7740</td>
+</tr>
+<tr>
+<td align="center">Button four single tap</td>
+<td align="center">4</td>
+<td align="center">7680</td>
+</tr>
+<tr>
+<td align="center">Button four hold</td>
+<td align="center">4</td>
+<td align="center">7800</td>
+</tr>
+<tr>
+<td align="center">Button four release</td>
+<td align="center">4</td>
+<td align="center">7740</td>
+</tr>
+</tbody>
+</table>
+<p>Example Event:</p>
+<pre><code class="language-yaml">    &quot;event_type&quot;: &quot;zwave.scene_activated&quot;,
+    &quot;data&quot;: {
+        &quot;entity_id&quot;: &quot;zwave.nanomote&quot;,
+        &quot;scene_id&quot;: 2,
+        &quot;scene_data&quot;: 7680
+    }
+</code></pre>
+<h3>Aeotec Wallmote</h3>
+<!-- from https://hastebin.com/esodiweduq.cs -->
+<p>For the Aeotec Wallmote, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">      &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;5&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+        &lt;Instance index=&quot;1&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button One&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Button Two&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Button Three&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Button Four&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+          &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Other&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+      &lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the Wallmote (as a reference for other similar devices):</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Button one single tap</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button one hold</td>
+<td align="center">1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button one release</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button two single tap</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button two hold</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button two release</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button three single tap</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button three hold</td>
+<td align="center">3</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button three release</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button four single tap</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button four hold</td>
+<td align="center">4</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button four release</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<h3>WallC-S Switch</h3>
+<p>Use the same configuration as for the Aeotec Wallmote.</p>
+<h3>HANK One-key Scene Controller HKZN-SCN01/HKZW-SCN01</h3>
+<p>For the HANK One-key Scene Controller, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">      &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;1&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+        &lt;Instance index=&quot;1&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button One&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+      &lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the Button (as a reference for other similar devices):</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Button single tap</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button hold</td>
+<td align="center">1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button release</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<h3>HANK Four-key Scene Controller HKZN-SCN04</h3>
+<p>For the HANK Four-key Scene Controller, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">      &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;5&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+        &lt;Instance index=&quot;1&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button One&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Button Two&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;1&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Button Three&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;1&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Button Four&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;1&quot; /&gt;
+        &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Other&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+      &lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the Buttons and associated Pictogram:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>Pictogram</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Button one tap</td>
+<td align="center">Moon and Star</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button one hold</td>
+<td align="center">Moon and Star</td>
+<td align="center">1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button one release</td>
+<td align="center">Moon and Star</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button two tap</td>
+<td align="center">People</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button two hold</td>
+<td align="center">People</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button two release</td>
+<td align="center">People</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button three tap</td>
+<td align="center">Circle</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button three hold</td>
+<td align="center">Circle</td>
+<td align="center">3</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button three release</td>
+<td align="center">Circle</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button four tap</td>
+<td align="center">Circle with Line</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Button four hold</td>
+<td align="center">Circle with Line</td>
+<td align="center">4</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button four release</td>
+<td align="center">Circle with Line</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<h3>Remotec ZRC-90 Scene Master</h3>
+<p>To get the ZRC-90 Scene Master working in Home Assistant, you must first edit the <code>COMMAND_CLASS_CENTRAL_SCENE</code> in your <code>zwcfg</code> file.</p>
+<ol>
+<li>
+<p>Go the Z-Wave control panel in Home Assistant and make a note of the node number your ZRC-90 has been assigned.</p>
+</li>
+<li>
+<p><em>Stop</em> Home Assistant.</p>
+</li>
+<li>
+<p>Make a backup of your <code>zwfcg</code> file, just in case.</p>
+</li>
+<li>
+<p>In the <code>zwcfg</code> file, find the <code>Node id</code> that corresponds to the number you noted in the first step.</p>
+</li>
+<li>
+<p>Within the <code>Node id</code> you identified, highlight everything between <code>&lt;CommandClass id=&quot;91&quot;</code> and <code>&lt;/CommandClass&gt;</code> (inclusive) and paste in the following:</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;5&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+  &lt;Instance index=&quot;1&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Scene 1&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;3&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Scene 2&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Scene 3&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Scene 4&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;1&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Scene 5&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;6&quot; label=&quot;Scene 6&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;7&quot; label=&quot;Scene 7&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;8&quot; label=&quot;Scene 8&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;9&quot; label=&quot;Other&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+</li>
+<li>
+<p>Save the changes you made the <code>zwcfg</code> file and start Home Assistant back up.</p>
+</li>
+</ol>
+<p>Button presses will trigger <code>zwave.scene_activated</code> with the following:</p>
+<ul>
+<li><code>node_id</code>: the node of your Scene Master (useful if you have more than one)</li>
+<li><code>scene_id</code>: the number button you press (1-8)</li>
+<li><code>scene_data</code>: the type of press registered (see below)</li>
+</ul>
+<p>The Scene Master has eight buttons which can send four actions.
+The type of action is reflected in the <code>scene_data</code> parameter:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_data</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Single press</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">Long press (2s)</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Release from hold</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Double-press</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s see how this works in an automation for a Scene Master that’s assigned as Node 7:</p>
+<pre><code class="language-yaml">- id: '1234567890'
+  alias: Double-press Button 2 to toggle all lights
+  trigger:
+  - platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      node_id: 7
+      scene_id: 2
+      scene_data: 3  
+  condition: []
+  action:
+  - data:
+    service: light.toggle
+      entity_id: group.all_lights
+</code></pre>
+<h3>RFWDC Cooper 5-button Scene Control Keypad</h3>
+<p>For the RFWDC Cooper 5-button Scene Control Keypad, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;5&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;
+  &lt;Instance index=&quot;1&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button One&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Button Two&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Button Three&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Button Four&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+  &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Button Five&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+&lt;/CommandClass&gt;
+</code></pre>
+<p>Below is a table of the action/scenes for the Buttons:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Action</strong></th>
+<th align="center"><strong>scene_id</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Button one tap</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Button two tap</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">Button three tap</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Button four tap</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">Button five tap</td>
+<td align="center">5</td>
+</tr>
+</tbody>
+</table>
+<p>When a button turns off, the controller sends <code>basic_set</code> in a generic <code>node_event</code> and does not specify which button was pressed. The status of the buttons is encoded into the <code>indicator</code> value, so in order to determine the status of each button, you need to refresh the indicator value. You can also control the LEDs for each button by setting the indicator value. For responsiveness, automations should be triggered with <code>zwave.scene_activated</code> events rather than the switch status.</p>
+<p>Here is an example configuration needed for the scene controller:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Sync the indicator value on button events
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.scene_contrl
+      - platform: event
+        event_type: zwave.node_event
+        event_data:
+          entity_id: zwave.scene_contrl
+    action:
+      - service: zwave.refresh_node_value
+        data_template: 
+          node_id: 3
+          value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+switch:
+  - platform: template
+    switches:
+      button_1_led:
+        value_template: &quot;{{ states('sensor.scene_contrl_indicator')|int|bitwise_and(1) &gt; 0 }}&quot;
+        turn_on:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int + 1 }}&quot;
+        turn_off:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int - 1 }}&quot;
+      button_2_led:
+        value_template: &quot;{{ states('sensor.scene_contrl_indicator')|int|bitwise_and(2) &gt; 0 }}&quot;
+        turn_on:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int + 2 }}&quot;
+        turn_off:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int - 2 }}&quot;
+      button_3_led:
+        value_template: &quot;{{ states('sensor.scene_contrl_indicator')|int|bitwise_and(4) &gt; 0 }}&quot;
+        turn_on:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int + 4 }}&quot;
+        turn_off:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int - 4 }}&quot;
+      button_4_led:
+        value_template: &quot;{{ states('sensor.scene_contrl_indicator')|int|bitwise_and(8) &gt; 0 }}&quot;
+        turn_on:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states(scene_contrl_indicator)|int + 8 }}&quot;
+        turn_off:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int - 8 }}&quot;
+      button_5_led:
+        value_template: &quot;{{ states('sensor.scene_contrl_indicator')|int|bitwise_and(16) &gt; 0 }}&quot;
+        turn_on:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int + 16 }}&quot;
+        turn_off:
+          service: zwave.set_node_value
+          data_template:
+            node_id: 3
+            value_id: &quot;{{ state_attr('sensor.scene_contrl_indicator','value_id') }}&quot;
+            value: &quot;{{ states('sensor.scene_contrl_indicator')|int - 16 }}&quot;
+</code></pre>
+<h3>HeatIt/ThermoFloor Z-Push Button 2/8 Wall Switch</h3>
+<p>To get the Z-Push Button 2 or the Z-Push Button 8 working in Home Assistant, you must first edit the <code>COMMAND_CLASS_CENTRAL_SCENE</code> in your <code>zwcfg</code> file.</p>
+<ol>
+<li>
+<p>Go the Z-Wave control panel in Home Assistant and make a note of the node number your wall switch has been assigned.</p>
+</li>
+<li>
+<p><em>Stop</em> Home Assistant.</p>
+</li>
+<li>
+<p>Make a backup of your <code>zwfcg</code> file, just in case.</p>
+</li>
+<li>
+<p>In the <code>zwcfg</code> file, find the <code>Node id</code> that corresponds to the number you noted in the first step.</p>
+</li>
+<li>
+<p>Within the <code>Node id</code> you identified, highlight everything between <code>&lt;CommandClass id=&quot;91&quot;</code> and <code>&lt;/CommandClass&gt;</code> (inclusive) and paste in the following:</p>
+<ul>
+<li>5.1 For the Z-Push Button 2:</li>
+</ul>
+<pre><code class="language-xml">    &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;				&lt;Instance index=&quot;1&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button 1&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Button 2&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;/CommandClass&gt;
+</code></pre>
+<ul>
+<li>5.2 For the Z-Push Button 8:</li>
+</ul>
+<pre><code class="language-xml">    &lt;CommandClass id=&quot;91&quot; name=&quot;COMMAND_CLASS_CENTRAL_SCENE&quot; version=&quot;1&quot; request_flags=&quot;4&quot; innif=&quot;true&quot; scenecount=&quot;0&quot;&gt;				&lt;Instance index=&quot;1&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;system&quot; instance=&quot;1&quot; index=&quot;0&quot; label=&quot;Scene Count&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;1&quot; label=&quot;Button 1&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;2&quot; label=&quot;Button 2&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;3&quot; label=&quot;Button 3&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;4&quot; label=&quot;Button 4&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;5&quot; label=&quot;Button 5&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;6&quot; label=&quot;Button 6&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;7&quot; label=&quot;Button 7&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;Value type=&quot;int&quot; genre=&quot;user&quot; instance=&quot;1&quot; index=&quot;8&quot; label=&quot;Button 8&quot; units=&quot;&quot; read_only=&quot;true&quot; write_only=&quot;false&quot; verify_changes=&quot;false&quot; poll_intensity=&quot;0&quot; min=&quot;-2147483648&quot; max=&quot;2147483647&quot; value=&quot;0&quot; /&gt;
+    &lt;/CommandClass&gt;
+</code></pre>
+</li>
+<li>
+<p>Save the changes you made the <code>zwcfg</code> file and start Home Assistant back up.</p>
+</li>
+</ol>
+<p>Button presses will trigger <code>zwave.scene_activated</code> with the following:</p>
+<ul>
+<li><code>scene_id</code>: the number of the button you press from top left (1) to bottom right (8)</li>
+</ul>
+:ET

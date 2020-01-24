@@ -1,0 +1,679 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Customizing entities - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Simple customization for entities in the frontend.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/docs/configuration/customizing-devices/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Customizing entities">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/docs/configuration/customizing-devices/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Simple customization for entities in the frontend.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Customizing entities">
+    <meta name="twitter:description" content="Simple customization for entities in the frontend.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_docs/configuration/customizing-devices.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Customizing entities
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <h2>
+<a class="title-link" name="changing-the-entity_id" href="#changing-the-entity_id"></a> Changing the entity_id</h2>
+<p>You can use the UI to change the <code>entity_id</code> and friendly name of supported entities. To do this:</p>
+<ol>
+<li>Select the entity, either from the frontend or by clicking <img src="/images/frontend/entity_box.png"> next to the entity in the Developer Tools “States” tab.</li>
+<li>Click on the cog in the right corner of the entity’s dialog</li>
+<li>Enter the new name or the new entity ID (remember not to change the domain of the entity - the part before the <code>.</code>)</li>
+<li>Select <em>Save</em>
+</li>
+</ol>
+<p>If your entity is not supported, or you cannot customize what you need via this method, please see below for more options:</p>
+<h2>
+<a class="title-link" name="customizing-entities" href="#customizing-entities"></a> Customizing entities</h2>
+<p>By default, all of your devices will be visible and have a default icon determined by their domain. You can customize the look and feel of your front page by altering some of these parameters. This can be done by overriding attributes of specific entities.</p>
+<h3>
+<a class="title-link" name="customization-using-the-ui" href="#customization-using-the-ui"></a> Customization using the UI</h3>
+<p>Under the <em>Configuration</em> menu you’ll find the <em>Customization</em> menu. If this menu item is not visible, enable advanced mode on your <a href="/docs/authentication/#your-account-profile">profile page</a> first. When you select an entity to customize, you’ll see all the existing attributes listed and you can customize those or select an additional supported attribute (<a href="/docs/configuration/customizing-devices/#possible-values">see below</a>). You may also need to add the following to your <code>configuration.yaml</code> file, depending when you started using Home Assistant:</p>
+<pre><code class="language-yaml">homeassistant:
+  customize: !include customize.yaml
+</code></pre>
+<h4>
+<a class="title-link" name="possible-values" href="#possible-values"></a> Possible values</h4>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the entity as displayed in the UI.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="hidden" href="#hidden"></a> hidden</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to <code>true</code> to hide the entity.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="emulated_hue_hidden" href="#emulated_hue_hidden"></a> emulated_hue_hidden</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to <code>true</code> to hide the entity from <code>emulated_hue</code> (this will be deprecated in the near future and should be configured in <a href="/integrations/emulated_hue"><code>emulated_hue</code></a>).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="entity_picture" href="#entity_picture"></a> entity_picture</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>URL to use as picture for entity.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="icon" href="#icon"></a> icon</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Any icon from <a href="http://MaterialDesignIcons.com" rel="external nofollow">MaterialDesignIcons.com</a> (<a href="https://cdn.materialdesignicons.com/4.5.95/" rel="external nofollow">Cheatsheet</a>). Prefix name with <code>mdi:</code>, ie <code>mdi:home</code>. Note: Newer icons may not yet be available in the current Home Assistant release. You can check when an icon was added to MaterialDesignIcons.com at <a href="https://materialdesignicons.com/history" rel="external nofollow">MDI History</a>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="assumed_state" href="#assumed_state"></a> assumed_state</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>For switches with an assumed state two buttons are shown (turn off, turn on) instead of a switch. By setting <code>assumed_state</code> to <code>false</code> you will get the default switch icon.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the class of the device, changing the device state and icon that is displayed on the UI (see below). It does not set the <code>unit_of_measurement</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>None</p>
+</dd>
+<dt>
+<a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the units of measurement, if any. This will also influence the graphical presentation in the history visualisation as continuous value. Sensors with missing <code>unit_of_measurement</code> are showing as discrete values.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>None</p>
+</dd>
+<dt>
+<a class="title-link" name="initial_state" href="#initial_state"></a> initial_state</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the initial state for automations, <code>on</code> or <code>off</code>.</p>
+</span></p></dd>
+</dl>
+</div>
+<h4>
+<a class="title-link" name="device-class" href="#device-class"></a> Device Class</h4>
+<p>Device class is currently supported by the following components:</p>
+<ul>
+<li><a href="/integrations/binary_sensor/">Binary Sensor</a></li>
+<li><a href="/integrations/sensor/">Sensor</a></li>
+<li><a href="/integrations/cover/">Cover</a></li>
+<li><a href="integrations/media_player/">Media Player</a></li>
+</ul>
+<h3>
+<a class="title-link" name="manual-customization" href="#manual-customization"></a> Manual customization</h3>
+<div class="note">
+<p>If you implement <code>customize</code>, <code>customize_domain</code>, or <code>customize_glob</code> you must make sure it is done inside of <code>homeassistant:</code> or it will fail.</p>
+</div>
+<pre><code class="language-yaml">homeassistant:
+  name: Home
+  unit_system: metric
+  # etc
+
+  customize:
+    # Add an entry for each entity that you want to overwrite.
+    sensor.living_room_motion:
+      hidden: true
+    thermostat.family_room:
+      entity_picture: https://example.com/images/nest.jpg
+      friendly_name: Nest
+    switch.wemo_switch_1:
+      friendly_name: Toaster
+      entity_picture: /local/toaster.jpg
+    switch.wemo_switch_2:
+      friendly_name: Kitchen kettle
+      icon: mdi:kettle
+    switch.rfxtrx_switch:
+      assumed_state: false
+  # Customize all entities in a domain
+  customize_domain:
+    light:
+      icon: mdi:home
+    automation:
+      initial_state: 'on'
+  # Customize entities matching a pattern
+  customize_glob:
+    "light.kitchen_*":
+      icon: mdi:description
+    "scene.month_*_colors":
+      hidden: true
+      emulated_hue_hidden: false
+</code></pre>
+<h3>
+<a class="title-link" name="reloading-customize" href="#reloading-customize"></a> Reloading customize</h3>
+<p>Home Assistant offers a service to reload the core configuration while Home Assistant is running called <code>homeassistant.reload_core_config</code>. This allows you to change your customize section and see it being applied without having to restart Home Assistant. To call this service, go to the “Service” tab under Developer Tools, select the <code>homeassistant.reload_core_config</code> service and click the “CALL SERVICE” button. Alternatively, you can press the “Reload Location &amp; Customizations” button under Configuration &gt; Server Control.</p>
+<div class="note warning">
+New customize information will be applied the next time the state of the entity gets updated.
+</div>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  <div class="section">
+    <h1 class="title delta">목차</h1>
+    <ul class="divided sidebar-menu">
+      <li>
+        <b><a  href='/faq/'>FAQ </a></b> |
+        <b><a  href='/docs/glossary/'>Glossary </a></b>
+      </li>
+      <li>
+        <b><a  href='/docs/installation/'>설치 </a></b>
+        <ul>
+          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
+          <li>
+            <a  href='/docs/installation/troubleshooting/'>문제해결
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/configuration/'>설정 </a></b>
+        <ul>
+          <li><a  href='/docs/configuration/yaml/'>YAML </a></li>
+          <li>
+            <a  href='/docs/configuration/basic/'>기본 설정 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/devices/'>기기 추가 </a>
+          </li>
+          <li>
+            <a class='active' href='/docs/configuration/customizing-devices/'>Customizing
+            entities </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/troubleshooting/'>문제해결
+            </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/securing/'>Security Check Points
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Advanced Configuration</b>
+        <ul>
+          <li><a  href='/docs/configuration/remote/'>Remote access </a></li>
+          <li><a  href='/docs/configuration/packages/'>Packages </a></li>
+          <li>
+            <a  href='/docs/configuration/splitting_configuration/'>Splitting up the configuration </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/secrets/'>Storing Secrets </a>
+          </li>
+          <li><a  href='/docs/configuration/templating/'>Templating </a></li>
+          <li>
+            <a  href='/docs/configuration/platform_options/'>Entity
+            component platform options </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/authentication/'>Authentication </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/authentication/providers/'>Auth Providers </a>
+          </li>
+          <li>
+            <a  href='/docs/authentication/multi-factor-auth/'>Multi Factor
+            Auth </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Core objects</b>
+        <ul>
+          <li><a  href='/docs/configuration/events/'>Events </a></li>
+          <li>
+            <a  href='/docs/configuration/state_object/'>State Objects </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/automation/'>Automation </a></b>
+        <ul>
+          <li><a  href='/docs/automation/examples/'>Examples </a></li>
+          <li><a  href='/docs/automation/editor/'>Editor </a></li>
+          <li><a  href='/docs/automation/trigger/'>Triggers </a></li>
+          <li><a  href='/docs/automation/condition/'>Conditions </a></li>
+          <li><a  href='/docs/automation/action/'>Actions </a></li>
+          <li><a  href='/docs/automation/templating/'>Templates </a></li>
+          <li>
+            <a  href='/docs/automation/troubleshooting/'>Troubleshooting </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/frontend/'>Frontend </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/frontend/mobile/'>Android/iOS Homescreen </a>
+          </li>
+          <li>
+            <a  href='/docs/frontend/browsers/'>Browser Compatibility List
+            </a>
+          </li>
+          <li><a  href='/lovelace'>Lovelace UI </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/backend/'>Backend </a></b>
+        <ul>
+          <li><a  href='/docs/backend/database/'>Database </a></li>
+          <li><a  href='/docs/backend/updater/'>Updater </a></li>
+          <li><a  href='/developers/api/'>API </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scripts/'>Scripts </a></b>
+        <ul>
+          <li><a  href='/docs/scripts/service-calls/'>Service Calls </a></li>
+          <li><a  href='/docs/scripts/conditions/'>Conditions </a></li>
+          <li><a  href='/docs/scripts/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scene/'>Scenes </a></b>
+        <ul>
+          <li><a  href='/docs/scene/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/tools/'>Tools and Helpers </a></b>
+        <ul>
+          <li><a  href='/docs/tools/dev-tools/'>Developer Tools </a></li>
+          <li><a  href='/docs/tools/hass/'>hass </a></li>
+          <li><a  href='/docs/tools/benchmark/'>benchmark </a></li>
+          <li><a  href='/docs/tools/check_config/'>check_config </a></li>
+          <li><a  href='/docs/tools/credstash/'>credstash </a></li>
+          <li><a  href='/docs/tools/ensure_config/'>ensure_config </a></li>
+          <li><a  href='/docs/tools/keyring/'>keyring </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/security/'>Security </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/security/webserver/'>Web server fingerprint </a>
+          </li>
+          <li><a  href='/docs/security/porosity/'>Porosity </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/z-wave/'>Z-Wave </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/z-wave/installation/'>Configuring the Z-Wave
+            component </a>
+          </li>
+          <li><a  href='/docs/z-wave/adding/'>Adding devices </a></li>
+          <li>
+            <a  href='/docs/z-wave/control-panel/'>The Z-Wave control panel
+            </a>
+          </li>
+          <li><a  href='/docs/z-wave/controllers/'>Controllers </a></li>
+          <li>
+            <a  href='/docs/z-wave/devices/'>Devices </a> and <a  href='/docs/z-wave/entities/'>Entities </a>
+          </li>
+          <li>
+            <a  href='/docs/z-wave/query-stage/'>Query Stages </a> for devices
+          </li>
+          <li>
+            <a  href='/docs/z-wave/device-specific/'>Device Specific </a>
+            configuration
+          </li>
+          <li>
+            <a  href='/docs/z-wave/events/'>Events </a> and <a  href='/docs/z-wave/services/'>Services </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/mqtt/'>MQTT </a></b>
+        <ul>
+          <li><a  href='/docs/mqtt/broker/'>Broker </a></li>
+          <li><a  href='/docs/mqtt/certificate/'>Certificate </a></li>
+          <li><a  href='/docs/mqtt/discovery/'>Discovery </a></li>
+          <li><a  href='/docs/mqtt/service/'>Publish service </a></li>
+          <li>
+            <a  href='/docs/mqtt/birth_will/'>Birth and last will messages
+            </a>
+          </li>
+          <li><a  href='/docs/mqtt/testing/'>Testing your setup </a></li>
+          <li><a  href='/docs/mqtt/logging/'>Logging </a></li>
+          <li><a  href='/docs/mqtt/processing_json/'>Processing JSON </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/ecosystem/ios/'>iOS </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/notifications/basic/'>Basic
+            notifications </a>
+          </li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/sounds/'>Sounds </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/architecture/'>Architecture </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/privacy_security_rate_limits/'>Privacy, rate limiting and security </a>
+            </li>
+          </ul>
+          <li>Advanced notifications</li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/attachments/'>Attachments </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/content_extensions/'>Dynamic
+              content </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/actions/'>Actionable notifications </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/requesting_location_updates/'>Requesting location updates </a>
+            </li>
+          </ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/location/'>Location Tracking </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/ios/integration/'>Integration with
+            other apps </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a  href='/docs/ecosystem/'>Ecosystem </a>
+        <ul>
+          <li>
+            <a  href='/docs/autostart/'>Autostart </a>
+            <ul>
+              <li>
+                <a  href='/docs/autostart/systemd/'>systemd (Linux) </a>
+              </li>
+              <li>
+                <a  href='/docs/autostart/upstart/'>Upstart (Linux) </a>
+              </li>
+              <li><a  href='/docs/autostart/init.d/'>init.d (Linux) </a></li>
+              <li><a  href='/docs/autostart/macos/'>macOS </a></li>
+              <li><a  href='/docs/autostart/synology/'>Synology NAS </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/appdaemon/'>AppDaemon </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/hadashboard/'>HADashboard </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/notebooks/'>Notebooks </a>
+            <ul>
+              <li><a  href='/docs/ecosystem/notebooks/'>Introduction </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/installation/'>Installation </a>
+              </li>
+              <li><a  href='/docs/ecosystem/notebooks/graph/'>Graph </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/api/'>Home Assistant API
+                </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/database/'>Database </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/stats/'>Statistics </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Remote access
+            <ul>
+              <li><a  href='/docs/ecosystem/apache/'>Apache </a></li>
+              <li><a  href='/docs/ecosystem/caddy/'>Caddy Server </a></li>
+              <li><a  href='/docs/ecosystem/haproxy/'>HAProxy </a></li>
+              <li><a  href='/docs/ecosystem/nginx/'>NGINX </a></li>
+              <li>
+                <a  href='/docs/ecosystem/nginx_subdomain/'>NGINX with
+                subdomain</a>
+              </li>
+              <li><a  href='/docs/ecosystem/tor/'>Tor Onion Service </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/certificates/'>Certificates </a>
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_self_signed_certificate/'>Self-signed certificate </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_domain_certificate/'>Certificate
+                domain owners </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/lets_encrypt/'>Let's
+                Encrypt (detailed) </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Backup
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_github/'>Backup to
+                GitHub </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_dropbox/'>Backup to
+                Dropbox </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_usb/'>Backup to USB
+                device </a>
+              </li>
+            </ul>
+          </li>
+          <li><a  href='/docs/ecosystem/synology/'>Synology </a></li>
+          <li>
+            <a  href='/docs/ecosystem/hass-configurator/'>Configurator
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

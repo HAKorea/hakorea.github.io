@@ -1,0 +1,46 @@
+I"�<p>Integrate your <a href="https://efergy.com">Efergy</a> meter information into Home Assistant.</p>
+<h2>Setup</h2>
+<p>To get an app token:</p>
+<ol>
+<li>Log in to your efergy account</li>
+<li>Go to the Settings page</li>
+<li>Click on App tokens</li>
+<li>Click “Add token”</li>
+</ol>
+<h2>Configuration</h2>
+<p>To enable the sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: efergy
+    app_token: APP_TOKEN
+    utc_offset: UTC_OFFSET
+    monitored_variables:
+      - type: instant_readings
+      - type: budget
+      - type: cost
+        period: day
+        currency: $
+      - type: amount
+        period: day
+      - type: current_values
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='app_token' href='#app_token'></a> app_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The App Token for your account.</p>
+</span></p></dd><dt><a class='title-link' name='utc_offset' href='#utc_offset'></a> utc_offset</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Some variables (currently only the daily_cost) require that the negative number of minutes your timezone is ahead/behind UTC time.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='monitored_variables' href='#monitored_variables'></a> monitored_variables</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Variables to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the variable.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='instant_readings' href='#instant_readings'></a> instant_readings</dt><dd><p class='desc'><span class='description'><p>Instant energy consumption.</p>
+</span></p></dd><dt><a class='title-link' name='budget' href='#budget'></a> budget</dt><dd><p class='desc'><span class='description'><p>Monthly budget.</p>
+</span></p></dd><dt><a class='title-link' name='cost' href='#cost'></a> cost</dt><dd><p class='desc'><span class='description'><p>The cost for energy consumption (with the tariff that has been set in Efergy) over a given period.</p>
+</span></p></dd><dt><a class='title-link' name='amount' href='#amount'></a> amount</dt><dd><p class='desc'><span class='description'><p>The amount of energy consumed over a given period.</p>
+</span></p></dd><dt><a class='title-link' name='current_values' href='#current_values'></a> current_values</dt><dd><p class='desc'><span class='description'><p>This returns the current energy usage of each device on your account, as <code>efergy_\&lt;sid of device\&gt;</code>. If you only have one device in your account, this is effectively the same as instant_readings.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='period' href='#period'></a> period</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Some variables take a period argument. Valid options are “day”, “week”, “month”, and “year”.</p>
+</span></p><p class='default'>
+Default value: <p>year</p>
+</p></dd><dt><a class='title-link' name='currency' href='#currency'></a> currency</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This is used to display the cost/period as the unit when monitoring the cost. It should correspond to the actual currency used in your dashboard.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

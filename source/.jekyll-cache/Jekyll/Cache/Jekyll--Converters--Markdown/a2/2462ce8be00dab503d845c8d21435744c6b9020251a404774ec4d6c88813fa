@@ -1,0 +1,55 @@
+I"è<p>The <code>upcloud</code> integration allows you to access the information about your <a href="https://upcloud.com/">UpCloud</a> servers from Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Setup</h2>
+<p>Set up your API user credentials in your <a href="https://hub.upcloud.com/">UpCloud control panel</a>.</p>
+<h2>Configuration</h2>
+<p>To integrate your UpCloud servers with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+upcloud:
+  username: YOUR_API_USERNAME
+  password: YOUR_API_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your UpCloud API username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your UpCloud API user password.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Update interval in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>60</p>
+</p></dd></dl>
+</div>
+<h2>Binary Sensor</h2>
+<p>The <code>upcloud</code> binary sensor platform allows you to monitor your UpCloud servers.</p>
+<p>To use your UpCloud servers, you first have to set up your <a href="#configuration">UpCloud hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: upcloud
+    servers:
+      - 002167b7-4cb1-44b7-869f-e0900ddeeae1
+      - 00886296-6137-4074-afe3-068e16d89d00
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='servers' href='#servers'></a> servers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of servers you want to monitor.</p>
+</span></p></dd></dl>
+</div>
+<h2>Switch</h2>
+<p>The <code>upcloud</code> switch platform allows you to control (start/stop) your UpCloud servers.</p>
+<p>To use your UpCloud servers, you first have to set up your <a href="#configuration">UpCloud hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: upcloud
+    servers:
+      - 002167b7-4cb1-44b7-869f-e0900ddeeae1
+      - 00886296-6137-4074-afe3-068e16d89d00
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='servers' href='#servers'></a> servers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of servers you want to control.</p>
+</span></p></dd></dl>
+</div>
+:ET

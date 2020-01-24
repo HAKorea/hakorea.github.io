@@ -1,0 +1,40 @@
+I"�<p>It can happen that you run into trouble while installing Home Assistant. This page is here to help you solve the most common problems.</p>
+<h4>pip3: command not found</h4>
+<p>This utility should have been installed as part of the Python installation. Check if Python is installed by running <code>python3 --version</code>. If it is not installed, <a href="https://www.python.org/getit/">download it here</a>.</p>
+<p>If you are able to successfully run <code>python3 --version</code> but not <code>pip3</code>, install Home Assistant by running the following command instead:</p>
+<pre><code class="language-bash">python3 -m pip install homeassistant
+</code></pre>
+<p>On a Debian system, you can also install python3 by <code>sudo apt-get install python3</code>, and pip3 by <code>sudo apt-get install python3-pip</code>.</p>
+<h4>No module named pip</h4>
+<p><a href="https://pip.pypa.io/en/stable/">Pip</a> should come bundled with the latest Python 3 but is omitted by some distributions. If you are unable to run <code>python3 -m pip --version</code> you can install <code>pip</code> by <a href="https://bootstrap.pypa.io/get-pip.py">downloading the installer</a> and running it with Python 3:</p>
+<pre><code class="language-bash">python3 get-pip.py
+</code></pre>
+<h4>libyaml is not found or a compiler error</h4>
+<p>On a Debian system, install the Python 3 YAML library by <code>sudo apt-get install python3-yaml</code>.</p>
+<h4>distutils.errors.DistutilsOptionError: must supply either home or prefix/exec-prefix – not both</h4>
+<p>This is a known issue if you’re on a Mac using Homebrew to install Python. Please follow <a href="https://github.com/Homebrew/brew/blob/master/docs/Homebrew-and-Python.md#note-on-pip-install---user">these instructions</a> to resolve it.</p>
+<h4>No access to the frontend</h4>
+<p>In newer Linux distributions (at least Fedora &gt; 22/CentOS 7) the access to a host is very limited. This means that you can’t access the Home Assistant frontend that is running on a host outside of the host machine. Windows and macOS machines may also have issues with this.</p>
+<p>To fix this you will need to open your machine’s firewall for TCP traffic to port 8123. The method for doing this will vary depending on your operating system and the firewall you have installed. Below are some suggestions to try. Google is your friend here.</p>
+<ul>
+<li><a href="http://windows.microsoft.com/en-us/windows/open-port-windows-firewall#1TC=windows-7">Windows instructions</a></li>
+<li><a href="https://support.apple.com/en-us/HT201642">macOS instructions</a></li>
+</ul>
+<p>For systems with <strong>firewalld</strong> (Fedora, CentOS/RHEL, etc.):</p>
+<pre><code class="language-bash">sudo firewall-cmd --permanent --add-port=8123/tcp
+sudo firewall-cmd --reload
+</code></pre>
+<p>For UFW systems (Ubuntu, Debian, Raspbian, etc.):</p>
+<pre><code class="language-bash">sudo ufw allow 8123/tcp
+</code></pre>
+<p>For <code>iptables</code> systems (was the default for older distributions):</p>
+<pre><code class="language-bash">iptables -I INPUT -p tcp --dport 8123 -j ACCEPT
+iptables-save &gt; /etc/network/iptables.rules  # your rules may be saved elsewhere
+</code></pre>
+<h4>After upgrading, your browser login gets stuck at the “loading data” step</h4>
+<p>After upgrading to a new version, you may notice your browser gets stuck at the “loading data” login screen. Close the window/tab and go into your browser settings and delete all the cookies for your URL. You can then log back in and it should work.</p>
+<p>Android Chrome
+chrome -&gt; settings -&gt; site settings -&gt; storage -&gt; search for your URL for Home Assistant-&gt; “clear &amp; reset”</p>
+<h4>Not initializing discovery because could not install dependency netdisco</h4>
+<p>If you see <code>Not initializing discovery because could not install dependency netdisco==x.y.z</code> in the logs, you will need to install the <code>python3-dev</code> or <code>python3-devel</code> package on your system manually (eg. <code>sudo apt-get install python3-dev</code> or <code>sudo dnf -y install python3-devel</code>). On the next restart of Home Assistant, discovery should work. If you still get an error, check if you have a compiler (<code>gcc</code>) available on your system.</p>
+:ET

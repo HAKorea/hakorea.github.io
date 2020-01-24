@@ -1,0 +1,153 @@
+I"�#<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#notifications">Notifications</a></li>
+</ul>
+<div class='note'>
+<p>The free tier is <a href="https://docs.pushbullet.com/#push-limit">limited</a> to 500 pushes per month.</p>
+</div>
+<h3>Sensor</h3>
+<p>The <code>pushbullet</code> sensor platform reads messages from <a href="https://www.pushbullet.com/">Pushbullet</a>, a free service to send information between your phones, browsers, and friends. This sensor platform provides sensors that show the properties of the latest received Pushbullet notification mirror.</p>
+<h3>Setup</h3>
+<p>Notification Mirroring allows users to see their Android device’s notifications on their computer. It must be first enabled in the app and is currently only available on the Android platform. For more information, please see <a href="https://blog.pushbullet.com/2013/11/12/real-time-notification-mirroring-from-android-to-your-computer/">this announcement</a> on the Pushbullet Blog.</p>
+<p>Go to <a href="https://www.pushbullet.com/#settings/account">https://www.pushbullet.com/#settings/account</a> to retrieve your API key/access token.</p>
+<h3>Configuration</h3>
+<p>To enable the Pushbullet sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: pushbullet
+    api_key: YOUR_API_KEY
+    monitored_conditions:
+      - body
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Pushbullet API key.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Properties of the push to monitor.</p>
+</span></p><p class='default'>
+Default value: <p><code>body</code> and <code>title</code></p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='application_name' href='#application_name'></a> application_name</dt><dd><p class='desc'><span class='description'><p>The application sending the push.</p>
+</span></p></dd><dt><a class='title-link' name='body' href='#body'></a> body</dt><dd><p class='desc'><span class='description'><p>Body of the message.</p>
+</span></p></dd><dt><a class='title-link' name='notification_id' href='#notification_id'></a> notification_id</dt><dd><p class='desc'><span class='description'><p>ID of the notification.</p>
+</span></p></dd><dt><a class='title-link' name='notification_tag' href='#notification_tag'></a> notification_tag</dt><dd><p class='desc'><span class='description'><p>Tag (if the application sending supports it).</p>
+</span></p></dd><dt><a class='title-link' name='package_name' href='#package_name'></a> package_name</dt><dd><p class='desc'><span class='description'><p>Name of the sender’s package.</p>
+</span></p></dd><dt><a class='title-link' name='receiver_email' href='#receiver_email'></a> receiver_email</dt><dd><p class='desc'><span class='description'><p>The email of the push’s target.</p>
+</span></p></dd><dt><a class='title-link' name='sender_email' href='#sender_email'></a> sender_email</dt><dd><p class='desc'><span class='description'><p>The sender of the push.</p>
+</span></p></dd><dt><a class='title-link' name='source_device_iden' href='#source_device_iden'></a> source_device_iden</dt><dd><p class='desc'><span class='description'><p>ID of the sender’s device.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='description'><p>Title of the push.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='description'><p>Type of push.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>All properties will be displayed as attributes. The properties array are just for logging the sensor readings for multiple properties.</p>
+<h2>Notifications</h2>
+<p>The <code>pushbullet</code> notification platform sends messages to <a href="https://www.pushbullet.com/">Pushbullet</a>, a free service to send information between your phones, browsers, and friends. The free tier is <a href="https://docs.pushbullet.com/#push-limit">limited</a> to 500 pushes per month.</p>
+<p>To enable Pushbullet notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: pushbullet
+    api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Enter the API key for Pushbullet. Go to <a href="https://www.pushbullet.com/#settings/account">https://www.pushbullet.com/#settings/account</a> to retrieve your API key/access token.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The default value is <code>notify</code>. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd></dl>
+</div>
+<h3>Usage</h3>
+<p>Pushbullet is a notify platform and thus can be controlled by calling the notify service <a href="/integrations/notify/">as described here</a>. It will send a notification to all devices registered in the Pushbullet account. An optional <strong>target</strong> parameter can be given to Pushbullet to specify specific account’s devices, contacts or channels.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Prefix</th>
+<th>Suffix</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Device</td>
+<td><code>device/</code></td>
+<td>Device nickname</td>
+<td><code>device/iphone</code></td>
+</tr>
+<tr>
+<td>Channel</td>
+<td><code>channel/</code></td>
+<td>Channel tag</td>
+<td><code>channel/my_home</code></td>
+</tr>
+<tr>
+<td>Email</td>
+<td><code>email/</code></td>
+<td>Contact’s email address</td>
+<td><code>email/email@example.com</code></td>
+</tr>
+</tbody>
+</table>
+<p>If using targets, your own account’s email address functions as ‘send to all devices’. All targets are verified (if exists) before sending, except email.</p>
+<h4>Example service payload</h4>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;A message for many people&quot;,
+  &quot;target&quot;: [
+    &quot;device/telephone&quot;,
+    &quot;email/hello@example.com&quot;,
+    &quot;channel/my_home&quot;
+  ]
+}
+</code></pre>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<h3>URL support</h3>
+<pre><code class="language-yaml">action:
+  service: notify.NOTIFIER_NAME
+  data:
+    title: Send URL
+    message: This is an url
+    data:
+      url: google.com
+</code></pre>
+<ul>
+<li><strong>url</strong> (<em>Required</em>): Page URL to send with Pushbullet.</li>
+</ul>
+<h3>File support</h3>
+<pre><code class="language-yaml">action:
+  service: notify.NOTIFIER_NAME
+  data:
+    title: Send file
+    message: This is a file
+    data:
+      file: /path/to/my/file
+</code></pre>
+<ul>
+<li><strong>file</strong> (<em>Required</em>): File to send with Pushbullet.</li>
+</ul>
+<h3>File URL support</h3>
+<pre><code class="language-yaml">action:
+  service: notify.NOTIFIER_NAME
+  data:
+    title: Send file
+    message: This is a file URL
+    data:
+      file_url:  https://cdn.pixabay.com/photo/2014/06/03/19/38/test-361512_960_720.jpg
+</code></pre>
+<ul>
+<li><strong>file_url</strong> (<em>Required</em>): File to send with Pushbullet.</li>
+</ul>
+<h3>Single target</h3>
+<pre><code class="language-yaml">  action:
+    service: notify.NOTIFIER_NAME
+    data:
+      title: &quot;Send to one device&quot;
+      message: &quot;This only goes to one specific device&quot;
+      target: device/DEVICE_NAME
+</code></pre>
+<ul>
+<li><strong>target</strong>: Pushbullet device to receive the notification.</li>
+</ul>
+<div class='note'>
+<p>Don’t forget to <a href="/docs/configuration/basic/">whitelist external directories</a>, so Home Assistant has access to them.</p>
+</div>
+:ET

@@ -1,0 +1,25 @@
+I"ê	<p>This integration offers presence detection by examining devices connected to a <a href="https://keenetic.net/">Keenetic</a>
+Router running NDMS2 firmware.</p>
+<p>To use a Keenetic router in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: keenetic_ndms2
+    host: YOUR_HOST
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your router, e.g., 192.168.1.1.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The Telnet port of your router.</p>
+</span></p><p class='default'>
+Default value: <p>23</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username to login into the router (user should have read access to telnet interface of the router).</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for the specified username.</p>
+</span></p></dd><dt><a class='title-link' name='interface' href='#interface'></a> interface</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Ihe internal name of the interface to get devices connected to. For expert users only.</p>
+</span></p><p class='default'>
+Default value: <p>Home</p>
+</p></dd></dl>
+</div>
+<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+:ET

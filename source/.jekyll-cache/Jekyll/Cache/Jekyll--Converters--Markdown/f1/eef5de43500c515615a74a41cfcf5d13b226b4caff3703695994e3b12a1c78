@@ -1,0 +1,44 @@
+I"�<p>The <code>dht</code> sensor platform allows you to get the current temperature and humidity from a DHT11, DHT22 or AM2302 device.</p>
+<h2>Configuration</h2>
+<p>To use your DHTxx sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  platform: dht
+  sensor: DHT22
+  pin: 23
+  monitored_conditions:
+    - temperature
+    - humidity
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='sensor' href='#sensor'></a> sensor</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensor type, supported devices are DHT11, DHT22, and AM2302.</p>
+</span></p></dd><dt><a class='title-link' name='pin' href='#pin'></a> pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The pin the sensor is connected to.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>DHT Sensor</p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to monitor. Available conditions are only <em>temperature</em> and <em>humidity</em>.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>Temperature at the sensor’s location.</p>
+</span></p></dd><dt><a class='title-link' name='humidity' href='#humidity'></a> humidity</dt><dd><p class='desc'><span class='description'><p>Humidity level at the sensor’s location.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='temperature_offset' href='#temperature_offset'></a> temperature_offset</dt><dd><p class='desc'><span class='type'>(<span class='integer float'>integer | float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Add or subtract a value from the temperature.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='humidity_offset' href='#humidity_offset'></a> humidity_offset</dt><dd><p class='desc'><span class='type'>(<span class='integer float'>integer | float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Add or subtract a value from the humidity.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd></dl>
+</div>
+<p>The name of the pin to which the sensor is connected has different names on different platforms. ‘P8_11’ for Beaglebone, ‘23’ for Raspberry Pi.</p>
+<h3>Example</h3>
+<p>An example for a Raspberry Pi 3 with a DHT22 sensor connected to GPIO4 (pin 7):</p>
+<pre><code class="language-yaml">sensor:
+  - platform: dht
+    sensor: DHT22
+    pin: 4
+    temperature_offset: 2.1
+    humidity_offset: -3.2
+    monitored_conditions:
+      - temperature
+      - humidity
+</code></pre>
+:ET

@@ -1,0 +1,20 @@
+I"�<p>The <code>twitch</code> platform will allow you to monitor <a href="https://www.twitch.tv/">Twitch</a> channel status from within Home Assistant and setup automation based on the information.</p>
+<h2>Setup</h2>
+<p>Create a new app at “Register Your Application” in the <a href="https://glass.twitch.tv/console/apps">Twitch developer portal</a>. Then get the <strong>Client ID</strong> for the new app.</p>
+<h2>Configuration</h2>
+<p>To use Twitch with your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  platform: twitch
+  client_id: YOUR_TWITCH_CLIENT_ID
+  channels:
+    - channel1
+    - channel2
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Twitch client ID.</p>
+</span></p></dd><dt><a class='title-link' name='channels' href='#channels'></a> channels</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of channels names</p>
+</span></p></dd></dl>
+</div>
+:ET

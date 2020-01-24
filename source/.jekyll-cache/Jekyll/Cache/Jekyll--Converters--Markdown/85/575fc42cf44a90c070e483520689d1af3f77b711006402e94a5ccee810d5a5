@@ -1,0 +1,43 @@
+I"…<p>Create a simple DHCP server for your network and allow setting fixed IPs for devices.</p>
+<pre><code class="language-json">{
+  &quot;domain&quot;: &quot;mynetwork.local&quot;,
+  &quot;dns&quot;: [&quot;8.8.8.8&quot;, &quot;8.8.4.4&quot;],
+  &quot;networks&quot;: [
+    {
+      &quot;subnet&quot;: &quot;192.168.1.0&quot;,
+      &quot;netmask&quot;: &quot;255.255.255.0&quot;,
+      &quot;range_start&quot;: &quot;192.168.1.100&quot;,
+      &quot;range_end&quot;: &quot;192.168.1.200&quot;,
+      &quot;broadcast&quot;: &quot;192.168.1.255&quot;,
+      &quot;gateway&quot;: &quot;192.168.1.1&quot;,
+      &quot;interface&quot;: &quot;eth0&quot;
+    }
+  ],
+  &quot;hosts&quot;: [
+    {
+      &quot;name&quot;: &quot;webcam_xy&quot;,
+      &quot;mac&quot;: &quot;aa:bb:ee:cc&quot;,
+      &quot;ip&quot;: &quot;192.168.1.40&quot;
+    }
+  ]
+}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='domain' href='#domain'></a> domain</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your network domain name.</p>
+</span></p></dd><dt><a class='title-link' name='dns' href='#dns'></a> dns</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of DNS server for your network.</p>
+</span></p></dd><dt><a class='title-link' name='networks' href='#networks'></a> networks</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of network to provide DHCP.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='subnet' href='#subnet'></a> subnet</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your network schema.</p>
+</span></p></dd><dt><a class='title-link' name='netmask' href='#netmask'></a> netmask</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your network netmask.</p>
+</span></p></dd><dt><a class='title-link' name='range_start' href='#range_start'></a> range_start</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Start address for DHCP leases.</p>
+</span></p></dd><dt><a class='title-link' name='range_end' href='#range_end'></a> range_end</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>End address for DHCP leases.</p>
+</span></p></dd><dt><a class='title-link' name='broadcast' href='#broadcast'></a> broadcast</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Network broadcast address.</p>
+</span></p></dd><dt><a class='title-link' name='gateway' href='#gateway'></a> gateway</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A List of gateways.</p>
+</span></p></dd><dt><a class='title-link' name='interface' href='#interface'></a> interface</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Interface on that will be listen. Normally is <code>eth0</code> for ethernet wired connection and <code>wlan0</code> for wireless connection.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='hosts' href='#hosts'></a> hosts</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of fixed IPs for devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name/hostname of your device.</p>
+</span></p></dd><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Mac address of your device.</p>
+</span></p></dd><dt><a class='title-link' name='ip' href='#ip'></a> ip</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Fix IP address for device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

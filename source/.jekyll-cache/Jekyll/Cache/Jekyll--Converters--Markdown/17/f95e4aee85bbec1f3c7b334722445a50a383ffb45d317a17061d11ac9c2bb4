@@ -1,0 +1,34 @@
+I"L<p>The <code>llamalab_automate</code> platform uses Googles Cloud Messaging Services to push messages from Home Assistant to your Android device running the LlamaLab <a href="https://llamalab.com/automate/">Automate</a> app. This can serve as an alternative to Tasker + AutoRemote.</p>
+<p>Go to <a href="https://llamalab.com/automate/cloud/">https://llamalab.com/automate/cloud/</a> and create a new API key/secret.</p>
+<p>To add Automate to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: llamalab_automate
+    api_key: YOUR_API_KEY
+    to: YOUR_EMAIL_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Enter the API key for Automate.</p>
+</span></p></dd><dt><a class='title-link' name='to' href='#to'></a> to</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>E-Mail address the Automate-Fiber is configured for.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the target device to receive the messages.</p>
+</span></p></dd></dl>
+</div>
+<p>Receiving cloud messages in Automate:</p>
+<ol>
+<li>Add a new flow</li>
+<li>Insert block “Messaging -&gt; Cloud message receive”</li>
+<li>Insert block “Interface -&gt; Toast show”</li>
+<li>Connect OK from Flow beginning to IN of Cloud receive</li>
+<li>Connect OK from Cloud receive to Toast show</li>
+<li>Connect OK form Toast show to IN of Cloud receive</li>
+<li>Tap Cloud receive and select the E-Mail account as setup in your configuration</li>
+<li>Assign a variable name for the Payload</li>
+<li>Tap Toast show and set the message value to the variable you’ve specified</li>
+</ol>
+<p>If you have multiple devices paired to one Google Mail account and want to control each instance of Automate individually, you can set the notifier to target a specific device. To determine your devices name, add a Cloud Message send block to your flow, tap it and scroll all the way to the bottom. Device names are case sensitive.</p>
+:ET

@@ -1,0 +1,347 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Egardia - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to setup Egardia / Woonveilig within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/egardia/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Egardia">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/egardia/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to setup Egardia / Woonveilig within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Egardia">
+    <meta name="twitter:description" content="Instructions on how to setup Egardia / Woonveilig within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/egardia.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Egardia
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>egardia</code> platform enables the ability to control an <a href="https://egardia.com/" rel="external nofollow">Egardia</a>/<a href="https://woonveilig.nl" rel="external nofollow">Woonveilig</a> control panel. These alarm panels are known under different brand names across the world, including Woonveilig in the Netherlands. This was tested on the WL-1716, GATE-01, GATE-02 and GATE-03 versions of the Egardia/Woonveilig platform. Not only will you integrate your alarm control panel, supported sensors (door contacts at this moment) will be added automatically (hidden by default).</p>
+<p>You will need to know the IP of your alarm panel on your local network. Test if you can login to the panel by browsing to the IP address and log in using your Egardia/Woonveilig account.</p>
+<h2>
+<a class="title-link" name="basic-configuration" href="#basic-configuration"></a> Basic configuration</h2>
+<p>To enable the integration with your alarm panel, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">   # Example configuration.yaml entry
+   egardia:
+     host: YOUR_HOST
+     username: YOUR_USERNAME
+     password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The local IP address of the Egardia/Woonveilig alarm panel.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="username" href="#username"></a> username</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Username for the Egardia/Woonveilig account.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="password" href="#password"></a> password</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Password for Egardia/Woonveilig account.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="version" href="#version"></a> version</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The version of the Egardia system. <code>GATE-01</code>, <code>GATE-02</code> and <code>GATE-03</code> are currently supported.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>GATE-01</p>
+</dd>
+<dt>
+<a class="title-link" name="port" href="#port"></a> port</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port of the alarm panel.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>80</p>
+</dd>
+<dt>
+<a class="title-link" name="report_server_enabled" href="#report_server_enabled"></a> report_server_enabled</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enable reporting by server.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="report_server_port" href="#report_server_port"></a> report_server_port</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Port of the Egardia server.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>52010</p>
+</dd>
+<dt>
+<a class="title-link" name="report_server_codes" href="#report_server_codes"></a> report_server_codes</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Map of list of codes for the different states.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="arm" href="#arm"></a> arm</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of codes for the ‘arm’ state.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="disarm" href="#disarm"></a> disarm</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of codes for the ‘disarm’ state.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="armhome" href="#armhome"></a> armhome</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of codes for the ‘armhome’ state.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="triggered" href="#triggered"></a> triggered</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of codes for the ‘triggered’ state.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="ignore" href="#ignore"></a> ignore</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of codes that will be ignored.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<p>Note that this basic configuration will only enable you to read the armed/armed away/disarmed status of your alarm and will <strong>not</strong> update the status if the alarm is triggered. This is because of how Egardia built their system. The alarm triggers normally go through their servers.
+You can change this, however, using the following procedure. This is a more advanced (and more useful) configuration.</p>
+<div class="note">
+There seem to be multiple versions of software running on GATE-02 devices; we have received reports from GATE-02 users who successfully run this package in GATE-02 mode. Others have reported they needed to specify GATE-03 as their version to integrate their GATE-02.
+</div>
+<h2>
+<a class="title-link" name="advanced-configuration" href="#advanced-configuration"></a> Advanced configuration</h2>
+<ol>
+<li>Log in to your alarm system’s control panel. You will need to access http://[IP of your control panel]. You know this already since you need it in the basic configuration from above. Log in to the control panel with your Egardia/Woonveilig username and password.</li>
+<li>Once logged in, go to <em>System Settings</em>, <em>Report</em> and change the Server Address for your primary server to the IP or hostname of your Home Assistant machine. You can leave the port number set to 52010 or change it to anything you like. <strong>Make sure to change the settings of the primary server otherwise the messages will not come through. Note that this will limit (or fully stop) the number of alarm messages you will get through Egardia’s / Woonveilig services.</strong> Maybe, that is just what you want. Make sure to save your settings by selecting ‘OK’.</li>
+<li>The Egardia integration relies on capturing the status codes that your alarm emits when something happens (status change or trigger). These codes will be unique for every situation - i.e. the code emitted by the alarm when a sensor is triggered is unique to that sensor. Also, if you have multiple users or remotes, each remote has unique codes that are emitted by the alarm when status is changed using that remote or by that user. For the Egardia integration to work correctly you will need to capture the codes. To do this, on your Home Assistant machine run <code>$ sudo python3 egardiaserver.py</code>. Refer to the <a href="https://github.com/jeroenterheerdt/python-egardia" rel="external nofollow">python-egardia repository</a> for detailed documentation on parameters. This will receive status codes from your alarm control panel and display them. Record the codes shown as well as the status they relate to (see step 4 below). Make sure to change the status of your alarm to all states (disarm, arm, home) by all means possible (all users, remotes, web login, app) as well as trigger the alarm in all ways possible to get 100% coverage of all the codes the alarm system generates. You will need to run this script once and stop it once you have captured all the possible codes. Also, if you ever add users, remotes or sensors to your alarm system, make sure to re-run the script to capture the extra codes so you can update your configuration (see step 4 below). <strong>For comfort, before triggering the alarm it might be good to disable the siren temporarily (can be done in Panel Settings).</strong>
+</li>
+<li>Once you have the codes, update your <code>configuration.yaml</code>:
+<pre><code class="language-yaml"># Example configuration.yaml entry
+egardia:
+host: YOUR_HOST
+username: YOUR_USERNAME
+password: YOUR_PASSWORD
+  report_server_enabled: true
+  report_server_port: PORT_OF_EGARDIASERVER (optional, defaults to 52010)
+  report_server_codes:
+    arm: XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX
+    disarm: XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX
+    armhome: XXXXXXXXXXXXXXXX
+    triggered: XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX
+    ignore: XXXXXXXXXXXXXXXX
+</code></pre>
+</li>
+</ol>
+<p>Note that for all code groups (<em>arm</em>,<em>disarm</em>, etc) multiple codes can be entered since each sensor triggers with a different code and each user of the system has its own arm and disarm codes. Also note that your system will do regular system checks which will be reported as well. Since Home Assistant provides no way of handling them properly, you can enter those codes as <em>ignore</em> (again, multiple codes can be used here). The egardia integration will ignore these codes and continue returning the old status if it receives any of the codes that are listed as ignore. This is useful for example when you have armed your alarm at night: normally a system check will occur at least once during the night and if that code is not specified anywhere Home Assistant will set the status of the alarm to its default, which is unarmed. This is in fact wrong. Listing the code as ignore changes this behavior and Home Assistant will continue to show the status the alarm is in (disarm, arm, home, triggered) even when system checks occur.
+5. Test your setup and enjoy. The integration will update if the alarm status changes, including triggers. You can use this to build your own automations and send notifications as you wish. <em>Note</em>: previous versions required a separate egardiaserver to be set up. This is no longer necessary and corresponding system services can be removed (using systemctl).</p>
+<h2>
+<a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
+<p>The <code>egardia</code> platform allows you to get data from your <a href="https://www.egardia.com" rel="external nofollow">Egardia</a>/<a href="https://www.woonveilig.nl" rel="external nofollow">Woonveilig</a> binary sensors from within Home Assistant.
+Currently only door contacts are supported. IR sensors are not supported and will probably never be since their status cannot be read outside of the alarm control panel. Smoke sensors and others might be added but currently are not supported.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/egardia.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/egardia.png' /></div><div class="section">
+    <kb-alert-link integration="egardia"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: 0.65
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/egardia/'>/components/egardia/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#hub'>Hub</a>
+      </li><li>
+        <a href='/integrations/#alarm'>Alarm</a>
+      </li><li>
+        <a href='/integrations/#binary-sensor'>Binary Sensor</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

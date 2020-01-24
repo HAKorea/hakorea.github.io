@@ -1,0 +1,34 @@
+I"�<p>To enable Z-Wave, plug your Z-Wave USB stick into your Raspberry Pi 3 and add the following to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml">zwave:
+  usb_path: /dev/ttyACM0
+</code></pre>
+<h2>RAZBERRY BOARD</h2>
+<p>If you need GPIO on Raspberry Pi 3 for your Z-Wave module, add the following line into <code>config.txt</code> (you have to access that on the SD card directly. Simply plug it into your PC and edit it there. The <code>config.txt</code> is not accessible from your Hass.io system, you may need to open the SD card on a Windows or Linux system.):</p>
+<pre><code class="language-txt">dtoverlay=pi3-miniuart-bt
+</code></pre>
+<p>After that, you need to change <code>usb_path</code> to <code>/dev/ttyAMA0</code> in your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml">zwave:
+  usb_path: /dev/ttyAMA0
+</code></pre>
+<h2>HUSBZB-1</h2>
+<pre><code class="language-yaml">zwave:
+  usb_path: /dev/ttyUSB0
+
+zha:
+  usb_path: /dev/ttyUSB1
+  database_path: /config/zigbee.db
+</code></pre>
+<h2>Ubuntu and Debian based host system</h2>
+<p>If your instance is running on a Debian based system, e.g., Ubuntu, the ModemManager may cause unexpected issues.</p>
+<p>The ModemManager might be claiming or interfering with a USB Z-Wave stick, like the much used Aeotec ones. If you experience issues where the stick stops responding, needs to be re-plugged or Home Assistant needs a restart to get Z-Wave back, chances are high that the ModemManager is causing the issue.</p>
+<p>Execute the following command on your host system to disable the ModemManager:</p>
+<pre><code class="language-bash">systemctl disable ModemManager.service
+</code></pre>
+<h3>Finding the path</h3>
+<p>If the above defaults don’t work, you can check what hardware has been found using the <a href="/hassio/commandline/#hardware"><code>hassio</code> command</a>:</p>
+<pre><code class="language-bash">$ hassio hardware info
+</code></pre>
+<p>Or you can use the UI and look in the <em>System</em> section of the <em>Hass.io</em> menu. There you’ll find a <em>Hardware</em> button which will list all the hardware found.</p>
+<h2>Further reading</h2>
+<p>For more information on using Z-Wave, see the <a href="/docs/z-wave/">main documentation</a>.</p>
+:ET

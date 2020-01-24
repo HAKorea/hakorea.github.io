@@ -1,0 +1,142 @@
+I"M,<p>The <code>smtp</code> platform allows you to deliver notifications from Home Assistant to an e-mail recipient.</p>
+<p>To enable notification by e-mail in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: smtp
+    sender: YOUR_SENDER
+    recipient: YOUR_RECIPIENT
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='sender' href='#sender'></a> sender</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>E-mail address of the sender.</p>
+</span></p></dd><dt><a class='title-link' name='recipient' href='#recipient'></a> recipient</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Required)</span><span class='description'><p>E-mail address of the recipient of the notification. This can be a recipient address or a list of addresses for multiple recipients.</p>
+</span></p></dd><dt><a class='title-link' name='server' href='#server'></a> server</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>SMTP server which is used to end the notifications.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port that the SMTP server is using.</p>
+</span></p><p class='default'>
+Default value: <p>587</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The timeout in seconds that the SMTP server is using.</p>
+</span></p><p class='default'>
+Default value: <p>5</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Username for the SMTP account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Password for the SMTP server that belongs to the given username. If the password contains a colon it need to be wrapped in apostrophes.</p>
+</span></p></dd><dt><a class='title-link' name='encryption' href='#encryption'></a> encryption</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set mode for encryption, <code>starttls</code>, <code>tls</code> or <code>none</code>.</p>
+</span></p><p class='default'>
+Default value: <p>starttls</p>
+</p></dd><dt><a class='title-link' name='sender_name' href='#sender_name'></a> sender_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets a custom ‘sender name’ in the emails headers (<em>From</em>: Custom name <a href="mailto:example@mail.com">example@mail.com</a>).</p>
+</span></p></dd><dt><a class='title-link' name='debug' href='#debug'></a> debug</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enables Debug, e.g., True or False.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>A sample configuration entry for Google Mail.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: smtp
+    server: smtp.gmail.com
+    port: 587
+    timeout: 15
+    sender: john@gmail.com
+    encryption: starttls
+    username: john@gmail.com
+    password: thePassword
+    recipient:
+      - james@gmail.com
+      - bob@gmail.com
+    sender_name: My Home Assistant
+</code></pre>
+<p>Keep in mind that Google has some extra layers of protection which need special attention (Hint: ‘Less secure apps’). If you have 2-step verification enabled on your Google account, you’ll need to use <a href="https://support.google.com/mail/answer/185833?hl=en">an application-specific password</a>.</p>
+<p>To use the SMTP notification, refer to it in an automation or script like in this example:</p>
+<pre><code class="language-yaml">  burglar:
+    alias: Burglar Alarm
+    sequence:
+      - service: shell_command.snapshot
+      - delay:
+            seconds: 1
+      - service: notify.NOTIFIER_NAME
+        data:
+            title: 'Intruder alert'
+            message: 'Intruder alert at apartment!!'
+            data:
+                images:
+                    - /home/pi/snapshot1.jpg
+                    - /home/pi/snapshot2.jpg
+</code></pre>
+<p>The optional <code>images</code> field adds in-line image attachments to the email. This sends a text/HTML multi-part message instead of the plain text default.</p>
+<p>The optional <code>html</code> field makes a custom text/HTML multi-part message, allowing total freedom for sending rich html emails. In them, if you need to attach images, you can pass both arguments (<code>html</code> and <code>images</code>), the attachments will be joined with the basename of the images, so they can be included in the html page with <code>src=&quot;cid:image_name.ext&quot;</code>.</p>
+<pre><code class="language-yaml">  burglar:
+    alias: Burglar Alarm
+    sequence:
+      - service: shell_command.snapshot
+      - delay:
+            seconds: 1
+      - service: notify.NOTIFIER_NAME
+        data_template:
+            message: 'Intruder alert at apartment!!'
+            data:
+              images:
+                - /home/pi/snapshot1.jpg
+                - /home/pi/snapshot2.jpg
+              html: &gt;
+                &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+                &lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+                    &lt;head&gt;
+                        &lt;meta charset=&quot;UTF-8&quot;&gt;
+                        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+                        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+                        &lt;title&gt;Intruder alert&lt;/title&gt;
+                        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css&quot;&gt;
+                        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css&quot;&gt;
+                        &lt;style type=&quot;text/css&quot;&gt;
+                            @font-face {
+                              font-family: 'Open Sans';
+                              font-style: normal;
+                              font-weight: 300;
+                              src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTZS3E-kSBmtLoNJPDtbj2Pk.ttf) format('truetype');
+                            }
+                            h1,h2,h3,h4,h5,h6 {
+                                font-family:'Open Sans',Arial,sans-serif;
+                                font-weight:400;
+                                margin:10px 0
+                            }
+                        &lt;/style&gt;
+                    &lt;/head&gt;
+                    &lt;body&gt;
+                      &lt;div class=&quot;jumbotron jumbotron-fluid&quot; style=&quot;background-color: #f00a2d; color: white;&quot;&gt;
+                          &lt;div class=&quot;container py-0&quot;&gt;
+                              &lt;h1&gt;Intruder alert at apartment!!&lt;/h1&gt;
+                          &lt;/div&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&quot;container-fluid&quot;&gt;
+                        &lt;div class=&quot;row&quot;&gt;
+                          &lt;div class=&quot;col-xs-12 col-md-6 px-0&quot;&gt;
+                            &lt;img class=&quot;rounded&quot; style=&quot;width: 100%;&quot;
+                                alt=&quot;snapshot1&quot; src=&quot;cid:snapshot1.jpg&quot; /&gt;
+                          &lt;/div&gt;
+                          &lt;div class=&quot;col-xs-12 col-md-6 px-0&quot;&gt;
+                            &lt;img class=&quot;rounded&quot; style=&quot;width: 100%;&quot;
+                                alt=&quot;snapshot2&quot; src=&quot;cid:snapshot2.jpg&quot; /&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;br&gt;
+                      &lt;/div&gt;
+                    &lt;/body&gt;
+                    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+                    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+                &lt;/html&gt;
+
+</code></pre>
+<p>Obviously, this kind of complex html email reporting is done much more conveniently using Jinja2 templating from an <a href="/docs/ecosystem/appdaemon/tutorial/">AppDaemon app</a>, for example.</p>
+<p>This platform is fragile and not able to catch all exceptions in a smart way because of the large number of possible configuration combinations.</p>
+<p>A combination that will work properly is port 587 and STARTTLS. It’s recommended to enable STARTTLS, if possible.</p>
+<p>Keep in mind that if the password contains a colon, it needs to be wrapped in apostrophes in the <code>configuration.yaml</code> file.</p>
+<p>For Google Mail (smtp.gmail.com) an additional step in the setup process is needed. Google has some extra layers of protection
+which need special attention. By default, the usage by external applications, especially scripts, is limited. Visit the <a href="https://www.google.com/settings/security/lesssecureapps">Less secure apps</a> page and enable it.</p>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+:ET

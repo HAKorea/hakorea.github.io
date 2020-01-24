@@ -1,0 +1,382 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Google Maps Travel Time - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to add Google Maps travel time to Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/google_travel_time/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Google Maps Travel Time">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/google_travel_time/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to add Google Maps travel time to Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Google Maps Travel Time">
+    <meta name="twitter:description" content="Instructions on how to add Google Maps travel time to Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/google_travel_time.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Google Maps Travel Time
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>google_travel_time</code> sensor provides travel time from the <a href="https://developers.google.com/maps/documentation/distance-matrix/" rel="external nofollow">Google Distance Matrix API</a>.</p>
+<h2>
+<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
+<p>You need to register for an API key by following the instructions <a href="https://github.com/googlemaps/google-maps-services-python#api-keys" rel="external nofollow">here</a>. You only need to turn on the Distance Matrix API.</p>
+<p><a href="https://mapsplatform.googleblog.com/2018/05/introducing-google-maps-platform.html" rel="external nofollow">Google now requires billing</a> to be enabled (and a valid credit card loaded) to access Google Maps APIs. The Distance Matrix API is billed at US$10 per 1000 requests, however, a US$200 per month credit is applied (20,000 requests). By default, the sensor will update the travel time every 5 minutes, making approximately 288 calls per day. Note that at this rate, more than 2 sensors will likely exceed the free credit amount. If you need to run more than 2 sensors, consider changing the <a href="/docs/configuration/platform_options/#scan-interval">scan interval</a> to something longer than 5 minutes to stay within the free credit limit or update the sensors on-demand using an automation (see example below).</p>
+<p>A quota can be set against the API to avoid exceeding the free credit amount. Set the ‘Elements per day’ to a limit of 645 or less. Details on how to configure a quota can be found <a href="https://developers.google.com/maps/documentation/distance-matrix/usage-and-billing#set-caps" rel="external nofollow">here</a></p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To enable the sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  - platform: google_travel_time
+    api_key: XXXX_XXXXX_XXXXX
+    origin: Trondheim, Norway
+    destination: Paris, France
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your application’s API key (get one by following the instructions above). This key identifies your application for purposes of quota management.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="origin" href="#origin"></a> origin</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The starting point for calculating travel distance and time. You can supply one or more locations separated by the pipe character, in the form of an address, latitude/longitude coordinates, or a <a href="https://developers.google.com/places/place-id" rel="external nofollow">Google place ID</a>. When specifying the location using a Google place ID, the ID must be prefixed with <code>place_id:</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="destination" href="#destination"></a> destination</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>One or more locations to use as the finishing point for calculating travel distance and time. The options for the destinations parameter are the same as for the origins parameter, described above.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A name to display on the sensor. The default is “Google Travel Time - [Travel Mode]” where [Travel Mode] is the mode set in options for the sensor (see option “mode” below).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="travel_mode" href="#travel_mode"></a> travel_mode</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>You can choose between: <code>driving</code>, <code>walking</code>, <code>bicycling</code> or <code>transit</code>. This method is now deprecated, use <code>mode</code> under <code>options</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="options" href="#options"></a> options</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A dictionary containing parameters to add to all requests to the Distance Matrix API. A full listing of available options can be found <a href="https://developers.google.com/maps/documentation/distance-matrix/intro#RequestParameters" rel="external nofollow">here</a>.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="mode" href="#mode"></a> mode</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The travel mode used to calculate the directions/time. Can be <code>driving</code>, <code>bicycling</code>, <code>transit</code> or <code>walking</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>driving</p>
+</dd>
+<dt>
+<a class="title-link" name="language" href="#language"></a> language</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>You can choose from a lot of languages: <code>ar</code>, <code>bg</code>, <code>bn</code>, <code>ca</code>, <code>cs</code>, <code>da</code>, <code>de</code>, <code>el</code>, <code>en</code>, <code>es</code>, <code>eu</code>, <code>fa</code>, <code>fi</code>, <code>fr</code>, <code>gl</code>, <code>gu</code>, <code>hi</code>, <code>hr</code>, <code>hu</code>, <code>id</code>, <code>it</code>, <code>iw</code>, <code>ja</code>, <code>kn</code>, <code>ko</code>, <code>lt</code>, <code>lv</code>, <code>ml</code>, <code>mr</code>, <code>nl</code>, <code>no</code>, <code>pl</code>, <code>pt</code>, <code>pt-BR</code>, <code>pt-PT</code>, <code>ro</code>, <code>ru</code>, <code>sk</code>, <code>sl</code>, <code>sr</code>, <code>sv</code>, <code>ta</code>, <code>te</code>, <code>th</code>, <code>tl</code>, <code>tr</code>, <code>uk</code>, <code>vi</code>, <code>zh-CN</code> and <code>zh-TW</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="departure_time" href="#departure_time"></a> departure_time</dt>
+<dd><p class="desc"><span class="type">(<span class="time string">time | string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>Can be <code>now</code>, a Unix timestamp, or a 24 hour time string like <code>08:00:00</code>. If you provide a time string, it will be combined with the current date to get travel time for that moment.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="arrival_time" href="#arrival_time"></a> arrival_time</dt>
+<dd><p class="desc"><span class="type">(<span class="time string">time | string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>See notes above for <code>departure_time</code>. <code>arrival_time</code> cannot be <code>now</code>, only a Unix timestamp or time string. You can not provide both <code>departure_time</code> and <code>arrival_time</code>. If you do provide both, <code>arrival_time</code> will be removed from the request.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="avoid" href="#avoid"></a> avoid</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Indicate what google should avoid when calculating the travel time, you can choose from: <code>tolls</code>, <code>highways</code>, <code>ferries</code>, <code>indoor</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="transit_mode" href="#transit_mode"></a> transit_mode</dt>
+<dd><p class="desc"><span class="description"><p>If you opted for <code>transit</code> at <code>travel_mode</code>, you can use this variable to specify which public transport you want to use: <code>bus</code>, <code>subway</code>, <code>train</code>, <code>tram</code> or <code>rail</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="transit_routing_preference" href="#transit_routing_preference"></a> transit_routing_preference</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>for the travel time calculation for public transport you can also specify the preference for: <code>less_walking</code> or <code>fewer_transfers</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="units" href="#units"></a> units</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the unit for the sensor in metric or imperial, otherwise the default unit the same as the unit set in <code>unit_system:</code>.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="dynamic-configuration" href="#dynamic-configuration"></a> Dynamic Configuration</h2>
+<p>Tracking can be setup to track entities of type <code>device_tracker</code>, <code>zone</code>, <code>sensor</code> and <code>person</code>. If an entity is placed in the origin or destination then every 5 minutes when the platform updates it will use the latest location of that entity.</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  # Tracking entity to entity
+  - platform: google_travel_time
+    name: Phone To Home
+    api_key: XXXX_XXXXX_XXXXX
+    origin: device_tracker.mobile_phone
+    destination: zone.home
+
+  # Tracking entity to zone friendly name
+  - platform: google_travel_time
+    name: Home To Eddie's House
+    api_key: XXXX_XXXXX_XXXXX
+    origin: zone.home
+    destination: Eddies House    # Friendly name of a zone
+
+  # Tracking entity in imperial unit
+  - platform: google_travel_time
+    api_key: XXXX_XXXXX_XXXXX
+    destination: zone.home
+    options:
+      units: imperial    # 'metric' for Metric, 'imperial' for Imperial
+</code></pre>
+<h2>
+<a class="title-link" name="entity-tracking" href="#entity-tracking"></a> Entity Tracking</h2>
+<ul>
+<li>
+<strong>device_tracker</strong>
+<ul>
+<li>If state is a zone then the zone location will be used</li>
+<li>If state is not a zone it will look for the longitude and latitude attributes</li>
+</ul>
+</li>
+<li>
+<strong>zone</strong>
+<ul>
+<li>Uses the longitude and latitude attributes</li>
+<li>Can also be referenced by just the zone’s friendly name found in the attributes.</li>
+</ul>
+</li>
+<li>
+<strong>sensor</strong>
+<ul>
+<li>If state is a zone or zone friendly name then will use the zone location</li>
+<li>All other states will be passed directly into the Google API
+<ul>
+<li>This includes all valid locations listed in the <em>Configuration Variables</em>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>
+<a class="title-link" name="updating-sensors-on-demand-using-automation" href="#updating-sensors-on-demand-using-automation"></a> Updating sensors on-demand using Automation</h2>
+<p>You can also use the <code>homeassistant.update_entity</code> service to update the sensor on-demand. For example, if you want to update <code>sensor.morning_commute</code> every 2 minutes on weekday mornings, you can use the following automation:</p>
+<pre><code class="language-yaml">- id: update_morning_commute_sensor
+  alias: "Commute - Update morning commute sensor"
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    - condition: time
+      after: '08:00:00'
+      before: '11:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.morning_commute
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/google_travel_time.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/google_maps.png' /></div><div class="section">
+    <kb-alert-link integration="google_travel_time"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Introduced in release: 0.19
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/google_travel_time/'>/components/google_travel_time/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#transport'>Transport</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

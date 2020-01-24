@@ -1,0 +1,80 @@
+I"~<p>The <a href="https://www.roku.com/">Roku</a> integration allows integration of Roku, which will be automatically discovered if you enable the <a href="/integrations/discovery/">discovery component</a>.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Media Player</li>
+<li>Remote</li>
+</ul>
+<p>The <code>roku</code> integration can also be forced to load by adding the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+roku:
+  - host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Set the IP address of the Roku device.</p>
+</span></p></dd></dl>
+</div>
+<h2>Services</h2>
+<h3>Service <code>roku_scan</code></h3>
+<p>Scans the local network for Rokus. All found devices are presented as a persistent notification.</p>
+<h2>Remote</h2>
+<p>The <code>roku</code> remote platform allows you to send remote control buttons to a Roku device. It is automatically set up when a Roku is configured.</p>
+<p>At the moment, the following buttons are supported:</p>
+<ul>
+<li>back</li>
+<li>backspace</li>
+<li>channel_down</li>
+<li>channel_up</li>
+<li>down</li>
+<li>enter</li>
+<li>find_remote</li>
+<li>forward</li>
+<li>home</li>
+<li>info</li>
+<li>input_av1</li>
+<li>input_hdmi1</li>
+<li>input_hdmi2</li>
+<li>input_hdmi3</li>
+<li>input_hdmi4</li>
+<li>input_tuner</li>
+<li>left</li>
+<li>literal</li>
+<li>play</li>
+<li>power</li>
+<li>replay</li>
+<li>reverse</li>
+<li>right</li>
+<li>search</li>
+<li>select</li>
+<li>up</li>
+<li>volume_down</li>
+<li>volume_mute</li>
+<li>volume_up</li>
+</ul>
+<p>A typical service call for pressing several buttons looks like this.</p>
+<pre><code class="language-yaml">service: remote.send_command
+data:
+  entity_id: remote.roku
+  command:
+    - left
+    - left
+    - select
+</code></pre>
+<h2>Media Player</h2>
+<p>When the Home Assistant Roku integration is enabled and has found a Roku device, in the Home Assistant GUI the Roku media player will show a listing of the installed channels, or apps, under “source”. Select one and it will attempt to launch the channel on your Roku device. This action can also be automated, but it requires you to acquire an extra piece of information; the <code>appID</code> for the channel specific to your Roku. Although this information is gathered by the Roku integration, at the moment it is not exposed to the end user. This item might be added in a future release. For now though, you can easily get the information yourself. All you need to do is a simple GET API call on the same network as your device.</p>
+<p>The api calls are like this:</p>
+<pre><code class="language-txt">GET http:// ROKU_IP:8060/query/apps
+POST http://ROKU_IP:8060/launch/APP_ID
+
+YouTube example:
+POST http://YOUR_ROKU_IP:8060/launch/837?contentID=YOUR_YOUTUBE_VIDEOS_CONTENT_ID&amp;MediaType=live
+</code></pre>
+<p>More details can be found on the <a href="https://developer.roku.com/docs/developer-program/discovery/external-control-api.md">Roku dev pages</a></p>
+<p>To use this in Home Assistant, for instance in an automation, the format is as follows. Note that <code>source: </code> is the appID you discovered in the API call:</p>
+<pre><code class="language-yaml">action:
+- data:
+    entity_id: media_player.roku
+    source: 20197
+  service: media_player.select_source
+</code></pre>
+:ET

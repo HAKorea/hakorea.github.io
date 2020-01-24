@@ -1,0 +1,95 @@
+I"�<p>The <code>geonetnz_volcano</code> integration lets you use a GeoJSON feed provided by
+New Zealand’s <a href="https://www.geonet.org.nz/">GeoNet</a> with information
+about volcanoes in the New Zealand region.
+It shows information of those volcanoes filtered by distance to Home Assistant’s
+location.</p>
+<p>Entities are generated and updated automatically with each update
+from the feed. Each entity defines the <a href="https://www.geonet.org.nz/about/volcano/val">volcanic alert level</a>
+as its state.  Latitude and longitude of the volcano are included as attributes
+to show on the default map automatically.</p>
+<p>The data is updated every 5 minutes.</p>
+<p class='img'>
+  <img src='/images/integrations/geonetnz_volcano/map.png' />
+</p>
+<p class='img'>
+  <img src='/images/integrations/geonetnz_volcano/sensor.png' />
+</p>
+<div class='note'>
+<p>The material used by this integration is provided under the <a href="http://creativecommons.org/licenses/by/3.0/nz/">Creative Commons Attribution 3.0 New Zealand (CC BY 3.0 NZ) license</a>.
+It has only been modified for the purpose of presenting the material in Home Assistant.
+Please refer to the <a href="https://www.geonet.org.nz/disclaimer">creator’s disclaimer notice</a> and <a href="https://www.geonet.org.nz/policy">data policy</a> for more information.</p>
+<p>We acknowledge the New Zealand GeoNet project and its sponsors EQC, GNS Science and LINZ, for providing data/images used in this integration.</p>
+</div>
+<h2>Configuration</h2>
+<p>To integrate the GeoNet New Zealand Volcanic Alert Level feed use the <strong>Integrations</strong> feature
+in the GUI, you find it under <strong>Configurations</strong> -&gt; <strong>Integrations</strong>, or add the
+following line to your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geonetnz_volcano:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The radius around your location to monitor; defaults to 50 km or mi (depending on the unit system defined in your configuration).</p>
+</span></p><p class='default'>
+Default value: <p>50.0</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude of the coordinates around which volcanoes are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Latitude defined in your configuration.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude of the coordinates around which volcanoes are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Longitude defined in your configuration.</p>
+</p></dd></dl>
+</div>
+<h2>State Attributes</h2>
+<p>The following state attributes are available for each entity in addition to
+the standard ones:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latitude</td>
+<td>Latitude of the volcano.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Longitude of the volcano.</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>The external ID used in the feed to identify the volcano.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>Volcanic activity.</td>
+</tr>
+<tr>
+<td>hazards</td>
+<td>Most likely hazards.</td>
+</tr>
+<tr>
+<td>distance</td>
+<td>The distance in km or mi to Home Assistant’s location.</td>
+</tr>
+<tr>
+<td>last update</td>
+<td>Timestamp of the last update from the feed.</td>
+</tr>
+<tr>
+<td>last update successful</td>
+<td>Timestamp of the last successful update from the feed.</td>
+</tr>
+</tbody>
+</table>
+<h2>Full Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geonetnz_quakes:
+  radius: 100
+  latitude: -41.2
+  longitude: 174.7
+</code></pre>
+:ET

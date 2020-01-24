@@ -1,0 +1,54 @@
+I"Ž<p>The <code>imap_email_content</code> integration will read emails from an IMAP email server and report them as a state change within Home Assistant. This is useful if you have a device that only reports its state via email.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: imap_email_content
+    server: imap.gmail.com
+    port: 993
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    folder: YOUR_FOLDER
+    senders:
+      - example@gmail.com
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='server' href='#server'></a> server</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of the IMAP server.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port where the server is accessible.</p>
+</span></p><p class='default'>
+Default value: <p>993</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the IMAP sensor.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Username for the IMAP server.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Password for the IMAP server.</p>
+</span></p></dd><dt><a class='title-link' name='folder' href='#folder'></a> folder</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Folder to get mails from.</p>
+</span></p><p class='default'>
+Default value: <p>INBOX</p>
+</p></dd><dt><a class='title-link' name='senders' href='#senders'></a> senders</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of sender email addresses that are allowed to report state via email. Only emails received from these addresses will be processed.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>If specified this template will be used to render the state of the sensor. If a template is not supplied the message subject will be used for the sensor value. The following attributes will be supplied to the template.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='from' href='#from'></a> from</dt><dd><p class='desc'><span class='description'><p>The from address of the email.</p>
+</span></p></dd><dt><a class='title-link' name='body' href='#body'></a> body</dt><dd><p class='desc'><span class='description'><p>The body of the email.</p>
+</span></p></dd><dt><a class='title-link' name='subject' href='#subject'></a> subject</dt><dd><p class='desc'><span class='description'><p>The subject of the email.git.</p>
+</span></p></dd><dt><a class='title-link' name='date' href='#date'></a> date</dt><dd><p class='desc'><span class='description'><p>The date and time the email was sent.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Example</h2>
+<p>The following example shows the usage of the IMAP email content sensor to scan the subject of an email for text, in this case, an email from the APC SmartConnect service which tells whether the UPS is running on battery or not.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: imap_email_content
+    server: imap.gmail.com
+    name: house_electricity
+    port: 993
+    username: MY_EMAIL_USERNAME
+    password: MY_EMAIL_PASSWORD
+    senders:
+      - no-reply@smartconnect.apc.com
+    value_template: &gt;-
+      {% if 'UPS On Battery' in subject %}
+        power_out
+      {% elif 'Power Restored' in subject %}
+        power_on
+      {% endif %}
+</code></pre>
+<p>The same template structure can scan the date, body or sender for matching text before setting the state of the sensor.</p>
+:ET

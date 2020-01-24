@@ -1,0 +1,119 @@
+I"�<p>The <code>zwave</code> integration exposes multiple services to help maintain the network. All of these are available through the Z-Wave control panel.</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add_node</td>
+<td>Put the Z-Wave controller in inclusion mode. Allows you to add a new device to the Z-Wave network.</td>
+</tr>
+<tr>
+<td>add_node_secure</td>
+<td>Put the Z-Wave controller in secure inclusion mode. Allows you to add a new device with secure communications to the Z-Wave network.</td>
+</tr>
+<tr>
+<td>cancel_command</td>
+<td>Cancels a running Z-Wave command. If you have started an add_node or remove_node command, and decide you are not going to do it, then this must be used to stop the inclusion/exclusion command.</td>
+</tr>
+<tr>
+<td>change_association</td>
+<td>Add or remove an association in the Z-Wave network</td>
+</tr>
+<tr>
+<td>heal_network</td>
+<td>Tells the controller to “heal” the Z-Wave network. Basically asks the nodes to tell the controller all of their neighbors so the controller can re-figure out optimal routing.</td>
+</tr>
+<tr>
+<td>heal_node</td>
+<td>Tells the controller to “heal” a specific node on the network. Requires <code>node_id</code> field. You can also force return route update with <code>return_routes</code> field.</td>
+</tr>
+<tr>
+<td>print_config_parameter</td>
+<td>Prints Z-Wave node’s config parameter value to the (console) log.</td>
+</tr>
+<tr>
+<td>print_node</td>
+<td>Print all states of Z-Wave node.</td>
+</tr>
+<tr>
+<td>refresh_entity</td>
+<td>Refresh the Z-Wave entity by refreshing dependent values.</td>
+</tr>
+<tr>
+<td>refresh_node</td>
+<td>Refresh the Z-Wave node.</td>
+</tr>
+<tr>
+<td>refresh_node_value</td>
+<td>Refresh the specified value of a Z-Wave node.</td>
+</tr>
+<tr>
+<td>remove_node</td>
+<td>Put the Z-Wave controller in exclusion mode. Allows you to remove a device from the Z-Wave network.</td>
+</tr>
+<tr>
+<td>rename_node</td>
+<td>Sets a node’s name. Requires a <code>node_id</code> and <code>name</code> field.</td>
+</tr>
+<tr>
+<td>rename_value</td>
+<td>Sets a value’s name. Requires a <code>node_id</code>, <code>value_id</code>, and <code>name</code> field.</td>
+</tr>
+<tr>
+<td>remove_failed_node</td>
+<td>Remove a failed node from the network. The Node should be on the controller’s Failed Node List, otherwise this command will fail.</td>
+</tr>
+<tr>
+<td>replace_failed_node</td>
+<td>Replace a failed device with another. If the node is not in the controller’s Failed Node List, or the node responds, this command will fail.</td>
+</tr>
+<tr>
+<td>reset_node_meters</td>
+<td>Reset a node’s meter values. Only works if the node supports this.</td>
+</tr>
+<tr>
+<td>set_config_parameter</td>
+<td>Lets the user set a config parameter to a node. NOTE: Use the parameter option’s <code>label</code> string as the <code>value</code> for list parameters (e.g., <code>&quot;value&quot;: &quot;Off&quot;</code>). For all other parameters use the relevant integer <code>value</code> (e.g., <code>&quot;value&quot;: 1</code>).</td>
+</tr>
+<tr>
+<td>set_node_value</td>
+<td>Set the specified value of a Z-Wave node.</td>
+</tr>
+<tr>
+<td>soft_reset</td>
+<td>Tells the controller to do a “soft reset.” This is not supposed to lose any data, but different controllers can behave differently to a “soft reset” command.</td>
+</tr>
+<tr>
+<td>start_network</td>
+<td>Starts the Z-Wave network.</td>
+</tr>
+<tr>
+<td>stop_network</td>
+<td>Stops the Z-Wave network.</td>
+</tr>
+<tr>
+<td>test_network</td>
+<td>Tells the controller to send no-op commands to each node and measure the time for a response. In theory, this can also bring back nodes which have been marked “presumed dead.”</td>
+</tr>
+<tr>
+<td>test_node</td>
+<td>Tells the controller to send no-op command(s) to a specific node. Requires <code>node_id</code> field. You can specify amount of test_messages to send by specifying it with <code>messages</code> field. In theory, this could bring back nodes marked as “presumed dead”</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>soft_reset</code> and <code>heal_network</code> commands can be used to help keep a Z-Wave network running reliably. This is a configuration option for the <code>zwave</code> component. The option defaults to <code>false</code> but can be enabled by setting <code>autoheal</code> to true. This, however, is bad practice since it introduces overhead that can be avoided since you only need to do a <code>heal_network</code> whenever one of the following actions are done:</p>
+<ul>
+<li>Adding/Removing a new node</li>
+<li>Moving a node around</li>
+<li>Moving the Controller</li>
+<li>Removing a Dead Node</li>
+</ul>
+<div class='note'>
+<p>Using the <code>soft_reset</code> function with some Z-Wave controllers can cause the Z-Wave network to hang.</p>
+</div>
+<p>To trigger a <code>heal_network</code>, one can always use <em>Settings -&gt; Z-Wave Network Management -&gt; Heal Network</em> from the GUI whenever one of the above actions took place.</p>
+:ET

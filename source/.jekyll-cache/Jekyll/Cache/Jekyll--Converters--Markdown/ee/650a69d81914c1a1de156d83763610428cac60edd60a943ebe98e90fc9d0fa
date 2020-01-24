@@ -1,0 +1,58 @@
+I"º<p>The <code>imap</code> integration is observing your <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol">IMAP server</a> and reporting the amount of unread emails.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: imap
+    server: YOUR_IMAP_SERVER
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='server' href='#server'></a> server</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of the IMAP server.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port where the server is accessible.</p>
+</span></p><p class='default'>
+Default value: <p>993</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the IMAP sensor.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Username for the IMAP server.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Password for the IMAP server.</p>
+</span></p></dd><dt><a class='title-link' name='folder' href='#folder'></a> folder</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IMAP folder to watch.</p>
+</span></p><p class='default'>
+Default value: <p>inbox</p>
+</p></dd><dt><a class='title-link' name='search' href='#search'></a> search</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IMAP search to perform on the watched folder.</p>
+</span></p><p class='default'>
+Default value: <p>UnSeen UnDeleted</p>
+</p></dd><dt><a class='title-link' name='charset' href='#charset'></a> charset</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The character set used for this connection.</p>
+</span></p><p class='default'>
+Default value: <p>utf-8</p>
+</p></dd></dl>
+</div>
+<h3>Configuring IMAP Searches</h3>
+<p>By default, this integration will count unread emails. By configuring the search string, you can count other results, for example:</p>
+<ul>
+<li><code>ALL</code> to count all emails in a folder</li>
+<li><code>FROM</code>, <code>TO</code>, <code>SUBJECT</code> to find emails in a folder (see <a href="https://tools.ietf.org/html/rfc3501#section-6.4.4">IMAP RFC for all standard options</a>)</li>
+<li><a href="https://developers.google.com/gmail/imap/imap-extensions">Gmailâ€™s IMAP extensions</a> allow raw Gmail searches, like <code>X-GM-RAW &quot;in: inbox older_than:7d&quot;</code> to show emails older than one week in your inbox. Note that raw Gmail searches will ignore your folder configuration and search all emails in your account!</li>
+</ul>
+<h4>Full configuration sample with search</h4>
+<pre><code class="language-yaml"># Example configuration.yaml entry for gmail
+sensor:
+  - platform: imap
+    server: imap.gmail.com
+    port: 993
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    search: FROM &lt;sender@email.com&gt;, SUBJECT &lt;subject here&gt;
+
+# Example configuration.yaml entry for Office 365
+sensor:
+  - platform: imap
+    server: outlook.office365.com
+    port: 993
+    username: email@address.com
+    password: password
+    search: FROM &lt;sender@email.com&gt;, SUBJECT &lt;subject here&gt;
+    charset: US-ASCII
+</code></pre>
+:ET

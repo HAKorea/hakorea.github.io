@@ -1,0 +1,315 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Yi Home Cameras - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/yi/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Yi Home Cameras">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/yi/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Yi Home Cameras">
+    <meta name="twitter:description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/yi.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Yi Home Cameras
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>yi</code> camera platform allows you to utilize <a href="https://www.yitechnology.com/" rel="external nofollow">Yi Home Cameras</a> within Home Assistant. Specifically, this platform supports the line of Yi Home Cameras that are based on the Hi3518e Chipset. This includes:</p>
+<ul>
+<li>Yi Home 17CN / 27US / 47US</li>
+<li>Yi 1080p Home</li>
+<li>Yi Dome</li>
+<li>Yi 1080p Dome</li>
+</ul>
+<p>To successfully implement this platform, the Home Assistant host should be capable of multiple simultaneous reads. For every concurrent Home Assistant user, a connection will be made to the camera every 10 seconds. This should normally not be a problem.</p>
+<h2>
+<a class="title-link" name="preparing-the-device" href="#preparing-the-device"></a> Preparing the Device</h2>
+<h3>
+<a class="title-link" name="installing-alternative-firmware" href="#installing-alternative-firmware"></a> Installing Alternative Firmware</h3>
+<p>In order to integrate the camera with Home Assistant, it is necessary to install a custom firmware on the device. Instructions for doing so can be found via the <a href="https://github.com/shadow-1/yi-hack-v3" rel="external nofollow">yi-hack-v3 GitHub project</a> or if you have a 2019 version camera <a href="https://github.com/roleoroleo/yi-hack-6FUS_4.5.0" rel="external nofollow">yi-hack-6FUS_4.5.0 GitHub project</a>.</p>
+<p>Once installed, please ensure that you have enabled FTP and Telnet on your device.</p>
+<div class="note warning">
+<p>Currently, version 0.1.4-beta2 of the custom firmware is the highest supported without having to make additional modifications. Firmwares higher than this version use <a href="https://www.pureftpd.org/project/pure-ftpd" rel="external nofollow">Pure-FTPd</a>, which has a bug that prevents FFmpeg from correctly rendering video files. To use higher firmware versions you must also follow <a href="https://github.com/shadow-1/yi-hack-v3/issues/129#issuecomment-361723075" rel="external nofollow">this workaround</a> to revert back to ftpd.</p>
+</div>
+<div class="note warning">
+<p>If you use a version higher than 0.1.4-beta2, you can simply solve the FTP issue by creating a symlink to <code>/tmp</code> in the <code>/home/yi-hack-v4</code> directory (the directory name can be different depending on the version which you use). For example, access the Yi camera via SSH and type command: <code>ln -s /tmp tmp</code>.</p>
+</div>
+<div class="note warning">
+Raspbian users: don't forget to install ffmpeg support on your platform, otherwise, you'll not see video.
+</div>
+<div class="note warning">
+<p>Some alternative Yi firmwares enable an experimental RTSP server, which will allow you to connect to your camera via other Home Assistant camera platforms. However, this RTSP server disables the ability to use the supremely-useful Yi Home app. In order to maintain both Home Assistant compatibility <em>and</em> the native app, this platform retrieves videos via FTP.</p>
+</div>
+<h3>
+<a class="title-link" name="changing-the-ftp-password" href="#changing-the-ftp-password"></a> Changing the FTP Password</h3>
+<p>Once the custom firmware is installed, a password must be added to the FTP
+server. To do so:</p>
+<ol>
+<li>Telnet into your camera: <code>telnet &lt;IP ADDRESS&gt;</code>.</li>
+<li>Enter <code>root</code> as the username and <code>&lt;blank&gt;</code> as the password.</li>
+<li>Type <code>passwd</code> and hit <code>&lt;Enter&gt;</code>.</li>
+<li>Enter your new password twice.</li>
+<li>Log out of Telnet.</li>
+</ol>
+<h2>
+<a class="title-link" name="configuring-the-platform" href="#configuring-the-platform"></a> Configuring the Platform</h2>
+<p>To enable the platform, add the following lines to your<code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">camera:
+  - platform: yi
+    name: Camera
+    host: '192.168.1.100'
+    password: my_password_123
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A human-friendly name for the camera.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address or hostname of the camera.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="password" href="#password"></a> password</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password for the FTP server running on the camera. Can be any string as the current firmware doesn’t allow setting FTP passwords.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="path" href="#path"></a> path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The path to the raw MP4 files.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>/media/mmcblk0p1/record</p>
+</dd>
+<dt>
+<a class="title-link" name="username" href="#username"></a> username</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The user that can access the FTP server.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>root</p>
+</dd>
+<dt>
+<a class="title-link" name="ffmpeg_arguments" href="#ffmpeg_arguments"></a> ffmpeg_arguments</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Extra options to pass to <code>ffmpeg</code> (e.g., image quality or video filter options).</p>
+</span></p></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="image-quality" href="#image-quality"></a> Image quality</h2>
+<p>Any option supported by <a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a> can be utilized via the <code>ffmpeg_arguments</code> configuration parameter.</p>
+<p>One particularly useful adjustment deals with video size. Since Yi videos are fairly large (especially on the 1080p cameras), the following configuration will bring them down to a manageable size:</p>
+<pre><code class="language-yaml">camera:
+  - platform: yi
+    name: My Camera
+    host: '192.168.1.100'
+    password: my_password_123
+    path: /home/camera/feed
+    ffmpeg_arguments: '-vf scale=800:450'
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/yi.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/yi.png' /></div><div class="section">
+    <kb-alert-link integration="yi"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: 0.56
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/yi/'>/components/yi/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#camera'>Camera</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

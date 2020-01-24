@@ -1,0 +1,18 @@
+I"�<p>The <a href="https://supla.org/">Supla</a> is an Open Source home automation system for ESP8266 based devices. It has its own set of protocols, it’s own firmware and commercially available devices (produced for example by <a href="https://supla.zamel.pl/">Zamel</a>)</p>
+<p>Currently only covers (shutters in Supla’s lingo) and switches are supported, but, thanks to comprehensive and universal REST API, it’s pretty easy to add more.</p>
+<p>Right now it’s impossible to add single devices – all of them are discovered from Supla Cloud’s servers or yours.</p>
+<h2>Configuration</h2>
+<p>To use Supla devices in your installation, add the following to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml">supla:
+  servers:
+    - server: svr1.supla.org
+      access_token: your_really_long_access_token
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='servers' href='#servers'></a> servers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='description'><p>List of server configurations.</p>
+</span></p></dd><dt><a class='title-link' name='server' href='#server'></a> server</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Address of your Supla Cloud server (either IP or DNS name)</p>
+</span></p></dd><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>An access token for REST API configuration. Can be acquired from http[s]://your.server.org/integrations/tokens (please add at least Channel’s Read and Action Execution permissions).</p>
+</span></p></dd></dl>
+</div>
+:ET

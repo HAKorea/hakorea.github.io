@@ -1,0 +1,42 @@
+I"�<p>The <code>braviatv</code> platform allows you to control a <a href="https://www.sony.com/">Sony Bravia TV</a>.</p>
+<p>Almost all <a href="https://info.tvsideview.sony.net/en_ww/home_device.html#bravia">Sony Bravia TV 2013 and newer</a> are supported. A more generic method for older TVs connected to a Raspberry Pi with HDMI-CEC is explained further below.</p>
+<p>You will need to configure your TV to allow the Home Assistant for remote usage. To do that, ensure that your TV is turned on. Open the configuration popup on Home Assistant and enter a random PIN (for example 0000). After that, the TV will show you a PIN and Home Assistant will allow you to re-enter that PIN. Enter the PIN shown on your TV and Home Assistant will be able to control your Sony Bravia TV.</p>
+<p>To add a TV to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: braviatv
+    host: 192.168.0.10
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP of the Sony Bravia TV, e.g., 192.168.0.10</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use on the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>Sony Bravia TV</p>
+</p></dd></dl>
+</div>
+<p>You are also able to configure the TV manually by placing a <code>bravia.conf</code> file in your <a href="/docs/configuration/">configuration directory</a> with the following information - please update the details to match your setup:</p>
+<pre><code class="language-json">{&quot;192.168.0.10&quot;: {&quot;pin&quot;: &quot;7745&quot;, &quot;mac&quot;: &quot;ac:1e:0a:e1:0c:01&quot;}}
+</code></pre>
+<h2>For TVs older than 2013</h2>
+<p>Users of TVs older than 2013 have another option for controlling their TV via Home Assistant.</p>
+<h3>Using HDMI-CEC</h3>
+<p>If you have a Raspberry Pi connected to your TV:</p>
+<pre><code class="language-yaml">switch:
+  - platform: command_line
+    switches:
+      tv_rpi:
+        command_on: ssh root@[IP] &quot;echo 'on 0' | cec-client -s&quot;
+        command_off: ssh root@[IP] &quot;echo 'standby 0' | cec-client -s&quot;
+        command_state: ssh root@[IP] &quot;echo 'pow 0' | cec-client -s |grep 'power status:'&quot;
+        value_template: '{{ value == &quot;power status: on&quot; }}'
+</code></pre>
+<p>Using <code>cec-client</code> is a great method to turn your TV off/on, however the trade off is if you’re using Kodi, it will no longer be able to control your TV using the TV Remote.</p>
+<p>This is because only one process can control the CEC functionality within the Raspberry Pi at a time and running the above commands terminates the functionality inside libCEC within Kodi. Kodi must be restarted for TV remove functionality to work again.</p>
+<p><strong>Workaround:</strong></p>
+<p>If your desire is only to turn on your TV, the following “workaround” may be desirable:</p>
+<p>Change the ‘on’ command to a restart for Kodi. This doesn’t reboot the Kodi device.</p>
+<p>Restarting Kodi will trigger a HDMI-CEC event to bring the TV out of standby. The following can replace your TV ‘on’ command.</p>
+<pre><code class="language-yaml">command_on: ssh root@[IP] &quot;systemctl restart kodi&quot;
+</code></pre>
+:ET

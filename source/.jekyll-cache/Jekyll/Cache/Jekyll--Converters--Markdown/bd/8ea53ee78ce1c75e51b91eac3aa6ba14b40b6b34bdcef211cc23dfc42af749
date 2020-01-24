@@ -1,0 +1,33 @@
+I"Ì	<p>The <code>torque</code> platform will allow you to monitor <a href="https://torque-bhp.com/">Torque</a> data relayed from a Bluetooth OBD2 stick via the Torque mobile application.</p>
+<h2>Setup</h2>
+<p>To use Torque sensors with your installation, you must configure both the Torque mobile application and Home Assistant.</p>
+<h3>Torque application</h3>
+<p>In <strong>Settings</strong> -&gt; <strong>Data Logging &amp; Upload</strong>:</p>
+<p>Under the <strong>Logging Preferences</strong> header:</p>
+<ul>
+<li>Touch <strong>Select what to log</strong>, activate the menu in the upper right, and select <strong>Add PID to log</strong>.</li>
+<li>Select items of interest.</li>
+</ul>
+<p>Under the <strong>Realtime Web Upload</strong> header:</p>
+<ul>
+<li>Check <strong>Upload to web-server</strong>.</li>
+<li>Enter <code>http://HOST:PORT/api/torque?api_password=YOUR_PASSWORD</code> as the <strong>Web-server URL</strong>, where <code>HOST</code> and <code>PORT</code> are your externally accessible Home Assistant HTTP host and port and YOUR_PASSWORD is your Home Assistantâ€™s <a href="/integrations/http/">API password</a>. It highly recommended that you protect your Home Assistant instance with <a href="/docs/ecosystem/certificates/">SSL/TSL</a>.</li>
+<li>Enter an email address in <strong>User Email Address</strong>.</li>
+<li>Optionally set the <strong>Web Logging Interval</strong>. The 2-second default may quickly fill up the Home Assistant history database.</li>
+</ul>
+<h3>Configuration</h3>
+<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: torque
+    email: your_configured@email.com
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Vehicle name (your choice).</p>
+</span></p><p class='default'>
+Default value: <p>vehicle</p>
+</p></dd><dt><a class='title-link' name='email' href='#email'></a> email</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Email address configured in Torque application.</p>
+</span></p></dd></dl>
+</div>
+:ET

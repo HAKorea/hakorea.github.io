@@ -1,0 +1,537 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Insteon - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to set up an Insteon Modem (PLM or Hub) locally within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/insteon/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Insteon">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/insteon/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to set up an Insteon Modem (PLM or Hub) locally within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Insteon">
+    <meta name="twitter:description" content="Instructions on how to set up an Insteon Modem (PLM or Hub) locally within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/insteon.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Insteon
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>This integration adds “local push” support for INSTEON Modems allowing linked INSTEON devices to be used within Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Cover</li>
+<li>Fan</li>
+<li>Light</li>
+<li>Sensor</li>
+<li>Switch</li>
+</ul>
+<p>Device support is provided by the underlying <a href="https://github.com/nugget/python-insteonplm" rel="external nofollow">insteonplm</a> package. It is known to work with the <a href="https://www.insteon.com/powerlinc-modem-usb" rel="external nofollow">2413U</a> USB and <a href="https://www.insteon.com/powerlinc-modem-serial" rel="external nofollow">2412S</a> RS242 flavors of PLM and the <a href="https://www.smarthome.com/insteon-2448a7-portable-usb-adapter.html" rel="external nofollow">2448A7</a> USB stick. It has also been tested to work with the <a href="https://www.insteon.com/support-knowledgebase/2014/9/26/insteon-hub-owners-manual" rel="external nofollow">2242</a> and <a href="https://www.insteon.com/insteon-hub/" rel="external nofollow">2245</a> Hubs.</p>
+<h3>
+<a class="title-link" name="insteon-modem-configuration" href="#insteon-modem-configuration"></a> INSTEON Modem configuration</h3>
+<p>To set up an INSTEON Powerline Modem (PLM) device such as the <a href="https://www.insteon.com/powerlinc-modem-usb" rel="external nofollow">2413U</a>, use the following configuration:</p>
+<pre><code class="language-yaml"># PLM configuration variables
+insteon:
+  port: SERIAL_PORT
+</code></pre>
+<p>To set up an INSTEON Hub model <a href="https://www.insteon.com/insteon-hub/" rel="external nofollow">2245</a>, use the following configuration:</p>
+<pre><code class="language-yaml"># Hub 2245 configuration variables
+insteon:
+  host: HOST
+  ip_port: IP_PORT
+  username: USERNAME
+  password: PASSWORD
+  hub_version: 2
+</code></pre>
+<p>To set up an INSTEON Hub model <a href="https://www.insteon.com/support-knowledgebase/2014/9/26/insteon-hub-owners-manual" rel="external nofollow">2242</a>, use the following configuration:</p>
+<pre><code class="language-yaml"># Hub 2242 configuration variables
+insteon:
+  host: HOST
+  hub_version: 1
+</code></pre>
+<p>Additional configuration items are available:</p>
+<pre><code class="language-yaml">insteon:
+  &lt;PLM or Hub configuration&gt;
+  device_override:
+     - address: ADDRESS
+       cat: CATEGORY
+       subcat: SUBCATEGORY
+       firmware: FIRMWARE
+       product_key: PRODUCT_KEY
+  x10_devices:
+     - housecode: HOUSECODE
+       unitcode: UNITCODE
+       platform: PLATFORM
+       steps: STEPS
+  x10_all_units_off: HOUSECODE
+  x10_all_lights_on: HOUSECODE
+  x10_all_lights_off: HOUSECODE
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="port" href="#port"></a> port</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The serial or USB port for your device, e.g., <code>/dev/ttyUSB0</code> or <code>COM3</code>. Required for PLM setup.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The host name or IP address of the Hub. Required with Hub.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="ip_port" href="#ip_port"></a> ip_port</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP port number of the Hub. For Hub model [2245] (i.e. Hub version 2) the default port is 25105. For the Hub model [2242] (i.e. Hub version 1) the default port is 9761. Use the Insteon app to find the port number for your specific Hub. Optional with Hub.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="username" href="#username"></a> username</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username to login in to the local Hub. You can find your Hub username on the bottom of the Hub or you can use the Insteon app. Required for Hub version 2 setup.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="password" href="#password"></a> password</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The password to login in to the local Hub. You can find your Hub password on the bottom of the Hub or you can use the Insteon app. Required for Hub version 2 setup.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="hub_version" href="#hub_version"></a> hub_version</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Hub version number where model [2242] is Hub version 1 and model [2245] is Hub version 2. Required for Hub version 1 setup.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>2</p>
+</dd>
+<dt>
+<a class="title-link" name="device_override" href="#device_override"></a> device_override</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Override the default device definition.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="address" href="#address"></a> address</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>is found on the device itself in the form 1A.2B.3C or 1a2b3c.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="cat" href="#cat"></a> cat</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>is found in the back of the device’s User Guide in the form of 0x00 - 0xff.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="subcat" href="#subcat"></a> subcat</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>is found in the back of the device’s User Guide in the form of 0x00 - 0xff.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="firmware" href="#firmware"></a> firmware</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>are more advanced options and will typically not be used.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="product_key" href="#product_key"></a> product_key</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>are more advanced options and will typically not be used.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="x10_devices" href="#x10_devices"></a> x10_devices</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Define X10 devices to control or respond to.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="housecode" href="#housecode"></a> housecode</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>is the X10 housecode values a - p</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="unitcode" href="#unitcode"></a> unitcode</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>is the X10 unit code values 1 - 16</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="platform" href="#platform"></a> platform</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>is the Home Assistant Platform to associate the device with. The following platforms are supported: binary_sensor: Used for on/off devices or keypad buttons that are read-only. light: Used for dimmable X10 devices. switch: Used for On/Off X10 devices.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="dim_steps" href="#dim_steps"></a> dim_steps</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>is the number of dim/bright steps the device supports. Used for dimmable X10 devices only.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>22</p>
+</dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="x10_all_units_off" href="#x10_all_units_off"></a> x10_all_units_off</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Creates a binary_sensor that responds to the X10 standard command for All Units Off.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="x10_all_lights_on" href="#x10_all_lights_on"></a> x10_all_lights_on</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Creates a binary_sensor that responds to the X10 standard command for All Lights On</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="x10_all_lights_off" href="#x10_all_lights_off"></a> x10_all_lights_off</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Creates a binary_sensor that responds to the X10 standard command for All Lights Off</p>
+</span></p></dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="autodiscovery" href="#autodiscovery"></a> Autodiscovery</h3>
+<p>The first time autodiscovery runs, the duration may require up to 20 seconds per device. Subsequent startups will occur much quicker using cached device information. If a device is not recognized during autodiscovery, you can add the device to the <strong>device_override</strong> configuration.</p>
+<p>In order for a device to be discovered, it must be linked to the INSTEON Modem as either a responder or a controller.</p>
+<h3>
+<a class="title-link" name="linking-devices-to-the-insteon-modem" href="#linking-devices-to-the-insteon-modem"></a> Linking Devices to the INSTEON Modem</h3>
+<p>In order for any two Insteon devices to talk with one another, they must be linked. For an overview of device linking, please read the Insteon page on <a href="https://www.insteon.com/support-knowledgebase/2015/1/28/understanding-linking" rel="external nofollow">understanding linking</a>. The Insteon Modem module supports All-Linking through <a href="/docs/tools/dev-tools/">Development Tools</a> service calls. The following services are available:</p>
+<ul>
+<li>
+<strong>insteon.add_all_link</strong>: Puts the Insteon Modem (IM) into All-Linking mode. The IM can be set as a controller or a responder. If the IM is a controller, put the IM into linking mode then press the SET button on the device. If the IM is a responder, press the SET button on the device then put the IM into linking mode.</li>
+<li>
+<strong>insteon.delete_all_link</strong>: Tells the Insteon Modem (IM) to remove an All-Link record from the All-Link Database of the IM and a device. Once the IM is set to delete the link, press the SET button on the corresponding device to complete the process.</li>
+<li>
+<strong>insteon.load_all_link_database</strong>: Load the All-Link Database for a device. WARNING - Loading a device All-Link database may take a LONG time and may need to be repeated to obtain all records.</li>
+<li>
+<strong>insteon.print_all_link_database</strong>: Print the All-Link Database for a device. Requires that the All-Link Database is loaded first.</li>
+<li>
+<strong>insteon.print_im_all_link_database</strong>: Print the All-Link Database for the INSTEON Modem (IM).</li>
+</ul>
+<p>If you are looking for more advanced options, you can use the <a href="https://github.com/nugget/python-insteonplm#command-line-interface" rel="external nofollow">insteonplm_interactive</a> command line tool that is distributed with the <a href="https://github.com/nugget/python-insteonplm" rel="external nofollow">insteonplm</a> Python module. Please see the documentation on the <a href="https://github.com/nugget/python-insteonplm" rel="external nofollow">insteonplm</a> GitHub site. Alternatively, you can download <a href="https://www.smarthome.com/houselinc.html" rel="external nofollow">HouseLinc</a> which runs on any Windows PC, or you can use <a href="https://github.com/pfrommerd/insteon-terminal" rel="external nofollow">Insteon Terminal</a> which is open source and runs on most platforms. SmartHome no longer supports HouseLinc, but it still works. Insteon Terminal is a very useful tool but please read the disclaimers carefully, they are important.</p>
+<h3>
+<a class="title-link" name="customization" href="#customization"></a> Customization</h3>
+<p>The only configuration item that is necessary is the PLM port or Hub IP address, username and password so that Home Assistant can connect to the INSTEON Modem. This will expose all the supported INSTEON devices which exist in the modem’s ALL-Link database. However, devices will only be shown by their INSTEON hex address (e.g., “1A.2B.3C”) which can be a bit unwieldy. As you link and unlink devices using the ‘Set’ buttons, they’ll be added and removed from Home Assistant automatically.</p>
+<p>You can use the normal Home Assistant <a href="/getting-started/customizing-devices/">device customization</a> section of your configuration to assign friendly names and special icons to your devices. This is especially useful for setting device_class on your binary_sensor INSTEON devices.</p>
+<h3>
+<a class="title-link" name="device-overrides" href="#device-overrides"></a> Device Overrides</h3>
+<p>INSTEON devices are added to Home Assistant using the platform(s) that make the most sense given the model and features of the hardware. The features of the INSTEON devices are built into the Home Assistant platform. Changing the platform is not recommended.</p>
+<p>There are two primary uses for the <strong>device_override</strong> feature:</p>
+<ul>
+<li>Devices that do not respond during autodiscovery. This is common for battery operated devices.</li>
+<li>Devices that have not been fully developed. This allows an unknown device to be mapped to a device that operates similarly to another device.</li>
+</ul>
+<h3>
+<a class="title-link" name="example-configuration-with-options" href="#example-configuration-with-options"></a> Example Configuration with Options</h3>
+<pre><code class="language-yaml"># Full example of Insteon configuration with customizations and overrides
+
+homeassistant:
+  customize:
+    light.a1b2c3:
+      friendly_name: Bedside Lamp
+    binary_sensor.a2b3c4:
+      friendly_name: Garage Door
+      device_class: opening
+
+insteon:
+  port: /dev/ttyUSB0
+  device_override:
+    - address: a1b2c3  # Hidden Door Sensor [2845-222]
+      cat: 0x10
+      subcat: 0x11
+</code></pre>
+<h3>
+<a class="title-link" name="what-not-to-do" href="#what-not-to-do"></a> What NOT to do</h3>
+<p>Insteon Modem is a top-level integration and device discovery will identify the Home Assistant platform the device belongs in. As such, do not declare Insteon devices in other platforms. For example, this configuration will NOT work:</p>
+<pre><code class="language-yaml">light:
+  - platform: insteon
+    address: 1a2b3c
+</code></pre>
+<h3>
+<a class="title-link" name="insteon-scenes" href="#insteon-scenes"></a> INSTEON Scenes</h3>
+<p>Trigger an INSTEON scene on or off is done via automations. Two services are provided to support this feature:</p>
+<ul>
+<li>
+<strong>insteon.scene_on</strong>
+<ul>
+<li>
+<strong>group</strong>: (required) The INSTEON scene number to trigger.</li>
+</ul>
+</li>
+<li>
+<strong>insteon.scene_off</strong>
+<ul>
+<li>
+<strong>group</strong>: (required) The INSTEON scene to turn off</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-yaml">automation:
+  # Trigger an INSTEON scene 25
+  - id: trigger_scene_25_on
+    alias: Turn on scene 25
+    action:
+      - service: insteon.scene_on
+        group: 25
+</code></pre>
+<h3>
+<a class="title-link" name="events-and-mini-remotes" href="#events-and-mini-remotes"></a> Events and Mini-Remotes</h3>
+<p>Mini-Remote devices do not appear as Home Assistant entities, they generate events. The following events are available:</p>
+<ul>
+<li>
+<strong>insteon.button_on</strong>
+<ul>
+<li>
+<strong>address</strong>: (required) The Insteon device address in lower case without dots (e.g., 1a2b3c)</li>
+<li>
+<strong>button</strong>: (Optional) The button id in lower case. For a 4-button remote the values are <code>a</code> to <code>d</code>. For an 8 button remote the values are <code>a</code> to <code>h</code>. For a one-button remote this field is not used.</li>
+</ul>
+</li>
+<li>
+<strong>insteon.button_off</strong>
+<ul>
+<li>
+<strong>address</strong>: (required) The Insteon device address in lower case without dots (e.g., 1a2b3c)</li>
+<li>
+<strong>button</strong>: (Optional) The button id in lower case. For a 4-button remote the values are a to d. For an 8 button remote the values are <code>a</code> to <code>h</code>. For a one-button remote this field is not used.</li>
+</ul>
+</li>
+</ul>
+<p>This allows the mini-remotes to be configured as triggers for automations. Here is an example of how to use these events for automations:</p>
+<pre><code class="language-yaml">automation:
+  # 4 or 8 button remote with button c pressed
+  - id: light_on
+    alias: Turn a light on
+    trigger:
+      - platform: event
+        event_type: insteon.button_on
+    event_data:
+      address: 1a2b3c
+      button: c
+    condition:
+      - condition: state
+        entity_id: light.some_light
+        state: 'off'
+    action:
+      - service: light.turn_on
+        entity_id: light.some_light
+
+  # single button remote
+  - id: light_off
+    alias: Turn a light off
+    trigger:
+      - platform: event
+        event_type: insteon.button_on
+    event_data:
+      address: 1a2b3c
+    condition:
+      - condition: state
+        entity_id: light.some_light
+        state: 'off'
+    action:
+      - service: light.turn_on
+        entity_id: light.some_light
+</code></pre>
+<h3>
+<a class="title-link" name="known-issues-with-the-insteon-hub" href="#known-issues-with-the-insteon-hub"></a> Known Issues with the INSTEON Hub</h3>
+<p>The INSTEON Hub has three known issues that are inherent to the design of the Hub:</p>
+<ol>
+<li>
+<p>If you see multiple error messages in the log file stating the Hub connection is closed, and reconnection has failed, this generally requires the Hub to be restarted to reconnect.</p>
+</li>
+<li>
+<p>You cannot use both Home Assistant and the INSTEON app. If you do, the changes made in the app will not appear in Home Assistant. Changes made in Home Assistant will appear in the app after a period of time, however.</p>
+</li>
+<li>
+<p>The Hub response times can be very slow. This is due to the Hub polling devices frequently. Since only one INSTEON message can be broadcast at a time, messages to and from Home Assistant can be delayed.</p>
+</li>
+</ol>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/insteon.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/insteon.png' /></div><div class="section">
+    <kb-alert-link integration="insteon"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Push
+    </div><div class='section'>
+      Introduced in release: 0.39
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/insteon/'>/components/insteon/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#hub'>Hub</a>
+      </li><li>
+        <a href='/integrations/#binary-sensor'>Binary Sensor</a>
+      </li><li>
+        <a href='/integrations/#cover'>Cover</a>
+      </li><li>
+        <a href='/integrations/#fan'>Fan</a>
+      </li><li>
+        <a href='/integrations/#light'>Light</a>
+      </li><li>
+        <a href='/integrations/#sensor'>Sensor</a>
+      </li><li>
+        <a href='/integrations/#switch'>Switch</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

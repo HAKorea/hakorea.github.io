@@ -1,0 +1,153 @@
+I"�<p>The <code>xiaomi_miio</code> switch platform allows you to control the state of your Xiaomi Smart WiFi Socket aka Plug, Xiaomi Smart Power Strip and Xiaomi Chuangmi Plug V1.</p>
+<p>Please follow the instructions on <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> to get the API token to use in the <code>configuration.yaml</code> file.</p>
+<h2>Features</h2>
+<h3>Xiaomi Smart WiFi Socket</h3>
+<p>Supported models: <code>chuangmi.plug.m1</code>, <code>chuangmi.plug.m3</code>, <code>chuangmi.plug.v2</code>, <code>chuangmi.plug.hmi205</code></p>
+<ul>
+<li>Power (on, off)</li>
+<li>Attributes
+<ul>
+<li>Temperature</li>
+</ul>
+</li>
+</ul>
+<h3>Xiaomi Chuangmi Plug V1</h3>
+<p>Supported models: <code>chuangmi.plug.v1</code>, <code>chuangmi.plug.v3</code></p>
+<ul>
+<li>Power (on, off)</li>
+<li>USB (on, off)</li>
+<li>Attributes
+<ul>
+<li>Temperature</li>
+</ul>
+</li>
+</ul>
+<h3>Xiaomi Smart Power Strip</h3>
+<p>Supported models: <code>qmi.powerstrip.v1</code>, <code>zimi.powerstrip.v2</code></p>
+<ul>
+<li>Power (on, off)</li>
+<li>Wifi LED (on, off)</li>
+<li>Power Price (0…999)</li>
+<li>Power Mode (green, normal) (Power Strip V1 only)</li>
+<li>Attributes
+<ul>
+<li>Temperature</li>
+<li>Current</li>
+<li>Load power</li>
+<li>Wifi LED</li>
+<li>Mode (Power Strip V1 only)</li>
+</ul>
+</li>
+</ul>
+<h3>Xiaomi Air Conditioning Companion V3</h3>
+<p>Supported models: <code>lumi.acpartner.v3</code> (the socket of the <code>acpartner.v1</code> and <code>v2</code> isn’t switchable!)</p>
+<ul>
+<li>Power (on, off)</li>
+<li>Attributes
+<ul>
+<li>Load power</li>
+</ul>
+</li>
+</ul>
+<h2>Configuration</h2>
+<p>To add a plug to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entries
+switch:
+  - platform: xiaomi_miio
+    host: MIIO_IP_ADDRESS
+    token: YOUR_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your miio device.</p>
+</span></p></dd><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API token of your miio device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of your miio device.</p>
+</span></p><p class='default'>
+Default value: <p>Xiaomi Miio Switch</p>
+</p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of your miio device. Valid values are <code>chuangmi.plug.v1</code>, <code>qmi.powerstrip.v1</code>, <code>zimi.powerstrip.v2</code>, <code>chuangmi.plug.m1</code>, <code>chuangmi.plug.m3</code>, <code>chuangmi.plug.v2</code>, <code>chuangmi.plug.v3</code> and <code>chuangmi.plug.hmi205</code>. This setting can be used to bypass the device model detection and is recommended if your device isn’t always available.</p>
+</span></p></dd></dl>
+</div>
+<h2>Platform Services</h2>
+<h3>Service <code>xiaomi_miio.switch_set_wifi_led_on</code> (Power Strip only)</h3>
+<p>Turn the wifi led on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO switch entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.switch_set_wifi_led_off</code> (Power Strip only)</h3>
+<p>Turn the wifi led off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO switch entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.switch_set_power_price</code> (Power Strip)</h3>
+<p>Set the power price.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO switch entity.</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>no</td>
+<td>Power price, between 0 and 999.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.switch_set_power_mode</code> (Power Strip V1 only)</h3>
+<p>Set the power mode.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO switch entity.</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>no</td>
+<td>Power mode, valid values are ‘normal’ and ‘green’</td>
+</tr>
+</tbody>
+</table>
+:ET

@@ -1,0 +1,159 @@
+I"�'<p>Backing up and regularly syncing your Home Assistant configuration to <a href="http://GitHub.com">GitHub</a> has several benefits:</p>
+<ul>
+<li>A remote copy of your Home Assistant YAML files in case you need to recover.</li>
+<li>A documented history of your changes for troubleshooting purposes.</li>
+<li>It will help the Home Assistant community learn from your configuration examples.</li>
+</ul>
+<div class='note'>
+<p>This is not a comprehensive tutorial on using GitHub, more information can be found in the <a href="https://help.github.com/">GitHub Help</a> pages. This guide assumes the user has an intermediate experience level and is comfortable with such concepts as: navigating the Home Assistant directory structure, logging in as the Home Assistant user, and working with the command line.</p>
+</div>
+<div class='note'>
+This will not create a full backup of your Home Assistant files or your OS. In addition to backing up to Github, you should consider having regular backups of all your Home Assistant configuration files and images of your SD card if applicable.
+</div>
+<h3>Important Best Practices</h3>
+<p>Some best practices to consider before putting your configuration on GitHub:</p>
+<ul>
+<li>Extensive use of <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> to hide sensitive information like usernames, passwords, device information, and location.</li>
+<li>Exclusion of some files, including <code>secrets.yaml</code> and device-specific information using a <a href="https://git-scm.com/docs/gitignore"><code>.gitignore</code></a> file.</li>
+<li>Regularly committing your configuration to GitHub to make sure that your backup is up to date.</li>
+<li>Use a README.md to document your configuration and include screenshots of your Home Assistant frontend.</li>
+</ul>
+<h3>Step 1: Installing and Initializing Git</h3>
+<p>In order to put your configuration on GitHub, you must install the Git package on your Home Assistant server (instructions below will work on Raspberry Pi, Ubuntu or any Debian-based system) <em>Note: this isn’t required in Hass.io, it’s included as default so proceed to step 2</em>:</p>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install git
+</code></pre>
+<h3>Step 2: Creating <code>.gitignore</code></h3>
+<div class='note warning'>
+<p>Before creating and pushing your Home Assistant configuration to GitHub, please make sure to follow the <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> best practice mentioned above and scrub your configuration for any passwords or sensitive information.</p>
+</div>
+<p>Creating a <code>.gitignore</code> file in your repository will tell Git which files NOT to push to the GitHub server. This should be used to prevent publishing sensitive files to the public. It should contain a list of filenames and pattern matches. This list should include at least your <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> file, device configuration files, and the Home Assistant database/directory structure. The <code>.gitignore</code> file should be placed in the root of your Home Assistant configuration directory: <code>&lt;config dir&gt;/.gitignore</code>.</p>
+<div class='note'>
+<p>If you are creating the <code>.gitignore</code> file on Windows, make sure that you save the file with Unix line endings (i.e. by using an editor like Notepad++).</p>
+</div>
+<p>Here is an example that will ignore everything but your YAML configuration.</p>
+<pre><code class="language-bash"># Example .gitignore file for your config dir.
+# An * ensures that everything will be ignored.
+*
+
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+</code></pre>
+<div class='note'>
+  You might read this guide too late and accidentally already have your secrets published. It is not enough to just remove them with a new commit. Git is a version control system and keeps history. You need to delete your repository and start a new one. Also change all passwords and revoke the API keys that were public.
+</div>
+<p>More information on the layout of the file can be found in the <a href="https://git-scm.com/docs/gitignore">.gitignore manual</a>.</p>
+<h3>Step 3: Preparing your Home Assistant directory for GitHub</h3>
+<p>In your Home Assistant directory, type the following commands as the Home Assistant user, replacing the email address and name with your information:</p>
+<pre><code class="language-bash">git init
+git config user.email &quot;you@example.com&quot;
+git config user.name &quot;Your Name&quot;
+git add .
+git commit
+</code></pre>
+<p>After the <code>git commit</code> command, you will be asked to enter a message for the commit.  This will add a comment beside each file on GitHub describing the purpose for the commit. In this case, you can enter something like “Initial commit of my Home Assistant configuration”. To exit the editor, press <code>CTRL + C</code> and then <code>:wq</code> which will exit and save the changes.</p>
+<h3>Step 4: Creating Repository on GitHub</h3>
+<ul>
+<li>Connect to <a href="https://github.com">GitHub</a> and login to your account (or create an account if you don’t already have one).</li>
+<li>Click “<a href="https://github.com/new">New Repository</a>” and give your repository a name/description (<code>Home-AssistantConfig</code> is used in the example below). You do NOT need to change any other options.</li>
+<li>Click “Create Repository”</li>
+</ul>
+<h3>Step 5: Your initial commit to GitHub</h3>
+<p>Once you are sure you are using <code>secrets.yaml</code> and <code>.gitignore</code> correctly, it is time to push your configuration to the GitHub Repository that you just created.</p>
+<p>In your Home Assistant directory, type the following commands as the Home Assistant user, replacing “username” in the URL with your GitHub username:</p>
+<pre><code class="language-bash">git remote add origin https://github.com/username/Home-AssistantConfig
+git push -u origin master
+</code></pre>
+<p>You will be asked to enter your GitHub username and password (or ssh key passphrase if you use <a href="https://help.github.com/categories/ssh/">GitHub with ssh</a>).</p>
+<p>Congratulations, you now have a copy of your current Home Assistant Configuration on GitHub!</p>
+<h3>Step 6: Keeping your repository up to date</h3>
+<p>You should update your repository on a regular basis. Ideally after you make a major configuration change (new device, new component, etc.). The below script will update your repository with any changed configuration files and allow you to add a comment with the commit for tracking purposes:</p>
+<div class='note'>
+You may need to adjust the paths in the script depending on your Home Assistant configuration.
+</div>
+<p><code>gitupdate.sh</code></p>
+<pre><code class="language-bash">#!/bin/bash
+
+cd /home/homeassistant/.homeassistant
+source /srv/homeassistant/bin/activate
+hass --script check_config
+
+git add .
+git status
+echo -n &quot;Enter the Description for the Change: &quot; [Minor Update]
+read CHANGE_MSG
+git commit -m &quot;${CHANGE_MSG}&quot;
+git push origin master
+
+exit
+</code></pre>
+<p>Every time you run this script, you will be prompted for a comment to describe the change(s) that you are committing. This comment will be displayed beside each changed file on GitHub and will be stored after each commit. You will also be asked to enter your GitHub username and password (or SSH key passphrase if you use <a href="https://help.github.com/categories/ssh/">GitHub with SSH</a>).</p>
+<h3>Step 7: Configuration file testing</h3>
+<p><a href="https://travis-ci.org">Travis CI</a> is a continuous integration testing system that runs every time the code in your repository is updated and allows you to validate that your code works on a fresh install.</p>
+<ul>
+<li><a href="https://travis-ci.org/auth">Authorize Travis CI</a> to have access to your GitHub repositories.</li>
+<li>Create the build script that Travis will run to test your repository.</li>
+<li>Create a dummy <code>secrets.yaml</code> for Travis.</li>
+</ul>
+<p>Example .travis.yml</p>
+<pre><code class="language-yaml">language: python
+python:
+  - &quot;3.7&quot;
+before_install:
+  - mv travis_secrets.yaml secrets.yaml
+  - sudo apt-get install -y libudev-dev
+install:
+  - pip3 install homeassistant
+script:
+  - hass -c . --script check_config
+</code></pre>
+<p>Since the <code>secrets.yaml</code> should <em>not</em> be stored in your repository for security reasons, you won’t be able to access it at build time. Creating a dummy <code>secrets.yaml</code> is as simple as creating a new file that mimics your existing <code>secrets.yaml</code> with the required keys, but not their value.</p>
+<pre><code class="language-yaml">#travis_secrets.yaml
+http_api: 000000000000000000000000
+home_latitude: 00.00000
+home_longitude: 00.0000
+home_elevation: 0
+</code></pre>
+<h3>Extra commands</h3>
+<p>You can enter these commands to get a list of the files in your local Git repository and a status of files that have changed but not committed yet:</p>
+<pre><code class="language-bash">git ls-files
+git status
+</code></pre>
+<p>Examples:</p>
+<pre><code class="language-bash">homeassistant@raspberrypi:~/.homeassistant $ git ls-files
+.gitignore
+README.md
+automation.yaml
+configuration.yaml
+customize.yaml
+device_tracker.yaml
+group.yaml
+script.yaml
+
+homeassistant@raspberrypi:~/.homeassistant $ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        modified:   .gitignore
+        modified:   automation.yaml
+        modified:   customize.yaml
+        modified:   group.yaml
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre>
+:ET

@@ -1,0 +1,1045 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Xiaomi Air Purifier - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate your Xiaomi Air Purifier and Xiaomi Air Humidifier within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/fan.xiaomi_miio/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Xiaomi Air Purifier">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/fan.xiaomi_miio/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate your Xiaomi Air Purifier and Xiaomi Air Humidifier within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Xiaomi Air Purifier">
+    <meta name="twitter:description" content="Instructions on how to integrate your Xiaomi Air Purifier and Xiaomi Air Humidifier within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/fan.xiaomi_miio.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Xiaomi Air Purifier
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>xiaomi_miio</code> fan platform allows you to control the Xiaomi Air Purifier, Air Humidifier and Air Fresh.</p>
+<p>Supported devices:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Model</th>
+<th>Model no.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Air Purifier</td>
+<td>zhimi.airpurifier.v1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier 2</td>
+<td>zhimi.airpurifier.v2</td>
+<td>FJY4006CN</td>
+</tr>
+<tr>
+<td>Air Purifier V3</td>
+<td>zhimi.airpurifier.v3</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier V5</td>
+<td>zhimi.airpurifier.v5</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier Pro</td>
+<td>zhimi.airpurifier.v6</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier Pro V7</td>
+<td>zhimi.airpurifier.v7</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier 2 (mini)</td>
+<td>zhimi.airpurifier.m1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier (mini)</td>
+<td>zhimi.airpurifier.m2</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier MA1</td>
+<td>zhimi.airpurifier.ma1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier 2S</td>
+<td>zhimi.airpurifier.ma2</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier 2S</td>
+<td>zhimi.airpurifier.mc1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier Super</td>
+<td>zhimi.airpurifier.sa1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Purifier Super 2</td>
+<td>zhimi.airpurifier.sa2</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Humidifier</td>
+<td>zhimi.humidifier.v1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Humidifier CA1</td>
+<td>zhimi.humidifier.ca1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Humidifier CB1</td>
+<td>zhimi.humidifier.cb1</td>
+<td></td>
+</tr>
+<tr>
+<td>Air Fresh VA2</td>
+<td>zhimi.airfresh.va2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="features" href="#features"></a> Features</h2>
+<h3>
+<a class="title-link" name="air-purifier-2-et-al" href="#air-purifier-2-et-al"></a> Air Purifier 2 et al.</h3>
+<ul>
+<li>Power (on, off)</li>
+<li>Operation modes (auto, silent, favorite, idle)</li>
+<li>Buzzer (on, off)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off), LED brightness (bright, dim, off)</li>
+<li>Favorite Level (0…16)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>aqi</li>
+<li>mode</li>
+<li>filter_hours_used</li>
+<li>filter_life_remaining</li>
+<li>favorite_level</li>
+<li>child_lock</li>
+<li>led</li>
+<li>motor_speed</li>
+<li>average_aqi</li>
+<li>purify_volume</li>
+<li>learn_mode</li>
+<li>sleep_time</li>
+<li>sleep_mode_learn_count</li>
+<li>extra_features</li>
+<li>turbo_mode_supported</li>
+<li>auto_detect</li>
+<li>use_time</li>
+<li>button_pressed</li>
+<li>buzzer</li>
+<li>led_brightness</li>
+<li>sleep_mode</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-purifier-pro-zhimiairpurifierv6" href="#air-purifier-pro-zhimiairpurifierv6"></a> Air Purifier Pro (zhimi.airpurifier.v6)</h3>
+<ul>
+<li>Power (on, off)</li>
+<li>Operation modes (auto, silent, favorite)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off)</li>
+<li>Favorite Level (0…16)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>aqi</li>
+<li>mode</li>
+<li>filter_hours_used</li>
+<li>filter_life_remaining</li>
+<li>favorite_level</li>
+<li>child_lock</li>
+<li>led</li>
+<li>motor_speed</li>
+<li>average_aqi</li>
+<li>purify_volume</li>
+<li>learn_mode</li>
+<li>sleep_time</li>
+<li>sleep_mode_learn_count</li>
+<li>extra_features</li>
+<li>turbo_mode_supported</li>
+<li>auto_detect</li>
+<li>use_time</li>
+<li>button_pressed</li>
+<li>filter_rfid_product_id</li>
+<li>filter_rfid_tag</li>
+<li>filter_type</li>
+<li>illuminance</li>
+<li>motor2_speed</li>
+<li>volume</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-purifier-pro-v7-zhimiairpurifierv7" href="#air-purifier-pro-v7-zhimiairpurifierv7"></a> Air Purifier Pro V7 (zhimi.airpurifier.v7)</h3>
+<ul>
+<li>Power (on, off)</li>
+<li>Operation modes (auto, silent, favorite)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off)</li>
+<li>Favorite Level (0…16)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>aqi</li>
+<li>mode</li>
+<li>filter_hours_used</li>
+<li>filter_life_remaining</li>
+<li>favorite_level</li>
+<li>child_lock</li>
+<li>led</li>
+<li>motor_speed</li>
+<li>average_aqi</li>
+<li>learn_mode</li>
+<li>extra_features</li>
+<li>turbo_mode_supported</li>
+<li>button_pressed</li>
+<li>filter_rfid_product_id</li>
+<li>filter_rfid_tag</li>
+<li>filter_type</li>
+<li>illuminance</li>
+<li>motor2_speed</li>
+<li>volume</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-purifier-2s-zhimiairpurifiermc1" href="#air-purifier-2s-zhimiairpurifiermc1"></a> Air Purifier 2S (zhimi.airpurifier.mc1)</h3>
+<ul>
+<li>Power (on, off)</li>
+<li>Operation modes (auto, silent, favorite)</li>
+<li>Buzzer (on, off)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off)</li>
+<li>Favorite Level (0…16)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>aqi</li>
+<li>mode</li>
+<li>filter_hours_used</li>
+<li>filter_life_remaining</li>
+<li>favorite_level</li>
+<li>child_lock</li>
+<li>led</li>
+<li>motor_speed</li>
+<li>average_aqi</li>
+<li>learn_mode</li>
+<li>extra_features</li>
+<li>turbo_mode_supported</li>
+<li>button_pressed</li>
+<li>filter_rfid_product_id</li>
+<li>filter_rfid_tag</li>
+<li>filter_type</li>
+<li>illuminance</li>
+<li>buzzer</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-purifier-v3-zhimiairpurifierv3" href="#air-purifier-v3-zhimiairpurifierv3"></a> Air Purifier V3 (zhimi.airpurifier.v3)</h3>
+<ul>
+<li>Power (on, off)</li>
+<li>Operation modes (auto, silent, favorite, idle, medium, high, strong)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>aqi</li>
+<li>mode</li>
+<li>led</li>
+<li>buzzer</li>
+<li>child_lock</li>
+<li>illuminance</li>
+<li>filter_hours_used</li>
+<li>filter_life_remaining</li>
+<li>motor_speed</li>
+<li>average_aqi</li>
+<li>volume</li>
+<li>motor2_speed</li>
+<li>filter_rfid_product_id</li>
+<li>filter_rfid_tag</li>
+<li>filter_type</li>
+<li>purify_volume</li>
+<li>learn_mode</li>
+<li>sleep_time</li>
+<li>sleep_mode_learn_count</li>
+<li>extra_features</li>
+<li>auto_detect</li>
+<li>use_time</li>
+<li>button_pressed</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-humidifier-zhimihumidifierv1" href="#air-humidifier-zhimihumidifierv1"></a> Air Humidifier (zhimi.humidifier.v1)</h3>
+<ul>
+<li>On, Off</li>
+<li>Operation modes (silent, medium, high, strong)</li>
+<li>Buzzer (on, off)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off), LED brightness (bright, dim, off)</li>
+<li>Target humidity (30, 40, 50, 60, 70, 80)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>mode</li>
+<li>buzzer</li>
+<li>child_lock</li>
+<li>trans_level</li>
+<li>target_humidity</li>
+<li>led_brightness</li>
+<li>button_pressed</li>
+<li>use_time</li>
+<li>hardware_version</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-humidifier-ca-zhimihumidifierca1" href="#air-humidifier-ca-zhimihumidifierca1"></a> Air Humidifier CA (zhimi.humidifier.ca1)</h3>
+<ul>
+<li>On, Off</li>
+<li>Operation modes (silent, medium, high, auto)</li>
+<li>Buzzer (on, off)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off), LED brightness (bright, dim, off)</li>
+<li>Target humidity (30, 40, 50, 60, 70, 80)</li>
+<li>Dry mode (on, off)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>mode</li>
+<li>buzzer</li>
+<li>child_lock</li>
+<li>trans_level</li>
+<li>target_humidity</li>
+<li>led_brightness</li>
+<li>button_pressed</li>
+<li>use_time</li>
+<li>hardware_version</li>
+<li>motor_speed</li>
+<li>depth</li>
+<li>dry</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-humidifier-cb-zhimihumidifiercb1" href="#air-humidifier-cb-zhimihumidifiercb1"></a> Air Humidifier CB (zhimi.humidifier.cb1)</h3>
+<ul>
+<li>On, Off</li>
+<li>Operation modes (silent, medium, high, auto)</li>
+<li>Buzzer (on, off)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off), LED brightness (bright, dim, off)</li>
+<li>Target humidity (30, 40, 50, 60, 70, 80)</li>
+<li>Dry mode (on, off)</li>
+<li>Attributes
+<ul>
+<li>speed</li>
+<li>speed_list</li>
+<li>model</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>mode</li>
+<li>buzzer</li>
+<li>child_lock</li>
+<li>target_humidity</li>
+<li>led_brightness</li>
+<li>use_time</li>
+<li>hardware_version</li>
+<li>motor_speed</li>
+<li>depth</li>
+<li>dry</li>
+<li>supported_features</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="air-fresh-va2" href="#air-fresh-va2"></a> Air Fresh VA2</h3>
+<ul>
+<li>Power (on, off)</li>
+<li>Operation modes (auto, silent, interval, low, middle, strong)</li>
+<li>Buzzer (on, off)</li>
+<li>Child lock (on, off)</li>
+<li>LED (on, off), LED brightness (bright, dim, off)</li>
+<li>Attributes
+<ul>
+<li>model</li>
+<li>aqi</li>
+<li>average_aqi</li>
+<li>temperature</li>
+<li>humidity</li>
+<li>co2</li>
+<li>mode</li>
+<li>led</li>
+<li>led_brightness</li>
+<li>buzzer</li>
+<li>child_lock</li>
+<li>filter_life_remaining</li>
+<li>filter_hours_used</li>
+<li>use_time</li>
+<li>motor_speed</li>
+<li>extra_features</li>
+</ul>
+</li>
+</ul>
+<p>Please follow the instructions on <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> to get the API token to use in the <code>configuration.yaml</code> file.</p>
+<p>To add a Xiaomi Air Purifier to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">fan:
+# Example configuration.yaml entry
+  - platform: xiaomi_miio
+    host: 192.168.130.66
+    token: YOUR_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of your miio fan.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="token" href="#token"></a> token</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The API token of your miio fan.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of your miio fan.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Xiaomi Air Purifier</p>
+</dd>
+<dt>
+<a class="title-link" name="model" href="#model"></a> model</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The model of your miio fan. See the table above for valid values (f.e. <code>zhimi.airpurifier.v2</code>). This setting can be used to bypass the device model detection and is recommended if your device isn’t always available.</p>
+</span></p></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="platform-services" href="#platform-services"></a> Platform Services</h2>
+<h3>
+<a class="title-link" name="service-fanset_speed" href="#service-fanset_speed"></a> Service fan.set_speed</h3>
+<p>Set the fan speed/operation mode.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+<tr>
+<td><code>speed</code></td>
+<td>no</td>
+<td>Fan speed. Valid values are ‘Auto’, ‘Silent’, ‘Favorite’ and ‘Idle’</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_buzzer_on-air-purifier-pro-excluded" href="#service-xiaomi_miiofan_set_buzzer_on-air-purifier-pro-excluded"></a> Service xiaomi_miio.fan_set_buzzer_on (Air Purifier Pro excluded)</h3>
+<p>Turn the buzzer on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_buzzer_off-air-purifier-pro-excluded" href="#service-xiaomi_miiofan_set_buzzer_off-air-purifier-pro-excluded"></a> Service xiaomi_miio.fan_set_buzzer_off (Air Purifier Pro excluded)</h3>
+<p>Turn the buzzer off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_led_on-air-purifiers-only" href="#service-xiaomi_miiofan_set_led_on-air-purifiers-only"></a> Service xiaomi_miio.fan_set_led_on (Air Purifiers only)</h3>
+<p>Turn the led on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_led_off-air-purifiers-only" href="#service-xiaomi_miiofan_set_led_off-air-purifiers-only"></a> Service xiaomi_miio.fan_set_led_off (Air Purifiers only)</h3>
+<p>Turn the led off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_child_lock_on" href="#service-xiaomi_miiofan_set_child_lock_on"></a> Service xiaomi_miio.fan_set_child_lock_on</h3>
+<p>Turn the child lock on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_child_lock_off" href="#service-xiaomi_miiofan_set_child_lock_off"></a> Service xiaomi_miio.fan_set_child_lock_off</h3>
+<p>Turn the child lock off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_led_brightness-air-purifier-2s-and-air-purifier-pro-excluded" href="#service-xiaomi_miiofan_set_led_brightness-air-purifier-2s-and-air-purifier-pro-excluded"></a> Service xiaomi_miio.fan_set_led_brightness (Air Purifier 2S and Air Purifier Pro excluded)</h3>
+<p>Set the led brightness. Supported values are 0 (Bright), 1 (Dim), 2 (Off).</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td>no</td>
+<td>Brightness, between 0 and 2.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_favorite_level-air-purifiers-only" href="#service-xiaomi_miiofan_set_favorite_level-air-purifiers-only"></a> Service xiaomi_miio.fan_set_favorite_level (Air Purifiers only)</h3>
+<p>Set the favorite level of the operation mode “favorite”.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>no</td>
+<td>Level, between 0 and 16.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_auto_detect_on-air-purifier-2s-and-air-purifier-pro-only" href="#service-xiaomi_miiofan_set_auto_detect_on-air-purifier-2s-and-air-purifier-pro-only"></a> Service xiaomi_miio.fan_set_auto_detect_on (Air Purifier 2S and Air Purifier Pro only)</h3>
+<p>Turn the auto detect on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_auto_detect_off-air-purifier-2s-and-air-purifier-pro-only" href="#service-xiaomi_miiofan_set_auto_detect_off-air-purifier-2s-and-air-purifier-pro-only"></a> Service xiaomi_miio.fan_set_auto_detect_off (Air Purifier 2S and Air Purifier Pro only)</h3>
+<p>Turn the auto detect off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_learn_mode_on-air-purifier-2-only" href="#service-xiaomi_miiofan_set_learn_mode_on-air-purifier-2-only"></a> Service xiaomi_miio.fan_set_learn_mode_on (Air Purifier 2 only)</h3>
+<p>Turn the learn mode on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_learn_mode_off-air-purifier-2-only" href="#service-xiaomi_miiofan_set_learn_mode_off-air-purifier-2-only"></a> Service xiaomi_miio.fan_set_learn_mode_off (Air Purifier 2 only)</h3>
+<p>Turn the learn mode off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_volume-air-purifier-pro-only" href="#service-xiaomi_miiofan_set_volume-air-purifier-pro-only"></a> Service xiaomi_miio.fan_set_volume (Air Purifier Pro only)</h3>
+<p>Set the sound volume.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+<tr>
+<td><code>volume</code></td>
+<td>no</td>
+<td>Volume, between 0 and 100.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_reset_filter-air-purifier-2-only" href="#service-xiaomi_miiofan_reset_filter-air-purifier-2-only"></a> Service xiaomi_miio.fan_reset_filter (Air Purifier 2 only)</h3>
+<p>Reset the filter lifetime and usage.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_extra_features-air-purifier-only" href="#service-xiaomi_miiofan_set_extra_features-air-purifier-only"></a> Service xiaomi_miio.fan_set_extra_features (Air Purifier only)</h3>
+<p>Set the extra features.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+<tr>
+<td><code>features</code></td>
+<td>no</td>
+<td>Integer, known values are 0 and 1.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-xiaomi_miiofan_set_target_humidity-air-humidifier-only" href="#service-xiaomi_miiofan_set_target_humidity-air-humidifier-only"></a> Service xiaomi_miio.fan_set_target_humidity (Air Humidifier only)</h3>
+<p>Set the target humidity.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+<tr>
+<td><code>humidity</code></td>
+<td>no</td>
+<td>Target humidity. Allowed values are 30, 40, 50, 60, 70 and 80</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-fanxiaomi_miio_set_dry_on-air-humidifier-ca-and-cb" href="#service-fanxiaomi_miio_set_dry_on-air-humidifier-ca-and-cb"></a> Service fan.xiaomi_miio_set_dry_on (Air Humidifier CA and CB)</h3>
+<p>Turn the dry mode on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-fanxiaomi_miio_set_dry_off-air-humidifier-ca-and-cb" href="#service-fanxiaomi_miio_set_dry_off-air-humidifier-ca-and-cb"></a> Service fan.xiaomi_miio_set_dry_off (Air Humidifier CA and CB)</h3>
+<p>Turn the dry mode off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific Xiaomi miIO fan entity.</td>
+</tr>
+</tbody>
+</table>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/fan.xiaomi_miio.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/xiaomi.png' /></div><div class="section">
+    <kb-alert-link integration="xiaomi_miio"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: 0.57
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/xiaomi_miio/'>/components/xiaomi_miio/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#fan'>Fan</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

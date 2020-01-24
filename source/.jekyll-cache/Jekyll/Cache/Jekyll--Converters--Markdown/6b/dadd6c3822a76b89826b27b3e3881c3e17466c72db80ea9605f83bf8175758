@@ -1,0 +1,31 @@
+I"B<p>The <code>digitalloggers</code> switch platform allows you to control the state of your <a href="https://www.digital-loggers.com/dinfaqs.html">Digital Loggers</a> switches.</p>
+<h2>Configuration</h2>
+<p>To use your digitalloggers switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: digitalloggers
+    host: 192.168.1.43
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or FQDN of your DIN III relay, e.g., <code>192.168.1.32</code> or <code>myrelay.example.com</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use when controlling this relay.</p>
+</span></p><p class='default'>
+Default value: <p>DINRelay</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Username for controlling this relay.</p>
+</span></p><p class='default'>
+Default value: <p>admin</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Password for controlling this relay.</p>
+</span></p><p class='default'>
+Default value: <p>admin</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the timeout in seconds if you need to, valid range is 1 to 600.</p>
+</span></p><p class='default'>
+Default value: <p>20</p>
+</p></dd><dt><a class='title-link' name='cycletime' href='#cycletime'></a> cycletime</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This is the delay enforced by the library when you send multiple commands to the same device. Override it if you need to. Valid range is 1 to 600. A delay is a recommendation of Digital Loggers: Many loads draw more power when they are initially switched on. Sequencing prevents circuit overloads when loads devices are attached to a single circuit.</p>
+</span></p><p class='default'>
+Default value: <p>2</p>
+</p></dd></dl>
+</div>
+<p>Your relays will be available in the form <code>switch.fantasticrelaydevice_individualrelayname</code></p>
+<p><strong>Note:</strong> There is currently a limitation of the <a href="https://github.com/dwighthubbard/python-dlipower">dlipower library</a> used by the <code>digitalloggers</code> integration that communication is only available over port 80.</p>
+:ET

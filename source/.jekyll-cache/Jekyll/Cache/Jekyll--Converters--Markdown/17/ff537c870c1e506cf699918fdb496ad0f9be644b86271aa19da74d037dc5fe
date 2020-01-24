@@ -1,0 +1,47 @@
+I"�<p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
+<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
+<p>The RFLink integration does not know the difference between a <code>binary_sensor</code>, a <code>switch</code> and a <code>light</code>. Therefore all switchable devices are automatically added as <code>light</code> by default.</p>
+<p>RFLink binary_sensor/switch/light ID’s are composed of: protocol, id, switch/channel. For example: <code>newkaku_0000c6c2_1</code>.</p>
+<p>Once the ID of a binary sensor is known, it can be used to configure it as a binary sensor type in Home Assistant, for example, to hide it or configure a nice name.</p>
+<p>Configuring a device as a binary sensor:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+   - platform: rflink
+     devices:
+       pt2262_00174754_0: {}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of binary sensors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='rflink_ids' href='#rflink_ids'></a> rflink_ids</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>RFLink ID of the device</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name for the device.</p>
+</span></p><p class='default'>
+Default value: <p>RFLink ID</p>
+</p></dd><dt><a class='title-link' name='aliases' href='#aliases'></a> aliases</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Alternative RFLink ID’s this device is known by.</p>
+</span></p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='off_delay' href='#off_delay'></a> off_delay</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>For sensors that only sends ‘On’ state updates, this variable sets a delay after which the sensor state will be updated back to ‘Off’.</p>
+</span></p></dd><dt><a class='title-link' name='force_update' href='#force_update'></a> force_update</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sends update events even if the value has not changed. Useful for sensors that only sends <code>On</code>.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h3>Sensor state</h3>
+<p>Initially, the state of a binary sensor is unknown. When a sensor update is received, the state is known and will be shown in the frontend.</p>
+<h3>Device support</h3>
+<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<h3>Additional configuration examples</h3>
+<p>Multiple sensors with custom name and device class and set off_delay</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+   - platform: rflink
+     devices:
+       pt2262_00174754_0:
+         name: PIR Entrance
+         device_class: motion
+         off_delay: 5
+       pt2262_00174758_0:
+         name: PIR Living Room
+         device_class: motion
+         off_delay: 5
+</code></pre>
+:ET

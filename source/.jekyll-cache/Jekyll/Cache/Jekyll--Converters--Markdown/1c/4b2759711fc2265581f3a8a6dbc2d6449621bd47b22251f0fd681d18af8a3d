@@ -1,0 +1,46 @@
+I"a	<p>Integrates <a href="https://sensibo.com">Sensibo</a> Air Conditioning controller into Home Assistant.</p>
+<p>To enable this platform, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+climate:
+  - platform: sensibo
+    api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Sensibo API key (To get your API key visit <a href="https://home.sensibo.com/me/api">https://home.sensibo.com/me/api</a>).</p>
+</span></p></dd><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A unit ID or a list of IDs. If none specified then all units accessible by the <code>api_key</code> will be used.</p>
+</span></p></dd></dl>
+</div>
+<div class="note">
+If you create the API key using a dedicated user (and not your main user),
+then in the Sensibo app log you will be able to distinguish between actions
+done in the app and actions done by Home Assistant.
+</div>
+<h3>Full config example</h3>
+<pre><code class="language-yaml">climate:
+  - platform: sensibo
+    api_key: YOUR_API_KEY
+    id:
+      - id1
+      - id2
+</code></pre>
+<h3>Adding a quick switch example</h3>
+<p>If you want a “Quick Switch” to turn your AC On / Off, you can do that using the following <code>Switch Template</code>:</p>
+<pre><code class="language-yaml">switch:
+  - platform: template
+    switches:
+      ac:
+        friendly_name: &quot;AC&quot;
+        value_template: &quot;{{ is_state('climate.ac', 'cool') or is_state('climate.ac', 'heat') or is_state('climate.ac', 'dry') or is_state('climate.ac', 'fan_only') }}&quot;
+        turn_on:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.ac
+            hvac_mode: cool
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.ac
+            hvac_mode: off
+</code></pre>
+:ET

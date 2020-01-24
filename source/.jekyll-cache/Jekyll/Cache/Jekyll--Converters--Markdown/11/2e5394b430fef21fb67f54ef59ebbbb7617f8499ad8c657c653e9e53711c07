@@ -1,0 +1,265 @@
+I"�8<p>Triggers are what starts the processing of an automation rule. It is possible to specify <a href="/docs/automation/trigger/#multiple-triggers">multiple triggers</a> for the same rule - when <em>any</em> of the triggers becomes true then the automation will start. Once a trigger starts, Home Assistant will validate the conditions, if any, and call the action.</p>
+<h3>Event trigger</h3>
+<p>Triggers when an event is being processed. Events are the raw building blocks of Home Assistant. You can match events on just the event name or also require specific event data to be present.</p>
+<p>Events can be fired by integrations or via the API. There is no limitation to the types. A list of built-in events can be found <a href="/docs/configuration/events/">here</a>.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: event
+    event_type: MY_CUSTOM_EVENT
+    # optional
+    event_data:
+      mood: happy
+</code></pre>
+<div class='note warning'>
+<p>Starting 0.42, it is no longer possible to listen for event <code>homeassistant_start</code>. Use the ‘homeassistant’ platform below instead.</p>
+</div>
+<h3>Home Assistant trigger</h3>
+<p>Triggers when Home Assistant starts up or shuts down.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: homeassistant
+    # Event can also be 'shutdown'
+    event: start
+</code></pre>
+<h3>MQTT trigger</h3>
+<p>Triggers when a specific message is received on given topic. Optionally can match on the payload being sent over the topic. The default payload encoding is ‘utf-8’. For images and other byte payloads use <code>encoding: ''</code> to disable payload decoding completely.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: mqtt
+    topic: living_room/switch/ac
+    # Optional
+    payload: &quot;on&quot;
+    encoding: &quot;utf-8&quot;
+</code></pre>
+<h3>Numeric state trigger</h3>
+<p>Triggers when numeric value of an entity’s state crosses a given threshold. On state change of a specified entity, attempts to parse the state as a number and triggers once if value is changing from above to below or from below to above the given threshold.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.temperature
+    # Optional
+    value_template: &quot;{{ state.attributes.battery }}&quot;
+    # At least one of the following required
+    above: 17
+    below: 25
+
+    # If given, will trigger when condition has been for X time, can also use days and milliseconds.
+    for:
+      hours: 1
+      minutes: 10
+      seconds: 5
+</code></pre>
+<div class='note'>
+Listing above and below together means the numeric_state has to be between the two values.
+In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, or 25 or above) would fire this trigger.
+</div>
+<p>The <code>for:</code> can also be specified as <code>HH:MM:SS</code> like this:</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.temperature
+    # Optional
+    value_template: &quot;{{ state.attributes.battery }}&quot;
+    # At least one of the following required
+    above: 17
+    below: 25
+
+    # If given, will trigger when condition has been for X time.
+    for: &quot;01:10:05&quot;
+</code></pre>
+<p>You can also use templates in the <code>for</code> option.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: numeric_state
+    entity_id:
+      - sensor.temperature_1
+      - sensor.temperature_2
+    above: 80
+    for:
+      minutes: &quot;{{ states('input_number.high_temp_min')|int }}&quot;
+      seconds: &quot;{{ states('input_number.high_temp_sec')|int }}&quot;
+  action:
+    service: persistent_notification.create
+    data_template:
+      message: &gt;
+        {{ trigger.to_state.name }} too high for {{ trigger.for }}!
+</code></pre>
+<p>The <code>for</code> template(s) will be evaluated when an entity changes as specified.</p>
+<h3>State trigger</h3>
+<p>Triggers when the state of any of given entities changes. If only <code>entity_id</code> is given trigger will activate for all state changes, even if only state attributes change.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: state
+    entity_id: device_tracker.paulus, device_tracker.anne_therese
+    # Optional
+    from: &quot;not_home&quot;
+    # Optional
+    to: &quot;home&quot;
+
+    # If given, will trigger when state has been the to state for X time.
+    for: &quot;01:10:05&quot;
+</code></pre>
+<p>You can also use templates in the <code>for</code> option.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: state
+    entity_id: device_tracker.paulus, device_tracker.anne_therese
+    to: &quot;home&quot;
+    for:
+      minutes: &quot;{{ states('input_number.lock_min')|int }}&quot;
+      seconds: &quot;{{ states('input_number.lock_sec')|int }}&quot;
+  action:
+    service: lock.lock
+    entity_id: lock.my_place
+</code></pre>
+<p>The <code>for</code> template(s) will be evaluated when an entity changes as specified.</p>
+<div class='note warning'>
+<p>Use quotes around your values for <code>from</code> and <code>to</code> to avoid the YAML parser interpreting values as booleans.</p>
+</div>
+<h3>Sun trigger</h3>
+<h4>Sunset / Sunrise trigger</h4>
+<p>Triggers when the sun is setting or rising, i.e. when the sun elevation reaches 0°.</p>
+<p>An optional time offset can be given to have it trigger a set time before or after the sun event (e.g. 45 minutes before sunset).</p>
+<div class='note'>
+<p>Since the duration of twilight is different throughout the year, it is recommended to use <a href="/docs/automation/trigger/#sun-elevation-trigger">sun elevation triggers</a> instead of <code>sunset</code> or <code>sunrise</code> with a time offset to trigger automations during dusk or dawn.</p>
+</div>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: sun
+    # Possible values: sunset, sunrise
+    event: sunset
+    # Optional time offset. This example will trigger 45 minutes before sunset.
+    offset: &quot;-00:45:00&quot;
+</code></pre>
+<h4>Sun elevation trigger</h4>
+<p>Sometimes you may want more granular control over an automation than simply sunset or sunrise and specify an exact elevation of the sun. This can be used to layer automations to occur as the sun lowers on the horizon or even after it is below the horizon. This is also useful when the “sunset” event is not dark enough outside and you would like the automation to run later at a precise solar angle instead of the time offset such as turning on exterior lighting. For most things intended to trigger during dusk or dawn, a number between 0° and -6° is suitable; -4° is used in this example:</p>
+<pre><code class="language-yaml">automation:
+  alias: &quot;Exterior Lighting on when dark outside&quot;
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: &quot;{{ state_attr('sun.sun', 'elevation') }}&quot;
+    # Can be a positive or negative number
+    below: -4.0
+  action:
+    service: switch.turn_on
+    entity_id: switch.exterior_lighting
+</code></pre>
+<p>If you want to get more precise, start with the US Naval Observatory <a href="https://aa.usno.navy.mil/data/docs/AltAz.php">tool</a> which will help you estimate what the solar elevation will be at any specific time. Then from this, you can select from the defined twilight numbers.</p>
+<p>Although the actual amount of light depends on weather, topography and land cover, they are defined as:</p>
+<ul>
+<li>
+<p>Civil twilight: 0° &gt; Solar angle &gt; -6°</p>
+<p>This is what is meant by twilight for the average person: Under clear weather conditions, civil twilight approximates the limit at which solar illumination suffices for the human eye to clearly distinguish terrestrial objects. Enough illumination renders artificial sources unnecessary for most outdoor activities.</p>
+</li>
+<li>
+<p>Nautical twilight: -6° &gt; Solar angle &gt; -12°</p>
+</li>
+<li>
+<p>Astronomical twilight: -12° &gt; Solar angle &gt; -18°</p>
+</li>
+</ul>
+<p>A very thorough explanation of this is available in the Wikipedia article about the <a href="https://en.wikipedia.org/wiki/Twilight">Twilight</a>.</p>
+<h3>Template trigger</h3>
+<p>Template triggers work by evaluating a <a href="/docs/configuration/templating/">template</a> on every state change for all of the recognized entities. The trigger will fire if the state change caused the template to render ‘true’. This is achieved by having the template result in a true boolean expression (<code>{{ is_state('device_tracker.paulus', 'home') }}</code>) or by having the template render ‘true’ (example below). Being a boolean expression the template must evaluate to false (or anything other than true) before it will fire again.
+With template triggers you can also evaluate attribute changes by using is_state_attr (<code>{{ is_state_attr('climate.living_room', 'away_mode', 'off') }}</code>)</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: template
+    value_template: &quot;{% if is_state('device_tracker.paulus', 'home') %}true{% endif %}&quot;
+
+    # If given, will trigger when template remains true for X time.
+    for: &quot;00:01:00&quot;
+</code></pre>
+<p>You can also use templates in the <code>for</code> option.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: template
+    value_template: &quot;{{ is_state('device_tracker.paulus', 'home') }}&quot;
+    for:
+      minutes: &quot;{{ states('input_number.minutes')|int(0) }}&quot;
+</code></pre>
+<p>The <code>for</code> template(s) will be evaluated when the <code>value_template</code> becomes <code>true</code>.</p>
+<div class='note warning'>
+Rendering templates with time (`now()`) is dangerous as trigger templates only update based on entity state changes.
+</div>
+<p>As an alternative, providing you include the sensor <a href="/integrations/time_date/">time</a> in your configuration, you can use the following template:</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: template
+    value_template: &quot;{{ (as_timestamp(states.sensor.time.last_changed) - as_timestamp(states.YOUR.ENTITY.last_changed)) &gt; 300 }}&quot;
+</code></pre>
+<p>which will evaluate to <code>True</code> if <code>YOUR.ENTITY</code> changed more than 300 seconds ago.</p>
+<h3>Time trigger</h3>
+<p>The time trigger is configured to run once at a specific point in time each day.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: time
+    # Military time format. This trigger will fire at 3:32 PM
+    at: &quot;15:32:00&quot;
+</code></pre>
+<h3>Time pattern trigger</h3>
+<p>With the time pattern trigger, you can match if the hour, minute or second of the current time matches a specific value. You can prefix the value with a <code>/</code> to match whenever the value is divisible by that number. You can specify <code>*</code> to match any value (when using the web interface this is required, the fields cannot be left empty).</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: time_pattern
+    # Matches every hour at 5 minutes past whole
+    minutes: 5
+
+automation 2:
+  trigger:
+    platform: time_pattern
+    # Trigger once per minute during the hour of 3
+    hours: &quot;3&quot;
+    minutes: &quot;*&quot;
+
+automation 3:
+  trigger:
+    platform: time_pattern
+    # You can also match on interval. This will match every 5 minutes
+    minutes: &quot;/5&quot;
+</code></pre>
+<div class='note warning'>
+<p>Do not prefix numbers with a zero - using <code>'00'</code> instead of ‘0’ for example will result in errors.</p>
+</div>
+<h3>Webhook trigger</h3>
+<p>Webhook triggers are triggered by web requests made to the webhook endpoint: <code>/api/webhook/&lt;webhook_id&gt;</code>. This endpoint does not require authentication besides knowing the webhook id. You can either send encoded form or JSON data, available in the template as either <code>trigger.json</code> or <code>trigger.data</code>. URL query parameters are available in the template as <code>trigger.query</code>.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: webhook
+    webhook_id: some_hook_id
+</code></pre>
+<p>You could test triggering the above automation by sending a POST HTTP request to <code>http://your-home-assistant:8123/api/webhook/some_hook_id</code>. An example with no data sent to a SSL/TLS secured installation and using the command-line curl program is <code>curl -d &quot;&quot; https://your-home-assistant:8123/api/webhook/some_hook_id</code>.</p>
+<h3>Zone trigger</h3>
+<p>Zone triggers can trigger when an entity is entering or leaving the zone. For zone automation to work, you need to have setup a device tracker platform that supports reporting GPS coordinates. This includes <a href="/integrations/gpslogger/">GPS Logger</a>, the <a href="/integrations/owntracks/">OwnTracks platform</a> and the <a href="/integrations/icloud/">iCloud platform</a>.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: zone
+    entity_id: device_tracker.paulus
+    zone: zone.home
+    # Event is either enter or leave
+    event: enter # or &quot;leave&quot;
+</code></pre>
+<h3>Geolocation trigger</h3>
+<p>Geolocation triggers can trigger when an entity is appearing in or disappearing from a zone. Entities that are created by a <a href="/integrations/geo_location/">Geolocation</a> platform support reporting GPS coordinates.
+Because entities are generated and removed by these platforms automatically, the entity id normally cannot be predicted. Instead, this trigger requires the definition of a <code>source</code> which is directly linked to one of the Geolocation platforms.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    platform: geo_location
+    source: nsw_rural_fire_service_feed
+    zone: zone.bushfire_alert_zone
+    # Event is either enter or leave
+    event: enter # or &quot;leave&quot;
+</code></pre>
+<h3>Multiple triggers</h3>
+<p>When your want your automation rule to have multiple triggers, just prefix the first line of each trigger with a dash (-) and indent the next lines accordingly. Whenever one of the triggers fires, your rule is executed.</p>
+<pre><code class="language-yaml">automation:
+  trigger:
+    # first trigger
+    - platform: time_pattern
+      minutes: 5
+      # our second trigger is the sunset
+    - platform: sun
+      event: sunset
+</code></pre>
+:ET

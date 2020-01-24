@@ -1,0 +1,261 @@
+I"N <p>The <code>sonos</code> integration allows you to control your <a href="https://www.sonos.com">Sonos</a> wireless speakers from Home Assistant. It also works with IKEA Symfonisk speakers.</p>
+<p>You can configure the Sonos integration by going to the integrations page inside the config panel.</p>
+<h2>Services</h2>
+<p>The Sonos integration makes various custom services available.</p>
+<h3>Service <code>sonos.snapshot</code></h3>
+<p>Take a snapshot of what is currently playing on one or more speakers. This service, and the following one, are useful if you want to play a doorbell or notification sound and resume playback afterwards. If no <code>entity_id</code> is provided, all speakers are snapshotted.</p>
+<div class='note'>
+<p>The queue is not snapshotted and must be left untouched until the restore. Using <code>media_player.play_media</code> is safe and can be used to play a notification sound, including <a href="/integrations/tts/">TTS</a> announcements.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>The speakers to snapshot.</td>
+</tr>
+<tr>
+<td><code>with_group</code></td>
+<td>yes</td>
+<td>Should we also snapshot the group layout and the state of other speakers in the group, defaults to true.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.restore</code></h3>
+<p>Restore a previously taken snapshot of one or more speakers. If no <code>entity_id</code> is provided, all speakers are restored.</p>
+<div class='note'>
+<p>The playing queue is not snapshotted. Using <code>sonos.restore</code> on a speaker that has replaced its queue will restore the playing position, but in the new queue!</p>
+</div>
+<div class='note'>
+A cloud queue cannot be restarted. This includes queues started from within Spotify and queues controlled by Amazon Alexa.
+</div>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of <code>entity_id</code>s that should have their snapshot restored.</td>
+</tr>
+<tr>
+<td><code>with_group</code></td>
+<td>yes</td>
+<td>Should we also restore the group layout and the state of other speakers in the group, defaults to true.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.join</code></h3>
+<p>Group players together under a single coordinator. This will make a new group or join to an existing group.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>master</code></td>
+<td>no</td>
+<td>A single <code>entity_id</code> that will become/stay the coordinator speaker.</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of <code>entity_id</code>s to join to the master.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.unjoin</code></h3>
+<p>Remove one or more speakers from their group of speakers. If no <code>entity_id</code> is provided, all speakers are unjoined.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of <code>entity_id</code>s to separate from their coordinator speaker.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.set_sleep_timer</code></h3>
+<p>Sets a timer that will turn off a speaker by tapering the volume down to 0 after a certain amount of time. Protip: If you set the sleep_time value to 0, then the speaker will immediately start tapering the volume down.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of <code>entity_id</code>s that will have their timers set.</td>
+</tr>
+<tr>
+<td><code>sleep_time</code></td>
+<td>no</td>
+<td>Integer number of seconds that the speaker should wait until it starts tapering. Cannot exceed 86399 (one day).</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.clear_sleep_timer</code></h3>
+<p>Clear the sleep timer on a speaker, if one is set.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of <code>entity_id</code>s that will have their timers cleared. Must be a coordinator speaker.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.update_alarm</code></h3>
+<p>Update an existing Sonos alarm.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of <code>entity_id</code>s that will have their timers cleared. Must be a coordinator speaker.</td>
+</tr>
+<tr>
+<td><code>alarm_id</code></td>
+<td>no</td>
+<td>Integer that is used in Sonos to refer to your alarm.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>yes</td>
+<td>Time to set the alarm.</td>
+</tr>
+<tr>
+<td><code>volume</code></td>
+<td>yes</td>
+<td>Float for volume level.</td>
+</tr>
+<tr>
+<td><code>enabled</code></td>
+<td>yes</td>
+<td>Boolean for whether or not to enable this alarm.</td>
+</tr>
+<tr>
+<td><code>include_linked_zones</code></td>
+<td>yes</td>
+<td>Boolean that defines if the alarm also plays on grouped players.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.set_option</code></h3>
+<p>Set Sonos speaker options.</p>
+<p>Night Sound and Speech Enhancement modes are only supported when playing from the TV source of products like Sonos Playbar and Sonos Beam. Other speaker types will ignore these options.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of <code>entity_id</code>s that will have their options set.</td>
+</tr>
+<tr>
+<td><code>night_sound</code></td>
+<td>yes</td>
+<td>Boolean to control Night Sound mode.</td>
+</tr>
+<tr>
+<td><code>speech_enhance</code></td>
+<td>yes</td>
+<td>Boolean to control Speech Enhancement mode.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>sonos.play_queue</code></h3>
+<p>Starts playing the Sonos queue.</p>
+<p>Force start playing the queue, allows switching from another stream (such as radio) to playing the queue.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of <code>entity_id</code>s that will start playing. It must be the coordinator if targeting a group.</td>
+</tr>
+<tr>
+<td><code>queue_position</code></td>
+<td>yes</td>
+<td>Position of the song in the queue to start playing from, starts at 0.</td>
+</tr>
+</tbody>
+</table>
+<h2>Advanced use</h2>
+<p>For advanced uses, there are some manual configuration options available. These are usually only needed if you have a complex network setup where Home Assistant and Sonos are not on the same subnet.</p>
+<p>You can disable auto-discovery by specifying the Sonos IP addresses:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry with manually specified Sonos IP addresses
+sonos:
+  media_player:
+    hosts:
+      - 192.0.2.25
+      - 192.0.2.26
+      - 192.0.2.27
+</code></pre>
+<p>If your Home Assistant server has multiple IP addresses, you can provide the IP address that should be used for Sonos auto-discovery. This is rarely needed since all addresses should be tried by default.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry using Sonos discovery on a specific interface
+sonos:
+  media_player:
+    interface_addr: 192.0.2.1
+</code></pre>
+<p>The Sonos speakers will attempt to connect back to Home Assistant to deliver change events (using TCP port 1400). You can change the IP address that Home Assistant advertises to Sonos speakers. This can help in NAT scenarios such as when <em>not</em> using the Docker option <code>--net=host</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry modifying the advertised host address
+sonos:
+  media_player:
+    advertise_addr: 192.0.2.1
+</code></pre>
+:ET

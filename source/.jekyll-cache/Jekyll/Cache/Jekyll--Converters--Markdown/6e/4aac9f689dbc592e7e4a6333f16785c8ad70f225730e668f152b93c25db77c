@@ -1,0 +1,124 @@
+I"¼<p>Notification platform for <a href="https://play.google.com/store/apps/details?id=de.cyberdream.androidtv.notifications.google">Notifications for Android TV</a> and <a href="https://play.google.com/store/apps/details?id=de.cyberdream.firenotifications.google">Notifications for FireTV</a>. You can use this plarform to send notifications to your Android TV device. An overlay with the message content will appear for a configurable amount of seconds and then disapper again. Sending images (e.g., security cam) is supported too.</p>
+<p>The notifications are in the global scope of your Android TV device. They will be displayed regardless of which application is running.</p>
+<p>When setting this up be aware, that there are two apps: one for your smartphone to send notifications (not required for this platform) and one for your Android TV device to receive the notifications. The app available in the store of your Android TV device is the one that is needed to display notifications sent from Home Assistant. The In-App purchases only apply to the client for Android smartphones, so there isnâ€™t any limit when pushing notifications from Home Assistant.</p>
+<p>To enable the notification platform, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - platform: nfandroidtv
+    name: Kitchen
+    host: 192.168.1.12
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of the Android TV / FireTV device.</p>
+</span></p></dd><dt><a class='title-link' name='duration' href='#duration'></a> duration</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The duration in seconds for which the notification will be displayed.</p>
+</span></p><p class='default'>
+Default value: <p>5</p>
+</p></dd><dt><a class='title-link' name='fontsize' href='#fontsize'></a> fontsize</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Has to be one of: <code>small</code>, <code>medium</code>, <code>large</code> or <code>max</code>.</p>
+</span></p><p class='default'>
+Default value: <p>medium</p>
+</p></dd><dt><a class='title-link' name='position' href='#position'></a> position</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Has to be one of: <code>bottom-right</code>, <code>bottom-left</code>, <code>top-right</code>, <code>top-left</code> or <code>center</code>.</p>
+</span></p><p class='default'>
+Default value: <p>bottom-right</p>
+</p></dd><dt><a class='title-link' name='color' href='#color'></a> color</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Has to be one of: <code>grey</code>, <code>black</code>, <code>indigo</code>, <code>green</code>, <code>red</code>, <code>cyan</code>, <code>teal</code>, <code>amber</code> or <code>pink</code>.</p>
+</span></p><p class='default'>
+Default value: <p>grey</p>
+</p></dd><dt><a class='title-link' name='transparency' href='#transparency'></a> transparency</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Has to be one of: <code>0%</code>, <code>25%</code>, <code>50%</code>, <code>75%</code> or <code>100%</code>.</p>
+</span></p><p class='default'>
+Default value: <p>25%</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The timeout in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>5</p>
+</p></dd><dt><a class='title-link' name='interrupt' href='#interrupt'></a> interrupt</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If set to true, 1, on etc., the notification is interactive and can be dismissed or selected to display more details. Depending on the running app (e.g., Netflix), this may stop playback.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>The configuration will be used to configure the default values for the notification for the host specified by the IP. However, you can override most of the settings by passing them with the data-attribute when calling the service.
+This is a fully customized JSON you can use to test how the final notification will look like:</p>
+<pre><code class="language-json">{
+&quot;message&quot;: &quot;Messagetext&quot;,
+&quot;title&quot;: &quot;My Notification&quot;,
+&quot;data&quot;:{
+    &quot;fontsize&quot;: &quot;large&quot;,
+    &quot;position&quot;:&quot;center&quot;,
+    &quot;duration&quot;:2,
+    &quot;transparency&quot;:&quot;0%&quot;,
+    &quot;color&quot;: &quot;red&quot;,
+    &quot;interrupt&quot;: 1
+    }
+}
+</code></pre>
+<h3>Service data for sending images</h3>
+<p>The following attributes can be placed inside <code>data</code> to send images.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>yes</td>
+<td>Groups the attributes for file upload. If present, either <code>url</code> or <code>path</code> have to be provided.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>yes</td>
+<td>Local path of an image file. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>yes</td>
+<td>URL of an image file. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>yes</td>
+<td>Username if the url requires authentication. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>yes</td>
+<td>Password if the url requires authentication. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>auth</code></td>
+<td>yes</td>
+<td>If set to <code>digest</code> HTTP-Digest-Authentication is used. If missing, HTTP-BASIC-Authentication is used. Is placed inside <code>file</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Example for posting file from URL:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;:&quot;Messagetext&quot;,
+  &quot;title&quot;:&quot;My Notification&quot;,
+  &quot;data&quot;:{
+    &quot;file&quot;:{
+      &quot;url&quot;:&quot;http://[url to image file]&quot;,
+      &quot;username&quot;:&quot;optional user, if necessary&quot;,
+      &quot;password&quot;:&quot;optional password, if necessary&quot;,
+      &quot;auth&quot;:&quot;digest&quot;
+    }
+  }
+}
+</code></pre>
+<p>Example for posting file from local path:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;:&quot;Messagetext&quot;,
+  &quot;title&quot;:&quot;My Notification&quot;,
+  &quot;data&quot;:{
+    &quot;file&quot;:{
+      &quot;path&quot;:&quot;/path/to/file.ext&quot;
+    }
+  }
+}
+</code></pre>
+<p>Please note that <code>path</code> is validated against the <code>whitelist_external_dirs</code> in the <code>configuration.yaml</code>.</p>
+:ET

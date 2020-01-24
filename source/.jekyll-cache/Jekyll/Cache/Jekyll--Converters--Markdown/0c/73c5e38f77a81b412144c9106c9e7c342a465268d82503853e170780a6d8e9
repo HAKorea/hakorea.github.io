@@ -1,0 +1,34 @@
+I"3<p>With this sensor platform, you will be able to integrate the test build results reported by <a href="https://travis-ci.org/">Travis-CI</a> working within Home Assistant.</p>
+<h2>Setup</h2>
+<p>Create a GitHub <a href="https://github.com/settings/tokens">access token</a> with the following scopes:</p>
+<ul>
+<li><strong>read:org</strong></li>
+<li><strong>user:email</strong></li>
+<li><strong>repo_deployment</strong></li>
+<li><strong>repo:status</strong></li>
+<li><strong>write:repo_hook</strong></li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this platform, please add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: travisci
+    api_key: YOUR_ACCESS_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The acces token for GitHub.</p>
+</span></p></dd><dt><a class='title-link' name='branch' href='#branch'></a> branch</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Determine which default branch should be used by the <strong>state</strong> condition.</p>
+</span></p><p class='default'>
+Default value: <p>master</p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. If not specified, all conditions below will be enabled by default. The following conditions can be monitored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='last_build_id' href='#last_build_id'></a> last_build_id</dt><dd><p class='desc'><span class='description'><p>Turn the last build job ID.</p>
+</span></p></dd><dt><a class='title-link' name='last_build_duration' href='#last_build_duration'></a> last_build_duration</dt><dd><p class='desc'><span class='description'><p>Return the time elapsed in seconds to run the last test job.</p>
+</span></p></dd><dt><a class='title-link' name='last_build_finished_at' href='#last_build_finished_at'></a> last_build_finished_at</dt><dd><p class='desc'><span class='description'><p>Return the timestamp of when the last test job finished.</p>
+</span></p></dd><dt><a class='title-link' name='last_build_started_at' href='#last_build_started_at'></a> last_build_started_at</dt><dd><p class='desc'><span class='description'><p>Return the timestamp of when the last test job started.</p>
+</span></p></dd><dt><a class='title-link' name='last_build_state' href='#last_build_state'></a> last_build_state</dt><dd><p class='desc'><span class='description'><p>Return the state from the latest test job/PR. The conditions can be: ‘passed’, ‘failed’ or ‘started’.</p>
+</span></p></dd><dt><a class='title-link' name='state' href='#state'></a> state</dt><dd><p class='desc'><span class='description'><p>Return the build test from the branch specified at by <strong>branch</strong> parameter.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='repository' href='#repository'></a> repository</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name from the GitHub repositories to be monitored. If not specified, all GitHub repositories linked to Travis-CI will be enabled by default.</p>
+</span></p></dd></dl>
+</div>
+:ET

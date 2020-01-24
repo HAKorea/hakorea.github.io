@@ -1,0 +1,40 @@
+I"\<p>The <code>mqtt_room</code> sensor platform allows you to detect the indoor location of devices using MQTT clients.</p>
+<h2>Configuration</h2>
+<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: mqtt_room
+    device_id: 123testid
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device_id' href='#device_id'></a> device_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The device id to track for this sensor.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Room Sensor</p>
+</p></dd><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The topic that contains all subtopics for the rooms.</p>
+</span></p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time in seconds after which a room presence state is considered old. An example: device1 is reported at scanner1 with a distance of 1. No further updates are sent from scanner1. After 5 seconds scanner2 reports device1 with a distance of 2. The old location info is discarded in favor of the new scanner2 information as the timeout has passed.</p>
+</span></p><p class='default'>
+Default value: <p>5</p>
+</p></dd><dt><a class='title-link' name='away_timeout' href='#away_timeout'></a> away_timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time in seconds after which the state should be set to <code>not_home</code> if there were no updates. <code>0</code> disables the check.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd></dl>
+</div>
+<h2>Usage</h2>
+<p>Example JSON that should be published to the room topics:</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;123testid&quot;,
+  &quot;name&quot;: &quot;Test Device&quot;,
+  &quot;distance&quot;: 5.678
+}
+</code></pre>
+<h3>Setting up clients</h3>
+<p>This integration works with any software that is sending data in the given format. Each client should post the discovered devices in its own subtopic of the configured topic.
+Instead of developing your own application, you can also use any of these already existing clients:</p>
+<ul>
+<li><a href="https://github.com/mKeRix/room-assistant"><strong>room-assistant</strong></a>: looks for Bluetooth LE beacons, based on Node.js</li>
+<li><a href="https://github.com/happy-bubbles/presence"><strong>Happy Bubbles Presence Server</strong></a>: presence detection server for Happy Bubbles BLE-scanning devices, based on Go</li>
+<li><a href="https://jptrsn.github.io/ESP32-mqtt-room/"><strong>ESP32-MQTT-room</strong></a>: runs on an ESP32, and looks for Bluetooth LE devices, based on C++/Arduino</li>
+</ul>
+:ET

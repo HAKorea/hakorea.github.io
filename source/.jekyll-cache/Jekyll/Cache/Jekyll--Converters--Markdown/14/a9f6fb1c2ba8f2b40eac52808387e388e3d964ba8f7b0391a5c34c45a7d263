@@ -1,0 +1,110 @@
+I"�"<p>The <a href="https://www.knx.org">KNX</a> integration for Home Assistant allows you to connect to a KNX/IP devices.</p>
+<p>The integration requires a local KNX/IP interface like the <a href="https://www.weinzierl.de/index.php/en/all-knx/knx-devices-en/produktarchiv-en/knx-ip-interface-730-en">Weinzierl 730</a>. Through this, it will send and receive commands to and from other devices to the KNX bus.</p>
+<div class='note warning'>
+Please note, the `knx` platform does not support Windows.
+</div>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="/integrations/binary_sensor.knx">Binary Sensor</a></li>
+<li><a href="/integrations/cover.knx">Cover</a></li>
+<li><a href="/integrations/sensor.knx">Sensor</a></li>
+<li><a href="/integrations/switch.knx">Switch</a></li>
+<li><a href="/integrations/light.knx">Light</a></li>
+<li><a href="/integrations/climate.knx">Thermostat</a></li>
+<li><a href="/integrations/notify.knx">Notify</a></li>
+<li><a href="/integrations/scene.knx">Scene</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To use your KNX in your installation, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">knx:
+</code></pre>
+<p>Optional, recommended for large KNX installations (&gt;100 devices) and/or if you want to use the XKNX abstraction also for other scripted tools outside of Home Assistant:</p>
+<pre><code class="language-yaml">knx:
+  config_file: '/path/to/xknx.yaml'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='config_file' href='#config_file'></a> config_file</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The path for XKNX configuration file.</p>
+</span></p></dd><dt><a class='title-link' name='rate_limit' href='#rate_limit'></a> rate_limit</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the maximum number of telegrams to be sent to the bus per second (range 1-100).</p>
+</span></p><p class='default'>
+Default value: <p>20</p>
+</p></dd></dl>
+</div>
+<p>If the auto detection of the KNX/IP device does not work you can specify ip/port of the tunneling device:</p>
+<pre><code class="language-yaml">knx:
+  tunneling:
+    host: '192.168.2.23'
+    port: 3671
+    local_ip: '192.168.2.109'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Host of the KNX/IP tunneling device.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port of the KNX/IP tunneling device.</p>
+</span></p></dd><dt><a class='title-link' name='local_ip' href='#local_ip'></a> local_ip</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>IP of the local interface.</p>
+</span></p></dd></dl>
+</div>
+<p>Explicit connection to a KNX/IP routing device:</p>
+<pre><code class="language-yaml">knx:
+  routing:
+     local_ip: '192.168.2.109'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='local_ip' href='#local_ip'></a> local_ip</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The local IP address of interface (which should be used for multicasting).</p>
+</span></p></dd></dl>
+</div>
+<pre><code class="language-yaml">knx:
+  fire_event: true
+  fire_event_filter: [&quot;1/0/*&quot;, &quot;6/2,3,4-6/*&quot;]
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Inclusive)</span><span class='description'><p>If set to True, platform will write all received KNX messages to event bus</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='fire_event_filter' href='#fire_event_filter'></a> fire_event_filter</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Inclusive)</span><span class='description'><p>If <code>fire_event</code> is set <code>fire_event_filter</code> has to be specified. <code>fire_event_filter</code> defines a list of patterns for filtering KNX addresses. Only telegrams which match this pattern are sent to the HOme Assistant event bus.</p>
+</span></p></dd><dt><a class='title-link' name='state_updater' href='#state_updater'></a> state_updater</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The integration will collect the current state of each configured device from the KNX bus to display it correctly within Home-Assistant. Set this option to False to prevent this behavior.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<h3>Services</h3>
+<p>In order to directly interact with the KNX bus, you can use the following service:</p>
+<pre><code class="language-txt">Domain: knx
+Service: send
+Service Data: {&quot;address&quot;: &quot;1/0/15&quot;, &quot;payload&quot;: 0}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='description'><p>KNX group address</p>
+</span></p></dd><dt><a class='title-link' name='payload' href='#payload'></a> payload</dt><dd><p class='desc'><span class='type'>(<span class='integer list'>integer | list</span>)</span><span class='description'><p>Payload, either an integer or an array of integers</p>
+</span></p></dd></dl>
+</div>
+<h3>Exposing sensor values or time to knx bus</h3>
+<p>KNX integration is able to expose time or sensor values to KNX bus. The integration will broadcast any change of the exposed value to the KNX bus and answer read requests to the specified group address:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+knx:
+  expose:
+    - type: 'temperature'
+      entity_id: 'sensor.owm_temperature'
+      address: '0/0/2'
+    - type: 'string'
+      address: '0/6/4'
+      entity_id: &quot;sensor.owm_weather&quot;
+    - type: 'binary'
+      entity_id: 'binary_sensor.kitchen_window'
+      address: '0/6/5'
+    - type: 'time'
+      address: '0/0/1'
+    - type: 'datetime'
+      address: '0/0/23'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Type of the exposed value. Either ‘binary’, ‘time’, ‘date’, ‘datetime’ or any supported type of <a href="/integrations/sensor.knx/">KNX Sensor</a> (e.g., “temperature” or “humidity”).</p>
+</span></p></dd><dt><a class='title-link' name='entity_id' href='#entity_id'></a> entity_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='description'><p>Entity id to be exposed. Not needed for types time, date and datetime.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>KNX group address.</p>
+</span></p></dd></dl>
+</div>
+:ET

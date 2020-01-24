@@ -1,0 +1,33 @@
+I";
+<p>The <code>IntesisHome</code> climate platform lets you control <a href="https://www.intesishome.com">IntesisHome</a> and <a href="https://www.airconwithme.com">Airconwithme</a> devices. IntesisHome provides integrations with air conditioners, including Panasonic, Daikin, Fujitsu, Toshiba, LG and more.</p>
+<p>Note: IntesisHome products are a separate product line to IntesisBox. This platform does not support IntesisBox devices (which can be controlled locally using the WMP protocol).</p>
+<h2>Configuration</h2>
+<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">climate:
+  - platform: intesishome
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your username for <a href="https://user.intesishome.com">IntesisHome.com</a> / <a href="https://user.airconwithme.com">Airconwithme</a></p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your password for IntesisHome</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><code>IntesisHome</code> or <code>airconwithme</code>.</p>
+</span></p><p class='default'>
+Default value: <p>IntesisHome</p>
+</p></dd></dl>
+</div>
+<p>This component opens a TCP connection with the IntesisHome API to receive temperature and status updates, and to issue commands.
+By default, the component will be named using the friendly device name from the IntesisHome website or application.
+If internet connectivity is lost, the device will be marked as unavailable after 5 minutes.</p>
+<h3>Supported services</h3>
+<p>Available services:</p>
+<ul>
+<li><code>climate.set_temperature</code></li>
+<li><code>climate.set_fan_mode</code></li>
+<li><code>climate.set_operation_mode</code></li>
+<li><code>climate.set_swing_mode</code></li>
+<li><code>climate.turn_on</code></li>
+<li><code>climate.turn_off</code></li>
+</ul>
+:ET

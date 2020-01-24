@@ -1,0 +1,48 @@
+I"è<p>The <code>signal_messenger</code> integration uses the <a href="https://github.com/bbernhard/signal-cli-rest-api">Signal Messenger REST API</a> to deliver notifications from Home Assistant to your Android or iOS device.</p>
+<h2>Setup</h2>
+<p>The requirements are:</p>
+<ul>
+<li>You need to set up the Signal Messenger REST API.</li>
+<li>You need a spare phone number to register with the Signal Messenger service.</li>
+</ul>
+<p>Please follow those <a href="https://github.com/bbernhard/signal-cli-rest-api/blob/master/doc/HOMEASSISTANT.md">instructions</a>, to set up the Signal Messenger REST API.</p>
+<h2>Configuration</h2>
+<p>To send Signal Messenger notifications with Home Assistant, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Signal Messenger 
+notify:
+  - name: signal
+    platform: signal_messenger
+    url: &quot;http://127.0.0.1:8080&quot; # the URL where the Signal Messenger REST API is listening 
+    number: &quot;YOUR_PHONE_NUMBER&quot; # the sender number
+    recipients: # one or more recipients
+      - &quot;RECIPIENT1&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL where the Signal Messenger REST API listens for incoming requests.</p>
+</span></p></dd><dt><a class='title-link' name='number' href='#number'></a> number</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sender number.</p>
+</span></p></dd><dt><a class='title-link' name='recipients' href='#recipients'></a> recipients</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of recipients.</p>
+</span></p></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>A few examples on how to use this integration.</p>
+<h3>Text message</h3>
+<pre><code class="language-yaml">...
+action:
+  service: notify.NOTIFIER_NAME
+  data:
+    message: &quot;That's an example that sends a simple text message to the recipients specified in the configuration.yaml&quot;
+</code></pre>
+<h3>Text message with an attachment</h3>
+<pre><code class="language-yaml">...
+action:
+  service: notify.NOTIFIER_NAME
+  data:
+    message: &quot;Alarm in the living room!&quot;
+    data:
+      attachment: &quot;/tmp/surveillance_camera.jpg&quot;
+</code></pre>
+:ET

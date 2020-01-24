@@ -1,0 +1,70 @@
+I"À<p>The AquaLogic integration provides connectivity to a Hayward/Goldline AquaLogic/ProLogic pool controller. Note that an RS-485 to Ethernet adapter connected to the pool controller is required.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To add the AquaLogic integration to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+aqualogic:
+  host: IP_ADDRESS
+  port: PORT
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The domain name or IP address of the RS-485 to Ethernet adapter connected to the pool controller, e.g., 192.168.1.1.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port provided by the RS-485 to Ethernet adapter.</p>
+</span></p></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>Once you have enabled the AquaLogic component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: aqualogic
+    monitored_conditions:
+      - pool_temp
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of items you want to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>all</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='air_temp' href='#air_temp'></a> air_temp</dt><dd><p class='desc'><span class='description'><p>The air temperature.</p>
+</span></p></dd><dt><a class='title-link' name='pool_temp' href='#pool_temp'></a> pool_temp</dt><dd><p class='desc'><span class='description'><p>The pool temperature.</p>
+</span></p></dd><dt><a class='title-link' name='spa_temp' href='#spa_temp'></a> spa_temp</dt><dd><p class='desc'><span class='description'><p>The spa temperature.</p>
+</span></p></dd><dt><a class='title-link' name='pool_chlorinator' href='#pool_chlorinator'></a> pool_chlorinator</dt><dd><p class='desc'><span class='description'><p>The pool chlorinator setting.</p>
+</span></p></dd><dt><a class='title-link' name='spa_chlorinator' href='#spa_chlorinator'></a> spa_chlorinator</dt><dd><p class='desc'><span class='description'><p>The spa chlorinator setting.</p>
+</span></p></dd><dt><a class='title-link' name='salt_level' href='#salt_level'></a> salt_level</dt><dd><p class='desc'><span class='description'><p>The current salt level.</p>
+</span></p></dd><dt><a class='title-link' name='pump_speed' href='#pump_speed'></a> pump_speed</dt><dd><p class='desc'><span class='description'><p>The current pump speed (Hayward VS pumps only).</p>
+</span></p></dd><dt><a class='title-link' name='pump_power' href='#pump_power'></a> pump_power</dt><dd><p class='desc'><span class='description'><p>The current pump power usage (Hayward VS pumps only).</p>
+</span></p></dd><dt><a class='title-link' name='status' href='#status'></a> status</dt><dd><p class='desc'><span class='description'><p>The current system status.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Switch</h2>
+<p>Once you have enabled the AquaLogic component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: aqualogic
+    monitored_conditions:
+      - lights
+      - filter
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of items you want to monitor/control.</p>
+</span></p><p class='default'>
+Default value: <p>all</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='filter' href='#filter'></a> filter</dt><dd><p class='desc'><span class='description'><p>Controls the filter pump.</p>
+</span></p></dd><dt><a class='title-link' name='filter_low_speed' href='#filter_low_speed'></a> filter_low_speed</dt><dd><p class='desc'><span class='description'><p>Controls low speed mode on the filter pump (multi-speed pumps only).</p>
+</span></p></dd><dt><a class='title-link' name='lights' href='#lights'></a> lights</dt><dd><p class='desc'><span class='description'><p>Controls the Lights relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_1' href='#aux_1'></a> aux_1</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 1 relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_2' href='#aux_2'></a> aux_2</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 2 relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_3' href='#aux_3'></a> aux_3</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 3 relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_4' href='#aux_4'></a> aux_4</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 4 relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_5' href='#aux_5'></a> aux_5</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 5 relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_6' href='#aux_6'></a> aux_6</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 6 relay.</p>
+</span></p></dd><dt><a class='title-link' name='aux_7' href='#aux_7'></a> aux_7</dt><dd><p class='desc'><span class='description'><p>Controls the Aux 7 relay.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

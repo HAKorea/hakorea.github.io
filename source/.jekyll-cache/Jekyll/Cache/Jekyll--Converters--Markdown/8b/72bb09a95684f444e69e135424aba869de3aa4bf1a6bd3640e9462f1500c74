@@ -1,0 +1,88 @@
+I"'<p>The <code>asuswrt</code> integration is the main integration to connect to a <a href="https://event.asus.com/2013/nw/ASUSWRT/">ASUSWRT</a> based router.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><strong>Presence Detection</strong> - The asuswrt platform offers presence detection by looking at connected devices to a ASUSWRT based router.</li>
+<li><strong>Sensor</strong> - The asuswrt sensor platform allows you to get upload and download data from your ASUSWRT within Home Assistant.</li>
+</ul>
+<h2>Configuration</h2>
+<p>To use an ASUSWRT router in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+asuswrt:
+  host: YOUR_ROUTER_IP
+  username: YOUR_ADMIN_USERNAME
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your router, e.g., <code>192.168.1.1</code>.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username of a user with administrative privileges, usually <code>admin</code>.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The password for your given admin account (use this if no SSH key is given).</p>
+</span></p></dd><dt><a class='title-link' name='protocol' href='#protocol'></a> protocol</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The protocol (<code>ssh</code> or <code>telnet</code>) to use.</p>
+</span></p><p class='default'>
+Default value: <p>ssh</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>SSH port to use.</p>
+</span></p><p class='default'>
+Default value: <p>22</p>
+</p></dd><dt><a class='title-link' name='mode' href='#mode'></a> mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The operating mode of the router (<code>router</code> or <code>ap</code>).</p>
+</span></p><p class='default'>
+Default value: <p>router</p>
+</p></dd><dt><a class='title-link' name='ssh_key' href='#ssh_key'></a> ssh_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The path to your SSH private key file associated with your given admin account (instead of password).</p>
+</span></p></dd><dt><a class='title-link' name='require_ip' href='#require_ip'></a> require_ip</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the router is in access point mode.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of enabled sensors</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='upload' href='#upload'></a> upload</dt><dd><p class='desc'><span class='description'><p>TX upload sensor</p>
+</span></p></dd><dt><a class='title-link' name='download' href='#download'></a> download</dt><dd><p class='desc'><span class='description'><p>RX download sensor</p>
+</span></p></dd><dt><a class='title-link' name='download_speed' href='#download_speed'></a> download_speed</dt><dd><p class='desc'><span class='description'><p>download mbit/s sensor</p>
+</span></p></dd><dt><a class='title-link' name='upload_speed' href='#upload_speed'></a> upload_speed</dt><dd><p class='desc'><span class='description'><p>upload mbit/s sensor</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note warning'>
+<p>You need to enable telnet on your router if you choose to use <code>protocol: telnet</code>.</p>
+</div>
+<h3>Example Sensor Configuration</h3>
+<p>To enable ASUSWRT sensors as part of your installation, reference the following example configuration:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+asuswrt:
+  host: YOUR_ROUTER_IP
+  username: YOUR_ADMIN_USERNAME
+  ssh_key: /config/id_rsa
+  sensors:
+    - upload
+    - download
+    - upload_speed
+    - download_speed
+</code></pre>
+<p>The example above, creates the following sensors:</p>
+<ul>
+<li>sensor.asuswrt_download (unit_of_measurement: Gigabyte - <em>Daily accumulation</em>)</li>
+<li>sensor.asuswrt_download_speed (unit_of_measurement: Mbit/s)</li>
+<li>sensor.asuswrt_upload (unit_of_measurement: Gigabyte - <em>Daily accumulation</em>)</li>
+<li>sensor.asuswrt_upload_speed (unit_of_measurement: Mbit/s)</li>
+</ul>
+<h2>Padavan custom firmware (The rt-n56u project)</h2>
+<p>The <a href="https://bitbucket.org/padavan/rt-n56u">rt-n56u project</a> does not store <code>dnsmasq.leases</code> which is used to track devices at <code>/var/lib/misc/</code> as <code>asuswrt</code> do. However this integration can still be used for the rt-n56u project by linking <code>dnsmasq.leases</code> during the boot process of the router.</p>
+<p>Follow these steps to setup the link.</p>
+<ol>
+<li>SSH or Telnet into the router. (default ssh <a href="mailto:admin@my.router">admin@my.router</a>)</li>
+<li>Run the following command to find the file:</li>
+</ol>
+<pre><code class="language-bash">$ find / -name &quot;dnsmasq.leases&quot;
+</code></pre>
+<ol start="3">
+<li>Copy or remember the full path of, example: <code>/tmp/dnsmasq.leases</code></li>
+<li>Create the folder if it does not exist:</li>
+</ol>
+<pre><code class="language-bash">$ mkdir -p /var/lib/misc
+</code></pre>
+<ol start="5">
+<li>Add the linking process to the routers started script (one line):</li>
+</ol>
+<pre><code class="language-bash">$ echo &quot;/bin/ln -s /tmp/dnsmasq.leases /var/lib/misc/dnsmasq.leases&quot; &gt;&gt; /etc/storage/started_script.sh
+</code></pre>
+<ol start="6">
+<li>Reboot the router or link the file:</li>
+</ol>
+<pre><code class="language-bash">$ /bin/ln -s /tmp/dnsmasq.leases /var/lib/misc/dnsmasq.leases
+</code></pre>
+<p>The started script is also accessible and editable in the Router’s web interface. <code>Advanced Settings -&gt; Customization -&gt; Scripts -&gt; Custom User Script -&gt; Run After Router Started</code></p>
+:ET

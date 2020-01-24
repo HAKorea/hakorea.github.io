@@ -1,0 +1,346 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Generic Thermostat - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Turn Home Assistant into a thermostat">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/generic_thermostat/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Generic Thermostat">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/generic_thermostat/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Turn Home Assistant into a thermostat">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Generic Thermostat">
+    <meta name="twitter:description" content="Turn Home Assistant into a thermostat">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/generic_thermostat.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Generic Thermostat
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>generic_thermostat</code> climate platform is a thermostat implemented in Home Assistant. It uses a sensor and a switch connected to a heater or air conditioning under the hood. When in heater mode, if the measured temperature is cooler than the target temperature, the heater will be turned on and turned off when the required temperature is reached. When in air conditioning mode, if the measured temperature is hotter than the target temperature, the air conditioning will be turned on and turned off when required temperature is reached. One Generic Thermostat entity can only control one switch. If you need to activate two switches, one for a heater and one for an air conditioner, you will need two Generic Thermostat entities.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+climate:
+  - platform: generic_thermostat
+    name: Study
+    heater: switch.study_heater
+    target_sensor: sensor.study_temperature
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of thermostat.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Generic Thermostat</p>
+</dd>
+<dt>
+<a class="title-link" name="heater" href="#heater"></a> heater</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p><code>entity_id</code> for heater switch, must be a toggle device. Becomes air conditioning switch when <code>ac_mode</code> is set to <code>true</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="target_sensor" href="#target_sensor"></a> target_sensor</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p><code>entity_id</code> for a temperature sensor, target_sensor.state must be temperature.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="min_temp" href="#min_temp"></a> min_temp</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set minimum set point available.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>7</p>
+</dd>
+<dt>
+<a class="title-link" name="max_temp" href="#max_temp"></a> max_temp</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set maximum set point available.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>35</p>
+</dd>
+<dt>
+<a class="title-link" name="target_temp" href="#target_temp"></a> target_temp</dt>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set initial target temperature. Failure to set this variable will result in target temperature being set to null on startup. As of version 0.59, it will retain the target temperature set before restart if available.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="ac_mode" href="#ac_mode"></a> ac_mode</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the switch specified in the <em>heater</em> option to be treated as a cooling device instead of a heating device.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="min_cycle_duration" href="#min_cycle_duration"></a> min_cycle_duration</dt>
+<dd><p class="desc"><span class="type">(<span class="time integer">time | integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set a minimum amount of time that the switch specified in the <em>heater</em> option must be in its current state prior to being switched either off or on.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="cold_tolerance" href="#cold_tolerance"></a> cold_tolerance</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set a minimum amount of difference between the temperature read by the sensor specified in the <em>target_sensor</em> option and the target temperature that must change prior to being switched on. For example, if the target temperature is 25 and the tolerance is 0.5 the heater will start when the sensor equals or goes below 24.5.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0.3</p>
+</dd>
+<dt>
+<a class="title-link" name="hot_tolerance" href="#hot_tolerance"></a> hot_tolerance</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set a minimum amount of difference between the temperature read by the sensor specified in the <em>target_sensor</em> option and the target temperature that must change prior to being switched off. For example, if the target temperature is 25 and the tolerance is 0.5 the heater will stop when the sensor equals or goes above 25.5.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0.3</p>
+</dd>
+<dt>
+<a class="title-link" name="keep_alive" href="#keep_alive"></a> keep_alive</dt>
+<dd><p class="desc"><span class="type">(<span class="time integer">time | integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set a keep-alive interval. If set, the switch specified in the <em>heater</em> option will be triggered every time the interval elapses. Use with heaters and A/C units that shut off if they don’t receive a signal from their remote for a while. Use also with switches that might lose state. The keep-alive call is done with the current valid climate integration state (either on or off).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="initial_hvac_mode" href="#initial_hvac_mode"></a> initial_hvac_mode</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the initial HVAC mode. Valid values are <code>off</code>, <code>heat</code> or <code>cool</code>. Value has to be double quoted. If this parameter is not set, it is preferable to set a <em>keep_alive</em> value. This is helpful to align any discrepancies between <em>generic_thermostat</em> and <em>heater</em> state.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="away_temp" href="#away_temp"></a> away_temp</dt>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the temperature used by <code>preset_mode: away</code>. If this is not specified, the preset mode feature will not be available.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="precision" href="#precision"></a> precision</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The desired precision for this device. Can be used to match your actual thermostat’s precision. Supported values are <code>0.1</code>, <code>0.5</code> and <code>1.0</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>0.5</code> for Celsius and <code>1.0</code> for Fahrenheit.</p>
+</dd>
+</dl>
+</div>
+<p>Time for <code>min_cycle_duration</code> and <code>keep_alive</code> must be set as “hh:mm:ss” or it must contain at least one of the following entries: <code>days:</code>, <code>hours:</code>, <code>minutes:</code>, <code>seconds:</code> or <code>milliseconds:</code>. Alternatively, it can be an integer that represents time in seconds.</p>
+<p>Currently the <code>generic_thermostat</code> climate platform supports ‘heat’, ‘cool’ and ‘off’ hvac modes. You can force your <code>generic_thermostat</code> to avoid starting by setting HVAC mode to ‘off’.</p>
+<p>Please note that when changing the preset mode to away, you will force a target temperature change as well that will get restored once the preset mode is set to none again.</p>
+<h2>
+<a class="title-link" name="full-configuration-example" href="#full-configuration-example"></a> Full configuration example</h2>
+<pre><code class="language-yaml">climate:
+  - platform: generic_thermostat
+    name: Study
+    heater: switch.study_heater
+    target_sensor: sensor.study_temperature
+    min_temp: 15
+    max_temp: 21
+    ac_mode: false
+    target_temp: 17
+    cold_tolerance: 0.3
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "off"
+    away_temp: 16
+    precision: 0.1
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/generic_thermostat.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/home-assistant.png' /></div><div class="section">
+    <kb-alert-link integration="generic_thermostat"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: pre 0.7
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/generic_thermostat/'>/components/generic_thermostat/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#climate'>Climate</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

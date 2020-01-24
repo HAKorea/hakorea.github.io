@@ -1,0 +1,55 @@
+I"û
+<p>Image processing enables Home Assistant to process images from <a href="/integrations/#camera">cameras</a>. Only camera entities are supported as sources.</p>
+<div class='note'>
+<p>If you are running Home Assistant over SSL or from within a container, you will have to setup a base URL (<code>base_url</code>) inside the <a href="/integrations/http/">http component</a>.</p>
+</div>
+<h2>ALPR</h2>
+<p>ALPR entities have a vehicle counter attribute <code>vehicles</code> and all found plates are stored in the <code>plates</code> attribute.</p>
+<p>The <code>found_plate</code> event is triggered after OpenALPR has found a new license plate.</p>
+<pre><code class="language-yaml"># Example configuration.yaml automation entry
+automation:
+- alias: Open garage door
+  trigger:
+    platform: event
+    event_type: image_processing.found_plate
+    event_data:
+      entity_id: openalpr.camera_garage_1
+      plate: BE2183423
+...
+</code></pre>
+<p>The following event attributes will be present (platform-dependent): <code>entity_id</code>, <code>plate</code>, <code>confidence</code></p>
+<h2>Face</h2>
+<p>Face entities have a face counter attribute <code>total_faces</code> and all face data is stored in the <code>faces</code> attribute.</p>
+<p>The <code>detect_face</code> event is triggered after a Face entity has found a face.</p>
+<pre><code class="language-yaml"># Example configuration.yaml automation entry
+automation:
+- alias: Known person in front of my door
+  trigger:
+    platform: event
+    event_type: image_processing.detect_face
+    event_data:
+      entity_id: image_processing.door
+      name: 'Hans Maier'
+...
+</code></pre>
+<p>The following event attributes will be present (platform-dependent): <code>entity_id</code>, <code>name</code>, <code>confidence</code>, <code>age</code>, <code>gender</code>, <code>motion</code>, <code>glasses</code></p>
+<h2>scan_interval and Optimising Resources</h2>
+<p>Image processing integrations process the image from a camera at a fixed period given by the <code>scan_interval</code>. This leads to excessive processing if the image on the camera hasnâ€™t changed, as the default <code>scan_interval</code> is 10 seconds. You can override this by adding to your config <code>scan_interval: 10000</code> (setting the interval to 10,000 seconds), and then call the <code>image_processing.scan</code> service when you actually want to perform processing.</p>
+<pre><code class="language-yaml"># Example configuration.yaml
+sensor:
+- platform: _AN_IMAGE_PROCESSING_PLATFORM_
+  scan_interval: 10000
+...
+automation:
+- alias: Scan for faces when motion detected
+  trigger:
+    - platform: state
+      entity_id: sensor.door_motion_sensor
+      to: 'on'
+  action:
+    - service: image_processing.scan
+      data:
+        entity_id: image_processing.door
+...
+</code></pre>
+:ET

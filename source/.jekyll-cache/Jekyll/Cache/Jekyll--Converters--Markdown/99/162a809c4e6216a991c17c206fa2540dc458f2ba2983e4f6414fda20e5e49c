@@ -1,0 +1,169 @@
+I"C<div class='note'>
+<p>Beginners should check our <a href="/getting-started/">Getting started guide</a> first.</p>
+</div>
+<p>Home Assistant provides multiple ways to be installed. The first start may take up to 20 minutes because the required packages will be downloaded and installed. The web interface will be served on <code>http://ip.add.re.ss:8123/</code>. Replace <code>ip.add.re.ss</code> with the IP of the computer you installed it on.</p>
+<div class='note warning'>
+<p>Please remember to <a href="/docs/configuration/securing/">secure your installation</a> once you’ve finished with the installation process.</p>
+</div>
+<h2>Hardware</h2>
+<p>Below is a list of <strong>minimum</strong> requirements</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Minimum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storage</td>
+<td>32 GB</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>1 GB</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>100 Mb/s wired</td>
+</tr>
+<tr>
+<td>Power (if Pi)</td>
+<td>At least 2.5A</td>
+</tr>
+</tbody>
+</table>
+<h3>Performance expectations</h3>
+<p>This is a list of popular platforms and what to expect from them.</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raspberry Pi Zero/Pi 2</td>
+<td><strong>Only</strong> use these for testing</td>
+</tr>
+<tr>
+<td>Raspberry Pi 3/3+/4</td>
+<td>This is a good starting point, and depending on the amount of devices you integrate this can be enough - use an <a href="https://amzn.to/2X0Z2di">A2 class SD</a> card if possible.</td>
+</tr>
+<tr>
+<td>NUC i3</td>
+<td>This is if you need a little more power over a Pi</td>
+</tr>
+<tr>
+<td>NUC i5</td>
+<td>This will allow you to run multiple services without any issues, perfect for a homelab</td>
+</tr>
+<tr>
+<td>NUC i7/i9</td>
+<td>Pure power, you should not have <em>any</em> performance issues</td>
+</tr>
+</tbody>
+</table>
+<h2>Recommended</h2>
+<p>These install options are fully supported by Home Assistant’s documentation. For example, if an integration requires that you install something to make it work on one of these methods then the integration page will document the steps required.</p>
+<div class='note'>
+<p>The only installation methods that allow you to use Hass.io Add-ons are the Hass.io image and manual installer. All other methods only install the base Home Assistant packages, however the software from the add-ons may still usually be installed manually like any other program.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Method</strong></th>
+<th align="left"><strong>You have</strong></th>
+<th align="left"><strong>Recommended for</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="/hassio/installation/">Hass.io</a></td>
+<td align="left">Raspberry Pi<br>VM</td>
+<td align="left">Anybody</td>
+</tr>
+<tr>
+<td align="left"><a href="/docs/installation/docker/">Docker</a></td>
+<td align="left">Docker</td>
+<td align="left">Anybody already running Docker</td>
+</tr>
+</tbody>
+</table>
+<h2>Alternative installs</h2>
+<p>If you use these install methods, we assume that you know how to manage and administer the operating system you’re using. Due to the range of platforms on which these install methods can be used, integration documentation may only tell you what you have to install, not how to install it.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Method</strong></th>
+<th align="left"><strong>You have</strong></th>
+<th align="left"><strong>Recommended for</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="/docs/installation/raspberry-pi/">venv<BR>(as another user)</a></td>
+<td align="left">Any Linux, Python 3.7 or later</td>
+<td align="left">Those familiar with their operating system</td>
+</tr>
+<tr>
+<td align="left"><a href="/docs/installation/virtualenv/">venv<BR>(as your user)</a></td>
+<td align="left">Any Python 3.7 or later</td>
+<td align="left">Developers</td>
+</tr>
+</tbody>
+</table>
+<h2>Community provided guides</h2>
+<p>These guides are provided as-is. Some of these install methods are more limited than the methods above. Some integrations may not work due to limitations of the platform or because required Python packages aren’t available for that platform.</p>
+<div class="text-center hass-option-cards" markdown="0">
+  <a class='option-card' href='/docs/installation/armbian/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/armbian.png' />
+    </div>
+    <div class='title'>armbian</div>
+  </a>
+  <a class='option-card' href='/docs/installation/archlinux/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/archlinux.png' />
+    </div>
+    <div class='title'>ArchLinux</div>
+  </a>
+  <a class='option-card' href='/docs/installation/fedora/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/fedora.png' />
+    </div>
+    <div class='title'>Fedora</div>
+  </a>
+  <a class='option-card' href='/docs/installation/centos/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/centos.png' />
+    </div>
+    <div class='title'>CentOS/RHEL</div>
+  </a>
+  <a class='option-card' href='/docs/installation/macos/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/apple.png' />
+    </div>
+    <div class='title'>macOS</div>
+  </a>
+  <a class='option-card' href='/docs/installation/synology/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/synology.png' />
+    </div>
+    <div class='title'>Synology</div>
+  </a>
+  <a class='option-card' href='/docs/installation/freenas/'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/freenas.png' />
+    </div>
+    <div class='title'>FreeNAS</div>
+  </a>
+  <a class='option-card' href='/hassio/installation/#alternative-install-on-a-generic-linux-host'>
+    <div class='img-container'>
+      <img src='/images/supported_brands/home-assistant.png' />
+    </div>
+    <div class='title'>Hass.io <br> on generic Linux server</div>
+  </a>
+</div>
+:ET

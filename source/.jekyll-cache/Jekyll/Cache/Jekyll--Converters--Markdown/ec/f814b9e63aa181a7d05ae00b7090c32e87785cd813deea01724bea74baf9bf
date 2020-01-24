@@ -1,0 +1,50 @@
+I"|<p>The <code>beewi_smartclim</code> sensor platform allows one to monitor room or external temperature and humidity. The <a href="http://www.bee-wi.com/produits/capteurs/capteur-de-temperature/">BeeWi SmartClim BLE</a> is a Bluetooth Low Energy sensor device that monitors temperature from a room or a garden from your smartphone by using an APP. Use this integration to track these metrics from any location thanks to Home Assistant, as well as to create some automation scripts based on your room’s temperature.</p>
+<h2>Installation</h2>
+<p>Depending on the operating system you’re running, you have to configure the proper Bluetooth backend on your system:</p>
+<ul>
+<li>On <a href="/hassio/installation/">Hass.io</a>: <code>beewi_smartclim</code> will work out of the box as long as the host supports Bluetooth (like the Raspberry Pi does).</li>
+<li>On a <a href="/docs/installation/docker/">generic Docker installation</a>: Works out of the box with <code>--net=host</code> and properly configured Bluetooth on the host.</li>
+<li>On other Linux systems:
+<ul>
+<li>Preferred solution: Install the <code>bluepy</code> and <code>btlewrap</code> library (via pip). When using a virtual environment, make sure to use install the library in the right one.</li>
+<li>Fallback solution: Install <code>btlewrap</code> library (via pip) and <code>gatttool</code> via your package manager. Depending on the distribution, the package name might be: <code>bluez</code>, <code>bluetooth</code> or    <code>bluez-deprecated</code>.</li>
+</ul>
+</li>
+<li>Windows and MacOS are currently not supported by the <code>btlewrap</code> library.</li>
+</ul>
+<h2>Configuration</h2>
+<p>Start a scan to determine the MAC addresses of the sensor:</p>
+<pre><code class="language-bash">$ sudo hcitool lescan
+LE Scan ...
+D0:5F:B8:51:9B:36 BeeWi SmartClim
+[...]
+</code></pre>
+<p>Or if your distribution is using bluetoothctl:</p>
+<pre><code class="language-bash">$ bluetoothctl
+[bluetooth]# scan on
+Discovery started
+[CHG] Controller XX:XX:XX:XX:XX:XX Discovering: yes
+[NEW] Device D0:5F:B8:51:9B:36 BeeWi SmartClim
+</code></pre>
+<p>Check for <code>BeeWi SmartClim</code> or similar entries, those are your sensor.</p>
+<p>To use your Mi Temperature and Humidity sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: beewi_smartclim
+    mac: 'xx:xx:xx:xx:xx:xx'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MAC address of your sensor.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name displayed in the frontend.</p>
+</span></p></dd></dl>
+</div>
+<h2>Full example</h2>
+<p>A full configuration example could look like the one below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: beewi_smartclim
+    mac: 'xx:xx:xx:xx:xx:xx'
+    name: Garden
+</code></pre>
+:ET

@@ -1,0 +1,17 @@
+I"0<p>The <code>lockitron</code> platform allows you to control your <a href="https://lockitron.com/">Lockitron</a> lock from within Home Assistant.</p>
+<h2>Setup</h2>
+<p>In order to get the correct <code>access_token</code> and <code>id</code>, log on to their <a href="https://api.lockitron.com/">developer page</a>, create a new app, and get the access_token they give you. Then, call the retrieve all locks function on the page and get the id of your lock (make sure you get your lock’s id and not the virtual lock they create for you).</p>
+<h2>Configuration</h2>
+<p>To enable the lock, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">lock:
+  - platform: lockitron
+    access_token: YOUR_ACCESS_TOKEN
+    id: YOUR_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The security token provided by Lockitron to lock and unlock your lock.</p>
+</span></p></dd><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The lock id given by Lockitron (should be a GUID).</p>
+</span></p></dd></dl>
+</div>
+:ET

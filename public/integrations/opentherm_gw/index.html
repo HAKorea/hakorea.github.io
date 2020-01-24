@@ -1,0 +1,986 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>OpenTherm Gateway - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Control your OpenTherm Gateway from Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/opentherm_gw/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="OpenTherm Gateway">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/opentherm_gw/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Control your OpenTherm Gateway from Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="OpenTherm Gateway">
+    <meta name="twitter:description" content="Control your OpenTherm Gateway from Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/opentherm_gw.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      OpenTherm Gateway
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>opentherm_gw</code> integration is used to control the <a href="http://otgw.tclcode.com/" rel="external nofollow">OpenTherm Gateway</a> from Home Assistant.</p>
+<p>The following device types are currently supported within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Climate</li>
+<li>Sensor</li>
+</ul>
+<p>This integration will add a single <code>climate</code> entity to Home Assistant for each configured gateway. Each gateway also has a collection of <code>sensor</code> and <code>binary_sensor</code> entities, which are disabled by default. These can be enabled from the <code>Devices</code> panel in the <code>Configuration</code> page of the web interface.</p>
+<div class="note">
+The OpenTherm protocol is based on polling. The thermostat sends requests to the boiler at specific intervals. As a result, it may take some time for changes to propagate between Home Assistant and the thermostat.
+</div>
+<h1>Configuration</h1>
+<p>The OpenTherm Gateway can be added to Home Assistant through the <code>Integrations</code> panel in the <code>Configuration</code> page of the web interface.
+The following configuration options are available:</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The friendly name used for the OpenTherm Gateway and its entities.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="path" href="#path"></a> path</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Path to the OpenTherm Gateway device as supported by <a href="https://pythonhosted.org/pyserial/url_handlers.html" rel="external nofollow">PySerial</a>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="id" href="#id"></a> id</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The <code>gateway_id</code> for this OpenTherm Gateway’s entity IDs and services. The entered value will be slugified.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>The slugified <code>name</code> of this OpenTherm Gateway.</p>
+</dd>
+</dl>
+</div>
+<div class="note">
+The precision and floor_temperature settings that were supported in configuration.yaml entries have been lost upon import of the configuration.yaml entry into the Integrations panel. You can now configure them as per the following Options paragraph.
+</div>
+<h1>Options</h1>
+<p>The OpenTherm Gateway can be further configured through the integration settings in the web interface
+The following options are available:</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="precision" href="#precision"></a> Precision</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="description"><p>The desired precision for this device. Can be used to match your actual thermostat’s precision. Set to <code>0</code> to use the default value for your unit preference.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>0.5</code> for Celsius and <code>1.0</code> for Fahrenheit.</p>
+</dd>
+<dt>
+<a class="title-link" name="floor-temperature" href="#floor-temperature"></a> Floor Temperature</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="description"><p>Some thermostats round all temperatures down to the lower value according to their precision. Default behavior for Home Assistant is to round temperatures to the nearest value. Enable this setting to override this behavior and round to the lower value according to the configured precision.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Disabled</p>
+</dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="services" href="#services"></a> Services</h2>
+<h3>
+<a class="title-link" name="service-opentherm_gwreset_gateway" href="#service-opentherm_gwreset_gateway"></a> Service opentherm_gw.reset_gateway</h3>
+<p>Reset the OpenTherm Gateway.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_clock" href="#service-opentherm_gwset_clock"></a> Service opentherm_gw.set_clock</h3>
+<p>Provide the time and day of week to the OpenTherm Gateway. The value provided here will be forwarded to the thermostat on the next date/time request from the thermostat. The OpenTherm Gateway does not have the ability to accurately keep track of time, so it will only retain the information provided here for a maximum of about 61 seconds.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>N/A</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>yes</td>
+<td>Today’s date</td>
+<td>Date from which the day of week will be extracted. Format: <code>YYYY-MM-DD</code>.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>yes</td>
+<td>Current time</td>
+<td>Time in 24h format.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_control_setpoint" href="#service-opentherm_gwset_control_setpoint"></a> Service opentherm_gw.set_control_setpoint</h3>
+<div class="note warning">
+Improper use of this service may continuously keep your central heating system active, resulting in an overheated house and a significant increase in gas and/or electricity consumption.
+</div>
+<p>Set the central heating control setpoint override on the OpenTherm Gateway.
+In a normal situation, the thermostat will calculate and control the central heating setpoint on the boiler. Setting this to any value other than 0 will enable the override and allow the OpenTherm Gateway to control this setting. While the override is active, the OpenTherm Gateway will also request your boiler to activate the central heating circuit. For your boiler’s actual maximum and minimum supported setpoint value, please see the <a href="#slave_ch_max_setp"><code>slave_ch_max_setp</code></a> and <a href="#slave_ch_min_setp"><code>slave_ch_min_setp</code></a> variables. Due to the potential consequences of leaving this setting enabled for prolonged periods, the override will be disabled when Home Assistant is shut down or restarted.
+<strong>You will only need this if you are writing your own software thermostat.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>no</td>
+<td>The central heating setpoint. Values between <code>0.0</code> and <code>90.0</code> are accepted, but your boiler may not support the full range. Set to <code>0</code> to disable the override.</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p>Please read <a href="http://otgw.tclcode.com/standalone.html" rel="external nofollow">this information</a> from the designer of the OpenTherm Gateway before considering to write your own software thermostat.</p>
+</div>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_hot_water_ovrd" href="#service-opentherm_gwset_hot_water_ovrd"></a> Service opentherm_gw.set_hot_water_ovrd</h3>
+<p>Set the domestic hot water enable option on the OpenTherm Gateway.
+Control the domestic hot water enable option. If the boiler has
+been configured to let the room unit control when to keep a
+small amount of water preheated, this command can influence
+that.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>dhw_override</code></td>
+<td>no</td>
+<td>The domestic hot water override state. Value should be 0 or 1 to enable the override in off or on state, or “A” to disable the override.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_gpio_mode" href="#service-opentherm_gwset_gpio_mode"></a> Service opentherm_gw.set_gpio_mode</h3>
+<p>Configure the GPIO behavior on the OpenTherm Gateway.
+For an explanation of the possible modes, see <a href="#gpio-modes">GPIO modes</a></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>no</td>
+<td>The GPIO ID, <code>A</code> or <code>B</code>.</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>no</td>
+<td>The GPIO mode to be set.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_led_mode" href="#service-opentherm_gwset_led_mode"></a> Service opentherm_gw.set_led_mode</h3>
+<p>Configure the function of the LEDs on the OpenTherm Gateway.
+For a list of possible modes with explanation, see <a href="#led-modes">LED modes</a></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>no</td>
+<td>The LED ID, accepted values are <code>A</code> through <code>F</code>.</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>no</td>
+<td>The LED mode to be set.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_max_modulation" href="#service-opentherm_gwset_max_modulation"></a> Service opentherm_gw.set_max_modulation</h3>
+<div class="note warning">
+Improper use of this service may impair the performance of your central heating system.
+</div>
+<p>Set the maximum modulation level override on the OpenTherm Gateway.
+In a normal situation, the thermostat will control the maximum modulation level on the boiler. Setting this to any value other than <code>-1</code> will enable the override and allow the OpenTherm Gateway to control this setting. Due to the potential consequences of leaving this setting enabled, the override will be disabled when Home Assistant is shut down or restarted.
+<strong>You will only need this if you are writing your own software thermostat.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>no</td>
+<td>The maximum modulation level. Accepted values are <code>-1</code> through <code>100</code>. Set to <code>-1</code> to disable the override.</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p>Please read <a href="http://otgw.tclcode.com/standalone.html" rel="external nofollow">this information</a> from the designer of the OpenTherm Gateway before considering to write your own software thermostat.</p>
+</div>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_outside_temperature" href="#service-opentherm_gwset_outside_temperature"></a> Service opentherm_gw.set_outside_temperature</h3>
+<p>Provide the outside temperature to the thermostat.
+If your thermostat is unable to display an outside temperature and does not support OTC (Outside Temperature Correction), this has no effect. Note that not all thermostats are able to display the full supported range.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>no</td>
+<td>The outside temperature to provide to the thermostat. Accepted values are <code>-40.0</code> through <code>64.0</code>. Any value above <code>64.0</code> will clear a previously configured value (suggestion: <code>99</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-opentherm_gwset_setback_temperature" href="#service-opentherm_gwset_setback_temperature"></a> Service opentherm_gw.set_setback_temperature</h3>
+<p>Configure the setback temperature on the OpenTherm Gateway.
+The value you provide here will be used with the GPIO <code>home</code> (5) and <code>away</code> (6) modes.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_id</code></td>
+<td>no</td>
+<td>The <code>gateway_id</code> as specified during configuration.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>no</td>
+<td>The setback temperature. Accepted values are <code>0.0</code> through <code>30.0</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="sensors" href="#sensors"></a> Sensors</h2>
+<p>The following <code>sensor</code> entities will be created for each configured gateway. The <code>entity_id</code> of every sensor will have a suffix containing the <code>gateway_id</code> of the gateway to which it belongs. All <code>sensor</code> entities are disabled by default.</p>
+<p class="note">
+Not all boilers and thermostats properly support all OpenTherm features, so not all of the sensors will have useful values.
+</p>
+<ul>
+<li>
+<p><strong>burner_hours</strong>
+Boiler flame on time.</p>
+</li>
+<li>
+<p><strong>burner_starts</strong>
+Number of burner starts.</p>
+</li>
+<li>
+<p><strong>ch_pump_hours</strong>
+Central heating pump running time.</p>
+</li>
+<li>
+<p><strong>ch_pump_starts</strong>
+Number of central heating pump starts.</p>
+</li>
+<li>
+<p><strong>ch_water_pressure</strong>
+Central heating water pressure.</p>
+</li>
+<li>
+<p><strong>ch_water_temp</strong>
+Central heating water temperature.</p>
+</li>
+<li>
+<p><strong>ch_water_temp_2</strong>
+Central heating 2 water temperature.</p>
+</li>
+<li>
+<p><strong>control_setpoint</strong>
+Central heating water target temperature.</p>
+</li>
+<li>
+<p><strong>control_setpoint_2</strong>
+Central heating 2 water target temperature.</p>
+</li>
+<li>
+<p><strong>cooling_control</strong>
+Cooling control signal value.</p>
+</li>
+<li>
+<p><strong>dhw_burner_hours</strong>
+Hot water flame on time.</p>
+</li>
+<li>
+<p><strong>dhw_burner_starts</strong>
+Number of hot water burner starts.</p>
+</li>
+<li>
+<p><strong>dhw_flow_rate</strong>
+Hot water flow rate.</p>
+</li>
+<li>
+<p><strong>dhw_pump_hours</strong>
+Hot water pump running time.</p>
+</li>
+<li>
+<p><strong>dhw_pump_starts</strong>
+Number of hot water pump starts.</p>
+</li>
+<li>
+<p><strong>dhw_setpoint</strong>
+Hot water target temperature.</p>
+</li>
+<li>
+<p><strong>dhw_temp</strong>
+Hot water temperature.</p>
+</li>
+<li>
+<p><strong>dhw_temp_2</strong>
+Hot water 2 temperature.</p>
+</li>
+<li>
+<p><strong>exhaust_temp</strong>
+Boiler exhaust temperature.</p>
+</li>
+<li>
+<p><strong>master_memberid</strong>
+Thermostat member ID.</p>
+</li>
+<li>
+<p><strong>master_ot_version</strong>
+Thermostat OpenTherm protocol version.</p>
+</li>
+<li>
+<p><strong>master_product_type</strong>
+Thermostat product type.</p>
+</li>
+<li>
+<p><strong>master_product_version</strong>
+Thermostat product version.</p>
+</li>
+<li>
+<p><strong>max_ch_setpoint</strong>
+Boiler maximum central heating water temperature.</p>
+</li>
+<li>
+<p><strong>oem_diag</strong>
+OEM diagnostic information.</p>
+</li>
+<li>
+<p><strong>otgw_about</strong>
+OpenTherm Gateway firmware version.</p>
+</li>
+<li>
+<p><strong>otgw_build</strong>
+OpenTherm Gateway firmware build date and time.</p>
+</li>
+<li>
+<p><strong>otgw_clockmhz</strong>
+OpenTherm Gateway firmware design clock speed.</p>
+</li>
+<li>
+<p><strong>otgw_dhw_ovrd</strong>
+OpenTherm Gateway hot water override status.</p>
+</li>
+<li>
+<p><strong>otgw_gpio_a</strong>
+OpenTherm Gateway GPIO port A operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_gpio_b</strong>
+OpenTherm Gateway GPIO port B operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_led_a</strong>
+OpenTherm Gateway LED A operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_led_b</strong>
+OpenTherm Gateway LED B operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_led_c</strong>
+OpenTherm Gateway LED C operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_led_d</strong>
+OpenTherm Gateway LED D operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_led_e</strong>
+OpenTherm Gateway LED E operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_led_f</strong>
+OpenTherm Gateway LED F operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_mode</strong>
+OpenTherm Gateway operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_setback_temp</strong>
+OpenTherm Gateway setback temperature for <code>away mode</code>.</p>
+</li>
+<li>
+<p><strong>otgw_setpoint_ovrd_mode</strong>
+OpenTherm Gateway central heating setpoint override mode.</p>
+</li>
+<li>
+<p><strong>otgw_smart_pwr</strong>
+OpenTherm Gateway smart power operating mode.</p>
+</li>
+<li>
+<p><strong>otgw_thermostat_detect</strong>
+OpenTherm Gateway automatic thermostat detection status.</p>
+</li>
+<li>
+<p><strong>otgw_vref</strong>
+OpenTherm Gateway voltage reference setting.</p>
+</li>
+<li>
+<p><strong>outside_temp</strong>
+Outside temperature as reported in the OpenTherm protocol.</p>
+</li>
+<li>
+<p><strong>relative_mod_level</strong>
+Relative modulation level.</p>
+</li>
+<li>
+<p><strong>return_water_temp</strong>
+Boiler return water temperature.</p>
+</li>
+<li>
+<p><strong>room_setpoint</strong>
+Room target temperature.</p>
+</li>
+<li>
+<p><strong>room_setpoint_2</strong>
+Room 2 target temperature.</p>
+</li>
+<li>
+<p><strong>room_setpoint_ovrd</strong>
+Room target temperature override value.</p>
+</li>
+<li>
+<p><strong>room_temp</strong>
+Current room temperature.</p>
+</li>
+<li>
+<p><strong>slave_ch_max_setp</strong>
+Maximum boiler supported central heating water target temperature.</p>
+</li>
+<li>
+<p><strong>slave_ch_min_setp</strong>
+Minimum boiler supported central heating water target temperature.</p>
+</li>
+<li>
+<p><strong>slave_dhw_max_setp</strong>
+Maximum boiler supported hot water target temperature.</p>
+</li>
+<li>
+<p><strong>slave_dhw_min_setp</strong>
+Minimum boiler supported hot water target temperature.</p>
+</li>
+<li>
+<p><strong>slave_max_capacity</strong>
+Maximum boiler capacity.</p>
+</li>
+<li>
+<p><strong>slave_max_relative_modulation</strong>
+Maximum boiler supported relative modulation.</p>
+</li>
+<li>
+<p><strong>slave_memberid</strong>
+Boiler member ID.</p>
+</li>
+<li>
+<p><strong>slave_min_mod_level</strong>
+Minimum boiler supported modulation level.</p>
+</li>
+<li>
+<p><strong>slave_oem_fault</strong>
+Boiler OEM fault indication.</p>
+</li>
+<li>
+<p><strong>slave_ot_version</strong>
+Boiler OpenTherm protocol version.</p>
+</li>
+<li>
+<p><strong>slave_product_type</strong>
+Boiler product type.</p>
+</li>
+<li>
+<p><strong>slave_product_version</strong>
+Boiler product version.</p>
+</li>
+<li>
+<p><strong>solar_coll_temp</strong>
+Solar collector temperature.</p>
+</li>
+<li>
+<p><strong>solar_storage_temp</strong>
+Solar storage unit temperature.</p>
+</li>
+</ul>
+<h2>
+<a class="title-link" name="binary-sensors" href="#binary-sensors"></a> Binary Sensors</h2>
+<p>The following <code>binary_sensor</code> entities will be created for each configured gateway. The <code>entity_id</code> of every sensor will have a suffix containing the <code>gateway_id</code> of the gateway to which it belongs. All <code>binary_sensor</code> entities are disabled by default.</p>
+<p class="note">
+Not all boilers and thermostats properly support all OpenTherm features, so not all of the sensors will have useful values.
+</p>
+<ul>
+<li>
+<p><strong>master_ch2_enabled</strong>
+Thermostat requests central heating 2 on.</p>
+</li>
+<li>
+<p><strong>master_ch_enabled</strong>
+Thermostat requests central heating on.</p>
+</li>
+<li>
+<p><strong>master_cooling_enabled</strong>
+Thermostat requests cooling.</p>
+</li>
+<li>
+<p><strong>master_dhw_enabled</strong>
+Thermostat requests hot water to be heated.</p>
+</li>
+<li>
+<p><strong>master_otc_enabled</strong>
+Thermostat is using outside temperature correction.</p>
+</li>
+<li>
+<p><strong>otgw_gpio_a_state</strong>
+OpenTherm Gateway GPIO A state.</p>
+</li>
+<li>
+<p><strong>otgw_gpio_b_state</strong>
+OpenTherm Gateway GPIO B state.</p>
+</li>
+<li>
+<p><strong>otgw_ignore_transitions</strong>
+OpenTherm Gateway ignores ripples in the signal during high/low transitions.</p>
+</li>
+<li>
+<p><strong>otgw_ovrd_high_byte</strong>
+OpenTherm Gateway overrides high byte with message ID 100.</p>
+</li>
+<li>
+<p><strong>remote_rw_dhw</strong>
+Boiler supports writing hot water setpoint.</p>
+</li>
+<li>
+<p><strong>remote_rw_max_ch</strong>
+Boiler supports writing maximum central heating setpoint.</p>
+</li>
+<li>
+<p><strong>remote_transfer_dhw</strong>
+Boiler supports reading hot water setpoint.</p>
+</li>
+<li>
+<p><strong>remote_transfer_max_ch</strong>
+Boiler supports reading maximum central heating setpoint.</p>
+</li>
+<li>
+<p><strong>rovrd_auto_prio</strong>
+Programmed room setpoint change takes priority over remote override setting.</p>
+</li>
+<li>
+<p><strong>rovrd_man_prio</strong>
+Manual room setpoint change takes priority over remote override setting.</p>
+</li>
+<li>
+<p><strong>slave_air_pressure_fault</strong>
+Boiler reports air pressure fault.</p>
+</li>
+<li>
+<p><strong>slave_ch2_active</strong>
+Boiler reports central heating 2 active.</p>
+</li>
+<li>
+<p><strong>slave_ch2_present</strong>
+Boiler has a central heating 2 circuit.</p>
+</li>
+<li>
+<p><strong>slave_ch_active</strong>
+Boiler reports central heating active.</p>
+</li>
+<li>
+<p><strong>slave_control_type</strong>
+Boiler control type (‘off’ is modulating, ‘on’ is on/off).</p>
+</li>
+<li>
+<p><strong>slave_cooling_active</strong>
+Boiler reports cooling active.</p>
+</li>
+<li>
+<p><strong>slave_cooling_supported</strong>
+Boiler supports cooling.</p>
+</li>
+<li>
+<p><strong>slave_dhw_active</strong>
+Boiler reports hot water active.</p>
+</li>
+<li>
+<p><strong>slave_dhw_config</strong>
+Boiler hot water mode (‘off’ is instantaneous or unspecified, ‘on’ is storage tank).</p>
+</li>
+<li>
+<p><strong>slave_dhw_present</strong>
+Boiler reports hot water present.</p>
+</li>
+<li>
+<p><strong>slave_diagnostic_indication</strong>
+Boiler diagnostic indication.</p>
+</li>
+<li>
+<p><strong>slave_fault_indication</strong>
+Boiler fault indication.</p>
+</li>
+<li>
+<p><strong>slave_flame_on</strong>
+Boiler reports flame on.</p>
+</li>
+<li>
+<p><strong>slave_gas_fault</strong>
+Boiler reports gas fault.</p>
+</li>
+<li>
+<p><strong>slave_low_water_pressure</strong>
+Boiler reports low water pressure.</p>
+</li>
+<li>
+<p><strong>slave_master_low_off_pump</strong>
+Boiler supports low-off and pump control commands (this sensor is inverted, ‘on’ is not supported, ‘off’ is supported)</p>
+</li>
+<li>
+<p><strong>slave_remote_reset</strong>
+Boiler reports ‘lockout-reset’ supported.</p>
+</li>
+<li>
+<p><strong>slave_service_required</strong>
+Boiler reports service required.</p>
+</li>
+<li>
+<p><strong>slave_water_overtemp</strong>
+Boiler reports water overtemperature.</p>
+</li>
+</ul>
+<h2>
+<a class="title-link" name="gpio-modes" href="#gpio-modes"></a> GPIO modes</h2>
+<p>Possible modes and their meaning for the GPIO pins are listed here:</p>
+<ul>
+<li>1. No function, default for both ports on a freshly flashed chip.</li>
+<li>2. Ground - A permanently low output (0V). Could be used for a power LED.</li>
+<li>3. Vcc - A permanently high output (5V). Can be used as a short-proof power supply for some external circuitry used by the other GPIO port.</li>
+<li>4. LED E - An additional LED if you want to present more than 4 LED functions.</li>
+<li>5. LED F - An additional LED if you want to present more than 5 LED functions.</li>
+<li>6. Home - Set thermostat to setback temperature when pulled low.</li>
+<li>7. Away - Set thermostat to setback temperature when pulled high.</li>
+<li>8. DS1820 (GPIO port B only) - Data line for a DS18S20 or DS18B20 temperature sensor used to measure the outside temperature. A 4k7 resistor should be connected between GPIO port B and Vcc.</li>
+</ul>
+<h2>
+<a class="title-link" name="led-modes" href="#led-modes"></a> LED modes</h2>
+<p>Possible LED modes and their meaning are listed here:</p>
+<ul>
+<li>R. Receiving an Opentherm message from the thermostat or boiler.</li>
+<li>X. Transmitting an Opentherm message to the thermostat or boiler.</li>
+<li>T. Transmitting or receiving a message on the thermostat interface.</li>
+<li>B. Transmitting or receiving a message on the boiler interface.</li>
+<li>O. Remote setpoint override is active.</li>
+<li>F. Flame is on.</li>
+<li>H. Central heating is on.</li>
+<li>W. Hot water is on.</li>
+<li>C. Comfort mode (Domestic Hot Water Enable) is on.</li>
+<li>X. Transmission error has been detected.</li>
+<li>M. Boiler requires maintenance.</li>
+<li>P. Raised power mode active on thermostat interface.</li>
+</ul>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/opentherm_gw.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/opentherm.png' /></div><div class="section">
+    <kb-alert-link integration="opentherm_gw"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Push
+    </div><div class='section'>
+      Introduced in release: 0.81
+    </div><div class='section'>
+      This integration is configurable via UI
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/opentherm_gw/'>/components/opentherm_gw/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#hub'>Hub</a>
+      </li><li>
+        <a href='/integrations/#binary-sensor'>Binary Sensor</a>
+      </li><li>
+        <a href='/integrations/#climate'>Climate</a>
+      </li><li>
+        <a href='/integrations/#sensor'>Sensor</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

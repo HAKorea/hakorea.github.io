@@ -1,0 +1,176 @@
+I"�+<p>The <code>alert</code> integration is designed to notify you when problematic issues arise.
+For example, if the garage door is left open, the <code>alert</code> integration can be used
+remind you of this by sending you repeating notifications at customizable
+intervals. This is also used for low battery sensors,
+water leak sensors, or any condition that may need your attention.</p>
+<p>Alerts will add an entity to the front end only when they are firing.
+This entity allows you to silence an alert until it is resolved.</p>
+<h3>Basic Example</h3>
+<p>The <code>alert</code> integration makes use of any of the <code>notifications</code> integrations. To
+setup the <code>alert</code> integration, first, you must setup a <code>notification</code> integration.
+Then, add the following to your configuration file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alert:
+  garage_door:
+    name: Garage is open
+    done_message: Garage is closed
+    entity_id: input_boolean.garage_door
+    state: 'on'
+    repeat: 30
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - ryans_phone
+      - kristens_phone
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The friendly name of the alert.</p>
+</span></p></dd><dt><a class='title-link' name='entity_id' href='#entity_id'></a> entity_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The ID of the entity to watch.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>A title to be used for the notification if the notifier supports it with <a href="/docs/configuration/templating/">template</a> support.</p>
+</span></p></dd><dt><a class='title-link' name='state' href='#state'></a> state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The problem condition for the entity.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='repeat' href='#repeat'></a> repeat</dt><dd><p class='desc'><span class='type'>(<span class='integer list'>integer | list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Number of minutes before the notification should be repeated. Can be either a number or a list of numbers.</p>
+</span></p></dd><dt><a class='title-link' name='can_acknowledge' href='#can_acknowledge'></a> can_acknowledge</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allows the alert to be unacknowledgeable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='skip_first' href='#skip_first'></a> skip_first</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Controls whether the notification should be sent immediately or after the first delay.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='message' href='#message'></a> message</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>A message to be sent after an alert transitions from <code>off</code> to <code>on</code> with <a href="/docs/configuration/templating/">template</a> support.</p>
+</span></p></dd><dt><a class='title-link' name='done_message' href='#done_message'></a> done_message</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>A message sent after an alert transitions from <code>on</code> to <code>off</code> with <a href="/docs/configuration/templating/">template</a> support. Is only sent if an alert notification was sent for transitioning from <code>off</code> to <code>on</code>.</p>
+</span></p></dd><dt><a class='title-link' name='notifiers' href='#notifiers'></a> notifiers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of <code>notification</code> integrations to use for alerts.</p>
+</span></p></dd><dt><a class='title-link' name='data' href='#data'></a> data</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Dictionary of extra parameters to send to the notifier.</p>
+</span></p></dd></dl>
+</div>
+<p>In this example, the garage door status (<code>input_boolean.garage_door</code>) is watched
+and this alert will be triggered when its status is equal to <code>on</code>.
+This indicates that the door has been opened. Because the <code>skip_first</code> option
+was set to <code>true</code>, the first notification will not be delivered immediately.
+However, every 30 minutes, a notification will be delivered until either
+<code>input_boolean.garage_door</code> no longer has a state of <code>on</code> or until the alert is
+acknowledged using the Home Assistant frontend.</p>
+<p>For notifiers that require other parameters (such as <code>twilio_sms</code> which requires
+you specify a <code>target</code> parameter when sending the notification), you can use the
+<code>group</code> notification to wrap them for an alert.
+Simply create a <code>group</code> notification type with a single notification member
+(such as <code>twilio_sms</code>) specifying the required parameters other than <code>message</code>
+provided by the <code>alert</code> component:</p>
+<pre><code class="language-yaml">- platform: group
+  name: john_phone_sms
+  services:
+    - service: twilio_sms
+      data:
+        target: !secret john_phone
+</code></pre>
+<pre><code class="language-yaml">alert:
+  freshwater_temp_alert:
+    name: &quot;Warning: I have detected a problem with the freshwater tank temperature&quot;
+    entity_id: binary_sensor.freshwater_temperature_status
+    state: 'on'
+    repeat: 5
+    can_acknowledge: true
+    skip_first: false
+    notifiers:
+      - john_phone_sms
+</code></pre>
+<h3>Complex Alert Criteria</h3>
+<p>By design, the <code>alert</code> integration only handles very simple criteria for firing.
+That is, it only checks if a single entity’s state is equal to a value. At some
+point, it may be desirable to have an alert with a more complex criteria.
+Possibly, when a battery percentage falls below a threshold. Maybe you want to
+disable the alert on certain days. Maybe the alert firing should depend on more
+than one input. For all of these situations, it is best to use the alert in
+conjunction with a <code>Template Binary Sensor</code>. The following example does that.</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: template
+    sensors:
+      motion_battery_low:
+        value_template: &quot;{{ state_attr('sensor.motion', 'battery') &lt; 15 }}&quot;
+        friendly_name: 'Motion battery is low'
+
+alert:
+  motion_battery:
+    name: Motion Battery is Low
+    entity_id: binary_sensor.motion_battery_low
+    repeat: 30
+    notifiers:
+      - ryans_phone
+      - kristens_phone
+</code></pre>
+<p>This example will begin firing as soon as the entity <code>sensor.motion</code>’s <code>battery</code>
+attribute falls below 15. It will continue to fire until the battery attribute
+raises above 15 or the alert is acknowledged on the frontend.</p>
+<h3>Dynamic Notification Delay Times</h3>
+<p>It may be desirable to have the delays between alert notifications dynamically
+change as the alert continues to fire. This can be done by setting the <code>repeat</code>
+configuration key to a list of numbers rather than a single number.
+Altering the first example would look like the following.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alert:
+  garage_door:
+    name: Garage is open
+    entity_id: input_boolean.garage_door
+    state: 'on'   # Optional, 'on' is the default value
+    repeat:
+      - 15
+      - 30
+      - 60
+    can_acknowledge: true  # Optional, default is true
+    skip_first: true  # Optional, false is the default
+    notifiers:
+      - ryans_phone
+      - kristens_phone
+</code></pre>
+<p>Now the first message will be sent after a 15 minute delay, the second will be
+sent 30 minutes after that, and a 60 minute delay will fall between every
+following notification.
+For example, if the garage door opens at 2:00, a notification will be
+sent at 2:15, 2:45, 3:45, 4:45, etc., continuing every 60 minutes.</p>
+<h3>Message Templates</h3>
+<p>It may be desirable to have the alert notifications include information
+about the state of the entity. <a href="/docs/configuration/templating/">Templates</a>
+can be used in the message or name of the alert to make it more relevant.
+The following will show for a plant how to include the problem <code>attribute</code>
+of the entity.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alert:
+  office_plant:
+    name: Plant in office needs help
+    entity_id: plant.plant_office
+    state: 'problem'
+    repeat: 30
+    can_acknowledge: true
+    skip_first: true
+    message: &quot;Plant {{ states.plant.plant_office }} needs help ({{ state_attr('plant.plant_office', 'problem') }})&quot;
+    done_message: Plant in office is fine
+    notifiers:
+      - ryans_phone
+      - kristens_phone
+</code></pre>
+<p>The resulting message could be <code>Plant Officeplant needs help (moisture low)</code>.</p>
+<h3>Additional parameters for notifiers</h3>
+<p>Some notifiers support more parameters (e.g., to set text color or action
+buttons). These can be supplied via the <code>data</code> parameter:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alert:
+  garage_door:
+    name: Garage is open
+    entity_id: input_boolean.garage_door
+    state: 'on'   # Optional, 'on' is the default value
+    repeat:
+      - 15
+      - 30
+      - 60
+    can_acknowledge: True  # Optional, default is True
+    skip_first: True  # Optional, false is the default
+    data:
+      inline_keyboard:
+        - 'Close garage:/close_garage, Acknowledge:/garage_acknowledge'
+    notifiers:
+      - frank_telegram
+</code></pre>
+<p>This particular example relies on the <code>inline_keyboard</code> functionality of
+Telegram, where the user is presented with buttons to execute certain actions.</p>
+:ET

@@ -1,0 +1,24 @@
+I"å<p>The <code>mqtt</code> camera platform allows you to integrate the content of an image file sent through MQTT into Home Assistant as a camera. Every time a message under the <code>topic</code> in the configuration is received, the image displayed in Home Assistant will also be updated.</p>
+<p>This can be used with an application or a service capable of sending images through MQTT.</p>
+<h2>Configuration</h2>
+<p>To enable this camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: mqtt
+    topic: zanzito/shared_locations/my-device
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='topic' href='#topic'></a> topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MQTT topic to subscribe to.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the camera.</p>
+</span></p></dd><dt><a class='title-link' name='unique_id' href='#unique_id'></a> unique_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An ID that uniquely identifies this camera. If two cameras have the same unique ID Home Assistant will raise an exception.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the device this camera is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifiers' href='#identifiers'></a> identifiers</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd><dt><a class='title-link' name='connections' href='#connections'></a> connections</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>&quot;connections&quot;: [&quot;mac&quot;, &quot;02:5b:26:a8:dc:12&quot;]</code>.</p>
+</span></p></dd><dt><a class='title-link' name='manufacturer' href='#manufacturer'></a> manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The manufacturer of the device.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of the device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device.</p>
+</span></p></dd><dt><a class='title-link' name='sw_version' href='#sw_version'></a> sw_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The firmware version of the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

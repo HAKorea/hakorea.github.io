@@ -1,0 +1,35 @@
+I"<p>The <code>rocketchat</code> notify platform allows you to send messages to your <a href="https://rocket.chat/">Rocket.Chat</a> instance from Home Assistant.</p>
+<h2>Configuration</h2>
+<p>To add Rocket.Chat to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - platform: rocketchat
+    name: NOTIFIER_NAME
+    url: https://rocketchat.example.com
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    room: YOUR_ROOM_NAME
+</code></pre>
+<ul>
+<li><strong>name</strong> (<em>Optional</em>): Name displayed in the frontend. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</li>
+<li><strong>url</strong> (<em>Required</em>): The URL of your Rocket.Chat instance.</li>
+<li><strong>username</strong> (<em>Required</em>): The Rocket.Chat username.</li>
+<li><strong>password</strong> (<em>Required</em>): The Rocker.Chat password.</li>
+<li><strong>room</strong> (<em>Required</em>): The chat room name to send messages to.</li>
+</ul>
+<h3>script.yaml example</h3>
+<pre><code class="language-yaml">rocketchat_notification:
+  sequence:
+  - service: notify.NOTIFIER_NAME
+    data:
+      message: &quot;Message to Rocket.Chat from Home Assistant!&quot;
+      data:
+        emoji: &quot;:smirk:&quot;
+</code></pre>
+<h4>Message variables</h4>
+<ul>
+<li><strong>message</strong> (<em>Required</em>): Message to be displayed.</li>
+<li><strong>data</strong> (<em>Optional</em>): Dictionary containing any of the variables defined in the <a href="https://rocket.chat/docs/developer-guides/rest-api/chat/postmessage#message-object-example">Rocket.Chat docs</a></li>
+</ul>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+:ET

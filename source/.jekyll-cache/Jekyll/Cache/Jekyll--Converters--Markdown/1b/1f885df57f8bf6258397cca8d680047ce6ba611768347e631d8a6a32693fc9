@@ -1,0 +1,104 @@
+I"�(<p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
+<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
+<p>After configuring the RFLink hub, lights will be automatically discovered and added.</p>
+<p>RFLink binary_sensor/switch/light ID’s are composed of: protocol, id, switch/channel. For example: <code>newkaku_0000c6c2_1</code>.</p>
+<p>Once the ID of a light is known, it can be used to configure the light in HA, for example to add it to a different group, hide it or configure a nice name.</p>
+<p>Configuring devices as a light:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: rflink
+    devices:
+      NewKaku_02a48800_0: {}
+      newkaku_0000c6c2_1: {}
+      Ansluta_ce30_0: {}
+      Maclean_0d82_01: {}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device_defaults' href='#device_defaults'></a> device_defaults</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The defaults for the devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set default <code>fire_event</code> for RFLink switch devices (see below).</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='signal_repetitions' href='#signal_repetitions'></a> signal_repetitions</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set default <code>signal_repetitions</code> for RFLink switch devices (see below).</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd></dl></dd><dt><a class='title-link' name='automatic_add' href='#automatic_add'></a> automatic_add</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Automatically add new/unconfigured devices to Home Assistant if detected.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of lights.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='rflink_ids' href='#rflink_ids'></a> rflink_ids</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>RFLink ID of the device</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name for the device.</p>
+</span></p><p class='default'>
+Default value: <p>RFLink ID</p>
+</p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override automatically detected type of the light device, can be: switchable, dimmable, hybrid or toggle. See <a href="/integrations/light.rflink/#light-types">Light Types</a> below.</p>
+</span></p><p class='default'>
+Default value: <p>switchable</p>
+</p></dd><dt><a class='title-link' name='aliases' href='#aliases'></a> aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Alternative RFLink ID’s this device is known by.</p>
+</span></p></dd><dt><a class='title-link' name='group_aliases' href='#group_aliases'></a> group_aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><code>aliases</code> which only respond to group commands.</p>
+</span></p></dd><dt><a class='title-link' name='no_group_aliases' href='#no_group_aliases'></a> no_group_aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><code>aliases</code> which do not respond to group commands.</p>
+</span></p></dd><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Fire a <code>button_pressed</code> event if this device is turned on or off.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='signal_repetitions' href='#signal_repetitions'></a> signal_repetitions</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Repeat every RFLink command this number of times.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='group' href='#group'></a> group</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allow light to respond to group commands (ALLON/ALLOFF).</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h3>Light state</h3>
+<p>Initially the state of a light is unknown. When the light is turned on or off (via frontend or remote) the state is known and will be shown in the frontend.</p>
+<p>Sometimes a light is controlled by multiple remotes, each remote has its own code programmed in the light. To allow tracking of the state when switched via other remotes add the corresponding remote codes as aliases:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: rflink
+    devices:
+      newkaku_0000c6c2_1:
+        aliases:
+          - newkaku_000000001_2
+          - kaku_000001_a
+</code></pre>
+<p>Any on/off command from any alias ID updates the current state of the light. However when sending a command through the frontend only the primary ID is used.</p>
+<h3>Light types</h3>
+<p>Light devices can come in different forms. Some only switch on and off, other support dimming. Dimmable devices might not always respond nicely to repeated <code>on</code> command as they turn into a pulsating state until <code>on</code> is pressed again (for example KlikAanKlikUit). The RFLink integration support three types of lights to make things work in every situation:</p>
+<ul>
+<li><em>Hybrid</em>: This type sends a <code>dim</code> followed by an an <code>on</code> command; and <code>off</code> commands. This will make dimmable devices turn on at the requested dim level and on/off devices on. One caveat is this type is not compatible with signal repetition as multiple <code>on</code> signals will cause dimmers to go into disco mode.</li>
+<li><em>Switchable</em>: Device type that sends only <code>on</code> and <code>off</code> commands. It work for both on/off and dimmable type switches. However dimmables might have issues with signal repetition (see above).</li>
+<li><em>Dimmable</em>: Sends only <code>dim</code> and <code>off</code> commands. This does not work on on/off type devices as they don’t understand the <code>dim</code> command. For dimmers this does not cause issues with signal repetitions.</li>
+<li><em>Toggle</em>: Device type that sends only <code>on</code> commands to turn on or off the device. Some switches like for example Livolo light switches use the same ‘on’ command to switch on and switch off the lights. If the light is on and ‘on’ gets sent, the light will turn off and if the light is off and ‘on’ gets sent, the light will turn on. If the device has an unknown state, it will assume it is off by default.</li>
+</ul>
+<p>By default new lights are assigned the <code>switchable</code> type. Protocol supporting dimming are assigned the <code>hybrid</code> type. Currently only <code>newkaku</code> protocol is detected as dimmable. Please refer to Device Support to get your dimmers supported.</p>
+<h3>Hiding/ignoring lights</h3>
+<p>Lights are added automatically when the RFLink gateway intercepts a wireless command in the ether. To prevent cluttering the frontend use any of these methods:</p>
+<ul>
+<li>Disable automatically adding of unconfigured new sensors (set <code>automatic_add</code> to <code>false</code>).</li>
+<li>Hide unwanted devices using <a href="/getting-started/customizing-devices/">customizations</a></li>
+<li><a href="/integrations/rflink/#ignoring-devices">Ignore devices on a platform level</a></li>
+</ul>
+<h3>Device support</h3>
+<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<h3>Additional configuration examples</h3>
+<p>Multiple lights with <code>signal_repetitions</code> and custom names</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: rflink
+    device_defaults:
+      fire_event: true
+      signal_repetitions: 2
+    automatic_add: true
+    devices:
+      NewKaku_02a48800_0:
+        name: Kitchen
+        type: hybrid
+      newkaku_0000c6c2_1:
+        name: Living room
+        aliases:
+          - newkaku_000000001_2
+          - kaku_000001_a
+      Ansluta_ce30_0:
+        name: Kitchen Under Counter Lights
+      Maclean_0d82_01:
+        name: Bedroom Lamp
+</code></pre>
+:ET

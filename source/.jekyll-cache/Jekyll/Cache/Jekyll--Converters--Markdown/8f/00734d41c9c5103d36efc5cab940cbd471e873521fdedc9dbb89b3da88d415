@@ -1,0 +1,32 @@
+I"÷	<p>The <code>obihai</code> integration allows you to view the call status for your <a href="https://www.obitalk.com/info/products#home_section">Obihai devices</a>.</p>
+<p>To enable <code>obihai</code> in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: obihai
+    host: 192.168.1.x
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP Address of Obihai device</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Username for the Obihai device.</p>
+</span></p><p class='default'>
+Default value: <p>admin</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Password for the Obihai device.</p>
+</span></p><p class='default'>
+Default value: <p>admin</p>
+</p></dd></dl>
+</div>
+<p>The following is a list of expected sensors and their expected states when using the <code>user</code> account:</p>
+<ul>
+<li>Sensor if the device requires a reboot (<code>True</code> or <code>False</code>)</li>
+<li>Sensor for each configured service (<code>0</code> for no calls, <code>1</code> for a call and <code>2</code> for call waiting/3way calling)</li>
+<li>Sensor for the last reboot date</li>
+<li>Sensor for call direction (<code>No Active Calls</code>, <code>Inbound Call</code> or <code>Outbound Call</code>)</li>
+</ul>
+<p>In addition to the above list the <code>admin</code> account can expect to see the following sensors:</p>
+<ul>
+<li>Obihai service status (<code>Normal</code>, <code>Down</code> or other states from Obihais network)</li>
+<li>Sensors for each phone port in use (<code>On Hook</code>, <code>Off Hook</code> and <code>Ringing</code>)</li>
+<li>Sensors for last caller name and number (this is also the current incoming call, will also show <code>--</code> if no data provided)</li>
+</ul>
+:ET

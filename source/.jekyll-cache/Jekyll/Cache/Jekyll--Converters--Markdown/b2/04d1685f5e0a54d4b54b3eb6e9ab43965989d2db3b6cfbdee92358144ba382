@@ -1,0 +1,36 @@
+I"U<p>The <code>dominos</code> integration allows you to order Dominos Pizza from within your Home Assistant scripts and automations.</p>
+<p>At present, this integration only supports ordering within Canada and the US.</p>
+<h2>Configuration</h2>
+<p>To enable the component, you need to set up your customer information and define some orders.</p>
+<p>Orders are a group of product codes. You can get these product codes by inspecting an order request from the Dominos web app, or you can <a href="https://github.com/craigjmidwinter/hass-dominos-panel">add this custom panel by following this readme</a> to see the available product codes in a separate panel in your install.</p>
+<p>Currently, there is no support in this integration for toppings, coupons or order tracking.</p>
+<pre><code class="language-yaml">dominos:
+  country_code: ca
+  first_name: John
+  last_name: Smith
+  email: john.smith@example.com
+  phone: 123456789
+  address: 24 Housten Dr, Ottawa, ON, K2M2M2
+  orders:
+  - name: Medium Pan
+    codes:
+      - P12IPAZA
+</code></pre>
+<p>Now you can use the Dominos service to order pizza within your automations:</p>
+<pre><code class="language-yaml">- service: dominos.order
+  data:
+    order_entity_id: dominos.medium_pan
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='country_code' href='#country_code'></a> country_code</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>'ca' or 'us', depending on your location</p>
+</span></p></dd><dt><a class='title-link' name='first_name' href='#first_name'></a> first_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your first name</p>
+</span></p></dd><dt><a class='title-link' name='last_name' href='#last_name'></a> last_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your last name</p>
+</span></p></dd><dt><a class='title-link' name='email' href='#email'></a> email</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your email address</p>
+</span></p></dd><dt><a class='title-link' name='phone' href='#phone'></a> phone</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your phone number</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your delivery address</p>
+</span></p></dd><dt><a class='title-link' name='show_menu' href='#show_menu'></a> show_menu</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Dumps product codes from your nearest store into your log (for use in with the custom panel)</p>
+</span></p></dd><dt><a class='title-link' name='orders' href='#orders'></a> orders</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets of product codes to use for ordering</p>
+</span></p></dd></dl>
+</div>
+:ET

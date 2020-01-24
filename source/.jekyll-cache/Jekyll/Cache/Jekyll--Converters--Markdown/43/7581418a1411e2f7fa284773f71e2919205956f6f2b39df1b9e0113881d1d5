@@ -1,0 +1,64 @@
+I"�<p>The <code>tado</code> integration platform is used as an interface to the <a href="https://my.tado.com/">my.tado.com</a> website.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Climate - for every tado zone.</li>
+<li><a href="#presence-detection">Presence Detection</a></li>
+<li>Sensor - for some additional information of the zones.</li>
+</ul>
+<h2>Configuration</h2>
+<p>To use your tado thermostats in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tado:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your username for <a href="https://my.tado.com/">my.tado.com</a>.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your password for <a href="https://my.tado.com/">my.tado.com</a>.</p>
+</span></p></dd><dt><a class='title-link' name='fallback' href='#fallback'></a> fallback</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Indicates if you want to fallback to Smart Schedule on the next Schedule change, or stay in Manual mode until you set the mode back to Auto.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<p>The tado thermostats are internet connected thermostats. There exists an unofficial API at <a href="https://my.tado.com/">my.tado.com</a>, which is used by their website and now by this component.</p>
+<p>It currently supports presenting the current temperature, the setting temperature and the current operation mode. Switching the mode is also supported. If no user is at home anymore, the devices are showing the away-state. Switching to away-mode is not supported.</p>
+<h2>Presence Detection</h2>
+<p>The <code>tado</code> device tracker is using the <a href="https://www.tado.com/">Tado Smart Thermostat</a> and its support for person presence detection based on smartphone location by geofencing.</p>
+<p>This tracker uses the Tado API to determine if a mobile device is at home. It tracks all devices in your home that Tado knows about.</p>
+<p>To use the Tado platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Tado
+device_tracker:
+  - platform: tado
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    home_id: YOUR_HOME_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for your Tado account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for your Tado account.</p>
+</span></p></dd><dt><a class='title-link' name='home_id' href='#home_id'></a> home_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The id of your home of which you want to track devices. If provided, the Tado device tracker will tack <em>all</em> devices known to Tado associated with this home. See below how to find it.</p>
+</span></p></dd></dl>
+</div>
+<p>After configuration, your device has to be at home at least once before showing up as <em>home</em> or <em>away</em>.
+Polling Tado API for presence information will happen at most once every 30 seconds.</p>
+<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked. Beware that the Tado (v2) API does not provide GPS location of devices, only a bearing, therefore Home Assistant only uses <code>home</code>/<code>not-home</code> status.</p>
+<h3>Finding your <code>home_id</code></h3>
+<p>Find your <code>home_id</code> by browsing to <code>https://my.tado.com/api/v2/me?username=YOUR_USERNAME&amp;password=YOUR_PASSWORD</code>. There you’ll see something like the following:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Mark&quot;,
+  &quot;email&quot;: &quot;your@email.tld&quot;,
+  &quot;username&quot;: &quot;your@email.tld&quot;,
+  &quot;homes&quot;: [
+    {
+      &quot;id&quot;: 12345,
+      &quot;name&quot;: &quot;Home Sweet Home&quot;
+    }
+  ],
+  &quot;locale&quot;: &quot;en_US&quot;,
+  &quot;mobileDevices&quot;: []
+}
+</code></pre>
+<p>In this example <code>12345</code> is the <code>home_id</code> you’ll need to configure.</p>
+:ET

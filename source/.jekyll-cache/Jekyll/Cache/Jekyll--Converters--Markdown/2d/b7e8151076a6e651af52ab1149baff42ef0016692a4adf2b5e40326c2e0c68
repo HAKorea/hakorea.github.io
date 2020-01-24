@@ -1,0 +1,187 @@
+I"�<p>The <code>usgs_earthquakes_feed</code> platform lets you integrate a GeoJSON feed provided by the <a href="https://earthquake.usgs.gov/">U.S. Geological Survey</a> with information about seismic events like earthquakes. It retrieves incidents from a feed and shows information of those incidents filtered by distance to Home Assistant’s location.</p>
+<p class='img'>
+  <img src='/images/screenshots/usgs-earthquake-hazards-program-feed-entities.png' />
+</p>
+<p>Entities are generated, updated and removed automatically with each update from the feed. Each entity defines latitude and longitude and will be shown on the map automatically. The distance in kilometers is available as the state of each entity.</p>
+<p class='img'>
+  <img src='/images/screenshots/usgs-earthquake-hazards-program-feed-map.png' />
+</p>
+<p>The data is updated every 5 minutes.</p>
+<h2>Configuration</h2>
+<p>To integrate the U.S. Geological Survey Earthquake Hazards Program feed, add the following lines to your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geo_location:
+  - platform: usgs_earthquakes_feed
+    feed_type: 'past_day_all_earthquakes'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='feed_type' href='#feed_type'></a> feed_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The U.S. Geological Survey Earthquake Hazards Program provides 20 feeds covering different timeframes and magnitudes. You must select one of the feed types listed below.</p>
+</span></p></dd><dt><a class='title-link' name='minimum_magnitude' href='#minimum_magnitude'></a> minimum_magnitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The minimum magnitude of an earthquake to be included.</p>
+</span></p><p class='default'>
+Default value: <p>0.0</p>
+</p></dd><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The distance in kilometers around Home Assistant’s coordinates in which seismic events are included.</p>
+</span></p><p class='default'>
+Default value: <p>50.0</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude of the coordinates around which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Latitude defined in your <code>configuration.yaml</code></p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude of the coordinates around which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Longitude defined in your <code>configuration.yaml</code></p>
+</p></dd></dl>
+</div>
+<h3>Supported Feed Types</h3>
+<table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Feed Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Past Hour - Significant Earthquakes</td>
+<td><code>past_hour_significant_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Hour - M4.5+ Earthquakes</td>
+<td><code>past_hour_m45_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Hour - M2.5+ Earthquakes</td>
+<td><code>past_hour_m25_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Hour - M1.0+ Earthquakes</td>
+<td><code>past_hour_m10_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Hour - All Earthquakes</td>
+<td><code>past_hour_all_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Day - Significant Earthquakes</td>
+<td><code>past_day_significant_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Day - M4.5+ Earthquakes</td>
+<td><code>past_day_m45_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Day - M2.5+ Earthquakes</td>
+<td><code>past_day_m25_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Day - M1.0+ Earthquakes</td>
+<td><code>past_day_m10_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past Day - All Earthquakes</td>
+<td><code>past_day_all_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 7 Days - Significant Earthquakes</td>
+<td><code>past_week_significant_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 7 Days - M4.5+ Earthquakes</td>
+<td><code>past_week_m45_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 7 Days - M2.5+ Earthquakes</td>
+<td><code>past_week_m25_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 7 Days - M1.0+ Earthquakes</td>
+<td><code>past_week_m10_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 7 Days - All Earthquakes</td>
+<td><code>past_week_all_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 30 Days - Significant Earthquakes</td>
+<td><code>past_month_significant_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 30 Days - M4.5+ Earthquakes</td>
+<td><code>past_month_m45_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 30 Days - M2.5+ Earthquakes</td>
+<td><code>past_month_m25_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 30 Days - M1.0+ Earthquakes</td>
+<td><code>past_month_m10_earthquakes</code></td>
+</tr>
+<tr>
+<td>Past 30 Days - All Earthquakes</td>
+<td><code>past_month_all_earthquakes</code></td>
+</tr>
+</tbody>
+</table>
+<h2>State Attributes</h2>
+<p>The following state attributes are available for each entity in addition to the standard ones:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latitude</td>
+<td>Latitude of the earthquake.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Longitude of the earthquake.</td>
+</tr>
+<tr>
+<td>source</td>
+<td><code>usgs_earthquakes_feed</code> to be used in conjunction with <code>geo_location</code> automation trigger.</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>The external ID used in the feed to identify the earthquake in the feed.</td>
+</tr>
+<tr>
+<td>place</td>
+<td>Textual description of named geographic region near to the event.</td>
+</tr>
+<tr>
+<td>magnitude</td>
+<td>Reported magnitude of the earthquake.</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Date and time when this event occurred.</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>Date and time when this event was most recently updated.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Indicates whether the event has been reviewed by a human: “automatic”, “reviewed”, “deleted”</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Type of seismic event: “earthquake” or “quarry”.</td>
+</tr>
+</tbody>
+</table>
+<h2>Full Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geo_location:
+  - platform: usgs_earthquakes_feed
+    feed_type: 'past_month_all_earthquakes'
+    radius: 50
+    minimum_magnitude: 0.0
+    latitude: 35.899722
+    longitude: -120.432778
+</code></pre>
+:ET

@@ -1,0 +1,26 @@
+I"�<p>The <a href="https://sisyphus-industries.com/">Sisyphus</a> integration for Home Assistant allows you to observe and control your Sisyphus Kinetic Art Table.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><strong>Light</strong> - Can be used to sleep/wake the table or adjust the brightness of the table light.</li>
+<li><strong>Media Player</strong> - Can be used to sleep/wake the table, play/pause, move between tracks, or toggle shuffle on and off. The “volume” control adjusts the table’s speed.</li>
+</ul>
+<p>The Light and Media players will be automatically added for each of your Sisyphus tables, if the Sisyphus integration is configured.</p>
+<p>There are two ways to configure this component. For the automatic discovery of your table(s), simply add the following to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># This will auto-detect all Sisyphus tables on your local network.
+sisyphus:
+</code></pre>
+<p>Auto-detection can be a little slow, so if your table has a fixed IP address or hostname, you may add a list of tables in your <code>configuration.yaml</code>. For example:</p>
+<pre><code class="language-yaml"># This will skip auto-detection and add only the listed tables
+sisyphus:
+  - name: 'TABLE_NAME'
+    host: 'TABLE_IP_OR_HOSTNAME'
+  - name: 'ANOTHER_TABLE_NAME'
+    host: 'ANOTHER_TABLE_IP_OR_HOSTNAME'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name by which the table should appear in Home Assistant</p>
+</span></p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The hostname or IP address of the table</p>
+</span></p></dd></dl>
+</div>
+:ET

@@ -1,0 +1,170 @@
+I"&<p>The <code>solarlog</code> integration uses the open JSON interface on <a href="https://www.solar-log.com/">Solar-Log PV monitoring systems</a> to allow you to get details from your Solar-Log device and integrate these into your Home Assistant installation.</p>
+<p>Before being able to use the integration, you have to activate the open JSON interface on your Solar-Log device. This can be activated from the Configuration | System | Access control menu of your Solar-Log device.
+When activating the interface, a red warning triangle with security information and risks is displayed.</p>
+<p>The <code>solarlog</code> integration uses the default host address “<a href="http://solar-log">http://solar-log</a>” if you don’t specify a host. If your device isn’t accessible on this address, use its IP Address instead.</p>
+<div class='note warning'>
+The open JSON interface is deactivated by default. To activate the open JSON interface, a user password must first be set. The password isn't needed for accessing the open JSON interface.
+</div>
+<h2>Configuration</h2>
+<p>There are 2 options in configuring the <code>solarlog</code> integration:</p>
+<ul>
+<li>Via the Home Assistant user interface where it will let you enter the name and host to connect to your Solar-Log device.</li>
+<li>Via the Home Assistant <code>configuration.yaml</code> file.</li>
+</ul>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  platform: solarlog
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP Address or host address of your Solar-Log device.</p>
+</span></p><p class='default'>
+Default value: <p><a href="http://solar-log">http://solar-log</a></p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Let you overwrite the name of the device in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>solarlog</p>
+</p></dd></dl>
+</div>
+<h3>Full configuration sample</h3>
+<p>A full configuration entry would look like the sample below.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: solarlog
+    name: solarlog
+    host: 192.168.1.123
+</code></pre>
+<p>In case you would like to convert the values, for example, to Wh instead of the default kWh, you can use the <a href="/integrations/template/">template platform</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for sensor template platform
+sensor:
+  - platform: template
+    sensors:
+      solarlog_yield_day_template:
+        value_template: &quot;{{ (states('sensor.solarlog_yield_day') | float * 1000) | round(0) }}&quot;
+</code></pre>
+<h2>Sensors</h2>
+<p>The following sensors are available in the library:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>Unit</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>last_update</td>
+<td></td>
+<td align="left">Time of latest data update.</td>
+</tr>
+<tr>
+<td>power_ac</td>
+<td>W</td>
+<td align="left">Total output PAC from all of the inverters and meters in inverter mode.</td>
+</tr>
+<tr>
+<td>power_dc</td>
+<td>W</td>
+<td align="left">Total output PAC from all of the inverters.</td>
+</tr>
+<tr>
+<td>voltage_ac</td>
+<td>V</td>
+<td align="left">Average voltage AC from the inverter.</td>
+</tr>
+<tr>
+<td>voltage_dc</td>
+<td>V</td>
+<td align="left">Average voltage DC from the inverter</td>
+</tr>
+<tr>
+<td>yield_day</td>
+<td>kWh</td>
+<td align="left">Total yield for the day from all of the inverters</td>
+</tr>
+<tr>
+<td>yield_yesterday</td>
+<td>kWh</td>
+<td align="left">Total yield for the previous day from all of the inverters.</td>
+</tr>
+<tr>
+<td>yield_month</td>
+<td>kWh</td>
+<td align="left">Total yield for the month from all of the inverters.</td>
+</tr>
+<tr>
+<td>yield_year</td>
+<td>kWh</td>
+<td align="left">Total yield for the year from all of the inverters.</td>
+</tr>
+<tr>
+<td>yield_total</td>
+<td>kWh</td>
+<td align="left">Total yield from all of the inverters.</td>
+</tr>
+<tr>
+<td>consumption_ac</td>
+<td>kWh</td>
+<td align="left">Current total consumption AC from all of the consumption meters.</td>
+</tr>
+<tr>
+<td>consumption_day</td>
+<td>kWh</td>
+<td align="left">Total consumption for the day from all of the consumption meters.</td>
+</tr>
+<tr>
+<td>consumption_yesterday</td>
+<td>kWh</td>
+<td align="left">Total consumption for the previous day from all of the consumption meters.</td>
+</tr>
+<tr>
+<td>consumption_month</td>
+<td>kWh</td>
+<td align="left">Total consumption for the month from all of the consumption meters.</td>
+</tr>
+<tr>
+<td>consumption_year</td>
+<td>kWh</td>
+<td align="left">Total consumption for the year from all of the consumption meters.</td>
+</tr>
+<tr>
+<td>consumption_total</td>
+<td>kWh</td>
+<td align="left">Accumulated total consumption from all consumption meters.</td>
+</tr>
+<tr>
+<td>total_power</td>
+<td>Wp</td>
+<td align="left">Installed generator power.</td>
+</tr>
+<tr>
+<td>alternator_loss</td>
+<td>W</td>
+<td align="left">Altenator loss (equals to power_dc - power_ac)</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>%</td>
+<td align="left">Capacity (equals to power_dc / total power)</td>
+</tr>
+<tr>
+<td>efficiency</td>
+<td>% W/Wp</td>
+<td align="left">Efficiency (equals to power_ac / power_dc</td>
+</tr>
+<tr>
+<td>power_available</td>
+<td>W</td>
+<td align="left">Available power (equals to power_ac - consumption_ac)</td>
+</tr>
+<tr>
+<td>usage</td>
+<td></td>
+<td align="left">Usage (equals to consumption_ac / power_ac)</td>
+</tr>
+</tbody>
+</table>
+<div class='note'>
+The solarlog integration is using the sunwatcher pypi package to get the data from your Solar-Log device. The last five sensors are not reported by your Solar-Log device directly, but are computed by the sunwatcher package.
+</div>
+:ET
