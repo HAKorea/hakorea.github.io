@@ -8,6 +8,7 @@ description: "Instructions on how to setup presence detection within Home Assist
 - 아이가 학교에 도착하면 알람을 받는다
 - 퇴근후 집으로 출발하면서 에어콘을 켠다
 
+
 <p class='img'>
 <img src='/images/screenshots/map.png' />
 두 사람의 위치가 학교, 직장 또는 집 여부를 나타내는 홈어시스턴트 화면.
