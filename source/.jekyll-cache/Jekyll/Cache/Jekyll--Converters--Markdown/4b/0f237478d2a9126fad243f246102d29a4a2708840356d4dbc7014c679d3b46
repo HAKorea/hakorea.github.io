@@ -1,0 +1,64 @@
+I"é<p>The <code>stream</code> integration provides a way to proxy live streams through Home Assistant. The integration currently only supports proxying H.264 source streams to the HLS format and requires at least FFmpeg &gt;= 3.2.</p>
+<h2>Configuration</h2>
+<p>To enable this component, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+stream:
+</code></pre>
+<h3>Services</h3>
+<p>Once loaded, the <code>stream</code> platform will expose services that can be called to perform various actions.</p>
+<h4>Service <code>record</code></h4>
+<p>Make a <code>.mp4</code> recording from a provided stream.  While this service can be called directly, it is used internally by the <a href="/integrations/camera#service-record"><code>camera.record</code></a> service.</p>
+<p>Both <code>duration</code> and <code>lookback</code> options are suggestions, but should be consistent per stream.  The actual length of the recording may vary. It is suggested that you tweak these settings to fit your needs.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stream_source</code></td>
+<td>no</td>
+<td>The input source for the stream, e.g., <code>rtsp://my.stream.feed:554</code>.</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>no</td>
+<td>The file name string. e.g., <code>/tmp/my_stream.mp4</code>.</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>yes</td>
+<td>Target recording length (in seconds). Default: 30</td>
+</tr>
+<tr>
+<td><code>lookback</code></td>
+<td>yes</td>
+<td>Target lookback period (in seconds) to include in addition to duration.  Only available if there is currently an active HLS stream for <code>stream_source</code>. Default: 0</td>
+</tr>
+</tbody>
+</table>
+<p>The path part of <code>filename</code> must be an entry in the <code>whitelist_external_dirs</code> in your <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> section of your <code>configuration.yaml</code> file.</p>
+<p>For example, the following action in an automation would take a recording from <code>rtsp://my.stream.feed:554</code> and save it to <code>/config/www</code>.</p>
+<pre><code class="language-yaml">action:
+  service: camera.record
+  data:
+    entity_id: camera.quintal
+    filename: '/config/www/my_stream.mp4'
+    duration: 30
+</code></pre>
+<h2>Streaming in Lovelace</h2>
+<p>As of Homeassistant version 0.92 you can now live-stream a camera feed directly in lovelace.
+To do this add either <a href="/lovelace/picture-entity/">picture-entity</a>, <a href="/lovelace/picture-glance/">picture-glance</a> or <a href="/lovelace/picture-elements/">picture-elements</a>, set <code>camera_image</code> to a stream-ready camera entity and set <code>camera_view</code> to <code>live</code> in one of your lovelace views.</p>
+<h2>Troubleshooting</h2>
+<p>Some users on manual installs may see the following error in their logs after restarting:</p>
+<pre><code class="language-text">2019-03-12 08:49:59 ERROR (SyncWorker_5) [homeassistant.util.package] Unable to install package av==6.1.2: Command &quot;/home/pi/home-assistant/bin/python3 -u -c &quot;import setuptools, tokenize;__file__='/tmp/pip-install-udfl2b3t/av/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))&quot; install --record /tmp/pip-record-ftn5zmh2/install-record.txt --single-version-externally-managed --compile --install-headers /home/pi/home-assistant/include/site/python3.6/av&quot; failed with error code 1 in /tmp/pip-install-udfl2b3t/av/
+2019-03-12 08:49:59 ERROR (MainThread) [homeassistant.requirements] Not initializing stream because could not install requirement av==6.1.2
+2019-03-12 08:49:59 ERROR (MainThread) [homeassistant.setup] Setup failed for stream: Could not install all requirements.
+</code></pre>
+<p>If you see this error you can solve it by running the following commands and restarting Home Assistant (commands do not need to be ran as the <code>homeassistant</code> user):</p>
+<pre><code class="language-text">sudo apt-get install -y python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
+</code></pre>
+:ET

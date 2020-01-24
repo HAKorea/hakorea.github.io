@@ -1,0 +1,933 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Broadlink - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate Broadlink within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/broadlink/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Broadlink">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/broadlink/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate Broadlink within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Broadlink">
+    <meta name="twitter:description" content="Instructions on how to integrate Broadlink within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/broadlink.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Broadlink
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#remote">Remote</a></li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>
+<a class="title-link" name="remote" href="#remote"></a> Remote</h2>
+<p>The <code>broadlink</code> remote platform allows you to interact with Broadlink remote control devices.</p>
+<h3>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+remote:
+  - platform: broadlink
+    host: IP_ADDRESS
+    mac: MAC_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname/IP address to connect to.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="mac" href="#mac"></a> mac</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Device MAC address.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Timeout in seconds for the connection to the device.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>5</p>
+</dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the device.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Broadlink</p>
+</dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="learn-command" href="#learn-command"></a> Learn command</h3>
+<p>Use the <code>remote.learn_command</code> service to learn new commands.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>ID of the remote.</td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td>no</td>
+<td>Name of the device to control.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>no</td>
+<td>Names of the commands to learn.</td>
+</tr>
+<tr>
+<td><code>alternative</code></td>
+<td>yes</td>
+<td>Toggle commands?</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>yes</td>
+<td>Timeout in seconds to learn each command.</td>
+</tr>
+</tbody>
+</table>
+<p>Example 1: Learn a single command</p>
+<pre><code class="language-yaml">script:
+  learn_mute_tv:
+    sequence:
+      - service: remote.learn_command
+        data:
+          entity_id: remote.bedroom
+          device: television
+          command: mute
+</code></pre>
+<p>Example 2: Learn a sequence of commands</p>
+<pre><code class="language-yaml">script:
+  learn_tv_commands:
+    sequence:
+      - service: remote.learn_command
+        data:
+          entity_id: remote.bedroom
+          device: television
+          command:
+            - turn on
+            - turn off
+            - volume up
+            - volume down
+</code></pre>
+<p>Example 3: Learn a toggle command</p>
+<p>The <code>alternative</code> flag is useful for capturing commands where the same button is used for more than one purpose, such as the power button, which can turn the television on and off.</p>
+<pre><code class="language-yaml">script:
+  learn_tv_power_button:
+    sequence:
+      - service: remote.learn_command
+        data:
+          entity_id: remote.bedroom
+          device: television
+          command: power
+          alternative: True
+</code></pre>
+<p>In the above example, two codes will be captured for the power command, and will be sent alternately each time the command is called.</p>
+<h3>
+<a class="title-link" name="send-command" href="#send-command"></a> Send command</h3>
+<p>Use the <code>remote.send_command</code> service to send commands.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>ID of the remote.</td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td>no</td>
+<td>Name of the device to control.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>no</td>
+<td>Names of the commands to send.</td>
+</tr>
+<tr>
+<td><code>num_repeats</code></td>
+<td>yes</td>
+<td>Number of times to repeat the commands.</td>
+</tr>
+<tr>
+<td><code>delay_secs</code></td>
+<td>yes</td>
+<td>Interval in seconds between one command and another.</td>
+</tr>
+</tbody>
+</table>
+<p>Example 1: Send a single command</p>
+<pre><code class="language-yaml">script:
+  mute_tv:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.bedroom
+          device: television
+          command: mute
+</code></pre>
+<p>Example 2: Send a command repeatedly</p>
+<pre><code class="language-yaml">script:
+  turn_up_tv_volume_20:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.bedroom
+          device: television
+          command: volume up
+          num_repeats: 20
+</code></pre>
+<p>Example 3: Send a sequence of commands</p>
+<pre><code class="language-yaml">script:
+  turn_on_ac:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.bedroom
+          device: air conditioner
+          command:
+            - turn on
+            - turn off display
+</code></pre>
+<h2>
+<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
+<p>The <code>broadlink</code> sensor platform let you monitor data from an RM2 and A1 E-air. There is currently no support for the cloud API.</p>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: broadlink
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+    monitored_conditions:
+      - 'temperature'
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname/IP address to connect to.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="mac" href="#mac"></a> mac</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Device MAC address. Use the following format: <code>AA:BB:CC:DD:EE:FF</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sensor name.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Broadlink sensor</p>
+</dd>
+<dt>
+<a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Time in seconds to fetch data from sensors.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>300</p>
+</dd>
+<dt>
+<a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Timeout in seconds for the connection to the device.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>10</p>
+</dd>
+<dt>
+<a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"></span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="temperature" href="#temperature"></a> 'temperature'</dt>
+<dd><p class="desc"><span class="description"><p>Temperature</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="humidity" href="#humidity"></a> 'humidity'</dt>
+<dd><p class="desc"><span class="description"><p>Humidity</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="air_quality" href="#air_quality"></a> 'air_quality'</dt>
+<dd><p class="desc"><span class="description"><p>Air quality</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="light" href="#light"></a> 'light'</dt>
+<dd><p class="desc"><span class="description"><p>Light</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="noise" href="#noise"></a> 'noise'</dt>
+<dd><p class="desc"><span class="description"><p>Noise</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<p>Obtain sensor data from an A1:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: broadlink
+    scan_interval: 60
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+    monitored_conditions:
+      - temperature
+      - humidity
+      - air_quality
+      - light
+      - noise
+</code></pre>
+<p>Obtain temperature data from an RM2:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: broadlink
+    scan_interval: 60
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+    monitored_conditions:
+      - temperature
+</code></pre>
+<h3>
+<a class="title-link" name="microsoft-windows-installation" href="#microsoft-windows-installation"></a> Microsoft Windows installation</h3>
+<div class="note">
+<p>The pycrypto library needs to be available on your platform. On a typical windows sysytem <code>pip install pycrypto</code> will fail, as a compiler needs to be installed first.</p>
+</div>
+<p>The quickest way around this is to use a pre-built binary, e.g., from <a href="https://github.com/sfbahr/PyCrypto-Wheels" rel="external nofollow">https://github.com/sfbahr/PyCrypto-Wheels</a></p>
+<p>Be sure to get the correct 64 or 32-bit binary for your system, the full command line will look something like the sample below for a 64-bit system:</p>
+<pre><code class="language-bash">pip install --use-wheel --no-index --find-links=https://github.com/sfbahr/PyCrypto-Wheels/raw/master/pycrypto-2.6.1-cp35-none-win_amd64.whl pycrypto
+</code></pre>
+<h2>
+<a class="title-link" name="switch" href="#switch"></a> Switch</h2>
+<p>This <code>Broadlink</code> switch platform allow to you control Broadlink <a href="https://www.ibroadlink.com/" rel="external nofollow">devices</a>.</p>
+<h3>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: broadlink
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname/IP address to connect to.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="mac" href="#mac"></a> mac</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Device MAC address. Use the following format: <code>AA:BB:CC:DD:EE:FF</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Timeout in seconds for the connection to the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="retry" href="#retry"></a> retry</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Retry times for fetch data if failed.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>2</p>
+</dd>
+<dt>
+<a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name used to display the switch in the frontend.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Switch type. Choose one from: <code>rm</code>, <code>rm2</code>, <code>rm_mini</code>, <code>rm_pro_phicomm</code>, <code>rm2_home_plus</code>, <code>rm2_home_plus_gdt</code>, <code>rm2_pro_plus</code>, <code>rm2_pro_plus2</code>, <code>rm2_pro_plus_bl</code>, <code>rm_mini_shate</code>, <code>sp1</code>, <code>sp2</code>, <code>honeywell_sp2</code>, <code>sp3</code>, <code>spmini2</code>, <code>spminiplus</code> or <code>mp1</code>. <code>SC1</code> devices can be registered as <code>sp2</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="switches" href="#switches"></a> switches</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The array that contains all switches.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="identifier" href="#identifier"></a> identifier</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the command switch as slug. Multiple entries are possible.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="command_on" href="#command_on"></a> command_on</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Base64 encoded packet from RM device to take for on.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="command_off" href="#command_off"></a> command_off</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Base64 encoded packet from RM device to take for off.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name used to display the switch in the frontend.</p>
+</span></p></dd>
+</dl></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="slots" href="#slots"></a> slots</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of 4 slots of MP1 power strip. If not configured, slot name will be <code>switch's friendly_name + 'slot {slot_index}'</code>. e.g ‘MP1 slot 1’</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="slot_1" href="#slot_1"></a> slot_1</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 1</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="slot_2" href="#slot_2"></a> slot_2</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 2</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="slot_3" href="#slot_3"></a> slot_3</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 3</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="slot_4" href="#slot_4"></a> slot_4</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 4</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<p>Information about how to install on Windows can be found <a href="/integrations/broadlink#sensor#microsoft-windows-installation">here</a>.</p>
+<h3>
+<a class="title-link" name="how-to-obtain-irrf-packets" href="#how-to-obtain-irrf-packets"></a> How to obtain IR/RF packets?</h3>
+<p>Choose Call Service from the Developer Tools. Choose the service <code>broadlink.learn</code> from the list of <strong>Available services:</strong>, write in “Service Data” JSON with 1 field “host”:“your_broadlink_IP” and hit <strong>CALL SERVICE</strong>. Press the button on your remote with in 20 seconds. The packet will be printed as a persistent notification in the States page of the web interface.</p>
+<p>Example config for <code>rm</code>, <code>rm2</code>, <code>rm_mini</code>, <code>rm_pro_phicomm</code>, <code>rm2_home_plus</code>, <code>rm2_home_plus_gdt</code>, <code>rm2_pro_plus</code>, <code>rm2_pro_plus2</code>, <code>rm2_pro_plus_bl</code> and <code>rm_mini_shate</code> devices:</p>
+<pre><code class="language-yaml">switch:
+  - platform: broadlink
+    host: 192.168.1.2
+    mac: 'B4:43:0D:CC:0F:58'
+    timeout: 15
+    retry: 5
+    switches:
+      # Will work on most Phillips TVs:
+      tv_phillips:
+        friendly_name: "Phillips Tv Power"
+        command_on: 'JgAcAB0dHB44HhweGx4cHR06HB0cHhwdHB8bHhwADQUAAAAAAAAAAAAAAAA='
+        command_off: 'JgAaABweOR4bHhwdHB4dHRw6HhsdHR0dOTocAA0FAAAAAAAAAAAAAAAAAAA='
+      # Will work on most LG TVs
+      tv_lg:
+        friendly_name: "LG Tv Power"
+        command_on: 'JgBYAAABIJISExETETcSEhISEhQQFBETETcROBESEjcRNhM1EjcTNRMTERISNxEUERMSExE2EjYSNhM2EhIROBE3ETcREhITEgAFGwABH0oSAAwzAAEfShEADQU='
+        command_off: 'JgBYAAABIJISExETETcSEhISEhQQFBETETcROBESEjcRNhM1EjcTNRMTERISNxEUERMSExE2EjYSNhM2EhIROBE3ETcREhITEgAFGwABH0oSAAwzAAEfShEADQU='
+      tv_lg_hdmi1_hdmi2:
+        friendly_name: "LG Tv HDMI12"
+        command_on: 'JgBIAAABIZMRExITEjYSExMRERURExEUEDkRNxEUEjYSNhM3ETcSNxITETgSNhI2ExMQExE4ETYSNxIUERMSExE4ETcRFBETEQANBQ=='
+        command_off: 'JgBQAAABJJMSEhISETgSEhITEBMSEhMSETcSNxMREjcSNxI3EjcSOBETERITNhM2EhITERM2EzcRNxI3ExISEhI3EjcRExETEgAFLQABJEoRAA0FAAAAAAAAAAA='
+      tv_lg_hdmi3:
+        friendly_name: "LG Tv HDMI3"
+        command_on: 'JgBIAAABIZMSFBISETgRExEUERQQFBETEjcTNhMSETgRNxE3EjcROBM2ERMSFBE4ERMSNxM2EjUSFBE2ETgRExM2ExITEhATEwANBQ=='
+      tv_lg_av1_av2:
+        friendly_name: "LG Tv AV12"
+        command_on: 'JgBIAAABIpQPFBITETgSEw8UEhQSEhEVDzgSOBAUETgQOQ84EjgRNxITETgSExA5EDgREhI3EhMROBMSEDkQFBETEjYTEhE4EQANBQ=='
+        command_off: 'JgBIAAABH5YPFBETETgUERAUEBURFBATETgROBEUETcSNxE4ETcSOBISEBUQFREUEjUSFBA5ETcRNxE4ETkQOBAUEjcRFRAUEQANBQ=='
+  - platform: broadlink
+    host: 192.168.1.2
+    mac: 'B4:43:0D:CC:0F:58'
+    timeout: 15
+    switches:
+    # Will work on most Phillips TVs:
+      tv:
+        friendly_name: "Phillips Tv"
+        command_on: 'JgAcAB0dHB44HhweGx4cHR06HB0cHhwdHB8bHhwADQUAAAAAAAAAAAAAAAA='
+        command_off: 'JgAaABweOR4bHhwdHB4dHRw6HhsdHR0dOTocAA0FAAAAAAAAAAAAAAAAAAA='
+</code></pre>
+<p>Example config for <code>sp1</code>, <code>sp2</code>, <code>honeywell_sp2</code>, <code>sp3</code>, <code>spmini2</code> and <code>spminiplus</code> devices:</p>
+<pre><code class="language-yaml">switch:
+  - platform: broadlink
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+    type:  sp1
+    friendly_name: 'Humidifier'
+  - platform: broadlink
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+    type:  sp2
+    retry: 5
+    friendly_name: 'Humidifier'
+</code></pre>
+<p>Example config for <code>mp1</code> device:</p>
+<pre><code class="language-yaml">switch:
+  - platform: broadlink
+    host: IP_ADDRESS
+    mac: 'MAC_ADDRESS'
+    type: mp1
+    friendly_name: 'MP1'
+    slots:
+      # friendly name of slots - optional
+      # if not set, slot name will be switch's friendly_name + 'slot {slot_index}'. e.g 'MP1 slot 1'
+      slot_1: 'TV slot'
+      slot_2: 'Xbox slot'
+      slot_3: 'Fan slot'
+      slot_4: 'Speaker slot'
+</code></pre>
+<h3>
+<a class="title-link" name="service-broadlinksend" href="#service-broadlinksend"></a> Service broadlink.send</h3>
+<p>You can use the service <code>broadlink.send</code> to directly send IR packets without the need to assign a switch entity for each command.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>no</td>
+<td>IP address to send command to.</td>
+</tr>
+<tr>
+<td><code>packet</code></td>
+<td>no</td>
+<td>String or list of strings that contain the packet data.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  tv_select_source:
+    sequence:
+      - service: broadlink.send
+        data:
+          host: 192.168.0.107
+          packet:
+            - "JgCMAJSSFDYUNhQ2FBEUERQRFBEUERQ2FDYUNhQRFBEUERQRFBEUERQRFDYUERQRFBEUERQRFDYUNhQRFDYUNhQ2FDYUNhQABfWUkhQ2FDYUNhQRFBEUERQRFBEUNhQ2FDYUERQRFBEUERQRFBEUERQ2FBEUERQRFBEUERQ2FDYUERQ2FDYUNhQ2FDYUAA0FAAAAAAAAAAAAAAAA"
+            - "JgBGAJSTFDUUNhM2ExITEhMSExITEhM2EzYTNhQRFBEUERQRFBEUNRQ2ExITNhMSExITNhMSExITEhM2ExITNhQ1FBEUNhMADQUAAA=="
+</code></pre>
+<h3>
+<a class="title-link" name="using-e-control-remotes" href="#using-e-control-remotes"></a> Using E-Control remotes</h3>
+<p>If you already have your remotes learned on E-Control app you can use this method to “copy” them to Home Assistant.</p>
+<p>First get or learn all the remotes you want to add to Home Assistant in E-Control</p>
+<ol>
+<li>
+<p>Download</p>
+<p>Get the script from <a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">here</a>.</p>
+</li>
+<li>
+<p>Dump the data from the app</p>
+<p>Open the E-Control app on your mobile device. On the left side menu choose “Share” and then “Share to other phones in WLAN”. It will generate the files you will need for the script.</p>
+</li>
+<li>
+<p>Get data from your Android device</p>
+<p>Connect your Android device to your computer and browse the SD card/External Storage folder “/broadlink/newremote/SharedData/”. You need to get the following files and put them in the same folder as this script:</p>
+<p>jsonSubIr
+jsonButton
+jsonIrCode</p>
+</li>
+<li>
+<p>Install Requirements</p>
+<p>Run <code>pip install simplejson</code>. You must install simplejson in the same python version you will use to run the scripts. You can ensure that the current version is installed by attempting to install again and confirming that you see “Requirement already satisfied”.</p>
+</li>
+<li>
+<p>Get the data from the device</p>
+<p>Navigate to the folder you downloaded and run <code>python getBroadlinkSharedData.py</code>. Follow the steps on screen. NOTE: These scripts were only tested with Python 2.7.</p>
+</li>
+<li>
+<p>Install python-broadlink library:</p>
+<pre><code class="language-bash">git clone https://github.com/mjg59/python-broadlink.git
+cd python-broadlink
+sudo python setup.py install
+</code></pre>
+</li>
+<li>
+<p>Test the codes
+Use the <code>sendcode</code> script you have already downloaded to test the codes you got from the device.
+You need to edit the script with your RM Pro IP Address and MAC Address and with the code in HEX format.
+When run the script, you know the code works when get message.
+Code sent…
+Not every code works.</p>
+</li>
+<li>
+<p>Convert the HEX codes to base64.
+Use <a href="https://tomeko.net/online_tools/hex_to_base64.php?lang=en1" rel="external nofollow">this</a> tool to convert the hex codes to base64 for use with Home Assistant.</p>
+</li>
+</ol>
+<h3>
+<a class="title-link" name="using-ios-and-windows-to-obtain-codes" href="#using-ios-and-windows-to-obtain-codes"></a> Using iOS and Windows to obtain codes</h3>
+<ol>
+<li>
+<p>Use the E-Control app to learn the codes from all of your suitable remotes. Depending on the remote, try to add useful names for the buttons and/or the remotes. This will mean that you should only have to run this process once and will help with getting them quickly into Home Assistant. Dump the files in the app by navigating to the hamburger icon, select <code>share and select</code>, then choose <code>Share to other phones on WLAN</code>.</p>
+</li>
+<li>
+<p>Install Requirements</p>
+<ul>
+<li>Download and install Python 2.7 on your windows PC.</li>
+<li>Run <code>pip install simplejson</code>. You must install simplejson in the same python version you will use to run the scripts. You can ensure that the current version is installed by attempting to install again and confirming that you see “Requirement already satisfied”.</li>
+<li>Download and install <a href="https://www.imactools.com/iphonebackupviewer/" rel="external nofollow">iBackup Viewer</a>.</li>
+<li>Download <a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">these</a> github files. Make sure you place them in the \Python27 path in Windows. Be sure that the getBroadlinkSharedData.py from the download is in this directory.</li>
+</ul>
+</li>
+<li>
+<p>Plug your iphone into your windows PC, open iTunes and create a non-encrypted backup of your device.</p>
+</li>
+<li>
+<p>Open iBackup viewer then select the iOS backup that you created. Navigate to the App icon and then scroll until you find e-control.app, select this. Select and extract the files jsonButton, jsonIrCode and jsonSublr; they will be located in the Documents/SharedData section. Put these in the same location as the getBroadlinkSharedData.py.</p>
+</li>
+<li>
+<p>Now open a Command Prompt and navigate to the directory where the aforementioned files are located e.g. C:\Python27. Now run the command python getBroadlinkSharedData.py, you should see something like this:</p>
+<pre><code class="language-bash">C:\Python27&gt;python getBroadlinkSharedData.py
+ID: 1 | Name: TV
+ID: 2 | Name: Upstairs
+ID: 3 | Name: Sort in order
+ID: 4 | Name: Soundbar
+ID: 5 | Name: TV
+ID: 6 | Name: Xbox One
+ID: 7 | Name: User-Defined Aircon
+ID: 8 | Name: Sort in order
+ID: 9 | Name: User-Defined Aircon
+ID: 10 | Name: Kids Fan
+ID: 11 | Name: Downstairs
+ID: 12 | Name: Ceiling Fan
+ID: 13 | Name: Samsung TV
+ID: 14 | Name: Xbox One
+ID: 15 | Name: SONY SoundBar
+ID: 16 | Name: Fire TV
+ID: 17 | Name: New RF Remote
+</code></pre>
+<p>Select the remote ID you would like to extract:</p>
+<pre><code class="language-bash">Select accessory ID: 5
+[+] You selected:  TV
+[+] Dumping codes to TV.txt
+</code></pre>
+</li>
+<li>
+<p>Now there should be a file with the name of the remote you chose in the same directory ending in <code>.txt</code>. Open that up and it will contain the Base64 code required for Home Assistant. To ensure these codes work correctly you may need to add <code>==</code> to the end of the code in your config.yaml file (or wherever you have your switches).</p>
+</li>
+</ol>
+<h3>
+<a class="title-link" name="using-windows-to-obtain-codes-with-broadlink-manager" href="#using-windows-to-obtain-codes-with-broadlink-manager"></a> Using Windows to obtain codes with Broadlink Manager</h3>
+<ol>
+<li>Install Broadlink Manager from this SourceForge link <a href="https://sourceforge.net/projects/broadlink-manager/" rel="external nofollow">here</a>.</li>
+<li>Open the application and hit “scan” to activate your broadlink device.</li>
+<li>Hit “Learn New Command” and follow instructions on screen.</li>
+<li>The “OnRawData Base64” is the value to be used with Home Assistant.</li>
+</ol>
+<h3>
+<a class="title-link" name="using-node-red-to-obtain-codes" href="#using-node-red-to-obtain-codes"></a> Using Node-RED to obtain codes</h3>
+<ol>
+<li>Install the Broadlink Control palette in Node-RED (click the Hamburger menu at top right corner&gt; Settings&gt; Palette&gt; Install and type Broadlink. Click install on the node-red-contrib-broadlink-control.</li>
+<li>Once installed, verify that the new palette titled broadlink is available in the nodes menu.</li>
+<li>Drag the RM node to an empty flow and double click to configure the node.
+<pre><code class="language-bash">a. give your RM device a name for easy identification
+b. click on the pencil to edit the device information
+c. enter the MAC address of the Broadlink RM PRO or RM Mini
+d. enter the IP address of the Broadlink RM PRO or RM mini
+e. leave the Catalog field empty.
+</code></pre>
+</li>
+<li>Click Update, and the device field should show the MAC address of the newly added device. If not, just select it.</li>
+<li>In the Action field, select Learn, then click Done.</li>
+<li>Drag an Inject node to the left of the RM node and link them. The type of inject doesn’t matter. Leave it to the defaults.</li>
+<li>Drag a Template node on the Flow to the right of the RM node and link it to the RM node.</li>
+<li>Double click the Template node to edit it, select:
+<pre><code class="language-bash">Property: msg.payload
+Format: Mustache template
+Template field: enter '{{payload.data}}'.
+Output as: Plain text
+</code></pre>
+</li>
+<li>Drag a Debug node to the right of the Template node and link them.</li>
+<li>Show the debug messages, deploy the flow and click on the inject button.</li>
+<li>A message will show in the debug window:
+<pre><code class="language-bash">3/23/2019, 9:56:53 AMnode: RM_Mini1
+msg : string[47]
+"Please tap the remote button within 30 seconds."
+</code></pre>
+</li>
+<li>Point the IR remote control at the RM device and click the desired button for about 2 seconds. An array of numbers will show in the debug window. For example:
+<pre><code class="language-bash">'38,0,132,3,19,18,19,18,19,18,19,17,20,54,20,54,20,54,19,18,19,18,19,18,19,17,20,17,20,17,20,54,20,17,19,18,19,18,19,18,19,17,20,17,20,54,20,17,20,54,19,55,19,54,20,54,20,54,19,55,19,0,6,6,150,146,20,54,20,54,20,54,19,18,19,18,19,18,19,17,20,17,20,54,20,54,19,55,19,18,19,17,20,17,20,17,20,17,20,17,20,54,19,18,19,18,19,18,19,17,20,17,20,17,20,54,19,18,19,55,19,54,20,54,20,54,20,54,19,55,19,0,6,6,150,146,20,54,20,54,19,55,19,18,19,17,20,17,20,17,20,17,20,54,19,55,19,54,20,17,20,17,20,17,20,17,20,17,19,18,19,55,19,17,20,17,20,17,20,17,20,17,19,18,19,55,19,18,19,54,20,54,20,54,19,55,19,54,20,54,20,0,6,5,150,146,20,54,20,54,20,54,19,18,19,18,19,18,19,17,20,17,20,54,20,54,19,55,19,18,19,17,20,17,20,17,20,17,20,17,20,54,19,18,19,18,19,18,19,17,20,17,20,17,20,54,19,18,19,55,19,54,20,54,20,54,19,55,19,54,20,0,6,6,149,147,20,54,19,55,19,54,20,17,20,17,20,17,20,17,20,17,19,55,19,54,20,54,20,17,20,17,20,17,19,18,19,18,19,18,19,54,20,17,20,17,20,17,20,17,19,18,19,18,19,54,20,17,20,54,20,54,20,54,19,...'
+</code></pre>
+</li>
+</ol>
+<p>This is the code we need to transmit again to replicate the same remote function.</p>
+<h3>
+<a class="title-link" name="using-node-red-to-transmit-codes" href="#using-node-red-to-transmit-codes"></a> Using Node red to Transmit Codes</h3>
+<ol>
+<li>Drag another RM node on the same flow we created earlier. The RM node should be configured to the RM device created earlier by default.</li>
+<li>In the Action field, select - Set from msg.payload -.</li>
+<li>Drag an Inject node and give it a meaningful name relevant to the remote control button function, like “TV On” or “TV Source”.</li>
+<li>Drag a template node and double click it to configure:
+<pre><code class="language-bash">Property: msg.payload
+Format: Mustache template
+Template: enter the following:
+'{
+   "action" : "send",
+   "data" : [ 38, 0, 34, 1, 40, 15, 40, 15 ] // Here you must enter the entire code from point 12 above, without the trailing "."
+}'
+In the Output as field, "select Parsed JSON".
+</code></pre>
+</li>
+<li>Click Done.</li>
+<li>Drag a debug node and connect it to the output of the RM node.</li>
+<li>Connect the Inject node to the Template node, and the template node to the RM node.</li>
+<li>Click Deploy to activate the flow, and then click the inject button. The debug window should show a debug message. For example:
+<pre><code class="language-bash">{"action":"send","data":   [38,0,152,0,0,1,39,148,19,18,18,19,18,55,19,18,18,19,18,19,18,19,18,55,18,56,18,19,18,55,18,19,18,56,18,18,19,55,18,19,18,19,18,18,18,56,18,19,18,18,19,55,18,56,18,18,19,18,18,19,18,19,18,55,19,18,18,19,18,19,18,19,18,18,18,19,18,19,18,55,19,55,18,19,18,19,18,18,19,18,18,56,18,19,18,18,19,55,18,56,18,18,19,18,18,19,18,19,18,19,18,18,19,18,18,56,18,55,18,19,18,19,18,19,18,18,19,55,18,19,18,55,19,18,18,56,18,19,18,18,19,18,18,19,18,19,18,19,18,18,18,56,18,0,13,5],"status":"OK"}
+</code></pre>
+</li>
+</ol>
+<p>The “status” : “OK” at the end is a feedback that the Broadlink RM device is connected and has transmitted the payload.</p>
+<p>Now you can add as many template nodes, each having a specific code, and add any type of input nodes to activate the template and transmit the code.</p>
+<h3>
+<a class="title-link" name="using-broadlink_cli-to-obtain-codes" href="#using-broadlink_cli-to-obtain-codes"></a> Using broadlink_cli to obtain codes</h3>
+<p>It is also possible to obtain codes using <code>broadlink_cli</code> from <a href="https://github.com/mjg59/python-broadlink" rel="external nofollow">python-broadlink</a> project.
+First use discovery to find your Broadlink device:</p>
+<pre><code class="language-bash">./broadlink_discovery 
+Discovering...
+###########################################
+RM2
+# broadlink_cli --type 0x2737 --host 192.168.1.137 --mac 36668342f7c8
+Device file data (to be used with --device @filename in broadlink_cli) : 
+0x2737 192.168.1.137 36668342nnnn
+temperature = 0.0
+</code></pre>
+<p>Then use this info in a cli-command:</p>
+<pre><code class="language-bash">./broadlink_cli  --learn --device "0x2737 192.168.1.137 36668342nnnn"
+Learning...
+</code></pre>
+<p>Press a button on the remote and you get a code:</p>
+<pre><code class="language-txt">260058000001219512131114113910141114111411141114103911391114103911391139103911391039113911141039111411391015103911141114113910141139111410391114110005250001274b11000c520001274b11000d05
+Base64: b'JgBYAAABIZUSExEUETkQFBEUERQRFBEUEDkROREUEDkRORE5EDkRORA5ETkRFBA5ERQRORAVEDkRFBEUETkQFBE5ERQQOREUEQAFJQABJ0sRAAxSAAEnSxEADQU='
+</code></pre>
+<h3>
+<a class="title-link" name="conversion-of-codes-from-other-projects" href="#conversion-of-codes-from-other-projects"></a> Conversion of codes from other projects</h3>
+<p>For old/awkward devices another possibility is to try to get codes by using data gathered by the LIRC project.</p>
+<p>Assuming that your (or similar) device is in one of these databases:</p>
+<ul>
+<li><a href="https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/" rel="external nofollow">https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/</a></li>
+<li><a href="https://github.com/probonopd/irdb/tree/master/" rel="external nofollow">https://github.com/probonopd/irdb/tree/master/</a></li>
+</ul>
+<p>You can grab <code>irdb2broadlinkha.sh</code> from <a href="https://github.com/molexx/irdb2broadlinkha" rel="external nofollow">irdb2broadlinkha</a> project and try to convert codes to format suitable for Home Assistant.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/broadlink.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/broadlink.png' /></div><div class="section">
+    <kb-alert-link integration="broadlink"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: 0.35
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/broadlink/'>/components/broadlink/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#remote'>Remote</a>
+      </li><li>
+        <a href='/integrations/#switch'>Switch</a>
+      </li><li>
+        <a href='/integrations/#sensor'>Sensor</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

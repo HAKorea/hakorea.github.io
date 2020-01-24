@@ -1,0 +1,24 @@
+I"ä<p>The <code>apache_kafka</code> integration sends all state changes to a
+<a href="https://kafka.apache.org/">Apache Kafka</a> topic.</p>
+<p>Apache Kafka is a real-time data pipeline that can read and write streams of data. It
+stores its data safely in a distributed, replicated, fault-tolerant cluster.</p>
+<p>To use the <code>apache_kafka</code> integration in your installation, add the following to your
+<code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">apache_kafka:
+  host: localhost
+  port: 9092
+  topic: home_assistant_1
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of an Apache Kafka cluster.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port to use.</p>
+</span></p></dd><dt><a class='title-link' name='topic' href='#topic'></a> topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Kafka topic to send data to.</p>
+</span></p></dd><dt><a class='title-link' name='filter' href='#filter'></a> filter</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Filters for entities to be included/excluded.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='include_domains' href='#include_domains'></a> include_domains</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Domains to be included.</p>
+</span></p></dd><dt><a class='title-link' name='include_entities' href='#include_entities'></a> include_entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entities to be included.</p>
+</span></p></dd><dt><a class='title-link' name='exclude_domains' href='#exclude_domains'></a> exclude_domains</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Domains to be excluded.</p>
+</span></p></dd><dt><a class='title-link' name='exclude_entities' href='#exclude_entities'></a> exclude_entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entities to be excluded.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

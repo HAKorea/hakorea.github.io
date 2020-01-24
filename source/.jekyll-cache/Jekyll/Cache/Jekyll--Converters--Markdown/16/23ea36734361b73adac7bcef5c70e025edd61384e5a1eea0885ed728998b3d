@@ -1,0 +1,59 @@
+I"t<p>The <code>nad</code> platform allows you to control a <a href="https://nadelectronics.com/">NAD receiver</a> through RS232, TCP and Telnet from Home Assistant.</p>
+<p>To add an NAD receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for RS232 configuration
+media_player:
+  - platform: nad
+    serial_port: /dev/ttyUSB0
+</code></pre>
+<pre><code class="language-yaml"># Example configuration.yaml entry for TCP configuration
+media_player:
+  - platform: nad
+    type: TCP
+    host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of communication. Valid types are <code>RS232</code>, <code>Telnet</code> or <code>TCP</code></p>
+</span></p><p class='default'>
+Default value: <p>RS232</p>
+</p></dd><dt><a class='title-link' name='serial_port' href='#serial_port'></a> serial_port</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The serial port. (for <code>RS232</code> type only)</p>
+</span></p><p class='default'>
+Default value: <p>/dev/ttyUSB0</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of your amplifier. (for <code>TCP</code> and <code>Telnet</code> types)</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number of the device. (for <code>Telnet</code> type only)</p>
+</span></p><p class='default'>
+Default value: <p>53</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the device.</p>
+</span></p><p class='default'>
+Default value: <p>NAD Receiver</p>
+</p></dd><dt><a class='title-link' name='min_volume' href='#min_volume'></a> min_volume</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minimum volume in dB to use with the slider.</p>
+</span></p><p class='default'>
+Default value: <p>-92</p>
+</p></dd><dt><a class='title-link' name='max_volume' href='#max_volume'></a> max_volume</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Maximum volume in dB to use with the slider.</p>
+</span></p><p class='default'>
+Default value: <p>-20</p>
+</p></dd><dt><a class='title-link' name='sources' href='#sources'></a> sources</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of mappings from source to source name. Valid sources are <code>1 to 10</code>. (for <code>RS232</code> and <code>Telnet</code> types)</p>
+</span></p></dd><dt><a class='title-link' name='volume_step' href='#volume_step'></a> volume_step</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The amount in dB you want to increase the volume with when pressing volume up/down. (for <code>TCP</code> type only)</p>
+</span></p><p class='default'>
+Default value: <p>4</p>
+</p></dd></dl>
+</div>
+<p>The min_volume and max_volume are there to protect you against misclicks on the slider so you will not blow up your speakers when you go from -92dB to +20dB. You can still force it to go higher or lower than the values set with the plus and minus buttons.</p>
+<div class='note warning'>
+<p>On linux the user running home-assistant needs <code>dialout</code> permissions to access the serial port.
+This can be added to the user by doing <code>sudo usermod -a -G dialout &lt;username&gt;</code>.
+Be aware that the user might need to logout and logon again to activate these permissions.</p>
+</div>
+<p>A full configuration example could look like this:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: nad
+    serial_port: /dev/ttyUSB0
+    name: NAD Receiver
+    min_volume: -60
+    max_volume: -20
+    sources:
+      1: 'Kodi'
+      2: 'TV'
+</code></pre>
+:ET

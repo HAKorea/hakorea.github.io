@@ -1,0 +1,141 @@
+I"X)<p>The MQTT integration needs you to run an MQTT broker for Home Assistant to connect to. There are four options, each with various degrees of ease of setup and privacy.</p>
+<h3>Run your own</h3>
+<p>This is the most private option, but it requires a little bit of work to setup. There are multiple free and open-source brokers to pick from: e.g., <a href="http://mosquitto.org/">Mosquitto</a>, <a href="https://github.com/emqx/emqx">EMQ</a> or <a href="http://www.mosca.io/">Mosca</a>.
+For Hass.io users, the recommended setup method is to use the <a href="/addons/mosquitto">Mosquitto MQTT broker addon</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+mqtt:
+  broker: 192.168.1.100
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='broker' href='#broker'></a> broker</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address or hostname of your MQTT broker, e.g., 192.168.1.32.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The network port to connect to. Default is 1883.</p>
+</span></p></dd><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The client ID that Home Assistant will use. Has to be unique on the server. Default is a randomly generated one.</p>
+</span></p></dd><dt><a class='title-link' name='keepalive' href='#keepalive'></a> keepalive</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time in seconds between sending keep alive messages for this client. Default is 60.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The username to use with your MQTT broker.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The corresponding password for the username to use with your MQTT broker.</p>
+</span></p></dd><dt><a class='title-link' name='protocol' href='#protocol'></a> protocol</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Protocol to use: 3.1 or 3.1.1. By default it connects with 3.1.1 and falls back to 3.1 if server does not support 3.1.1.</p>
+</span></p></dd><dt><a class='title-link' name='certificate' href='#certificate'></a> certificate</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to the certificate file, e.g., <code>/home/user/.homeassistant/server.crt</code>.</p>
+</span></p></dd><dt><a class='title-link' name='tls_insecure' href='#tls_insecure'></a> tls_insecure</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set the verification of the server hostname in the server certificate.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='tls_version' href='#tls_version'></a> tls_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>TLS/SSL protocol version to use. Available options are: <code>'auto'</code>, <code>'1.0'</code>, <code>'1.1'</code>, <code>'1.2'</code>. Make sure to put quotes around the value. Defaults to <code>'auto'</code>.</p>
+</span></p></dd></dl>
+</div>
+<div class='note warning'>
+<p>There is an issue with the Mosquitto package included in Ubuntu 14.04 LTS. Specify <code>protocol: 3.1</code> in your MQTT configuration to work around this issue.</p>
+<p>If you get this error <code>AttributeError: module 'ssl' has no attribute 'PROTOCOL_TLS'</code> then you need to set <code>tls_version: '1.2'</code>.</p>
+</div>
+<div class='note'>
+<p>If you are running a Mosquitto instance on the same server as Home Assistant then you must ensure that the Mosquitto service starts before Home Assistant. For a Linux instance running Systemd (Raspberry Pi, Debian, Ubuntu and others) then you should edit the file <code>/etc/systemd/system/home-assistant@homeassistant.service</code> as <code>root</code> (e.g., <code>sudo nano /etc/systemd/system/home-assistant@homeassistant.service</code>) and add the Mosquitto service:</p>
+<pre><code class="language-txt">[Unit]
+Description=Home Assistant
+After=network.target mosquitto.service
+</code></pre>
+</div>
+<div class='note'>
+<p>If you are running a Mosquitto instance on a different server with proper SSL encryption using a service like Let’s Encrypt you may have to set the certificate to the operating systems own <code>.crt</code> certificates file. In the instance of Ubuntu this would be <code>certificate: /etc/ssl/certs/ca-certificates.crt</code></p>
+</div>
+<h3>Public broker</h3>
+<p>The Mosquitto project runs a <a href="http://test.mosquitto.org">public broker</a>. This is the easiest to set up, but there is no privacy as all messages are public. Use this only for testing purposes and not for real tracking of your devices or controlling your home.</p>
+<pre><code class="language-yaml">mqtt:
+  broker: test.mosquitto.org
+  port: 1883 or 8883
+
+  # Optional, replace port 1883 with following if you want encryption
+  # (doesn't really matter because broker is public)
+  port: 8883
+  # Download certificate from http://test.mosquitto.org/ssl/mosquitto.org.crt
+  certificate: /home/paulus/downloads/mosquitto.org.crt
+</code></pre>
+<h3>CloudMQTT</h3>
+<p><a href="https://www.cloudmqtt.com">CloudMQTT</a> is a hosted private MQTT instance that is free for up to 10 connected devices. This is enough to get started with for example <a href="/integrations/owntracks/">OwnTracks</a> and give you a taste of what is possible.</p>
+<div class='note'>
+Home Assistant is not affiliated with CloudMQTT nor will receive any kickbacks.
+</div>
+<ol>
+<li><a href="https://customer.cloudmqtt.com/login">Create an account</a> (no payment details needed)</li>
+<li><a href="https://customer.cloudmqtt.com/subscription/create">Create a new CloudMQTT instance</a>
+(Cute Cat is the free plan)</li>
+<li>From the control panel, click on the <em>Details</em> button.</li>
+<li>Create unique users for Home Assistant and each phone to connect<br>(CloudMQTT does not allow two connections from the same user)
+<ol>
+<li>Under manage users, fill in username, password and click add</li>
+<li>Under ACLs, select user, topic <code>#</code>, check ‘read access’ and ‘write access’</li>
+</ol>
+</li>
+<li>Copy the instance info to your configuration.yaml:</li>
+</ol>
+<pre><code class="language-yaml">mqtt:
+  broker: CLOUDMQTT_SERVER
+  port: CLOUDMQTT_PORT
+  username: CLOUDMQTT_USER
+  password: CLOUDMQTT_PASSWORD
+</code></pre>
+<div class='note'>
+Home Assistant will automatically load the correct certificate if you connect to an encrypted channel of CloudMQTT (port range 20000-30000).
+</div>
+<div class='note'>
+<p>If you experience an error message like <code>Failed to connect due to exception: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed</code>, then add <code>certificate: auto</code> to your broker configuration and restart Home Assistant.</p>
+</div>
+<h3>Embedded broker (Deprecated)</h3>
+<p>Home Assistant contains an embedded MQTT broker called <a href="https://pypi.python.org/pypi/hbmqtt">HBMQTT</a>. If you don’t have an MQTT broker, you can configure this one to be used. If configured, Home Assistant will automatically connect to it.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td>localhost</td>
+</tr>
+<tr>
+<td>Port</td>
+<td>1883</td>
+</tr>
+<tr>
+<td>Protocol</td>
+<td>3.1.1</td>
+</tr>
+<tr>
+<td>User</td>
+<td>homeassistant</td>
+</tr>
+<tr>
+<td>Password</td>
+<td><em>password set under mqtt settings</em></td>
+</tr>
+<tr>
+<td>Websocket port</td>
+<td>8080</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+mqtt:
+  password: hello
+</code></pre>
+<div class='note warning'>
+As of release 0.92, the embedded broker has been marked as deprecated. This means bugs may not be fixed, and the functionality may be removed in a future release.
+</div>
+<div class='note'>
+Before release 0.76, the embedded broker would use your API password as a password to the MQTT user. This is no longer the case.
+</div>
+<div class='note warning'>
+<p>There is <a href="https://github.com/beerfactory/hbmqtt/issues/62">an issue</a> with the HBMQTT broker and the WebSocket connection that is causing a memory leak. If you experience this issue, consider using another broker like Mosquitto.</p>
+</div>
+<h4>Owntracks</h4>
+<p>To use Owntracks with the internal broker a small configuration change must be made in order for the app to use MQTT protocol 3.1.1 (Protocol Level 4).</p>
+<p>In the Owntracks preferences (Android: v1.2.3+, iOS: v9.5.1+) open <strong>Configuration Management</strong>; Find the value named <code>mqttProtocolLevel</code> and set the value to <code>4</code>. The application will now use MQTT 3.1.1 to connect, which is compatible with the embedded broker.</p>
+<h4>Settings</h4>
+<p>If you want to customize the settings of the embedded broker, use <code>embedded:</code> and the values shown in the <a href="http://hbmqtt.readthedocs.org/en/latest/references/broker.html#broker-configuration">HBMQTT Broker configuration</a>. This will replace the default configuration.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+mqtt:
+  embedded:
+    # Your HBMQTT config here. Example at:
+    # http://hbmqtt.readthedocs.org/en/latest/references/broker.html#broker-configuration
+</code></pre>
+:ET

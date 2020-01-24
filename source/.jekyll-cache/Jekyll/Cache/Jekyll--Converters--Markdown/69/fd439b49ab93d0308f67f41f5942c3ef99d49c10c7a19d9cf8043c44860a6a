@@ -1,0 +1,23 @@
+I"�<div class='note'>
+<p>The <code>knx</code> integration must be configured correctly to use this integration, see <a href="/integrations/knx">KNX Integration</a>.</p>
+</div>
+<p>The <code>knx</code> switch platform is used as an interface to switching actuators.</p>
+<h2>Configuration</h2>
+<p>To use your KNX switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">switch:
+  - platform: knx
+    name: Kitchen.Coffee
+    address: '1/1/6'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>KNX group address for switching the switch on/off.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for this device used within Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>KNX Switch</p>
+</p></dd><dt><a class='title-link' name='state_address' href='#state_address'></a> state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Separate KNX group address for retrieving the switch state.</p>
+</span></p></dd></dl>
+</div>
+<p>Some KNX devices can change their state internally without any messages on the KNX bus, e.g., if you configure a timer on a channel. The optional <code>state_address</code> can be used to inform Home Assistant about these state changes. If a KNX message is seen on the bus addressed to the given state address, this will overwrite the state of the switch object.
+For switching actuators that are only controlled by a single group address and can’t change their state internally, you don’t have to configure the state address.</p>
+:ET

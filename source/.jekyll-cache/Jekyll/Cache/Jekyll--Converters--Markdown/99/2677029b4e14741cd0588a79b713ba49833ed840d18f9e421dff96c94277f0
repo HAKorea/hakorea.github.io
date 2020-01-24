@@ -1,0 +1,84 @@
+I"<p>The <code>hp_ilo</code> platform allows you to do an API call to the HP ILO (Integrated Lights-Out) sensor of your server, and use this data in Home Assistant sensors.</p>
+<p>If the ILO or specified jsonpath query returns only a single value (e.g., a temperature or state), it will be put in the state field. If a data structure is returned, it will be placed in the <code>ilo_data</code> attribute.</p>
+<p>Some more details about what can be retrieved from these sensors is available in the <a href="https://seveas.github.io/python-hpilo/">python-hpilo documentation</a>.</p>
+<p class='img'>
+  <img src='/images/screenshots/hp_ilo.png' />
+</p>
+<h2>Configuration</h2>
+<p>To use this integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: hp_ilo
+    host: IP_ADDRESS or HOSTNAME
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    monitored_variables:
+      - name: SENSOR NAME
+        sensor_type: SENSOR TYPE
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The hostname or IP address on which the ILO can be reached.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port on which the ILO can be reached.</p>
+</span></p><p class='default'>
+Default value: <p>443</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username used to connect to the ILO.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password used to connect to the ILO.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_variables' href='#monitored_variables'></a> monitored_variables</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sensors created from the ILO data.</p>
+</span></p><p class='default'>
+Default value: <p>Defaults to an empty list (no sensors are created).</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensor name.</p>
+</span></p></dd><dt><a class='title-link' name='sensor_type' href='#sensor_type'></a> sensor_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensor type, has to be one of the valid sensor types specified below.</p>
+</span></p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The sensors’ unit of measurement.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>When a Jinja2 template is specified here, the created sensor will output the template result. The ILO response can be referenced with the <code>ilo_data</code> variable.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>Valid sensor_types:</p>
+<ul>
+<li><strong>server_name</strong>: Get the name of the server this iLO is managing.</li>
+<li><strong>server_fqdn</strong>: Get the fqdn of the server this iLO is managing.</li>
+<li><strong>server_host_data</strong>: Get SMBIOS records that describe the host.</li>
+<li><strong>server_oa_info</strong>: Get information about the Onboard Administrator of the enclosing chassis.</li>
+<li><strong>server_power_status</strong>: Whether the server is powered on or not.</li>
+<li><strong>server_power_readings</strong>: Get current, min, max and average power readings.</li>
+<li><strong>server_power_on_time</strong>: How many minutes ago has the server been powered on (Non-resetting counter, akin to hours used).</li>
+<li><strong>server_asset_tag</strong>: Gets the server asset tag.</li>
+<li><strong>server_uid_status</strong>: Get the status of the UID light.</li>
+<li><strong>server_health</strong>: Get server health information.</li>
+<li><strong>network_settings</strong>: Get the iLO network settings.</li>
+</ul>
+<h2>Example</h2>
+<p>In order to get two sensors reporting CPU fan speed and Ambient Inlet Temperature, as well as a dump of <code>server_health</code> on a HP Microserver Gen8, you could use the following in your <code>configuration.yaml</code> file</p>
+<pre><code class="language-yaml">sensor:
+  - platform: hp_ilo
+    host: IP_ADDRESS or HOSTNAME
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    monitored_variables:
+      - name: CPU fanspeed
+        sensor_type: server_health
+        unit_of_measurement: '%'
+        value_template: '{{ ilo_data.fans[&quot;Fan 1&quot;].speed[0] }}'
+      - name: Inlet temperature
+        sensor_type: server_health
+        unit_of_measurement: '°C'
+        value_template: '{{ ilo_data.temperature[&quot;01-Inlet Ambient&quot;].currentreading[0] }}'
+      - name: Server Health
+        sensor_type: server_health
+
+</code></pre>
+<p class='img'>
+  <img src='/images/screenshots/hp_ilo_sensors.png' />
+</p>
+<h2>Hardware specifics</h2>
+<div class='note warning'>
+Not every hardware supports all values.
+</div>
+<h3>HP Microserver Gen8</h3>
+<p>On this hardware you should avoid using the following sensor_types as <code>monitored_variables:</code> to prevent errors.</p>
+<ul>
+<li><code>server_oa_info</code></li>
+<li><code>server_power_readings</code></li>
+<li><code>server_power_on_time</code></li>
+</ul>
+:ET

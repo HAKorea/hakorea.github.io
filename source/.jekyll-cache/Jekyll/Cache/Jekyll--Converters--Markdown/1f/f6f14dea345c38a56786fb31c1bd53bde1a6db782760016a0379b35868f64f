@@ -1,0 +1,76 @@
+I"^<p>The <a href="http://www.ezcontrol.de/content/view/36/28/">EZcontrol XS1</a> integration for Home Assistant allows you to observe and control devices configured on the XS1 Gateway. Please have a look at the official docs for using this gateway <a href="http://www.ezcontrol.de/support/downloads/XS1/xs1manual/Bedienungsanleitung_EZcontrol_XS1_3.0.0.0-2.pdf">Bedienungsanleitung v3.0.0.0</a>.</p>
+<h2>Configuration</h2>
+<p>Add the following entry to the <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+xs1:
+  host: &quot;192.168.2.100&quot;
+</code></pre>
+<p>The integration will automatically detect the configuration of the XS1 Gateway only <strong>on initialization</strong> which currently means when Home Assistant boots. When you change the configuration of the XS1 you (currently) have to restart Home Assistant to see the effects.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Host of the XS1 Gateway.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Custom port if you are running your gateway behind some kind of proxy.</p>
+</span></p><p class='default'>
+Default value: <p>80</p>
+</p></dd><dt><a class='title-link' name='ssl' href='#ssl'></a> ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines if <code>https</code> should be used for API requests  (only possible via your own proxy).</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>User to access XS1 web API.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Password to access XS1 web API.</p>
+</span></p></dd></dl>
+</div>
+<h2>Supported Device Types</h2>
+<div class='note warning'>
+This integration currently only covers part of the device types supported by the XS1 gateway, unsupported types are simply ignored.
+</div>
+<h3>Sensors</h3>
+<p>Any type of sensor is supported.</p>
+<div class='note warning'>
+If you are using climate devices the "current temp" sensor will be automatically used by the actuator (if named correctly). To make this work have a look at the actuator description below.
+</div>
+<h3>Actuators</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Supported</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>switch</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dimmer</code></td>
+<td>Partly</td>
+<td>Dimmers are currently handled like switches so actual dimming is not supported :(</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Climate Actuator/Sensor</h3>
+<p>Home Assistant can combine temperature sensors and climate actuators into a single device. The XS1 gateway does not allow this, but a sensor and actuator can be configured separately. To make Home Assistant register them in the same climate device just prefix the <strong>sensor</strong> name with the actuator name on the XS1 gateway configuration, f.ex:</p>
+<ul>
+<li>Actuator device name: “Bedroom_Temp”</li>
+<li>Sensor device name: “Bedroom_Temp_Sensor”</li>
+</ul>
+<h2>Examples</h2>
+<p>In this section, you find some real-life examples of how to use this component.</p>
+<h3>Full configuration</h3>
+<p>This example shows how you can use the optional configuration options.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+xs1:
+  host: &quot;192.168.2.100&quot;
+  port: 80
+  ssl: false
+  username: myuser
+  password: 123totallySecure
+</code></pre>
+:ET

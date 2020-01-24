@@ -1,0 +1,29 @@
+I" 
+<p>The <code>aten_pe</code> integration lets you control <a href="https://www.aten.com/eu/en/products/energy-intelligence-pduupsracks/rack-pdu/">ATEN Rack PDUs</a> from Home Assistant.</p>
+<p>In order to use it, SNMP must be enabled on your PDU. It is recommended to use SNMPv3 to protect your credentials from eavesdropping.</p>
+<p>Tested devices:</p>
+<ul>
+<li><a href="https://www.aten.com/eu/en/products/energy-intelligence-pduupsracks/rack-pdu/pe8324/">PE8324G</a></li>
+</ul>
+<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">switch:
+  - platform: aten_pe
+    host: 192.168.0.60
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP/host which to control.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port on which to communicate.</p>
+</span></p><p class='default'>
+Default value: <p>161</p>
+</p></dd><dt><a class='title-link' name='community' href='#community'></a> community</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>community string to use for authentication (SNMP v1 and v2c).</p>
+</span></p><p class='default'>
+Default value: <p>private</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Username to use for authentication.</p>
+</span></p><p class='default'>
+Default value: <p>administrator</p>
+</p></dd><dt><a class='title-link' name='auth_key' href='#auth_key'></a> auth_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Authentication key to use for SNMP v3.</p>
+</span></p></dd><dt><a class='title-link' name='priv_key' href='#priv_key'></a> priv_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Privacy key to use for SNMP v3.</p>
+</span></p></dd></dl>
+</div>
+:ET

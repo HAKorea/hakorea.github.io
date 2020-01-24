@@ -1,0 +1,479 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Bosch BME680 Environmental Sensor - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate a BME680 sensor into Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/bme680/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Bosch BME680 Environmental Sensor">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/bme680/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate a BME680 sensor into Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Bosch BME680 Environmental Sensor">
+    <meta name="twitter:description" content="Instructions on how to integrate a BME680 sensor into Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/bme680.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Bosch BME680 Environmental Sensor
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>bme680</code> sensor platform allows you to read temperature, humidity, pressure and gas resistance values of a <a href="https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf" rel="external nofollow">Bosch BME680 Environmental sensor</a> connected via an <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2C</a> bus (SDA, SCL pins). It allows you to use all the operation modes of the sensor described in its datasheet. In addition, it includes a basic air quality calculation that uses gas resistance and humidity measurements to calculate a percentage based air quality measurement.</p>
+<p>Tested devices:</p>
+<ul>
+<li><a href="https://www.raspberrypi.org/" rel="external nofollow">Raspberry Pi</a></li>
+</ul>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To use your BME680 sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: bme680
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the sensor</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>BME680 Sensor</p>
+</dd>
+<dt>
+<a class="title-link" name="i2c_bus" href="#i2c_bus"></a> i2c_bus</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>I2C bus that the sensor is connected to.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>1</p>
+</dd>
+<dt>
+<a class="title-link" name="i2c_address" href="#i2c_address"></a> i2c_address</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>I2C address of the sensor. It is 0x76 or 0x77.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>119</p>
+</dd>
+<dt>
+<a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Conditions to monitor.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>[“temperature”, “humidity”, “pressure”, “airquality”]</p>
+</dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="temperature" href="#temperature"></a> temperature</dt>
+<dd><p class="desc"><span class="description"><p>Monitor temperature.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="humidity" href="#humidity"></a> humidity</dt>
+<dd><p class="desc"><span class="description"><p>Monitor relative humidity.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="pressure" href="#pressure"></a> pressure</dt>
+<dd><p class="desc"><span class="description"><p>Monitor pressure.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="gas" href="#gas"></a> gas</dt>
+<dd><p class="desc"><span class="description"><p>Monitor gas resistance values on the VOC sensor.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="airquality" href="#airquality"></a> airquality</dt>
+<dd><p class="desc"><span class="description"><p>Monitor air quality using the values of humidity and gas resistance and calculate a percentage based air quality measurement.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="oversampling_temperature" href="#oversampling_temperature"></a> oversampling_temperature</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Oversampling multiplier as described in the sensor datasheet. Can be 0 (no sampling), 1, 2, 4, 8, or 16.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>8</p>
+</dd>
+<dt>
+<a class="title-link" name="oversampling_pressure" href="#oversampling_pressure"></a> oversampling_pressure</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Oversampling multiplier as described in the sensor datasheet. Can be 0 (no sampling), 1, 2, 4, 8, or 16.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>2</p>
+</dd>
+<dt>
+<a class="title-link" name="oversampling_humidity" href="#oversampling_humidity"></a> oversampling_humidity</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Oversampling multiplier as described in the sensor datasheet. Can be 0 (no sampling), 1, 2, 4, 8, or 16.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>4</p>
+</dd>
+<dt>
+<a class="title-link" name="filter_size" href="#filter_size"></a> filter_size</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>IIR filter size as described in the sensor datasheet. Can be 0 (off), 1, 3, 7, 15, 31, 63 or 127.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>3</p>
+</dd>
+<dt>
+<a class="title-link" name="gas_heater_temperature" href="#gas_heater_temperature"></a> gas_heater_temperature</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The temperature to heat the hotplate to for gas resistance measurements as described in the sensor datasheet.  Can be between 200-400°C.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>320</p>
+</dd>
+<dt>
+<a class="title-link" name="gas_heater_duration" href="#gas_heater_duration"></a> gas_heater_duration</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The duration to heat the hotplate in milliseconds for gas resistance measurements as described in the sensor datasheet.  Can be between 1-4032 ms. In reality, you will likely need between 80-100ms to reach a stable temperature.  Using a duration greater than 1000ms is inadvisable as it will essentially result in the heater being continually on due to the 1-second update interval.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>150</p>
+</dd>
+<dt>
+<a class="title-link" name="aq_burn_in_time" href="#aq_burn_in_time"></a> aq_burn_in_time</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The duration to perform gas resistance measurements to establish a stable baseline measurements for Air Quality calculations in seconds. The burn in time is only performed when the sensor integration is first initialized.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>300</p>
+</dd>
+<dt>
+<a class="title-link" name="aq_humidity_baseline" href="#aq_humidity_baseline"></a> aq_humidity_baseline</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The baseline <em>ideal</em> relative humidity value for the air quality calculations.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>40</p>
+</dd>
+<dt>
+<a class="title-link" name="aq_humidity_bias" href="#aq_humidity_bias"></a> aq_humidity_bias</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The bias for humidity to the gas resistance measurement in the air quality calculations expressed as a percentage of the total calculation e.g., 25% humidity to 75% gas.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>25</p>
+</dd>
+<dt>
+<a class="title-link" name="temp_offset" href="#temp_offset"></a> temp_offset</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The temperature for the sensor will always be too high as it pulls heat from the components around it. Consider adding a negative offset to ensure the sensor returns an accurate temperature. Note: This value is in celsius.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="full-examples" href="#full-examples"></a> Full Examples</h2>
+<p>If you want to specify the working mode of the digital sensor or need to change the default I2C address (which is 0x77), add more details to the <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example of customized configuration.yaml entry
+sensor:
+  - platform: bme680
+    name: BME680 Sensor
+    i2c_bus: 1
+    i2c_address: 0x77
+    monitored_conditions:
+      - temperature
+      - humidity
+      - pressure
+      - gas
+      - airquality
+    oversampling_temperature: 8
+    oversampling_humidity: 2
+    oversampling_pressure: 4
+    filter_size: 3
+    gas_heater_temperature: 320
+    gas_heater_duration: 150
+    aq_burn_in_time: 300
+    aq_humidity_baseline: 40
+    aq_humidity_bias: 25
+    temp_offset: -5.5
+</code></pre>
+<h2>
+<a class="title-link" name="customizing-the-sensor-data" href="#customizing-the-sensor-data"></a> Customizing the sensor data</h2>
+<p>Give the values friendly names and icons, add the following to your <code>customize:</code> section.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+customize:
+  sensor.bme680_sensor_temperature:
+    icon: mdi:thermometer
+    friendly_name: Temperature
+  sensor.bme680_sensor_humidity:
+    icon: mdi:water
+    friendly_name: Humidity
+    device_class: humidity
+    unit_of_measurement: "%"
+  sensor.bme680_sensor_pressure:
+    icon: mdi:gauge
+    friendly_name: Pressure
+  sensor.bme680_sensor_air_quality:
+    icon: mdi:blur
+    friendly_name: Air Quality
+    device_class: pm25
+    unit_of_measurement: "%"
+</code></pre>
+<p>To create a group, add the following to your <code>group</code> section.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+group:
+  climate:
+    name: Climate
+    entities:
+      - sensor.bme680_sensor_temperature
+      - sensor.bme680_sensor_humidity
+      - sensor.bme680_sensor_pressure
+      - sensor.bme680_sensor_air_quality
+</code></pre>
+<h2>
+<a class="title-link" name="directions-for-enabling-i2c-interface-on-hassio" href="#directions-for-enabling-i2c-interface-on-hassio"></a> Directions for enabling I2C interface on Hass.io</h2>
+<p>Follow the instructions here to <a href="/hassio/enable_i2c/">enable I2C on Hass.io.</a>.</p>
+<h2>
+<a class="title-link" name="directions-for-installing-smbus-support-on-raspberry-pi" href="#directions-for-installing-smbus-support-on-raspberry-pi"></a> Directions for installing SMBus support on Raspberry Pi</h2>
+<p>Enable I2C interface with the Raspberry Pi configuration utility:</p>
+<pre><code class="language-bash"># pi user environment: Enable I2C interface
+$ sudo raspi-config
+</code></pre>
+<p>Select <code>Interfacing options-&gt;I2C</code> choose <code>&lt;Yes&gt;</code> and hit <code>Enter</code>, then go to <code>Finish</code> and you’ll be prompted to reboot.</p>
+<p>Install dependencies to use the <code>smbus-cffi</code> module and add your <em>homeassistant</em> user to the <em>i2c</em> group:</p>
+<pre><code class="language-bash"># pi user environment: Install I2C dependencies and utilities
+$ sudo apt-get install build-essential libi2c-dev i2c-tools python-dev libffi-dev
+
+# pi user environment: Add homeassistant user to the I2C group
+$ sudo addgroup homeassistant i2c
+
+# pi user environment: Reboot Raspberry Pi to apply changes
+$ sudo reboot
+</code></pre>
+<h3>
+<a class="title-link" name="check-the-i2c-address-of-the-sensor" href="#check-the-i2c-address-of-the-sensor"></a> Check the I2C address of the sensor</h3>
+<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors:</p>
+<pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
+</code></pre>
+<p>It will output a table like this:</p>
+<pre><code class="language-text">     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- 3c -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 76
+</code></pre>
+<p>So you can see the sensor address that you are looking for is <strong>0x76</strong> (there is another I2C device on that Raspberry Pi).</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/bme680.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/raspberry-pi.png' /></div><div class="section">
+    <kb-alert-link integration="bme680"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Push
+    </div><div class='section'>
+      Introduced in release: 0.62
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/bme680/'>/components/bme680/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#diy'>DIY</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

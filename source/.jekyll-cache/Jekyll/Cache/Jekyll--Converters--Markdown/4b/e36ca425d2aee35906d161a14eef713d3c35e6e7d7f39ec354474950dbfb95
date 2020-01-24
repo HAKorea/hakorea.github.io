@@ -1,0 +1,83 @@
+I"G<p>Integrates <a href="https://ambiclimate.com/">Ambiclimate</a> Air Conditioning controller into Home Assistant.</p>
+<p>You must create an application <a href="https://api.ambiclimate.com/clients">here</a> to obtain a <code>client_id</code> and <code>client_secret</code>.
+The <code>callback url</code> should be configured as your Home Assistant <code>base_url</code> + <code>/api/ambiclimate</code>, e.g. <code>https://example.com/api/ambiclimate</code>.</p>
+<p>To enable this platform, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ambiclimate:
+  client_id: CLIENT_ID
+  client_secret: CLIENT_SECRET
+</code></pre>
+<p>Restart Home Assistant. Then, go to the frontend and authorize Ambiclimate.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Ambiclimate API client ID.</p>
+</span></p></dd><dt><a class='title-link' name='client_secret' href='#client_secret'></a> client_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Ambiclimate API client secret.</p>
+</span></p></dd></dl>
+</div>
+<p>Note that you have to select manual mode from the Ambiclimate app to be able to control the A/C from Home Assistant.</p>
+<h2>Component services</h2>
+<p>Enable comfort mode on your AC:</p>
+<p><code>climate.set_comfort_mode</code></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Name</code></td>
+<td>yes</td>
+<td>String with device name.</td>
+</tr>
+</tbody>
+</table>
+<p>Send feedback for comfort mode:</p>
+<p><code>climate.send_comfort_feedback</code></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Name</code></td>
+<td>yes</td>
+<td>String with device name.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>yes</td>
+<td>Send any of the following comfort values: too_hot, too_warm, bit_warm, comfortable, bit_cold, too_cold, freezing</td>
+</tr>
+</tbody>
+</table>
+<p>Enable temperature mode on your AC:</p>
+<p><code>climate.set_temperature_mode</code></p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Name</code></td>
+<td>yes</td>
+<td>String with device name.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>yes</td>
+<td>Target value in celsius</td>
+</tr>
+</tbody>
+</table>
+:ET

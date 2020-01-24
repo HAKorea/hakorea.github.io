@@ -1,0 +1,105 @@
+I"�<p>The <code>emoncms</code> sensor platform creates sensors for the feeds available in your local or cloud based version of <a href="https://emoncms.org">Emoncms</a>.</p>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>, it will list all feeds as a sensor:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry using cloud based Emoncms
+sensor:
+  platform: emoncms
+  api_key: API_KEY
+  url: https://emoncms.org
+  id: 1
+</code></pre>
+<h2>Configuration variables</h2>
+<ul>
+<li><strong>api_key</strong> (<em>Required</em>): The read API key for your Emoncms user.</li>
+<li><strong>url</strong> (<em>Required</em>): The base URL of Emoncms, use “<a href="https://emoncms.org">https://emoncms.org</a>” for the cloud based version.</li>
+<li><strong>id</strong> (<em>Required</em>): Positive integer identifier for the sensor. Must be unique if you specify multiple Emoncms sensors.</li>
+<li><strong>include_only_feed_id</strong> (<em>Optional</em>): Positive integer list of Emoncms feed IDs. Only the feeds with feed IDs specified here will be displayed. Can not be specified if <code>exclude_feed_id</code> is specified.</li>
+<li><strong>exclude_feed_id</strong> (<em>Optional</em>): Positive integer list of Emoncms feed IDs. All the feeds will be displayed as sensors except the ones listed here. Can not be specified if <code>include_only_feed_id</code> is specified.</li>
+<li><strong>sensor_names</strong> (<em>Optional</em>): Dictionary of names for the sensors created that are created based on feed ID. The dictionary consists of <code>feedid: name</code> pairs. Sensors for feeds with their feed ID mentioned here will get the chosen name instead of the default name</li>
+<li><strong>value_template</strong> (<em>Optional</em>): Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to alter the feed value.</li>
+<li><strong>scan_interval</strong> (<em>Optional</em>): Defines the update interval of the sensor in seconds.</li>
+<li><strong>unit_of_measurement</strong> (<em>Optional</em>): Defines the unit of measurement of for all the sensors. default is “W”.</li>
+</ul>
+<h2>Default naming scheme</h2>
+<p>The names of the sensors created by this integration will use the feed names defined in EmonCMS if available,
+or the feed ID otherwise, and will be prefixed with “EmonCMS”, e.g., “EmonCMS Total Power” or “EmonCMS Feed 5”.
+If the <code>id</code> property is anything but <code>1</code>, the ID will be shown as well, e.g., “EmonCMS 2 Feed 5”.</p>
+<p>If <code>sensor_names</code> is used, any feeds with defined names will get those names exactly, with no prefix.</p>
+<h3>Examples</h3>
+<p>In this section you find some more examples of how this sensor can be used.</p>
+<p>Display only feeds with their feed IDs specified in <code>include_only_feed_id</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: emoncms
+    api_key: API_KEY
+    url: https://emoncms.org
+    id: 1
+    unit_of_measurement: &quot;W&quot;
+    include_only_feed_id:
+      - 107
+      - 105
+</code></pre>
+<p>Display all feeds except feeds with their feed id specified in <code>exclude_feed_id</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: emoncms
+    api_key: API_KEY
+    url: https://emoncms.org
+    id: 1
+    unit_of_measurement: &quot;KWH&quot;
+    exclude_feed_id:
+      - 107
+      - 105
+</code></pre>
+<p>Display only feeds with their feed id’s specified in <code>include_only_feed_id</code> and give the feed sensors a name using “sensor_names”. You don’t have to specify all feeds names in “sensor_names”, the remaining sensor names will be chosen based on “id” and the Emoncms <code>feedid</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: emoncms
+    api_key: API_KEY
+    url: https://emoncms.org
+    id: 1
+    unit_of_measurement: &quot;KW&quot;
+    include_only_feed_id:
+      - 5
+      - 120
+    sensor_names:
+      5: &quot;feed 1&quot;
+      48: &quot;kWh feed&quot;
+      61: &quot;amp feed&quot;
+      110: &quot;watt feed&quot;
+</code></pre>
+<p>Use a <code>value_template</code> to add 1500 to the feed value for all specified feed IDs in <code>include_feed_id</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: emoncms
+    api_key: API_KEY
+    url: https://emoncms.org
+    scan_interval: 15
+    id: 1
+    value_template: &quot;{{ value | float + 1500 }}&quot;
+    include_only_feed_id:
+      - 107
+      - 106
+</code></pre>
+<p>Display feeds from the same Emoncms instance with 2 groups of feeds, different <code>scan_interval</code> and a different <code>unit_of_measurement</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: emoncms
+    api_key: API_KEY
+    url: https://emoncms.org
+    scan_interval: 30
+    id: 1
+    unit_of_measurement: &quot;W&quot;
+    include_only_feed_id:
+      - 107
+      - 106
+  - platform: emoncms
+    api_key:  put your emoncms read api key here
+    url: https://emoncms.org
+    id: 2
+    scan_interval: 60
+    unit_of_measurement: &quot;A&quot;
+    include_only_feed_id:
+      - 108
+      - 61
+</code></pre>
+:ET

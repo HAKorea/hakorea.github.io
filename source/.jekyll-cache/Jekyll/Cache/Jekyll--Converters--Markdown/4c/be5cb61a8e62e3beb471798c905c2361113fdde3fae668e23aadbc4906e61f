@@ -1,0 +1,30 @@
+I"�<p>The <code>denon</code> platform allows you to control a <a href="https://www.denon.co.uk/chg/product/compactsystems/networkmusicsystems/ceolpiccolo">Denon Network Receivers</a> from Home Assistant. It might be that your device is supported by the <a href="/integrations/denonavr/">Denon AVR</a> platform.</p>
+<p>Supported devices:</p>
+<ul>
+<li>Denon DRA-N5</li>
+<li>Denon RCD-N8 (untested)</li>
+<li>Denon RCD-N9 (partial support)</li>
+<li>Denon AVR receivers with integrated Network support (partial support)</li>
+</ul>
+<p>To add a Denon Network Receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<h2>Telnet platform</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: denon
+    host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of the device. Example: 192.168.1.32</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device</p>
+</span></p></dd></dl>
+</div>
+<p>A few notes for platform: denon</p>
+<ul>
+<li>The receiver handles only one telnet connection and refuses others.</li>
+<li>Be careful with the volume. 100% or even 50% is very loud.</li>
+<li>To be able to wake up the receiver, activate the “remote” setting in the receiver’s settings.</li>
+<li>Play and pause are supported, toggling is not possible.</li>
+<li>Seeking cannot be implemented as the UI sends absolute positions. Only seeking via simulated button presses is possible.</li>
+</ul>
+:ET

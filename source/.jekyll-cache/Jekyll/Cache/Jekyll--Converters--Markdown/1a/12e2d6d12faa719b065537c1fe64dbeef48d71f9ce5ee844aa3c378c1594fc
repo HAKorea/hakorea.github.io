@@ -1,0 +1,109 @@
+I"�<p>The <code>skybell</code> implementation allows you to integrate your <a href="http://www.skybell.com/">Skybell.com</a> doorbells in Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="/integrations/skybell/#binary-sensor">Binary Sensor</a></li>
+<li><a href="/integrations/skybell/#camera">Camera</a></li>
+<li><a href="/integrations/skybell/#light">Light</a></li>
+<li><a href="/integrations/skybell/#sensor">Sensor</a></li>
+<li><a href="/integrations/skybell/#switch">Switch</a></li>
+</ul>
+<p>Currently only the Skybell HD is supported by this platform.</p>
+<h2>Configuration</h2>
+<p>To enable devices set up with your <a href="http://www.skybell.com/">Skybell.com</a> account, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+skybell:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing your Skybell account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing your Skybell account.</p>
+</span></p></dd></dl>
+</div>
+<h3>Binary Sensor</h3>
+<p>Once you have enabled the Skybell component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: skybell
+    monitored_conditions:
+      - button
+      - motion
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='button' href='#button'></a> button</dt><dd><p class='desc'><span class='description'><p>Returns whether the doorbell button was pressed.</p>
+</span></p></dd><dt><a class='title-link' name='motion' href='#motion'></a> motion</dt><dd><p class='desc'><span class='description'><p>Returns whether movement was detected by the Skybell doorbell.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h3>Camera</h3>
+<p>Once you have enabled the Skybell component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: skybell
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The camera images to display. Default is <code>avatar</code>. The full list is <code>avatar</code>, <code>activity</code>.</p>
+</span></p></dd><dt><a class='title-link' name='avatar_name' href='#avatar_name'></a> avatar_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to append to the device name for the avatar image. Default is empty string.</p>
+</span></p></dd><dt><a class='title-link' name='activity_name' href='#activity_name'></a> activity_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to append to the device name for the last activity image. Default is empty string.</p>
+</span></p></dd></dl>
+</div>
+<h4>Camera Types</h4>
+<p>There are two available camera types “Avatar”, which is the default, displays the Skybell avatar image.
+It is periodically updated with a fresh image. The other type is “Activity”, which displays a snapshot from
+the latest event (motion, bell, or on demand) captured by the camera. You may show either camera, or both, by
+specifying its name under monitored_condtions. It’s recommended, but not required, to set either avatar_name or activity_name
+if you are showing both cameras so you can tell them apart. The name will be appended to the skybell device name.</p>
+<pre><code class="language-yaml"># Example configuration.yaml with both images
+camera:
+  - platform: skybell
+    monitored_conditions:
+    - avatar
+    - activity
+    activity_name: &quot;Last Activity&quot;
+</code></pre>
+<pre><code class="language-yaml"># Example configuration.yaml with just last activity image
+camera:
+  - platform: skybell
+    monitored_conditions:
+    - activity
+</code></pre>
+<h3>Light</h3>
+<p>Once you have enabled the Skybell component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: skybell
+</code></pre>
+<h3>Sensor</h3>
+<p>Once you have enabled the Skybell component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: skybell
+    monitored_conditions:
+      - chime_level
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='chime_level' href='#chime_level'></a> chime_level</dt><dd><p class='desc'><span class='description'><p>Return a value between 0-3, indicating no chime, low, medium, and high respectively.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h3>Switch</h3>
+<p>Once you have enabled the Skybell component, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: skybell
+    monitored_conditions:
+      - do_not_disturb
+      - motion_sensor
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to display in the frontend.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='do_not_disturb' href='#do_not_disturb'></a> do_not_disturb</dt><dd><p class='desc'><span class='description'><p>Control the state of your doorbells indoor chime.</p>
+</span></p></dd><dt><a class='title-link' name='motion_sensor' href='#motion_sensor'></a> motion_sensor</dt><dd><p class='desc'><span class='description'><p>Control the state of your doorbells motion sensor.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

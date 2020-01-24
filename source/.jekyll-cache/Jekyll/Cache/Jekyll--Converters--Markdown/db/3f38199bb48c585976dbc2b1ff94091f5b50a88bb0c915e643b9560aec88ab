@@ -1,0 +1,27 @@
+I"¦<p>This <code>temper</code> sensor platform allows you to get the current temperature from a TEMPer device.</p>
+<h2>Configuration</h2>
+<p>To use your TEMPer sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: temper
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='offset' href='#offset'></a> offset</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The offset to fix reported vales.</p>
+</span></p><p class='default'>
+Default value: <p>o</p>
+</p></dd><dt><a class='title-link' name='scale' href='#scale'></a> scale</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The scale for the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use when displaying this switch.</p>
+</span></p><p class='default'>
+Default value: <p>myStrom Switch</p>
+</p></dd></dl>
+</div>
+<p>Since some of these sensors consistently show higher temperatures the scale and offset values can be used to fine-tune your sensor.
+The calculation follows the formula <code>scale * sensor value + offset</code>.</p>
+<p>The TEMPer sensors can only be accessed as root by default. To fix the USB permissions on your system create the file <code>/etc/udev/rules.d/99-tempsensor.rules</code> and add the following line to it:</p>
+<pre><code class="language-text">SUBSYSTEMS==&quot;usb&quot;, ACTION==&quot;add&quot;, ATTRS{idVendor}==&quot;0c45&quot;, ATTRS{idProduct}==&quot;7401&quot;, MODE=&quot;666&quot;
+</code></pre>
+<p>After that re-plug the device and restart Home Assistant.</p>
+:ET

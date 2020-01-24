@@ -1,0 +1,69 @@
+I"ù<p>The <code>flic</code> platform allows you to receive click events from <a href="https://flic.io">flic</a> smart buttons.</p>
+<p>The platform does not directly interact with the buttons, <em>but communicates with a flic service</em> that manages the buttons. The service can run on the same instance as Home Assistant or any other reachable machine.</p>
+<h4>Service setup</h4>
+<p>If you are using Hass.io, you can run the service locally by <a href="/hassio/installing_third_party_addons/">installing</a> the flicd add-on from <a href="https://github.com/pschmitt/hassio-addons">pschmittâ€™s repository</a>.</p>
+<p>For instructions on how to install the service manually, visit the GitHub repository of the service for <a href="https://github.com/50ButtonsEach/fliclib-linux-hci">Linux</a>, <a href="https://github.com/50ButtonsEach/flic-service-osx">OS X</a> or <a href="https://github.com/50ButtonsEach/fliclib-windows">Windows</a>.</p>
+<h4>Configuration</h4>
+<p>To use your flic buttons in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: flic
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP or hostname of the flic service server.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port of the flic service.</p>
+</span></p><p class='default'>
+Default value: <p>5551</p>
+</p></dd><dt><a class='title-link' name='discovery' href='#discovery'></a> discovery</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code> then the integration is configured to constantly scan for new buttons.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='ignored_click_types' href='#ignored_click_types'></a> ignored_click_types</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of click types whose occurrence should not trigger a <code>flic_click</code> event. Click types are <code>single</code>, <code>double</code>, and <code>hold</code>.</p>
+</span></p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum time in seconds an event can be queued locally on a button before discarding the event.</p>
+</span></p><p class='default'>
+Default value: <p>3</p>
+</p></dd></dl>
+</div>
+<h4>Discovery</h4>
+<p>If discovery is enabled, you can add a new button by pressing it for at least 7 seconds. The button will be paired with the flic service and added to Home Assistant. Otherwise, you have to manually pair it with the flic service. The Home Assistant platform will not scan for new buttons and will only connect to buttons already paired.</p>
+<h4>Timeout</h4>
+<p>When the flic button is triggered while disconnected from flic service, it will queue all events and try to connect and transmit them as soon as possible. The timeout variable can be used to stop events from triggering if too much time passed between the action and the notification in Home Assistant.</p>
+<h4>Events</h4>
+<p>The flic integration fires <code>flic_click</code> events on the bus. You can capture the events and respond to them in automation scripts like this:</p>
+<pre><code class="language-yaml"># Example configuration.yaml automation entry
+automation:
+  - alias: Turn on lights in the living room when flic is pressed once
+    trigger:
+      platform: event
+      event_type: flic_click
+      event_data:
+        button_name: flic_81e4ac74b6d2
+        click_type: single
+    action:
+      service: homeassistant.turn_on
+      entity_id: group.lights_livingroom
+</code></pre>
+<p>Event data:</p>
+<ul>
+<li><strong>button_name</strong>: The name of the button, that triggered the event.</li>
+<li><strong>button_address</strong>: The Bluetooth address of the button, that triggered the event.</li>
+<li><strong>click_type</strong>: The type of click. Possible values are <code>single</code>, <code>double</code> and <code>hold</code>.</li>
+<li><strong>queued_time</strong>: The amount of time this event was queued on the button, in seconds.</li>
+</ul>
+<p>To help detect and debug flic button clicks, you can use this automation that send a notification on very click type of every button. This example uses the <a href="/integrations/html5">HTML5 push notification platform</a>. Visit the <a href="/integrations/notify/">notification integration page</a> for more information on setting up notifications.</p>
+<pre><code class="language-yaml">automation:
+  - alias: FLIC Html5 notify on every click
+    trigger:
+      platform: event
+      event_type: flic_click
+    action:
+      - service_template: notify.html5
+        data_template:
+          title: &quot;flic click&quot;
+          message: &quot;flic {{ trigger.event.data.button_name }} was {{ trigger.event.data.click_type }} clicked&quot;
+</code></pre>
+<h5>Ignoring Click Types</h5>
+<p>For some purposes it might make sense to exclude a specific click type from triggering click events. For example when ignoring double clicks, pressing the button twice fast results in two <code>single</code> instead of a <code>double</code> click event. This is very useful for applications where you want to click fast.</p>
+:ET

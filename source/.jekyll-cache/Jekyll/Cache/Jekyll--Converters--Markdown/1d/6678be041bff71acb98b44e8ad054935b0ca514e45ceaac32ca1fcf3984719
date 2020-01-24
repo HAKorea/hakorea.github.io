@@ -1,0 +1,63 @@
+I"i<p>The <code>geo_json_events</code> platform lets you integrate GeoJSON feeds. It retrieves events from a feed and shows information of those events filtered by distance to Home Assistant’s location.
+All entries in the GeoJSON feed must define a <code>geometry</code> which typically is a point or polygon with geo coordinates. In addition, this platform will look for a <code>title</code> key in the entry’s <code>properties</code> and use that as the entity’s name.</p>
+<p>Entities are generated, updated and removed automatically with each update from the GeoJSON feed. Each entity defines latitude and longitude and will be shown on the map automatically. The distance in kilometers is available as the state of each entity.</p>
+<p>The data is updated every 5 minutes.</p>
+<h2>Configuration</h2>
+<p>To integrate a GeoJSON feed, add the following lines to your <code>configuration.yaml</code>. This is an example configuration showing <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php">earthquake data provided by the U.S. Geological Survey</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geo_location:
+  - platform: geo_json_events
+    url: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Full URL of the GeoJSON feed.</p>
+</span></p></dd><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The distance in kilometers around the Home Assistant’s coordinates in which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>20.0</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude of the coordinates around which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Latitude defined in your <code>configuration.yaml</code></p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude of the coordinates around which events are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Longitude defined in your <code>configuration.yaml</code></p>
+</p></dd></dl>
+</div>
+<h2>State Attributes</h2>
+<p>The following state attributes are available for each entity in addition to the standard ones:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latitude</td>
+<td>Latitude of the event.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Longitude of the event.</td>
+</tr>
+<tr>
+<td>source</td>
+<td><code>geo_json_events</code> to be used in conjunction with <code>geo_location</code> automation trigger.</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>The external ID used in the feed to identify the event in the feed.</td>
+</tr>
+</tbody>
+</table>
+<h2>Advanced Configuration Example</h2>
+<p>When integrating several GeoJSON feeds, it may be useful to distinguish the entities of different feeds. The easiest way to do that is by defining an <a href="/docs/configuration/platform_options/#entity-namespace/"><code>entity_namespace</code></a> for each platform which will prefix each entity ID with the defined value.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geo_location:
+  - platform: geo_json_events
+    url: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson
+    radius: 250
+    entity_namespace: 'usgs_earthquakes'
+</code></pre>
+:ET

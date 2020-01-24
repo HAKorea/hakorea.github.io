@@ -1,0 +1,414 @@
+I"iD<p>The <code>yeelight</code> integration allows you to control your Yeelight Wifi bulbs with Home Assistant. There are two possible methods for configuration of the Yeelight: Manual or Automatic.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><strong>Light</strong> - The yeelight platform for supporting lights.</li>
+<li><strong>Sensor</strong> - The yeelight platform for supporting sensors. Currently only nightlight mode sensor, for ceiling lights.</li>
+</ul>
+<h3>Example configuration (Automatic)</h3>
+<p>After the lights are connected to the WiFi network and have been detected in Home Assistant, the discovered names will be shown in the <code>Light</code> section of the <code>Overview</code> view. Add the following lines to your <code>customize.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example customize.yaml entry
+light.yeelight_color1_XXXXXXXXXXXX:
+  friendly_name: Living Room
+light.yeelight_color2_XXXXXXXXXXXX:
+  friendly_name: Downstairs Toilet
+</code></pre>
+<h3>Example configuration (Manual)</h3>
+<p>To enable those lights, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+discovery:
+  ignore:
+    - yeelight
+yeelight:
+  devices:
+    192.168.1.25:
+      name: Living Room
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of Yeelight devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='ip' href='#ip'></a> ip</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of the bulb.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A friendly name for the device.</p>
+</span></p></dd><dt><a class='title-link' name='transition' href='#transition'></a> transition</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Smooth transitions over time (in ms).</p>
+</span></p><p class='default'>
+Default value: <p>350</p>
+</p></dd><dt><a class='title-link' name='use_music_mode' href='#use_music_mode'></a> use_music_mode</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable music mode.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='save_on_change' href='#save_on_change'></a> save_on_change</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Saves the bulb state in its nonvolatile memory when changed from Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='nightlight_switch_type' href='#nightlight_switch_type'></a> nightlight_switch_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Adds another entity, to control nightlight mode (for models that supports it). Currently, only <code>light</code> is supported. It will create 2 light entities, one for normal light mode and second for nightlight mode. They are mutually exclusive.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Yeelight model. Possible values are <code>mono1</code>, <code>color1</code>, <code>color2</code>, <code>strip1</code>, <code>bslamp1</code>, <code>ceiling1</code>, <code>ceiling2</code>, <code>ceiling3</code>, <code>ceiling4</code>. The setting is used to enable model specific features f.e. a particular color temperature range.</p>
+</span></p></dd></dl></dd></dl></dd><dt><a class='title-link' name='custom_effects' href='#custom_effects'></a> custom_effects</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of custom effects to add. Check examples below.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of effect.</p>
+</span></p></dd><dt><a class='title-link' name='flow_params' href='#flow_params'></a> flow_params</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Flow params for effect.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='count' href='#count'></a> count</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number of times to run this flow (0 to run forever).</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='transitions' href='#transitions'></a> transitions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of transitions, for that effect, check <a href="#custom-effects">example</a>.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<h4>Music mode</h4>
+<p>Per default the bulb limits the amount of requests per minute to 60, a limitation which can be bypassed by enabling the music mode. In music mode the bulb is commanded to connect back to a socket provided by the integration and it tries to keep the connection open, which may not be wanted in all use-cases.
+<strong>Also note that bulbs in music mode will not update their state to “unavailable” if they are disconnected, which can cause delays in Home Assistant. Bulbs in music mode may also not react to commands from Home Assistant the first time if the connection is dropped. If you experience this issue, turn the light off and back on again in the frontend and everything will return to normal.</strong></p>
+<h3>Initial setup</h3>
+<div class='note'>
+<p>Before trying to control your light through Home Assistant, you have to setup your bulb using Yeelight app. ( <a href="https://play.google.com/store/apps/details?id=com.yeelight.cherry&amp;hl=fr">Android</a>, <a href="https://itunes.apple.com/us/app/yeelight/id977125608?mt=8">IOS</a> ).
+In the bulb property, you have to enable “LAN Control” (previously called “Developer mode”). LAN Control may only be available with the latest firmware installed on your bulb.  Firmware can be updated in the application after connecting the bulb.
+Determine your bulb IP (using router, software, ping…).
+Information on how to enable “LAN Control” can be found <a href="https://www.yeelight.com/faqs/lan_control">here</a>.</p>
+</div>
+<h3>Supported models</h3>
+<div class='note warning'>
+This integration is tested to work with the following models. If you have a different model and it is working please let us know.
+</div>
+<table>
+<thead>
+<tr>
+<th>Model ID</th>
+<th>Model number</th>
+<th>Product name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mono1</code></td>
+<td>YLDP01YL</td>
+<td>LED Bulb (White)</td>
+</tr>
+<tr>
+<td>?</td>
+<td>YLDP05YL</td>
+<td>LED Bulb (White) - 2nd generation</td>
+</tr>
+<tr>
+<td><code>color1</code></td>
+<td>YLDP02YL</td>
+<td>LED Bulb (Color)</td>
+</tr>
+<tr>
+<td><code>color1</code></td>
+<td>YLDP03YL</td>
+<td>LED Bulb (Color) - E26</td>
+</tr>
+<tr>
+<td><code>color2</code></td>
+<td>YLDP06YL</td>
+<td>LED Bulb (Color) - 2nd generation</td>
+</tr>
+<tr>
+<td><code>strip1</code></td>
+<td>YLDD01YL</td>
+<td>Lightstrip (Color)</td>
+</tr>
+<tr>
+<td><code>strip1</code></td>
+<td>YLDD02YL</td>
+<td>Lightstrip (Color)</td>
+</tr>
+<tr>
+<td>?</td>
+<td>YLDD04YL</td>
+<td>Lightstrip (Color)</td>
+</tr>
+<tr>
+<td><code>bslamp1</code></td>
+<td>MJCTD01YL</td>
+<td>Xiaomi Mijia Bedside Lamp - WIFI Version!</td>
+</tr>
+<tr>
+<td><code>bslamp1</code></td>
+<td>MJCTD02YL</td>
+<td>Xiaomi Mijia Bedside Lamp II</td>
+</tr>
+<tr>
+<td><code>RGBW</code></td>
+<td>MJDP02YL</td>
+<td>Mi Led smart Lamp - white and color WIFI Version</td>
+</tr>
+<tr>
+<td><code>lamp1</code></td>
+<td>MJTD01YL</td>
+<td>Xiaomi Mijia Smart LED Desk Lamp (autodiscovery isn’t possible because the device doesn’t support mDNS due to the small amount of RAM)</td>
+</tr>
+<tr>
+<td><code>ceiling1</code></td>
+<td>YLXD01YL</td>
+<td>Yeelight Ceiling Light</td>
+</tr>
+<tr>
+<td><code>ceiling2</code></td>
+<td>YLXD03YL</td>
+<td>Yeelight Ceiling Light - Youth Version</td>
+</tr>
+<tr>
+<td>?, may be <code>ceiling3</code></td>
+<td>YLXD04YL</td>
+<td>Yeelight Ceiling Light (Jiaoyue 450)</td>
+</tr>
+<tr>
+<td><code>ceiling3</code></td>
+<td>YLXD05YL</td>
+<td>Yeelight Ceiling Light (Jiaoyue 480)</td>
+</tr>
+<tr>
+<td><code>ceiling4</code></td>
+<td>YLXD02YL</td>
+<td>Yeelight Ceiling Light (Jiaoyue 650)</td>
+</tr>
+<tr>
+<td><code>mono</code></td>
+<td>YLTD03YL</td>
+<td>Yeelight Serene Eye-Friendly Desk Lamp</td>
+</tr>
+</tbody>
+</table>
+<h2>Platform Services</h2>
+<h3>Service <code>yeelight.set_mode</code></h3>
+<p>Set an operation mode.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>no</td>
+<td>Operation mode. Valid values are ‘last’, ‘normal’, ‘rgb’, ‘hsv’, ‘color_flow’, ‘moonlight’.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>yeelight.start_flow</code></h3>
+<p>Start flow with specified transitions</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>yes</td>
+<td>The number of times to run this flow (0 to run forever).</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>yes</td>
+<td>The action to take after the flow stops. Can be ‘recover’, ‘stay’, ‘off’. Default ‘recover’</td>
+</tr>
+<tr>
+<td><code>transitions</code></td>
+<td>no</td>
+<td>Array of transitions. See <a href="#custom-effects">examples below</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>yeelight.set_color_scene</code></h3>
+<p>Changes the light to the specified RGB color and brightness. If the light is off, it will be turned on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>rgb_color</code></td>
+<td>no</td>
+<td>A list containing three integers between 0 and 255 representing the RGB color you want the light to be. Three comma-separated integers that represent the color in RGB, within square brackets.</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td>no</td>
+<td>The brightness value to set (1-100).</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>yeelight.set_hsv_scene</code></h3>
+<p>Changes the light to the specified HSV color and brightness. If the light is off, it will be turned on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>hs_color</code></td>
+<td>no</td>
+<td>A list containing two floats representing the hue and saturation of the color you want the light to be. Hue is scaled 0-360, and saturation is scaled 0-100.</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td>no</td>
+<td>The brightness value to set (1-100).</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>yeelight.set_color_temp_scene</code></h3>
+<p>Changes the light to the specified color temperature. If the light is off, it will be turned on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>kelvin</code></td>
+<td>no</td>
+<td>Color temperature in Kelvin.</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td>no</td>
+<td>The brightness value to set (1-100).</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>yeelight.set_color_flow_scene</code></h3>
+<p>Starts a color flow. Difference between this and <a href="#service-yeelightstart_flow">yeelight.start_flow</a>, this service call uses different Yeelight api call. If the light was off, it will be turned on. There might be some firmware differences, in handling complex flows, etc.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>yes</td>
+<td>The number of times to run this flow (0 to run forever).</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>yes</td>
+<td>The action to take after the flow stops. Can be ‘recover’, ‘stay’, ‘off’. Default ‘recover’</td>
+</tr>
+<tr>
+<td><code>transitions</code></td>
+<td>no</td>
+<td>Array of transitions. See <a href="#custom-effects">examples below</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>yeelight.set_auto_delay_off_scene</code></h3>
+<p>Turns the light on to the specified brightness and sets a timer to turn it back off after the given number of minutes. If the light is off, it will be turned on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on specific lights.</td>
+</tr>
+<tr>
+<td><code>minutes</code></td>
+<td>no</td>
+<td>The minutes to wait before automatically turning the light off.</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td>no</td>
+<td>The brightness value to set (1-100).</td>
+</tr>
+</tbody>
+</table>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this light.</p>
+<h3>Full configuration</h3>
+<p>This example shows how you can use the optional configuration options.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+yeelight:
+  devices:
+    192.168.1.25:
+      name: Living Room
+      transition: 1000
+      use_music_mode: true
+      save_on_change: true
+</code></pre>
+<h3>Multiple bulbs</h3>
+<p>This example shows how you can add multiple bulbs in your configuration.</p>
+<pre><code class="language-yaml">yeelight:
+  devices:
+    192.168.1.25:
+      name: Living Room
+    192.168.1.13:
+      name: Front Door
+</code></pre>
+<h3>Custom effects</h3>
+<p>This example shows how you can add your custom effects in your configuration. To turn on the effect you can use <a href="/integrations/light/#service-lightturn_on">light.turn_on</a> service.</p>
+<p>Possible transitions are <code>RGBTransition</code>, <code>HSVTransition</code>, <code>TemperatureTransition</code>, <code>SleepTransition</code>.</p>
+<p>Where the array values are as per the following:</p>
+<ul>
+<li>RGBTransition: [red, green, blue, duration, brightness] with red / green / blue being an integer between 0 and 255, duration being                                                               in milliseconds (minimum of 50) and final brightness to transition to 0-100                                                             (%)</li>
+<li>HSVTransition: [hue, saturation, duration, brightness]  with hue being an integer between 0 and 359, saturation 0 -100, duration in                                                             milliseconds (minimum 50) and final brightness 0-100 (%)</li>
+<li>TemperatureTransition: [temp, duration, brightness]     with temp being the final color temperature between 1700 and 6500, duration                                                             in milliseconds (minimum 50) and final brightness to transition to 0-100 (%)</li>
+<li>SleepTransition: [duration]                             with duration being in integer for effect time in milliseconds (minimum 50)</li>
+</ul>
+<p>More info about transitions and their expected parameters can be found in <a href="https://yeelight.readthedocs.io/en/stable/flow.html">python-yeelight documentation</a>.</p>
+<pre><code class="language-yaml">yeelight:
+  devices:
+    192.168.1.25:
+      name: Living Room
+  custom_effects:
+    - name: 'Fire Flicker'
+      flow_params:
+        count: 0
+        transitions:
+          - TemperatureTransition: [1900, 1000, 80]
+          - TemperatureTransition: [1900, 2000, 60]
+          - SleepTransition:       [1000]
+</code></pre>
+:ET

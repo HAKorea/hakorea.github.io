@@ -1,0 +1,475 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Google Calendar Event - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to use Google Calendars in Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/calendar.google/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Google Calendar Event">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/calendar.google/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to use Google Calendars in Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Google Calendar Event">
+    <meta name="twitter:description" content="Instructions on how to use Google Calendars in Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/calendar.google.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Google Calendar Event
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>google</code> calendar platform allows you to connect to your
+<a href="https://calendar.google.com" rel="external nofollow">Google Calendars</a> and generate binary sensors.
+The sensors created can trigger based on any event on the calendar or only for
+matching events. When you first setup this integration it will generate a new
+configuration file <code>google_calendars.yaml</code> in your config directory that will contain information about
+all of the calendars you can see.
+It also exposes a service to add an event to one of your Google Calendars.</p>
+<h2>
+<a class="title-link" name="prerequisites" href="#prerequisites"></a> Prerequisites</h2>
+<p>Generate a Client ID and Client Secret on
+<a href="https://console.developers.google.com/start/api?id=calendar" rel="external nofollow">Google Developers Console</a>.</p>
+<ol>
+<li>Follow the wizard using the following information.</li>
+<li>When it gets to the point of asking <em>Which API are you using?</em> just click cancel.</li>
+<li>Under APIs &amp; Services (left sidebar) &gt; Credentials, click on the menu item, ‘OAuth consent screen’.</li>
+<li>Set the ‘Application Name’ (the name of the application asking for consent) to anything you want. We suggest “Home-Assistant”.</li>
+<li>Save this page. You don’t have to fill out anything else here.</li>
+<li>Click on the menu item, Credentials, then click ‘Create credentials’ &gt; OAuth client ID.</li>
+<li>Set the Application type to ‘Other’ and give this credential set a name (like “Home Assistant Credentials”) then click ‘Create’.</li>
+<li>Copy the client ID and client secret from the page that follows into a text editor temporarily as you will need to put these in your <code>configuration.yaml</code> file.</li>
+<li>Click on the menu item, Library, then search for “Google Calendar API” and enable it (if it isn’t already enabled automatically through this process).</li>
+</ol>
+<p>If you will later be adding more scopes than just the “Google Calendar API” to the OAuth for this application, you will need to delete your token file under your Home Assistant Profile. You will lose your refresh token due to the re-authenticating to add more API access. It’s recommended to use different authorizations for different pieces of Google.</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To integrate Google Calendar in Home Assistant,
+add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+google:
+  client_id: YOUR_CLIENT_ID
+  client_secret: YOUR_CLIENT_SECRET
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="client_id" href="#client_id"></a> client_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Use the client ID you generated in the Prerequisites stage.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="client_secret" href="#client_secret"></a> client_secret</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Use the client secret you generated in the Prerequisites stage.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="track_new_calendar" href="#track_new_calendar"></a> track_new_calendar</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Will automatically generate a binary sensor when a new calendar is detected. The system scans for new calendars only on startup.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+</dl>
+</div>
+<p>The next time you run or restart Home Assistant, you should find a new notification (the little bell icon in the lower left corner). Click on that notification it will give you a link and an authentication code. Click on that link to open a Google website where you should enter the code found in the notification. This will grant your Home Assistant service read-only access to all the Google Calendars that the account you
+authenticate with can read.</p>
+<h2>
+<a class="title-link" name="calendar-configuration" href="#calendar-configuration"></a> Calendar Configuration</h2>
+<p>Editing the <code>google_calendars.yaml</code> file.</p>
+<p>A basic entry for a single calendar looks like:</p>
+<pre><code class="language-yaml">- cal_id: "*****@group.calendar.google.com"
+  entities:
+  - device_id: test_everything
+    name: Give me everything
+    track: true
+- cal_id: "*****@group.calendar.google.com"
+  entities:
+  - device_id: test_important
+    name: Important Stuff
+    track: true
+    search: "#Important"
+    offset: "!!"
+  - device_id: test_unimportant
+    name: UnImportant Stuff
+    track: true
+    search: "#UnImportant"
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="cal_id" href="#cal_id"></a> cal_id</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The Google <em>generated</em> unique id for this calendar.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><strong>DO NOT CHANGE THE DEFAULT VALUE</strong></p>
+</dd>
+<dt>
+<a class="title-link" name="entities" href="#entities"></a> entities</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Yes, you can have multiple sensors for a calendar!</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="device_id" href="#device_id"></a> device_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name that all your automations/scripts will use to reference this device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>What is the name of your sensor that you’ll see in the frontend.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="track" href="#track"></a> track</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Required)</span><span class="description"><p>Should we create a sensor <code>true</code> or ignore it <code>false</code>?</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="search" href="#search"></a> search</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>If set will only trigger for matched events.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="offset" href="#offset"></a> offset</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A set of characters that precede a number in the event title for designating a pre-trigger state change on the sensor. This should be in the format of HH:MM or MM.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>!!</p>
+</dd>
+<dt>
+<a class="title-link" name="ignore_availability" href="#ignore_availability"></a> ignore_availability</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Should we respect <code>free</code>/<code>busy</code> flags?</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="max_results" href="#max_results"></a> max_results</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Max number of entries to retrieve</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>5</p>
+</dd>
+</dl></dd>
+</dl>
+</div>
+<p>From this we will end up with the binary sensors <code>calendar.test_unimportant</code> and
+<code>calendar.test_important</code> which will toggle themselves on/off based on events on
+the same calendar that match the search value set for each.
+You’ll also have a sensor <code>calendar.test_everything</code> that will
+not filter events out and always show the next event available.</p>
+<p>But what if you only wanted it to toggle based on all events?
+Just leave out the <em>search</em> parameter.</p>
+<div class="note warning">
+<p>If you use a <code>#</code> sign for <code>search</code> then wrap the whole search term in quotes.
+Otherwise everything following the hash sign would be considered a YAML comment.</p>
+</div>
+<h3>
+<a class="title-link" name="sensor-attributes" href="#sensor-attributes"></a> Sensor attributes</h3>
+<ul>
+<li>
+<strong>offset_reached</strong>: If set in the event title and parsed out will be <code>on</code>/<code>off</code> once the offset in the title in minutes is reached. So the title <code>Very important meeting #Important !!-10</code> would trigger this attribute to be <code>on</code> 10 minutes before the event starts.</li>
+<li>
+<strong>all_day</strong>: <code>true</code>/<code>false</code> if this is an all day event. Will be <code>false</code> if there is no event found.</li>
+<li>
+<strong>message</strong>: The event title with the <code>search</code> and <code>offset</code> values extracted. So in the above example for <strong>offset_reached</strong> the <strong>message</strong> would be set to <code>Very important meeting</code>
+</li>
+<li>
+<strong>description</strong>: The event description.</li>
+<li>
+<strong>location</strong>: The event Location.</li>
+<li>
+<strong>start_time</strong>: Start time of event.</li>
+<li>
+<strong>end_time</strong>: End time of event.</li>
+</ul>
+<h3>
+<a class="title-link" name="service-googleadd_event" href="#service-googleadd_event"></a> Service google.add_event</h3>
+<p>You can use the service <code>google.add_event</code> to create a new calendar event in a calendar. Calendar id’s can be found in the file <code>google_calendars.yaml</code>. All dates and times are in your local time, the integration gets your time zone from your <code>configuration.yaml</code> file.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>calendar_id</code></td>
+<td>no</td>
+<td>The id of the calendar you want.</td>
+<td>*****@group.calendar.google.com</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>no</td>
+<td>Acts as the title of the event.</td>
+<td>Bowling</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>yes</td>
+<td>The description of the event.</td>
+<td>Birthday bowling</td>
+</tr>
+<tr>
+<td><code>start_date_time</code></td>
+<td>yes</td>
+<td>The date and time the event should start.</td>
+<td>2019-03-10 20:00:00</td>
+</tr>
+<tr>
+<td><code>end_date_time</code></td>
+<td>yes</td>
+<td>The date and time the event should end.</td>
+<td>2019-03-10 23:00:00</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td>yes</td>
+<td>The date the whole day event should start.</td>
+<td>2019-03-10</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>yes</td>
+<td>The date the whole day event should end.</td>
+<td>2019-03-11</td>
+</tr>
+<tr>
+<td><code>in</code></td>
+<td>yes</td>
+<td>Days or weeks that you want to create the event in.</td>
+<td>“days”: 2</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p>You either use <code>start_date_time</code> and <code>end_date_time</code>, or <code>start_date</code> and <code>end_date</code>, or <code>in</code>.</p>
+</div>
+<h2>
+<a class="title-link" name="using-calendar-in-automations" href="#using-calendar-in-automations"></a> Using calendar in automations</h2>
+<p>A calendar can be used as an external scheduler for special events or reoccurring events instead of hardcoding them in automations.</p>
+<p>Trigger as soon as an event starts:</p>
+<pre><code class="language-yaml">    trigger:
+      platform: state
+      entity_id: calendar.calendar_name
+      to: 'on'
+</code></pre>
+<p>By using specific text in the event title, you can set conditions to initiate particular automation flows on designated events while other events will be ignored.</p>
+<p>For example, the actions following this condition will only be executed for events named ‘vacation’:</p>
+<pre><code class="language-yaml">    condition:
+        condition: template
+        value_template: "{{is_state_attr('calendar.calendar_name', 'message', 'vacation') }}"
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/calendar.google.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/google_calendar.png' /></div><div class="section">
+    <kb-alert-link integration="google"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Introduced in release: 0.33
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/google/'>/components/google/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#calendar'>Calendar</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

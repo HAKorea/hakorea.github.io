@@ -1,0 +1,177 @@
+I"�A<p>The <code>bom</code> weather platform uses the <a href="http://www.bom.gov.au">Australian Bureau of Meteorology (BOM)</a> as a source for current (half-hourly) meteorological data.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#camera">Camera</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To add the BOM weather platform to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+weather:
+  - platform: bom
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you would like to give to the weather station.</p>
+</span></p></dd><dt><a class='title-link' name='station' href='#station'></a> station</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The station ID string. See the <a href="#sensor"><code>sensor.bom</code> docs</a> for details on how to find the ID of a station.</p>
+</span></p><p class='default'>
+Default value: <p>The closest station</p>
+</p></dd></dl>
+</div>
+<div class='note'>
+<p>This platform is an alternative to the <a href="#sensor"><code>bom</code></a> sensor.
+The weather platform is easier to configure but less customizable.</p>
+</div>
+<h2>Camera</h2>
+<p>The <code>bom</code> camera platform uses the <a href="http://www.bom.gov.au">Australian Bureau of Meteorology (BOM)</a> <a href="http://www.bom.gov.au/australia/radar/">radar web service</a> as a source to generate an animated radar image.</p>
+<p>To add the BOM camera to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: bom
+    location: YOUR_LOCATION
+</code></pre>
+<p>See below for a list of valid <code>location</code> values, and subsitute one for <code>YOUR_LOCATION</code>.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='location' href='#location'></a> location</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Required unless <code>id</code> is specified. See below for a list of valid locations.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allows you to override the Home Assistant-generated camera name.</p>
+</span></p></dd><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allows you to manually specify a BOM Radar ID (either <code>location</code> or <code>id</code> must be defined, but not both).</p>
+</span></p></dd><dt><a class='title-link' name='delta' href='#delta'></a> delta</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Time in seconds between BOM radar images available for this radar. Optional if <code>location</code> is defined; required if <code>id</code> is defined.</p>
+</span></p></dd><dt><a class='title-link' name='frames' href='#frames'></a> frames</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Number of frames in the animated GIF. Optional if <code>location</code> is defined; required if <code>id</code> is defined.</p>
+</span></p></dd><dt><a class='title-link' name='filename' href='#filename'></a> filename</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Periodically save the animated GIF image to this filesystem path.</p>
+</span></p></dd></dl>
+</div>
+<h3>Valid <code>location</code> values</h3>
+<pre><code class="language-txt">Adelaide        Albany          AliceSprings    Bairnsdale      Bowen
+Brisbane        Broome          Cairns          Canberra        Carnarvon
+Ceduna          Dampier         Darwin          Emerald         Esperance
+Geraldton       Giles           Gladstone       Gove            Grafton
+Gympie          HallsCreek      Hobart          Kalgoorlie      Katherine
+Learmonth       Longreach       Mackay          Marburg         Melbourne
+Mildura         Moree           MorningtonIs    MountIsa        MtGambier
+Namoi           Newcastle       Newdegate       NorfolkIs       NWTasmania
+Perth           PortHedland     SellicksHill    SouthDoodlakine Sydney
+Townsville      WaggaWagga      Warrego         Warruwi         Watheroo
+Weipa           WillisIs        Wollongong      Woomera         Wyndham
+Yarrawonga
+</code></pre>
+<h3>Examples</h3>
+<h4>Using <code>location</code> and <code>name</code></h4>
+<p>Example <code>configuration.yaml</code> entry to display the <code>Townsville</code> radar with a camera named <code>mytowsvilleradar</code>:</p>
+<pre><code class="language-yaml">camera:
+  - platform: bom
+    name: mytownsvilleradar
+    location: Townsville
+</code></pre>
+<h4>Using <code>id</code>, <code>delta</code> and <code>frames</code></h4>
+<p>In the event BOM creates a new radar, or a radar’s ID changes, you may define a custom <code>id</code> along with corresponding <code>delta</code> and <code>frames</code> values. You may also specify custom <code>delta</code> and <code>frames</code> values, along with a valid <code>location</code>, to override the default values for an existing radar. You may not define <code>location</code> and <code>id</code> in the same entity; you must specify one or the other. If <code>id</code> is specified, then <code>delta</code> and <code>frames</code> values <em>must</em> be provided. If <code>location</code> is specified, <code>delta</code> and <code>frames</code> <em>may</em> be provided to override the default values.</p>
+<p>To find a live radar ID (e.g. for the <code>Townsville</code> radar), visit the <a href="http://www.bom.gov.au/australia/radar/">BOM website’s radars page</a>, click the link for the radar you are interested in, and note the URL, for example: <code>http://www.bom.gov.au/products/IDR733.loop.shtml</code>. The ID is the number following <code>IDR</code> (i.e. <code>733</code>) in the URL. You can also see, at the bottom of the radar image, a rotating set of times corresponding to the frames of the BOM’s JavaScript-driven animation. The number of minutes (in seconds) between these times corresponds to the camera’s <code>delta</code> value, and the number of frames corresponds to the <code>frames</code> value. At the time of this writing, the <code>Townsville</code> radar loop is composed of 4 frames at 10-minute (600 second) intervals. Since these are also the default values, this configuration block</p>
+<pre><code class="language-yaml">camera:
+  - platform: bom
+    location: Townsville
+</code></pre>
+<p>is equivalent to this one</p>
+<pre><code class="language-yaml">camera:
+  - platform: bom
+    id: '053'
+    delta: 600
+    frames: 4
+    name: 'Carnarvon'
+</code></pre>
+<h4>Using <code>filename</code></h4>
+<p>This option can be specified to save the animated radar-imagery GIF to the given filesystem path.</p>
+<p>Example <code>configuration.yaml</code> entry to display the <code>Sydney</code> radar and save the animated GIF to a file named <code>sydneyradar.gif</code> to the filesystem path accessible as <code>/local/sydneyradar.gif</code> via Home Assistant’s web server:</p>
+<pre><code class="language-yaml">camera:
+  - platform: bom
+    id: Sydney
+    filename: /config/www/images/sydneyradar.gif
+</code></pre>
+<p>The file will be updated every <code>delta</code> seconds when the camera regenerates the animation.</p>
+<h2>Sensor</h2>
+<p>The <code>bom</code> sensor platform uses the <a href="http://www.bom.gov.au">Australian Bureau of Meteorology (BOM)</a> as a source for current (half-hourly) meteorological data.</p>
+<ul>
+<li>Each sensor will be given the <code>device_id</code> of “bom [optionalname] friendlyname units”</li>
+<li>A name is optional but if multiple BOM weather stations are used a name will be required.</li>
+<li>The sensor checks for new data every minute, starting 30 minutes after the timestamp of the most recent data as the data is updated every half-hour.</li>
+</ul>
+<p>To add the BOM weather observation to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: bom
+    monitored_conditions:
+      - apparent_t
+      - cloud
+      - cloud_base_m
+      - cloud_oktas
+      - cloud_type_id
+      - cloud_type
+      - delta_t
+      - gust_kmh
+      - gust_kt
+      - air_temp
+      - dewpt
+      - local_date_time
+      - local_date_time_full
+      - press
+      - press_qnh
+      - press_msl
+      - press_tend
+      - rain_trace
+      - rel_hum
+      - sea_state
+      - swell_dir_worded
+      - swell_height
+      - swell_period
+      - vis_km
+      - weather
+      - wind_dir
+      - wind_spd_kmh
+      - wind_spd_kt
+</code></pre>
+<p>To get the station ID for any BOM station:</p>
+<ul>
+<li>Find your station on these maps: <a href="http://www.bom.gov.au/nsw/observations/map.shtml">NSW</a>, <a href="http://www.bom.gov.au/qld/observations/map.shtml">QLD</a>, <a href="http://www.bom.gov.au/vic/observations/map.shtml">VIC</a>, <a href="http://www.bom.gov.au/wa/observations/map.shtml">WA</a>, <a href="http://www.bom.gov.au/sa/observations/map.shtml">SA</a>, <a href="http://www.bom.gov.au/tas/observations/map.shtml">TAS</a>, <a href="http://www.bom.gov.au/act/observations/canberramap.shtml">ACT</a>, <a href="http://www.bom.gov.au/nt/observations/map.shtml">NT</a>.</li>
+<li>alternatively, from the <a href="http://www.bom.gov.au/">BOM website</a>, navigate to State -&gt; Observations -&gt; Latest Observations -&gt; Choose the station.</li>
+<li>The URL will look like <code>http://www.bom.gov.au/products/IDx60801/[station].shtml</code></li>
+<li>For Adelaide, the URL will look like <code>http://www.bom.gov.au/products/IDS60801/IDS60801.94675.shtml</code>; the station ID is <code>IDS60801.94675</code>.</li>
+</ul>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='station' href='#station'></a> station</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The station ID string as identified from the BOM website.</p>
+</span></p><p class='default'>
+Default value: <p>If not given, defaults to the closest station based on location data in configuration.yaml.</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you would like to give to the weather station.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of the conditions to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='apparent_t' href='#apparent_t'></a> apparent_t</dt><dd><p class='desc'><span class='description'><p>Feels like temperature in C.</p>
+</span></p></dd><dt><a class='title-link' name='cloud' href='#cloud'></a> cloud</dt><dd><p class='desc'><span class='description'><p>Cloud cover.</p>
+</span></p></dd><dt><a class='title-link' name='cloud_base_m' href='#cloud_base_m'></a> cloud_base_m</dt><dd><p class='desc'><span class='description'><p>Cloud Base in m.</p>
+</span></p></dd><dt><a class='title-link' name='cloud_oktas' href='#cloud_oktas'></a> cloud_oktas</dt><dd><p class='desc'><span class='description'><p>Cloud Oktas.</p>
+</span></p></dd><dt><a class='title-link' name='cloud_type_id' href='#cloud_type_id'></a> cloud_type_id</dt><dd><p class='desc'><span class='description'><p>Cloud type ID.</p>
+</span></p></dd><dt><a class='title-link' name='cloud_type' href='#cloud_type'></a> cloud_type</dt><dd><p class='desc'><span class='description'><p>Cloud type description.</p>
+</span></p></dd><dt><a class='title-link' name='delta_t' href='#delta_t'></a> delta_t</dt><dd><p class='desc'><span class='description'><p>Delta temperature in C.</p>
+</span></p></dd><dt><a class='title-link' name='gust_kmh' href='#gust_kmh'></a> gust_kmh</dt><dd><p class='desc'><span class='description'><p>Wind gust in km/h.</p>
+</span></p></dd><dt><a class='title-link' name='gust_kt' href='#gust_kt'></a> gust_kt</dt><dd><p class='desc'><span class='description'><p>Wing gust in kt.</p>
+</span></p></dd><dt><a class='title-link' name='air_temp' href='#air_temp'></a> air_temp</dt><dd><p class='desc'><span class='description'><p>Air temperature in C.</p>
+</span></p></dd><dt><a class='title-link' name='dewpt' href='#dewpt'></a> dewpt</dt><dd><p class='desc'><span class='description'><p>Dew point in C.</p>
+</span></p></dd><dt><a class='title-link' name='press' href='#press'></a> press</dt><dd><p class='desc'><span class='description'><p>Pressure in mbar.</p>
+</span></p></dd><dt><a class='title-link' name='press_qnh' href='#press_qnh'></a> press_qnh</dt><dd><p class='desc'><span class='description'><p>Pressure in qnh.</p>
+</span></p></dd><dt><a class='title-link' name='press_msl' href='#press_msl'></a> press_msl</dt><dd><p class='desc'><span class='description'><p>Pressure in msl.</p>
+</span></p></dd><dt><a class='title-link' name='press_tend' href='#press_tend'></a> press_tend</dt><dd><p class='desc'><span class='description'><p>Pressure trend.</p>
+</span></p></dd><dt><a class='title-link' name='rain_trace' href='#rain_trace'></a> rain_trace</dt><dd><p class='desc'><span class='description'><p>Raing today in mm.</p>
+</span></p></dd><dt><a class='title-link' name='rel_hum' href='#rel_hum'></a> rel_hum</dt><dd><p class='desc'><span class='description'><p>Relative Humidity in %.</p>
+</span></p></dd><dt><a class='title-link' name='sea_state' href='#sea_state'></a> sea_state</dt><dd><p class='desc'><span class='description'><p>Sea state.</p>
+</span></p></dd><dt><a class='title-link' name='swell_dir_worded' href='#swell_dir_worded'></a> swell_dir_worded</dt><dd><p class='desc'><span class='description'><p>Swell direction.</p>
+</span></p></dd><dt><a class='title-link' name='swell_height' href='#swell_height'></a> swell_height</dt><dd><p class='desc'><span class='description'><p>Swell height in m.</p>
+</span></p></dd><dt><a class='title-link' name='swell_period' href='#swell_period'></a> swell_period</dt><dd><p class='desc'><span class='description'><p>Swell period.</p>
+</span></p></dd><dt><a class='title-link' name='vis_km' href='#vis_km'></a> vis_km</dt><dd><p class='desc'><span class='description'><p>Visibility in km.</p>
+</span></p></dd><dt><a class='title-link' name='weather' href='#weather'></a> weather</dt><dd><p class='desc'><span class='description'><p>Weather summary.</p>
+</span></p></dd><dt><a class='title-link' name='wind_dir' href='#wind_dir'></a> wind_dir</dt><dd><p class='desc'><span class='description'><p>Wind direction.</p>
+</span></p></dd><dt><a class='title-link' name='wind_spd_kmh' href='#wind_spd_kmh'></a> wind_spd_kmh</dt><dd><p class='desc'><span class='description'><p>Wind speed in km/h.</p>
+</span></p></dd><dt><a class='title-link' name='wind_spd_kt' href='#wind_spd_kt'></a> wind_spd_kt</dt><dd><p class='desc'><span class='description'><p>Wind speed in kt.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note'>
+<p>This sensor is an alternative to the <a href="#configuration"><code>bom</code></a> weather platform.
+The weather platform is easier to configure but less customisable.</p>
+</div>
+:ET

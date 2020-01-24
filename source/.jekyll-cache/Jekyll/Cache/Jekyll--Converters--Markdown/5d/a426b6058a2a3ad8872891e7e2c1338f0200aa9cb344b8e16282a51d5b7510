@@ -1,0 +1,24 @@
+I"„	<p>The <code>xiaomi</code> platform offers presence detection by looking at connected devices to a <a href="http://miwifi.com">Xiaomi</a> router.</p>
+<h2>Setup</h2>
+<p>To use an Xiaomi router in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: xiaomi
+    host: YOUR_ROUTER_IP
+    password: YOUR_ADMIN_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your router, e.g., <code>192.168.0.1</code>.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The admin username.</p>
+</span></p><p class='default'>
+Default value: <p>admin</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for the admin account.</p>
+</span></p></dd></dl>
+</div>
+<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+<h3>Compatibility test</h3>
+<p>To ensure that your router is compatible, navigate to <code>http://YOUR_ROUTER_IP/api/misystem/devicelist</code>.
+You should see a listing of the device currently connected to your router.</p>
+<p>However, some users report that even when the previous URL does not work, they have been able to integrate their Mi Router 3 in Home Assistant. E.g., some users with the Mi Router 3 and firmware version 2.10.46 Stable have integrated their routers successfully and an alternative URL to test integration with is <code>http://YOUR_ROUTER_IP/cgi-bin/luci/api/misystem/devicelist</code>. Navigating to this page should show the <code>{&quot;code&quot;:401,&quot;msg&quot;:&quot;Invalid token&quot;}</code> message.</p>
+:ET

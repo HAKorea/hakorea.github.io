@@ -1,0 +1,579 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>MQTT Cover - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate MQTT covers into Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/cover.mqtt/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="MQTT Cover">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/cover.mqtt/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate MQTT covers into Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="MQTT Cover">
+    <meta name="twitter:description" content="Instructions on how to integrate MQTT covers into Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/cover.mqtt.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      MQTT Cover
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>mqtt</code> cover platform allows you to control an MQTT cover (such as blinds, a rollershutter or a garage door).</p>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>The device state (<code>open</code> or <code>closed</code>) will be updated only after a new message is published on <code>state_topic</code> matching <code>state_open</code> or <code>state_closed</code>. If these messages are published with the <code>retain</code> flag set, the cover will receive an instant state update after subscription and Home Assistant will display the correct state on startup. Otherwise, the initial state displayed in Home Assistant will be <code>unknown</code>.
+<code>state_topic</code> can only manage <code>state_open</code> and <code>state_closed</code>. No percentage positions etc.</p>
+<p>For this purpose is <code>position_topic</code> which can set state of the cover and position.
+Default setting are 0 means the device is <code>closed</code> and all other intermediate positions means the device is <code>open</code>.
+<code>position_topic</code> is managed by <code>position_open</code> and <code>position_closed</code>
+You can set it up in opossite way as well.
+If position topic is defined than state topic is ignored.</p>
+<p>If a state topic and position topic are not defined, the cover will work in optimistic mode. In this mode, the cover will immediately change state (<code>open</code> or <code>closed</code>) after every command sent by Home Assistant. If a state topic/position topic is defined, the cover will wait for a message on <code>state_topic</code> or <code>position_topic</code>.</p>
+<p>Optimistic mode can be forced, even if a <code>state_topic</code> / <code>position_topic</code> is defined. Try to enable it if experiencing incorrect cover operation (Google Assistant gauge may need optimistic mode as it often send request to your Home Assistant immediately after send set_cover_position in which case MQTT could be too slow).</p>
+<p>The <code>mqtt</code> cover platform optionally supports an <code>availability_topic</code> to receive online and offline messages (birth and LWT messages) from the MQTT cover device. During normal operation, if the MQTT cover device goes offline (i.e. publishes <code>payload_not_available</code> to <code>availability_topic</code>), Home Assistant will display the cover as “unavailable”. If these messages are published with the <code>retain</code> flag set, the cover will receive an instant update after subscription and Home Assistant will display correct availability state of the cover when Home Assistant starts up. If the <code>retain</code> flag is not set, Home Assistant will display the cover as “unavailable” when Home Assistant starts up.</p>
+<p>To use your MQTT cover in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: mqtt
+    command_topic: "home-assistant/cover/set"
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="command_topic" href="#command_topic"></a> command_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic to publish commands to control the cover.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the cover.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>MQTT Cover</p>
+</dd>
+<dt>
+<a class="title-link" name="payload_open" href="#payload_open"></a> payload_open</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The command payload that opens the cover.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>OPEN</p>
+</dd>
+<dt>
+<a class="title-link" name="payload_close" href="#payload_close"></a> payload_close</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The command payload that closes the cover.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>CLOSE</p>
+</dd>
+<dt>
+<a class="title-link" name="payload_stop" href="#payload_stop"></a> payload_stop</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The command payload that stops the cover.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>STOP</p>
+</dd>
+<dt>
+<a class="title-link" name="state_topic" href="#state_topic"></a> state_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive cover state messages. Use only if not using <code>position_topic</code>. State topic can only read open/close state. Cannot read position state. If <code>position_topic</code> is set <code>state_topic</code> is ignored.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="state_open" href="#state_open"></a> state_open</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the open state.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>open</p>
+</dd>
+<dt>
+<a class="title-link" name="state_closed" href="#state_closed"></a> state_closed</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the closed state.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>closed</p>
+</dd>
+<dt>
+<a class="title-link" name="position_topic" href="#position_topic"></a> position_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive cover position messages. If <code>position_topic</code> is set <code>state_topic</code> is ignored.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="position_open" href="#position_open"></a> position_open</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Number which represents open position.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>100</p>
+</dd>
+<dt>
+<a class="title-link" name="position_closed" href="#position_closed"></a> position_closed</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Number which represents closed position.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="availability_topic" href="#availability_topic"></a> availability_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to to receive birth and LWT messages from the MQTT cover device. If <code>availability_topic</code> is not defined, the cover availability state will always be <code>available</code>. If <code>availability_topic</code> is defined, the cover availability state will be <code>unavailable</code> by default.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="payload_available" href="#payload_available"></a> payload_available</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the online state.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>online</p>
+</dd>
+<dt>
+<a class="title-link" name="payload_not_available" href="#payload_not_available"></a> payload_not_available</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the offline state.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>offline</p>
+</dd>
+<dt>
+<a class="title-link" name="optimistic" href="#optimistic"></a> optimistic</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Flag that defines if switch works in optimistic mode.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>true</code> if no state topic defined, else <code>false</code>.</p>
+</dd>
+<dt>
+<a class="title-link" name="qos" href="#qos"></a> qos</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum QoS level to be used when receiving and publishing messages.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="retain" href="#retain"></a> retain</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines if published messages should have the retain flag set.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the payload.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="set_position_topic" href="#set_position_topic"></a> set_position_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic to publish position commands to. You need to set position_topic as well if you want to use position topic. Use template if position topic wants different values than within range <code>position_closed</code> - <code>position_open</code>. If template is not defined and <code>position_closed != 100</code> and <code>position_open != 0</code> then proper position value is calculated from percentage position.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="set_position_template" href="#set_position_template"></a> set_position_template</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/topics/templating/">template</a> to define the position to be sent to the <code>set_position_topic</code> topic. Incoming position value is available for use in the template ``. If no template is defined, the position (0-100) will be calculated according to <code>position_open</code> and `position_closed` values.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="tilt_command_topic" href="#tilt_command_topic"></a> tilt_command_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic to publish commands to control the cover tilt.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="tilt_status_topic" href="#tilt_status_topic"></a> tilt_status_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive tilt status update values.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="tilt_status_template" href="#tilt_status_template"></a> tilt_status_template</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/topics/templating/">template</a> that can be used to extract the payload for the <code>tilt_status_topic</code> topic.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="tilt_min" href="#tilt_min"></a> tilt_min</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The minimum tilt value.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="tilt_max" href="#tilt_max"></a> tilt_max</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum tilt value</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>100</p>
+</dd>
+<dt>
+<a class="title-link" name="tilt_closed_value" href="#tilt_closed_value"></a> tilt_closed_value</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The value that will be sent on a <code>close_cover_tilt</code> command.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0</p>
+</dd>
+<dt>
+<a class="title-link" name="tilt_opened_value" href="#tilt_opened_value"></a> tilt_opened_value</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The value that will be sent on an <code>open_cover_tilt</code> command.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>100</p>
+</dd>
+<dt>
+<a class="title-link" name="tilt_optimistic" href="#tilt_optimistic"></a> tilt_optimistic</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Flag that determines if tilt works in optimistic mode.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>true</code> if <code>tilt_status_topic</code> is not defined, else <code>false</code></p>
+</dd>
+<dt>
+<a class="title-link" name="tilt_invert_state" href="#tilt_invert_state"></a> tilt_invert_state</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Flag that determines if open/close are flipped; higher values toward closed and lower values toward open.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/cover/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="json_attributes_topic" href="#json_attributes_topic"></a> json_attributes_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="json_attributes_template" href="#json_attributes_template"></a> json_attributes_template</dt>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="unique_id" href="#unique_id"></a> unique_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>An ID that uniquely identifies this cover. If two covers have the same unique ID, Home Assistant will raise an exception.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="device" href="#device"></a> device</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Information about the device this cover is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="identifiers" href="#identifiers"></a> identifiers</dt>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="connections" href="#connections"></a> connections</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>"connections": ["mac", "02:5b:26:a8:dc:12"]</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="manufacturer" href="#manufacturer"></a> manufacturer</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The manufacturer of the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="model" href="#model"></a> model</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The model of the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="sw_version" href="#sw_version"></a> sw_version</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The firmware version of the device.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<p>In this section you will find some real-life examples of how to use this platform.</p>
+<h3>
+<a class="title-link" name="full-configuration-state-topic-without-tilt" href="#full-configuration-state-topic-without-tilt"></a> Full configuration state topic without tilt</h3>
+<p>The example below shows a full configuration for a cover without tilt with state topic only.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: mqtt
+    name: "MQTT Cover"
+    command_topic: "home-assistant/cover/set"
+    state_topic: "home-assistant/cover/state"
+    availability_topic: "home-assistant/cover/availability"
+    qos: 0
+    retain: true
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
+    payload_stop: "STOP"
+    state_open: "open"
+    state_closed: "closed"
+    payload_available: "online"
+    payload_not_available: "offline"
+    optimistic: false
+    value_template: '{{ value.x }}'
+</code></pre>
+<h3>
+<a class="title-link" name="full-configuration-position-topic-without-tilt" href="#full-configuration-position-topic-without-tilt"></a> Full configuration position topic without tilt</h3>
+<p>The example below shows a full configuration for a cover without tilt with position topic.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: mqtt
+    name: "MQTT Cover"
+    command_topic: "home-assistant/cover/set"
+    position_topic: "home-assistant/cover/position"
+    availability_topic: "home-assistant/cover/availability"
+    set_position_topic: "home-assistant/cover/set_position"
+    qos: 0
+    retain: true
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
+    payload_stop: "STOP"
+    position_open: 100
+    position_closed: 0
+    payload_available: "online"
+    payload_not_available: "offline"
+    optimistic: false
+    value_template: '{{ value.x }}'
+</code></pre>
+<h3>
+<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full configuration</h3>
+<p>The example below shows a full configuration for a cover.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: mqtt
+    name: "MQTT Cover"
+    command_topic: "home-assistant/cover/set"
+    state_topic: "home-assistant/cover/state"
+    availability_topic: "home-assistant/cover/availability"
+    qos: 0
+    retain: true
+    payload_open: "OPEN"
+    payload_close: "CLOSE"
+    payload_stop: "STOP"
+    state_open: "open"
+    state_closed: "closed"
+    payload_available: "online"
+    payload_not_available: "offline"
+    optimistic: false
+    value_template: '{{ value.x }}'
+    tilt_command_topic: 'home-assistant/cover/tilt'
+    tilt_status_topic: 'home-assistant/cover/tilt-state'
+    tilt_status_template: '{{ value_json["PWM"]["PWM1"] }}'
+    tilt_min: 0
+    tilt_max: 180
+    tilt_closed_value: 70
+    tilt_opened_value: 180
+</code></pre>
+<p>To test, you can use the command line tool <code>mosquitto_pub</code> shipped with <code>mosquitto</code> or the <code>mosquitto-clients</code> package to send MQTT messages. This allows you to operate your cover manually:</p>
+<pre><code class="language-bash">$  mosquitto_pub -h 127.0.0.1 -t home-assistant/cover/set -m "CLOSE"
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/cover.mqtt.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/mqtt.png' /></div><div class="section">
+    <kb-alert-link integration="mqtt"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Configurable
+    </div><div class='section'>
+      Introduced in release: 0.18
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/mqtt/'>/components/mqtt/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#cover'>Cover</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,16 @@
+I"¾<p>The <code>stookalert</code> sensor platform queries the <a href="https://www.rivm.nl/stookalert">RIVM stookalert</a> API for unfavorable weather conditions or poor air quality. With a Stookalert, the RIVM calls on people not to burn wood. This can prevent health problems in people in the area.</p>
+<h2>Configuration</h2>
+<p>To enable the platform, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: stookalert
+    province: YOUR_NL_PROVINCE
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='province' href='#province'></a> province</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A province to use for the binary sensorâ€™s state. Currently only provinces in the Netherlands are supported. Valid values are <code>Drenthe</code>, <code>Flevoland</code>, <code>Friesland</code>, <code>Gelderland</code>, <code>Groningen</code>, <code>Limburg</code>, <code>Noord-Brabant</code>, <code>Noord-Holland</code>, <code>Overijssel</code>, <code>Utrecht</code>, <code>Zeeland</code> or <code>Zuid-Holland</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The sensor name to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>Stookalert</p>
+</p></dd></dl>
+</div>
+:ET

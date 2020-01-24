@@ -1,0 +1,39 @@
+I"�<div class='note'>
+<p>If you want to integrate your Google Home or mobile phone running Google Assistant, with Home Assistant, then you want the <a href="/integrations/google_assistant/">Google Assistant component</a>.</p>
+</div>
+<p><a href="https://assistant.google.com/">Google Assistant</a> is an AI-powered voice assistant that runs on the Raspberry Pi and x86 platforms and interacts via the <a href="/integrations/dialogflow/">DialogFlow</a> integration or the <a href="/integrations/google_assistant/">Google Assistant component</a> with Home-Assistant. You can also use <a href="https://actions.google.com/">Google Actions</a> to extend its functionality.</p>
+<p>To enable access to the Google Assistant API, do the following:</p>
+<ol>
+<li>Go to the <a href="https://console.actions.google.com/">Google Actions Console</a> and create a new project.</li>
+<li>After you created the project on the bottom of the page click “Device registration”. Keep this tab open for later use.</li>
+<li>Enable the Google Assistant API on the new project through <a href="https://console.developers.google.com/apis/api/embeddedassistant.googleapis.com/overview">this</a> link. Make sure you have the right project selected (shown in the middle of the screen in the top bar). If you can’t select the right project, it may help to open the link in an incognito window.</li>
+<li>Configure the <a href="https://console.developers.google.com/apis/credentials/consent">OAuth consent screen</a>. Also again check that you have the right project and don’t forget to hit “Save” at the bottom of the page. You only have to fill in a project name and your e-mail.</li>
+<li>You back to you device registration tab and click “Device registration”. Or open you project in the <a href="https://console.actions.google.com/">Google Actions Console</a> start the Quick setup, and in the left bar click “Device registration”.</li>
+<li>Give you project a name, think of a nice manufacturer and for device type select “speaker”.</li>
+<li>Edit you “model id”, if you want to and copy it for later use.</li>
+<li>Download the credentials.</li>
+<li>Click “Next” and click “Skip”.</li>
+<li>Upload your credentials as “google_assistant.json” to the “hassio/share” folder, for example by using the <a href="/addons/samba/">Samba</a> add-on.</li>
+<li>In the Add-on configuration field fill-in you “project id” and your “model-id” and hit “Save”. Your project id can be found in the Google Actions console by clicking on the top right menu button and selecting “Project settings”. This id may differ from the project name that you choose!</li>
+<li>Below the “Config” window select the microphone and speaker that you want to use. On a Raspberry Pi 3, ALSA device 0 is the built-in headset port and ALSA device 1 is the HDMI port. Also don’t forget to click “Save”.</li>
+<li>Start the add-on. Check the log and click refresh till it says: “ENGINE Bus STARTED”.</li>
+<li>Now click “Open Web UI” and follow the authentication process. You will get an empty response after you have send your token.</li>
+</ol>
+<p>That’s it. You should now be able to use the Google Voice assistant.</p>
+<h3>Add-on configuration</h3>
+<pre><code class="language-json">{
+  &quot;client_secrets&quot;: &quot;google_assistant.json&quot;,
+  &quot;project_id&quot;: &quot;you-project-id&quot;,
+  &quot;model_id&quot;: &quot;your-model-id&quot;
+}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='client_secrets' href='#client_secrets'></a> client_secrets</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The file downloaded from the <a href="https://console.actions.google.com/">Google Actions Console</a>, you can redownload them under the “Develop - Device registration” tab. By default the add-on look in the “hassio/share” folder.</p>
+</span></p></dd><dt><a class='title-link' name='project_id' href='#project_id'></a> project_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The project id can be found in your “google_assistant.json” file or under project settings in the <a href="https://console.actions.google.com/">Google Actions Console</a>.</p>
+</span></p></dd><dt><a class='title-link' name='model_id' href='#model_id'></a> model_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The model id can also be found under the “Develop - Device registration tab” in the <a href="https://console.actions.google.com/">Google Actions Console</a>.</p>
+</span></p></dd></dl>
+</div>
+<h3>Home Assistant configuration</h3>
+<p>Use the Home Assistant <a href="/integrations/dialogflow/">DialogFlow component</a> to integrate the add-on into Home Assistant or combine it with the <a href="/integrations/google_assistant/">Google Assistant component</a>.</p>
+:ET

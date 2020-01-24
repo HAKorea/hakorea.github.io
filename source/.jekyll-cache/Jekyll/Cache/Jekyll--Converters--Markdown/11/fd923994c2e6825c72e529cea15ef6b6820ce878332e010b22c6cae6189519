@@ -1,0 +1,21 @@
+I"ø<p>The <code>ffmpeg</code> platform allows you to use any video feed as a camera in Home Assistant via <a href="https://www.ffmpeg.org/">FFmpeg</a>. This video source must support multiple simultaneous reads, because for every concurrent Home Assistant user, a connection will be made to the source every 10 seconds. Normally this should not be a problem.</p>
+<h2>Configuration</h2>
+<p>To enable your FFmpeg feed in your installation you must first configure the <a href="/integrations/ffmpeg/">ffmpeg integration</a>, then add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+camera:
+  - platform: ffmpeg
+    input: FFMPEG_SUPPORTED_INPUT
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='input' href='#input'></a> input</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>An FFmpeg-compatible input file, stream, or feed.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the name of your camera.</p>
+</span></p></dd><dt><a class='title-link' name='extra_arguments' href='#extra_arguments'></a> extra_arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Extra options to pass to <code>ffmpeg</code>, e.g., image quality or video filter options.</p>
+</span></p><p class='default'>
+Default value: <p>-pred 1</p>
+</p></dd></dl>
+</div>
+<h3>Image quality</h3>
+<p>You can control the image quality with <a href="https://www.ffmpeg.org/ffmpeg-codecs.html#jpeg2000"><code>extra_arguments</code></a> <code>-q:v 2-32</code> or with lossless option <code>-pred 1</code>. Default is lossless.</p>
+<p>If you are running into trouble with this sensor, please refer to the <a href="/integrations/ffmpeg/#troubleshooting">Troubleshooting section</a>.</p>
+:ET

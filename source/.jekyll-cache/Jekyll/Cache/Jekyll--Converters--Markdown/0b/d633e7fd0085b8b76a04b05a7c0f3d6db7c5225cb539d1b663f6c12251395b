@@ -1,0 +1,69 @@
+I"<p>The <code>raincloud</code> integration allows you to integrate your <a href="https://wifiaquatimer.com">Melnor RainCloud</a> sprinkler system in Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable it, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+raincloud:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing your Melnor RainCloud account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing your Melnor RainCloud account.</p>
+</span></p></dd></dl>
+</div>
+<h2>Binary Sensor</h2>
+<p>Once you have enabled the <a href="#configuration">Raincloud component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: raincloud
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+</span></p><p class='default'>
+Default value: <p>If not specified, all conditions below will be enabled.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='is_watering' href='#is_watering'></a> is_watering</dt><dd><p class='desc'><span class='description'><p>Return if is currently watering per zone.</p>
+</span></p></dd><dt><a class='title-link' name='status' href='#status'></a> status</dt><dd><p class='desc'><span class='description'><p>Return status from the Melnor RainCloud Controller and Melnor RainCloud Faucet.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>Once you have enabled the <a href="#configuration">Raincloud component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: raincloud
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+</span></p><p class='default'>
+Default value: <p>If not specified, all conditions below will be enabled.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='battery' href='#battery'></a> battery</dt><dd><p class='desc'><span class='description'><p>Return the battery level the Melnor RainCloud faucet.</p>
+</span></p></dd><dt><a class='title-link' name='next_cycle' href='#next_cycle'></a> next_cycle</dt><dd><p class='desc'><span class='description'><p>Return the next schedulle watering cycle per zone.</p>
+</span></p></dd><dt><a class='title-link' name='rain_delay' href='#rain_delay'></a> rain_delay</dt><dd><p class='desc'><span class='description'><p>Return the number of days the automatic watering will be delayed due to raining per zone.</p>
+</span></p></dd><dt><a class='title-link' name='watering_time' href='#watering_time'></a> watering_time</dt><dd><p class='desc'><span class='description'><p>Return the watering remaining minutes per zone.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Switch</h2>
+<p>Once you have enabled the <a href="#configuration">Raincloud component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: raincloud
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='watering_minutes' href='#watering_minutes'></a> watering_minutes</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Value in minutes to watering your garden via frontend. The values allowed are: 5, 10, 15, 30, 45, 60.</p>
+</span></p><p class='default'>
+Default value: <p>15</p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. If not specified, all conditions below will be enabled by default.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='auto_watering' href='#auto_watering'></a> auto_watering</dt><dd><p class='desc'><span class='description'><p>Toggle the watering scheduled per zone.</p>
+</span></p></dd><dt><a class='title-link' name='manual_watering' href='#manual_watering'></a> manual_watering</dt><dd><p class='desc'><span class='description'><p>Toggle manually the watering per zone. It will inherent the value in minutes specified on the RainCloud hub component.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

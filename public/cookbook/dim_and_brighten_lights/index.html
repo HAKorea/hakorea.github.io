@@ -1,0 +1,563 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Dim (and brighten) lights via a remote - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="The scripts and automations to allow you to use a remote to dim and brighten a light">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/cookbook/dim_and_brighten_lights/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Dim (and brighten) lights via a remote">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/cookbook/dim_and_brighten_lights/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="The scripts and automations to allow you to use a remote to dim and brighten a light">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Dim (and brighten) lights via a remote">
+    <meta name="twitter:description" content="The scripts and automations to allow you to use a remote to dim and brighten a light">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Dim (and brighten) lights via a remote
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>This requires both a dimmable light, and a Z-Wave remote control that sends one scene when a button is held, and another when released. This ensures that the scripts (which follow) are stopped, avoiding the risks of a script that never ends.</p>
+<p>In the following automation, replace <code>zwave.YOUR_REMOTE</code> with the actual entity ID of your controller. For the controller this was written for scene ID 13 was sent when the up button was held, and 15 when released. Similarly, scene 14 when the down button was held, and 16 when released. You’ll need to use the scene IDs that are sent by your remote if different.</p>
+<pre><code class="language-yaml">automation: 
+
+  - alias: 'Make the lights go bright'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          scene_id: 13
+          entity_id: zwave.YOUR_REMOTE
+    action:
+      - service: script.turn_on
+        data:
+          entity_id: script.light_bright
+
+  - alias: 'Stop the bright just there'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          scene_id: 15
+          entity_id: zwave.YOUR_REMOTE
+    action:
+      - service: script.turn_off
+        data:
+          entity_id: script.light_bright
+      - service: script.turn_off
+        data:
+          entity_id: script.light_bright_pause
+
+  - alias: 'Make the lights go dim'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          scene_id: 14
+          entity_id: zwave.YOUR_REMOTE
+    action:
+      - service: script.turn_on
+        data:
+          entity_id: script.light_dim
+
+  - alias: 'Stop the dim just there'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          scene_id: 16
+          entity_id: zwave.YOUR_REMOTE
+    action:
+      - service: script.turn_off
+        data:
+          entity_id: script.light_dim
+      - service: script.turn_off
+        data:
+          entity_id: script.light_dim_pause
+</code></pre>
+<p>There are 2 variables that control the speed of the change for the scripts below. The first is the <code>step</code>, small steps create a smooth transition. The second is the delay, larger delays will create a slower transition.</p>
+<p>To allow flexibility, an <a href="/integrations/input_number/">Input Number</a> is used for the step (at the time of writing this, it’s not possible to template the delay when the delay uses milliseconds). Two additional <a href="/integrations/input_number/">Input Numbers</a> are used to set the minimum and maximum brightness, so that it’s easy to tune that (or manage it through an automation).</p>
+<pre><code class="language-yaml">input_number:
+  light_step:
+    name: 'Step the lights this much'
+    initial: 20
+    min: 1
+    max: 64
+    step: 1
+
+  light_minimum:
+    name: 'No dimmer than this'
+    initial: 5
+    min: 1
+    max: 255
+    step: 1
+    
+  light_maximum:
+    name: 'No brighter than this'
+    initial: 255
+    min: 50
+    max: 255
+    step: 1
+</code></pre>
+<p>Now the scripts. There are 2 pairs of scripts. The first steps the light brighter to the maximum and the second provides the delay. These call each other until both are stopped. The second pair does the same for dimming.</p>
+<pre><code class="language-yaml"># Replace YOURLIGHT with the actual light entity
+script:
+    light_bright:
+      sequence:
+        - service: light.turn_on
+          data_template:
+            entity_id: light.YOUR_LIGHT
+            brightness: &gt;-
+              {% set current = state_attr('light.YOUR_LIGHT', 'brightness')|default(0)|int %}
+              {% set step = states('input_number.light_step')|int %}
+              {% set next = current + step %}
+              {% if next &gt; states('input_number.light_maximum')|int %}
+                {% set next = states('input_number.light_maximum')|int %}
+              {% endif %}
+              {{ next }}
+
+        - service_template: &gt;
+            {% if state_attr('light.YOUR_LIGHT', 'brightness')|default(0)|int &lt; states('input_number.light_maximum')|int %}
+              script.turn_on
+            {% else %}
+              script.turn_off
+            {% endif %}
+          data:
+            entity_id: script.light_bright_pause
+        
+    light_bright_pause:
+      sequence:
+        - delay:
+            milliseconds: 1
+        - service: script.turn_on
+          data:
+            entity_id: script.light_bright
+
+    light_dim:
+      sequence:
+        - service: light.turn_on
+          data_template:
+            entity_id: light.YOUR_LIGHT
+            brightness: &gt;-
+              {% set current = state_attr('light.YOUR_LIGHT', 'brightness')|default(0)|int %}
+              {% set step = states('input_number.light_step')|int %}
+              {% set next = current - step %}
+              {% if next &lt; states('input_number.light_minimum')|int %}
+                {% set next = states('input_number.light_minimum')|int %}
+              {% endif %}
+              {{ next }}
+
+        - service_template: &gt;
+            {% if state_attr('light.YOUR_LIGHT', 'brightness')|default(0)|int &gt; states('input_number.light_minimum')|int %}
+              script.turn_on
+            {% else %}
+              script.turn_off
+            {% endif %}
+          data:
+            entity_id: script.light_dim_pause
+        
+    light_dim_pause:
+      sequence:
+        - delay:
+            milliseconds: 1
+        - service: script.turn_on
+          data:
+            entity_id: script.light_dim
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_cookbook/dim_and_brighten_lights.markdown'>깃허브 편집</a></div>
+
+
+  
+
+  <div class='section'>
+    <a href='/cookbook'>쿡북</a>
+  </div>
+
+  <div class='section'>
+    <h1 class="title delta">Automation Examples</h1>
+    <ul class='divided'>
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_for_rainy_days/'>Automation for rainy days</a>
+            
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li>
+            
+              Dim (and brighten) lights via a remote
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/dim_lights_when_playing_media/'>Dim lights when playing media</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_flashing_lights/'>Examples for flashing lights</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_telegram_presence_alert/'>Examples sending notification depending of the presence</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_first_light/'>Examples using first light</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_sun/'>Examples using the sun</a>
+            
+          </li>
+        
+      
+        
+      
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/foscam_away_mode_PTZ/'>Foscam Recording during Away Mode Only using Pan/Tilt/Zoom Control and Motion Detection</a>
+            
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/perform_actions_based_on_input_select/'>Perform actions based on input select</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/restart_ha_if_wemo_switch_is_not_detected/'>Restart Home Assistant if Wemo Switch is not detected</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/send_a_reminder/'>Send a reminder</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/notify_if_over_threshold/'>Send notification based on sensor</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/notify_if__new_ha_release/'>Send notification if new Home Assistant release</a>
+            
+          </li>
+        
+      
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/sonos_say/'>Sonos say script to speak with text-to-speech</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_enocean_phue/'>Switch Philips Hue with enocean</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/track_battery_level/'>Track your phone battery level</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/turn_on_light_for_10_minutes_when_motion_detected/'>Turn on lights for 10 minutes after motion detected</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_using_timeinterval_inputboolean/'>Using time interval and input boolean</a>
+            
+          </li>
+        
+      
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

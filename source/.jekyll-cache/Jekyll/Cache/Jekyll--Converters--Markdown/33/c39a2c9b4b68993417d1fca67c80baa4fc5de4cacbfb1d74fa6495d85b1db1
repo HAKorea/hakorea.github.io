@@ -1,0 +1,172 @@
+I"�&<p>The <code>airvisual</code> sensor platform queries the <a href="https://airvisual.com/">AirVisual</a> API for air quality data. Data can be collected via latitude/longitude or by city/state/country. The resulting information creates sensors for the Air Quality Index (AQI), the human-friendly air quality level, and the main pollutant of that area. Sensors that conform to either/both the <a href="https://www.clm.com/publication.cfm?ID=366">U.S. and Chinese air quality standards</a> can be created.</p>
+<p>This platform requires an AirVisual API key, which can be obtained <a href="https://airvisual.com/api">here</a>. Note that the platform was designed using the “Community” package; the “Startup” and “Enterprise” package keys should continue to function, but actual results may vary (or not work at all).</p>
+<p>The Community API key is valid for 12 months after which it will expire. You must then go back to the Airvisual website, delete your old key, create a new one following the same steps and update your configuration with the new key.</p>
+<div class='note warning'>
+<p>The “Community” API key is limited to 10,000 calls per month. In order to leave a buffer, the <code>airvisual</code> platform queries the API every 10 minutes (600 seconds) by default. Modification of this (via the <code>scan_interval</code> key) to a too-low value may result in your API key being deactivated.</p>
+</div>
+<h2>Configuration</h2>
+<p>To enable the platform and gather data via latitude/longitude, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: YOUR_AIRVISUAL_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your AirVisual API key.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The air quality standard(s) to use (<code>us</code> for U.S., <code>cn</code> for Chinese).</p>
+</span></p><p class='default'>
+Default value: <p>[“us”, “cn”]</p>
+</p></dd><dt><a class='title-link' name='show_on_map' href='#show_on_map'></a> show_on_map</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Whether to show a marker on the map at the specified location.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The rate in seconds at which AirVisual should be polled for new data.</p>
+</span></p><p class='default'>
+Default value: <p>600</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The latitude of the location to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>The latitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The longitude of the location to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>The longitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</p></dd><dt><a class='title-link' name='city' href='#city'></a> city</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The city to monitor.</p>
+</span></p></dd><dt><a class='title-link' name='state' href='#state'></a> state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The state the city belongs to.</p>
+</span></p></dd><dt><a class='title-link' name='country' href='#country'></a> country</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The country the state belongs to.</p>
+</span></p></dd></dl>
+</div>
+<h2>Example Configurations</h2>
+<p>Configuration using custom Latitude and Longitude:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: YOUR_AIRVISUAL_API_KEY
+    monitored_conditions:
+      - cn
+    show_on_map: false
+    scan_interval: 300
+    latitude: 42.81212
+    longitude: 108.12422
+</code></pre>
+<p>Configuration using city, state, and country:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: YOUR_AIRVISUAL_API_KEY
+    monitored_conditions:
+      - us
+    show_on_map: false
+    scan_interval: 300
+    city: Los Angeles
+    state: California
+    country: USA
+</code></pre>
+<h2>Determining the City/State/Country</h2>
+<p>To easily determine the proper values for a particular location, use the <a href="https://airvisual.com/world">AirVisual region directory</a>. Once you browse to the particular city you want, take note of the breadcrumb title, which is of the form <code>country &gt; state/region &gt; city</code>. Use this information to fill out <code>configuration.yaml</code>.</p>
+<p>For example, Sao Paulo, Brazil shows a breadcrumb title of <code>Brazil &gt; Sao Paulo &gt; Sao Paulo</code>. Thus, the proper configuration would look like this:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: abc123
+    monitored_conditions:
+      - us
+      - cn
+    city: sao-paulo
+    state: sao-paulo
+    country: brazil
+</code></pre>
+<h2>Sensor Types</h2>
+<p>When configured, the platform will create three sensors for each configured air quality standard:</p>
+<h3>Air Quality Index</h3>
+<ul>
+<li><strong>Description:</strong> This sensor displays a numeric air quality index (AQI), a metric for the overall “health” of the air.</li>
+<li><strong>Example Sensor Name:</strong> <code>sensor.chinese_air_quality_index</code></li>
+<li><strong>Example Sensor Value:</strong> <code>32</code></li>
+<li><strong>Explanation:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>AQI</th>
+<th align="center">Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 50</td>
+<td align="center"><strong>Good</strong></td>
+<td>Air quality is considered satisfactory, and air pollution poses little or no risk</td>
+</tr>
+<tr>
+<td>51 - 100</td>
+<td align="center"><strong>Moderate</strong></td>
+<td>Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution</td>
+</tr>
+<tr>
+<td>101 - 150</td>
+<td align="center"><strong>Unhealthy for Sensitive Groups</strong></td>
+<td>Members of sensitive groups may experience health effects. The general public is not likely to be affected</td>
+</tr>
+<tr>
+<td>151 - 200</td>
+<td align="center"><strong>Unhealthy</strong></td>
+<td>Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects</td>
+</tr>
+<tr>
+<td>201 - 300</td>
+<td align="center"><strong>Very unhealthy</strong></td>
+<td>Health warnings of emergency conditions. The entire population is more likely to be affected</td>
+</tr>
+<tr>
+<td>301+</td>
+<td align="center"><strong>Hazardous</strong></td>
+<td>Health alert: everyone may experience more serious health effects</td>
+</tr>
+</tbody>
+</table>
+<h3>Air Pollution Level</h3>
+<ul>
+<li><strong>Description:</strong> This sensor displays the associated <code>Status</code> (from the above table) for the current AQI.</li>
+<li><strong>Sample Sensor Name:</strong> <code>sensor.us_air_pollution_level</code></li>
+<li><strong>Example Sensor Value:</strong> <code>Moderate</code></li>
+</ul>
+<h3>Main Pollutant</h3>
+<ul>
+<li><strong>Description:</strong> This sensor displays the pollutant whose value is currently highest.</li>
+<li><strong>Sample Sensor Name:</strong> <code>sensor.us_main_pollutant</code></li>
+<li><strong>Example Sensor Value:</strong> <code>PM2.5</code></li>
+<li><strong>Explanation:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pollutant</th>
+<th align="center">Symbol</th>
+<th>More Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particulate (&lt;= 2.5 μm)</td>
+<td align="center">PM2.5</td>
+<td><a href="https://www.epa.gov/pm-pollution">EPA: Particulate Matter (PM) Pollution </a></td>
+</tr>
+<tr>
+<td>Particulate (&lt;= 10 μm)</td>
+<td align="center">PM10</td>
+<td><a href="https://www.epa.gov/pm-pollution">EPA: Particulate Matter (PM) Pollution </a></td>
+</tr>
+<tr>
+<td>Ozone</td>
+<td align="center">O</td>
+<td><a href="https://www.epa.gov/ozone-pollution">EPA: Ozone Pollution</a></td>
+</tr>
+<tr>
+<td>Sulpher Dioxide</td>
+<td align="center">SO2</td>
+<td><a href="https://www.epa.gov/so2-pollution">EPA: Sulfur Dioxide (SO2) Pollution</a></td>
+</tr>
+<tr>
+<td>Carbon Monoxide</td>
+<td align="center">CO</td>
+<td><a href="https://www.epa.gov/co-pollution">EPA: Carbon Monoxide (CO) Pollution in Outdoor Air</a></td>
+</tr>
+</tbody>
+</table>
+:ET

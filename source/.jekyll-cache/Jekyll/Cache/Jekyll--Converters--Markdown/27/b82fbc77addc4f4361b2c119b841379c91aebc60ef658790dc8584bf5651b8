@@ -1,0 +1,89 @@
+I"�<p><a href="https://www.proxmox.com/en/">Proxmox VE</a> is an open-source server virtualization environment. This integration allows you to poll various data from your instance.</p>
+<p>After configuring this component, the binary sensors automatically appear.</p>
+<h2>Configuration</h2>
+<div class='note'>
+You should have at least one VM or container entry configured, else this integration won't do anything.
+</div>
+<p>To use the <code>proxmoxve</code> component, add the following config to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+proxmoxve:
+  - host: IP_ADDRESS
+    username: USERNAME
+    password: PASSWORD
+    nodes:
+      - node: NODE_NAME
+        vms:
+          - VM_ID
+        containers:
+          - CONTAINER_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of the Proxmox VE instance.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number on which Proxmox VE is running.</p>
+</span></p><p class='default'>
+Default value: <p>8006</p>
+</p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Whether to do strict validation on SSL certificates. If you use a self signed SSL certificate you need to set this to false.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username used to authenticate.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password used to authenticate.</p>
+</span></p></dd><dt><a class='title-link' name='realm' href='#realm'></a> realm</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The authentication realm of the user.</p>
+</span></p><p class='default'>
+Default value: <p>pam</p>
+</p></dd><dt><a class='title-link' name='nodes' href='#nodes'></a> nodes</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of the Proxmox VE nodes to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='node' href='#node'></a> node</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the node</p>
+</span></p></dd><dt><a class='title-link' name='vms' href='#vms'></a> vms</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of the QEMU VMs to monitor.</p>
+</span></p></dd><dt><a class='title-link' name='containers' href='#containers'></a> containers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of the LXC containers to monitor.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>Example with multiple VMs and no containers:</p>
+<pre><code class="language-yaml">proxmoxve:
+  - host: IP_ADDRESS
+    username: USERNAME
+    password: PASSWORD
+    nodes:
+      - node: NODE_NAME
+        vms:
+          - VM_ID_1
+          - VM_ID_2
+</code></pre>
+<h2>Binary Sensor</h2>
+<p>The integration will automatically create a binary sensor for each tracked virtual machine or container. The binary sensor will either be on if the VM’s state is running or off if the VM’s state is different.</p>
+<p>The created sensor will be called <code>binary_sensor.NODE_NAME_VMNAME_running</code>.</p>
+<h2>Proxmox Permissions</h2>
+<p>To be able to retrieve the status of VMs and containers, the user used to connect must minimally have the <code>VM.Audit</code> privilege. Below is a guide to how to configure a new user with the minimum required permissions.</p>
+<h3>Create Home Assistant Role</h3>
+<p>Before creating the user, we need to create a permissions role for the user.</p>
+<ul>
+<li>Click <code>Datacenter</code></li>
+<li>Open <code>Permissions</code> and click <code>Roles</code></li>
+<li>Click the <code>Create</code> button above all the existing roles</li>
+<li>name the new role (e.g. “home-assistant”)</li>
+<li>Click the arrow next to privileges and select <code>VM.Audit</code> in the dropdown</li>
+<li>Click <code>Create</code></li>
+</ul>
+<h3>Create Home Assistant User</h3>
+<p>Creating a dedicated user for home assistant limited to only the role just created is the most secure method. These instructions use the <code>pve</code> realm for the user. This allows a connection, but ensures that the user is not authenticated for SSH connections. If you use the <code>pve</code> realm, just be sure to add <code>realm: pve</code> to your config.</p>
+<ul>
+<li>Click <code>Datacenter</code></li>
+<li>Open <code>Permissions</code> and click <code>Users</code></li>
+<li>Click <code>Add</code></li>
+<li>Enter a username (e.g. “hass”)</li>
+<li>Enter a secure password (it can be complex as you will only need to copy/paste it into your Home Assistant configuration)</li>
+<li>Set the realm to “Proxmox VE authentication server”</li>
+<li>Ensure <code>Enabled</code> is checked and <code>Expire</code> is set to “never”</li>
+<li>Click <code>Add</code></li>
+</ul>
+<h3>Add User Permissions to Assets</h3>
+<p>To apply the user and role just created, we need to give it permissions</p>
+<ul>
+<li>Click <code>Datacenter</code></li>
+<li>Click <code>Permissions</code></li>
+<li>Open <code>Add</code> and click <code>User Permission</code></li>
+<li>Select “&quot; for the path</li>
+<li>Select your hass user (“hass”)</li>
+<li>Select the Home Assistant role (“home-assistant”)</li>
+<li>Make sure <code>Propigate</code> is checked</li>
+</ul>
+:ET

@@ -1,0 +1,55 @@
+I"?<p>The <code>co2signal</code> sensor platform queries the <a href="https://www.co2signal.com/">CO2Signal</a> API for the CO2 intensity of a specific region. Data can be collected via latitude/longitude or by country code. This API uses the same data as <a href="https://www.electricitymap.org">https://www.electricitymap.org</a> Not all countries/regions in the world are supported so please consult this website to check local availability.</p>
+<p>This platform requires a CO2Signal API key, which can be obtained <a href="https://www.co2signal.com/">here</a>. Note that this API key is for personal use only and other options exist when the data is used commercially.</p>
+<p>At the moment, the free CO2Signal API only supports the average carbon intensity of a country and not the marginal carbon intensity.</p>
+<div class='note warning'>
+The "free" API key is limited to a limited number of calls. Too many requests can result in data loss.
+</div>
+<h2>Configuration</h2>
+<p>To set up this platform, get your <a href="https://www.co2signal.com/">API key</a> and add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: co2signal
+    token: YOUR_CO2SIGNAL_API_KEY
+</code></pre>
+<p>By default, the sensor will use your Home Assistant longitude and latitude. More detailed configurations to overwrite this can be found below.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your CO2Signal API key.</p>
+</span></p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The latitude of the location to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>The latitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The longitude of the location to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>The longitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</p></dd><dt><a class='title-link' name='country_code' href='#country_code'></a> country_code</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The country code or region code.</p>
+</span></p></dd></dl>
+</div>
+<p>To enable the platform and gather data via a specific latitude/longitude, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: co2signal
+    token: YOUR_CO2SIGNAL_API_KEY
+    latitude: YOUR_LATITUDE
+    longitude: YOUR_LONGITUDE
+</code></pre>
+<p>A similar result can be achieved by using the country code. In that case, use the following lines in your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: co2signal
+    token: YOUR_CO2SIGNAL_API_KEY
+    country_code: YOUR_COUNTRY_CODE
+</code></pre>
+<h2>Example Configurations</h2>
+<p>Configuration using custom latitude and longitude:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: co2signal
+    token: YOUR_CO2SIGNAL_API_KEY
+    latitude: 55.4
+    longitude: 5.5
+</code></pre>
+<p>Configuration using a country code:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: co2signal
+    token: YOUR_CO2SIGNAL_API_KEY
+    country_code: BE
+</code></pre>
+<h2>Sensor Types</h2>
+<p>When configured, the platform will create one sensor for each configured location.</p>
+:ET

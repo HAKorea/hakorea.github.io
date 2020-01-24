@@ -1,0 +1,487 @@
+I"YP<p>The <code>xiaomi_miio</code> vacuum platform allows you to control the state of your <a href="https://www.mi.com/roomrobot/">Xiaomi Mi Robot Vacuum</a>.</p>
+<p>Currently supported services are:</p>
+<ul>
+<li><code>start</code></li>
+<li><code>pause</code></li>
+<li><code>stop</code></li>
+<li><code>return_to_base</code></li>
+<li><code>locate</code></li>
+<li><code>clean_spot</code></li>
+<li><code>set_fan_speed</code>
+Fan speeds: <code>Silent</code>, <code>Standard</code>, <code>Medium</code>, <code>Turbo</code> and <code>Gentle</code> (exclusively for mopping).</li>
+<li><code>remote_control_*</code> (of your robot)</li>
+<li><code>xiaomi_clean_zone</code></li>
+</ul>
+<h2>Configuration</h2>
+<p>Please follow <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> to retrieve the API token used in
+<code>configuration.yaml</code>.</p>
+<p>To add a vacuum to your installation, add the following to <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml">vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.1.2
+    token: YOUR_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your robot.</p>
+</span></p></dd><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API token of your robot.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of your robot.</p>
+</span></p><p class='default'>
+Default value: <p>Xiaomi Vacuum cleaner</p>
+</p></dd></dl>
+</div>
+<h2>Platform Services</h2>
+<p>In addition to all of the services provided by the <code>vacuum</code> integration (<code>start</code>, <code>pause</code>, <code>stop</code>, <code>return_to_base</code>, <code>locate</code>, <code>set_fan_speed</code> and <code>send_command</code>), the <code>xiaomi_miio</code> platform introduces specific services to access the remote control mode of the robot. These are:</p>
+<ul>
+<li><code>xiaomi_miio.vacuum_remote_control_start</code></li>
+<li><code>xiaomi_miio.vacuum_remote_control_stop</code></li>
+<li><code>xiaomi_miio.vacuum_remote_control_move</code></li>
+<li><code>xiaomi_miio.vacuum_remote_control_move_step</code></li>
+<li><code>xiaomi_miio.vacuum_clean_zone</code></li>
+</ul>
+<h3>Service <code>xiaomi_miio.vacuum_remote_control_start</code></h3>
+<p>Start the remote control mode of the robot. You can then move it with <code>remote_control_move</code>; when done, call <code>remote_control_stop</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific robot</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.vacuum_remote_control_stop</code></h3>
+<p>Exit the remote control mode of the robot.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific robot</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.vacuum_remote_control_move</code></h3>
+<p>Remote control the robot. Please ensure you first set it in remote control mode with <code>remote_control_start</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific robot</td>
+</tr>
+<tr>
+<td><code>velocity</code></td>
+<td>no</td>
+<td>Speed: between -0.29 and 0.29</td>
+</tr>
+<tr>
+<td><code>rotation</code></td>
+<td>no</td>
+<td>Rotation: between -179 degrees and 179 degrees</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>no</td>
+<td>The number of milliseconds that the robot should move for</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.vacuum_remote_control_move_step</code></h3>
+<p>Enter remote control mode, make one move, stop, and exit remote control mode.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific robot</td>
+</tr>
+<tr>
+<td><code>velocity</code></td>
+<td>no</td>
+<td>Speed: between -0.29 and 0.29</td>
+</tr>
+<tr>
+<td><code>rotation</code></td>
+<td>no</td>
+<td>Rotation: between -179 degrees and 179 degrees</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>no</td>
+<td>The number of milliseconds that the robot should move for</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>xiaomi_miio.vacuum_clean_zone</code></h3>
+<p>Start the cleaning operation in the areas selected for the number of repeats indicated.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Only act on a specific robot</td>
+</tr>
+<tr>
+<td><code>zone</code></td>
+<td>no</td>
+<td>List of zones. Each zone is an array of 4 integer value. Example: [[23510,25311,25110,26361]]</td>
+</tr>
+<tr>
+<td><code>repeats</code></td>
+<td>no</td>
+<td>Number of cleaning repeats for each zone between 1 and 3.</td>
+</tr>
+</tbody>
+</table>
+<p>Example of <code>xiaomi_miio.vacuum_clean_zone</code> use:</p>
+<p>Inline array:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Test vacuum zone3
+    trigger:
+    - event: start
+      platform: homeassistant
+    condition: []
+    action:
+    - service: xiaomi_miio.vacuum_clean_zone
+      data_template:
+        entity_id: vacuum.xiaomi_vacuum
+        repeats: '{{states('input_number.vacuum_passes')|int}}'
+        zone: [[30914,26007,35514,28807], [20232,22496,26032,26496]]
+</code></pre>
+<p>Array with inline zone:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Test vacuum zone3
+    trigger:
+    - event: start
+      platform: homeassistant
+    condition: []
+    action:
+    - service: xiaomi_miio.vacuum_clean_zone
+      data_template:
+        entity_id: vacuum.xiaomi_vacuum
+        repeats: '{{states('input_number.vacuum_passes')|int}}'
+        zone:
+        - [30914,26007,35514,28807]
+        - [20232,22496,26032,26496]
+</code></pre>
+<p>Array mode:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Test vacuum zone3
+    trigger:
+    - event: start
+      platform: homeassistant
+    condition: []
+    action:
+    - service: xiaomi_miio.vacuum_clean_zone
+      data:
+        entity_id: vacuum.xiaomi_vacuum
+        repeats: 1
+        zone:
+        - - 30914
+          - 26007
+          - 35514
+          - 28807
+        - - 20232
+          - 22496
+          - 26032
+          - 26496
+</code></pre>
+<h2>Attributes</h2>
+<p>In addition to <a href="/integrations/vacuum/#attributes">all of the attributes provided by the <code>vacuum</code> component</a>,
+(<code>battery_icon</code>, <code>cleaned_area</code>, <code>fan_speed</code>, <code>fan_speed_list</code>, and <code>params</code>), the <code>xiaomi</code> platform introduces specific attributes. These are:</p>
+<ul>
+<li><code>cleaning_time</code></li>
+<li><code>do_not_disturb</code></li>
+<li><code>main_brush_left</code></li>
+<li><code>side_brush_left</code></li>
+<li><code>filter_left</code></li>
+<li><code>sensor_dirty_left</code></li>
+<li><code>cleaning_count</code></li>
+<li><code>total_cleaned_area</code></li>
+<li><code>total_cleaning_time</code></li>
+<li><code>clean_start</code></li>
+<li><code>clean_end</code></li>
+</ul>
+<p>The following table shows the units of measurement for each attribute:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Unit of measurement</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>do_not_disturb</code></td>
+<td></td>
+<td>DND mode on / off</td>
+</tr>
+<tr>
+<td><code>cleaning_time</code></td>
+<td>minutes</td>
+<td>Last / actual cleaning time in minutes</td>
+</tr>
+<tr>
+<td><code>cleaned_area</code></td>
+<td>square meter</td>
+<td>Last / actual cleaned area in square meters</td>
+</tr>
+<tr>
+<td><code>main_brush_left</code></td>
+<td>hours</td>
+<td>Hours left until a change of the main brush is needed</td>
+</tr>
+<tr>
+<td><code>side_brush_left</code></td>
+<td>hours</td>
+<td>Hours left until a change of the side brush is needed</td>
+</tr>
+<tr>
+<td><code>filter_left</code></td>
+<td>hours</td>
+<td>Hours left until a change of the filter is needed</td>
+</tr>
+<tr>
+<td><code>sensor_dirty_left</code></td>
+<td>hours</td>
+<td>Hours left until the wall and cliff sensors should be cleaned</td>
+</tr>
+<tr>
+<td><code>cleaning_count</code></td>
+<td></td>
+<td>Number of total cleaning cycles</td>
+</tr>
+<tr>
+<td><code>total_cleaned_area</code></td>
+<td>square meter</td>
+<td>Total cleaned area in square meters</td>
+</tr>
+<tr>
+<td><code>total_cleaning_time</code></td>
+<td>minutes</td>
+<td>Total cleaning time in minutes</td>
+</tr>
+<tr>
+<td><code>clean_start</code></td>
+<td>datetime</td>
+<td>The last date/time the vacuum started cleaning (offset naive)</td>
+</tr>
+<tr>
+<td><code>clean_end</code></td>
+<td>datetime</td>
+<td>The last date/time the vacuum finished cleaning (offset naive)</td>
+</tr>
+</tbody>
+</table>
+<h2>Retrieving the Access Token</h2>
+<div class='note'>
+<p>If using an Android device to retrieve the Access Token only <code>v5.4.49</code> of Mi Home is confirmed working (December 2019). Use <code>v5.4.49</code> of Mi Home locate a text file under the <code>Smarthome/logs</code> folder where the 32 character token is stored. There will likely be several text files in this directory, search all of them for the word ‘token’ and you should find it there. Be advised that the latest version of Mi Home does not store the token in clear text.
+<br/> <br/>
+The iPhone app still stores the token in the SQLite db as of <code>v4.23.4</code> (Nov 17, 2019).
+<br/> <br/>
+After resetting the WiFi settings of the Xiaomi robot vacuum, a new Access Token will be generated and therefore these instructions need to be followed again.
+<br/> <br/>
+These instructions are written for the Mi Home app - not for the new RoboRock app.
+<br/> <br/>
+This token (32 hexadecimal characters) is required for the Xiaomi Mi Robot Vacuum, Mi Robot 2 (Roborock) Vacuum, Xiaomi Philips Lights and Xiaomi IR Remote. The Xiaomi Gateway uses another security method and requires a <code>key</code> (16 alphanumeric chars), which can be obtained easily via a hidden menu item at the Mi-Home app or using the <code>miio</code> command line tool.</p>
+</div>
+<h3>Android (not rooted)</h3>
+<blockquote>
+<p>If using an Android device to retrieve the Access Token only <code>v5.4.49</code> of Mi Home is confirmed working (December 2019).</p>
+</blockquote>
+<ol>
+<li>To begin, set up your Robovac with the latest version of Mi Home on your primary Android device as you normally would.</li>
+<li>Using <code>v5.4.49</code> of Mi Home locate a text file under the <code>Smarthome/logs</code> folder where the 32 character token is stored.</li>
+<li>There will likely be several text files in this directory, search all of them for the word ‘token’ and you should find it there. Be advised that the latest version of Mi Home does not store the token in clear text.</li>
+</ol>
+<h3>Linux and Rooted Android</h3>
+<ol>
+<li>To begin, set up your Robovac with the latest version of Mi Home on your primary Android device as you normally would.</li>
+<li>Ensure successful operation using the latest Mi Home app and give the Vacuum a static IP in your router or however you do that on your LAN.</li>
+<li>Install version <code>v5.4.54</code> of Mi Home on your rooted Android device and login (you can’t have two version of Mi Home installed at the same time).</li>
+<li>Ensure you are using the same server every time</li>
+<li>Ensure successful operation using 5.4.54 (locate is a nice simple test)</li>
+<li>Using adb we will now extract the token from the rooted phone</li>
+<li>Use adb shell to connect to your device and become root (if using Magisck root do <code>adb shell -&gt; su -&gt; whoami</code> to ensure root access.</li>
+<li>Then run grep -R ‘“token”’ /data/data/com.xiaomi.smarthome and grab the token</li>
+</ol>
+<h3>iOS</h3>
+<ol>
+<li>
+<p>Configure the robot with the Mi Home app. Make sure to select the correct region, as Xiaomi uses different product names for different geographical areas. Note that the new RoboRock app is currently not supported for this method.</p>
+</li>
+<li>
+<p>Using iTunes, create an unencrypted backup of your iPhone.</p>
+</li>
+<li>
+<p>Install <a href="https://www.imactools.com/iphonebackupviewer/">iBackup Viewer</a>, open it, and open your backup.</p>
+</li>
+<li>
+<p>Open the “Raw Data” module.</p>
+</li>
+<li>
+<p>Navigate to <code>com.xiaomi.mihome</code>.</p>
+</li>
+<li>
+<p>Search for a file that looks like this: <code>123456789_mihome.sqlite</code> (Note: <code>_mihome.sqlite</code> is <em>not</em> the correct file. Most likely, you will find this file in the <code>Documents</code> folder.)</p>
+</li>
+<li>
+<p>Save this file to your filesystem.</p>
+</li>
+<li>
+<p>Install <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a>.</p>
+</li>
+<li>
+<p>Open DB Browser and load the <code>.sqlite</code> file you saved from your backup.</p>
+</li>
+<li>
+<p>Click on the <code>Execute SQL</code> tab.</p>
+</li>
+<li>
+<p>Input and run this query:</p>
+<pre><code class="language-sql">SELECT ZTOKEN FROM ZDEVICE WHERE ZMODEL LIKE &quot;%vacuum%&quot;
+</code></pre>
+</li>
+<li>
+<p>Copy the returned 96-digit hexadecimal string to your clipboard.</p>
+</li>
+<li>
+<p>Open <code>Terminal</code> and execute this command:</p>
+<pre><code class="language-bash">echo '0: &lt;YOUR HEXADECIMAL STRING&gt;' | xxd -r -p | openssl enc -d -aes-128-ecb -nopad -nosalt -K 00000000000000000000000000000000
+</code></pre>
+</li>
+<li>
+<p>Use the resulting 32-digit string as your token. (On your mac in front of the terminal session)</p>
+</li>
+</ol>
+<h3>Bluestacks</h3>
+<ol>
+<li>Configure the robot with the Mi-Home app. Make sure to select the correct region, as Xiaomi uses different product names for different geographical areas. Note that the new RoboRock app is currently not supported for this method.</li>
+<li>Install <a href="https://www.bluestacks.com">BlueStacks</a>.</li>
+<li>Set up <a href="https://www.apkmirror.com/apk/xiaomi-inc/mihome/mihome-5-0-30-release/">Mi Home version 5.0.30</a> in BlueStacks and login to synchronize devices.</li>
+<li>Use <a href="https://forum.xda-developers.com/general/general/bluestacks-tweaker-2-tool-modifing-t3622681">BlueStacks Tweaker</a> to access the filesystem and retrieve the token.</li>
+<li>Copy <code>/data/data/com.xiaomi.smarthome/databases/miio2.db</code> file to your computer using the Bluestacks Tweakers filesystem tool.</li>
+<li>Install <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a>.</li>
+<li>Open the DB Browser and load the <code>miio2.db</code> from your computer.</li>
+<li>Select <code>Browse Data</code> tab from the DB Browser and switch to table called <code>devicerecord</code></li>
+<li>This will display all the connected devices information with the token.</li>
+</ol>
+<h3>Miio command line tool</h3>
+<p>Use of Miio should be done before the Vacuum is connected to Mi Home. If you already connected to the app you will need to delete it and then join the ad-hoc Wifi network the Vacuum creates. If the vacuum is already paired it’s likely this method will only return <code>???</code> as your token.</p>
+<p>You can install the command line tool using the following command:</p>
+<pre><code class="language-bash">npm install -g miio
+</code></pre>
+<p>Discovering devices on the current network:</p>
+<pre><code class="language-bash">miio discover
+</code></pre>
+<p>This will list devices that are connected to the same network as your computer. Let it run for a while so it has a chance to reach all devices, as it might take a minute or two for all devices to answer.</p>
+<p>The commands outputs each device on this format:</p>
+<pre><code class="language-text">Device ID: 48765421
+Model info: zhimi.airpurifier.m1
+Address: 192.168.100.9
+Token: token-as-hex-here via auto-token
+Support: At least basic
+</code></pre>
+<p>The information output is:</p>
+<ul>
+<li><code>Device ID</code> - The unique identifier of the device, does not change if the device is reset.</li>
+<li><code>Model ID</code>- The model id if it could be determined, this indicates what type of device it is.</li>
+<li><code>Address</code> - The IP that the device has on the network.</li>
+<li><code>Token</code> - The token of the device or <code>???</code> if it could not be automatically determined.</li>
+</ul>
+<h2>Example on how to clean a specific room</h2>
+<p>Example script using <a href="/integrations/vacuum/"><code>vacuum.send_command</code></a> to clean a specific room:</p>
+<pre><code class="language-yaml">vacuum_kitchen:
+  alias: &quot;Clean the kitchen&quot;
+  sequence:
+    - service: vacuum.send_command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: app_segment_clean
+        params: [18]
+</code></pre>
+<p>Where params specify room numbers, for multiple rooms, params can be specified like <code>[17,18]</code>.</p>
+<p>Valid room numbers can be retrieved using miio command-line tool. It will only give room numbers and not the room names. To get the room names, one can just test the app_segment_clean command and see which room it cleans.</p>
+<pre><code class="language-bash">miio protocol call &lt;ip of the vacuum&gt; get_room_mapping
+</code></pre>
+<h2>Example on how to reset maintenance hours (brushes, filter, sensors)</h2>
+<p>The vacuum entity stores attribute values for when brushes, filters and sensors need to be
+cleaned or replaced (<code>main_brush_left</code>, <code>side_brush_left</code>, <code>filter_left</code> and
+<code>sensor_dirty_left</code>).  The values are measured in hours. Once the parts are cleaned
+or replaced you can then reset those values on the vacuum.  Here is an example script using
+<a href="/integrations/vacuum/"><code>vacuum.send_command</code></a> to reset the hours for the main brush:</p>
+<pre><code class="language-yaml">reset_main_brush_left:
+  alias: &quot;Reset hours for main brush replacement&quot;
+  sequence:
+    - service: vacuum.send_Command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: reset_consumable
+        params: ['main_brush_work_time']
+</code></pre>
+<p>Allowed <code>params</code> for the <code>reset_consumable</code> command:</p>
+<ul>
+<li><code>['main_brush_work_time']</code></li>
+<li><code>['side_brush_work_time']</code></li>
+<li><code>['filter_work_time']</code></li>
+<li><code>['sensor_dirty_time']</code></li>
+</ul>
+<h2>Retrieving Zoned Cleaning Coordinates</h2>
+<h3>Using FloleVac (Android)</h3>
+<ol>
+<li>Download <a href="https://play.google.com/store/apps/details?id=de.flole.xiaomi">FloleVac</a></li>
+<li>Login with your Xiaomi credentials</li>
+<li>Open Map (make sure you’re on the same network as your vacuum cleaner)</li>
+<li>Select “Zone cleanup” and draw a box around the zone you’d like to clean</li>
+<li>Long press “Cleanup” and the zone coordinates will be copied to your clipboard</li>
+</ol>
+<h3>Using RoboRock Control Center (requires Valetudo firmware)</h3>
+<p><a href="https://github.com/LazyT/rrcc">RRCC</a> supports both rooted and non-rooted Vacuums and acts as a mostly fully featured replacement for Mi Home that works locally without the cloud. If you have installed the rooted firmware <a href="https://github.com/Hypfer/Valetudo">Valetudo</a> you are able to SSH into your Vacuum and enable MQTT plus use map functions with no cloud requirement.</p>
+<p>Using the map editor you are able to acquire the co-ordinates required for zoned clean up. Here is an example script for zoned clean up:</p>
+<pre><code class="language-yaml">vacuum_kitchen:
+  alias: &quot;vacuum kitchen&quot;
+  sequence:
+    - service: vacuum.send_command
+      data:
+        entity_id: 'vacuum.xiaomi_vacuum_cleaner'
+        command: app_zoned_clean
+        params: [[23084,26282,27628,29727,1]]
+</code></pre>
+:ET

@@ -1,0 +1,115 @@
+I"�<p>The <code>script</code> integration allows users to specify a sequence of actions to be executed by Home Assistant. These are run when you turn the script on. The script integration will create an entity for each script and allow them to be controlled via services.</p>
+<h2>Configuration</h2>
+<p>The sequence of actions is specified using the <a href="/getting-started/scripts/">Home Assistant Script Syntax</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+script:
+  message_temperature:
+    sequence:
+      # This is Home Assistant Script Syntax
+      - service: notify.notify
+        data_template:
+          message: Current temperature is {{ states('sensor.temperature') }}
+</code></pre>
+<div class='note'>
+<p>Script names (e.g., <code>message_temperature</code> in the example above) are not allowed to contain capital letters, or dash (minus) characters, i.e. <code>-</code>. The preferred way to separate words for better readability is to use underscore (<code>_</code>) characters.</p>
+</div>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='alias' href='#alias'></a> alias</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Friendly name for the script.</p>
+</span></p></dd><dt><a class='title-link' name='description' href='#description'></a> description</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A description of the script that will be displayed in the Services tab under Developer Tools.</p>
+</span></p></dd><dt><a class='title-link' name='fields' href='#fields'></a> fields</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the parameters that the script uses; see the <a href="#passing-variables-to-scripts">Passing variables to scripts</a> section below.</p>
+</span></p><p class='default'>
+Default value: <p>{}</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='parameter_name' href='#parameter_name'></a> PARAMETER_NAME</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='description'><p>A parameter used by this script.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='description' href='#description'></a> description</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='description'><p>A description of PARAMETER_NAME.</p>
+</span></p></dd><dt><a class='title-link' name='example' href='#example'></a> example</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='description'><p>An example value for PARAMETER_NAME.</p>
+</span></p></dd></dl></dd></dl></dd><dt><a class='title-link' name='sequence' href='#sequence'></a> sequence</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sequence of actions to be performed in the script.</p>
+</span></p></dd></dl>
+</div>
+<h3>Full Configuration</h3>
+<pre><code class="language-yaml">script: 
+  wakeup:
+    alias: Wake Up
+    description: 'Turns on the bedroom lights and then the living room lights after a delay'
+    fields:
+      minutes:
+        description: 'The amount of time to wait before turning on the living room lights'
+        example: 1
+    sequence:
+      # This is Home Assistant Script Syntax
+      - event: LOGBOOK_ENTRY
+        event_data:
+          name: Paulus
+          message: is waking up
+          entity_id: device_tracker.paulus
+          domain: light
+      - alias: Bedroom lights on
+        service: light.turn_on
+        data:
+          entity_id: group.bedroom
+          brightness: 100
+      - delay:
+          # supports seconds, milliseconds, minutes, hours
+          minutes: {{ minutes }}
+      - alias: Living room lights on
+        service: light.turn_on
+        data:
+          entity_id: group.living_room
+</code></pre>
+<h3>Passing variables to scripts</h3>
+<p>As part of the service, variables can be passed along to a script so they become available within templates in that script.</p>
+<p>There are two ways to achieve this. One way is using the generic <code>script.turn_on</code> service. To pass variables to the script with this service, call it with the desired variables:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+automation:
+  trigger:
+    platform: state
+    entity_id: light.bedroom
+    from: 'off'
+    to: 'on'
+  action:
+    service: script.turn_on
+    entity_id: script.notify_pushover
+    data:
+      variables:
+        title: 'State change'
+        message: 'The light is on!'
+</code></pre>
+<p>The other way is calling the script as a service directly. In this case, all service data will be made available as variables. If we apply this approach on the script above, it would look like this:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+automation:
+  trigger:
+    platform: state
+    entity_id: light.bedroom
+    from: 'off'
+    to: 'on'
+  action:
+    service: script.notify_pushover
+    data:
+      title: 'State change'
+      message: 'The light is on!'
+</code></pre>
+<p>Using the variables in the script requires the use of <code>data_template</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+script:
+  notify_pushover:
+    description: 'Send a pushover notification'
+    fields:
+      title:
+        description: 'The title of the notification'
+        example: 'State change'
+      message:
+        description: 'The message content'
+        example: 'The light is on!'
+    sequence:
+      - condition: state
+        entity_id: switch.pushover_notifications
+        state: 'on'
+      - service: notify.pushover
+        data_template:
+          title: &quot;{{ title }}&quot;
+          message: &quot;{{ message }}&quot;
+</code></pre>
+<h3>In the Overview</h3>
+<p>Scripts in the Overview panel will be displayed with an <strong>EXECUTE</strong> button if the device has no <code>delay:</code> or <code>wait:</code> statement, and as a toggle switch if it has either of those.</p>
+<p>This is to enable you to stop a running script.</p>
+:ET

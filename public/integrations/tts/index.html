@@ -1,0 +1,361 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Text-to-Speech (TTS) - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to set up Text-to-Speech (TTS) with Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/tts/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Text-to-Speech (TTS)">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/tts/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to set up Text-to-Speech (TTS) with Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Text-to-Speech (TTS)">
+    <meta name="twitter:description" content="Instructions on how to set up Text-to-Speech (TTS) with Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/tts.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Text-to-Speech (TTS)
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>Text-to-Speech (TTS) enables Home Assistant to speak to you.</p>
+<h2>
+<a class="title-link" name="configuring-a-tts-platform" href="#configuring-a-tts-platform"></a> Configuring a tts platform</h2>
+<p>To get started, add the following lines to your <code>configuration.yaml</code> (example for Google):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Google TTS service
+tts:
+  - platform: google_translate
+</code></pre>
+<div class="note">
+<p>Depending on your setup, you might need to set a base URL (<code>base_url</code>) inside the <a href="/integrations/http/">http component</a> or in the parameters of this component.</p>
+</div>
+<p>The following optional parameters can be used with any platform. However, the TTS integration will only look for global settings under the configuration of the first configured platform:</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="cache" href="#cache"></a> cache</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Allow TTS to cache voice file to local storage.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="cache_dir" href="#cache_dir"></a> cache_dir</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Folder name or path to a folder for caching files.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>tts</p>
+</dd>
+<dt>
+<a class="title-link" name="time_memory" href="#time_memory"></a> time_memory</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Time to hold the voice data inside memory for fast play on a media player. Minimum is 60 s and the maximum 57600 s (16 hours).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>300</p>
+</dd>
+<dt>
+<a class="title-link" name="base_url" href="#base_url"></a> base_url</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A base URL to use <em>instead</em> of the one set in the <a href="/integrations/http/">http component</a>. It is used as-is by the <code>tts</code> component. In particular, you need to include the protocol scheme <code>http://</code> or <code>https://</code> and the correct port number. They will not be automatically added for you.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>value of <code>http.base_url</code></p>
+</dd>
+<dt>
+<a class="title-link" name="service_name" href="#service_name"></a> service_name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Define the service name.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>The service name default set to <platform>_say. For example, for google_translate tts, its service name default is <code>google_translate_say</code>.</platform></p>
+</dd>
+</dl>
+</div>
+<p>The extended example from above would look like the following sample:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Google Translate TTS service
+tts:
+  - platform: google_translate
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+    base_url: http://192.168.0.10:8123
+    service_name: google_say
+</code></pre>
+<div class="note">
+<p>In the above example, <code>base_url</code> is custom to this particular TTS platform configuration. It is not suggesting that you use the <code>base_url</code> that you have set for your core Home Assistant configuration. The reason you might need to do this is outlined in the next section.</p>
+</div>
+<h2>
+<a class="title-link" name="when-do-you-need-to-set-base_url-here" href="#when-do-you-need-to-set-base_url-here"></a> When do you need to set base_url here?</h2>
+<p>The general answer is “whenever the global <code>base_url</code> set in <a href="/integrations/http/">http component</a> is not adequate to allow the <code>say</code> service to run”. The <code>say</code> service operates by generating a media file that contains the speech corresponding to the text passed to the service. Then the <code>say</code> service sends a message to the media device with a URL pointing to the file. The device fetches the media file at the URL and plays the media. Some combinations of a media device, network configuration and Home Assistant configuration can make it so that the device cannot fetch the media file.</p>
+<p>The following sections describe some of the problems encountered with media devices.</p>
+<h3>
+<a class="title-link" name="self-signed-certificates" href="#self-signed-certificates"></a> Self-signed certificates</h3>
+<p>This problem occurs when your Home Assistant instance is configured to be accessed through SSL, and you are using a self-signed certificate.</p>
+<p>The <code>tts</code> service will send an <code>https://</code> URL to the media device, which will check the certificate, and reject it. So it won’t play your file. If you could make the device accept your certificate, it would play the file. However, many media devices do not allow changing settings to accept self-signed certificates. Ultimately, your option may be to serve files to the device as <code>http://</code> rather than <code>https://</code>. To do this, you <em>could</em> change the <code>base_url</code> setting in <a href="/integrations/http/">http component</a>, but that would turn off SSL for all services that use <code>base_url</code>. Instead, setting a <code>base_url</code> for the <code>tts</code> service allows turning off SSL only for this component.</p>
+<h3>
+<a class="title-link" name="google-cast-devices" href="#google-cast-devices"></a> Google cast devices</h3>
+<p>The Google cast devices (Google Home, Chromecast, etc.) present the following problems:</p>
+<ul>
+<li>
+<p>They <a href="#self-signed-certificates">reject self-signed certificates</a>.</p>
+</li>
+<li>
+<p>They do not work with URLs that contain hostnames established by local naming means. Let’s say your Home Assistant instance is running on a machine made known locally as <code>ha</code>. All your machines on your local network are able to access it as <code>ha</code>. However, try as you may, your cast device won’t download the media files from your <code>ha</code> machine. That’s because your cast device ignores your local naming setup. In this example, the <code>say</code> service creates a URL like <code>http://ha/path/to/media.mp3</code> (or <code>https://...</code> if you are using SSL). Setting a <code>base_url</code> that contains the IP address of your server works around this issue. By using an IP address, the cast device does not have to resolve the hostname.</p>
+</li>
+<li>
+<p>An alternative way to force Google cast devices to use internal DNS is to block them from accessing Google DNS at the firewall/router level. This would be useful in the case, for example, where your internal IP of Home Assistant is a private IP and you have your internal DNS server (quite often a split-brain DNS scenario). This method works on both Google Home Mini and Google Chromecasts.</p>
+</li>
+</ul>
+<h2>
+<a class="title-link" name="service-say" href="#service-say"></a> Service say</h2>
+<p>The <code>say</code> service support <code>language</code> and on some platforms also <code>options</code> for set, i.e., <em>voice, motion, speed, etc</em>. The text for speech is set with <code>message</code>. Since release 0.92, service name can be defined in configuration <code>service_name</code> option.</p>
+<p>Say to all <code>media_player</code> device entities:</p>
+<pre><code class="language-yaml"># Replace google_translate_say with &lt;platform&gt;_say when you use a different platform.
+service: tts.google_translate_say
+entity_id: "all"
+data:
+  message: 'May the Force be with you.'
+</code></pre>
+<p>Say to the <code>media_player.floor</code> device entity:</p>
+<pre><code class="language-yaml">service: tts.google_translate_say
+entity_id: media_player.floor
+data:
+  message: 'May the Force be with you.'
+</code></pre>
+<p>Say to the <code>media_player.floor</code> device entity in French:</p>
+<pre><code class="language-yaml">service: tts.google_translate_say
+entity_id: media_player.floor
+data:
+  message: 'Que la force soit avec toi.'
+  language: 'fr'
+</code></pre>
+<p>With a template:</p>
+<pre><code class="language-yaml">service: tts.google_translate_say
+data_template:
+  message: "Temperature is {{states('sensor.temperature')}}."
+  cache: false
+</code></pre>
+<h2>
+<a class="title-link" name="cache" href="#cache"></a> Cache</h2>
+<p>The integration has two caches. Both caches can be controlled with the <code>cache</code> option in the platform configuration or the service call <code>say</code>. A long time cache will be located on the file system. The in-memory cache for fast responses to media players will be auto-cleaned after a short period.</p>
+<h2>
+<a class="title-link" name="rest-api" href="#rest-api"></a> REST Api</h2>
+<h3>
+<a class="title-link" name="post-apitts_get_url" href="#post-apitts_get_url"></a> POST /api/tts_get_url</h3>
+<p>Returns an URL to the generated TTS file. Platform and message are required.</p>
+<pre><code class="language-json">{
+    "platform": "amazon_polly",
+    "message": "I am speaking now"
+}
+</code></pre>
+<p>The return code is 200 if the file is generated. The message body will contain a JSON object with the URL.</p>
+<pre><code class="language-json">{
+    "url": "http://127.0.0.1:8123/api/tts_proxy/265944c108cbb00b2a621be5930513e03a0bb2cd_en_-_demo.mp3"
+}
+</code></pre>
+<p>Sample <code>curl</code> command:</p>
+<pre><code class="language-bash">$ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
+       -H "Content-Type: application/json" \
+       -d '{"message": "I am speaking now", "platform": "amazon_polly"}' \
+       http://localhost:8123/api/tts_get_url
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/tts.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'></div><div class="section">
+    <kb-alert-link integration="tts"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.35
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/tts/'>/components/tts/</a>
+  </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,157 @@
+I"�<p>The <code>ViCare</code> integration lets you control <a href="https://www.viessmann.com">Viessmann</a> devices via the Viessmann ViCare (REST) API.
+Most recent network-connected Viessmann heating devices (e.g., gas boilers) should be supported.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#climate">Climate</a> (Heating)</li>
+<li><a href="#water-heater">Water Heater</a> (Domestic Hot Water)</li>
+</ul>
+<h2>Configuration</h2>
+<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">vicare:
+  username: VICARE_EMAIL
+  password: VICARE_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your username for the ViCare App</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your password for the ViCare App</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The friendly_name of the device (will be appended with <em>Heating</em> or <em>Water</em>)</p>
+</span></p><p class='default'>
+Default value: <p>ViCare</p>
+</p></dd><dt><a class='title-link' name='circuit' href='#circuit'></a> circuit</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Heating circuit of your heating device if multiple exist</p>
+</span></p></dd><dt><a class='title-link' name='heating_type' href='#heating_type'></a> heating_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>One of <code>generic</code>, <code>gas</code> or <code>heatpump</code>. Specifying the heating_type provides additional attributes specific for the heating system.</p>
+</span></p><p class='default'>
+Default value: <p>generic</p>
+</p></dd></dl>
+</div>
+<p>Two components will be created: <code>climate.vicare_heating</code> and <code>water_heater.vicare_water</code> (for domestic hot water).
+Unless you specify a <code>circuit</code> parameter, it will pick up the first heating circuit of your installation.</p>
+<h2>Climate</h2>
+<p>A note about the current temperature attribute: Viessmann devices with room temperature sensing will show the current room temperature via <code>current_temperature</code>. All other devices will show the current supply temperature of the heating circuit.</p>
+<h3>Supported services <code>climate.vicare_heating</code></h3>
+<p>The following services of the <a href="/integrations/climate/">Climate component</a> are provided by the ViCare integration: <code>set_temperature</code>, <code>set_hvac_mode</code>, <code>set_preset_mode</code></p>
+<h4>Service <code>set_temperature</code></h4>
+<p>Sets the target temperature to the given temperature.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of climate devices to control. To target all entities, use <code>all</code> keyword instead of entity_id.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>no</td>
+<td>Desired target temperature</td>
+</tr>
+</tbody>
+</table>
+<p>Note that <code>set_temperature</code> will always affect the current normal temperature or, if a preset is set, the temperature of the preset (i.e., Viessman program like eco or comfort).</p>
+<h4>Service <code>climate.set_hvac_mode</code></h4>
+<p>Set HVAC mode for the climate device. The following modes are supported:</p>
+<p>The <code>climate.vicare_heating</code> component has the following mapping of HVAC modes to Viessmann operation modes:</p>
+<table>
+<thead>
+<tr>
+<th>HVAC mode</th>
+<th>Viessmann mode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>off</code></td>
+<td><code>ForcedReduced</code></td>
+<td>Permanently set heating to reduced temperature. Note: This will also deactivate domestic hot water</td>
+</tr>
+<tr>
+<td><code>heat</code></td>
+<td><code>ForcedNormal</code></td>
+<td>Permanently set heating to normal temperature.</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td><code>DHWandHeating</code></td>
+<td>Switches between reduced and normal temperature as by the heating schedule programmed in your device</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of climate devices to control. To target all entities, use <code>all</code> keyword instead of entity_id.</td>
+</tr>
+<tr>
+<td><code>hvac_mode</code></td>
+<td>no</td>
+<td>New value of HVAC mode</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>set_preset_mode</code></h4>
+<p>Sets the preset mode. Supported preset modes are <em>eco</em> and <em>comfort</em>. These are identical to the respective Viessmann programs and are only temporary. Please consult your heating device manual for more information.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of climate devices to control. To target all entities, use <code>all</code> keyword instead of entity_id.</td>
+</tr>
+<tr>
+<td><code>preset_mode</code></td>
+<td>no</td>
+<td>New value of hold mode.</td>
+</tr>
+</tbody>
+</table>
+<h2>Water Heater</h2>
+<p>It is not possible to turn on/off water heating via the Water Heater component since this would conflict with the operation modes of the heating component. Therefore the operation mode of that component is just available as an attribute and cannot be modified.</p>
+<h3>Supported services <code>water_heater.vicare_water</code></h3>
+<p>The following services of the <a href="/integrations/water_heater/">Water Heater component</a> are provided by the ViCare integration: <code>set_temperature</code></p>
+<h4>Service <code>set_temperature</code></h4>
+<p>Sets the target temperature of domestic hot water to the given temperature.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>’s of water heater devices to control. To target all entities, use <code>all</code> keyword instead of entity_id.</td>
+</tr>
+<tr>
+<td><code>temperature</code></td>
+<td>no</td>
+<td>New target temperature for water heater</td>
+</tr>
+</tbody>
+</table>
+:ET

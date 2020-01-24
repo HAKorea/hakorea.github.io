@@ -1,0 +1,69 @@
+I"�<p>The <code>iperf3</code> sensor integration allows you to measure network bandwidth performance against a private or public <a href="https://software.es.net/iperf/index.html">Iperf3</a> server.</p>
+<p>Enabling this integration will automatically create the Iperf3 sensors for the monitored conditions (below). By default, it will run every hour. The user can change the update frequency in the config by defining the <code>scan_interval</code> for a Iperf3 test to run.</p>
+<h2>Setup</h2>
+<p>This integration requires the <code>iperf3</code> command to be installed on your OS. Please, refer to the <a href="https://software.es.net/iperf/obtaining.html">official Iperf3 documentation</a> for installation instructions.</p>
+<h2>Configuration</h2>
+<p>To add the <code>iperf3</code> sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>Once per hour, on the hour (default):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+iperf3:
+  hosts:
+    - host: iperf.he.net
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sensors to display in the frontend.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='download' href='#download'></a> download</dt><dd><p class='desc'><span class='description'><p>The download speed (Mbit/s).</p>
+</span></p></dd><dt><a class='title-link' name='upload' href='#upload'></a> upload</dt><dd><p class='desc'><span class='description'><p>The upload speed (Mbit/s).</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='hosts' href='#hosts'></a> hosts</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of Iperf3 servers to perform the test against.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minimum time interval between updates. Supported formats: <code>scan_interval: 'HH:MM:SS'</code>, <code>scan_interval: 'HH:MM'</code> and Time period dictionary (see example below).</p>
+</span></p><p class='default'>
+Default value: <p>60 minutes</p>
+</p></dd><dt><a class='title-link' name='manual' href='#manual'></a> manual</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p><code>true</code> or <code>false</code> to turn manual mode on or off. Manual mode will disable scheduled tests.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>Configuration variables (host):</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Server name/IP address running Iperf3 to test against.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port that Iperf3 is running on.</p>
+</span></p><p class='default'>
+Default value: <p>5201</p>
+</p></dd><dt><a class='title-link' name='duration' href='#duration'></a> duration</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify the test duration in seconds. Default is 10 and the valid range is from 5 to 10.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd><dt><a class='title-link' name='parallel' href='#parallel'></a> parallel</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='description'><p>Specify the number of concurrent streams to connect to the server. Default is 1 and the valid range is from 1 to 20.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='protocol' href='#protocol'></a> protocol</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify the protocol to be used on the test. Default is TCP and the valid values are TCP or UDP. If your Iperf3 server is located in the Internet, consider to use TCP instead of UDP. If the protocol is set to use UDP, the sensor may not get updated due to package retransmission issues due to its nature.</p>
+</span></p><p class='default'>
+Default value: <p>tcp</p>
+</p></dd></dl>
+</div>
+<h4>Time period dictionary example</h4>
+<pre><code class="language-yaml">scan_interval:
+  # At least one of these must be specified:
+  days: 0
+  hours: 0
+  minutes: 3
+  seconds: 30
+  milliseconds: 0
+</code></pre>
+<p>You can find a list of public Iperf3 servers <a href="https://iperf.fr/iperf-servers.php">here</a>. You can also start your own Iperf3 server using the <a href="https://hub.docker.com/r/mlabbe/iperf3/">mlabbe/iperf3’s</a> docker image or just refer to your <code>iperf3</code> command’s man page.</p>
+<p>The frequency when the test will be automatically triggered can be adjusted by setting the value <code>scan_interval</code> in seconds.</p>
+<p>Parallel streams can help in some situations. As TCP attempts to be fair and conservative, you may consider increasing the <code>parallel</code> attribute. Use this value with careful and refer to Iperf3 man page for more information.</p>
+<p>You can use the service <code>sensor.iperf3_update</code> to trigger a manual speed test for all sensors. Iperf3 has its own service call that allow to perform a speed test on a particular entity.</p>
+<h3>Service</h3>
+<p>Once loaded, the <code>iperf3</code> integration will expose a service (<code>iperf3.speedtest</code>) that can be called to run a speed test on demand. This can be useful if you have enabled manual mode.</p>
+<p>| Service data attribute | Description |
+| <code>host</code> | String that point at a configured <code>host</code> from configuration.yaml. Otherwise, tests will be run against all configured hosts.</p>
+<p>Example Service data:</p>
+<pre><code class="language-json">{&quot;host&quot;: &quot;192.168.0.121&quot;}
+</code></pre>
+<h2>Notes</h2>
+<ul>
+<li>When running on Raspberry Pi, just note that the maximum speed is limited by its 100 Mbit/s LAN adapter.</li>
+</ul>
+:ET

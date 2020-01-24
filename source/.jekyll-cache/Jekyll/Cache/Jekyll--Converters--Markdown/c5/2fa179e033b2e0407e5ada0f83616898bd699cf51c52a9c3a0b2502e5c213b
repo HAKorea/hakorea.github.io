@@ -1,0 +1,41 @@
+I"�
+<p>The <code>flunearyou</code> sensor platform allows users in the United States and its
+territories to get information regarding reported flu symptoms from <a href="https://flunearyou.org/">Flu Near
+You</a>. The platform can return user-reported information as well reports from the
+Center for Disease Control (CDC).</p>
+<h2>Configuration</h2>
+<p>To enable the platform, add the following lines to your <code>configuration.yaml</code>
+file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: flunearyou
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The sensor categories to display.</p>
+</span></p><p class='default'>
+Default value: <p>[“cdc_report”, “user_report”]</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The latitude of the location to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>The latitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The longitude of the location to monitor.</p>
+</span></p><p class='default'>
+Default value: <p>The longitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</p></dd></dl>
+</div>
+<h2>Sensor Types</h2>
+<h3>User Report</h3>
+<ul>
+<li>Number of reported cases of <a href="https://www.cdc.gov/flu/avianflu/index.htm">Avian Flu</a> symptoms</li>
+<li>Number of reported cases of <a href="https://www.cdc.gov/dengue/index.html">Dengue</a> symptoms</li>
+<li>Number of reported cases of <a href="https://www.cdc.gov/flu/">Flu</a> symptoms</li>
+<li>Number of reported cases of <a href="https://en.wikipedia.org/wiki/Influenza-like_illness">Flu-like</a> symptoms</li>
+<li>Number of reported cases of <a href="https://www.cdc.gov/leptospirosis/index.html">Leptospirosis</a> symptoms</li>
+<li>Total number of reported cases with symptoms</li>
+<li>Number of reported cases with no symptoms</li>
+</ul>
+<h3>CDC Report</h3>
+<ul>
+<li>Current CDC level for the state</li>
+<li>Current CDC “Level 2” for the state</li>
+</ul>
+:ET

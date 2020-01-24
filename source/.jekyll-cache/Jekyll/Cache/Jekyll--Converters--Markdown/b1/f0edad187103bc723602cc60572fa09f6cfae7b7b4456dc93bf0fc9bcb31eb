@@ -1,0 +1,46 @@
+I"�<p>Zones allow you to specify certain regions on earth (for now). When a device tracker sees a device to be within a zone, the state will take the name from the zone. Zones can also be used as a <a href="/getting-started/automation-trigger/#zone-trigger">trigger</a> or <a href="/getting-started/automation-condition/#zone-condition">condition</a> inside automation setups.</p>
+<p>The <code>zone</code> integration uses YAML sequences to configure multiple zones:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+zone:
+  - name: School
+    latitude: 32.8773367
+    longitude: -117.2494053
+    radius: 250
+    icon: mdi:school
+
+  - name: Work
+    latitude: 32.8753367
+    longitude: -117.2474053
+
+  # This will override the default home zone
+  - name: Home
+    latitude: 32.8793367
+    longitude: -117.2474053
+    radius: 100
+    icon: mdi:account-multiple
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The friendly name of the zone.</p>
+</span></p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Required)</span><span class='description'><p>The latitude of the center point of the zone.</p>
+</span></p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Required)</span><span class='description'><p>The longitude of the center point of the zone.</p>
+</span></p></dd><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The radius of the zone in meters.</p>
+</span></p><p class='default'>
+Default value: <p>100</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The icon to show instead of name.</p>
+</span></p></dd><dt><a class='title-link' name='passive' href='#passive'></a> passive</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>To only use the zone for automation and hide it from the frontend and not use the zone for device tracker name.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>To find the latitude/longitude of a certain place you can use <a href="https://www.google.com/maps/">Google Maps</a> or <a href="https://www.bing.com/maps">Bing Maps</a>. Just right click and copy the coordinates from there (Bing) or click on the “What is here?” (Google)</p>
+<h2>Home zone</h2>
+<p>If no configuration is given, the <code>zone</code> integration will create a zone for home. This zone will use location provided in the <code>configuration.yaml</code> file and have a radius of 100 meters. To override this, create a zone configuration and name it <strong>‘Home’</strong>.</p>
+<div class='note'>
+<p>Devices that are in the zone <strong>‘Home’</strong> will not appear on the map in the Home Assistant UI.</p>
+</div>
+<h2>Icons</h2>
+<p>It is preferred to pick an icon to use for your zone. Pick any icon that you can find on <a href="https://materialdesignicons.com/">materialdesignicons.com</a> and prefix the name with <code>mdi:</code>. For example <code>mdi:school</code>, <code>mdi:worker</code>, <code>mdi:home</code>, <code>mdi:cart</code>, or <code>mdi:castle</code>.</p>
+<h2>State</h2>
+<p><code>zoning</code> is the state a <code>zone</code> has when it is configured. A <code>zone</code> doesn’t have another state; all configured zones are <code>zoning</code> all the time.</p>
+:ET

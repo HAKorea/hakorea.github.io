@@ -1,0 +1,48 @@
+I"	<p>The <code>netio</code> switch platform allows you to control your <a href="https://www.netio-products.com/en/overview/">Netio</a> Netio4, Netio4 All, and Netio 230B. These are smart outlets controllable through Ethernet and/or WiFi that reports consumptions (Netio4all).</p>
+<p>To use Netio devices in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: netio
+    host: 192.168.1.43
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    outlets:
+      1: Free
+      2: TV
+      4: Lamp
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your Netio plug, e.g., <code>http://192.168.1.32</code>.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port to communicate with the switch.</p>
+</span></p><p class='default'>
+Default value: <p>1234</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for your plug.</p>
+</span></p><p class='default'>
+Default value: <p>admin</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for your plug.</p>
+</span></p></dd><dt><a class='title-link' name='outlets' href='#outlets'></a> outlets</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of all outlets. Consisting of a number and a name [No.]: [Name].</p>
+</span></p></dd></dl>
+</div>
+<p>To get pushed updates from the Netio devices, one can add this Lua code in the device interface as an action triggered on “Netio” “System variables updated” with an ‘Always’ schedule:</p>
+<pre><code class="language-lua">-- this will send socket and consumption status updates via CGI
+-- to given address. Associate with 'System variables update' event
+-- to get consumption updates when they show up
+
+local address='ha:8123'
+local path = '/api/netio/&lt;host&gt;'
+
+
+local output = {}
+for i = 1, 4 do for _, what in pairs({'state', 'consumption',
+                        'cumulatedConsumption', 'consumptionStart'}) do
+    local varname = string.format('output%d_%s', i, what)
+    table.insert(output,
+        varname..'='..tostring(devices.system[varname]):gsub(&quot; &quot;,&quot;|&quot;))
+end end
+
+local qs = table.concat(output, '&amp;')
+local url = string.format('http://%s%s?%s', address, path, qs)
+devices.system.CustomCGI{url=url}
+</code></pre>
+:ET

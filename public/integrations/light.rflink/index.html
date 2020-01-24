@@ -1,0 +1,404 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>RFLink Light - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate RFLink lights into Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/light.rflink/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="RFLink Light">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/light.rflink/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate RFLink lights into Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="RFLink Light">
+    <meta name="twitter:description" content="Instructions on how to integrate RFLink lights into Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/light.rflink.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      RFLink Light
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
+<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
+<p>After configuring the RFLink hub, lights will be automatically discovered and added.</p>
+<p>RFLink binary_sensor/switch/light ID’s are composed of: protocol, id, switch/channel. For example: <code>newkaku_0000c6c2_1</code>.</p>
+<p>Once the ID of a light is known, it can be used to configure the light in HA, for example to add it to a different group, hide it or configure a nice name.</p>
+<p>Configuring devices as a light:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: rflink
+    devices:
+      NewKaku_02a48800_0: {}
+      newkaku_0000c6c2_1: {}
+      Ansluta_ce30_0: {}
+      Maclean_0d82_01: {}
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="device_defaults" href="#device_defaults"></a> device_defaults</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The defaults for the devices.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="fire_event" href="#fire_event"></a> fire_event</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set default <code>fire_event</code> for RFLink switch devices (see below).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="signal_repetitions" href="#signal_repetitions"></a> signal_repetitions</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set default <code>signal_repetitions</code> for RFLink switch devices (see below).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>1</p>
+</dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="automatic_add" href="#automatic_add"></a> automatic_add</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Automatically add new/unconfigured devices to Home Assistant if detected.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="devices" href="#devices"></a> devices</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of lights.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="rflink_ids" href="#rflink_ids"></a> rflink_ids</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>RFLink ID of the device</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name for the device.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>RFLink ID</p>
+</dd>
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Override automatically detected type of the light device, can be: switchable, dimmable, hybrid or toggle. See <a href="/integrations/light.rflink/#light-types">Light Types</a> below.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>switchable</p>
+</dd>
+<dt>
+<a class="title-link" name="aliases" href="#aliases"></a> aliases</dt>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Alternative RFLink ID’s this device is known by.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="group_aliases" href="#group_aliases"></a> group_aliases</dt>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>aliases</code> which only respond to group commands.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="no_group_aliases" href="#no_group_aliases"></a> no_group_aliases</dt>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>aliases</code> which do not respond to group commands.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="fire_event" href="#fire_event"></a> fire_event</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Fire a <code>button_pressed</code> event if this device is turned on or off.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="signal_repetitions" href="#signal_repetitions"></a> signal_repetitions</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Repeat every RFLink command this number of times.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>1</p>
+</dd>
+<dt>
+<a class="title-link" name="group" href="#group"></a> group</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Allow light to respond to group commands (ALLON/ALLOFF).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+</dl></dd>
+</dl></dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="light-state" href="#light-state"></a> Light state</h3>
+<p>Initially the state of a light is unknown. When the light is turned on or off (via frontend or remote) the state is known and will be shown in the frontend.</p>
+<p>Sometimes a light is controlled by multiple remotes, each remote has its own code programmed in the light. To allow tracking of the state when switched via other remotes add the corresponding remote codes as aliases:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: rflink
+    devices:
+      newkaku_0000c6c2_1:
+        aliases:
+          - newkaku_000000001_2
+          - kaku_000001_a
+</code></pre>
+<p>Any on/off command from any alias ID updates the current state of the light. However when sending a command through the frontend only the primary ID is used.</p>
+<h3>
+<a class="title-link" name="light-types" href="#light-types"></a> Light types</h3>
+<p>Light devices can come in different forms. Some only switch on and off, other support dimming. Dimmable devices might not always respond nicely to repeated <code>on</code> command as they turn into a pulsating state until <code>on</code> is pressed again (for example KlikAanKlikUit). The RFLink integration support three types of lights to make things work in every situation:</p>
+<ul>
+<li>
+<em>Hybrid</em>: This type sends a <code>dim</code> followed by an an <code>on</code> command; and <code>off</code> commands. This will make dimmable devices turn on at the requested dim level and on/off devices on. One caveat is this type is not compatible with signal repetition as multiple <code>on</code> signals will cause dimmers to go into disco mode.</li>
+<li>
+<em>Switchable</em>: Device type that sends only <code>on</code> and <code>off</code> commands. It work for both on/off and dimmable type switches. However dimmables might have issues with signal repetition (see above).</li>
+<li>
+<em>Dimmable</em>: Sends only <code>dim</code> and <code>off</code> commands. This does not work on on/off type devices as they don’t understand the <code>dim</code> command. For dimmers this does not cause issues with signal repetitions.</li>
+<li>
+<em>Toggle</em>: Device type that sends only <code>on</code> commands to turn on or off the device. Some switches like for example Livolo light switches use the same ‘on’ command to switch on and switch off the lights. If the light is on and ‘on’ gets sent, the light will turn off and if the light is off and ‘on’ gets sent, the light will turn on. If the device has an unknown state, it will assume it is off by default.</li>
+</ul>
+<p>By default new lights are assigned the <code>switchable</code> type. Protocol supporting dimming are assigned the <code>hybrid</code> type. Currently only <code>newkaku</code> protocol is detected as dimmable. Please refer to Device Support to get your dimmers supported.</p>
+<h3>
+<a class="title-link" name="hidingignoring-lights" href="#hidingignoring-lights"></a> Hiding/ignoring lights</h3>
+<p>Lights are added automatically when the RFLink gateway intercepts a wireless command in the ether. To prevent cluttering the frontend use any of these methods:</p>
+<ul>
+<li>Disable automatically adding of unconfigured new sensors (set <code>automatic_add</code> to <code>false</code>).</li>
+<li>Hide unwanted devices using <a href="/getting-started/customizing-devices/">customizations</a>
+</li>
+<li><a href="/integrations/rflink/#ignoring-devices">Ignore devices on a platform level</a></li>
+</ul>
+<h3>
+<a class="title-link" name="device-support" href="#device-support"></a> Device support</h3>
+<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<h3>
+<a class="title-link" name="additional-configuration-examples" href="#additional-configuration-examples"></a> Additional configuration examples</h3>
+<p>Multiple lights with <code>signal_repetitions</code> and custom names</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: rflink
+    device_defaults:
+      fire_event: true
+      signal_repetitions: 2
+    automatic_add: true
+    devices:
+      NewKaku_02a48800_0:
+        name: Kitchen
+        type: hybrid
+      newkaku_0000c6c2_1:
+        name: Living room
+        aliases:
+          - newkaku_000000001_2
+          - kaku_000001_a
+      Ansluta_ce30_0:
+        name: Kitchen Under Counter Lights
+      Maclean_0d82_01:
+        name: Bedroom Lamp
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/light.rflink.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/rflink.png' /></div><div class="section">
+    <kb-alert-link integration="rflink"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Assumed State
+    </div><div class='section'>
+      Introduced in release: 0.38
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/rflink/'>/components/rflink/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#light'>Light</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

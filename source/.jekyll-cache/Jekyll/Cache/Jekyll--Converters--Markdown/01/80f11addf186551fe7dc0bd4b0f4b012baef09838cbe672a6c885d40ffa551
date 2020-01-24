@@ -1,0 +1,47 @@
+I"­<p>The <code>modbus</code> binary sensor allows you to gather data from <a href="http://www.modbus.org/">Modbus</a> coils.</p>
+<h2>Configuration</h2>
+<p>To use your Modbus binary sensors in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: modbus
+    coils:
+      - name: Sensor1
+        hub: hub1
+        slave: 1
+        coil: 100
+      - name: Sensor2
+        hub: hub1
+        slave: 1
+        coil: 110
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='coils' href='#coils'></a> coils</dt><dd><p class='desc'><span class='type'>(<span class='map list'>map | list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The array contains a list of coils to read from.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='hub' href='#hub'></a> hub</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the hub.</p>
+</span></p><p class='default'>
+Default value: <p>default</p>
+</p></dd><dt><a class='title-link' name='slave' href='#slave'></a> slave</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The number of the slave (Optional for TCP and UDP Modbus).</p>
+</span></p></dd><dt><a class='title-link' name='coil' href='#coil'></a> coil</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>Coil number.</p>
+</span></p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='device_class'><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>The <a href="/integrations/binary_sensor/#device-class">type/class</a> of the binary sensor to set the icon in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd></dl></dd></dl>
+</div>
+<p>Itâ€™s possible to change the default 30 seconds scan interval for the sensor updates as shown in the <a href="/docs/configuration/platform_options/#scan-interval">Platform options</a> documentation.</p>
+<h2>Full example</h2>
+<p>Example a sensor with a 10 seconds scan interval:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: modbus
+    scan_interval: 10
+    coils:
+      - name: Sensor1
+        hub: hub1
+        slave: 1
+        coil: 100
+      - name: Sensor2
+        hub: hub1
+        slave: 1
+        coil: 110
+</code></pre>
+:ET

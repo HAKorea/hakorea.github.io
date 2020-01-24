@@ -1,0 +1,240 @@
+I"�J<p><a href="https://www.pilight.org/">Pilight</a> is a modular and open source solution to communicate with 433 MHz devices and runs on various small form factor computers. A lot of common <a href="https://manual.pilight.org/protocols/index.html">protocols</a> are already available.</p>
+<p>This pilight hub connects to the <a href="https://manual.pilight.org/programs/daemon.html">pilight-daemon</a> via a socket connection to receive and send codes. Thus Home Assistant does not have to run on the computer in charge of the RF communication.</p>
+<p>The received and supported RF codes are put on the event bus of Home Assistant and are therefore directly usable by other integrations (e.g., automation). Additionally a send service is provided to send RF codes.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+<li><a href="#light">Light</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To integrate pilight into Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+pilight:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of the computer running the pilight-daemon, e.g., 192.168.1.32.</p>
+</span></p><p class='default'>
+Default value: <p>127.0.0.1</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The network port to connect to, see also: (<a href="https://manual.pilight.org/development/api.html">https://manual.pilight.org/development/api.html</a>).</p>
+</span></p><p class='default'>
+Default value: <p>5001</p>
+</p></dd><dt><a class='title-link' name='send_delay' href='#send_delay'></a> send_delay</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can define a send delay as a fraction of seconds if you experience transmission problems when you try to switch multiple switches at once. This can happen when you use a <a href="https://github.com/pilight/pilight-usb-nano">pilight USB Nano</a> as hardware and switches a whole group of multiple switches on or off. Tested values are between 0.3 and 0.8 seconds depending on the hardware.</p>
+</span></p><p class='default'>
+Default value: <p>0.0</p>
+</p></dd><dt><a class='title-link' name='whitelist' href='#whitelist'></a> whitelist</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can define a whitelist to prevent that too many unwanted RF codes (e.g., the neighbors weather station) are put on your HA event bus. All defined subsections have to be matched. A subsection is matched if one of the items are true.</p>
+</span></p></dd></dl>
+</div>
+<p>In this example only received RF codes using a daycom or Intertechno protocol are put on the event bus and only when the device id is 42. For more possible settings please look at the receiver section of the pilight <a href="https://manual.pilight.org/development/api.html">API</a>.</p>
+<p>A full configuration sample could look like the sample below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+pilight:
+  host: 127.0.0.1
+  port: 5000
+  send_delay: 0.4
+  whitelist:  # optional
+    protocol:
+      - daycom
+      - intertechno
+    id:
+      - 42
+</code></pre>
+<h2>Binary Sensor</h2>
+<p>The <code>pilight</code> binary sensor platform implement the <a href="#configuration">pilight hub</a> binary sensor functionality. Two type of Pilight binary sensor configuration available. A normal sensor which send the on and off state cyclical and a trigger sensor which send only a trigger when an event happened (for example lots of cheap PIR motion detector).</p>
+<p>To enable a Pilight binary sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: pilight
+    variable: 'state'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='variable' href='#variable'></a> variable</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The variable name in the data stream that defines the sensor value.</p>
+</span></p></dd><dt><a class='title-link' name='payload' href='#payload'></a> payload</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Message payload identifiers. Only if all identifiers are matched the sensor value is set.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='payload_on' href='#payload_on'></a> payload_on</dt><dd><p class='desc'><span class='type'>(<span class='string float integer'>string | float | integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Variable <code>on</code> value. The integration will recognize this as logical ‘1’.</p>
+</span></p></dd><dt><a class='title-link' name='payload_off' href='#payload_off'></a> payload_off</dt><dd><p class='desc'><span class='type'>(<span class='string float integer'>string | float | integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Variable <code>off</code> value. The integration will recognize this as logical ‘0’.</p>
+</span></p></dd><dt><a class='title-link' name='disarm_after_trigger' href='#disarm_after_trigger'></a> disarm_after_trigger</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Configure sensor as trigger type.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='reset_delay_sec' href='#reset_delay_sec'></a> reset_delay_sec</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Seconds before the sensor is disarmed if <code>disarm_after_trigger</code> is set to true.</p>
+</span></p><p class='default'>
+Default value: <p>30</p>
+</p></dd></dl>
+</div>
+<h3>Full example</h3>
+<p>A full configuration example could look like this:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: pilight
+    name: 'Motion'
+    variable: 'state'
+    payload:
+      unitcode: 371399
+    payload_on: 'closed'
+    disarm_after_trigger: true
+    reset_delay_sec: 30
+</code></pre>
+<h2>Sensor</h2>
+<p>This <code>pilight</code> sensor platform for 433 MHz devices uses a value in the message payload as the sensor value. Unique identifiers (e.g., <em>uuid</em>) can be set to distinguish between multiple pilight devices. To use a pilight sensor the pilight Home Assistant hub has to be set up.</p>
+<p>To use your sensor via pilight, make sure it is <a href="https://wiki.pilight.org/doku.php/protocols">supported</a> and add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: pilight
+    variable: temperature
+    payload:
+      uuid: '0000-b8-27-eb-f447d3'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='variable' href='#variable'></a> variable</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The variable name in the data stream that defines the sensor value.</p>
+</span></p></dd><dt><a class='title-link' name='payload' href='#payload'></a> payload</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Message payload identifiers. Only if all identifiers are matched the sensor value is set.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Pilight Sensor</p>
+</p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the units of measurement of the sensor, if any.</p>
+</span></p></dd></dl>
+</div>
+<h3>Example: Weather station</h3>
+<p>This section shows a real life example how to use values of a weather station.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: pilight
+    name: 'Temperature'
+    variable: 'temperature'
+    payload:
+      uuid: 0000-b8-27-eb-f1f72e
+    unit_of_measurement: '°C'
+  - platform: pilight
+    name: 'Humidity'
+    variable: 'humidity'
+    payload:
+      uuid: 0000-b8-27-eb-f1f72e
+    unit_of_measurement: '%'
+  - platform: pilight
+    name: 'Battery'
+    variable: 'battery'
+    payload:
+      uuid: 0000-b8-27-eb-f1f72e
+    unit_of_measurement: '%'
+</code></pre>
+<h2>Switch</h2>
+<p>The <code>pilight</code> switch platform is issuing 433 MHz commands using <a href="https://www.pilight.org/">pilight</a> to turn a 433 MHz device on or off. The Pilight Home Assistant hub has to be set up.</p>
+<p>Additionally, RF commands can be defined that trigger this switch to turn on and off. This allows you to also use the remote shipped with your 433 MHz switch without mixing up the Home Assistant states. You can even define several on/off commands, thus several RF remotes to toggle this switch.</p>
+<p>To be really sure that Home Assistant knows the actual state of your device it is recommended to use the RF remote with codes unknown to any of your 433 MHz devices. Thus you use the remote to trigger this switch to send the correct RF code to the device.</p>
+<p>To define a Pilight switch, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: pilight
+    switches:
+      Bed light:
+        on_code:
+          protocol: intertechno_old
+          'on': 1
+        off_code:
+          protocol: intertechno_old
+          'off': 1
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='switches' href='#switches'></a> switches</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The list that contains all command switches.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entry' href='#entry'></a> entry</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the command switch. Multiple entries are possible.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='on_code' href='#on_code'></a> on_code</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The code to turn the device on.</p>
+</span></p></dd><dt><a class='title-link' name='off_code' href='#off_code'></a> off_code</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The code to turn the device off.</p>
+</span></p></dd><dt><a class='title-link' name='on_code_receive' href='#on_code_receive'></a> on_code_receive</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If given, this command will turn the switch on if it is received by pilight.</p>
+</span></p></dd><dt><a class='title-link' name='off_code_receive' href='#off_code_receive'></a> off_code_receive</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If given, this command will turn the switch off if it is received by pilight.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<p>Variables for the different codes (<code>on_code</code> and <code>off_code</code>):</p>
+<ul>
+<li><strong>protocol</strong> (<em>Required</em>): Protocol to use, e.g., <code>intertechno_old</code> or <code>daycom</code>.</li>
+<li><strong>systemcode</strong> (<em>Optional</em>): The systemcode of the device.</li>
+<li><strong>unit</strong> (<em>Optional</em>): The unit to use (is equivalent to <code>pilight-send --unit</code>).</li>
+<li><strong>unitcode</strong> (<em>Optional</em>): The unitcode to use (is equivalent to <code>pilight-send --unitcode</code>).</li>
+<li><strong>id</strong> (<em>Optional</em>): ID of the device</li>
+<li><strong>state</strong> (<em>Optional</em>): <code>'on'</code> or <code>'off'</code> has to be in apostrophes to be parsed correctly.</li>
+<li><strong>‘off’</strong> (<em>Optional</em>): <code>1</code> or <code>0</code></li>
+<li><strong>‘on’</strong> (<em>Optional</em>): <code>1</code> or <code>0</code></li>
+</ul>
+<p>For possible code entries, look at the <a href="https://manual.pilight.org/development/api.html">pilight API</a>. All commands allowed by <a href="https://manual.pilight.org/programs/send.html">pilight-send</a> can be used. Which means that if, for a certain protocol, there are different parameters used, you should be able to replace the variables above by the proper ones required by the specific protocol. When using the <code>elro_800_switch</code> or <code>mumbi</code> protocol, for example, you will have to replace the variable <code>unit</code> with <code>unitcode</code> or there will be errors occurring.</p>
+<p>Variables for the different receive codes (<code>on_code_receive</code> and <code>off_code_receive</code>):</p>
+<ul>
+<li><strong>echo</strong> (<em>Optional</em>) Set to <code>true</code> if the on-/off-code should be sent if the given code was received.</li>
+</ul>
+<p>This is useful if you have paired your sender directly with the receiver to prevent sending the signal twice.</p>
+<h3>Examples</h3>
+<pre><code class="language-yaml">switch:
+  - platform: pilight
+    switches:
+      Bed light:
+        on_code:
+          protocol: intertechno_old
+          unit: 3
+          id: 4
+          'on': 1
+        off_code:
+          protocol: intertechno_old
+          unit: 3
+          id: 4
+          'off': 1
+        on_code_receive:
+          protocol: daycom
+          systemcode: 14462
+          unit: 6
+          id: 34
+          state: 'on'
+        off_code_receive:
+          protocol: daycom
+          systemcode: 14462
+          unit: 6
+          id: 34
+          state: 'off'
+</code></pre>
+<h2>Light</h2>
+<p>Pilight dimmer devices, which can have different brightness values, can be used as a light.
+The configuration parameters are the same for dimmers and switches.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='lights' href='#lights'></a> lights</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The list that contains all command lights.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entry' href='#entry'></a> entry</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the command light, which are the same like for switches. Multiple entries are possible.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h3>Example</h3>
+<pre><code class="language-yaml">light:
+  - platform: pilight
+    lights:
+      test2:
+        on_code:
+          protocol: kaku_dimmer
+          id: 23298822
+          unit: 10
+          'on': 1
+        off_code:
+          protocol: kaku_dimmer
+          id: 23298822
+          unit: 10
+          'off': 1
+        on_code_receive:
+          protocol: kaku_dimmer
+          id: 23298822
+          unit: 10
+          state: 'on'
+        off_code_receive:
+          protocol: kaku_dimmer
+          id: 23298822
+          unit: 10
+          state: 'off'
+</code></pre>
+<h2>Troubleshooting</h2>
+<ul>
+<li>A list of tested RF transceiver hardware is available <a href="https://manual.pilight.org/electronics/index.html">here</a>. This might be useful before buying.</li>
+<li>Sending commands is simple when the protocol is known by pilight, but receiving commands can be rather difficult. It can happen that the code is not correctly recognized due to different timings in the sending hardware or the RF receiver. If this happens follow these steps:</li>
+</ul>
+<ol>
+<li><a href="https://manual.pilight.org/installation.html">Install</a> pilight from source (do not worry that is very easy) and only activate the protocols you are expecting in the pop up menu. This reduces false positives.</li>
+<li>Check the real timings of your device + RF receiver by running <code>pilight-debug</code>. Remember the <code>pulslen</code> parameter.</li>
+<li>Go to the <code>libs/pilight/protocols/433.92</code> subfolder of the pilight source code and open the .c file of your protocol. Search for <code>MIN_PULSE_LENGTH</code>, <code>MAX_PULSE_LENGTH </code> and <code>AVG_PULSE_LENGTH</code>. Change the pulse lengths to match your measured one. Recompile and install pilight by re-running <code>$ sudo ./setup.sh</code>.</li>
+</ol>
+:ET

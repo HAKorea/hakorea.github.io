@@ -1,0 +1,454 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>AirVisual - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to use AirVisual data within Home Assistant">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/airvisual/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="AirVisual">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/airvisual/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to use AirVisual data within Home Assistant">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="AirVisual">
+    <meta name="twitter:description" content="Instructions on how to use AirVisual data within Home Assistant">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/airvisual.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      AirVisual
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>airvisual</code> sensor platform queries the <a href="https://airvisual.com/" rel="external nofollow">AirVisual</a> API for air quality data. Data can be collected via latitude/longitude or by city/state/country. The resulting information creates sensors for the Air Quality Index (AQI), the human-friendly air quality level, and the main pollutant of that area. Sensors that conform to either/both the <a href="https://www.clm.com/publication.cfm?ID=366" rel="external nofollow">U.S. and Chinese air quality standards</a> can be created.</p>
+<p>This platform requires an AirVisual API key, which can be obtained <a href="https://airvisual.com/api" rel="external nofollow">here</a>. Note that the platform was designed using the “Community” package; the “Startup” and “Enterprise” package keys should continue to function, but actual results may vary (or not work at all).</p>
+<p>The Community API key is valid for 12 months after which it will expire. You must then go back to the Airvisual website, delete your old key, create a new one following the same steps and update your configuration with the new key.</p>
+<div class="note warning">
+<p>The “Community” API key is limited to 10,000 calls per month. In order to leave a buffer, the <code>airvisual</code> platform queries the API every 10 minutes (600 seconds) by default. Modification of this (via the <code>scan_interval</code> key) to a too-low value may result in your API key being deactivated.</p>
+</div>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To enable the platform and gather data via latitude/longitude, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: YOUR_AIRVISUAL_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your AirVisual API key.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The air quality standard(s) to use (<code>us</code> for U.S., <code>cn</code> for Chinese).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>[“us”, “cn”]</p>
+</dd>
+<dt>
+<a class="title-link" name="show_on_map" href="#show_on_map"></a> show_on_map</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Whether to show a marker on the map at the specified location.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The rate in seconds at which AirVisual should be polled for new data.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>600</p>
+</dd>
+<dt>
+<a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The latitude of the location to monitor.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>The latitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</dd>
+<dt>
+<a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The longitude of the location to monitor.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>The longitude defined under the <code>homeassistant</code> key in <code>configuration.yaml</code>.</p>
+</dd>
+<dt>
+<a class="title-link" name="city" href="#city"></a> city</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The city to monitor.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="state" href="#state"></a> state</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The state the city belongs to.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="country" href="#country"></a> country</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The country the state belongs to.</p>
+</span></p></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="example-configurations" href="#example-configurations"></a> Example Configurations</h2>
+<p>Configuration using custom Latitude and Longitude:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: YOUR_AIRVISUAL_API_KEY
+    monitored_conditions:
+      - cn
+    show_on_map: false
+    scan_interval: 300
+    latitude: 42.81212
+    longitude: 108.12422
+</code></pre>
+<p>Configuration using city, state, and country:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: YOUR_AIRVISUAL_API_KEY
+    monitored_conditions:
+      - us
+    show_on_map: false
+    scan_interval: 300
+    city: Los Angeles
+    state: California
+    country: USA
+</code></pre>
+<h2>
+<a class="title-link" name="determining-the-citystatecountry" href="#determining-the-citystatecountry"></a> Determining the City/State/Country</h2>
+<p>To easily determine the proper values for a particular location, use the <a href="https://airvisual.com/world" rel="external nofollow">AirVisual region directory</a>. Once you browse to the particular city you want, take note of the breadcrumb title, which is of the form <code>country &gt; state/region &gt; city</code>. Use this information to fill out <code>configuration.yaml</code>.</p>
+<p>For example, Sao Paulo, Brazil shows a breadcrumb title of <code>Brazil &gt; Sao Paulo &gt; Sao Paulo</code>. Thus, the proper configuration would look like this:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: airvisual
+    api_key: abc123
+    monitored_conditions:
+      - us
+      - cn
+    city: sao-paulo
+    state: sao-paulo
+    country: brazil
+</code></pre>
+<h2>
+<a class="title-link" name="sensor-types" href="#sensor-types"></a> Sensor Types</h2>
+<p>When configured, the platform will create three sensors for each configured air quality standard:</p>
+<h3>
+<a class="title-link" name="air-quality-index" href="#air-quality-index"></a> Air Quality Index</h3>
+<ul>
+<li>
+<strong>Description:</strong> This sensor displays a numeric air quality index (AQI), a metric for the overall “health” of the air.</li>
+<li>
+<strong>Example Sensor Name:</strong> <code>sensor.chinese_air_quality_index</code>
+</li>
+<li>
+<strong>Example Sensor Value:</strong> <code>32</code>
+</li>
+<li><strong>Explanation:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>AQI</th>
+<th align="center">Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 50</td>
+<td align="center"><strong>Good</strong></td>
+<td>Air quality is considered satisfactory, and air pollution poses little or no risk</td>
+</tr>
+<tr>
+<td>51 - 100</td>
+<td align="center"><strong>Moderate</strong></td>
+<td>Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution</td>
+</tr>
+<tr>
+<td>101 - 150</td>
+<td align="center"><strong>Unhealthy for Sensitive Groups</strong></td>
+<td>Members of sensitive groups may experience health effects. The general public is not likely to be affected</td>
+</tr>
+<tr>
+<td>151 - 200</td>
+<td align="center"><strong>Unhealthy</strong></td>
+<td>Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects</td>
+</tr>
+<tr>
+<td>201 - 300</td>
+<td align="center"><strong>Very unhealthy</strong></td>
+<td>Health warnings of emergency conditions. The entire population is more likely to be affected</td>
+</tr>
+<tr>
+<td>301+</td>
+<td align="center"><strong>Hazardous</strong></td>
+<td>Health alert: everyone may experience more serious health effects</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="air-pollution-level" href="#air-pollution-level"></a> Air Pollution Level</h3>
+<ul>
+<li>
+<strong>Description:</strong> This sensor displays the associated <code>Status</code> (from the above table) for the current AQI.</li>
+<li>
+<strong>Sample Sensor Name:</strong> <code>sensor.us_air_pollution_level</code>
+</li>
+<li>
+<strong>Example Sensor Value:</strong> <code>Moderate</code>
+</li>
+</ul>
+<h3>
+<a class="title-link" name="main-pollutant" href="#main-pollutant"></a> Main Pollutant</h3>
+<ul>
+<li>
+<strong>Description:</strong> This sensor displays the pollutant whose value is currently highest.</li>
+<li>
+<strong>Sample Sensor Name:</strong> <code>sensor.us_main_pollutant</code>
+</li>
+<li>
+<strong>Example Sensor Value:</strong> <code>PM2.5</code>
+</li>
+<li><strong>Explanation:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pollutant</th>
+<th align="center">Symbol</th>
+<th>More Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particulate (&lt;= 2.5 μm)</td>
+<td align="center">PM2.5</td>
+<td><a href="https://www.epa.gov/pm-pollution" rel="external nofollow">EPA: Particulate Matter (PM) Pollution </a></td>
+</tr>
+<tr>
+<td>Particulate (&lt;= 10 μm)</td>
+<td align="center">PM10</td>
+<td><a href="https://www.epa.gov/pm-pollution" rel="external nofollow">EPA: Particulate Matter (PM) Pollution </a></td>
+</tr>
+<tr>
+<td>Ozone</td>
+<td align="center">O</td>
+<td><a href="https://www.epa.gov/ozone-pollution" rel="external nofollow">EPA: Ozone Pollution</a></td>
+</tr>
+<tr>
+<td>Sulpher Dioxide</td>
+<td align="center">SO2</td>
+<td><a href="https://www.epa.gov/so2-pollution" rel="external nofollow">EPA: Sulfur Dioxide (SO2) Pollution</a></td>
+</tr>
+<tr>
+<td>Carbon Monoxide</td>
+<td align="center">CO</td>
+<td><a href="https://www.epa.gov/co-pollution" rel="external nofollow">EPA: Carbon Monoxide (CO) Pollution in Outdoor Air</a></td>
+</tr>
+</tbody>
+</table>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/airvisual.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/airvisual.jpg' /></div><div class="section">
+    <kb-alert-link integration="airvisual"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Introduced in release: 0.53
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/airvisual/'>/components/airvisual/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#health'>Health</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

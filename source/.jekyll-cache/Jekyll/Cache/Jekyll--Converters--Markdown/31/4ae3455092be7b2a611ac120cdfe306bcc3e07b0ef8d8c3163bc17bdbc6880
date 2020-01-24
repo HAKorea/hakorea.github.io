@@ -1,0 +1,530 @@
+I"S�<p>The <code>mqtt</code> light platform lets you control your MQTT enabled lights through one of the supported message schemas.</p>
+<h2>Comparison of light MQTT schemas</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th><a href="#default-schema"><code>default</code></a></th>
+<th><a href="#json-schema"><code>json</code></a></th>
+<th><a href="#template-schema"><code>template</code></a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brightness</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>Color temperature</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>Effects</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>Flashing</td>
+<td>✘</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>RGB Color</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>Transitions</td>
+<td>✘</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>XY Color</td>
+<td>✔</td>
+<td>✔</td>
+<td>✘</td>
+</tr>
+<tr>
+<td>HS Color</td>
+<td>✔</td>
+<td>✔</td>
+<td>✘</td>
+</tr>
+<tr>
+<td>White Value</td>
+<td>✔</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+</tbody>
+</table>
+<h2>Default schema</h2>
+<p>The <code>mqtt</code> light platform with default schema lets you control your MQTT enabled lights. It supports setting brightness, color temperature, effects, flashing, on/off, RGB colors, transitions, XY colors and white values.</p>
+<h2>Default schema - Configuration</h2>
+<p>In an ideal scenario, the MQTT device will have a state topic to publish state changes. If these messages are published with a <code>RETAIN</code> flag, the MQTT light will receive an instant state update after subscription and will start with the correct state. Otherwise, the initial state of the switch will be <code>false</code> / <code>off</code>.</p>
+<p>When a state topic is not available, the light will work in optimistic mode. In this mode, the light will immediately change state after every command. Otherwise, the light will wait for state confirmation from the device (message from <code>state_topic</code>).</p>
+<p>Optimistic mode can be forced, even if the <code>state_topic</code> is available. Try to enable it, if experiencing incorrect light operation.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    command_topic: &quot;office/rgb1/light/switch&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the light.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT Light</p>
+</p></dd><dt><a class='title-link' name='unique_id' href='#unique_id'></a> unique_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An ID that uniquely identifies this light. If two lights have the same unique ID, Home Assistant will raise an exception.</p>
+</span></p></dd><dt><a class='title-link' name='command_topic' href='#command_topic'></a> command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MQTT topic to publish commands to change the switch state.</p>
+</span></p></dd><dt><a class='title-link' name='brightness_command_topic' href='#brightness_command_topic'></a> brightness_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s brightness.</p>
+</span></p></dd><dt><a class='title-link' name='brightness_scale' href='#brightness_scale'></a> brightness_scale</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the maximum brightness value (i.e. 100%) of the MQTT device.</p>
+</span></p><p class='default'>
+Default value: <p>255</p>
+</p></dd><dt><a class='title-link' name='brightness_state_topic' href='#brightness_state_topic'></a> brightness_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive brightness state updates.</p>
+</span></p></dd><dt><a class='title-link' name='brightness_value_template' href='#brightness_value_template'></a> brightness_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the brightness value.</p>
+</span></p></dd><dt><a class='title-link' name='color_temp_command_template' href='#color_temp_command_template'></a> color_temp_command_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/">template</a> to compose message which will be sent to <code>color_temp_command_topic</code>. Available variables: <code>value</code>.</p>
+</span></p></dd><dt><a class='title-link' name='color_temp_command_topic' href='#color_temp_command_topic'></a> color_temp_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s color temperature state. The color temperature command slider has a range of 153 to 500 mireds (micro reciprocal degrees).</p>
+</span></p></dd><dt><a class='title-link' name='color_temp_state_topic' href='#color_temp_state_topic'></a> color_temp_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive color temperature state updates.</p>
+</span></p></dd><dt><a class='title-link' name='color_temp_value_template' href='#color_temp_value_template'></a> color_temp_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the color temperature value.</p>
+</span></p></dd><dt><a class='title-link' name='effect_command_topic' href='#effect_command_topic'></a> effect_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s effect state.</p>
+</span></p></dd><dt><a class='title-link' name='effect_state_topic' href='#effect_state_topic'></a> effect_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive effect state updates.</p>
+</span></p></dd><dt><a class='title-link' name='effect_value_template' href='#effect_value_template'></a> effect_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the effect value.</p>
+</span></p></dd><dt><a class='title-link' name='effect_list' href='#effect_list'></a> effect_list</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of effects the light supports.</p>
+</span></p></dd><dt><a class='title-link' name='hs_command_topic' href='#hs_command_topic'></a> hs_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s color state in HS format (Hue Saturation). Range for Hue: 0° .. 360°, Range of Saturation: 0..100. Note: Brightness is sent separately in the <code>brightness_command_topic</code>.</p>
+</span></p></dd><dt><a class='title-link' name='hs_state_topic' href='#hs_state_topic'></a> hs_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive color state updates in HS format. Note: Brightness is received separately in the <code>brightness_state_topic</code>.</p>
+</span></p></dd><dt><a class='title-link' name='hs_value_template' href='#hs_value_template'></a> hs_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the HS value.</p>
+</span></p></dd><dt><a class='title-link' name='on_command_type' href='#on_command_type'></a> on_command_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines when on the payload_on is sent. Using <code>last</code> (the default) will send any style (brightness, color, etc) topics first and then a <code>payload_on</code> to the <code>command_topic</code>. Using <code>first</code> will send the <code>payload_on</code> and then any style topics. Using <code>brightness</code> will only send brightness commands instead of the <code>payload_on</code> to turn the light on.</p>
+</span></p></dd><dt><a class='title-link' name='optimistic' href='#optimistic'></a> optimistic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if switch works in optimistic mode.</p>
+</span></p><p class='default'>
+Default value: <p><code>true</code> if no state topic defined, else <code>false</code>.</p>
+</p></dd><dt><a class='title-link' name='payload_on' href='#payload_on'></a> payload_on</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents enabled state.</p>
+</span></p><p class='default'>
+Default value: <p>ON</p>
+</p></dd><dt><a class='title-link' name='payload_off' href='#payload_off'></a> payload_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents disabled state.</p>
+</span></p><p class='default'>
+Default value: <p>OFF</p>
+</p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='retain' href='#retain'></a> retain</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the published message should have the retain flag on or not.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='rgb_command_template' href='#rgb_command_template'></a> rgb_command_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/">template</a> to compose message which will be sent to <code>rgb_command_topic</code>. Available variables: <code>red</code>, <code>green</code> and <code>blue</code>.</p>
+</span></p></dd><dt><a class='title-link' name='rgb_command_topic' href='#rgb_command_topic'></a> rgb_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s RGB state. Please note that the color value sent by Home Assistant is normalized to full brightness if <code>brightness_command_topic</code> is set. Brightness information is in this case sent separately in the <code>brightness_command_topic</code>. This will cause a light that expects an absolute color value (including brightness) to flicker.</p>
+</span></p></dd><dt><a class='title-link' name='rgb_state_topic' href='#rgb_state_topic'></a> rgb_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive RGB state updates. The expected payload is the RGB values separated by commas, for example, <code>255,0,127</code>. Please note that the color value received by Home Assistant is normalized to full brightness. Brightness information is received separately in the <code>brightness_state_topic</code>.</p>
+</span></p></dd><dt><a class='title-link' name='rgb_value_template' href='#rgb_value_template'></a> rgb_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the RGB value.</p>
+</span></p></dd><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive state updates.</p>
+</span></p></dd><dt><a class='title-link' name='state_value_template' href='#state_value_template'></a> state_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the state value. The template should match the payload <code>on</code> and <code>off</code> values, so if your light uses <code>power on</code> to turn on, your <code>state_value_template</code> string should return <code>power on</code> when the switch is on. For example if the message is just <code>on</code>, your <code>state_value_template</code> should be <code>power </code>.</p>
+</span></p></dd><dt><a class='title-link' name='white_value_command_topic' href='#white_value_command_topic'></a> white_value_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s white value.</p>
+</span></p></dd><dt><a class='title-link' name='white_value_scale' href='#white_value_scale'></a> white_value_scale</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the maximum white value (i.e. 100%) of the MQTT device.</p>
+</span></p><p class='default'>
+Default value: <p>255</p>
+</p></dd><dt><a class='title-link' name='white_value_state_topic' href='#white_value_state_topic'></a> white_value_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive white value updates.</p>
+</span></p></dd><dt><a class='title-link' name='white_value_template' href='#white_value_template'></a> white_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the white value.</p>
+</span></p></dd><dt><a class='title-link' name='xy_command_topic' href='#xy_command_topic'></a> xy_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s XY state.</p>
+</span></p></dd><dt><a class='title-link' name='xy_state_topic' href='#xy_state_topic'></a> xy_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive XY state updates.</p>
+</span></p></dd><dt><a class='title-link' name='xy_value_template' href='#xy_value_template'></a> xy_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the XY value.</p>
+</span></p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes_template' href='#json_attributes_template'></a> json_attributes_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the device this light is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifiers' href='#identifiers'></a> identifiers</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd><dt><a class='title-link' name='connections' href='#connections'></a> connections</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>&quot;connections&quot;: [[&quot;mac&quot;, &quot;02:5b:26:a8:dc:12&quot;]]</code>.</p>
+</span></p></dd><dt><a class='title-link' name='manufacturer' href='#manufacturer'></a> manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The manufacturer of the device.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of the device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device.</p>
+</span></p></dd><dt><a class='title-link' name='sw_version' href='#sw_version'></a> sw_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The firmware version of the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note warning'>
+<p>Make sure that your topics match exactly. <code>some-topic/</code> and <code>some-topic</code> are different topics.</p>
+</div>
+<div class='note warning'>
+  XY and RGB can not be used at the same time. If both are provided, XY overrides RGB.
+</div>
+<h2>Default schema - Examples</h2>
+<p>In this section you will find some real-life examples of how to use this sensor.</p>
+<h3>Brightness and RGB support</h3>
+<p>To enable a light with brightness and RGB support in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    name: &quot;Office Light RGB&quot;
+    state_topic: &quot;office/rgb1/light/status&quot;
+    command_topic: &quot;office/rgb1/light/switch&quot;
+    brightness_state_topic: &quot;office/rgb1/brightness/status&quot;
+    brightness_command_topic: &quot;office/rgb1/brightness/set&quot;
+    rgb_state_topic: &quot;office/rgb1/rgb/status&quot;
+    rgb_command_topic: &quot;office/rgb1/rgb/set&quot;
+    state_value_template: &quot;{{ value_json.state }}&quot;
+    brightness_value_template: &quot;{{ value_json.brightness }}&quot;
+    rgb_value_template: &quot;{{ value_json.rgb | join(',') }}&quot;
+    qos: 0
+    payload_on: &quot;ON&quot;
+    payload_off: &quot;OFF&quot;
+    optimistic: false
+</code></pre>
+<h3>Brightness and no RGB support</h3>
+<p>To enable a light with brightness (no RGB version) in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    name: &quot;Office light&quot;
+    state_topic: &quot;office/light/status&quot;
+    command_topic: &quot;office/light/switch&quot;
+    brightness_state_topic: 'office/light/brightness'
+    brightness_command_topic: 'office/light/brightness/set'
+    qos: 0
+    payload_on: &quot;ON&quot;
+    payload_off: &quot;OFF&quot;
+    optimistic: false
+</code></pre>
+<h3>Brightness without on commands</h3>
+<p>To enable a light that sends only brightness topics to turn it on, add the following to your <code>configuration.yaml</code> file. The <code>command_topic</code> is only used to send an off command in this case:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    name: &quot;Brightness light&quot;
+    state_topic: &quot;office/light/status&quot;
+    command_topic: &quot;office/light/switch&quot;
+    payload_off: &quot;OFF&quot;
+    brightness_state_topic: 'office/light/brightness'
+    brightness_command_topic: 'office/light/brightness/set'
+    on_command_type: 'brightness'
+</code></pre>
+<h2>Default schema - Implementations</h2>
+<ul>
+<li>A <a href="https://github.com/mertenats/open-home-automation/tree/master/ha_mqtt_light">basic example</a> using a nodeMCU board (ESP8266) to control its built-in LED (on/off).</li>
+<li>Another <a href="https://github.com/mertenats/open-home-automation/tree/master/ha_mqtt_rgb_light">example</a> to control a RGB LED (on/off, brightness, and colors).</li>
+<li><a href="https://github.com/xoseperez/espurna/wiki/HomeAssistant">Integration guide</a> for the ESPUrna firmware (ESP8285/ESP8266).</li>
+</ul>
+<h2>JSON schema</h2>
+<p>The <code>mqtt</code> light platform with JSON schema lets you control a MQTT-enabled light that can receive <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> messages.</p>
+<p>This schema supports on/off, brightness, RGB colors, XY colors, color temperature, transitions, short/long flashing and white values. The messages sent to/from the lights look similar to this, omitting fields when they aren’t needed:</p>
+<pre><code class="language-json">{
+  &quot;brightness&quot;: 255,
+  &quot;color_temp&quot;: 155,
+  &quot;color&quot;: {
+    &quot;r&quot;: 255,
+    &quot;g&quot;: 180,
+    &quot;b&quot;: 200,
+    &quot;x&quot;: 0.406,
+    &quot;y&quot;: 0.301,
+    &quot;h&quot;: 344.0,
+    &quot;s&quot;: 29.412
+  },
+  &quot;effect&quot;: &quot;colorloop&quot;,
+  &quot;state&quot;: &quot;ON&quot;,
+  &quot;transition&quot;: 2,
+  &quot;white_value&quot;: 150
+}
+</code></pre>
+<h2>JSON schema - Configuration</h2>
+<p>In an ideal scenario, the MQTT device will have a state topic to publish state changes. If these messages are published with the RETAIN flag, the MQTT light will receive an instant state update after subscription and will start with the correct state. Otherwise, the initial state of the light will be off.</p>
+<p>When a state topic is not available, the light will work in optimistic mode. In this mode, the light will immediately change state after every command. Otherwise, the light will wait for state confirmation from the device (message from <code>state_topic</code>).</p>
+<p>Optimistic mode can be forced, even if state topic is available. Try enabling it if the light is operating incorrectly.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: json
+    command_topic: &quot;home/rgb1/set&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the light.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT JSON Light</p>
+</p></dd><dt><a class='title-link' name='unique_id' href='#unique_id'></a> unique_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An ID that uniquely identifies this light. If two lights have the same unique ID, Home Assistant will raise an exception.</p>
+</span></p></dd><dt><a class='title-link' name='command_topic' href='#command_topic'></a> command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s state.</p>
+</span></p></dd><dt><a class='title-link' name='brightness' href='#brightness'></a> brightness</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports brightness.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='brightness_scale' href='#brightness_scale'></a> brightness_scale</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the maximum brightness value (i.e. 100%) of the MQTT device.</p>
+</span></p><p class='default'>
+Default value: <p>255</p>
+</p></dd><dt><a class='title-link' name='color_temp' href='#color_temp'></a> color_temp</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports color temperature.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='effect' href='#effect'></a> effect</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports effects.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='effect_list' href='#effect_list'></a> effect_list</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of effects the light supports.</p>
+</span></p></dd><dt><a class='title-link' name='flash_time_long' href='#flash_time_long'></a> flash_time_long</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The duration, in seconds, of a “long” flash.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd><dt><a class='title-link' name='flash_time_short' href='#flash_time_short'></a> flash_time_short</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The duration, in seconds, of a “short” flash.</p>
+</span></p><p class='default'>
+Default value: <p>2</p>
+</p></dd><dt><a class='title-link' name='optimistic' href='#optimistic'></a> optimistic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light works in optimistic mode.</p>
+</span></p><p class='default'>
+Default value: <p><code>true</code> if no state topic defined, else <code>false</code>.</p>
+</p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='retain' href='#retain'></a> retain</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the published message should have the retain flag on or not.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='rgb' href='#rgb'></a> rgb</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports RGB colors.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive state updates.</p>
+</span></p></dd><dt><a class='title-link' name='white_value' href='#white_value'></a> white_value</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports white values.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='xy' href='#xy'></a> xy</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports XY colors.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='hs' href='#hs'></a> hs</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light supports HS colors.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes_template' href='#json_attributes_template'></a> json_attributes_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the device this light is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifiers' href='#identifiers'></a> identifiers</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd><dt><a class='title-link' name='connections' href='#connections'></a> connections</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>&quot;connections&quot;: [[&quot;mac&quot;, &quot;02:5b:26:a8:dc:12&quot;]]</code>.</p>
+</span></p></dd><dt><a class='title-link' name='manufacturer' href='#manufacturer'></a> manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The manufacturer of the device.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of the device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device.</p>
+</span></p></dd><dt><a class='title-link' name='sw_version' href='#sw_version'></a> sw_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The firmware version of the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note warning'>
+<p>Make sure that your topics match exact. <code>some-topic/</code> and <code>some-topic</code> are different topics.</p>
+</div>
+<div class='note warning'>
+<p>RGB, XY and HSV can not be used at the same time in <code>state_topic</code> messages. Make sure that only one of the color models is in the “color” section of the state MQTT payload.</p>
+</div>
+<h2>JSON schema - Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>Brightness and RGB support</h3>
+<p>To enable a light with brightness and RGB support in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: json
+    name: mqtt_json_light_1
+    state_topic: &quot;home/rgb1&quot;
+    command_topic: &quot;home/rgb1/set&quot;
+    brightness: true
+    rgb: true
+</code></pre>
+<h3>Brightness and no RGB support</h3>
+<p>To enable a light with brightness (but no color support) in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: json
+    name: mqtt_json_light_1
+    state_topic: &quot;home/rgb1&quot;
+    command_topic: &quot;home/rgb1/set&quot;
+    brightness: true
+</code></pre>
+<h3>Brightness Scaled</h3>
+<p>To enable a light using a brightness scale other than 8bit the <code>brightness_scale</code> option may be added to denote the “fully on” value:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: json
+    name: mqtt_json_light_1
+    state_topic: &quot;home/light&quot;
+    command_topic: &quot;home/light/set&quot;
+    brightness: true
+    brightness_scale: 4095
+</code></pre>
+<p>Home Assistant will then convert its 8bit value in the message to and from the device:</p>
+<pre><code class="language-json">{
+  &quot;brightness&quot;: 4095,
+  &quot;state&quot;: &quot;ON&quot;
+}
+</code></pre>
+<h3>HS Color</h3>
+<p>To use a light with hue+saturation as the color model, set <code>hs</code> to <code>true</code> in the platform configuration:</p>
+<pre><code class="language-yaml">light:
+  - platform: mqtt
+    schema: json
+    name: mqtt_json_hs_light
+    state_topic: &quot;home/light&quot;
+    command_topic: &quot;home/light/set&quot;
+    hs: true
+</code></pre>
+<p>Home Assistant expects the hue values to be in the range 0 to 360 and the saturation values to be scaled from 0 to 100. For example, the following is a blue color shade:</p>
+<pre><code class="language-json">{
+  &quot;state&quot;: &quot;ON&quot;,
+  &quot;color&quot;: {
+    &quot;h&quot;: 24.0,
+    &quot;s&quot;: 100.0
+  }
+}
+</code></pre>
+<h3>Brightness and RGBW support</h3>
+<p>To enable a light with brightness, RGB support and a separate white channel (RGBW) in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: json
+    name: mqtt_json_light_1
+    state_topic: &quot;home/rgbw1&quot;
+    command_topic: &quot;home/rgbw1/set&quot;
+    brightness: true
+    rgb: true
+    white_value: true
+</code></pre>
+<h2>Implementations</h2>
+<ul>
+<li>
+<p>A full example of custom lighting using this platform and an ESP8266 microcontroller can be found <a href="https://github.com/corbanmailloux/esp-mqtt-rgb-led">here</a>. It supports on/off, brightness, transitions, RGB colors, and flashing.</p>
+</li>
+<li>
+<p>There is also another implementation forked from the above repo, it supports all the same features but is made for addressable LED strips using FastLED on a NodeMCU V3 it can be found <a href="https://github.com/JammyDodger231/nodemcu-mqtt-rgb-led">here</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/toblum/McLighting">McLighting</a> is another ESP8266 firmware for WS2812 addressable LEDs.</p>
+</li>
+<li>
+<p><a href="https://github.com/mertenats/Open-Home-Automation/tree/master/ha_mqtt_rgbw_light_with_discovery">MQTT JSON Light</a> is another implementation for ESP8266 including <a href="/docs/mqtt/discovery/">MQTT discovery</a>.</p>
+</li>
+<li>
+<p><a href="https://esphome.io">ESPHome</a> implements the JSON schema for MQTT based installs and supports <a href="/docs/mqtt/discovery/">MQTT discovery</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/stelgenhof/AiLight">AiLight</a> is a custom firmware for the Ai-Thinker (and equivalent) RGBW WiFi light bulbs that has an ESP8266 onboard and controlled by the MY9291 LED driver. It implements the <a href="/integrations/light.mqtt">MQTT JSON light</a> platform and supports ON/OFF, RGBW colours, brightness, colour temperature, flashing and transitions. Also it includes <a href="/docs/mqtt/discovery/">MQTT Auto Discovery</a>) and the MQTT Last Will and Testament is enabled as well.</p>
+</li>
+<li>
+<p><a href="https://github.com/starkillerOG/h801-mqtt-json">h801-mqtt-json</a> is a custom firmware for the H801 LED dimmer, a 5 channel (RGBWWCW)  WiFi LED strip controller for 12V LED strips. The firmware is meant to control the 5 channels of the H801 to simultaneously control an RGB and a Warm-white/Cold-white Led strip such as a 5050 RGB LED strip and a 5025 Dual White strip. It implements the <a href="/integrations/light.mqtt">MQTT JSON light</a> platform and supports ON/OFF, RGBW colours (RGB strip), brightness, color temperature (CW/WW strip) and transitions.</p>
+</li>
+</ul>
+<h2>Template schema</h2>
+<p>The <code>mqtt</code> light platform with template schema lets you control a MQTT-enabled light that receive commands on a command topic and optionally sends status update on a state topic.
+It is format-agnostic so you can use any data format you want (i.e. string, JSON), just configure it with templating.</p>
+<p>This schema supports on/off, brightness, RGB colors, XY colors, color temperature, transitions, short/long flashing, effects and white values.</p>
+<h2>Template schema - Configuration</h2>
+<p>In an ideal scenario, the MQTT device will have a state topic to publish state changes. If these messages are published with the RETAIN flag, the MQTT light will receive an instant state update after subscription and will start with the correct state. Otherwise, the initial state of the light will be off.</p>
+<p>When a state topic is not available, the light will work in optimistic mode. In this mode, the light will immediately change state after every command. Otherwise, the light will wait for state confirmation from the device (message from <code>state_topic</code>).</p>
+<p>Optimistic mode can be forced, even if state topic is available. Try enabling it if the light is operating incorrectly.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: template
+    command_topic: &quot;home/rgb1/set&quot;
+    command_on_template: &quot;on&quot;
+    command_off_template: &quot;off&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the light.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT Template Light</p>
+</p></dd><dt><a class='title-link' name='unique_id' href='#unique_id'></a> unique_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An ID that uniquely identifies this light. If two lights have the same unique ID, Home Assistant will raise an exception.</p>
+</span></p></dd><dt><a class='title-link' name='effect_list' href='#effect_list'></a> effect_list</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of possible effects.</p>
+</span></p></dd><dt><a class='title-link' name='command_topic' href='#command_topic'></a> command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MQTT topic to publish commands to change the light’s state.</p>
+</span></p></dd><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive state updates.</p>
+</span></p></dd><dt><a class='title-link' name='command_on_template' href='#command_on_template'></a> command_on_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The <a href="/docs/configuration/templating/#processing-incoming-data">template</a> for <em>on</em> state changes. Available variables: <code>state</code>, <code>brightness</code>, <code>red</code>, <code>green</code>, <code>blue</code>, <code>white_value</code>, <code>flash</code>, <code>transition</code> and <code>effect</code>.</p>
+</span></p></dd><dt><a class='title-link' name='command_off_template' href='#command_off_template'></a> command_off_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The <a href="/docs/configuration/templating/#processing-incoming-data">template</a> for <em>off</em> state changes. Available variables: <code>state</code> and <code>transition</code>.</p>
+</span></p></dd><dt><a class='title-link' name='state_template' href='#state_template'></a> state_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract state from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='brightness_template' href='#brightness_template'></a> brightness_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract brightness from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='red_template' href='#red_template'></a> red_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract red color from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='green_template' href='#green_template'></a> green_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract green color from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='blue_template' href='#blue_template'></a> blue_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract blue color from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='color_temp_template' href='#color_temp_template'></a> color_temp_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract color temperature from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='effect_template' href='#effect_template'></a> effect_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract effect from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='white_value_template' href='#white_value_template'></a> white_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="/docs/configuration/templating/#processing-incoming-data">Template</a> to extract white value from the state payload value.</p>
+</span></p></dd><dt><a class='title-link' name='optimistic' href='#optimistic'></a> optimistic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if the light works in optimistic mode.</p>
+</span></p><p class='default'>
+Default value: <p><code>true</code> if no state topic or state template is defined, else <code>false</code>.</p>
+</p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes_template' href='#json_attributes_template'></a> json_attributes_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the device this light is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifiers' href='#identifiers'></a> identifiers</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd><dt><a class='title-link' name='connections' href='#connections'></a> connections</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>&quot;connections&quot;: [[&quot;mac&quot;, &quot;02:5b:26:a8:dc:12&quot;]]</code>.</p>
+</span></p></dd><dt><a class='title-link' name='manufacturer' href='#manufacturer'></a> manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The manufacturer of the device.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of the device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device.</p>
+</span></p></dd><dt><a class='title-link' name='sw_version' href='#sw_version'></a> sw_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The firmware version of the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note warning'>
+<p>Make sure that your topics match exact. <code>some-topic/</code> and <code>some-topic</code> are different topics.</p>
+</div>
+<h2>Template schema - Examples</h2>
+<p>In this section you find some real-life examples of how to use this light.</p>
+<h3>Simple string payload</h3>
+<p>For a simple string payload with the format <code>state,brightness,r-g-b</code> (e.g., <code>on,255,255-255-255</code>), add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: template
+    command_topic: &quot;home/rgb1/set&quot;
+    state_topic: &quot;home/rgb1/status&quot;
+    command_on_template: &quot;on,{{ brightness|d }},{{ red|d }}-{{ green|d }}-{{ blue|d }}&quot;
+    command_off_template: &quot;off&quot;
+    state_template: &quot;{{ value.split(',')[0] }}&quot;  # must return `on` or `off`
+    brightness_template: &quot;{{ value.split(',')[1] }}&quot;
+    red_template: &quot;{{ value.split(',')[2].split('-')[0] }}&quot;
+    green_template: &quot;{{ value.split(',')[2].split('-')[1] }}&quot;
+    blue_template: &quot;{{ value.split(',')[2].split('-')[2] }}&quot;
+</code></pre>
+<h3>JSON payload</h3>
+<p>For a JSON payload with the format <code>{&quot;state&quot;: &quot;on&quot;, &quot;brightness&quot;: 255, &quot;color&quot;: [255, 255, 255], &quot;effect&quot;: &quot;rainbow&quot;}</code>, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mqtt
+    schema: template
+    effect_list:
+      - rainbow
+      - colorloop
+    command_topic: &quot;home/rgb1/set&quot;
+    state_topic: &quot;home/rgb1/status&quot;
+    command_on_template: &gt;
+      {&quot;state&quot;: &quot;on&quot;
+      {%- if brightness is defined -%}
+      , &quot;brightness&quot;: {{ brightness }}
+      {%- endif -%}
+      {%- if red is defined and green is defined and blue is defined -%}
+      , &quot;color&quot;: [{{ red }}, {{ green }}, {{ blue }}]
+      {%- endif -%}
+      {%- if effect is defined -%}
+      , &quot;effect&quot;: &quot;{{ effect }}&quot;
+      {%- endif -%}
+      }
+    command_off_template: '{&quot;state&quot;: &quot;off&quot;}'
+    state_template: '{{ value_json.state }}'
+    brightness_template: '{{ value_json.brightness }}'
+    red_template: '{{ value_json.color[0] }}'
+    green_template: '{{ value_json.color[1] }}'
+    blue_template: '{{ value_json.color[2] }}'
+    effect_template: '{{ value_json.effect }}'
+</code></pre>
+<h3>Template schema - No brightness or color support</h3>
+<p>If you don’t want brightness, color or effect support, just omit the corresponding configuration sections.</p>
+:ET

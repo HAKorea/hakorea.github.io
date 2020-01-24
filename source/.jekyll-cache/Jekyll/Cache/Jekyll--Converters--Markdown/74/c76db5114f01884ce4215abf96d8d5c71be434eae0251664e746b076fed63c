@@ -1,0 +1,54 @@
+I"B<p>Home Assistant offers a wide range of automation configurations. In this section, we’ll try to guide you through all the different possibilities and options. Besides this documentation, there are also a couple of people who have made their automations <a href="/cookbook/#example-configurationyaml">publicly available</a>.</p>
+<h3>Automation basics</h3>
+<p>Before you can go ahead and create your own automations, it’s important to learn the basics. To explore these, let’s have a look at the following example home automation rule:</p>
+<pre><code class="language-text">(trigger)    When Paulus arrives home
+(condition)  and it is after sunset:
+(action)     Turn the lights in the living room on
+</code></pre>
+<p>The example consists of three different parts: a <a href="/docs/automation/trigger/">trigger</a>, a <a href="/docs/automation/condition/">condition</a> and an <a href="/docs/automation/action/">action</a>.</p>
+<p>The first line is the <strong>trigger</strong> of the automation rule. Triggers describe events that should trigger the automation rule. In this case, it is a person arriving home, which can be observed in Home Assistant by observing the state of Paulus changing from ‘not_home’ to ‘home’.</p>
+<p>The second line is the <strong>condition</strong>. Conditions are optional tests that can limit an automation rule to only work in your specific use cases. A condition will test against the current state of the system. This includes the current time, devices, people and other things like the sun. In this case, we only want to act when the sun has set.</p>
+<p>The third part is the <strong>action</strong>, which will be performed when a rule is triggered and all conditions are met. For example, it can turn a light on, set the temperature on your thermostat or activate a scene.</p>
+<div class='note'>
+The difference between a condition and a trigger can be confusing as they are very similar. Triggers look at the actions, while conditions look at the results: turning a light on versus a light being on.
+</div>
+<h3>Exploring the internal state</h3>
+<p>Automation rules interact directly with the internal state of Home Assistant, so you’ll need to familiarize yourself with it. Home Assistant exposes its current state via the developer tools. These are available at the bottom of the sidebar in the frontend. The <img src='/images/screenshots/developer-tool-states-icon.png' class='no-shadow' height='38' /> icon will show all currently available states. An entity can be anything. A light, a switch, a person and even the sun. A state consists of the following parts:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entity ID</td>
+<td>Unique identifier for the entity.</td>
+<td><code>light.kitchen</code></td>
+</tr>
+<tr>
+<td>State</td>
+<td>The current state of the device.</td>
+<td><code>home</code></td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Extra data related to the device and/or current state.</td>
+<td><code>brightness</code></td>
+</tr>
+</tbody>
+</table>
+<p>State changes can be used as the source of triggers and the current state can be used in conditions.</p>
+<p>Actions are all about calling services. To explore the available services open the <img src='/images/screenshots/developer-tool-services-icon.png' class='no-shadow' height='38' /> Services developer tool. Services allow to change anything. For example turn on a light, run a script or enable a scene. Each service has a domain and a name. For example the service <code>light.turn_on</code> is capable of turning on any light in your system. Services can be passed parameters to for example tell which device to turn on or what color to use.</p>
+<h3>Automation initial state</h3>
+<p>When you create a new automation, it will be enabled unless you explicitly add <code>initial_state: false</code> to it or turn it off manually via UI/another automation/developer tools. In case automations need to be always enabled or disabled when Home Assistant starts, then you can set the <code>initial_state</code> in your automations. Otherwise, the previous state will be restored.</p>
+<p>Please note that if for some reason Home Assistant cannot restore the previous state, it will result in the automation being enabled.</p>
+<pre><code class="language-text">automation:
+- alias: Automation Name
+  initial_state: false
+  trigger:
+  ...
+</code></pre>
+:ET

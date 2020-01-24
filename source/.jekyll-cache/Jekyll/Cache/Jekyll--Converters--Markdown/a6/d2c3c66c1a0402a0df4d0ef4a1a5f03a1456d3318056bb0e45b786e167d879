@@ -1,0 +1,90 @@
+I"<p>Home Assistant has support to integrate your <a href="https://www.verisure.com/">Verisure</a> devices.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Alarm</li>
+<li>Camera</li>
+<li>Switch (Smartplug)</li>
+<li>Sensor (Thermometers, Hygrometers and Mouse detectors)</li>
+<li>Lock</li>
+<li>Binary Sensor (Door &amp; Window)</li>
+</ul>
+<h2>Configuration</h2>
+<p>To integrate Verisure with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+verisure:
+  username: USERNAME
+  password: PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username to Verisure mypages.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password to Verisure mypages.</p>
+</span></p></dd><dt><a class='title-link' name='alarm' href='#alarm'></a> alarm</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show alarm, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='hygrometers' href='#hygrometers'></a> hygrometers</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show hygrometers, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='smartplugs' href='#smartplugs'></a> smartplugs</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show smartplugs, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='locks' href='#locks'></a> locks</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show locks, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='default_lock_code' href='#default_lock_code'></a> default_lock_code</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Code that will be used to lock or unlock, if none is supplied.</p>
+</span></p></dd><dt><a class='title-link' name='thermometers' href='#thermometers'></a> thermometers</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show thermometers, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='mouse' href='#mouse'></a> mouse</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show mouse detectors, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='door_window' href='#door_window'></a> door_window</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to show mouse detectors, <code>false</code> to disable.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='code_digits' href='#code_digits'></a> code_digits</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Number of digits in PIN code.</p>
+</span></p><p class='default'>
+Default value: <p>4</p>
+</p></dd><dt><a class='title-link' name='giid' href='#giid'></a> giid</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The GIID of your installation (If you have more then one alarm system). To find the GIID for your systems run ‘python verisure.py EMAIL PASSWORD installations’.</p>
+</span></p></dd></dl>
+</div>
+<h2>Alarm Control Panel</h2>
+<p>The Verisure alarm control panel platform allows you to control your <a href="https://www.verisure.com/">Verisure</a> Alarms.</p>
+<p>The requirement is that you have setup your Verisure hub first, with the instruction above.</p>
+<p>The <code>changed_by</code> attribute enables one to be able to take different actions depending on who armed/disarmed the alarm in <a href="/getting-started/automation/">automation</a>.</p>
+<pre><code class="language-yaml">automation:
+  - alias: Alarm status changed
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.alarm_1
+    action:
+      - service: notify.notify
+        data_template:
+          message: &gt;
+            Alarm changed from {{ trigger.from_state.state }}
+            to {{ trigger.to_state.state }}
+            by {{ trigger.to_state.attributes.changed_by }}
+</code></pre>
+<h2>Services</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disable_autolock</td>
+<td>Disables autolock function for a specific lock.</td>
+</tr>
+<tr>
+<td>enable_autolock</td>
+<td>Enables autolock function for a specific lock.</td>
+</tr>
+<tr>
+<td>smartcam_capture</td>
+<td>Capture a new image from a specific smartcam.</td>
+</tr>
+</tbody>
+</table>
+:ET

@@ -1,0 +1,95 @@
+I"�<p>The <code>nut</code> sensor platform allows you to monitor a UPS (battery backup) by using data from a <a href="https://networkupstools.org/">NUT</a> (Network UPS Tools) server.</p>
+<h2>Configuration</h2>
+<p>To use this sensor platform, you need to add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: nut
+    resources:
+      - ups.load
+      - ups.realpower.nominal
+      - input.voltage
+      - battery.runtime
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name prefix for defined sensors.</p>
+</span></p><p class='default'>
+Default value: <p>NUT UPS</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The host name or IP address of the device that is running NUT.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number.</p>
+</span></p><p class='default'>
+Default value: <p>3493</p>
+</p></dd><dt><a class='title-link' name='alias' href='#alias'></a> alias</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the ups on the NUT server.</p>
+</span></p><p class='default'>
+Default value: <p>Will default to the first UPS name listed.</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Username to login to the NUT server.</p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Password to login to the NUT server.</p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='resources' href='#resources'></a> resources</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Contains all entries to display.</p>
+</span></p></dd></dl>
+</div>
+<h2>Example</h2>
+<p>Given the following example output from NUT (your variables may differ):</p>
+<pre><code class="language-yaml">$ upsc ups_name@192.168.11.5
+ups.timer.reboot: 0
+battery.voltage: 27.0
+ups.firmware.aux: L3 -P
+ups.mfr: American Power Conversion
+battery.runtime.low: 120
+ups.delay.shutdown: 20
+ups.load: 19
+ups.realpower.nominal: 600
+battery.charge.warning: 50
+battery.charge.low: 10
+ups.vendorid: 051d
+ups.timer.shutdown: -1
+ups.test.result: No test initiated
+ups.firmware: 868.L3 -P.D
+battery.mfr.ups.serial: 3B1519X19994
+ups.productid: 0002
+battery.runtime: 2552
+battery.battery.voltage.nominal: 24.0
+battery.type: PbAc
+ups.mfr.ups.status: OL
+ups.model: Back-UPS RS1000G
+ups.beeper.status: disabled
+battery.charge: 100
+input.sensitivity: medium
+input.transfer.low: 88
+input.transfer.high: 147
+input.voltage: 121.0
+input.voltage.nominal: 120
+input.transfer.reason: input voltage out of range
+output.current: 1.10
+output.frequency: 60.20
+output.voltage: 121.50
+output.voltage.nominal: 120
+</code></pre>
+<p>Use the values from the left hand column. Support is included for most values with ‘ups’, ‘battery’, ‘input’ and ‘output’ prefixes.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: nut
+    name: UPS Name
+    host: 192.168.11.5
+    port: 3493
+    alias: ups_name
+    username: user
+    password: pass
+    resources:
+      - ups.load
+      - ups.realpower.nominal
+      - input.voltage
+      - battery.runtime
+</code></pre>
+<h2>UPS Status - human-readable version</h2>
+<p>An additional virtual sensor type <code>ups.status.display</code> is available translating the UPS status value retrieved from <code>ups.status</code> into a human-readable version.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: nut
+    resources:
+      - ups.status.display
+</code></pre>
+:ET

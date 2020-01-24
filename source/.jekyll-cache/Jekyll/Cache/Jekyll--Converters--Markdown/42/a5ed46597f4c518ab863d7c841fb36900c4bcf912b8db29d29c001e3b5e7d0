@@ -1,0 +1,76 @@
+I"/<p>The <code>synologydsm</code> sensor platform allows getting various statistics from your <a href="https://www.synology.com">Synology NAS</a>.</p>
+<h2>Configuration</h2>
+<p>To use the <code>synologydsm</code> sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: synologydsm
+    host: IP_ADDRESS_OF_SYNOLOGY_NAS
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - network_up
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use in the frontend for your Synology device.</p>
+</span></p><p class='default'>
+Default value: <p>Synology DSM</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the Synology NAS to monitor.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number on which the Synology NAS is reachable.</p>
+</span></p><p class='default'>
+Default value: <p>5001</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>An user to connect to the Synology NAS (a separate account is advised, see the Separate User Configuration section below for details).</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password of the user to connect to the Synology NAS.</p>
+</span></p></dd><dt><a class='title-link' name='ssl' href='#ssl'></a> ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Determine if HTTPS should be used.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='volumes' href='#volumes'></a> volumes</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Array of volumes to monitor. Defaults to all volumes. Replace any spaces in the volume name with underscores, e.g., <code>volume 1</code> with <code>volume_1</code>.</p>
+</span></p></dd><dt><a class='title-link' name='disks' href='#disks'></a> disks</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Array of disks to monitor. Defaults to all disks. Use only disk names like <code>sda</code>, <code>sdb</code>, etc.</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to extract a value from the payload.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='cpu_other_load' href='#cpu_other_load'></a> cpu_other_load</dt><dd><p class='desc'><span class='description'><p>Displays unspecified load in percentage.</p>
+</span></p></dd><dt><a class='title-link' name='cpu_user_load' href='#cpu_user_load'></a> cpu_user_load</dt><dd><p class='desc'><span class='description'><p>Displays user load in percentage.</p>
+</span></p></dd><dt><a class='title-link' name='cpu_system_load' href='#cpu_system_load'></a> cpu_system_load</dt><dd><p class='desc'><span class='description'><p>Displays system load in percentage.</p>
+</span></p></dd><dt><a class='title-link' name='cpu_total_load' href='#cpu_total_load'></a> cpu_total_load</dt><dd><p class='desc'><span class='description'><p>Displays combined load in percentage.</p>
+</span></p></dd><dt><a class='title-link' name='cpu_1min_load' href='#cpu_1min_load'></a> cpu_1min_load</dt><dd><p class='desc'><span class='description'><p>Displays maximum load in past minute.</p>
+</span></p></dd><dt><a class='title-link' name='cpu_5min_load' href='#cpu_5min_load'></a> cpu_5min_load</dt><dd><p class='desc'><span class='description'><p>Displays maximum load in past 5 minutes.</p>
+</span></p></dd><dt><a class='title-link' name='cpu_15min_load' href='#cpu_15min_load'></a> cpu_15min_load</dt><dd><p class='desc'><span class='description'><p>Displays maximum load in past 15 minutes.</p>
+</span></p></dd><dt><a class='title-link' name='memory_real_usage' href='#memory_real_usage'></a> memory_real_usage</dt><dd><p class='desc'><span class='description'><p>Displays percentage of memory used.</p>
+</span></p></dd><dt><a class='title-link' name='memory_size' href='#memory_size'></a> memory_size</dt><dd><p class='desc'><span class='description'><p>Displays total size of memory in MB.</p>
+</span></p></dd><dt><a class='title-link' name='memory_cached' href='#memory_cached'></a> memory_cached</dt><dd><p class='desc'><span class='description'><p>Displays total size of cache in MB.</p>
+</span></p></dd><dt><a class='title-link' name='memory_available_swap' href='#memory_available_swap'></a> memory_available_swap</dt><dd><p class='desc'><span class='description'><p>Displays total size of available swap in MB.</p>
+</span></p></dd><dt><a class='title-link' name='memory_available_real' href='#memory_available_real'></a> memory_available_real</dt><dd><p class='desc'><span class='description'><p>Displays total size of memory used (based on real memory) in MB.</p>
+</span></p></dd><dt><a class='title-link' name='memory_total_swap' href='#memory_total_swap'></a> memory_total_swap</dt><dd><p class='desc'><span class='description'><p>Displays total size of actual memory in MB.</p>
+</span></p></dd><dt><a class='title-link' name='memory_total_real' href='#memory_total_real'></a> memory_total_real</dt><dd><p class='desc'><span class='description'><p>Displays total size of real memory in MB.</p>
+</span></p></dd><dt><a class='title-link' name='network_up' href='#network_up'></a> network_up</dt><dd><p class='desc'><span class='description'><p>Displays total up speed of network interfaces (combines all interfaces).</p>
+</span></p></dd><dt><a class='title-link' name='network_down' href='#network_down'></a> network_down</dt><dd><p class='desc'><span class='description'><p>Displays total down speed of network interfaces (combines all interfaces).</p>
+</span></p></dd><dt><a class='title-link' name='disk_name' href='#disk_name'></a> disk_name</dt><dd><p class='desc'><span class='description'><p>Displays the name of the hard disk (creates a new entry for each disk).</p>
+</span></p></dd><dt><a class='title-link' name='disk_device' href='#disk_device'></a> disk_device</dt><dd><p class='desc'><span class='description'><p>Displays the path of the hard disk (creates a new entry for each disk).</p>
+</span></p></dd><dt><a class='title-link' name='disk_smart_status' href='#disk_smart_status'></a> disk_smart_status</dt><dd><p class='desc'><span class='description'><p>Displays the S.M.A.R.T status of the hard disk (creates a new entry for each disk).</p>
+</span></p></dd><dt><a class='title-link' name='disk_status' href='#disk_status'></a> disk_status</dt><dd><p class='desc'><span class='description'><p>Displays the status of the hard disk (creates a new entry for each disk).</p>
+</span></p></dd><dt><a class='title-link' name='disk_exceed_bad_sector_thr' href='#disk_exceed_bad_sector_thr'></a> disk_exceed_bad_sector_thr</dt><dd><p class='desc'><span class='description'><p>Displays true / false to indicate if the hard disk exceeded the maximum bad sector threshold (creates a new entry for each disk).</p>
+</span></p></dd><dt><a class='title-link' name='disk_below_remain_life_thr' href='#disk_below_remain_life_thr'></a> disk_below_remain_life_thr</dt><dd><p class='desc'><span class='description'><p>Displays true / false to indicate if the hard disk dropped below the remain life threshold (creates a new entry for each disk).</p>
+</span></p></dd><dt><a class='title-link' name='disk_temp' href='#disk_temp'></a> disk_temp</dt><dd><p class='desc'><span class='description'><p>Displays the temperature of the hard disk (creates a new entry for each disk, uses the unit_system to display in C or F).</p>
+</span></p></dd><dt><a class='title-link' name='volume_status' href='#volume_status'></a> volume_status</dt><dd><p class='desc'><span class='description'><p>Displays the status of the volume (creates a new entry for each volume).</p>
+</span></p></dd><dt><a class='title-link' name='volume_device_type' href='#volume_device_type'></a> volume_device_type</dt><dd><p class='desc'><span class='description'><p>Displays the volume type (RAID, etc) (creates a new entry for each volume).</p>
+</span></p></dd><dt><a class='title-link' name='volume_size_total' href='#volume_size_total'></a> volume_size_total</dt><dd><p class='desc'><span class='description'><p>Displays the total size of the volume in GB’s (creates a new entry for each volume).</p>
+</span></p></dd><dt><a class='title-link' name='volume_size_used' href='#volume_size_used'></a> volume_size_used</dt><dd><p class='desc'><span class='description'><p>Displays the used space on this volume in GB’s (creates a new entry for each volume).</p>
+</span></p></dd><dt><a class='title-link' name='volume_percentage_used' href='#volume_percentage_used'></a> volume_percentage_used</dt><dd><p class='desc'><span class='description'><p>Displays the percentage used for this volume in GB’s (creates a new entry for each volume).</p>
+</span></p></dd><dt><a class='title-link' name='volume_disk_temp_avg' href='#volume_disk_temp_avg'></a> volume_disk_temp_avg</dt><dd><p class='desc'><span class='description'><p>Displays the average temperature of all disks in the volume (creates a new entry for each volume).</p>
+</span></p></dd><dt><a class='title-link' name='volume_disk_temp_max' href='#volume_disk_temp_max'></a> volume_disk_temp_max</dt><dd><p class='desc'><span class='description'><p>Displays the maximum temperature of all disks in the volume (creates a new entry for each volume).</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note'>
+After booting Home Assistant it can take up to 15 minutes for the sensors to show up. This is due to the fact that sensors are created after Home Assistant has fully been initialized.
+</div>
+<div class='note warning'>
+This sensor will wake up your Synology NAS if it's in hibernation mode.
+</div>
+<div class='note warning'>
+<p>If you set <code>ssl:</code> to <code>False</code>, you <em>have</em> to also explicitly set <code>port:</code> to <strong>5000</strong>.</p>
+</div>
+<h2>Separate User Configuration</h2>
+<p>Due to the nature of the Synology DSM API it is required to grant the user admin rights. This is related to the fact that utilization information is stored in the core module.</p>
+<p>When creating the user it is possible to deny access to all locations and applications. By doing this the user will not be able to login to the web interface or view any of the files on the Synology NAS. It is still able to read the utilization and storage information using the API.</p>
+:ET

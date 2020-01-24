@@ -1,0 +1,260 @@
+I"�<p>Integrates MySensors sensors into Home Assistant. See the <a href="/integrations/mysensors/">main component</a> for configuration instructions.</p>
+<h2>Supported sensor types</h2>
+<p>The following sensor types are supported:</p>
+<h3>MySensors version 1.4 and higher</h3>
+<table>
+<thead>
+<tr>
+<th>S_TYPE</th>
+<th>V_TYPE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_TEMP</td>
+<td>V_TEMP</td>
+</tr>
+<tr>
+<td>S_HUM</td>
+<td>V_HUM</td>
+</tr>
+<tr>
+<td>S_BARO</td>
+<td>V_PRESSURE, V_FORECAST</td>
+</tr>
+<tr>
+<td>S_WIND</td>
+<td>V_WIND, V_GUST, V_DIRECTION</td>
+</tr>
+<tr>
+<td>S_RAIN</td>
+<td>V_RAIN, V_RAINRATE</td>
+</tr>
+<tr>
+<td>S_UV</td>
+<td>V_UV</td>
+</tr>
+<tr>
+<td>S_WEIGHT</td>
+<td>V_WEIGHT, V_IMPEDANCE</td>
+</tr>
+<tr>
+<td>S_POWER</td>
+<td>V_WATT, V_KWH</td>
+</tr>
+<tr>
+<td>S_DISTANCE</td>
+<td>V_DISTANCE</td>
+</tr>
+<tr>
+<td>S_LIGHT_LEVEL</td>
+<td>V_LIGHT_LEVEL</td>
+</tr>
+<tr>
+<td>S_IR</td>
+<td>V_IR_RECEIVE</td>
+</tr>
+<tr>
+<td>S_WATER</td>
+<td>V_FLOW, V_VOLUME</td>
+</tr>
+<tr>
+<td>S_AIR_QUALITY</td>
+<td>V_DUST_LEVEL</td>
+</tr>
+<tr>
+<td>S_CUSTOM</td>
+<td>V_VAR1, V_VAR2, V_VAR3, V_VAR4, V_VAR5</td>
+</tr>
+<tr>
+<td>S_DUST</td>
+<td>V_DUST_LEVEL</td>
+</tr>
+<tr>
+<td>S_SCENE_CONTROLLER</td>
+<td>V_SCENE_ON, V_SCENE_OFF</td>
+</tr>
+</tbody>
+</table>
+<h3>MySensors version 1.5 and higher</h3>
+<table>
+<thead>
+<tr>
+<th>S_TYPE</th>
+<th>V_TYPE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_COLOR_SENSOR</td>
+<td>V_RGB</td>
+</tr>
+<tr>
+<td>S_MULTIMETER</td>
+<td>V_VOLTAGE, V_CURRENT, V_IMPEDANCE</td>
+</tr>
+<tr>
+<td>S_SOUND</td>
+<td>V_LEVEL</td>
+</tr>
+<tr>
+<td>S_VIBRATION</td>
+<td>V_LEVEL</td>
+</tr>
+<tr>
+<td>S_MOISTURE</td>
+<td>V_LEVEL</td>
+</tr>
+<tr>
+<td>S_LIGHT_LEVEL</td>
+<td>V_LEVEL</td>
+</tr>
+<tr>
+<td>S_AIR_QUALITY</td>
+<td>V_LEVEL (replaces V_DUST_LEVEL)</td>
+</tr>
+<tr>
+<td>S_DUST</td>
+<td>V_LEVEL (replaces V_DUST_LEVEL)</td>
+</tr>
+</tbody>
+</table>
+<h3>MySensors version 2.0 and higher</h3>
+<table>
+<thead>
+<tr>
+<th>S_TYPE</th>
+<th>V_TYPE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_INFO</td>
+<td>V_TEXT</td>
+</tr>
+<tr>
+<td>S_GAS</td>
+<td>V_FLOW, V_VOLUME</td>
+</tr>
+<tr>
+<td>S_GPS</td>
+<td>V_POSITION</td>
+</tr>
+<tr>
+<td>S_WATER_QUALITY</td>
+<td>V_TEMP, V_PH, V_ORP, V_EC</td>
+</tr>
+</tbody>
+</table>
+<h2>Custom unit of measurement</h2>
+<p>Some sensor value types are not specific for a certain sensor type. These do not have a default unit of measurement in Home Assistant. For example, the V_LEVEL type can be used for different sensor types, dust, sound, vibration etc.</p>
+<p>By using V_UNIT_PREFIX, it’s possible to set a custom unit for any sensor. The string value that is sent for V_UNIT_PREFIX will be used in preference to any other unit of measurement, for the defined sensors. V_UNIT_PREFIX can’t be used as a stand-alone sensor value type. Sending a supported value type and value from the tables above is also required. V_UNIT_PREFIX is available with MySensors version 1.5 and later.</p>
+<p>For more information, visit the <a href="https://www.mysensors.org/download">serial api</a> of MySensors.</p>
+<h2>Example sketches</h2>
+<h3>MySensors 1.5 example sketch</h3>
+<pre><code class="language-cpp">/**
+ * Documentation: https://www.mysensors.org
+ * Support Forum: https://forum.mysensors.org
+ *
+ * https://www.mysensors.org/build/light
+ */
+
+#include &lt;SPI.h&gt;
+#include &lt;MySensor.h&gt;
+#include &lt;BH1750.h&gt;
+#include &lt;Wire.h&gt;
+
+#define SN &quot;LightLuxSensor&quot;
+#define SV &quot;1.0&quot;
+#define CHILD_ID 1
+unsigned long SLEEP_TIME = 30000; // Sleep time between reads (in milliseconds)
+
+BH1750 lightSensor;
+MySensor gw;
+MyMessage msg(CHILD_ID, V_LEVEL);
+MyMessage msgPrefix(CHILD_ID, V_UNIT_PREFIX);  // Custom unit message.
+uint16_t lastlux = 0;
+
+void setup()
+{
+  gw.begin();
+  gw.sendSketchInfo(SN, SV);
+  gw.present(CHILD_ID, S_LIGHT_LEVEL);
+  lightSensor.begin();
+  gw.send(msg.set(lastlux));
+  gw.send(msgPrefix.set(&quot;lux&quot;));  // Set custom unit.
+}
+
+void loop()
+{
+  uint16_t lux = lightSensor.readLightLevel();  // Get Lux value
+  if (lux != lastlux) {
+      gw.send(msg.set(lux));
+      lastlux = lux;
+  }
+
+  gw.sleep(SLEEP_TIME);
+}
+</code></pre>
+<h3>MySensors 2.x example sketch</h3>
+<pre><code class="language-cpp">/**
+ * Documentation: https://www.mysensors.org
+ * Support Forum: https://forum.mysensors.org
+ *
+ * https://www.mysensors.org/build/light
+ */
+
+#define MY_DEBUG
+#define MY_RADIO_NRF24
+
+#include &lt;BH1750.h&gt;
+#include &lt;Wire.h&gt;
+#include &lt;MySensors.h&gt;
+
+#define SN &quot;LightLuxSensor&quot;
+#define SV &quot;1.0&quot;
+#define CHILD_ID 1
+unsigned long SLEEP_TIME = 30000; // Sleep time between reads (in milliseconds)
+
+BH1750 lightSensor;
+MyMessage msg(CHILD_ID, V_LEVEL);
+MyMessage msgPrefix(CHILD_ID, V_UNIT_PREFIX);  // Custom unit message.
+uint16_t lastlux = 0;
+bool initialValueSent = false;
+
+void setup()
+{
+  sendSketchInfo(SN, SV);
+  present(CHILD_ID, S_LIGHT_LEVEL);
+  lightSensor.begin();
+}
+
+void loop()
+{
+  if (!initialValueSent) {
+    Serial.println(&quot;Sending initial value&quot;);
+    send(msgPrefix.set(&quot;custom_lux&quot;));  // Set custom unit.
+    send(msg.set(lastlux));
+    Serial.println(&quot;Requesting initial value from controller&quot;);
+    request(CHILD_ID, V_LEVEL);
+    wait(2000, C_SET, V_LEVEL);
+  }
+  uint16_t lux = lightSensor.readLightLevel();  // Get Lux value
+  if (lux != lastlux) {
+      send(msg.set(lux));
+      lastlux = lux;
+  }
+
+  sleep(SLEEP_TIME);
+}
+
+void receive(const MyMessage &amp;message) {
+  if (message.type == V_LEVEL) {
+    if (!initialValueSent) {
+      Serial.println(&quot;Receiving initial value from controller&quot;);
+      initialValueSent = true;
+    }
+  }
+}
+</code></pre>
+:ET

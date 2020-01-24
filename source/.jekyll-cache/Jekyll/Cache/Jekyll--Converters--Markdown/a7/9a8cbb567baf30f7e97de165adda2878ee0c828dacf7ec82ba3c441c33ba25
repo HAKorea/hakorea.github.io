@@ -1,0 +1,64 @@
+I"§<p>The <code>watson_tts</code> text-to-speech platform that works with <a href="https://www.ibm.com/watson/services/text-to-speech/">IBM Watson Cloud</a> to create the spoken output.
+Watson is a paid service via IBM Cloud but there is a decent <a href="https://www.ibm.com/cloud/watson-text-to-speech/pricing">free tier</a> which offers 10000 free characters every month.</p>
+<h2>Setup</h2>
+<p>For supported formats and voices please go to <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-about#about">IBM Cloud About section</a>.</p>
+<p>To get started please read the <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-gettingStarted#gettingStarted">Getting started tutorial</a>.</p>
+<h2>Configuration</h2>
+<p>To configure Watson TTS, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: watson_tts
+    watson_apikey: YOUR_GENERATED_APIKEY
+</code></pre>
+<p>You can get these tokens after you generated the credentials on the IBM Cloud console:</p>
+<p class='img'>
+  <img src='/images/screenshots/watson_tts_screen.png' />
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='watson_url' href='#watson_url'></a> watson_url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The endpoint to which the service will connect.</p>
+</span></p><p class='default'>
+Default value: <p><a href="https://stream.watsonplatform.net/text-to-speech/api">https://stream.watsonplatform.net/text-to-speech/api</a></p>
+</p></dd><dt><a class='title-link' name='watson_apikey' href='#watson_apikey'></a> watson_apikey</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your secret apikey generated on the IBM Cloud admin console.</p>
+</span></p></dd><dt><a class='title-link' name='voice' href='#voice'></a> voice</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Voice name to be used.</p>
+</span></p><p class='default'>
+Default value: <p>en-US_AllisonVoice</p>
+</p></dd><dt><a class='title-link' name='output_format' href='#output_format'></a> output_format</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the default output format. Supported formats: <code>audio/flac</code>, <code>audio/mp3</code>, <code>audio/mpeg</code>, <code>audio/ogg</code>, <code>audio/ogg;codecs=opus</code>, <code>audio/ogg;codecs=vorbis</code>, <code>audio/wav</code></p>
+</span></p><p class='default'>
+Default value: <p>audio/mp3</p>
+</p></dd></dl>
+</div>
+<h2>Usage</h2>
+<p>Say to all <code>media_player</code> device entities:</p>
+<pre><code class="language-yaml">- service: tts.watson_tts_say
+  data_template:
+    message: 'Hello from Watson'
+</code></pre>
+<p>or</p>
+<pre><code class="language-yaml">- service: tts.watson_tts_say
+  data_template:
+    message: &gt;
+      &lt;speak&gt;
+          Hello from Watson
+      &lt;/speak&gt;
+</code></pre>
+<p>Say to the <code>media_player.living_room</code> device entity:</p>
+<pre><code class="language-yaml">- service: tts.watson_tts_say
+  data_template:
+    entity_id: media_player.living_room
+    message: &gt;
+      &lt;speak&gt;
+          Hello from Watson
+      &lt;/speak&gt;
+</code></pre>
+<p>Say with break:</p>
+<pre><code class="language-yaml">- service: tts.watson_tts_say
+  data_template:
+    message: &gt;
+      &lt;speak&gt;
+          Hello from
+          &lt;break time=&quot;.9s&quot; /&gt;
+          Watson
+      &lt;/speak&gt;
+</code></pre>
+:ET

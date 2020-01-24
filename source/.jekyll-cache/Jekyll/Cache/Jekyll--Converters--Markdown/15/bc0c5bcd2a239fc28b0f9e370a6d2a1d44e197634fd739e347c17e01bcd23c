@@ -1,0 +1,83 @@
+I"�<p>Integrates MySensors notifications into Home Assistant. See the <a href="/integrations/mysensors/">main component</a> for configuration instructions.</p>
+<p>Setting the <code>target</code> key in the service call will target the name of the MySensors device in Home Assistant. MySensors device names follow the notation: “[Sketch name] [Node id] [Child id]”.</p>
+<h3>Automation example</h3>
+<pre><code class="language-yaml">...
+action:
+  service: notify.mysensors
+  data:
+    message: Welcome home!
+    target: 'TextSensor 254 1'
+</code></pre>
+<p>The following sensor types are supported:</p>
+<h5>MySensors version 2.0 and higher</h5>
+<table>
+<thead>
+<tr>
+<th>S_TYPE</th>
+<th>V_TYPE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_INFO</td>
+<td>V_TEXT</td>
+</tr>
+</tbody>
+</table>
+<p>For more information, visit the <a href="https://www.mysensors.org/download/">api</a> page of MySensors.</p>
+<h3>Example sketch</h3>
+<pre><code class="language-cpp">/*
+ * Documentation: https://www.mysensors.org
+ * Support Forum: https://forum.mysensors.org
+ */
+
+ #define MY_DEBUG
+ #define MY_RADIO_NRF24
+ #define MY_REPEATER_FEATURE
+
+ #include &lt;SPI.h&gt;
+ #include &lt;MySensors.h&gt;
+
+ #define SN &quot;TextSensor&quot;
+ #define SV &quot;1.0&quot;
+ #define CHILD_ID 1
+
+ MyMessage textMsg(CHILD_ID, V_TEXT);
+ bool initialValueSent = false;
+
+ void setup(void) {
+ }
+
+ void presentation() {
+   sendSketchInfo(SN, SV);
+   present(CHILD_ID, S_INFO, &quot;TextSensor1&quot;);
+ }
+
+ void loop() {
+   if (!initialValueSent) {
+     Serial.println(&quot;Sending initial value&quot;);
+     // Send initial values.
+     send(textMsg.set(&quot;-&quot;));
+     Serial.println(&quot;Requesting initial value from controller&quot;);
+     request(CHILD_ID, V_TEXT);
+     wait(2000, C_SET, V_TEXT);
+   }
+ }
+
+ void receive(const MyMessage &amp;message) {
+   if (message.type == V_TEXT) {
+     if (!initialValueSent) {
+       Serial.println(&quot;Receiving initial value from controller&quot;);
+       initialValueSent = true;
+     }
+     // Dummy print
+     Serial.print(&quot;Message: &quot;);
+     Serial.print(message.sensor);
+     Serial.print(&quot;, Message: &quot;);
+     Serial.println(message.getString());
+     // Send message to controller
+     send(textMsg.set(message.getString()));
+   }
+ }
+</code></pre>
+:ET

@@ -1,0 +1,17 @@
+I"*<p>Sensor for monitoring the contents of a folder. Note that folder paths must be added to <a href="/docs/configuration/basic/">whitelist_external_dirs</a>. Optionally a <a href="https://docs.python.org/3.6/library/fnmatch.html">wildcard filter</a> can be applied to the files considered within the folder. The state of the sensor is the size in MB of files within the folder that meet the filter criteria.
+The sensor exposes the number of filtered files in the folder, total size in bytes of those files and a comma separated list of the file paths as attributes.</p>
+<h2>Configuration</h2>
+<p>To enable the <code>folder</code> sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: folder
+    folder: /config
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='folder' href='#folder'></a> folder</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The folder path</p>
+</span></p></dd><dt><a class='title-link' name='filter' href='#filter'></a> filter</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Filter to apply</p>
+</span></p><p class='default'>
+Default value: <p><code>*</code></p>
+</p></dd></dl>
+</div>
+:ET

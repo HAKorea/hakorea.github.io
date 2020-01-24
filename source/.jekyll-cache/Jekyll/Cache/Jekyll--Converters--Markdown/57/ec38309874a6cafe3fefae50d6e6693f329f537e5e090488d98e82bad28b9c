@@ -1,0 +1,47 @@
+I"Ý<p>The <code>fastdotcom</code> integration uses the <a href="https://fast.com/">Fast.com</a> web service to measure network bandwidth performance.</p>
+<div class='note'>
+<p>Currently fast.com only supports measuring download bandwidth. If you want to measure bandwidth metrics other then download such as ping and upload, utilize the <a href="/integrations/speedtestdotnet">speedtest</a> component.</p>
+</div>
+<p>Enabling this integration will automatically create the Fast.com Sensor.</p>
+<p>By default, a speed test will be run every hour. The user can change the update frequency in the configuration by defining the <code>scan_interval</code> for a speed test to run.</p>
+<h2>Configuration</h2>
+<p>To add Fast.com to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>Once per hour, on the hour (default):</p>
+<pre><code class="language-yaml">fastdotcom:
+</code></pre>
+<p>Every half hour of every day:</p>
+<pre><code class="language-yaml">fastdotcom:
+  scan_interval:
+      minutes: 30
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minimum time interval between updates. Supported formats: <code>scan_interval: 'HH:MM:SS'</code>, <code>scan_interval: 'HH:MM'</code> and Time period dictionary (see example below).</p>
+</span></p><p class='default'>
+Default value: <p>60 minutes</p>
+</p></dd><dt><a class='title-link' name='manual' href='#manual'></a> manual</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Turn manual mode on or off. Manual mode will disable scheduled speedtests.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<h4>Time period dictionary example</h4>
+<pre><code class="language-yaml">scan_interval:
+  # At least one of these must be specified:
+  days: 0
+  hours: 0
+  minutes: 3
+  seconds: 30
+  milliseconds: 0
+</code></pre>
+<h3>Service</h3>
+<p>Once loaded, the <code>fastdotcom</code> integration will expose a service (<code>fastdotcom.speedtest</code>) that can be called to run a Fast.com speed test on demand. This service takes no parameters. This can be useful if you have enabled manual mode.</p>
+<pre><code class="language-yaml">action:
+  service: fastdotcom.speedtest
+</code></pre>
+<h2>Notes</h2>
+<ul>
+<li>When running on Raspberry Pi 3 or older, the maximum speed is limited by its 100 Mbit/s LAN adapter.</li>
+<li>The sensor will return the maximum measured speed during a 15-second test.</li>
+<li>Speed tests consume data depending on your internet speed, make sure to consider this if your internet connection has limited bandwidth.</li>
+</ul>
+:ET

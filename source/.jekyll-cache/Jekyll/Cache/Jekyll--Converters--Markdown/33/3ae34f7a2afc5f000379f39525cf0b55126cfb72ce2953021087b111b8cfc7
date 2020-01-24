@@ -1,0 +1,68 @@
+I"<+<p>The <code>egardia</code> platform enables the ability to control an <a href="https://egardia.com/">Egardia</a>/<a href="https://woonveilig.nl">Woonveilig</a> control panel. These alarm panels are known under different brand names across the world, including Woonveilig in the Netherlands. This was tested on the WL-1716, GATE-01, GATE-02 and GATE-03 versions of the Egardia/Woonveilig platform. Not only will you integrate your alarm control panel, supported sensors (door contacts at this moment) will be added automatically (hidden by default).</p>
+<p>You will need to know the IP of your alarm panel on your local network. Test if you can login to the panel by browsing to the IP address and log in using your Egardia/Woonveilig account.</p>
+<h2>Basic configuration</h2>
+<p>To enable the integration with your alarm panel, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">   # Example configuration.yaml entry
+   egardia:
+     host: YOUR_HOST
+     username: YOUR_USERNAME
+     password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The local IP address of the Egardia/Woonveilig alarm panel.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Username for the Egardia/Woonveilig account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Password for Egardia/Woonveilig account.</p>
+</span></p></dd><dt><a class='title-link' name='version' href='#version'></a> version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The version of the Egardia system. <code>GATE-01</code>, <code>GATE-02</code> and <code>GATE-03</code> are currently supported.</p>
+</span></p><p class='default'>
+Default value: <p>GATE-01</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port of the alarm panel.</p>
+</span></p><p class='default'>
+Default value: <p>80</p>
+</p></dd><dt><a class='title-link' name='report_server_enabled' href='#report_server_enabled'></a> report_server_enabled</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable reporting by server.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='report_server_port' href='#report_server_port'></a> report_server_port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port of the Egardia server.</p>
+</span></p><p class='default'>
+Default value: <p>52010</p>
+</p></dd><dt><a class='title-link' name='report_server_codes' href='#report_server_codes'></a> report_server_codes</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Map of list of codes for the different states.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='arm' href='#arm'></a> arm</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of codes for the ‘arm’ state.</p>
+</span></p></dd><dt><a class='title-link' name='disarm' href='#disarm'></a> disarm</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of codes for the ‘disarm’ state.</p>
+</span></p></dd><dt><a class='title-link' name='armhome' href='#armhome'></a> armhome</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of codes for the ‘armhome’ state.</p>
+</span></p></dd><dt><a class='title-link' name='triggered' href='#triggered'></a> triggered</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of codes for the ‘triggered’ state.</p>
+</span></p></dd><dt><a class='title-link' name='ignore' href='#ignore'></a> ignore</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of codes that will be ignored.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>Note that this basic configuration will only enable you to read the armed/armed away/disarmed status of your alarm and will <strong>not</strong> update the status if the alarm is triggered. This is because of how Egardia built their system. The alarm triggers normally go through their servers.
+You can change this, however, using the following procedure. This is a more advanced (and more useful) configuration.</p>
+<div class='note'>
+There seem to be multiple versions of software running on GATE-02 devices; we have received reports from GATE-02 users who successfully run this package in GATE-02 mode. Others have reported they needed to specify GATE-03 as their version to integrate their GATE-02.
+</div>
+<h2>Advanced configuration</h2>
+<ol>
+<li>Log in to your alarm system’s control panel. You will need to access http://[IP of your control panel]. You know this already since you need it in the basic configuration from above. Log in to the control panel with your Egardia/Woonveilig username and password.</li>
+<li>Once logged in, go to <em>System Settings</em>, <em>Report</em> and change the Server Address for your primary server to the IP or hostname of your Home Assistant machine. You can leave the port number set to 52010 or change it to anything you like. <strong>Make sure to change the settings of the primary server otherwise the messages will not come through. Note that this will limit (or fully stop) the number of alarm messages you will get through Egardia’s / Woonveilig services.</strong> Maybe, that is just what you want. Make sure to save your settings by selecting ‘OK’.</li>
+<li>The Egardia integration relies on capturing the status codes that your alarm emits when something happens (status change or trigger). These codes will be unique for every situation - i.e. the code emitted by the alarm when a sensor is triggered is unique to that sensor. Also, if you have multiple users or remotes, each remote has unique codes that are emitted by the alarm when status is changed using that remote or by that user. For the Egardia integration to work correctly you will need to capture the codes. To do this, on your Home Assistant machine run <code>$ sudo python3 egardiaserver.py</code>. Refer to the <a href="https://github.com/jeroenterheerdt/python-egardia">python-egardia repository</a> for detailed documentation on parameters. This will receive status codes from your alarm control panel and display them. Record the codes shown as well as the status they relate to (see step 4 below). Make sure to change the status of your alarm to all states (disarm, arm, home) by all means possible (all users, remotes, web login, app) as well as trigger the alarm in all ways possible to get 100% coverage of all the codes the alarm system generates. You will need to run this script once and stop it once you have captured all the possible codes. Also, if you ever add users, remotes or sensors to your alarm system, make sure to re-run the script to capture the extra codes so you can update your configuration (see step 4 below). <strong>For comfort, before triggering the alarm it might be good to disable the siren temporarily (can be done in Panel Settings).</strong></li>
+<li>Once you have the codes, update your <code>configuration.yaml</code>:
+<pre><code class="language-yaml"># Example configuration.yaml entry
+egardia:
+host: YOUR_HOST
+username: YOUR_USERNAME
+password: YOUR_PASSWORD
+  report_server_enabled: true
+  report_server_port: PORT_OF_EGARDIASERVER (optional, defaults to 52010)
+  report_server_codes:
+    arm: XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX
+    disarm: XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX
+    armhome: XXXXXXXXXXXXXXXX
+    triggered: XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX, XXXXXXXXXXXXXXXX
+    ignore: XXXXXXXXXXXXXXXX
+</code></pre>
+</li>
+</ol>
+<p>Note that for all code groups (<em>arm</em>,<em>disarm</em>, etc) multiple codes can be entered since each sensor triggers with a different code and each user of the system has its own arm and disarm codes. Also note that your system will do regular system checks which will be reported as well. Since Home Assistant provides no way of handling them properly, you can enter those codes as <em>ignore</em> (again, multiple codes can be used here). The egardia integration will ignore these codes and continue returning the old status if it receives any of the codes that are listed as ignore. This is useful for example when you have armed your alarm at night: normally a system check will occur at least once during the night and if that code is not specified anywhere Home Assistant will set the status of the alarm to its default, which is unarmed. This is in fact wrong. Listing the code as ignore changes this behavior and Home Assistant will continue to show the status the alarm is in (disarm, arm, home, triggered) even when system checks occur.
+5. Test your setup and enjoy. The integration will update if the alarm status changes, including triggers. You can use this to build your own automations and send notifications as you wish. <em>Note</em>: previous versions required a separate egardiaserver to be set up. This is no longer necessary and corresponding system services can be removed (using systemctl).</p>
+<h2>Binary Sensor</h2>
+<p>The <code>egardia</code> platform allows you to get data from your <a href="https://www.egardia.com">Egardia</a>/<a href="https://www.woonveilig.nl">Woonveilig</a> binary sensors from within Home Assistant.
+Currently only door contacts are supported. IR sensors are not supported and will probably never be since their status cannot be read outside of the alarm control panel. Smoke sensors and others might be added but currently are not supported.</p>
+:ET

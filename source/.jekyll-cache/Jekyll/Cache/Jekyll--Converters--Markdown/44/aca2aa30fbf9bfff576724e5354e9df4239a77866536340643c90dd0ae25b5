@@ -1,0 +1,94 @@
+I"<p>The <code>netdata</code> sensor platform allows you to display information collected by <a href="https://my-netdata.io/">Netdata</a>.</p>
+<h2>Setup</h2>
+<p>Getting the details to configure the sensors is a bit tricky as Netdata uses different name for the <code>element:</code> value that is required. To get the value for the <code>data_group:</code> use Netdata’s web interface. <code>1.</code> marks the name for the <code>data_group:</code>. <code>2.</code> are the names for the element to show in Home Assistant. The name that is shown can be different than the name under which the metrics are available.</p>
+<p class='img'>
+  <img src='/images/integrations/netdata/details.png' />
+</p>
+<p>To check if the <code>element:</code> name matches the name in the Netdata frontend, use <code>curl</code> with the IP address of your Netdata instance, its port and the <code>data_group</code>:</p>
+<pre><code class="language-bash">$ curl -X GET &quot;http://[Netdata_Instance]:19999/api/v1/data?chart=[data_group]&amp;points=2&amp;options=jsonwrap&quot;
+{
+   &quot;api&quot;: 1,
+   &quot;id&quot;: &quot;system.ipv4&quot;,
+   &quot;name&quot;: &quot;system.ipv4&quot;,
+[...]
+   &quot;dimension_names&quot;: [&quot;received&quot;, &quot;sent&quot;],
+   &quot;dimension_ids&quot;: [&quot;InOctets&quot;, &quot;OutOctets&quot;],
+[...]
+</code></pre>
+<ul>
+<li><code>dimension_names</code>: Names shown in the frontend.</li>
+<li><code>dimension_ids</code>: Names to use for <code>element</code>.</li>
+</ul>
+<p>Alternatively you can browse to the built in Netdata API in your browser <code>http://[Netdata_Instance]:19999/api/v1/allmetrics?format=json</code> and search for the <code>data_group</code> identified in the Netdata frontend. In the example JSON below the data group is “system.load”.</p>
+<pre><code class="language-json">	&quot;system.load&quot;: {
+		&quot;name&quot;:&quot;system.load&quot;,
+		&quot;context&quot;:&quot;system.load&quot;,
+		&quot;units&quot;:&quot;load&quot;,
+		&quot;last_updated&quot;: 1558446920,
+		&quot;dimensions&quot;: {
+			&quot;load1&quot;: {
+				&quot;name&quot;: &quot;load1&quot;,
+				&quot;value&quot;: 0.1250000
+			},
+			&quot;load5&quot;: {
+				&quot;name&quot;: &quot;load5&quot;,
+				&quot;value&quot;: 0.1290000
+			},
+			&quot;load15&quot;: {
+				&quot;name&quot;: &quot;load15&quot;,
+				&quot;value&quot;: 0.1430000
+			}
+		}
+	},
+</code></pre>
+<p>Once the <code>data_group</code> “system.load” and the <code>element</code> “load15” have been identified from the JSON it can be configured in your configuration.yaml like the example below.</p>
+<h2>Configuration</h2>
+<p>Add the following to your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: netdata
+    resources:    
+      load:
+        data_group: system.load
+        element: load15
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address or hostname of your Netdata instance.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port that the Netdata instance is running on.</p>
+</span></p><p class='default'>
+Default value: <p>19999</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the monitored Netdata instance.</p>
+</span></p><p class='default'>
+Default value: <p>Netdata</p>
+</p></dd><dt><a class='title-link' name='resources' href='#resources'></a> resources</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of details to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name to use for the sensor in the frontend.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='data_group' href='#data_group'></a> data_group</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the data group to monitor, e.g., <code>system.cpu</code>.</p>
+</span></p></dd><dt><a class='title-link' name='element' href='#element'></a> element</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The element of the group to monitor.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='icon'><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to use for the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>mdi:desktop-classic</p>
+</p></dd><dt><a class='title-link' name='invert' href='#invert'></a> invert</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Invert the sensor values.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h3>Full Example</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: netdata
+    host: '192.168.1.2'
+    port: '19999'
+    name: SomeHostName
+    resources: 
+      system_load:
+        data_group: system.load 
+        element: load15
+      core0_freq:
+        data_group: 'cpu.cpufreq'
+        element: 'cpu0'
+        icon: mdi:chip
+</code></pre>
+:ET

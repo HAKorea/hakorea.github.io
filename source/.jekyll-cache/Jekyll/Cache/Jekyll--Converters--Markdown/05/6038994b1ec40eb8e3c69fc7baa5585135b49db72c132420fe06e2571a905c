@@ -1,0 +1,198 @@
+I",<p>The Netgear LTE integration for Home Assistant allows you to observe and control <a href="https://www.netgear.com/home/products/mobile-broadband/lte-modems/default.aspx">Netgear LTE modems</a>.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Notifications</li>
+<li>Sensors</li>
+<li>Binary Sensors</li>
+</ul>
+<p>The integration supports sending notifications with SMS, reporting incoming SMS with events and reporting the modem and connection state in a number of sensors and binary sensors.</p>
+<div class='note'>
+<p>Splitting of long SMS messages is not supported so notifications can contain a maximum of 70 characters. Simple messages using the reduced GSM-7 alphabet can contain up to 160 characters. Most emojis are not supported.</p>
+</div>
+<h2>Configuration</h2>
+<p>To enable the integration, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+netgear_lte:
+  - host: IP_ADDRESS
+    password: SECRET
+    notify:
+      - name: sms
+        recipient: &quot;+15105550123&quot;
+    sensor:
+      monitored_conditions:
+        - usage
+        - sms
+    binary_sensor:
+      monitored_conditions:
+        - wire_connected
+        - mobile_connected
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the modem web interface.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password used for the modem web interface.</p>
+</span></p></dd><dt><a class='title-link' name='notify' href='#notify'></a> notify</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of notification services connected to this specific host.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='recipient' href='#recipient'></a> recipient</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The phone number of a default recipient or a list with multiple recipients.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the notification service.</p>
+</span></p><p class='default'>
+Default value: <p><code>netgear_lte</code></p>
+</p></dd></dl></dd><dt><a class='title-link' name='sensor' href='#sensor'></a> sensor</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Configuration options for sensors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sensor types to create.</p>
+</span></p><p class='default'>
+Default value: <p>usage</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='cell_id' href='#cell_id'></a> cell_id</dt><dd><p class='desc'><span class='description'><p>The Cell ID, a number identifying the base station.</p>
+</span></p></dd><dt><a class='title-link' name='connection_text' href='#connection_text'></a> connection_text</dt><dd><p class='desc'><span class='description'><p>A connection text, e.g., “4G”.</p>
+</span></p></dd><dt><a class='title-link' name='connection_type' href='#connection_type'></a> connection_type</dt><dd><p class='desc'><span class='description'><p>The connection type, e.g., “IPv4Only”.</p>
+</span></p></dd><dt><a class='title-link' name='current_band' href='#current_band'></a> current_band</dt><dd><p class='desc'><span class='description'><p>The radio band used, e.g., “LTE B3”.</p>
+</span></p></dd><dt><a class='title-link' name='current_ps_service_type' href='#current_ps_service_type'></a> current_ps_service_type</dt><dd><p class='desc'><span class='description'><p>The service type, e.g. “LTE”.</p>
+</span></p></dd><dt><a class='title-link' name='radio_quality' href='#radio_quality'></a> radio_quality</dt><dd><p class='desc'><span class='description'><p>A number with the radio quality in percent, e.g., “55”</p>
+</span></p></dd><dt><a class='title-link' name='register_network_display' href='#register_network_display'></a> register_network_display</dt><dd><p class='desc'><span class='description'><p>The name of the service provider.</p>
+</span></p></dd><dt><a class='title-link' name='rx_level' href='#rx_level'></a> rx_level</dt><dd><p class='desc'><span class='description'><p>The RSRP value, a measurement of the received power level, e.g., “-95”.</p>
+</span></p></dd><dt><a class='title-link' name='sms' href='#sms'></a> sms</dt><dd><p class='desc'><span class='description'><p>Number of unread SMS messages in the modem inbox.</p>
+</span></p></dd><dt><a class='title-link' name='sms_total' href='#sms_total'></a> sms_total</dt><dd><p class='desc'><span class='description'><p>Number of SMS messages in the modem inbox.</p>
+</span></p></dd><dt><a class='title-link' name='tx_level' href='#tx_level'></a> tx_level</dt><dd><p class='desc'><span class='description'><p>Transmit power, e.g., “23”.</p>
+</span></p></dd><dt><a class='title-link' name='upstream' href='#upstream'></a> upstream</dt><dd><p class='desc'><span class='description'><p>Current upstream connection, “WAN” or “LTE”.</p>
+</span></p></dd><dt><a class='title-link' name='usage' href='#usage'></a> usage</dt><dd><p class='desc'><span class='description'><p>Amount of data transferred.</p>
+</span></p></dd></dl></dd></dl></dd><dt><a class='title-link' name='binary_sensor' href='#binary_sensor'></a> binary_sensor</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Configuration options for binary sensors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Binary sensor types to create.</p>
+</span></p><p class='default'>
+Default value: <p>mobile_connected</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='mobile_connected' href='#mobile_connected'></a> mobile_connected</dt><dd><p class='desc'><span class='description'><p>The LTE connection state.</p>
+</span></p></dd><dt><a class='title-link' name='wire_connected' href='#wire_connected'></a> wire_connected</dt><dd><p class='desc'><span class='description'><p>The wired uplink connection state.</p>
+</span></p></dd><dt><a class='title-link' name='roaming' href='#roaming'></a> roaming</dt><dd><p class='desc'><span class='description'><p>The current roaming state.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<h2>Events</h2>
+<h3>Event <code>netgear_lte_sms</code></h3>
+<p>Messages arriving in the modem inbox are sent as events of type <code>netgear_lte_sms</code> with the following content.</p>
+<table>
+<thead>
+<tr>
+<th>Event data attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>The modem that received the message.</td>
+</tr>
+<tr>
+<td><code>sms_id</code></td>
+<td>The inbox ID of the received message.</td>
+</tr>
+<tr>
+<td><code>from</code></td>
+<td>The sender of the message.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>The SMS message content.</td>
+</tr>
+</tbody>
+</table>
+<h2>Services</h2>
+<h3>Service <code>netgear_lte.connect_lte</code></h3>
+<p>This service asks the modem to establish its LTE connection, useful if the modem does not autoconnect.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>yes</td>
+<td>The modem that should connect (optional when just one modem is configured).</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>netgear_lte.disconnect_lte</code></h3>
+<p>This service asks the modem to close its LTE connection.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>yes</td>
+<td>The modem that should disconnect (optional when just one modem is configured).</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>netgear_lte.delete_sms</code></h3>
+<p>The integration makes a service available to delete messages from the modem inbox. This can be used to clean up after incoming SMS events.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>yes</td>
+<td>The modem that should have a message deleted (optional when just one modem is configured).</td>
+</tr>
+<tr>
+<td><code>sms_id</code></td>
+<td>no</td>
+<td>Integer or list of integers with inbox IDs of messages to delete.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>netgear_lte.set_option</code></h3>
+<p>This service can set modem configuration options (otherwise available in the modem web UI).</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>yes</td>
+<td>The modem to set options on (optional when just one modem is configured).</td>
+</tr>
+<tr>
+<td><code>autoconnect</code></td>
+<td>yes</td>
+<td>Autoconnect value: <code>never</code>/<code>home</code>/<code>always</code>, with <code>home</code> meaning “not roaming”.</td>
+</tr>
+<tr>
+<td><code>failover</code></td>
+<td>yes</td>
+<td>Failover mode: <code>wire</code> (wired connection only), <code>mobile</code> (mobile connection only), <code>auto</code> (wired connection with failover to mobile connection).</td>
+</tr>
+</tbody>
+</table>
+<h2>Examples</h2>
+<p>The following automation example processes incoming SMS messages with the <a href="/integrations/conversation/">Conversation</a> integration and then deletes the message from the inbox.</p>
+<pre><code class="language-yaml">automation:
+  - alias: SMS conversation
+    trigger:
+      - platform: event
+        event_type: netgear_lte_sms
+    action:
+      - service: conversation.process
+        data_template:
+          text: '{{ trigger.event.data.message }}'
+      - service: netgear_lte.delete_sms
+        data_template:
+          host: '{{ trigger.event.data.host }}'
+          sms_id: '{{ trigger.event.data.sms_id }}'
+</code></pre>
+:ET

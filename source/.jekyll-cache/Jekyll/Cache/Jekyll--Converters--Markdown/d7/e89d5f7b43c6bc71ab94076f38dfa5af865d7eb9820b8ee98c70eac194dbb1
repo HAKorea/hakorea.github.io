@@ -1,0 +1,112 @@
+I"�-<p>The <code>alarmdecoder</code> integration will allow Home Assistant users who own either a DSC or Honeywell alarm panel to leverage their alarm system and its sensors to provide Home Assistant with rich information about their homes. Connectivity between Home Assistant and the alarm panel is accomplished through a device produced by Nu Tech Software Solutions, known as the AlarmDecoder. The AlarmDecoder devices provide a serial, TCP/IP socket or USB interface to the alarm panel, where it emulates an alarm keypad.</p>
+<p>Please visit the <a href="https://www.alarmdecoder.com/">AlarmDecoder website</a> for further information about the AlarmDecoder devices.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor: Reports on zone status</li>
+<li>Sensor: Emulates a keypad display</li>
+<li><a href="#alarm-control-panel">Alarm Control Panel</a>: Reports on alarm status, and can be used to arm/disarm the system</li>
+</ul>
+<p>This is a fully event-based component. Any event sent by the AlarmDecoder device will be immediately reflected within Home Assistant.</p>
+<h2>Configuration</h2>
+<p>An <code>alarmdecoder</code> section must be present in the <code>configuration.yaml</code> file and contain the following options as required:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alarmdecoder:
+  device:
+    type: socket
+    host: 192.168.1.20
+    port: 10000
+  panel_display: false
+  zones:
+    01:
+      name: 'Smoke Detector'
+      type: 'smoke'
+      rfid: '0123456'
+    02:
+      name: 'Front Door'
+      type: 'opening'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of variables for the AlarmDecoder device.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The type of AlarmDecoder device: socket, serial or USB.</p>
+</span></p><p class='default'>
+Default value: <p>socket</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of the AlarmDecoder device on your home network, if using socket type.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of the AlarmDecoder device on your home network, if using socket type.</p>
+</span></p><p class='default'>
+Default value: <p>10000</p>
+</p></dd><dt><a class='title-link' name='path' href='#path'></a> path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The path of the AlarmDecoder device, if using serial type.</p>
+</span></p><p class='default'>
+Default value: <p>/dev/ttyUSB0</p>
+</p></dd><dt><a class='title-link' name='baudrate' href='#baudrate'></a> baudrate</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The baud rate of the AlarmDecoder device, if using serial type.</p>
+</span></p><p class='default'>
+Default value: <p>115200</p>
+</p></dd></dl></dd><dt><a class='title-link' name='panel_display' href='#panel_display'></a> panel_display</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Create a sensor called sensor.alarm_display to match the Alarm Keypad display.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='autobypass' href='#autobypass'></a> autobypass</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If this is set to <code>true</code>, then when arming (home or away), it will automatically bypass all open zones (sending ‘6#’).</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='zones' href='#zones'></a> zones</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>AlarmDecoder has no way to tell us which zones are actually in use, so each zone must be configured in Home Assistant. For each zone, at least a name must be given. For more information on the available zone types, take a look at the <a href="/integrations/alarmdecoder">Binary Sensor</a> docs. <em>Note: If no zones are specified, Home Assistant will not load any binary_sensor integrations.</em></p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A name for the zone.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A type for the zone. Here you can find a list of <a href="/integrations/binary_sensor/#device-class">Device Classes</a>.</p>
+</span></p><p class='default'>
+Default value: <p>opening</p>
+</p></dd><dt><a class='title-link' name='rfid' href='#rfid'></a> rfid</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The RF serial-number associated with RF zones. Providing this field allows Home Assistant to associate raw sensor data to a given zone, allowing direct monitoring of the state, battery, and supervision status.</p>
+</span></p></dd><dt><a class='title-link' name='loop' href='#loop'></a> loop</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The loop number associated with RF zones (1, 2, 3, or 4). Providing this field allows Home Assistant to read open/closed status from the raw sensor data in addition to from the panel display, meaning it can correctly show a bypassed RF zone as open or closed when the alarm is armed. (This is an alternative to relayaddr/relaychan below for RF zones.)</p>
+</span></p></dd><dt><a class='title-link' name='relayaddr' href='#relayaddr'></a> relayaddr</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Inclusive)</span><span class='description'><p>Address of the relay or zone expander board to associate with the zone. (ex: 12, 13, 14, or 15). Typically used in cases where a panel will not send bypassed zones such as motion during an armed home state, the Vista 20P is an example of this. Alarmdecoder can emulate a zone expander board and the panel can be programmed to push zone events to this virtual expander. This allows the bypassed zone binary sensors to be utilized. One example is using bypassed motion sensors at night for motion-based automated lights while the system is armed with the motion sensor bypassed.</p>
+</span></p></dd><dt><a class='title-link' name='relaychan' href='#relaychan'></a> relaychan</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Inclusive)</span><span class='description'><p>Channel of the relay or zone expander board to associate with the zone. (ex: 1, 2, 3, or 4 for relay expander boards, 1 - 8 for zone expander boards)</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Alarm Control Panel</h2>
+<p>There are several attributes available on the alarm panel to give you more information about your alarm.</p>
+<ul>
+<li><code>ac_power</code>: Set to <code>true</code> if your system has AC power supplying it.</li>
+<li><code>backlight_on</code>: Set to <code>true</code> if your keypad’s backlight is on.</li>
+<li><code>battery_low</code>: Set to <code>true</code> if your system’s back-up battery is low.</li>
+<li><code>check_zone</code>: Set to <code>true</code> if your system was recently triggered. When <code>check_zone</code> is <code>true</code>, it must be cleared by entering your code + 1 before attempting to rearm your alarm.</li>
+<li><code>chime</code>: Set to <code>true</code> if your system’s chime is activated. When activated, your system will beep anytime a door or window is faulted while the alarm is disarmed.</li>
+<li><code>entry_delay_off</code>: Set to <code>true</code> if your system is in “Instant” mode, meaning the alarm will sound on any faults.</li>
+<li><code>programming_mode</code>: Set to <code>true</code> if your system is in programming mode.</li>
+<li><code>ready</code>: Set to <code>true</code> if your system is ready to be armed. Any faults, including motions sensors, will make this value <code>false</code>.</li>
+<li><code>zone_bypassed</code>: Set to <code>true</code> if your system is currently bypassing a zone.</li>
+</ul>
+<h2>Services</h2>
+<p>The Alarm Decoder integration gives you access to several services for you to control your alarm with.</p>
+<ul>
+<li><code>alarm_arm_away</code>: Arms the alarm in away mode; all faults will trigger the alarm.</li>
+<li><code>alarm_arm_home</code>: Arms the alarm in stay mode; faults to the doors or windows will trigger the alarm.</li>
+<li><code>alarm_arm_night</code>: Arms the alarm in instant mode; all faults will trigger the alarm. Additionally, the entry delay is turned off on the doors.</li>
+<li><code>alarm_disarm</code>: Disarms the alarm from any state. Also clears a <code>check_zone</code> flag after an alarm was triggered.</li>
+<li><code>alarmdecoder.alarm_keypress</code>: Sends a string of characters to the alarm, as if you had touched those keys on a keypad.</li>
+<li><code>alarmdecoder.alarm_toggle_chime</code>: Toggles the alarm’s chime state.</li>
+</ul>
+<div class='note'>
+<p><code>alarm_arm_custom_bypass</code> and <code>alarm_trigger</code>, while available in the services list in Home Assistant, are not currently implemented in the Alarm Decoder platform.</p>
+</div>
+<h3>Examples</h3>
+<p>Using a combination of the available services and attributes, you can create switch templates.</p>
+<h3>Chime Status and Control</h3>
+<pre><code class="language-yaml">- platform: template
+  switches:
+    alarm_chime:
+      friendly_name: Chime
+      value_template: &quot;{{ is_state_attr('alarm_control_panel.alarm_panel', 'chime', true) }}&quot;
+      turn_on:
+        service: alarmdecoder.alarm_toggle_chime
+        data:
+          code: !secret alarm_code
+      turn_off:
+        service: alarmdecoder.alarm_toggle_chime
+        data:
+          code: !secret alarm_code
+      icon_template: &gt;-
+          {% if is_state_attr('alarm_control_panel.alarm_panel', 'chime', true) %}
+            mdi:bell-ring
+          {% else %}
+            mdi:bell-off
+          {% endif %}
+</code></pre>
+:ET

@@ -1,0 +1,147 @@
+I"Ù<p>The <code>systemmonitor</code> sensor platform allows you to monitor disk usage,
+memory usage, CPU usage, and running processes. This platform has superseded the
+process integration which is now considered deprecated.</p>
+<p>To add this platform to your installation,
+add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='resources' href='#resources'></a> resources</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Contains all entries to display.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='required'>(Required)</span><span class='description'><p>The type of the information to display, please check the table below for details.</p>
+</span></p></dd><dt><a class='title-link' name='arg' href='#arg'></a> arg</dt><dd><p class='desc'><span class='required'>(Optional)</span><span class='description'><p>Argument to use, please check the table below for details.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>The table contains types and their argument to use in your <code>configuration.yaml</code>
+file.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Type (<code>type:</code>)</th>
+<th align="left">Argument (<code>arg:</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">disk_use_percent</td>
+<td align="left">Path, e.g., <code>/</code></td>
+</tr>
+<tr>
+<td align="left">disk_use</td>
+<td align="left">Path, e.g., <code>/</code></td>
+</tr>
+<tr>
+<td align="left">disk_free</td>
+<td align="left">Path, e.g., <code>/</code></td>
+</tr>
+<tr>
+<td align="left">memory_use_percent</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">memory_use</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">memory_free</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">swap_use_percent</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">swap_use</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">swap_free</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">load_1m</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">load_5m</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">load_15m</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">network_in</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">network_out</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">throughput_network_in</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">throughput_network_out</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">packets_in</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">packets_out</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">ipv4_address</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">ipv6_address</td>
+<td align="left">Interface, e.g., <code>eth0</code></td>
+</tr>
+<tr>
+<td align="left">processor_use</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">process</td>
+<td align="left">Binary, e.g., <code>octave-cli</code></td>
+</tr>
+<tr>
+<td align="left">last_boot</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h2>Linux specific</h2>
+<p>To retrieve all available network interfaces on a Linux System, execute the
+<code>ifconfig</code> command.</p>
+<pre><code class="language-bash">ifconfig -a | sed 's/[ \t].*//;/^$/d'
+</code></pre>
+<h2>Windows specific</h2>
+<p>When running this platform on Microsoft Windows, Typically,
+the default interface would be called <code>Local Area Connection</code>,
+so your configuration might look like:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: systemmonitor
+    resources:
+      - type: network_in
+        arg: 'Local Area Connection'
+</code></pre>
+<p>If you need to use some other interface, open a command line prompt and type <code>ipconfig</code> to list all interface names. For example a wireless connection output from <code>ipconfig</code> might look like:</p>
+<pre><code class="language-bash">Wireless LAN adapter Wireless Network Connection:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+</code></pre>
+<p>Where the name is <code>Wireless Network Connection</code>.</p>
+:ET

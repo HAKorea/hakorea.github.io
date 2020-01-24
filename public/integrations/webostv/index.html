@@ -1,0 +1,436 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>LG webOS Smart TV - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate a LG webOS Smart TV within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/webostv/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="LG webOS Smart TV">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/webostv/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate a LG webOS Smart TV within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="LG webOS Smart TV">
+    <meta name="twitter:description" content="Instructions on how to integrate a LG webOS Smart TV within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/webostv.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      LG webOS Smart TV
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>webostv</code> platform allows you to control a <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS Smart TV.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#media-player">Media Player</a></li>
+<li><a href="#notifications">Notifications</a></li>
+</ul>
+<p>To begin with enable <em>LG Connect Apps</em> feature in <em>Network</em> settings of the TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a>.</p>
+<p>Once basic configuration is added to your <code>configuration.yaml</code> file. A notification should be visible in the frontend’s <strong>Notification</strong> section. Follow the instructions and accept the pairing request on your TV.</p>
+<p>Pairing information will be saved to a configuration file <code>webostv.conf</code> in the Home Assistant configuration directory. This process is IP address-sensitive, in case the IP address of your TV would change in future.</p>
+<h3>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<p>To add a TV to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+webostv:
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP of the LG webOS Smart TV, e.g., <code>192.168.0.10</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name you would like to give to the LG webOS Smart TV.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="standby_connection" href="#standby_connection"></a> standby_connection</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Keep connection alive when TV is in standby (this should be set to true if and only if the “Standby+” option is enabled in the TV UI.)</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="turn_on_action" href="#turn_on_action"></a> turn_on_action</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an <a href="/docs/automation/action/">action</a> to turn the TV on.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="customize" href="#customize"></a> customize</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of options to customize.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="sources" href="#sources"></a> sources</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of hardware and webOS App inputs.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="example" href="#example"></a> Example</h3>
+<p>A full configuration example will look like the sample below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+webostv:
+  host: 192.168.0.10
+  name: Living Room TV
+  standby_connection: true
+  turn_on_action:
+    service: persistent_notification.create
+    data:
+      message: "Turn on action"
+  customize:
+    sources:
+      - livetv
+      - youtube
+      - makotv
+      - netflix
+        
+media_player:
+
+notify:
+</code></pre>
+<p>Avoid using <code>[ ]</code> in the <code>name:</code> of your device.</p>
+<h3>
+<a class="title-link" name="turn-on-action" href="#turn-on-action"></a> Turn on action</h3>
+<p>Home Assistant is able to turn on a LG webOS Smart TV if you specify an action, like HDMI-CEC or WakeOnLan.</p>
+<p>Common for webOS 3.0 and higher would be to use WakeOnLan feature. To use this feature your TV should be connected to your network via Ethernet rather than Wireless and you should enable <em>LG Connect Apps</em> feature in <em>Network</em> settings of the TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a> (or <em>Mobile App</em> in <em>General</em> settings for older models) (*may vary by version).</p>
+<p>On newer models (2017+), WakeOnLan may need to be enabled in the TV settings by going to Settings &gt; General &gt; Mobile TV On &gt; Turn On Via WiFi <a href="https://support.quanticapps.com/hc/en-us/articles/115005985729-How-to-turn-on-my-LG-Smart-TV-using-the-App-WebOS-" rel="external nofollow">instructions</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+wake_on_lan: # enables `wake_on_lan` domain
+
+webostv:
+  host: 192.168.0.10
+  #other settings
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: "B4:E6:2A:1E:11:0F"
+
+media_player:
+
+notify:
+</code></pre>
+<p>Any other <a href="/docs/automation/action/">actions</a> to power on the device can be configured.</p>
+<h3>
+<a class="title-link" name="sources" href="#sources"></a> Sources</h3>
+<p>To obtain complete list of available sources currently configured on the TV, once the webOS TV is configured and linked, while its powered on head to the <strong>Developer Tools</strong> &gt; <strong>States</strong>, find your <code>media_player.&lt;name&gt;</code> and use the sources listed in <code>source_list:</code> remembering to split them per line into your <code>sources:</code> configuration.</p>
+<h3>
+<a class="title-link" name="change-channel-through-play_media-service" href="#change-channel-through-play_media-service"></a> Change channel through play_media service</h3>
+<p>The <code>play_media</code> service can be used in a script to switch to the specified tv channel. It selects the best matching channel according to the <code>media_content_id</code> parameter:</p>
+<ol>
+<li>Channel number <em>(i.e. ‘1’ or ‘6’)</em>
+</li>
+<li>Exact channel name <em>(i.e. ‘France 2’ or ‘CNN’)</em>
+</li>
+<li>Substring in channel name <em>(i.e. ‘BFM’ in ‘BFM TV’)</em>
+</li>
+</ol>
+<pre><code class="language-yaml"># Example action entry in script to switch to channel number 1
+service: media_player.play_media
+data:
+  entity_id: media_player.lg_webos_smart_tv
+  media_content_id: 1
+  media_content_type: "channel"
+
+# Example action entry in script to switch to channel including 'TF1' in its name
+service: media_player.play_media
+data:
+  entity_id: media_player.lg_webos_smart_tv
+  media_content_id: "TF1"
+  media_content_type: "channel"
+</code></pre>
+<h3>
+<a class="title-link" name="nextprevious-buttons" href="#nextprevious-buttons"></a> Next/Previous buttons</h3>
+<p>The behaviour of the next and previous buttons is different depending on the active source:</p>
+<ul>
+<li>if the source is ‘LiveTV’ (television): next/previous buttons act as channel up/down</li>
+<li>otherwise: next/previous buttons act as next/previous track</li>
+</ul>
+<h3>
+<a class="title-link" name="generic-commands-and-buttons" href="#generic-commands-and-buttons"></a> Generic commands and buttons</h3>
+<p>Available services: <code>button</code>, <code>command</code></p>
+<h4>
+<a class="title-link" name="service-webostvbutton" href="#service-webostvbutton"></a> Service webostv.button</h4>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Target a specific webostv media player.</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>no</td>
+<td>Name of the button. Known possible values are <code>LEFT</code>, <code>RIGHT</code>, <code>DOWN</code>, <code>UP</code>, <code>HOME</code>, <code>BACK</code>, <code>ENTER</code>, <code>DASH</code>, <code>INFO</code>, <code>ASTERISK</code>, <code>CC</code>, <code>EXIT</code>, <code>MUTE</code>, <code>RED</code>, <code>GREEN</code>, <code>BLUE</code>, <code>VOLUMEUP</code>, <code>VOLUMEDOWN</code>, <code>CHANNELUP</code>, <code>CHANNELDOWN</code>, <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="service-webostvcommand" href="#service-webostvcommand"></a> Service webostv.command</h4>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Target a specific webostv media player.</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>no</td>
+<td>Endpoint for the command, e.g. <code>media.controls/rewind</code>.  The full list of known endpoints is available at <a href="https://github.com/bendavid/aiopylgtv/blob/master/aiopylgtv/endpoints.py" rel="external nofollow">https://github.com/bendavid/aiopylgtv/blob/master/aiopylgtv/endpoints.py</a>
+</td>
+</tr>
+</tbody>
+</table>
+<h4>
+<a class="title-link" name="example" href="#example"></a> Example</h4>
+<pre><code class="language-yaml">script:
+  home_button:
+    sequence:
+      - service: webostv.button
+        data:
+          entity_id:  media_player.lg_webos_smart_tv
+          button: "HOME"
+
+  rewind_command:
+    sequence:
+      - service: webostv.command
+        data:
+          entity_id:  media_player.lg_webos_smart_tv
+          command: "media.controls/rewind"
+</code></pre>
+<h2>
+<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
+<p>The <code>webostv</code> notify platform allows you to send notifications to a LG webOS Smart TV.</p>
+<p>The icon can be overridden for individual notifications by providing a path to an alternative icon image to use:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Front door motion
+    trigger:
+      platform: state
+      entity_id: binary_sensor.front_door_motion
+      to: 'on'
+    action:
+      service: notify.livingroom_tv
+      data:
+        message: "Movement detected: Front Door"
+        data:
+          icon: "/home/homeassistant/images/doorbell.png"
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/webostv.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/webos.png' /></div><div class="section">
+    <kb-alert-link integration="webostv"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Polling
+    </div><div class='section'>
+      Introduced in release: 0.18
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/webostv/'>/components/webostv/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#media-player'>Media Player</a>
+      </li><li>
+        <a href='/integrations/#notifications'>Notifications</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

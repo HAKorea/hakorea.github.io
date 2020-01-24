@@ -1,0 +1,48 @@
+I"�<p>The <a href="https://fibaro.com/">Fibaro</a> hub is a controller mainly connecting to Z-Wave devices.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Cover</li>
+<li>Climate</li>
+<li>Light</li>
+<li>Sensor</li>
+<li>Scene</li>
+<li>Switch</li>
+</ul>
+<p>They will be automatically added when the <code>fibaro</code> hub is connected to Home Assistant.</p>
+<h2>Configuration</h2>
+<p>To use Fibaro devices in your installation, add the following to your <code>configuration.yaml</code> file using the IP and port number of your Fibaro controller:</p>
+<pre><code class="language-yaml">fibaro:
+  gateways:
+    - url: http://192.168.1.161/api/
+      username: your_username
+      password: your_password
+      device_config:
+        light_device_name_123:
+          color: false
+          white_value: false
+          reset_color: true
+        binary_device_name_123:
+          device_class: &quot;garage_door&quot;
+          icon: mdi:open
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='gateways' href='#gateways'></a> gateways</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='description'><p>List of gateway configurations.</p>
+</span></p></dd><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL for your Fibaro HomeCenter device.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for your Fibaro account.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for your Fibaro account.</p>
+</span></p></dd><dt><a class='title-link' name='plugins' href='#plugins'></a> plugins</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Whether to import plugin-generated devices from Fibaro HomeCenter, such as Netatmo and Sonos devices, etc.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='device_config' href='#device_config'></a> device_config</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Lists device specific parameter or behaviour overrides.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd></dl>
+</div>
+<div class='note'>
+<p>It is recommended to assign a static IP address to your Fibaro controller. This ensures that it won’t change its IP address, so you won’t have to change the <code>url</code> if the controller reboots and comes up with a different IP address. See your router’s manual for details on how to set this up. If you need the MAC address of your Fibaro, check the label on the bottom.</p>
+</div>
+<h3>Using Z-Wave devices in automation</h3>
+<p>If you want to use a Z-Wave device from the Fibaro controller in Home Assistant automation, you’ll need the entity id. In the Home Assistant UI you’ll find all entities listed under the <img src='/images/screenshots/developer-tool-states-icon.png' alt='service developer tool icon' class="no-shadow" height="38" /> icon of the Developer Tools section. Look for entities that contain ‘fibaro_id’ in their attributes, and you’ll find the entity id on the left.</p>
+:ET

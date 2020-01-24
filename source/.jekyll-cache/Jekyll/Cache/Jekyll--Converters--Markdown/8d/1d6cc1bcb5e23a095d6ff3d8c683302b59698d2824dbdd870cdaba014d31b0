@@ -1,0 +1,40 @@
+I"�<p>The <code>solaredge_local</code> platform uses the local API available on some SolarEdge Inverters to allow you to get details from your SolarEdge solar power setup and integrate these into your Home Assistant installation.</p>
+<p>Only specific models support the local API. The local API is available on inverters that do not have an LCD character screen. You can also  check the datasheets if in the section “Additional Features”, sub-section “Inverter Commissioning” is present the following line “With the SetApp mobile application using built-in Wi-Fi access point for local connection”. These inverters also have a part number that ends with a 4. For example: SEXXK-XXXXXBXX4 or SEXXXXH-XXXXXBXX4</p>
+<p>You can check if the local API works by finding the IP address of your inverter and visiting it in a browser. If it supports the local API, you’ll see a HTML page with the SolarEdge logo and a “Commissioning” menu.</p>
+<div class='note'>
+<p>If your inverter does not support the local API, you can use the <a href="/integrations/solaredge/">cloud based version</a></p>
+</div>
+<h2>Configuration</h2>
+<p>To use the SolarEdge sensors in your installation, add the following to your configuration.yaml file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: solaredge_local
+    ip_address: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ip_address' href='#ip_address'></a> ip_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP Address of your SolarEdge inverter.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Let you overwrite the name of the device in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>SolarEdge</p>
+</p></dd></dl>
+</div>
+<h3>Full configuration sample</h3>
+<p>A full configuration entry would look like the sample below.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: solaredge_local
+    name: SolarEdge
+    ip_address: 192.168.1.123
+</code></pre>
+<p>In case you would like to convert the values for example to kWh instead of the default Wh, you can use the <a href="/integrations/template">template platform</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for sensor template platform
+sensor:
+  - platform: template
+    sensors:
+      solaredge_energy_this_year_template:
+        value_template: &quot;{{ (states('sensor.solaredge_energy_this_year') | float / 1000) | round(2) }}&quot;
+        unit_of_measurement: 'KWh'
+        icon_template: &quot;mdi:solar-power&quot;
+</code></pre>
+:ET

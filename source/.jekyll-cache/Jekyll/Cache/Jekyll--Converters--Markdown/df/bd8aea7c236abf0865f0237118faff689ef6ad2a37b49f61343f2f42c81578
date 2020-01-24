@@ -1,0 +1,69 @@
+I"ê<p>The <code>workday</code> binary sensor indicates, whether the current day is a workday or not. It allows specifying, which days of the week counts as workdays and also
+uses the python module <a href="https://pypi.python.org/pypi/holidays">holidays</a> to incorporate information about region-specific public holidays.</p>
+<h2>Setup</h2>
+<p>Check the <a href="https://github.com/dr-prodigy/python-holidays#available-countries">country list</a> for available province.</p>
+<h2>Configuration</h2>
+<p>To enable the <code>workday</code> sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: workday
+    country: DE
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for this sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Workday Sensor</p>
+</p></dd><dt><a class='title-link' name='country' href='#country'></a> country</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Country code according to <a href="https://pypi.org/project/holidays/">holidays</a> notation.</p>
+</span></p></dd><dt><a class='title-link' name='province' href='#province'></a> province</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Province code according to <a href="https://pypi.org/project/holidays/">holidays</a> notation.</p>
+</span></p></dd><dt><a class='title-link' name='workdays' href='#workdays'></a> workdays</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of workdays.</p>
+</span></p><p class='default'>
+Default value: <p>[mon, tue, wed, thu, fri]</p>
+</p></dd><dt><a class='title-link' name='excludes' href='#excludes'></a> excludes</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of workday excludes.</p>
+</span></p><p class='default'>
+Default value: <p>[sat, sun, holiday]</p>
+</p></dd><dt><a class='title-link' name='days_offset' href='#days_offset'></a> days_offset</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set days offset (e.g., -1 for yesterday, 1 for tomorrow).</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='add_holidays' href='#add_holidays'></a> add_holidays</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Add custom holidays (such as company, personal holidays or vacations). Needs to formatted as <code>YYYY-MM-DD</code>.</p>
+</span></p></dd></dl>
+</div>
+<p>Days are specified as follows: <code>mon</code>, <code>tue</code>, <code>wed</code>, <code>thu</code>, <code>fri</code>, <code>sat</code>, <code>sun</code>.
+The keyword <code>holiday</code> is used for public holidays identified by the holidays module.</p>
+<div class='note warning'>
+<p>If you use the sensor for Norway (<code>NO</code>) you need to wrap <code>NO</code> in quotes or write the name in full.
+Otherwise the value is evaluated as <code>false</code>.
+If you use the sensor for Canada (<code>CA</code>) with Ontario (<code>ON</code>) as <code>province:</code> then you need to wrap <code>ON</code> in quotes.
+Otherwise the value is evaluated as <code>true</code> (check the YAML documentation for further details) and the sensor will not work.</p>
+</div>
+<h2>Full example</h2>
+<p>This examples excludes Saturdays, Sundays and holiday. Two custom holidays are added.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: workday
+    country: DE
+    workdays: [mon, wed, fri]
+    excludes: [sat, sun, holiday]
+    add_holidays: 
+      - '2018-12-26'
+      - '2018-12-31'
+</code></pre>
+<h2>Automation example</h2>
+<p>Example usage for automation:</p>
+<pre><code class="language-yaml">automation:
+  alias: Turn on heater on workdays
+  trigger:
+    platform: time
+    at: '08:00:00'
+  condition:
+    condition: state
+    entity_id: 'binary_sensor.workday_sensor'
+    state: 'on'
+  action:
+    service: switch.turn_on
+    entity_id: switch.heater
+</code></pre>
+<div class='note'>
+<p>Please remember that <a href="/docs/configuration/devices/">as explained here</a> you can only have a single <code>automation:</code> entry. Add the automation to your existing automations.</p>
+</div>
+:ET

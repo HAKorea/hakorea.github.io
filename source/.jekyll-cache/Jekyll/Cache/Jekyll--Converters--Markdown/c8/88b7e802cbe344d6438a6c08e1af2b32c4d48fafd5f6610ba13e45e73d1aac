@@ -1,0 +1,82 @@
+I"R<p>The <code>meteo_france</code> integration uses the <a href="http://www.meteofrance.com/">Météo-France</a> web service as a source for meteorological data for your location. The location is based on the <code>city</code> configured in your <code>configuration.yaml</code> file.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Sensor</li>
+<li>Weather</li>
+</ul>
+<p>It displays the current weather along with a 4 days forecast and can create sensors based on the <code>monitored_conditions</code> set in your <code>configuration.yaml</code> file, including weather alerts from <a href="https://vigilance.meteofrance.com/">Vigilance Météo-France</a></p>
+<h2>Configuration</h2>
+<p>To add Météo-France to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+meteo_france:
+  - city: '76000'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='city' href='#city'></a> city</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the city (<a href="#about-city-configuration">see below</a>).</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The conditions types to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='temperature' href='#temperature'></a> temperature</dt><dd><p class='desc'><span class='description'><p>The current temperature.</p>
+</span></p></dd><dt><a class='title-link' name='weather' href='#weather'></a> weather</dt><dd><p class='desc'><span class='description'><p>A human-readable text summary of the current conditions.</p>
+</span></p></dd><dt><a class='title-link' name='wind_speed' href='#wind_speed'></a> wind_speed</dt><dd><p class='desc'><span class='description'><p>The wind speed.</p>
+</span></p></dd><dt><a class='title-link' name='uv' href='#uv'></a> uv</dt><dd><p class='desc'><span class='description'><p>The current UV index.</p>
+</span></p></dd><dt><a class='title-link' name='next_rain' href='#next_rain'></a> next_rain</dt><dd><p class='desc'><span class='description'><p>Time to the next rain if happening for the next hour (<a href="#about-next_rain-condition-sensor">see note below</a>).</p>
+</span></p></dd><dt><a class='title-link' name='freeze_chance' href='#freeze_chance'></a> freeze_chance</dt><dd><p class='desc'><span class='description'><p>Probability of temperature below 0°C for the day.</p>
+</span></p></dd><dt><a class='title-link' name='rain_chance' href='#rain_chance'></a> rain_chance</dt><dd><p class='desc'><span class='description'><p>Probability of rain for the day.</p>
+</span></p></dd><dt><a class='title-link' name='snow_chance' href='#snow_chance'></a> snow_chance</dt><dd><p class='desc'><span class='description'><p>Probability of snow for the day.</p>
+</span></p></dd><dt><a class='title-link' name='thunder_chance' href='#thunder_chance'></a> thunder_chance</dt><dd><p class='desc'><span class='description'><p>Probability of thunderstorm for the day.</p>
+</span></p></dd><dt><a class='title-link' name='weather_alert' href='#weather_alert'></a> weather_alert</dt><dd><p class='desc'><span class='description'><p>Weather alert status.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h3>About <code>city</code> configuration</h3>
+<p>This integration use the Météo-France search API to get the first city from the results returned.</p>
+<p>It works well with french postal code, city name, etc. In case your expected result doesn’t come first, you can set a more specified query like <code>&lt;city name&gt;, &lt;postal_code&gt;</code>.</p>
+<p>It also works with international city, with mixed results. You may have to find the correct city query.
+For example <code>Montreal, Canada</code> will return a city in Ardèche, France, whereas <code>Montreal, america</code> works</p>
+<p><a href="https://www.meteofrance.com/mf3-rpc-portlet/rest/lieu/facet/previsions/search/montreal,amerique">https://www.meteofrance.com/mf3-rpc-portlet/rest/lieu/facet/previsions/search/montreal,amerique</a></p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Montreal, Canada
+meteo_france:
+  - city: 'montreal,amerique'
+</code></pre>
+<h3>About <code>next_rain</code> condition sensor</h3>
+<div class='note warning'>
+<p>The 1 hour rain forecast is supported for more than 75 % of metropolitan France.<br/>
+You can check if your city is covered on the <a href="https://www.meteofrance.com/previsions-meteo-france/previsions-pluie">Météo-France website</a>.</p>
+</div>
+<p>The <code>next_rain</code> sensor value is the time to next rain, from 0 to 55 minutes.
+If no rain is forecasted for the next hour, value will be “No rain”.</p>
+<p>Attributes also give the forecast for the next hour in 5 minutes intervals.
+Possible value for each intervals attributes are:</p>
+<ul>
+<li>1 No rain</li>
+<li>2 Light rain</li>
+<li>3 Moderate rain</li>
+<li>4 Heavy rain</li>
+</ul>
+<h3>About <code>weather_alert</code> sensor</h3>
+<div class='note warning'>
+  The weather alert is available for the metropolitan France.
+</div>
+<p>The <code>weather_alert</code> sensor value give the current weather alert status for the department linked to the city. Data is retrieve from <a href="https://vigilance.meteofrance.com/">Météo-France vigilance website</a>.</p>
+<p>The sensor attributes give access to each type of alerts and date of the bulletin emitted by Météo-France.</p>
+<h3>Complete example</h3>
+<p>This is an example for 3 cities forecast with different monitored conditions:</p>
+<pre><code class="language-yaml"># Complete example configuration.yaml entry
+meteo_france:
+  - city: 'Rouen'
+    monitored_conditions:
+        - rain_chance
+        - freeze_chance
+        - thunder_chance
+        - snow_chance
+        - weather
+        - next_rain
+        - wind_speed
+        - temperature
+        - uv
+        - weather_alert
+  - city: 'Oslo, norvege'
+    monitored_conditions:
+      - temperature
+  - city: '51100'
+</code></pre>
+:ET

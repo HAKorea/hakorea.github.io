@@ -1,0 +1,137 @@
+I"1<p>The <code>persistent_notification</code> integration can be used to show a notification on the frontend that has to be dismissed by the user.</p>
+<p class='img'>
+  <img src='/images/screenshots/persistent-notification.png' />
+</p>
+<h3>Service</h3>
+<p>The service <code>persistent_notification.create</code> takes in <code>message</code>, <code>title</code>, and <code>notification_id</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td>no</td>
+<td>Body of the notification.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>yes</td>
+<td>Title of the notification.</td>
+</tr>
+<tr>
+<td><code>notification_id</code></td>
+<td>yes</td>
+<td>If <code>notification_id</code> is given, it will overwrite the notification if there already was a notification with that ID.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>persistent_notification</code> integration supports specifying <a href="/topics/templating/">templates</a> for both the <code>message</code> and the <code>title</code>. This will allow you to use the current state of Home Assistant in your notifications.</p>
+<p>In an <a href="/getting-started/automation-action/">action</a> of your <a href="/getting-started/automation/">automation setup</a> it could look like this with a customized subject.</p>
+<pre><code class="language-yaml">action:
+  service: persistent_notification.create
+  data:
+    message: &quot;Your message goes here&quot;
+    title: &quot;Custom subject&quot;
+</code></pre>
+<p>The service <code>persistent_notification.dismiss</code> requires a <code>notification_id</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>notification_id</code></td>
+<td>no</td>
+<td>the <code>notification_id</code> is required to identify the notification that should be removed.</td>
+</tr>
+</tbody>
+</table>
+<p>This service allows you to remove a notifications by script or automation.</p>
+<pre><code class="language-yaml">action:
+  service: persistent_notification.dismiss
+  data:
+    notification_id: &quot;1234&quot;
+</code></pre>
+<p>This automation example shows a notification when the Z-Wave network is starting and removes it when the network is ready.</p>
+<pre><code class="language-yaml">- alias: 'Z-Wave network is starting'
+  trigger:
+    - platform: event
+      event_type: zwave.network_start
+  action:
+    - service: persistent_notification.create
+      data:
+        title: &quot;Z-Wave&quot;
+        message: &quot;Z-Wave network is starting...&quot;
+        notification_id: zwave
+
+- alias: 'Z-Wave network is ready'
+  trigger:
+    - platform: event
+      event_type: zwave.network_ready
+  action:
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: zwave
+</code></pre>
+<h3>Markdown support</h3>
+<p>The message attribute supports the <a href="https://daringfireball.net/projects/markdown/syntax">Markdown formatting syntax</a>. Some examples are:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Headline 1</td>
+<td><code># Headline</code></td>
+</tr>
+<tr>
+<td>Headline 2</td>
+<td><code>## Headline</code></td>
+</tr>
+<tr>
+<td>Newline</td>
+<td><code>\n</code></td>
+</tr>
+<tr>
+<td>Bold</td>
+<td><code>**My bold text**</code></td>
+</tr>
+<tr>
+<td>Cursive</td>
+<td><code>*My cursive text*</code></td>
+</tr>
+<tr>
+<td>Link</td>
+<td><code>[Link](https://home-assistant.io/)</code></td>
+</tr>
+<tr>
+<td>Image</td>
+<td><code>![image](/local/my_image.jpg)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p><code>/local/</code> in this context refers to the <code>.homeassistant/www/</code> folder.</p>
+</div>
+<h3>Create a persistent notification</h3>
+<p>Choose the <strong>Services</strong> tab from the <strong>Developer Tools</strong> sidebar item, then select the <code>persistent_notification.create</code> service from the “Service” dropdown. Enter something like the sample below into the <strong>Service Data</strong> field and press the <strong>CALL SERVICE</strong> button.</p>
+<pre><code class="language-json">{
+  &quot;notification_id&quot;: &quot;1234&quot;,
+  &quot;title&quot;: &quot;Sample notification&quot;,
+  &quot;message&quot;: &quot;This is a sample text&quot;
+}
+</code></pre>
+<p>This will create the notification entry shown above.</p>
+:ET

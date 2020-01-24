@@ -1,0 +1,66 @@
+I"�<p>Home Assistant uses the <a href="https://yaml.org/">YAML</a> syntax for configuration. YAML might take a while to get used to but is really powerful in allowing you to express complex configurations.</p>
+<p>For integrations that you want to use in Home Assistant, you add code in your <code>configuration.yaml</code> file to specify its settings. This especially applies to integrations that are not yet available to configure through the UI.</p>
+<p>The following example entry assumes that you would like to set up the <a href="/integrations/notify">notify component</a> with the <a href="/integrations/pushbullet">pushbullet platform</a>.</p>
+<pre><code class="language-yaml">notify:
+  platform: pushbullet
+  api_key: &quot;o.1234abcd&quot;
+  name: pushbullet
+</code></pre>
+<ul>
+<li>A <strong>component</strong> provides the core logic for some functionality (like <code>notify</code> provides sending notifications).</li>
+<li>A <strong>platform</strong> makes the connection to a specific software or hardware platform (like <code>pushbullet</code> works with the service from pushbullet.com).</li>
+</ul>
+<p>The basics of YAML syntax are block collections and mappings containing key-value pairs. Each item in a collection starts with a <code>-</code> while mappings have the format <code>key: value</code>. If you specify duplicate keys, the last value for a key is used. This is somewhat similar to a Hash table or more specifically a dictionary in Python. These can be nested as well.</p>
+<p>Note that indentation is an important part of specifying relationships using YAML. Things that are indented are nested “inside” things that are one level higher. So in the above example, <code>platform: pushbullet</code> is a property of (nested inside) the <code>notify</code> component.</p>
+<p>Getting the right indentation can be tricky if you’re not using an editor with a fixed width font. Tabs are not allowed to be used for indentation. Convention is to use 2 spaces for each level of indentation.</p>
+<p>You can use the online service <a href="http://www.yamllint.com/">YAMLLint</a> to check if your YAML syntax is correct before loading it into Home Assistant which will save you some time. If you do so, be aware that this is a third-party service and is not maintained by the Home Assistant community.</p>
+<div class='note'>
+<p>Please pay attention to not storing private data (passwords, API keys, etc.) directly in your <code>configuration.yaml</code> file. Private data can be stored in either a <a href="/docs/configuration/secrets/">separate file</a> or in <a href="/docs/configuration/yaml/#using-environment-variables">environmental variables</a>, which circumvents this security problem.</p>
+</div>
+<p>Strings of text following a <code>#</code> are comments and are ignored by the system.</p>
+<p>The next example shows an <a href="/integrations/input_select">input_select</a> integration that uses a block collection for the values of options.
+The other properties (like <code>name:</code>) are specified using mappings. Note that the second line just has <code>threat:</code> with no value on the same line. Here threat is the name of the input_select and the values for it are everything nested below it.</p>
+<pre><code class="language-yaml">input_select:
+  threat:
+    name: Threat level
+# A collection is used for options
+    options:
+     - 0
+     - 1
+     - 2
+     - 3
+    initial: 0
+</code></pre>
+<p>The following example shows nesting a collection of mappings in a mapping. In Home Assistant, this would create two sensors that each use the MQTT platform but have different values for their <code>state_topic</code> (one of the properties used for MQTT sensors).</p>
+<pre><code class="language-yaml">sensor:
+  - platform: mqtt
+    state_topic: sensor/topic
+  - platform: mqtt
+    state_topic: sensor2/topic
+</code></pre>
+<h2>Including values</h2>
+<h3>Environmental variables</h3>
+<p>You can include values from your system’s environment variables with <code>!env_var</code>. Note that this will only work in a scenario where it is possible to specify these. Hass.io users are recommended to use <code>!include</code> statements instead.</p>
+<pre><code class="language-yaml">example:
+  password: !env_var PASSWORD
+</code></pre>
+<h4>Default value</h4>
+<p>If an environment variable is not set, you can fallback to a default value.</p>
+<pre><code class="language-yaml">example:
+  password: !env_var PASSWORD default_password
+</code></pre>
+<h3>Including entire files</h3>
+<p>To improve readability, you can source out certain domains from your main configuration file with the <code>!include</code>-syntax.</p>
+<pre><code class="language-yaml">lights: !include lights.yaml
+</code></pre>
+<p>More information about this feature can also be found at <a href="/docs/configuration/splitting_configuration/">splitting configuration</a>.</p>
+<h2>Common Issues</h2>
+<h3>found character ‘\t’</h3>
+<p>If you see the following message:</p>
+<pre><code class="language-txt">found character '\t' that cannot start any token
+</code></pre>
+<p>This means that you’ve mistakenly entered a tab character, instead of spaces.</p>
+<h3>Upper and lower case</h3>
+<p>Home Assistant is case sensitive, a state of <code>'on'</code> is not the same as <code>'On'</code> or <code>'ON'</code>. Similarly an entity of <code>group.Doors</code> is not the same as <code>group.doors</code>.</p>
+<p>If you’re having trouble, check the case that Home Assistant is reporting in the dev-state menu, under <em>Developer tools</em>.</p>
+:ET

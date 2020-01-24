@@ -1,0 +1,42 @@
+I"†<p>The <code>yandextts</code> text-to-speech platform uses <a href="https://tech.yandex.com/speechkit/">Yandex SpeechKit</a> Text-to-Speech engine to read a text with natural sounding voices.</p>
+<h2>Configuration</h2>
+<p>To enable text-to-speech with Yandex SpeechKit, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: yandextts
+    api_key: THE_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API Key for use this service.</p>
+</span></p></dd><dt><a class='title-link' name='language' href='#language'></a> language</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The language to use. Supported languages are <code>en-US</code>, <code>ru-RU</code>, <code>uk-UK</code> and <code>tr-TR</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>en-US</code></p>
+</p></dd><dt><a class='title-link' name='codec' href='#codec'></a> codec</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The audio codec. Supported codecs are <code>mp3</code>, <code>wav</code> and <code>opus</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>mp3</code></p>
+</p></dd><dt><a class='title-link' name='voice' href='#voice'></a> voice</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The speaker voice. Supported female voices are <code>jane</code>, <code>oksana</code>, <code>alyss</code>, <code>omazh</code>, <code>silaerkan</code>, <code>nastya</code>, <code>sasha</code>, <code>tanya</code>, <code>tatyana_abramova</code>, <code>voicesearch</code>, and <code>zombie</code>. Male voices are <code>zahar</code>, <code>ermil</code>, <code>levitan</code>, <code>ermilov</code>, <code>kolya</code>, <code>kostya</code>, <code>nick</code>, <code>erkanyavas</code>, <code>zhenya</code>, <code>anton_samokhvalov</code>, <code>ermil_with_tuning</code>, <code>robot</code>, <code>dude</code>, and <code>smoky</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>zahar</code></p>
+</p></dd><dt><a class='title-link' name='emotion' href='#emotion'></a> emotion</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The speaker emotional intonation. Supported emotions are <code>good</code> (friendly), <code>evil</code> (angry) and <code>neutral</code></p>
+</span></p><p class='default'>
+Default value: <p><code>neutral</code></p>
+</p></dd><dt><a class='title-link' name='speed' href='#speed'></a> speed</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The speech speed. Highest speed is <code>3</code> and lowest <code>0,1</code></p>
+</span></p><p class='default'>
+Default value: <p><code>1</code></p>
+</p></dd></dl>
+</div>
+<p>Please check the <a href="https://tech.yandex.com/speechkit/cloud/doc/guide/concepts/tts-http-request-docpage/">API documentation</a> for details. It seems that the English version of documentation is outdated. You could request an API key <a href="https://tech.yandex.com/speechkit/cloud/">by email</a> or <a href="https://developer.tech.yandex.ru/">online</a>.</p>
+<h2>Full configuration example</h2>
+<p>The configuration sample below shows how an entry can look like:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: yandextts
+    api_key: YOUR_API_KEY
+    language: 'ru-RU'
+    codec: mp3
+    voice: oksana
+    emotion: evil
+    speed: 2
+</code></pre>
+:ET

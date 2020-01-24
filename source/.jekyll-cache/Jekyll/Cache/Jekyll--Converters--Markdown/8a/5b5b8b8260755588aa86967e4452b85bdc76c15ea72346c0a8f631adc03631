@@ -1,0 +1,46 @@
+I"�<p>The Starling Bank sensor platform allows you to monitor your account balance data as sensors in Home Assistant.</p>
+<ul>
+<li>Turn off the lights when money’s tight?</li>
+<li>Play a song when you reach a savings goal?</li>
+<li>Sound an alarm if you go into your overdraft?</li>
+</ul>
+<p>You can find more information about Starling Bank at <a href="https://www.starlingbank.com/">their website</a>. Information on their API can be found on their <a href="https://developer.starlingbank.com/">developers site</a>.</p>
+<h2>Access Token</h2>
+<p>Once you have your own Starling bank account you will need to sign up for a Starling developer account <a href="https://developer.starlingbank.com/signup">here</a>. You won’t need to do any development but you will need to get a “Personal Access Token” that will allow the integration to access your account balance.</p>
+<div class='note info'>
+  You control what access is granted using this token. This integration only needs very basic access (see below).
+</div>
+<p>Once you’ve signed up:</p>
+<ol>
+<li>Head to the <a href="https://developer.starlingbank.com/personal/token">Personal Access Section</a> of your developer account.</li>
+<li>Click “Create Token”.</li>
+<li>Give your token a name e.g., “Home Assistant”.</li>
+<li>Tick the permissions “account:read” and “balance:read”. The others you can leave un-ticked.</li>
+<li>Click “Create” and make a note of the newly created token, you will need this for your Home Assistant configuration.</li>
+</ol>
+<h2>Configuration</h2>
+<p>To add Starling account balance sensors to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: starlingbank
+    accounts:
+      - access_token: YOUR_PERSONAL_ACCESS_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='accounts' href='#accounts'></a> accounts</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of Starling accounts. Allows you to monitor multiple Starling accounts.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A friendly name for your account.</p>
+</span></p><p class='default'>
+Default value: <p>Starling</p>
+</p></dd><dt><a class='title-link' name='sandbox' href='#sandbox'></a> sandbox</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>For test purposes. Set to true if you are using an access token for a sandbox Starling account.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your personal access token.</p>
+</span></p></dd><dt><a class='title-link' name='balance_types' href='#balance_types'></a> balance_types</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Choose to monitor your cleared or effective balance (or both).</p>
+</span></p><p class='default'>
+Default value: <p>Both balance types will be monitored.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='cleared_balance' href='#cleared_balance'></a> cleared_balance</dt><dd><p class='desc'><span class='description'><p>Excludes outstanding transactions.</p>
+</span></p></dd><dt><a class='title-link' name='effective_balance' href='#effective_balance'></a> effective_balance</dt><dd><p class='desc'><span class='description'><p>Includes outstanding transactions.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

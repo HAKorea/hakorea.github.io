@@ -1,0 +1,47 @@
+I"
+<p>The <code>totalconnect</code> platform provides connectivity with the Honeywell TotalConnect alarm systems used by many alarm companies.</p>
+<p>This platform supports the following services: <code>alarm_arm_away</code>, <code>alarm_arm_home</code>, <code>alarm_arm_night</code> and <code>alarm_disarm</code>.</p>
+<p>The <code>triggered</code> state also provides a state attribute called <code>triggered_source</code> giving more detail on what triggered the alarm:</p>
+<ul>
+<li><code>Police/Medical</code> is when sensors detected a burglar and/or a person pushed the Police or Medical button</li>
+<li><code>Fire/Smoke</code> is when fire or smoke is detected, or a person pushed the Fire button</li>
+<li><code>Carbon Monoxide</code> is when carbon monoxide is detected</li>
+</ul>
+<p>If you have issues running this component, you may require <code>libxml2-dev</code> and <code>libxmlsec1-dev</code> packages. To install these on Raspbian, run the command <code>apt install libxml2-dev libxmlsec1-dev</code> with sudo.</p>
+<h2>Configuration</h2>
+<p>To enable this, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml">totalconnect:
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of device in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Username used to sign into the TotalConnect app/web client.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Password used to sign into the TotalConnect app/web client.</p>
+</span></p></dd></dl>
+</div>
+<p>You are highly encouraged to create a Total Connect user account specifically for Home Assistant. It should not have full administrative privileges.</p>
+<h2>Automation example</h2>
+<pre><code class="language-yaml">automation:
+  - alias: &quot;Alarm: Disarmed Daytime&quot;
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.total_connect
+      to: 'disarmed'
+    condition:
+      condition: sun
+      before: sunset
+    action:
+      service: scene.turn_on
+      entity_id: scene.OnDisarmedDaytime
+  - alias: &quot;Alarm: Armed Away&quot;
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.total_connect
+      to: 'armed_away'
+    action:
+      service: scene.turn_on
+      entity_id: scene.OnArmedAway
+</code></pre>
+:ET

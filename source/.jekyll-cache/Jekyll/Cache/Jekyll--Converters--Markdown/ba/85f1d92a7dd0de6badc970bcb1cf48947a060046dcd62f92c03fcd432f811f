@@ -1,0 +1,79 @@
+I"�<p>The <code>entur_public_transport</code> sensor gives real-time departure information for the next departures from any bus stop, car ferry quay, train station, airport and person ferries quay in Norway.</p>
+<p>For each stop place given in the configuration, a sensor will be mounted for that stop place. It will give remaining minutes until the nearest departure in the state, but also next departures in the attributes. Information about if the departure is monitored in real-time or is from scheduled times, and how many minutes there is in delays, are included as well.</p>
+<p>Real-time data is fetched from <a href="https://www.entur.org">Entur</a>. Entur is a service which collects and delivers information about all public transport available in Norway under an <a href="https://data.norge.no/nlod/no">open source license</a>.</p>
+<div class='note'>
+Note that the underlying API is rate limited and to avoid getting your instance blocked from entur the sensor is only fetching new information every 45 seconds. It's recommended to not schedule updates more often than this.
+</div>
+<h2>Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: entur_public_transport
+    stop_ids:
+      - 'STOP_ID_1'
+      - 'STOP_ID_2'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='stop_ids' href='#stop_ids'></a> stop_ids</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of stop places or platforms to monitor departure times from.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override parts of the sensor name.</p>
+</span></p><p class='default'>
+Default value: <p>Entur</p>
+</p></dd><dt><a class='title-link' name='expand_platforms' href='#expand_platforms'></a> expand_platforms</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If additional sensors should be created for each platform under a stop place.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='show_on_map' href='#show_on_map'></a> show_on_map</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If platform locations should be added to the sensor, and the map.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='line_whitelist' href='#line_whitelist'></a> line_whitelist</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of lines that should be whitelisted in the resulting sensors, and will only show when the defined lines are expected to leave the platform or station. All lines that you want on any of the sensors should be included in the list.</p>
+</span></p></dd><dt><a class='title-link' name='omit_non_boarding' href='#omit_non_boarding'></a> omit_non_boarding</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the sensors should remove resulting departures that doesn’t take new passangers, or is at last stop.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='number_of_departures' href='#number_of_departures'></a> number_of_departures</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number of departures that should be shown in the sensor attributes. Maximum 10, Minimum 2.</p>
+</span></p><p class='default'>
+Default value: <p>2</p>
+</p></dd></dl>
+</div>
+<h2>Example usage</h2>
+<p>Example of multiple stop places, with expanded sensors for each platform under the station, and with the platforms added to the map.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: entur_public_transport
+    name: Transport
+    expand_platforms: true
+    show_on_map: true
+    stop_ids:
+      - 'NSR:StopPlace:548'   # Bergen train station
+      - 'NSR:StopPlace:737'   # Trondheim airport
+      - 'NSR:StopPlace:5850'  # Grorud T bus stop
+      - 'NSR:StopPlace:58652' # Mortavika ferry
+      - 'NSR:StopPlace:27639' # Sør-Hidle quay
+      - 'NSR:Quay:48550'      # Fiskepiren bus stop platform 1
+</code></pre>
+<p>Example with whitelisting of one line on each stop place.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: entur_public_transport
+    stop_ids:
+      - 'NSR:Quay:7333'
+      - 'NSR:Quay:48550'
+      - 'NSR:StopPlace:596'
+    line_whitelist:
+      - 'RUT:Line:1'
+      - 'KOL:Line:1000_236'
+      - 'NSB:Line:59'
+</code></pre>
+<h2>Obtaining a stop id</h2>
+<p><a href="https://en-tur.no">Entur’s travel planer</a> has a map of all stops used in Norway. Use the map to find the stops you’re interested in. When you have found one of your stops, click on it.</p>
+<p>Now the web browser should contain an URL with the id in it. Such as this:</p>
+<p><code>https://en-tur.no/nearby-stop-place-detail?id=NSR:StopPlace:32376</code></p>
+<p>The stop id is the content after <code>id=</code> parameter in the url. Copy paste this into the configuration.</p>
+<h2>FAQ - Troubleshooting</h2>
+<p><strong>Q:</strong> I have multiple stop ids and have added whitelisting of a line. Now some of the stop places are showing <code>unknown</code>.</p>
+<p><strong>A:</strong> A whitelisting of lines takes affect on all of the stops. So you have to whitelist all lines you are interested in on all stop places.</p>
+<hr />
+<p><strong>Q:</strong> I have added whitelisting of lines, and everything has worked as fine before, but now it has stopped updating all of a sudden.</p>
+<p><strong>A:</strong> Some transport companies, such as Kolumbus in Rogaland, have running numbers on the end of their line ids. These gets periodically updated and will make the whitelisting invalid. The new line ids needs to be added again. Most of the time it iterates by one.</p>
+<hr />
+<p><strong>Q:</strong> Where do I find a line id to add to the whitelisting?</p>
+<p><strong>A:</strong> The sensor will show the line id, and is the recommended way to find it, while we wait for ‘Nasjonalt Stoppestedregister’ to become public. It is also possible to see the line ids by using the developer tool in the browser while looking at the traffic in <a href="https://en-tur.no">Entur’s travel planer</a>.</p>
+:ET

@@ -1,0 +1,107 @@
+I"�<<p>The <code>mqtt</code> fan platform lets you control your MQTT enabled fans.</p>
+<h2>Configuration</h2>
+<p>In an ideal scenario, the MQTT device will have a <code>state_topic</code> to publish state changes. If these messages are published with a <code>RETAIN</code> flag, the MQTT fan will receive an instant state update after subscription and will start with the correct state. Otherwise, the initial state of the fan will be <code>false</code> / <code>off</code>.</p>
+<p>When a <code>state_topic</code> is not available, the fan will work in optimistic mode. In this mode, the fan will immediately change state after every command. Otherwise, the fan will wait for state confirmation from the device (message from <code>state_topic</code>).</p>
+<p>Optimistic mode can be forced even if a <code>state_topic</code> is available. Try to enable it if you are experiencing incorrect fan operation.</p>
+<p>To enable MQTT fans in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+fan:
+  - platform: mqtt
+    command_topic: &quot;bedroom_fan/on/set&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='command_topic' href='#command_topic'></a> command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MQTT topic to publish commands to change the fan state.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the fan.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT Fan</p>
+</p></dd><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive state updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_on' href='#payload_on'></a> payload_on</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the running state.</p>
+</span></p><p class='default'>
+Default value: <p>ON</p>
+</p></dd><dt><a class='title-link' name='payload_off' href='#payload_off'></a> payload_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the stop state.</p>
+</span></p><p class='default'>
+Default value: <p>OFF</p>
+</p></dd><dt><a class='title-link' name='state_value_template' href='#state_value_template'></a> state_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the state.</p>
+</span></p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='optimistic' href='#optimistic'></a> optimistic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag that defines if lock works in optimistic mode</p>
+</span></p><p class='default'>
+Default value: <p><code>true</code> if no state topic defined, else <code>false</code>.</p>
+</p></dd><dt><a class='title-link' name='retain' href='#retain'></a> retain</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the published message should have the retain flag on or not.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='oscillation_state_topic' href='#oscillation_state_topic'></a> oscillation_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive oscillation state updates.</p>
+</span></p></dd><dt><a class='title-link' name='oscillation_command_topic' href='#oscillation_command_topic'></a> oscillation_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change the oscillation state.</p>
+</span></p></dd><dt><a class='title-link' name='payload_oscillation_on' href='#payload_oscillation_on'></a> payload_oscillation_on</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the oscillation on state.</p>
+</span></p><p class='default'>
+Default value: <p>oscillate_on</p>
+</p></dd><dt><a class='title-link' name='payload_oscillation_off' href='#payload_oscillation_off'></a> payload_oscillation_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the oscillation off state.</p>
+</span></p><p class='default'>
+Default value: <p>oscillate_off</p>
+</p></dd><dt><a class='title-link' name='oscillation_value_template' href='#oscillation_value_template'></a> oscillation_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the oscillation.</p>
+</span></p></dd><dt><a class='title-link' name='speed_state_topic' href='#speed_state_topic'></a> speed_state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive speed state updates.</p>
+</span></p></dd><dt><a class='title-link' name='speed_command_topic' href='#speed_command_topic'></a> speed_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to change speed state.</p>
+</span></p></dd><dt><a class='title-link' name='payload_low_speed' href='#payload_low_speed'></a> payload_low_speed</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the fan’s low speed.</p>
+</span></p><p class='default'>
+Default value: <p>low</p>
+</p></dd><dt><a class='title-link' name='payload_medium_speed' href='#payload_medium_speed'></a> payload_medium_speed</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the fan’s medium speed.</p>
+</span></p><p class='default'>
+Default value: <p>medium</p>
+</p></dd><dt><a class='title-link' name='payload_high_speed' href='#payload_high_speed'></a> payload_high_speed</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the fan’s high speed.</p>
+</span></p><p class='default'>
+Default value: <p>high</p>
+</p></dd><dt><a class='title-link' name='speed_value_template' href='#speed_value_template'></a> speed_value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the speed payload.</p>
+</span></p></dd><dt><a class='title-link' name='speeds' href='#speeds'></a> speeds</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of speeds this fan is capable of running at. Valid entries are <code>off</code>, <code>low</code>, <code>medium</code> and <code>high</code>.</p>
+</span></p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes_template' href='#json_attributes_template'></a> json_attributes_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='unique_id' href='#unique_id'></a> unique_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An ID that uniquely identifies this fan. If two fans have the same unique ID, Home Assistant will raise an exception.</p>
+</span></p></dd><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Information about the device this fan is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifiers' href='#identifiers'></a> identifiers</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd><dt><a class='title-link' name='connections' href='#connections'></a> connections</dt><dd><p class='desc'><span class='type'>(<span class='list map'>list | map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>&quot;connections&quot;: [[&quot;mac&quot;, &quot;02:5b:26:a8:dc:12&quot;]]</code>.</p>
+</span></p></dd><dt><a class='title-link' name='manufacturer' href='#manufacturer'></a> manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The manufacturer of the device.</p>
+</span></p></dd><dt><a class='title-link' name='model' href='#model'></a> model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The model of the device.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the device.</p>
+</span></p></dd><dt><a class='title-link' name='sw_version' href='#sw_version'></a> sw_version</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The firmware version of the device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note warning'>
+<p>Make sure that your topics match exactly. <code>some-topic/</code> and <code>some-topic</code> are different topics.</p>
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this fan.</p>
+<h3>Full configuration</h3>
+<p>The example below shows a full configuration for a MQTT fan.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+fan:
+  - platform: mqtt
+    name: &quot;Bedroom Fan&quot;
+    state_topic: &quot;bedroom_fan/on/state&quot;
+    command_topic: &quot;bedroom_fan/on/set&quot;
+    oscillation_state_topic: &quot;bedroom_fan/oscillation/state&quot;
+    oscillation_command_topic: &quot;bedroom_fan/oscillation/set&quot;
+    speed_state_topic: &quot;bedroom_fan/speed/state&quot;
+    speed_command_topic: &quot;bedroom_fan/speed/set&quot;
+    qos: 0
+    payload_on: &quot;true&quot;
+    payload_off: &quot;false&quot;
+    payload_oscillation_on: &quot;true&quot;
+    payload_oscillation_off: &quot;false&quot;
+    payload_low_speed: &quot;low&quot;
+    payload_medium_speed: &quot;medium&quot;
+    payload_high_speed: &quot;high&quot;
+    speeds:
+      - &quot;off&quot;
+      - low
+      - medium
+      - high
+</code></pre>
+:ET

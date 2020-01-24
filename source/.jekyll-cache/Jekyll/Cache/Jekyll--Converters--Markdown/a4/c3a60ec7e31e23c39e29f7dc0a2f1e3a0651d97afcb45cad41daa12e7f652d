@@ -1,0 +1,30 @@
+I" <p><a href="https://www.pencomdesign.com/">Pencom Design</a> is a manufacturer of computer-controlled relay, I/O and custom boards for commercial and industrial applications.  This interface to <a href="https://www.pencomdesign.com/relay-boards">Pencom’s Relay Control Boards</a> is designed to work over an ethernet to serial adapter (NPort).  Each switch (relay) can be turned on/off, and the state of the relay can be read.</p>
+<h2>Configuration</h2>
+<p>The Pencom relays can be daisy-chained to allow for up to 8 boards.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: pencom
+    host: host.domain.com
+    port: 4001
+    boards: 2
+    relays:
+      - name: &quot;Irrigation&quot;
+        addr: 0
+      - name: &quot;Upper Entry Door&quot;
+        addr: 1
+      - name: &quot;Fountain&quot;
+        addr: 0
+        board: 2
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the ethernet to serial adapter.  It is assumed that the adapter has been preconfigured.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port of the ethernet to serial adapter.</p>
+</span></p></dd><dt><a class='title-link' name='boards' href='#boards'></a> boards</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Number of boards daisy-chained together (default is 1).</p>
+</span></p></dd><dt><a class='title-link' name='relays' href='#relays'></a> relays</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of relays.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the switch (component).</p>
+</span></p></dd><dt><a class='title-link' name='addr' href='#addr'></a> addr</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The relay on the board starting with 0.</p>
+</span></p></dd><dt><a class='title-link' name='board' href='#board'></a> board</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The board number (defaults to 1).</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

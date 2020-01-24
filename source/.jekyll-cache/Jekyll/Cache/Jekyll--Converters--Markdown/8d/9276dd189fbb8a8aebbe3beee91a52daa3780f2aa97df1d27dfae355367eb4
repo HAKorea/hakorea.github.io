@@ -1,0 +1,113 @@
+I"7<p>The <code>orangepi_gpio</code> integration is the base for all related GPIO platforms in Home Assistant. There is no setup needed for the integration itself, for the platforms please check their corresponding pages.</p>
+<h2>Binary Sensor</h2>
+<p>The <code>orangepi_gpio</code> binary sensor platform allows you to read sensor values of the GPIOs of your Orange Pi or NanoPi.</p>
+<h2>Configuration</h2>
+<p>To use your Orange Pi’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: orangepi_gpio
+    pin_mode: pc
+    ports:
+      11: PIR Office
+      12: PIR Bedroom
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='pin_mode' href='#pin_mode'></a> pin_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Type of pin mode to use. This depends on which device you are actually using (<a href="#pin-modes">Pin modes</a>).</p>
+</span></p></dd><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='port-name' href='#port-name'></a> port: name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port numbers (physical pin numbers) and corresponding names.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code>, inverts the output logic to ACTIVE LOW.</p>
+</span></p><p class='default'>
+Default value: <p><code>false</code> (ACTIVE HIGH)</p>
+</p></dd></dl>
+</div>
+<p>Compared to the <a href="/integrations/rpi_gpio/">Raspberry Pi GPIO</a> component, this integration does not support pull-up resistors or port debouncing. Use external pull-ups and external port-debouncing.</p>
+<h2>Pin modes</h2>
+<p>As this platform supports different types of GPIO pinouts for difference Orange Pi or Nano Pi devices, we use the <code>pin_mode</code> value to specify which one to use. Enabled values are:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lite</code></td>
+<td>Supports the Orange Pi Lite</td>
+</tr>
+<tr>
+<td><code>lite2</code></td>
+<td>Supports the Orange Pi Lite 2</td>
+</tr>
+<tr>
+<td><code>one</code></td>
+<td>Supports the Orange Pi One</td>
+</tr>
+<tr>
+<td><code>oneplus</code></td>
+<td>Supports the Orange Pi One Plus</td>
+</tr>
+<tr>
+<td><code>pc</code></td>
+<td>Supports the Orange Pi PC</td>
+</tr>
+<tr>
+<td><code>pc2</code></td>
+<td>Supports the Orange Pi PC 2</td>
+</tr>
+<tr>
+<td><code>pcplus</code></td>
+<td>Supports the Orange Pi PC Plus</td>
+</tr>
+<tr>
+<td><code>pi3</code></td>
+<td>Supports the Orange Pi 3</td>
+</tr>
+<tr>
+<td><code>plus2e</code></td>
+<td>Supports the Orange Pi Plus 2E</td>
+</tr>
+<tr>
+<td><code>prime</code></td>
+<td>Supports the Orange Pi Prime</td>
+</tr>
+<tr>
+<td><code>r1</code></td>
+<td>Supports the Orange Pi R1</td>
+</tr>
+<tr>
+<td><code>winplus</code></td>
+<td>Supports the Orange Pi WinPlus</td>
+</tr>
+<tr>
+<td><code>zero</code></td>
+<td>Supports the Orange Pi Zero</td>
+</tr>
+<tr>
+<td><code>zeroplus</code></td>
+<td>Supports the Orange Pi Zero Plus</td>
+</tr>
+<tr>
+<td><code>zeroplus2</code></td>
+<td>Supports the Orange Pi Zero Plus 2</td>
+</tr>
+<tr>
+<td><code>duo</code></td>
+<td>Supports the NanoPi Duo</td>
+</tr>
+<tr>
+<td><code>neocore2</code></td>
+<td>Supports the NanoPi Neocore 2</td>
+</tr>
+</tbody>
+</table>
+<h2>Additional steps</h2>
+<p>This integration uses the <code>SYSFS</code> filesystem to get control of the GPIOs. Therefore an operating system with <code>CONFIG_GPIO_SYSFS</code> is required. As far as I know, most out-of-the-box distributions still enable this by default.</p>
+<p>As of Linux 4.8 sysfs-gpio is marked as obsolete. However as of today, the alternative GPIO character device is not widely used. Therefore we will use this until the new character device is more widely supported.</p>
+<p>Normally the <code>/sys/class/gpio</code> path is owned by root, so Home Assistant does not have access. As we don’t want to run Home Assistant as root, we will add the group <code>gpio</code> to have control over this path. I will assume you added the <code>homeassistant</code> user already to the <code>gpio</code> group as recommended in the <a href="/docs/installation/raspberry-pi/">Manual installation guide</a></p>
+<p>Create a new file in <code>/etc/udev/rules.d/</code> named <code>10-gpio.rules</code> with the following contents:</p>
+<pre><code class="language-txt">SUBSYSTEM==&quot;gpio*&quot;, PROGRAM=&quot;/bin/sh -c 'find -L /sys/class/gpio/ -maxdepth 2 -exec chown root:gpio {} \; -exec chmod 770 {} \; || true'&quot;
+</code></pre>
+<p>Home Assistant will now be able to control your GPIO pins.</p>
+:ET

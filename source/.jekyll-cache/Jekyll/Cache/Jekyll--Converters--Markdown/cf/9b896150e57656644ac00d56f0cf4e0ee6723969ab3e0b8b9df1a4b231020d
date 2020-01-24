@@ -1,0 +1,209 @@
+I"<p>The <code>rejseplanen</code> sensor will provide you with travel details for Danish public transport, using timetable data from <a href="https://www.rejseplanen.dk/">Rejseplanen</a>.</p>
+<h2>Setup</h2>
+<p>The <code>stop_id</code> can be obtained through the following steps:</p>
+<p>If you know the exact name of the stop you can search the stop_id with the following url <a href="http://xmlopen.rejseplanen.dk/bin/rest.exe/location?format=json&amp;input=STOP_NAME">http://xmlopen.rejseplanen.dk/bin/rest.exe/location?format=json&amp;input=STOP_NAME</a> and put in the name of the stop instead of “STOP_NAME” in the end of the url.</p>
+<p>If you don’t know the name of the stop follow this guide:</p>
+<ul>
+<li>Go to <a href="https://www.openstreetmap.org">https://www.openstreetmap.org</a></li>
+<li>Make a search and fill in the location you want to find for.</li>
+<li>The url will look like this <a href="https://www.openstreetmap.org/#map=18/56.15756/10.20674">https://www.openstreetmap.org/#map=18/56.15756/10.20674</a></li>
+<li>Now insert the coordinates for the location in the url, in this example it will be: <a href="http://xmlopen.rejseplanen.dk/bin/rest.exe/stopsNearby?coordX=56.15756&amp;coordY=10.20674&amp;">http://xmlopen.rejseplanen.dk/bin/rest.exe/stopsNearby?coordX=56.15756&amp;coordY=10.20674&amp;</a></li>
+<li>You will now see the 30 stops closest to your location.</li>
+</ul>
+<p>You will see an output like this:</p>
+<pre><code class="language-text">&quot;StopLocation&quot;:[{
+    &quot;name&quot;:&quot;Engdalsvej/Århusvej (Favrskov Kom)&quot;,
+    &quot;x&quot;:&quot;10078598&quot;,
+    &quot;y&quot;:&quot;56243456&quot;,
+    &quot;id&quot;:&quot;713000702&quot;
+</code></pre>
+<p>Find the name of your stop in the list and the “id” is the one you are looking for to us as value for <code>stop_id:</code>.</p>
+<h2>Configuration</h2>
+<p>Add a sensor to your <code>configuration.yaml</code> file as shown in the example:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rejseplanen
+    stop_id: 'YOUR_STOP_ID'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='stop_id' href='#stop_id'></a> stop_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The ID of the public transport stop.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor. Entity ID for the sensor will be created based on this name. E.g., Glostrup St becomes <code>sensor.glostrup_st</code>. It’s optional but recommended if you define more than one sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Next departure</p>
+</p></dd><dt><a class='title-link' name='route' href='#route'></a> route</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of route names.</p>
+</span></p></dd><dt><a class='title-link' name='direction' href='#direction'></a> direction</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of directions to filter by.</p>
+</span></p></dd><dt><a class='title-link' name='departure_type' href='#departure_type'></a> departure_type</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of departure types to filter by.</p>
+</span></p></dd></dl>
+</div>
+<h2>Direction</h2>
+<p>If you use the <code>direction</code> filter it’s important to put correct final destination(s) or else the sensor will not work at all.
+The <code>direction</code> has to be the final destination(s) for the <code>Departure type</code> - <em><strong>NOT the stop where you want to get off</strong></em>.</p>
+<ul>
+<li>Check <a href="https://rejseplanen.dk/">https://rejseplanen.dk/</a></li>
+<li>Make a search and use <strong>all variations</strong> for the final destination(s) for the needed <code>Departure type</code> in your configuration under <code>direction</code>. Make sure you use the exact name for final destination(s).</li>
+</ul>
+<p>A working example on how to use this sensor with direction:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry with the correct use of direction.
+sensor:
+  - platform: rejseplanen
+    stop_id: '008600615'
+    direction:
+      - 'CPH Lufthavn'
+      - 'Helsingør St.'
+</code></pre>
+<p>A NOT WORKING example use this sensor with direction:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry with the correct use of direction.
+sensor:
+  - platform: rejseplanen
+    stop_id: '008600615'
+    direction:
+      - 'København H'
+</code></pre>
+<p>It fails because the final destination for the train from the departure station is NOT ‘københavn H’, but ‘CPH Lufthavn’ and ‘Helsingør St.’.</p>
+<h2>Examples</h2>
+<p>A more extensive example on how to use this sensor:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rejseplanen
+    name: 'Elmegade 350S'
+    stop_id: '000045740'
+    route: 'Bus 350S'
+    direction:
+      - 'Herlev St.'
+      - 'Ballerup St.'
+</code></pre>
+<p>The sensor can filter the timetables by one or more routes, directions and types. The known types are listed in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Departure type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BUS</td>
+<td>Normal bus</td>
+</tr>
+<tr>
+<td>EXB</td>
+<td>Express bus</td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Harbour bus</td>
+</tr>
+<tr>
+<td>LET</td>
+<td>Letbanen</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Metro</td>
+</tr>
+<tr>
+<td>S</td>
+<td>S-train</td>
+</tr>
+<tr>
+<td>REG</td>
+<td>Regional train</td>
+</tr>
+<tr>
+<td>IC</td>
+<td>Intercity train</td>
+</tr>
+<tr>
+<td>LYN</td>
+<td>Intercity express train</td>
+</tr>
+<tr>
+<td>TOG</td>
+<td>Other trains</td>
+</tr>
+</tbody>
+</table>
+<h2>Attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>due_in</code></td>
+<td>Minutes until departure</td>
+</tr>
+<tr>
+<td><code>due_at</code></td>
+<td>Departure date and time</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Transport type</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td>Route code</td>
+</tr>
+<tr>
+<td><code>direction</code></td>
+<td>Destination stop</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>Departure stop</td>
+</tr>
+<tr>
+<td><code>stop_id</code></td>
+<td>ID of departure stop</td>
+</tr>
+<tr>
+<td><code>attribution</code></td>
+<td>Attribution (required by data source)</td>
+</tr>
+<tr>
+<td><code>next_departures</code></td>
+<td>List of further departures</td>
+</tr>
+</tbody>
+</table>
+<h3><code>next_departures</code></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>due_in</code></td>
+<td>Minutes until departure</td>
+</tr>
+<tr>
+<td><code>due_at</code></td>
+<td>Departure date and time</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Transport type</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td>Route code</td>
+</tr>
+<tr>
+<td><code>direction</code></td>
+<td>Destination stop</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>Departure stop</td>
+</tr>
+</tbody>
+</table>
+:ET

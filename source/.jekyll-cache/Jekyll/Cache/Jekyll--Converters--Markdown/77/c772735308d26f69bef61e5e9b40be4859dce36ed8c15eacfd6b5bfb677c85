@@ -1,0 +1,35 @@
+I"Ï<p>The <code>ffmpeg</code> platform allows you to use any video or audio feed with <a href="https://www.ffmpeg.org/">FFmpeg</a> for various sensors in Home Assistant.</p>
+<div class='note'>
+<p>If the <code>ffmpeg</code> process is broken, the sensor will be unavailable. To control the ffmpeg process of sensor, use the service <em>ffmpeg.start</em>, <em>ffmpeg.stop</em>, <em>ffmpeg.restart</em>.</p>
+</div>
+<h2>Configuration</h2>
+<p>To add FFmpeg with noise detection to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: ffmpeg_noise
+    input: FFMPEG_SUPPORTED_INPUT
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='input' href='#input'></a> input</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>An FFmpeg-compatible input file, stream, or feed.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the name of your camera.</p>
+</span></p></dd><dt><a class='title-link' name='initial_state' href='#initial_state'></a> initial_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Start ffmpeg with home-assistant.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='peak' href='#peak'></a> peak</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The threshold of detecting noise, in dB. 0 is very loud and -100 is low.</p>
+</span></p><p class='default'>
+Default value: <p>-30</p>
+</p></dd><dt><a class='title-link' name='duration' href='#duration'></a> duration</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>How long the noise needs to be over the peak to trigger the state.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='reset' href='#reset'></a> reset</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time to reset the state after no new noise is over the peak.</p>
+</span></p><p class='default'>
+Default value: <p>20</p>
+</p></dd><dt><a class='title-link' name='extra_arguments' href='#extra_arguments'></a> extra_arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Extra options to pass to <code>ffmpeg</code>, like audio frequency filtering.</p>
+</span></p></dd><dt><a class='title-link' name='output' href='#output'></a> output</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allows you to send the audio output of this sensor to an Icecast server or other FFmpeg-supported output, e.g., to stream with Sonos after a state is triggered.</p>
+</span></p></dd></dl>
+</div>
+<p>To experiment with values:</p>
+<pre><code class="language-bash">$ ffmpeg -i YOUR_INPUT -vn -filter:a silencedetect=n=-30dB:d=1 -f null -
+</code></pre>
+:ET

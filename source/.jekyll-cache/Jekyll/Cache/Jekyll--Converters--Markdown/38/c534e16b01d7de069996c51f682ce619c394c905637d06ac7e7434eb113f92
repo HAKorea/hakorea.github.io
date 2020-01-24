@@ -1,0 +1,18 @@
+I"8<p>This platform allows you to detect presence by looking at devices connected to a <a href="https://www.ubnt.com/products/#unifi">UniFi AP</a>. This device tracker differs form <a href="/integrations/unifi">Ubiquiti Unifi WAP</a> because it doesn’t require the Unifi controller software.</p>
+<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: unifi_direct
+    host: YOUR_AP_IP_ADDRESS
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The hostname or IP address of your Unifi AP.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The SSH device username used to connect to your Unifi AP.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The SSH device password used to connect to your Unifi AP.</p>
+</span></p></dd></dl>
+</div>
+<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+:ET

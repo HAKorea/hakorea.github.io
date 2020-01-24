@@ -1,0 +1,22 @@
+I"		<p>The <code>tile</code> platform allows Home Assistant to utilize <a href="https://www.thetileapp.com">Tile® Bluetooth trackers</a>.
+The official Tile mobile app handles the actual tracking of Tile devices using
+the mobile device’s Bluetooth and GPS.</p>
+<p>To integrate Tile into Home Assistant, add the following section to your
+<code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">device_tracker:
+  - platform: tile
+    username: email@address.com
+    password: MY_PASSWORD_123
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>the email address for the Tile account</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>the password for the Tile account</p>
+</span></p></dd><dt><a class='title-link' name='monitored_variables' href='#monitored_variables'></a> monitored_variables</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>the Tile types to monitor; valid values are <code>TILE</code> and <code>PHONE</code> (default is for all types to be included)</p>
+</span></p></dd><dt><a class='title-link' name='show_inactive' href='#show_inactive'></a> show_inactive</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>whether to show expired/disabled Tiles</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>Multiple Tile accounts can be used by repeating the <code>tile</code> platform. Tracked devices in <code>known_devices.yaml</code> will be named <code>tile_&lt;tile_identifier&gt;</code>. You can find <code>&lt;tile_identifier&gt;</code> in the Tile app by clicking on a tile.</p>
+:ET

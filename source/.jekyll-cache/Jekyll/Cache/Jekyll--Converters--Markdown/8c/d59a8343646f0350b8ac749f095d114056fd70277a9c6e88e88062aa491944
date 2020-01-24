@@ -1,0 +1,100 @@
+I"G<p>The <code>thethingsnetwork</code> integration allows one to interact with the <a href="https://www.thethingsnetwork.org">The Things Network</a>. This community-driven and open network supports <a href="https://www.lora-alliance.org/">LoRaWAN</a> for long range (~5 to 15km) communication with a low bandwidth (51 bytes/message). <a href="https://www.thethingsnetwork.org/docs/gateways/">Gateways</a> transfers the received data from the sensors to the The Things Network.</p>
+<p>The Things network support various integrations to make the data available:</p>
+<table>
+<thead>
+<tr>
+<th>The Things Network Integration</th>
+<th>Home Assistant platform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.thethingsnetwork.org/docs/applications/mqtt/">MQTT</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://www.thethingsnetwork.org/docs/applications/storage/">Storage</a></td>
+<td><a href="#sensor"><code>thethingsnetwork</code></a></td>
+</tr>
+<tr>
+<td><a href="https://www.thethingsnetwork.org/docs/applications/http/">HTTP</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Setup</h2>
+<p>Visit the <a href="https://console.thethingsnetwork.org/">The Things Network Console</a> website, log in with your The Things Network credentials, choose your application from <strong>Applications</strong>.</p>
+<p>The <strong>Application ID</strong> is used to identify the scope of your data.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/applications.png' />
+Application overview
+</p>
+<p>You need an access key to be able to read the data from your application.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/access_key.png' />
+Access keys
+</p>
+<h2>Configuration</h2>
+<p>To enable this component, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+thethingsnetwork:
+  app_id: sensor-123
+  access_key: ttn-account-v2.xxxxxxxxxxx_yyyyyyyyyyy
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='app_id' href='#app_id'></a> app_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Application ID.</p>
+</span></p></dd><dt><a class='title-link' name='access_key' href='#access_key'></a> access_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The access key.</p>
+</span></p></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>The <code>thethingsnetwork</code> sensor platform allows you to get data from a <a href="https://www.thethingsnetwork.org/docs/applications/storage/">The Things Network Storage Integration</a>.</p>
+<p>This platform requires that the <a href="#configuration">The Things Network component</a> is set up and the <a href="https://www.thethingsnetwork.org/docs/applications/storage/">The Things Network Storage Integration</a> as well.</p>
+<h3>Prerequisites</h3>
+<p>Visit the <a href="https://console.thethingsnetwork.org/">The Things Network Console</a> website, log in with your The Things Network credentials, choose your application from <strong>Applications</strong> and go to <strong>Integrations</strong>.</p>
+<p>Add a new integration.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/add_integration.png' />
+Add a The Things Network integration
+</p>
+<p>Select <strong>Data Storage</strong>.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/choose_integration.png' />
+Choose a The Things Network integration
+</p>
+<p>Click <strong>Add integration</strong> to finish the process.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/confirm_integration.png' />
+Add a The Things Network Data Storage integration
+</p>
+<p>When done, the status of the integration should be <strong>Running</strong>. You could check the output after clicking on <strong>go to platform</strong> in an interactive web interface.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/storage_integration.png' />
+Add a The Things Network integration
+</p>
+<p>Select <strong>Devices</strong> to get the ID of your device that you want to use.</p>
+<p class='img'>
+<img src='/images/integrations/thethingsnetwork/devices.png' />
+Devices overview
+</p>
+<h3>Configuration</h3>
+<p>To enable this platform, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: thethingsnetwork
+    device_id: ha-demo
+    values:
+      sensor_value: unit of measurement
+      voltage: V
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device_id' href='#device_id'></a> device_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The ID of the device.</p>
+</span></p></dd><dt><a class='title-link' name='values' href='#values'></a> values</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensor values with their unit of measurement</p>
+</span></p></dd></dl>
+</div>
+:ET

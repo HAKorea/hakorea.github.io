@@ -1,0 +1,150 @@
+I"r&<p>The <code>mystrom</code> light platform allows you to control your <a href="https://mystrom.ch/en/">myStrom</a> WiFi Bulbs.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#light">Light</a></li>
+<li><a href="#binary-sensor">Binary Sensor</a>
+<ul>
+<li><a href="#setup-of-mystrom-buttons">Setup of myStrom Buttons</a></li>
+</ul>
+</li>
+<li><a href="#switch">Switch</a>
+<ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#get-the-current-power-consumption">Get the current power consumption</a></li>
+</ul>
+</li>
+</ul>
+<h2>Light</h2>
+<p>To use your myStrom WiFi Bulb in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  - platform: mystrom
+    host: IP_ADDRESS
+    mac: MAC_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your myStrom WiFi Bulb, e.g., <code>192.168.1.32</code>.</p>
+</span></p></dd><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The MAC address of your myStrom WiFi Bulb, e.g., <code>5AAC8CA542F3</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use when displaying this bulb.</p>
+</span></p><p class='default'>
+Default value: <p>myStrom Bulb</p>
+</p></dd></dl>
+</div>
+<p>Check if you are able to access the light located at <code>IP_ADRRESS</code>. The details about your light is provided as a JSON response.</p>
+<pre><code class="language-bash">$ curl http://[IP_ADDRESS]/api/v1/device/[MAC_ADDRESS]
+
+{
+  &quot;MAC_ADDRESS&quot;: {
+    &quot;type&quot;: &quot;rgblamp&quot;,
+    &quot;battery&quot;: false,
+    &quot;reachable&quot;: true,
+    &quot;meshroot&quot;: false,
+    &quot;on&quot;: true,
+    &quot;color&quot;: &quot;0;0;100&quot;,
+    &quot;mode&quot;: &quot;hsv&quot;,
+    &quot;ramp&quot;: 409,
+    &quot;power&quot;: 5.1,
+    &quot;fw_version&quot;: &quot;2.25&quot;
+  }
+}
+</code></pre>
+<h2>Binary Sensor</h2>
+<p>The <code>mystrom</code> binary sensor platform allows you to use <a href="https://mystrom.ch/wifi-button/">myStrom Wifi Buttons</a> with Home Assistant. The myStrom Wifi Buttons support three and the myStrom WiFi Button + four different push pattern:</p>
+<ul>
+<li><code>single</code>: Short push (approx. 1/2 seconds)</li>
+<li><code>double</code>: 2x sequential short pushes (within 2 seconds)</li>
+<li><code>long</code>: Long push (approx. 2 seconds)</li>
+<li><code>touch</code>: Touch of the button’s surface (only affective for WiFi Button +)</li>
+</ul>
+<p>The first usage of the pattern will create the binary sensor for the pattern. If the WiFi Button is pushed one time then a binary sensor for the <code>single</code> pattern will be created. The same applies for the other patterns. With the second usage of the pattern the binary sensors become fully functional.</p>
+<p>The buttons will give you feedback with its built-in LED:</p>
+<ul>
+<li>white then green: Pattern was submitted successfully</li>
+<li>white then red: There is a problem with the communication</li>
+</ul>
+<p>To use your myStrom WiFi Button in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: mystrom
+</code></pre>
+<div class='note'>
+The firmware version 2.56 doesn't support TLS/SSL. This means that you are only able to use the WiFi Buttons if you are using plain-text communication between Home Assistant and the clients/entities.
+</div>
+<h3>Setup of myStrom Buttons</h3>
+<p>You need to configure every button to make it work with Home Assistant. First connect the Wifi Buttons to your wireless network. Once a button is connected you have three minutes to set the actions for the push patterns if the button is not charging. The fastest way is to use <code>curl</code>. Check the <a href="https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt">documentation</a> of the WiFi Button for further details about the implementation (<code>http://</code> is replaced by <code>get://</code> or <code>post://</code>). <code>action</code> is the name of the corresponding push pattern (see above).</p>
+<p>The endpoint that is receiving the data is <code>http://[IP address Home Assistant]:8123/api/mystrom</code>. If you have set an <a href="/integrations/http/"><code>api_password</code></a> then this needs to be included in the URL.</p>
+<p>With <code>api_password:</code></p>
+<pre><code class="language-bash">$ curl -d &quot;[action]=get://[IP address Home Assistant]:8123/api/mystrom?api_password%3D[api_password]%26[action]%3D[ID of the button]&quot; \
+    http://[IP address of the button]/api/v1/device/[MAC address of the button]
+</code></pre>
+<p>Without <code>api_password</code>:</p>
+<pre><code class="language-bash">$ curl -d &quot;[action]=get://[IP address Home Assistant]:8123/api/mystrom?[action]%3D[ID of the button]&quot; \
+    http://[IP address of the button]/api/v1/device/[MAC address of the button]
+{
+  &quot;[MAC address of the button]&quot;: {
+    &quot;type&quot;: &quot;button&quot;,
+    &quot;battery&quot;: true,
+    &quot;reachable&quot;: true,
+    &quot;meshroot&quot;: false,
+    &quot;charge&quot;: true,
+    &quot;voltage&quot;: 4.292,
+    &quot;fw_version&quot;: &quot;2.56&quot;,
+    &quot;single&quot;: &quot;get://[IP address Home Assistant]:8123/api/mystrom?single=[id of the button]&quot;,
+    &quot;double&quot;: &quot;&quot;,
+    &quot;long&quot;: &quot;&quot;,
+    &quot;touch&quot;: &quot;&quot;
+  }
+}
+</code></pre>
+<p>A complete command to set the URL for a double click could look like the example below:</p>
+<pre><code class="language-bash">$ curl -d &quot;double=get://192.168.1.3:8123/api/mystrom?double%3DButton1&quot; http://192.168.1.12/api/v1/device/4D5F5D5CD553
+</code></pre>
+<p>With an <code>api_password</code>:</p>
+<pre><code class="language-bash">curl -d &quot;double=get://192.168.1.3:8123/api/mystrom?api_password%3Dapi_password%26double%3DButton1&quot; http://192.168.1.12/api/v1/device/4D5F5D5CD553
+</code></pre>
+<p>The command-line tool <a href="https://github.com/fabaff/python-mystrom"><code>mystrom</code></a> is a helper to configure myStrom buttons.</p>
+<p>If you have set <a href="/integrations/http/"><code>login_attempts_threshold</code></a> and forget to include the <code>api_password</code> for an action and that action is triggered then after the threshold is reached will the button no longer work because it is banned. See <a href="/integrations/http/#ip-filtering-and-banning">IP filtering and banning</a> about how to revert the banning.</p>
+<h2>Switch</h2>
+<p>The <code>mystrom</code> switch platform allows you to control the state of your <a href="https://mystrom.ch/en/">myStrom</a> switches. The built-in sensor is measuring the power consumption while the switch is on.</p>
+<h3>Setup</h3>
+<p>Make sure that you have enabled the REST API under <strong>Advanced</strong> in the web frontend of the switch.</p>
+<p class='img'>
+  <img src='/images/integrations/mystrom/switch-advanced.png' />
+</p>
+<p>To use your myStrom switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: mystrom
+    host: IP_ADRRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your myStrom switch, e.g., <code>http://192.168.1.32</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use when displaying this switch.</p>
+</span></p><p class='default'>
+Default value: <p>myStrom Switch</p>
+</p></dd></dl>
+</div>
+<p>Check if you are able to access the device located at <code>http://IP_ADRRESS</code>. The details about your switch is provided as a JSON response.</p>
+<pre><code class="language-bash">$ curl -X GET -H &quot;Content-Type: application/json&quot; http://IP_ADDRESS/report
+{
+  &quot;power&quot;: 0,
+  &quot;relay&quot;: false
+}
+</code></pre>
+<p>or change its state:</p>
+<pre><code class="language-bash">curl -G -X GET http://IP_ADDRESS/relay -d 'state=1'
+</code></pre>
+<h3>Get the current power consumption</h3>
+<p>The switch is measuring the current power consumption. To expose this as a sensor use a <a href="/integrations/template"><code>template</code> sensor</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: template
+    sensors:
+      power:
+        friendly_name: &quot;Current Power&quot;
+        unit_of_measurement: &quot;W&quot;
+        value_template: &quot;{{ state_attr('switch.office', 'current_power_w') }}&quot;
+</code></pre>
+:ET

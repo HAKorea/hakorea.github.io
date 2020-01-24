@@ -1,0 +1,58 @@
+I"�<p>Like it how the lights dim up/down at the movies? Do it at home as well!</p>
+<p>This example uses the <a href="/integrations/media_player/">media player</a>, <a href="/integrations/light/">lights</a> (transitions) and the <a href="/integrations/sun/">sun</a> integration. We’ll use actions to detect media player state changes and <a href="/integrations/scene/">scenes</a> to control multiple lights and transition between scenes.</p>
+<h4>Scenes</h4>
+<p>One scene for normal light, one for when movies are on. A 2 second transition gives a nice ‘feel’ to the switch.</p>
+<pre><code class="language-yaml">scene:
+  - name: Livingroom normal
+    entities:
+        light.light1:
+            state: on
+            transition: 2
+            brightness_pct: 60
+        light.light2:
+            state: on
+            transition: 2
+            brightness_pct: 85
+  - name: Livingroom dim
+    entities:
+        light.light1:
+            state: on
+            transition: 2
+            brightness_pct: 30
+        light.light2:
+            state: on
+            transition: 2
+            brightness_pct: 55
+</code></pre>
+<h4>Automation</h4>
+<p>The paused/stopped state is best matched using “from: ‘playing’”. Adding in the sun condition as we only want this when it’s dark.</p>
+<pre><code class="language-yaml">automation:
+  - alias: &quot;Media player paused/stopped&quot;
+    trigger:
+      - platform: state
+        entity_id: media_player.htpc
+        from: 'playing'
+        to: 'idle'
+    condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+    action:
+        service: scene.turn_on
+        entity_id: scene.livingroom_normal
+
+  - alias: &quot;Media player playing&quot;
+    trigger:
+      - platform: state
+        entity_id: media_player.htpc
+        to: 'playing'
+        from: 'idle'
+    condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+    action:
+        service: scene.turn_on
+        entity_id: scene.livingroom_dim
+</code></pre>
+:ET

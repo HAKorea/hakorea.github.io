@@ -1,0 +1,28 @@
+I"L<p>The <code>clicksend_tts</code> platform uses <a href="https://clicksend.com">ClickSend</a> to deliver text-to-speech (TTS) notifications from Home Assistant.</p>
+<p>Go to your <a href="https://dashboard.clicksend.com">ClickSend Dashboard</a> section and create your new project. After creating your project, you should now be able to obtain your <code>username</code> and <code>api_key</code>.</p>
+<p>To add ClickSend to your installation, add the following to your Home Assistant <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">notify:
+  - platform: clicksend_tts
+    username: CLICKSEND_USERNAME
+    api_key: CLICKSEND_API_KEY
+    recipient: PHONE_NO
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter name allows multiple notifiers to be created. The notifier will bind to the service notify.NOTIFIER_NAME.</p>
+</span></p><p class='default'>
+Default value: <p>ClickSend</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your username.</p>
+</span></p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your API Key.</p>
+</span></p></dd><dt><a class='title-link' name='recipient' href='#recipient'></a> recipient</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Recipient phone number. This is the phone number that you want to call and notify via TTS (e.g., <code>09171234567</code>).</p>
+</span></p></dd><dt><a class='title-link' name='caller' href='#caller'></a> caller</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Caller phone number. This is the phone number that you want to be the TTS call originator (e.g., <code>09181234567</code>). If not defined the recipient number is used.</p>
+</span></p></dd><dt><a class='title-link' name='language' href='#language'></a> language</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The language you want to use to convert the message to audio. Accepted values are found in the <a href="http://docs.clicksend.apiary.io/#reference/voice/voice-languages">ClickSend Documentation</a>.</p>
+</span></p><p class='default'>
+Default value: <p>en-us</p>
+</p></dd><dt><a class='title-link' name='voice' href='#voice'></a> voice</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The voice that needs to be used to play the message to the recipient. Allowed values are <code>female</code> or <code>male</code>.</p>
+</span></p><p class='default'>
+Default value: <p>female</p>
+</p></dd></dl>
+</div>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+:ET

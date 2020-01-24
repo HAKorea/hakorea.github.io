@@ -1,0 +1,33 @@
+I"|<p>The <code>eq3btsmart</code> climate platform allows you to integrate EQ3 Bluetooth Smart Thermostats.</p>
+<p>The current functionality allows setting the temperature as well as controlling the supported modes with help of <a href="https://github.com/rytilahti/python-eq3bt">python-eq3bt</a> library.
+As the device doesn’t contain a temperature sensor (<a href="https://forum.fhem.de/index.php/topic,39308.15.html">read more</a>),
+we report target temperature also as current one.</p>
+<h3>Testing the connectivity</h3>
+<p>Before configuring Home Assistant you should check that connectivity with the thermostat is working, which can be done with the eq3cli tool:</p>
+<pre><code class="language-bash">eq3cli --mac 00:11:22:33:44:55
+
+[00:1A:22:XX:XX:XX] Target 17.0 (mode: auto dst, away: no)
+Locked: False
+Batter low: False
+Window open: False
+Boost: False
+Current target temp: 21.0
+Current mode: auto dst
+Valve: 0
+</code></pre>
+<h3>Configuration</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+climate:
+  - platform: eq3btsmart
+    devices:
+      room1:
+        mac: '00:11:22:33:44:55'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of thermostats.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name to use for the thermostat.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>MAC address of the thermostat.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+:ET

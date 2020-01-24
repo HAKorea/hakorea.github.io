@@ -1,0 +1,28 @@
+I"�<p>The <code>kaiterra</code> integration allows you to view the readings from your Laser Egg or Sensedge device using the <a href="https://www.kaiterra.com/dev/">Kaiterra REST API</a>.</p>
+<p>To use the integration, you need to get the API key by signing up at <a href="https://dashboard.kaiterra.cn/">Kaiterra dashboard</a>, registring the device and create the key under <code>Settings -&gt; Profile -&gt; Developer</code>.</p>
+<h2>Configuration</h2>
+<p>To enable <code>kaiterra</code> in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+kaiterra:
+  api_key: YOUR_API_KEY
+  devices:
+    - device_id: YOUR_DEVICE_ID
+      type: YOUR_DEVICE_TYPE
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your personal API key from Kaiterra Dashboard.</p>
+</span></p></dd><dt><a class='title-link' name='aqi_standard' href='#aqi_standard'></a> aqi_standard</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The standard of Air Quality Index. Available values <code>us</code>, <code>in</code>, <code>cn</code>.</p>
+</span></p><p class='default'>
+Default value: <p>us</p>
+</p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The interval to scan for sensor state changes in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>30</p>
+</p></dd><dt><a class='title-link' name='preferred_units' href='#preferred_units'></a> preferred_units</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of preferred units. Available values in the list <code>x</code>, <code>%</code>, <code>C</code>, <code>F</code>, <code>mg/m³</code>, <code>µg/m³</code>, <code>ppm</code>, <code>ppb</code>.</p>
+</span></p></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The devices you want to get reading from.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='device_id' href='#device_id'></a> device_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The UUID of the device you want to monitor. You can take it from Kaiterra Dashboard.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The device type. Available values <code>laseregg</code> and <code>sensedge</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The custom name of your device.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

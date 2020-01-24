@@ -1,0 +1,372 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>IQVIA - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to use IQVIA data within Home Assistant">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/iqvia/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="IQVIA">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/iqvia/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to use IQVIA data within Home Assistant">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="IQVIA">
+    <meta name="twitter:description" content="Instructions on how to use IQVIA data within Home Assistant">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/iqvia.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      IQVIA
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>iqvia</code> sensor platform collects and displays allergy, asthma and disease
+information (based on a U.S. ZIP code) from <a href="https://www.iqvia.com/" rel="external nofollow">IQVIA</a>.
+Data measured includes:</p>
+<ul>
+<li>Indicies for allergies, asthma and cold/flu indices</li>
+<li>Trends</li>
+<li>Current outlook</li>
+<li>more!</li>
+</ul>
+<h2>
+<a class="title-link" name="configuring-the-platform" href="#configuring-the-platform"></a> Configuring the Platform</h2>
+<p>To integrate <code>iqvia</code> into Home Assistant, add the following section to your
+<code>configuration.yaml</code> file (adjusting the <code>monitored_conditions</code> list to your
+liking):</p>
+<pre><code class="language-yaml">iqvia:
+  zip_code: "00544"
+  monitored_conditions:
+    - allergy_average_forecasted
+    - allergy_index_today
+    - allergy_index_tomorrow
+    - asthma_average_forecasted
+    - asthma_index_today
+    - asthma_index_tomorrow
+    - disease_average_forecasted
+    - disease_index_today
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="zip_code" href="#zip_code"></a> zip_code</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The U.S. ZIP code to gather data for (as a quoted string).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The metric types to monitor.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="allergy_average_forecasted" href="#allergy_average_forecasted"></a> allergy_average_forecasted</dt>
+<dd><p class="desc"><span class="description"><p>The average forecasted allergy index over the next 5 days.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="allergy_index_today" href="#allergy_index_today"></a> allergy_index_today</dt>
+<dd><p class="desc"><span class="description"><p>The allergy index for today.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="allergy_index_tomorrow" href="#allergy_index_tomorrow"></a> allergy_index_tomorrow</dt>
+<dd><p class="desc"><span class="description"><p>The allergy index for tomorrow.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="asthma_average_forecasted" href="#asthma_average_forecasted"></a> asthma_average_forecasted</dt>
+<dd><p class="desc"><span class="description"><p>The average forecasted asthma index over the next 5 days.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="asthma_index_today" href="#asthma_index_today"></a> asthma_index_today</dt>
+<dd><p class="desc"><span class="description"><p>The asthma index for today.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="asthma_index_tomorrow" href="#asthma_index_tomorrow"></a> asthma_index_tomorrow</dt>
+<dd><p class="desc"><span class="description"><p>The asthma index for tomorrow.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="disease_average_forecasted" href="#disease_average_forecasted"></a> disease_average_forecasted</dt>
+<dd><p class="desc"><span class="description"><p>The average forecasted cold/flu index over the next 5 days.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="disease_index_today" href="#disease_index_today"></a> disease_index_today</dt>
+<dd><p class="desc"><span class="description"><p>The cold/flu index for today.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<div class="note warning">
+It is important to ensure the ZIP code is quoted if it starts with a 0. Unquoted
+ZIP codes that start with 0 will cause errors.
+</div>
+<h2>
+<a class="title-link" name="understanding-the-indices" href="#understanding-the-indices"></a> Understanding the Indices</h2>
+<p>Any index-related sensor will have a value between 0.0 and 12.0. The values
+map to the following human-friendly ratings:</p>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Rating</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0 - 2.4</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>2.5 - 4.8</td>
+<td>Low/Medium</td>
+</tr>
+<tr>
+<td>4.9 - 7.2</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>7.3 - 9.6</td>
+<td>Medium/High</td>
+</tr>
+<tr>
+<td>9.7 - 12.0</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="understanding-asthma-allergens" href="#understanding-asthma-allergens"></a> Understanding Asthma Allergens</h2>
+<p>Several asthma-related sensors carry information regarding the top three
+“asthma allergens” (i.e., irritants that may exacerbate asthma symptoms).
+Example values include:</p>
+<table>
+<thead>
+<tr>
+<th>Pollutant</th>
+<th>Symbol</th>
+<th>More Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particulate (&lt;= 2.5 μm)</td>
+<td>PM2.5</td>
+<td><a href="https://www.epa.gov/pm-pollution" rel="external nofollow">EPA: Particulate Matter (PM) Pollution</a></td>
+</tr>
+<tr>
+<td>Particulate (&lt;= 10 μm)</td>
+<td>PM10</td>
+<td><a href="https://www.epa.gov/pm-pollution" rel="external nofollow">EPA: Particulate Matter (PM) Pollution</a></td>
+</tr>
+<tr>
+<td>Ozone</td>
+<td>O</td>
+<td><a href="https://www.epa.gov/ozone-pollution" rel="external nofollow">EPA: Ozone Pollution</a></td>
+</tr>
+<tr>
+<td>Sulpher Dioxide</td>
+<td>SO2</td>
+<td><a href="https://www.epa.gov/so2-pollution" rel="external nofollow">EPA: Sulfur Dioxide (SO2) Pollution</a></td>
+</tr>
+<tr>
+<td>Carbon Monoxide</td>
+<td>CO</td>
+<td><a href="https://www.epa.gov/co-pollution" rel="external nofollow">EPA: Carbon Monoxide (CO) Pollution in Outdoor Air</a></td>
+</tr>
+</tbody>
+</table>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/iqvia.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/iqvia.png' /></div><div class="section">
+    <kb-alert-link integration="iqvia"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Introduced in release: 0.63
+    </div><div class='section'>
+      This integration is configurable via UI
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/iqvia/'>/components/iqvia/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#health'>Health</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

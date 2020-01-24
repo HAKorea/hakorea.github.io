@@ -1,0 +1,34 @@
+I"	<p>The <code>philips_js</code> platform allows you to control Philips TVs which expose the <a href="http://jointspace.sourceforge.net/">jointSPACE</a> JSON-API. Instructions on how to activate the API and if your model is supported can be found <a href="http://jointspace.sourceforge.net/download.html">here</a>. Note that not all listed, jointSPACE-enabled devices won’t have JSON-interface running on port 1925. This is true at least for some models before year 2011.</p>
+<p>To add your TV to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: philips_js
+    host: 192.168.1.99
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of TV.</p>
+</span></p><p class='default'>
+Default value: <p>127.0.0.1 (localhost).</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you would like to give to the Philips TV.</p>
+</span></p><p class='default'>
+Default value: <p>Philips TV</p>
+</p></dd><dt><a class='title-link' name='turn_on_action' href='#turn_on_action'></a> turn_on_action</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A script that will be executed to turn on the TV (can be used with wol).</p>
+</span></p></dd><dt><a class='title-link' name='api_version' href='#api_version'></a> api_version</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The JointSpace API version of your Philips TV. This is an experimental option and not all the functionalities are guaranteed to work with API versions different from <code>1</code> and <code>5</code>.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd></dl>
+</div>
+<div class='note'>
+When using api_version: 5 changing sources switches tv channels. Additionally this allows setting the volume level.
+</div>
+<pre><code class="language-yaml"># Example configuration.yaml with turn_on_action
+media_player:
+  - platform: philips_js
+    host: 192.168.1.99
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: aa:bb:cc:dd:ee:ff
+</code></pre>
+:ET

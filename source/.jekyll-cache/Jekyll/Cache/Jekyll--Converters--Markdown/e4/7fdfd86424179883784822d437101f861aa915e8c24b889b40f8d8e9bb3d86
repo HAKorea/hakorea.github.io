@@ -1,0 +1,52 @@
+I"]<p>A <code>command_line</code>cover platform that issues specific commands when it is moved up, down and stopped. It allows anyone to integrate any type of cover into Home Assistant that can be controlled from the command line.</p>
+<p>To enable a command line cover in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: command_line
+    covers:
+      garage_door:
+        command_open: move_command up garage
+        command_close: move_command down garage
+        command_stop: move_command stop garage
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='covers' href='#covers'></a> covers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The array that contains all command line covers.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='identifier' href='#identifier'></a> identifier</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the command line cover as slug. Multiple entries are possible.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='command_open' href='#command_open'></a> command_open</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The command to open the cover.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='command_close' href='#command_close'></a> command_close</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The action to close the cover.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='command_stop' href='#command_stop'></a> command_stop</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The action to stop the cover.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='command_state' href='#command_state'></a> command_state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If given, this will act as a sensor that runs in the background and updates the state of the cover. If the command returns a <code>0</code> the indicates the cover is fully closed, whereas a 100 indicates the cover is fully open.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>if specified, <code>command_state</code> will ignore the result code of the command but the template evaluating will indicate the position of the cover. For example, if your <code>command_state</code> returns a string “open”, using <code>value_template</code> as in the example config above will allow you to translate that into the valid state <code>100</code>.</p>
+</span></p><p class='default'>
+Default value: <p>‘{{ value }}’</p>
+</p></dd><dt><a class='title-link' name='friendly_name' href='#friendly_name'></a> friendly_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name used to display the cover in the frontend.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>Full configuration</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: command_line
+    covers:
+      garage_door:
+        command_open: move_command up garage
+        command_close: move_command down garage
+        command_stop: move_command stop garage
+        command_state: state_command garage
+        value_template: &gt;
+          {% if value == 'open' %}
+          100
+          {% elif value == 'closed' %}
+          0
+          {% endif %}
+          
+</code></pre>
+:ET

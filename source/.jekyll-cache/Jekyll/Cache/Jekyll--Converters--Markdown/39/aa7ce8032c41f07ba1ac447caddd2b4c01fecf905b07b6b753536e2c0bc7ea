@@ -1,0 +1,39 @@
+I"s	<p><a href="https://iota.org/">IOTA</a> is a new blockless distributed ledger which is scalable, lightweight and makes it possible to transfer value without any fees.</p>
+<p>The <code>iota</code> integration displays various details (e.g., the balance, node attributes) of IOTA wallets.</p>
+<pre><code class="language-yaml"># configuration.yaml example
+iota:
+  iri: https://testnet140.tangle.works:4434
+  wallets:
+    - name: Default Wallet
+      seed: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='iri' href='#iri'></a> iri</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>URL of the IRI node.</p>
+</span></p></dd><dt><a class='title-link' name='testnet' href='#testnet'></a> testnet</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Flag for indicating “testnet”.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='wallets' href='#wallets'></a> wallets</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of IOTA wallets.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='description'><p>Name of the wallet.</p>
+</span></p></dd><dt><a class='title-link' name='seed' href='#seed'></a> seed</dt><dd><p class='desc'><span class='description'><p>Seed of the wallet.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>A full configuration example could look the one below:</p>
+<pre><code class="language-yaml"># Full example
+iota:
+  iri: https://testnet140.tangle.works:4434
+  testnet: true
+  wallets:
+    - name: Default Wallet
+      seed: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    - name: Exchange Wallet
+      seed: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+</code></pre>
+<h2>Sensor</h2>
+<p>The sensors are automatically created if the IOTA integration is present.</p>
+<p>Available sensors:</p>
+<ul>
+<li>Wallet balance</li>
+<li>Node information</li>
+</ul>
+:ET

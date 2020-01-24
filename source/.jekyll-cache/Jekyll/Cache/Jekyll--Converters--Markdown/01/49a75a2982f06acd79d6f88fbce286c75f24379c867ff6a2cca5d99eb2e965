@@ -1,0 +1,262 @@
+I"Db<p>To display cards on the UI you have to define them in views. Views sort cards in columns based on their <code>card size</code>. If you want to group some cards you have to use <code>stack</code> cards.</p>
+<p class="img">
+  <img src="/images/lovelace/lovelace_views.png" alt="Views toolbar">
+  Use titles and icons to describe the content of views.
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='views' href='#views'></a> views</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of view configurations.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The title or name.</p>
+</span></p></dd><dt><a class='title-link' name='badges' href='#badges'></a> badges</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of entities IDs or <code>badge</code> objects to display as badges.</p>
+</span></p></dd><dt><a class='title-link' name='cards' href='#cards'></a> cards</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Cards to display in this view.</p>
+</span></p></dd><dt><a class='title-link' name='path' href='#path'></a> path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Paths are used in the URL, more info below.</p>
+</span></p><p class='default'>
+Default value: <p>view index</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon-name from Material Design Icons.</p>
+</span></p></dd><dt><a class='title-link' name='panel' href='#panel'></a> panel</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Renders the view in panel mode, more info below.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='background' href='#background'></a> background</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Style the background using CSS, more info below.</p>
+</span></p></dd><dt><a class='title-link' name='theme' href='#theme'></a> theme</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Themes view and cards, more info below.</p>
+</span></p></dd><dt><a class='title-link' name='visible' href='#visible'></a> visible</dt><dd><p class='desc'><span class='type'>(<span class='boolean list'>boolean | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Hide/show the view tab from all users or a list of individual <code>visible</code> objects.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl></dd></dl>
+</div>
+<h2>Options For Visible</h2>
+<p>If you define <code>visible</code> as objects instead of a boolean to specify conditions for displaying the view tab:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='user' href='#user'></a> user</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>User id that can see the view tab (unique hex value found on the Users configuration page).</p>
+</span></p></dd></dl>
+</div>
+<h4>Example</h4>
+<p>View config:</p>
+<pre><code class="language-yaml">- title: Living room
+  badges:
+    - device_tracker.demo_paulus
+    - entity: light.ceiling_lights
+      name: Ceiling Lights
+      icon: mdi:bulb
+    - entity: switch.decorative_lights
+      image: /local/lights.png
+</code></pre>
+<h2>Paths</h2>
+<p>You can link to one view from another view by its path. For this use cards that support navigation (<code>navigation_path</code>). Do not use special characters in paths. Do not begin a path with a number. This will cause the parser to read your path as a view index.</p>
+<h3>Example</h3>
+<p>View config:</p>
+<pre><code class="language-yaml">- title: Living room
+  # the final path is /lovelace/living_room
+  path: living_room
+</code></pre>
+<p>Picture card config:</p>
+<pre><code class="language-yaml">- type: picture
+  image: /local/living_room.png
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/living_room
+</code></pre>
+<h2>Icons</h2>
+<p>If you define an icon the title will be used as a tool-tip.</p>
+<h3>Example</h3>
+<pre><code class="language-yaml">- title: Garden
+  icon: mdi:flower
+</code></pre>
+<h2>Visible</h2>
+<p>You can specify the visibility of views as a whole or per-user. (Note: This is only for the display of the tabs. The url path is still accessible)</p>
+<h3>Example</h3>
+<pre><code class="language-yaml">views:
+  - title: Ian
+    visible:
+      - user: 581fca7fdc014b8b894519cc531f9a04
+    cards:
+      ...
+  - title: Chelsea
+    visible:
+      - user: 6e690cc4e40242d2ab14cf38f1882ee6
+    cards:
+      ...
+  - title: Admin
+    visible: db34e025e5c84b70968f6530823b117f
+    cards:
+      ...
+</code></pre>
+<h2>Panel mode</h2>
+<p>This renders the first card on full width, other cards in this view will not be rendered. Good for cards like <code>map</code>, <code>stack</code> or <code>picture-elements</code>.</p>
+<h3>Example</h3>
+<pre><code class="language-yaml">- title: Map
+  panel: true
+  cards:
+    - type: map
+      entities:
+        - device_tracker.demo_paulus
+        - zone.home
+</code></pre>
+<h2>Themes</h2>
+<p>Set a separate <a href="/integrations/frontend/#themes">theme</a> for the view and its cards.</p>
+<h3>Example</h3>
+<pre><code class="language-yaml">- title: Home
+  theme: happy
+</code></pre>
+<h3>Background</h3>
+<p>You can style the background of your views with a <a href="/integrations/frontend/#themes">theme</a>. You can use the CSS variable <code>lovelace-background</code>. For wallpapers you probably want to use the example below, more options can be found <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background">here</a>.</p>
+<h4>Example</h4>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+frontend:
+  themes:
+    example:
+      lovelace-background: center / cover no-repeat url(&quot;/local/background.png&quot;) fixed
+</code></pre>
+<h2>Badges</h2>
+<h3>State Label Badge</h3>
+<p>The State Label badge allows you to dislay a state badge</p>
+<pre><code class="language-yaml">type: state-label
+entity: light.living_room
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>entity-button</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Home Assistant entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites friendly name.</p>
+</span></p><p class='default'>
+Default value: <p>Name of Entity</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites icon or entity picture.</p>
+</span></p><p class='default'>
+Default value: <p>Entity Domain Icon</p>
+</p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The URL of an image.</p>
+</span></p></dd><dt><a class='title-link' name='show_name' href='#show_name'></a> show_name</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Show name.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='show_icon' href='#show_icon'></a> show_icon</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Show icon.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action to take on tap</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='action' href='#action'></a> action</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+</span></p><p class='default'>
+Default value: <p><code>toggle</code></p>
+</p></dd><dt><a class='title-link' name='navigation_path' href='#navigation_path'></a> navigation_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='url_path' href='#url_path'></a> url_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='service' href='#service'></a> service</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='service_data' href='#service_data'></a> service_data</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='confirmation' href='#confirmation'></a> confirmation</dt><dd><p class='desc'><span class='type'>(<span class='boolean map'>boolean | map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action to take on tap-and-hold</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='action' href='#action'></a> action</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+</span></p><p class='default'>
+Default value: <p><code>more-info</code></p>
+</p></dd><dt><a class='title-link' name='navigation_path' href='#navigation_path'></a> navigation_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='url_path' href='#url_path'></a> url_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='service' href='#service'></a> service</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='service_data' href='#service_data'></a> service_data</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='confirmation' href='#confirmation'></a> confirmation</dt><dd><p class='desc'><span class='type'>(<span class='boolean map'>boolean | map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action to take on double tap</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='action' href='#action'></a> action</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+</span></p><p class='default'>
+Default value: <p><code>more-info</code></p>
+</p></dd><dt><a class='title-link' name='navigation_path' href='#navigation_path'></a> navigation_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='url_path' href='#url_path'></a> url_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='service' href='#service'></a> service</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='service_data' href='#service_data'></a> service_data</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p><p class='default'>
+Default value: <p>none</p>
+</p></dd><dt><a class='title-link' name='confirmation' href='#confirmation'></a> confirmation</dt><dd><p class='desc'><span class='type'>(<span class='boolean map'>boolean | map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl>
+</div>
+<h4>Options For Confirmation</h4>
+<p>If you define confirmation as an object instead of boolean, you can add more customization and configurations:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='text' href='#text'></a> text</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Text to present in the confirmation dialog.</p>
+</span></p></dd><dt><a class='title-link' name='exemptions' href='#exemptions'></a> exemptions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of <code>exemption</code> objects. See below</p>
+</span></p></dd></dl>
+</div>
+<h4>Options For Exemptions</h4>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='user' href='#user'></a> user</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>User id that can see the view tab.</p>
+</span></p></dd></dl>
+</div>
+<h3>Entity Filter Badge</h3>
+<p>This badge allows you to define a list of entities that you want to track only when in a certain state. Very useful for showing lights that you forgot to turn off or show a list of people only when they’re at home.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>entity-filter</p>
+</span></p></dd><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of entity IDs or <code>entity</code> objects, see below.</p>
+</span></p></dd><dt><a class='title-link' name='state_filter' href='#state_filter'></a> state_filter</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of strings representing states or <code>filter</code> objects, see below.</p>
+</span></p></dd></dl>
+</div>
+<h4>Options For Entities</h4>
+<p>If you define entities as objects instead of strings (by adding <code>entity:</code> before entity ID), you can add more customization and configurations:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets a custom badge type: <code>custom:my-custom-badge</code></p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Home Assistant entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites friendly name.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites icon or entity picture.</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The URL of an image.</p>
+</span></p></dd><dt><a class='title-link' name='state_filter' href='#state_filter'></a> state_filter</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of strings representing states or <code>filter</code> objects, see below.</p>
+</span></p></dd></dl>
+</div>
+<h4>Options For state_filter</h4>
+<p>If you define state_filter as objects instead of strings (by adding <code>value:</code> before your state value), you can add more customization to your filter:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='value' href='#value'></a> value</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>String representing the state.</p>
+</span></p></dd><dt><a class='title-link' name='operator' href='#operator'></a> operator</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Operator to use in the comparison. Can be <code>==</code>, <code>&lt;=</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>!=</code> or <code>regex</code>.</p>
+</span></p></dd><dt><a class='title-link' name='attribute' href='#attribute'></a> attribute</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Attribute of the entity to use instead of the state.</p>
+</span></p></dd></dl>
+</div>
+<h4>Examples</h4>
+<p>Show only active switches or lights in the house</p>
+<pre><code class="language-yaml">type: entity-filter
+entities:
+  - entity: light.bed_light
+    name: Bed
+  - light.kitchen_lights
+  - light.ceiling_lights
+state_filter:
+  - &quot;on&quot;
+</code></pre>
+<p>Specify filter for a single entity</p>
+<pre><code class="language-yaml">type: entity-filter
+state_filter:
+  - &quot;on&quot;
+  - operator: &quot;&gt;&quot;
+    value: 90
+entities:
+  - sensor.water_leak
+  - sensor.outside_temp
+  - entity: sensor.humidity_and_temp
+    state_filter:
+      - operator: &quot;&gt;&quot;
+        value: 50
+        attribute: humidity
+</code></pre>
+:ET

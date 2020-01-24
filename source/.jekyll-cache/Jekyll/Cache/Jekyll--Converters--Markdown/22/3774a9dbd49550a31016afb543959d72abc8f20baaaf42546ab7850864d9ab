@@ -1,0 +1,70 @@
+I"�<p>The <code>panasonic_viera</code> platform allows you to control a Panasonic Viera TV.</p>
+<p>Currently known supported models:</p>
+<ul>
+<li>TC-P65VT30</li>
+<li>TX-32AS520E</li>
+<li>TX-32DSX609</li>
+<li>TX-49DX650B</li>
+<li>TX-50DX700B</li>
+<li>TX-55CX700E</li>
+<li>TX-55CX680B</li>
+<li>TX-55EXW584</li>
+<li>TX-65EXW784</li>
+<li>TX-L42ET50</li>
+<li>TX-P42STW50</li>
+<li>TX-P50GT30Y</li>
+<li>TX-P50GT60E</li>
+<li>TH-32ES500</li>
+<li>TX-42AS650</li>
+<li>TX55ASW654</li>
+</ul>
+<p>If your model is not on the list then give it a test, if everything works correctly then add it to the list on <a href="https://github.com/home-assistant/home-assistant.io/blob/current/source/_integrations/panasonic_viera.markdown">GitHub</a>.</p>
+<p>Some Panasonic Viera TVs allow Home Assistant to turn them on, if you specify the MAC address with <code>mac:</code>.</p>
+<p>Note that your TV has to reside in the same network as your Home Assistant instance for this platform to work. If you have multiple network interfaces on your Home Assistant instance, you may need to specify the <code>broadcast_address</code>.</p>
+<p>To add a TV to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: panasonic_viera
+    host: 192.168.0.10
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP of the Panasonic Viera TV, e.g., <code>192.168.0.10</code>.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number of your Panasonic Viera TV.</p>
+</span></p><p class='default'>
+Default value: <p>55000</p>
+</p></dd><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MAC address of your Panasonic Viera TV, e.g., <code>AA:BB:CC:DD:99:1A</code>.</p>
+</span></p></dd><dt><a class='title-link' name='broadcast_address' href='#broadcast_address'></a> broadcast_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The broadcast address on which to send the Wake-On-Lan packet.</p>
+</span></p><p class='default'>
+Default value: <p>255.255.255.255</p>
+</p></dd><dt><a class='title-link' name='app_power' href='#app_power'></a> app_power</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> if your Panasonic Viera TV supports “Turn on via App”.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you would like to give to the Panasonic Viera TV.</p>
+</span></p><p class='default'>
+Default value: <p>Panasonic Viera TV</p>
+</p></dd></dl>
+</div>
+<h3>Example <code>play_media</code> script</h3>
+<p>The <code>play_media</code> function can be used to open web pages and other media types (images, movies) in the TV web browser.</p>
+<pre><code class="language-yaml"># Example play_media script that can be triggered when someone is detected at the door
+#
+script:
+  front_door_camera:
+    alias: &quot;Show who's at the door&quot;
+    sequence:
+      - service: media_player.turn_on
+        data:
+          entity_id: media_player.living_room_tv
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.living_room_tv
+          media_content_type: &quot;url&quot;
+          media_content_id: &quot;http://google.com&quot;
+      - delay:
+        seconds: 5
+      - service: media_player.media_stop
+        data:
+          entity_id: media_player.living_room_tv
+</code></pre>
+:ET

@@ -1,0 +1,551 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Google Hangouts - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Hangouts chatbot support">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/hangouts/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Google Hangouts">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/hangouts/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Hangouts chatbot support">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Google Hangouts">
+    <meta name="twitter:description" content="Hangouts chatbot support">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/hangouts.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Google Hangouts
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>This integration allows you to send messages to <a href="https://hangouts.google.com" rel="external nofollow">Google Hangouts</a> conversations, as well as to react to messages in conversations. Reacting to commands is accomplished by firing an event when one of the configured commands is triggered. Home Assistant will impersonate a Smartisan YQ603 phone which will then show up in your Google devices.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#notifications">Notifications</a></li>
+</ul>
+<h2>
+<a class="title-link" name="setup-the-integration-via-the-frontend" href="#setup-the-integration-via-the-frontend"></a> Setup the integration via the frontend</h2>
+<p>Menu: <em>Configuration</em> -&gt; <em>Integrations</em></p>
+<p>Configure the integration:</p>
+<ul>
+<li>Enter your <strong>Google Mail Address</strong> and <strong>Password</strong>
+</li>
+<li>In the authentication form there is an Optional Field: <strong>Authorization Code</strong> which should only be used if you get an invalid login error with email and password (see note below for details).</li>
+<li>If you secured your account with 2-factor authentication you will be asked for a 2-factor authentication token.</li>
+</ul>
+<h2>
+<a class="title-link" name="manual-authentication" href="#manual-authentication"></a> Manual Authentication</h2>
+<p>If you are sure your email and password are correct, but the integration says the login is invalid then you would need to use the manual authentication method.</p>
+<p>To use the manual method, first you would need to obtain an authorization code (see <a href="#steps-to-obtain-authorization-code">instructions below</a> for details).</p>
+<p>Once the code is obtained fill in the form with your email, password and the authorization code to complete authentication.</p>
+<h3>
+<a class="title-link" name="steps-to-obtain-authorization-code" href="#steps-to-obtain-authorization-code"></a> Steps to obtain Authorization Code:</h3>
+<ol>
+<li>To obtain your authorization code, open <a href="https://accounts.google.com/o/oauth2/programmatic_auth?scope=https%3A%2F%2Fwww.google.com%2Faccounts%2FOAuthLogin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;client_id=936475272427.apps.googleusercontent.com&amp;device_name=hangups" rel="external nofollow">this URL</a> in your browser.</li>
+<li>Log into your Google account normally.</li>
+<li>You should be redirected to a loading screen. Copy the <code>oauth_code</code> cookie value set by this page and paste it here.</li>
+</ol>
+<p>To obtain the <code>oauth_code</code> cookie value using Chrome or Firefox, follow the steps below:</p>
+<ul>
+<li>Press F12 to open developer tools.</li>
+<li>Select the “Application” (Chrome) or “Storage” (Firefox) tab.</li>
+<li>In the sidebar, expand “Cookies” and select <code>https://accounts.google.com</code>
+</li>
+<li>In the cookie list, double click on the value for the <code>oauth_code</code> cookie to select it, and copy the value. This is the authorization code</li>
+</ul>
+<div class="note">
+You can't write messages to yourself or get notifications in a group, if "you" write the message. The best way is to create a new Google Hangouts account for this integration.<br>
+<br>
+If you secured your account with 2-factor authentication: Only verification by app or SMS are supported. There is no support for verification by prompt on your phone.<br>
+<br>
+The manual authentication work-around is a result of unofficial support for using bots in hangouts from Google.
+</div>
+<p>The authentication token will be generated and stored internally.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+hangouts:
+  intents:
+    HangoutsHelp:
+      sentences:
+        - Help
+    LivingRoomTemperature:
+      sentences:
+        - What is the temperature in the living room
+      conversations:
+        - id: CONVERSATION_ID1
+        - id: CONVERSATION_ID2
+  default_conversations:
+    - id: CONVERSATION_ID1
+  error_suppressed_conversations:
+    - id: CONVERSATION_ID2
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="intents" href="#intents"></a> intents</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Intents that the hangouts integration should understand.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>empty</p>
+</dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="intent-name" href="#intent-name"></a> `<intent name>`</intent>
+</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Single intent entry.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="sentences" href="#sentences"></a> sentences</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Sentences that should trigger this intent.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="conversations" href="#conversations"></a> conversations</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of conversations that triggers this intent. If no conversation are given, every conversations triggers the intent.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>empty</p>
+</dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="id" href="#id"></a> id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Specifies the id of the conversation. <em>The conversation id can be obtained from the <code>hangouts.conversations</code> entity.</em></p>
+</span></p></dd>
+</dl></dd>
+</dl></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="default_conversations" href="#default_conversations"></a> default_conversations</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of conversations that are used for intents if no <code>conversations</code> entry for an intent is given.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>empty</p>
+</dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="id" href="#id"></a> id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Specifies the id of the conversation. <em>The conversation id can be obtained from the <code>hangouts.conversations</code> entity.</em></p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="error_suppressed_conversations" href="#error_suppressed_conversations"></a> error_suppressed_conversations</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of conversations that won’t get a message if the intent is not known.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>empty</p>
+</dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="id" href="#id"></a> id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Specifies the id of the conversation. <em>The conversation id can be obtained from the <code>hangouts.conversations</code> entity.</em></p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<p>The conversations has to be precreated, the conversation id can be obtained from the <code>hangouts.conversations</code> entity. Make sure to use quotes around the conversation id or alias to escape special characters (<code>!</code>, and <code>#</code>) in YAML.</p>
+<p>The intent <code>HangoutsHelp</code> is part of the integration and return a list of all sentences the integration unterstand in this conversation.</p>
+<h2>
+<a class="title-link" name="adding-sentences" href="#adding-sentences"></a> Adding sentences</h2>
+<pre><code class="language-yaml"># The Hangouts component
+hangouts:
+  intents:
+    HassLightSet:
+      sentences:
+        - Toggle {name}.
+      conversations:
+        - id: CONVERSATION_ID1
+    Ping:
+      sentences:
+        - How many Conversation do you know
+  error_suppressed_conversations:
+    - id: CONVERSATION_ID2
+
+intent_script:
+  Ping:
+    speech:
+      text: I know {{ states('hangouts.conversations') }} conversations
+</code></pre>
+<p>This configuration will:</p>
+<ul>
+<li>Toggle the light in the given location in a specific conversation.</li>
+<li>Return the conversations the bot know.</li>
+</ul>
+<h2>
+<a class="title-link" name="adding-advanced-custom-sentences" href="#adding-advanced-custom-sentences"></a> Adding advanced custom sentences</h2>
+<p>Sentences can contain slots (marked with curly braces: <code>{name}</code>) and optional words (marked with square brackets: <code>[the]</code>). The values of slots will be passed on to the intent and are available inside the templates.</p>
+<p>The following configuration can handle the following sentences:</p>
+<ul>
+<li>Change the lights to red</li>
+<li>Change the lights to green</li>
+<li>Change the lights to blue</li>
+<li>Change the lights to the color red</li>
+<li>Change the lights to the color green</li>
+<li>Change the lights to the color blue</li>
+</ul>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+hangouts:
+  intents:
+    ColorLight:
+      sentences:
+        - Change the lights to [the color] {color}
+
+intent_script:
+  ColorLight:
+    speech:
+      text: Changed the lights to {{ color }}.
+    action:
+      service: light.turn_on
+      data_template:
+        rgb_color:
+          - "{% if color == 'red' %}255{% else %}0{% endif %}"
+          - "{% if color == 'green' %}255{% else %}0{% endif %}"
+          - "{% if color == 'blue' %}255{% else %}0{% endif %}"
+</code></pre>
+<h2>
+<a class="title-link" name="services" href="#services"></a> Services</h2>
+<h3>
+<a class="title-link" name="service-hangoutsupdate" href="#service-hangoutsupdate"></a> Service hangouts.update</h3>
+<p>Updates the list of conversations.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-hangoutssend_message" href="#service-hangoutssend_message"></a> Service hangouts.send_message</h3>
+<p>Sends a message to the given conversations.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>List of targets with id or name. [Required]</td>
+<td>[{“id”: “UgxrXzVrARmjx_C6AZx4AaABAagBo-6UCw”}, {“name”: “Test Conversation”}]</td>
+</tr>
+<tr>
+<td>message</td>
+<td>List of message segments, only the “text” field is required in every segment. [Required]</td>
+<td>[{“text”:“test”, “is_bold”: false, “is_italic”: false, “is_strikethrough”: false, “is_underline”: false, “parse_str”: false, “link_target”: “http://google.com”}, …]</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Extra options</td>
+<td>{“image_file”: “path”} / {“image_url”: “url”}</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="service-hangoutsreconnect" href="#service-hangoutsreconnect"></a> Service hangouts.reconnect</h3>
+<p>Reconnects the hangouts bot.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="advanced" href="#advanced"></a> Advanced</h2>
+<h3>
+<a class="title-link" name="automatic-reconnect-after-ip-change" href="#automatic-reconnect-after-ip-change"></a> Automatic reconnect after IP change</h3>
+<p>The hangouts integration can’t detect if your IP address changes, so it can’t automatic reconnect to the Google servers. This is a workaround for this problem.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: rest
+    resource: https://api.ipify.org/?format=json
+    name: External IP
+    value_template: '{{ value_json.ip }}'
+    scan_interval: 10
+
+automation:
+  - alias: Reconnect Hangouts
+    trigger:
+      - entity_id: sensor.external_ip
+        platform: state
+    condition:
+      - condition: template
+        value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
+      - condition: template
+        value_template: '{{ not is_state("sensor.external_ip", "unavailable") }}'
+    action:
+      - service: hangouts.reconnect
+</code></pre>
+<h2>
+<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
+<p>The <code>hangouts</code> platform allows you to deliver notifications from Home Assistant to <a href="https://hangouts.google.com/" rel="external nofollow">Google Hangouts</a> conversations. Conversations can be both direct as well as group chats.</p>
+<p>To enable Hangouts notifications in your installation, you first need to configure the Hangouts component. Then, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry  
+notify:
+  - name: NOTIFIER_NAME
+    platform: hangouts
+    default_conversations:
+      - id: CONVERSATION_ID1
+      - id: CONVERSATION_ID2
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The default value is <code>notify</code>. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="default_conversations" href="#default_conversations"></a> default_conversations</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>The conversations all messages will be sent to, when no other target is given.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="id" href="#id"></a> id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Specifies the id of the conversation. <em>The conversation id can be obtained from the <code>hangouts.conversations</code> entity.</em></p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="finding-the-conversation-id" href="#finding-the-conversation-id"></a> Finding the conversation ID</h3>
+<p>The conversations has to be precreated, the conversation id can be obtained from the <code>hangouts.conversations</code> entity, this can be found in with the states developer tool that is shown as this icon <img src="/images/screenshots/developer-tool-states-icon.png" class="no-shadow" height="38"> in the side bar. Using your web browsers search tool to find the <code>hangouts.conversations</code> entity. You will find something like below.</p>
+<pre><code class="language-json">0: {
+  "id": "&lt;Hangout ID&gt;",
+  "name": "A simple hangout",
+  "users": [
+    "Steve",
+    "Jo"
+  ]
+}
+</code></pre>
+<p>This may have more if the account is in multiple hangout conversations, for configuring the bot to be in a conversation you will need the ID that would be where <code>&lt;Hangout ID&gt;</code> is in that example. Make sure to use quotes around the conversation id or alias to escape special characters (<code>!</code>, and <code>#</code>) in YAML.</p>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/hangouts.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/hangouts.png' /></div><div class="section">
+    <kb-alert-link integration="hangouts"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.77
+    </div><div class='section'>
+      This integration is configurable via UI
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/hangouts/'>/components/hangouts/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#hub'>Hub</a>
+      </li><li>
+        <a href='/integrations/#notifications'>Notifications</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

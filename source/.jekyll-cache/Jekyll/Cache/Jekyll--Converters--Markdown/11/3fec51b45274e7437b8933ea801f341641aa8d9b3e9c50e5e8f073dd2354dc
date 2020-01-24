@@ -1,0 +1,22 @@
+I"<p>You can verify that your automation rules are being initialized correctly by watching both the realtime logs (<code>homeassistant.log</code> in the configuration directory) and also the <a href="/integrations/logbook/">Logbook</a>. The realtime logs will show the rules being initialized (once for each trigger), example:</p>
+<pre><code class="language-text">INFO [homeassistant.components.automation] Initialized rule Rainy Day
+INFO [homeassistant.components.automation] Initialized rule Rainy Day
+INFO [homeassistant.components.automation] Initialized rule Rainy Day
+INFO [homeassistant.components.automation] Initialized rule Rain is over
+</code></pre>
+<p>The Logbook integration will show a line entry when an automation is triggered. You can look at the previous entry to determine which trigger in the rule triggered the event.</p>
+<p><img src="/images/integrations/automation/logbook.png" alt="Logbook example" /></p>
+<h3>Testing your automation</h3>
+<p>It is generally a difficult task to test an automation, especially if it includes several triggers and some conditions.</p>
+<p>Please note that if you click on <strong>Trigger</strong> of an automation in the frontend, <strong>only the <code>action</code> part will be executed</strong> by Home Assistant. That means you <strong>can’t</strong> test your trigger or condition part that way. It also means that if your automation uses some data from triggers, it won’t work properly as well just because <code>trigger</code> is not defined in this scenario.</p>
+<p>All this makes that Trigger feature pretty limited and nearly useless for debugging purposes so you need to find another way.
+Make sure you check and adapt to your circumstances appropriate examples from Automation Trigger, Conditions and Actions.</p>
+<p>It is also useful to go to <strong>Configuration</strong> -&gt; <strong>Server Control</strong> and click on <strong>Check Config</strong> button in Configuration validation section to make sure there are no syntax errors before restarting Home Assistant. In order for <strong>Check Config</strong> to be visible, you must enable <strong>Advanced Mode</strong> on your user profile.</p>
+<p>If your automation uses templates in any part, you can do the following to make sure it works as expected:</p>
+<ol>
+<li>Go to <strong>Developer tools</strong> -&gt; <strong>Template</strong> tab.</li>
+<li>Create all variables (sources) required for your template as described at the end of <a href="https://www.home-assistant.io/docs/configuration/templating/#processing-incoming-data">this</a> paragraph.</li>
+<li>Copy your template code and paste it in Template editor straight after your variables.</li>
+<li>If necessary, change your sources’ value and check if the template works as you want and does not generate any errors.</li>
+</ol>
+:ET

@@ -1,0 +1,84 @@
+I"2<p>The <code>dialogflow</code> integration is designed to be used with the <a href="https://dialogflow.com/docs/fulfillment#webhook">webhook</a> integration of <a href="https://dialogflow.com/">Dialogflow</a>. When a conversation ends with a user, Dialogflow sends an action and parameters to the webhook.</p>
+<p>To be able to receive messages from DialogFlow, your Home Assistant instance needs to be accessible from the web (<a href="/addons/duckdns/">Hass.io instructions</a>) and you need to have the <code>base_url</code> configured for the HTTP integration (<a href="/integrations/http/#base_url">docs</a>). Dialogflow will return fallback answers if your server does not answer or takes too long (more than 5 seconds).</p>
+<p>Dialogflow could be <a href="https://dialogflow.com/docs/integrations/">integrated</a> with many popular messaging, virtual assistant and IoT platforms.</p>
+<p>Using Dialogflow will be easy to create conversations like:</p>
+<p><em>User: What is the temperature at home?</em></p>
+<p><em>Bot: The temperature is 34 degrees</em></p>
+<p><em>User: Turn on the light</em></p>
+<p><em>Bot: In which room?</em></p>
+<p><em>User: In the kitchen</em></p>
+<p><em>Bot: Turning on kitchen light</em></p>
+<p>To use this integration, you should define a conversation (intent) in Dialogflow, configure Home Assistant with the speech to return and, optionally, the action to execute.</p>
+<h3>Configuring your Dialogflow account</h3>
+<p>To get the webhook URL, go to the integrations page in the configuration screen and find “Dialogflow”. Click on “configure”. Follow the instructions on the screen.</p>
+<ul>
+<li><a href="https://console.dialogflow.com/">Login</a> with your Google account</li>
+<li>Click on “Create Agent”</li>
+<li>Select name, language (if you are planning to use Google Actions check their <a href="https://support.google.com/assistant/answer/7108196?hl=en">supported languages</a>) and time zone</li>
+<li>Click “Save”</li>
+<li>Now go to “Fulfillment” (in the left menu)</li>
+<li>Enable Webhook and set your Dialogflow webhook url as the endpoint, e.g., <code>https://myhome.duckdns.org/api/webhook/800b4cb4d27d078a8871656a90854a292651b20635685f8ea23ddb7a09e8b417</code></li>
+<li>Click “Save”</li>
+<li>Create a new intent</li>
+<li>Below “User says” write one phrase that you, the user, will tell Dialogflow, e.g., <code>What is the temperature at home?</code></li>
+<li>In “Action” set some key (this will be the bind with Home Assistant configuration), e.g.,: GetTemperature</li>
+<li>In “Response” set “Cannot connect to Home Assistant or it is taking to long” (fall back response)</li>
+<li>At the end of the page, click on “Fulfillment” and check “Use webhook”</li>
+<li>Click “Save”</li>
+<li>On the top right, where is written “Try it now…”, write, or say, the phrase you have previously defined and hit enter</li>
+<li>Dialogflow has send a request to your Home Assistant server</li>
+</ul>
+<div class='note warning'>
+<p>The V1 api will be deprecated on October 23, 2019. If you are still using the V1 API, it is recommended to change your settings in Dialogflow to use the V2 API. No changes to your intents yaml configuration need to take place after upgrading to the V2 API. Change to the V2 API by clicking on the cog button <a href="https://console.dialogflow.com/">here</a> and then select the V2 API.</p>
+</div>
+<p>Take a look to “Integrations”, in the left menu, to configure third parties.</p>
+<h3>Configuring Home Assistant</h3>
+<p>When activated, the <a href="/integrations/alexa/"><code>alexa</code> integration</a> will have Home Assistant’s native intent support handle the incoming intents. If you want to run actions based on intents, use the <a href="/integrations/intent_script"><code>intent_script</code></a> integration.</p>
+<h2>Examples</h2>
+<p>Download <a href="https://github.com/home-assistant/home-assistant.io/blob/next/source/assets/HomeAssistant_APIAI.zip">this zip</a> and load it in your Dialogflow agent (<strong>Settings</strong> -&gt; <strong>Export and Import</strong>) for examples intents to use with this configuration:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+dialogflow:
+
+intent_script:
+  Temperature:
+    speech:
+      text: The temperature at home is {{ states('sensor.home_temp') }} degrees
+  LocateIntent:
+    speech:
+      text: &gt;
+        {%- for state in states.device_tracker -%}
+          {%- if state.name.lower() == User.lower() -%}
+            {{ state.name }} is at {{ state.state }}
+          {%- elif loop.last -%}
+            I am sorry, I do not know where {{ User }} is.
+          {%- endif -%}
+        {%- else -%}
+          Sorry, I don't have any trackers registered.
+        {%- endfor -%}
+  WhereAreWeIntent:
+    speech:
+      text: &gt;
+        {%- if is_state('device_tracker.adri', 'home') and
+               is_state('device_tracker.bea', 'home') -%}
+          You are both home, you silly
+        {%- else -%}
+          Bea is at {{ states(&quot;device_tracker.bea&quot;) }}
+          and Adri is at {{ states(&quot;device_tracker.adri&quot;) }}
+        {% endif %}
+  TurnLights:
+    speech:
+      text: Turning {{ Room }} lights {{ OnOff }}
+    action:
+      - service: notify.pushbullet
+        data_template:
+          message: Someone asked via apiai to turn {{ Room }} lights {{ OnOff }}
+      - service_template: &gt;
+          {%- if OnOff == &quot;on&quot; -%}
+            switch.turn_on
+          {%- else -%}
+            switch.turn_off
+          {%- endif -%}
+        data_template:
+          entity_id: &quot;switch.light_{{ Room | replace(' ', '_') }}&quot;
+</code></pre>
+:ET

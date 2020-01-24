@@ -1,0 +1,51 @@
+I"<p>In Home Assistant 0.102 we introduced the first version of our scene editor. If you just created a new configuration with Home Assistant, then you’re all set! Go to the UI and enjoy.</p>
+<p>From the UI choose <strong>Configuration</strong> which is located in the sidebar, then click on <strong>Scenes</strong> to go to the scene editor. Press the <strong>+</strong> sign in the lower right corner to get started.</p>
+<p>Choose a meaningful name for your scene.</p>
+<p class='img'>
+  <img src='/images/docs/scenes/editor.png' />
+</p>
+<p>Select all the devices (and/or entities when in advanced mode) you want to include in your scene.
+The state of your devices will be saved, so it can be restored when you are finished creating your scene.
+Set the state of the devices to how you want them to be in your scene, this can be done by clicking on it and edit the state from the popup, or any other method that changes the state.
+On the moment you save the scene, all the states of your devices are stored in the scene.
+When you leave the editor the states of the devices are restored to the state from before you started editing.</p>
+<h2>Updating your configuration to use the editor</h2>
+<p>First, check that you have activated the configuration editor.</p>
+<pre><code class="language-yaml"># Activate the configuration editor
+config:
+</code></pre>
+<p>The scene editor reads and writes to the file <code>scenes.yaml</code> in the root of your <a href="/docs/configuration/">configuration</a> folder.
+Currently, both the name of this file and its location are fixed.
+Make sure that you have set up the scene integration to read from it:</p>
+<pre><code class="language-yaml"># Configuration.yaml example
+scene: !include scenes.yaml
+</code></pre>
+<p>If you still want to use your old scene section, add a label to the old entry:</p>
+<pre><code class="language-yaml">scene old:
+  - name: ...
+</code></pre>
+<p>You can use the <code>scene:</code> and <code>scene old:</code> sections at the same time:</p>
+<ul>
+<li><code>scene old:</code> to keep your manual designed scenes</li>
+<li><code>scene:</code> to save the scene created by the online editor</li>
+</ul>
+<pre><code class="language-yaml">scene: !include scenes.yaml
+scene old: !include_dir_merge_list scenes
+</code></pre>
+<h2>Migrating your scenes to <code>scenes.yaml</code></h2>
+<p>If you want to migrate your old scenes to use the editor, you’ll have to copy them to <code>scenes.yaml</code>. Make sure that <code>scenes.yaml</code> remains a list! For each scene that you copy over, you’ll have to add an <code>id</code>. This can be any string as long as it’s unique.</p>
+<p>For example:</p>
+<pre><code class="language-yaml"># Example scenes.yaml entry
+- id: my_unique_id # &lt;-- Required for editor to work.
+  name: Romantic
+  entities:
+    light.tv_back_light: on
+    light.ceiling:
+      state: on
+      xy_color: [0.33, 0.66]
+      brightness: 200
+</code></pre>
+<div class='note'>
+Any comments in the YAML file will be lost and templates will be reformatted when you update a scene via the editor.
+</div>
+:ET

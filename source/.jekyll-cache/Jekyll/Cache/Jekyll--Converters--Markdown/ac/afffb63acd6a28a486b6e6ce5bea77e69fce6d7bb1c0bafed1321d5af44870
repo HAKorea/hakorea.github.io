@@ -1,0 +1,66 @@
+I"¤<p>The <code>nx584</code> platform provides integration with GE, Caddx, Interlogix (and other brands) alarm panels that support the NX584 interface module (or have it built in). Supported panels include NX4/6/8/8E. Actual integration is done through <a href="https://github.com/kk7ds/pynx584">pynx584</a> which is required for this to work.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+alarm_control_panel:
+  - platform: nx584
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The host where the nx584 server process is running.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This parameter allows you to override the name.</p>
+</span></p><p class='default'>
+Default value: <p>NX584</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port where the Alarm panel is listening.</p>
+</span></p><p class='default'>
+Default value: <p>5007</p>
+</p></dd></dl>
+</div>
+<h2>Binary Sensor</h2>
+<p>Enabling this binary sensor platform exposes all of your zones as binary sensors, which provides visibility through the UI as well as the ability to trigger automation actions instantly when something happens like a door opening, or a motion sensor trigger.</p>
+<p>To enable this feature, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  platform: nx584
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This is the host where the nx584 server process is running. If unset, it is assumed to be <code>localhost</code>, which will work if the server process is running on the same system as Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port where the server process is running.</p>
+</span></p><p class='default'>
+Default value: <p>5007</p>
+</p></dd><dt><a class='title-link' name='exclude_zones' href='#exclude_zones'></a> exclude_zones</dt><dd><p class='desc'><span class='type'>(<span class='list integer'>list | integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This is a list of zone numbers that should be excluded. Use this to avoid exposing a zone that is of no interest, unconnected, etc.</p>
+</span></p></dd><dt><a class='title-link' name='zone_types' href='#zone_types'></a> zone_types</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This is a list of zone numbers mapped to zone types. Use this to designate zones as doors, motion sensors, smoke detectors, etc. See the list of available zone types relevant to alarm zones below.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='opening' href='#opening'></a> opening</dt><dd><p class='desc'><span class='description'><p>Opening</p>
+</span></p></dd><dt><a class='title-link' name='motion' href='#motion'></a> motion</dt><dd><p class='desc'><span class='description'><p>Motion</p>
+</span></p></dd><dt><a class='title-link' name='gas' href='#gas'></a> gas</dt><dd><p class='desc'><span class='description'><p>Gas</p>
+</span></p></dd><dt><a class='title-link' name='smoke' href='#smoke'></a> smoke</dt><dd><p class='desc'><span class='description'><p>Smoke</p>
+</span></p></dd><dt><a class='title-link' name='moisture' href='#moisture'></a> moisture</dt><dd><p class='desc'><span class='description'><p>Moisture</p>
+</span></p></dd><dt><a class='title-link' name='safety' href='#safety'></a> safety</dt><dd><p class='desc'><span class='description'><p>Safety</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Full example</h2>
+<p>An extended configuration entry could look like this:</p>
+<pre><code class="language-yaml"># Full example configuration.yaml entry
+binary_sensor:
+  platform: nx584
+  host: 192.168.1.10
+  port: 5007
+  exclude_zones:
+    - 3
+    - 5
+  zone_types:
+    1: opening
+    2: opening
+    4: motion
+    6: moisture
+</code></pre>
+:ET

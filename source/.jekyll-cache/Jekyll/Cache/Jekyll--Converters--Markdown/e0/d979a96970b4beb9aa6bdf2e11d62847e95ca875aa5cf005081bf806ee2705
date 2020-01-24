@@ -1,0 +1,116 @@
+I"»<p>The <code>vultr</code> integration allows you to access information about and interact with your <a href="https://www.vultr.com">Vultr</a> subscriptions (Virtual Private Servers) from Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>Obtain your API key from your <a href="https://my.vultr.com/settings/#settingsapi">Vultr Account</a>.</p>
+<div class='note'>
+Ensure you allow the public IP of Home Assistant under the Access Control heading.
+</div>
+<p>To integrate your Vultr subscriptions with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vultr:
+  api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Vultr API key.</p>
+</span></p></dd></dl>
+</div>
+<h2>Binary sensor</h2>
+<p>The <code>vultr</code> binary sensor platform allows you to monitor your <a href="https://www.vultr.com/">Vultr</a> subscription to see if it is powered on or not.</p>
+<h3>Configuration</h3>
+<p>To use this binary sensor, you first have to set up your Vultr hub.</p>
+<div class='note'>
+<p>The following examples assume a subscription that has an ID of <code>123456</code> and a label of <code>Web Server</code></p>
+</div>
+<p>Minimal <code>configuration.yaml</code> (produces <code>binary_sensor.vultr_web_server</code>):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: vultr
+    subscription: 123456
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='subscription' href='#subscription'></a> subscription</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The subscription you want to monitor, this can be found in the URL when viewing a server.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you want to give this binary sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Vultr {subscription label}</p>
+</p></dd></dl>
+</div>
+<h3>Full example</h3>
+<p>Full <code>configuration.yaml</code> (produces <code>binary_sensor.totally_awesome_server</code>):</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: vultr
+    name: totally_awesome_server
+    subscription: 12345
+</code></pre>
+<h2>Sensor</h2>
+<p>The <code>vultr</code> sensor platform will allow you to view current bandwidth usage and pending charges against your <a href="https://www.vultr.com/">Vultr</a> subscription.</p>
+<p>To use this sensor, you must set up your Vultr hub.</p>
+<div class='note'>
+<p>The following examples assume a subscription that has an ID of <code>123456</code> and a label of <code>Web Server</code></p>
+</div>
+<p>Minimal <code>configuration.yaml</code> (produces <code>sensor.vultr_web_server_current_bandwidth_used</code> and <code>sensor.vultr_web_server_pending_charges</code>):</p>
+<pre><code class="language-yaml">sensor:
+  - platform: vultr
+    subscription: 123456
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='subscription' href='#subscription'></a> subscription</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Vultr subscription to monitor, this can be found in the URL when viewing a subscription.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to give this sensor.</p>
+</span></p><p class='default'>
+Default value: <p>Vultr {Vultr subscription label} {monitored condition name}</p>
+</p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of items you want to monitor for each subscription.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='current_bandwidth_used' href='#current_bandwidth_used'></a> current_bandwidth_used</dt><dd><p class='desc'><span class='description'><p>The current (invoice period) bandwidth usage in Gigabytes (GB).</p>
+</span></p></dd><dt><a class='title-link' name='pending_charges' href='#pending_charges'></a> pending_charges</dt><dd><p class='desc'><span class='description'><p>The current (invoice period) charges that have built up for this subscription. Value is in US Dollars (US$).</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>Full <code>configuration.yaml</code> using <code>{}</code> to format condition name (produces <code>sensor.server_current_bandwidth_used</code> and <code>sensor.server_pending_charges</code>):</p>
+<pre><code class="language-yaml">sensor:
+  - platform: vultr
+    name: Server {}
+    subscription: 123456
+    monitored_conditions:
+      - current_bandwidth_used
+      - pending_charges
+</code></pre>
+<p>Custom <code>configuration.yaml</code> with only one condition monitored (produces <code>sensor.web_server_bandwidth</code>):</p>
+<pre><code class="language-yaml">sensor:
+  - platform: vultr
+    name: Web Server Bandwidth
+    subscription: 123456
+    monitored_conditions:
+      - current_bandwidth_used
+</code></pre>
+<h2>Switch</h2>
+<p>The <code>vultr</code> switch platform allows you to control (start/stop) your <a href="https://www.vultr.com/">Vultr</a> subscription.</p>
+<p>To control your Vultr subscription, you first have to set up your Vultr hub.</p>
+<h3>Configuration</h3>
+<p>Minimal <code>configuration.yaml</code> (produces <code>switch.vultr_web_server</code>):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: vultr
+    subscription: YOUR_SUBSCRIPTION_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='subscription' href='#subscription'></a> subscription</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of droplets you want to control.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you want to give this switch.</p>
+</span></p><p class='default'>
+Default value: <p>Vultr {subscription label}</p>
+</p></dd></dl>
+</div>
+<h3>Additional Examples</h3>
+<p>Full example that produces <code>switch.amazing_server</code>, assuming a subscription that has an ID of <code>123456</code> and a label of <code>Web Server</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: vultr
+    name: Amazing Server
+    subscription: 123456
+</code></pre>
+:ET

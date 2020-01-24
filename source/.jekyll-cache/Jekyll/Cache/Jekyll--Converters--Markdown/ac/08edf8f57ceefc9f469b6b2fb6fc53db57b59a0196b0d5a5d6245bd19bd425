@@ -1,0 +1,108 @@
+I"Y<p>The <code>nilu</code> air quality platform shows measurements of current air quality from NILU (Norsk Institutt for luftforskning/Norwegian Institute for Air Research) sensor stations within Norway. Makes data from the open API at <a href="http://luftkvalitet.info/">luftkvalitet.info</a> and <a href="https://nilu.no/">nilu.no</a> available in Home Assistant.</p>
+<h2>Configuration</h2>
+<p>To enable this platform, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+air_quality:
+  - platform: nilu
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Manually specify latitude. By default, the value will be taken from the Home Assistant configuration.</p>
+</span></p><p class='default'>
+Default value: <p>Provided by Home Assistant configuration.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Manually specify longitude. By default, the value will be taken from the Home Assistant configuration.</p>
+</span></p><p class='default'>
+Default value: <p>Provided by Home Assistant configuration.</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the sensor to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>NILU</p>
+</p></dd><dt><a class='title-link' name='area' href='#area'></a> area</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>Name of an area to get sensor stations from. See available areas below.</p>
+</span></p></dd><dt><a class='title-link' name='stations' href='#stations'></a> stations</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>Name of a specific station to get measurements from.</p>
+</span></p></dd><dt><a class='title-link' name='show_on_map' href='#show_on_map'></a> show_on_map</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Option to show the position of the sensor station on the map.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<h2>Health risk index explainations</h2>
+<p>Under the attributes from a NILU station, there will be a <code>nilu pollution index</code>. This indicates how polluted the air is in the area around the sensor station. Following is a longer explanation of what the indexes mean.</p>
+<h3>Low</h3>
+<p>Low or no health risk linked to measured air pollution. Outdoor activities are recommended.</p>
+<h3>Moderate</h3>
+<p>Health effects may occur in some asthmatics and people with other respiratory diseases, as well as serious cardiovascular diseases. Outdoor activity can be recommended for the vast majority, but some should consider their activity in areas with high traffic or high emissions.</p>
+<h3>High</h3>
+<p>Health effects may occur in asthmatics and people with other respiratory diseases, as well as serious cardiovascular disease. Children with respiratory distress (asthma, bronchitis) and adults with severe cardiac or respiratory distress should reduce outdoor activity and not stay in the most polluted areas.</p>
+<h3>Extremely high</h3>
+<p>Sensitive groups in the population can have health effects. Respiratory irritation and discomfort may occur in healthy subjects. People with heart or respiratory distress should reduce outdoor activity and not stay in the most polluted areas.</p>
+<p>Source: <a href="http://www.luftkvalitet.info/home/Varslingsklasser.aspx">Explainations in Norwegian</a></p>
+<h2>Available areas</h2>
+<p>The <code>area</code> configuration is restricted to the areas NILU has defined. Here is the list of available areas:</p>
+<ul>
+<li><code>Bergen</code></li>
+<li><code>Birkenes</code></li>
+<li><code>Bodø</code></li>
+<li><code>Brumunddal</code></li>
+<li><code>Bærum</code></li>
+<li><code>Drammen</code></li>
+<li><code>Elverum</code></li>
+<li><code>Fredrikstad</code></li>
+<li><code>Gjøvik</code></li>
+<li><code>Grenland</code></li>
+<li><code>Halden</code></li>
+<li><code>Hamar</code></li>
+<li><code>Harstad</code></li>
+<li><code>Hurdal</code></li>
+<li><code>Karasjok</code></li>
+<li><code>Kristiansand</code></li>
+<li><code>Kårvatn</code></li>
+<li><code>Lillehammer</code></li>
+<li><code>Lillesand</code></li>
+<li><code>Lillestrøm</code></li>
+<li><code>Lørenskog</code></li>
+<li><code>Mo i Rana</code></li>
+<li><code>Moss</code></li>
+<li><code>Narvik</code></li>
+<li><code>Oslo</code></li>
+<li><code>Prestebakke</code></li>
+<li><code>Sandve</code></li>
+<li><code>Sarpsborg</code></li>
+<li><code>Stavanger</code></li>
+<li><code>Sør-Varanger</code></li>
+<li><code>Tromsø</code></li>
+<li><code>Trondheim</code></li>
+<li><code>Tustervatn</code></li>
+<li><code>Zeppelinfjellet</code></li>
+<li><code>Ålesund</code></li>
+</ul>
+<h2>Configuration examples</h2>
+<p>Example of adding health risk monitoring from sensor stations around the Home Assistant location.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+# Adds all sensor stations within 20km.
+air_quality:
+  - platform: nilu
+</code></pre>
+<p>Example where the sensors are also added to the map.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+# Adds all sensor stations within 20km.
+# Additionally adds the sensors to the map.
+air_quality:
+  - platform: nilu
+    show_on_map: True
+</code></pre>
+<p>Example of a specific station.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+# Monitors stations 'Alnabru'
+air_quality:
+  - platform: nilu
+    stations:
+      - Alnabru
+</code></pre>
+<p>Example of getting stations from a specified area, giving the sensors a custom name.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+# Stations from specific area, 'Bergen'
+# Custom name for the sensors.
+air_quality:
+  - platform: nilu
+    area: Bergen
+    name: Forurensing Bergen
+</code></pre>
+:ET

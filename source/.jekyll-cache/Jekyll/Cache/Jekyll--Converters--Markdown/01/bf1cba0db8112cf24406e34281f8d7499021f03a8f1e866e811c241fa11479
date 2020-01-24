@@ -1,0 +1,27 @@
+I"<h4>Change Hue light on interval to random color based on state of an input boolean</h4>
+<p><em>Note, Philips Hue is currently the only light platform that support the random effect.</em></p>
+<pre><code class="language-yaml">input_boolean:
+  loop_livingcolors:
+    name: Loop LivingColors
+    initial: off
+    icon: mdi:spotlight
+
+automation:
+# Changes Hue light every two minutes to random color if input boolean is set to on
+- alias: 'Set LivingColors to random color'
+  trigger:
+    platform: time_pattern
+    minutes: '/2'
+  condition:
+    condition: state
+    entity_id: input_boolean.loop_livingcolors
+    state: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.woonkamer_livingcolors
+    data:
+      effect: random
+      transition: 5
+      brightness: 255
+</code></pre>
+:ET

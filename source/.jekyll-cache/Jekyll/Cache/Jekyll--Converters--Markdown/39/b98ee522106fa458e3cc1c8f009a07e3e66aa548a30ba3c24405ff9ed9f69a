@@ -1,0 +1,64 @@
+I"<p>The <code>toon</code> integration platform can be used to control your Toon thermostat. This integration adds a climate device for your Toon thermostat, sensors for power and gas consumption, sensors for solar production and several binary sensors for things like boiler burner on/off, hot tap water and boiler health status.</p>
+<p>For the <code>toon</code> integration to work, you’ll need an active Toon subscription with Eneco and a Toon API developer account.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li><a href="#climate">Climate</a></li>
+<li>Sensor</li>
+</ul>
+<h2>Setting up a developer account</h2>
+<p>In order to be able to use this component, you’ll need to sign up for a free Toon API developer account.</p>
+<ol>
+<li>Visit the <a href="https://developer.toon.eu/">Toon API developers website</a>, and <a href="https://developer.toon.eu/user/login">sign in</a>. <a href="https://developer.toon.eu/user/register">Create an account</a> if you don’t have one already.</li>
+<li>Open the “<a href="https://developer.toon.eu/user/me/apps">My Apps</a>” page and click on “Add a new App” button on the top right.</li>
+<li>The “Add App” page shows a form with two fields:
+<ul>
+<li><strong>App Name</strong>: Can be anything you like, for example, “Home Assistant” will just do.</li>
+<li><strong>Callback URL</strong>: Fill in <code>localhost</code> in this field.</li>
+</ul>
+</li>
+<li>Click on “Create App” to complete the creation process.</li>
+<li>Open the “<a href="https://developer.toon.eu/user/me/apps">My Apps</a>” page again and click on the app that you’ve just created.</li>
+<li>You need the codes now shown: “Consumer Key” and “Consumer Secret”.</li>
+<li>Add the Toon integration to your <code>configuration.yaml</code> and restart Home Assistant. Then, go to <code>Configuration &gt; Integrations</code> and select <code>CONFIGURE</code> next to Toon and follow the setup instructions.</li>
+</ol>
+<h2>Configuration</h2>
+<p>To use your Toon in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+toon:
+  client_id: YOUR_CONSUMER_KEY
+  client_secret: YOUR_CONSUMER_SECRET
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Toon API Consumer Key.</p>
+</span></p></dd><dt><a class='title-link' name='client_secret' href='#client_secret'></a> client_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Toon API Consumer Secret.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The rate in seconds at which Toon should be polled for new data.</p>
+</span></p><p class='default'>
+Default value: <p>300</p>
+</p></dd></dl>
+</div>
+<h2>Climate</h2>
+<p>The <code>toon</code> climate platform allows you to interact with your Toon thermostat.</p>
+<p>Home Assistant support the four Toon presets: <code>Comfort</code>, <code>Home</code>, <code>Away</code> and <code>Sleep</code>.
+It also supports setting the temperature manually.</p>
+<h2>Services</h2>
+<h3>Service <code>update</code></h3>
+<p>Updates ententies from Toon with fresh queried data.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>display</code></td>
+<td>Yes</td>
+<td>The display you wish to fetch updates from.</td>
+</tr>
+</tbody>
+</table>
+:ET

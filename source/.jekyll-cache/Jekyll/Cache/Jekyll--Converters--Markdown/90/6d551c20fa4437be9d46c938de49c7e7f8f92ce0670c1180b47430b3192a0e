@@ -1,0 +1,72 @@
+I"[<p>The <code>raspyrfm</code> integration adds support for cheap RC 433 MHz outlets via one of the supported gateways.</p>
+<p>Initially, this integration was created to support the Simple Solutions <code>ConnAir</code> gateway which has been discontinued. There are custom alternatives that reimplemented the protocol used by the ConnAir though like this <a href="https://github.com/Phunkafizer/RaspyRFM/blob/master/connair.py">ConnAir emulator</a> which can be used in conjunction with the <a href="https://www.seegel-systeme.de/produkt/raspyrfm-ii">RaspyRFM-II</a> RC module for a Raspberry Pi.</p>
+<p>Other vendors of 433 MHz RC outlets have also created gateways that use a very similar protocol and can also be used with this integration like the Intertechno <a href="https://www.intertechno24.de/LAN-Gateway/Gateway-ITGW-433.html">ITGW-433 LAN Gateway</a>.</p>
+<h2>Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  platform: raspyrfm
+  switches:
+    - controlunit_manufacturer: Intertechno
+      controlunit_model: CMR 1000
+      channel_config:  # Note that keys used here vary between control units
+        master: A
+        slave: 1
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='gateway_manufacturer' href='#gateway_manufacturer'></a> gateway_manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Manufacturer of the gateway.</p>
+</span></p><p class='default'>
+Default value: <p>Seegel Systeme</p>
+</p></dd><dt><a class='title-link' name='gateway_model' href='#gateway_model'></a> gateway_model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Model of the gateway.</p>
+</span></p><p class='default'>
+Default value: <p>RaspyRFM</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Host of the gateway.</p>
+</span></p><p class='default'>
+Default value: <p>127.0.0.1</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port of the gateway.</p>
+</span></p><p class='default'>
+Default value: <p>Depends on the gateway model.</p>
+</p></dd><dt><a class='title-link' name='switches' href='#switches'></a> switches</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of switches that can be controlled with this gateway.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name for the device.</p>
+</span></p><p class='default'>
+Default value: <p>Unnamed Device</p>
+</p></dd><dt><a class='title-link' name='controlunit_manufacturer' href='#controlunit_manufacturer'></a> controlunit_manufacturer</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Manufacturer of the control unit.</p>
+</span></p></dd><dt><a class='title-link' name='controlunit_model' href='#controlunit_model'></a> controlunit_model</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Model of the control unit.</p>
+</span></p></dd><dt><a class='title-link' name='channel_config' href='#channel_config'></a> channel_config</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Channel configuration of the control unit. The exact keys needed depend on the control unit manufacturer and model.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Device support</h2>
+<p>Have a look at the underlying library <a href="https://github.com/markusressel/raspyrfm-client">raspyrfm-client</a> to check what gateways and control units (outlets) are supported.</p>
+<h2>Channel configuration</h2>
+<p>Depending on the control unit the channel config can have varying formats. Have a look at the underlying library <a href="https://github.com/markusressel/raspyrfm-client">raspyrfm-client</a> to find out about a specific model.</p>
+<h2>Switch state</h2>
+<p>Initially, the state of a switch is unknown. When the switch is turned on or off (via frontend) the state is known and will be shown in the frontend.</p>
+<div class='note warning'>
+<p>Note that due to the way those cheap RC units work it is <strong>not possible to query their current state</strong>. Therefore the only way to preserve a consistent state within Home Assistant is to only use Home Assistant as the controller.</p>
+</div>
+<h2>Full example</h2>
+<pre><code class="language-yaml">switch:
+  platform: raspyrfm
+  gateway_manufacturer: Seegel Systeme
+  gateway_model: RaspyRFM
+  host: 127.0.0.1              # Optional
+  port: 49880                  # Optional
+  switches:
+    - name: My Switch
+      controlunit_manufacturer: Intertechno
+      controlunit_model: CMR 1000
+      channel_config:
+        master: A
+        slave: 1
+    - name: My other Switch
+      controlunit_manufacturer: Brennenstuhl
+      controlunit_model: RCS 1000 N Comfort
+      channel_config:
+        1: 1
+        2: 1
+        3: 1
+        4: 1
+        5: 1
+        CH: A
+</code></pre>
+:ET

@@ -1,0 +1,39 @@
+I"L<p>History graph is a basic card, allowing you to display a graph for each of the entities in the list specified as config.</p>
+<p class='img'>
+<img src='/images/lovelace/lovelace_history_graph.png' alt='Screenshot of the history graph card for entities without a unit_of_measurement'>
+Screenshot of the history graph card, when the sensor has no `unit_of_measurement` defined.
+</p>
+<p class='img'>
+<img src='/images/lovelace/lovelace_history_graph_lines.png' alt='Screenshot of the history graph card for entities with a unit_of_measurement'>
+Screenshot of the history graph card, when the sensor has a `unit_of_measurement` defined.
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>history-graph</p>
+</span></p></dd><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of entity IDs or <code>entity</code> objects, see below.</p>
+</span></p></dd><dt><a class='title-link' name='hours_to_show' href='#hours_to_show'></a> hours_to_show</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Hours to show. Minimum is 1 hour, maximum of 80 hours.</p>
+</span></p><p class='default'>
+Default value: <p>24</p>
+</p></dd><dt><a class='title-link' name='refresh_interval' href='#refresh_interval'></a> refresh_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Refresh interval in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The card title.</p>
+</span></p></dd></dl>
+</div>
+<h2>Options For Entities</h2>
+<p>If you define entities as objects instead of strings, you can add more customization and configuration:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Home Assistant entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites friendly name.</p>
+</span></p></dd></dl>
+</div>
+<h2>Example</h2>
+<pre><code class="language-yaml">type: history-graph
+title: 'My Graph'
+entities:
+  - sensor.outside_temperature
+  - entity: media_player.lounge_room
+    name: Main player
+</code></pre>
+:ET

@@ -1,0 +1,111 @@
+I"~<p><a href="http://www.apcupsd.org/">APCUPSd</a> status information can be integrated into Home Assistant when the Network Information Server (NIS) <a href="http://www.apcupsd.org/manual/manual.html#nis-server-client-configuration-using-the-net-driver">is configured</a> on the APC device.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Hass.io Installation</h2>
+<p>Install this <a href="https://github.com/korylprince/hassio-apcupsd/">unofficial add-on</a> to use this integration with Hass.io. Keep in mind that we can’t give you support for this add-on.</p>
+<p>After installation, follow the instructions on the Github page to configure the plugin. Then continue to follow the integration configurations below.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+apcupsd:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The hostname/IP address on which the APCUPSd NIS is being served.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port on which the APCUPSd NIS is listening.</p>
+</span></p><p class='default'>
+Default value: <p>3551</p>
+</p></dd></dl>
+</div>
+<div class='note'>
+<p>If you get <code>ConnectionRefusedError: Connection refused</code> errors in the Home Assistant logs, ensure the <a href="http://www.apcupsd.org/">APCUPSd</a> configuration directives used by its Network Information Server is set to permit connections from all addresses <a href="http://www.apcupsd.org/manual/manual.html#configuration-directives-used-by-the-network-information-server">NISIP 0.0.0.0</a>, else non-local addesses will not connect. This includes Hass.io running in Docker, even when hosted on the same machine or a virtual machine.</p>
+ </div>
+<h2>Binary sensor</h2>
+<p>In addition to the <a href="#sensor">APCUPSd Sensor</a> devices, you may also create a device which is simply “on” when the UPS status is online and “off” at all other times.</p>
+<h3>Configuration</h3>
+<p>To enable this sensor, you first have to set up apcupsd integration (above), and add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: apcupsd
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>UPS Online Status</p>
+</p></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>The <code>apcupsd</code> sensor platform allows you to monitor a UPS (battery backup) by using data from the <a href="https://linux.die.net/man/8/apcaccess">apcaccess</a> command.</p>
+<h3>Configuration</h3>
+<p>To use this sensor platform, you first have to set up apcupsd integration (above), and add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: apcupsd
+    resources:
+      - bcharge
+      - linev
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='resources' href='#resources'></a> resources</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Contains all entries to display.</p>
+</span></p></dd></dl>
+</div>
+<h3>Example</h3>
+<p>Given the following output from <code>apcaccess</code>:</p>
+<pre><code class="language-yaml">APC      : 001,051,1149
+DATE     : 2016-02-09 17:13:31 +0000
+HOSTNAME : localhost
+VERSION  : 3.14.12 (29 March 2014) redhat
+UPSNAME  : netrack
+CABLE    : Custom Cable Smart
+DRIVER   : APC Smart UPS (any)
+UPSMODE  : Stand Alone
+STARTTIME: 2016-02-09 16:06:47 +0000
+MODEL    : SMART-UPS 1400
+STATUS   : TRIM ONLINE
+LINEV    : 247.0 Volts
+LOADPCT  : 13.0 Percent
+BCHARGE  : 100.0 Percent
+TIMELEFT : 104.0 Minutes
+MBATTCHG : 5 Percent
+MINTIMEL : 3 Minutes
+MAXTIME  : 0 Seconds
+MAXLINEV : 249.6 Volts
+MINLINEV : 244.4 Volts
+OUTPUTV  : 218.4 Volts
+[...]
+</code></pre>
+<p>Use the values from the left hand column (lower case required).</p>
+<p>Full Example Configuration:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: apcupsd
+    resources:
+      - apc
+      - date
+      - hostname
+      - version
+      - upsname
+      - cable
+      - driver
+      - upsmode
+      - starttime
+      - model
+      - status
+      - linev
+      - loadpct
+      - bcharge
+      - timeleft
+      - mbattchg
+      - mintimel
+      - maxtime
+      - maxlinev
+      - minlinev
+      - outputv
+</code></pre>
+:ET

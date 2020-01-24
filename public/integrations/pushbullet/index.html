@@ -1,0 +1,439 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Pushbullet - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to read user pushes in Home Assistant">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/pushbullet/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Pushbullet">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/pushbullet/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to read user pushes in Home Assistant">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Pushbullet">
+    <meta name="twitter:description" content="Instructions on how to read user pushes in Home Assistant">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/pushbullet.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Pushbullet
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#notifications">Notifications</a></li>
+</ul>
+<div class="note">
+<p>The free tier is <a href="https://docs.pushbullet.com/#push-limit" rel="external nofollow">limited</a> to 500 pushes per month.</p>
+</div>
+<h3>
+<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h3>
+<p>The <code>pushbullet</code> sensor platform reads messages from <a href="https://www.pushbullet.com/" rel="external nofollow">Pushbullet</a>, a free service to send information between your phones, browsers, and friends. This sensor platform provides sensors that show the properties of the latest received Pushbullet notification mirror.</p>
+<h3>
+<a class="title-link" name="setup" href="#setup"></a> Setup</h3>
+<p>Notification Mirroring allows users to see their Android device’s notifications on their computer. It must be first enabled in the app and is currently only available on the Android platform. For more information, please see <a href="https://blog.pushbullet.com/2013/11/12/real-time-notification-mirroring-from-android-to-your-computer/" rel="external nofollow">this announcement</a> on the Pushbullet Blog.</p>
+<p>Go to <a href="https://www.pushbullet.com/#settings/account" rel="external nofollow">https://www.pushbullet.com/#settings/account</a> to retrieve your API key/access token.</p>
+<h3>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<p>To enable the Pushbullet sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: pushbullet
+    api_key: YOUR_API_KEY
+    monitored_conditions:
+      - body
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your Pushbullet API key.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Properties of the push to monitor.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>body</code> and <code>title</code></p>
+</dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="application_name" href="#application_name"></a> application_name</dt>
+<dd><p class="desc"><span class="description"><p>The application sending the push.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="body" href="#body"></a> body</dt>
+<dd><p class="desc"><span class="description"><p>Body of the message.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="notification_id" href="#notification_id"></a> notification_id</dt>
+<dd><p class="desc"><span class="description"><p>ID of the notification.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="notification_tag" href="#notification_tag"></a> notification_tag</dt>
+<dd><p class="desc"><span class="description"><p>Tag (if the application sending supports it).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="package_name" href="#package_name"></a> package_name</dt>
+<dd><p class="desc"><span class="description"><p>Name of the sender’s package.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="receiver_email" href="#receiver_email"></a> receiver_email</dt>
+<dd><p class="desc"><span class="description"><p>The email of the push’s target.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="sender_email" href="#sender_email"></a> sender_email</dt>
+<dd><p class="desc"><span class="description"><p>The sender of the push.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="source_device_iden" href="#source_device_iden"></a> source_device_iden</dt>
+<dd><p class="desc"><span class="description"><p>ID of the sender’s device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="title" href="#title"></a> title</dt>
+<dd><p class="desc"><span class="description"><p>Title of the push.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="description"><p>Type of push.</p>
+</span></p></dd>
+</dl></dd>
+</dl>
+</div>
+<p>All properties will be displayed as attributes. The properties array are just for logging the sensor readings for multiple properties.</p>
+<h2>
+<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
+<p>The <code>pushbullet</code> notification platform sends messages to <a href="https://www.pushbullet.com/" rel="external nofollow">Pushbullet</a>, a free service to send information between your phones, browsers, and friends. The free tier is <a href="https://docs.pushbullet.com/#push-limit" rel="external nofollow">limited</a> to 500 pushes per month.</p>
+<p>To enable Pushbullet notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: pushbullet
+    api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Enter the API key for Pushbullet. Go to <a href="https://www.pushbullet.com/#settings/account" rel="external nofollow">https://www.pushbullet.com/#settings/account</a> to retrieve your API key/access token.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The default value is <code>notify</code>. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>notify</p>
+</dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="usage" href="#usage"></a> Usage</h3>
+<p>Pushbullet is a notify platform and thus can be controlled by calling the notify service <a href="/integrations/notify/">as described here</a>. It will send a notification to all devices registered in the Pushbullet account. An optional <strong>target</strong> parameter can be given to Pushbullet to specify specific account’s devices, contacts or channels.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Prefix</th>
+<th>Suffix</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Device</td>
+<td><code>device/</code></td>
+<td>Device nickname</td>
+<td><code>device/iphone</code></td>
+</tr>
+<tr>
+<td>Channel</td>
+<td><code>channel/</code></td>
+<td>Channel tag</td>
+<td><code>channel/my_home</code></td>
+</tr>
+<tr>
+<td>Email</td>
+<td><code>email/</code></td>
+<td>Contact’s email address</td>
+<td><code>email/email@example.com</code></td>
+</tr>
+</tbody>
+</table>
+<p>If using targets, your own account’s email address functions as ‘send to all devices’. All targets are verified (if exists) before sending, except email.</p>
+<h4>
+<a class="title-link" name="example-service-payload" href="#example-service-payload"></a> Example service payload</h4>
+<pre><code class="language-json">{
+  "message": "A message for many people",
+  "target": [
+    "device/telephone",
+    "email/hello@example.com",
+    "channel/my_home"
+  ]
+}
+</code></pre>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<h3>
+<a class="title-link" name="url-support" href="#url-support"></a> URL support</h3>
+<pre><code class="language-yaml">action:
+  service: notify.NOTIFIER_NAME
+  data:
+    title: Send URL
+    message: This is an url
+    data:
+      url: google.com
+</code></pre>
+<ul>
+<li>
+<strong>url</strong> (<em>Required</em>): Page URL to send with Pushbullet.</li>
+</ul>
+<h3>
+<a class="title-link" name="file-support" href="#file-support"></a> File support</h3>
+<pre><code class="language-yaml">action:
+  service: notify.NOTIFIER_NAME
+  data:
+    title: Send file
+    message: This is a file
+    data:
+      file: /path/to/my/file
+</code></pre>
+<ul>
+<li>
+<strong>file</strong> (<em>Required</em>): File to send with Pushbullet.</li>
+</ul>
+<h3>
+<a class="title-link" name="file-url-support" href="#file-url-support"></a> File URL support</h3>
+<pre><code class="language-yaml">action:
+  service: notify.NOTIFIER_NAME
+  data:
+    title: Send file
+    message: This is a file URL
+    data:
+      file_url:  https://cdn.pixabay.com/photo/2014/06/03/19/38/test-361512_960_720.jpg
+</code></pre>
+<ul>
+<li>
+<strong>file_url</strong> (<em>Required</em>): File to send with Pushbullet.</li>
+</ul>
+<h3>
+<a class="title-link" name="single-target" href="#single-target"></a> Single target</h3>
+<pre><code class="language-yaml">  action:
+    service: notify.NOTIFIER_NAME
+    data:
+      title: "Send to one device"
+      message: "This only goes to one specific device"
+      target: device/DEVICE_NAME
+</code></pre>
+<ul>
+<li>
+<strong>target</strong>: Pushbullet device to receive the notification.</li>
+</ul>
+<div class="note">
+<p>Don’t forget to <a href="/docs/configuration/basic/">whitelist external directories</a>, so Home Assistant has access to them.</p>
+</div>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/pushbullet.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/pushbullet.png' /></div><div class="section">
+    <kb-alert-link integration="pushbullet"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Introduced in release: 0.44
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/pushbullet/'>/components/pushbullet/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#sensor'>Sensor</a>
+      </li><li>
+        <a href='/integrations/#notifications'>Notifications</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

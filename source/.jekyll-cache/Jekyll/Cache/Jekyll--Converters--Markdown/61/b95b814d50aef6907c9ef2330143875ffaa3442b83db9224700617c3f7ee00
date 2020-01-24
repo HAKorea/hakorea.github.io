@@ -1,0 +1,40 @@
+I"/<div class='note warning'>
+SpotCrime is no longer handing out API keys to integrate their services.
+</div>
+<p>The <code>spotcrime</code> sensor allows one to track reported incidents occurring in a given area. Incidents include anything reported to <a href="https://www.spotcrime.info">Spot Crime</a>. Your regional emergency services may or may not report data. The sensor defaults to counting incidents within one day, but can be customized via configuration.yaml.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>. Your <code>radius</code> should be of sufficient size to capture incidents in your area. 0.01 = 1 mile.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: spotcrime
+    name: NAME
+    radius: SEARCH_RADIUS
+    api_key: YOUR_API_KEY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name the sensor what you’d like.</p>
+</span></p></dd><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Required)</span><span class='description'><p>Radius you’d like to search within. 0.01 = 1 mile.</p>
+</span></p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API key to access the service.</p>
+</span></p></dd><dt><a class='title-link' name='days' href='#days'></a> days</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Number of days you’d like see to crime statistics for.</p>
+</span></p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Event types you want statistics for.</p>
+</span></p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Event types to ignore statistics for.</p>
+</span></p></dd></dl>
+</div>
+<h2>Notes</h2>
+<h3>Incident Types</h3>
+<p>You can explicitly include or exclude incident types. Specifying <code>include</code>s restricts the incidents to those types. Specifying <code>exclude</code>s will return all incident types except those specified.</p>
+<p>These incident types are available:</p>
+<ul>
+<li>Arrest</li>
+<li>Arson</li>
+<li>Assault</li>
+<li>Burglary</li>
+<li>Robbery</li>
+<li>Shooting</li>
+<li>Theft</li>
+<li>Vandalism</li>
+<li>Other</li>
+</ul>
+<h3>Events</h3>
+<p>The <code>crimealerts</code> sensor fires a <code>crimealerts_incident</code> event when a new incident is detected, including the type, time, and location of the incident.</p>
+:ET

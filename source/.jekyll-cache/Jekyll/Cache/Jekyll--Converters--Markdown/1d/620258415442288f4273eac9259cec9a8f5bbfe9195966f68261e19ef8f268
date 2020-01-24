@@ -1,0 +1,163 @@
+I"Û<p>The <code>counter</code> integration allows one to count occurrences fired by automations.</p>
+<h2>Configuration</h2>
+<p>To add a counter to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+counter:
+  my_custom_counter:
+    initial: 30
+    step: 1
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='alias' href='#alias'></a> [alias]</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Alias for the counter. Multiple entries are allowed. <code>alias</code> should be replaced by the user for their actual value.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Friendly name of the counter.</p>
+</span></p></dd><dt><a class='title-link' name='initial' href='#initial'></a> initial</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Initial value when Home Assistant starts or the counter is reset.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='restore' href='#restore'></a> restore</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Try to restore the last known value when Home Assistant starts.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='step' href='#step'></a> step</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Incremental/step value for the counter.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='minimum' href='#minimum'></a> minimum</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minimum value the counter will have</p>
+</span></p></dd><dt><a class='title-link' name='maximum' href='#maximum'></a> maximum</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Maximum value the counter will have</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='icon'><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to display for the counter.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>Pick an icon that you can find on <a href="https://materialdesignicons.com/">materialdesignicons.com</a> to use for your input and prefix the name with <code>mdi:</code>. For example <code>mdi:car</code>, <code>mdi:ambulance</code> or <code>mdi:motorbike</code>.</p>
+<h3>Restore State</h3>
+<p>This integration will automatically restore the state it had prior to Home Assistant stopping as long as you your entity has <code>restore</code> set to <code>true</code> which is the default. To disable this feature, set <code>restore</code> to <code>false</code>.</p>
+<p>If <code>restore</code> is set to <code>false</code>, the <code>initial</code> value will only be used when no previous state is found or when the counter is reset.</p>
+<h2>Services</h2>
+<p>Available services: <code>increment</code>, <code>decrement</code>, <code>reset</code> and <code>configure</code>.</p>
+<h4>Service <code>counter.increment</code></h4>
+<p>Increments the counter with 1 or the given value for the steps.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>counter.decrement</code></h4>
+<p>Decrements the counter with 1 or the given value for the steps.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>counter.reset</code></h4>
+<p>With this service the counter is reset to its initial value.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>counter.configure</code></h4>
+<p>With this service the properties of the counter can be changed while running.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+</tr>
+<tr>
+<td><code>minimum</code></td>
+<td>yes</td>
+<td>Set new value for minimum. None disables minimum.</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td>yes</td>
+<td>Set new value for maximum. None disables maximum.</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>yes</td>
+<td>Set new value for step.</td>
+</tr>
+<tr>
+<td><code>initial</code></td>
+<td>yes</td>
+<td>Set new value for initial.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>yes</td>
+<td>Set the counters state to the given value.</td>
+</tr>
+</tbody>
+</table>
+<h3>Use the service</h3>
+<p>Select the <strong>Services</strong> tab from within <strong>Developer Tools</strong>. Choose <strong>counter</strong> from the list of <strong>Domains</strong>, select the <strong>Service</strong>, enter something like the sample below into the <strong>Service Data</strong> field, and hit <strong>CALL SERVICE</strong>.</p>
+<pre><code class="language-json">{
+  &quot;entity_id&quot;: &quot;counter.my_custom_counter&quot;
+}
+</code></pre>
+<h2>Examples</h2>
+<h3>Counting Home Assistant errors</h3>
+<p>To use a counter to count errors as caught by Home Assistant, you need to add <code>fire_event: true</code> to your <code>configuration.yaml</code>, like so:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+system_log:
+  fire_event: true
+</code></pre>
+<h3>Error counting - example configuration</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+automation:
+- id: 'errorcounterautomation'
+  alias: Error Counting Automation
+  trigger:
+    platform: event
+    event_type: system_log_event
+    event_data:
+      level: ERROR
+  action:
+    service: counter.increment
+    entity_id: counter.error_counter
+    
+counter:
+  error_counter:
+    name: Errors
+    icon: mdi:alert  
+</code></pre>
+:ET

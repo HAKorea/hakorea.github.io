@@ -1,0 +1,172 @@
+I"¬<p>Example integration to target an <code>entity_id</code> to:</p>
+<ul>
+<li>turn it on at 7AM in the morning</li>
+<li>turn it on if anyone comes home and it is off</li>
+<li>turn it off if all lights are turned off</li>
+<li>turn it off if all people leave the house</li>
+<li>offer a service to turn it on for 10 seconds</li>
+</ul>
+<p>To set it up, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+example:
+  target: TARGET_ENTITY
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='target' href='#target'></a> target</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>TARGET_ENTITY should be one of your devices that can be turned on and off, e.g., a light or a switch. Example value could be light.Ceiling or switch.AC (if you have these devices with those names).</p>
+</span></p></dd></dl>
+</div>
+<p>Create the file <code>&lt;config dir&gt;/custom_components/example.py</code> and copy paste the content below:</p>
+<pre><code class="language-python">&quot;&quot;&quot;
+Example of a custom component.
+&quot;&quot;&quot;
+import logging
+import time
+
+import voluptuous as vol
+
+import homeassistant.components as core
+import homeassistant.helpers.config_validation as cv
+from homeassistant.components import device_tracker, light
+from homeassistant.const import (
+    ATTR_ENTITY_ID,
+    SERVICE_TURN_OFF,
+    SERVICE_TURN_ON,
+    STATE_HOME,
+    STATE_NOT_HOME,
+    STATE_OFF,
+    STATE_ON,
+)
+from homeassistant.core import split_entity_id
+from homeassistant.helpers.event import (
+    async_track_state_change,
+    async_track_time_change,
+)
+
+# The domain of your component. Should be equal to the name of your component.
+DOMAIN = &quot;example&quot;
+
+# List of integration names (string) your integration depends upon.
+# We depend on group because group will be loaded after all the integrations that
+# initialize devices have been setup.
+DEPENDENCIES = [&quot;group&quot;, &quot;device_tracker&quot;, &quot;light&quot;]
+
+# Configuration key for the entity id we are targeting.
+CONF_TARGET = &quot;target&quot;
+
+# Variable for storing configuration parameters.
+TARGET_ID = None
+
+# Name of the service that we expose.
+SERVICE_FLASH = &quot;flash&quot;
+
+# Shortcut for the logger
+_LOGGER = logging.getLogger(__name__)
+
+# Validate that all required config options are given.
+CONFIG_SCHEMA = vol.Schema(
+    {DOMAIN: vol.Schema({vol.Optional(CONF_TARGET): cv.entity_id})},
+    extra=vol.ALLOW_EXTRA,
+)
+
+
+async def async_setup(hass, config):
+    &quot;&quot;&quot;Setup example component.&quot;&quot;&quot;
+    TARGET_ID = config[DOMAIN][CONF_TARGET]
+
+    domain = split_entity_id(TARGET_ID)[0]
+    data = {ATTR_ENTITY_ID: TARGET_ID}
+
+    # Validate that the target entity id exists.
+    if hass.states.get(TARGET_ID) is None:
+        _LOGGER.error(&quot;Target entity id %s does not exist&quot;, TARGET_ID)
+
+        # Tell the bootstrapper that we failed to initialize and clear the
+        # stored target id so our functions don't run.
+        TARGET_ID = None
+        return False
+
+    async def async_switch_on(entity_id, old_state, new_state):
+        &quot;&quot;&quot;Callback to turn on our target entity&quot;&quot;&quot;
+        # If the target id is not set, return
+        if not TARGET_ID:
+            return
+
+        if not core.is_on(hass, TARGET_ID):
+            await hass.services.async_call(domain, SERVICE_TURN_ON, data)
+
+    async def async_switch_off(entity_id, old_state, new_state):
+        &quot;&quot;&quot;Callback to turn off our target entity&quot;&quot;&quot;
+        # If the target id is not set, return
+        if not TARGET_ID:
+            return
+
+        if core.is_on(hass, TARGET_ID):
+            await hass.services.async_call(domain, SERVICE_TURN_OFF, data)
+
+    async def async_wake_up(service):
+        &quot;&quot;&quot;Turn light on in the morning.
+
+        Turn the light on when called, but only if there are people home
+        and it is not already on.
+        &quot;&quot;&quot;
+        if not TARGET_ID:
+            return
+
+        if device_tracker.is_on(hass) and not core.is_on(hass, TARGET_ID):
+            _LOGGER.info(&quot;People home at 7AM, turning target on&quot;)
+            await hass.services.async_call(domain, SERVICE_TURN_ON, data)
+
+    async def async_flash_service(service):
+        &quot;&quot;&quot;Service callback that will toggle the target.
+
+        Set the light to off for 10 seconds if on and vice versa.
+        &quot;&quot;&quot;
+        if not TARGET_ID:
+            return
+
+        if core.is_on(hass, TARGET_ID):
+            # We need this call to run blocking, as we want to wait 10s after it finished
+            await hass.services.async_call(
+                domain, SERVICE_TURN_OFF, data, blocking=True
+            )
+            time.sleep(10)
+            await hass.services.async_call(domain, SERVICE_TURN_ON, data)
+        else:
+            await hass.services.async_call(domain, SERVICE_TURN_ON, data, blocking=True)
+            time.sleep(10)
+            await hass.services.async_call(domain, SERVICE_TURN_OFF, data)
+
+    # register the example.flash service
+    hass.services.async_register(DOMAIN, SERVICE_FLASH, async_flash_service)
+
+    # If all lights turn off, turn off.
+    async_track_state_change(
+        hass, light.ENTITY_ID_ALL_LIGHTS, async_switch_off, STATE_ON, STATE_OFF
+    )
+
+    # If all people leave the house and the entity is on, turn it off.
+    async_track_state_change(
+        hass,
+        device_tracker.ENTITY_ID_ALL_DEVICES,
+        async_switch_off,
+        STATE_HOME,
+        STATE_NOT_HOME,
+    )
+
+    # If anyone comes home and the entity is not on, turn it on.
+    async_track_state_change(
+        hass,
+        device_tracker.ENTITY_ID_ALL_DEVICES,
+        async_switch_on,
+        STATE_NOT_HOME,
+        STATE_HOME,
+    )
+
+    # Call wakeup callback at 7 AM
+    async_track_time_change(hass, async_wake_up, hour=7, minute=00, second=00)
+
+    # Tell the bootstrapper that we initialized successfully.
+    return True
+</code></pre>
+:ET

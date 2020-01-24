@@ -1,0 +1,98 @@
+I"a<p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
+<h2>Configuration</h2>
+<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
+<p>After configuring the RFLink hub, sensors will be automatically discovered and added.</p>
+<p>RFLink sensor ID’s are composed of: protocol, id and type (optional). For example: <code>alectov1_0334_temp</code>. Some sensors emit multiple types of data. Each will be created as its own.</p>
+<p>Once the ID of a sensor is known, it can be used to configure the sensor in Home Assistant, for example to add it to a different group, hide it or configure a nice name.</p>
+<p>Configuring a device as a sensor:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rflink
+    devices:
+      alectov1_0334_temp: {}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='automatic_add' href='#automatic_add'></a> automatic_add</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Automatically add new/unconfigured devices to Home Assistant if detected.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of sensors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='rflink_ids' href='#rflink_ids'></a> rflink_ids</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>RFLink ID of the device</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name for the device.</p>
+</span></p><p class='default'>
+Default value: <p>RFLink ID</p>
+</p></dd><dt><a class='title-link' name='sensor_type' href='#sensor_type'></a> sensor_type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Override automatically detected type of sensor. For list of <a href="/integrations/sensor.rflink/#sensors-types">values</a> see below.</p>
+</span></p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override automatically detected unit of sensor.</p>
+</span></p></dd><dt><a class='title-link' name='aliases' href='#aliases'></a> aliases</dt><dd><p class='desc'><span class='type'>(<span class='list string'>list | string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Alternative RFLink ID’s this device is known by.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<h2>Sensor types</h2>
+<p>Sensor type values:</p>
+<ul>
+<li>average_windspeed</li>
+<li>barometric_pressure</li>
+<li>battery</li>
+<li>weather_forecast</li>
+<li>doorbell_melody</li>
+<li>command</li>
+<li>co2_air_quality</li>
+<li>current_phase_1</li>
+<li>current_phase_2</li>
+<li>current_phase_3</li>
+<li>distance</li>
+<li>firmware</li>
+<li>humidity_status</li>
+<li>humidity</li>
+<li>hardware</li>
+<li>kilowatt</li>
+<li>light_intensity</li>
+<li>meter_value</li>
+<li>total_rain</li>
+<li>rain_rate</li>
+<li>revision</li>
+<li>noise_level</li>
+<li>temperature</li>
+<li>uv_intensity</li>
+<li>version</li>
+<li>voltage</li>
+<li>watt</li>
+<li>windchill</li>
+<li>winddirection</li>
+<li>windgusts</li>
+<li>windspeed</li>
+<li>windtemp</li>
+</ul>
+<h2>Hiding/ignoring sensors</h2>
+<p>Sensors are added automatically when the RFLink gateway intercepts a wireless command in the ether. To prevent cluttering the frontend use any of these methods:</p>
+<ul>
+<li>Disable automatically adding of unconfigured new sensors (set <code>automatic_add</code> to <code>false</code>).</li>
+<li>Hide unwanted devices using <a href="/getting-started/customizing-devices/">customizations</a></li>
+<li><a href="/integrations/rflink/#ignoring-devices">Ignore devices on a platform level</a></li>
+</ul>
+<h2>Device support</h2>
+<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<h2>Additional configuration examples</h2>
+<p>Multiple sensors with <code>automatic_add</code> disabled and <code>aliases</code></p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: rflink
+    automatic_add: false
+    devices:
+      oregontemp_0d93_temp:
+        sensor_type: temperature
+      oregontemp_0d93_bat:
+        sensor_type: battery
+      tunex_c001_temp:
+        sensor_type: temperature
+        aliases:
+          - xiron_4001_temp
+      tunex_c001_hum:
+        sensor_type: humidity
+        aliases:
+          - xiron_4001_hum
+      tunex_c001_bat:
+        sensor_type: battery
+        aliases:
+          - xiron_4001_bat
+</code></pre>
+:ET

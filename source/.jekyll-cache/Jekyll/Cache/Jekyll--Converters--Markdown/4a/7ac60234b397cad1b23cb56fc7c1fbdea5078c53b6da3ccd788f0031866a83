@@ -1,0 +1,54 @@
+I"k<p>The <code>comfoconnect</code> integration lets you control Zehnder ComfoAir <a href="https://www.international.zehnder-systems.com/products-and-systems/comfosystems/zehnder-comfoair-q350-tr">Q350</a>/<a href="https://www.international.zehnder-systems.com/products-and-systems/comfosystems/zehnder-comfoair-q450-tr">Q450</a>/<a href="https://www.international.zehnder-systems.com/products-and-systems/comfosystems/zehnder-comfoair-q600-st">Q600</a>
+ventilation units from Home Assistant. You need a <a href="https://www.zehnder.co.uk/products-and-systems/comfortable-indoor-ventilation/ms-comfoair-q/ideal-control#node-21233">ComfoConnect LAN C</a>
+bridge to connect the unit to your local network.</p>
+<p>There is an official iPhone and Android app to configure and control your unit. This platform connects with the help of
+the unofficial <a href="https://github.com/michaelarnauts/comfoconnect">pycomfoconnect</a> library.</p>
+<p>The integration has a fan platform to view and control the ventilation speed, and a sensors platform to read out the outdoor temperature and humidity, the indoor temperature and humidity, and the extract and supply air flow (in m³ per hour).</p>
+<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">comfoconnect:
+  host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP or hostname of the ComfoConnect LAN C bridge.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of this device as you want to see it in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>ComfoAirQ</p>
+</p></dd><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The token you want to use when registering with the device. This is a random 32 char hexadecimal string.</p>
+</span></p><p class='default'>
+Default value: <p><code>00000000000000000000000000000001</code></p>
+</p></dd><dt><a class='title-link' name='user_agent' href='#user_agent'></a> user_agent</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you want to supply when registering with the device.</p>
+</span></p><p class='default'>
+Default value: <p><code>Home Assistant</code></p>
+</p></dd><dt><a class='title-link' name='pin' href='#pin'></a> pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The pin code to use when registering. You only need to change this if you have changed the factory default pin.</p>
+</span></p><p class='default'>
+Default value: <p><code>0000</code></p>
+</p></dd></dl>
+</div>
+<p>To register the sensors, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: comfoconnect
+    resources:
+      - air_flow_exhaust
+      - air_flow_supply
+      - bypass_state
+      - current_humidity
+      - current_temperature
+      - days_to_replace_filter
+      - exhaust_fan_duty
+      - exhaust_fan_speed
+      - exhaust_humidity
+      - exhaust_temperature
+      - outside_humidity
+      - outside_temperature
+      - power_usage
+      - supply_fan_duty
+      - supply_fan_speed
+      - supply_humidity
+      - supply_temperature
+</code></pre>
+<p>The list above indicates all supported sensors. It is recommended to only include the ones you need.</p>
+<div class='note'>
+Note that it's not possible to have multiple connection to the bridge at the same time. This integration will keep the connection open, and if you open the app, it will ask you to disconnect Home Assistant. If you close the app again, Home Assistant will reconnect automatically.
+</div>
+:ET

@@ -1,0 +1,63 @@
+I":<p>The <code>simulated</code> sensor platform provides a simulated sensor that generates a time-varying signal <code>V(t)</code> given by the <a href="https://en.wikipedia.org/wiki/Sine_wave">function</a>:</p>
+<pre><code class="language-text">V(t) = M + A sin((2 pi (t - t_0) / w) + P) + N(s)
+</code></pre>
+<p>where:</p>
+<ul>
+<li><strong>M</strong> = the <a href="https://en.wikipedia.org/wiki/Mean">mean</a> value of the sensor</li>
+<li><strong>A</strong> = the <a href="https://en.wikipedia.org/wiki/Amplitude">amplitude</a> of the periodic contribution</li>
+<li><strong>t</strong> = the time when a value is generated</li>
+<li><strong>t_0</strong> = the time when the sensor is started</li>
+<li><strong>w</strong> = the time <a href="https://en.wikipedia.org/wiki/Periodic_function">period</a> in seconds for a single complete cycle of the periodic contribution</li>
+<li><strong>P</strong> = the <a href="https://en.wikipedia.org/wiki/Phase_(waves)">phase</a> offset to add to the periodic contribution, in units of degrees</li>
+<li><strong>N(s)</strong> = the random <a href="https://en.wikipedia.org/wiki/Gaussian_noise">Gaussian noise</a> with spread <strong>s</strong></li>
+</ul>
+<p>The output will be limited to 3 decimals.</p>
+<h2>Configuration</h2>
+<p>To add a simulated sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: simulated
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>simulated</p>
+</p></dd><dt><a class='title-link' name='unit' href='#unit'></a> unit</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The unit to apply.</p>
+</span></p><p class='default'>
+Default value: <p>value</p>
+</p></dd><dt><a class='title-link' name='amplitude' href='#amplitude'></a> amplitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The amplitude of periodic contribution.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='mean' href='#mean'></a> mean</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The mean level of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='period' href='#period'></a> period</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time in seconds for one complete oscillation of the periodic contribution.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='phase' href='#phase'></a> phase</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The phase offset (in degrees) to apply to the periodic component.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='seed' href='#seed'></a> seed</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The <a href="https://docs.python.org/3.6/library/random.html#random.seed">seed</a> value for the random noise component.</p>
+</span></p><p class='default'>
+Default value: <p>999</p>
+</p></dd><dt><a class='title-link' name='spread' href='#spread'></a> spread</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The spread is the range of the randomly distributed values about their mean. This is sometimes referred to as the Full Width at Half Maximum (<a href="https://en.wikipedia.org/wiki/Full_width_at_half_maximum">FWHM</a>) of the random distribution.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd><dt><a class='title-link' name='relative_to_epoch' href='#relative_to_epoch'></a> relative_to_epoch</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Whether to simulate from epoch time (00:00:00, 1970-01-01), or relative to when the sensor was started.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<h2>Example</h2>
+<p>To give an example of simulating real world data, a simulated relative humidity sensor (in %) can be added using the following configuration:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: simulated
+    name: 'simulated relative humidity'
+    unit: '%'
+    amplitude: 0 # Turns off the periodic contribution
+    mean: 50
+    spread: 10
+    seed: 999
+    relative_to_epoch: false
+</code></pre>
+:ET

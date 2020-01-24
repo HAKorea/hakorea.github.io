@@ -1,0 +1,65 @@
+I"Ù<p>The <code>dovado</code> integration manages communication with the <a href="https://www.dovado.com/">Dovado</a> router.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="/integrations/dovado/#notifications">Notifications</a></li>
+<li><a href="/integrations/dovado/#sensor">Sensor</a></li>
+</ul>
+<p>To add a Dovado integration to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+dovado:
+  username: YOUR_USERNAME
+  password: YOUR_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Dovado username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Dovado password.</p>
+</span></p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address of your router.</p>
+</span></p><p class='default'>
+Default value: <p>Home Assistantâ€™s default gateway</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number of your router.</p>
+</span></p><p class='default'>
+Default value: <p>6435</p>
+</p></dd></dl>
+</div>
+<h2>Notifications</h2>
+<p>The <code>dovado</code> notify platform allows you to send SMS from your <a href="https://www.dovado.com/">Dovado</a> router, if it supports it.</p>
+<p>To add the Dovado notify platform to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - platform: dovado
+</code></pre>
+<h3>Usage</h3>
+<p>This is a notify platform and thus can be controlled by calling the notify service <a href="/integrations/notify/">as described here</a>. It will send an SMS notification to a single phone number in the notification <strong>target</strong>.</p>
+<pre><code class="language-yaml"># Example automation notification entry
+automation:
+  - alias: The sun has set
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      service: notify.dovado
+      data:
+        message: 'The sun has set'
+        target: '+14151234567'
+</code></pre>
+<h2>Sensor</h2>
+<p>The <code>dovado</code> sensor platform let you monitor your <a href="https://www.dovado.com/">Dovado</a> router.</p>
+<p>To add a Dovado sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: dovado
+    sensors:
+      - network
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Conditions to display in the frontend. Only accepts the values listed here.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='network' href='#network'></a> network</dt><dd><p class='desc'><span class='description'><p>Creates a sensor for Network State (3G, 4G, etc.).</p>
+</span></p></dd><dt><a class='title-link' name='signal' href='#signal'></a> signal</dt><dd><p class='desc'><span class='description'><p>Creates a sensor for the signal strength.</p>
+</span></p></dd><dt><a class='title-link' name='download' href='#download'></a> download</dt><dd><p class='desc'><span class='description'><p>Creates a sensor for download speed.</p>
+</span></p></dd><dt><a class='title-link' name='upload' href='#upload'></a> upload</dt><dd><p class='desc'><span class='description'><p>Creates a sensor for download speed.</p>
+</span></p></dd><dt><a class='title-link' name='sms' href='#sms'></a> sms</dt><dd><p class='desc'><span class='description'><p>Creates a sensor for number of unread text messages.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

@@ -1,0 +1,102 @@
+I"<p>The <code>Remember The Milk</code> (RTM) integration allows you to create tasks in <a href="https://www.rememberthemilk.com">remember_the_milk</a> from Home Assistant. You can use this if you want Home Assistant to send you a task that you should not forget, e.g., water the plants. The integration allows you to have several RTM accounts in parallel.</p>
+<h2>Setup</h2>
+<p>The setup consists of two steps: getting an API key and registering your account</p>
+<h3>Step 1: API key</h3>
+<p>To be able to use this component, you need a Remember The Milk account and you need to apply for your own <a href="https://www.rememberthemilk.com/services/api/keys.rtm">API key</a>. With the API key you will also receive your personal <code>shared secret</code>. Both of them need to be stored in your Home Assistant configuration:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+
+remember_the_milk:
+  - name: your_rtm_account
+    api_key: YOUR_API_KEY
+    shared_secret: YOUR_SHARED_SECRET
+
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the RTM account, as you can have several accounts in RTM. The name must be unique.</p>
+</span></p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Put the API key you’ve received in here.</p>
+</span></p></dd><dt><a class='title-link' name='shared_secret' href='#shared_secret'></a> shared_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Put the shared secret you’ve received in here.</p>
+</span></p></dd></dl>
+</div>
+<h3>Step 2: registering your account</h3>
+<p>After saving the configuration, you need to (re-)start Home Assistant. On the first start you will notice a new “Configuration” panel appearing on the Home Assistant page. After opening the configuration page, follow the link “Remember The Milk login”. This will take you to a login page where you have to log in with your normal Remember The Milk credentials. This will authorize Home Assistant to access your Remember The Milk account.</p>
+<p>After that click on the “login completed” button. This will tell Home Assistant that you have completed the login process on the Remember The Milk page and Home Assistant should try to register with this account.</p>
+<p>If the registration was successful, the Configuration panel will disappear from your Home Assistant screen and a Remember The Milk panel should appear. This completes the setup process.</p>
+<p>In the background Home Assistant downloaded a “token” from the Remember The Milk server which is stored in the <code>remember_the_milk.conf</code> file locally. So you only need to register once. After that the token is used to authenticate with the server.</p>
+<h2>Creating/updating tasks with service <code>create_task</code></h2>
+<p>This integration offers a new service domain <code>remember_the_milk</code> with the services <code>&lt;account&gt;_create_task</code>. You can call this service with the argument <code>name</code> and the optional parameter <code>id</code> to create a new task in your Remember The Milk account. You can call this service from your usual automations.</p>
+<p>If you set an <code>id</code> and a task with that id exists already, the existing task is updated, rather than creating a new task. This way you can change the name of the task. If you do not set an <code>id</code>, a new task is created with every call. If you’re using this from an automation, you could use the name of your automation as id or the entity that triggered the task to be created. This way you can later on update or complete this task.</p>
+<p>The task creation supports the “smart syntax”, so to create a task with the tag “from_hass” which is due today you can create a task with the name <code>test task created in Home Assistant ^today #from_hass</code>. More info about the smart syntax is available on the <a href="https://www.rememberthemilk.com/help/answer/basics-smartadd-howdoiuse">Remember The Milk documentation</a>.</p>
+<p><strong>Note:</strong>
+At the moment, smart syntax is <em>not</em> supported when updating tasks. All smart syntax commands are ignored during the update and will end up as normal text in the name of the task.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>no</td>
+<td>Name of the new task, you can use the smart syntax here.</td>
+<td>“do this ^today #from_hass”</td>
+</tr>
+<tr>
+<td>id</td>
+<td>yes</td>
+<td>Identifier for the task you’re creating, can be used to update or complete the task later on</td>
+<td>“myid”</td>
+</tr>
+</tbody>
+</table>
+<h2>Completing tasks with service  <code>complete_task</code></h2>
+<p>Complete a tasks that was privously created from Home Assistant. You can not complete tasks that were created outside of Home Assistant.</p>
+<p>If you have created your task with an <code>id</code>, calling <code>&lt;account&gt;_complete_task</code> with the parameter <code>id</code> will then complete your task.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>no</td>
+<td>Identifier that was defined when creating the task</td>
+<td>“myid”</td>
+</tr>
+</tbody>
+</table>
+<h2>Automation example</h2>
+<p>Here’s an example for an automation that creates a new task whenever <code>sensor.mysensor</code> is <code>on</code> and completes it when the sensor reports <code>off</code>. This way it reminds you to switch it off. By using the <code>entity_id</code> as id for the task, you can use the same rule also for multiple sensors.</p>
+<pre><code class="language-yaml">- id: mysensor_on
+  trigger:
+    platform: state
+    entity_id: sensor.mysensor
+    to: on
+  action:
+    - service: remember_the_milk.myaccount_create_task
+      data_template:
+        name: &quot;Please switch of &quot;
+        id: &quot;&quot;
+- id: mysensor_off
+  trigger:
+    platform: state
+    entity_id: sensor.mysensor
+    to: off
+  action:
+    - service: remember_the_milk.myaccount_complete_task
+      data_template:
+        id: &quot;&quot;
+
+</code></pre>
+<h2>Disclaimer</h2>
+<p>This product uses the Remember The Milk API but is not endorsed or certified by Remember The Milk.</p>
+:ET

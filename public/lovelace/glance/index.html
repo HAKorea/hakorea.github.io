@@ -1,0 +1,624 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Glance Card - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="The Glance card allows you to see a list of entities at a glance.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/lovelace/glance/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Glance Card">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/lovelace/glance/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="The Glance card allows you to see a list of entities at a glance.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Glance Card">
+    <meta name="twitter:description" content="The Glance card allows you to see a list of entities at a glance.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_lovelace/glance.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Glance Card
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>Glance cards are very compact. Very useful to group together multiple sensors for a quick and easy overview. Keep in mind that this can be used together with <a href="/lovelace/entity-filter/">entity-filter</a> cards to create dynamic cards.</p>
+<p class="img">
+<img src="/images/lovelace/lovelace_glance_card.png" alt="Screenshot of the glance card">
+Screenshot of the glance card.
+</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>glance</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="entities" href="#entities"></a> entities</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list of entity IDs or <code>entity</code> objects, see below.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="title" href="#title"></a> title</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Card title</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="show_name" href="#show_name"></a> show_name</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Show entity name.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="show_icon" href="#show_icon"></a> show_icon</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Show entity icon.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="show_state" href="#show_state"></a> show_state</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Show entity state-text.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="theme" href="#theme"></a> theme</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to any theme within <code>themes.yaml</code></p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="columns" href="#columns"></a> columns</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Number of columns to show. If not specified the number will be set automatically.</p>
+</span></p></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="options-for-entities" href="#options-for-entities"></a> Options For Entities</h2>
+<p>If you define entities as objects instead of strings, you can add more customization and configuration:</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="entity" href="#entity"></a> entity</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Home Assistant entity ID.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites friendly name.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="icon" href="#icon"></a> icon</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites icon.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="image" href="#image"></a> image</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites entity picture.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="show_last_changed" href="#show_last_changed"></a> show_last_changed</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites the state display with the relative time since last changed.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="show_state" href="#show_state"></a> show_state</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Show entity state-text.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="tap_action" href="#tap_action"></a> tap_action</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Action to take on tap</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="action" href="#action"></a> action</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>more-info</code></p>
+</dd>
+<dt>
+<a class="title-link" name="navigation_path" href="#navigation_path"></a> navigation_path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="url_path" href="#url_path"></a> url_path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="service" href="#service"></a> service</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="service_data" href="#service_data"></a> service_data</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="confirmation" href="#confirmation"></a> confirmation</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="hold_action" href="#hold_action"></a> hold_action</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Action to take on tap-and-hold</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="action" href="#action"></a> action</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>more-info</code></p>
+</dd>
+<dt>
+<a class="title-link" name="navigation_path" href="#navigation_path"></a> navigation_path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="url_path" href="#url_path"></a> url_path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="service" href="#service"></a> service</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="service_data" href="#service_data"></a> service_data</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="confirmation" href="#confirmation"></a> confirmation</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="double_tap_action" href="#double_tap_action"></a> double_tap_action</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Action to take on double tap</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="action" href="#action"></a> action</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p><code>more-info</code></p>
+</dd>
+<dt>
+<a class="title-link" name="navigation_path" href="#navigation_path"></a> navigation_path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="url_path" href="#url_path"></a> url_path</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="service" href="#service"></a> service</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="service_data" href="#service_data"></a> service_data</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>none</p>
+</dd>
+<dt>
+<a class="title-link" name="confirmation" href="#confirmation"></a> confirmation</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+</dl></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="options-for-confirmation" href="#options-for-confirmation"></a> Options For Confirmation</h2>
+<p>If you define confirmation as an object instead of boolean, you can add more customization and configurations:</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="text" href="#text"></a> text</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Text to present in the confirmation dialog.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="exemptions" href="#exemptions"></a> exemptions</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of <code>exemption</code> objects. See below</p>
+</span></p></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="options-for-exemptions" href="#options-for-exemptions"></a> Options For Exemptions</h2>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="user" href="#user"></a> user</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>User id that can see the view tab.</p>
+</span></p></dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<p>Basic example:</p>
+<pre><code class="language-yaml">type: glance
+title: Glance card sample
+entities:
+  - binary_sensor.movement_backyard
+  - light.bed_light
+  - binary_sensor.basement_floor_wet
+  - sensor.outside_temperature
+  - light.ceiling_lights
+  - switch.ac
+  - lock.kitchen_door
+</code></pre>
+<p class="img">
+<img src="/images/lovelace/lovelace_glance_card.png" alt="Screenshot of the glance card with custom title">
+Screenshot of the glance card with custom title.
+</p>
+<p>Define entities as objects and apply a custom name:</p>
+<pre><code class="language-yaml">type: glance
+title: Better names
+entities:
+  - entity: binary_sensor.movement_backyard
+    name: Movement?
+  - light.bed_light
+  - binary_sensor.basement_floor_wet
+  - sensor.outside_temperature
+  - light.ceiling_lights
+  - switch.ac
+  - lock.kitchen_door
+  - entity: switch.wall_plug_switch
+    tap_action:
+      action: toggle
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  <!-- 
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_lovelace/glance.markdown'>깃허브 편집</a></div>
+
+ -->
+  
+
+  <div class='section'>
+    <h1 class="title delta">Lovelace UI</h1>
+    <ul class='divided sidebar-menu'>
+      <li><a  href='/lovelace/'>소개 </a></li>
+      <li><a  href='/lovelace/changelog/'>Changelog </a></li>
+    </ul>
+  </div>
+
+  <div class='section'>
+    <h1 class="title delta">Advanced</h1>
+    <ul class='divided sidebar-menu'>
+      <li><a  href='/lovelace/how-it-works/'>동작 원리 </a></li>
+      <li><a  href='/lovelace/header-footer/'>헤더 & 푸터 </a></li>
+      <li><a  href='/lovelace/yaml-mode/'>YAML 모드 </a></li>
+      <li><a  href='/lovelace/views/'>Views </a></li>
+      <li><a href='https://developers.home-assistant.io/docs/en/lovelace_custom_card.html'>커스텀 카드 제작 <i icon='icon-external-link'></i></a></li>
+    </ul>
+  </div>
+
+  <div class='section'>
+    <h1 class="title delta">Cards</h1>
+    <ul class='divided sidebar-menu'>
+      
+        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
+      
+        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
+      
+        <li><a  href='/lovelace/entities/'>Entities </a></li>
+      
+        <li><a  href='/lovelace/entity-button/'>Entity Button </a></li>
+      
+        <li><a  href='/lovelace/entity-filter/'>Entity Filter </a></li>
+      
+        <li><a  href='/lovelace/gauge/'>Gauge </a></li>
+      
+        <li><a class='active' href='/lovelace/glance/'>Glance </a></li>
+      
+        <li><a  href='/lovelace/history-graph/'>History Graph </a></li>
+      
+        <li><a  href='/lovelace/horizontal-stack/'>Horizontal Stack </a></li>
+      
+        <li><a  href='/lovelace/iframe/'>Iframe </a></li>
+      
+        <li><a  href='/lovelace/light/'>Light </a></li>
+      
+        <li><a  href='/lovelace/map/'>Map </a></li>
+      
+        <li><a  href='/lovelace/markdown/'>Markdown </a></li>
+      
+        <li><a  href='/lovelace/media-control/'>Media Control </a></li>
+      
+        <li><a  href='/lovelace/picture/'>Picture </a></li>
+      
+        <li><a  href='/lovelace/picture-elements/'>Picture Elements </a></li>
+      
+        <li><a  href='/lovelace/picture-entity/'>Picture Entity </a></li>
+      
+        <li><a  href='/lovelace/picture-glance/'>Picture Glance </a></li>
+      
+        <li><a  href='/lovelace/plant-status/'>Plant Status </a></li>
+      
+        <li><a  href='/lovelace/sensor/'>Sensor </a></li>
+      
+        <li><a  href='/lovelace/shopping-list/'>Shopping List </a></li>
+      
+        <li><a  href='/lovelace/thermostat/'>Thermostat </a></li>
+      
+        <li><a  href='/lovelace/vertical-stack/'>Vertical Stack </a></li>
+      
+        <li><a  href='/lovelace/weather-forecast/'>Weather Forecast </a></li>
+      
+    </ul>
+  </div>
+
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,21 @@
+I"è<p>Always forget to eat lunch? Let Home Assistant send you a reminder.</p>
+<p>Add a <a href="/integrations/notify/">notify platform</a> of your choice.</p>
+<pre><code class="language-yaml">notify:
+  - platform: xmpp
+    name: jabber
+    sender: YOUR_JID
+    password: YOUR_JABBER_ACCOUNT_PASSWORD
+    recipient: YOUR_RECIPIENT
+</code></pre>
+<p>and automation part to your <code>configuration.yaml</code> file.</p>
+<pre><code class="language-yaml">automation:
+  - alias: Send message at a given time
+    trigger:
+      platform: time
+      at: '12:15:00'
+    action:
+      service: notify.jabber
+      data:
+        message: 'Time for lunch'
+</code></pre>
+:ET

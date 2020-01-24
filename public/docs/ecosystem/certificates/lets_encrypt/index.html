@@ -1,0 +1,909 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Remote Access with TLS/SSL via Let's Encrypt - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="A guide to remotely accessing Home Assistant and securing the connection with an SSL certificate from Let's Encrypt">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/docs/ecosystem/certificates/lets_encrypt/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Remote Access with TLS/SSL via Let's Encrypt">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/docs/ecosystem/certificates/lets_encrypt/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="A guide to remotely accessing Home Assistant and securing the connection with an SSL certificate from Let's Encrypt">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Remote Access with TLS/SSL via Let's Encrypt">
+    <meta name="twitter:description" content="A guide to remotely accessing Home Assistant and securing the connection with an SSL certificate from Let's Encrypt">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_docs/ecosystem/certificates/lets_encrypt.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Remote Access with TLS/SSL via Let's Encrypt
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <div class="note">
+<p>If you are using Hass.io do not use this guide. Instead, use the <a href="/addons/duckdns/">DuckDNS add-on</a> for Hass.io.</p>
+</div>
+<p>This guide was added by mf_social on 16/03/2017 and was valid at the time of writing. This guide makes the following assumptions:</p>
+<ul>
+<li>You can access your Home Assistant instance across your local network, and access the device that it is on via SSH from your local network.</li>
+<li>You know the internal IP address of your router and can access your router’s configuration pages.</li>
+<li>You have already secured your Home Assistant instance, following the advice on <a href="/docs/configuration/securing/">this page</a>
+</li>
+<li>You want to access your Home Assistant instance when you are away from home (ie, not connected to your local network) and secure it with a TLS/SSL certificate.</li>
+<li>You have a basic understanding of the phrases I have used so far.</li>
+<li>You are not currently running anything on port 80 on your network (you’d know if you were).</li>
+<li>If you are not using Home Assistant on a Debian/Raspian system you will be able to convert any of the terminology I use in to the correct syntax for your system.</li>
+<li>You understand that this is a ‘guide’ covering the general application of these things to the general masses and there are things outside of the scope of it, and it does not cover every eventuality (although I have made some notes where people may stumble). Also, I have used some turns of phrase to make it easier to understand for the novice reader which people of advanced knowledge may say is inaccurate.  My goal here is to get you through this guide with a satisfactory outcome and have a decent understanding of what you are doing and why, not to teach you advanced internet communication protocols.</li>
+<li>Each step presumes you have fully completed the previous step successfully, so if you did an earlier step following a different guide, please ensure that you have not missed anything out that may affect the step you have jumped to, and ensure that you adapt any commands to take in to account different file placements from other guides.</li>
+</ul>
+<p>Steps we will take:</p>
+<ul>
+<li>0 - Gain a basic level of understanding around IP addresses, port numbers and port forwarding</li>
+<li>1 - Set your device to have a static IP address</li>
+<li>2 - Set up port forwarding without TLS/SSL and test connection</li>
+<li>3 - Set up a DuckDNS account</li>
+<li>4 - Obtain a TLS/SSL certificate from Let’s Encrypt</li>
+<li>5 - Check the incoming connection</li>
+<li>6 - Clean up port forwards</li>
+<li>7 - Set up a sensor to monitor the expiry date of the certificate</li>
+<li>8 - Set up an automatic renewal of the TLS/SSL certificate</li>
+<li>9 - Set up an alert to warn us if something went wrong</li>
+</ul>
+<h3>
+<a class="title-link" name="0---gain-a-basic-level-of-understanding-around-ip-addresses-port-numbers-and-port-forwarding" href="#0---gain-a-basic-level-of-understanding-around-ip-addresses-port-numbers-and-port-forwarding"></a> 0 - Gain a basic level of understanding around IP addresses, port numbers and port forwarding</h3>
+<p>An IP address is a bit like a phone number. When you access your Home Assistant instance you type something similar to 192.168.0.200:8123 in to your address bar of your browser. The bit before the colon is the IP address (in this case 192.168.0.200) and the bit after is the port number (in this case 8123).  When you SSH in to the device running Home Assistant you will use the same IP address, and you will use port 22. You may not be aware that you are using port 22, but if you are using Putty look in the box next to where you type the IP address, you will see that it has already selected port 22 for you.</p>
+<p>So, if an IP address is like a phone number, a port number is like an extension number. An analogy would be if you phone your local doctors on 192-1680-200 and the receptionist answers, you ask to speak to Dr. Smith and she will put you through to extension 8123, which is the phone Dr. Smith is sitting at. The doctors surgery is the device your Home Assistant is running on, Dr. Smith is your Home Assistant. Thusly, your Home Assistant instance is ‘waiting for your call’ on port 8123, at the device IP 192.168.0.200 .</p>
+<p>Now, to speak to the outside world your connection goes through a router. Your router will have two IP addresses. One is the internal network number, most likely 192.168.0.1 in my example, and an external IP address that incoming traffic is sent to.  In the example of calling the doctors, the external IP is your telephone number’s area code.</p>
+<p>So, when we want to connect to our Home Assistant instance from outside our network we will need to call the correct extension number, at the correct phone number, in the correct area code.</p>
+<p>We will be looking for a system to run like this (in this example I will pretend our external IP is 203.0.113.12):</p>
+<pre><code class="language-text">Outside world -&gt; 203.0.113.12:8123 -&gt; your router -&gt; 192.168.0.200:8123
+</code></pre>
+<p>Sounds simple?  It really is except for two small, but easy to overcome, complications:</p>
+<ul>
+<li>IP addresses are often dynamically allocated, so they can change.</li>
+<li>Because of the way the internet works you cannot chain IP addresses together to get from where you are, to where you want to go.</li>
+</ul>
+<p>To get around the issue of changing IP addresses we must remember that there are two IP addresses affected.  Your external one (which we will ‘call’ to get on to your network from the internet) and your internal one (192.168.0.200 in the example I am currently using).</p>
+<p>So, we can use a static IP to ensure that whenever our device running Home Assistant connects to our router it always uses the same address.  This way our internal IP never changes.  This is covered in step 1 below.</p>
+<p>We then have no control over our external IP, as our Service Provider will give us a new one at random intervals. To fix this we will use a service called DuckDNS which will give us a name for our connection (something like examplehome.duckdns.org) and behind the scenes will continue to update your external IP. So no matter how many times the IP address changes, typing examplehome.duckdns.org in to our browser will convert to the correct, up-to-date, IP address.  This is covered in step 3 below.</p>
+<p>To get around the issue of not being able to chain the IP addresses together (I can’t say I want to call 203.0.113.12 and be put through to 192.168.0.200, and then be put through to extension 8123) we use port forwarding. Port forwarding is the process of telling your router which device to allow the outside connection to speak to.  In the doctors surgery example, port forwarding is the receptionist. This takes a call from outside, and forwards it to the correct extension number inside.  It is important to note that port forwarding can forward an incoming request for one port to a different port on your internal network if you so choose, and we will be doing this later on. The end result being that when we have our TLS/SSL certificate our incoming call will by default be requesting port 443 (because that is the default HTTPS port, like the default SSH port is 22), our port forwarding rule can forward this to our HA instance on port 8123 (or we can specify the port number in the URL). When this guide is completed we will run something like this:</p>
+<pre><code class="language-text">Outside world -&gt; https://examplehome.duckdns.org -&gt; 203.0.113.12:443 -&gt; your router -&gt; 192.168.0.200:8123
+</code></pre>
+<p>So, let’s make it happen…</p>
+<h3>
+<a class="title-link" name="1---set-your-device-to-have-a-static-ip-address" href="#1---set-your-device-to-have-a-static-ip-address"></a> 1 - Set your device to have a static IP address</h3>
+<p>Whenever a device is connected to a network it has an IP address. This IP address is often dynamically assigned to the device on connection. This means there are occasions where the IP address you use to access Home Assistant, or SSH in to the device running Home Assistant, may change. Setting a static IP address means that the device will always be on the same address.</p>
+<p>SSH in to your system running Home Assistant and login.</p>
+<p>Type the following command to list your network interfaces:</p>
+<pre><code class="language-bash">ifconfig
+</code></pre>
+<p>You will receive an output similar to the image below:</p>
+<p class="img">
+  <img src="/images/screenshots/ip-set.jpg">
+  Screenshot
+</p>
+<p>Make a note of the interface name and the IP address you are currently on. In the picture it is the wireless connection that is highlighted, but with your setup it may be the wired one (eth0 or similar), make sure you get the correct information.</p>
+<p>Then type the following command to open the text file that controls your network connection:</p>
+<pre><code class="language-bash">sudo nano /etc/dhcpcd.conf
+</code></pre>
+<p>At the bottom of the file add the following lines:</p>
+<pre><code class="language-text">interface wlan0 &lt;----- or the interface you just wrote down.
+
+static ip_address=192.168.0.200/24  &lt;---- the IP address you just wrote down with a '/24' at the end
+static routers=192.168.0.1      &lt;---- Your router's IP address
+static domain_name_servers=192.168.0.1 &lt;---- Your router's IP address
+</code></pre>
+<p>It is important to note that the first three bytes of your static IP address and your router’s IP address should be the same, e.g.:</p>
+<pre><code class="language-text">Router: 192.168.0.1
+
+Yes
+HA IP: 192.168.0.200
+
+No
+HA IP: 192.175.96.200
+</code></pre>
+<p>Press Ctrl + x to close the editor, pressing Y to save the changes when prompted.</p>
+<p>Reboot your device running HA:</p>
+<pre><code class="language-bash">sudo reboot
+</code></pre>
+<p>When it comes back up check that you can SSH in to it again on the IP address you wrote down.</p>
+<p>Make sure Home Assistant is running and access it via the local network by typing the IP address and port number in to the browser:</p>
+<pre><code class="language-text">http://192.168.0.200:8123.
+</code></pre>
+<p>All working?  Hooray!  You now have a static IP. This will now always be your internal IP address for your Home Assistant device. This will be known as YOUR-HA-IP for the rest of this guide.</p>
+<h3>
+<a class="title-link" name="2---set-up-port-forwarding-without-tlsssl-and-test-connection" href="#2---set-up-port-forwarding-without-tlsssl-and-test-connection"></a> 2 - Set up port forwarding without TLS/SSL and test connection</h3>
+<p>Log in to your router’s configuration pages and find the port forwarding options. This bit is hard to write a guide for because each router has a different way of presenting these options. Searching google for “port forwarding” and the name of your router may help. When you find it you will likely have options similar to:</p>
+<p>Service name - Port Range -  Local IP -  Local Port - Protocol</p>
+<p>You may also have other options (like ‘source IP’), these can usually be left blank or in their default state.</p>
+<p>Set the port forwarding to:</p>
+<pre><code class="language-text">Service name - ha_test
+Port Range - 8123
+Local IP - YOUR-HA-IP
+Local Port - 8123
+Protocol - Both
+</code></pre>
+<p>Then save the change. On my router you have to fill these values in, then press an ‘add’ button to add the new rule to the list, then save the changes. All routers have a different interface, but you must ensure that these rules are saved at this point.  If you are unsure, you can reboot the router and log back in, if the rule is present it was saved, if not, it wasn’t!</p>
+<p>Once you have saved this rule, go to your browser, and go to:</p>
+<pre><code class="language-text">https://whatismyipaddress.com/
+</code></pre>
+<p>This will tell you your current external IP address</p>
+<p>Type the external IP address in to the URL bar with http:// in front and :8123 after like so (203.0.113.12 is my example!):</p>
+<pre><code class="language-text">http://203.0.113.12:8123
+</code></pre>
+<p>Can you see your Home Assistant instance? If not, your router may not support ‘loopback’ - try the next step anyway and if that works, and this one still doesn’t, just remember that you cannot use loopback, so will have to use internal addresses when you’re on your home network. More on this later on if it’s relevant to you.</p>
+<p>Just to verify this isn’t some kind of witchcraft that is actually using your internal network, pick up your phone, disconnect it from your WiFi so that you are on your mobile data and not connected to the home network, put the same URL in the browser on your phone.</p>
+<p>Can you see it now, from a device that is definitely not connected to your local network? Excellent! You now have a remotely accessible Home Assistant instance.</p>
+<p>But what if your external IP changes?  Plus, remembering all those numbers is pretty hard, isn’t it?  Read on to get yourself set up with a word-based URL at DuckDNS that will track any changes to your IP address so you don’t have to stress anymore.</p>
+<h3>
+<a class="title-link" name="3---set-up-a-duckdns-account" href="#3---set-up-a-duckdns-account"></a> 3 - Set up a DuckDNS account</h3>
+<p>Open your browser and go to <a href="https://duckdns.org" rel="external nofollow">https://duckdns.org</a>.</p>
+<p>Sign in and create an account using one of the id validation options in the top right corner.</p>
+<p>In the domains section pick a name for your subdomain, this can be anything you like, and click add domain.</p>
+<p>The URL you will be using later to access your Home Assistant instance from outside will be the subdomain you picked, followed by duckdns.org . For our example we will say our URL is examplehome.duckdns.org</p>
+<p>Set up Home Assistant to keep your DuckDNS URL and external IP address in sync. In your <code>configuration.yaml</code> file add the following:</p>
+<pre><code class="language-yaml">duckdns:
+  domain: examplehome
+  access_token: abcdefgh-1234-abcd-1234-abcdefgh
+</code></pre>
+<p>The access token is available on your DuckDNS page. Restart Home Assistant after the change.</p>
+<p>What you have now done is set up DuckDNS so that whenever you type examplehome.duckdns.org in to your browser it will convert that to your router’s external IP address. Your external IP address will always be up to date because Homeassistant will update DuckDNS every time it changes.</p>
+<p>Now type your new URL in to your address bar on your browser with port 8123 on the end:</p>
+<pre><code class="language-text">http://examplehome.duckdns.org:8123
+</code></pre>
+<p>What now happens behind the scenes is this:</p>
+<ul>
+<li>DuckDNS receives the request and forwards the request to your router’s external IP address (which has been kept up to date by your device running Home Assistant)</li>
+<li>Your router receives the request on port 8123 and checks the port forwarding rules</li>
+<li>It finds the rule you created in step 2 and forwards the request to your HA instance</li>
+<li>Your browser displays your Home Assistant instance frontend.</li>
+</ul>
+<p>Did it work? Super!</p>
+<p>You now have a remotely accessible Home Assistant instance that has a text-based URL and will not drop out if your service provider changes your IP. But, it is only as secure as the password you set, which can be snooped during your session by a malicious hacker with relative ease. So we need to set up some encryption with TLS/SSL, read on to find out how.</p>
+<h3>
+<a class="title-link" name="4---obtain-a-tlsssl-certificate-from-lets-encrypt" href="#4---obtain-a-tlsssl-certificate-from-lets-encrypt"></a> 4 - Obtain a TLS/SSL certificate from Let’s Encrypt</h3>
+<p>First we need to set up another port forward like we did in step 2.  Set your new rule to:</p>
+<pre><code class="language-text">Service name - ha_letsencrypt
+Port Range - 80
+Local IP - YOUR-HA-IP
+Local Port - 80
+Protocol - Both
+</code></pre>
+<p>Remember to save the new rule.</p>
+<div class="note">
+In cases where your ISP blocks port 80 you will need to change the port forward options to forward port 443 from outside to port 443 on your Home Assistant device. Please note that this will limit your options for automatically renewing the certificate, but this is a limitation because of your ISP setup and there is not a lot we can do about it!
+</div>
+<p>Now SSH in to the device your Home Assistant is running on.</p>
+<div class="note">
+<p>If you’re running the ‘standard’ setup on a Raspberry Pi the chances are you just logged in as the ‘pi’ user. If not, you may have logged in as the Home Assistant user. There are commands below that require the Home Assistant user to be on the <code>sudoers</code> list. If you are not using the ‘standard’ Pi setup it is presumed you will know how to get your Home Assistant user on the <code>sudoers</code> list before continuing.  If you are running the ‘standard’ Pi setup, from your ‘pi’ user issue the following command (where <code>homeassistant</code> is the Home Assistant user):</p>
+<pre><code class="language-bash">sudo adduser homeassistant sudo
+</code></pre>
+</div>
+<p>If you did not already log in as the user that currently runs Home Assistant, change to that user (usually <code>homeassistant</code> or <code>hass</code> - you may have used a command similar to this in the past):</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+</code></pre>
+<p>Make sure you are in the home directory for the Home Assistant user:</p>
+<pre><code class="language-bash">cd
+</code></pre>
+<p>We will now make a directory for the certbot software, download it and give it the correct permissions:</p>
+<pre><code class="language-text">mkdir certbot
+cd certbot/
+wget https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
+</code></pre>
+<p>You might need to stop Home Assistant before continuing with the next step. You can do this via the Web-UI or use the following command if you are running on Raspbian:</p>
+<pre><code class="language-text">sudo systemctl stop home-assistant@homeassistant.service
+</code></pre>
+<p>You can restart Home Assistant after the next step using the same command and replacing <code>stop</code> with <code>start</code>.
+Now we will run the certbot program to get our SSL certificate. You will need to include your email address and your DuckDNS URL in the appropriate places:</p>
+<pre><code class="language-text">./certbot-auto certonly --standalone --preferred-challenges http-01 --email your@email.address -d examplehome.duckdns.org
+</code></pre>
+<p>Once the program has run it will generate a certificate and other files and place them in a folder <code>/etc/letsencrypt/</code> .</p>
+<p>Confirm this file has been populated:</p>
+<pre><code class="language-bash">ls /etc/letsencrypt/live/
+</code></pre>
+<p>This should show a folder named exactly after your DuckDNS URL.</p>
+<p>Our Home Assistant user needs access to files within the letsencrypt folder, so issue the following commands to change the permissions.</p>
+<pre><code class="language-bash">sudo chmod 755 /etc/letsencrypt/live/
+sudo chmod 755 /etc/letsencrypt/archive/
+</code></pre>
+<p>Did all of that go without a hitch? Wahoo! Your Let’s Encrypt certificate is now ready to be used with Home Assistant. Move to step 5 to put it all together</p>
+<h3>
+<a class="title-link" name="5---check-the-incoming-connection" href="#5---check-the-incoming-connection"></a> 5 - Check the incoming connection</h3>
+<div class="note">
+<p>Following on from Step 4 your SSH will still be in the certbot folder. If you edit your configuration files over SSH you will need to change to our <code>homeassistant</code> folder:</p>
+<pre><code class="language-bash">cd ~/.homeassistant
+</code></pre>
+<p>If you use Samba shares to edit your files you can exit your SSH now.</p>
+</div>
+<p>If during step 4 you had to use port 443 instead of port 80 to generate your certificate, you should delete that rule now.</p>
+<p>Go to your router’s configuration pages and set up a new port forwarding rule, thus:</p>
+<pre><code class="language-text">Service name - ha_ssl
+Port Range - 443
+Local IP - YOUR-HA-IP
+Local Port - 8123
+Protocol - Both
+</code></pre>
+<p>Remember to save the rule changes.</p>
+<p>Now edit your configuration.yaml file to reflect the SSL entries and your base URL (changing the <code>examplehome</code> subdomain to yours in all three places):</p>
+<pre><code class="language-yaml">http:
+  ssl_certificate: /etc/letsencrypt/live/examplehome.duckdns.org/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/examplehome.duckdns.org/privkey.pem
+  base_url: examplehome.duckdns.org
+</code></pre>
+<p>You may wish to set up other options for the <a href="/integrations/http/">http</a> integration at this point, these extra options are beyond the scope of this guide.</p>
+<p>Save the changes to configuration.yaml. Restart Home Assistant.</p>
+<p>In step 3 we accessed our Home Assistant from the outside world with our DuckDNS URL and our port number. We are going to use a slightly different URL this time.</p>
+<pre><code class="language-text">https://examplehome.duckdns.org
+</code></pre>
+<p>Note the <strong>S</strong> after http, and that no port number is added. This is because https will use port 443 automatically, and we have already set up our port forward to redirect this request to our Home Assistant instance on port 8123.</p>
+<p>You should now be able to see your Home Assistant instance via your DuckDNS URL, and importantly note that your browser shows the connection as secure.</p>
+<p>You will now NO LONGER be able to access your Home Assistant via your old internal IP address in the way you previously have. Your default way to access your Home Assistant instance, even from inside your house, is to use your DuckDNS URL.</p>
+<p>In cases where you need to access via the local network only (which should be few and far between) you can access it with the following URL (note the added <strong>S</strong> after http):</p>
+<pre><code class="language-text">https://YOUR-HA-IP:8123
+</code></pre>
+<p>…and accepting the browsers warning that you are connecting to an insecure site. This warning occurs because your certificate expects your incoming connection to come via your DuckDNS URL. It does not mean that your device has suddenly become insecure.</p>
+<p>Some cases such as this are where your router does not allow ‘loopback’ or where there is a problem with incoming connections due to technical failure. In these cases you can still use your internal connection and safely ignore the warnings.</p>
+<p>If you were previously using a webapp on your phone/tablet to access your Home Assistant you should delete the old one and create a new one with the new address. The old one will no longer work as it is not keyed to your new, secure URL.  Instructions for creating your new webapp can be found <a href="/docs/frontend/mobile/">here</a>.</p>
+<p>All done? Accessing your Home Assistant from across the world with your DuckDNS URL and a lovely secure logo on your browser? Ace! Now let’s clean up our port forwards so that we are only exposing the parts of our network that are absolutely necessary to the outside world.</p>
+<h3>
+<a class="title-link" name="6---clean-up-port-forwards" href="#6---clean-up-port-forwards"></a> 6 - Clean up port forwards</h3>
+<p>In step 2 we created a port forwarding rule called <code>ha_test</code>. This opens port 8123 to the world, and is no longer necessary.</p>
+<p>Go to your router’s configuration pages and delete the <code>ha_test</code> rule.</p>
+<p>You should now have two rules in relation to Home Assistant for your port forwards, named:</p>
+<p><code>ha_ssl</code> and <code>ha_letsencrypt</code></p>
+<p>If you have any more for Home Assistant you should delete them now. If you only have <code>ha_ssl</code> this is probably because during step 4 you had to use port 443 instead of port 80, so we deleted the rule during step 5.</p>
+<p>You are now part of one of two groups:</p>
+<ul>
+<li>If you have BOTH rules you are able to set up auto renewals of your certificates using port 80 and the standard http challenge, as performed above.</li>
+<li>If you only have one, you are still able to set up auto renewals of your certificates, but will have to specify additional options when renewing that will temporarily stop Home Assistant and use port 8123 for certificate renewal.</li>
+</ul>
+<p>Please remember whether you are a ONE-RULE person or a BOTH-RULE person for step 8!</p>
+<p>Let’s Encrypt certificates only last for 90 days. When they have less than 30 days left they can be renewed. Renewal is a simple process.</p>
+<p>Move on to step 7 to see how to monitor your certificates expiry date, and be ready to renew your certificate when the time comes.</p>
+<h3>
+<a class="title-link" name="7---set-up-a-sensor-to-monitor-the-expiry-date-of-the-certificate" href="#7---set-up-a-sensor-to-monitor-the-expiry-date-of-the-certificate"></a> 7 - Set up a sensor to monitor the expiry date of the certificate</h3>
+<p>Setting a sensor to read the number of days left on your TLS/SSL certificate before it expires is not required, but it has the following advantages:</p>
+<ul>
+<li>You can physically see how long you have left, pleasing your inner control freak</li>
+<li>You can set automations based on the number of days left</li>
+<li>You can set alerts to notify you if your certificate has not been renewed and is coming close to expiry.</li>
+<li>If you cannot set up automatic renewals due to your ISP blocking port 80, you will have timely reminders to complete the process manually.</li>
+</ul>
+<p>If you do not wish to set up a sensor you can skip straight to step 8 to learn how to update your certificates.</p>
+<p>The sensor will rely on a command line program that needs to be installed on your device running Home Assistant. SSH in to the device and run the following commands:</p>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install ssl-cert-check
+</code></pre>
+<div class="note">
+<p>In cases where, for whatever reason, apt-get installing is not appropriate for your installation you can fetch the ssl-cert-check script from <code>http://prefetch.net/code/ssl-cert-check</code> bearing in mind that you will have to modify the command in the sensor code below to run the script from wherever you put it, modify permission if necessary and so on.</p>
+</div>
+<p>To set up a senor add the following to your <code>configuration.yaml</code> (remembering to correct the URL for your DuckDNS):</p>
+<pre><code class="language-yaml">sensor:
+  - platform: command_line
+    name: SSL cert expiry
+    unit_of_measurement: days
+    scan_interval: 10800
+    command: "ssl-cert-check -b -c /etc/letsencrypt/live/examplehome.duckdns.org/cert.pem | awk '{ print $NF }'"
+</code></pre>
+<p>Save the configuration.yaml. Restart Home Assistant.</p>
+<p>On your default_view you should now see a sensor badge containing your number of days until expiry. If you’ve been following this guide from the start and have not taken any breaks in between, this should be 89 or 90. The sensor will update every 3 hours. You can place this reading on a card using groups, or hide it using customize. These topics are outside of the scope of this guide, but information can be found on their respective integrations pages: <a href="/integrations/group/">Group</a> and <a href="/docs/configuration/customizing-devices/">Customize</a></p>
+<p>Got your sensor up and running and where you want it? Top drawer! Nearly there, now move on to the final steps to ensure that you’re never without a secure connection in the future.</p>
+<h3>
+<a class="title-link" name="8---set-up-an-automatic-renewal-of-the-tlsssl-certificate" href="#8---set-up-an-automatic-renewal-of-the-tlsssl-certificate"></a> 8 - Set up an automatic renewal of the TLS/SSL certificate.</h3>
+<p>The certbot program we downloaded in step 4 contains a script that will renew your certificate. The script will only obtain a new certificate if the current one has less than 30 days left on it, so running the script more often than is actually needed will not cause any harm.</p>
+<p>If you are a ONE-RULE person (from step 6), you can automatically renew your certificate with your current port mapping by temporarily stopping Home Assistant and telling certbot to bind port 8123 internally, and using a <code>tls-sni</code> challenge so that the Let’s Encrypt CA binds port 443 externally. The flags used to specify these additional steps are shown below.</p>
+<p>If you are a TWO-RULE person (from step 6), you can automatically renew your certificate using a <code>http-01</code> challenge and port 80.</p>
+<p>There are a number of options for automating the renewal process:</p>
+<h4>
+<a class="title-link" name="option-1" href="#option-1"></a> Option 1:</h4>
+<p>Your certificate can be renewed as a ‘cron job’ - cron jobs are background tasks run by the computer at specified intervals (and are totally independent of Home Assistant). Defining cron is outside of the scope of this guide but you will have had dealings with <code>crontab</code> when setting up DuckDNS in step 3</p>
+<p>To set a cron job to run the script at regular intervals:</p>
+<ul>
+<li>SSH in to your device running Home Assistant.</li>
+<li>Change to your Home Assistant user (where <code>homeassistant</code> is the name of the user):</li>
+</ul>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+</code></pre>
+<ul>
+<li>Open the crontab:</li>
+</ul>
+<pre><code class="language-bash">crontab -e
+</code></pre>
+<ul>
+<li>If you are a TWO-RULE Person: Scroll to the bottom of the file and paste in the following line</li>
+</ul>
+<pre><code class="language-text">30 2 * * 1 ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+</code></pre>
+<ul>
+<li>If you are a ONE-RULE Person: Scroll to the bottom of the file and paste in the following line</li>
+</ul>
+<pre><code class="language-text">30 2 * * 1 ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges tls-sni-01 --tls-sni-01-port 8123 --pre-hook "sudo systemctl stop home-assistant@homeassistant.service" --post-hook "sudo systemctl start home-assistant@homeassistant.service"
+</code></pre>
+<ul>
+<li>
+<p>Let’s take a moment to look at the differences here:</p>
+<ol>
+<li>This method uses a <code>tls-sni</code> challenge, so the Let’s Encrypt CA will attempt to bind port 443 externally (which you have forwarded)</li>
+<li>
+<code>--tls-sni-01-port 8123</code> tells certbot to bind port 8123 internally, which matches with the port forwarding rules that are already in place.</li>
+<li>We define pre-hooks and post-hooks that stop our Home Assistant service before certbot runs, freeing port 8123 for certificate renewal, and restart Home Assistant after renewal is complete.</li>
+</ol>
+</li>
+<li>
+<p>Save the file and exit</p>
+</li>
+</ul>
+<h4>
+<a class="title-link" name="option-2" href="#option-2"></a> Option 2:</h4>
+<p>You can set an automation in Home Assistant to run the certbot renewal script.</p>
+<p>Add the following sections to your configuration.yaml if you are a TWO-RULE person</p>
+<pre><code class="language-yaml">shell_command:
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+
+automation:
+  - alias: 'Auto Renew SSL Cert'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.ssl_cert_expiry
+      below: 29
+    action:
+      service: shell_command.renew_ssl
+</code></pre>
+<p>If you are a ONE-RULE person, replace the <code>certbot-auto</code> command above with <code>~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges tls-sni-01 --tls-sni-01-port 8123 --pre-hook "sudo systemctl stop home-assistant@homeassistant.service" --post-hook "sudo systemctl start home-assistant@homeassistant.service"</code></p>
+<h4>
+<a class="title-link" name="option-3" href="#option-3"></a> Option 3:</h4>
+<p>You can manually update the certificate when your certificate is less than 30 days to expiry.</p>
+<p>To manually update:</p>
+<ul>
+<li>SSH in to your device running Home Assistant.</li>
+<li>Change to your Home Assistant user (where <code>homeassistant</code> is the name of the user):</li>
+</ul>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+</code></pre>
+<ul>
+<li>Change to your certbot folder</li>
+</ul>
+<pre><code class="language-bash">cd ~/certbot/
+</code></pre>
+<ul>
+<li>Run the renewal command</li>
+</ul>
+<pre><code class="language-bash">./certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+</code></pre>
+<ul>
+<li>If you are a ONE-RULE person, replace the <code>certbot-auto</code> command above with <code>~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges tls-sni-01 --tls-sni-01-port 8123 --pre-hook "sudo systemctl stop home-assistant@homeassistant.service" --post-hook "sudo systemctl start home-assistant@homeassistant.service"</code>
+</li>
+</ul>
+<p>So, now were all set up. We have our secured, remotely accessible Home Assistant instance and we’re on track for keeping our certificates up to date. But what if something goes wrong?  What if the automation didn’t fire?  What if the cron job forgot to run?  What if the dog ate my homework? Read on to set up an alert so you can be notified in plenty of time if you need to step in and sort out any failures.</p>
+<h3>
+<a class="title-link" name="9---set-up-an-alert-to-warn-us-if-something-went-wrong" href="#9---set-up-an-alert-to-warn-us-if-something-went-wrong"></a> 9 - Set up an alert to warn us if something went wrong.</h3>
+<p>We set up our automatic renewal of our certificates and whatever method we used the certificate should be renewed on or around 30 days before it expires. But what if a week later it still hasn’t been? This alert will go off if the expiry time on the certificate gets down to 21 days. This will give you 3 weeks to fix the problem, get your new certificate installed and get another 90 days of secure Home Assistant connections in play.</p>
+<p>In your <code>configuration.yaml</code> add the following automation, adding your preferred notification platform where appropriate:</p>
+<pre><code class="language-yaml">automation:
+  - alias: 'SSL expiry notification'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.ssl_cert_expiry
+      below: 21
+    action:
+      service: notify.[your_notification_preference]
+      data:
+        message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'
+</code></pre>
+<p>If you receive this warning notification, follow the steps for a manual update from step 8. Any error messages received at that point can be googled and resolved. If the manual update goes without a hitch there may be something wrong with your chosen method for automatic updates, and you can start troubleshooting from there.</p>
+<p>So, that’s it. We’ve taken a Home Assistant instance that was only reachable on the local network, made it accessible from the internet, secured it, and set up a system to ensure that it always stays secure. Well done, go and treat yourself to a cookie!</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  <div class="section">
+    <h1 class="title delta">목차</h1>
+    <ul class="divided sidebar-menu">
+      <li>
+        <b><a  href='/faq/'>FAQ </a></b> |
+        <b><a  href='/docs/glossary/'>Glossary </a></b>
+      </li>
+      <li>
+        <b><a  href='/docs/installation/'>설치 </a></b>
+        <ul>
+          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
+          <li>
+            <a  href='/docs/installation/troubleshooting/'>문제해결
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/configuration/'>설정 </a></b>
+        <ul>
+          <li><a  href='/docs/configuration/yaml/'>YAML </a></li>
+          <li>
+            <a  href='/docs/configuration/basic/'>기본 설정 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/devices/'>기기 추가 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/customizing-devices/'>Customizing
+            entities </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/troubleshooting/'>문제해결
+            </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/securing/'>Security Check Points
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Advanced Configuration</b>
+        <ul>
+          <li><a  href='/docs/configuration/remote/'>Remote access </a></li>
+          <li><a  href='/docs/configuration/packages/'>Packages </a></li>
+          <li>
+            <a  href='/docs/configuration/splitting_configuration/'>Splitting up the configuration </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/secrets/'>Storing Secrets </a>
+          </li>
+          <li><a  href='/docs/configuration/templating/'>Templating </a></li>
+          <li>
+            <a  href='/docs/configuration/platform_options/'>Entity
+            component platform options </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/authentication/'>Authentication </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/authentication/providers/'>Auth Providers </a>
+          </li>
+          <li>
+            <a  href='/docs/authentication/multi-factor-auth/'>Multi Factor
+            Auth </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Core objects</b>
+        <ul>
+          <li><a  href='/docs/configuration/events/'>Events </a></li>
+          <li>
+            <a  href='/docs/configuration/state_object/'>State Objects </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/automation/'>Automation </a></b>
+        <ul>
+          <li><a  href='/docs/automation/examples/'>Examples </a></li>
+          <li><a  href='/docs/automation/editor/'>Editor </a></li>
+          <li><a  href='/docs/automation/trigger/'>Triggers </a></li>
+          <li><a  href='/docs/automation/condition/'>Conditions </a></li>
+          <li><a  href='/docs/automation/action/'>Actions </a></li>
+          <li><a  href='/docs/automation/templating/'>Templates </a></li>
+          <li>
+            <a  href='/docs/automation/troubleshooting/'>Troubleshooting </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/frontend/'>Frontend </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/frontend/mobile/'>Android/iOS Homescreen </a>
+          </li>
+          <li>
+            <a  href='/docs/frontend/browsers/'>Browser Compatibility List
+            </a>
+          </li>
+          <li><a  href='/lovelace'>Lovelace UI </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/backend/'>Backend </a></b>
+        <ul>
+          <li><a  href='/docs/backend/database/'>Database </a></li>
+          <li><a  href='/docs/backend/updater/'>Updater </a></li>
+          <li><a  href='/developers/api/'>API </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scripts/'>Scripts </a></b>
+        <ul>
+          <li><a  href='/docs/scripts/service-calls/'>Service Calls </a></li>
+          <li><a  href='/docs/scripts/conditions/'>Conditions </a></li>
+          <li><a  href='/docs/scripts/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scene/'>Scenes </a></b>
+        <ul>
+          <li><a  href='/docs/scene/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/tools/'>Tools and Helpers </a></b>
+        <ul>
+          <li><a  href='/docs/tools/dev-tools/'>Developer Tools </a></li>
+          <li><a  href='/docs/tools/hass/'>hass </a></li>
+          <li><a  href='/docs/tools/benchmark/'>benchmark </a></li>
+          <li><a  href='/docs/tools/check_config/'>check_config </a></li>
+          <li><a  href='/docs/tools/credstash/'>credstash </a></li>
+          <li><a  href='/docs/tools/ensure_config/'>ensure_config </a></li>
+          <li><a  href='/docs/tools/keyring/'>keyring </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/security/'>Security </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/security/webserver/'>Web server fingerprint </a>
+          </li>
+          <li><a  href='/docs/security/porosity/'>Porosity </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/z-wave/'>Z-Wave </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/z-wave/installation/'>Configuring the Z-Wave
+            component </a>
+          </li>
+          <li><a  href='/docs/z-wave/adding/'>Adding devices </a></li>
+          <li>
+            <a  href='/docs/z-wave/control-panel/'>The Z-Wave control panel
+            </a>
+          </li>
+          <li><a  href='/docs/z-wave/controllers/'>Controllers </a></li>
+          <li>
+            <a  href='/docs/z-wave/devices/'>Devices </a> and <a  href='/docs/z-wave/entities/'>Entities </a>
+          </li>
+          <li>
+            <a  href='/docs/z-wave/query-stage/'>Query Stages </a> for devices
+          </li>
+          <li>
+            <a  href='/docs/z-wave/device-specific/'>Device Specific </a>
+            configuration
+          </li>
+          <li>
+            <a  href='/docs/z-wave/events/'>Events </a> and <a  href='/docs/z-wave/services/'>Services </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/mqtt/'>MQTT </a></b>
+        <ul>
+          <li><a  href='/docs/mqtt/broker/'>Broker </a></li>
+          <li><a  href='/docs/mqtt/certificate/'>Certificate </a></li>
+          <li><a  href='/docs/mqtt/discovery/'>Discovery </a></li>
+          <li><a  href='/docs/mqtt/service/'>Publish service </a></li>
+          <li>
+            <a  href='/docs/mqtt/birth_will/'>Birth and last will messages
+            </a>
+          </li>
+          <li><a  href='/docs/mqtt/testing/'>Testing your setup </a></li>
+          <li><a  href='/docs/mqtt/logging/'>Logging </a></li>
+          <li><a  href='/docs/mqtt/processing_json/'>Processing JSON </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/ecosystem/ios/'>iOS </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/notifications/basic/'>Basic
+            notifications </a>
+          </li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/sounds/'>Sounds </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/architecture/'>Architecture </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/privacy_security_rate_limits/'>Privacy, rate limiting and security </a>
+            </li>
+          </ul>
+          <li>Advanced notifications</li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/attachments/'>Attachments </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/content_extensions/'>Dynamic
+              content </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/actions/'>Actionable notifications </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/requesting_location_updates/'>Requesting location updates </a>
+            </li>
+          </ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/location/'>Location Tracking </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/ios/integration/'>Integration with
+            other apps </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a  href='/docs/ecosystem/'>Ecosystem </a>
+        <ul>
+          <li>
+            <a  href='/docs/autostart/'>Autostart </a>
+            <ul>
+              <li>
+                <a  href='/docs/autostart/systemd/'>systemd (Linux) </a>
+              </li>
+              <li>
+                <a  href='/docs/autostart/upstart/'>Upstart (Linux) </a>
+              </li>
+              <li><a  href='/docs/autostart/init.d/'>init.d (Linux) </a></li>
+              <li><a  href='/docs/autostart/macos/'>macOS </a></li>
+              <li><a  href='/docs/autostart/synology/'>Synology NAS </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/appdaemon/'>AppDaemon </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/hadashboard/'>HADashboard </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/notebooks/'>Notebooks </a>
+            <ul>
+              <li><a  href='/docs/ecosystem/notebooks/'>Introduction </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/installation/'>Installation </a>
+              </li>
+              <li><a  href='/docs/ecosystem/notebooks/graph/'>Graph </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/api/'>Home Assistant API
+                </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/database/'>Database </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/stats/'>Statistics </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Remote access
+            <ul>
+              <li><a  href='/docs/ecosystem/apache/'>Apache </a></li>
+              <li><a  href='/docs/ecosystem/caddy/'>Caddy Server </a></li>
+              <li><a  href='/docs/ecosystem/haproxy/'>HAProxy </a></li>
+              <li><a  href='/docs/ecosystem/nginx/'>NGINX </a></li>
+              <li>
+                <a  href='/docs/ecosystem/nginx_subdomain/'>NGINX with
+                subdomain</a>
+              </li>
+              <li><a  href='/docs/ecosystem/tor/'>Tor Onion Service </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/certificates/'>Certificates </a>
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_self_signed_certificate/'>Self-signed certificate </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_domain_certificate/'>Certificate
+                domain owners </a>
+              </li>
+              <li>
+                <a class='active' href='/docs/ecosystem/certificates/lets_encrypt/'>Let's
+                Encrypt (detailed) </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Backup
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_github/'>Backup to
+                GitHub </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_dropbox/'>Backup to
+                Dropbox </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_usb/'>Backup to USB
+                device </a>
+              </li>
+            </ul>
+          </li>
+          <li><a  href='/docs/ecosystem/synology/'>Synology </a></li>
+          <li>
+            <a  href='/docs/ecosystem/hass-configurator/'>Configurator
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

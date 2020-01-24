@@ -1,0 +1,32 @@
+I":<p>The Reddit sensor integrates data from <a href="https://reddit.com/">Reddit</a> to monitor your favorite subreddits.</p>
+<h2>Setup</h2>
+<p>To set up this sensor, you will need to generate a <code>client_id</code> and <code>client_secret</code> for the user account you will use to connect. Follow the first steps in <a href="https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example">this Wiki page</a>.</p>
+<div class='note'>
+This integration does not support Reddit's two-factor authentication. If you use two-factor authentication for your Reddit account, create a separate Reddit account without two-factor authentication for use with Home Assistant.
+</div>
+<h2>Configuration</h2>
+<p>To enable this platform, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: reddit
+    username: !secret reddit_username
+    password: !secret reddit_password
+    client_id: !secret reddit_client_id
+    client_secret: !secret reddit_client_secret
+    subreddits:
+      - news
+      - worldnews
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Reddit account username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Reddit account password.</p>
+</span></p></dd><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Reddit account client ID.</p>
+</span></p></dd><dt><a class='title-link' name='client_secret' href='#client_secret'></a> client_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Reddit account client secret</p>
+</span></p></dd><dt><a class='title-link' name='subreddits' href='#subreddits'></a> subreddits</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of subreddits you want to get data on.</p>
+</span></p></dd><dt><a class='title-link' name='sort_by' href='#sort_by'></a> sort_by</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sort reddit posts by <code>new</code>, <code>top</code>, <code>controversial</code> and <code>hot</code>.</p>
+</span></p><p class='default'>
+Default value: <p>hot</p>
+</p></dd></dl>
+</div>
+:ET

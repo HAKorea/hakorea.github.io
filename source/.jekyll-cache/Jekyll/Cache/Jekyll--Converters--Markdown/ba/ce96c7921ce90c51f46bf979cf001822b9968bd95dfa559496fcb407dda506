@@ -1,0 +1,74 @@
+I"ô<p>The <code>htu21d</code> sensor platform allows you to read the temperature and humidity from a <a href="https://cdn-shop.adafruit.com/datasheets/1899_HTU21D.pdf">HTU21D sensor</a> connected via <a href="https://en.wikipedia.org/wiki/I%C2%B2C">I2c</a> bus (SDA, SCL pins).</p>
+<p>Tested devices:</p>
+<ul>
+<li><a href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+</ul>
+<h2>Configuration</h2>
+<p>To use your HTU21D sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: htu21d
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p><p class='default'>
+Default value: <p>i2c_bus</p>
+</p></dd><dt><a class='title-link' name='i2c_bus' href='#i2c_bus'></a> i2c_bus</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>I2c bus where the sensor is.</p>
+</span></p><p class='default'>
+Default value: <p>1 (for Raspberry Pi 2 and 3)</p>
+</p></dd></dl>
+</div>
+<h2>Customizing the sensor data</h2>
+<p>Give the values friendly names and icons, add the following to your <code>customize:</code> section.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+customize:
+  sensor.htu21d_sensor_temperature:
+    icon: mdi:thermometer
+    friendly_name: &quot;Temperature&quot;
+  sensor.htu21d_sensor_humidity:
+    icon: mdi:weather-rainy
+    friendly_name: &quot;Humidity&quot;
+</code></pre>
+<p>To create a group, add the following to your <code>groups</code> section.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+group:
+  ambient_sensor:
+    name: HTU21D Environment sensor
+    entities:
+      - sensor.htu21d_sensor_temperature
+      - sensor.htu21d_sensor_humidity
+</code></pre>
+<h2>Directions for installing smbus support on Raspberry Pi</h2>
+<p>Enable I2c interface with the Raspberry Pi configuration utility:</p>
+<pre><code class="language-bash"># pi user environment: Enable i2c interface
+$ sudo raspi-config
+</code></pre>
+<p>Select <code>Interfacing options-&gt;I2C</code> choose <code>&lt;Yes&gt;</code> and hit <code>Enter</code>, then go to <code>Finish</code> and youâ€™ll be prompted to reboot.</p>
+<p>Install dependencies for use the <code>smbus-cffi</code> module and enable your <em>homeassistant</em> user to join the <em>i2c</em> group:</p>
+<pre><code class="language-bash"># pi user environment: Install i2c dependencies and utilities
+$ sudo apt-get install build-essential libi2c-dev i2c-tools python-dev libffi-dev
+
+# pi user environment: Add homeassistant user to the i2c group
+$ sudo addgroup homeassistant i2c
+
+# pi user environment: Reboot Raspberry Pi to apply changes
+$ sudo reboot
+</code></pre>
+<h3>Check the i2c address of the sensor</h3>
+<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors:</p>
+<pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
+</code></pre>
+<p>It will output a table like this:</p>
+<pre><code class="language-text">     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- 23 -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- UU -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 77
+</code></pre>
+<p>So you can see the sensor is present at the <strong>0x40</strong> address (there are more i2c sensors in that Raspberry Pi).</p>
+:ET

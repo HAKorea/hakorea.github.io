@@ -1,0 +1,33 @@
+I"ú<p>Allows you to shut down a Windows computer with a service call from Home Assistant.</p>
+<pre><code class="language-json">{
+  &quot;computers&quot;: [
+    {
+      &quot;alias&quot;: &quot;test-pc-1&quot;,
+      &quot;address&quot;: &quot;192.168.0.1&quot;,
+      &quot;credentials&quot;: &quot;user%password&quot;
+    },
+    {
+      &quot;alias&quot;: &quot;test-pc-2&quot;,
+      &quot;address&quot;: &quot;192.168.0.2&quot;,
+      &quot;credentials&quot;: &quot;user%password&quot;
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li><strong>computers</strong> (<em>Required</em>): A list of computer objects to shutdown from Home-Assistant.</li>
+<li><strong>computers/alias</strong> (<em>Required</em>): Set an alias for this record which becomes the name for the input.</li>
+<li><strong>computers/address</strong> (<em>Required</em>): IP address or NetBIOS name of the computer for the shutdown.</li>
+<li><strong>computers/credentials</strong> (<em>Required</em>): Credentials for logging into computer. Use a <code>%</code> as the delimiter of username and password.</li>
+</ul>
+<h3>Home Assistant configuration</h3>
+<p>Use the following inside Home Assistant service call to use it:</p>
+<pre><code class="language-yaml">service: hassio.addon_stdin
+data:
+  addon: core_rpc_shutdown
+  input: test-pc
+</code></pre>
+<div class='note'>
+<p>The <code>user</code> specified in the credentials should be an applicable user listed in <code>C:/Users</code>. This may differ from the username used to login to Windows. Depending on your settings and privileges within Windows, changes to the firewall, UAC (User Account Control) and registry settings may be required to allow this add-on to remotely shut down your computer. There are many guides available online on how to adjust these settings.</p>
+</div>
+:ET

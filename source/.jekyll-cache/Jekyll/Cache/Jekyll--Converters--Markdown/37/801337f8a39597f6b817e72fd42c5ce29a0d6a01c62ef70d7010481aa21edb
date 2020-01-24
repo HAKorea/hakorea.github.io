@@ -1,0 +1,151 @@
+I"�(<p>The <code>rfxtrx</code> platform support binary sensors that
+communicate in the frequency range of 433.92 MHz.
+The rfxtrx binary sensor integration provides support for them.</p>
+<p>Many cheap sensors available on the web today are based on a particular RF chip
+called <em>PT-2262</em>. Depending on the running firmware on the RFXcom box, some of
+them may be recognized under the X10 protocol but most of them are recognized
+under the <em>Lighting4</em> protocol. The rfxtrx binary sensor integration provides
+some special options for them, while other rfxtrx protocols should work too.</p>
+<h2>Setting up your devices</h2>
+<p>Once you have set up your <a href="/integrations/rfxtrx/">rfxtrx hub</a>, the easiest way
+to find your binary sensors is to add this to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  platform: rfxtrx
+  automatic_add: true
+</code></pre>
+<p>Open your Home Assistant frontend and go to the “states” page.
+Then make sure to trigger your sensor. You should see a new entity
+appear in the <em>Current entities</em> list, starting with “binary_sensor.”
+and some hexadecimal digits. Those hexadecimal digits are your device id.</p>
+<p>For example: “binary_sensor.0913000022670e013b70”. Here your device id
+is <code>0913000022670e013b70</code>. Then you should update your configuration to:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  platform: rfxtrx
+  devices:
+    0913000022670e013b70:
+      name: device_name
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='devices' href='#devices'></a> devices</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of devices.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the name to use in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='device_class'><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Fires an event even if the state is the same as before. Can be used for automations.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='off_delay' href='#off_delay'></a> off_delay</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>For sensors that only sends ‘On’ state updates, this variable sets a delay after which the sensor state will be updated back to ‘Off’.</p>
+</span></p></dd><dt><a class='title-link' name='data_bits' href='#data_bits'></a> data_bits</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines how many bits are used for commands inside the data packets sent by the device.</p>
+</span></p></dd><dt><a class='title-link' name='command_on' href='#command_on'></a> command_on</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the data bits value that is sent by the device upon an ‘On’ command.</p>
+</span></p></dd><dt><a class='title-link' name='command_off' href='#command_off'></a> command_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the data bits value that is sent by the device upon an ‘Off’ command.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='automatic_add' href='#automatic_add'></a> automatic_add</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>To enable the automatic addition of new binary sensors.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<div class='note warning'>
+<p>This integration and the <a href="/integrations/switch.rfxtrx/">rfxtrx switch</a> can steal each other’s devices when setting the <code>automatic_add</code> configuration parameter to <code>true</code>.
+Set <code>automatic_add</code> only when you have some devices to add to your installation, otherwise leave it to <code>false</code>.</p>
+</div>
+<div class='note warning'>
+<p>If a device ID consists of only numbers, please make sure to surround it with quotes.
+This is a known limitation in YAML, because the device ID will be interpreted as a number otherwise.</p>
+</div>
+<p>Binary sensors have only two states - “on” and “off”. Many door or window
+opening sensors will send a signal each time the door/window is open or closed.
+However, depending on their hardware or on their purpose,
+some sensors are only able to signal their “on” state:</p>
+<ul>
+<li>Most motion sensors send a signal each time they detect motion. They stay “on” for a few seconds and go back to sleep, ready to signal other motion events. Usually, they do not send a signal when they go back to sleep.</li>
+<li>Some doorbells may also only send “on” signals when their toggle switch is pressed, but no “off” signal when the switch is released.</li>
+</ul>
+<p>For those devices, use the <em>off_delay</em> parameter.
+It defines a delay after which a device will go back to an “Off” state.
+That “Off” state will be fired internally by Home Assistant, just as if
+the device fired it by itself. If a motion sensor can only send signals
+once every 5 seconds, sets the <em>off_delay</em> parameter to <em>seconds: 5</em>.</p>
+<p>Example configuration:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  platform: rfxtrx
+  automatic_add: true
+  devices:
+    091300006ca2c6001080:
+    name: motion_hall
+    device_class: motion
+    off_delay:
+      seconds: 5
+</code></pre>
+<h3>Options for PT-2262 devices under the Lighting4 protocol</h3>
+<p>When a data packet is transmitted by a PT-2262 device using the Lighting4
+protocol, there is no way to automatically extract the device identifier and the
+command from the packet. Each device has its own id/command length combination
+and the fields lengths are not included in the data. One device that sends 2
+different commands will be seen as 2 devices on Home Assistant. For such cases,
+the following options are available in order to circumvent the problem:</p>
+<ul>
+<li><strong>data_bits</strong> (<em>Optional</em>)</li>
+<li><strong>command_on</strong> (<em>Optional</em>)</li>
+<li><strong>command_off</strong> (<em>Optional</em>)</li>
+</ul>
+<p>Let’s try to add a new PT-2262 sensor using the “automatic_add”
+option and have a look at Home Assistant system log.</p>
+<p>Have your sensor trigger the “On” state for the first time.
+Some messages will appear:</p>
+<pre><code class="language-text">INFO (Thread-6) [homeassistant.components.binary_sensor.rfxtrx] Added binary sensor 0913000022670e013970 (Device_id: 22670e Class: LightingDevice Sub: 0)
+</code></pre>
+<p>Here the sensor has the id <em>22670e</em>.</p>
+<p>Now have your sensor trigger the “Off” state and look for the following
+message in the Home Assistant log. You should see that your device
+has been detected as a <em>new</em> device when triggering its “Off” state:</p>
+<pre><code class="language-text">INFO (Thread-6) [homeassistant.components.binary_sensor.rfxtrx] Added binary sensor 09130000226707013d70 (Device_id: 226707 Class: LightingDevice Sub: 0)
+</code></pre>
+<p>Here the device id is <em>226707</em>, which is almost similar to
+the <em>22670e</em> we had on the “On” event a few seconds ago.</p>
+<p>From those two values, you can guess that the actual id of your device is
+<em>22670</em>, and that <em>e</em> and <em>7</em> are commands for “On” and “Off” states
+respectively. As one hexadecimal digit uses 4 bits,
+we can conclude that the device is using 4 data bits.</p>
+<p>So here is the actual configuration section for the binary sensor:</p>
+<pre><code class="language-yaml">platform: rfxtrx
+automatic_add: true
+devices:
+  0913000022670e013b70:
+    name: window_room2
+    device_class: opening
+    data_bits: 4
+    command_on: 0xe
+    command_off: 0x7
+</code></pre>
+<p>The <em>automatic_add</em> option makes the rfxtrx binary sensor integration calculate
+and display the configuration options for you in the Home Assistant logs:</p>
+<pre><code class="language-text">INFO (Thread-6) [homeassistant.components.rfxtrx] rfxtrx: found possible device 226707 for 22670e with the following configuration:
+data_bits=4
+command_on=0xe
+command_off=0x7
+INFO (Thread-6) [homeassistant.components.binary_sensor.rfxtrx] Found possible matching deviceid 22670e.
+</code></pre>
+<p>This automatic guess should work most of the time but there is
+no guarantee on that. You should activate it only when you
+want to configure your new devices and leave it off otherwise.</p>
+<h3>Known working devices</h3>
+<p>The following devices are known to work with the rfxtrx binary sensor component.
+There are too many other to list.</p>
+<ul>
+<li>
+<p>Motion detectors:</p>
+<ul>
+<li>Kerui P817 and P829.</li>
+<li>Chuango PIR-700.</li>
+</ul>
+</li>
+<li>
+<p>Door / window sensors:</p>
+<ul>
+<li>Kerui D026 door / window sensor: can trigger on “open” and “close”. Has a tamper switch.</li>
+<li>Nexa LMST-606.</li>
+</ul>
+</li>
+</ul>
+:ET

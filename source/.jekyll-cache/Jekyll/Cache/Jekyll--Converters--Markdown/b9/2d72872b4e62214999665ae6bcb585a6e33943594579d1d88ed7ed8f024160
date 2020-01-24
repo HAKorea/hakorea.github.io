@@ -1,0 +1,79 @@
+I"><p>The <code>input_boolean</code> integration allows the user to define boolean values that can be controlled via the frontend and can be used within conditions of automation. This can for example be used to disable or enable certain automations.</p>
+<p>To enable input booleans in your installation, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+input_boolean:
+  notify_home:
+    name: Notify when someone arrives home
+    initial: off
+    icon: mdi:car
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='input_boolean' href='#input_boolean'></a> input_boolean</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Alias for the input. Multiple entries are allowed.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Friendly name of the input.</p>
+</span></p></dd><dt><a class='title-link' name='initial' href='#initial'></a> initial</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Initial value when Home Assistant starts.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='icon'><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to display in front of the input element in the frontend.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h3>Services</h3>
+<p>This integration provides the following services to modify the state of the <code>input_boolean</code> and a service to reload the
+configuration without restarting Home Assistant itself.</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Data</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>turn_on</code></td>
+<td><code>entity_id(s)</code><br><code>area_id(s)</code></td>
+<td>Set the value of specific <code>input_boolean</code> entities to <code>on</code></td>
+</tr>
+<tr>
+<td><code>turn_off</code></td>
+<td><code>entity_id(s)</code><br><code>area_id(s)</code></td>
+<td>Set the value of specific <code>input_boolean</code> entities to <code>off</code></td>
+</tr>
+<tr>
+<td><code>toggle</code></td>
+<td><code>entity_id(s)</code><br><code>area_id(s)</code></td>
+<td>Toggle the value of specific <code>input_boolean</code> entities</td>
+</tr>
+<tr>
+<td><code>reload</code></td>
+<td></td>
+<td>Reload <code>input_boolean</code> configuration</td>
+</tr>
+</tbody>
+</table>
+<h3>Restore State</h3>
+<p>If you set a valid value for <code>initial</code> this integration will start with state set to that value. Otherwise, it will restore the state it had prior to Home Assistant stopping.</p>
+<h2>Automation Examples</h2>
+<p>Here’s an example of an automation using the above <code>input_boolean</code>. This action will only occur if the switch is on.</p>
+<pre><code class="language-yaml">automation:
+  alias: Arriving home
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_garage
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.notify_home
+    state: 'on'
+  action:
+    service: notify.pushbullet
+    data:
+      title: &quot;&quot;
+      message: &quot;Honey, I'm home!&quot;
+</code></pre>
+<p>You can also set or change the status of an <code>input_boolean</code> by using <code>input_boolean.turn_on</code>, <code>input_boolean.turn_off</code> or <code>input_boolean.toggle</code> in your automations.</p>
+<pre><code class="language-yaml">    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.notify_home
+</code></pre>
+:ET

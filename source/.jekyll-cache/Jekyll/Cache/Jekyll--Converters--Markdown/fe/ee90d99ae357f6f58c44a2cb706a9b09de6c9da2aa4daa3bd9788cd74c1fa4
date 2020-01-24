@@ -1,0 +1,55 @@
+I"|<p>본 문서는 라즈베리파이에 홈어시스턴트를 운용하는 것에 대한 가이드입니다. 가장 쉬운 방법은 <a href="/hassio/">Hass.io</a> 를 설치하는 것으로 라즈베리파이와 다른 기기들을 연결해주는 강력한 홈오토메이션 허브를 만들 수 있습니다.</p>
+<p>리눅스에 대한 경험이 없거나 홈어시스턴트를 빨리 시작하려면 이 문서를 참고하세요. 숙련된 유저이거나 <a href="/hassio/installation/">이 문서에서 사용한 장비</a>가 없다면 <a href="/docs/installation/">다른 설치 방법</a>을 참고하길 바랍니다. 다른 설치 방법을 완료하신 분은 바로 <a href="/getting-started/onboarding/">다음단계</a>로 넘어가세요.</p>
+<h3>Suggested hardware</h3>
+<p>We will need a few things to get started with installing Home Assistant. The Raspberry Pi 4 Model B is a good, affordable starting point for your home automation journey. Links below lead to Amazon US. If you’re not in the US, you should be able to find these items in web stores in your country.</p>
+<ul>
+<li><a href="https://amzn.to/2XULT2z">Raspberry Pi 4 Model B (2GB)</a> + <a href="https://www.raspberrypi.org/help/faqs/#powerReqs">Power Supply</a> (at least 2.5A)</li>
+<li><a href="https://amzn.to/2X0Z2di">Micro SD Card</a>. Ideally get one that is <a href="https://www.sdcard.org/developers/overview/application/index.html">Application Class 2</a> as they handle small I/O much more consistently than cards not optimized to host applications. A 32 GB or bigger card is recommended.</li>
+<li>SD Card reader. This is already part of most laptops, but you can purchase a <a href="https://amzn.to/2WWxntY">standalone USB adapter</a> if you don’t have one. The brand doesn’t matter, just pick the cheapest.</li>
+<li>Ethernet cable. Home Assistant can work with Wi-Fi, but an Ethernet connection would be more reliable.</li>
+</ul>
+<h3>Software requirements</h3>
+<ul>
+<li>Download and extract the HassOS image for <a href="/hassio/installation/">your device</a></li>
+<li>Download <a href="https://www.balena.io/etcher">balenaEtcher</a> to write the image to an SD card</li>
+</ul>
+<h3>Installation</h3>
+<ol>
+<li>
+<p>Put the SD card in your card reader.</p>
+</li>
+<li>
+<p>Open balenaEtcher, select the HassOS image and flash it to the SD card.</p>
+</li>
+<li>
+<p>Unmount the SD card and remove it from your card reader.</p>
+</li>
+<li>
+<p>Follow this step if you want to configure Wi-Fi or a static IP address (this step requires a USB stick). Otherwise, move to step 5.</p>
+<ul>
+<li>Format a USB stick to FAT32 with the volume name <code>CONFIG</code>.</li>
+<li>Create a folder named <code>network</code> in the root of the newly-formatted USB stick.</li>
+<li>Within that folder, create a file named <code>my-network</code> without a file extension.</li>
+<li>Copy one of <a href="https://github.com/home-assistant/hassos/blob/dev/Documentation/network.md">the examples</a> to the <code>my-network</code> file and adjust accordingly.</li>
+<li>Plug the USB stick into the Raspberry Pi.</li>
+</ul>
+</li>
+<li>
+<p>Insert the SD card into your Raspberry Pi. If you are going to use an Ethernet cable, connect that too.</p>
+</li>
+<li>
+<p>Connect your power supply to the Raspberry Pi.</p>
+</li>
+<li>
+<p>The Raspberry Pi will now boot up, connect to the Internet and download the latest version of Home Assistant. This will take about 20 minutes.</p>
+</li>
+<li>
+<p>Home Assistant will be available at <code>http://hassio.local:8123</code>. If you are running an older Windows version or have a stricter network configuration, you might need to access Home Assistant at <code>http://hassio:8123</code>.</p>
+</li>
+<li>
+<p>If you used a USB stick for configuring the network, you can now remove it.</p>
+</li>
+</ol>
+<h3><a href="/getting-started/onboarding/">Next step: Onboarding »</a></h3>
+<p><em>As an Amazon Associate Home Assistant earns from qualifying purchases.</em></p>
+:ET

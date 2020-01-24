@@ -1,0 +1,81 @@
+I"�<p>The <code>microsoft_face</code> integration platform is the main integration for Microsoft
+Azure Cognitive service
+<a href="https://azure.microsoft.com/en-us/services/cognitive-services/face/">Face</a>.
+All data are stored in your own private instance in the Azure cloud.</p>
+<h2>Setup</h2>
+<p>You need an API key, which is free, but requires an
+<a href="https://azure.microsoft.com/en-us/free/">Azure registration</a> using your
+Microsoft ID. The free resource (<em>F0</em>) is limited to 20 requests per minute and
+30k requests in a month. If you don’t want to use the Azure cloud, you can also
+get an API key by registering with
+<a href="https://azure.microsoft.com/en-us/try/cognitive-services/">cognitive-services</a>.
+Please note that all keys on cognitive services must be recreated every 90 days.</p>
+<h2>Configuration</h2>
+<p>To enable the Microsoft Face component,
+add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+microsoft_face:
+  api_key: YOUR_API_KEY
+  azure_region: eastus2
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API key for your Cognitive resource.</p>
+</span></p></dd><dt><a class='title-link' name='azure_region' href='#azure_region'></a> azure_region</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The region where you instantiated your Microsoft Cognitive services endpoint.</p>
+</span></p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set timeout for the API connection.</p>
+</span></p><p class='default'>
+Default value: <p>10s</p>
+</p></dd></dl>
+</div>
+<h3>Person and Groups</h3>
+<p>For most services, you need to set up a group or a person.
+This limits the processing and detection to elements provided by the group.
+Home Assistant creates an entity for all groups and allows you to show the
+state, person, and IDs directly on the frontend.</p>
+<p>The following services are available for managing this feature and can be called
+via the Frontend, a script, or the REST API.</p>
+<ul>
+<li><em>microsoft_face.create_group</em></li>
+<li><em>microsoft_face.delete_group</em></li>
+</ul>
+<pre><code class="language-yaml">service: microsoft_face.create_group
+data:
+  name: 'Family'
+</code></pre>
+<ul>
+<li><em>microsoft_face.create_person</em></li>
+<li><em>microsoft_face.delete_person</em></li>
+</ul>
+<pre><code class="language-yaml">service: microsoft_face.create_person
+data:
+  group: family
+  name: 'Hans Maier'
+</code></pre>
+<p>You need to add an image of a person. You can add multiple images for every
+person to make the detection better. You can take a picture from a camera or
+send a local image to your Azure resource.</p>
+<ul>
+<li><em>microsoft_face.face_person</em></li>
+</ul>
+<pre><code class="language-yaml">service: microsoft_face.face_person
+data:
+  group: family
+  name: 'Hans Maier'
+  camera_entity: camera.door
+</code></pre>
+<p>For the local image we need <code>curl</code>.
+The <code>{personId}</code> is present in group entity as attribute.</p>
+<pre><code class="language-bash">$ curl -v -X POST &quot;https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/{GroupName}/persons/{personId}/persistedFaces&quot; \
+  -H &quot;Ocp-Apim-Subscription-Key: YOUR_API_KEY&quot; \
+  -H &quot;Content-Type: application/octet-stream&quot; --data-binary &quot;@/tmp/image.jpg&quot;
+</code></pre>
+<p>After we’re done with changes on a group,
+we need train this group to teach the AI how to handle the new data.</p>
+<ul>
+<li><em>microsoft_face.train_group</em></li>
+</ul>
+<pre><code class="language-yaml">service: microsoft_face.train_group
+data:
+  group: family
+</code></pre>
+:ET

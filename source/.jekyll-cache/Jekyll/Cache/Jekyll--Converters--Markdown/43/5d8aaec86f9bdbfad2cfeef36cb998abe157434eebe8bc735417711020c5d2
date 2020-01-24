@@ -1,0 +1,24 @@
+I"Ç	<p>This is a presence detection scanner for <a href="https://www.cisco.com">Cisco</a> Mobility Express wireless controllers.</p>
+<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+device_tracker:
+  - platform: cisco_mobility_express
+    host: CONTROLLER_IP_ADDRESS
+    username: YOUR_ADMIN_USERNAME
+    password: YOUR_ADMIN_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of your controller, e.g., 192.168.10.150.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username of a user with administrative privileges.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for your given admin account.</p>
+</span></p></dd><dt><a class='title-link' name='ssl' href='#ssl'></a> ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Use HTTPS instead of HTTP to connect.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='verify_ssl' href='#verify_ssl'></a> verify_ssl</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable or disable SSL certificate verification. Set to false if you have a self-signed SSL certificate and havenâ€™t installed the CA certificate to enable verification.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+:ET

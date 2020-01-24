@@ -1,0 +1,121 @@
+I"�)<p>The <code>here_travel_time</code> sensor provides travel time from the <a href="https://developer.here.com/documentation/routing/topics/introduction.html">HERE Routing API</a>.</p>
+<h2>Setup</h2>
+<p>You need to register for an API key (REST &amp; XYZ HUB API/CLI) by following the instructions <a href="https://developer.here.com/documentation/routing/topics/introduction.html?create=Freemium-Basic&amp;keepState=true&amp;step=account">here</a>.</p>
+<p>HERE offers a Freemium Plan which includes 250,000 free Transactions per month. For the Routing API, one transaction equals one request with one starting point (no multi stop). More information can be found <a href="https://developer.here.com/faqs#payment-subscription">here</a></p>
+<p>By default HERE will deactivate your account if you exceed the free Transaction limit for the month. You can add payment details to reenable your account as described <a href="https://developer.here.com/faqs">here</a></p>
+<h3>Migrate from app_code to api_key</h3>
+<p>HERE has changed its authentication mechanism. It is no longer possible to use <code>app_id</code> and <code>app_code</code>. Existing users have to follow the <a href="https://developer.here.com/documentation/authentication/dev_guide/topics/api-key-credentials.html">migration guide</a> in order to retrieve the now needed <code>api_key</code>.</p>
+<h2>Configuration</h2>
+<p>To enable the sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  - platform: here_travel_time
+    api_key: &quot;YOUR_API_KEY&quot;
+    origin_latitude: &quot;51.222975&quot;
+    origin_longitude: &quot;9.267577&quot;
+    destination_latitude: &quot;51.257430&quot;
+    destination_longitude: &quot;9.335892&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your application’s API key (get one by following the instructions above).</p>
+</span></p></dd><dt><a class='title-link' name='origin_latitude' href='#origin_latitude'></a> origin_latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>The starting latitude for calculating travel distance and time. Must be used in combination with origin_longitude. Cannot be used in combination with <code>origin_entity_id</code>.</p>
+</span></p></dd><dt><a class='title-link' name='origin_longitude' href='#origin_longitude'></a> origin_longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>The starting longitude for calculating travel distance and time. Must be used in combination with origin_latitude. Cannot be used in combination with <code>origin_entity_id</code>.</p>
+</span></p></dd><dt><a class='title-link' name='destination_latitude' href='#destination_latitude'></a> destination_latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>The finishing latitude for calculating travel distance and time. Must be used in combination with destination_longitude. Cannot be used in combination with <code>destination_entity_id</code>.</p>
+</span></p></dd><dt><a class='title-link' name='destination_longitude' href='#destination_longitude'></a> destination_longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>The finishing longitude for calculating travel distance and time. Must be used in combination with destination_latitude. Cannot be used in combination with <code>destination_entity_id</code>.</p>
+</span></p></dd><dt><a class='title-link' name='origin_entity_id' href='#origin_entity_id'></a> origin_entity_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>The entity_id holding the starting point for calculating travel distance and time. Cannot be used in combination with <code>origin_latitude</code>/<code>origin_longitude</code>.</p>
+</span></p></dd><dt><a class='title-link' name='destination_entity_id' href='#destination_entity_id'></a> destination_entity_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Exclusive)</span><span class='description'><p>The entity_id holding the finishing point for calculating travel distance and time. Cannot be used in combination with <code>destination_latitude</code>/<code>destination_longitude</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name to display on the sensor. The default is “HERE Travel Time”.</p>
+</span></p><p class='default'>
+Default value: <p>HERE Travel Time</p>
+</p></dd><dt><a class='title-link' name='mode' href='#mode'></a> mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can choose between: <code>bicycle</code>, <code>car</code>, <code>pedestrian</code>, <code>publicTransport</code>, <code>publicTransportTimeTable</code> or <code>truck</code>. The default is <code>car</code>. For public transport <code>publicTransportTimeTable</code> is recommended. You can find more information on the modes <a href="https://developer.here.com/documentation/routing/topics/transport-modes.html">here</a> and on the public modes <a href="https://developer.here.com/documentation/routing/topics/public-transport-routing.html">here</a></p>
+</span></p><p class='default'>
+Default value: <p>car</p>
+</p></dd><dt><a class='title-link' name='route_mode' href='#route_mode'></a> route_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can choose between: <code>fastest</code>, or <code>shortest</code>. This will determine whether the route is optimized to be the shortest and completely disregard traffic and speed limits or the fastest route according to the current traffic information. The default is <code>fastest</code></p>
+</span></p><p class='default'>
+Default value: <p>fastest</p>
+</p></dd><dt><a class='title-link' name='traffic_mode' href='#traffic_mode'></a> traffic_mode</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can choose between: <code>true</code>, or <code>false</code>. Decide whether you want to take the current traffic condition into account. Default is <code>false</code>.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='unit_system' href='#unit_system'></a> unit_system</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>You can choose between <code>metric</code> or <code>imperial</code>.</p>
+</span></p><p class='default'>
+Default value: <p>Defaults to <code>metric</code> or <code>imperial</code> based on the Home Assistant configuration.</p>
+</p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the update interval of the sensor in seconds. Defaults to 300 (5 minutes).</p>
+</span></p><p class='default'>
+Default value: <p>300</p>
+</p></dd></dl>
+</div>
+<h2>Dynamic Configuration</h2>
+<p>Tracking can be set up to track entities of type <code>device_tracker</code>, <code>zone</code>, <code>sensor</code> and <code>person</code>. If an entity is placed in the origin or destination then every 5 minutes when the platform updates, it will use the latest location of that entity.</p>
+<pre><code class="language-yaml"># Example entry for configuration.yaml
+sensor:
+  # Tracking entity to entity
+  - platform: here_travel_time
+    api_key: &quot;YOUR_API_KEY&quot;
+    name: Phone To Home
+    origin_entity_id: device_tracker.mobile_phone
+    destination_entity_id: zone.home
+  # Full config
+  - platform: here_travel_time
+    api_key: &quot;YOUR_API_KEY&quot;
+    name: Work to Home By Bike
+    origin_entity_id: zone.work
+    destination_latitude: 59.2842
+    destination_longitude: 59.2642
+    mode: bicycle
+    route_mode: fastest
+    traffic_mode: false
+    unit_system: imperial
+    scan_interval: 2678400 # 1 month
+    
+
+</code></pre>
+<h2>Entity Tracking</h2>
+<ul>
+<li><strong>device_tracker</strong>
+<ul>
+<li>If the state is a zone, then the zone location will be used</li>
+<li>If the state is not a zone, it will look for the longitude and latitude attributes</li>
+</ul>
+</li>
+<li><strong>zone</strong>
+<ul>
+<li>Uses the longitude and latitude attributes</li>
+</ul>
+</li>
+<li><strong>sensor</strong>
+<ul>
+<li>If the state is a zone, then will use the zone location</li>
+<li>All other states will be passed directly into the HERE API
+<ul>
+<li>This includes all valid locations listed in the <em>Configuration Variables</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Updating sensors on-demand using Automation</h2>
+<p>You can also use the <code>homeassistant.update_entity</code> service to update the sensor on-demand. For example, if you want to update <code>sensor.morning_commute</code> every 2 minutes on weekday mornings, you can use the following automation:</p>
+<pre><code class="language-yaml">automation:
+- id: update_morning_commute_sensor
+  alias: &quot;Commute - Update morning commute sensor&quot;
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    - condition: time
+      after: '08:00:00'
+      before: '11:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.morning_commute
+</code></pre>
+:ET

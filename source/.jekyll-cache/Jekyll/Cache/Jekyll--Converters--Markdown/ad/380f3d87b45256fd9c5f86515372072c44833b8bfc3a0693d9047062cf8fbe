@@ -1,0 +1,149 @@
+I"�<p>The <code>input_datetime</code> integration allows the user to define date and time values
+that can be controlled via the frontend and can be used within automations and
+templates.</p>
+<p>To add three datetime inputs to your installation,
+one with both date and time, and one with date or time each,
+add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+input_datetime:
+  both_date_and_time:
+    name: Input with both date and time
+    has_date: true
+    has_time: true
+  only_date:
+    name: Input with only date
+    has_date: true
+    has_time: false
+  only_time:
+    name: Input with only time
+    has_date: false
+    has_time: true
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='input_datetime' href='#input_datetime'></a> input_datetime</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Alias for the datetime input. Multiple entries are allowed.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Friendly name of the datetime input.</p>
+</span></p></dd><dt><a class='title-link' name='has_time' href='#has_time'></a> has_time</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> if the input should have a time. At least one <code>has_time</code> or <code>has_date</code> must be defined.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='has_date' href='#has_date'></a> has_date</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> if the input should have a date. At least one <code>has_time</code> or <code>has_date</code> must be defined.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='icon'><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to display in front of the input element in the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='initial' href='#initial'></a> initial</dt><dd><p class='desc'><span class='type'>(<span class='datetime time date'>datetime | time | date</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set the initial value of this input, depending on <code>has_time</code> and <code>has_date</code>.</p>
+</span></p><p class='default'>
+Default value: <p>1970-01-01 00:00 | 00:00 | 1970-01-01</p>
+</p></dd></dl></dd></dl>
+</div>
+<h3>Attributes</h3>
+<p>A datetime input entity’s state exports several attributes that can be useful in
+automations and templates.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>has_time</code></td>
+<td><code>true</code> if this entity has a time.</td>
+</tr>
+<tr>
+<td><code>has_date</code></td>
+<td><code>true</code> if this entity has a date.</td>
+</tr>
+<tr>
+<td><code>year</code><br><code>month</code><br><code>day</code></td>
+<td>The year, month and day of the date.<br>(only available if <code>has_date: true</code>)</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>A timestamp representing the time held in the input.<br>(only available if <code>has_time: true</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3>Restore State</h3>
+<p>If you set a valid value for <code>initial</code> this integration will start with state set to that value. Otherwise, it will restore the state it had prior to Home Assistant stopping.</p>
+<h3>Services</h3>
+<p>Available service: <code>input_datetime.set_datetime</code> and <code>input_datetime.reload</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Format String</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>%Y-%m-%d</code></td>
+<td>This can be used to dynamically set the date.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td><code>%H:%M:%S</code></td>
+<td>This can be used to dynamically set the time.</td>
+</tr>
+<tr>
+<td><code>datetime</code></td>
+<td><code>%Y-%m-%d %H:%M:%S</code></td>
+<td>This can be used to dynamically set both the date &amp; time.</td>
+</tr>
+</tbody>
+</table>
+<p>To set both the date and time in the same call, use <code>date</code> and <code>time</code> together, or use <code>datetime</code> by itself. Using <code>datetime</code> has the advantage that both can be set using one template.</p>
+<p><code>input_dateteime.reload</code> service allows one to reload <code>input_datetime</code>’s configuration without restarting Home Assistant itself.</p>
+<h2>Automation Examples</h2>
+<p>The following example shows the usage of the <code>input_datetime</code> as a trigger in an
+automation (note that you will need a
+<a href="/integrations/time_date">time sensor</a> elsewhere in your configuration):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+# Turns on bedroom light at the time specified.
+automation:
+  trigger:
+    platform: template
+    value_template: &quot;{{ states('sensor.time') == (state_attr('input_datetime.bedroom_alarm_clock_time', 'timestamp') | int | timestamp_custom('%H:%M', True)) }}&quot;
+  action:
+    service: light.turn_on
+    entity_id: light.bedroom
+</code></pre>
+<p>To dynamically set the <code>input_datetime</code> you can call
+<code>input_datetime.set_datetime</code>. The values for <code>date</code> and <code>time</code> must be in a certain format for the call to be successful. (See service description above.)
+If you have a <code>datetime</code> object you can use its <code>strftime</code> method. Of if you have a timestamp you can use the <code>timestamp_custom</code> filter.
+The following example can be used in an automation rule:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+# Sets input_datetime to '05:30' when an input_boolean is turned on.
+automation:
+  trigger:
+    platform: state
+    entity_id: input_boolean.example
+    to: 'on'
+  action:
+  - service: input_datetime.set_datetime
+    entity_id: input_datetime.bedroom_alarm_clock_time
+    data:
+      time: '05:30:00'
+  - service: input_datetime.set_datetime
+    entity_id: input_datetime.another_time
+    data_template:
+      time: &quot;{{ now().strftime('%H:%M:%S') }}&quot;
+  - service: input_datetime.set_datetime
+    entity_id: input_datetime.another_date
+    data_template:
+      date: &quot;{{ as_timestamp(now())|timestamp_custom('%Y-%m-%d') }}&quot;
+  - service: input_datetime.set_datetime
+    entity_id: input_datetime.date_and_time
+    data_template:
+      datetime: &quot;{{ now().strftime('%Y-%m-%d %H:%M:%S') }}&quot;
+  - service: input_datetime.set_datetime
+    data_template:
+      entity_id: input_datetime.date_and_time
+      date: &gt;
+        {{ now().timestamp() | timestamp_custom(&quot;%Y-%m-%d&quot;, true) }}
+      time: &gt;
+        {{ now().timestamp() | timestamp_custom(&quot;%H:%M:%S&quot;, true) }}
+</code></pre>
+:ET

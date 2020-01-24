@@ -1,0 +1,153 @@
+I"�<p>The core of Home Assistant is the event bus. The event bus allows any integration to fire or listen for events. It is the core of everything. For example, any state change will be announced on the event bus as a <code>state_changed</code> event containing the previous and the new state of an entity.</p>
+<p>Home Assistant contains a few built-in events that are used to coordinate between various components.</p>
+<h3>Event <code>homeassistant_start</code></h3>
+<p>Event <code>homeassistant_start</code> is fired when all integrations from the configuration have been initialized. This is the event that will start the timer firing off <code>time_changed</code> events.</p>
+<div class='note warning'>
+<p>Starting 0.42, it is no longer possible to listen for event <code>homeassistant_start</code>. Use the ‘homeassistant’ <a href="/docs/automation/trigger">platform</a> instead.</p>
+</div>
+<h3>Event <code>homeassistant_stop</code></h3>
+<p>Event <code>homeassistant_stop</code> is fired when Home Assistant is shutting down. It should be used to close any open connection or release any resources.</p>
+<h3>Event <code>state_changed</code></h3>
+<p>Event <code>state_changed</code> is fired when a state changes. Both <code>old_state</code> and <code>new_state</code> are state objects. <a href="/topics/state_object/">Documentation about state objects.</a></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>Entity ID of the changed entity. Example: <code>light.kitchen</code></td>
+</tr>
+<tr>
+<td><code>old_state</code></td>
+<td>The previous state of the entity before it changed. This field is omitted if the entity is new.</td>
+</tr>
+<tr>
+<td><code>new_state</code></td>
+<td>The new state of the entity. This field is omitted if the entity is removed from the state machine.</td>
+</tr>
+</tbody>
+</table>
+<h3>Event <code>time_changed</code></h3>
+<p>Event <code>time_changed</code> is fired every second by the timer and contains the current time.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>now</code></td>
+<td>A <a href="https://docs.python.org/3.4/library/datetime.html#datetime.datetime">datetime object</a> containing the current time in UTC.</td>
+</tr>
+</tbody>
+</table>
+<h3>Event <code>service_registered</code></h3>
+<p>Event <code>service_registered</code> is fired when a new service has been registered within Home Assistant.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>Domain of the service. Example: <code>light</code>.</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>The service to call. Example: <code>turn_on</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Event <code>call_service</code></h3>
+<p>Event <code>call_service</code> is fired to call a service.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>Domain of the service. Example: <code>light</code>.</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>The service to call. Example: <code>turn_on</code></td>
+</tr>
+<tr>
+<td><code>service_data</code></td>
+<td>Dictionary with the service call parameters. Example: <code>{ 'brightness': 120 }</code>.</td>
+</tr>
+<tr>
+<td><code>service_call_id</code></td>
+<td>String with a unique call id. Example: <code>23123-4</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Event <code>service_executed</code></h3>
+<p>Event <code>service_executed</code> is fired by the service handler to indicate the service is done.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>service_call_id</code></td>
+<td>String with the unique call id of the service call that was executed. Example: <code>23123-4</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class='note warning'>
+<p>Starting with 0.84, it is no longer possible to listen for event <code>service_executed</code>.</p>
+</div>
+<h3>Event <code>platform_discovered</code></h3>
+<p>Event <code>platform_discovered</code> is fired when a new platform has been discovered by the <a href="/integrations/discovery/"><code>discovery</code></a> component.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>service</code></td>
+<td>The platform that is discovered. Example: <code>zwave</code>.</td>
+</tr>
+<tr>
+<td><code>discovered</code></td>
+<td>Dictionary containing discovery information. Example: <code>{ &quot;host&quot;: &quot;192.168.1.10&quot;, &quot;port&quot;: 8889}</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Event <code>component_loaded</code></h3>
+<p>Event <code>component_loaded</code> is fired when a new integration has been loaded and initialized.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component</code></td>
+<td>Domain of the integration that has just been initialized. Example: <code>light</code>.</td>
+</tr>
+</tbody>
+</table>
+:ET

@@ -1,0 +1,43 @@
+I"?<p>This add-on allows you to set up a <a href="https://www.samba.org">Samba</a> server to access Hass.io folders using Windows network shares.</p>
+<div class='note warning'>
+<p>Be careful when setting up port forwarding for remote access. If you don’t restrict access by setting a username and strong password, your configuration could be exposed to the entire Internet!</p>
+</div>
+<div class='note'>
+<p>Sometimes shares will not show up under network in Windows. Then you could open the file browser, click the address field where it says “&gt; Network” and type <code>\\HASSIO</code> to access Hass.io shares.</p>
+</div>
+<pre><code class="language-json">{
+  &quot;workgroup&quot;: &quot;WORKGROUP&quot;,
+  &quot;username&quot;: &quot;&quot;,
+  &quot;password&quot;: &quot;&quot;,
+  &quot;interface&quot;: &quot;eth0&quot;,
+  &quot;allow_hosts&quot;: [
+      &quot;10.0.0.0/8&quot;,
+      &quot;172.16.0.0/12&quot;,
+      &quot;192.168.0.0/16&quot;
+  ],
+  &quot;veto_files&quot;: [
+      &quot;._*&quot;,
+      &quot;.DS_Store&quot;,
+      &quot;Thumbs.db&quot;,
+      &quot;icon?&quot;,
+      &quot;.Trashes&quot;
+  ]
+}
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='workgroup' href='#workgroup'></a> workgroup</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set network workgroup name.</p>
+</span></p><p class='default'>
+Default value: <p><code>WORKGROUP</code></p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Username for logging in.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Password for <code>username</code>. An empty password is not supported.</p>
+</span></p></dd><dt><a class='title-link' name='interface' href='#interface'></a> interface</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Interface that will start the share. Normally this is <code>eth0</code> for ethernet wired connection and <code>wlan0</code> for wireless connection. If you are running on an Intel NUC this could also be <code>enp3s0</code> for ethernet or <code>wlp5s0</code> for wireless connection.</p>
+</span></p></dd><dt><a class='title-link' name='allow_hosts' href='#allow_hosts'></a> allow_hosts</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The hosts that are allowed to connect to your Samba server. By default it is limited to people within the same local network.</p>
+</span></p><p class='default'>
+Default value: <p><code>[&quot;10.0.0.0/8&quot;, &quot;172.16.0.0/12&quot;, &quot;192.168.0.0/16&quot;]</code></p>
+</p></dd><dt><a class='title-link' name='veto_files' href='#veto_files'></a> veto_files</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of files that are neither visible nor accessible. Useful to stop clients from littering the share with temporary hidden files (e.g. macOS .DS_Store, Windows Thumbs.db)</p>
+</span></p><p class='default'>
+Default value: <p><code>[&quot;._*&quot;, &quot;.DS_Store&quot;, &quot;Thumbs.db&quot;, &quot;icon?&quot;, &quot;.Trashes&quot;]</code></p>
+</p></dd></dl>
+</div>
+:ET

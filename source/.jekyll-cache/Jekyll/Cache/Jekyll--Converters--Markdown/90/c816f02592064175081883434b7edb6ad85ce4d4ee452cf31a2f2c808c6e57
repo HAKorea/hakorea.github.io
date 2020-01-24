@@ -1,0 +1,30 @@
+I"	<p>The <code>yamaha_musiccast</code> platform allows you to control <a href="https://usa.yamaha.com/products/audio_visual/hifi_components/index.html">Yamaha MusicCast Receivers</a> from Home Assistant.</p>
+<p>Supported devices are listed on their <a href="https://de.yamaha.com/de/products/contents/audio_visual/musiccast/products.html">German site</a>.</p>
+<p>To add a Yamaha MusicCast Receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: yamaha_musiccast
+    host: 192.168.xx.xx
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address or hostname of the device.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>UDP source port. If multiple devices are present, specify a different port per device.</p>
+</span></p><p class='default'>
+Default value: <p>5005</p>
+</p></dd><dt><a class='title-link' name='interval_seconds' href='#interval_seconds'></a> interval_seconds</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Polling interval in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>480</p>
+</p></dd></dl>
+</div>
+<h3>Supported operations</h3>
+<p>Currently, this integration supports powering on/off, mute, volume control, and source selection. Playback controls, for instance, play and stop are available for sources that support it.</p>
+<h3>Example configuration</h3>
+<p>A full configuration example will look like the sample below:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: yamaha_musiccast
+    host: 192.168.178.97
+    port: 5005
+</code></pre>
+:ET

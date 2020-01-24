@@ -1,0 +1,78 @@
+I"�<p>The <code>ptvsd</code> integration allows you to use the Visual Studio Code PTVSD debugger with Home Assistant.</p>
+<p>This is useful in testing changes on a local development install, or connecting to a production server to debug issues.</p>
+<p>To enable the <code>ptvsd</code> integration add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ptvsd:
+</code></pre>
+<p>By default this will listen on all local interfaces, on port 5678, and will not wait for a connection.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The local interface to listen on.</p>
+</span></p><p class='default'>
+Default value: <p>0.0.0.0 (all interfaces).</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port to listen on.</p>
+</span></p><p class='default'>
+Default value: <p>5678</p>
+</p></dd><dt><a class='title-link' name='wait' href='#wait'></a> wait</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If true, wait for the debugger to connect before starting up Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<h3>Security</h3>
+<p>Ensure if this is a public-facing server, that the port is secured. Anyone who is able to access the debugger port can <em>execute arbitrary code</em> on the Home Assistant server, which is very unsafe.</p>
+<p>If the Home Assistant server is behind your firewall with only the http(s) port exposed, then this is safe from outside connections.</p>
+<p>Another way of securing the port is to set <code>host</code> to localhost and have a secured SSH TCP tunnel with a client certificate for access from the outside internet.</p>
+<h3>Memory Use</h3>
+<p>There have been reports of continually increasing memory use while the debugger is running, although this doesn’t seem to appear on all systems. Only configure the debugger on a persistent server when it’s actually required.</p>
+<h3>Waiting at startup</h3>
+<p>If you want to debug something in the boot-up sequence, configure the integration to wait for a connection first:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ptvsd:
+  wait: True
+</code></pre>
+<p>The ptvsd debugger is loaded quite early on in the boot-up sequence, before any other components. This will allow you to set breakpoints in <code>async_setup</code> or similar and debug the loading of the component.</p>
+<h3>Alternate host and port</h3>
+<p>You can also listen on a different server address or port:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ptvsd:
+  host: localhost
+  port: 6789
+</code></pre>
+<p>This is useful for multi-homed servers, or for localhost only access</p>
+<h3>Example Visual Studio Code configuration</h3>
+<p>This can be copied into your <code>launch.json</code> in the <code>.vscode</code> subdirectory in your Visual Studio Code project to connect to the debugger.</p>
+<pre><code class="language-json">{
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [        
+        {
+            // Example of attaching to local debug server running on WSL
+            &quot;name&quot;: &quot;Python: Attach Local&quot;,
+            &quot;type&quot;: &quot;python&quot;,
+            &quot;request&quot;: &quot;attach&quot;,
+            &quot;port&quot;: 5678,
+            &quot;host&quot;: &quot;localhost&quot;,
+            &quot;pathMappings&quot;: [
+                {
+                    &quot;localRoot&quot;: &quot;c:\\Users\\Penny\\Documents\\Software\\home-assistant\\&quot;,
+                    &quot;remoteRoot&quot;: &quot;/mnt/c/Users/Penny/Documents/Software/home-assistant&quot; 
+                }
+            ],            
+        },
+        {
+            // Example of attaching to my production server
+            &quot;name&quot;: &quot;Python: Attach Brontosarus&quot;,
+            &quot;type&quot;: &quot;python&quot;,
+            &quot;request&quot;: &quot;attach&quot;,
+            &quot;port&quot;: 5678,
+            &quot;host&quot;: &quot;10.0.0.3&quot;, // Within my firewall so I don't need to secure the port.
+            &quot;pathMappings&quot;: [
+                {
+                    &quot;localRoot&quot;: &quot;c:\\Users\\Penny\\Documents\\Software\\home-assistant\\&quot;,
+                    &quot;remoteRoot&quot;: &quot;/usr/src/app&quot; // setup for docker container.
+                }
+            ],            
+        }
+    ]
+}
+</code></pre>
+:ET

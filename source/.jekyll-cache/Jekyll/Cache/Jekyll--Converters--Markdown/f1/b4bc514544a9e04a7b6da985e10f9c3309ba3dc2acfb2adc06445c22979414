@@ -1,0 +1,32 @@
+I"!
+<p>The <code>deutsche_bahn</code> sensor will give you the departure time of the next train for the given connection. In case of a delay, the delay is also shown. Additional details are used to inform about, e.g., the type of the train, price, and if it is on time.</p>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: deutsche_bahn
+    from: NAME_OF_START_STATION
+    to: NAME_OF_FINAL_STATION
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='from' href='#from'></a> from</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the start station.</p>
+</span></p></dd><dt><a class='title-link' name='to' href='#to'></a> to</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the end/destination station.</p>
+</span></p></dd><dt><a class='title-link' name='offset' href='#offset'></a> offset</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Do not display departures leaving sooner than this number of seconds. Useful if you are a couple of minutes away from the stop. The formats “HH:MM” and “HH:MM:SS” are also supported.</p>
+</span></p><p class='default'>
+Default value: <p>0.0</p>
+</p></dd><dt><a class='title-link' name='only_direct' href='#only_direct'></a> only_direct</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Only show direct connections.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>This sensor stores a lot of attributes which can be accessed by other sensors, e.g., a <a href="/integrations/template">template sensor</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  platform: template
+  sensors:
+    next_departure:
+      value_template: '{{ state_attr('sensor.munich_to_ulm', 'next') }}'
+      friendly_name: 'Next departure'
+</code></pre>
+<p>The data is coming from the <a href="https://www.bahn.de/p/view/index.shtml">bahn.de</a> website.</p>
+:ET

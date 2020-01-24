@@ -1,0 +1,78 @@
+I"<p>Retrieve train departure information from <a href="https://www.trafikverket.se/">Trafikverket</a>.</p>
+<p>Use cases:</p>
+<ul>
+<li>Retrieve the next departure and information connected to it for a specific train line.</li>
+<li>Retrieve information for specific departure time on a specific train line.</li>
+<li>Set up an alert or perform actions if your train is delayed or canceled.</li>
+</ul>
+<p>Data that is retrieved:</p>
+<ul>
+<li>Next departure for the specific train line.</li>
+<li>Canceled status.</li>
+<li>The number of minutes delayed.</li>
+<li>Planned time if no delays occur.</li>
+<li>Estimated time of arrival if delays occur.</li>
+<li>Actual time - when it did arrive.</li>
+<li>Other information / additional texts.</li>
+<li>Deviations.</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this sensor, use the following format in your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml">sensor:
+   - platform: trafikverket_train
+     api_key: TRAFIKVERKET_API
+     trains:
+     - name: &quot;Morning train to Malmö&quot;
+       from: &quot;Stockholm Central&quot;
+       to: &quot;Malmö C&quot;
+       time: &quot;9:25&quot;
+       
+     - name: &quot;Next train to Uppsala&quot;
+       from: &quot;Stockholm Central&quot;
+       to: &quot;Uppsala C&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your personal API key from Trafikverket.</p>
+</span></p></dd><dt><a class='title-link' name='trains' href='#trains'></a> trains</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Specify details on the departures to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the departure, will be the sensor name.</p>
+</span></p></dd><dt><a class='title-link' name='from' href='#from'></a> from</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The station from where the train departs.</p>
+</span></p></dd><dt><a class='title-link' name='to' href='#to'></a> to</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The destination station.</p>
+</span></p></dd><dt><a class='title-link' name='time' href='#time'></a> time</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Departure time to monitor, if not entered it will retrieve the next departure.</p>
+</span></p></dd><dt><a class='title-link' name='weekday' href='#weekday'></a> weekday</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify which days in the week to monitor the specific departure.</p>
+</span></p><p class='default'>
+Default value: <p>[mon, tue, wed, thu, fri, sat, sun]</p>
+</p></dd></dl></dd></dl>
+</div>
+<h2>Obtaining API key</h2>
+<p>Please click <a href="https://api.trafikinfo.trafikverket.se/">here</a> and register to obtain the API key.</p>
+<h2>Train station names</h2>
+<p>Click <a href="https://www.trafikverket.se/trafikinformation/tag/?ArrDep=departure&amp;">here</a> to see an example of train station names.</p>
+<h2>Examples</h2>
+<pre><code class="language-yaml">sensor:
+- platform: trafikverket_train
+  api_key: !secret trafikverket_api_key
+  trains:
+  - name: &quot;Train to work&quot;
+    from: Sölvesborg
+    to: Kristianstad C
+    time: &quot;07:28&quot;
+    weekday: [mon, tue, wed, thu, fri]
+    
+  - name: &quot;Train from work early&quot;
+    from: Kristianstad C
+    to: Sölvesborg
+    time: &quot;16:38&quot;
+    
+  - name: &quot;Train from work late&quot;
+    from: Kristianstad C
+    to: Sölvesborg
+    time: &quot;17:02&quot;
+    weekday: [sat, sun]
+    
+  - name: &quot;Next train to Uppsala&quot;
+    from: &quot;Stockholm Central&quot;
+    to: &quot;Uppsala C&quot;
+    
+</code></pre>
+:ET

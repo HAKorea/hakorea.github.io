@@ -1,0 +1,34 @@
+I"ö	<p>The <code>solaredge</code> platform uses the <a href="https://www.solaredge.com/sites/default/files/se_monitoring_api.pdf">SolarEdge Monitoring API</a> to allow you to get details from your SolarEdge solar power setup and integrate these in your Home Assistant installation.</p>
+<div class='note'>
+<p>The SolarEdge Monitoring API has a daily rate limit of 300 requests. In order to stay under this limit, and alow for some additional requests, the <code>solaredge</code> platform will update the site overview every 10 minutes.</p>
+</div>
+<h2>Configuration</h2>
+<p>There are 2 options in configuring the SolarEdge integration:</p>
+<ul>
+<li>Via the Home Assistant user interface where it will let you enter the port string to connect to the Velbus bus.</li>
+<li>Via the Home Assistant <code>configuration.yaml</code> file.</li>
+</ul>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+solaredge:
+  api_key: API_KEY
+  site_id: SITE_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your SolarEdge Site API key.</p>
+</span></p></dd><dt><a class='title-link' name='site_id' href='#site_id'></a> site_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The id of your SolarEdge Site.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Let you overwrite the name of the device in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>SolarEdge</p>
+</p></dd></dl>
+</div>
+<h2>Full configuration example</h2>
+<p>In case you would like to convert the values for example to kWh instead of the default Wh, you can use the <a href="/integrations/template">template platform</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for template platform
+sensors:
+  platform: template
+  sensors:
+    solaredge_energy_this_year_template:
+      value_template: &quot;{{ (states('sensor.solaredge_energy_this_year') | float / 1000) | round(2) }}&quot;
+</code></pre>
+:ET

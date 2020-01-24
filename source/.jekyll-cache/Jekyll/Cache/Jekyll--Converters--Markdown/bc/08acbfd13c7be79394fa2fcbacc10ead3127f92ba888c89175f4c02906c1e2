@@ -1,0 +1,40 @@
+I"Q<p>The <code>nws</code> platform uses the <a href="https://www.weather.gov">National Weather Service</a> web API as a source for meteorological data for your location.</p>
+<h2>Configuration</h2>
+<p>According to the <a href="https://www.weather.gov/documentation/services-web-api/">API documentation</a>, a string is required for the API key, and an email address is suggested to be included within the string.</p>
+<p>To add NWS to your installation using the closest station, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+weather:
+  - platform: nws
+    api_key: YOUR_API_KEY
+</code></pre>
+<p>To specify a station, for example, KADW (Andrews Air Force Base), use the following:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+weather:
+  - platform: nws
+    api_key: YOUR_API_KEY
+    station: KADW
+</code></pre>
+<p>A list of nearby stations is printed to the log with level <code>DEBUG</code> if no station is supplied. Stations can also be found on the <a href="https://www.cnrfc.noaa.gov/metar.php">NOAA website</a>. Codes with only three characters, for example, <code>ADW</code> should be prefixed with the letter K, <code>KADW</code>.</p>
+<p>The default forecast is day and night, <code>mode: daynight</code>, while <code>mode: hourly</code> gives the forecast hourly.  The forecast is obtained from the latitude and longitude value, not the station.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your API key. Any string, but an email address is suggested to be included.</p>
+</span></p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Manually specify latitude. By default, the value will be taken from the Home Assistant configuration.</p>
+</span></p><p class='default'>
+Default value: <p>Provided by Home Assistant configuration.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Manually specify longitude. By default, the value will be taken from the Home Assistant configuration.</p>
+</span></p><p class='default'>
+Default value: <p>Provided by Home Assistant configuration.</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>Station name.</p>
+</p></dd><dt><a class='title-link' name='mode' href='#mode'></a> mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The forecast type. Can be <code>daynight</code> or <code>hourly</code>.</p>
+</span></p><p class='default'>
+Default value: <p>daynight</p>
+</p></dd><dt><a class='title-link' name='station' href='#station'></a> station</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>METAR station code.</p>
+</span></p><p class='default'>
+Default value: <p>Closest station to <code>latitude</code> and <code>longitude</code> as returned by NWS API.</p>
+</p></dd></dl>
+</div>
+<p>Details about the API are available in the <a href="https://www.weather.gov/documentation/services-web-api">NWS API documentation</a>. The <a href="https://github.com/MatthewFlamm/pynws">pynws</a> library is used to retrieve data.</p>
+:ET

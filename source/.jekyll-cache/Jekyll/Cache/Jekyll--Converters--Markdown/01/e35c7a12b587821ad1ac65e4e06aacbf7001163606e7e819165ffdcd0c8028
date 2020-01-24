@@ -1,0 +1,129 @@
+I"W<p>The <code>slack</code> platform allows you to deliver notifications from Home Assistant to <a href="https://slack.com/">Slack</a>.</p>
+<h2>Setup</h2>
+<h3>Bot posting as you</h3>
+<ol>
+<li>Create a <a href="https://api.slack.com/apps">new app</a> under your Slack.com account</li>
+<li>Click the <code>OAuth &amp; Permissions</code> link in the sidebar, under the Features heading</li>
+<li>In the Scopes section, add the <code>chat:write:user</code> scope, <code>Send messages as user</code></li>
+<li>Scroll up to <code>OAuth Tokens &amp; Redirect URLs</code> and click <code>Install App</code></li>
+<li>Copy your <code>OAuth Access Token</code> and put that key into your <code>configuration.yaml</code> file – see below</li>
+</ol>
+<div class='note'>
+<p>There is an app credential Verification Token on the Basic Settings of your app. This is <strong>not</strong> the API key you want.</p>
+</div>
+<h3>Bot posting as its own user</h3>
+<p>It is also possible to use Slack bots as users. Just create a new bot at https://[YOUR_TEAM].slack.com/apps/build/custom-integration and use the provided token for that. You can add an icon from the frontend for Home Assistant and give the bot a meaningful name.</p>
+<p>Don’t forget to invite the bot to the room where you want to get the notifications.</p>
+<h2>Configuration</h2>
+<p>To enable the Slack notification in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: slack
+    api_key: YOUR_API_KEY
+    default_channel: '#general'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting this parameter allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Slack API token to use for sending Slack messages.</p>
+</span></p></dd><dt><a class='title-link' name='default_channel' href='#default_channel'></a> default_channel</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The default channel to post to if no channel is explicitly specified when sending the notification message.  A channel can be specified adding a target attribute to the JSON at the same level as “message”.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Home Assistant will post to Slack using the username specified.</p>
+</span></p><p class='default'>
+Default value: <p>The user account or botname that you generated the API key as.</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Use one of the Slack emojis as an Icon for the supplied username.  Slack uses the standard emoji sets used <a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">here</a>.</p>
+</span></p></dd></dl>
+</div>
+<h3>Slack service data</h3>
+<p>The following attributes can be placed inside <code>data</code> for extended functionality.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>yes</td>
+<td>Groups the attributes for file upload. If present, either <code>url</code> or <code>path</code> have to be provided.</td>
+</tr>
+<tr>
+<td><code>path </code></td>
+<td>yes</td>
+<td>Local path of file, photo etc to post to slack. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>yes</td>
+<td>URL of file, photo etc to post to slack. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>yes</td>
+<td>Username if the url requires authentication. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>yes</td>
+<td>Password if the url requires authentication. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>auth</code></td>
+<td>yes</td>
+<td>If set to <code>digest</code> HTTP-Digest-Authentication is used. If missing HTTP-BASIC-Authentication is used. Is placed inside <code>file</code>.</td>
+</tr>
+<tr>
+<td><code>attachments</code></td>
+<td>yes</td>
+<td>Array of <a href="https://api.slack.com/docs/message-attachments">Slack attachments</a>. See <a href="https://api.slack.com/docs/message-attachments">the attachment documentation</a> for how to format. <em>NOTE</em>: if using <code>attachments</code>, they are shown <strong>in addition</strong> to <code>message</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example for posting file from URL:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;:&quot;Message that will be added as a comment to the file.&quot;,
+  &quot;title&quot;:&quot;Title of the file.&quot;,
+  &quot;target&quot;: [&quot;#channelname&quot;], 
+  &quot;data&quot;:{
+    &quot;file&quot;:{
+      &quot;url&quot;:&quot;http://[url to file, photo, security camera etc]&quot;,
+      &quot;username&quot;:&quot;optional user, if necessary&quot;,
+      &quot;password&quot;:&quot;optional password, if necessary&quot;,
+      &quot;auth&quot;:&quot;digest&quot;
+    }
+  }
+}
+</code></pre>
+<p>Example for posting file from local path:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;:&quot;Message that will be added as a comment to the file.&quot;,
+  &quot;title&quot;:&quot;Title of the file.&quot;,
+  &quot;data&quot;:{
+    &quot;file&quot;:{
+      &quot;path&quot;:&quot;/path/to/file.ext&quot;
+    }
+  }
+}
+</code></pre>
+<p>Please note that <code>path</code> is validated against the <code>whitelist_external_dirs</code> in the <code>configuration.yaml</code>.</p>
+<p>Example for posting formatted attachment:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;&quot;,
+  &quot;data&quot;: {
+    &quot;attachments&quot;: [
+      {
+        &quot;title&quot;: &quot;WHAT A HORRIBLE NIGHT TO HAVE A CURSE.&quot;,
+        &quot;image_url&quot;: &quot;https://i.imgur.com/JEExnsI.gif&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<p>Please note that both <code>message</code> is a required key, but is always shown, so use an empty (<code>&quot;&quot;</code>) string for <code>message</code> if you don’t want the extra text.</p>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+:ET

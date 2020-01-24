@@ -1,0 +1,36 @@
+I" <p>The <code>surepetcare</code> component allows you to get information on your Sure Petcare Connect Pet or Cat Flap.</p>
+<h2>Configuration</h2>
+<p>To add a flap and pet, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+surepetcare:
+  username: x@y.com
+  password: v3rys3cr3t!
+  household_id: 1337
+  flaps: [{id: 2337, name: Flap}]
+  pets: [{id: 3337, name: Pet}]
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Sure Petcare Username/Email</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Sure Petcare Password</p>
+</span></p></dd><dt><a class='title-link' name='household_id' href='#household_id'></a> household_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Sure Petcare household_id</p>
+</span></p></dd><dt><a class='title-link' name='flaps' href='#flaps'></a> flaps</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Sure Petcare flaps</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Sure Petcare id of a flap</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A name for the flap</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='pets' href='#pets'></a> pets</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Pets managed by Sure Petcare flap(s)</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The Sure Petcare id of a pet</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the pet</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to display (e.g., <code>mdi:cat</code>)</p>
+</span></p><p class='default'>
+Default value: <p>mdi:cat</p>
+</p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Minimum time interval between updates. Supported formats: <code>scan_interval: 'HH:MM:SS'</code>, <code>scan_interval: 'HH:MM'</code> and Time period dictionary (see example below).</p>
+</span></p><p class='default'>
+Default value: <p>3 minutes</p>
+</p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='device_class'><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>The type/class of the sensor to set the icon in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>lock</p>
+</p></dd></dl>
+</div>
+<h2>Getting the IDs of your household, flaps and pets</h2>
+<p>For now, please use the <a href="https://github.com/rcastberg/sure_petcare/blob/master/sp_cli.py">sp_cli.py</a> from <a href="https://github.com/rcastberg">@rcastberg</a> to fetch the IDs from the Sure Petcare API. With default setting, the IDs will be written as JSON to <code>~/.surepet.cache</code>.</p>
+:ET

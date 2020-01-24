@@ -1,0 +1,806 @@
+I"�q<p><a href="https://www.wink.com/">Wink</a> is a home automation hub that can control a whole wide range of devices on the market. Or, as they say in their own words:</p>
+<blockquote>
+  Wink offers one, quick and simple way to connect people with the products they rely on every day in their home.
+</blockquote>
+<p>Home Assistant integrates with the Wink API and automatically sets up any switches, lights, locks, fans, climate devices (thermostats, air conditioners, and water heaters), covers, sensors, alarms, and sirens.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#alarm-control-panel">Alarm</a></li>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#climate">Climate</a></li>
+<li><a href="#cover">Cover</a></li>
+<li><a href="#fan">Fan</a></li>
+<li><a href="#light">Light</a></li>
+<li><a href="#lock">Lock</a></li>
+<li>Scene</li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#switch">Switch</a></li>
+<li><a href="#water-heater">Water heater</a></li>
+</ul>
+<h2>Authenticate using <a href="https://developer.wink.com">developer.wink.com</a></h2>
+<p>You need to set up a developer account with Wink. This process can take a few days to get approved.</p>
+<p>Wink requests three pieces of information from the user when they sign up for a developer account.</p>
+<ol>
+<li><code>Name:</code> This can be anything, for example, “Home Assistant”</li>
+<li><code>Website:</code> The external address of your Home Assistant instance. If not externally accessible you can use your email address.</li>
+<li><code>Redirect URI:</code> This should be <code>http://192.168.1.5:8123/auth/wink/callback</code> replacing the IP with the internal IP of your Home Assistant box.</li>
+</ol>
+<p>No settings are required in the <code>configuration.yaml</code> other than <code>wink:</code>.</p>
+<p>After adding <code>wink:</code> to your <code>configuration.yaml</code> and restarting Home Assistant you will see a persistent notification on the frontend with a <code>CONFIGURE</code> button that will guide you through the setup via the frontend configurator.</p>
+<div class='note'>
+When using the configurator make sure the initial setup is performed on the same local network as the Home Assistant server, if not from the same box Home Assistant is running on. This will allow for authentication redirects to happen correctly.
+</div>
+<pre><code class="language-yaml">wink:
+</code></pre>
+<h2>Full oauth authentication (legacy)</h2>
+<p>This should be used for users that obtained their client_id and client_secret via email from Wink support prior to <a href="https://developer.wink.com">developer.wink.com’s</a> existence.</p>
+<pre><code class="language-yaml">wink:
+  email: YOUR_WINK_EMAIL_ADDRESS
+  password: YOUR_WINK_PASSWORD
+  client_id: YOUR_WINK_CLIENT_ID
+  client_secret: YOUR_WINK_CLIENT_SECRET
+</code></pre>
+<p>Please pay attention that the required entries are only needed for legacy OAuth access.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='email' href='#email'></a> email</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Wink login email address.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your Wink login password.</p>
+</span></p></dd><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your provided Wink <code>client_id</code>.</p>
+</span></p></dd><dt><a class='title-link' name='client_secret' href='#client_secret'></a> client_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your provided Wink <code>client_secret</code>.</p>
+</span></p></dd><dt><a class='title-link' name='local_control' href='#local_control'></a> local_control</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If set to <code>true</code> state changes for lights, locks and switches will be issued to the local hub.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>Local control:</p>
+<ul>
+<li>Wink’s local control API isn’t officially documented and therefore could be broken by a hub update. For these reasons <code>local_control</code> defaults to <code>false</code>.</li>
+<li>Using local control doesn’t appear to make commands any quicker, but does function in an internet/Wink outage.</li>
+<li>Local control is also only available for the Wink hub v1 and v2, not the Wink relay.</li>
+<li>Local control isn’t used during the start-up of Home Assistant; this means initial setup requires an active internet connection.</li>
+<li>Local control requests are first sent to the controlling hub. If a request fails, that request will attempt to go online.</li>
+</ul>
+<div class='note'>
+<p>It is possible for the hub to get into a bad state where it stops accepting local control request. If this happens, you will notice requests taking significantly longer as they are redirected online. This doesn’t happen often, but when it does, it appears to be resolved by rebooting the hub.</p>
+<p>The following error will be logged if the hub is rejecting local requests.</p>
+<pre><code class="language-txt">Error sending local control request. Sending request online
+</code></pre>
+</div>
+<h2>Service <code>refresh_state_from_wink</code></h2>
+<p>The Wink integration only obtains the device states from the Wink API once, during startup. All updates after that are pushed via a third party called PubNub. On rare occasions where an update isn’t pushed device states can be out of sync.</p>
+<p>You can use the service wink/refresh_state_from_wink to pull the most recent state from the Wink API for all devices. If <code>local_control</code> is set to <code>true</code> states will be pulled from the devices controlling hub, not the online API.</p>
+<h2>Service <code>pull_newly_added_devices_from_wink</code></h2>
+<p>You can use the service wink/add_new_devices to pull any newly paired Wink devices to an already running instance of Home-Assistant. Any new devices will also be added if Home-Assistant is restarted.</p>
+<h2>Service <code>delete_wink_device</code></h2>
+<p>You can use the service wink/delete_wink_device to remove/unpair a device from Wink.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String that points at the <code>entity_id</code> of device to delete.</td>
+</tr>
+</tbody>
+</table>
+<h2>Service <code>pair_new_device</code></h2>
+<p>You can use the service wink/pair_new_device to pair a new device to your Wink hub/relay</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hub_name</code></td>
+<td>no</td>
+<td>The name of the hub to pair a new device to.</td>
+</tr>
+<tr>
+<td><code>pairing_mode</code></td>
+<td>no</td>
+<td>One of the following [zigbee, zwave, zwave_exclusion, zwave_network_rediscovery, lutron, bluetooth, kidde]</td>
+</tr>
+<tr>
+<td><code>kidde_radio_code</code></td>
+<td>conditional</td>
+<td>A string of 8 1s and 0s one for each dip switch on the kidde device left –&gt; right = 1 –&gt; 8 (Required if pairing_mode = kidde)</td>
+</tr>
+</tbody>
+</table>
+<div class='note'>
+Calling service wink/pull_newly_added_wink_devices after a device is paired will add that new device to Home Assistant. The device will also show up on the next restart of Home Assistant.
+</div>
+<h2>Service <code>rename_wink_device</code></h2>
+<p>You can use the service wink/rename_wink_device to change the name of a device.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String that points at the <code>entity_id</code> of device to rename.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>no</td>
+<td>The name to change it to.</td>
+</tr>
+</tbody>
+</table>
+<div class='note'>
+Home Assistant entity_ids for Wink devices are based on the Wink device's name. Calling this service will not change the entity_id of the device until Home Assistant is restarted.
+</div>
+<div class='note'>
+The Wink hub, by default, can only be accessed via the cloud. This means it requires an active internet connection and you will experience delays when controlling and updating devices (~3s).
+</div>
+<h2>Custom Wink devices and their services</h2>
+<ul>
+<li>GoControl siren and strobe</li>
+<li>Dome siren/chime/strobe</li>
+<li>Quirky Nimbus (Legacy device) These can no longer be officially added to your Wink account</li>
+</ul>
+<h3>Service <code>set_siren_auto_shutoff</code></h3>
+<p>You can use the service wink/set_siren_auto_shutoff to set how long the siren will sound before shutting off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auto_shutoff</code></td>
+<td>no</td>
+<td>Int. One of [None, -1, 30, 60, 120] (None and -1 are forever. Use None for gocontrol, and -1 for Dome)</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of siren.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_all_sirens_to_one_minute_auto_shutoff:
+    sequence:
+      - service: wink.set_siren_auto_shutoff
+        data:
+          auto_shutoff: 60
+</code></pre>
+<div class='note'>
+The following services only work with the Dome siren/chime.
+</div>
+<h3>Service <code>set_chime_volume</code></h3>
+<p>You can use the service wink/set_chime_volume to set the volume for the chime on your Dome siren/chime.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>volume</code></td>
+<td>no</td>
+<td>String. One of [“low”, “medium”, “high”]</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of the siren/chime.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_chime_volume_to_low_for_all_chimes
+    sequence:
+      - service: wink.set_chime_volume
+        data:
+          volume: &quot;low&quot;
+</code></pre>
+<h3>Service <code>set_siren_volume</code></h3>
+<p>You can use the service wink/set_chime_volume to set the volume for the chime on your Dome siren/chime.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>volume</code></td>
+<td>no</td>
+<td>String. One of [“low”, “medium”, “high”]</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of siren/chime.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_siren_volume_to_low_for_all_sirens
+    sequence:
+      - service: wink.set_siren_volume
+        data:
+          volume: &quot;low&quot;
+</code></pre>
+<h3>Service <code>enable_chime</code></h3>
+<p>You can use the service wink/enable_chime to set the tone and enable the chime on your Dome siren/chime.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tone</code></td>
+<td>no</td>
+<td>String. One of [“doorbell”, “fur_elise”, “doorbell_extended”, “alert”, “william_tell”, “rondo_alla_turca”, “police_siren”, “evacuation”, “beep_beep”, “beep”, “inactive”]</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of siren/chime.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  execute_doorbell
+    sequence:
+      - service: wink.enable_chime
+        data:
+          tone: &quot;doorbell&quot;
+</code></pre>
+<h3>Service <code>set_siren_tone</code></h3>
+<p>You can use the service wink/set_siren_tone to set the tone on your Dome siren. This tone will be used the next time the siren is executed.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tone</code></td>
+<td>no</td>
+<td>String. One of [“doorbell”, “fur_elise”, “doorbell_extended”, “alert”, “william_tell”, “rondo_alla_turca”, “police_siren”, “evacuation”, “beep_beep”, “beep”]</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of siren/chime.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_siren_to_alert:
+    sequence:
+      - service: wink.set_siren_tone
+        data:
+          tone: &quot;alert&quot;
+</code></pre>
+<h3>Service <code>set_siren_strobe_enabled</code></h3>
+<p>You can use the service wink/set_siren_strobe_enabled to enable or disable the strobe when the siren is executed.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>no</td>
+<td>Boolean. True or False.</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of siren/chime.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  disable_siren_strobe:
+    sequence:
+      - service: wink.set_siren_strobe_enabled
+        data:
+          enabled: false
+</code></pre>
+<h3>Service <code>set_chime_strobe_enabled</code></h3>
+<p>You can use the service wink/set_chime_strobe_enabled to enable or disable the strobe when the chime is executed.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>no</td>
+<td>Boolean. True or False.</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of chime/chime.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  disable_chime_strobe:
+    sequence:
+      - service: wink.set_chime_strobe_enabled
+        data:
+          enabled: false
+</code></pre>
+<h3>Service <code>set_nimbus_dial_state</code></h3>
+<p>You can use the service wink/set_nimbus_dial_state to update an individual dial’s value/position and its labels</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of strings that point at <code>entity_id</code>s of chime/chime.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>no</td>
+<td>A number, should be between the dials min and max value (See set_nimbus_dial_configuration below)</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>yes</td>
+<td>A list of strings the first being the value set on the dial’s face and the second being the value on the dial face when the Nimbus is pressed</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_dial_1_value:
+    sequence:
+      - service: wink.set_nimbus_dial_state
+        data:
+          entity_id: wink.nimbus_dial_1
+          value: 150
+          labels:
+            - &quot;Dial 1&quot;
+            - &quot;150&quot;
+</code></pre>
+<h3>Service <code>set_nimbus_dial_configuration</code></h3>
+<p>You can use the service wink/set_nimbus_dial_configuration to update an individual dial’s configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of strings that point at <code>entity_id</code>s of chime/chime.</td>
+</tr>
+<tr>
+<td><code>rotation</code></td>
+<td>yes</td>
+<td>One of “cw” or “ccw” the direction the dial hand should rotate.</td>
+</tr>
+<tr>
+<td><code>ticks</code></td>
+<td>yes</td>
+<td>A positive number, the number of times the hand should move.</td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>yes</td>
+<td>One of “linear” or “log” How the dial should move in response to higher values.</td>
+</tr>
+<tr>
+<td><code>min_value</code></td>
+<td>yes</td>
+<td>A number, the minimum value that the dial can have.</td>
+</tr>
+<tr>
+<td><code>max_value</code></td>
+<td>yes</td>
+<td>A number, the maximum value that the dial can have.</td>
+</tr>
+<tr>
+<td><code>min_position</code></td>
+<td>yes</td>
+<td>A number generally [0-360], the minimum position for the dial’s hand.</td>
+</tr>
+<tr>
+<td><code>max_value</code></td>
+<td>yes</td>
+<td>A number generally [0-360], the maximum position for the dial’s hand.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_dial_1_value:
+    sequence:
+      - service: wink.set_nimbus_dial_state
+        data:
+          entity_id: wink.nimbus_dial_1
+          rotation: 'ccw'
+</code></pre>
+<h2>Alarm Control Panel</h2>
+<p>The Wink alarm platform allows you to control your <a href="https://www.wink.com/">Wink</a> Canary all-in-one security camera.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported devices</h3>
+<ul>
+<li>Canary all-in-one security camera</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Binary Sensor</h2>
+<p>The Wink binary sensor platform allows you to get data from your <a href="https://www.wink.com/">Wink</a> binary sensors.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported Binary sensor devices</h3>
+<ul>
+<li>Smoke and CO detectors (No Wink hub required for Nest)</li>
+<li>Window/Door sensors</li>
+<li>Motion sensors</li>
+<li>Ring Door bells (No hub required)</li>
+<li>Liquid presence sensors</li>
+<li>Z-wave lock key codes</li>
+<li>Lutron connected bulb remote buttons</li>
+<li>Wink Relay buttons and presence detection</li>
+<li>Wink spotter loudness and vibration (No Wink hub required)</li>
+<li>Wink hub devices connection status. This includes any paired hubs like Hue, Wink v1, Wink v2, Wink Relay…</li>
+<li>Dropcam sensors</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Climate</h2>
+<p>The Wink climate platform allows you to get data from your <a href="https://www.wink.com/">Wink</a> thermostats and air conditioners.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported climate devices</h3>
+<ul>
+<li>Nest (No Wink hub required)</li>
+<li>Ecobee (No Wink hub required)</li>
+<li>Sensi (No Wink hub required)</li>
+<li>Carrier (Unconfirmed)</li>
+<li>Honeywell (No Wink hub required)</li>
+<li>Generic Z-Wave</li>
+<li>Quirky Aros window AC unit</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Cover</h2>
+<p>Wink Cover garage door functionality varies on the product. Home Assistant can open, close, and view state of GoControl/Linear openers. For Chamberlain MyQ-enabled openers, Home Assistant is limited to show current state (open or closed) only using this Wink cover. This restriction was imposed by Chamberlain for third party control. Wink suggests that MyQ customers should contact Chamberlain directly to inquire about expanding permissions.</p>
+<p>The <a href="/integrations/myq">MyQ Cover</a> does provide full functionality for opening and closing Chamberlain MyQ-enabled garage doors. If installed along with the Wink Component, a duplicate garage door entity may exist. In that case, the semi-functional Wink garage door entity can be hidden via customize.yaml.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported cover devices</h3>
+<ul>
+<li>Bali window treatments</li>
+<li>Lutron shades</li>
+<li>Pella motorized blinds and shades</li>
+<li>GoControl garage door opener</li>
+<li>Chamberlain MyQ (Limited functionality) (No Wink hub required)</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Fan</h2>
+<p>The Wink fan platform allows you to control your <a href="https://www.wink.com/">Wink</a> fans.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported fan devices</h3>
+<ul>
+<li>Home Decorator Wink-enabled Gardinier ceiling fan</li>
+<li>Hampton Bay ceiling fan module</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Light</h2>
+<p>The <code>wink</code> light platform allows you to use your <a href="https://www.wink.com/">Wink</a> lights.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported light devices</h3>
+<ul>
+<li>Z-wave switches with dimming</li>
+<li>Hue</li>
+<li>Lightify</li>
+<li>GE link</li>
+<li>Wink light groups (User created groups of lights)</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Lock</h2>
+<p>The Wink lock platform allows you to control your <a href="https://www.wink.com/">Wink</a> locks.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported lock devices</h3>
+<ul>
+<li>Kwikset</li>
+<li>Schlage</li>
+<li>August (No Wink hub required) (August Connect required)</li>
+<li>Generic Z-wave</li>
+</ul>
+<div class='note'>
+The following services have only been confirmed on Schlage locks.
+</div>
+<h3>Service <code>set_lock_alarm_mode</code></h3>
+<p>You can use the service wink/set_lock_alarm_mode to set the alarm mode of your lock.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td>no</td>
+<td>String one of tamper, activity, or forced_entry</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of locks.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_locks_to_tamper:
+    sequence:
+      - service: wink.set_lock_alarm_mode
+        data:
+          mode: &quot;tamper&quot;
+</code></pre>
+<h3>Service <code>set_lock_alarm_sensitivity</code></h3>
+<p>You can use the service wink/set_lock_alarm_sensitivity to set the alarm sensitivity of your lock.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sensitivity</code></td>
+<td>no</td>
+<td>String one of low, medium_low, medium, medium_high, high.</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of locks.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  set_locks_to_high_sensitivity:
+    sequence:
+      - service: wink.set_lock_alarm_sensitivity
+        data:
+          sensitivity: &quot;high&quot;
+</code></pre>
+<h3>Service <code>set_lock_alarm_state</code></h3>
+<p>You can use the service wink/set_lock_alarm_state to set the alarm state of your lock.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>no</td>
+<td>Boolean enabled or disabled, true or false</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of locks.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  disable_all_locks_alarm:
+    sequence:
+      - service: wink.set_lock_alarm_state
+        data:
+          enabled: false
+</code></pre>
+<h3>Service <code>set_lock_beeper_state</code></h3>
+<p>You can use the service wink/set_lock_beeper_state to set the beeper state of your lock.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>no</td>
+<td>Boolean enabled or disabled, true or false</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of locks.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  disable_all_locks_beepers:
+    sequence:
+      - service: wink.set_lock_beeper_state
+        data:
+          enabled: false
+</code></pre>
+<h3>Service <code>set_lock_vacation_mode</code></h3>
+<p>You can use the service wink/set_lock_vacation_mode to set the vacation mode of your lock.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>no</td>
+<td>Boolean enabled or disabled, true or false</td>
+</tr>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that point at <code>entity_id</code>s of locks.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="language-yaml">script:
+  enabled_vacation_mode_on_all_locks:
+    sequence:
+      - service: wink.set_lock_vacation_mode
+        data:
+          enabled: false
+</code></pre>
+<h3>Service <code>add_new_lock_key_code</code></h3>
+<p>You can use the service wink/add_new_lock_key_code to add a new user code to your Wink lock.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>String or list of strings that point at <code>entity_id</code>s of locks.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>no</td>
+<td>the name of the new key code</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>no</td>
+<td>The new code. Must match length of existing codes.</td>
+</tr>
+</tbody>
+</table>
+<div class='note'>
+Calling service wink/pull_newly_added_wink_devices will add the new key code to Home Assistant. The device will also show up on the next restart of Home Assistant.
+</div>
+<div class='note'>
+If supported by your lock, a binary sensor will be created for each user key code you have defined. These key codes will turn on when the code is entered and automatically turn off after a few seconds.
+</div>
+<h2>Sensor</h2>
+<p>The Wink sensor platform allows you to get data from your <a href="https://www.wink.com/">Wink</a> sensors.</p>
+<p>The requirement is that you have setup <a href="/integrations/wink/">Wink</a> from above.</p>
+<h3>Supported sensor devices</h3>
+<ul>
+<li>Wink Relay temperature, proximity, and humidity</li>
+<li>Wink Spotter temperature, humidity, and brightness (No Wink hub required)</li>
+<li>Wink Porkfolio balance (No Wink hub required)</li>
+<li>Wink eggminder (No Wink hub required)</li>
+<li>Nest protect Smoke and CO severity (No confirmation that this is actually reported) (No Wink hub required)</li>
+<li>Motion sensor temperature</li>
+<li>Quirky refuel propane tank monitor (No Wink hub required)</li>
+</ul>
+<div class='note'>
+The above devices are confirmed to work, but others may work as well.
+</div>
+<h2>Switch</h2>
+<p>The Wink switch platform allows you to control your <a href="https://www.wink.com/">Wink</a> switches.</p>
+<p>The requirement is that you have set up <a href="/integrations/wink/">Wink</a> from above.</p>
+<h2>Supported switch devices</h2>
+<ul>
+<li>Wink Pivot power genius (No Wink hub required)</li>
+<li>non-dimming Z-wave in-wall switches (dimming switches show up as lights)</li>
+<li>Wink Relay load controlling switches</li>
+<li>Rachio sprinkler controller (No Wink hub required)</li>
+<li>iHome smart plug (No Wink hub required)</li>
+<li>Wink switch groups (User created groups of switches)</li>
+</ul>
+<h2>Water heater</h2>
+<p>The Wink water heater platform allows you to get data from your <a href="https://www.wink.com/">Wink</a> Water Heaters.</p>
+<p>The requirement is that you have set up <a href="/integrations/wink/">Wink</a> from above.</p>
+<h2>Supported water heaters</h2>
+<ul>
+<li>Rheem Econet water heaters (No Wink hub required)</li>
+</ul>
+<div class='note'>
+<p>Wink water heaters use to live under the <code>climate</code> platform prior to release 0.81.</p>
+</div>
+:ET

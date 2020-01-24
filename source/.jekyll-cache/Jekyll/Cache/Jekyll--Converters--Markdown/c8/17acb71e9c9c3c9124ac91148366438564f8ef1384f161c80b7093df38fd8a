@@ -1,0 +1,60 @@
+I"z<div class='note'>
+<p>The <code>knx</code> integration must be configured correctly to use this integration, see <a href="/integrations/knx">KNX Integration</a>.</p>
+</div>
+<p>The <code>knx</code> sensor platform allows you to monitor <a href="https://www.knx.org/">KNX</a> binary sensors.</p>
+<p>Binary sensors are read-only. To write to the knx-bus configure an exposure <a href="/integrations/knx/#exposing-sensor-values-or-time-to-knx-bus">KNX Integration - Expose</a>.</p>
+<h2>Configuration</h2>
+<p>The <code>knx</code> integration must be configured correctly, see <a href="/integrations/knx">KNX Integration</a>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: knx
+    state_address: '6/0/2'
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='state_address' href='#state_address'></a> state_address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>KNX group address of the binary sensor.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for this device used within Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='sync_state' href='#sync_state'></a> sync_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Actively read the value from the bus. If <code>False</code> no GroupValueRead telegrams will be sent to the bus.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='significant_bit' href='#significant_bit'></a> significant_bit</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify which significant bit of the KNX value should be used.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='reset_after' href='#reset_after'></a> reset_after</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Reset back to OFF state after specified milliseconds.</p>
+</span></p></dd></dl>
+</div>
+<h3>Automation actions</h3>
+<p>You can also attach actions to binary sensors (e.g., to switch on a light when a switch was pressed). In this example, one light is switched on when the button was pressed once and two others when the button was pressed a second time.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: knx
+    name: Livingroom.3Switch3
+    state_address: '5/0/26'
+    automation:
+      - counter: 1
+        hook: 'on'
+        action:
+          - entity_id: light.hue_color_lamp_1
+            service: homeassistant.turn_on
+      - counter: 2
+        hook: 'on'
+        action:
+          - entity_id: light.hue_bloom_1
+            service: homeassistant.turn_on
+          - entity_id: light.hue_bloom_2
+            service: homeassistant.turn_on
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A name for this device used within Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='counter' href='#counter'></a> counter</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to 2 if your only want the action to be executed if the button was pressed twice. To 3 for three times button pressed.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='hook' href='#hook'></a> hook</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Indicates if the automation should be executed on what state of the binary sensor. Values are “on” or “off”.</p>
+</span></p><p class='default'>
+Default value: <p>on</p>
+</p></dd><dt><a class='title-link' name='action' href='#action'></a> action</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Specify a list of actions analog to the <a href="/docs/automation/action/">automation rules</a>.</p>
+</span></p></dd></dl>
+</div>
+:ET

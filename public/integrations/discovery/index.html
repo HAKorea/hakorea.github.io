@@ -1,0 +1,358 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Discovery - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to setup Home Assistant to discover new devices.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/discovery/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Discovery">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/discovery/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to setup Home Assistant to discover new devices.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Discovery">
+    <meta name="twitter:description" content="Instructions on how to setup Home Assistant to discover new devices.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/discovery.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Discovery
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>Home Assistant can discover and automatically configure <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking" rel="external nofollow">zeroconf</a>/<a href="https://en.wikipedia.org/wiki/Multicast_DNS" rel="external nofollow">mDNS</a> and <a href="https://en.wikipedia.org/wiki/Universal_Plug_and_Play" rel="external nofollow">uPnP</a> devices on your network. Currently the <code>discovery</code> integration can detect:</p>
+<ul>
+<li><a href="/integrations/apple_tv/">Apple TV</a></li>
+<li><a href="/integrations/wemo/">Belkin WeMo switches</a></li>
+<li><a href="/integrations/bluesound">Bluesound speakers</a></li>
+<li><a href="/integrations/soundtouch">Bose Soundtouch speakers</a></li>
+<li><a href="/integrations/denonavr/">Denon network receivers</a></li>
+<li><a href="/integrations/directv">DirecTV receivers</a></li>
+<li><a href="/integrations/dlna_dmr">DLNA DMR enabled devices</a></li>
+<li><a href="/integrations/enigma2">Enigma2 media player</a></li>
+<li><a href="/integrations/frontier_silicon">Frontier Silicon internet radios</a></li>
+<li><a href="/integrations/cast">Google Cast</a></li>
+<li><a href="/integrations/openhome">Linn / Openhome</a></li>
+<li><a href="/integrations/harmony">Logitech Harmony Hub</a></li>
+<li><a href="/integrations/squeezebox">Logitech media server (Squeezebox)</a></li>
+<li><a href="/integrations/netgear">Netgear routers</a></li>
+<li><a href="/integrations/panasonic_viera">Panasonic Viera</a></li>
+<li><a href="/integrations/hue">Philips Hue</a></li>
+<li><a href="/integrations/plex#media-player">Plex media server</a></li>
+<li><a href="/integrations/roku#media-player">Roku media player</a></li>
+<li><a href="/integrations/sabnzbd">SABnzbd downloader</a></li>
+<li><a href="/integrations/syncthru">Samsung SyncThru Printer</a></li>
+<li><a href="/integrations/samsungtv">Samsung TVs</a></li>
+<li><a href="/integrations/sonos">Sonos speakers</a></li>
+<li><a href="/integrations/tellduslive/">Telldus Live</a></li>
+<li><a href="/integrations/wink/">Wink</a></li>
+<li><a href="/integrations/yamaha">Yamaha media player</a></li>
+<li><a href="/integrations/yeelightsunflower/">Yeelight Sunflower bulb</a></li>
+<li><a href="/integrations/xiaomi_aqara/">Xiaomi Gateway (Aqara)</a></li>
+</ul>
+<p>It will be able to add Google Chromecasts and Belkin WeMo switches automatically,
+for Philips Hue it will require some configuration from the user.</p>
+<div class="note">
+<p>Zeroconf discoverable integrations <a href="/integrations/axis/">Axis</a>/<a href="/integrations/esphome/">ESPHome</a>/<a href="/integrations/homekit_controller/">HomeKit</a>/<a href="/integrations/tradfri/">Tradfri</a> have been migrated to use <a href="/integrations/zeroconf">zeroconf</a> integration to initiate discovery.</p>
+</div>
+<p>To load this integration, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+discovery:
+  ignore:
+    - sonos
+    - samsung_tv
+  enable:
+    - homekit
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="ignore" href="#ignore"></a> ignore</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of platforms that never will be automatically configured by <code>discovery</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="enable" href="#enable"></a> enable</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of platforms not enabled by default that <code>discovery</code> should discover.</p>
+</span></p></dd>
+</dl>
+</div>
+<p>Valid values for ignore are:</p>
+<ul>
+<li>
+<code>apple_tv</code>: Apple TV</li>
+<li>
+<code>belkin_wemo</code>: Belkin WeMo switches</li>
+<li>
+<code>bluesound</code>: Bluesound speakers</li>
+<li>
+<code>bose_soundtouch</code>: Bose Soundtouch speakers</li>
+<li>
+<code>denonavr</code>: Denon network receivers</li>
+<li>
+<code>directv</code>: DirecTV receivers</li>
+<li>
+<code>enigma2</code>: Enigma2 media players</li>
+<li>
+<code>frontier_silicon</code>: Frontier Silicon internet radios</li>
+<li>
+<code>google_cast</code>: Google Cast</li>
+<li>
+<code>harmony</code>: Logitech Harmony Hub</li>
+<li>
+<code>igd</code>: Internet Gateway Device</li>
+<li>
+<code>logitech_mediaserver</code>: Logitech media server (Squeezebox)</li>
+<li>
+<code>netgear_router</code>: Netgear routers</li>
+<li>
+<code>octoprint</code>: Octoprint</li>
+<li>
+<code>openhome</code>: Linn / Openhome</li>
+<li>
+<code>panasonic_viera</code>: Panasonic Viera</li>
+<li>
+<code>philips_hue</code>: Philips Hue</li>
+<li>
+<code>plex_mediaserver</code>: Plex media server</li>
+<li>
+<code>roku</code>: Roku media player</li>
+<li>
+<code>sabnzbd</code>: SABnzbd downloader</li>
+<li>
+<code>samsung_printer</code>: Samsung SyncThru Printer</li>
+<li>
+<code>samsung_tv</code>: Samsung TVs</li>
+<li>
+<code>sonos</code>: Sonos speakers</li>
+<li>
+<code>songpal</code> : Songpal</li>
+<li>
+<code>tellstick</code>: Telldus Live</li>
+<li>
+<code>wink</code>: Wink Hub</li>
+<li>
+<code>yamaha</code>: Yamaha media player</li>
+<li>
+<code>yeelight</code>: Yeelight lamps and bulbs (not only Yeelight Sunflower bulb)</li>
+<li>
+<code>xiaomi_gw</code>: Xiaomi Aqara gateway</li>
+</ul>
+<p>Valid values for enable are:</p>
+<ul>
+<li>
+<code>dlna_dmr</code>: DLNA DMR enabled devices</li>
+</ul>
+<h2>
+<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h2>
+<h3>
+<a class="title-link" name="upnp" href="#upnp"></a> UPnP</h3>
+<p>Home Assistant must be on the same network as the devices for uPnP discovery to work.
+If running Home Assistant in a <a href="/docs/installation/docker/">Docker container</a> use switch <code>--net=host</code> to put it on the host’s network.</p>
+<h3>
+<a class="title-link" name="windows" href="#windows"></a> Windows</h3>
+<h4>
+<a class="title-link" name="64-bit-python" href="#64-bit-python"></a> 64-bit Python</h4>
+<p>There is currently a <a href="https://bitbucket.org/al45tair/netifaces/issues/17/dll-fails-to-load-windows-81-64bit" rel="external nofollow">known issue</a> with running this integration on a 64-bit version of Python and Windows.</p>
+<h3>
+<a class="title-link" name="could-not-install-dependency-netdisco" href="#could-not-install-dependency-netdisco"></a> could not install dependency netdisco</h3>
+<p>If you see <code>Not initializing discovery because could not install dependency netdisco==0.6.1</code> in the logs, you will need to install the <code>python3-dev</code> or <code>python3-devel</code> package on your system manually (eg. <code>sudo apt-get install python3-dev</code> or <code>sudo dnf -y install python3-devel</code>). On the next restart of Home Assistant, the discovery should work. If you still get an error, check if you have a compiler (<code>gcc</code>) available on your system.</p>
+<h3>
+<a class="title-link" name="dsm-and-synology" href="#dsm-and-synology"></a> DSM and Synology</h3>
+<p>For DSM/Synology, install via debian-chroot <a href="https://community.home-assistant.io/t/error-starting-home-assistant-on-synology-for-first-time/917/15">see this forum post</a>.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/discovery.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/home-assistant.png' /></div><div class="section">
+    <kb-alert-link integration="discovery"></kb-alert-link>
+  </div><div class='section'>
+      Quality Scale: <a href='/docs/quality_scale/'>🏠 (internal)</a>
+    </div><div class='section'>
+      Introduced in release: 0.7
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/discovery/'>/components/discovery/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#other'>Other</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

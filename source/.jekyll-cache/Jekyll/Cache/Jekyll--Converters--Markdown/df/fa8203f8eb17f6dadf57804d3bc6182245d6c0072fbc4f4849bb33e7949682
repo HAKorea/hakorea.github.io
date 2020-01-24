@@ -1,0 +1,163 @@
+I"K<p>The <code>geonetnz_quakes</code> integration lets you use a GeoJSON feed provided by
+New Zealand’s <a href="https://www.geonet.org.nz/">GeoNet</a> with information
+about quakes in the New Zealand region that happened within the last 7 days.
+It retrieves incidents from a feed and
+shows information of those incidents filtered by distance to Home Assistant’s
+location.</p>
+<p>Entities are generated, updated and removed automatically with each update
+from the feed. Each entity defines latitude and longitude and will be shown
+on the default map automatically, or on a map card by defining the source
+<code>geonetnz_quakes</code>. The distance is available as the state of each entity, and
+converted to the unit (kilometers or miles) configured in Home Assistant.</p>
+<p class='img'>
+  <img src='/images/screenshots/geonetnz-quakes-feed-map.png' />
+</p>
+<p>The data is updated every 5 minutes.</p>
+<div class='note'>
+<p>The material used by this integration is provided under the <a href="https://creativecommons.org/licenses/by/3.0/nz/">Creative Commons Attribution 3.0 New Zealand (CC BY 3.0 NZ) license</a>.
+It has only been modified for the purpose of presenting the material in Home Assistant.
+Please refer to the <a href="https://www.geonet.org.nz/disclaimer">creator’s disclaimer notice</a> and <a href="https://www.geonet.org.nz/policy">data policy</a> for more information.</p>
+<p>We acknowledge the New Zealand GeoNet project and its sponsors EQC, GNS Science and LINZ, for providing data/images used in this integration.</p>
+</div>
+<h2>Configuration</h2>
+<p>To integrate the GeoNet New Zealand Quakes feed use the “Integrations” feature
+in the GUI, you find it under Configurations - Integrations, or add the
+following line to your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geonetnz_quakes:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='mmi' href='#mmi'></a> mmi</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Request quakes that may have caused shaking greater than or equal to the <a href="https://www.geonet.org.nz/earthquake/mmi">MMI</a> value. Allowable values are -1..8 inclusive. Value -1 is used for quakes that are too small to calculate a stable MMI value for.</p>
+</span></p><p class='default'>
+Default value: <p>2</p>
+</p></dd><dt><a class='title-link' name='minimum_magnitude' href='#minimum_magnitude'></a> minimum_magnitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The minimum magnitude of an earthquake to be included.</p>
+</span></p><p class='default'>
+Default value: <p>0.0</p>
+</p></dd><dt><a class='title-link' name='radius' href='#radius'></a> radius</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The radius around your location to monitor; defaults to 50 km or mi (depending on the unit system defined in your <code>configuration.yaml</code>).</p>
+</span></p><p class='default'>
+Default value: <p>50.0</p>
+</p></dd><dt><a class='title-link' name='latitude' href='#latitude'></a> latitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Latitude of the coordinates around which quakes are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Latitude defined in your configuration.</p>
+</p></dd><dt><a class='title-link' name='longitude' href='#longitude'></a> longitude</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Longitude of the coordinates around which quakes are considered.</p>
+</span></p><p class='default'>
+Default value: <p>Longitude defined in your configuration.</p>
+</p></dd></dl>
+</div>
+<h2>State Attributes</h2>
+<p>The following state attributes are available for each entity in addition to
+the standard ones:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latitude</td>
+<td>Latitude of the quake.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Longitude of the quake.</td>
+</tr>
+<tr>
+<td>source</td>
+<td><code>geonetnz_quakes</code> to be used in conjunction with <code>geo_location</code> automation trigger.</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>The external ID used in the feed to identify the quake in the feed.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title of this entry.</td>
+</tr>
+<tr>
+<td>mmi</td>
+<td>The calculated MMI shaking at the closest locality in the New Zealand region.</td>
+</tr>
+<tr>
+<td>magnitude</td>
+<td>The summary magnitude for the quake.</td>
+</tr>
+<tr>
+<td>depth</td>
+<td>The depth of the quake in km.</td>
+</tr>
+<tr>
+<td>time</td>
+<td>The origin date and time of the quake.</td>
+</tr>
+<tr>
+<td>locality</td>
+<td>Distance and direction to the nearest locality.</td>
+</tr>
+<tr>
+<td>quality</td>
+<td>The quality of this information: best, good, caution, deleted.</td>
+</tr>
+</tbody>
+</table>
+<p>Please note that the reported MMI may be lower than the minimum requested MMI.
+This integration is passing the requested MMI value to the feed source and
+displays all entries retrieved without further filtering by MMI.</p>
+<h2>Sensor</h2>
+<p>This integration automatically creates a sensor that shows how many entities
+are currently managed by this integration. In addition to that the sensor has
+some useful attributes that indicate the currentness of the data retrieved
+from the feed.</p>
+<p class='img'>
+  <img src='/images/screenshots/geonetnz-quakes-sensor.png' />
+</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>Status of last update from the feed (“OK” or “ERROR”).</td>
+</tr>
+<tr>
+<td>last update</td>
+<td>Timestamp of the last update from the feed.</td>
+</tr>
+<tr>
+<td>last update successful</td>
+<td>Timestamp of the last successful update from the feed.</td>
+</tr>
+<tr>
+<td>last timestamp</td>
+<td>Timestamp of the latest entry from the feed.</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Number of entities that were created during last update (optional).</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>Number of entities that were updated during last update (optional).</td>
+</tr>
+<tr>
+<td>removed</td>
+<td>Number of entities that were removed during last update (optional).</td>
+</tr>
+</tbody>
+</table>
+<h2>Full Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+geonetnz_quakes:
+  radius: 100
+  mmi: 4
+  minimum_magnitude: 4.5
+  latitude: -41.2
+  longitude: 174.7
+</code></pre>
+:ET

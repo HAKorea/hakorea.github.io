@@ -1,0 +1,626 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Manual installation on a Raspberry Pi - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions to install Home Assistant on a Raspberry Pi running Raspbian Lite.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/docs/installation/raspberry-pi/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Manual installation on a Raspberry Pi">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/docs/installation/raspberry-pi/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions to install Home Assistant on a Raspberry Pi running Raspbian Lite.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Manual installation on a Raspberry Pi">
+    <meta name="twitter:description" content="Instructions to install Home Assistant on a Raspberry Pi running Raspbian Lite.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_docs/installation/raspberry-pi.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Manual installation on a Raspberry Pi
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>This installation of Home Assistant requires the Raspberry Pi to run <a href="https://www.raspberrypi.org/downloads/raspbian/" rel="external nofollow">Raspbian Lite</a>. The installation will be installed in a <a href="/docs/installation/virtualenv">Virtual Environment</a> with minimal overhead. Instructions assume this is a new installation of Raspbian Lite.</p>
+<p>You must have Python 3.7 or later installed (including the package <code>python3-dev</code>) which is <em>not</em> the case for Raspbian Stretch.</p>
+<div class="note">
+Although these installation steps specifically mention a Raspberry Pi, you can go ahead and proceed on any Linux install as well. This guide is also referred to as the "Advanced Guide" for a virtual environment install.
+</div>
+<div class="note warning">
+<p>Please remember to ensure you’re using an <a href="https://www.raspberrypi.org/documentation/faqs/#pi-power" rel="external nofollow">appropriate power supply</a> with your Pi. Mobile chargers may not be suitable, since some are designed to only provide the full power with that manufacturer’s handsets. USB ports on your computer also will not supply enough power and must not be used.</p>
+</div>
+<p>Connect to the Raspberry Pi over SSH. Default password is <code>raspberry</code>.
+You will need to enable SSH access. The Raspberry Pi website has instructions <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/" rel="external nofollow">here</a>.</p>
+<pre><code class="language-bash">$ ssh pi@ipaddress
+</code></pre>
+<p>Changing the default password is encouraged.</p>
+<pre><code class="language-bash">passwd
+</code></pre>
+<p>Update the system.</p>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get upgrade -y
+</code></pre>
+<p>Install the dependencies.</p>
+<pre><code class="language-bash">sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev
+</code></pre>
+<p>Add an account for Home Assistant called <code>homeassistant</code>.
+Since this account is only for running Home Assistant the extra arguments of <code>-rm</code> is added to create a system account and create a home directory. The arguments <code>-G dialout,gpio,i2c</code> adds the user to the <code>dialout</code>, <code>gpio</code> and the <code>i2c</code> group. The first is required for using Z-Wave and Zigbee controllers, while the second is required to communicate with Raspberry’s GPIO.</p>
+<pre><code class="language-bash">sudo useradd -rm homeassistant -G dialout,gpio,i2c
+</code></pre>
+<p>Next we will create a directory for the installation of Home Assistant and change the owner to the <code>homeassistant</code> account.</p>
+<pre><code class="language-bash">cd /srv
+sudo mkdir homeassistant
+sudo chown homeassistant:homeassistant homeassistant
+</code></pre>
+<p>Next up is to create and change to a virtual environment for Home Assistant. This will be done as the <code>homeassistant</code> account.</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+cd /srv/homeassistant
+python3 -m venv .
+source bin/activate
+</code></pre>
+<p>Once you have activated the virtual environment (notice the prompt change to <code>(homeassistant) homeassistant@raspberrypi:/srv/homeassistant $</code>) you will need to run the following command to install a required python package.</p>
+<pre><code class="language-bash">python3 -m pip install wheel
+</code></pre>
+<p>Once you have installed the required python package it is now time to install Home Assistant!</p>
+<pre><code class="language-bash">pip3 install homeassistant
+</code></pre>
+<p>Start Home Assistant for the first time. This will complete the installation for you, automatically creating the <code>.homeassistant</code> configuration directory in the <code>/home/homeassistant</code> directory, and installing any basic dependencies.</p>
+<pre><code class="language-bash">hass
+</code></pre>
+<p>You can now reach your installation on your Raspberry Pi over the web interface on <code>http://ipaddress:8123</code>.</p>
+<div class="note">
+<p>When you run the <code>hass</code> command for the first time, it will download, install and cache the necessary libraries/dependencies. This procedure may take anywhere between 5 to 10 minutes. During that time, you may get “site cannot be reached” error when accessing the web interface. This will only happen for the first time, and subsequent restarts will be much faster.</p>
+</div>
+<p>If you want to setup <code>hass</code> as a daemon and autostart it on boot please refer to <a href="/docs/autostart/">Autostart Home Assistant</a>.</p>
+<h3>
+<a class="title-link" name="updating" href="#updating"></a> Updating</h3>
+<p>To update to the latest version of Home Assistant follow these simple steps:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --upgrade homeassistant
+</code></pre>
+<p>Once the last command executes, restart the Home Assistant service to apply the latest updates. Please keep in mind that some updates may take longer to start up than others. If Home Assistant fails to start, make sure you check the <strong>Breaking Changes</strong> from the <a href="https://github.com/home-assistant/home-assistant/releases" rel="external nofollow">Release Notes</a>.</p>
+<h3>
+<a class="title-link" name="run-a-specific-version" href="#run-a-specific-version"></a> Run a specific version</h3>
+<p>In the event that a Home Assistant version doesn’t play well with your hardware setup, you can downgrade to a previous release. For example:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install homeassistant==0.XX.X
+</code></pre>
+<h3>
+<a class="title-link" name="run-the-beta-version" href="#run-the-beta-version"></a> Run the beta version</h3>
+<p>If you would like to test next release before anyone else, you can install the beta version released every two weeks, for example:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --pre --upgrade homeassistant
+</code></pre>
+<h3>
+<a class="title-link" name="run-the-development-version" href="#run-the-development-version"></a> Run the development version</h3>
+<p>If you want to stay on the bleeding-edge Home Assistant development branch, you can upgrade to <code>dev</code>.</p>
+<div class="note warning">
+  The "dev" branch is likely to be unstable. Potential consequences include loss of data and instance corruption.
+</div>
+<p>For example:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+pip3 install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
+</code></pre>
+<h3>
+<a class="title-link" name="activating-the-virtual-environment" href="#activating-the-virtual-environment"></a> Activating the virtual environment</h3>
+<p>When instructions tell you to activate the virtual environment, the following commands will do this:</p>
+<pre><code class="language-bash">sudo -u homeassistant -H -s
+source /srv/homeassistant/bin/activate
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  <div class="section">
+    <h1 class="title delta">목차</h1>
+    <ul class="divided sidebar-menu">
+      <li>
+        <b><a  href='/faq/'>FAQ </a></b> |
+        <b><a  href='/docs/glossary/'>Glossary </a></b>
+      </li>
+      <li>
+        <b><a  href='/docs/installation/'>설치 </a></b>
+        <ul>
+          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
+          <li>
+            <a  href='/docs/installation/troubleshooting/'>문제해결
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/configuration/'>설정 </a></b>
+        <ul>
+          <li><a  href='/docs/configuration/yaml/'>YAML </a></li>
+          <li>
+            <a  href='/docs/configuration/basic/'>기본 설정 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/devices/'>기기 추가 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/customizing-devices/'>Customizing
+            entities </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/troubleshooting/'>문제해결
+            </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/securing/'>Security Check Points
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Advanced Configuration</b>
+        <ul>
+          <li><a  href='/docs/configuration/remote/'>Remote access </a></li>
+          <li><a  href='/docs/configuration/packages/'>Packages </a></li>
+          <li>
+            <a  href='/docs/configuration/splitting_configuration/'>Splitting up the configuration </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/secrets/'>Storing Secrets </a>
+          </li>
+          <li><a  href='/docs/configuration/templating/'>Templating </a></li>
+          <li>
+            <a  href='/docs/configuration/platform_options/'>Entity
+            component platform options </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/authentication/'>Authentication </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/authentication/providers/'>Auth Providers </a>
+          </li>
+          <li>
+            <a  href='/docs/authentication/multi-factor-auth/'>Multi Factor
+            Auth </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Core objects</b>
+        <ul>
+          <li><a  href='/docs/configuration/events/'>Events </a></li>
+          <li>
+            <a  href='/docs/configuration/state_object/'>State Objects </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/automation/'>Automation </a></b>
+        <ul>
+          <li><a  href='/docs/automation/examples/'>Examples </a></li>
+          <li><a  href='/docs/automation/editor/'>Editor </a></li>
+          <li><a  href='/docs/automation/trigger/'>Triggers </a></li>
+          <li><a  href='/docs/automation/condition/'>Conditions </a></li>
+          <li><a  href='/docs/automation/action/'>Actions </a></li>
+          <li><a  href='/docs/automation/templating/'>Templates </a></li>
+          <li>
+            <a  href='/docs/automation/troubleshooting/'>Troubleshooting </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/frontend/'>Frontend </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/frontend/mobile/'>Android/iOS Homescreen </a>
+          </li>
+          <li>
+            <a  href='/docs/frontend/browsers/'>Browser Compatibility List
+            </a>
+          </li>
+          <li><a  href='/lovelace'>Lovelace UI </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/backend/'>Backend </a></b>
+        <ul>
+          <li><a  href='/docs/backend/database/'>Database </a></li>
+          <li><a  href='/docs/backend/updater/'>Updater </a></li>
+          <li><a  href='/developers/api/'>API </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scripts/'>Scripts </a></b>
+        <ul>
+          <li><a  href='/docs/scripts/service-calls/'>Service Calls </a></li>
+          <li><a  href='/docs/scripts/conditions/'>Conditions </a></li>
+          <li><a  href='/docs/scripts/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scene/'>Scenes </a></b>
+        <ul>
+          <li><a  href='/docs/scene/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/tools/'>Tools and Helpers </a></b>
+        <ul>
+          <li><a  href='/docs/tools/dev-tools/'>Developer Tools </a></li>
+          <li><a  href='/docs/tools/hass/'>hass </a></li>
+          <li><a  href='/docs/tools/benchmark/'>benchmark </a></li>
+          <li><a  href='/docs/tools/check_config/'>check_config </a></li>
+          <li><a  href='/docs/tools/credstash/'>credstash </a></li>
+          <li><a  href='/docs/tools/ensure_config/'>ensure_config </a></li>
+          <li><a  href='/docs/tools/keyring/'>keyring </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/security/'>Security </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/security/webserver/'>Web server fingerprint </a>
+          </li>
+          <li><a  href='/docs/security/porosity/'>Porosity </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/z-wave/'>Z-Wave </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/z-wave/installation/'>Configuring the Z-Wave
+            component </a>
+          </li>
+          <li><a  href='/docs/z-wave/adding/'>Adding devices </a></li>
+          <li>
+            <a  href='/docs/z-wave/control-panel/'>The Z-Wave control panel
+            </a>
+          </li>
+          <li><a  href='/docs/z-wave/controllers/'>Controllers </a></li>
+          <li>
+            <a  href='/docs/z-wave/devices/'>Devices </a> and <a  href='/docs/z-wave/entities/'>Entities </a>
+          </li>
+          <li>
+            <a  href='/docs/z-wave/query-stage/'>Query Stages </a> for devices
+          </li>
+          <li>
+            <a  href='/docs/z-wave/device-specific/'>Device Specific </a>
+            configuration
+          </li>
+          <li>
+            <a  href='/docs/z-wave/events/'>Events </a> and <a  href='/docs/z-wave/services/'>Services </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/mqtt/'>MQTT </a></b>
+        <ul>
+          <li><a  href='/docs/mqtt/broker/'>Broker </a></li>
+          <li><a  href='/docs/mqtt/certificate/'>Certificate </a></li>
+          <li><a  href='/docs/mqtt/discovery/'>Discovery </a></li>
+          <li><a  href='/docs/mqtt/service/'>Publish service </a></li>
+          <li>
+            <a  href='/docs/mqtt/birth_will/'>Birth and last will messages
+            </a>
+          </li>
+          <li><a  href='/docs/mqtt/testing/'>Testing your setup </a></li>
+          <li><a  href='/docs/mqtt/logging/'>Logging </a></li>
+          <li><a  href='/docs/mqtt/processing_json/'>Processing JSON </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/ecosystem/ios/'>iOS </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/notifications/basic/'>Basic
+            notifications </a>
+          </li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/sounds/'>Sounds </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/architecture/'>Architecture </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/privacy_security_rate_limits/'>Privacy, rate limiting and security </a>
+            </li>
+          </ul>
+          <li>Advanced notifications</li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/attachments/'>Attachments </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/content_extensions/'>Dynamic
+              content </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/actions/'>Actionable notifications </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/requesting_location_updates/'>Requesting location updates </a>
+            </li>
+          </ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/location/'>Location Tracking </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/ios/integration/'>Integration with
+            other apps </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a  href='/docs/ecosystem/'>Ecosystem </a>
+        <ul>
+          <li>
+            <a  href='/docs/autostart/'>Autostart </a>
+            <ul>
+              <li>
+                <a  href='/docs/autostart/systemd/'>systemd (Linux) </a>
+              </li>
+              <li>
+                <a  href='/docs/autostart/upstart/'>Upstart (Linux) </a>
+              </li>
+              <li><a  href='/docs/autostart/init.d/'>init.d (Linux) </a></li>
+              <li><a  href='/docs/autostart/macos/'>macOS </a></li>
+              <li><a  href='/docs/autostart/synology/'>Synology NAS </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/appdaemon/'>AppDaemon </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/hadashboard/'>HADashboard </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/notebooks/'>Notebooks </a>
+            <ul>
+              <li><a  href='/docs/ecosystem/notebooks/'>Introduction </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/installation/'>Installation </a>
+              </li>
+              <li><a  href='/docs/ecosystem/notebooks/graph/'>Graph </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/api/'>Home Assistant API
+                </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/database/'>Database </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/stats/'>Statistics </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Remote access
+            <ul>
+              <li><a  href='/docs/ecosystem/apache/'>Apache </a></li>
+              <li><a  href='/docs/ecosystem/caddy/'>Caddy Server </a></li>
+              <li><a  href='/docs/ecosystem/haproxy/'>HAProxy </a></li>
+              <li><a  href='/docs/ecosystem/nginx/'>NGINX </a></li>
+              <li>
+                <a  href='/docs/ecosystem/nginx_subdomain/'>NGINX with
+                subdomain</a>
+              </li>
+              <li><a  href='/docs/ecosystem/tor/'>Tor Onion Service </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/certificates/'>Certificates </a>
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_self_signed_certificate/'>Self-signed certificate </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_domain_certificate/'>Certificate
+                domain owners </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/lets_encrypt/'>Let's
+                Encrypt (detailed) </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Backup
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_github/'>Backup to
+                GitHub </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_dropbox/'>Backup to
+                Dropbox </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_usb/'>Backup to USB
+                device </a>
+              </li>
+            </ul>
+          </li>
+          <li><a  href='/docs/ecosystem/synology/'>Synology </a></li>
+          <li>
+            <a  href='/docs/ecosystem/hass-configurator/'>Configurator
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

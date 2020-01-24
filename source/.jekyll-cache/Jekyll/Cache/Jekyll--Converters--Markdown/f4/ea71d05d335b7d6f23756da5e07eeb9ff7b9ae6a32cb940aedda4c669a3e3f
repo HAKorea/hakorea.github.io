@@ -1,0 +1,59 @@
+I"�#<p>The <a href="https://www.brultech.com/greeneye/">GreenEye Monitor (GEM)</a> integration for Home Assistant allows you to create sensors for the various data channels of the GEM. Each current transformer (CT) channel, pulse counter, and temperature sensor appears in Home Assistant as a sensor, and can be used in automations.</p>
+<p>Configure your GEM(s) to produce binary-format packets (for example, “Bin32 NET” for a 32-channel GEM with some channels configured for net metering) and send them to an unused port on your Home Assistant machine. (These settings are in the “Packet Send” and “Network” pages of the GEM UI.) Then specify that port and information about your monitor(s) and the data channels you wish to monitor in your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+greeneye_monitor:
+  port: 8000
+  monitors:
+    - serial_number: &quot;YOUR_SERIAL_NUMBER&quot;
+      channels:
+        - number: 1
+          name: total_power
+        - number: 2
+          name: solar_panels_power
+          net_metering: true
+      pulse_counters:
+        - number: 1
+          name: sprinklers_water_usage
+          counted_quantity: &quot;gal&quot;
+          counted_quantity_per_pulse: 1
+          time_unit: &quot;min&quot;
+      temperature_sensors:
+        - number: 1
+          name: back_porch_temperature
+      voltage:
+        - number: 1
+          name: house_volts
+</code></pre>
+<p>By default, GEM will send updates every 5 seconds. That’s a lot of data, and the databases used by the <a href="/integrations/recorder"><code>recorder</code></a> integration for history don’t do well with that much data, so it is recommended to configure the <a href="/integrations/influxdb"><code>influxdb</code></a> integration and exclude the GEM sensors from <code>recorder</code>.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port on which Home Assistant should listen for packets from your GEM. Must match the port set in the “Network” tab of the GEM setup UI.</p>
+</span></p></dd><dt><a class='title-link' name='monitors' href='#monitors'></a> monitors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of monitors that should appear in Home Assistant. Data from other monitors will be ignored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='serial_number' href='#serial_number'></a> serial_number</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Your 8-digit GEM serial number, as it appears in the UI.</p>
+</span></p></dd><dt><a class='title-link' name='channels' href='#channels'></a> channels</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of channels that should appear in Home Assistant for this monitor. Data from other channels will be ignored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='number' href='#number'></a> number</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The channel number as it appears in the GEM UI.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name that should be used for this channel’s sensor in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='net_metering' href='#net_metering'></a> net_metering</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> if the channel is configured for net metering in the GEM, otherwise <code>false</code>.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd><dt><a class='title-link' name='voltage' href='#voltage'></a> voltage</dt><dd><p class='desc'><span class='required'>(Optional)</span><span class='description'><p>Configuration for voltage sensor</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='number' href='#number'></a> number</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>A channel number that exists in the GEM. There is only one voltage sensor on current models of the GEM.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name that should be used for the voltage sensor in Home Assistant.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='temperature_sensors' href='#temperature_sensors'></a> temperature_sensors</dt><dd><p class='desc'><span class='required'>(Optional)</span><span class='description'><p>Configuration for temperature sensors</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='temperature_unit' href='#temperature_unit'></a> temperature_unit</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The unit of measure to use for the temperature (F or C)</p>
+</span></p></dd><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The list of temperature sensors that should appear in Home Assistant for this monitor. Data from other sensors will be ignored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='number' href='#number'></a> number</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The sensor number as it appears in the GEM UI.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name that should be used for this sensor in Home Assistant.</p>
+</span></p></dd></dl></dd></dl></dd><dt><a class='title-link' name='pulse_counters' href='#pulse_counters'></a> pulse_counters</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The list of pulse counters that should appear in Home Assistant for this monitor. Data from other pulse counters will be ignored.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='number' href='#number'></a> number</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The pulse counter’s number as it appears in the GEM UI.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name that should be used for this pulse counter in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='counted_quantity' href='#counted_quantity'></a> counted_quantity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The unit being counted by this pulse counter (e.g., gal, L)</p>
+</span></p></dd><dt><a class='title-link' name='counted_quantity_per_pulse' href='#counted_quantity_per_pulse'></a> counted_quantity_per_pulse</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The number of the counted quantity represented by each pulse.</p>
+</span></p><p class='default'>
+Default value: <p>1.0</p>
+</p></dd><dt><a class='title-link' name='time_unit' href='#time_unit'></a> time_unit</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time unit to use when computing rates (s, min, or h)</p>
+</span></p><p class='default'>
+Default value: <p>s</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+:ET

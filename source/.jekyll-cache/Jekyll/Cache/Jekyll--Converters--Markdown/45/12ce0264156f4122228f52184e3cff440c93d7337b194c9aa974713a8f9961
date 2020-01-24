@@ -1,0 +1,22 @@
+I"i<p>The <code>postnl</code> platform allows one to track deliveries by <a href="https://www.postnl.nl">PostNL</a> (Dutch Postal Services). To use this sensor, you need a <a href="https://jouw.postnl.nl">PostNL Account</a>. It is possible to add multiple accounts to your Home Assistant configuration.</p>
+<p>The sensor value shows the number of packages to be delivered. The packages are available in the shipments attribute.</p>
+<h2>Configuration</h2>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml">sensor:
+  - platform: postnl
+    username: POSTNL_USERNAME
+    password: POSTNL_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sensor name</p>
+</span></p><p class='default'>
+Default value: <p>postnl</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Account username of jouw.postnl.nl</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Account password of jouw.postnl.nl</p>
+</span></p></dd></dl>
+</div>
+<div class='note warning'>
+This integration is not affiliated with PostNL and retrieves data from the endpoints of the mobile application. Use at your own risk.
+</div>
+:ET

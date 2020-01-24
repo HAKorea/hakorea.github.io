@@ -1,0 +1,106 @@
+I"�"<p>The <code>satel_integra</code> integration will allow Home Assistant users who own a Satel Integra alarm panel to leverage their alarm system and its sensors to provide Home Assistant with information about their homes. Connectivity between Home Assistant and the alarm is accomplished through a ETHM extension module that must be installed in the alarm. Compatible with ETHM-1 Plus module with firmware version &gt; 2.00 (version 2.04 confirmed).</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor: Reports on zone or output statuses</li>
+<li>Switch: allows for setting states of selected outputs</li>
+<li>Alarm Control Panel: represents the partition (in Polish: “strefa”). Reports its status, and can be used to arm/disarm the the partition</li>
+</ul>
+<p>The module communicates via Satel’s open TCP protocol published on their website. It subscribes for new events coming from alarm system and reacts to them immediately.</p>
+<h2>Setup</h2>
+<p>Please note that <strong>ETHM-1 module is currently not supported</strong>: it does not provide functionality used by this extension. At the moment only ETHM-1 Plus module is supported. That might change in the future, but no promisses are given.</p>
+<p>The library currently doesn’t support encrypted connection to your alarm, so you need <strong>to turn off encryption for integration protocol</strong>. In Polish: “koduj integracje” must be unchecked. You will find this setting in your DloadX program.</p>
+<p>A list of all partition, zone and output IDs can be acquired by running DloadX program and connecting to your alarm.</p>
+<p>For the Binary Sensor check the <a href="/integrations/binary_sensor/">type/class</a> list for a possible visualization of your zones. Note: If no zones or outputs are specified, Home Assistant will not load any binary_sensor components.”</p>
+<h2>Configuration</h2>
+<p>A <code>satel_integra</code> section must be present in the <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+satel_integra:
+  host: IP_ADDRESS
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the Satel Integra ETHM module on your home network, if using socket type.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port on which the ETHM module listens for clients using integration protocol.</p>
+</span></p><p class='default'>
+Default value: <p>7094</p>
+</p></dd><dt><a class='title-link' name='code' href='#code'></a> code</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The INTEGRA ID (found in DLOADX under “Communication configuration” or in polish “Komunikacja Konfiguracji” section), it’s needed for making use of the switchable_outputs.</p>
+</span></p></dd><dt><a class='title-link' name='partitions' href='#partitions'></a> partitions</dt><dd><p class='desc'><span class='type'>(<span class='integer list'>integer | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of the partitions to operate on.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the partition.</p>
+</span></p></dd><dt><a class='title-link' name='arm_home_mode' href='#arm_home_mode'></a> arm_home_mode</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The mode in which the partition is armed when ‘arm home’ is used. Possible options are <code>1</code>,<code>2</code> or <code>3</code>. For more information on what the differences are between them, please refer to Satel Integra manual.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd></dl></dd><dt><a class='title-link' name='zones' href='#zones'></a> zones</dt><dd><p class='desc'><span class='type'>(<span class='integer list'>integer | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This parameter lists the zones (or inputs) that will be visible by Home Assistant. For each zone, a proper ID must be given as well as its name. The name is arbitrary and does not need to match the one specified in Satel Integra alarm configuration.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the zone.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The zone type.</p>
+</span></p><p class='default'>
+Default value: <p>motion</p>
+</p></dd></dl></dd><dt><a class='title-link' name='outputs' href='#outputs'></a> outputs</dt><dd><p class='desc'><span class='type'>(<span class='integer list'>integer | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Very similar to zones, but with outputs. Satel Integra uses outputs to inform external systems about different events. For example power failure, or that alarm started counting for exit or some other user-defined condition. They may be used for simple alarm-based automation. For more information please refer to Satel homepage and forums.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the output.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The type of the device - just for presentation.</p>
+</span></p><p class='default'>
+Default value: <p>motion</p>
+</p></dd></dl></dd><dt><a class='title-link' name='switchable_outputs' href='#switchable_outputs'></a> switchable_outputs</dt><dd><p class='desc'><span class='type'>(<span class='integer list'>integer | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Switchable outputs. These will show up as switches within Home Assistant.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the output.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Full examples</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+satel_integra:
+  host: 192.168.1.100
+  port: 7094
+  partitions:
+    01:
+      name: 'House'
+      arm_home_mode: 2
+    02:
+      name: 'Garage'
+  zones:
+    01:
+      name: 'Bedroom'
+      type: 'motion'
+    02:
+      name: 'Hall'
+      type: 'motion'
+    30:
+      name: 'Kitchen - smoke'
+      type: 'smoke'
+    113:
+      name: 'Entry door'
+      type: 'opening'
+  outputs:
+    05:
+      name: 'Garden lights trigger'
+      type: 'light'
+    09:
+      name: 'Gate opening trigger'
+      type: 'opening'
+    30:
+      name: 'Alarm triggered'
+      type: 'safety'
+    32:
+      name: 'Alarm power problem'
+      type: 'safety'
+  switchable_outputs:
+    05:
+      name: 'Gate open'
+    06:
+      name: 'Gate close'    
+    14:
+      name: 'Garden light'
+      
+</code></pre>
+<p>Having configured the zones and the outputs, you can use them for automation, such as to react on the movement in your bedroom.
+For example:</p>
+<pre><code class="language-yaml">  alias: Flick the input switch when movement in bedroom detected
+  trigger:
+      platform: state
+      entity_id: 'binary_sensor.bedroom'
+      to: 'on'
+  action:
+      service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.movement_detected
+</code></pre>
+:ET

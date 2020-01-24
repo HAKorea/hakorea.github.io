@@ -1,0 +1,58 @@
+I"m<p>The MQTT integration will register the service <code>mqtt.publish</code> which allows publishing messages to MQTT topics. There are two ways of specifying your payload. You can either use <code>payload</code> to hard-code a payload or use <code>payload_template</code> to specify a <a href="/topics/templating/">template</a> that will be rendered to generate the payload.</p>
+<h3>Service <code>mqtt.publish</code></h3>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>topic</code></td>
+<td>no</td>
+<td>Topic to publish payload to.</td>
+</tr>
+<tr>
+<td><code>payload</code></td>
+<td>yes</td>
+<td>Payload to publish.</td>
+</tr>
+<tr>
+<td><code>payload_template</code></td>
+<td>yes</td>
+<td>Template to render as payload value. Ignored if payload given.</td>
+</tr>
+<tr>
+<td><code>qos</code></td>
+<td>yes</td>
+<td>Quality of Service to use.</td>
+</tr>
+<tr>
+<td><code>retain</code></td>
+<td>yes</td>
+<td>If message should have the retain flag set. (default: false)</td>
+</tr>
+</tbody>
+</table>
+<div class='note'>
+You need to include either payload or payload_template, but not both.
+</div>
+<pre><code class="language-yaml">topic: home-assistant/light/1/command
+payload: on
+</code></pre>
+<pre><code class="language-yaml">topic: home-assistant/light/1/state
+payload_template: {{ states('device_tracker.paulus') }}
+</code></pre>
+<p><code>payload</code> must be a string. If you want to send JSON then you need to format/escape it properly. Like:</p>
+<pre><code class="language-yaml">topic: home-assistant/light/1/state
+payload: &quot;{\&quot;Status\&quot;:\&quot;off\&quot;, \&quot;Data\&quot;:\&quot;something\&quot;}&quot;
+</code></pre>
+<p>Example of how to use <code>qos</code> and <code>retain</code>:</p>
+<pre><code class="language-yaml">topic: home-assistant/light/1/command
+payload: on
+qos: 2
+retain: true
+</code></pre>
+:ET

@@ -1,0 +1,48 @@
+I"�<p>The <code>foursquare</code> integration accepts pushes from the Foursquare <a href="https://developer.foursquare.com/overview/realtime">Real-Time API</a> and a service to check users in on Swarm.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+foursquare:
+  access_token: &quot;&lt;foursquare access token&gt;&quot;
+  push_secret: &quot;&lt;foursquare push secret&gt;&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='access_token' href='#access_token'></a> access_token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A Foursquare API access token.</p>
+</span></p></dd><dt><a class='title-link' name='push_secret' href='#push_secret'></a> push_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The push secret that Foursquare provides to you in the app dashboard.</p>
+</span></p></dd></dl>
+</div>
+<h4>Getting the access token</h4>
+<p>After you have registered your APP on your <a href="https://foursquare.com/developers/apps">My Apps Page</a> you get a <code>CLIENT_ID</code> and you have specified a
+<code>REDIRECT_URL</code> which can be any URL you like, but since it will get your access token via an HTTP GET request, it should be a URL which will ignore the <code>access_token</code> HTTP GET variable. A good idea is to choose the URL of your Home Assistant.
+Visit the following URL in your browser:</p>
+<pre><code class="language-txt">https://foursquare.com/oauth2/authenticate?client_id=CLIENT_ID&amp;response_type=token&amp;redirect_uri=YOUR_REGISTERED_REDIRECT_URI
+</code></pre>
+<p>and change the <code>CLIENT_ID</code> and <code>YOUR_REGISTERED_REDIRECT_URL</code> to your actual values.
+You will receive an OAuth request landing page, asking you if you want to connect your Foursquare account to your newly created app. Say “Yes”.
+After that, you will get redirected to your <code>REDIRECT_URL</code> with the <code>access_token</code> as an HTTP GET variable. Copy everything after the = and paste it in your configuration.yaml as the <code>access_token</code>.</p>
+<h3>Real-Time API</h3>
+<p>The integration accepts pushes from Foursquare at <code>/api/foursquare</code>. The route does not require authentication.</p>
+<p>Foursquare check-in events can be used out of the box to trigger automation actions, e.g.:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Trigger action when you check into a venue.
+    trigger:
+      platform: event
+      event_type: foursquare.push
+    action:
+      service: script.turn_on
+      entity_id: script.my_action
+</code></pre>
+<h3>Check ins</h3>
+<p>To check a user in, use the <code>foursquare/checkin</code> service.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>venueId</strong> (<em>Required</em>): The Foursquare venue where the user is checking in.</li>
+<li><strong>eventId</strong> (<em>Optional</em>): The event the user is checking in to.</li>
+<li><strong>shout</strong> (<em>Optional</em>): A message about your check-in. The maximum length of this field is 140 characters.</li>
+<li><strong>mentions</strong> (<em>Optional</em>): Mentions in your check-in. This parameter is a semicolon-delimited list of mentions. A single mention is of the form “start,end,userid”, where start is the index of the first character in the shout representing the mention, end is the index of the first character in the shout after the mention, and userid is the userid of the user being mentioned. If userid is prefixed with “fbu-”, this indicates a Facebook userid that is being mention. Character indices in shouts are 0-based.</li>
+<li><strong>broadcast</strong> (<em>Optional</em>): “Who to broadcast this check-in to. Accepts a comma-delimited list of values: private (off the grid) or public (share with friends), Facebook share on Facebook, twitter share on twitter, followers share with followers (celebrity mode users only), If no valid value is found, the default is public.”</li>
+<li><strong>ll</strong> (<em>Optional</em>): Latitude and longitude of the user’s location. Only specify this field if you have a GPS or other device reported location for the user at the time of check-in.</li>
+<li><strong>llAcc</strong> (<em>Optional</em>): Accuracy of the user’s latitude and longitude, in meters.</li>
+<li><strong>alt</strong> (<em>Optional</em>): Altitude of the user’s location, in meters.</li>
+<li><strong>altAcc</strong> (<em>Optional</em>): Vertical accuracy of the user’s location, in meters.</li>
+</ul>
+:ET

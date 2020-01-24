@@ -1,0 +1,297 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>FFmpeg - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate FFmpeg within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/ffmpeg/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="FFmpeg">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/ffmpeg/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate FFmpeg within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="FFmpeg">
+    <meta name="twitter:description" content="Instructions on how to integrate FFmpeg within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/ffmpeg.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      FFmpeg
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>ffmpeg</code> integration allows other Home Assistant integrations to process video and audio streams. This integration supports all FFmpeg versions since 3.0.0; if you have an older version, please update.</p>
+<div class="note">
+<p>You need the <code>ffmpeg</code> binary in your system path. On Debian 8 or Raspbian (Jessie) you can install it from <a href="https://backports.debian.org/Instructions/" rel="external nofollow">debian-backports</a>. If you want <a href="https://trac.ffmpeg.org/wiki/HWAccelIntro" rel="external nofollow">hardware acceleration</a> support on a Raspberry Pi, you will need to build from source by yourself. Windows binaries are available on the <a href="http://www.ffmpeg.org/" rel="external nofollow">FFmpeg</a> website.</p>
+</div>
+<div class="note">
+<p>If you are using <a href="/hassio/">Hass.io</a> then just move forward to the configuration as all requirements are already fulfilled.</p>
+</div>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">ffmpeg:
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="ffmpeg_bin" href="#ffmpeg_bin"></a> ffmpeg_bin</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name or path to the <code>ffmpeg</code> binary.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>ffmpeg</p>
+</dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="raspbian-debian-jessie-lite-installations" href="#raspbian-debian-jessie-lite-installations"></a> Raspbian Debian Jessie Lite Installations</h3>
+<p>To get the binary on Raspbian Debian Jessie Lite on a RPi you need to perform the following:</p>
+<pre><code class="language-bash">sudo echo "deb http://ftp.debian.org/debian jessie-backports main" &gt;&gt; /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get -t jessie-backports install ffmpeg
+</code></pre>
+<p>We can use now following in the configuration:</p>
+<pre><code class="language-yaml">ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+</code></pre>
+<h3>
+<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h3>
+<p>In most cases, <code>ffmpeg</code> automatically detects all needed options to read a video or audio stream or file. But it is possible in rare cases that you will need to set options to help <code>ffmpeg</code> out.</p>
+<p>First, check that your stream is playable by <code>ffmpeg</code> outside of Home Assistant with (use option <code>-an</code> or <code>-vn</code> to disable video or audio stream):</p>
+<pre><code class="language-bash">ffmpeg -i INPUT -an -f null -
+</code></pre>
+<p>Now you should be able to see what is going wrong. The following list contains some common problems and solutions:</p>
+<ul>
+<li>
+<code>[rtsp @ ...] UDP timeout, retrying with TCP</code>: You need to set an RTSP transport in the configuration with: <code>input: -rtsp_transport tcp -i INPUT</code>
+</li>
+<li>
+<code>[rtsp @ ...] Could not find codec parameters for stream 0 (Video: ..., none): unspecified size</code>: FFmpeg needs more data or time for autodetection (the default is 5 seconds). You can set the <code>analyzeduration</code> and/or <code>probesize</code> options to experiment with giving FFmpeg more leeway. If you find the needed value, you can set it with: <code>input: -analyzeduration xy -probesize xy -i INPUT</code>. More information about this can be found <a href="https://www.ffmpeg.org/ffmpeg-formats.html#Description" rel="external nofollow">here</a>.</li>
+</ul>
+<h4>
+<a class="title-link" name="usb-cameras" href="#usb-cameras"></a> USB cameras</h4>
+<p>For <code>INPUT</code> a valid source is needed. A USB camera is an easy way to test your video setup. To get all available USB cameras connected to the system, e.g., use the v4l2 tools on a Linux machine.</p>
+<pre><code class="language-bash">$ v4l2-ctl --list-devices
+UVC Camera (046d:0825) (usb-0000:00:14.0-1):
+  /dev/video1
+
+Integrated Camera (usb-0000:00:14.0-10):
+  /dev/video0
+</code></pre>
+<p>Record a test video with your USB device <code>/dev/video1</code>:</p>
+<pre><code class="language-bash">$ ffmpeg -i /dev/video1 -codec:v libx264 -qp 0 lossless.mp4
+[...]
+Input #0, video4linux2,v4l2, from '/dev/video1':
+  Duration: N/A, start: 43556.376974, bitrate: 147456 kb/s
+    Stream #0:0: Video: rawvideo (YUY2 / 0x32595559), yuyv422, 640x480, 147456 kb/s, 30 fps, 30 tbr, 1000k tbn, 1000k tbc
+[...]
+Output #0, mp4, to 'lossless.mp4':
+  Metadata:
+    encoder         : Lavf57.41.100
+    Stream #0:0: Video: h264 (libx264) ([33][0][0][0] / 0x0021), yuv422p, 640x480, q=-1--1, 30 fps, 15360 tbn, 30 tbc
+    Metadata:
+      encoder         : Lavc57.48.101 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: -1
+Stream mapping:
+  Stream #0:0 -&gt; #0:0 (rawvideo (native) -&gt; h264 (libx264))
+Press [q] to stop, [?] for help
+frame=  223 fps= 40 q=-1.0 Lsize=   16709kB time=00:00:07.40 bitrate=18497.5kbits/s dup=58 drop=0 speed=1.32x
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/ffmpeg.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/ffmpeg.png' /></div><div class="section">
+    <kb-alert-link integration="ffmpeg"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.29
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/ffmpeg/'>/components/ffmpeg/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#image-processing'>Image Processing</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

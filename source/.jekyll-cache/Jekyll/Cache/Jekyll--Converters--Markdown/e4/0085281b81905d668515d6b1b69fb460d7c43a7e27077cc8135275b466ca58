@@ -1,0 +1,31 @@
+I"(
+<p>The <code>geizhals</code> sensor will give you the best price of a product from <a href="https://geizhals.de">Geizhals</a> or related site. With this information can be used in e.g., automations to notify you when a price drops.</p>
+<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: geizhals
+    name: PRODUCT_NAME
+    product_id: PRODUCT_ID
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The internal name of the product in Home Assistant.</p>
+</span></p></dd><dt><a class='title-link' name='product_id' href='#product_id'></a> product_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>ID of the product. Get the ID from the Geizhals website of your chosen product by opening the <em>Price History</em> in a new browser tab (right-click on the price history &gt; open in new tab). The URL of this site reveals the ID, e.g., <code>https://geizhals.de/?phist=1696985</code> with a <code>product_id</code> of <code>1696985</code>.</p>
+</span></p></dd><dt><a class='title-link' name='description' href='#description'></a> description</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the product in the front end.</p>
+</span></p><p class='default'>
+Default value: <p>price</p>
+</p></dd><dt><a class='title-link' name='locale' href='#locale'></a> locale</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Localisation which should be used for the request. Set this to <code>AT</code>, <code>EU</code>, <code>DE</code>, <code>UK</code> or <code>PL</code>.</p>
+</span></p><p class='default'>
+Default value: <p>DE</p>
+</p></dd></dl>
+</div>
+<h4>Extended example</h4>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: geizhals
+    name: qc35
+    product_id: 1696985
+    description: &quot;Bose QC35&quot;
+    locale: &quot;DE&quot;
+</code></pre>
+:ET

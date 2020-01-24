@@ -1,0 +1,37 @@
+I"_	<p>The <code>mqtt_eventstream</code> integration connects two Home Assistant instances via MQTT.</p>
+<h2>Configuration</h2>
+<p>To integrate MQTT Eventstream into Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+mqtt_eventstream:
+  publish_topic: MyServerName
+  subscribe_topic: OtherHaServerName
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='publish_topic' href='#publish_topic'></a> publish_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Topic for publishing local events.</p>
+</span></p></dd><dt><a class='title-link' name='subscribe_topic' href='#subscribe_topic'></a> subscribe_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Topic to receive events from the remote server.</p>
+</span></p></dd><dt><a class='title-link' name='ignore_event' href='#ignore_event'></a> ignore_event</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Ignore sending these <a href="/docs/configuration/events/">events</a> over mqtt.</p>
+</span></p></dd></dl>
+</div>
+<h2>Multiple Instances</h2>
+<p>Events from multiple instances can be aggregated to a single master instance by subscribing to a wildcard topic from the master instance.</p>
+<pre><code class="language-yaml"># Example master instance configuration.yaml entry
+mqtt_eventstream:
+  publish_topic: master/topic
+  subscribe_topic: slaves/#
+  ignore_event:
+    - call_service
+    - state_changed
+</code></pre>
+<p>For a multiple instance setup, each slave would publish to their own topic.</p>
+<pre><code class="language-yaml"># Example slave instance configuration.yaml entry
+mqtt_eventstream:
+  publish_topic: slaves/upstairs
+  subscribe_topic: master/topic
+</code></pre>
+<pre><code class="language-yaml"># Example slave instance configuration.yaml entry
+mqtt_eventstream:
+  publish_topic: slaves/downstairs
+  subscribe_topic: master/topic
+</code></pre>
+:ET

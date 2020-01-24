@@ -1,0 +1,62 @@
+I"<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<h2>Notifications</h2>
+<p>The <code>file</code> platform allows you to store notifications from Home Assistant as a file.</p>
+<p>To enable file notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFIER_NAME
+    platform: file
+    filename: FILENAME
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='filename' href='#filename'></a> filename</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the file to use. The file will be created if it doesn’t exist and saved in your <a href="/docs/configuration/">configuration</a> folder.</p>
+</span></p></dd><dt><a class='title-link' name='timestamp' href='#timestamp'></a> timestamp</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting <code>timestamp</code> to <code>true</code> adds a timestamp to every entry.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<h2>Sensor</h2>
+<p>The <code>file</code> sensor platform reads the entries from a plain-text file and shows the found value. Only the last line of the file is used. This is similar to do <code>$ tail -n 1 sensor.txt</code> on the command-line. Note that file paths must be added to <a href="/docs/configuration/basic/">whitelist_external_dirs</a>.</p>
+<p>To enable the <code>file</code> sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: file
+    file_path: /home/user/.homeassistant/sensor-data.txt
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='file_path' href='#file_path'></a> file_path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Path to file that stores the sensor data.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the sensor to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>file name</p>
+</p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the units of measurement of the sensor, if any.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the payload.</p>
+</span></p></dd></dl>
+</div>
+<h3>Examples</h3>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h4>Entries as JSON</h4>
+<p>Assuming that the log file contains multiple values formatted as JSON like shown below:</p>
+<pre><code class="language-text">[...]
+{&quot;temperature&quot;: 21, &quot;humidity&quot;: 39}
+{&quot;temperature&quot;: 22, &quot;humidity&quot;: 36}
+</code></pre>
+<p>This would require the following entry in the <code>configuration.yaml</code> file to extract the temperature:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: file
+    name: Temperature
+    file_path: /home/user/.homeassistant/sensor.json
+    value_template: '{{ value_json.temperature }}'
+    unit_of_measurement: '°C'
+</code></pre>
+:ET

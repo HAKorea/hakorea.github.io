@@ -1,0 +1,62 @@
+I"Û<p>The Fitbit sensor allows you to expose data from <a href="https://fitbit.com/">Fitbit</a> to Home Assistant.</p>
+<p>Enable the sensor by adding the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: fitbit
+    clock_format: 12H
+    monitored_resources:
+      - &quot;body/weight&quot;
+</code></pre>
+<p>Restart Home Assistant once this is complete. Go to the frontend. You will see a new entry for configuring Fitbit. Follow the instructions there to complete the setup process.</p>
+<p>Please be aware that Fitbit has very low rate limits, 150 per user per hour. The clock resets at the <em>top</em> of the hour (meaning it is not a rolling 60 minutes). There is no way around the limits. Due to the rate limits, the sensor only updates every 30 minutes. You can manually trigger an update by restarting Home Assistant. Keep in mind that 1 request is used for every entry in <code>monitored_resources</code>.</p>
+<p>The unit system that the sensor will use is based on the country you set in your Fitbit profile.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='monitored_resources' href='#monitored_resources'></a> monitored_resources</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Resource to monitor.</p>
+</span></p><p class='default'>
+Default value: <p><code>activities/steps</code></p>
+</p></dd><dt><a class='title-link' name='clock_format' href='#clock_format'></a> clock_format</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Format to use for <code>sleep/startTime</code> resource. Accepts <code>12H</code> or <code>24H</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>24H</code></p>
+</p></dd><dt><a class='title-link' name='unit_system' href='#unit_system'></a> unit_system</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Unit system to use for measurements. Accepts <code>default</code>, <code>metric</code>, <code>en_US</code> or <code>en_GB</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>default</code></p>
+</p></dd></dl>
+</div>
+<p>Below is the list of resources that you can add to <code>monitored_resources</code>. One sensor is exposed for every resource.</p>
+<pre><code class="language-text">activities/activityCalories
+activities/calories
+activities/caloriesBMR
+activities/distance
+activities/elevation
+activities/floors
+activities/heart
+activities/minutesFairlyActive
+activities/minutesLightlyActive
+activities/minutesSedentary
+activities/minutesVeryActive
+activities/steps
+activities/tracker/activityCalories
+activities/tracker/calories
+activities/tracker/distance
+activities/tracker/elevation
+activities/tracker/floors
+activities/tracker/minutesFairlyActive
+activities/tracker/minutesLightlyActive
+activities/tracker/minutesSedentary
+activities/tracker/minutesVeryActive
+activities/tracker/steps
+body/bmi
+body/fat
+body/weight
+devices/battery
+sleep/awakeningsCount
+sleep/efficiency
+sleep/minutesAfterWakeup
+sleep/minutesAsleep
+sleep/minutesAwake
+sleep/minutesToFallAsleep
+sleep/startTime
+sleep/timeInBed
+</code></pre>
+:ET

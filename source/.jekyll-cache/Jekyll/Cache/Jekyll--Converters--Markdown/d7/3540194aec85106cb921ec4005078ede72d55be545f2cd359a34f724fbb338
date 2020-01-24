@@ -1,0 +1,116 @@
+I"'<p><code>limitlessled</code> can control your LimitlessLED lights from within Home Assistant. The lights are also known as EasyBulb, AppLight, AppLamp, MiLight, LEDme, dekolight, or iLight.</p>
+<p>LimitlessLED bulbs are controlled via groups, so you can only control an individual bulb via the bridge if it is in a group by itself.</p>
+<p>Note: you can assign an <code>rgbw</code>, <code>rgbww</code>, <code>white</code> and <code>dimmer</code> group to the same group number, effectively allowing up to 16 groups (4 <code>rgbww</code>, 4 <code>rgbw</code>, 4 <code>white</code> and 4 <code>dimmer</code>) per bridge.</p>
+<p>An archive of the extensive API can be found <a href="https://github.com/Fantasmos/LimitlessLED-DevAPI">here</a>.</p>
+<h3>Setup</h3>
+<p>Before configuring Home Assistant, make sure you can control your bulbs or LEDs with the MiLight mobile application. Next, discover your bridge(s) IP address. You can do this via your router or a mobile application like Fing (<a href="https://play.google.com/store/apps/details?id=com.overlook.android.fing&amp;hl=en">android</a> or <a href="https://itunes.apple.com/us/app/fing-network-scanner/id430921107?mt=8">iTunes</a>).</p>
+<p>To add <code>limitlessled</code> to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+light:
+  platform: limitlessled
+  bridges:
+    - host: 192.168.1.10
+      groups:
+      - number: 1
+        name: Bedroom
+      - number: 2
+        type: rgbw
+        name: Bathroom
+      - number: 3
+        type: rgbw
+        name: Kitchen
+        fade: true
+      - number: 4
+        type: dimmer
+        name: Livingroom
+    - host: 192.168.1.11
+      groups:
+      - number: 1
+        name: Living Room &amp; Hall
+      - number: 1
+        type: bridge-led
+        name: Bridge Light
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='bridges' href='#bridges'></a> bridges</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of bridges.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>IP address of the device, e.g., <code>192.168.1.32</code>.</p>
+</span></p></dd><dt><a class='title-link' name='version' href='#version'></a> version</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Bridge version.</p>
+</span></p><p class='default'>
+Default value: <p>6</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Bridge port. For older bridges than <code>v6</code> choose <code>8899</code>.</p>
+</span></p><p class='default'>
+Default value: <p>5987</p>
+</p></dd><dt><a class='title-link' name='groups' href='#groups'></a> groups</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The list of available groups.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='number' href='#number'></a> number</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>Group number (<code>1</code>-<code>4</code>). Corresponds to the group number on the remote. These numbers may overlap only if the type is different.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Any name you’d like. Must be unique among all configured groups.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of group. Choose either <code>rgbww</code>, <code>rgbw</code>, <code>white</code>, <code>bridge-led</code> or <code>dimmer</code>. Use <code>bridge-led</code> to control the built-in LED of newer WiFi bridges.</p>
+</span></p><p class='default'>
+Default value: <p>rgbw</p>
+</p></dd><dt><a class='title-link' name='fade' href='#fade'></a> fade</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Fade behavior. If turned on (true), the group is faded out before being turned off. This makes for a more pleasing transition at the expense of wall switch usability since the light will turn back on at the lowest brightness if it is power cycled.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h3>Night Effect</h3>
+<p>LimitlessLED has a <code>night</code> effect that can be used to dim the lights below <code>brightness: 1</code>. This night mode is meant to temporarily turn the lights into a nightlight. This mode can be especially helpful when wall switches are also being used. For example, when a light is using the <code>night</code> effect one way to return it to its previous brightness level (other than using Home Assistant) is to switch the lights off and then back on from the wall switch.</p>
+<p>Note that the <code>brightness</code>, <code>color</code> and <code>temperature</code> attributes cannot be used when using the <code>night</code> effect. You can turn on <code>night</code> effect by using the <code>effect</code> attribute of the normal <code>light.turn_on</code> service. Here is an example:</p>
+<pre><code class="language-yaml">automation:
+  - alias: ...
+    trigger:
+      # ...
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office, light.kitchen
+          effect: night
+</code></pre>
+<h3>Properties</h3>
+<p>Refer to the <a href="/integrations/light/">light</a> documentation for general property usage, but keep in mind the following notes specific to LimitlessLED.</p>
+<ul>
+<li><strong>RGBWW</strong> (Only supported on v6 bridges)
+<ul>
+<li><em>Color</em>: There are 25,856 color possibilities along the LimitlessLED color spectrum. For colors, hue and saturation can be used, but not lightness. If you select a color with lightness, Home Assistant will calculate the nearest valid LimitlessLED color. In white mode, the temperature can be set.</li>
+<li><em>Temperature</em>: There are 101 temperature steps.</li>
+<li><em>Brightness</em>: There are 101 brightness steps.</li>
+</ul>
+</li>
+<li><strong>RGBW</strong>
+<ul>
+<li><em>Color</em>: There are 256 color possibilities along the LimitlessLED color spectrum. Color properties like saturation and lightness cannot be used - only Hue can. The only exception is white (which may be warm or cold depending on the type of RGBW bulb). If you select a color with saturation or lightness, Home Assistant will calculate the nearest valid LimitlessLED color.</li>
+<li><em>Brightness</em>: Wifi bridge v6 supports 101 brightness steps; older versions only 25.</li>
+</ul>
+</li>
+<li><strong>White</strong>
+<ul>
+<li>When using a legacy WiFi bridge (before v6), you can observe on the MiLight mobile application, you can not select a specific brightness or temperature - you can only step each property up or down. There is no indication of which step you are on. This restriction, combined with the unreliable nature of LimitlessLED transmissions, means that setting white bulb properties is done on a best-effort basis. The only very reliable settings are the minimum and maximum of each property.</li>
+<li><em>Temperature</em>: Wifi bridge v6 supports 101 temperature steps; older versions only 10.</li>
+<li><em>Brightness</em>: Wifi bridge v6 supports 101 brightness steps; older versions only 10.</li>
+</ul>
+</li>
+<li><strong>Dimmer</strong> (Only supported on v6 bridges)
+<ul>
+<li>This type is for a single color LED dimmer like the 1CH MiLight dimmer module or similar. This type is only supported by the version 6 Wifi bridges.</li>
+<li><em>Brightness</em>: Wifi bridge v6 supports 101 brightness steps.</li>
+</ul>
+</li>
+<li><strong>Transitions</strong>
+<ul>
+<li>If a transition time is set, the group will transition between the current settings and the target settings for the duration specified. Transitions from or to white are not possible - the color will change immediately.</li>
+</ul>
+</li>
+</ul>
+<h3>Initialization &amp; Synchronization</h3>
+<p>When starting Home Assistant, the last recorded state will be shown. This might no longer match the actual state of the bulbs.</p>
+<p>If you control your LimitlessLED lights via the MiLight mobile application or other means while Home Assistant is running, Home Assistant cannot track those changes and you may observe obsolete information.</p>
+<p>This lack of synchronization is due to a LimitlessLED limitation.</p>
+<p class='img'>
+<img src='/images/screenshots/limitlessled_assumed_state.png' />
+</p>
+<p>Because LimitlessLED lights may have an obsolete state, Home Assistant shows the power switch as two buttons rather than a toggle. This ensures that the power can be set with a single click even if the assumed state is wrong. You can change to use the power toggle with <a href="/docs/configuration/customizing-devices/">Customize</a>:</p>
+<pre><code class="language-yaml">homeassistant:
+  customize_domain:
+    light:
+      assumed_state: false
+</code></pre>
+:ET

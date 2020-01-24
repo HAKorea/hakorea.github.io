@@ -1,0 +1,115 @@
+I"�&<p>The <code>rpi_gpio</code> integration is the base for all related GPIO platforms in Home Assistant. There is no setup needed for the integration itself, for the platforms please check their corresponding pages.</p>
+<h2>Binary Sensor</h2>
+<p>The <code>rpi_gpio</code> binary sensor platform allows you to read sensor values of the GPIOs of your <a href="https://www.raspberrypi.org/">Raspberry Pi</a>.</p>
+<h2>Configuration</h2>
+<p>To use your Raspberry Pi’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: rpi_gpio
+    ports:
+      11: PIR Office
+      12: PIR Bedroom
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='port-name' href='#port-name'></a> port: name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port numbers (<a href="https://pinout.xyz/resources/raspberry-pi-pinout.png">BCM mode pin numbers</a>) and corresponding names.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='bouncetime' href='#bouncetime'></a> bouncetime</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time in milliseconds for port debouncing.</p>
+</span></p><p class='default'>
+Default value: <p>50</p>
+</p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If <code>true</code>, inverts the output logic to ACTIVE LOW.</p>
+</span></p><p class='default'>
+Default value: <p><code>false</code> (ACTIVE HIGH)</p>
+</p></dd><dt><a class='title-link' name='pull_mode' href='#pull_mode'></a> pull_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Type of internal pull resistor to use. Options are <code>UP</code> - pull-up resistor and <code>DOWN</code> - pull-down resistor.</p>
+</span></p><p class='default'>
+Default value: <p><code>UP</code></p>
+</p></dd></dl>
+</div>
+<p>For more details about the GPIO layout, visit the Wikipedia <a href="https://en.wikipedia.org/wiki/Raspberry_Pi#GPIO_connector">article</a> about the Raspberry Pi.</p>
+<h2>Cover</h2>
+<p>The <code>rpi_gpio</code> cover platform allows you to use a Raspberry Pi to control your cover such as Garage doors.</p>
+<p>It uses two pins on the Raspberry Pi.</p>
+<ul>
+<li>The <code>state_pin</code> will detect if the cover is closed, and</li>
+<li>the <code>relay_pin</code> will trigger the cover to open or close.</li>
+</ul>
+<p>Although you do not need Andrews Hilliday’s software controller when you run Home Assistant, he has written clear instructions on how to hook your garage door and sensors up to your Raspberry Pi, which can be found <a href="https://github.com/andrewshilliday/garage-door-controller#hardware-setup">here</a>.</p>
+<h2>Configuration</h2>
+<p>To enable Raspberry Pi Covers in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: rpi_gpio
+    covers:
+      - relay_pin: 10
+        state_pin: 11
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='relay_time' href='#relay_time'></a> relay_time</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The time that the relay will be on for in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>0.2</p>
+</p></dd><dt><a class='title-link' name='invert_relay' href='#invert_relay'></a> invert_relay</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Invert the relay pin output so that it is active-high (True).</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='state_pull_mode' href='#state_pull_mode'></a> state_pull_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The direction the State pin is pulling. It can be UP or DOWN.</p>
+</span></p><p class='default'>
+Default value: <p>UP</p>
+</p></dd><dt><a class='title-link' name='invert_state' href='#invert_state'></a> invert_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Invert the value of the State pin so that 0 means closed.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='covers' href='#covers'></a> covers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of your doors.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='relay_pin' href='#relay_pin'></a> relay_pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The pin of your Raspberry Pi where the relay is connected.</p>
+</span></p></dd><dt><a class='title-link' name='state_pin' href='#state_pin'></a> state_pin</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The pin of your Raspberry Pi to retrieve the state.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name to use in the frontend.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Full example</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+cover:
+  - platform: rpi_gpio
+    relay_time: 0.2
+    invert_relay: false
+    state_pull_mode: 'UP'
+    invert_state: true
+    covers:
+      - relay_pin: 10
+        state_pin: 11
+      - relay_pin: 12
+        state_pin: 13
+        name: 'Right door'
+</code></pre>
+<h2>Remote Raspberry Pi Cover</h2>
+<p>If you don’t have Home Assistant running on your Raspberry Pi and you want to use it as a remote cover instead, there is a project called <a href="https://github.com/Jerrkawz/GarageQTPi">GarageQTPi</a> that will work remotely with the <a href="/integrations/cover.mqtt/">MQTT Cover Component</a>. Follow the Github instructions to install and configure GarageQTPi and once configured follow the Home Assistant instructions to configure the MQTT Cover.</p>
+<h2>Switch</h2>
+<p>The <code>rpi_gpio</code> switch platform allows you to control the GPIOs of your <a href="https://www.raspberrypi.org/">Raspberry Pi</a>.</p>
+<h2>Configuration</h2>
+<p>To use your Raspberry Pi’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: rpi_gpio
+    ports:
+      11: Fan Office
+      12: Light Desk
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='ports' href='#ports'></a> ports</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Array of used ports.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer string'>integer | string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Port numbers and corresponding names (GPIO</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If true, inverts the output logic to ACTIVE LOW.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<p>For more details about the GPIO layout, visit the Wikipedia <a href="https://en.wikipedia.org/wiki/Raspberry_Pi#General_purpose_input-output_(GPIO)_connector">article</a> about the Raspberry Pi.</p>
+<div class='note warning'>
+Note that a pin managed by Home Assistant is expected to be exclusive to Home Assistant.
+</div>
+<p>A common question is what does Port refer to, this number is the actual GPIO #, not the pin #.
+For example, if you have a relay connected to pin 11 its GPIO # is 17.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: rpi_gpio
+    ports:
+      17: Speaker Relay
+</code></pre>
+:ET

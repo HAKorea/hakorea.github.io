@@ -1,0 +1,28 @@
+I"K<p><a href="http://growl.info/documentation/developer/gntp.php">GNTP</a> is a specification for sending and receiving notifications between computers. The most well known server implementations are <a href="http://growl.info">Growl</a> for Mac and <a href="http://www.growlforwindows.com/">Growl for Windows</a>.</p>
+<p>To use GNTP notifications, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+notify:
+  - name: NOTIFER_NAME
+    platform: gntp
+</code></pre>
+<p>GNTP will attempt to connect to a local server running on port 23053 if no <code>hostname</code> is provided.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+</span></p><p class='default'>
+Default value: <p>notify</p>
+</p></dd><dt><a class='title-link' name='app_name' href='#app_name'></a> app_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The application name that will be displayed on every notification and will be registered with the server.</p>
+</span></p><p class='default'>
+Default value: <p>HomeAssistant</p>
+</p></dd><dt><a class='title-link' name='app_icon' href='#app_icon'></a> app_icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The icon that will be displayed on every notification. You can provide an HTTP URL or a <code>file://</code> URL. File URLs only work if Home Assistant and the GNTP server are running on the same machine. If no <code>app_icon</code> is set a local copy of the Home Assistant logo will be used. If you choose to use an HTTP URL please make the maximum image size 150 px by 150 px as Growl for Mac will sometimes timeout when registering.</p>
+</span></p></dd><dt><a class='title-link' name='hostname' href='#hostname'></a> hostname</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The hostname or IP address of the GNTP server to contact.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The password to authenticate to the GNTP server with.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port that the GNTP server runs on. The specification states that servers should not allow users to use any port other than 23053 but <code>port</code> is provided here just in case.</p>
+</span></p><p class='default'>
+Default value: <p>23053</p>
+</p></dd></dl>
+</div>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+:ET

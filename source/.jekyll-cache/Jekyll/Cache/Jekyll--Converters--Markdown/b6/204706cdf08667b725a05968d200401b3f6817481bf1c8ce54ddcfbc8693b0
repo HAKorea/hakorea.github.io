@@ -1,0 +1,39 @@
+I"e<p>The <code>marytts</code> text-to-speech platform uses <a href="http://mary.dfki.de/">MaryTTS</a> Text-to-Speech engine to read a text with natural sounding voices.</p>
+<h2>Configuration</h2>
+<p>To enable text-to-speech with MaryTTS, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: marytts
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MaryTTS server hostname or IP address.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MaryTTS server port.</p>
+</span></p><p class='default'>
+Default value: <p>59125</p>
+</p></dd><dt><a class='title-link' name='codec' href='#codec'></a> codec</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The audio codec. Supported codecs are <code>aiff</code>, <code>au</code> and <code>wav</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>wav</code></p>
+</p></dd><dt><a class='title-link' name='voice' href='#voice'></a> voice</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The speaker voice.</p>
+</span></p><p class='default'>
+Default value: <p><code>cmu-slt-hsmm</code></p>
+</p></dd><dt><a class='title-link' name='language' href='#language'></a> language</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The language to use. Supported languages are <code>de</code>, <code>en-GB</code>, <code>en-US</code>, <code>fr</code>, <code>it</code>, <code>lb</code>, <code>ru</code>, <code>sv</code>, <code>te</code> and <code>tr</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>en-US</code></p>
+</p></dd></dl>
+</div>
+<p>See <a href="http://mary.dfki.de/documentation/index.html">documentation</a> for details.</p>
+<h2>Full configuration example</h2>
+<p>A full configuration sample including optional variables:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+tts:
+  - platform: marytts
+    host: 'localhost'
+    port: 59125
+    codec: 'wav'
+    voice: 'cmu-slt-hsmm'
+    language: 'en-US'
+</code></pre>
+:ET

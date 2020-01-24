@@ -1,0 +1,57 @@
+I" <p>The <code>onewire</code> platform supports sensors which are using the One wire (1-wire) bus for communication.</p>
+<p>Supported devices:</p>
+<ul>
+<li><a href="https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf">DS18B20</a></li>
+<li><a href="https://www.maximintegrated.com/en/products/sensors/DS18S20.html">DS18S20</a></li>
+<li><a href="https://datasheets.maximintegrated.com/en/ds/DS1822.pdf">DS1822</a></li>
+<li><a href="https://datasheets.maximintegrated.com/en/ds/DS1825.pdf">DS1825</a></li>
+<li><a href="https://datasheets.maximintegrated.com/en/ds/DS28EA00.pdf">DS28EA00</a> temperature sensors</li>
+<li><a href="https://datasheets.maximintegrated.com/en/ds/DS2406.pdf">DS2406/TAI-8570</a> Temperature and pressure sensor made by AAG</li>
+<li><a href="https://datasheets.maximintegrated.com/en/ds/DS2438.pdf">DS2438/B1-R1-A</a> Temperature, pressure and humidity sensor by AAG</li>
+</ul>
+<p>The 1-Wire bus can be connected directly to the IO pins of Raspberry Pi or using dedicated interface adapter (e.g <a href="https://datasheets.maximintegrated.com/en/ds/DS9490-DS9490R.pdf">DS9490R</a>).</p>
+<h2>Raspberry Pi setup</h2>
+<p>In order to setup 1-Wire support on Raspberry Pi, you’ll need to edit <code>/boot/config.txt</code> following <a href="https://www.waveshare.com/wiki/Raspberry_Pi_Tutorial_Series:_1-Wire_DS18B20_Sensor#Enable_1-Wire">this documentation</a>.
+To edit <code>/boot/config.txt</code> on Hass.io use <a href="https://developers.home-assistant.io/docs/en/hassio_debugging.html">this documentation</a> to enable SSH and edit <code>/mnt/boot/config.txt</code> via <code>vi</code>.</p>
+<h2>Interface adapter setup</h2>
+<h3>owfs</h3>
+<p>When an interface adapter is used, sensors can be accessed on Linux hosts via <a href="https://owfs.org/">owfs 1-Wire file system</a>. When using an interface adapter and the owfs, the <code>mount_dir</code> option must be configured to correspond a directory, where owfs device tree has been mounted.</p>
+<h3>owserver</h3>
+<p>When an interface adapter is used, you can also access sensors on a remote or local Linux host that is running owserver.  owserver by default runs on port 4304. Use the <code>host</code> option to specify the host or IP of the remote server, and the optional <code>port</code> option to change the port from the default.</p>
+<h3>Units with multiple sensors</h3>
+<p>This platform works with devices with multiple sensors which will cause a discontinuity in recorded values. Existing devices will receive a new ID and therefore show up as new devices.
+If you wish to maintain continuity it can be resolved in the database by renaming the old devices to the new names.</p>
+<p>Connect to your database using the instructions from <a href="/docs/backend/database/">Database section</a>. Check the names of sensors:</p>
+<pre><code class="language-sql">SELECT entity_id, COUNT(*) as count FROM states GROUP BY entity_id ORDER BY count DESC LIMIT 10;
+</code></pre>
+<p>Alter the names of sensors using the following examples:</p>
+<pre><code class="language-sql">UPDATE states SET entity_id='sensor.&lt;sensor_name&gt;_temperature' WHERE entity_id LIKE 'sensor.&lt;sensor_name&gt;%' AND attributes LIKE '%\u00b0C%';
+UPDATE states SET entity_id='sensor.&lt;sensor_name&gt;_pressure' WHERE entity_id LIKE 'sensor.&lt;sensor_name&gt;%' AND attributes LIKE '%mb%';
+UPDATE states SET entity_id='sensor.&lt;sensor_name&gt;_humidity' WHERE entity_id LIKE 'sensor.&lt;sensor_name&gt;%' AND attributes LIKE '%%%' ESCAPE '';
+</code></pre>
+<p>Remember to replace <code>&lt;sensor_name&gt;</code> with the actual name of the sensor as seen in the <code>SELECT</code> query.</p>
+<h2>Configuration</h2>
+<p>To enable One wire sensors in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: onewire
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='names' href='#names'></a> names</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>ID and friendly name of your sensors.</p>
+</span></p></dd><dt><a class='title-link' name='mount_dir' href='#mount_dir'></a> mount_dir</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Location of device tree if owfs driver used.</p>
+</span></p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Remote or local host running owserver.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port number of the owserver (requires <code>host</code>).</p>
+</span></p><p class='default'>
+Default value: <p>4304</p>
+</p></dd></dl>
+</div>
+<h3>Configuration Example</h3>
+<p>When <code>onewire</code> is added to Home Assistant, it will generate an ID for the sensor. You can specify a friendly name for the sensor with the name configuration option.</p>
+<pre><code class="language-yaml"># Named sensor configuration.yaml entry
+sensor:
+  - platform: onewire
+    names:
+      GENERATED_ID: FRIENDLY_NAME
+</code></pre>
+:ET

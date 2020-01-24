@@ -1,0 +1,26 @@
+I"5
+<p>Telegram chatbot polling implementation.</p>
+<p>One of two bot implementations supported by Telegram. Your Home Assistant does not have to be exposed to the internet.</p>
+<h2>Configuration</h2>
+<p>To integrate this into Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+telegram_bot:
+  - platform: polling
+    api_key: YOUR_API_KEY
+    allowed_chat_ids:
+      - 12345
+      - 67890
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='allowed_chat_ids' href='#allowed_chat_ids'></a> allowed_chat_ids</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of users in the <code>user_id</code> Telegram format that are authorized to interact with the webhook.</p>
+</span></p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API token of your bot.</p>
+</span></p></dd><dt><a class='title-link' name='parse_mode' href='#parse_mode'></a> parse_mode</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Default parser for messages if not explicit in message data, either <code>html</code> or <code>markdown</code>.</p>
+</span></p><p class='default'>
+Default value: <p><code>markdown</code></p>
+</p></dd><dt><a class='title-link' name='proxy_url' href='#proxy_url'></a> proxy_url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Proxy url if working behind one (<code>socks5://proxy_ip:proxy_port</code>).</p>
+</span></p></dd><dt><a class='title-link' name='proxy_params' href='#proxy_params'></a> proxy_params</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Proxy configuration parameters, as dict, if working behind a proxy (<code>username</code>, <code>password</code>, etc.).</p>
+</span></p></dd></dl>
+</div>
+<p>To get your <code>chat_id</code> and <code>api_key</code> follow the instructions <a href="/integrations/telegram">here</a>.</p>
+:ET

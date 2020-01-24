@@ -1,0 +1,41 @@
+I"D<p>The <code>smappee</code> integration adds support for the <a href="https://www.smappee.com/">Smappee</a> controller for energy monitoring and Comport plug switches.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Sensor</li>
+<li>Switch</li>
+</ul>
+<p>Will be automatically added when you connect to the Smappee controller.</p>
+<p>The smappee integration gets information from <a href="https://smappee.atlassian.net/wiki/spaces/DEVAPI/overview">Smappee API</a>. Note: their cloud API now requires a subscription fee of €2.50 per month for Smappee Energy/Solar or €3 per month for Smappee Plus.</p>
+<h2>Configuration</h2>
+<p>Info on how to get API access is described in the <a href="https://github.com/EnergieID/smappy/wiki">smappy wiki</a>.</p>
+<p>To use the <code>smappee</code> integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+smappee:
+  host: 10.0.0.5
+  client_id: YOUR_CLIENT_ID
+  client_secret: YOUR_CLIENT_SECRET
+  username: YOUR_MYSMAPPEE_USERNAME
+  password: YOUR_MYSMAPPEE_PASSWORD
+</code></pre>
+<pre><code class="language-yaml"># Minimal example configuration.yaml entry
+smappee:
+  host: 10.0.0.5
+</code></pre>
+<pre><code class="language-yaml"># Cloud only example configuration.yaml entry
+smappee:
+  client_id: YOUR_CLIENT_ID
+  client_secret: YOUR_CLIENT_SECRET
+  username: YOUR_MYSMAPPEE_USERNAME
+  password: YOUR_MYSMAPPEE_PASSWORD
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your Local Smappee unit IP.</p>
+</span></p></dd><dt><a class='title-link' name='host_password' href='#host_password'></a> host_password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your Local Smappee password.</p>
+</span></p></dd><dt><a class='title-link' name='client_id' href='#client_id'></a> client_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your Smappee API client ID.</p>
+</span></p></dd><dt><a class='title-link' name='client_secret' href='#client_secret'></a> client_secret</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your Smappee API client secret.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your My Smappee username.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your My Smappee password.</p>
+</span></p></dd></dl>
+</div>
+:ET

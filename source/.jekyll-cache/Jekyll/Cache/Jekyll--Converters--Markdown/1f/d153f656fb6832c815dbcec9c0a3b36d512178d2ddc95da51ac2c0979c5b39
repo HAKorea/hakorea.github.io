@@ -1,0 +1,21 @@
+I"<p>The <code>dlna_dmr</code> platform allows you to control a <a href="https://www.dlna.org/">DLNA Digital Media Renderer</a>, such as DLNA enabled TVs or radios.</p>
+<p>Please note that some devices, such as Samsung TVs, are rather picky about the source used to play from. The TTS service might not work in combination with these devices. If the play_media service does not work, please try playing from a DLNA/DMS (such as <a href="https://sourceforge.net/projects/minidlna/">MiniDLNA</a>).</p>
+<h2>Configuration</h2>
+<p>To add a DLNA DMR device to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+media_player:
+  - platform: dlna_dmr
+    url: http://192.168.0.10:9197/description.xml
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL to the device description .xml file, e.g., <code>http://192.168.0.10:9197/description.xml</code>.</p>
+</span></p></dd><dt><a class='title-link' name='listen_ip' href='#listen_ip'></a> listen_ip</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>IP to listen on for events from the device. Only set this when the IP is not detected properly.</p>
+</span></p></dd><dt><a class='title-link' name='listen_port' href='#listen_port'></a> listen_port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Port to listen on for events from the device.</p>
+</span></p><p class='default'>
+Default value: <p>8301</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name you would like to give to the device, e.g., <code>TV living room</code>.</p>
+</span></p></dd><dt><a class='title-link' name='callback_url_override' href='#callback_url_override'></a> callback_url_override</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the advertised callback URL. In case the Home Assistant instance is not directly reachable (e.g., running in a docker container without bridged-networking), advertise this callback URL for events.</p>
+</span></p></dd></dl>
+</div>
+:ET

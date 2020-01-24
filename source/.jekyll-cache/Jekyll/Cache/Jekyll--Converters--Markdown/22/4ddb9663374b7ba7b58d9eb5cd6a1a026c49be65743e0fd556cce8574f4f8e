@@ -1,0 +1,34 @@
+I"i<p>The goal behind this switch is to allow a very flexible whole home audio system based upon <a href="https://www.freedesktop.org/wiki/Software/PulseAudio/">PulseAudio</a>.</p>
+<p>For example, for a system with a 7.1 surround sound card, and 3 instances of <a href="https://www.musicpd.org/">MPD</a> running, it is possible to quickly route the output of any MPD instance to any of the 8 possible (4 stereo) channels on the sound card, by loading/unloading a loopback module. This loading/unloading functionality is provided by this component. When the switch is <code>on</code>, the loopback module is loaded.  When the switch is <code>off</code>, the module is not loaded.</p>
+<p>The benefit of this approach is that this audio routing can occur without modifying the design-time configuration of MPD or PulseAudio.</p>
+<p>This integration uses a TCP connection to control a local or remote PulseAudio server. So there are no local dependencies.</p>
+<p>To enable this switch, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: pulseaudio_loopback
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='sink_name' href='#sink_name'></a> sink_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the Pulseaudio sink that will receive the audio.</p>
+</span></p></dd><dt><a class='title-link' name='source_name' href='#source_name'></a> source_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the Pulseaudio source that will supply the audio.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the switch.</p>
+</span></p><p class='default'>
+Default value: <p>paloopback</p>
+</p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The IP address or host name of the PulseAudio server.</p>
+</span></p><p class='default'>
+Default value: <p>localhost</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port that Pulseaudio is listening on.</p>
+</span></p><p class='default'>
+Default value: <p>4712</p>
+</p></dd><dt><a class='title-link' name='buffer_size' href='#buffer_size'></a> buffer_size</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>How much data to load from Pulseaudio at once.</p>
+</span></p><p class='default'>
+Default value: <p>1024</p>
+</p></dd><dt><a class='title-link' name='tcp_timeout' href='#tcp_timeout'></a> tcp_timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>How long to wait for a response from Pulseaudio before giving up.</p>
+</span></p><p class='default'>
+Default value: <p>3</p>
+</p></dd></dl>
+</div>
+<div class='note warning'>
+<p>This integration relies on raw TCP commands to PulseAudio. In order for PulseAudio to accept commands with this component, <code>module-cli-protocol</code> must be loaded on the PulseAudio server.</p>
+</div>
+:ET

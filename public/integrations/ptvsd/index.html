@@ -1,0 +1,317 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PTVSD - Python Tools for Visual Studio Debug Server - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Debugging from Visual Studio Code.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/ptvsd/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="PTVSD - Python Tools for Visual Studio Debug Server">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/ptvsd/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Debugging from Visual Studio Code.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="PTVSD - Python Tools for Visual Studio Debug Server">
+    <meta name="twitter:description" content="Debugging from Visual Studio Code.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/ptvsd.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      PTVSD - Python Tools for Visual Studio Debug Server
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>ptvsd</code> integration allows you to use the Visual Studio Code PTVSD debugger with Home Assistant.</p>
+<p>This is useful in testing changes on a local development install, or connecting to a production server to debug issues.</p>
+<p>To enable the <code>ptvsd</code> integration add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ptvsd:
+</code></pre>
+<p>By default this will listen on all local interfaces, on port 5678, and will not wait for a connection.</p>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The local interface to listen on.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>0.0.0.0 (all interfaces).</p>
+</dd>
+<dt>
+<a class="title-link" name="port" href="#port"></a> port</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Port to listen on.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>5678</p>
+</dd>
+<dt>
+<a class="title-link" name="wait" href="#wait"></a> wait</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>If true, wait for the debugger to connect before starting up Home Assistant.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="security" href="#security"></a> Security</h3>
+<p>Ensure if this is a public-facing server, that the port is secured. Anyone who is able to access the debugger port can <em>execute arbitrary code</em> on the Home Assistant server, which is very unsafe.</p>
+<p>If the Home Assistant server is behind your firewall with only the http(s) port exposed, then this is safe from outside connections.</p>
+<p>Another way of securing the port is to set <code>host</code> to localhost and have a secured SSH TCP tunnel with a client certificate for access from the outside internet.</p>
+<h3>
+<a class="title-link" name="memory-use" href="#memory-use"></a> Memory Use</h3>
+<p>There have been reports of continually increasing memory use while the debugger is running, although this doesn’t seem to appear on all systems. Only configure the debugger on a persistent server when it’s actually required.</p>
+<h3>
+<a class="title-link" name="waiting-at-startup" href="#waiting-at-startup"></a> Waiting at startup</h3>
+<p>If you want to debug something in the boot-up sequence, configure the integration to wait for a connection first:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ptvsd:
+  wait: True
+</code></pre>
+<p>The ptvsd debugger is loaded quite early on in the boot-up sequence, before any other components. This will allow you to set breakpoints in <code>async_setup</code> or similar and debug the loading of the component.</p>
+<h3>
+<a class="title-link" name="alternate-host-and-port" href="#alternate-host-and-port"></a> Alternate host and port</h3>
+<p>You can also listen on a different server address or port:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ptvsd:
+  host: localhost
+  port: 6789
+</code></pre>
+<p>This is useful for multi-homed servers, or for localhost only access</p>
+<h3>
+<a class="title-link" name="example-visual-studio-code-configuration" href="#example-visual-studio-code-configuration"></a> Example Visual Studio Code configuration</h3>
+<p>This can be copied into your <code>launch.json</code> in the <code>.vscode</code> subdirectory in your Visual Studio Code project to connect to the debugger.</p>
+<pre><code class="language-json">{
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            // Example of attaching to local debug server running on WSL
+            "name": "Python: Attach Local",
+            "type": "python",
+            "request": "attach",
+            "port": 5678,
+            "host": "localhost",
+            "pathMappings": [
+                {
+                    "localRoot": "c:\\Users\\Penny\\Documents\\Software\\home-assistant\\",
+                    "remoteRoot": "/mnt/c/Users/Penny/Documents/Software/home-assistant" 
+                }
+            ],            
+        },
+        {
+            // Example of attaching to my production server
+            "name": "Python: Attach Brontosarus",
+            "type": "python",
+            "request": "attach",
+            "port": 5678,
+            "host": "10.0.0.3", // Within my firewall so I don't need to secure the port.
+            "pathMappings": [
+                {
+                    "localRoot": "c:\\Users\\Penny\\Documents\\Software\\home-assistant\\",
+                    "remoteRoot": "/usr/src/app" // setup for docker container.
+                }
+            ],            
+        }
+    ]
+}
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/ptvsd.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/visual-studio.png' /></div><div class="section">
+    <kb-alert-link integration="ptvsd"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.93
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/ptvsd/'>/components/ptvsd/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#utility'>Utility</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

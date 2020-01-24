@@ -1,0 +1,54 @@
+I"ß
+<p>The <code>nuimo_controller</code> integration allows you to connect to a <a href="https://www.senic.com/">Nuimo</a> device for receiving input events and displaying on the LED  matrix via the <a href="https://github.com/getSenic/nuimo-linux-python">Nuimo SDK for Python on Linux</a>.</p>
+<p>To connect to a Nuimo device add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+nuimo_controller:
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='mac' href='#mac'></a> mac</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Skip discovery and connect to this device address.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>To handle more than one device by names, add the name of the device.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd></dl>
+</div>
+<p>Example for testing rotation value and sending to the LED matrix:</p>
+<pre><code class="language-yaml">automation Nuimo_rotate_right:
+  trigger:
+    platform: event
+    event_type: nuimo_input
+    event_data:
+      type: ROTATE
+  condition:
+    condition: template
+    value_template: '{{ trigger.event.data.value &gt; 100 }}'
+  action:
+    service: nuimo_controller.led_matrix
+    data:
+      matrix:
+            '........
+             0000000.
+             .000000.
+             ..00000.
+             .0.0000.
+             .00.000.
+             .000000.
+             .000000.
+             ........'
+      interval: 0.5
+</code></pre>
+<p>Troubleshooting:</p>
+<ul>
+<li>
+<p>use <code>hcitool lescan</code> to see the mac address of your device</p>
+</li>
+<li>
+<p>allow non-root user access to Bluetooth LE with <code>sudo setcap cap_net_raw+eip $(eval readlink -f $(which python))</code></p>
+</li>
+<li>
+<p>install the newest version of <a href="https://bitbucket.org/OscarAcena/pygattlib">pygattlib</a> from the repository, either because there is no binary package for your system or the pip version contains errors, with <code>pip install hg+https://bitbucket.org/OscarAcena/pygattlib --target $HOME/.homeassistant/deps</code>.
+(Dependencies of pygattlib: <code>sudo apt-get install pkg-config libboost-python-dev libboost-thread-dev libbluetooth-dev libglib2.0-dev python-dev</code>)
+Then invoke Home Assistant with <code>hass --skip-pip</code>.</p>
+</li>
+</ul>
+:ET

@@ -1,0 +1,185 @@
+I"�K<p>The <code>google_assistant</code> integration allows you to control things via Google Assistant on your mobile, tablet or Google Home device.</p>
+<h2>Automatic setup via Home Assistant Cloud</h2>
+<p>With <a href="/cloud/">Home Assistant Cloud</a>, you can connect your Home Assistant instance in a few simple clicks to Google Assistant. With Home Assistant Cloud you don’t have to deal with dynamic DNS, SSL certificates or opening ports on your router. Just log in via the user interface and a secure connection with the cloud will be established. Home Assistant Cloud requires a paid subscription after a 30-day free trial.</p>
+<p>For Home Assistant Cloud Users, documentation can be found <a href="https://www.nabucasa.com/config/google_assistant/">here</a>.</p>
+<h2>Manual setup</h2>
+<p>The Google Assistant integration (without Home Assistant Cloud) requires a bit more setup than most due to the way Google requires Assistant Apps to be set up.</p>
+<div class='note warning'>
+<p>To use Google Assistant, your Home Assistant configuration has to be <a href="/docs/configuration/remote/">externally accessible with a hostname and SSL certificate</a>. If you haven’t already configured that, you should do so before continuing. If you make DNS changes to accomplish this, please ensure you have allowed up to the full 48 hours for DNS changes to propagate, otherwise Google may not be able to reach your server.</p>
+</div>
+<p>You will need to create a service account <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey">Create Service account key</a>  which allows you to update devices without unlinking and relinking an account (see <a href="#troubleshooting-the-request_sync-service">below</a>). If you don’t provide the service account, the <code>google_assistant.request_sync</code> service is not exposed. It is recommended to set up this configuration key as it also allows the usage of the following command, “Ok Google, sync my devices”. Once you have set up this component, you will need to call this service (or command) each time you add a new device in Home Assistant that you wish to control via the Google Assistant integration.  See Step 2 after the note for more details.</p>
+<ol>
+<li>
+<p>Create a new project in the <a href="https://console.actions.google.com/">Actions on Google console</a>.</p>
+<ol>
+<li>Add/Import a project and give it a name.</li>
+<li>Click on the <code>Smart Home</code> card, select the <code>Smart home</code> recommendation.</li>
+<li>Click <code>Build your Action</code>, select <code>Add Action(s)</code>. Add your Home Assistant URL: <code>https://[YOUR HOME ASSISTANT URL:PORT]/api/google_assistant</code> in the <code>Fulfillment URL</code> box, replace the <code>[YOUR HOME ASSISTANT URL:PORT]</code> with the domain / IP address and the port under which your Home Assistant is reachable.</li>
+<li>Click <code>Save</code>. Then click on <code>Overview</code>, which will lead you back to the app details screen.</li>
+</ol>
+</li>
+<li>
+<p><code>Account linking</code> is required for your app to interact with Home Assistant. Set this up under the <code>Quick Setup</code> section.</p>
+<ol>
+<li>Leave it at the default <code>No, I only want to allow account creation on my website</code> and select <code>Next</code>.</li>
+<li>For the <code>Linking type</code> select <code>OAuth</code> and <code>Authorization Code</code>. Click <code>Next</code></li>
+<li>Client ID: <code>https://oauth-redirect.googleusercontent.com/</code>, the trailing slash is important.</li>
+<li>Client Secret: Anything you like, Home Assistant doesn’t need this field.</li>
+<li>Authorization URL (replace with your actual URL): <code>https://[YOUR HOME ASSISTANT URL:PORT]/auth/authorize</code>.</li>
+<li>Token URL (replace with your actual URL): <code>https://[YOUR HOME ASSISTANT URL:PORT]/auth/token</code>. Click <code>Next</code></li>
+<li>Configure your client: Type <code>email</code> and click <code>Add scope</code>, then type <code>name</code> and click <code>Add scope</code> again.</li>
+<li>Do <strong>NOT</strong> check <code>Google to transmit clientID and secret via HTTP basic auth header</code>. Click <code>Next</code></li>
+<li>Testing instructions: Enter anything. It doesn’t matter since you won’t submit this app. Click <code>Save</code></li>
+</ol>
+ <img src='/images/integrations/google_assistant/accountlinking.png' alt='Screenshot: Account linking'>
+</li>
+<li>
+<p>Select the <code>Develop</code> tab at the top of the page, then in the upper right hand corner select the <code>Test</code> button to generate the draft version Test App.</p>
+</li>
+<li>
+<p>Add the <code>google_assistant</code> integration configuration to your <code>configuration.yaml</code> file and restart Home Assistant following the <a href="#configuration">configuration guide</a> below.</p>
+</li>
+<li>
+<p>(Note that app versions may be slightly different.) Open the Google Home app and go to <code>Settings</code>.</p>
+</li>
+<li>
+<p>Click <code>Add...</code>, <code>+ Set up or add</code>, <code>+ Set up device</code>, and click <code>Have something already setup?</code>. You should have <code>[test] your app name</code> listed under ‘Add new’. Selecting that should lead you to a browser to login your Home Assistant instance, then redirect back to a screen where you can set rooms and nicknames for your devices if you wish.</p>
+</li>
+</ol>
+<div class='note'>
+<p>If you’ve added Home Assistant to your phone’s home screen, you have to first remove it from home screen, otherwise, this HTML5 app will show up instead of a browser. Using it would prevent Home Assistant redirecting back to the Google Home app.</p>
+</div>
+<ol>
+<li>If you want to allow other household users to control the devices:
+<ol>
+<li>Go to the settings for the project you created in the <a href="https://console.actions.google.com/">Actions on Google console</a>.</li>
+<li>Click <code>Test -&gt; Simulator</code>, then click <code>Share</code> icon in the right top corner. Follow the on-screen instruction:
+<ol>
+<li>Add team members: Got to <code>Settings -&gt; Permission</code>, click <code>Add</code>, type the new user’s e-mail address and choose <code>Project -&gt; Viewer</code> role.</li>
+<li>Copy and share the link with the new user.</li>
+<li>When the new user opens the link with their own Google account, it will enable your draft test app under their account.</li>
+</ol>
+</li>
+<li>Have the new user go to their <code>Google Assistant</code> app to add <code>[test] your app name</code> to their account.</li>
+</ol>
+</li>
+<li>If you want to support actively reporting of state to Google’s server (config option <code>report_state</code>) and support <code>google_assistant.request_sync</code>, you need to generate a service account.
+<ol>
+<li>In the GCP Console, go to the <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey">Create Service account key</a> page.</li>
+<li>From the Service account list, select New service account.</li>
+<li>In the Service account name field, enter a name.</li>
+<li>In the Service account ID field, enter an ID.</li>
+<li>From the Role list, select Service Accounts &gt; Service Account Token Creator.</li>
+<li>For the Key type, select the JSON option.</li>
+<li>Click Create. A JSON file that contains your key downloads to your computer.</li>
+<li>Use the information in this file or the file directly to add to the <code>service_account</code> key in the configuration.</li>
+<li>Go to the <a href="https://console.cloud.google.com/apis/api/homegraph.googleapis.com/overview">Google API Console</a>.</li>
+<li>Select your project and click Enable HomeGraph API.</li>
+</ol>
+</li>
+</ol>
+<h3>Configuration</h3>
+<p>Now add your setup to your <code>configuration.yaml</code> file, such as:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+google_assistant:
+  project_id: YOUR_PROJECT_ID
+  service_account: !include SERVICE_ACCOUNT.JSON
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+  entity_config:
+    switch.kitchen:
+      name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
+      aliases:
+        - BRIGHT_LIGHTS
+        - ENTRY_LIGHTS
+    light.living_room:
+      expose: false
+      room: LIVING_ROOM
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='project_id' href='#project_id'></a> project_id</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Project ID from the Actions on Google console (looks like <code>words-2ab12</code>)</p>
+</span></p></dd><dt><a class='title-link' name='secure_devices_pin' href='#secure_devices_pin'></a> secure_devices_pin</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Pin code to say when you want to interact with a secure device.</p>
+</span></p></dd><dt><a class='title-link' name='api_key' href='#api_key'></a> api_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Your HomeGraph API key (for the <code>google_assistant.request_sync</code> service). This is not required if a service_account is specified.  This has been deprecated and will be removed in 0.105, you must setup a <code>service_account</code> now.</p>
+</span></p></dd><dt><a class='title-link' name='service_account' href='#service_account'></a> service_account</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Service account information. You can use an include statement with your downloaded JSON file, enter data here directly or use secrets file to populate.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='private_key' href='#private_key'></a> private_key</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Private key in PEM format</p>
+</span></p></dd><dt><a class='title-link' name='client_email' href='#client_email'></a> client_email</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Service email address</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='report_state' href='#report_state'></a> report_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Actively report state changes on entities. This speeds up response time for actions affecting multiple entities since Google Assistant knows pre-hand what state they are. It is also required for some features on visual controls.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='expose_by_default' href='#expose_by_default'></a> expose_by_default</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Expose devices in all supported domains by default. If <code>exposed_domains</code> domains is set, only these domains are exposed by default. If <code>expose_by_default</code> is set to false, devices have to be manually exposed in <code>entity_config</code>.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='exposed_domains' href='#exposed_domains'></a> exposed_domains</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of entity domains to expose to Google Assistant if <code>expose_by_default</code> is set to true. This has no effect if <code>expose_by_default</code> is set to false.</p>
+</span></p></dd><dt><a class='title-link' name='entity_config' href='#entity_config'></a> entity_config</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity specific configuration for Google Assistant</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entity_id' href='#entity_id'></a> `<ENTITY_ID>`</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity to configure</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the entity to show in Google Assistant</p>
+</span></p></dd><dt><a class='title-link' name='expose' href='#expose'></a> expose</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Force an entity to be exposed/excluded.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='aliases' href='#aliases'></a> aliases</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Aliases that can also be used to refer to this entity</p>
+</span></p></dd><dt><a class='title-link' name='room' href='#room'></a> room</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Allows for associating this device to a Room in Google Assistant.</p>
+</span></p></dd></dl></dd></dl></dd></dl>
+</div>
+<h3>Available domains</h3>
+<p>Currently, the following domains are available to be used with Google Assistant, listed with their default types:</p>
+<ul>
+<li>camera (streaming, requires compatible camera)</li>
+<li>group (on/off)</li>
+<li>input_boolean (on/off)</li>
+<li>scene (on)</li>
+<li>script (on)</li>
+<li>switch (on/off)</li>
+<li>fan (on/off/speed)</li>
+<li>light (on/off/brightness/rgb color/color temp)</li>
+<li>lock (lock/unlock (to allow assistant to unlock, set the <code>allow_unlock</code> key in configuration))</li>
+<li>cover (on/off/set position)</li>
+<li>media_player (on/off/set volume (via set volume)/source (via set input source))</li>
+<li>climate (temperature setting, hvac_mode)</li>
+<li>vacuum (dock/start/stop/pause)</li>
+<li>sensor (temperature setting for temperature sensors and humidity setting for humidity sensors)</li>
+<li>Alarm Control Panel (arm/disarm)</li>
+</ul>
+<h3>Secure Devices</h3>
+<p>Certain devices are considered secure, including anything in the <code>lock</code> domain, <code>alarm_control_panel</code> domain and <code>covers</code> with device types <code>garage</code> and <code>door</code>.</p>
+<p>By default these cannot be opened by Google Assistant unless a <code>secure_devices_pin</code> is set up. To allow opening, set the <code>secure_devices_pin</code> to something and you will be prompted to speak the pin when opening the device. Closing or locking these devices does not require a pin.</p>
+<p>For the Alarm Control Panel if a code is set it must be the same as the <code>secure_devices_pin</code>. If <code>code_arm_required</code> is set to <code>false</code> the system will arm without prompting for the pin.</p>
+<h3>Media Player Sources</h3>
+<p>Media Player sources are sent via the Modes trait in Google Assistant.
+There is currently a limitation with this feature that requires a hard-coded set of settings. Because of this, the only sources that will be usable by this feature <a href="https://developers.google.com/actions/reference/smarthome/traits/modes">are listed here</a>.</p>
+<h4>Example Command</h4>
+<p>“Hey Google, change input source to TV on Living Room Receiver”</p>
+<h3>Room/Area support</h3>
+<p>Entities that have not been explicitly assigned to rooms but have been placed in Home Assistant areas will return room hints to Google with the devices in those areas.</p>
+<h3>Climate Operation Modes</h3>
+<p>There is not an exact 1-1 match between Home Assistant and Google Assistant for the available operation modes.
+Here are the modes that are currently available:</p>
+<ul>
+<li>off</li>
+<li>heat</li>
+<li>cool</li>
+<li>heatcool (auto)</li>
+<li>fan-only</li>
+<li>dry</li>
+<li>eco</li>
+</ul>
+<h3>Troubleshooting the request_sync service</h3>
+<p>Syncing may fail after a period of time, likely around 30 days, due to the fact that your Actions on Google app is technically in testing mode and has never been published. Eventually, it seems that the test expires. Control of devices will continue to work but syncing may not. If you say “Ok Google, sync my devices” and get the response “Unable to sync Home Assistant” (or whatever you named your project), this can usually be resolved by going back to your test app in the <a href="https://console.actions.google.com/">Actions on Google console</a> and clicking <code>Simulator</code> under <code>TEST</code>. Regenerate the draft version Test App and try asking Google to sync your devices again. If regenerating the draft does not work, go back to the <code>Action</code> section and just hit the <code>enter</code> key for the URL to recreate the Preview.</p>
+<p>The <code>request_sync</code> service requires that the initial sync from Google includes the <code>agent_user_id</code>. If not, the service will log an error that reads something like “Request contains an invalid argument”. If this happens, then <a href="https://support.google.com/googlenest/answer/7126338">unlink the account</a> from Home Control and relink.</p>
+<p>The <code>request_sync</code> service may fail with a 404 if the <code>project_id</code> of the HomeGraph API differs from the <code>project_id</code> of the Actions SDK found in the preferences of your project on <a href="https://console.actions.google.com">Actions on Google console</a>. Resolve this by:</p>
+<ol>
+<li>Removing your project from the <a href="https://console.actions.google.com">Actions on Google console</a>.</li>
+<li>Add a new project to the <a href="https://console.cloud.google.com">Google Cloud API Console</a>. Here you get a new <code>project_id</code>.</li>
+<li>Enable HomeGraph API to the new project.</li>
+<li>Generate a new API key.</li>
+<li>Again, create a new project in the <a href="https://console.actions.google.com/">Actions on Google console</a>. Described above. But at the step ‘Build under the Actions SDK box’ choose your newly created project. By this, they share the same <code>project_id</code>.</li>
+</ol>
+<h3>Troubleshooting with NGINX</h3>
+<p>When using NGINX, ensure that your <code>proxy_pass</code> line <em>does not</em> have a trailing <code>/</code>, as this will result in errors. Your line should look like:</p>
+<pre><code>proxy_pass http://localhost:8123;
+</code></pre>
+<h3>Unlink and relink</h3>
+<p>If you’re having trouble with <em>Account linking failed</em> after you unlinked your service, try clearing the browser history and cache.</p>
+:ET

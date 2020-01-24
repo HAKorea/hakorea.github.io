@@ -1,0 +1,128 @@
+I"p)<p>The <code>raspihats</code> integration is the base for all related Raspihats platforms in Home Assistant. There is no setup needed for the integration itself.</p>
+<h2>Binary Sensor</h2>
+<p>The <code>raspihats</code> binary sensor platform allows you to read sensor values ​​using the digital inputs of the <a href="https://www.raspihats.com/">raspihats</a> boards.</p>
+<h2>Configuration</h2>
+<p>To use your <code>raspihats</code> boards in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: raspihats
+    i2c_hats:
+      - board: DI6acDQ6rly
+        address: 0x60
+        channels:
+          - index: 0
+            name: PIR Office
+            invert_logic: true
+            device_class: motion
+          - index: 1
+            name: PIR Bedroom
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='i2c_hats' href='#i2c_hats'></a> i2c_hats</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An array of used I2C-HATs.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='board' href='#board'></a> board</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The board name either Di16, Di6Rly6, DI16ac or DI6acDQ6rly.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The board I2C address as HEX value.</p>
+</span></p></dd><dt><a class='title-link' name='channels' href='#channels'></a> channels</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>Array of used digital input channels.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='index' href='#index'></a> index</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>Digital input channel index.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Friendly name to use for the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Inverts the input logic.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='device_class' href='#device_class'></a> device_class</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h2>Directions for installing smbus support on Raspberry Pi</h2>
+<p>Enable I2c interface with the Raspberry Pi configuration utility:</p>
+<pre><code class="language-bash"># pi user environment: Enable i2c interface
+$ sudo raspi-config
+</code></pre>
+<p>Select <code>Interfacing options-&gt;I2C</code> choose <code>&lt;Yes&gt;</code> and hit <code>Enter</code>, then go to <code>Finish</code>.</p>
+<p>Install dependencies for use the <code>smbus-cffi</code> module and enable your <em>homeassistant</em> user to join the <em>i2c</em> group:</p>
+<pre><code class="language-bash"># pi user environment: Install i2c dependencies and utilities
+$ sudo apt-get install build-essential libi2c-dev i2c-tools python-dev libffi-dev
+
+# pi user environment: Add homeassistant user to the i2c group
+$ sudo usermod -a -G i2c homeassistant
+</code></pre>
+<h3>Check the i2c address of the sensor</h3>
+<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors, so you can see the sensor address:</p>
+<pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
+</code></pre>
+<p>It will output a table like this:</p>
+<pre><code class="language-text">     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- 23 -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- UU -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 77
+</code></pre>
+<p>For more details about the <code>raspihats</code> add-on boards for Raspberry Pi, visit <a href="https://www.raspihats.com/">raspihats.com</a>.</p>
+<h2>Switch</h2>
+<p>The <code>raspihats</code> switch platform allows you to control the digital outputs of your <a href="https://www.raspihats.com/">Raspihats</a> boards.</p>
+<h2>Configuration</h2>
+<p>To use your Raspihats boards in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+switch:
+  - platform: raspihats
+    i2c_hats:
+      - board: DI6acDQ6rly
+        address: 0x60
+        channels:
+          - index: 0
+            name: Fan Office
+            invert_logic: true
+            initial_state: true
+          - index: 1
+            name: Light Office
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='i2c_hats' href='#i2c_hats'></a> i2c_hats</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An array of used I2C-HATs.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='board' href='#board'></a> board</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The board name.</p>
+</span></p></dd><dt><a class='title-link' name='address' href='#address'></a> address</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The board I2C address as HEX value.</p>
+</span></p></dd><dt><a class='title-link' name='channels' href='#channels'></a> channels</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>An array of used digital input channels.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='index' href='#index'></a> index</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The digital input channel index.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The friendly name to use for the frontend.</p>
+</span></p></dd><dt><a class='title-link' name='invert_logic' href='#invert_logic'></a> invert_logic</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Inverts the input logic.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='initial_state' href='#initial_state'></a> initial_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The initial state, can be either <code>true</code> or <code>false</code>. <code>none</code> means no state is forced on the corresponding digital output when this switch is instantiated.</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd></dl></dd></dl></dd></dl>
+</div>
+<h2>Directions for installing smbus support on Raspberry Pi</h2>
+<p>Enable I2c interface with the Raspberry Pi configuration utility:</p>
+<pre><code class="language-bash"># pi user environment: Enable i2c interface
+$ sudo raspi-config
+</code></pre>
+<p>Select <code>Interfacing options-&gt;I2C</code> choose <code>&lt;Yes&gt;</code> and hit <code>Enter</code>, then go to <code>Finish</code>.</p>
+<p>Install dependencies for use the <code>smbus-cffi</code> module and enable your <em>homeassistant</em> user to join the <em>i2c</em> group:</p>
+<pre><code class="language-bash"># pi user environment: Install i2c dependencies and utilities
+$ sudo apt-get install build-essential libi2c-dev i2c-tools python-dev libffi-dev
+
+# pi user environment: Add homeassistant user to the i2c group
+$ sudo usermod -a -G i2c homeassistant
+</code></pre>
+<h2>Check the i2c address of the sensor</h2>
+<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors, so you can see the sensor address:</p>
+<pre><code class="language-bash">/usr/sbin/i2cdetect -y 1
+</code></pre>
+<p>It will output a table like this:</p>
+<pre><code class="language-text">     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- 23 -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- UU -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- 77
+</code></pre>
+<p>For more details about the Raspihats add-on boards for Raspberry Pi, visit <a href="https://www.raspihats.com/">raspihats.com</a>.</p>
+:ET

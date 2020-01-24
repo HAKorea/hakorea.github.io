@@ -1,0 +1,15 @@
+I"-<p>Using <a href="https://github.com/fugue/credstash">Credstash</a> is an alternative way to <code>secrets.yaml</code>. They can be managed from the command line via the credstash script.</p>
+<p>Before using credstash, you need to set up AWS credentials either via the <code>aws</code> command line tool or using environment variables as explained in the <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">AWS CLI docs</a> as well as creating a KMS key named <code>credstash</code> as explained in the <a href="https://github.com/fugue/credstash#setting-up-kms">credstash Readme</a>. After that is complete, you can use the provided script to add secrets to your Home Assistant secret store in credstash.</p>
+<pre><code class="language-bash">$ hass --script credstash --help
+</code></pre>
+<p>To store a password in credstash, replace your password or API key with <code>!secret</code> and an identifier in <code>configuration.yaml</code> file.</p>
+<pre><code class="language-yaml">example:
+  password: !secret example_password
+</code></pre>
+<p>Create an entry in your credstash store.</p>
+<pre><code class="language-bash">$ hass --script credstash put http_password 123
+</code></pre>
+<p>List your secrets.</p>
+<pre><code class="language-bash">$ hass --script credstash list
+</code></pre>
+:ET

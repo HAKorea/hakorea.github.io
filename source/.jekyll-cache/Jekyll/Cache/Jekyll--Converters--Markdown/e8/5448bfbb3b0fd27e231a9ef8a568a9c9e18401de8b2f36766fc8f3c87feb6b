@@ -1,0 +1,184 @@
+I"�%<div class='note'>
+<p>This is a work in progress, based upon reports in the forum, the author’s own devices and reading of various documentation. It will be incomplete, so if you have a device that isn’t reported here or have a device that reports a different value, please provide a report in the <a href="https://community.home-assistant.io/c/configuration/zwave">Z-Wave section</a> of the forum or the #zwave channel on <a href="https://discord.gg/RkajcgS">Discord</a>.</p>
+</div>
+<h2>Binary Sensor</h2>
+<p>Devices that support the Binary Sensor command class will create one (or more) entities starting with <code>binary_sensor</code>. For example, if the node is <code>door_sensor</code> then the binary sensor entity will be <code>binary_sensor.door_sensor</code>.</p>
+<p>These will normally be <code>on</code> when the sensor is active, otherwise they will be <code>off</code>. Some devices use <code>on</code> for closed, and some use <code>on</code> for open, and some devices allow you to change how they report.</p>
+<h2>Alarm</h2>
+<p>This is for a single purpose sensor, multi sensors are explained under Multi Sensor.</p>
+<p>Devices (usually sensors) that support the Alarm command class will create entities starting with <code>sensor</code>, and with some generic suffixes, and a suffix that relates to the supported alarm class. For example, the smoke detector <code>lounge</code> will have an entity <code>sensor.lounge_smoke</code>, and possibly also <code>sensor.lounge_alarm_type</code> and <code>sensor.lounge_alarm_level</code>. If the device creates a <code>binary_sensor</code> entity, it is recommended to use that rather then the <code>sensor</code> entity.</p>
+<p>Note that the older Z-Wave alarm command class version 1 didn’t have standardized types, and so each manufacturer specified their own version and type info. With Version 2 the alarm type was standardized to the below list. See the <a href="https://github.com/OpenZWave/open-zwave/wiki/Alarm-Command-Class">openzwave alarm command class documents</a> for more info. You can see which version your sensor supports via the zwcfg_0x*.xml file. An example with version 2 support:</p>
+<pre><code class="language-xml">&lt;CommandClass id=&quot;113&quot; name=&quot;COMMAND_CLASS_ALARM&quot; version=&quot;2&quot; request_flags=&quot;2&quot; innif=&quot;true&quot;&gt;
+</code></pre>
+<h3>Alarm Type Entity</h3>
+<ul>
+<li>
+<p>Version 2 <strong>alarm_type</strong>:</p>
+<ul>
+<li><strong>0</strong>: General purpose</li>
+<li><strong>1</strong>: Smoke sensor</li>
+<li><strong>2</strong>: Carbon Monoxide (CO) sensor</li>
+<li><strong>3</strong>: Carbon Dioxide (CO2) sensor</li>
+<li><strong>4</strong>: Heat sensor</li>
+<li><strong>5</strong>: Water leak (flood) sensor</li>
+<li><strong>6</strong>: Access control</li>
+<li><strong>7</strong>: Burglar</li>
+<li><strong>8</strong>: Power management</li>
+<li><strong>9</strong>: System</li>
+<li><strong>10</strong>: Emergency</li>
+<li><strong>11</strong>: Clock</li>
+<li><strong>12</strong>: Appliance</li>
+<li><strong>13</strong>: Home Health</li>
+</ul>
+</li>
+<li>
+<p>Version 1 (manufacturer-specific) <strong>alarm_type</strong>:</p>
+<ul>
+<li><strong>9</strong>: Lock jammed</li>
+<li><strong>18</strong>: Lock locked with user code</li>
+<li><strong>19</strong>: Lock unlocked with user code</li>
+<li><strong>21</strong>: Manual lock</li>
+<li><strong>22</strong>: Manual unlock</li>
+<li><strong>24</strong>: Locked by RF</li>
+<li><strong>25</strong>: Unlocked by RF</li>
+<li><strong>27</strong>: Auto lock</li>
+<li><strong>33</strong>: User deleted</li>
+<li><strong>112</strong>: Master code changed, or user added</li>
+<li><strong>113</strong>: Duplicate PIN code error</li>
+<li><strong>130</strong>: RF Module power cycled</li>
+<li><strong>161</strong>: Tamper alarm</li>
+<li><strong>167</strong>: Low battery</li>
+<li><strong>168</strong>: Critical battery level</li>
+<li><strong>169</strong>: Battery too low to operate</li>
+</ul>
+</li>
+</ul>
+<h3>Alarm Level Entity</h3>
+<p>The meaning of the <code>alarm_level</code> entity depends on the nature of the alarm sensor.</p>
+<h4>Smoke, CO, and CO2</h4>
+<ul>
+<li><strong>1</strong>: Detection - will include a Node Location Report</li>
+<li><strong>2</strong>: Detection (unknown location)</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Heat</h4>
+<ul>
+<li><strong>1</strong>: Overheat detected - will include a Node Location Report</li>
+<li><strong>2</strong>: Overheat detected (unknown location)</li>
+<li><strong>3</strong>: Rapid temperature rise - will include a Node Location Report</li>
+<li><strong>4</strong>: Rapid temperature rise (unknown location)</li>
+<li><strong>5</strong>: Underheat detection - will include a Node Location Report</li>
+<li><strong>6</strong>: Underheat detection (unknown location)</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Water leak</h4>
+<ul>
+<li><strong>1</strong>: Water leak detected - will include a Node Location Report</li>
+<li><strong>2</strong>: Water leak detected (unknown location)</li>
+<li><strong>3</strong>: Water level dropped - will include a Node Location Report</li>
+<li><strong>4</strong>: Water level dropped (unknown location)</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Access control</h4>
+<ul>
+<li><strong>1</strong>: Manual lock</li>
+<li><strong>2</strong>: Manual unlock</li>
+<li><strong>3</strong>: RF lock</li>
+<li><strong>4</strong>: RF unlock</li>
+<li><strong>5</strong>: Keypad lock - will include the User Identifier of the User Code Report</li>
+<li><strong>6</strong>: Keypad unlock - will include the User Identifier of the User Code Report</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Burglar</h4>
+<ul>
+<li><strong>1</strong>: Intrusion - will include a Node Location Report</li>
+<li><strong>2</strong>: Intrusion (unknown location)</li>
+<li><strong>3</strong>: Tampering (case opened)</li>
+<li><strong>4</strong>: Tampering (invalid code)</li>
+<li><strong>5</strong>: Glass break - will include a Node Location Report</li>
+<li><strong>6</strong>: Glass break (invalid code)</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Power Management</h4>
+<ul>
+<li><strong>1</strong>: Power applied</li>
+<li><strong>2</strong>: AC disconnected</li>
+<li><strong>3</strong>: AC re-connected</li>
+<li><strong>4</strong>: Surge detection</li>
+<li><strong>5</strong>: Voltage drop or drift</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>System Alarm</h4>
+<ul>
+<li><strong>1</strong>: System hardware failure</li>
+<li><strong>2</strong>: System software failure</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Emergency Alarm</h4>
+<ul>
+<li><strong>1</strong>: Contact Police</li>
+<li><strong>2</strong>: Contact Fire Service</li>
+<li><strong>3</strong>: Contact Medical Service</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h4>Alarm Clock</h4>
+<ul>
+<li><strong>1</strong>: Wake up</li>
+<li><strong>254</strong>: Unknown event</li>
+</ul>
+<h3>Access Control Entity</h3>
+<ul>
+<li><strong>access_control</strong>: These <em>may</em> vary between brands
+<ul>
+<li><strong>22</strong>: Open</li>
+<li><strong>23</strong>: Closed</li>
+<li><strong>254</strong>: Deep sleep</li>
+<li><strong>255</strong>: Case open</li>
+</ul>
+</li>
+</ul>
+<p>If your device has an <code>access_control</code> entity, but not a <code>binary_sensor</code> equivalent, you can use a <a href="/integrations/binary_sensor.template/">template binary sensor</a> to create one (here we’ve defined it as a door, but you can use <a href="/integrations/binary_sensor/#device-class">any relevant device class</a>:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: template
+    sensors: 
+      YOUR_SENSOR:
+        friendly_name: &quot;Friendly name here&quot;
+        device_class: door
+        value_template: &quot;{{ is_state('sensor.YOUR_ORIGINAL_SENSOR_access_control', '22') }}&quot;
+</code></pre>
+<h3>Burglar Entity</h3>
+<ul>
+<li><strong>burglar</strong>: These <em>may</em> vary between brands
+<ul>
+<li><strong>0</strong>: Not active</li>
+<li><strong>2</strong>: Smoke (?)</li>
+<li><strong>3</strong>: Tamper</li>
+<li><strong>8</strong>: Motion</li>
+<li><strong>22</strong>: Open</li>
+<li><strong>23</strong>: Closed</li>
+<li><strong>254</strong>: Deep sleep</li>
+<li><strong>255</strong>: Case open</li>
+</ul>
+</li>
+</ul>
+<p>If your device has a <code>burglar</code> entity, but not a <code>binary_sensor</code> equivalent, you can use a <a href="/integrations/binary_sensor.template/">template binary sensor</a> to create one (here we’ve defined it as a motion sensor, but you can use <a href="/integrations/binary_sensor/#device-class">any relevant device class</a>:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: template
+    sensors: 
+      YOUR_SENSOR:
+        friendly_name: &quot;Friendly name here&quot;
+        device_class: motion
+        value_template: &quot;{{ is_state('sensor.YOUR_SENSOR_burglar', '8') }}&quot;
+</code></pre>
+<h3>Source Node ID Entity</h3>
+<ul>
+<li><strong>sourcenodeid</strong>: Reports the sensor that generated the alarm - this is only valid for Zensor Net based devices</li>
+</ul>
+<h2>Multisensor</h2>
+<p>Multi sensor devices will create a number of entities, one for each sensor, potentially a <code>binary_sensor</code> entity, and probably also <code>alarm_type</code> and <code>alarm_level</code> entities.</p>
+<p>These are all generally self explanatory, however it’s worth noting:</p>
+<ul>
+<li><strong>ultraviolet</strong> sensors will usually report zero indoors, as UVB is blocked by glass</li>
+<li><strong>luminance</strong> sensors should report in <a href="https://en.wikipedia.org/wiki/Lux">Lux</a></li>
+</ul>
+:ET

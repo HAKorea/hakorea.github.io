@@ -1,0 +1,111 @@
+I"H<p>The <code>logger</code> integration lets you define the level of logging activities in Home
+Assistant.</p>
+<p>To enable the <code>logger</code> integration in your installation,
+add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+logger:
+</code></pre>
+<p>To log all messages and ignore events lower than critical for specified
+components:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+logger:
+  default: info
+  logs:
+    homeassistant.components.yamaha: critical
+    custom_components.my_integration: critical
+</code></pre>
+<p>To ignore all messages lower than critical and log event for specified
+components:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+logger:
+  default: critical
+  logs:
+    # log level for HA core
+    homeassistant.core: fatal
+    
+    # log level for MQTT integration
+    homeassistant.components.mqtt: warning
+    
+    # log level for all python scripts
+    homeassistant.components.python_script: warning
+    
+    # individual log level for this python script
+    homeassistant.components.python_script.my_new_script.py: debug
+    
+    # log level for SmartThings lights
+    homeassistant.components.smartthings.light: info
+
+    # log level for a custom component
+    custom_components.my_integration: debug
+
+    # log level for the `aiohttp` Python package
+    aiohttp: error
+
+    # log level for both 'glances_api' and 'glances' integration
+    homeassistant.components.glances: fatal
+    glances_api: fatal
+</code></pre>
+<p>The log entries are in the form<br />
+<em>timestamp</em> <em>log-level</em> <em>thread</em> [<strong>namespace</strong>] <em>message</em><br />
+where <strong>namespace</strong> is the <em>&lt;component_namespace&gt;</em> currently logging.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='default' href='#default'></a> default</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Default log level. See <a href="#log-levels">log_level</a>.</p>
+</span></p><p class='default'>
+Default value: <p>debug</p>
+</p></dd><dt><a class='title-link' name='logs' href='#logs'></a> logs</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of integrations and their log level.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='ltcomponent_namespacegt' href='#ltcomponent_namespacegt'></a> &lt;component_namespace&gt;</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='description'><p>Logger namespace of the component. See <a href="#log-levels">log_level</a>.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>In the example, do note the difference between ‘glances_api’ and ‘homeassistant.components.glances’ namespaces,
+both of which are at root. They are logged by different APIs.</p>
+<p>If you want to know the namespaces in your own environment then check your log files on startup.
+You will see INFO log messages from homeassistant.loader stating <code>loaded &lt;component&gt; from &lt;namespace&gt;</code>.
+Those are the namespaces available for you to set a <code>log level</code> against.</p>
+<h3>Log Levels</h3>
+<p>Possible log severity levels, listed in order from most severe to least severe, are:</p>
+<ul>
+<li>critical</li>
+<li>fatal</li>
+<li>error</li>
+<li>warning</li>
+<li>warn</li>
+<li>info</li>
+<li>debug</li>
+<li>notset</li>
+</ul>
+<h2>Services</h2>
+<h3>Service <code>set_default_level</code></h3>
+<p>You can alter the default log level (for integrations without a specified log
+level) using the service <code>logger.set_default_level</code>.</p>
+<p>An example call might look like this:</p>
+<pre><code class="language-yaml">service: logger.set_default_level
+data:
+  level: info
+</code></pre>
+<h3>Service <code>set_level</code></h3>
+<p>You can alter log level for one or several integrations using the service
+<code>logger.set_level</code>. It accepts the same format as <code>logs</code> in the configuration.</p>
+<p>An example call might look like this:</p>
+<pre><code class="language-yaml">service: logger.set_level
+data:
+  homeassistant.core: fatal
+  homeassistant.components.mqtt: warning
+  homeassistant.components.smartthings.light: info
+  custom_components.my_integration: debug
+  aiohttp: error
+</code></pre>
+<p>The log information are stored in the
+<a href="/docs/configuration/">configuration directory</a> as <code>home-assistant.log</code>
+and you can read it with the command-line tool <code>cat</code> or follow it dynamically
+with <code>tail -f</code>.</p>
+<p>If you are a Hass.io user, you can use the example below, when logged in through
+the <a href="/addons/ssh/">SSH add-on</a>:</p>
+<pre><code class="language-bash">$ tail -f /config/home-assistant.log
+</code></pre>
+<p>On Docker you can use your host command line directly - follow the logs dynamically with:</p>
+<pre><code class="language-bash"># follow the log dynamically
+docker logs --follow  MY_CONTAINER_ID
+</code></pre>
+<p>To see other options use <code>--help</code> instead, or simply leave with no options to display the entire log.</p>
+:ET

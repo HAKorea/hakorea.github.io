@@ -1,0 +1,68 @@
+I"<p>The <code>yi</code> camera platform allows you to utilize <a href="https://www.yitechnology.com/">Yi Home Cameras</a> within Home Assistant. Specifically, this platform supports the line of Yi Home Cameras that are based on the Hi3518e Chipset. This includes:</p>
+<ul>
+<li>Yi Home 17CN / 27US / 47US</li>
+<li>Yi 1080p Home</li>
+<li>Yi Dome</li>
+<li>Yi 1080p Dome</li>
+</ul>
+<p>To successfully implement this platform, the Home Assistant host should be capable of multiple simultaneous reads. For every concurrent Home Assistant user, a connection will be made to the camera every 10 seconds. This should normally not be a problem.</p>
+<h2>Preparing the Device</h2>
+<h3>Installing Alternative Firmware</h3>
+<p>In order to integrate the camera with Home Assistant, it is necessary to install a custom firmware on the device. Instructions for doing so can be found via the <a href="https://github.com/shadow-1/yi-hack-v3">yi-hack-v3 GitHub project</a> or if you have a 2019 version camera <a href="https://github.com/roleoroleo/yi-hack-6FUS_4.5.0">yi-hack-6FUS_4.5.0 GitHub project</a>.</p>
+<p>Once installed, please ensure that you have enabled FTP and Telnet on your device.</p>
+<div class='note warning'>
+<p>Currently, version 0.1.4-beta2 of the custom firmware is the highest supported without having to make additional modifications. Firmwares higher than this version use <a href="https://www.pureftpd.org/project/pure-ftpd">Pure-FTPd</a>, which has a bug that prevents FFmpeg from correctly rendering video files. To use higher firmware versions you must also follow <a href="https://github.com/shadow-1/yi-hack-v3/issues/129#issuecomment-361723075">this workaround</a> to revert back to ftpd.</p>
+</div>
+<div class='note warning'>
+<p>If you use a version higher than 0.1.4-beta2, you can simply solve the FTP issue by creating a symlink to <code>/tmp</code> in the <code>/home/yi-hack-v4</code> directory (the directory name can be different depending on the version which you use). For example, access the Yi camera via SSH and type command: <code>ln -s /tmp tmp</code>.</p>
+</div>
+<div class='note warning'>
+Raspbian users: don't forget to install ffmpeg support on your platform, otherwise, you'll not see video.
+</div>
+<div class='note warning'>
+<p>Some alternative Yi firmwares enable an experimental RTSP server, which will allow you to connect to your camera via other Home Assistant camera platforms. However, this RTSP server disables the ability to use the supremely-useful Yi Home app. In order to maintain both Home Assistant compatibility <em>and</em> the native app, this platform retrieves videos via FTP.</p>
+</div>
+<h3>Changing the FTP Password</h3>
+<p>Once the custom firmware is installed, a password must be added to the FTP
+server. To do so:</p>
+<ol>
+<li>Telnet into your camera: <code>telnet &lt;IP ADDRESS&gt;</code>.</li>
+<li>Enter <code>root</code> as the username and <code>&lt;blank&gt;</code> as the password.</li>
+<li>Type <code>passwd</code> and hit <code>&lt;Enter&gt;</code>.</li>
+<li>Enter your new password twice.</li>
+<li>Log out of Telnet.</li>
+</ol>
+<h2>Configuring the Platform</h2>
+<p>To enable the platform, add the following lines to your<code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">camera:
+  - platform: yi
+    name: Camera
+    host: '192.168.1.100'
+    password: my_password_123
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>A human-friendly name for the camera.</p>
+</span></p></dd><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of the camera.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for the FTP server running on the camera. Can be any string as the current firmware doesn’t allow setting FTP passwords.</p>
+</span></p></dd><dt><a class='title-link' name='path' href='#path'></a> path</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The path to the raw MP4 files.</p>
+</span></p><p class='default'>
+Default value: <p>/media/mmcblk0p1/record</p>
+</p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The user that can access the FTP server.</p>
+</span></p><p class='default'>
+Default value: <p>root</p>
+</p></dd><dt><a class='title-link' name='ffmpeg_arguments' href='#ffmpeg_arguments'></a> ffmpeg_arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Extra options to pass to <code>ffmpeg</code> (e.g., image quality or video filter options).</p>
+</span></p></dd></dl>
+</div>
+<h2>Image quality</h2>
+<p>Any option supported by <a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a> can be utilized via the <code>ffmpeg_arguments</code> configuration parameter.</p>
+<p>One particularly useful adjustment deals with video size. Since Yi videos are fairly large (especially on the 1080p cameras), the following configuration will bring them down to a manageable size:</p>
+<pre><code class="language-yaml">camera:
+  - platform: yi
+    name: My Camera
+    host: '192.168.1.100'
+    password: my_password_123
+    path: /home/camera/feed
+    ffmpeg_arguments: '-vf scale=800:450'
+</code></pre>
+:ET

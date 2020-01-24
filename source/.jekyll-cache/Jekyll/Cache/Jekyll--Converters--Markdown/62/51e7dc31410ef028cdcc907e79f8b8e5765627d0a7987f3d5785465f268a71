@@ -1,0 +1,27 @@
+I"â<p>Keeps track which remotes are in your environment, their state and allows you to control them.</p>
+<ul>
+<li>Maintains a state per remote and a combined state <code>all_remotes</code>.</li>
+<li>Registers services <code>remote/turn_on</code>, <code>remote/turn_off</code>, <code>remote/toggle</code>, and <code>remote/send_command</code> to control remotes.</li>
+</ul>
+<h3>Use the services</h3>
+<p>Go to the <strong>Developer Tools</strong>, then to <strong>Call Service</strong> in the frontend, and choose <code>remote/turn_on</code>, <code>remote/turn_off</code>, or <code>remote/toggle</code> from the list of available services (<strong>Available services:</strong> on the left). Enter something like the sample below into the <strong>Service Data</strong> field and hit <strong>Call Service</strong>.</p>
+<pre><code class="language-json">{&quot;entity_id&quot;:&quot;remote.family_room&quot;}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>Only act on a specific remote, else target all.</td>
+</tr>
+</tbody>
+</table>
+<p>See the platform documentation for each type of remote for more detailed examples.</p>
+:ET

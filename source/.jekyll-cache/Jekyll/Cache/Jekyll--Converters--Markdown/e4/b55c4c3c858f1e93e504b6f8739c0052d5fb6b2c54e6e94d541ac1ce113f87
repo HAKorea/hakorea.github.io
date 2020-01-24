@@ -1,0 +1,15 @@
+I"I<p>The <code>pca</code> switch platform allows you to control the state of your <a href="https://www.elv.de/funkschaltsteckdose-fuer-energiekostenmonitor-pca-301.html">ELV PCA 301 smart switch</a>. You need an 868 MHz interface like the <a href="https://www.digitalsmarties.net/products/jeelink">JeeLink</a> flashed with the <a href="https://github.com/mhop/fhem-mirror/blob/master/fhem/FHEM/firmware/JeeLink_PCA301.hex">pca-hex firmware</a>.</p>
+<h2>Configuration</h2>
+<p>To use your PCA 301 switch or socket in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+elv:
+  device: SERIAL_PORT
+</code></pre>
+<p>This platform will add all PCA 301 switches which are in range. You can read the total used energy in KWh and the current power in Watt.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='device' href='#device'></a> device</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The path to you serial console. Get it via: <code>ls /dev/tty*</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Default name for the plugs.</p>
+</span></p></dd></dl>
+</div>
+:ET

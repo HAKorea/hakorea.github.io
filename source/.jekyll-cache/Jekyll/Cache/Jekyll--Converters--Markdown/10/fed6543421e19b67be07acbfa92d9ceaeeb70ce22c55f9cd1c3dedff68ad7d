@@ -1,0 +1,329 @@
+I";t<p>The <code>mqtt</code> vacuum integration allows you to control your MQTT-enabled vacuum.
+There are two possible message schemas - <code>legacy</code> and <code>state</code>.
+New installations should use the <code>state</code> schema as <code>legacy</code> is deprecated and might be removed someday in the future.
+The <code>state</code> schema is preferred because the vacuum will then be represented as a <code>StateVacuumDevice</code> which is the preferred parent vacuum entity.</p>
+<p>This documentation has 3 sections. Config for <code>legacy</code> vacuum with examples, config for <code>state</code> vacuum with examples and shared section with examples which are the same for both schemas.</p>
+<h2>Configuration</h2>
+<p>To add your MQTT vacuum to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vacuum:
+  - platform: mqtt
+</code></pre>
+<h2>Legacy Configuration</h2>
+<p>Legacy MQTT vacuum configuration section.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the vacuum.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT Vacuum</p>
+</p></dd><dt><a class='title-link' name='schema' href='#schema'></a> schema</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The schema to use.</p>
+</span></p><p class='default'>
+Default value: <p>legacy</p>
+</p></dd><dt><a class='title-link' name='supported_features' href='#supported_features'></a> supported_features</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of features that the vacuum supports (possible values are <code>turn_on</code>, <code>turn_off</code>, <code>pause</code>, <code>stop</code>, <code>return_home</code>, <code>battery</code>, <code>status</code>, <code>locate</code>, <code>clean_spot</code>, <code>fan_speed</code>, <code>send_command</code>).”</p>
+</span></p><p class='default'>
+Default value: <p><code>turn_on</code>, <code>turn_off</code>, <code>stop</code>, <code>return_home</code>, <code>status</code>, <code>battery</code>, <code>clean_spot</code></p>
+</p></dd><dt><a class='title-link' name='command_topic' href='#command_topic'></a> command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to control the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='retain' href='#retain'></a> retain</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the published message should have the retain flag on or not.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='payload_turn_on' href='#payload_turn_on'></a> payload_turn_on</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to begin the cleaning cycle.</p>
+</span></p><p class='default'>
+Default value: <p>turn_on</p>
+</p></dd><dt><a class='title-link' name='payload_turn_off' href='#payload_turn_off'></a> payload_turn_off</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to turn the vacuum off.</p>
+</span></p><p class='default'>
+Default value: <p>turn_off</p>
+</p></dd><dt><a class='title-link' name='payload_return_to_base' href='#payload_return_to_base'></a> payload_return_to_base</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to tell the vacuum to return to base.</p>
+</span></p><p class='default'>
+Default value: <p>return_to_base</p>
+</p></dd><dt><a class='title-link' name='payload_stop' href='#payload_stop'></a> payload_stop</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to stop the vacuum.</p>
+</span></p><p class='default'>
+Default value: <p>stop</p>
+</p></dd><dt><a class='title-link' name='payload_clean_spot' href='#payload_clean_spot'></a> payload_clean_spot</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to begin a spot cleaning cycle.</p>
+</span></p><p class='default'>
+Default value: <p>clean_spot</p>
+</p></dd><dt><a class='title-link' name='payload_locate' href='#payload_locate'></a> payload_locate</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to locate the vacuum (typically plays a song).</p>
+</span></p><p class='default'>
+Default value: <p>locate</p>
+</p></dd><dt><a class='title-link' name='payload_start_pause' href='#payload_start_pause'></a> payload_start_pause</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to start or pause the vacuum.</p>
+</span></p><p class='default'>
+Default value: <p>start_pause</p>
+</p></dd><dt><a class='title-link' name='battery_level_topic' href='#battery_level_topic'></a> battery_level_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive battery level values from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='battery_level_template' href='#battery_level_template'></a> battery_level_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to define the battery level of the vacuum. This is required if <code>battery_level_topic</code> is set.</p>
+</span></p></dd><dt><a class='title-link' name='charging_topic' href='#charging_topic'></a> charging_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive charging state values from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='charging_template' href='#charging_template'></a> charging_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to define the charging state of the vacuum. This is required if <code>charging_topic</code> is set.</p>
+</span></p></dd><dt><a class='title-link' name='cleaning_topic' href='#cleaning_topic'></a> cleaning_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive cleaning state values from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='cleaning_template' href='#cleaning_template'></a> cleaning_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to define the cleaning state of the vacuum. This is required if <code>cleaning_topic</code> is set.</p>
+</span></p></dd><dt><a class='title-link' name='docked_topic' href='#docked_topic'></a> docked_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive docked state values from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='docked_template' href='#docked_template'></a> docked_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to define the docked state of the vacuum. This is required if <code>docked_topic</code> is set.</p>
+</span></p></dd><dt><a class='title-link' name='error_topic' href='#error_topic'></a> error_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive error messages from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='error_template' href='#error_template'></a> error_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to define potential error messages emitted by the vacuum. This is required if <code>error_topic</code> is set.</p>
+</span></p></dd><dt><a class='title-link' name='fan_speed_topic' href='#fan_speed_topic'></a> fan_speed_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive fan speed values from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='fan_speed_template' href='#fan_speed_template'></a> fan_speed_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to define the fan speed of the vacuum. This is required if <code>fan_speed_topic</code> is set.</p>
+</span></p></dd><dt><a class='title-link' name='set_fan_speed_topic' href='#set_fan_speed_topic'></a> set_fan_speed_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to control the vacuum’s fan speed.</p>
+</span></p></dd><dt><a class='title-link' name='fan_speed_list' href='#fan_speed_list'></a> fan_speed_list</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of possible fan speeds for the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='send_command_topic' href='#send_command_topic'></a> send_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish custom commands to the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd><dt><a class='title-link' name='json_attributes_template' href='#json_attributes_template'></a> json_attributes_template</dt><dd><p class='desc'><span class='type'>(<span class='template'><a href="/docs/configuration/templating/">template</a></span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd></dl>
+</div>
+<h3>Legacy configuration example</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vacuum:
+  - platform: mqtt
+    name: &quot;MQTT Vacuum&quot;
+    supported_features:
+      - turn_on
+      - turn_off
+      - pause
+      - stop
+      - return_home
+      - battery
+      - status
+      - locate
+      - clean_spot
+      - fan_speed
+      - send_command
+    command_topic: &quot;vacuum/command&quot;
+    battery_level_topic: &quot;vacuum/state&quot;
+    battery_level_template: &quot;{{ value_json.battery_level }}&quot;
+    charging_topic: &quot;vacuum/state&quot;
+    charging_template: &quot;{{ value_json.charging }}&quot;
+    cleaning_topic: &quot;vacuum/state&quot;
+    cleaning_template: &quot;{{ value_json.cleaning }}&quot;
+    docked_topic: &quot;vacuum/state&quot;
+    docked_template: &quot;{{ value_json.docked }}&quot;
+    error_topic: &quot;vacuum/state&quot;
+    error_template: &quot;{{ value_json.error }}&quot;
+    fan_speed_topic: &quot;vacuum/state&quot;
+    fan_speed_template: &quot;{{ value_json.fan_speed }}&quot;
+    set_fan_speed_topic: &quot;vacuum/set_fan_speed&quot;
+    fan_speed_list:
+      - min
+      - medium
+      - high
+      - max
+    send_command_topic: 'vacuum/send_command'
+</code></pre>
+<h2>Legacy MQTT Protocol</h2>
+<p>The above configuration for this integration expects an MQTT protocol like the following.</p>
+<h3>Legacy Basic Commands</h3>
+<p>MQTT topic: <code>vacuum/command</code></p>
+<p>Possible MQTT payloads:</p>
+<ul>
+<li><code>turn_on</code> - Begin cleaning</li>
+<li><code>turn_off</code> - Turn the Vacuum off</li>
+<li><code>return_to_base</code> - Return to base/dock</li>
+<li><code>stop</code> - Stop the Vacuum</li>
+<li><code>clean_spot</code> - Initialize a spot cleaning cycle</li>
+<li><code>locate</code> - Locate the vacuum (typically by playing a song)</li>
+<li><code>start_pause</code> - Toggle the vacuum between cleaning and stopping</li>
+</ul>
+<h3>Status/Sensor Updates</h3>
+<p>MQTT topic: <code>vacuum/state</code></p>
+<p>MQTT payload:</p>
+<pre><code class="language-json">{
+    &quot;battery_level&quot;: 61,
+    &quot;docked&quot;: true,
+    &quot;cleaning&quot;: false,
+    &quot;charging&quot;: true,
+    &quot;fan_speed&quot;: &quot;off&quot;,
+    &quot;error&quot;: &quot;Error message&quot;
+}
+</code></pre>
+<h2>State Configuration</h2>
+<p>State MQTT vacuum configuration section.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the vacuum.</p>
+</span></p><p class='default'>
+Default value: <p>MQTT Vacuum</p>
+</p></dd><dt><a class='title-link' name='schema' href='#schema'></a> schema</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The schema to use.</p>
+</span></p><p class='default'>
+Default value: <p>legacy</p>
+</p></dd><dt><a class='title-link' name='supported_features' href='#supported_features'></a> supported_features</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of features that the vacuum supports (possible values are <code>start</code>, <code>stop</code>, <code>pause</code>, <code>return_home</code>, <code>battery</code>, <code>status</code>, <code>locate</code>, <code>clean_spot</code>, <code>fan_speed</code>, <code>send_command</code>).</p>
+</span></p><p class='default'>
+Default value: <p><code>start</code>, <code>stop</code>, <code>return_home</code>, <code>status</code>, <code>battery</code>, <code>clean_spot</code></p>
+</p></dd><dt><a class='title-link' name='command_topic' href='#command_topic'></a> command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to control the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='qos' href='#qos'></a> qos</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The maximum QoS level of the state topic.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='retain' href='#retain'></a> retain</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If the published message should have the retain flag on or not.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='payload_start' href='#payload_start'></a> payload_start</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to begin the cleaning cycle.</p>
+</span></p><p class='default'>
+Default value: <p>start</p>
+</p></dd><dt><a class='title-link' name='payload_stop' href='#payload_stop'></a> payload_stop</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to stop cleaning.</p>
+</span></p><p class='default'>
+Default value: <p>stop</p>
+</p></dd><dt><a class='title-link' name='payload_return_to_base' href='#payload_return_to_base'></a> payload_return_to_base</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to tell the vacuum to return to base.</p>
+</span></p><p class='default'>
+Default value: <p>return_to_base</p>
+</p></dd><dt><a class='title-link' name='payload_clean_spot' href='#payload_clean_spot'></a> payload_clean_spot</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to begin a spot cleaning cycle.</p>
+</span></p><p class='default'>
+Default value: <p>clean_spot</p>
+</p></dd><dt><a class='title-link' name='payload_locate' href='#payload_locate'></a> payload_locate</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to locate the vacuum (typically plays a song).</p>
+</span></p><p class='default'>
+Default value: <p>locate</p>
+</p></dd><dt><a class='title-link' name='payload_pause' href='#payload_pause'></a> payload_pause</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload to send to the <code>command_topic</code> to pause the vacuum.</p>
+</span></p><p class='default'>
+Default value: <p>pause</p>
+</p></dd><dt><a class='title-link' name='state_topic' href='#state_topic'></a> state_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive state messages from the vacuum. State topic is extracting json if no <code>value_template</code> is defined.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/topics/templating/">template</a> to extract possible states from the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='set_fan_speed_topic' href='#set_fan_speed_topic'></a> set_fan_speed_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish commands to control the vacuum’s fan speed.</p>
+</span></p></dd><dt><a class='title-link' name='fan_speed_list' href='#fan_speed_list'></a> fan_speed_list</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of possible fan speeds for the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='send_command_topic' href='#send_command_topic'></a> send_command_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic to publish custom commands to the vacuum.</p>
+</span></p></dd><dt><a class='title-link' name='availability_topic' href='#availability_topic'></a> availability_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive availability (online/offline) updates.</p>
+</span></p></dd><dt><a class='title-link' name='payload_available' href='#payload_available'></a> payload_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the available state.</p>
+</span></p><p class='default'>
+Default value: <p>online</p>
+</p></dd><dt><a class='title-link' name='payload_not_available' href='#payload_not_available'></a> payload_not_available</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The payload that represents the unavailable state.</p>
+</span></p><p class='default'>
+Default value: <p>offline</p>
+</p></dd><dt><a class='title-link' name='json_attributes_topic' href='#json_attributes_topic'></a> json_attributes_topic</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd></dl>
+</div>
+<h3>State configuration example</h3>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+vacuum:
+  - platform: mqtt
+    name: &quot;MQTT Vacuum&quot;
+    schema: state
+    supported_features:
+      - start
+      - pause
+      - stop
+      - return_home
+      - battery
+      - status
+      - locate
+      - clean_spot
+      - fan_speed
+      - send_command
+    command_topic: &quot;vacuum/command&quot;
+    state_topic: &quot;vacuum/state&quot;
+    set_fan_speed_topic: &quot;vacuum/set_fan_speed&quot;
+    fan_speed_list:
+      - min
+      - medium
+      - high
+      - max
+    send_command_topic: 'vacuum/send_command'
+</code></pre>
+<h2>State MQTT Protocol</h2>
+<p>The above configuration for this integration expects an MQTT protocol like the following.</p>
+<h3>State Basic Commands</h3>
+<p>MQTT topic: <code>vacuum/command</code></p>
+<p>Possible MQTT payloads:</p>
+<ul>
+<li><code>start</code> - Start cleaning</li>
+<li><code>pause</code> - Pause cleaning</li>
+<li><code>return_to_base</code> - Return to base/dock</li>
+<li><code>stop</code> - Stop the vacuum.</li>
+<li><code>clean_spot</code> - Initialize a spot cleaning cycle</li>
+<li><code>locate</code> - Locate the vacuum (typically by playing a song)</li>
+</ul>
+<h3>Send Custom Command</h3>
+<p>Vacuum send_command allows three parameters:</p>
+<ul>
+<li>entity_id</li>
+<li>command</li>
+<li>params - optional</li>
+</ul>
+<p>If params are not provided it sends command as payload to MQTT send_command topic.
+If params are provided service sends json as payload with such structure:</p>
+<pre><code class="language-json">{
+  'command': 'command',
+  'param1-key': 'param1-value'
+}
+</code></pre>
+<p>Service trigger example:</p>
+<pre><code class="language-yaml">- alias: Push command based on sensor
+    trigger:
+      - platform: state
+        entity_id: sensor.sensor
+    action:
+      service: vacuum.send_command
+      data:
+        entity_id: 'vacuum.vacuum_entity'
+        command: 'custom_command'
+        params:
+          - key: value
+</code></pre>
+<p>MQTT topic: <code>vacuum/send_command</code></p>
+<h3>Status/Sensor Updates</h3>
+<p>MQTT topic: <code>vacuum/state</code></p>
+<p>MQTT payload:</p>
+<pre><code class="language-json">{
+    &quot;battery_level&quot;: 61,
+    &quot;state&quot;: &quot;docked&quot;,
+    &quot;fan_speed&quot;: &quot;off&quot;
+}
+</code></pre>
+<p>State has to be one of vacuum states supported by Home Assistant:</p>
+<ul>
+<li>cleaning,</li>
+<li>docked,</li>
+<li>paused,</li>
+<li>idle,</li>
+<li>returning,</li>
+<li>error.</li>
+</ul>
+<h2>Shared MQTT Protocol</h2>
+<p>The configuration for this integration expects an MQTT protocol like the following.
+These services are identical for both - legacy and state vacuum.</p>
+<h3>Set Fan Speed</h3>
+<p>MQTT topic: <code>vacuum/set_fan_speed</code></p>
+<p>Possible MQTT payloads:</p>
+<ul>
+<li><code>min</code> - Minimum fan speed</li>
+<li><code>medium</code> - Medium fan speed</li>
+<li><code>high</code> - High fan speed</li>
+<li><code>max</code> - Max fan speed</li>
+</ul>
+<h3>Send Custom Command</h3>
+<p>Vacuum send_command allows three parameters:</p>
+<ul>
+<li>entity_id</li>
+<li>command</li>
+<li>params - optional</li>
+</ul>
+<p>If params are not provided it sends command as payload to MQTT send_command topic.
+If params are provided service sends json as payload with such structure:</p>
+<pre><code class="language-json">{
+  'command': 'command',
+  'param1-key': 'param1-value'
+}
+</code></pre>
+<p>Service trigger example:</p>
+<pre><code class="language-yaml">- alias: Push command based on sensor
+    trigger:
+      - platform: state
+        entity_id: sensor.sensor
+    action:
+      service: vacuum.send_command
+      data:
+        entity_id: 'vacuum.vacuum_entity'
+        command: 'custom_command'
+        params:
+          - key: value
+</code></pre>
+<p>MQTT topic: <code>vacuum/send_command</code></p>
+<h3>Usage with cloudless Xiaomi vacuums</h3>
+<p>This integration is supported by the cloud-free Xiaomi Vacuum Webinterface <a href="https://github.com/Hypfer/Valetudo">Valetudo</a>.</p>
+<h3>Retrofitting non-wifi vacuums</h3>
+<ul>
+<li>Retrofitting your old Roomba with an ESP8266. <a href="https://github.com/johnboiles/esp-roomba-mqtt">This repo</a> provides MQTT client firmware.</li>
+<li>If you own a non-wifi Neato, you can refer to <a href="https://github.com/jeroenterheerdt/neato-serial">this repo</a> that uses a Raspberry Pi to retrofit an old Neato.</li>
+</ul>
+:ET

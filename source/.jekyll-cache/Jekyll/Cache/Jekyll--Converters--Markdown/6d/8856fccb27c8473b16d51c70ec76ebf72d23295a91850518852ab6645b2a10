@@ -1,0 +1,139 @@
+I"<p>The <code>system_log</code> integration stores information about all logged errors and warnings in Home Assistant. All collected information is accessible directly in the frontend, just navigate to the <code>Info</code> section under <code>Developer Tools</code>. In order to not overload Home Assistant with log data, only the 50 last errors and warnings will be stored. Older entries are automatically discarded from the log. It is possible to change the number of stored log entries using the parameter <code>max_entries</code>.</p>
+<h2>Configuration</h2>
+<p>This integration is automatically loaded by the <code>frontend</code> (so no need to do anything if you are using the frontend). If you are not doing so, or if you wish to change a parameter, add the following section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">system_log:
+  max_entries: MAX_ENTRIES
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='max_entries' href='#max_entries'></a> max_entries</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Number of entries to store (older entries are discarded).</p>
+</span></p><p class='default'>
+Default value: <p>50</p>
+</p></dd><dt><a class='title-link' name='fire_event' href='#fire_event'></a> fire_event</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Whether events are fired (required when used for triggers).</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<h2>Services</h2>
+<h3>Service <code>clear</code></h3>
+<p>To manually clear the system log, call this service.</p>
+<h3>Service <code>write</code></h3>
+<p>Write a log entry</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td>no</td>
+<td>Message to log</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>yes</td>
+<td>Log level: debug, info, warning, error, critical. Defaults to ‘error’.</td>
+</tr>
+<tr>
+<td><code>logger</code></td>
+<td>yes</td>
+<td>Logger name under which to log the message. Defaults to ‘system_log.external’.</td>
+</tr>
+</tbody>
+</table>
+<h2>Events</h2>
+<p>Errors and warnings are posted as the event <code>system_log_event</code>, so it is possible to write automations that trigger whenever a warning or error occurs. The following information is included in each event:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>level</code></td>
+<td>Either <code>WARNING</code> or <code>ERROR</code> depending on severity.</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>File that triggered the error, e.g., <code>core.py</code> or <code>media_player/yamaha.py</code>.</td>
+</tr>
+<tr>
+<td><code>exception</code></td>
+<td>Full stack trace if available, an empty string otherwise.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Descriptive message of the error, e.g., “Error handling request”.</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Unix timestamp with as a double, e.g., 1517241010.237416.</td>
+</tr>
+</tbody>
+</table>
+<p>Live examples of these events can be found in the Home Assistant log file (<code>home-assistant.log</code>) or by just looking in the system log. An example could, for instance, look like this:</p>
+<pre><code class="language-text">2019-02-14 16:20:35 ERROR (MainThread) [homeassistant.loader] Unable to find integration system_healt
+2019-02-14 16:20:36 ERROR (MainThread) [homeassistant.components.device_tracker] Error setting up platform google_maps
+Traceback (most recent call last):
+  File &quot;/home/fab/Documents/repos/ha/home-assistant/homeassistant/integrations/device_tracker/__init__.py&quot;, line 184, in
+[...]
+</code></pre>
+<p>The message (“Unable to find integration system_healt”), source (<code>homeassistant.loader</code>) and level (<code>ERROR</code>) can easily be extracted from the log. The exact timestamp and if there is a stack trace that’s shown as well. Here is another error caused by the <code>google_map</code> integration with additional output present.</p>
+<h2>Examples</h2>
+<p>Here are some examples using the events posted by <code>system_log</code>. <code>fire_event</code> must be set to <code>true</code> for these to work.</p>
+<h3>Counting Number of Warnings</h3>
+<p>This will create a <code>counter</code> that increases every time a warning is logged:</p>
+<pre><code class="language-yaml">counter:
+  warning_counter:
+    name: Warnings
+    icon: mdi:alert
+
+automation:
+  - alias: Count warnings
+    trigger:
+      platform: event
+      event_type: system_log_event
+      event_data:
+        level: WARNING
+    action:
+      service: counter.increment
+      entity_id: counter.warning_counter
+</code></pre>
+<h3>Conditional Messages</h3>
+<p>This automation will create a persistent notification whenever an error or warning is logged that has the word “service” in the message:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Create notifications for &quot;service&quot; errors
+    trigger:
+      platform: event
+      event_type: system_log_event
+    condition:
+      condition: template
+      value_template: '{{ &quot;service&quot; in trigger.event.data.message }}'
+    action:
+      service: persistent_notification.create
+      data_template:
+        title: Something bad happened
+        message: '{{ trigger.event.data.message }}'
+</code></pre>
+<h3>Writing to log</h3>
+<p>This automation will create a new log entry when the door is opened:</p>
+<pre><code class="language-yaml">automation:
+  - alias: Log door opened
+    trigger:
+      platform: state
+      entity_id: binary_sensor.door
+      from: 'off'
+      to: 'on'
+    action:
+      service: system_log.write
+      data_template:
+        message: 'Door opened!'
+        level: info
+</code></pre>
+:ET

@@ -1,0 +1,164 @@
+I"�<p>The device tracker allows you to track devices in Home Assistant. This can happen by querying your wireless router or by having applications push location info.</p>
+<h2>Configuring a <code>device_tracker</code> platform</h2>
+<p>To get started add the following lines to your <code>configuration.yaml</code> (example for Netgear):</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Netgear device
+device_tracker:
+  - platform: netgear
+    host: IP_ADDRESS
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    new_device_defaults:
+      track_new_devices: true
+</code></pre>
+<p>The following optional parameters can be used with any platform:</p>
+<div class='note'>
+  Device tracker will only look for global settings under the configuration of the first configured platform. These 3 are the global settings:
+</div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>interval_seconds</code></td>
+<td>12</td>
+<td>Seconds between each scan for new devices</td>
+</tr>
+<tr>
+<td><code>consider_home</code></td>
+<td>180</td>
+<td>Seconds to wait till marking someone as not home after not being seen. This parameter is most useful for households with Apple iOS devices that go into sleep mode while still at home to conserve battery life. iPhones will occasionally drop off the network and then re-appear. <code>consider_home</code> helps prevent false alarms in presence detection when using IP scanners such as Nmap. <code>consider_home</code> accepts various time representations, (e.g., the following all represents 3 minutes: <code>180</code>, <code>0:03</code>, <code>0:03:00</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class='note'>
+<p>Note that setting <code>track_new_devices: false</code> will still result in new devices being recorded in <code>known_devices.yaml</code>, but they won’t be tracked (<code>track: false</code>).</p>
+</div>
+<p>The extended example from above would look like the following sample:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for Netgear device
+device_tracker:
+  - platform: netgear
+    host: IP_ADDRESS
+    username: YOUR_USERNAME
+    interval_seconds: 10
+    consider_home: 180
+    new_device_defaults:
+      track_new_devices: true
+</code></pre>
+<p>Multiple device trackers can be used in parallel, such as <a href="/integrations/owntracks/">Owntracks</a> and <a href="/integrations/nmap_tracker/">Nmap</a>. The state of the device will be determined by the source that reported last.</p>
+<h2><code>known_devices.yaml</code></h2>
+<div class='note warning'>
+<p>As of 0.94 <code>known_devices.yaml</code> is being phased out and no longer used by all trackers. Depending on the integration you use this section may no longer apply. This includes the mobile app, OwnTracks, GeoFency, GPSLogger, Locative and Huawei LTE.</p>
+</div>
+<p>Once <code>device_tracker</code> is enabled, a file will be created in your config dir named <code>known_devices.yaml</code>. Edit this file to adjust which devices to be tracked.</p>
+<p>Here’s an example configuration for a single device:</p>
+<pre><code class="language-yaml">devicename:
+  name: Friendly Name
+  mac: EA:AA:55:E7:C6:94
+  picture: https://www.home-assistant.io/images/favicon-192x192.png
+  track: true
+</code></pre>
+<div class='note warning'>
+<p>In the example above, <code>devicename</code> refers to the detected name of the device.  For example, with <code>nmap</code>, this will be the MAC address (with byte separators omitted).</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Host name or “Unnamed Device”</td>
+<td>The friendly name of the device.</td>
+</tr>
+<tr>
+<td><code>mac</code></td>
+<td>None</td>
+<td>The MAC address of the device. Add this if you are using a network device tracker like Nmap or SNMP.</td>
+</tr>
+<tr>
+<td><code>picture</code></td>
+<td>None</td>
+<td>A picture that you can use to easily identify the person or device. You can also save the image file in a folder “www” in the same location (can be obtained from developer tools) where you have your configuration.yaml file and just use <code>picture: /local/favicon-192x192.png</code>. The path ‘local’ is mapped to the ‘www’ folder you create.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>mdi:account</td>
+<td>An icon for this device (use as an alternative to <code>picture</code>).</td>
+</tr>
+<tr>
+<td><code>gravatar</code></td>
+<td>None</td>
+<td>An email address for the device’s owner. If provided, it will override <code>picture</code>.</td>
+</tr>
+<tr>
+<td><code>track</code></td>
+<td>[uses platform setting]</td>
+<td>If  <code>yes</code>/<code>on</code>/<code>true</code> then the device will be tracked. Otherwise its location and state will not update.</td>
+</tr>
+<tr>
+<td><code>consider_home</code></td>
+<td>[uses platform setting]</td>
+<td>Seconds to wait till marking someone as not home after not being seen. Allows you to override the global <code>consider_home</code> setting from the platform configuration on a per device level.</td>
+</tr>
+</tbody>
+</table>
+<h2>Device states</h2>
+<p>The state of your tracked device will be <code>'home'</code> if it is in the <a href="/integrations/zone#home-zone">home zone</a>, detected by your network or Bluetooth based presence detection. If you’re using a presence detection method that includes coordinates then when it’s in a zone the state will be the name of the zone (case sensitive). When a device isn’t at home and isn’t in any zone, the state will be <code>'not_home'</code>.</p>
+<h2><code>device_tracker.see</code> service</h2>
+<p>The <code>device_tracker.see</code> service can be used to manually update the state of a device tracker:</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dev_id</code></td>
+<td>no</td>
+<td>The second half of the <code>entity_id</code>, for example <code>tardis</code> for <code>device_tracker.tardis</code></td>
+</tr>
+<tr>
+<td><code>location_name</code></td>
+<td>no</td>
+<td>The location, <code>home</code>, <code>not_home</code>, or the name of the zone</td>
+</tr>
+<tr>
+<td><code>host_name</code></td>
+<td>yes</td>
+<td>The hostname of the device tracker</td>
+</tr>
+<tr>
+<td><code>mac</code></td>
+<td>yes</td>
+<td>The MAC address of the entity (only specify if you’re updating a network based tracker)</td>
+</tr>
+<tr>
+<td><code>gps</code></td>
+<td>yes</td>
+<td>If you’re providing a location, for example <code>[51.513845, -0.100539]</code></td>
+</tr>
+<tr>
+<td><code>gps_accuracy</code></td>
+<td>yes</td>
+<td>The accuracy of the GPS fix</td>
+</tr>
+<tr>
+<td><code>battery</code></td>
+<td>yes</td>
+<td>The battery level of the device</td>
+</tr>
+</tbody>
+</table>
+:ET

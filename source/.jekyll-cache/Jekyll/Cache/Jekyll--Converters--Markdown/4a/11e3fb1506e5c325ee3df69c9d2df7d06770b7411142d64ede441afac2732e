@@ -1,0 +1,37 @@
+I"1<p><a href="http://www.lutron.com/">Lutron</a> is an American lighting control company. The Lutron Homeworks Series 4 &amp; 8 systems are relatively old (~2003), and use RS-232 connections to communicate with home automation systems.  The <code>homeworks</code> integration in Home Assistant is responsible for communicating with the main controller for these systems.  Communication is through an ethernet to serial converter (NPort, for example).</p>
+<p>Only a subset of the Homeworks system is supported - lights and keypads.</p>
+<p>Lutron has created many systems over the years, each with their own unique interfacing protocol.  There are three Homeworks systems - QS, Series 4 &amp; 8, and original.  This platform is only for Series 4 &amp; 8.  There is another integration <a href="/integrations/lutron/">lutron</a> which handles Lutron RadioRA 2 systems.</p>
+<p>Homeworks keypad buttons are momentary switches.  The button is pressed and released, meaning that there is no “state”.  Buttons generate <code>homeworks_button_press</code> and <code>homeworks_button_release</code> events.  These events contain the “id”, “name”, and “button” of the button that was pressed.  “id” is derived from “name”, and “button” is the number of the button on the keypad (starting at 1).</p>
+<h2>Configuration</h2>
+<p>The protocol for automatically extracting device information from the controller isn’t documented, so the <code>homeworks</code> integration must be configured manually. To use Lutron Homeworks devices in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+homeworks:
+  host: IP_ADDRESS
+  port: 4001
+  dimmers:
+    - addr: &quot;[02:08:01:01]&quot;
+      name: &quot;Foyer Sconces&quot;
+    - addr: &quot;[02:08:01:02]&quot;
+      name: &quot;Foyer Downlights&quot;
+      rate: 2
+
+  keypads:
+    - addr: &quot;[02:08:02:01]&quot;
+      name: &quot;Foyer Keypad&quot;
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address of the ethernet to serial adapter.  It is assumed that the adaptor has been preconfigured.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port of the ethernet to serial adapter.</p>
+</span></p></dd><dt><a class='title-link' name='dimmers' href='#dimmers'></a> dimmers</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of dimmers.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='addr' href='#addr'></a> addr</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The unique address of the dimmer on the controller. The quotes, brackets, and number formatting must be of the form <code>&quot;[##:##:##:##]&quot;</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the sensor will be the title of the button +<code>&quot;_&quot;</code> + the name of the keypad/</p>
+</span></p></dd><dt><a class='title-link' name='rate' href='#rate'></a> rate</dt><dd><p class='desc'><span class='type'>(<span class='float'>float</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The amount of time (in seconds) for the light to transition to a new brightness level.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd></dl></dd><dt><a class='title-link' name='keypads' href='#keypads'></a> keypads</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of keypads.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='addr' href='#addr'></a> addr</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The unique address of the keypad on the controller. The quotes, brackets, and number formatting must be of the form <code>&quot;[##:##:##:##]&quot;</code>.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The name of the keypad.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+:ET

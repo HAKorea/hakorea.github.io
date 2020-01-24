@@ -1,0 +1,178 @@
+I"¸Q<p>The Elk-M1 is a home security and automation controller that is capable of alarm control panel functions and automation.</p>
+<p>The Elk-M1 controller is manufactured by <a href="https://www.elkproducts.com">Elk Products</a>.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><strong>Alarm</strong> - An Elk-M1 area (also known as partition) is represented as an <code>alarm_control_panel</code>.</li>
+<li><strong>Climate</strong> - An Elk-M1 thermostat is represented as a <code>climate</code> entity.</li>
+<li><strong>Light</strong> - An Elk-M1 light (which can be X10, Insteon, UPB) is represented as a <code>light</code>.</li>
+<li><strong>Scene</strong> - Elk-M1 tasks are represented as <code>scene</code> entities.</li>
+<li><strong>Sensor</strong> - Elk-M1 counters, keypads, panel, settings, and zones are represented as <code>sensor</code> entities.</li>
+<li><strong>Switch</strong> - Elk-M1 outputs are represented as <code>switch</code> entities.</li>
+</ul>
+<h2>Configuration</h2>
+<p>To integrate one or more Elk-M1 controllers with Home Assistant, add the following
+section to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+elkm1:
+  - host: elk://IP_ADDRESS_1
+  ...
+  - host: elk://IP_ADDRESS_2
+    prefix: gh  # for guest house controller
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Connection string to Elk of the form <code>&lt;method&gt;://&lt;address&gt;[:port]</code>. <code>&lt;method&gt;</code> is <code>elk</code> for non-secure connection, <code>elks</code> for secure connection, and <code>serial</code> for serial port connection. <code>&lt;address&gt;</code> is IP address or domain or for <code>serial</code> the serial port that the Elk is connected to. Optional <code>&lt;port&gt;</code> is the port to connect to on the Elk, defaulting to 2101 for <code>elk</code> and 2601 for <code>elks</code>. For <code>serial</code> method, <em>address</em> is the path to the tty <em>/dev/ttyS1</em> for example and <code>[:baud]</code> is the baud rate to connect with (Elk systems default to 115200 baud, but this can be changed during Elk system configuration).  You may have multiple host sections for connecting multiple controllers.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Username to login to Elk. Only required if using <code>elks</code> connection method.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Password to login to Elk. Only required if using <code>elks</code> connection method.</p>
+</span></p></dd><dt><a class='title-link' name='prefix' href='#prefix'></a> prefix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='description'><p>The prefix to use, if any, for all the devices created for this controller. At most one host can omit the prefix, all others must have a unique prefix within the Home Assistant instance.</p>
+</span></p></dd><dt><a class='title-link' name='temperature_unit' href='#temperature_unit'></a> temperature_unit</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The temperature unit that the Elk panel uses. Valid values are <code>C</code> and <code>F</code>.</p>
+</span></p><p class='default'>
+Default value: <p>F</p>
+</p></dd><dt><a class='title-link' name='area' href='#area'></a> area</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk areas to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='counter' href='#counter'></a> counter</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk counters to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='keypad' href='#keypad'></a> keypad</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk keypads to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='output' href='#output'></a> output</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk outputs to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='setting' href='#setting'></a> setting</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk settings to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='task' href='#task'></a> task</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk tasks to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='thermostat' href='#thermostat'></a> thermostat</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk thermostats to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='plc' href='#plc'></a> plc</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk PLC lights to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd><dt><a class='title-link' name='zone' href='#zone'></a> zone</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Elk zones to include in Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='enabled' href='#enabled'></a> enabled</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Enable this configuration section.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='include' href='#include'></a> include</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to include in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a positive integer or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>All included.</p>
+</p></dd><dt><a class='title-link' name='exclude' href='#exclude'></a> exclude</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List to exclude in the form of either <code>&lt;value&gt;</code> or <code>&lt;value&gt;-&lt;value&gt;</code> where <code>&lt;value&gt;</code> is a number or an X10 housecode. See configuration below for examples of ranges.</p>
+</span></p><p class='default'>
+Default value: <p>None excluded.</p>
+</p></dd></dl></dd></dl>
+</div>
+<p>Example configuration of the above:</p>
+<pre><code class="language-yaml">elkm1:
+  host: elks://IP_ADDRESS
+  username: USERNAME
+  password: PASSWORD
+  area:
+    exclude: [5-8]
+  zone:
+    exclude: [11-16, 19-192, 199-208]
+  plc:
+    include: [a1-d16, 192]
+    exclude: [b12-d5]
+</code></pre>
+<p>Example for a serial port instance on /dev/ttyUSB0 at 115200 baud:</p>
+<pre><code class="language-yaml">elkm1:
+  - host: serial:///dev/ttyUSB0:115200
+    # Elk doesn't know which areas/zones/etc are unused, so it can generate
+    # many unwanted Home Assistant Entities.  Be liberal in excluding them:
+    area:
+      exclude: [2-8]
+    zone:
+      exclude: [17-192, 195-208]
+    plc:
+      enabled: false
+    task:
+      enabled: false
+    counter:
+      exclude: [1-64]
+    keypad:
+      exclude: [3-16]
+    setting:
+      exclude: [1-20]
+    output:
+      enabled: false
+    thermostat:
+      enabled: false
+</code></pre>
+:ET

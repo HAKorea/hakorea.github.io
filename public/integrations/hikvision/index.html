@@ -1,0 +1,384 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Hikvision - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to set up Hikvision camera binary sensors within Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/hikvision/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Hikvision">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/hikvision/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to set up Hikvision camera binary sensors within Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Hikvision">
+    <meta name="twitter:description" content="Instructions on how to set up Hikvision camera binary sensors within Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.svg" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/hikvision.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Hikvision
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The Hikvision Binary Sensor is a platform that parses the event stream of a
+<a href="https://www.hikvision.com/" rel="external nofollow">Hikvision IP Camera or NVR</a> and presents the
+camera/nvr events to Home Assistant as binary sensors with either an “off” or
+“on” state.</p>
+<p>The platform will automatically add all sensors to Home Assistant that are
+configured within the camera/nvr interface to “Notify the surveillance center”
+as a trigger. If you would like to hide a sensor type you can do so by either
+unchecking “Notify the surveillance center” in the camera configuration or by
+using the “ignored” customize option detailed below.</p>
+<div class="note">
+In order for the sensors to work the hikvision user must have the 'Remote: Notify Surveillance Center/Trigger Alarm Output' permission which can be enabled from the user management section of the web interface.
+Also the 'WEB Authentication' needs to be set to 'digest/basic' in the security/authentication section.
+</div>
+<p>For example, if you configure a camera with the name “Front Porch” that has
+motion detection and line crossing events enabled to notify the surveillance
+center the following binary sensors will be added to Home Assistant:</p>
+<pre><code class="language-text">binary_sensor.front_porch_motion
+binary_sensor.front_port_line_crossing
+</code></pre>
+<p>When used with a NVR device the sensors will be appended with the channel number
+they represent. For example,
+if you configure an NVR with the name “Home” that supports 2 cameras with
+motion detection and line crossing events enabled to notify the surveillance
+center the following binary sensors will be added to Home Assistant:</p>
+<pre><code class="language-text">binary_sensor.home_motion_1
+binary_sensor.home_motion_2
+binary_sensor.home_line_crossing_1
+binary_sensor.home_line_crossing_2
+</code></pre>
+<p>This platform should work with all Hikvision cameras and nvrs,
+and has been confirmed to work with the following models:</p>
+<ul>
+<li>DS-2CD3132-I</li>
+<li>DS-2CD2232-I5</li>
+<li>DS-2CD2032-I</li>
+<li>DS-2CD2042WD-I</li>
+<li>DS-2CD2142FWD-I</li>
+<li>DS-2CD2155FWD-IS</li>
+<li>IPC-D140H(-M)</li>
+</ul>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To enable this sensor,
+add the following lines are required in your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: hikvision
+    host: IP_ADDRESS
+    username: user
+    password: pass
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="host" href="#host"></a> host</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of the camera you would like to connect to.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="username" href="#username"></a> username</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The username to authenticate with.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="password" href="#password"></a> password</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password to authenticate with.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name you would like to give the camera in Home Assistant, defaults to name defined in the camera.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="port" href="#port"></a> port</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port to connect to the camera on.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>80</p>
+</dd>
+<dt>
+<a class="title-link" name="ssl" href="#ssl"></a> ssl</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>true</code> if you want to connect with https. Be sure to set the port also.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="customize" href="#customize"></a> customize</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>This attribute contains sensor-specific override values. Only sensor name needs defined:</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="ignored" href="#ignored"></a> ignored</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Ignore this sensor completely. It won’t be shown in the Web Interface and no events are generated for it.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="delay" href="#delay"></a> delay</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Specify the delay to wait after a sensor event ends before notifying Home Assistant in seconds. This is useful to catch multiple quick trips in one window without the state toggling on and off.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>5</p>
+</dd>
+</dl></dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="supported-types" href="#supported-types"></a> Supported types</h3>
+<p>Supported sensor/event types are:</p>
+<ul>
+<li>Motion</li>
+<li>Line Crossing</li>
+<li>Field Detection</li>
+<li>Video Loss</li>
+<li>Tamper Detection</li>
+<li>Shelter Alarm</li>
+<li>Disk Full</li>
+<li>Disk Error</li>
+<li>Net Interface Broken</li>
+<li>IP Conflict</li>
+<li>Illegal Access</li>
+<li>Video Mismatch</li>
+<li>Bad Video</li>
+<li>PIR Alarm</li>
+<li>Face Detection</li>
+<li>Scene Change Detection</li>
+</ul>
+<h2>
+<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<p>Example of a configuration in your <code>configuration.yaml</code>
+that utilizes the customize options for a camera:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: hikvision
+    host: 192.168.X.X
+    port: 80
+    ssl: false
+    username: user
+    password: pass
+    customize:
+      motion:
+        delay: 30
+      line_crossing:
+        ignored: true
+</code></pre>
+<p>Example of a configuration in your <code>configuration.yaml</code>
+that utilizes the customize options for a nvr:</p>
+<pre><code class="language-yaml">binary_sensor:
+  - platform: hikvision
+    host: 192.168.X.X
+    port: 80
+    ssl: false
+    username: user
+    password: pass
+    customize:
+      motion_1:
+        delay: 30
+      field_detection_2:
+        ignored: true
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/hakorea.github.io/tree/current/source/_integrations/hikvision.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/hikvision.png' /></div><div class="section">
+    <kb-alert-link integration="hikvision"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Local Push
+    </div><div class='section'>
+      Introduced in release: 0.35
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/hikvision/'>/components/hikvision/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#binary-sensor'>Binary Sensor</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
+          </div>
+          <div class="icons">
+            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
+            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
+            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
+            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
+            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
+            <li><a href='/security/'>Security Vulnerabilities</a></li>
+            <li><a href='/privacy/'>Privacy</a></li>
+            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+          Hosted by <a href='https://www.netlify.com/'>Netlify</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

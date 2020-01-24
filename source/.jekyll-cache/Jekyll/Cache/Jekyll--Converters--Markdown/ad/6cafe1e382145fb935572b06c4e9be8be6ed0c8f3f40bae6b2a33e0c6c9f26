@@ -1,0 +1,218 @@
+I"�/<p>The <code>amcrest</code> camera platform allows you to integrate your <a href="https://amcrest.com/">Amcrest</a> IP camera in Home Assistant.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor</li>
+<li>Camera</li>
+<li>Sensor</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable your camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+amcrest:
+  - host: IP_ADDRESS_CAMERA
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP address or hostname of your camera. If using a hostname, make sure the DNS works as expected.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for accessing your camera.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for accessing your camera.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This parameter allows you to override the name of your camera. In the case of multi-camera setups, this is highly recommended as camera id number will be randomly changed at each reboot if a name is not allocated.</p>
+</span></p><p class='default'>
+Default value: <p>Amcrest Camera</p>
+</p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The port that the camera is running on.</p>
+</span></p><p class='default'>
+Default value: <p>80</p>
+</p></dd><dt><a class='title-link' name='resolution' href='#resolution'></a> resolution</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>This parameter allows you to specify the camera resolution. For a high resolution (1080/720p), specify the option <code>high</code>. For VGA resolution (640x480p), specify the option <code>low</code>.</p>
+</span></p><p class='default'>
+Default value: <p>high</p>
+</p></dd><dt><a class='title-link' name='stream_source' href='#stream_source'></a> stream_source</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The data source for the live stream. <code>mjpeg</code> will use the camera’s native MJPEG stream, whereas <code>snapshot</code> will use the camera’s snapshot API to create a stream from still images. You can also set the <code>rtsp</code> option to generate the streaming via RTSP protocol.</p>
+</span></p><p class='default'>
+Default value: <p>snapshot</p>
+</p></dd><dt><a class='title-link' name='ffmpeg_arguments' href='#ffmpeg_arguments'></a> ffmpeg_arguments</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Extra options to pass to ffmpeg, e.g., image quality or video filter options.</p>
+</span></p><p class='default'>
+Default value: <p>-pred 1</p>
+</p></dd><dt><a class='title-link' name='authentication' href='#authentication'></a> authentication</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines which authentication method to use only when <strong>stream_source</strong> is <strong>mjpeg</strong>. Currently, <em>aiohttp</em> only support <em>basic</em>.</p>
+</span></p><p class='default'>
+Default value: <p>basic</p>
+</p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the update interval of the sensor in seconds.</p>
+</span></p><p class='default'>
+Default value: <p>10</p>
+</p></dd><dt><a class='title-link' name='binary_sensors' href='#binary_sensors'></a> binary_sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored:</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='motion_detected' href='#motion_detected'></a> motion_detected</dt><dd><p class='desc'><span class='description'><p>Return <code>on</code> when a motion is detected, <code>off</code> when not.</p>
+</span></p></dd><dt><a class='title-link' name='online' href='#online'></a> online</dt><dd><p class='desc'><span class='description'><p>Return <code>on</code> when camera is available (i.e., responding to commands), <code>off</code> when not.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='sensors' href='#sensors'></a> sensors</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Conditions to display in the frontend. The following conditions can be monitored:</p>
+</span></p><p class='default'>
+Default value: <p>None</p>
+</p></dd><dd><dl class='nested'><dt><a class='title-link' name='sdcard' href='#sdcard'></a> sdcard</dt><dd><p class='desc'><span class='description'><p>Return the SD card usage by reporting the total and used space.</p>
+</span></p></dd><dt><a class='title-link' name='ptz_preset' href='#ptz_preset'></a> ptz_preset</dt><dd><p class='desc'><span class='description'><p>Return the number of PTZ preset positions configured for the given camera.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='control_light' href='#control_light'></a> control_light</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Automatically control the camera’s indicator light, turning it on if the audio or video streams are enabled, and turning it off if both streams are disabled.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<p><strong>Note:</strong> Amcrest cameras with newer firmware no longer have the ability to
+stream <code>high</code> definition video with MJPEG encoding. You may need to use <code>low</code>
+resolution stream or the <code>snapshot</code> stream source instead.  If the quality seems
+too poor, lower the <code>Frame Rate (FPS)</code> and max out the <code>Bit Rate</code> settings in
+your camera’s configuration manager. If you defined the <em>stream_source</em> to
+<strong>mjpeg</strong>, make sure your camera supports <em>Basic</em> HTTP authentication.
+Newer Amcrest firmware may not work, then <strong>rtsp</strong> is recommended instead.</p>
+<p><strong>Note:</strong> If you set the <code>stream_source</code> option to <code>rtsp</code>,
+make sure to follow the steps mentioned at <a href="/integrations/ffmpeg/">FFMPEG</a>
+documentation to install the <code>ffmpeg</code>.</p>
+<h2>Services</h2>
+<p>Once loaded, the <code>amcrest</code> integration will expose services that can be called to perform various actions. The <code>entity_id</code> service attribute can specify one or more specific cameras, or <code>all</code> can be used to specify all configured Amcrest cameras.</p>
+<p>Available services:
+<code>enable_audio</code>, <code>disable_audio</code>,
+<code>enable_motion_recording</code>, <code>disable_motion_recording</code>,
+<code>enable_recording</code>, <code>disable_recording</code>,
+<code>goto_preset</code>, <code>set_color_bw</code>,
+<code>start_tour</code> and <code>stop_tour</code></p>
+<h4>Service <code>enable_audio</code>/<code>disable_audio</code></h4>
+<p>These services enable or disable the camera’s audio stream.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>enable_motion_recording</code>/<code>disable_motion_recording</code></h4>
+<p>These services enable or disable the camera to record a clip to its configured storage location when motion is detected.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>enable_recording</code>/<code>disable_recording</code></h4>
+<p>These services enable or disable the camera to continuously record to its configured storage location.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>goto_preset</code></h4>
+<p>This service will cause the camera to move to one of the PTZ locations configured within the camera.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+<tr>
+<td><code>preset</code></td>
+<td>no</td>
+<td>Preset number, starting from 1.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>set_color_bw</code></h4>
+<p>This service will set the color mode of the camera.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+<tr>
+<td><code>color_bw</code></td>
+<td>no</td>
+<td>One of <code>auto</code>, <code>bw</code> or <code>color</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Service <code>start_tour</code>/<code>stop_tour</code></h4>
+<p>These services start or stop the camera’s PTZ tour function.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>Name(s) of entities, e.g., <code>camera.living_room_camera</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2>Advanced Configuration</h2>
+<p>You can also use this more advanced configuration example:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+amcrest:
+  - host: IP_ADDRESS_CAMERA_1
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    binary_sensors:
+      - motion_detected
+      - online
+    sensors:
+      - sdcard
+
+  # Add second camera
+  - host: IP_ADDRESS_CAMERA_2
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    name: Amcrest Camera 2
+    resolution: low
+    stream_source: snapshot
+    sensors:
+      - ptz_preset
+</code></pre>
+<p>To check if your Amcrest camera is supported/tested, visit the <a href="https://github.com/tchellomello/python-amcrest#supportability-matrix">supportability matrix</a> link from the <code>python-amcrest</code> project.</p>
+:ET

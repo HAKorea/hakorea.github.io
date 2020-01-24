@@ -1,0 +1,39 @@
+I"¦<p>The <code>random</code> integration simply creates random values or state. This can be useful if you want to test automation rules or run an interactive demo. It generates a new state every time it is polled.</p>
+<h2>Binary Sensor</h2>
+<p>The <code>random</code> binary sensor platform is creating random states (<code>true</code>, 1, <code>on</code> or <code>false</code>, 0, <code>off</code>).</p>
+<h3>Configuration</h3>
+<p>To enable the random binary sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+binary_sensor:
+  - platform: random
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>Random Binary Sensor</p>
+</p></dd></dl>
+</div>
+<h2>Sensor</h2>
+<p>The <code>random</code> sensor platform is creating random sensor values (integers) out of a given range. Returned values form a <a href="https://en.wikipedia.org/wiki/Discrete_uniform_distribution">discrete uniform distribution</a>, meaning that each integer value in the range configured is equally likely to be drawn.</p>
+<h3>Configuration</h3>
+<p>To enable the random sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: random
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to use in the frontend.</p>
+</span></p><p class='default'>
+Default value: <p>Random Sensor</p>
+</p></dd><dt><a class='title-link' name='minimum' href='#minimum'></a> minimum</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Lower limit for the values.</p>
+</span></p><p class='default'>
+Default value: <p>0</p>
+</p></dd><dt><a class='title-link' name='maximum' href='#maximum'></a> maximum</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Upper limit for the values.</p>
+</span></p><p class='default'>
+Default value: <p>20</p>
+</p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the units of measurement of the sensor, if any.</p>
+</span></p></dd></dl>
+</div>
+:ET

@@ -1,0 +1,119 @@
+I"�"<p>The <code>command_line</code> sensor platform that issues specific commands to get data. This might become our most powerful platform as it allows anyone to integrate any type of sensor into Home Assistant that can get data from the command line.</p>
+<h2>Configuration</h2>
+<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    command: SENSOR_COMMAND
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='command' href='#command'></a> command</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The action to take to get the value.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of the command sensor.</p>
+</span></p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the unit of measurement of the sensor, if any.</p>
+</span></p></dd><dt><a class='title-link' name='value_template' href='#value_template'></a> value_template</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the payload.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines number of seconds for polling interval.</p>
+</span></p><p class='default'>
+Default value: <p>60</p>
+</p></dd><dt><a class='title-link' name='command_timeout' href='#command_timeout'></a> command_timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines number of seconds for command timeout</p>
+</span></p><p class='default'>
+Default value: <p>15</p>
+</p></dd><dt><a class='title-link' name='json_attributes' href='#json_attributes'></a> json_attributes</dt><dd><p class='desc'><span class='type'>(<span class='string list'>string | list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines a list of keys to extract values from a JSON dictionary result and then set as sensor attributes.</p>
+</span></p></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>In this section you find some real-life examples of how to use this sensor.</p>
+<h3>Hard drive temperature</h3>
+<p>There are several ways to get the temperature of your hard drive. A simple solution is to use <a href="https://savannah.nongnu.org/projects/hddtemp/">hddtemp</a>.</p>
+<pre><code class="language-bash">$ hddtemp -n /dev/sda
+</code></pre>
+<p>To use this information, the entry for a command-line sensor in the <code>configuration.yaml</code> file will look like this.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    name: HD Temperature
+    command: &quot;hddtemp -n /dev/sda&quot;
+    # If errors occur, make sure configuration file is encoded as UTF-8
+    unit_of_measurement: &quot;°C&quot;
+</code></pre>
+<h3>CPU temperature</h3>
+<p>Thanks to the <a href="https://en.wikipedia.org/wiki/Procfs"><code>proc</code></a> file system, various details about a system can be retrieved. Here the CPU temperature is of interest. Add something similar to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    name: CPU Temperature
+    command: &quot;cat /sys/class/thermal/thermal_zone0/temp&quot;
+    # If errors occur, make sure configuration file is encoded as UTF-8
+    unit_of_measurement: &quot;°C&quot;
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+</code></pre>
+<h3>Monitoring failed login attempts on Home Assistant</h3>
+<p>If you’d like to know how many failed login attempts are made to Home Assistant, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    name: badlogin
+    command: &quot;grep -c 'Login attempt' /home/hass/.homeassistant/home-assistant.log&quot;
+</code></pre>
+<p>Make sure to configure the <a href="/integrations/logger">logger component</a> to monitor the <a href="/integrations/http/">http component</a> at least the <code>warning</code> level.</p>
+<pre><code class="language-yaml"># Example working logger settings that works
+logger:
+  default: critical
+  logs:
+    homeassistant.components.http: warning
+</code></pre>
+<h3>Details about the upstream Home Assistant release</h3>
+<p>You can see directly in the frontend (<strong>Developer tools</strong> -&gt; <strong>About</strong>) what release of Home Assistant you are running. The Home Assistant releases are available on the <a href="https://pypi.python.org/pypi">Python Package Index</a>. This makes it possible to get the current release.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: command_line
+    command: python3 -c &quot;import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])&quot;
+    name: HA release
+</code></pre>
+<h3>Read value out of a remote text file</h3>
+<p>If you own a devices which are storing values in text files which are accessible over HTTP then you can use the same approach as shown in the previous section. Instead of looking at the JSON response we directly grab the sensor’s value.</p>
+<pre><code class="language-yaml">sensor:
+  - platform: command_line
+    command: python3 -c &quot;import requests; print(requests.get('http://remote-host/sensor_data.txt').text)&quot;
+    name: File value
+</code></pre>
+<h3>Use an external script</h3>
+<p>The example is doing the same as the <a href="/integrations/arest#sensor">aREST sensor</a> but with an external Python script. It should give you an idea about interfacing with devices which are exposing a RESTful API.</p>
+<p>The one-line script to retrieve a value is shown below. Of course would it be possible to use this directly in the <code>configuration.yaml</code> file but need extra care about the quotation marks.</p>
+<pre><code class="language-bash">$ python3 -c &quot;import requests; print(requests.get('http://10.0.0.48/analog/2').json()['return_value'])&quot;
+</code></pre>
+<p>The script (saved as <code>arest-value.py</code>) that is used looks like the example below.</p>
+<pre><code class="language-python">#!/usr/bin/python3
+from requests import get
+
+response = get(&quot;http://10.0.0.48/analog/2&quot;)
+print(response.json()[&quot;return_value&quot;])
+</code></pre>
+<p>To use the script you need to add something like the following to your <code>configuration.yaml</code> file.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    name: Brightness
+    command: &quot;python3 /path/to/script/arest-value.py&quot;
+</code></pre>
+<h3>Usage of templating in <code>command:</code></h3>
+<p><a href="/docs/configuration/templating/">Templates</a> are supported in the <code>command:</code> configuration variable. This could be used if you want to include the state of a specific sensor as an argument to your external script.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    name: wind direction
+    command: 'sh /home/pi/.homeassistant/scripts/wind_direction.sh {{ states('sensor.wind_direction') }}'
+    unit_of_measurement: &quot;Direction&quot;
+</code></pre>
+<h3>Usage of JSON attributes in command output</h3>
+<p>The example shows how you can retrieve multiple values with one sensor (where the additional are attributes) by using <code>value_json</code> and <code>json_attributes</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+sensor:
+  - platform: command_line
+    name: JSON time
+    json_attributes:
+      - date
+      - milliseconds_since_epoch
+    command: 'python3 /home/pi/.homeassistant/scripts/datetime.py'
+    value_template: '{{ value_json.time }}'
+</code></pre>
+:ET

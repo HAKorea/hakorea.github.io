@@ -1,0 +1,186 @@
+I"�C<p>IHC Controller integration for Home Assistant allows you to connect the LK IHC controller to Home Assistant. The controller is sold under other names in different countries - “ELKO Living system” in Sweden and Norway.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#sensor">Sensor</a></li>
+<li><a href="#light">Light</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+<p>An <code>ihc</code> section must be present in the <code>configuration.yaml</code> file and contain the following options:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry for two IHC controllers
+ihc:
+  - url: 'http://192.168.1.3'
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+  - url: 'http://192.168.1.4'
+    username: YOUR_USERNAME2
+    password: YOUR_PASSWORD2
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL of the IHC Controller.</p>
+</span></p></dd><dt><a class='title-link' name='username' href='#username'></a> username</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The username for the IHC Controller.</p>
+</span></p></dd><dt><a class='title-link' name='password' href='#password'></a> password</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The password for the IHC Controller.</p>
+</span></p></dd><dt><a class='title-link' name='auto_setup' href='#auto_setup'></a> auto_setup</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Automatic setup of IHC products.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='info' href='#info'></a> info</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Shows the IHC “name”, “note” and “position” attributes of each component. This will make it easier to identify the IHC products within Home Assistant.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd></dl>
+</div>
+<h2>Auto setup of IHC products</h2>
+<p>If the auto setup is enabled, the <code>ihc</code> integration will automatically find IHC products and insert these as devices in Home Assistant. To disable this set auto_setup to false. See the individual device types for a list of IHC products to be recognized automatically.</p>
+<p>Components will get a default name that is a combination of the IHC group and IHC resource id. If you want to change the display names use the <a href="/docs/configuration/customizing-devices/">Customizing entities</a>.</p>
+<h2>Manual setup</h2>
+<p>Each device is associated with an IHC resource id. To manually setup integrations you specify resource ids from the IHC project. The IHC project is the file you edit/upload to the IHC Controller using LK IHC Visual - or similar program if your controller is not the LK brand.</p>
+<p>The project file is an XML file and you can view it with any text/XML editor. You can rename it to have the XML extension and use a browser like Chrome or Internet Explorer. The resources are the &lt;airlink_xxx&gt; or &lt;dataline_xxx&gt; elements. Shown as inputs or outputs of products in the IHC application. You can also use inputs and outputs from function blocks. These are the &lt;resource_input&gt; and &lt;resource_output&gt; elements from the project file.</p>
+<p>The IHC resource id should be specified as an integer value. In the project file the id will be specified as a hex number.</p>
+<p>If you want an easier way to get the IHC resource ids, you can download the <a href="https://www.dingus.dk/updated-ihc-alternative-service-view/">Alternative Service View application</a>. The application will show the product tree. You can expand it, select inputs and outputs and when selected you can see the resource id.</p>
+<p>See the manual of each device type for configuration options.</p>
+<h2>Binary Sensor</h2>
+<p>Before you can use the IHC Binary Sensor platform, you must setup the IHC Component.</p>
+<p>When auto setup is enabled the following products will be found in the IHC project and setup as binary sensors:</p>
+<ul>
+<li>Dataline magnet contacts</li>
+<li>Dataline Pir sensors</li>
+<li>Dataline Pir sensors with twilight detection</li>
+<li>Dataline Pir alarm sensor</li>
+<li>Dataline smoke detector</li>
+<li>Dataline gas detector</li>
+<li>Dataline light sensor</li>
+</ul>
+<h2>Manual configuration</h2>
+<p>To manually configure IHC Binary Sensors insert the “binary_sensor” section in your IHC configuration:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ihc:
+  - url: 'http://192.168.1.3'
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    info: true
+    binary_sensor:
+      - id: 12345
+        name: switch_front_door
+        inverting: false
+        note: Magnet contact
+        position: Switch in door
+        type: door
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='binary_sensor' href='#binary_sensor'></a> binary_sensor</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of binary sensors to setup manually.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IHC resource id.</p>
+</span></p></dd><dt><a class='title-link' name='inverting' href='#inverting'></a> inverting</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If True the sensor will be inverted.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The binary sensor type. See <a href="/integrations/binary_sensor/">Home Assistant binary sensor</a> for available types.</p>
+</span></p></dd><dt><a class='title-link' name='note' href='#note'></a> note</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Descriptive note</p>
+</span></p></dd><dt><a class='title-link' name='position' href='#position'></a> position</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Where is it placed</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>The resource id should be an id of a boolean IHC resource. For more information about IHC resource ids see <a href="#manual-setup">Manual Setup</a>.</p>
+<h2>Sensor</h2>
+<p>Before you can use the IHC Sensor platform, you must setup the IHC Component.</p>
+<p>When auto setup is enabled the following products will be found in the IHC project and setup as sensors:</p>
+<ul>
+<li>Dataline temperature sensor - Will insert 2 temperature sensors</li>
+<li>Dataline Humidity - Will insert 1 humidity and 2 temperature sensors (calculated dewpoint)</li>
+<li>Dataline Lux - will insert 1 light and 1 temperature sensor</li>
+</ul>
+<p>To manually configure IHC sensors insert the “sensor” section in your IHC configuration:</p>
+<pre><code class="language-yaml">ihc:
+  - url: 'http://192.168.1.3'
+    username: YOUR_USERNAME2
+    password: YOUR_PASSWORD2
+    info: true
+    sensor:
+      - id: 12345
+        name: Temperatur_living_room
+        unit_of_measurement: '°C'
+        note: Floor and wall temp.
+        position: On wall between windows
+      - id: 23456
+        ...
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='sensor' href='#sensor'></a> sensor</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of sensors to setup manually.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IHC resource id.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the sensor.</p>
+</span></p></dd><dt><a class='title-link' name='unit_of_measurement' href='#unit_of_measurement'></a> unit_of_measurement</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Defines the unit of measurement of the sensor, if any.</p>
+</span></p></dd><dt><a class='title-link' name='note' href='#note'></a> note</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Descriptive note.</p>
+</span></p></dd><dt><a class='title-link' name='position' href='#position'></a> position</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Where it is placed.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>The resource id should be a IHC float resource. For more information about IHC resource ids see <a href="#manual-setup">Manual Setup</a>.</p>
+<h2>Light</h2>
+<p>Before you can use the IHC Light platform, you must setup the IHC Component.</p>
+<p>When auto setup is enabled the following products will be found in the IHC project and setup as light devices:</p>
+<ul>
+<li>Wireless lamp outlet dimmer</li>
+<li>Wireless dimmer</li>
+<li>Wireless combi dimmer 4 buttons</li>
+<li>Wireless lamp outlet relay</li>
+<li>Wireless combi relay 4 buttons</li>
+<li>Wireless mobile dimmer</li>
+<li>Dataline lamp outlet</li>
+</ul>
+<p>To manually configure IHC lights insert the “light” section in your IHC configuration:</p>
+<pre><code class="language-yaml">ihc:
+  - url: 'http://192.168.1.3'
+    username: YOUR_USERNAME2
+    password: YOUR_PASSWORD2
+    info: true
+    light:
+      - id: 12345
+        name: tablelight
+      - id: 23432
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='light' href='#light'></a> light</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of lights to setup manually</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='dimmable' href='#dimmable'></a> dimmable</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to True if the IHC resource is a light level.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IHC resource id.</p>
+</span></p></dd><dt><a class='title-link' name='on_id' href='#on_id'></a> on_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Optional IHC resource id that will be pulsed to turn ON this light.</p>
+</span></p></dd><dt><a class='title-link' name='off_id' href='#off_id'></a> off_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Optional IHC resource id that will be pulsed to turn OFF this light.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the component</p>
+</span></p></dd><dt><a class='title-link' name='note' href='#note'></a> note</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Descriptive note.</p>
+</span></p></dd><dt><a class='title-link' name='position' href='#position'></a> position</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Where it is placed.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>In the example above 12345 is ihc resource id and “tablelight” is the name. The IHC resource id can be a light level for dimmers or a boolean output of a relay. For more information about IHC resource ids see <a href="#manual-setup">Manual Setup</a>.</p>
+<h2>Switch</h2>
+<p>Before you can use the IHC Switch platform, you must setup the IHC Component.</p>
+<p>When auto setup is enabled the following products will be found in the ihc project and setup as switch devices:</p>
+<ul>
+<li>Wireless plug outlet</li>
+<li>Wireless relay</li>
+<li>Mobile wireless relay</li>
+<li>Dataline plug outlet</li>
+</ul>
+<p>To manually configure IHC switches insert the “switch” section in yourIHC configuration:</p>
+<pre><code class="language-yaml">ihc:
+  - url: 'http://192.168.1.3'
+    username: YOUR_USERNAME
+    password: YOUR_PASSWORD
+    info: true
+    switch:
+      - id: 12345
+      - id: 12346
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='switch' href='#switch'></a> switch</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of switches to setup manually</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='id' href='#id'></a> id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IHC resource id.</p>
+</span></p></dd><dt><a class='title-link' name='on_id' href='#on_id'></a> on_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Optional IHC resource id that will be pulsed to turn ON this switch.</p>
+</span></p></dd><dt><a class='title-link' name='off_id' href='#off_id'></a> off_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Optional IHC resource id that will be pulsed to turn OFF this switch.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of the component</p>
+</span></p></dd><dt><a class='title-link' name='note' href='#note'></a> note</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Descriptive note.</p>
+</span></p></dd><dt><a class='title-link' name='position' href='#position'></a> position</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Where it is placed.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<p>The resource id should be a boolean resource (On/Off). For more information about IHC resource ids see <a href="#manual-setup">Manual Setup</a>.</p>
+:ET

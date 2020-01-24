@@ -1,0 +1,96 @@
+I"<p>The <code>ness_alarm</code> integration will allow Home Assistant users who own a Ness D8x/D16x alarm system to leverage their alarm system and its sensors to provide Home Assistant with information about their homes. Connectivity between Home Assistant and the alarm is accomplished through a IP232 module that must be connected to the alarm.</p>
+<p>There is currently support for the following device types within Home Assistant:</p>
+<ul>
+<li>Binary Sensor: Reports on zone statuses</li>
+<li>Alarm Control Panel: Reports on alarm status, and can be used to arm/disarm the system</li>
+</ul>
+<p>The module communicates via the <a href="http://www.nesscorporation.com/Software/Ness_D8-D16_ASCII_protocol.pdf">Ness D8x/D16x ASCII protocol</a>.</p>
+<h2>Configuration</h2>
+<p>A <code>ness_alarm</code> section must be present in the <code>configuration.yaml</code> file and contain the following options as required:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+ness_alarm:
+  host: alarm.local
+  port: 2401
+  zones:
+    - name: Garage
+      id: 1
+    - name: Storeroom
+      id: 2
+    - name: Kitchen
+      id: 3
+    - name: Front Entrance
+      id: 4
+    - name: Front Door
+      id: 5
+      type: door
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The hostname of the IP232 module on your home network.</p>
+</span></p></dd><dt><a class='title-link' name='port' href='#port'></a> port</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>The port on which the IP232 module listens for clients.</p>
+</span></p></dd><dt><a class='title-link' name='scan_interval' href='#scan_interval'></a> scan_interval</dt><dd><p class='desc'><span class='type'>(<span class='time'>time</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Time interval between updates. Supported formats: <code>scan_interval: 'HH:MM:SS'</code>, <code>scan_interval: 'HH:MM'</code> and Time period dictionary (see example below).</p>
+</span></p><p class='default'>
+Default value: <p>00:01:00</p>
+</p></dd><dt><a class='title-link' name='infer_arming_state' href='#infer_arming_state'></a> infer_arming_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Infer the disarmed arming state only via system status events. This works around a bug with some panels (<code>&lt;v5.8</code>) which emit <code>update.status = []</code> when they are armed.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='zones' href='#zones'></a> zones</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Optional)</span><span class='description'><p>List of zones to add</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='zone_id' href='#zone_id'></a> zone_id</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Required)</span><span class='description'><p>ID of the zone on the alarm system (i.e Zone 1 -&gt; Zone 16).</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Name of the zone.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The zone type. Can be any <a href="/integrations/binary_sensor/#device-class">binary_sensor device class</a>.</p>
+</span></p><p class='default'>
+Default value: <p>motion</p>
+</p></dd></dl></dd></dl>
+</div>
+<h4>Time period dictionary example</h4>
+<pre><code class="language-yaml">scan_interval:
+  # At least one of these must be specified:
+  days: 0
+  hours: 0
+  minutes: 0
+  seconds: 10
+  milliseconds: 0
+</code></pre>
+<h2>Services</h2>
+<h3>Service <code>aux</code></h3>
+<p>Trigger an aux output.  This requires PCB version 7.8 or higher.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>output_id</code></td>
+<td>No</td>
+<td>The aux output you wish to change.  A number from 1-4.</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>Yes</td>
+<td>The On/Off State, represented as true/false. Default is true.  If P14xE 8E is enabled then a value of true will pulse output x for the time specified in P14(x+4)E.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>panic</code></h3>
+<p>Trigger a panic</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td>No</td>
+<td>The user code to use to trigger the panic.</td>
+</tr>
+</tbody>
+</table>
+:ET

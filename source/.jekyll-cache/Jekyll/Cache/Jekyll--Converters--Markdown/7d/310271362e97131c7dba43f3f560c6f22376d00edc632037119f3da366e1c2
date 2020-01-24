@@ -1,0 +1,95 @@
+I"±<p>The <code>xiaomi miio</code> remote platform allows you to send IR commands from your Xiaomi IR Remote (ChuangmiIr).</p>
+<h2>Setup</h2>
+<p>Please follow the instructions on <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> to get the API token to use in the <code>configuration.yaml</code> file.</p>
+<h2>Configuring the Platform</h2>
+<p>To add a Xiaomi IR Remote to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<pre><code class="language-yaml">remote:
+  - platform: xiaomi_miio
+    host: 192.168.42.42
+    token: YOUR_TOKEN
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='host' href='#host'></a> host</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The IP of your remote.</p>
+</span></p></dd><dt><a class='title-link' name='token' href='#token'></a> token</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The API token of your remote.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The name of your remote.</p>
+</span></p></dd><dt><a class='title-link' name='slot' href='#slot'></a> slot</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The slot used to save learned command.</p>
+</span></p><p class='default'>
+Default value: <p>1</p>
+</p></dd><dt><a class='title-link' name='timeout' href='#timeout'></a> timeout</dt><dd><p class='desc'><span class='type'>(<span class='integer'>integer</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Timeout for learning a new command.</p>
+</span></p><p class='default'>
+Default value: <p>30</p>
+</p></dd><dt><a class='title-link' name='commands' href='#commands'></a> commands</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A list of commands</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='command' href='#command'></a> command</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of commands as <a href="/integrations/remote.xiaomi_miio/#raw">raw (learned command)</a> or <a href="/integrations/remote.xiaomi_miio/#pronto-hex-code">pronto hex code</a>.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h2>Full Configuration</h2>
+<pre><code class="language-yaml">remote:
+  - platform: xiaomi_miio
+    name: &quot;bathroom remote&quot;
+    host: 192.168.42.42
+    token: YOUR_TOKEN
+    slot: 1
+    timeout: 30
+    commands:
+      activate_towel_heater:
+        command:
+          - raw:base64:[optional_frequency]
+      read_bad_poem:
+        command:
+          - raw:base64:[optional_frequency]
+          - pronto:pronto_hex:[optional_repeat]
+</code></pre>
+<h2>Use named commands to create UI buttons</h2>
+<pre><code class="language-yaml">script:
+  towel_heater:
+    sequence:
+      - service: remote.send_command
+        entity_id: 'remote.bathroom_remote'
+        data:
+          command:
+            - 'activate_towel_heater'
+  please_cover_your_ears:
+    sequence:
+      - service: remote.send_command
+        entity_id: 'remote.bathroom_remote'
+        data:
+          command:
+            - 'read_bad_poem'
+</code></pre>
+<h2>Command Types</h2>
+<p>The Xiaomi IR Remote Platform currently supports two different formats for IR codes.</p>
+<h3>Raw</h3>
+<p>A raw command is a command learned from <a href="/integrations/remote.xiaomi_miio/#xiaomi_miioremote_learn_command"><code>xiaomi_miio.remote_learn_command</code></a>.</p>
+<p>A raw command is defined as in the following example:</p>
+<pre><code class="language-bash">raw:Z6UFANEAAAAjAQAAAwkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAE=
+</code></pre>
+<p>with an optional last parameter of frequency:</p>
+<pre><code class="language-bash">raw:Z6UFANEAAAAjAQAAAwkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAE=:38400
+</code></pre>
+<h3>Pronto Hex Code</h3>
+<p>A pronto hex code is a hex code often supplied by the device manufacturer.</p>
+<p>A pronto hex code is defined as in the following example:</p>
+<pre><code class="language-bash">pronto:0000 006C 0022 0002 015B 00AD 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0623 015B 0057 0016 0E6E
+</code></pre>
+<p>with an optional last parameter of repeats (required by some devices):</p>
+<pre><code class="language-bash">pronto:0000 006C 0022 0002 015B 00AD 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0623 015B 0057 0016 0E6E:2
+</code></pre>
+<p>Note there are at least 4 versions of the Xiaomi IR Remote (ChuangmiIr) which can be recognized by their default hostname:</p>
+<ul>
+<li><code>chuangmi.ir.v2</code></li>
+<li><code>chuangmi.remote.h102a03</code></li>
+<li><code>chuangmi.remote.v2</code></li>
+<li><code>chuangmi.remote.h102c01</code></li>
+</ul>
+<p>For now, pronto hex codes only work on the first version (<code>chuangmi.ir.v2</code>).</p>
+<h2>Platform Services</h2>
+<p>The Xiaomi IR Remote Platform registers two services.</p>
+<h3><code>remote.send_command</code></h3>
+<p>Allows sending either named commands using an identifier or sending commands as one of the two types defined in <a href="/integrations/remote.xiaomi_miio/#command-types">Command Types</a>.</p>
+<h3><code>xiaomi_miio.remote_learn_command</code></h3>
+<p>Used to learn new commands.</p>
+<p>Use the entity_id of the Xiaomi IR Remote to start a learning process.</p>
+<p><code>slot</code> and <code>timeout</code> can be specified, but multiple commands learned to the same slot can still be sent using <a href="/integrations/remote.xiaomi_miio/#remotesend_command"><code>remote.send_command</code></a> even if they are overwritten.</p>
+<p>After learning the command the base64 string can be found as a notification in Overview, the string can be copied by left clicking on the string and choose the copy option.</p>
+:ET

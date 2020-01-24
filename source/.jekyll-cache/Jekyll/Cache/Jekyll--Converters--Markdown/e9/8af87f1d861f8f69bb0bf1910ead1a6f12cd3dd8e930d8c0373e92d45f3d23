@@ -1,0 +1,117 @@
+I"�<p>The <code>iqvia</code> sensor platform collects and displays allergy, asthma and disease
+information (based on a U.S. ZIP code) from <a href="https://www.iqvia.com/">IQVIA</a>.
+Data measured includes:</p>
+<ul>
+<li>Indicies for allergies, asthma and cold/flu indices</li>
+<li>Trends</li>
+<li>Current outlook</li>
+<li>more!</li>
+</ul>
+<h2>Configuring the Platform</h2>
+<p>To integrate <code>iqvia</code> into Home Assistant, add the following section to your
+<code>configuration.yaml</code> file (adjusting the <code>monitored_conditions</code> list to your
+liking):</p>
+<pre><code class="language-yaml">iqvia:
+  zip_code: &quot;00544&quot;
+  monitored_conditions:
+    - allergy_average_forecasted
+    - allergy_index_today
+    - allergy_index_tomorrow
+    - asthma_average_forecasted
+    - asthma_index_today
+    - asthma_index_tomorrow
+    - disease_average_forecasted
+    - disease_index_today
+</code></pre>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='zip_code' href='#zip_code'></a> zip_code</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The U.S. ZIP code to gather data for (as a quoted string).</p>
+</span></p></dd><dt><a class='title-link' name='monitored_conditions' href='#monitored_conditions'></a> monitored_conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>The metric types to monitor.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='allergy_average_forecasted' href='#allergy_average_forecasted'></a> allergy_average_forecasted</dt><dd><p class='desc'><span class='description'><p>The average forecasted allergy index over the next 5 days.</p>
+</span></p></dd><dt><a class='title-link' name='allergy_index_today' href='#allergy_index_today'></a> allergy_index_today</dt><dd><p class='desc'><span class='description'><p>The allergy index for today.</p>
+</span></p></dd><dt><a class='title-link' name='allergy_index_tomorrow' href='#allergy_index_tomorrow'></a> allergy_index_tomorrow</dt><dd><p class='desc'><span class='description'><p>The allergy index for tomorrow.</p>
+</span></p></dd><dt><a class='title-link' name='asthma_average_forecasted' href='#asthma_average_forecasted'></a> asthma_average_forecasted</dt><dd><p class='desc'><span class='description'><p>The average forecasted asthma index over the next 5 days.</p>
+</span></p></dd><dt><a class='title-link' name='asthma_index_today' href='#asthma_index_today'></a> asthma_index_today</dt><dd><p class='desc'><span class='description'><p>The asthma index for today.</p>
+</span></p></dd><dt><a class='title-link' name='asthma_index_tomorrow' href='#asthma_index_tomorrow'></a> asthma_index_tomorrow</dt><dd><p class='desc'><span class='description'><p>The asthma index for tomorrow.</p>
+</span></p></dd><dt><a class='title-link' name='disease_average_forecasted' href='#disease_average_forecasted'></a> disease_average_forecasted</dt><dd><p class='desc'><span class='description'><p>The average forecasted cold/flu index over the next 5 days.</p>
+</span></p></dd><dt><a class='title-link' name='disease_index_today' href='#disease_index_today'></a> disease_index_today</dt><dd><p class='desc'><span class='description'><p>The cold/flu index for today.</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<div class='note warning'>
+It is important to ensure the ZIP code is quoted if it starts with a 0. Unquoted
+ZIP codes that start with 0 will cause errors.
+</div>
+<h2>Understanding the Indices</h2>
+<p>Any index-related sensor will have a value between 0.0 and 12.0. The values
+map to the following human-friendly ratings:</p>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Rating</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0 - 2.4</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>2.5 - 4.8</td>
+<td>Low/Medium</td>
+</tr>
+<tr>
+<td>4.9 - 7.2</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>7.3 - 9.6</td>
+<td>Medium/High</td>
+</tr>
+<tr>
+<td>9.7 - 12.0</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>Understanding Asthma Allergens</h2>
+<p>Several asthma-related sensors carry information regarding the top three
+“asthma allergens” (i.e., irritants that may exacerbate asthma symptoms).
+Example values include:</p>
+<table>
+<thead>
+<tr>
+<th>Pollutant</th>
+<th>Symbol</th>
+<th>More Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particulate (&lt;= 2.5 μm)</td>
+<td>PM2.5</td>
+<td><a href="https://www.epa.gov/pm-pollution">EPA: Particulate Matter (PM) Pollution</a></td>
+</tr>
+<tr>
+<td>Particulate (&lt;= 10 μm)</td>
+<td>PM10</td>
+<td><a href="https://www.epa.gov/pm-pollution">EPA: Particulate Matter (PM) Pollution</a></td>
+</tr>
+<tr>
+<td>Ozone</td>
+<td>O</td>
+<td><a href="https://www.epa.gov/ozone-pollution">EPA: Ozone Pollution</a></td>
+</tr>
+<tr>
+<td>Sulpher Dioxide</td>
+<td>SO2</td>
+<td><a href="https://www.epa.gov/so2-pollution">EPA: Sulfur Dioxide (SO2) Pollution</a></td>
+</tr>
+<tr>
+<td>Carbon Monoxide</td>
+<td>CO</td>
+<td><a href="https://www.epa.gov/co-pollution">EPA: Carbon Monoxide (CO) Pollution in Outdoor Air</a></td>
+</tr>
+</tbody>
+</table>
+:ET
