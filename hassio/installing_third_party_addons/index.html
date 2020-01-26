@@ -6,15 +6,15 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Installing third-party add-ons - 홈어시스턴트</title>
+    <title>서드파티 애드온 설치 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to get started using third-party add-ons.">
     
     <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://hakorea.github.io/hassio/installing_third_party_addons/">
 
-    <meta property="fb:app_id" content="338291289691179">
-    <meta property="og:title" content="Installing third-party add-ons">
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="서드파티 애드온 설치">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/hassio/installing_third_party_addons/">
     <meta property="og:type" content="website">
@@ -22,9 +22,9 @@
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@home_assistant">
+    <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Installing third-party add-ons">
+    <meta name="twitter:title" content="서드파티 애드온 설치">
     <meta name="twitter:description" content="Instructions on how to get started using third-party add-ons.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -57,6 +57,7 @@
             <li><a href="/integrations/">통합구성요소</a></li>
             <li><a href="/docs/">문서</a></li>
             <li><a href="/cookbook/">예제</a></li>
+            <li><a href='#' class='show-search'><i class="icon-search"></i></a></li>
             <li>KOREAN(not official)</li>
         </ul>
       </nav>
@@ -96,29 +97,29 @@
   
   <header>
     <h1 class="title indent">
-      Installing third-party add-ons
+      서드파티 애드온 설치
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Hass.io allows anyone to create add-on repositories to share their add-ons for Hass.io easily. To try this locally, you can use our example add-on repository at</p>
+  <p>Hass.io는 해쇼용 애드온들을 공유하기 위한 저장소를 제공할 수 있습니다. 이것을 사용하기 위해서 예제로 준비한 애드온 저장소를 추가해볼 수 있습니다.</p>
 <pre><code class="language-text">https://github.com/home-assistant/hassio-addons-example
 </code></pre>
 <div class="note warning">
-Home Assistant cannot guarantee the quality or security of third-party add-ons. Use at your own risk.
+홈어시스턴트는 서드파티 애드온에 대해 보안 사항을 보증하지 않습니다. 서드파티 애드온은 본인이 위험을 감수하고 사용해야 합니다.
 </div>
 <p class="img">
 <img src="/images/hassio/screenshots/main_panel_addon_store.png">
-From the Hass.io main panel open the add-on store.
+Hass.io 메인 패널에서 애드온 스토어를 선택합니다.
 </p>
 <p class="img">
 <img src="/images/hassio/screenshots/adding_repositories.png">
-Add the URL of the repository and then press "Add". A new card for the repository will appear.
+저장소의 URL을 입력하고 "Add" 버튼을 누르면 저장소에서 배포중인 애드온들이 신규 카드로 나타납니다.
 </p>
 <h3>
-<a class="title-link" name="help-repository-is-not-showing-up" href="#help-repository-is-not-showing-up"></a> Help: Repository is not showing up</h3>
-<p>If you have added a repository, but it’s not showing up, it means that the repository contains invalid configuration. Go to the Hass.io panel and then the System tab to find the System log. It should tell you what went wrong. Report this information to the repository author.</p>
+<a class="title-link" name="---" href="#---"></a> 도움말: 저장소가 보이지 않아요</h3>
+<p>저장소를 추가해도 화면에 아무것도 보이지 않는 경우가 있습니다. 이것은 저장소에서 설정 파일이 잘못된 경우입니다. Hass.io 패널에서 시스템(System) 탭을 선택하여 시스템 로그를 살펴봅니다. 로그를 통해 무엇이 잘못됐는지 힌트를 얻을 수 있습니다. 오류가 있다면 저장소 관리자에게 알려주세요.</p>
 
 
 </article>
@@ -146,16 +147,16 @@ Add the URL of the repository and then press "Add". A new card for the repositor
     </ul>
     <ul class='divided sidebar-menu'>
       <li>
-        Advanced
+        고급 설정
         <ul>
-          <li><a  href='/hassio/commandline/'>명령어모드 </a></li>
+          <li><a  href='/hassio/commandline/'>명령어 모드 </a></li>
           <li><a  href='/hassio/zwave/'>Z-Wave </a></li>
-          <li><a  href='/hassio/enable_i2c/'>Enable I2C </a></li>
+          <li><a  href='/hassio/enable_i2c/'>I2C 사용 </a></li>
         </ul>
       </li>
     </ul>
     <ul class='divided sidebar-menu'>
-      <li><a href='/developers/hassio/addon_development/'>애드온을 제작해 보실 건가요?</a></li>
+      <li><a  href='/hassio/developing_addon/'>애드온을 제작하려면? </a></li>
     </ul>
   </div>
 </section>
@@ -177,27 +178,17 @@ Add the URL of the repository and then press "Add". A new card for the repositor
           <div class="title">
             <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
           </div>
-          <div class="icons">
-            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
-            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
-            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
-          </div>
         </div>
 
         <div class='grid__item one-third lap-one-half palm-one-whole'>
           <ul>
             <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
-            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
-            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
-            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
-            <li><a href='/security/'>Security Vulnerabilities</a></li>
-            <li><a href='/privacy/'>Privacy</a></li>
-            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
           </ul>
         </div>
 
         <div class='grid__item one-third lap-one-half palm-one-whole'>
-          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
           <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
         </div>
       </div>
@@ -208,7 +199,7 @@ Add the URL of the repository and then press "Add". A new card for the repositor
     </footer>
 
     <script>
-var _gaq=[['_setAccount','UA-57927901-1'],['_trackPageview']];
+var _gaq=[['_setAccount',''],['_trackPageview']];
 (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 s.parentNode.insertBefore(g,s)}(document,'script'));

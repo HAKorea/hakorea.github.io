@@ -6,15 +6,15 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hass.io via the Command line - 홈어시스턴트</title>
+    <title>Hass.io 명령어 모드 사용 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Command line utility to control Hass.io.">
     
     <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://hakorea.github.io/hassio/commandline/">
 
-    <meta property="fb:app_id" content="338291289691179">
-    <meta property="og:title" content="Hass.io via the Command line">
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Hass.io 명령어 모드 사용">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/hassio/commandline/">
     <meta property="og:type" content="website">
@@ -22,9 +22,9 @@
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@home_assistant">
+    <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Hass.io via the Command line">
+    <meta name="twitter:title" content="Hass.io 명령어 모드 사용">
     <meta name="twitter:description" content="Command line utility to control Hass.io.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -57,6 +57,7 @@
             <li><a href="/integrations/">통합구성요소</a></li>
             <li><a href="/docs/">문서</a></li>
             <li><a href="/cookbook/">예제</a></li>
+            <li><a href='#' class='show-search'><i class="icon-search"></i></a></li>
             <li>KOREAN(not official)</li>
         </ul>
       </nav>
@@ -96,7 +97,7 @@
   
   <header>
     <h1 class="title indent">
-      Hass.io via the Command line
+      Hass.io 명령어 모드 사용
     </h1>
   </header>
   <hr class="divider">
@@ -104,9 +105,9 @@
 
   <p class="img">
 <img src="/images/hassio/screenshots/ssh-upgrade.png">
-Hass.io upgrade process from the SSH command line
+SSH로 접속하여 명령어로 Hass.io 업그레이드 실행
 </p>
-<p>On the SSH command line, you can use the <code>hassio</code> command to retrieve logs, check the details of connected hardware, and more.</p>
+<p>SSH로 접속하면 <code>hassio</code> 명령어로 로그를 보거나 사용중인 하드웨어 정보 등을 살펴볼 수 있습니다.</p>
 <h2>
 <a class="title-link" name="home-assistant" href="#home-assistant"></a> Home Assistant</h2>
 <pre><code class="language-bash">hassio homeassistant check
@@ -139,12 +140,12 @@ hassio host update
 hassio hardware audio
 </code></pre>
 <h2>
-<a class="title-link" name="usage-examples" href="#usage-examples"></a> Usage examples</h2>
-<p>To update Home Assistant to a specific version, use the command:</p>
+<a class="title-link" name="-" href="#-"></a> 사용 예제</h2>
+<p>홈어시스턴트를 특정 버전으로 설치하고 싶다면 다음 명령어를 실행하세요:</p>
 <pre><code class="language-bash">hassio homeassistant update --version=x.y.z
 </code></pre>
-<p>Replace x.y.z with the desired version like <code>--version=0.74.2</code></p>
-<p>You can get a better description of the CLI capabilities by typing <code>hassio help</code>:</p>
+<p>x.y.z 를 버전 숫자로 바꾸세요 <code>--version=0.74.2</code></p>
+<p>명령어의 상세한 옵션을 알고 싶다면 <code>hassio help</code>라고 쳐보세요:</p>
 <pre><code class="language-bash">Usage:
   hassio [command]
 
@@ -173,8 +174,8 @@ Use "hassio [command] --help" for more information about a command.
 
 </code></pre>
 <h2>
-<a class="title-link" name="console-access" href="#console-access"></a> Console access</h2>
-<p>You can also access HassOS via a directly connected keyboard and monitor, the console. To log in to the physical console the username is <code>root</code>, with no password.</p>
+<a class="title-link" name="-" href="#-"></a> 콘솔 연결</h2>
+<p>HassOS를 설치한 라즈베리파이에 키보드와 모니터를 연결하면 콘솔로 직접 접근이 가능합니다. 로그인 과정에서 username을 <code>root</code>로 비밀번호는 입력하지 않습니다.</p>
 
 
 </article>
@@ -202,16 +203,16 @@ Use "hassio [command] --help" for more information about a command.
     </ul>
     <ul class='divided sidebar-menu'>
       <li>
-        Advanced
+        고급 설정
         <ul>
-          <li><a class='active' href='/hassio/commandline/'>명령어모드 </a></li>
+          <li><a class='active' href='/hassio/commandline/'>명령어 모드 </a></li>
           <li><a  href='/hassio/zwave/'>Z-Wave </a></li>
-          <li><a  href='/hassio/enable_i2c/'>Enable I2C </a></li>
+          <li><a  href='/hassio/enable_i2c/'>I2C 사용 </a></li>
         </ul>
       </li>
     </ul>
     <ul class='divided sidebar-menu'>
-      <li><a href='/developers/hassio/addon_development/'>애드온을 제작해 보실 건가요?</a></li>
+      <li><a  href='/hassio/developing_addon/'>애드온을 제작하려면? </a></li>
     </ul>
   </div>
 </section>
@@ -233,27 +234,17 @@ Use "hassio [command] --help" for more information about a command.
           <div class="title">
             <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
           </div>
-          <div class="icons">
-            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
-            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
-            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
-          </div>
         </div>
 
         <div class='grid__item one-third lap-one-half palm-one-whole'>
           <ul>
             <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
-            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
-            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
-            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
-            <li><a href='/security/'>Security Vulnerabilities</a></li>
-            <li><a href='/privacy/'>Privacy</a></li>
-            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
           </ul>
         </div>
 
         <div class='grid__item one-third lap-one-half palm-one-whole'>
-          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
           <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
         </div>
       </div>
@@ -264,7 +255,7 @@ Use "hassio [command] --help" for more information about a command.
     </footer>
 
     <script>
-var _gaq=[['_setAccount','UA-57927901-1'],['_trackPageview']];
+var _gaq=[['_setAccount',''],['_trackPageview']];
 (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 s.parentNode.insertBefore(g,s)}(document,'script'));

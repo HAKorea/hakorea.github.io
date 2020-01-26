@@ -6,15 +6,15 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enable HassOS i2c - 홈어시스턴트</title>
+    <title>HassOS에서 I2C 사용 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to enable I2C on a Raspberry PI for Hass.io.">
     
     <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://hakorea.github.io/hassio/enable_i2c/">
 
-    <meta property="fb:app_id" content="338291289691179">
-    <meta property="og:title" content="Enable HassOS i2c">
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="HassOS에서 I2C 사용">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/hassio/enable_i2c/">
     <meta property="og:type" content="website">
@@ -22,9 +22,9 @@
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@home_assistant">
+    <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Enable HassOS i2c">
+    <meta name="twitter:title" content="HassOS에서 I2C 사용">
     <meta name="twitter:description" content="Instructions on how to enable I2C on a Raspberry PI for Hass.io.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -57,6 +57,7 @@
             <li><a href="/integrations/">통합구성요소</a></li>
             <li><a href="/docs/">문서</a></li>
             <li><a href="/cookbook/">예제</a></li>
+            <li><a href='#' class='show-search'><i class="icon-search"></i></a></li>
             <li>KOREAN(not official)</li>
         </ul>
       </nav>
@@ -96,50 +97,50 @@
   
   <header>
     <h1 class="title indent">
-      Enable HassOS i2c
+      HassOS에서 I2C 사용
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Hass.io is a managed environment, which means you can’t use existing methods to enable the I2C bus on a Raspberry Pi.</p>
-<p>If you’re attempting to add an external sensor, you will have to <a href="https://github.com/home-assistant/hassos/blob/dev/Documentation/boards/raspberrypi.md#i2c" rel="external nofollow">enable the I2C interface in the Hass.io configuration</a> using a USB stick.</p>
+  <p>Hass.io는 제한된 환경으로 일반적인 방법으로 라즈베리파이의 I2C bus를 사용할 수 없습니다.</p>
+<p>만일 직접 라즈베리파이에 외부 센서를 연결하려면 USB 메모리 스틱을 사용하여 <a href="https://github.com/home-assistant/hassos/blob/dev/Documentation/boards/raspberrypi.md#i2c" rel="external nofollow">enable the I2C interface in the Hass.io configuration</a> 를 실행해야 합니다.</p>
 <h2>
-<a class="title-link" name="step-by-step-instructions" href="#step-by-step-instructions"></a> Step by step instructions</h2>
-<p>You will need:</p>
+<a class="title-link" name="--" href="#--"></a> 단계별 적용 방법</h2>
+<p>필요한 것:</p>
 <ul>
 <li>USB drive</li>
-<li>A way to add files to the USB drive</li>
-<li>A way to connect the drive to your Raspberry Pi</li>
+<li>USB drive에 파일을 복사할 방법</li>
+<li>Raspberry Pi에 USB 드라이브를 연결할 방법</li>
 </ul>
 <h3>
-<a class="title-link" name="step-1---prepare-the-usb-drive" href="#step-1---prepare-the-usb-drive"></a> Step 1 - Prepare the USB drive</h3>
-<p>Connect the USB drive to a device capable of adding and editing files to the USB drive.</p>
-<p>Format a USB stick with FAT32/EXT4/NTFS and name the drive <code>CONFIG</code> (uppercase).</p>
+<a class="title-link" name="1---usb--" href="#1---usb--"></a> 1단계 - USB 드라이브 준비</h3>
+<p>USB 드라이브 안에 파일을 편집 가능한 컴퓨터에 연결합니다.</p>
+<p>USB 드라이브를 FAT32/EXT4/NTFS 형식으로 포맷합니다. 그리고 드라이브의 이름을 <code>CONFIG</code>(모두 대문자)으로 만듭니다.</p>
 <h3>
-<a class="title-link" name="step-2---add-files-to-enable-i2c" href="#step-2---add-files-to-enable-i2c"></a> Step 2 - Add files to enable I2C</h3>
+<a class="title-link" name="2---i2c---" href="#2---i2c---"></a> 2단계 - I2C를 적용할 파일 생성</h3>
 <ul>
-<li>In the root of the USB drive add a folder called <code>/modules</code>.</li>
-<li>Inside that folder add a text file called <code>rpi-i2c.conf</code> with the following contents:
+<li>USB 드라이브의 루트에 <code>/modules</code>이라는 이름의 폴더를 만듭니다.</li>
+<li>해당 폴더 안에 <code>rpi-i2c.conf</code> 이름으로 텍스트 파일을 만들고 아래 내용을 입력합니다:
 <pre><code class="language-txt">i2c-bcm2708
 i2c-dev
 </code></pre>
 </li>
-<li>In the root of the USB drive add a file called <code>config.txt</code> with the following contents:
-<pre><code class="language-txt">dtparam=i2c1=on 
+<li>USB 드라이브 루트에 <code>config.txt</code> 이름으로 텍스트 파일을 만들고 아래 내용을 입력합니다:
+<pre><code class="language-txt">dtparam=i2c1=on
 dtparam=i2c_arm=on
 </code></pre>
 </li>
 </ul>
 <h3>
-<a class="title-link" name="step-3---load-the-new-usb-config" href="#step-3---load-the-new-usb-config"></a> Step 3 - Load the new USB config</h3>
+<a class="title-link" name="3---usb--" href="#3---usb--"></a> 3단계 - USB 드라이브로 설치</h3>
 <ul>
-<li>Insert the USB drive into your Raspberry PI.</li>
-<li>Now go to your Home Assistant web interface, in the sidebar click <strong>Hass.io</strong> &gt; <strong>System</strong>.</li>
-<li>Now click <code>Import from USB</code>.</li>
-<li>This will restart your Hass.io instance, and load the new USB configuration.</li>
+<li>라즈베리파이에 USB 드라이브를 꼽습니다.</li>
+<li>홈어시스턴트 웹페이지로 가서 <strong>Hass.io</strong> &gt; <strong>System</strong> 을 클릭합니다.</li>
+<li>이제 <code>Import from USB</code>를 클릭합니다.</li>
+<li>Hass.io를 재시작하면,새로운 USB 설정을 반영합니다.</li>
 </ul>
-<p>When the service has restarted, you will have a working I2C interface.</p>
+<p>서버를 재시작 하면 I2C interface를 사용할 수 있습니다.</p>
 
 
 </article>
@@ -167,16 +168,16 @@ dtparam=i2c_arm=on
     </ul>
     <ul class='divided sidebar-menu'>
       <li>
-        Advanced
+        고급 설정
         <ul>
-          <li><a  href='/hassio/commandline/'>명령어모드 </a></li>
+          <li><a  href='/hassio/commandline/'>명령어 모드 </a></li>
           <li><a  href='/hassio/zwave/'>Z-Wave </a></li>
-          <li><a class='active' href='/hassio/enable_i2c/'>Enable I2C </a></li>
+          <li><a class='active' href='/hassio/enable_i2c/'>I2C 사용 </a></li>
         </ul>
       </li>
     </ul>
     <ul class='divided sidebar-menu'>
-      <li><a href='/developers/hassio/addon_development/'>애드온을 제작해 보실 건가요?</a></li>
+      <li><a  href='/hassio/developing_addon/'>애드온을 제작하려면? </a></li>
     </ul>
   </div>
 </section>
@@ -198,27 +199,17 @@ dtparam=i2c_arm=on
           <div class="title">
             <img width="40" src="/images/favicon-192x192-full.png" alt="Home Assistant"> 홈어시스턴트
           </div>
-          <div class="icons">
-            <a rel="me" href='https://twitter.com/home_assistant' title="Twitter"><i class="icon-twitter"></i></a>
-            <a rel="me" href='https://www.facebook.com/homeassistantio' title="Facebook"><i class="icon-facebook"></i></a>
-            <a rel="me" href='https://github.com/home-assistant/home-assistant' title="GitHub"><i class="icon-github"></i></a>
-          </div>
         </div>
 
         <div class='grid__item one-third lap-one-half palm-one-whole'>
           <ul>
             <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
-            <li><a href='https://developers.home-assistant.io'>Developers</a></li>
-            <li><a href='https://data.home-assistant.io'>Data Science</a></li>
-            <li><a href='mailto:hello@home-assistant.io'>Contact</a> (no support!)</li>
-            <li><a href='/security/'>Security Vulnerabilities</a></li>
-            <li><a href='/privacy/'>Privacy</a></li>
-            <li><a href='https://status.home-assistant.io'>System Status</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
           </ul>
         </div>
 
         <div class='grid__item one-third lap-one-half palm-one-whole'>
-          이 웹사이트는 <a href='https://jekyllrb.com/'>지킬</a>과
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
           <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
         </div>
       </div>
@@ -229,7 +220,7 @@ dtparam=i2c_arm=on
     </footer>
 
     <script>
-var _gaq=[['_setAccount','UA-57927901-1'],['_trackPageview']];
+var _gaq=[['_setAccount',''],['_trackPageview']];
 (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 s.parentNode.insertBefore(g,s)}(document,'script'));
