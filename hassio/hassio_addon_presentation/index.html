@@ -6,26 +6,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Git pull - 홈어시스턴트</title>
+    <title>Presenting your add-on - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
-    <meta name="description" content="Load and update configuration files for Home Assistant from a GIT repository.">
+    <meta name="description" content="Open source home automation that puts local control and privacy first.">
     
     <meta name="viewport" content="width=device-width">
-    <link rel="canonical" href="https://hakorea.github.io/addons/git_pull/">
+    <link rel="canonical" href="https://hakorea.github.io/hassio/hassio_addon_presentation/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Git pull">
+    <meta property="og:title" content="Presenting your add-on">
     <meta property="og:site_name" content="홈어시스턴트">
-    <meta property="og:url" content="https://hakorea.github.io/addons/git_pull/">
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="Load and update configuration files for Home Assistant from a GIT repository.">
+    <meta property="og:url" content="https://hakorea.github.io/hassio/hassio_addon_presentation/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Open source home automation that puts local control and privacy first.">
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Git pull">
-    <meta name="twitter:description" content="Load and update configuration files for Home Assistant from a GIT repository.">
+    <meta name="twitter:title" content="Presenting your add-on">
+    <meta name="twitter:description" content="Open source home automation that puts local control and privacy first.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
     <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
@@ -88,7 +88,7 @@
   
     
 
-<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/_addons/git_pull.markdown" rel="external nofollow">깃허브 편집</a></div>
+<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/hassio/hassio_addon_presentation.markdown" rel="external nofollow">깃허브 편집</a></div>
 
 
   
@@ -96,108 +96,61 @@
   
   <header>
     <h1 class="title indent">
-      Git pull
+      Presenting your add-on
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Load and update configuration files for Home Assistant from a <a href="https://git-scm.com/" rel="external nofollow">Git</a> repository.</p>
-<pre><code class="language-json">{
-  "git_branch": "master",
-  "git_command": "pull",
-  "git_remote": "origin",
-  "git_prune": "false",
-  "repository": "https://example.com/my_configs.git",
-  "auto_restart": false,
-  "restart_ignore": [
-    "ui-lovelace.yaml",
-    ".gitignore",
-    "exampledirectory/"
-  ],
-  "repeat": {
-    "active": false,
-    "interval": 300
-  },
-  "deployment_user": "",
-  "deployment_password": "",
-  "deployment_key": [
-"-----BEGIN RSA PRIVATE KEY-----",
-"MIIEowIBAAKCAQEAv3hUrCvqGZKpXQ5ofxTOuH6pYSOZDsCqPqmaGBdUzBFgauQM",
-"xDEcoODGHIsWd7t9meAFqUtKXndeiKjfP0MMKsttnDohL1kb9mRvHre4VUqMsT5F",
-"...",
-"i3RUtnIHxGi1NqknIY56Hwa3id2yk7cEzvQGAAko/t6PCbe20AfmSQczs7wDNtBD",
-"HgXRyIqIXHYk2+5w+N2eunURIBqCI9uWYK/r81TMR6V84R+XhtvM",
-"-----END RSA PRIVATE KEY-----"
-  ],
-  "deployment_key_protocol": "rsa"
-}
-</code></pre>
+  <p>If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Hass.io also gives you some other tools to present your add-on even nicer.</p>
+<h2>
+<a class="title-link" name="adding-documentation" href="#adding-documentation"></a> Adding documentation</h2>
+<p>Good documentation helps the consumer of your add-on to understand its usage, explains configuration options, points users in the right direction in the case they have questions or issues, and contains the license under which the add-on was published.</p>
+<p>This file containing the documentation is usually referred to as the “README”, which is generally published as the <code>README.md</code> file.</p>
+<p>Take a look at other projects for inspiration. For example, see the <code>README.md</code> of the <a href="https://github.com/hassio-addons/addon-homebridge/blob/master/README.md" rel="external nofollow">Community Hass.io Add-ons: Homebridge</a> add-on.</p>
+<p>In future versions of Hass.io, the <code>README.md</code> file will be displayed in the Home Assistant frontend.</p>
+<h2>
+<a class="title-link" name="add-on-icon--logo" href="#add-on-icon--logo"></a> Add-on icon &amp; logo</h2>
+<p>A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. Those images are used when showing your add-on in the Home Assistant Hass.io panel and which will significantly improve the visual representation of your add-on.</p>
+<p>Requirements for the logo of your add-on:</p>
 <ul>
-<li>
-<strong>git_branch</strong> (<em>Required</em>): Branch name of the Git repo. If left empty, the currently checked out branch will be updated. Leave this as ‘master’ if you are unsure.</li>
-<li>
-<strong>git_command</strong> (<em>Required</em>): <code>pull</code>/<code>reset</code>: Command to run. Leave this as <code>pull</code> if you are unsure.</li>
+<li>The logo must be in the Portable Network Graphics format (<code>.png</code>).</li>
+<li>The filename must be <code>logo.png</code>.</li>
+<li>It is recommended to keep the logo size around 250x100px. You may choose to use a different size or aspect ratio as you seem fit for your add-on.</li>
 </ul>
+<p>Requirements for the icon of your add-on:</p>
 <ul>
-<li>
-<strong>pull</strong>: Incorporates changes from a remote repository into the current branch. Will preserve any local changes to tracked files.</li>
-<li>
-<strong>reset</strong>: Will execute <code>git reset --hard</code> and overwrite any local changes to tracked files and update from the remote repository. Use with caution.</li>
+<li>The icon must be in the Portable Network Graphics format (<code>.png</code>).</li>
+<li>The filename must be <code>icon.png</code>.</li>
+<li>The aspect ratio of the icon must be 1x1 (square).</li>
+<li>It is recommended to use an icon size of 128x128px.</li>
 </ul>
-<div class="note warning">
-<p>Using the <code>reset</code> option will overwrite changes to tracked files. Tracked files are those visible in the git repository or those given by the output on this command: <code>git ls-tree -r master --name-only</code>.</p>
-</div>
+<h2>
+<a class="title-link" name="keeping-a-changelog" href="#keeping-a-changelog"></a> Keeping a changelog</h2>
+<p>It is likely you are going to release newer versions of your add-on in the future. In case that happens, the users of your add-on would see an upgrade notice and probably want to know what changes were made in the latest version.</p>
+<p>A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of your add-on and is generally published as the <code>CHANGELOG.md</code> file.</p>
+<p>If you are in need of a guide on keeping a changelog, we would recommend checking the <a href="http://keepachangelog.com" rel="external nofollow">keep a changelog</a> website. They have developed a standard that is used by many opensource projects around the world.</p>
+<p>In future versions of Hass.io, the <code>CHANGELOG.md</code> file will be displayed in the Home Assistant frontend.</p>
+<h2>
+<a class="title-link" name="apparmor" href="#apparmor"></a> AppArmor</h2>
+<p>You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the Docker default profile. Put <code>apparmor.txt</code> file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.</p>
+<h2>
+<a class="title-link" name="ingress" href="#ingress"></a> Ingress</h2>
+<p>Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.</p>
+<p>To add Ingress support, follow the following steps:</p>
 <ul>
-<li>
-<p><strong>git_remote</strong> (<em>Required</em>): Name of the tracked repository. Leave this as <code>origin</code> if you are unsure.</p>
-</li>
-<li>
-<p><strong>git_prune</strong> (<em>Required</em>): <code>true</code>/<code>false</code>: If set to true, the add-on will clean-up branches that are deleted on the remote repository, but still have cached entries on the local machine. Leave this as <code>false</code> if you are unsure.</p>
-</li>
-<li>
-<p><strong>repository</strong> (<em>Required</em>): Git URL to your repository (make sure to use double quotes). You have to add <code>.git</code> to your repository URL (see example configuration).</p>
-</li>
-<li>
-<p><strong>auto_restart</strong> (<em>Required</em>): <code>true</code>/<code>false</code>: Restart Home Assistant when the configuration has changed (and is valid).</p>
-</li>
-<li>
-<p><strong>restart_ignore</strong> (<em>Optional</em>): When <code>auto_restart</code> is enabled, changes to these files will not make HA restart. Full directories to ignore can be specified.</p>
-</li>
-<li>
-<p><strong>repeat</strong>: Poll the repository for updates periodically automatically.</p>
-</li>
+<li>The add-on will need to provide the web interface on port <code>8099</code>. Make sure that the add-on accepts only connections from <code>172.30.32.2</code> on that port and that the connections are treated as authenticated.</li>
+<li>Update add-on configuration and set <code>ingress: true</code>. Here it is also possible to configure the Ingress port (default 8099).</li>
+<li>If you need to configure the application inside your add-on with the right path and port, query the add-on info API endpoint.</li>
+<li>If the application doesn’t support relative paths or you can’t set a base url, you can use nginx filter to replace the URL with correct path.</li>
 </ul>
+<p>Ingress API gateway supports the following:</p>
 <ul>
-<li>
-<strong>active</strong> (<em>Required</em>): <code>true</code>/<code>false</code>: Enable/disable automatic polling.</li>
-<li>
-<strong>interval</strong> (<em>Required</em>): The interval in seconds to poll the repo for if automatic polling is enabled.</li>
+<li>HTTP/1.x</li>
+<li>Streaming content</li>
+<li>Websockets</li>
 </ul>
-<ul>
-<li>
-<p><strong>deployment_user</strong> (<em>Optional</em>): Username to use when authenticating to a repository with a username and password.</p>
-</li>
-<li>
-<p><strong>deployment_password</strong> (<em>Optional</em>): Password to use when authenticating to a repository.  Ignored if <code>deployment_user</code> is not set.</p>
-</li>
-<li>
-<p><strong>deployment_key</strong> (<em>Optional</em>): A private SSH key that will be used for communication during Git operations. This key is mandatory for ssh-accessed repositories, which are the ones with the following pattern: <code>&lt;user&gt;@&lt;host&gt;:&lt;repository path&gt;</code>. This key has to be created without a passphrase.</p>
-</li>
-<li>
-<p><strong>deployment_key_protocol</strong> (<em>Optional</em>): The key protocol. Default is <code>rsa</code>. Valid protocols are:</p>
-<ul>
-<li><strong>dsa</strong></li>
-<li><strong>ecdsa</strong></li>
-<li><strong>ed25519</strong></li>
-<li><strong>rsa</strong></li>
-</ul>
-</li>
-</ul>
-<p>The protocol is typically known by the suffix of the private key –e.g., a key file named <code>id_rsa</code> will be a private key using <code>rsa</code> protocol.</p>
-<div class="note warning">
-<p>You should only use this add-on if you do not have an existing configuration or if your existing configuration is already in a Git repository. If the script does not find the necessary Git files in your configuration folder, it will delete anything that might be there. Please ensure that there is a <code>.git</code> folder before using this. You can verify this by listing the items in the configuration folder including hidden files. The command is <code>ls -a /config</code>.</p>
-</div>
+<h3><a href="/hassio/hassio_addon_repository/">다음 과정: 저장소 관리 »</a></h3>
 
 
 </article>
@@ -241,7 +194,7 @@
           <li><a  href='/hassio/hassio_addon_communication/'>통신 방법 </a></li>
           <li><a  href='/hassio/hassio_addon_testing/'>테스트 </a></li>
           <li><a  href='/hassio/hassio_addon_publishing/'>배포하기 </a></li>
-          <li><a  href='/hassio/hassio_addon_presentation/'>홍보하기 </a></li>
+          <li><a class='active' href='/hassio/hassio_addon_presentation/'>홍보하기 </a></li>
           <li><a  href='/hassio/hassio_addon_repository/'>저장소 관리 </a></li>
           <li><a  href='/hassio/hassio_addon_security/'>보안 검수 </a></li>
         </ol>

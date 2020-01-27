@@ -6,26 +6,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Git pull - 홈어시스턴트</title>
+    <title>Add-On Communication - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
-    <meta name="description" content="Load and update configuration files for Home Assistant from a GIT repository.">
+    <meta name="description" content="Open source home automation that puts local control and privacy first.">
     
     <meta name="viewport" content="width=device-width">
-    <link rel="canonical" href="https://hakorea.github.io/addons/git_pull/">
+    <link rel="canonical" href="https://hakorea.github.io/hassio/hassio_addon_communication/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Git pull">
+    <meta property="og:title" content="Add-On Communication">
     <meta property="og:site_name" content="홈어시스턴트">
-    <meta property="og:url" content="https://hakorea.github.io/addons/git_pull/">
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="Load and update configuration files for Home Assistant from a GIT repository.">
+    <meta property="og:url" content="https://hakorea.github.io/hassio/hassio_addon_communication/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Open source home automation that puts local control and privacy first.">
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Git pull">
-    <meta name="twitter:description" content="Load and update configuration files for Home Assistant from a GIT repository.">
+    <meta name="twitter:title" content="Add-On Communication">
+    <meta name="twitter:description" content="Open source home automation that puts local control and privacy first.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
     <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
@@ -88,7 +88,7 @@
   
     
 
-<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/_addons/git_pull.markdown" rel="external nofollow">깃허브 편집</a></div>
+<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/hassio/hassio_addon_communication.markdown" rel="external nofollow">깃허브 편집</a></div>
 
 
   
@@ -96,108 +96,41 @@
   
   <header>
     <h1 class="title indent">
-      Git pull
+      Add-On Communication
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Load and update configuration files for Home Assistant from a <a href="https://git-scm.com/" rel="external nofollow">Git</a> repository.</p>
-<pre><code class="language-json">{
-  "git_branch": "master",
-  "git_command": "pull",
-  "git_remote": "origin",
-  "git_prune": "false",
-  "repository": "https://example.com/my_configs.git",
-  "auto_restart": false,
-  "restart_ignore": [
-    "ui-lovelace.yaml",
-    ".gitignore",
-    "exampledirectory/"
-  ],
-  "repeat": {
-    "active": false,
-    "interval": 300
-  },
-  "deployment_user": "",
-  "deployment_password": "",
-  "deployment_key": [
-"-----BEGIN RSA PRIVATE KEY-----",
-"MIIEowIBAAKCAQEAv3hUrCvqGZKpXQ5ofxTOuH6pYSOZDsCqPqmaGBdUzBFgauQM",
-"xDEcoODGHIsWd7t9meAFqUtKXndeiKjfP0MMKsttnDohL1kb9mRvHre4VUqMsT5F",
-"...",
-"i3RUtnIHxGi1NqknIY56Hwa3id2yk7cEzvQGAAko/t6PCbe20AfmSQczs7wDNtBD",
-"HgXRyIqIXHYk2+5w+N2eunURIBqCI9uWYK/r81TMR6V84R+XhtvM",
-"-----END RSA PRIVATE KEY-----"
-  ],
-  "deployment_key_protocol": "rsa"
-}
-</code></pre>
+  <p>There are different ways for communication between add-ons inside Hass.io.</p>
+<h2>
+<a class="title-link" name="network" href="#network"></a> Network</h2>
+<p>We use an internal network that’s allowed to communicate with every add-on, including to/from Home Assistant, by using its name or alias. Only add-ons that run on the host network are limited in that they can talk with all internal add-ons by their name, but all other add-ons can’t address these add-ons by name. However, using an alias works for both!</p>
+<p>Names/aliases are used for communication inside Hass.io.
+The name is generated using the following format: <code>{REPO}_{SLUG}</code>, e.g., <code>local_xy</code> or <code>3283fh_myaddon</code>. In this example, <code>{SLUG}</code> is defined in an add-on’s <code>config.json</code> file. You can use this name as the DNS name also, but you need replace any <code>_</code> with <code>-</code> to have a valid hostname. If an add-on is installed locally, <code>{REPO}</code> will be <code>local</code>. If the add-on is installed from a Github repository, <code>{REPO}</code> is a hashed identifier generated from the GitHub repository’s URL (ex: <a href="https://github.com/xy/my_hassio_addons" rel="external nofollow">https://github.com/xy/my_hassio_addons</a>). See <a href="https://github.com/home-assistant/hassio/blob/587047f9d648b8491dc8eef17dc6777f81938bfd/hassio/addons/utils.py#L17" rel="external nofollow">here</a> to understand how this identifier is generated. Note that this identifier is required in certain service calls that use the <a href="https://github.com/home-assistant/hassio/blob/dev/API.md#restful-for-api-addons" rel="external nofollow">Hass.io add-on API</a>. You can view the repository identifiers for all currently-installed add-ons via a GET request to the hassio API <code>addons</code> endpoint.</p>
+<p>Use <code>hassio</code> for communication with the internal API.</p>
+<h2>
+<a class="title-link" name="home-assistant" href="#home-assistant"></a> Home Assistant</h2>
+<p>An add-on can talk to the <a href="https://www.home-assistant.io/developers/rest_api/">Home Assistant API</a> using the internal proxy. This makes it very easy to communicate with the API without knowing the password, port or any other information about the Home Assistant instance. Using this URL: <code>http://hassio/homeassistant/api</code> ensures that internal communication is redirected to the right place. The next step is to add <code>homeassistant_api: true</code> to the <code>config.json</code> file and read the environment variable <code>HASSIO_TOKEN</code>. Use this as the Home Assistant <a href="https://developers.home-assistant.io/docs/en/auth_api.html#making-authenticated-requests">bearer token</a> when making requests.</p>
+<p>For example <code>curl -X GET -H "Authorization: Bearer ${HASSIO_TOKEN}" -H "Content-Type: application/json" http://hassio/homeassistant/api/discovery_info</code></p>
+<p>There is also a proxy for the <a href="https://www.home-assistant.io/developers/websocket_api/">Home Assistant Websocket API</a> that works like the API proxy above and requires <code>HASSIO_TOKEN</code> as the password. Use this URL: <code>http://hassio/homeassistant/websocket</code>.</p>
+<p>It is also possible to talk directly to the Home Assistant instance, which is named <code>homeassistant</code>, over the internal network. However, you’ll need to know the configuration that is used by the running instance.</p>
+<p>We have several services for Hass.io inside Home Assistant to run tasks. Send data over STDIN to an add-on to use the <code>hassio.addon_stdin</code> service.</p>
+<h2>
+<a class="title-link" name="hassio-api" href="#hassio-api"></a> Hass.io API</h2>
+<p>To enable calls to the <a href="https://github.com/home-assistant/hassio/blob/master/API.md" rel="external nofollow">Hass.io API</a>, add <code>hassio_api: true</code> to the <code>config.json</code> file and read the environment variable <code>HASSIO_TOKEN</code>. Now you can use the API over the URL: <code>http://hassio/</code>. Use the <code>HASSIO_TOKEN</code> with header <code>X-HASSIO-KEY</code>. You may also need to change the Hass.io API role to <code>hassio_role: default</code>.</p>
+<p>Add-ons can call some API commands without needing to set <code>hassio_api: true</code>:</p>
 <ul>
-<li>
-<strong>git_branch</strong> (<em>Required</em>): Branch name of the Git repo. If left empty, the currently checked out branch will be updated. Leave this as ‘master’ if you are unsure.</li>
-<li>
-<strong>git_command</strong> (<em>Required</em>): <code>pull</code>/<code>reset</code>: Command to run. Leave this as <code>pull</code> if you are unsure.</li>
+<li><code>/homeassistant/api</code></li>
+<li><code>/homeassistant/api/stream</code></li>
+<li><code>/homeassistant/websocket</code></li>
+<li><code>/addons/self/*</code></li>
+<li><code>/services*</code></li>
+<li><code>/discovery*</code></li>
+<li><code>/info</code></li>
 </ul>
-<ul>
-<li>
-<strong>pull</strong>: Incorporates changes from a remote repository into the current branch. Will preserve any local changes to tracked files.</li>
-<li>
-<strong>reset</strong>: Will execute <code>git reset --hard</code> and overwrite any local changes to tracked files and update from the remote repository. Use with caution.</li>
-</ul>
-<div class="note warning">
-<p>Using the <code>reset</code> option will overwrite changes to tracked files. Tracked files are those visible in the git repository or those given by the output on this command: <code>git ls-tree -r master --name-only</code>.</p>
-</div>
-<ul>
-<li>
-<p><strong>git_remote</strong> (<em>Required</em>): Name of the tracked repository. Leave this as <code>origin</code> if you are unsure.</p>
-</li>
-<li>
-<p><strong>git_prune</strong> (<em>Required</em>): <code>true</code>/<code>false</code>: If set to true, the add-on will clean-up branches that are deleted on the remote repository, but still have cached entries on the local machine. Leave this as <code>false</code> if you are unsure.</p>
-</li>
-<li>
-<p><strong>repository</strong> (<em>Required</em>): Git URL to your repository (make sure to use double quotes). You have to add <code>.git</code> to your repository URL (see example configuration).</p>
-</li>
-<li>
-<p><strong>auto_restart</strong> (<em>Required</em>): <code>true</code>/<code>false</code>: Restart Home Assistant when the configuration has changed (and is valid).</p>
-</li>
-<li>
-<p><strong>restart_ignore</strong> (<em>Optional</em>): When <code>auto_restart</code> is enabled, changes to these files will not make HA restart. Full directories to ignore can be specified.</p>
-</li>
-<li>
-<p><strong>repeat</strong>: Poll the repository for updates periodically automatically.</p>
-</li>
-</ul>
-<ul>
-<li>
-<strong>active</strong> (<em>Required</em>): <code>true</code>/<code>false</code>: Enable/disable automatic polling.</li>
-<li>
-<strong>interval</strong> (<em>Required</em>): The interval in seconds to poll the repo for if automatic polling is enabled.</li>
-</ul>
-<ul>
-<li>
-<p><strong>deployment_user</strong> (<em>Optional</em>): Username to use when authenticating to a repository with a username and password.</p>
-</li>
-<li>
-<p><strong>deployment_password</strong> (<em>Optional</em>): Password to use when authenticating to a repository.  Ignored if <code>deployment_user</code> is not set.</p>
-</li>
-<li>
-<p><strong>deployment_key</strong> (<em>Optional</em>): A private SSH key that will be used for communication during Git operations. This key is mandatory for ssh-accessed repositories, which are the ones with the following pattern: <code>&lt;user&gt;@&lt;host&gt;:&lt;repository path&gt;</code>. This key has to be created without a passphrase.</p>
-</li>
-<li>
-<p><strong>deployment_key_protocol</strong> (<em>Optional</em>): The key protocol. Default is <code>rsa</code>. Valid protocols are:</p>
-<ul>
-<li><strong>dsa</strong></li>
-<li><strong>ecdsa</strong></li>
-<li><strong>ed25519</strong></li>
-<li><strong>rsa</strong></li>
-</ul>
-</li>
-</ul>
-<p>The protocol is typically known by the suffix of the private key –e.g., a key file named <code>id_rsa</code> will be a private key using <code>rsa</code> protocol.</p>
-<div class="note warning">
-<p>You should only use this add-on if you do not have an existing configuration or if your existing configuration is already in a Git repository. If the script does not find the necessary Git files in your configuration folder, it will delete anything that might be there. Please ensure that there is a <code>.git</code> folder before using this. You can verify this by listing the items in the configuration folder including hidden files. The command is <code>ls -a /config</code>.</p>
-</div>
+<p><em><strong>Note:</strong></em> For Home Assistant API access requirements, see above.</p>
+<h3><a href="/hassio/hassio_addon_testing/">다음 과정: 테스트 »</a></h3>
 
 
 </article>
@@ -238,7 +171,7 @@
         <ol>
           <li><a  href='/hassio/hassio_addon_tutorial/'>무작정 따라해보기 </a></li>
           <li><a  href='/hassio/hassio_addon_config/'>애드온 설정 </a></li>
-          <li><a  href='/hassio/hassio_addon_communication/'>통신 방법 </a></li>
+          <li><a class='active' href='/hassio/hassio_addon_communication/'>통신 방법 </a></li>
           <li><a  href='/hassio/hassio_addon_testing/'>테스트 </a></li>
           <li><a  href='/hassio/hassio_addon_publishing/'>배포하기 </a></li>
           <li><a  href='/hassio/hassio_addon_presentation/'>홍보하기 </a></li>

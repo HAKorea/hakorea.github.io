@@ -1,0 +1,722 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Add-On Configuration - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Open source home automation that puts local control and privacy first.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/hassio/hassio_addon_config/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Add-On Configuration">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/hassio/hassio_addon_config/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Open source home automation that puts local control and privacy first.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Add-On Configuration">
+    <meta name="twitter:description" content="Open source home automation that puts local control and privacy first.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/hassio/hassio_addon_config.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Add-On Configuration
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>Each add-on is stored in a folder. The file structure looks like this:</p>
+<pre><code class="language-text">addon_name/
+  apparmor.txt
+  build.json
+  CHANGELOG.md
+  config.json
+  Dockerfile
+  icon.png
+  logo.png
+  README.md
+  run.sh
+</code></pre>
+<h2>
+<a class="title-link" name="add-on-script" href="#add-on-script"></a> Add-on script</h2>
+<p>As with every Docker container, you will need a script to run when the container is started. A user might run many add-ons, so it is encouraged to try to stick to Bash scripts if you’re doing simple things.</p>
+<p>All our Images have also <a href="https://github.com/hassio-addons/bashio" rel="external nofollow">bashio</a> installed. It contains a set of commonly used operations and can be used to be included in add-ons to reduce code duplication across add-ons and therefore making it easier to develop and maintain add-ons.</p>
+<p>When developing your script:</p>
+<ul>
+<li>
+<code>/data</code> is a volume for persistent storage.</li>
+<li>
+<code>/data/options.json</code> contains the user configuration. You can use bashio or <code>jq</code> inside your shell script to parse this data.</li>
+</ul>
+<pre><code class="language-shell">CONFIG_PATH=/data/options.json
+
+TARGET="$(jq --raw-output '.target' $CONFIG_PATH)"
+</code></pre>
+<p>So if your <code>options</code> contain</p>
+<pre><code class="language-json">{ "target": "beer" }
+</code></pre>
+<p>then there will be a variable <code>TARGET</code> containing <code>beer</code> in the environment of your bash file afterwards.</p>
+<h2>
+<a class="title-link" name="add-on-docker-file" href="#add-on-docker-file"></a> Add-on Docker file</h2>
+<p>All add-ons are based on latest Alpine Linux. Hass.io will automatically substitute the right base image based on the machine architecture. Add <code>tzdata</code> if you need run in a different timezone. <code>tzdata</code> Is is already added to our base images.</p>
+<pre><code class="language-dockerfile">ARG BUILD_FROM
+FROM $BUILD_FROM
+
+ENV LANG C.UTF-8
+
+# Install requirements for add-on
+RUN apk add --no-cache jq
+
+# Copy data for add-on
+COPY run.sh /
+RUN chmod a+x /run.sh
+
+CMD [ "/run.sh" ]
+</code></pre>
+<p>If you don’t use local build on device or our build script, make sure that the Dockerfile have also a set of labels include:</p>
+<pre><code>LABEL io.hass.version="VERSION" io.hass.type="addon" io.hass.arch="armhf|aarch64|i386|amd64"
+</code></pre>
+<p>It is possible to use own base image with <code>build.json</code> or if you do not need support for automatic multi-arch building you can also use a simple docker <code>FROM</code>.</p>
+<h3>
+<a class="title-link" name="build-args" href="#build-args"></a> Build Args</h3>
+<p>We support the following build arguments by default:</p>
+<table>
+<thead>
+<tr>
+<th>ARG</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BUILD_FROM</td>
+<td>Hold image for dynamic builds or buildings over our systems.</td>
+</tr>
+<tr>
+<td>BUILD_VERSION</td>
+<td>Add-on version (read from <code>config.json</code>).</td>
+</tr>
+<tr>
+<td>BUILD_ARCH</td>
+<td>Hold current build arch inside.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="add-on-config" href="#add-on-config"></a> Add-on config</h2>
+<p>The config for an add-on is stored in <code>config.json</code>.</p>
+<pre><code class="language-json">{
+  "name": "xy",
+  "version": "1.2",
+  "slug": "folder",
+  "description": "long description",
+  "arch": ["amd64"],
+  "url": "website with more information about add-on (ie a forum thread for support)",
+  "startup": "application",
+  "boot": "auto",
+  "ports": {
+    "123/tcp": 123
+  },
+  "map": ["config:rw", "ssl"],
+  "options": {},
+  "schema": {},
+  "image": "repo/{arch}-my-custom-addon"
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>yes</td>
+<td>Name of the add-on</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>yes</td>
+<td>Version of the add-on</td>
+</tr>
+<tr>
+<td>slug</td>
+<td>string</td>
+<td>yes</td>
+<td>Slug of the add-on</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>yes</td>
+<td>Description of the add-on</td>
+</tr>
+<tr>
+<td>arch</td>
+<td>list</td>
+<td>yes</td>
+<td>List of supported arch: <code>armhf</code>, <code>armv7</code>, <code>aarch64</code>, <code>amd64</code>, <code>i386</code>.</td>
+</tr>
+<tr>
+<td>machine</td>
+<td>list</td>
+<td>no</td>
+<td>Default it support any machine type. You can select that this add-on run only on specific machines.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>url</td>
+<td>no</td>
+<td>Homepage of the addon. Here you can explain the add-ons and options.</td>
+</tr>
+<tr>
+<td>startup</td>
+<td>string</td>
+<td>yes</td>
+<td>
+<code>initialize</code> will start addon on setup of Hass.io. <code>system</code> is for things like databases and not dependent on other things. <code>services</code> will start before Home Assistant, while <code>application</code> is started afterwards. Finally <code>once</code> is for applications that don’t run as a daemon.</td>
+</tr>
+<tr>
+<td>webui</td>
+<td>string</td>
+<td>no</td>
+<td>A URL for web interface of this add-on. Like <code>http://[HOST]:[PORT:2839]/dashboard</code>, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the proto part to a config options with: <code>[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard</code> and he lookup if they is True and going to <code>https</code>.</td>
+</tr>
+<tr>
+<td>boot</td>
+<td>string</td>
+<td>yes</td>
+<td>
+<code>auto</code> by system and manual or only <code>manual</code>
+</td>
+</tr>
+<tr>
+<td>ports</td>
+<td>dict</td>
+<td>no</td>
+<td>Network ports to expose from the container. Format is <code>"container-port/type": host-port</code>. If host-port is <code>null</code>, the mapping is disabled.</td>
+</tr>
+<tr>
+<td>ports_description</td>
+<td>dict</td>
+<td>no</td>
+<td>Network ports description mapping. Format is <code>"container-port/type": "description of this port"</code>.</td>
+</tr>
+<tr>
+<td>host_network</td>
+<td>bool</td>
+<td>no</td>
+<td>If that is True, the add-on run on host network.</td>
+</tr>
+<tr>
+<td>host_ipc</td>
+<td>bool</td>
+<td>no</td>
+<td>Default False. Allow to share the IPC namespace with others.</td>
+</tr>
+<tr>
+<td>host_dbus</td>
+<td>bool</td>
+<td>no</td>
+<td>Default False. Map Host dbus service into add-on.</td>
+</tr>
+<tr>
+<td>host_pid</td>
+<td>bool</td>
+<td>no</td>
+<td>Default False. Allow to run container on host PID namespace. Work only for not protected add-ons.</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>list</td>
+<td>no</td>
+<td>Device list to map into the add-on. Format is: <code>&lt;path_on_host&gt;:&lt;path_in_container&gt;:&lt;cgroup_permissions&gt;</code>. i.e. <code>/dev/ttyAMA0:/dev/ttyAMA0:rwm</code>
+</td>
+</tr>
+<tr>
+<td>udev</td>
+<td>bool</td>
+<td>no</td>
+<td>Default False. Set this True, if your container runs a udev process of its own.</td>
+</tr>
+<tr>
+<td>auto_uart</td>
+<td>bool</td>
+<td>no</td>
+<td>Default False. Auto mapping all UART/Serial device from host into add-on.</td>
+</tr>
+<tr>
+<td>homeassistant</td>
+<td>string</td>
+<td>no</td>
+<td>Pin a minimum required Home Assistant version for such Add-on. Value is a version string like <code>0.91.2</code>.</td>
+</tr>
+<tr>
+<td>hassio_role</td>
+<td>str</td>
+<td>no</td>
+<td>Default <code>default</code>. Role based access to Hass.io API. Available: <code>default</code>, <code>homeassistant</code>, <code>backup</code>, <code>manager</code>, <code>admin</code>.</td>
+</tr>
+<tr>
+<td>hassio_api</td>
+<td>bool</td>
+<td>no</td>
+<td>This add-on can access to Hass.io REST API. It set the host alias <code>hassio</code>.</td>
+</tr>
+<tr>
+<td>homeassistant_api</td>
+<td>bool</td>
+<td>no</td>
+<td>This add-on can access to Hass.io Home-Assistant REST API proxy. Use <code>http://hassio/homeassistant/api</code>.</td>
+</tr>
+<tr>
+<td>docker_api</td>
+<td>bool</td>
+<td>no</td>
+<td>Allow read-oly access to docker API for add-on. Work only for not protected add-ons.</td>
+</tr>
+<tr>
+<td>privileged</td>
+<td>list</td>
+<td>no</td>
+<td>Privilege for access to hardware/system. Available access: <code>NET_ADMIN</code>, <code>SYS_ADMIN</code>, <code>SYS_RAWIO</code>, <code>SYS_TIME</code>, <code>SYS_NICE</code>, <code>SYS_RESOURCE</code>, <code>SYS_PTRACE</code>, <code>SYS_MODULE</code>, <code>DAC_READ_SEARCH</code>.</td>
+</tr>
+<tr>
+<td>full_access</td>
+<td>bool</td>
+<td>no</td>
+<td>Give full access to hardware like the privileged mode in docker. Work only for not protected add-ons.</td>
+</tr>
+<tr>
+<td>apparmor</td>
+<td>bool/string</td>
+<td>no</td>
+<td>Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.</td>
+</tr>
+<tr>
+<td>map</td>
+<td>list</td>
+<td>no</td>
+<td>List of maps for additional Hass.io folders. Possible values: <code>config</code>, <code>ssl</code>, <code>addons</code>, <code>backup</code>, <code>share</code>. Defaults to <code>ro</code>, which you can change by adding <code>:rw</code> to the end of the name.</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>dict</td>
+<td>no</td>
+<td>A dict of environment variable to run add-on.</td>
+</tr>
+<tr>
+<td>audio</td>
+<td>bool</td>
+<td>no</td>
+<td>Boolean. Mark this add-on to use internal an audio system. The ALSA configuration for this add-on will be mount automatic.</td>
+</tr>
+<tr>
+<td>gpio</td>
+<td>bool</td>
+<td>no</td>
+<td>Boolean. If this is set to True, <code>/sys/class/gpio</code> will map into add-on for access to GPIO interface from kernel. Some library need also <code>/dev/mem</code> and <code>SYS_RAWIO</code> for read/write access to this device. On system with AppArmor enabled, you need disable AppArmor or better for security, provide you own profile for the add-on.</td>
+</tr>
+<tr>
+<td>devicetree</td>
+<td>bool</td>
+<td>no</td>
+<td>Boolean. If this is set to True, <code>/device-tree</code> will map into add-on.</td>
+</tr>
+<tr>
+<td>kernel_modules</td>
+<td>bool</td>
+<td>no</td>
+<td>Map host kernel modules and config into add-on (readonly).</td>
+</tr>
+<tr>
+<td>stdin</td>
+<td>bool</td>
+<td>no</td>
+<td>Boolean. If that is enable, you can use the STDIN with Hass.io API.</td>
+</tr>
+<tr>
+<td>legacy</td>
+<td>bool</td>
+<td>no</td>
+<td>Boolean. If the docker image have no hass.io labels, you can enable the legacy mode to use the config data.</td>
+</tr>
+<tr>
+<td>options</td>
+<td>dict</td>
+<td>yes</td>
+<td>Default options value of the add-on</td>
+</tr>
+<tr>
+<td>schema</td>
+<td>dict</td>
+<td>yes</td>
+<td>Schema for options value of the add-on. It can be <code>False</code> to disable schema validation and use custom options.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>string</td>
+<td>no</td>
+<td>For use with Docker Hub and other container registries.</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>integer</td>
+<td>no</td>
+<td>Default 10 (second). The timeout to wait until the docker is done or will be killed.</td>
+</tr>
+<tr>
+<td>tmpfs</td>
+<td>string</td>
+<td>no</td>
+<td>Mount a tmpfs file system in <code>/tmpfs</code>. Valide format for this option is : <code>size=XXXu,uid=N,rw</code>. Size is mandatory, valid units (<code>u</code>) are <code>k</code>, <code>m</code> and <code>g</code> and <code>XXX</code> has to be replaced by a number. <code>uid=N</code> (with <code>N</code> the uid number) and <code>rw</code> are optional.</td>
+</tr>
+<tr>
+<td>discovery</td>
+<td>list</td>
+<td>no</td>
+<td>A list of services they this Add-on allow to provide for Home Assistant. Currently supported: <code>mqtt</code>
+</td>
+</tr>
+<tr>
+<td>services</td>
+<td>list</td>
+<td>no</td>
+<td>A list of services they will be provided or consumed with this Add-on. Format is <code>service</code>:<code>function</code> and functions are: <code>provide</code> (this add-on can provide this service), <code>want</code> (this add-on can use this service) or <code>need</code> (this add-on need this service to work correctly).</td>
+</tr>
+<tr>
+<td>auth_api</td>
+<td>bool</td>
+<td>no</td>
+<td>Allow access to Home Assistent user backend.</td>
+</tr>
+<tr>
+<td>ingress</td>
+<td>bool</td>
+<td>no</td>
+<td>Enable the ingress feature for the Add-on</td>
+</tr>
+<tr>
+<td>ingress_port</td>
+<td>integer</td>
+<td>no</td>
+<td>Default <code>8099</code>. For Add-ons they run on host network, you can use <code>0</code> and read the port later on API.</td>
+</tr>
+<tr>
+<td>ingress_entry</td>
+<td>string</td>
+<td>no</td>
+<td>Modify the URL entry point from <code>/</code>.</td>
+</tr>
+<tr>
+<td>panel_icon</td>
+<td>string</td>
+<td>no</td>
+<td>Default: mdi:puzzle. MDI icon for the menu panel integration.</td>
+</tr>
+<tr>
+<td>panel_title</td>
+<td>string</td>
+<td>no</td>
+<td>Default add-on name, but can Modify with this options.</td>
+</tr>
+<tr>
+<td>panel_admin</td>
+<td>bool</td>
+<td>no</td>
+<td>Default True. Make menu entry only available with admin privileged.</td>
+</tr>
+<tr>
+<td>snapshot_exclude</td>
+<td>list</td>
+<td>no</td>
+<td>List of file/path with glob support they are excluded from snapshots.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="options--schema" href="#options--schema"></a> Options / Schema</h3>
+<p>The <code>options</code> dictionary contains all available options and their default value. Set the default value to <code>null</code> if the value is required to be given by the user before the add-on can start, and it show it inside default values. Only nested arrays and dictionaries are supported with a deep of two size. If you want make an option optional, put <code>?</code> to the end of data type, otherwise it will be a required value.</p>
+<pre><code class="language-json">{
+  "message": "custom things",
+  "logins": [
+    { "username": "beer", "password": "123456" },
+    { "username": "cheep", "password": "654321" }
+  ],
+  "random": ["haha", "hihi", "huhu", "hghg"],
+  "link": "http://example.com/",
+  "size": 15,
+  "count": 1.2
+}
+</code></pre>
+<p>The <code>schema</code> looks like <code>options</code> but describes how we should validate the user input. For example:</p>
+<pre><code class="language-json">{
+  "message": "str",
+  "logins": [
+    { "username": "str", "password": "str" }
+  ],
+  "random": ["match(^\w*$)"],
+  "link": "url",
+  "size": "int(5,20)",
+  "count": "float",
+  "not_need": "str?"
+}
+</code></pre>
+<p>We support:</p>
+<ul>
+<li>str / str(min,) / str(,max) / str(min,max)</li>
+<li>bool</li>
+<li>int / int(min,) / int(,max) / int(min,max)</li>
+<li>float / float(min,) / float(,max) / float(min,max)</li>
+<li>email</li>
+<li>url</li>
+<li>port</li>
+<li>match(REGEX)</li>
+<li>list(val1|val2|…)</li>
+</ul>
+<h2>
+<a class="title-link" name="add-on-extended-build" href="#add-on-extended-build"></a> Add-on extended build</h2>
+<p>Additional build options for an add-on is stored in <code>build.json</code>. This file will be read from our build systems.
+You need this only, if you not use the default images or need additionals things.</p>
+<pre><code class="language-json">{
+  "build_from": {
+    "armhf": "mycustom/base-image:latest"
+  },
+  "squash": false,
+  "args": {
+    "my_build_arg": "xy"
+  }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>build_from</td>
+<td>no</td>
+<td>A dictionary with the hardware architecture as the key and the base Docker image as value.</td>
+</tr>
+<tr>
+<td>squash</td>
+<td>no</td>
+<td>Default <code>False</code>. Be carfully with this option, you can not use the image for caching stuff after that!</td>
+</tr>
+<tr>
+<td>args</td>
+<td>no</td>
+<td>Allow to set additional Docker build arguments as a dictionary.</td>
+</tr>
+</tbody>
+</table>
+<p>We provide a set of <a href="https://github.com/home-assistant/hassio-base" rel="external nofollow">Base-Images</a> which should cover a lot of needs. If you don’t want use the Alpine based version or need a specific Image tag, feel free to pin this requirements for you build with <code>build_from</code> option.</p>
+<h3><a href="/hassio/hassio_addon_communication/">다음 과정: 통신 방법 »</a></h3>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  <div class='section'>
+    <h1 class="title delta">목차</h1>
+    <ul class='divided sidebar-menu'>
+      <li>
+        <a  href='/hassio/'>Hass.io </a>
+        <ul>
+          <li><a  href='/hassio/installation/'>설치 </a></li>
+          <li><a  href='/addons/'>애드온 </a></li>
+          <li><a  href='/hassio/installing_third_party_addons/'>서드파티 애드온 </a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class='divided sidebar-menu'>
+      <li>
+        고급 설정
+        <ul>
+          <li><a  href='/hassio/commandline/'>명령어 모드 </a></li>
+          <li><a  href='/hassio/zwave/'>Z-Wave </a></li>
+          <li><a  href='/hassio/enable_i2c/'>I2C 사용 </a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class='divided sidebar-menu'>
+      <li><a  href='/hassio/developing_addon/'>애드온을 제작하려면? </a>
+        <ol>
+          <li><a  href='/hassio/hassio_addon_tutorial/'>무작정 따라해보기 </a></li>
+          <li><a class='active' href='/hassio/hassio_addon_config/'>애드온 설정 </a></li>
+          <li><a  href='/hassio/hassio_addon_communication/'>통신 방법 </a></li>
+          <li><a  href='/hassio/hassio_addon_testing/'>테스트 </a></li>
+          <li><a  href='/hassio/hassio_addon_publishing/'>배포하기 </a></li>
+          <li><a  href='/hassio/hassio_addon_presentation/'>홍보하기 </a></li>
+          <li><a  href='/hassio/hassio_addon_repository/'>저장소 관리 </a></li>
+          <li><a  href='/hassio/hassio_addon_security/'>보안 검수 </a></li>
+        </ol>
+      </li>
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant"> 홈어시스턴트
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'ae96d94b201c5444c8a443093edf3efb',
+  indexName: 'home-assistant',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>

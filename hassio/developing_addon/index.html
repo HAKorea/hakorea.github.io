@@ -6,26 +6,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>애드온을 제작하려면? - 홈어시스턴트</title>
+    <title>Developing an add-on - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
-    <meta name="description" content="Manage your Home Assistant and custom add-ons.">
+    <meta name="description" content="Open source home automation that puts local control and privacy first.">
     
     <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://hakorea.github.io/hassio/developing_addon/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="애드온을 제작하려면?">
+    <meta property="og:title" content="Developing an add-on">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/hassio/developing_addon/">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="Manage your Home Assistant and custom add-ons.">
+    <meta property="og:description" content="Open source home automation that puts local control and privacy first.">
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="애드온을 제작하려면?">
-    <meta name="twitter:description" content="Manage your Home Assistant and custom add-ons.">
+    <meta name="twitter:title" content="Developing an add-on">
+    <meta name="twitter:description" content="Open source home automation that puts local control and privacy first.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
     <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
@@ -96,34 +96,34 @@
   
   <header>
     <h1 class="title indent">
-      애드온을 제작하려면?
+      Developing an add-on
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Developing an add-on Add-ons for Hass.io allow the user to extend the functionality around Home Assistant. This can be running an application that Home Assistant can integrate with (like an MQTT broker) or to share the configuration via Samba for easy editing from other computers. Add-ons can be configured via the Hass.io panel in Home Assistant.</p>
-<p>Under the hood, add-ons are Docker images published in Docker Hub. Developers can create GitHub repositories that contain multiple references to add-ons for easy sharing with the community.</p>
+  <p>Add-ons for Hass.io allow the user to extend the functionality around Home Assistant. This can be running an application that Home Assistant can integrate with (like an MQTT broker) or to share the configuration via Samba for easy editing from other computers. Add-ons can be configured via the Hass.io panel in Home Assistant.</p>
+<p>Under the hood, add-ons are Docker images published in <a href="https://hub.docker.com/" rel="external nofollow">Docker Hub</a>. Developers can create <a href="https://github.com" rel="external nofollow">GitHub</a> repositories that contain multiple references to add-ons for easy sharing with the community.</p>
 <ol>
-<li>Tutorial: Making your first add-on</li>
-<li>Configuration</li>
-<li>Communication</li>
-<li>Local Testing</li>
-<li>Publishing</li>
-<li>Presentation</li>
-<li>Repositories</li>
-<li>Security</li>
+<li><a href="hassio_addon_tutorial.md">Tutorial: Making your first add-on</a></li>
+<li><a href="hassio_addon_config.md">Configuration</a></li>
+<li><a href="hassio_addon_communication.md">Communication</a></li>
+<li><a href="hassio_addon_testing.md">Local Testing</a></li>
+<li><a href="hassio_addon_publishing.md">Publishing</a></li>
+<li><a href="hassio_addon_presentation.md">Presentation</a></li>
+<li><a href="hassio_addon_repository.md">Repositories</a></li>
+<li><a href="hassio_addon_security.md">Security</a></li>
 </ol>
 <p>Useful links:</p>
 <ul>
-<li>Hass.io Supervisor</li>
-<li>Hass.io Core Add-ons</li>
-<li>Hass.io Build environment</li>
-<li>Hass.io base images</li>
-<li>Hass.io Builder</li>
-<li>Hass.io community Add-ons</li>
-<li>HassOS embedded Linux</li>
-<li>Home Assistant Dockerfile</li>
+<li><a href="https://github.com/home-assistant/hassio" rel="external nofollow">Hass.io Supervisor</a></li>
+<li><a href="https://github.com/home-assistant/hassio-addons" rel="external nofollow">Hass.io Core Add-ons</a></li>
+<li><a href="https://github.com/home-assistant/hassio-build" rel="external nofollow">Hass.io Build environment</a></li>
+<li><a href="https://github.com/home-assistant/hassio-base" rel="external nofollow">Hass.io base images</a></li>
+<li><a href="https://github.com/home-assistant/hassio-builder" rel="external nofollow">Hass.io Builder</a></li>
+<li><a href="https://github.com/hassio-addons" rel="external nofollow">Hass.io community Add-ons</a></li>
+<li><a href="https://github.com/home-assistant/hassos" rel="external nofollow">HassOS embedded Linux</a></li>
+<li><a href="https://github.com/home-assistant/hassio-homeassistant" rel="external nofollow">Home Assistant Dockerfile</a></li>
 </ul>
 
 
@@ -161,7 +161,18 @@
       </li>
     </ul>
     <ul class='divided sidebar-menu'>
-      <li><a class='active' href='/hassio/developing_addon/'>애드온을 제작하려면? </a></li>
+      <li><a class='active' href='/hassio/developing_addon/'>애드온을 제작하려면? </a>
+        <ol>
+          <li><a  href='/hassio/hassio_addon_tutorial/'>무작정 따라해보기 </a></li>
+          <li><a  href='/hassio/hassio_addon_config/'>애드온 설정 </a></li>
+          <li><a  href='/hassio/hassio_addon_communication/'>통신 방법 </a></li>
+          <li><a  href='/hassio/hassio_addon_testing/'>테스트 </a></li>
+          <li><a  href='/hassio/hassio_addon_publishing/'>배포하기 </a></li>
+          <li><a  href='/hassio/hassio_addon_presentation/'>홍보하기 </a></li>
+          <li><a  href='/hassio/hassio_addon_repository/'>저장소 관리 </a></li>
+          <li><a  href='/hassio/hassio_addon_security/'>보안 검수 </a></li>
+        </ol>
+      </li>
     </ul>
   </div>
 </section>
