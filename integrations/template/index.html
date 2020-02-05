@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>template</code> platform supports sensors which get their values from other entities.</p>
+  <p>템플릿<code>template</code> 플랫폼은 엔티티들이 가진 값들을 별도의 센서로 만들 수 있는 방법이다</p>
 <h2>
 <a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>The configuration of Template Sensors depends on what you want them to be. Adding the following to your <code>configuration.yaml</code> file will create two sensors, one for the current sun angle and one for the time of the next sunrise:</p>
+<p>템플릿 센서를 설정하는 방법은 무엇을 만들고 싶은지가 중요하다. <code>configuration.yaml</code>에 다음과 같이 sun 엔티티가 갖는 값을 이용하여 태양의 고도(지평선과의 각도)와 내일 해뜨는 시간을 표시하는 두가지 센서를 추가한다고 가정하면:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: template
@@ -125,25 +125,25 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="sensors" href="#sensors"></a> sensors</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>List of your sensors.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>만들고자 하는 센서 리스트</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>화면에 표시할 센서 가명</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="friendly_name_template" href="#friendly_name_template"></a> friendly_name_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template for the name to be used in the frontend (this overrides friendly_name).</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>상태 변화에 따라 화면에 표시할 센서 가명을 바꿀 때 사용(friendly_name을 덮어씀)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of entity IDs so the sensor only reacts to state changes of these entities. This can be used if the automatic analysis fails to find all relevant entities.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔티티 ID 리스트. 제작한 템플릿 센서는 이들 엔티티의 변화에 따라 값이 바뀐다. 다수의 관련된 엔티티들 서로 연결되어 센서로 표현해야 한다면 이 옵션을 적용하세요.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the units of measurement of the sensor, if any. This will also influence the graphical presentation in the history visualization as a continuous value. Sensors with missing <code>unit_of_measurement</code> are showing as discrete values.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 측정 단위. 이것은 히스토리 그래프 표현에 영향을 줍니다. <code>unit_of_measurement</code>를 설정하지 않으면 불연속적인 막대 그래프로 나타납니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -151,30 +151,30 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines a template to get the state of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>센서로 사용할 값을 엔티티로부터 받아오는 방법을 설정하는 밸류템플릿</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="icon_template" href="#icon_template"></a> icon_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template for the icon of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>센서에 대한 아이콘을 설정하는 템플릿</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_picture_template" href="#entity_picture_template"></a> entity_picture_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template for the entity picture of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 엔티티 이미지를 설정하는 템플</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="attribute_templates" href="#attribute_templates"></a> attribute_templates</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines templates for attributes of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 속성을 정의하는 템플</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="attribute-template" href="#attribute-template"></a> attribute: template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>The attribute and corresponding template.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>속성에 해당하는 템플릿을 작성</p>
 </span></p></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="availability_template" href="#availability_template"></a> availability_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the <code>available</code> state of the component. If the template returns <code>true</code>, the device is <code>available</code>. If the template returns any other value, the device will be <code>unavailable</code>. If <code>availability_template</code> is not configured, the component will always be <code>available</code>.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>컴포넌트의 <code>available</code> 상태를 받아오는 템플릿을 정의. 템플릿이 <code>true</code>를 반환하면 기기는 <code>available</code> 상태이고 다른 값을 반환하면 <code>unavailable</code> 상태로 템플릿을 작성해야 함. <code>availability_template</code>을 작성하지 않으면 컴포넌트의 <code>available</code> 상태는 항상 ‘true’입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -183,7 +183,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the class of the device, changing the device state and icon that is displayed on the UI (see below). It does not set the <code>unit_of_measurement</code>.</p>
+<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>기기의 클래스를 설정. UI에 나타나는 기기의 상태와 아이콘이 바뀝니다(하단 참고). <code>unit_of_measurement</code>를 변경하진 않습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -193,20 +193,20 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="considerations" href="#considerations"></a> Considerations</h2>
+<a class="title-link" name="" href="#"></a> 고려사항</h2>
 <h3>
-<a class="title-link" name="startup" href="#startup"></a> Startup</h3>
-<p>If you are using the state of a platform that takes extra time to load, the Template Sensor may get an <code>unknown</code> state during startup. To avoid this (and the resulting error messages in your log file), you can use <code>is_state()</code> function in your template. For example, you would replace <code>{{ states.cover.source.state == 'open' }}</code> with this equivalent that returns <code>true</code>/<code>false</code> and never gives an <code>unknown</code> result:</p>
+<a class="title-link" name="" href="#"></a> 부팅시</h3>
+<p>플랫폼의 상태를 체크하는 센서를 사용한다면 부팅시 플랫폼을 로드하는 과정에서 일정 시간이 소요되며 이 과정에서 템플릿 센서는 <code>unknown</code> 상태가 됩니다. 이것을 피하려면(로그 파일에 에러를 남기지 않으려면) <code>is_state()</code> 함수를 템플릿에 적용하면 됩니다. 예를 들어 <code>{{ states.cover.source.state == 'open' }}</code> 구문은 <code>unknown</code> 상태를 나타내기도 하는데 아래 템플릿으로 바꿔 적용하면 <code>true</code>/<code>false</code> 상태만을 잘 표현합니다:</p>
 <p><code>{{ is_state('switch.source', 'on') }}</code></p>
 <h3>
-<a class="title-link" name="entity-ids" href="#entity-ids"></a> Entity IDs</h3>
-<p>The template engine will attempt to work out what entities should trigger an update of the sensor. This can fail, for example, if your template loops over the contents of a group. In this case, you can use <code>entity_id</code> to provide a list of entity IDs that will cause the sensor to update or you can run the service <code>homeassistant.update_entity</code> to update the sensor at will.</p>
+<a class="title-link" name="-id" href="#-id"></a> 엔티티 ID</h3>
+<p>템플릿 엔진은 어떤 엔티티들을 사용하여 센서를 업데이트 할 것인가를 늘 시도합니다. 템플릿이 트리거를 받지 못하는 상황이 생겨 센서의 업데이트가 실패할 수도 있습니다. 이 경우 <code>entity_id</code>를 작성해서 엔티티들의 ID 리스트를 입력하면 센서를 업데이트 하도록 만들 수 있습니다. 또는 <code>homeassistant.update_entity</code> 서비스를 호출하게 센서를 강제 업데이트 해줍니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section, you find some real-life examples of how to use this sensor.</p>
+<a class="title-link" name="" href="#"></a> 사용예</h2>
+<p>아래 섹션에서 실제 적용 사례들을 살펴보겠습니다.</p>
 <h3>
-<a class="title-link" name="sun-angle" href="#sun-angle"></a> Sun Angle</h3>
-<p>This example shows the sun angle in the frontend.</p>
+<a class="title-link" name="-" href="#-"></a> 태양의 고도</h3>
+<p>화면에 태양의 고도를 표시합니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -216,9 +216,8 @@ Default value: </p>
         value_template: "{{ '%+.1f'|format(state_attr('sun.sun', 'elevation')) }}"
 </code></pre>
 <h3>
-<a class="title-link" name="renaming-sensor-output" href="#renaming-sensor-output"></a> Renaming Sensor Output</h3>
-<p>If you don’t like the wording of a sensor output, then the Template Sensor can help too. Let’s rename the output of the <a href="/integrations/sun/">Sun component</a> as
-a simple example:</p>
+<a class="title-link" name="--" href="#--"></a> 센서 표시를 변경하기</h3>
+<p>어떤 센서의 화면 표기가 마음에 들지 않는다면 템플릿 센서를 활용하여 변경할 수 있습니다. <a href="/integrations/sun/">Sun component</a>의 출력을 간단한 표기방법으로 변경해봅시다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -232,8 +231,8 @@ a simple example:</p>
           {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="multiline-example-with-an-if-test" href="#multiline-example-with-an-if-test"></a> Multiline Example With an if Test</h3>
-<p>This example shows a multiple line template with an <code>if</code> test. It looks at a sensing switch and shows <code>on</code>/<code>off</code> in the frontend.</p>
+<a class="title-link" name="if---" href="#if---"></a> if 구문을 여러번 사용하기</h3>
+<p>비교구문 <code>if</code>를 여러번 사용하여 다양한 값을 체크하는 예제입니다. 스위치의 상태를 체크하여 화면에 <code>on</code>/<code>off</code> 또는 <code>standby</code> 등을 표시합니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -251,8 +250,8 @@ a simple example:</p>
           {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="change-the-unit-of-measurement" href="#change-the-unit-of-measurement"></a> Change The Unit of Measurement</h3>
-<p>With a Template Sensor, it’s easy to convert given values into others if the unit of measurement doesn’t fit your needs.</p>
+<a class="title-link" name="--" href="#--"></a> 측정 단위를 변경하기</h3>
+<p>템플릿 센서를 사용하면 측정 단위를 이해하기 쉬운 다른 표현 방법으로 손쉽게 변경 가능합니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -267,8 +266,8 @@ a simple example:</p>
         value_template: "{{ states('sensor.transmission_up_speed')|float * 1024 }}"
 </code></pre>
 <h3>
-<a class="title-link" name="change-the-icon" href="#change-the-icon"></a> Change The Icon</h3>
-<p>This example shows how to change the icon based on the day/night cycle.</p>
+<a class="title-link" name="-" href="#-"></a> 아이콘 변경</h3>
+<p>다음 예제는 낮/밤에 따라 아이콘을 바꾸는 <code>icon_template</code> 사용법입니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -288,8 +287,8 @@ a simple example:</p>
           {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="change-the-entity-picture" href="#change-the-entity-picture"></a> Change The Entity Picture</h3>
-<p>This example shows how to change the entity picture based on the day/night cycle.</p>
+<a class="title-link" name="--" href="#--"></a> 엔티티 이미지 변경</h3>
+<p>다음 예제는 낮/밤에 따라 <code>entity_picture_template</code>을 사용하여 이미지를 변경하는 방법입니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -310,7 +309,7 @@ a simple example:</p>
 </code></pre>
 <h3>
 <a class="title-link" name="change-the-friendly-name-used-in-the-frontend" href="#change-the-friendly-name-used-in-the-frontend"></a> Change the Friendly Name Used in the Frontend</h3>
-<p>This example shows how to change the <code>friendly_name</code> based on a state.</p>
+<p>다음 예제는 센서의 상태에 따라서 <code>friendly_name_template</code>을 사용해 화면에 표시되는 <code>friendly_name</code>을 변경하는 방법입니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -325,8 +324,8 @@ a simple example:</p>
         unit_of_measurement: 'kW'
 </code></pre>
 <h3>
-<a class="title-link" name="add-custom-attributes" href="#add-custom-attributes"></a> Add Custom Attributes</h3>
-<p>This example shows how to add custom attributes.</p>
+<a class="title-link" name="--" href="#--"></a> 커스텀 속성을 추가하기</h3>
+<p>다음 예제는 커스텀 속성을 추가하는 방법입니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -352,9 +351,9 @@ a simple example:</p>
             {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="working-without-entities" href="#working-without-entities"></a> Working without entities</h3>
-<p>The <code>template</code> sensors are not limited to use attributes from other entities but can also work with <a href="/docs/configuration/templating/#home-assistant-template-extensions">Home Assistant’s template extensions</a>.</p>
-<p>This template contains no entities that will trigger an update (as <code>now()</code> is a function), so we add an <code>entity_id:</code> line with an entity that will force an update - here we’re using a <a href="/integrations/time_date">date sensor</a> to get a daily update:</p>
+<a class="title-link" name="----" href="#----"></a> 엔티티 없는 템플릿 센서 제작</h3>
+<p>템플릿 센서는 다른 엔티티의 속성으로 제작해야만 하는 것은 아니며 <a href="/docs/configuration/templating/#home-assistant-template-extensions">홈어시스턴트 템플릿 확장</a> 기능을 사용할 수도 있습니다.</p>
+<p>이런 템플릿은 트리거를 발생시킬 엔티티가 없어서(<code>now()</code> 함수처럼) 업데이트가 원활하게 이뤄지지 않습니다. 따라서 <code>entity_id:</code>를 추가하여 강제로 업데이트가 이뤄지도록 만들어야 합니다. 다음 예제는 <a href="/integrations/time_date">date sensor</a>를 엔티티로 추가해서 하루마다 업데이트를 진행합니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -364,7 +363,7 @@ a simple example:</p>
         friendly_name: 'Not smoking'
         unit_of_measurement: "Days"
 </code></pre>
-<p>In this case it is also possible to convert the entity-less template above into one that will be updated automatically:</p>
+<p>하지만 위 예제는 엔티티 없는 구문으로 다음과 같이 변경할 수도 있습니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -373,9 +372,8 @@ a simple example:</p>
         friendly_name: 'Not smoking'
         unit_of_measurement: "Days"
 </code></pre>
-<p>Useful entities to choose might be <code>sensor.date</code> which update once per day or <code>sensor.time</code>, which updates once per minute.<br>
-Please note that the resulting template will be evaluated by Home Assistant state engine on every state change of these sensors, which in case of <code>sensor.time</code> happens every minute and might have a negative impact on performance.</p>
-<p>An alternative to this is to create an interval-based automation that calls the service <code>homeassistant.update_entity</code> for the entities requiring updates. This modified example updates every 5 minutes:</p>
+<p>하루마다 동작시키려면 <code>sensor.date</code> 엔티티를 사용하고, 매 분마다 동작시키려면 <code>sensor.time</code> 엔티티를 사용하면 유용합니다. 템플릿은 홈어시스턴트의 state engine이 템플릿의 동작을 체크하고 변화가 있을 때마다 센서의 상태를 바꿉니다. 그러므로 <code>sensor.time</code>은 매 분마다 상태 체크를 하므로 성능에 영향을 줄 수 있어 사용에 주의해야 합니다.</p>
+<p>대체 방안으로 자동화를 사용한 인터벌 설정이 가능한데, 엔티티 업데이트가 필요할 때마다 <code>homeassistant.update_entity</code>를 호출하면 됩니다. 매 분마다 실행하는 것을 5분마다 실행하는 자동화를 적용하면 다음과 같습니다:</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:

@@ -6,26 +6,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Xiaomi Mijia BLE Temperature and Humidity Sensor - 홈어시스턴트</title>
+    <title>Xiaomi Mijia BLE 온습도 센서 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
-    <meta name="description" content="Instructions on how to integrate MiTemp BLE temperature and humidity sensor with Home Assistant.">
+    <meta name="description" content="MiTemp BLE 온습도 센서를 Home Assistant와 통합하는 방법.">
     
     <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://hakorea.github.io/integrations/mitemp_bt/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Xiaomi Mijia BLE Temperature and Humidity Sensor">
+    <meta property="og:title" content="Xiaomi Mijia BLE 온습도 센서">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mitemp_bt/">
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Instructions on how to integrate MiTemp BLE temperature and humidity sensor with Home Assistant.">
+    <meta property="og:description" content="MiTemp BLE 온습도 센서를 Home Assistant와 통합하는 방법.">
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Xiaomi Mijia BLE Temperature and Humidity Sensor">
-    <meta name="twitter:description" content="Instructions on how to integrate MiTemp BLE temperature and humidity sensor with Home Assistant.">
+    <meta name="twitter:title" content="Xiaomi Mijia BLE 온습도 센서">
+    <meta name="twitter:description" content="MiTemp BLE 온습도 센서를 Home Assistant와 통합하는 방법.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
     <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
@@ -97,44 +97,46 @@
   
   <header>
     <h1 class="title indent">
-      Xiaomi Mijia BLE Temperature and Humidity Sensor
+      Xiaomi Mijia BLE 온습도 센서
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mitemp_bt</code> sensor platform allows one to monitor room temperature and humidity. The <a href="https://www.amazon.com/Temperature-Humidity-Xiaomi-Bluetooth-Screen-Remote/dp/B079L6N6PC" rel="external nofollow">Xiaomi Mijia BLE Temperature and Humidity sensor with LCD</a> is a small Bluetooth Low Energy device that monitors the room temperature and humidity. As only a single BLE device can be polled at the same time, the library employs locking to make sure this is the case.</p>
+  <p>The <code>mitemp_bt</code> 센서 플랫폼은 모니터 온습도를 실시간으로 측정할 수 있습니다.  <a href="https://www.amazon.com/Temperature-Humidity-Xiaomi-Bluetooth-Screen-Remote/dp/B079L6N6PC" rel="external nofollow">LCD 내장 Xiaomi Mijia BLE 온습도 센서</a> 는 실내 온습도를 측정하는 소형 초저전력 블루투스 장치입니다.</p>
 <h2>
-<a class="title-link" name="installation" href="#installation"></a> Installation</h2>
-<p>Depending on the operating system you’re running, you have to configure the proper Bluetooth backend on your system:</p>
+<a class="title-link" name="" href="#"></a> 설치</h2>
+<p>실행중인 운영 체제에 따라 시스템에서 다음과 같은 여러상황에 맞는 Bluetooth 설정을 해야합니다.:</p>
 <ul>
-<li>On <a href="/hassio/installation/">Hass.io</a>: <code>mitemp_bt</code> will work out of the box as long as the host supports Bluetooth (like the Raspberry Pi does).</li>
-<li>On a <a href="/docs/installation/docker/">generic Docker installation</a>: Works out of the box with <code>--net=host</code> and properly configured Bluetooth on the host.</li>
-<li>On other Linux systems:
+<li>
+<a href="/hassio/installation/">Hass.io</a>: <code>mitemp_bt</code> 설치한 시스템이 블루투스를 지원한다면 즉시 사용 가능합니다. (블루투스를 지원하는 라즈베리파이의 경우 바로 사용가능).</li>
+<li>
+<a href="/docs/installation/docker/">generic Docker installation</a>: <code>--net=host</code> 명령을 이용하여 시스템에 적절한 블루투스 설정을 할 수 있습니다.</li>
+<li>그외 리눅스 시스템:
 <ul>
-<li>Preferred solution: Install the <code>bluepy</code> and <code>btlewrap</code> library (via pip). When using a virtual environment, make sure to use install the library in the right one.</li>
-<li>Fallback solution: Install <code>btlewrap</code> library (via pip) and <code>gatttool</code> via your package manager. Depending on the distribution, the package name might be: <code>bluez</code>, <code>bluetooth</code> or    <code>bluez-deprecated</code>.</li>
+<li>기본 솔루션: <code>bluepy</code> 및 <code>btlewrap</code> 라이브러리를 pip 명령으로 설치하십시오. 가상 환경을 사용하는 경우 그에 맞는 라이브러리 설치를 해야합니다.</li>
+<li>대체 솔루션: pip 명령으로 <code>btlewrap</code> 라이브러리를 설치하고 Package 관리 명령으로 <code>gatttool</code> 를 설치합니다. 배포판에 따라 패키지 이름은 <code>bluez</code>, <code>bluetooth</code> 혹은 <code>bluez-deprecated</code>일 수 있습니다.</li>
 </ul>
 </li>
-<li>Windows and MacOS are currently not supported by the <code>btlewrap</code> library.</li>
+<li>Windows 및 MacOS는 현재 <code>btlewrap</code> 라이브러리를 지원하지 않습니다.</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Start a scan to determine the MAC addresses of the sensor:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>스캔 명령으로 센서의 MAC 주소를 파악하십시오.:</p>
 <pre><code class="language-bash">$ sudo hcitool lescan
 LE Scan ...
 4C:65:A8:D2:31:7F MJ_HT_V1
 [...]
 </code></pre>
-<p>Or if your distribution is using bluetoothctl:</p>
+<p>배포판이 bluetoothctl을 지원할 경우:</p>
 <pre><code class="language-bash">$ bluetoothctl
 [bluetooth]# scan on
 Discovery started
 [CHG] Controller XX:XX:XX:XX:XX:XX Discovering: yes
 [NEW] Device 4C:65:A8:D2:31:7F MJ_HT_V1
 </code></pre>
-<p>Check for <code>MJ_HT_V1</code> or similar entries, those are your sensor.</p>
-<p>To use your Mi Temperature and Humidity sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>찾은 센서가 <code>MJ_HT_V1</code> 혹은 유사 제품인지 확인하십시오.</p>
+<p>설치시 Mi 온습도 센서를 사용하려면,  <code>configuration.yaml</code> 파일에 다음 내용을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: mitemp_bt
@@ -148,12 +150,12 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The MAC address of your sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>센서의 MAC 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The parameters that should be monitored.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>측정하고자 하는 파라미터.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -162,25 +164,25 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="temperature" href="#temperature"></a> temperature</dt>
-<dd><p class="desc"><span class="description"><p>Temperature in C at the sensor’s location.</p>
+<dd><p class="desc"><span class="description"><p>해당 위치의 온도 (C).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="humidity" href="#humidity"></a> humidity</dt>
-<dd><p class="desc"><span class="description"><p>Humidity level in % at the sensor’s location.</p>
+<dd><p class="desc"><span class="description"><p>해당 위치의 습도 (%).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="battery" href="#battery"></a> battery</dt>
-<dd><p class="desc"><span class="description"><p>Battery details (in %).</p>
+<dd><p class="desc"><span class="description"><p>배터리 잔량 (%).</p>
 </span></p></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name displayed in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트엔드에 나타나는 장치 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="force_update" href="#force_update"></a> force_update</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sends update events even if the value hasn’t changed.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>값이 변경되지 않았더라도 값을 강제적으로 보내는 옵션.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -189,7 +191,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="median" href="#median"></a> median</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sometimes the sensor measurements show spikes. Using this parameter, the poller will report the median of the last 3 (you can also use larger values) measurements. This filters out single spikes. Median: 5 will also filter double spikes. If you never have problems with spikes, <code>median: 1</code> will work fine.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>때로는 센서 측정에 튀는 값이 표시됩니다. 이 매개 변수를 사용하면, 출력값은 마지막 3 개 (더 큰 값을 사용할 수도 있음) 측정의 평균값을 출력합니다. 튀는 값을 걸러냅니다. Median: 5 라고 설정시 튀는 값이 2번 반복되어도 걸러냅니다. 튀는 값의 문제가 없다면, <code>median: 1</code> 로 설정해도 정상 동작합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -198,7 +200,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Define the timeout value in seconds when polling.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>측정치 출력시 제한 시간을 몇 초 단위로 할지 정하는 옵션.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -207,7 +209,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="retries" href="#retries"></a> retries</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Define the number of retries when polling.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>측정치 출력시 재시도 횟수를 정하는 옵션.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -216,7 +218,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="cache_value" href="#cache_value"></a> cache_value</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Define cache expiration value in seconds.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>캐시 만기 기간을 초 단위로 정하는 옵션.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -225,7 +227,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="adapter" href="#adapter"></a> adapter</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Define the Bluetooth adapter to use. Run <code>hciconfig</code> to get a list of available adapters.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 Bluetooth 어댑터 종류를 정하는 옵션. <code>hciconfig</code>를 사용하여 어뎁터의 종류를 확인해 보십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -233,11 +235,10 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Note that by default the sensor is only polled once every 5 minutes. This means with the <code>median: 3</code> setting will take as least 15 minutes before the sensor will report a value after a Home Assistant restart. Even though the hardware is able to provide new values every second, room temperatures don’t change that quickly.
-Reducing polling intervals will have a negative effect on the battery life.</p>
+<p>기본적으로 센서는 5 분마다 한 번 씩만 반영됩니다. 이는 <code>median: 3</code> 설정시 홈 어시스턴트가 다시 시작된 후 센서가 값을 나타내기까지 15 분 이상 소요됨을 의미합니다. 하드웨어가 1 초마다 새로운 값을 제공 할 수 있지만 실내 온도는 빠르게 변하지 않습니다. 반영값의 간격을 줄여버리면 배터리 수명에 부정적인 영향을 미칩니다.</p>
 <h2>
-<a class="title-link" name="full-example" href="#full-example"></a> Full example</h2>
-<p>A full configuration example could look like the one below:</p>
+<a class="title-link" name="--" href="#--"></a> 전체 적용 사례</h2>
+<p>전체적으로 모든 것을 설정한 구성 사례는 다음과 같습니다.:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: mitemp_bt

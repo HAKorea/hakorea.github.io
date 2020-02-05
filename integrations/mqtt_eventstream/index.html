@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>mqtt_eventstream</code> integration connects two Home Assistant instances via MQTT.</p>
+  <p><code>mqtt_eventstream</code> 통합구성요소는 MQTT를 통해서 두 대의 홈어시스턴트를 연결합니다(홈어시스턴트를 2개 설치해서 사용).</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To integrate MQTT Eventstream into Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>홈어시스턴트에 MQTT Eventstream 통합 설정하는 방법은 <code>configuration.yaml</code> 파일에 아래와 같이 작성합니다:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mqtt_eventstream:
   publish_topic: MyServerName
@@ -118,21 +118,21 @@ mqtt_eventstream:
   <dl class="">
 <dt>
 <a class="title-link" name="publish_topic" href="#publish_topic"></a> publish_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Topic for publishing local events.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>로컬 서버의 이벤트를 발행하기 위한 토픽.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="subscribe_topic" href="#subscribe_topic"></a> subscribe_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Topic to receive events from the remote server.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>리모트 서버로부터 수신할 이벤트의 토픽.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="ignore_event" href="#ignore_event"></a> ignore_event</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Ignore sending these <a href="/docs/configuration/events/">events</a> over mqtt.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT를 통해 전송할 때 무시할 <a href="/docs/configuration/events/">이벤트</a>.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
 <a class="title-link" name="multiple-instances" href="#multiple-instances"></a> Multiple Instances</h2>
-<p>Events from multiple instances can be aggregated to a single master instance by subscribing to a wildcard topic from the master instance.</p>
+<p>여러대의 홈어시스턴트(slave)로 부터 이벤트들을 한대의 홈어시스턴트(master)에서 모두 취합하기 위해서는 와일드카드 토픽(#)으로 수신하면 됩니다.</p>
 <pre><code class="language-yaml"># Example master instance configuration.yaml entry
 mqtt_eventstream:
   publish_topic: master/topic
@@ -141,7 +141,7 @@ mqtt_eventstream:
     - call_service
     - state_changed
 </code></pre>
-<p>For a multiple instance setup, each slave would publish to their own topic.</p>
+<p>다른 여러대의 홈어시스턴트 설정은 발행하는 주제 토픽은 동일하고 나머지 서브 토픽은 다르게 작성합니다.</p>
 <pre><code class="language-yaml"># Example slave instance configuration.yaml entry
 mqtt_eventstream:
   publish_topic: slaves/upstairs

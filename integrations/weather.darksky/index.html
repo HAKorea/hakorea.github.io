@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>The <code>darksky</code> platform uses the <a href="https://darksky.net/" rel="external nofollow">Dark Sky</a> web service as a source for meteorological data for your location.</p>
+  <p><code>darksky</code> 플랫폼은 <a href="https://darksky.net/" rel="external nofollow">Dark Sky</a> 웹서비스를 사용자 위치의 기상 데이터 소스로 사용합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>You need an API key which is free but requires <a href="https://darksky.net/dev/register" rel="external nofollow">registration</a>. The free tier allows up to 1000 calls per day, this platform updates at most every 3 minutes, using up to 480 of those calls.</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>무료이긴 하지만 <a href="https://darksky.net/dev/register" rel="external nofollow">가입</a>을 한 이후 API키를 받아야 합니다. 무료서비스로는 하루에 최대 1000번의 데이터 사용을 허용하며 플랫폼은 최대 3 분마다 최대 480번을 사용하여 업데이트합니다. (보통은 그 이하로 사용하므로 개인사용자는 무료로 사용 가능)</p>
 <div class="note warning">
-<p><a href="https://darksky.net/dev/" rel="external nofollow">Dark Sky</a> will charge you $0.0001 per API call if you enter your credit card details and create more than 1000 calls per day.</p>
+<p><a href="https://darksky.net/dev/" rel="external nofollow">Dark Sky</a> 신용 카드 정보 입력시 하루에 1000 번 이상 사용시 Dark Sky 는 이후 API 사용 횟수당 $ 0.0001의 요금을 청구합니다. (입력 안해도 1000번은 사용 가능)</p>
 </div>
-<p>To add Dark Sky to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>Dark Sky를 사용하시려면, <code>configuration.yaml</code> 파일에 다음을 추가하십시오:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 weather:
   - platform: darksky
@@ -122,30 +122,30 @@ weather:
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your API key for <a href="https://darksky.net/dev/" rel="external nofollow">Dark Sky</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>가입 이후 받은 <a href="https://darksky.net/dev/" rel="external nofollow">Dark Sky</a> API 값.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Manually specify latitude. By default the value will be taken from the Home Assistant configuration.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>위도를 수동으로 지정 가능. 기본적으로 이 값은 홈어시스턴트 설정에서 가져옵니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
-<p>Provided by Home Assistant configuration</p>
+<p>홈어시스턴트 사용자의 초기 설정값 사용</p>
 </dd>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Manually specify longitude. By default the value will be taken from the Home Assistant configuration.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>경도를 수동으로 지정 가능. 기본적으로 이 값은 홈어시스턴트 설정에서 가져옵니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
-<p>Provided by Home Assistant configuration</p>
+<p>홈어시스턴트 사용자의 초기 설정값 사용</p>
 </dd>
 <dt>
 <a class="title-link" name="units" href="#units"></a> units</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Manually specify unit system. Valid values are: <code>auto</code>, <code>us</code>, <code>si</code>, <code>ca</code>, <code>uk</code> and <code>uk2</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>단위 시스템을 수동으로 지정하십시오. 유효한 값은 다음과 같습니다: <code>auto</code>, <code>us</code>, <code>si</code>, <code>ca</code>, <code>uk</code> and <code>uk2</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -154,7 +154,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name to use in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 나타날 이름입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -163,7 +163,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="mode" href="#mode"></a> mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The forecast type. Can be <code>hourly</code> or <code>daily</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>예보 시간 단위. <code>hourly</code> 혹은 <code>daily</code>로 측정 가능합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -172,9 +172,26 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>This platform is an alternative to the <a href="/integrations/darksky"><code>darksky</code></a> sensor.</p>
+<p>이 플랫폼은 <a href="/integrations/darksky"><code>darksky</code></a> 센서를 대신해서 쓸 수 있습니다.</p>
 </div>
-<p>Details about the API are available in the <a href="https://darksky.net/dev/docs" rel="external nofollow">Dark Sky documentation</a>.</p>
+<h1>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+자세한 설명은 <a href="https://darksky.net/dev/docs" rel="external nofollow">Dark Sky documentation</a> 문서를 참조해주세요.</h1>
+<p>자세한 설명은ㅇ <a href="https://darksky.net/dev/docs" rel="external nofollow">Dark Sky documentation</a> 문서를 참조해주세요.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>9bab4e1b1e31e010b4e2588e5a21f97274f968c2</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 
 
 </article>
