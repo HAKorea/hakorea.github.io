@@ -6,26 +6,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring Home Assistant - 홈어시스턴트</title>
+    <title>홈 어시스턴트 설정 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
-    <meta name="description" content="Configuring Home Assistant.">
+    <meta name="description" content="홈 어시스턴트 설정.">
     
     <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://hakorea.github.io/docs/configuration/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Configuring Home Assistant">
+    <meta property="og:title" content="홈 어시스턴트 설정">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/configuration/">
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Configuring Home Assistant.">
+    <meta property="og:description" content="홈 어시스턴트 설정.">
     <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Configuring Home Assistant">
-    <meta name="twitter:description" content="Configuring Home Assistant.">
+    <meta name="twitter:title" content="홈 어시스턴트 설정">
+    <meta name="twitter:description" content="홈 어시스턴트 설정.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
     <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
@@ -97,15 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Configuring Home Assistant
+      홈 어시스턴트 설정
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>When launched for the first time, Home Assistant will create a default configuration file enabling the web interface and device discovery. It can take up to a minute after startup for your devices to be discovered and appear in the user interface.</p>
-<p>The web interface can be found at <code>http://ip.ad.dre.ss:8123/</code> - for example if your Home Assistant system has the IP address <code>192.168.0.40</code> then you’ll find the web interface as <code>http://192.168.0.40:8123/</code>.</p>
-<p>The location of the folder differs between operating systems:</p>
+  <p>Home Assistant는 처음 시작할 때 웹 인터페이스 및 장치 검색을 가능하게하는 기본 설정 파일을 만듭니다. 장치가 검색되어 사용자 인터페이스에 표시 되려면 시작 후 최대 1 분이 걸릴 수 있습니다.</p>
+<p>웹 인터페이스는 <code>http://ip.ad.dre.ss:8123/</code></p>
+<ul>
+<li>예를 들어 Home Assistant 시스템에 IP 주소를 <code>192.168.0.40</code>로 할당받아 설치했을 경우 웹으로 접속하고자 할때 <code>http://192.168.0.40:8123/</code>로 들어가면 됩니다.</li>
+</ul>
+<p>폴더의 위치는 운영 체제마다 다릅니다.:</p>
 <table>
 <thead>
 <tr>
@@ -136,22 +139,23 @@
 </tr>
 </tbody>
 </table>
-<p>If you want to use a different folder for configuration, use the config command line parameter: <code>hass --config path/to/config</code>.</p>
-<p>Inside your configuration folder is the file <code>configuration.yaml</code>. This is the main file that contains integrations to be loaded with their configurations. Throughout the documentation you will find snippets that you can add to your configuration file to enable functionality.</p>
-<p>If you run into trouble while configuring Home Assistant, have a look at the <a href="/getting-started/troubleshooting-configuration/">configuration troubleshooting page</a> and at the <a href="/cookbook/#example-configurationyaml">configuration.yaml examples</a>.</p>
+<p>설정의 위치를 다른 폴더를 사용하려면 config 명령의 위치를 매개 변수를 사용하여 접근하려면 시작시: <code>hass --config path/to/config</code>로 실행하면 됩니다.</p>
+<p>설정 폴더 안에 파일로서 <code>configuration.yaml</code>이 있습니다. 이것은 설정으로부터 로드된 통합 구성요소를 포함한 주요한 파일입니다.  문서 전체에서 기능을 사용하기 위해 설정 파일에 추가 할 수있는 snippet을 찾을 수 있습니다.</p>
+<p>Home Assistant를 설정하는 동안 문제가 발생하면  <a href="/getting-started/troubleshooting-configuration/">configuration troubleshooting page</a> 와 <a href="/cookbook/#example-configurationyaml">configuration.yaml examples</a>를 살펴보십시오.</p>
 <div class="note tip">
-<p>Test any changes to your configuration files from the command line with <code>hass --script check_config</code>. This script allows you to test changes without the need to restart Home Assistant. Remember to run this as the user you run Home Assistant as.</p>
+<p><code>hass --script check_config</code>을 사용하여 명령 행에서 설정 파일의 변경 사항을 테스트하십시오. 이 스크립트를 사용하면 Home Assistant를 다시 시작할 필요없이 변경 사항을 테스트 할 수 있습니다. 홈 어시스턴트를 실행할 수 있는 사용자 계정으로 실행해야합니다..</p>
 </div>
 <h2>
-<a class="title-link" name="reloading-changes" href="#reloading-changes"></a> Reloading changes</h2>
-<p>You will have to restart Home Assistant for most changes to <code>configuration.yaml</code> to take effect.
-You can load changes to <a href="/docs/automation/">automations</a>, <a href="/docs/configuration/customizing-devices/">core (customize)</a>, <a href="/integrations/group/">groups</a>, and <a href="/integrations/script/">scripts</a> without restarting.</p>
+<a class="title-link" name="---" href="#---"></a> 변경 사항 새로 고침</h2>
+<p>대부분의 변경 사항을 적용하려면 <code>configuration.yaml</code>이 영향을 미치게 하기위해 Home Assistant를 다시 시작해야 합니다.
+다시 시작하지 않고 <a href="/docs/automation/">automations</a>, <a href="/docs/configuration/customizing-devices/">core (customize)</a>, <a href="/integrations/group/">groups</a>, 그리고 <a href="/integrations/script/">scripts</a>는 적용 가능합니다.</p>
 <div class="note warning">
-<p>If you’ve made any changes, remember to <a href="/docs/configuration/troubleshooting/#problems-with-the-configuration">check your configuration</a> before trying to reload or restart.</p>
+<p>변경 한 경우 다시로드하거나 다시 시작하기 전 <a href="/docs/configuration/troubleshooting/#problems-with-the-configuration">check your configuration</a> 을 확인하십시오.</p>
 </div>
 <h2>
-<a class="title-link" name="migrating-to-a-new-system" href="#migrating-to-a-new-system"></a> Migrating to a new system</h2>
-<p>If you want to migrate your configuration to a new system then you can copy the contents of your configuration folder from the current system to the new system. Be aware that some of the files you need start with <code>.</code>, which is hidden by default from both <code>ls</code> (in SSH), in Windows Explorer, and macOS Finder. You’ll need to ensure that you’re viewing all files before you copy them.</p>
+<a class="title-link" name="--" href="#--"></a> 새로운 시스템으로 마이그레이션</h2>
+<p>구성을 새 시스템으로 마이그레이션하려는 경우 구성 폴더의 내용을 현재 시스템에서 새 시스템으로 복사 할 수 있습니다.<br>
+. 로 시작하는 파일 중 일부는 (SSH의) Windows 탐색기 및 macOS Finder에서 기본적으로 숨겨져 있습니다. 파일을 복사하기 전에 모든 파일을보고 있는지 확인해야합니다.</p>
 
 
 </article>

@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p>There is currently support for the following device types within Home Assistant:</p>
+  <p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.:</p>
 <ul>
 <li><a href="#remote">Remote</a></li>
 <li><a href="#sensor">Sensor</a></li>
@@ -111,10 +111,10 @@
 </ul>
 <h2>
 <a class="title-link" name="remote" href="#remote"></a> Remote</h2>
-<p>The <code>broadlink</code> remote platform allows you to interact with Broadlink remote control devices.</p>
+<p><code>broadlink</code> 원격 플랫폼은 Broadlink 원격 제어 장치와 상호 작용할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 remote:
   - platform: broadlink
@@ -127,16 +127,16 @@ remote:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname/IP address to connect to.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Device MAC address.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 MAC 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Timeout in seconds for the connection to the device.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 연결에 대한 시간 초과.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -145,7 +145,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the device.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -154,8 +154,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="learn-command" href="#learn-command"></a> Learn command</h3>
-<p>Use the <code>remote.learn_command</code> service to learn new commands.</p>
+<a class="title-link" name="-" href="#-"></a> 명령어 학습</h3>
+<p><code>remote.learn_command</code> 서비스를 사용하여 새로운 명령을 익히십시오..</p>
 <table>
 <thead>
 <tr>
@@ -168,31 +168,31 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>ID of the remote.</td>
+<td>리모컨의 ID입니다.</td>
 </tr>
 <tr>
 <td><code>device</code></td>
 <td>no</td>
-<td>Name of the device to control.</td>
+<td>제어 할 장치의 이름입니다.</td>
 </tr>
 <tr>
 <td><code>command</code></td>
 <td>no</td>
-<td>Names of the commands to learn.</td>
+<td>배울 명령의 이름.</td>
 </tr>
 <tr>
 <td><code>alternative</code></td>
 <td>yes</td>
-<td>Toggle commands?</td>
+<td>명령을 토글 여부.</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
 <td>yes</td>
-<td>Timeout in seconds to learn each command.</td>
+<td>각 명령을 익히는 시간 (초).</td>
 </tr>
 </tbody>
 </table>
-<p>Example 1: Learn a single command</p>
+<p>예 1 : 단일 명령 배우기</p>
 <pre><code class="language-yaml">script:
   learn_mute_tv:
     sequence:
@@ -202,7 +202,7 @@ Default value: </p>
           device: television
           command: mute
 </code></pre>
-<p>Example 2: Learn a sequence of commands</p>
+<p>예 2 : 일련 명령 학습</p>
 <pre><code class="language-yaml">script:
   learn_tv_commands:
     sequence:
@@ -216,8 +216,8 @@ Default value: </p>
             - volume up
             - volume down
 </code></pre>
-<p>Example 3: Learn a toggle command</p>
-<p>The <code>alternative</code> flag is useful for capturing commands where the same button is used for more than one purpose, such as the power button, which can turn the television on and off.</p>
+<p>예 3 : 토글 명령 배우기</p>
+<p><code>alternative</code> 플래그는 TV를 켜고 끌 수있는 전원 버튼과 같은 여러 버튼에 동일한 버튼을 사용하는 명령을 캡처하는 데 유용합니다.</p>
 <pre><code class="language-yaml">script:
   learn_tv_power_button:
     sequence:
@@ -228,10 +228,10 @@ Default value: </p>
           command: power
           alternative: True
 </code></pre>
-<p>In the above example, two codes will be captured for the power command, and will be sent alternately each time the command is called.</p>
+<p>위의 예에서 power 명령에 대해 두 개의 코드가 캡처되며 명령이 호출 될 때마다 교차로 전송됩니다.</p>
 <h3>
-<a class="title-link" name="send-command" href="#send-command"></a> Send command</h3>
-<p>Use the <code>remote.send_command</code> service to send commands.</p>
+<a class="title-link" name="-" href="#-"></a> 명령어 전송</h3>
+<p><code>remote.send_command</code> 서비스를 사용하여 명령을 보냅니다.</p>
 <table>
 <thead>
 <tr>
@@ -244,31 +244,31 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>ID of the remote.</td>
+<td>리모컨의 ID입니다.</td>
 </tr>
 <tr>
 <td><code>device</code></td>
 <td>no</td>
-<td>Name of the device to control.</td>
+<td>제어 할 장치의 이름입니다.</td>
 </tr>
 <tr>
 <td><code>command</code></td>
 <td>no</td>
-<td>Names of the commands to send.</td>
+<td>전송할 명령의 이름.</td>
 </tr>
 <tr>
 <td><code>num_repeats</code></td>
 <td>yes</td>
-<td>Number of times to repeat the commands.</td>
+<td>명령을 반복 할 횟수입니다.</td>
 </tr>
 <tr>
 <td><code>delay_secs</code></td>
 <td>yes</td>
-<td>Interval in seconds between one command and another.</td>
+<td>한 명령과 다른 명령 사이의 간격 (초).</td>
 </tr>
 </tbody>
 </table>
-<p>Example 1: Send a single command</p>
+<p>예 1 : 단일 명령 보내기</p>
 <pre><code class="language-yaml">script:
   mute_tv:
     sequence:
@@ -278,7 +278,7 @@ Default value: </p>
           device: television
           command: mute
 </code></pre>
-<p>Example 2: Send a command repeatedly</p>
+<p>예 2 : 명령을 반복적으로 전송</p>
 <pre><code class="language-yaml">script:
   turn_up_tv_volume_20:
     sequence:
@@ -289,7 +289,7 @@ Default value: </p>
           command: volume up
           num_repeats: 20
 </code></pre>
-<p>Example 3: Send a sequence of commands</p>
+<p>예 3 : 명령 시퀀스 전송</p>
 <pre><code class="language-yaml">script:
   turn_on_ac:
     sequence:
@@ -303,8 +303,8 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>broadlink</code> sensor platform let you monitor data from an RM2 and A1 E-air. There is currently no support for the cloud API.</p>
-<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<p>The <code>broadlink</code> 센서 플랫폼은 브로드링크 RM2와 A1 E-air 제품에서 데이터를 모니터링 할 수 있습니다. 현재 클라우드 API는 지원되지 않습니다.</p>
+<p>활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: broadlink
@@ -319,16 +319,16 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname/IP address to connect to.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Device MAC address. Use the following format: <code>AA:BB:CC:DD:EE:FF</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 MAC 주소. 다음 형식을 사용하십시오: <code>AA:BB:CC:DD:EE:FF</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sensor name.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -337,7 +337,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Time in seconds to fetch data from sensors.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서에서 데이터를 가져 오는 시간 (초)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -346,7 +346,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Timeout in seconds for the connection to the device.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 연결에 대한 시간 초과 (초).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -379,8 +379,8 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
-<p>Obtain sensor data from an A1:</p>
+<p>설정하려면 <code>configuration.yaml</code> 파일에 다음 정보를 추가 하십시오.:</p>
+<p>A1에서 센서 데이터 설정 방법.:</p>
 <pre><code class="language-yaml">sensor:
   - platform: broadlink
     scan_interval: 60
@@ -393,7 +393,7 @@ Default value: </p>
       - light
       - noise
 </code></pre>
-<p>Obtain temperature data from an RM2:</p>
+<p>RM2에서 온도 데이터 설정 방법:</p>
 <pre><code class="language-yaml">sensor:
   - platform: broadlink
     scan_interval: 60
@@ -403,20 +403,20 @@ Default value: </p>
       - temperature
 </code></pre>
 <h3>
-<a class="title-link" name="microsoft-windows-installation" href="#microsoft-windows-installation"></a> Microsoft Windows installation</h3>
+<a class="title-link" name="ms--" href="#ms--"></a> MS 윈도우 설치</h3>
 <div class="note">
-<p>The pycrypto library needs to be available on your platform. On a typical windows sysytem <code>pip install pycrypto</code> will fail, as a compiler needs to be installed first.</p>
+<p>pycrypto 라이브러리를 사용할 수 있어야합니다.  일반적인 Windows <code>pip install pycrypto</code> 명령으로는 동작하지 않습니다. 컴파일러를 먼저 설치해야 합니다.</p>
 </div>
-<p>The quickest way around this is to use a pre-built binary, e.g., from <a href="https://github.com/sfbahr/PyCrypto-Wheels" rel="external nofollow">https://github.com/sfbahr/PyCrypto-Wheels</a></p>
-<p>Be sure to get the correct 64 or 32-bit binary for your system, the full command line will look something like the sample below for a 64-bit system:</p>
+<p>이 문제를 해결하는 가장 빠른 방법은 <a href="https://github.com/sfbahr/PyCrypto-Wheels" rel="external nofollow">https://github.com/sfbahr/PyCrypto-Wheels</a>에서 사전 빌드 된 바이너리를 사용하는 방법입니다.</p>
+<p>시스템에 맞는 64 비트 또는 32 비트 바이너리를 가져 오십시오. 전체 명령 행은 64 비트 시스템의 경우 다음 샘플과 유사합니다.:</p>
 <pre><code class="language-bash">pip install --use-wheel --no-index --find-links=https://github.com/sfbahr/PyCrypto-Wheels/raw/master/pycrypto-2.6.1-cp35-none-win_amd64.whl pycrypto
 </code></pre>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>This <code>Broadlink</code> switch platform allow to you control Broadlink <a href="https://www.ibroadlink.com/" rel="external nofollow">devices</a>.</p>
+<p><code>Broadlink</code> 스위치 플랫폼을 사용하면 Broadlink <a href="https://www.ibroadlink.com/" rel="external nofollow">devices</a>.를 제어할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>활성화하려면 <code>configuration.yaml</code> 파일에 다음 행을 추가하십시오:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: broadlink
@@ -429,20 +429,20 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname/IP address to connect to.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소입니다..</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Device MAC address. Use the following format: <code>AA:BB:CC:DD:EE:FF</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 MAC 주소. 다음 형식을 사용하십시오 <code>AA:BB:CC:DD:EE:FF</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Timeout in seconds for the connection to the device.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 연결에 대한 시간 초과 (초).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="retry" href="#retry"></a> retry</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Retry times for fetch data if failed.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>실패한 경우 데이터 fetch에 대한 재시도 시간</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -450,65 +450,65 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name used to display the switch in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 스위치를 표시하는데 사용되는 이름입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Switch type. Choose one from: <code>rm</code>, <code>rm2</code>, <code>rm_mini</code>, <code>rm_pro_phicomm</code>, <code>rm2_home_plus</code>, <code>rm2_home_plus_gdt</code>, <code>rm2_pro_plus</code>, <code>rm2_pro_plus2</code>, <code>rm2_pro_plus_bl</code>, <code>rm_mini_shate</code>, <code>sp1</code>, <code>sp2</code>, <code>honeywell_sp2</code>, <code>sp3</code>, <code>spmini2</code>, <code>spminiplus</code> or <code>mp1</code>. <code>SC1</code> devices can be registered as <code>sp2</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>스위치 타입 중 다음중 하나를 선택: <code>rm</code>, <code>rm2</code>, <code>rm_mini</code>, <code>rm_pro_phicomm</code>, <code>rm2_home_plus</code>, <code>rm2_home_plus_gdt</code>, <code>rm2_pro_plus</code>, <code>rm2_pro_plus2</code>, <code>rm2_pro_plus_bl</code>, <code>rm_mini_shate</code>, <code>sp1</code>, <code>sp2</code>, <code>honeywell_sp2</code>, <code>sp3</code>, <code>spmini2</code>, <code>spminiplus</code> 혹은 <code>mp1</code>. <code>SC1</code> 는 <code>sp2</code>로 등록할 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="switches" href="#switches"></a> switches</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The array that contains all switches.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>모든 스위치를 포함하는 배열입니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="identifier" href="#identifier"></a> identifier</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the command switch as slug. Multiple entries are possible.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>slug로서 커맨드 스위치의 이름. 다중 entry 적용 가능합니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="command_on" href="#command_on"></a> command_on</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Base64 encoded packet from RM device to take for on.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>ON 시키고자 하는 RM 장치의 Base64 인코딩 패킷</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="command_off" href="#command_off"></a> command_off</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Base64 encoded packet from RM device to take for off.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>OFF 시키고자 하는 RM 장치의 Base64 인코딩 패킷</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name used to display the switch in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 스위치를 표시하는 데 사용되는 이름입니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="slots" href="#slots"></a> slots</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of 4 slots of MP1 power strip. If not configured, slot name will be <code>switch's friendly_name + 'slot {slot_index}'</code>. e.g ‘MP1 slot 1’</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>MP1 파워 스트립의 4 개 슬롯의 이름. 별도로 설정하지 않은 경우 슬롯 이름은 <code>switch's friendly_name + 'slot {slot_index}'</code>. 입니다.  예) ‘MP1 slot 1’</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="slot_1" href="#slot_1"></a> slot_1</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 1</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>slot 1 사용자정의 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="slot_2" href="#slot_2"></a> slot_2</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 2</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>slot 2 사용자정의 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="slot_3" href="#slot_3"></a> slot_3</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 3</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>slot 3 사용자정의 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="slot_4" href="#slot_4"></a> slot_4</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly names of slot 4</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>slot 4 사용자정의 이름</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
-<p>Information about how to install on Windows can be found <a href="/integrations/broadlink#sensor#microsoft-windows-installation">here</a>.</p>
+<p>Windows에 설치하는 방법에 대한 정보는 <a href="/integrations/broadlink#sensor#microsoft-windows-installation">here</a>를 참조하십시오.</p>
 <h3>
-<a class="title-link" name="how-to-obtain-irrf-packets" href="#how-to-obtain-irrf-packets"></a> How to obtain IR/RF packets?</h3>
-<p>Choose Call Service from the Developer Tools. Choose the service <code>broadlink.learn</code> from the list of <strong>Available services:</strong>, write in “Service Data” JSON with 1 field “host”:“your_broadlink_IP” and hit <strong>CALL SERVICE</strong>. Press the button on your remote with in 20 seconds. The packet will be printed as a persistent notification in the States page of the web interface.</p>
-<p>Example config for <code>rm</code>, <code>rm2</code>, <code>rm_mini</code>, <code>rm_pro_phicomm</code>, <code>rm2_home_plus</code>, <code>rm2_home_plus_gdt</code>, <code>rm2_pro_plus</code>, <code>rm2_pro_plus2</code>, <code>rm2_pro_plus_bl</code> and <code>rm_mini_shate</code> devices:</p>
+<a class="title-link" name="irrf---" href="#irrf---"></a> IR/RF 패킷을 습득하는 방법</h3>
+<p>**Available services:**에서 broadlink.learn Service를 선택하고 “host”: “your_broadlink_IP” , “Service Data” JSON 스크립트를 작성하고 <strong>CALL SERVICE</strong>를 누르십시오 . 20 초 안에 리모컨의 버튼을 누르십시오. 패킷은 웹의 States (상태) 페이지에 지속적인 알림으로 표시됩니다.</p>
+<p><code>rm</code>, <code>rm2</code>, <code>rm_mini</code>, <code>rm_pro_phicomm</code>, <code>rm2_home_plus</code>, <code>rm2_home_plus_gdt</code>, <code>rm2_pro_plus</code>, <code>rm2_pro_plus2</code>, <code>rm2_pro_plus_bl</code> 와 <code>rm_mini_shate</code> 기기의 설정 예:</p>
 <pre><code class="language-yaml">switch:
   - platform: broadlink
     host: 192.168.1.2
@@ -548,7 +548,7 @@ Default value: </p>
         command_on: 'JgAcAB0dHB44HhweGx4cHR06HB0cHhwdHB8bHhwADQUAAAAAAAAAAAAAAAA='
         command_off: 'JgAaABweOR4bHhwdHB4dHRw6HhsdHR0dOTocAA0FAAAAAAAAAAAAAAAAAAA='
 </code></pre>
-<p>Example config for <code>sp1</code>, <code>sp2</code>, <code>honeywell_sp2</code>, <code>sp3</code>, <code>spmini2</code> and <code>spminiplus</code> devices:</p>
+<p><code>sp1</code>, <code>sp2</code>, <code>honeywell_sp2</code>, <code>sp3</code>, <code>spmini2</code> 및 <code>spminiplus</code> 기기들의 설정 예:</p>
 <pre><code class="language-yaml">switch:
   - platform: broadlink
     host: IP_ADDRESS
@@ -562,7 +562,7 @@ Default value: </p>
     retry: 5
     friendly_name: 'Humidifier'
 </code></pre>
-<p>Example config for <code>mp1</code> device:</p>
+<p><code>mp1</code>의 설정예:</p>
 <pre><code class="language-yaml">switch:
   - platform: broadlink
     host: IP_ADDRESS
@@ -579,7 +579,7 @@ Default value: </p>
 </code></pre>
 <h3>
 <a class="title-link" name="service-broadlinksend" href="#service-broadlinksend"></a> Service broadlink.send</h3>
-<p>You can use the service <code>broadlink.send</code> to directly send IR packets without the need to assign a switch entity for each command.</p>
+<p><code>broadlink.send</code> 를 사용하면 각 명령에 스위치 엔터티를 할당 할 필요없이 IR 패킷을 직접 보낼 수 있습니다 .</p>
 <table>
 <thead>
 <tr>
@@ -592,16 +592,16 @@ Default value: </p>
 <tr>
 <td><code>host</code></td>
 <td>no</td>
-<td>IP address to send command to.</td>
+<td>명령을 보낼 IP 주소입니다.</td>
 </tr>
 <tr>
 <td><code>packet</code></td>
 <td>no</td>
-<td>String or list of strings that contain the packet data.</td>
+<td>패킷 데이터를 포함하는 문자열 또는 문자열 목록.</td>
 </tr>
 </tbody>
 </table>
-<p>Example:</p>
+<p>예:</p>
 <pre><code class="language-yaml">script:
   tv_select_source:
     sequence:
@@ -613,76 +613,78 @@ Default value: </p>
             - "JgBGAJSTFDUUNhM2ExITEhMSExITEhM2EzYTNhQRFBEUERQRFBEUNRQ2ExITNhMSExITNhMSExITEhM2ExITNhQ1FBEUNhMADQUAAA=="
 </code></pre>
 <h3>
-<a class="title-link" name="using-e-control-remotes" href="#using-e-control-remotes"></a> Using E-Control remotes</h3>
-<p>If you already have your remotes learned on E-Control app you can use this method to “copy” them to Home Assistant.</p>
-<p>First get or learn all the remotes you want to add to Home Assistant in E-Control</p>
+<a class="title-link" name="e-control-remotes-" href="#e-control-remotes-"></a> E-Control remotes 사용시</h3>
+<p>E-Control 앱에서 리모컨을 이미 익힌 경우, 이 방법을 사용하여 홈 어시스턴트로 원격복사 할 수 있습니다.</p>
+<p>먼저 E-Control의 홈 어시스턴트에 추가하려는 모든 리모컨을 얻거나 배우십시오.</p>
 <ol>
 <li>
-<p>Download</p>
-<p>Get the script from <a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">here</a>.</p>
+<p>다운로드</p>
+<p><a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">여기</a>서 스크립트를 다운로드 받으세요.</p>
 </li>
 <li>
-<p>Dump the data from the app</p>
-<p>Open the E-Control app on your mobile device. On the left side menu choose “Share” and then “Share to other phones in WLAN”. It will generate the files you will need for the script.</p>
+<p>앱에서 데이터를 가져오기</p>
+<p>모바일 장치에서 E-Control 앱을 엽니 다. 왼쪽 메뉴에서 “공유”를 선택한 다음 “WLAN의 다른 전화기와 공유”를 선택하십시오. 스크립트에 필요한 파일을 생성합니다.</p>
 </li>
 <li>
-<p>Get data from your Android device</p>
-<p>Connect your Android device to your computer and browse the SD card/External Storage folder “/broadlink/newremote/SharedData/”. You need to get the following files and put them in the same folder as this script:</p>
+<p>Android 기기에서 데이터 가져 오기</p>
+<p>Android 기기를 컴퓨터에 연결하고 SD 카드 / 외부 저장 폴더“/ broadlink / newremote / SharedData /”를 찾습니다. 다음 파일을 가져 와서이 스크립트와 같은 폴더에 넣어야합니다.:</p>
 <p>jsonSubIr
 jsonButton
 jsonIrCode</p>
 </li>
 <li>
-<p>Install Requirements</p>
-<p>Run <code>pip install simplejson</code>. You must install simplejson in the same python version you will use to run the scripts. You can ensure that the current version is installed by attempting to install again and confirming that you see “Requirement already satisfied”.</p>
+<p>설치 요구 사항</p>
+<p><code>pip install simplejson</code> 실행. 스크립트를 실행하는 데 사용할 동일한 Python 버전으로 simplejson을 설치해야합니다. 다시 설치를 시도하고 “요구 사항이 이미 충족되었습니다” 라는 메시지가 표시되면 현재 버전이 설치되어 있는지 확인할 수 있습니다.</p>
 </li>
 <li>
-<p>Get the data from the device</p>
-<p>Navigate to the folder you downloaded and run <code>python getBroadlinkSharedData.py</code>. Follow the steps on screen. NOTE: These scripts were only tested with Python 2.7.</p>
+<p>장치에서 데이터를 가져 오기</p>
+<p>다운로드 한 폴더로 이동하여 <code>python getBroadlinkSharedData.py</code>를 실행하십시오. 화면의 단계를 따르십시오. 참고 :이 스크립트는 Python 2.7에서만 테스트되었습니다.</p>
 </li>
 <li>
-<p>Install python-broadlink library:</p>
+<p>python-broadlink 라이브러리를 설치:</p>
 <pre><code class="language-bash">git clone https://github.com/mjg59/python-broadlink.git
 cd python-broadlink
 sudo python setup.py install
 </code></pre>
 </li>
 <li>
-<p>Test the codes
-Use the <code>sendcode</code> script you have already downloaded to test the codes you got from the device.
-You need to edit the script with your RM Pro IP Address and MAC Address and with the code in HEX format.
-When run the script, you know the code works when get message.
-Code sent…
-Not every code works.</p>
+<p>코드 테스트 하기</p>
+<p>테스트 장치에서 얻은 코드를 테스트하려면 이미 다운로드 한 <code>sendcode</code> 스크립트를 사용하십시오.
+RM Pro IP 주소 및 MAC 주소와 HEX 형식의 코드를 사용하여 스크립트를 편집해야합니다.
+스크립트를 실행할 때 메시지를받을 때 코드가 작동한다는 것을 알게됩니다.
+코드가 전송되었습니다… 모든 코드가 작동하는 것은 아닙니다.</p>
 </li>
 <li>
-<p>Convert the HEX codes to base64.
-Use <a href="https://tomeko.net/online_tools/hex_to_base64.php?lang=en1" rel="external nofollow">this</a> tool to convert the hex codes to base64 for use with Home Assistant.</p>
+<p>16 진수 코드를 base64로 변환</p>
+<p><a href="https://tomeko.net/online_tools/hex_to_base64.php?lang=en1" rel="external nofollow">이것</a>의 도구를 사용 하여 16 진 코드를 base64로 변환하여 Home Assistant와 함께 사용하십시오.</p>
 </li>
 </ol>
 <h3>
-<a class="title-link" name="using-ios-and-windows-to-obtain-codes" href="#using-ios-and-windows-to-obtain-codes"></a> Using iOS and Windows to obtain codes</h3>
+<a class="title-link" name="ios-windows---" href="#ios-windows---"></a> IOS와 WINDOWS를 사용하여 코드 얻기</h3>
 <ol>
 <li>
-<p>Use the E-Control app to learn the codes from all of your suitable remotes. Depending on the remote, try to add useful names for the buttons and/or the remotes. This will mean that you should only have to run this process once and will help with getting them quickly into Home Assistant. Dump the files in the app by navigating to the hamburger icon, select <code>share and select</code>, then choose <code>Share to other phones on WLAN</code>.</p>
+<p>E-Control 앱을 사용하여 모든 적합한 리모콘에서 코드를 학습하십시오.  리모컨에 따라 버튼 및 / 또는 리모컨에 유용한 이름을 추가하십시오. 결국 이 프로세스를 한 번만 실행하면 Home Assistant로 빠르게 가져갈 수 있습니다. 햄버거 아이콘으로 이동하여 앱에서 파일을 덤프하고 <code>share and select</code>를 선택한 후 <code>Share to other phones on WLAN</code>을 선택하십시오.</p>
 </li>
 <li>
-<p>Install Requirements</p>
+<p>설치 요구 사항</p>
 <ul>
-<li>Download and install Python 2.7 on your windows PC.</li>
-<li>Run <code>pip install simplejson</code>. You must install simplejson in the same python version you will use to run the scripts. You can ensure that the current version is installed by attempting to install again and confirming that you see “Requirement already satisfied”.</li>
-<li>Download and install <a href="https://www.imactools.com/iphonebackupviewer/" rel="external nofollow">iBackup Viewer</a>.</li>
-<li>Download <a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">these</a> github files. Make sure you place them in the \Python27 path in Windows. Be sure that the getBroadlinkSharedData.py from the download is in this directory.</li>
+<li>Windows PC에 Python 2.7을 다운로드하여 설치하십시오.</li>
+<li>
+<code>pip install simplejson</code> 실행. 스크립트를 실행하는 데 사용할 동일한 Python 버전으로 simplejson을 설치해야합니다. 다시 설치를 시도하고“요구 사항이 이미 충족되었습니다”라는 메시지가 표시되면 현재 버전이 설치되어 있는지 확인할 수 있습니다.</li>
+<li>
+<a href="https://www.imactools.com/iphonebackupviewer/" rel="external nofollow">iBackup Viewer</a>를 다운로드하여 설치하십시오 ..</li>
+<li>
+<a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">이것</a>을 github에서 다운로드하십시오. Windows의 \ Python27 경로에 배치하십시오. 다운로드의 getBroadlinkSharedData.py가이 디렉토리에 있는지 확인하십시오.</li>
 </ul>
 </li>
 <li>
-<p>Plug your iphone into your windows PC, open iTunes and create a non-encrypted backup of your device.</p>
+<p>iPhone을 Windows PC에 연결하고 iTunes를 열고 암호화되지 않은 장치 백업을 만듭니다.</p>
 </li>
 <li>
-<p>Open iBackup viewer then select the iOS backup that you created. Navigate to the App icon and then scroll until you find e-control.app, select this. Select and extract the files jsonButton, jsonIrCode and jsonSublr; they will be located in the Documents/SharedData section. Put these in the same location as the getBroadlinkSharedData.py.</p>
+<p>iBackup 뷰어를 열고 작성한 iOS 백업을 선택하십시오. 앱 아이콘으로 이동 한 다음 e-control.app를 찾을 때까지 스크롤하여 선택하십시오.  jsonButton, jsonIrCode 및 jsonSublr 파일을 선택하고 추출하십시오. 그것들은 Documents/SharedData 섹션에 있습니다. 이것을 getBroadlinkSharedData.py와 같은 위치에 두십시오.</p>
 </li>
 <li>
-<p>Now open a Command Prompt and navigate to the directory where the aforementioned files are located e.g. C:\Python27. Now run the command python getBroadlinkSharedData.py, you should see something like this:</p>
+<p>이제 명령 프롬프트를 열고 위에서 언급한 파일이있는 디렉토리 (예 : C:\Python27)로 이동하십시오. 이제 python getBroadlinkSharedData.py 명령을 실행하면 다음과 같은 내용이 표시됩니다.:</p>
 <pre><code class="language-bash">C:\Python27&gt;python getBroadlinkSharedData.py
 ID: 1 | Name: TV
 ID: 2 | Name: Upstairs
@@ -702,30 +704,31 @@ ID: 15 | Name: SONY SoundBar
 ID: 16 | Name: Fire TV
 ID: 17 | Name: New RF Remote
 </code></pre>
-<p>Select the remote ID you would like to extract:</p>
+<p>추출하려는 원격 ID를 선택하십시오.:</p>
 <pre><code class="language-bash">Select accessory ID: 5
 [+] You selected:  TV
 [+] Dumping codes to TV.txt
 </code></pre>
 </li>
 <li>
-<p>Now there should be a file with the name of the remote you chose in the same directory ending in <code>.txt</code>. Open that up and it will contain the Base64 code required for Home Assistant. To ensure these codes work correctly you may need to add <code>==</code> to the end of the code in your config.yaml file (or wherever you have your switches).</p>
+<p>이제 같은 디렉토리에서 선택한 <code>.txt</code>의 리모콘의 이름을 가진 파일이 있어야합니다. 이를 열어 보면 Home Assistant에 필요한 Base64 코드가 있습니다. 이러한 코드가 올바르게 작동하도록하려면 config.yaml 파일의 코드 끝에 <code>==</code>를 추가해야 합니다. (또는 스위치가있는 위치에).</p>
 </li>
 </ol>
 <h3>
-<a class="title-link" name="using-windows-to-obtain-codes-with-broadlink-manager" href="#using-windows-to-obtain-codes-with-broadlink-manager"></a> Using Windows to obtain codes with Broadlink Manager</h3>
+<a class="title-link" name="broadlink-manager----windows-" href="#broadlink-manager----windows-"></a> BROADLINK MANAGER로 코드를 얻기 위해 WINDOWS 사용</h3>
 <ol>
-<li>Install Broadlink Manager from this SourceForge link <a href="https://sourceforge.net/projects/broadlink-manager/" rel="external nofollow">here</a>.</li>
-<li>Open the application and hit “scan” to activate your broadlink device.</li>
-<li>Hit “Learn New Command” and follow instructions on screen.</li>
-<li>The “OnRawData Base64” is the value to be used with Home Assistant.</li>
+<li>
+<a href="https://sourceforge.net/projects/broadlink-manager/" rel="external nofollow">여기</a> SourceForge 링크에서 Broadlink Manager를 설치.</li>
+<li>응용 프로그램을 열고 “스캔” 을 눌러 broadlink 장치를 활성화하십시오.</li>
+<li>“Learn New Command”를 누르고 화면의 지시 사항을 따르십시오.</li>
+<li>“OnRawData Base64”는 홈 어시스턴트와 함께 사용되는 값입니다.</li>
 </ol>
 <h3>
-<a class="title-link" name="using-node-red-to-obtain-codes" href="#using-node-red-to-obtain-codes"></a> Using Node-RED to obtain codes</h3>
+<a class="title-link" name="node-red---" href="#node-red---"></a> NODE-RED를 사용하여 코드 얻기</h3>
 <ol>
-<li>Install the Broadlink Control palette in Node-RED (click the Hamburger menu at top right corner&gt; Settings&gt; Palette&gt; Install and type Broadlink. Click install on the node-red-contrib-broadlink-control.</li>
-<li>Once installed, verify that the new palette titled broadlink is available in the nodes menu.</li>
-<li>Drag the RM node to an empty flow and double click to configure the node.
+<li>Node-RED에 Broadlink Control 팔레트를 설치하십시오 (오른쪽 상단 모서리에있는 햄버거 메뉴를 클릭하고 설정&gt; 팔레트&gt; 설치 및 Broadlink를 입력 한 후 node-red-contrib-broadlink-control에서 install을 클릭하십시오.</li>
+<li>설치가 완료되면 노드 메뉴에서 Broadlink라는 새 팔레트를 사용할 수 있는지 확인하십시오.</li>
+<li>RM 노드를 빈 플로우로 끌어 두 번 클릭하여 노드를 구성하십시오.
 <pre><code class="language-bash">a. give your RM device a name for easy identification
 b. click on the pencil to edit the device information
 c. enter the MAC address of the Broadlink RM PRO or RM Mini
@@ -733,38 +736,38 @@ d. enter the IP address of the Broadlink RM PRO or RM mini
 e. leave the Catalog field empty.
 </code></pre>
 </li>
-<li>Click Update, and the device field should show the MAC address of the newly added device. If not, just select it.</li>
-<li>In the Action field, select Learn, then click Done.</li>
-<li>Drag an Inject node to the left of the RM node and link them. The type of inject doesn’t matter. Leave it to the defaults.</li>
-<li>Drag a Template node on the Flow to the right of the RM node and link it to the RM node.</li>
-<li>Double click the Template node to edit it, select:
+<li>업데이트를 클릭하면 장치 필드에 새로 추가 된 장치의 MAC 주소가 표시됩니다. 그렇지 않은 경우라도 그냥 선택하십시오.</li>
+<li>액션 필드에서, 학습을 선택한 후 완료를 클릭하세요.</li>
+<li>Inject 노드를 RM 노드의 왼쪽으로 끌어서 연결하십시오. Inject 유형은 중요하지 않습니다. 기본값으로 두십시오</li>
+<li>플로우에서 템플리트 노드를 RM 노드 오른쪽으로 끌어서 RM 노드에 링크하십시오.</li>
+<li>템플리트 노드를 더블클릭하여 편집하고 다음을 선택하십시오.:
 <pre><code class="language-bash">Property: msg.payload
 Format: Mustache template
 Template field: enter '{{payload.data}}'.
 Output as: Plain text
 </code></pre>
 </li>
-<li>Drag a Debug node to the right of the Template node and link them.</li>
-<li>Show the debug messages, deploy the flow and click on the inject button.</li>
-<li>A message will show in the debug window:
+<li>디버그 노드를 템플리트 노드 오른쪽으로 끌어서 연결하십시오.</li>
+<li>디버그 메시지를 표시하고 플로우를 배치 한 후 Inject 단추를 클릭하십시오.</li>
+<li>디버그 창에 메시지가 표시됩니다:
 <pre><code class="language-bash">3/23/2019, 9:56:53 AMnode: RM_Mini1
 msg : string[47]
 "Please tap the remote button within 30 seconds."
 </code></pre>
 </li>
-<li>Point the IR remote control at the RM device and click the desired button for about 2 seconds. An array of numbers will show in the debug window. For example:
+<li>IR 리모콘을 RM 장치를 가리키고 원하는 버튼을 약 2 초간 클릭하십시오. 숫자 배열이 디버그 창에 표시됩니다. 예를 들면 다음과 같습니다.:
 <pre><code class="language-bash">'38,0,132,3,19,18,19,18,19,18,19,17,20,54,20,54,20,54,19,18,19,18,19,18,19,17,20,17,20,17,20,54,20,17,19,18,19,18,19,18,19,17,20,17,20,54,20,17,20,54,19,55,19,54,20,54,20,54,19,55,19,0,6,6,150,146,20,54,20,54,20,54,19,18,19,18,19,18,19,17,20,17,20,54,20,54,19,55,19,18,19,17,20,17,20,17,20,17,20,17,20,54,19,18,19,18,19,18,19,17,20,17,20,17,20,54,19,18,19,55,19,54,20,54,20,54,20,54,19,55,19,0,6,6,150,146,20,54,20,54,19,55,19,18,19,17,20,17,20,17,20,17,20,54,19,55,19,54,20,17,20,17,20,17,20,17,20,17,19,18,19,55,19,17,20,17,20,17,20,17,20,17,19,18,19,55,19,18,19,54,20,54,20,54,19,55,19,54,20,54,20,0,6,5,150,146,20,54,20,54,20,54,19,18,19,18,19,18,19,17,20,17,20,54,20,54,19,55,19,18,19,17,20,17,20,17,20,17,20,17,20,54,19,18,19,18,19,18,19,17,20,17,20,17,20,54,19,18,19,55,19,54,20,54,20,54,19,55,19,54,20,0,6,6,149,147,20,54,19,55,19,54,20,17,20,17,20,17,20,17,20,17,19,55,19,54,20,54,20,17,20,17,20,17,19,18,19,18,19,18,19,54,20,17,20,17,20,17,20,17,19,18,19,18,19,54,20,17,20,54,20,54,20,54,19,...'
 </code></pre>
 </li>
 </ol>
-<p>This is the code we need to transmit again to replicate the same remote function.</p>
+<p>이것은 동일한 원격 기능을 복제하기 위해 다시 전송해야하는 코드입니다.</p>
 <h3>
-<a class="title-link" name="using-node-red-to-transmit-codes" href="#using-node-red-to-transmit-codes"></a> Using Node red to Transmit Codes</h3>
+<a class="title-link" name="node-red---" href="#node-red---"></a> Node red를 이용한 코드 전송</h3>
 <ol>
-<li>Drag another RM node on the same flow we created earlier. The RM node should be configured to the RM device created earlier by default.</li>
-<li>In the Action field, select - Set from msg.payload -.</li>
-<li>Drag an Inject node and give it a meaningful name relevant to the remote control button function, like “TV On” or “TV Source”.</li>
-<li>Drag a template node and double click it to configure:
+<li>앞에서 만든 것과 동일한 절차에서 다른 RM 노드를 끕니다. RM 노드는 기본적으로 앞에서 만든 RM 장치로 설정되어야합니다.</li>
+<li>Action 필드에서, - Set from msg.payload - 를 선택하십시오.</li>
+<li>인 젝트 노드를 드래그하여“TV On”또는“TV Source”와 같이 리모콘 버튼 기능과 관련된 의미있는 이름을 지정하십시오.</li>
+<li>템플리트 노드를 끌어서 두 번 클릭하여 구성하십시오.:
 <pre><code class="language-bash">Property: msg.payload
 Format: Mustache template
 Template: enter the following:
@@ -775,20 +778,20 @@ Template: enter the following:
 In the Output as field, "select Parsed JSON".
 </code></pre>
 </li>
-<li>Click Done.</li>
-<li>Drag a debug node and connect it to the output of the RM node.</li>
-<li>Connect the Inject node to the Template node, and the template node to the RM node.</li>
-<li>Click Deploy to activate the flow, and then click the inject button. The debug window should show a debug message. For example:
+<li>완료를 클릭.</li>
+<li>디버그 노드를 드레그해서 RM 노드의 출력에 연결하십시오.</li>
+<li>Inject 노드를 템플리트 노드에 연결하고 템플리트 노드를 RM 노드에 연결하십시오.</li>
+<li>배포를 클릭하여 흐름을 활성화 한 다음 주입 단추를 클릭하십시오. 디버그 창에 디버그 메시지가 표시되어야합니다. 예를 들면 다음과 같습니다.:
 <pre><code class="language-bash">{"action":"send","data":   [38,0,152,0,0,1,39,148,19,18,18,19,18,55,19,18,18,19,18,19,18,19,18,55,18,56,18,19,18,55,18,19,18,56,18,18,19,55,18,19,18,19,18,18,18,56,18,19,18,18,19,55,18,56,18,18,19,18,18,19,18,19,18,55,19,18,18,19,18,19,18,19,18,18,18,19,18,19,18,55,19,55,18,19,18,19,18,18,19,18,18,56,18,19,18,18,19,55,18,56,18,18,19,18,18,19,18,19,18,19,18,18,19,18,18,56,18,55,18,19,18,19,18,19,18,18,19,55,18,19,18,55,19,18,18,56,18,19,18,18,19,18,18,19,18,19,18,19,18,18,18,56,18,0,13,5],"status":"OK"}
 </code></pre>
 </li>
 </ol>
-<p>The “status” : “OK” at the end is a feedback that the Broadlink RM device is connected and has transmitted the payload.</p>
-<p>Now you can add as many template nodes, each having a specific code, and add any type of input nodes to activate the template and transmit the code.</p>
+<p>“status” : “OK” 확인”은 Broadlink RM 장치가 연결되어 페이로드를 전송 한 피드백입니다.</p>
+<p>이제 각각 특정 코드가있는 템플릿 노드를 여러 개 추가하고 모든 유형의 입력 노드를 추가하여 템플릿을 활성화하고 코드를 전송할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="using-broadlink_cli-to-obtain-codes" href="#using-broadlink_cli-to-obtain-codes"></a> Using broadlink_cli to obtain codes</h3>
-<p>It is also possible to obtain codes using <code>broadlink_cli</code> from <a href="https://github.com/mjg59/python-broadlink" rel="external nofollow">python-broadlink</a> project.
-First use discovery to find your Broadlink device:</p>
+<a class="title-link" name="broadlink_cli---" href="#broadlink_cli---"></a> BROADLINK_CLI를 사용하여 코드 얻기</h3>
+<p><a href="https://github.com/mjg59/python-broadlink" rel="external nofollow">python-broadlink</a> project 에서 <code>broadlink_cli</code>를 통해 코드를 얻을 수도 있습니다.
+먼저 검색을 사용하여 Broadlink 장치를 찾으십시오.:</p>
 <pre><code class="language-bash">./broadlink_discovery 
 Discovering...
 ###########################################
@@ -798,23 +801,23 @@ Device file data (to be used with --device @filename in broadlink_cli) :
 0x2737 192.168.1.137 36668342nnnn
 temperature = 0.0
 </code></pre>
-<p>Then use this info in a cli-command:</p>
+<p>그런 다음 cli-command에서 이 정보를 사용하십시오.:</p>
 <pre><code class="language-bash">./broadlink_cli  --learn --device "0x2737 192.168.1.137 36668342nnnn"
 Learning...
 </code></pre>
-<p>Press a button on the remote and you get a code:</p>
+<p>리모컨의 버튼을 누르면 코드가 나타납니다:</p>
 <pre><code class="language-txt">260058000001219512131114113910141114111411141114103911391114103911391139103911391039113911141039111411391015103911141114113910141139111410391114110005250001274b11000c520001274b11000d05
 Base64: b'JgBYAAABIZUSExEUETkQFBEUERQRFBEUEDkROREUEDkRORE5EDkRORA5ETkRFBA5ERQRORAVEDkRFBEUETkQFBE5ERQQOREUEQAFJQABJ0sRAAxSAAEnSxEADQU='
 </code></pre>
 <h3>
-<a class="title-link" name="conversion-of-codes-from-other-projects" href="#conversion-of-codes-from-other-projects"></a> Conversion of codes from other projects</h3>
-<p>For old/awkward devices another possibility is to try to get codes by using data gathered by the LIRC project.</p>
-<p>Assuming that your (or similar) device is in one of these databases:</p>
+<a class="title-link" name="---" href="#---"></a> 다른 프로젝트로의 코드 변환</h3>
+<p>오래되거나 안될것같던 장치들도 LIRC 프로젝트에서 수집 한 데이터를 사용하여 코드를 가져 오는 것도 가능합니다.</p>
+<p>귀하의 (또는 유사한) 장치가 다음 데이터베이스 중 하나에 있다고 가정합니다.:</p>
 <ul>
 <li><a href="https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/" rel="external nofollow">https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/</a></li>
 <li><a href="https://github.com/probonopd/irdb/tree/master/" rel="external nofollow">https://github.com/probonopd/irdb/tree/master/</a></li>
 </ul>
-<p>You can grab <code>irdb2broadlinkha.sh</code> from <a href="https://github.com/molexx/irdb2broadlinkha" rel="external nofollow">irdb2broadlinkha</a> project and try to convert codes to format suitable for Home Assistant.</p>
+<p><a href="https://github.com/molexx/irdb2broadlinkha" rel="external nofollow">irdb2broadlinkha</a>프로젝트에서 <code>irdb2broadlinkha.sh</code> 프로젝트 코드로 Home Assistant에 적합한 형식으로 변환 할 수 있습니다 .</p>
 
 
 </article>

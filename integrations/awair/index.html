@@ -103,18 +103,16 @@
   <hr class="divider">
   
 
-  <p>The <code>awair</code> sensor platform will fetch data from your <a href="https://getawair.com" rel="external nofollow">Awair device(s)</a>.</p>
-<p>You will need to request access to the Awair API and obtain an access token from the Awair <a href="https://developer.getawair.com/" rel="external nofollow">Developer Console</a>.</p>
+  <p><code>awair</code> 센서 플랫폼은 <a href="https://getawair.com" rel="external nofollow">Awair device(s)</a> 데이터를 연동 시킵니다.</p>
+<p>Awair API에 대한 액세스를 요청하고 <a href="https://developer.getawair.com/" rel="external nofollow">Developer Console</a>에서 액세스 토큰을 확보해야합니다 .</p>
 <h2>
-<a class="title-link" name="configuring-the-platform" href="#configuring-the-platform"></a> Configuring the Platform</h2>
-<p>To enable these sensors, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 설정</h2>
+<p>센서를 활성화하려면, <code>configuration.yaml</code> 파일에 다음 행을 추가 하십시오.:</p>
 <pre><code class="language-yaml">sensor:
   - platform: awair
     access_token: ACCESS_TOKEN
 </code></pre>
-<p>The Awair API has stringent usage quotas. The API method to discover devices in your account is
-limited to only 6 calls per 24 hours. If you find that you’ve exceeded this quota, you may optionally
-append device information to your configuration to bypass this call:</p>
+<p>Awair API에는 엄격한 사용 할당량이 있습니다. 계정에서 기기를 검색하는 API 방법은 24 시간당 6 건으로 제한됩니다. 이 할당량을 초과 한 경우 선택적으로 호출을 무시하도록 장치 정보를 설정에 추가 할 수 있습니다.:</p>
 <pre><code class="language-yaml">sensor:
   - platform: awair
     access_token: ACCESS_TOKEN
@@ -127,23 +125,23 @@ append device information to your configuration to bypass this call:</p>
   <dl class="">
 <dt>
 <a class="title-link" name="access_token" href="#access_token"></a> access_token</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The access token for the Awair API.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Awair API의 액세스 토큰.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="devices" href="#devices"></a> devices</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>An optional list to manually configure devices rather than relying upon API discovery.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>API 검색에 의존하지 않고 수동으로 장치를 구성하기위한 선택 옵션입니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="uuid" href="#uuid"></a> uuid</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>UUID of the Awair sensor to monitor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터링 할 Awair 센서의 UUID.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="available-sensors" href="#available-sensors"></a> Available Sensors</h2>
-<p>The platform will fetch all available sensors from each Awair device linked to your account. Supported sensors:</p>
+<a class="title-link" name="--" href="#--"></a> 사용 가능한 센서</h2>
+<p>플랫폼은 계정에 연결된 각 Awair 장치에서 사용 가능한 모든 센서를 가져옵니다. 지원되는 센서 :</p>
 <ul>
 <li>Temperature</li>
 <li>Humidity</li>
@@ -151,7 +149,7 @@ append device information to your configuration to bypass this call:</p>
 <li>VOC</li>
 <li>Dust, PM2.5, PM10: varies according to Awair model</li>
 </ul>
-<p>This platform refreshes at an interval based on a 300 API call per-day quota, and the number of devices you have configured.</p>
+<p>이 플랫폼은 하루 300 번의 API 호출 할당량과 설정한 장치 수에 따라 간격을두고 갱신합니다.</p>
 
 
 </article>
