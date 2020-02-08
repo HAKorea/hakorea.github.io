@@ -104,14 +104,16 @@
   
 
   <div class="note">
-<p>If you want to integrate your Google Home or mobile phone running Google Assistant, with Home Assistant, then you want the <a href="/integrations/google_assistant/">Google Assistant component</a>.</p>
+구글홈 또는 스마트폰의 구글 어시스턴트와 연결하려면 [구글 어시스턴트 컴포넌트][AssistantIntergration]를 사용합니다.
 </div>
-<p><a href="https://assistant.google.com/" rel="external nofollow">Google Assistant</a> is an AI-powered voice assistant that runs on the Raspberry Pi and x86 platforms and interacts via the <a href="/integrations/dialogflow/">DialogFlow</a> integration or the <a href="/integrations/google_assistant/">Google Assistant component</a> with Home-Assistant. You can also use <a href="https://actions.google.com/" rel="external nofollow">Google Actions</a> to extend its functionality.</p>
-<p>To enable access to the Google Assistant API, do the following:</p>
+<p><a href="https://assistant.google.com/" rel="external nofollow">구글 어시스턴트</a>는 AI로 동작하는 보이스 어시스턴트로서 라즈베리파이나 x86 플랫폼에서 홈어시스턴와 <a href="/integrations/dialogflow/">DialogFlow</a> 또는 <a href="/integrations/google_assistant/">구글 어시스턴트 컴포넌</a>를 사용해 인터랙션을 합니다. 이들 기능을 확장하기 위해 <a href="https://actions.google.com/" rel="external nofollow">구글 액션</a>을 추가할 수도 있습니다.</p>
+<p>구글 어시스턴트 API를 사용하려면 다음 과정을 거쳐야 합니다:</p>
 <ol>
-<li>Go to the <a href="https://console.actions.google.com/" rel="external nofollow">Google Actions Console</a> and create a new project.</li>
-<li>After you created the project on the bottom of the page click “Device registration”. Keep this tab open for later use.</li>
-<li>Enable the Google Assistant API on the new project through <a href="https://console.developers.google.com/apis/api/embeddedassistant.googleapis.com/overview" rel="external nofollow">this</a> link. Make sure you have the right project selected (shown in the middle of the screen in the top bar). If you can’t select the right project, it may help to open the link in an incognito window.</li>
+<li>
+<a href="https://console.actions.google.com/" rel="external nofollow">Google Actions Console</a>로 접속해서 create a new project를 선택하세요.</li>
+<li>프로젝트를 생성한 다음 페이지에서 웹 페이지 하단에 있는 “Device registration”을 찾아 대기합니다. 이 페이지를 닫지 마세요. 아래 과정에서 다시 진행할 것입니다.</li>
+<li>우선 <a href="https://console.developers.google.com/apis/api/embeddedassistant.googleapis.com/overview" rel="external nofollow">이 곳</a>에서 구글 어시스턴트 API 사용을 확인해야 합니다.
+Make sure you have the right project selected (shown in the middle of the screen in the top bar). If you can’t select the right project, it may help to open the link in an incognito window.</li>
 <li>Configure the <a href="https://console.developers.google.com/apis/credentials/consent" rel="external nofollow">OAuth consent screen</a>. Also again check that you have the right project and don’t forget to hit “Save” at the bottom of the page. You only have to fill in a project name and your e-mail.</li>
 <li>You back to you device registration tab and click “Device registration”. Or open you project in the <a href="https://console.actions.google.com/" rel="external nofollow">Google Actions Console</a> start the Quick setup, and in the left bar click “Device registration”.</li>
 <li>Give you project a name, think of a nice manufacturer and for device type select “speaker”.</li>

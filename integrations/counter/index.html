@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>counter</code> integration allows one to count occurrences fired by automations.</p>
+  <p><code>counter</code>는 자동화에 의해 실행된 상황의 횟수를 계산할 수 있도록 해주는 통합구성요소입니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add a counter to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>카운터를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 counter:
   my_custom_counter:
@@ -119,17 +119,17 @@ counter:
   <dl class="">
 <dt>
 <a class="title-link" name="alias" href="#alias"></a> [alias]</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Alias for the counter. Multiple entries are allowed. <code>alias</code> should be replaced by the user for their actual value.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>카운터의 별칭. 여러 항목이 허용됩니다. <code>alias</code> 실제 값은 사용자가 대체할 수 있습니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly name of the counter.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카운터의 친숙한 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="initial" href="#initial"></a> initial</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Initial value when Home Assistant starts or the counter is reset.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈 어시스턴트가 시작되거나 카운터가 재설정 될 때 초기 값입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -138,7 +138,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="restore" href="#restore"></a> restore</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Try to restore the last known value when Home Assistant starts.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈 어시스턴트가 시작될 때 마지막으로 알려진 값을 복원하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -147,7 +147,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="step" href="#step"></a> step</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Incremental/step value for the counter.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카운터의 증가분 / 단계 값.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -155,30 +155,30 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="minimum" href="#minimum"></a> minimum</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Minimum value the counter will have</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카운터가 가질 최소값</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="maximum" href="#maximum"></a> maximum</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Maximum value the counter will have</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카운터가 가질 최대값</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Icon to display for the counter.</p>
+<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>카운터에 표시 할 아이콘입니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
-<p>Pick an icon that you can find on <a href="https://materialdesignicons.com/" rel="external nofollow">materialdesignicons.com</a> to use for your input and prefix the name with <code>mdi:</code>. For example <code>mdi:car</code>, <code>mdi:ambulance</code> or <code>mdi:motorbike</code>.</p>
+<p><a href="https://materialdesignicons.com/" rel="external nofollow">materialdesignicons.com</a> 에서 입력에 사용할 아이콘을 선택 하고 이름 앞에 접두사 <code>mdi:</code>를 붙입니다  예로서 <code>mdi:car</code>, <code>mdi:ambulance</code> 혹은 <code>mdi:motorbike</code>.</p>
 <h3>
-<a class="title-link" name="restore-state" href="#restore-state"></a> Restore State</h3>
-<p>This integration will automatically restore the state it had prior to Home Assistant stopping as long as you your entity has <code>restore</code> set to <code>true</code> which is the default. To disable this feature, set <code>restore</code> to <code>false</code>.</p>
-<p>If <code>restore</code> is set to <code>false</code>, the <code>initial</code> value will only be used when no previous state is found or when the counter is reset.</p>
+<a class="title-link" name="-" href="#-"></a> 복원 상태</h3>
+<p>이 통합구성요소는 엔티티가 기본값 <code>restore</code> 기본값인 <code>true</code> 설정했는지에 따라 Home Assistant 중지 이전의 상태를 자동으로 복원합니다.  설정이 기능을 사용하지 않으려면 <code>restore</code> 를 <code>false</code>로 변경합니다.</p>
+<p>만일 <code>restore</code> 가 <code>false</code>로 설정되고 , <code>initial</code> 값이 이전 상태가 발견 될 때 혹은 카운터가 리셋되었을때 사용되게 되어 있습니다.</p>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>Available services: <code>increment</code>, <code>decrement</code>, <code>reset</code> and <code>configure</code>.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>제공 서비스 : <code>increment</code>, <code>decrement</code>, <code>reset</code> and <code>configure</code>.</p>
 <h4>
 <a class="title-link" name="service-counterincrement" href="#service-counterincrement"></a> Service counter.increment</h4>
-<p>Increments the counter with 1 or the given value for the steps.</p>
+<p>단계에 대해 1 또는 제공된 값으로 카운터를 증가시킵니다.</p>
 <table>
 <thead>
 <tr>
@@ -191,13 +191,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+<td>동작할 entitiy의 이름입니다. 예) <code>counter.my_custom_counter</code>.</td>
 </tr>
 </tbody>
 </table>
 <h4>
 <a class="title-link" name="service-counterdecrement" href="#service-counterdecrement"></a> Service counter.decrement</h4>
-<p>Decrements the counter with 1 or the given value for the steps.</p>
+<p>단계에 대해 1 또는 주어진 값으로 카운터를 감소시킵니다.</p>
 <table>
 <thead>
 <tr>
@@ -210,13 +210,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+<td>동작할 entitiy의 이름입니다. 예) <code>counter.my_custom_counter</code>.</td>
 </tr>
 </tbody>
 </table>
 <h4>
 <a class="title-link" name="service-counterreset" href="#service-counterreset"></a> Service counter.reset</h4>
-<p>With this service the counter is reset to its initial value.</p>
+<p>이 서비스를 통해 카운터는 초기값으로 재설정됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -229,13 +229,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+<td>동작할 entitiy의 이름입니다. 예) <code>counter.my_custom_counter</code>.</td>
 </tr>
 </tbody>
 </table>
 <h4>
 <a class="title-link" name="service-counterconfigure" href="#service-counterconfigure"></a> Service counter.configure</h4>
-<p>With this service the properties of the counter can be changed while running.</p>
+<p>이 서비스를 사용하면 실행 중에 카운터의 속성을 변경할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -248,53 +248,53 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Name of the entity to take action, e.g., <code>counter.my_custom_counter</code>.</td>
+<td>동작할 entitiy의 이름입니다. 예) <code>counter.my_custom_counter</code>.</td>
 </tr>
 <tr>
 <td><code>minimum</code></td>
 <td>yes</td>
-<td>Set new value for minimum. None disables minimum.</td>
+<td>최소값으로 새 값을 설정하십시오. 값이 없을시 최소를 비활성화합니다.</td>
 </tr>
 <tr>
 <td><code>maximum</code></td>
 <td>yes</td>
-<td>Set new value for maximum. None disables maximum.</td>
+<td>최대 값을 새로 설정하십시오. 값이 없을시 최소를 비활성화합니다.</td>
 </tr>
 <tr>
 <td><code>step</code></td>
 <td>yes</td>
-<td>Set new value for step.</td>
+<td>단계의 새 값을 설정하십시오.</td>
 </tr>
 <tr>
 <td><code>initial</code></td>
 <td>yes</td>
-<td>Set new value for initial.</td>
+<td>초기 값으로 새 값을 설정하십시오.</td>
 </tr>
 <tr>
 <td><code>value</code></td>
 <td>yes</td>
-<td>Set the counters state to the given value.</td>
+<td>카운터 상태를 주어진 값으로 설정하십시오.</td>
 </tr>
 </tbody>
 </table>
 <h3>
 <a class="title-link" name="use-the-service" href="#use-the-service"></a> Use the service</h3>
-<p>Select the <strong>Services</strong> tab from within <strong>Developer Tools</strong>. Choose <strong>counter</strong> from the list of <strong>Domains</strong>, select the <strong>Service</strong>, enter something like the sample below into the <strong>Service Data</strong> field, and hit <strong>CALL SERVICE</strong>.</p>
+<p><strong>Developer Tools</strong>에서 <strong>Services</strong> 탭을 선택하십시오. <strong>Domains</strong> 목록에서 <strong>counter</strong>를 선택하고, <strong>Service</strong>를 선택한 뒤, enter 아래 샘플과 같은 <strong>Service Data</strong> 필드로 들어간 뒤, <strong>CALL SERVICE</strong>를 누르세요.</p>
 <pre><code class="language-json">{
   "entity_id": "counter.my_custom_counter"
 }
 </code></pre>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 예시</h2>
 <h3>
-<a class="title-link" name="counting-home-assistant-errors" href="#counting-home-assistant-errors"></a> Counting Home Assistant errors</h3>
-<p>To use a counter to count errors as caught by Home Assistant, you need to add <code>fire_event: true</code> to your <code>configuration.yaml</code>, like so:</p>
+<a class="title-link" name="---" href="#---"></a> 홈 어시스턴트 오류 계산</h3>
+<p>카운터를 사용하여 Home Assistant에서 잡은 오류를 계산하려면, <code>fire_event: true</code>를 <code>configuration.yaml</code>에 다음과 같이 추가하세요 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 system_log:
   fire_event: true
 </code></pre>
 <h3>
-<a class="title-link" name="error-counting---example-configuration" href="#error-counting---example-configuration"></a> Error counting - example configuration</h3>
+<a class="title-link" name="-----" href="#-----"></a> 오류 계산 - 설정 예시</h3>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 automation:
 - id: 'errorcounterautomation'

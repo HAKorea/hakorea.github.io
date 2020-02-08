@@ -103,18 +103,18 @@
   <hr class="divider">
   
 
-  <p>The Climate integration allows you to control and monitor HVAC (heating, ventilating, and air conditioning) devices and thermostats.</p>
+  <p>Climate 통합구성요소를 통해 HVAC (가열, 환기 및 공기 조절) 장치 및 온도 조절기를 제어하고 모니터링 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
 <a class="title-link" name="climate-control-services" href="#climate-control-services"></a> Climate control services</h3>
-<p>Available services: <code>climate.set_aux_heat</code>, <code>climate.set_preset_mode</code>, <code>climate.set_temperature</code>, <code>climate.set_humidity</code>, <code>climate.set_fan_mode</code>, <code>climate.set_hvac_mode</code>, <code>climate.set_swing_mode</code>, <code>climate.turn_on</code>, <code>climate.turn_off</code></p>
+<p>제공 서비스: <code>climate.set_aux_heat</code>, <code>climate.set_preset_mode</code>, <code>climate.set_temperature</code>, <code>climate.set_humidity</code>, <code>climate.set_fan_mode</code>, <code>climate.set_hvac_mode</code>, <code>climate.set_swing_mode</code>, <code>climate.turn_on</code>, <code>climate.turn_off</code></p>
 <div class="note">
-<p>Not all climate services may be available for your platform. Be sure to check the available services Home Assistant has enabled by checking <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Services</strong>.</p>
+<p>플랫폼에 따라 모든 Climate Service가 제공되는 것은 아닙니다. 홈어시스턴트의 <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Services</strong>에서 체크해서 사용할 수있는 서비스를 확인해야합니다</p>
 </div>
 <h3>
 <a class="title-link" name="service-climateset_aux_heat" href="#service-climateset_aux_heat"></a> Service climate.set_aux_heat</h3>
-<p>Turn auxiliary heater on/off for climate device</p>
+<p>climate 장치용 보조 히터 켜기 / 끄기</p>
 <table>
 <thead>
 <tr>
@@ -127,17 +127,17 @@
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>aux_heat</code></td>
 <td>no</td>
-<td>New value of auxiliary heater.</td>
+<td>보조 히터의 새로운 값.</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -150,9 +150,7 @@
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateset_preset_mode" href="#service-climateset_preset_mode"></a> Service climate.set_preset_mode</h3>
-<p>Set preset mode for climate device. Away mode changes the target temperature permanently to a temperature
-reflecting a situation where the climate device is set to save energy. For example, this may be used to emulate a
-“vacation mode.”</p>
+<p>Climate 장치에 대한 사전 설정 모드를 설정하십시오. Away mode 는 Climate 장치가 에너지를 절약하도록 설정된 상황을 반영하는 온도로 목표 온도를 변경합니다. 이것은 “vacation mode” 를 에뮬레이션하는 데 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -165,17 +163,17 @@ reflecting a situation where the climate device is set to save energy. For examp
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어 할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>preset_mode</code></td>
 <td>no</td>
-<td>New value of preset mode.</td>
+<td>사전 설정 모드의 새로운 값.</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -188,7 +186,7 @@ reflecting a situation where the climate device is set to save energy. For examp
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateset_temperature" href="#service-climateset_temperature"></a> Service climate.set_temperature</h3>
-<p>Set target temperature of climate device</p>
+<p>Climate 장치의 목표 온도 설정</p>
 <table>
 <thead>
 <tr>
@@ -201,32 +199,32 @@ reflecting a situation where the climate device is set to save energy. For examp
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>temperature</code></td>
 <td>no</td>
-<td>New target temperature for climate device (commonly referred to as a <em>setpoint</em>). Do not use if <code>hvac_mode</code> is <code>heat_cool</code>.</td>
+<td>Climate 장치의 새로운 목표 온도 (일반적으로 <em>setpoint</em>이라 함). <code>hvac_mode</code>가 <code>heat_cool</code>일 경우 사용하지마십시오.</td>
 </tr>
 <tr>
 <td><code>target_temp_high</code></td>
 <td>yes</td>
-<td>The highest temperature that the climate device will allow. Required if <code>hvac_mode</code> is <code>heat_cool</code>.</td>
+<td>Climate 장치가 허용하는 최고온도입니다. <code>hvac_mode</code>가 <code>heat_cool</code>인 경우 반드시 필요.</td>
 </tr>
 <tr>
 <td><code>target_temp_low</code></td>
 <td>yes</td>
-<td>The lowest temperature that the climate device will allow. Required if <code>hvac_mode</code> is <code>heat_cool</code>.</td>
+<td>Climate 장치가 허용하는 최저온도입니다. <code>hvac_mode</code> 가 <code>heat_cool</code>인 경우 반드시 필요.</td>
 </tr>
 <tr>
 <td><code>hvac_mode</code></td>
 <td>yes</td>
-<td>HVAC mode to set the climate device to. This defaults to current HVAC mode if not set, or set incorrectly.</td>
+<td>Climate 장치를 설정하는 HVAC 모드. 설정하지 않았거나 잘못 설정한 경우 현재 HVAC 모드로 기본 설정됩니다.</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-examples" href="#automation-examples"></a> Automation examples</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">### Set temperature to 24 in heat mode
 automation:
   trigger:
@@ -254,7 +252,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateset_humidity" href="#service-climateset_humidity"></a> Service climate.set_humidity</h3>
-<p>Set target humidity of climate device</p>
+<p>Climate 장치의 목표 습도 설정</p>
 <table>
 <thead>
 <tr>
@@ -267,17 +265,17 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>humidity</code></td>
 <td>no</td>
-<td>New target humidity for climate device</td>
+<td>Climate 장치의 새로운 목표 습도</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -290,7 +288,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateset_fan_mode" href="#service-climateset_fan_mode"></a> Service climate.set_fan_mode</h3>
-<p>Set fan operation for climate device</p>
+<p>Climate 장치의 팬 작동 설정</p>
 <table>
 <thead>
 <tr>
@@ -303,17 +301,17 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>fan_mode</code></td>
 <td>no</td>
-<td>New value of fan mode</td>
+<td>fan mode의 새로운 값</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -326,7 +324,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateset_hvac_mode" href="#service-climateset_hvac_mode"></a> Service climate.set_hvac_mode</h3>
-<p>Set climate device’s HVAC mode</p>
+<p>Climate 장치의 HVAC 모드 설정</p>
 <table>
 <thead>
 <tr>
@@ -339,17 +337,17 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>hvac_mode</code></td>
 <td>no</td>
-<td>New value of HVAC mode</td>
+<td>HVAC mode의 새로운 값.</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -362,7 +360,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateset_swing_mode" href="#service-climateset_swing_mode"></a> Service climate.set_swing_mode</h3>
-<p>Set swing operation mode for climate device</p>
+<p>Climate 장치의 스윙 작동 모드 설정</p>
 <table>
 <thead>
 <tr>
@@ -375,17 +373,17 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>swing_mode</code></td>
 <td>no</td>
-<td>New value of swing mode</td>
+<td>스윙 모드의 새로운 값.</td>
 </tr>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h4>
+<a class="title-link" name="-" href="#-"></a> 자동화 예</h4>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -398,7 +396,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="service-climateturn_on" href="#service-climateturn_on"></a> Service climate.turn_on</h3>
-<p>Turn climate device on. This is only supported if the climate device supports being turned off.</p>
+<p>Climate 장치를 켭니다. Climate 장치가 꺼져있는 경우에만 지원됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -411,13 +409,13 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 </tbody>
 </table>
 <h3>
 <a class="title-link" name="service-climateturn_off" href="#service-climateturn_off"></a> Service climate.turn_off</h3>
-<p>Turn climate device off. This is only supported if the climate device has the hvac mode <code>off</code>.</p>
+<p>Climate 장치를 끕니다. Climate 장치에 hvac 모드가 off인 경우만 지원됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -430,7 +428,7 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>yes</td>
-<td>String or list of strings that define the entity ID(s) of climate device(s) to control. To target all climate devices, use <code>all</code>.</td>
+<td>제어할 climate 장치의 entity ID를 정의하는 문자열 또는 문자열 목록입니다. 모든 Climate 장치를 대상으로 하려면, <code>all</code>을 사용하십시오.</td>
 </tr>
 </tbody>
 </table>

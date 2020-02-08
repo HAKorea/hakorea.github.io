@@ -103,19 +103,19 @@
   <hr class="divider">
   
 
-  <p>You can enable the Cast integration by going to the Integrations page inside the config panel.</p>
+  <p>홈어시스턴트에서 설정 - 통합구성요소로 이동하여 Cast 통합구성요소를 추가하여 사용할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="home-assistant-cast" href="#home-assistant-cast"></a> Home Assistant Cast</h2>
-<p>Home Assistant has its own Cast application to show the Home Assistant UI on any Chromecast device.  You can use it by adding the <a href="/lovelace/entities/#cast">Cast entity row</a> to your Lovelace UI, or by calling the <code>cast.show_lovelace_view</code> service. The service takes the path of a Lovelace view and an entity ID of a Cast device to show the view on. A <code>path</code> has to be defined in your Lovelace YAML for each view, as outlined in the <a href="/lovelace/views/#path">views documentation</a>.</p>
+<p>홈 어시스턴트에는 Chromecast 기기에 홈 어시스턴트 UI를 표시하는 고유한 전송 애플리케이션이 있습니다.  <a href="/lovelace/entities/#cast">Cast entity row</a>를 Lovelace UI에 추가하여 사용하거나 <code>cast.show_lovelace_view</code> service 를 호출해서 사용할 수 있습니다. 해당 service 는 Cast 장치의 entity 와 Lovelace 화면의 경로를 통해서 view로 화면에 노출 시킬 수 있습니다. <a href="/lovelace/views/#path">views documentation</a>에서 제시하였듯이 <code>path</code>는 각 view 화면을 위한 Lovelace YAML에서 정의되어야 합니다.</p>
 <pre><code class="language-json">{
   "entity_id": "media_player.office_display_4",
   "view_path": "lights"
 }
 </code></pre>
-<p>Note that Home Assistant Cast requires your Home Assistant installation to be accessible via <code>https://</code>. If you’re using Home Assistant Cloud, you don’t need to do anything. Otherwise you must make sure that you have configured the <code>base_url</code> for <a href="/integrations/http/">the <code>http</code> integration</a>.</p>
+<p>홈 어시스턴트 설치가 <code>https://</code>를 경유하여 설치되어야 홈어시스턴트 캐스트를 통해 액세스 할 수 있습니다.  홈어시스턴트 Cloud를 사용하는 경우 별도의 작업을 수행 할 필요가 없습니다. 그렇지 않으면 확실히 <a href="/integrations/http/">the <code>http</code> integration</a>위한 <code>base_url</code>로 설정되어있는지 확인해야합니다.</p>
 <h2>
-<a class="title-link" name="advanced-use" href="#advanced-use"></a> Advanced use</h2>
-<p>Cast devices can only be discovered if they are on the same subnet as Home Assistant. If this is not the case, you need to configure the IP address of the Cast device directly:</p>
+<a class="title-link" name="-" href="#-"></a> 고급 사용</h2>
+<p>Cast 장치는 홈어시트턴트와 동일한 서브넷에있는 경우에만 검색 할 수 있습니다. 그렇지 않은 경우 Cast 장치의 IP 주소를 직접 설정해야합니다:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cast:
   media_player:
@@ -127,16 +127,16 @@ cast:
   <dl class="">
 <dt>
 <a class="title-link" name="media_player" href="#media_player"></a> media_player</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list that contains all Cast devices.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>모든 Cast 장치가 포함 된 목록입니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Use only if you don’t want to scan for devices.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치를 검색하지 않으려는 경우에만 사용하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="ignore_cec" href="#ignore_cec"></a> ignore_cec</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of Chromecasts that should ignore CEC data for determining the active input. <a href="https://github.com/balloob/pychromecast#ignoring-cec-data" rel="external nofollow">See the upstream documentation for more information.</a></p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>유효한 입력신호를 결정하기 위해 CEC 데이터를 무시해야하는 Chromecast 목록입니다. <a href="https://github.com/balloob/pychromecast#ignoring-cec-data" rel="external nofollow">See the upstream documentation for more information.</a></p>
 </span></p></dd>
 </dl></dd>
 </dl>
