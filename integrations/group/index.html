@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p>Groups allow the user to combine multiple entities into one.</p>
-<p>Check the <strong>States</strong> <img src="/images/screenshots/developer-tool-states-icon.png" class="no-shadow" height="38"> page from the <strong>Developer Tools</strong> and browse the <strong>Current entities:</strong> listing for all available entities.</p>
+  <p>Groups을 통해 사용자는 여러 entity를 하나로 결합 할 수 있습니다.</p>
+<p><strong>Developer Tools</strong> 에서 <strong>States</strong> <img src="/images/screenshots/developer-tool-states-icon.png" class="no-shadow" height="38"> 페이지를 확인하고 <strong>Current entities:</strong> 를 탐색합니다. : 사용할 수있는 모든 entities에 대한 목록이 나옵니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 group:
   kitchen:
@@ -128,16 +128,16 @@ group:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the group.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>그룹 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Array or comma delimited string, list of entities to group.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>배열 또는 쉼표로 구분 된 문자열, 그룹화 할 entity 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="all" href="#all"></a> all</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set this to <code>true</code> if the group state should only turn <em>on</em> if <strong>all</strong> grouped entities are <em>on</em>.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>만일 <strong>all</strong> 그룹화된 entity들이 <em>on</em> 명령을 내리면, 반드시 group 상태도 <em>on</em>이 되야할 경우 <code>true</code>로 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -145,13 +145,14 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The icon that shows in the front end.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 아이콘입니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
 <a class="title-link" name="group-behavior" href="#group-behavior"></a> Group behavior</h2>
-<p>By default when any member of a group is <code>on</code> then the group will also be <code>on</code>. Similarly with a device tracker, when any member of the group is <code>home</code> then the group is <code>home</code>. If you set the <code>all</code> option to <code>true</code> though, this behavior is inverted and all members of the group have to be <code>on</code> for the group to turn on as well.</p>
+<p>기본적으로 어떤 group의 구성원이 <code>on</code>일 경우 group은 모두 on 입니다. device tracker와 마찬가지로, 한 group의 구성원이 <code>home</code>일 경우 group은 <code>home</code>을 나타냅니다.
+만일  <code>all</code> 옵션을 <code>true</code>로 세팅했다면, 이 행위는 모든 group이 <code>on</code> 상태가 되고 역시 마찬가지로 모든 group의 멤버들은 <code>on</code>을 실행하게 됩니다.</p>
 
 
 </article>
