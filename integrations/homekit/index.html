@@ -103,9 +103,9 @@
   <hr class="divider">
   
 
-  <p><code>homekit</code> 통합구성요소는 애플의 홈 앱과 시리에서 제어 할 수 있도록 애플 HomeKit에 홈어시스턴트에서 entity들을 전달할 수 있습니다. 나중에 문제를 해결하기 위해 아래 나열된 <a href="#considerations">considerations</a>을 읽었는지 확인하십시오. 그러나 문제가 발생하면 <a href="#troubleshooting">troubleshooting</a> 섹션을 확인 하십시오.</p>
+  <p><code>homekit</code> 통합구성요소는 애플의 홈앱과 Siri에서 제어할 수 있도록 애플 HomeKit에 홈어시스턴트에서 entity들을 전달할 수 있습니다. 나중에 문제를 해결하기 위해 아래 나열된 <a href="#consideration">고려 사항</a>을 읽었는지 확인하십시오. 그러나 문제가 발생하면 <a href="#troubleshooting">문제해결</a> 섹션을 확인 하십시오.</p>
 <div class="note">
-<p>홈 어시스턴트로 <code>HomeKit</code> 장치 만 제어 하려면, <a href="/integrations/homekit_controller/">HomeKit controller</a> 구성 요소를 확인하십시오.</p>
+<p>홈어시스턴트로 <code>HomeKit</code> 장치만 제어 하려면, <a href="/integrations/homekit_controller/">HomeKit controller</a> 구성 요소를 확인하십시오.</p>
 </div>
 <div class="note warning">
 <p>추가 패키지를 설치해야 할 수도 있습니다. :
@@ -169,7 +169,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>동일한 로컬 네트워크에서 통합을 사용하여 각 홈어시스턴트 인스턴스마다 개별적이어야합니다. <code>3</code> 에서 <code>25</code>의 문자열들. 문자, 영숫자와 공백이 허용됩니다.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>동일한 로컬 네트워크에서 연동을 사용하여 각 홈어시스턴트 인스턴스마다 개별적이어야합니다. <code>3</code> 에서 <code>25</code>의 문자열들. 문자, 영숫자와 공백이 허용됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -190,11 +190,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="advertise_ip" href="#advertise_ip"></a> advertise_ip</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>mDNS 알림에 사용 된 IP 주소를 재정의해야하는 경우. (예를 들어, Docker에서 네트워크 격리하여 사용하고 <code>avahi-daemon</code> reflector 모드 처럼 mDNS Forwarder와 함께 사용하는 경우).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>mDNS 알림에 사용된 IP 주소를 재정의해야하는 경우. (예를 들어, Docker에서 네트워크 격리하여 사용하고 <code>avahi-daemon</code> reflector 모드 처럼 mDNS Forwarder와 함께 사용하는 경우).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="filter" href="#filter"></a> filter</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>HomeKit에서 포함 / 제외 할 entity를 필터링합니다. (<a href="#configure-filter">Configure Filter</a>).</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>HomeKit에서 포함 / 제외할 entity를 필터링합니다. (<a href="#configure-filter">Configure Filter</a>).</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -227,11 +227,11 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HomeKit에 표시 할 entity의 이름입니다. HomeKit은 첫 실행시 액세서리의 기능 세트를 캐시하므로 변경 사항을 적용하려면 장치를 <a href="#resetting-accessories">reset</a> 해야 합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HomeKit에 표시할 entity의 이름입니다. HomeKit은 첫 실행시 액세서리의 기능 세트를 캐시하므로 변경 사항을 적용하려면 장치를 <a href="#resetting-accessories">reset</a> 해야 합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="linked_battery_sensor" href="#linked_battery_sensor"></a> linked_battery_sensor</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity <code>sensor</code> 의 <code>entity_id</code>는 액세서리의 배터리로 사용할 수 있습니다. HomeKit will cache an accessory’s feature set on the first run so a device must be <a href="#resetting-accessories">reset</a> for any change to take effect.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity <code>sensor</code> 의 <code>entity_id</code>는 액세서리의 배터리로 사용할 수 있습니다. HomeKit은 첫 실행시 액세서리 기능 세트를 캐시하므로 변경 사항을 적용하려면 장치를 [reset] (# resetting-accessories)해야합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="low_battery_threshold" href="#low_battery_threshold"></a> low_battery_threshold</dt>
@@ -245,7 +245,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="code" href="#code"></a> code</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알람 (<code>arm / disarm</code>) 혹은 잠금장치 (<code>lock / unlock</code>)으로 code를 사용. Only applicable <code>alarm_control_panel</code> 혹은 <code>lock</code> entity에만 해당.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알람 (<code>arm / disarm</code>) 혹은 잠금장치 (<code>lock / unlock</code>)으로 code를 사용. <code>alarm_control_panel</code> 혹은 <code>lock</code> entity에만 해당.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -253,7 +253,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="feature_list" href="#feature_list"></a> feature_list</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity(<code>media_player</code>)만 해당. 주어진 entity에 추가 할 기능 확인 목록입니다. 플랫폼 스키마와 비교할 수 있습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity(<code>media_player</code>)만 해당. 주어진 entity에 추가할 기능 확인 목록입니다. 플랫폼 스키마와 비교할 수 있습니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -264,7 +264,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity (<code>switch</code>)에만 해당.  HomeKit 내에서 생성 할 액세서리 유형. 유효한 유형으로는 <code>faucet</code>, <code>outlet</code>, <code>shower</code>, <code>sprinkler</code>, <code>switch</code> 그리고 <code>valve</code>. HomeKit은 첫 실행시 유형을 캐시하므로 변경 사항을 적용하려면 장치를 <a href="#resetting-accessories">reset</a> 해야 합니다.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity (<code>switch</code>)에만 해당.  HomeKit 내에서 생성 할 액세서리 유형. 유효한 유형으로는 <code>faucet</code>, <code>outlet</code>, <code>shower</code>, <code>sprinkler</code>, <code>switch</code> 그리고 <code>valve</code>. HomeKit은 첫 실행시 타입을 캐시하므로 변경 사항을 적용하려면 장치를 <a href="#resetting-accessories">reset</a> 해야 합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -296,29 +296,29 @@ homekit:
 <li>
 <code>홈어시스턴트</code> Bridge 와 액세서리는 <code>Home</code> 앱에 나오게 됩니다.</li>
 </ol>
-<p>설정이 완료되면 Apple의 Home 및 Siri를 통해 홈어시스턴트 연동으로 제어 할 수 있게 됩니다.</p>
+<p>설정이 완료되면 애플의 홈앱 및 Siri를 통해 홈어시스턴트 연동으로 제어 할 수 있게 됩니다.</p>
 <h2>
 <a class="title-link" name="--" href="#--"></a> 홈어시스턴트 설치로 이동</h2>
-<p>새로운 Home Assistant 장치로 이동하거나 설치하여 HomeKit 페어링을 유지하려면 구성 파일을 복사하는 것 외에도 configuration 디렉토리 안에 <code>.homekit.state</code> 파일 을 복사해야합니다. 운영 체제에 따라 파일이 기본적으로 숨겨져 있음을 명심하십시오.</p>
-<p>복사하기 전에 먼저 이전 및 새 Home Assistant 인스턴스를 완전히 중지하십시오. 그렇지 않으면 작동하지 않습니다.</p>
+<p>새로운 홈어시스턴트 장치로 이동하거나 설치하여 HomeKit 페어링을 유지하려면 구성 파일을 복사하는 것 외에도 configuration 디렉토리 안에 <code>.homekit.state</code> 파일 을 복사해야합니다. 운영 체제에 따라 파일이 기본적으로 숨겨져 있음을 명심하십시오.</p>
+<p>복사하기 전에 먼저 홈어시스턴트 인스턴스를 완전히 중지하십시오. 그렇지 않으면 작동하지 않습니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 고려 사항</h2>
 <h3>
 <a class="title-link" name="-id" href="#-id"></a> 액세서리 ID</h3>
-<p>현재 이 통합구성요소는 고유한 <code>HomeKit</code>을 위한 <code>accessory id (aid)</code>를 생성해내기 위해서 <code>entity_id</code>를 사용합니다. The <code>aid</code>는 모든 구성 장치를 식별하고 저장하는 데 사용됩니다. 하지만 만일 이 액세서리를 위한 모든 설정을 갖고 있는 <code>entity_id</code>가 변경될 경우 <code>home</code> 앱에서는 사라지게 됩니다.</p>
+<p>현재 이 통합구성요소는 고유한 <code>HomeKit</code>을 위한 <code>accessory id (aid)</code>를 생성해내기 위해서 <code>entity_id</code>를 사용합니다. <code>aid</code>는 모든 구성 장치를 식별하고 저장하는 데 사용됩니다. 하지만 만일 이 액세서리를 위한 모든 설정을 갖고 있는 <code>entity_id</code>가 변경될 경우 <code>home</code> 앱에서는 사라지게 됩니다.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 기기 제한</h3>
-<p>HomeKit 가이드 라인는 브리지 당 최대 100 개의 고유 한 액세서리만 허용합니다.  필터를 구성 할 때 이 점에 유의하십시오.</p>
+<p>HomeKit 가이드 라인는 브리지 당 최대 100 개의 고유 한 액세서리만 허용합니다.  필터를 구성할 때 이 점에 유의하십시오.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 지속적인 저장</h3>
-<p>불행하게도 <code>HomeKit</code> 지속적인 저장 역할은 지원하지 않습니다 - <code>Home Assistant Bridge</code>에 추가 된 액세서리의 구성 만 유지됩니다. 문제를 피하기 위해서, 적어도 entity 셋업이 되어있는 상태에서 <code>homekit</code>이 항상 시작되도록 자동화를 사용할 것을 권장합니다.   만일 어떤 이유로 일부 엔티티가 설정되지 않았다면 해당 설정이 삭제됩니다. (알 수없는 상태 또는 비슷한 상태는 문제를 일으키지는 않습니다.)</p>
+<p>불행하게도 <code>HomeKit</code> 지속적인 저장 역할은 지원하지 않습니다 - <code>Home Assistant Bridge</code>에 추가 된 액세서리의 구성 만 유지됩니다. 문제를 피하기 위해서, 적어도 entity 셋업이 되어있는 상태에서 <code>homekit</code>이 항상 시작되도록 자동화를 사용할 것을 권장합니다. 만일 어떤 이유로 일부 엔티티가 설정되지 않았다면 해당 설정이 삭제됩니다. (알 수없는 상태 또는 비슷한 상태는 문제를 일으키지는 않습니다.)</p>
 <p>테스트를 위해 설정의 일부를 비활성화하기로 결정 할지 말지가, 일반적인 상황이 될 수 있습니다. <code>auto start</code>, <code>turn off</code>, <code>Start HomeKit</code> 자동화가 (하나라도 있을 경우) 비활성화시킬 것을 꼭 확인하십시오.</p>
 <h2>
 <a class="title-link" name="--" href="#--"></a> 자동 시작 비활성화</h2>
 <p>설정에 따라, 사용할 수있는 모든 <code>HomeKit</code> 액세서리의 <code>Auto Start</code>를 비활성화해야 할 수도 있습니다. <code>HomeKit</code> 연동이 시작될 때 모든것이 설정된 entity만 추가 할 수 있습니다. <code>auto_start: false</code>일 경우 <code>HomeKit</code>을 시작하려면, <code>homekit.start</code> service를 호출하면 됩니다..</p>
-<p>HomeKit에 노출하려는 Z-Wave entity가 있는 경우 자동 시작을 비활성화 한 다음 Z-Wave mesh가 준비된 후 시작해야합니다.Z-Wave entity는 그때까지 완전히 설정되지 않기 때문입니다. 이는 자동화를 사용하면 자동으로 실행시킬 수 있습니다.</p>
+<p>HomeKit에 노출하려는 Z-Wave entity가 있는 경우 자동 시작을 비활성화 한 다음 Z-Wave mesh가 준비된 후 시작해야합니다. Z-Wave entity는 그때까지 완전히 설정되지 않기 때문입니다. 이는 자동화를 사용하면 자동으로 실행시킬 수 있습니다.</p>
 <div class="note">
-<p>하나의 <code>automation</code> 항목 만 가질 수 있습니다. 기존 자동화에 자동화를 추가하십시오.</p>
+<p>하나의 <code>automation</code> 항목만 가질 수 있습니다. 기존 자동화에 자동화를 추가하십시오.</p>
 </div>
 <pre><code class="language-yaml"># Example for Z-Wave
 homekit:
@@ -336,7 +336,7 @@ automation:
     action:
       - service: homekit.start
 </code></pre>
-<p>연동시 이벤트를 생성하지 않는 일반적인 지연의 경우 다음을 수행 할 수도 있습니다. :</p>
+<p>연동시 이벤트를 생성하지 않는 일반적인 지연의 경우 다음을 수행 할 수 있습니다. :</p>
 <pre><code class="language-yaml"># Example using a delay after the start of Home Assistant
 homekit:
   auto_start: false
@@ -605,10 +605,10 @@ homekit:
 </code></pre>
 <h4>
 <a class="title-link" name="pin----" href="#pin----"></a> PIN이 지속적 상태로 표시되지 않습니다</h4>
-<p><code>Home Assistant Bridge</code> 이미 페어링했을 수 있습니다 . 그렇지 않은 경우, <code>.homekit.state</code> 파일을 삭제하십시오. (<a href="#deleting-the-homekitstate-file">guide</a>).</p>
+<p><code>Home Assistant Bridge</code> 이미 페어링했을 수 있습니다. 그렇지 않은 경우, <code>.homekit.state</code> 파일을 삭제하십시오. (<a href="#deleting-the-homekitstate-file">guide</a>).</p>
 <h4>
 <a class="title-link" name="-------" href="#-------"></a> 홈 어시스턴트 브리지가 홈 앱에 나타나지 않음 (페어링)</h4>
-<p>이것은 종종 설정 및 네트워크 관련이 있습니다. 아래의 다른 외부 환경 문제도 확인해 볼 수 있습니다. :</p>
+<p>이것은 종종 설정 및 네트워크와 관련이 있습니다. 아래의 다른 외부 환경 문제도 확인해 볼 수 있습니다. :</p>
 <ul>
 <li>라우터 설정 확인</li>
 <li>WiFi <strong>와</strong> LAN을 모두 사용해보십시오.</li>
@@ -618,15 +618,14 @@ homekit:
 <p>iOS 기기는 페어링을 위해 홈 어시스턴트 기기와 동일한 로컬 네트워크에 있어야합니다.</p>
 <h4>
 <a class="title-link" name="---------docker" href="#---------docker"></a> 홈어시스턴트 브리지가 홈 앱에 나타나지 않음 (페어링) - Docker</h4>
-<p><code>network_mode: host</code>를 설정하십시오. 추가 문제가있는 경우 이 <a href="https://github.com/home-assistant/home-assistant/issues/15692" rel="external nofollow">issue</a> 가 도움이 될 것입니다.</p>
+<p><code>network_mode: host</code>를 설정하십시오. 추가 문제가있는 경우 <a href="https://github.com/home-assistant/home-assistant/issues/15692" rel="external nofollow">issue</a> 가 도움이 될 것입니다.</p>
 <p><code>advertise_ip</code> 옵션과 함께 <code>avahi-daemon</code> 리플렉터 모드에서 사용을 시도해볼 수 있습니다 (위 참조).</p>
 <h4>
 <a class="title-link" name="---------virtualbox" href="#---------virtualbox"></a> 홈어시스턴트 브리지가 홈 앱 (페어링)에 표시되지 않음 - VirtualBox</h4>
-<p><code>networkbridge</code>로 네트워크 모드를로 설정하십시오.  그렇지 않으면 홈어시스턴트 bridge가 네트워크에 노출되지 않습니다.</p>
+<p><code>networkbridge</code>로 네트워크 모드를 설정하십시오. 그렇지 않으면 홈어시스턴트 bridge가 네트워크에 노출되지 않습니다.</p>
 <h4>
 <a class="title-link" name="----zeroconf-" href="#----zeroconf-"></a> 페어링 중단 - zeroconf 오류</h4>
-<p><br>
-결국 페어링에 실패하면 <code>NonUniqueNameException</code> 오류 메시지가 표시 될 수 있습니다. <code>safe_mode</code> 옵션을 설정에 추가 하십시오, <a href="#safe-mode">safe_mode</a> 참조.</p>
+<p>결국 페어링에 실패하면 <code>NonUniqueNameException</code> 오류 메시지가 표시 될 수 있습니다. <code>safe_mode</code> 옵션을 설정에 추가 하십시오, <a href="#safe-mode">safe_mode</a> 참조.</p>
 <h4>
 <a class="title-link" name="------" href="#------"></a> 페어링 중단 - 디버그 설정에서만 작동</h4>
 <p><code>demo.demo</code>를 포함하여 세팅 했을 때 페어링은 잘 동작합니다, 일반 설정에서는 동작하지 않습니다. <a href="#specific-entity-doesnt-work">specific entity doesn’t work</a> 참조.</p>
@@ -647,7 +646,7 @@ homekit:
 <p><a href="#disable-auto-start">disable auto start</a> 참조</p>
 <h4>
 <a class="title-link" name="-entity--" href="#-entity--"></a> 내 entity가 표시되지 않습니다</h4>
-<p>entity의 도메인이 <a href="#supported-components">supported</a>되는지 확인하십시오. 그렇다면, <a href="#configure-filter">filter</a> 설정을 확인하십시오.  특히를 <code>include_entities</code>를 사용하는 경우, 철자가 올바른지 확인하십시오.</p>
+<p>entity의 도메인이 <a href="#supported-components">supported</a>되는지 확인하십시오. 그렇다면, <a href="#configure-filter">filter</a> 설정을 확인하십시오.  특히 <code>include_entities</code>를 사용하는 경우, 철자가 올바른지 확인하십시오.</p>
 <h4>
 <a class="title-link" name="homekit------" href="#homekit------"></a> HomeKit은 두 번째 홈어시스턴트 인스턴스에서 작동하지 않습니다</h4>
 <p>동일한 로컬 네트워크에서 다른 홈어시스턴트 인스턴스와 HomeKit 연동 사용하려면 하나 이상의 사용자 정의 이름을 설정해야합니다. <a href="#name">config/name</a></p>
@@ -662,10 +661,10 @@ homekit:
 <p>참조 <a href="#device-limit">device limit</a></p>
 <h4>
 <a class="title-link" name="-----" href="#-----"></a> 액세서리가 응답하지 않음 - 임의로</h4>
-<p>불행히도, 때때로 그것은 때때로 발생합니다.  <code>Home</code> 앱 을 닫고 캐시에서 삭제하는 것이 도움이 될 수 있습니다. 일반적으로 액세서리는 최대 몇 분 후에 다시 응답해야합니다.</p>
+<p>불행히도, 이는 종종 발생합니다.  <code>Home</code> 앱 을 닫고 캐시에서 삭제하는 것이 도움이 될 수 있습니다. 일반적으로 액세서리는 최대 몇 분 후에 다시 응답합니다.</p>
 <h4>
 <a class="title-link" name="-------065x-" href="#-------065x-"></a> 액세서리가 응답하지 않거나 비정상적인 동작 - 0.65.x에서 업그레이드</h4>
-<p>이 문제를 해결하려면의 <code>Home Assistant Bridge</code> 페어링을 해제, <code>.homekit.state</code> 파일을 삭제하고 (<a href="#deleting-the-homekitstate-file">guide</a>) 다시 페어링 합니다. <code>0.65.x</code> 또는 이하에서 업그레이드하는 경우에만 문제가 됩니다..</p>
+<p>이 문제를 해결하려면의 <code>Home Assistant Bridge</code> 페어링을 해제, <code>.homekit.state</code> 파일을 삭제하고 (<a href="#deleting-the-homekitstate-file">guide</a>) 다시 페어링 합니다. <code>0.65.x</code> 또는 이하에서 업그레이드하는 경우에만 문제가 됩니다.</p>
 <h4>
 <a class="title-link" name="----" href="#----"></a> 연결된 배터리 센서가 인식되지 않습니다</h4>
 <p>HomeKit에서 entity를 제거한 후 다시 추가하십시오. HomeKit의 기존 엔터티에이 구성 옵션을 추가하는 경우 액세서리를 HomeKit에서 제거한 다음 다시 추가 할 때까지이 엔터티의 구성 옵션에 대한 변경 내용이 표시되지 않습니다. <a href="#resetting-accessories">resetting accessories</a>를 참조하십시오.</p>
@@ -674,7 +673,7 @@ homekit:
 <p>미디어 플레이어 <code>device_class: tv</code> entity는  iOS 12.2 / macOS 10.14.4 이상을 실행하는 기기에서 텔레비전 액세서리로 표시됩니다. 필요한 경우, 특히 이전에 <code>media_player</code>가 일련의 스위치로 노출 된 경우 HomeKit에서 entity를 제거한 다음 다시 추가하십시오. 지원되는 기능 변경을 포함하여 기존 액세서리에 대한 변경 사항은 HomeKit에서 액세서리를 제거한 다음 다시 추가 할 때까지 나타나지 않습니다.  <a href="#resetting-accessories">resetting accessories</a> 참조.</p>
 <h4>
 <a class="title-link" name="tv------" href="#tv------"></a> TV 미디어 플레이어의 볼륨을 조절할 수 없습니까?</h4>
-<p>볼륨 및 재생 / 일시 정지 제어가 원격 앱 또는 제어 센터에 표시됩니다. TV가 홈 어시스턴트를 통한 볼륨 조절을 지원하는 경우 화면에서 리모컨을 선택한 상태에서 장치의 측면 볼륨 버튼을 사용하여 볼륨을 조절할 수 있습니다.</p>
+<p>볼륨 및 재생 / 일시 정지 제어가 원격 앱 또는 제어 센터에 표시됩니다. TV가 홈어시스턴트를 통한 볼륨 조절을 지원하는 경우 화면에서 리모컨을 선택한 상태에서 장치의 측면 볼륨 버튼을 사용하여 볼륨을 조절할 수 있습니다.</p>
 <h4>
 <a class="title-link" name="-" href="#-"></a> 액세서리 재설정</h4>
 <p>홈어시스턴트 <code>0.97.x</code> 혹은 이후, 에서는 하나 이상의 entity_id와 함께 <code>homekit.reset_accessory</code> 서비스 를 사용하여 설정이 변경되었을 수있는 액세서리를 재설정 할 수 있습니다. media_player의 장치 클래스에서 <code>tv</code>로 변경했을 때 혹은 기존 entity에 새로운 HomeKit 기능에 대한 지원을 추가 할 때 유용합니다.</p>

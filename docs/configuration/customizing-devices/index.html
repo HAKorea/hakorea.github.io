@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Customizing entities - 홈어시스턴트</title>
+    <title>entity의 사용자 지정 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Simple customization for entities in the frontend.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/configuration/customizing-devices/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Customizing entities">
+    <meta property="og:title" content="entity의 사용자 지정">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/configuration/customizing-devices/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Customizing entities">
+    <meta name="twitter:title" content="entity의 사용자 지정">
     <meta name="twitter:description" content="Simple customization for entities in the frontend.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,46 +97,46 @@
   
   <header>
     <h1 class="title indent">
-      Customizing entities
+      entity의 사용자 지정
     </h1>
   </header>
   <hr class="divider">
   
 
   <h2>
-<a class="title-link" name="changing-the-entity_id" href="#changing-the-entity_id"></a> Changing the entity_id</h2>
-<p>You can use the UI to change the <code>entity_id</code> and friendly name of supported entities. To do this:</p>
+<a class="title-link" name="entity_id-" href="#entity_id-"></a> entity_id 변경</h2>
+<p>UI를 사용하여 <code>entity_id</code> 와 지원가능한 entity의 친숙한 이름(friendly name) 을 변경할 수 있습니다. :</p>
 <ol>
-<li>Select the entity, either from the frontend or by clicking <img src="/images/frontend/entity_box.png"> next to the entity in the Developer Tools “States” tab.</li>
-<li>Click on the cog in the right corner of the entity’s dialog</li>
-<li>Enter the new name or the new entity ID (remember not to change the domain of the entity - the part before the <code>.</code>)</li>
-<li>Select <em>Save</em>
-</li>
+<li>프론트 엔드에서 또는 개발자 도구 “states”탭 에서 entity 옆에 있는 <img src="/images/frontend/entity_box.png">을 클릭하여 entity를 선택하십시오..</li>
+<li>엔터티 대화 상자의 오른쪽 모서리에있는 톱니바퀴를 클릭하십시오.</li>
+<li>새 이름 또는 새 entity ID를 입력하십시오 (엔티티 앞의 부분 <code>.</code>이 나오기 전부분을 변경하지 마십시오 - )</li>
+<li>
+<em>Save</em> 를 선택하십시오.</li>
 </ol>
-<p>If your entity is not supported, or you cannot customize what you need via this method, please see below for more options:</p>
+<p>entity가 지원되지 않거나 이 방법을 통해 필요한 것을 사용자 정의 할 수 없는 경우 추가 옵션에 대해서는 아래를 참조하십시오:</p>
 <h2>
-<a class="title-link" name="customizing-entities" href="#customizing-entities"></a> Customizing entities</h2>
-<p>By default, all of your devices will be visible and have a default icon determined by their domain. You can customize the look and feel of your front page by altering some of these parameters. This can be done by overriding attributes of specific entities.</p>
+<a class="title-link" name="entity--" href="#entity--"></a> entity 사용자 지정</h2>
+<p>기본적으로 모든 장치가 표시되며 도메인에 따라 기본 아이콘이 결정됩니다. 이러한 매개 변수 중 일부를 변경하여 프론트 페이지의 모양과 느낌을 사용자 정의 할 수 있습니다.. 특정 entity의 특성을 재정의하여 수행 할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="customization-using-the-ui" href="#customization-using-the-ui"></a> Customization using the UI</h3>
-<p>Under the <em>Configuration</em> menu you’ll find the <em>Customization</em> menu. If this menu item is not visible, enable advanced mode on your <a href="/docs/authentication/#your-account-profile">profile page</a> first. When you select an entity to customize, you’ll see all the existing attributes listed and you can customize those or select an additional supported attribute (<a href="/docs/configuration/customizing-devices/#possible-values">see below</a>). You may also need to add the following to your <code>configuration.yaml</code> file, depending when you started using Home Assistant:</p>
+<a class="title-link" name="ui---" href="#ui---"></a> UI를 사용한 사용자 정의</h3>
+<p><em>Configuration</em> 메뉴 아래에 <em>Customization</em> 메뉴가 있습니다. 이 메뉴 항목이 보이지 않으면 먼저 <a href="/docs/authentication/#your-account-profile">profile page</a> 에서 고급 모드를 활성화 하십시오. 사용자 정의 할 entity를 선택하면 기존의 모든 속성이 나열되며 해당 속성을 사용자 정의하거나 추가 지원 속성을 선택할 수 있습니다(<a href="/docs/configuration/customizing-devices/#possible-values">이하 참조</a>). 홈 어시스턴트 사용을 시작한 시점에 따라 <code>configuration.yaml</code> 파일에 다음을 추가해야 할 수도 있습니다.</p>
 <pre><code class="language-yaml">homeassistant:
   customize: !include customize.yaml
 </code></pre>
 <h4>
-<a class="title-link" name="possible-values" href="#possible-values"></a> Possible values</h4>
+<a class="title-link" name="-" href="#-"></a> 가능한 값</h4>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the entity as displayed in the UI.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>UI에 표시되는 entity 이름입니다..</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="hidden" href="#hidden"></a> hidden</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to <code>true</code> to hide the entity.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity를 숨기기 위해 <code>true</code>로 설정</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -145,7 +145,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="emulated_hue_hidden" href="#emulated_hue_hidden"></a> emulated_hue_hidden</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to <code>true</code> to hide the entity from <code>emulated_hue</code> (this will be deprecated in the near future and should be configured in <a href="/integrations/emulated_hue"><code>emulated_hue</code></a>).</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity <code>emulated_hue</code>를 숨기기 위해 <code>true</code>로 설정 (이는 조만간 사용하지 않을 것이므로 <a href="/integrations/emulated_hue"><code>emulated_hue</code></a>에서 설정권장).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,16 +153,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="entity_picture" href="#entity_picture"></a> entity_picture</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>URL to use as picture for entity.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>entity의 그림파일로 사용할 URL입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Any icon from <a href="http://MaterialDesignIcons.com" rel="external nofollow">MaterialDesignIcons.com</a> (<a href="https://cdn.materialdesignicons.com/4.5.95/" rel="external nofollow">Cheatsheet</a>). Prefix name with <code>mdi:</code>, ie <code>mdi:home</code>. Note: Newer icons may not yet be available in the current Home Assistant release. You can check when an icon was added to MaterialDesignIcons.com at <a href="https://materialdesignicons.com/history" rel="external nofollow">MDI History</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><a href="http://MaterialDesignIcons.com" rel="external nofollow">MaterialDesignIcons.com</a> (<a href="https://cdn.materialdesignicons.com/4.5.95/" rel="external nofollow">Cheatsheet</a>)의 모든 아이콘. 접두어로 <code>mdi:</code>, 예) <code>mdi:home</code>. 참고 : 현재 홈어시스턴트 릴리스에서는 최신 아이콘을 아직 사용하지 못할 수 있습니다. <a href="https://materialdesignicons.com/history" rel="external nofollow">MDI History</a>에서 MaterialDesignIcons.com에 아이콘이 추가 된 시기를 확인할 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="assumed_state" href="#assumed_state"></a> assumed_state</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>For switches with an assumed state two buttons are shown (turn off, turn on) instead of a switch. By setting <code>assumed_state</code> to <code>false</code> you will get the default switch icon.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 상태의 스위치의 경우 스위치 대신 두 개의 단추가 표시됩니다 (끄기, 켜기). <code>assumed_state</code> 를 <code>false</code>로 세팅하면, 기본 switch 아이콘으로 전환.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -171,7 +171,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the class of the device, changing the device state and icon that is displayed on the UI (see below). It does not set the <code>unit_of_measurement</code>.</p>
+<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>UI에 표시되는 장치 상태 및 아이콘을 변경하여 장치 클래스를 설정합니다. (아래 참조). <code>unit_of_measurement</code>를 설정하진 않습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -180,7 +180,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the units of measurement, if any. This will also influence the graphical presentation in the history visualisation as continuous value. Sensors with missing <code>unit_of_measurement</code> are showing as discrete values.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>측정 단위(있는 경우)를 정의합니다. 이는 또한 History 시각화의 그래픽 표시에 지속적인 값으로 영향을줍니다. <code>unit_of_measurement</code>가 누락 된 센서는 불연속 값으로 표시됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -188,13 +188,13 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="initial_state" href="#initial_state"></a> initial_state</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the initial state for automations, <code>on</code> or <code>off</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>자동화의 초기 상태를 설정, <code>on</code> 혹은 <code>off</code>.</p>
 </span></p></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="device-class" href="#device-class"></a> Device Class</h4>
-<p>Device class is currently supported by the following components:</p>
+<a class="title-link" name="-" href="#-"></a> 장치 클래스</h4>
+<p>디바이스 클래스는 현재 다음 구성 요소에서 지원됩니다. :</p>
 <ul>
 <li><a href="/integrations/binary_sensor/">Binary Sensor</a></li>
 <li><a href="/integrations/sensor/">Sensor</a></li>
@@ -202,9 +202,9 @@ Default value: </p>
 <li><a href="integrations/media_player/">Media Player</a></li>
 </ul>
 <h3>
-<a class="title-link" name="manual-customization" href="#manual-customization"></a> Manual customization</h3>
+<a class="title-link" name="--" href="#--"></a> 수동 사용자 정의</h3>
 <div class="note">
-<p>If you implement <code>customize</code>, <code>customize_domain</code>, or <code>customize_glob</code> you must make sure it is done inside of <code>homeassistant:</code> or it will fail.</p>
+<p><code>customize</code>, <code>customize_domain</code>, 혹은 <code>customize_glob</code>을 구현하는 겨우 <code>homeassistant:</code>에 반영되어있는지 확인해야 합니다. 그렇지 않으면 동작하지 않습니다.</p>
 </div>
 <pre><code class="language-yaml">homeassistant:
   name: Home
@@ -241,10 +241,10 @@ Default value: </p>
       emulated_hue_hidden: false
 </code></pre>
 <h3>
-<a class="title-link" name="reloading-customize" href="#reloading-customize"></a> Reloading customize</h3>
-<p>Home Assistant offers a service to reload the core configuration while Home Assistant is running called <code>homeassistant.reload_core_config</code>. This allows you to change your customize section and see it being applied without having to restart Home Assistant. To call this service, go to the “Service” tab under Developer Tools, select the <code>homeassistant.reload_core_config</code> service and click the “CALL SERVICE” button. Alternatively, you can press the “Reload Location &amp; Customizations” button under Configuration &gt; Server Control.</p>
+<a class="title-link" name="-" href="#-"></a> 사용자정의 새로고침</h3>
+<p>홈어시스턴트는 홈어시스턴트가 실행되는 동안 핵심 설정을 다시로드하는 <code>homeassistant.reload_core_config</code> 서비스를 제공합니다. 이를 통해 사용자 정의 섹션을 변경하고 홈어시스턴트를 다시 시작하지 않고도 적용되는 섹션을 볼 수 있습니다. 이 서비스를 호출하려면, 개발자 툴에 있는 “Service” 탭으로 이동하고, <code>homeassistant.reload_core_config</code> 를 선택하고 “CALL SERVICE” 버튼을 클릭하십시오.  또는 Configuration &gt; Server Control 에서 “Reload Location &amp; Customizations” 버튼을 누를 수 있습니다.</p>
 <div class="note warning">
-New customize information will be applied the next time the state of the entity gets updated.
+다음에 entity 상태가 업데이트 될 때 새로운 사용자 정의 정보가 적용됩니다..
 </div>
 
 

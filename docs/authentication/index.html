@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Authentication - 홈어시스턴트</title>
+    <title>인증 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Guide on authentication in Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/authentication/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Authentication">
+    <meta property="og:title" content="인증">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/authentication/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Authentication">
+    <meta name="twitter:title" content="인증">
     <meta name="twitter:description" content="Guide on authentication in Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Authentication
+      인증
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>홈어이스턴트로 로그인하는 인증 과정은 안전한 접근을 보장합니다.</p>
-<p>홈어시스턴트를 처음 실행하거나 로그아웃을 한 상태에서 접속하면 로그인 사용자 계정과 비밀번호를 다음과 같이 물어봅니다.</p>
+  <p>홈어이스턴트로 로그인하는 인증 과정은 안전한 접근을 보장합니다.
+홈어시스턴트를 처음 실행하거나 로그아웃을 한 상태에서 접속하면 로그인 사용자 계정과 비밀번호를 다음과 같이 물어봅니다.</p>
 <img src="/images/docs/authentication/login.png" alt="Screenshot of the login screen" style="border: 0;box-shadow: none;">
 <h2>
 <a class="title-link" name="-" href="#-"></a> 사용자 계정</h2>
@@ -165,9 +165,9 @@
 <li><code>auth_provider.homeassistant</code></li>
 <li><code>onboarding</code></li>
 <li>
-<code>hassio</code> (for Hass.io users)</li>
+<code>hassio</code> (Hass.io 사용자)</li>
 <li>
-<code>cloud</code> (for nabucasa users)</li>
+<code>cloud</code> (nabucasa 사용자)</li>
 </ul>
 <p>파일 삭제후 홈어시스턴트를 재시작하면 새로운 관리자 계정을 처음부터 다시 설정할 수 있습니다.</p>
 <h3>
@@ -178,11 +178,11 @@
 <p>유효한 도메인명이 아니라면 <code>hosts</code> 파일을 편집하면 되는데, 윈도우의 <code>C:\Windows\System32\Drivers\etc\hosts</code> 파일이나 리눅스의 <code>/etc/hosts</code> 파일에 다음과 같이 추가합니다:</p>
 <pre><code class="language-text">12.34.56.78 homeassistant.home
 </code></pre>
-<p><code>12.34.56.78</code>은 여러분의 공인 IP로 바꾸셔야 합니다.
-이렇게 하면 <code>http://homeassistant.home:8123/</code>로 접속이 가능합니다.</p>
+<p><code>12.34.56.78</code>은 여러분의 공인 IP로 바꾸셔야 합니다.</p>
+<p>이렇게 하면 <code>http://homeassistant.home:8123/</code>로 접속이 가능합니다.</p>
 <h3>
-<a class="title-link" name="stuck-on-loading-data" href="#stuck-on-loading-data"></a> Stuck on Loading data</h3>
-<p>Wipr와 같은 blocking 소프트웨어는 웹소켓을 차단합니다. 로딩 화면에서 더이상 진행하지 못하는 경우 차단 소프트웨어를 중지하세요.</p>
+<a class="title-link" name="-" href="#-"></a> 데이터로드로 멈춤</h3>
+<p>Wipr과 같은 일부 광고 차단 소프트웨어가 웹 소켓을 차단합니다. 데이터로드 화면이 멈춘 경우 광고 차단 소프트웨어 사용을 중지 해보십시오.</p>
 <h3>
 <a class="title-link" name="077---" href="#077---"></a> 0.77 이전 버전에서 마이그레이션</h3>
 <p>만일 0.77 이전 버전을 사용하고 있다면  <code>auth:</code> 또는 <code>auth_providers:</code> 추가돼 있을 것입니다. 이것을 제거하고 홈어시스턴트가 <a href="/docs/authentication/providers/#configuring-auth-providers">자동으로 설정하는 방법</a>을 참고하세요.</p>

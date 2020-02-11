@@ -103,28 +103,30 @@
   <hr class="divider">
   
 
-  <p>Home Assistant uses the <a href="https://yaml.org/" rel="external nofollow">YAML</a> syntax for configuration. YAML might take a while to get used to but is really powerful in allowing you to express complex configurations.</p>
-<p>For integrations that you want to use in Home Assistant, you add code in your <code>configuration.yaml</code> file to specify its settings. This especially applies to integrations that are not yet available to configure through the UI.</p>
-<p>The following example entry assumes that you would like to set up the <a href="/integrations/notify">notify component</a> with the <a href="/integrations/pushbullet">pushbullet platform</a>.</p>
+  <p>홈어시스턴트는 설정에 <a href="https://yaml.org/" rel="external nofollow">YAML</a> 문법을 사용합니다. YAML은 익숙해지기까지 다소 시간이 걸리지 만 복잡한 구성을 표현할 수있는 능력이 있습니다.</p>
+<p>홈어시스턴트에서 통합구성요소를 사용하려는 통합의 경우 <code>configuration.yaml</code> 파일에 코드를 추가 하여 설정을 합니다. 이는 특히 UI를 통해 구성 할 수 없는 연동 시 적용됩니다.</p>
+<p>다음 예제 항목은 사용자가 설정하고자하는 것으로 <a href="/integrations/pushbullet">pushbullet platform</a>으로 <a href="/integrations/notify">notify component</a>을 셋업한 내용입니다.</p>
 <pre><code class="language-yaml">notify:
   platform: pushbullet
   api_key: "o.1234abcd"
   name: pushbullet
 </code></pre>
 <ul>
-<li>A <strong>component</strong> provides the core logic for some functionality (like <code>notify</code> provides sending notifications).</li>
-<li>A <strong>platform</strong> makes the connection to a specific software or hardware platform (like <code>pushbullet</code> works with the service from pushbullet.com).</li>
+<li>
+<strong>component</strong> 특정 기능을 위한 핵심 로직을 제공합니다. (<code>notify</code> 가 통지를 보내는 기능을 제공하는 것처럼).</li>
+<li>
+<strong>platform</strong> 특정 소프트웨어 또는 하드웨어 플랫폼으로 연결을 만듭니다. (<code>pushbullet</code> 가 pushbullet.com에서 서비스로 제공한 내용을 동작시키는 것처럼.).</li>
 </ul>
-<p>The basics of YAML syntax are block collections and mappings containing key-value pairs. Each item in a collection starts with a <code>-</code> while mappings have the format <code>key: value</code>. If you specify duplicate keys, the last value for a key is used. This is somewhat similar to a Hash table or more specifically a dictionary in Python. These can be nested as well.</p>
-<p>Note that indentation is an important part of specifying relationships using YAML. Things that are indented are nested “inside” things that are one level higher. So in the above example, <code>platform: pushbullet</code> is a property of (nested inside) the <code>notify</code> component.</p>
-<p>Getting the right indentation can be tricky if you’re not using an editor with a fixed width font. Tabs are not allowed to be used for indentation. Convention is to use 2 spaces for each level of indentation.</p>
-<p>You can use the online service <a href="http://www.yamllint.com/" rel="external nofollow">YAMLLint</a> to check if your YAML syntax is correct before loading it into Home Assistant which will save you some time. If you do so, be aware that this is a third-party service and is not maintained by the Home Assistant community.</p>
+<p>YAML 문법의 기본 사항은 key-value pair들을 포함하는 블록 모음 및 매핑들입니다. 컬렉션의 각 항목은 <code>-</code>로 시작하고 매핑은 <code>key: value</code> 형식으로 나타냅니다. 중복된 key를 지정하면 key의 마지막 value가 사용됩니다. 이는 해시 테이블 또는 파이썬의 dictionary와 다소 유사합니다. 마찬가지로 중첩 될 수 있습니다.</p>
+<p>들여 쓰기는 YAML을 사용하여 관계를 지정하는 데 중요한 부분입니다. 한 단계 높게 “안쪽으로” 중첩되어 들여쓰기 된 것들 입니다. 위의 예로 보면, <code>platform: pushbullet</code>는 <code>notify</code> component의 속성입니다.</p>
+<p>고정 폭 글꼴이있는 편집기를 사용하지 않는 경우 올바른 들여 쓰기를 얻는 것이 까다로울 수 있습니다. 들여 쓰기에는 탭을 사용할 수 없습니다. 규칙은 각 들여 쓰기 수준에 2 개의 공백을 사용하는 것입니다.</p>
+<p>온라인 서비스 <a href="http://www.yamllint.com/" rel="external nofollow">YAMLLint</a> 를 사용하여 홈어시스턴트로 로드하기 전에 YAML 구문이 올바른지 확인하면 시간을 절약 할 수 있습니다.
+이 서비스는 타사 서비스이며 홈어시스턴트 커뮤니티에서 유지 관리하지 않습니다.</p>
 <div class="note">
-<p>Please pay attention to not storing private data (passwords, API keys, etc.) directly in your <code>configuration.yaml</code> file. Private data can be stored in either a <a href="/docs/configuration/secrets/">separate file</a> or in <a href="/docs/configuration/yaml/#using-environment-variables">environmental variables</a>, which circumvents this security problem.</p>
+<p>개인 데이터 (암호, API 키 등)를 <code>configuration.yaml</code> 파일에 직접 저장하지 않도록 주의하십시오. 개인 데이터는 <a href="/docs/configuration/secrets/">별도의 파일</a> 또는  <a href="/docs/configuration/yaml/#using-environment-variables">환경 변수</a>에 저장하여 보안 문제를 피할 수 있습니다.</p>
 </div>
-<p>Strings of text following a <code>#</code> are comments and are ignored by the system.</p>
-<p>The next example shows an <a href="/integrations/input_select">input_select</a> integration that uses a block collection for the values of options.
-The other properties (like <code>name:</code>) are specified using mappings. Note that the second line just has <code>threat:</code> with no value on the same line. Here threat is the name of the input_select and the values for it are everything nested below it.</p>
+<p>다음에 나오는 문자열 <code>#</code> 는 주석이며 시스템에서 무시됩니다.</p>
+<p>다음은 옵션 값에 블록 콜렉션을 사용하는 <a href="/integrations/input_select">input_select</a> 통합구성요소를 보여주는 예시입니다. 다른 속성들 (<code>name:</code> 같은) 은 매핑을 사용하여 지정됩니다. 여기서 <code>threat</code>는 input_select의 이름이며 그 값은 그 아래에 모두 중첩되어 있습니다.</p>
 <pre><code class="language-yaml">input_select:
   threat:
     name: Threat level
@@ -136,7 +138,7 @@ The other properties (like <code>name:</code>) are specified using mappings. Not
      - 3
     initial: 0
 </code></pre>
-<p>The following example shows nesting a collection of mappings in a mapping. In Home Assistant, this would create two sensors that each use the MQTT platform but have different values for their <code>state_topic</code> (one of the properties used for MQTT sensors).</p>
+<p>다음 예제는 맵핑에서 맵핑 모음의 중첩을 보여줍니다. 홈 어시스턴트에서는 각각 MQTT 플랫폼을 사용하지만 서로 다른 값을 갖는 <code>state_topic</code>(MQTT 센서에 사용되는 특성 중 하나)에 두 개의 센서를 지정할 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: mqtt
     state_topic: sensor/topic
@@ -144,37 +146,37 @@ The other properties (like <code>name:</code>) are specified using mappings. Not
     state_topic: sensor2/topic
 </code></pre>
 <h2>
-<a class="title-link" name="including-values" href="#including-values"></a> Including values</h2>
+<a class="title-link" name="-" href="#-"></a> 값을 포함시키기</h2>
 <h3>
-<a class="title-link" name="environmental-variables" href="#environmental-variables"></a> Environmental variables</h3>
-<p>You can include values from your system’s environment variables with <code>!env_var</code>. Note that this will only work in a scenario where it is possible to specify these. Hass.io users are recommended to use <code>!include</code> statements instead.</p>
+<a class="title-link" name="-" href="#-"></a> 환경 변수</h3>
+<p><code>!env_var</code>로 시스템 환경 변수의 값을 포함시킬 수 있습니다. 이는 이를 지정할 수 있는 시나리오에서만 작동합니다. Hass.io 유저는 <code>!include</code> 를 대체하여 사용하는 것을 추천합니다.</p>
 <pre><code class="language-yaml">example:
   password: !env_var PASSWORD
 </code></pre>
 <h4>
-<a class="title-link" name="default-value" href="#default-value"></a> Default value</h4>
-<p>If an environment variable is not set, you can fallback to a default value.</p>
+<a class="title-link" name="" href="#"></a> 기본값</h4>
+<p>환경 변수가 설정되지 않은 경우 기본값으로 대체 할 수 있습니다.</p>
 <pre><code class="language-yaml">example:
   password: !env_var PASSWORD default_password
 </code></pre>
 <h3>
-<a class="title-link" name="including-entire-files" href="#including-entire-files"></a> Including entire files</h3>
-<p>To improve readability, you can source out certain domains from your main configuration file with the <code>!include</code>-syntax.</p>
+<a class="title-link" name="--" href="#--"></a> 전체 파일 포함시키기</h3>
+<p>가독성을 높이기 위해 <code>!include</code> 문법을 이용하여 현재 domain에서 특정 다른 domain으로 내용을 나눌 수가 있습니다.</p>
 <pre><code class="language-yaml">lights: !include lights.yaml
 </code></pre>
-<p>More information about this feature can also be found at <a href="/docs/configuration/splitting_configuration/">splitting configuration</a>.</p>
+<p>이 기능에 대한 자세한 내용은 <a href="/docs/configuration/splitting_configuration/">splitting configuration</a> 참조.</p>
 <h2>
-<a class="title-link" name="common-issues" href="#common-issues"></a> Common Issues</h2>
+<a class="title-link" name="-" href="#-"></a> 일반적인 문제</h2>
 <h3>
-<a class="title-link" name="found-character-t" href="#found-character-t"></a> found character ‘\t’</h3>
-<p>If you see the following message:</p>
+<a class="title-link" name="---t" href="#---t"></a> 발견 된 문자 ‘\t’</h3>
+<p>다음 메시지가 표시되면 :</p>
 <pre><code class="language-txt">found character '\t' that cannot start any token
 </code></pre>
-<p>This means that you’ve mistakenly entered a tab character, instead of spaces.</p>
+<p>이것은 공백 대신 실수로 탭 문자를 입력했음을 의미합니다.</p>
 <h3>
-<a class="title-link" name="upper-and-lower-case" href="#upper-and-lower-case"></a> Upper and lower case</h3>
-<p>Home Assistant is case sensitive, a state of <code>'on'</code> is not the same as <code>'On'</code> or <code>'ON'</code>. Similarly an entity of <code>group.Doors</code> is not the same as <code>group.doors</code>.</p>
-<p>If you’re having trouble, check the case that Home Assistant is reporting in the dev-state menu, under <em>Developer tools</em>.</p>
+<a class="title-link" name="-" href="#-"></a> 대문자와 소문자</h3>
+<p>홈 어시스턴트는 대소 문자를 구분하며 <code>'on'</code>상태는 <code>'On'</code>, <code>'ON'</code>과 같지 않습니다. 마찬가지로의 entity도 <code>group.Doors</code>와<code>group.doors</code>는 같지 않습니다</p>
+<p>문제가 있는 경우 <em>Developer tools</em> 아래에 dev 상태 메뉴에서 홈 어시스턴트가 보고하는 상황을 확인하십시오.</p>
 
 
 </article>
