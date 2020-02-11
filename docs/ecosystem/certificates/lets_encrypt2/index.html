@@ -1,0 +1,610 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Let's Encrypt를 이용한 TLS/SSL 원격 접속 - 기초 지식 - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Let's Encrypt에서 발급한 SSL 인증서로 원격으로 안전하게 연결하는 법">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/docs/ecosystem/certificates/lets_encrypt2/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Let's Encrypt를 이용한 TLS/SSL 원격 접속 - 기초 지식">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/docs/ecosystem/certificates/lets_encrypt2/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Let's Encrypt에서 발급한 SSL 인증서로 원격으로 안전하게 연결하는 법">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Let's Encrypt를 이용한 TLS/SSL 원격 접속 - 기초 지식">
+    <meta name="twitter:description" content="Let's Encrypt에서 발급한 SSL 인증서로 원격으로 안전하게 연결하는 법">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li><a href='#' class='show-search'><i class="icon-search"></i></a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/_docs/ecosystem/certificates/lets_encrypt2.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Let's Encrypt를 이용한 TLS/SSL 원격 접속 - 기초 지식
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <div class="note">
+<p>Hass.io를 사용하고 있다면 이 가이드 대신 <a href="/addons/duckdns/">DuckDNS add-on</a>를 따르시길 바랍니다.</p>
+</div>
+<h3>
+<a class="title-link" name="0---ip---------" href="#0---ip---------"></a> 0 - IP 주소, 포트 번호 및 포트포워딩에 대한 기본적인 수준의 이해</h3>
+<p>An IP address is a bit like a phone number. When you access your Home Assistant instance you type something similar to 192.168.0.200:8123 in to your address bar of your browser. The bit before the colon is the IP address (in this case 192.168.0.200) and the bit after is the port number (in this case 8123).  When you SSH in to the device running Home Assistant you will use the same IP address, and you will use port 22. You may not be aware that you are using port 22, but if you are using Putty look in the box next to where you type the IP address, you will see that it has already selected port 22 for you.</p>
+<p>So, if an IP address is like a phone number, a port number is like an extension number. An analogy would be if you phone your local doctors on 192-1680-200 and the receptionist answers, you ask to speak to Dr. Smith and she will put you through to extension 8123, which is the phone Dr. Smith is sitting at. The doctors surgery is the device your Home Assistant is running on, Dr. Smith is your Home Assistant. Thusly, your Home Assistant instance is ‘waiting for your call’ on port 8123, at the device IP 192.168.0.200 .</p>
+<p>Now, to speak to the outside world your connection goes through a router. Your router will have two IP addresses. One is the internal network number, most likely 192.168.0.1 in my example, and an external IP address that incoming traffic is sent to.  In the example of calling the doctors, the external IP is your telephone number’s area code.</p>
+<p>So, when we want to connect to our Home Assistant instance from outside our network we will need to call the correct extension number, at the correct phone number, in the correct area code.</p>
+<p>We will be looking for a system to run like this (in this example I will pretend our external IP is 203.0.113.12):</p>
+<pre><code class="language-text">Outside world -&gt; 203.0.113.12:8123 -&gt; your router -&gt; 192.168.0.200:8123
+</code></pre>
+<p>Sounds simple?  It really is except for two small, but easy to overcome, complications:</p>
+<ul>
+<li>IP addresses are often dynamically allocated, so they can change.</li>
+<li>Because of the way the internet works you cannot chain IP addresses together to get from where you are, to where you want to go.</li>
+</ul>
+<p>To get around the issue of changing IP addresses we must remember that there are two IP addresses affected.  Your external one (which we will ‘call’ to get on to your network from the internet) and your internal one (192.168.0.200 in the example I am currently using).</p>
+<p>So, we can use a static IP to ensure that whenever our device running Home Assistant connects to our router it always uses the same address.  This way our internal IP never changes.  This is covered in step 1 below.</p>
+<p>We then have no control over our external IP, as our Service Provider will give us a new one at random intervals. To fix this we will use a service called DuckDNS which will give us a name for our connection (something like examplehome.duckdns.org) and behind the scenes will continue to update your external IP. So no matter how many times the IP address changes, typing examplehome.duckdns.org in to our browser will convert to the correct, up-to-date, IP address.  This is covered in step 3 below.</p>
+<p>To get around the issue of not being able to chain the IP addresses together (I can’t say I want to call 203.0.113.12 and be put through to 192.168.0.200, and then be put through to extension 8123) we use port forwarding. Port forwarding is the process of telling your router which device to allow the outside connection to speak to.  In the doctors surgery example, port forwarding is the receptionist. This takes a call from outside, and forwards it to the correct extension number inside.  It is important to note that port forwarding can forward an incoming request for one port to a different port on your internal network if you so choose, and we will be doing this later on. The end result being that when we have our TLS/SSL certificate our incoming call will by default be requesting port 443 (because that is the default HTTPS port, like the default SSH port is 22), our port forwarding rule can forward this to our HA instance on port 8123 (or we can specify the port number in the URL). When this guide is completed we will run something like this:</p>
+<pre><code class="language-text">Outside world -&gt; https://examplehome.duckdns.org -&gt; 203.0.113.12:443 -&gt; your router -&gt; 192.168.0.200:8123
+</code></pre>
+<p>So, let’s make it happen…</p>
+<h3>
+<a class="title-link" name="1-----ip---" href="#1-----ip---"></a> 1 - 장치가 고정 IP 주소를 가지도록 설정</h3>
+<p>Whenever a device is connected to a network it has an IP address. This IP address is often dynamically assigned to the device on connection. This means there are occasions where the IP address you use to access Home Assistant, or SSH in to the device running Home Assistant, may change. Setting a static IP address means that the device will always be on the same address.</p>
+<p>SSH in to your system running Home Assistant and login.</p>
+<p>Type the following command to list your network interfaces:</p>
+<pre><code class="language-bash">ifconfig
+</code></pre>
+<p>You will receive an output similar to the image below:</p>
+<p class="img">
+  <img src="/images/screenshots/ip-set.jpg">
+  Screenshot
+</p>
+<p>Make a note of the interface name and the IP address you are currently on. In the picture it is the wireless connection that is highlighted, but with your setup it may be the wired one (eth0 or similar), make sure you get the correct information.</p>
+<p>Then type the following command to open the text file that controls your network connection:</p>
+<pre><code class="language-bash">sudo nano /etc/dhcpcd.conf
+</code></pre>
+<p>At the bottom of the file add the following lines:</p>
+<pre><code class="language-text">interface wlan0 &lt;----- or the interface you just wrote down.
+
+static ip_address=192.168.0.200/24  &lt;---- the IP address you just wrote down with a '/24' at the end
+static routers=192.168.0.1      &lt;---- Your router's IP address
+static domain_name_servers=192.168.0.1 &lt;---- Your router's IP address
+</code></pre>
+<p>It is important to note that the first three bytes of your static IP address and your router’s IP address should be the same, e.g.:</p>
+<pre><code class="language-text">Router: 192.168.0.1
+
+Yes
+HA IP: 192.168.0.200
+
+No
+HA IP: 192.175.96.200
+</code></pre>
+<p>Press Ctrl + x to close the editor, pressing Y to save the changes when prompted.</p>
+<p>Reboot your device running HA:</p>
+<pre><code class="language-bash">sudo reboot
+</code></pre>
+<p>When it comes back up check that you can SSH in to it again on the IP address you wrote down.</p>
+<p>Make sure Home Assistant is running and access it via the local network by typing the IP address and port number in to the browser:</p>
+<pre><code class="language-text">http://192.168.0.200:8123.
+</code></pre>
+<p>All working?  Hooray!  You now have a static IP. This will now always be your internal IP address for your Home Assistant device. This will be known as YOUR-HA-IP for the rest of this guide.</p>
+<h3>
+<a class="title-link" name="2---tlsssl----" href="#2---tlsssl----"></a> 2 - (TLS/SSL 없이)포트포워딩, 그리고 테스트 연결</h3>
+<p>Log in to your router’s configuration pages and find the port forwarding options. This bit is hard to write a guide for because each router has a different way of presenting these options. Searching google for “port forwarding” and the name of your router may help. When you find it you will likely have options similar to:</p>
+<p>Service name - Port Range -  Local IP -  Local Port - Protocol</p>
+<p>You may also have other options (like ‘source IP’), these can usually be left blank or in their default state.</p>
+<p>Set the port forwarding to:</p>
+<pre><code class="language-text">Service name - ha_test
+Port Range - 8123
+Local IP - YOUR-HA-IP
+Local Port - 8123
+Protocol - Both
+</code></pre>
+<p>Then save the change. On my router you have to fill these values in, then press an ‘add’ button to add the new rule to the list, then save the changes. All routers have a different interface, but you must ensure that these rules are saved at this point.  If you are unsure, you can reboot the router and log back in, if the rule is present it was saved, if not, it wasn’t!</p>
+<p>Once you have saved this rule, go to your browser, and go to:</p>
+<pre><code class="language-text">https://whatismyipaddress.com/
+</code></pre>
+<p>This will tell you your current external IP address</p>
+<p>Type the external IP address in to the URL bar with http:// in front and :8123 after like so (203.0.113.12 is my example!):</p>
+<pre><code class="language-text">http://203.0.113.12:8123
+</code></pre>
+<p>Can you see your Home Assistant instance? If not, your router may not support ‘loopback’ - try the next step anyway and if that works, and this one still doesn’t, just remember that you cannot use loopback, so will have to use internal addresses when you’re on your home network. More on this later on if it’s relevant to you.</p>
+<p>Just to verify this isn’t some kind of witchcraft that is actually using your internal network, pick up your phone, disconnect it from your WiFi so that you are on your mobile data and not connected to the home network, put the same URL in the browser on your phone.</p>
+<p>Can you see it now, from a device that is definitely not connected to your local network? Excellent! You now have a remotely accessible Home Assistant instance.</p>
+<p>But what if your external IP changes?  Plus, remembering all those numbers is pretty hard, isn’t it?  Read on to get yourself set up with a word-based URL at DuckDNS that will track any changes to your IP address so you don’t have to stress anymore.</p>
+<h3><a href="/docs/ecosystem/certificates/lets_encrypt/">다음 과정: DuckDNS와 Let’s Encrypt »</a></h3>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+  <div class="section">
+    <h1 class="title delta">목차</h1>
+    <ul class="divided sidebar-menu">
+      <li>
+        <b><a  href='/faq/'>FAQ </a></b> |
+        <b><a  href='/docs/glossary/'>용어정리 </a></b>
+      </li>
+      <li>
+        <b><a  href='/docs/installation/'>설치 </a></b>
+        <ul>
+          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
+          <li>
+            <a  href='/docs/installation/troubleshooting/'>문제해결
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/configuration/'>설정 </a></b>
+        <ul>
+          <li><a  href='/docs/configuration/yaml/'>YAML </a></li>
+          <li>
+            <a  href='/docs/configuration/basic/'>기본 설정 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/devices/'>장비 추가 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/customizing-devices/'>엔티티 수정 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/troubleshooting/'>문제해결
+            </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/securing/'>보안 점검 사항
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>고급 설정</b>
+        <ul>
+          <li><a  href='/docs/configuration/remote/'>원격 접속 </a></li>
+          <li><a  href='/docs/configuration/packages/'>패키지 </a></li>
+          <li>
+            <a  href='/docs/configuration/splitting_configuration/'>설정 파일 분할 </a>
+          </li>
+          <li>
+            <a  href='/docs/configuration/secrets/'>보안 유지 </a>
+          </li>
+          <li><a  href='/docs/configuration/templating/'>템플릿 사용 </a></li>
+          <li>
+            <a  href='/docs/configuration/platform_options/'>엔티티 옵션 </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/authentication/'>인증 </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/authentication/providers/'>Auth Providers </a>
+          </li>
+          <li>
+            <a  href='/docs/authentication/multi-factor-auth/'>Multi Factor
+            Auth </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>핵심 오브젝트</b>
+        <ul>
+          <li><a  href='/docs/configuration/events/'>이벤트 </a></li>
+          <li>
+            <a  href='/docs/configuration/state_object/'>상태 오브젝트 </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/automation/'>자동화 </a></b>
+        <ul>
+          <li><a  href='/docs/automation/examples/'>예제 </a></li>
+          <li><a  href='/docs/automation/editor/'>자동화 편집기 </a></li>
+          <li><a  href='/docs/automation/trigger/'>트리거 </a></li>
+          <li><a  href='/docs/automation/condition/'>조건 </a></li>
+          <li><a  href='/docs/automation/action/'>동작 </a></li>
+          <li><a  href='/docs/automation/templating/'>템플릿 </a></li>
+          <li>
+            <a  href='/docs/automation/troubleshooting/'>문제해결 </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/frontend/'>Frontend </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/frontend/mobile/'>Android/iOS 홈스크린 </a>
+          </li>
+          <li>
+            <a  href='/docs/frontend/browsers/'>호환 브라우저 목록
+            </a>
+          </li>
+          <li><a  href='/lovelace'>Lovelace UI </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/backend/'>Backend </a></b>
+        <ul>
+          <li><a  href='/docs/backend/database/'>데이터베이스 </a></li>
+          <li><a  href='/docs/backend/updater/'>Updater </a></li>
+          <li><a  href='/developers/api/'>API </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scripts/'>스크립트 </a></b>
+        <ul>
+          <li><a  href='/docs/scripts/service-calls/'>서비스 실행 </a></li>
+          <li><a  href='/docs/scripts/conditions/'>조건 </a></li>
+          <li><a  href='/docs/scripts/editor/'>스크립트 편집기 </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/scene/'>Scenes </a></b>
+        <ul>
+          <li><a  href='/docs/scene/editor/'>Editor </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/tools/'>Tools and Helpers </a></b>
+        <ul>
+          <li><a  href='/docs/tools/dev-tools/'>Developer Tools </a></li>
+          <li><a  href='/docs/tools/hass/'>hass </a></li>
+          <li><a  href='/docs/tools/benchmark/'>benchmark </a></li>
+          <li><a  href='/docs/tools/check_config/'>check_config </a></li>
+          <li><a  href='/docs/tools/credstash/'>credstash </a></li>
+          <li><a  href='/docs/tools/ensure_config/'>ensure_config </a></li>
+          <li><a  href='/docs/tools/keyring/'>keyring </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/security/'>Security </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/security/webserver/'>Web server fingerprint </a>
+          </li>
+          <li><a  href='/docs/security/porosity/'>Porosity </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/z-wave/'>Z-Wave </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/z-wave/installation/'>지웨이브 설정 </a>
+          </li>
+          <li><a  href='/docs/z-wave/adding/'>기기 추가 </a></li>
+          <li>
+            <a  href='/docs/z-wave/control-panel/'>지웨이브 관리 화면
+            </a>
+          </li>
+          <li><a  href='/docs/z-wave/controllers/'>콘트롤러 </a></li>
+          <li>
+            <a  href='/docs/z-wave/devices/'>기기 </a> 와 <a  href='/docs/z-wave/entities/'>엔티티 </a>
+          </li>
+          <li>
+            <a  href='/docs/z-wave/query-stage/'>단계별 초기화 </a>
+          </li>
+          <li>
+            <a  href='/docs/z-wave/device-specific/'>특정 기기 </a>
+            설정
+          </li>
+          <li>
+            <a  href='/docs/z-wave/events/'>이벤트 </a> 와 <a  href='/docs/z-wave/services/'>서비스 </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/mqtt/'>MQTT </a></b>
+        <ul>
+          <li><a  href='/docs/mqtt/broker/'>브로커 </a></li>
+          <li><a  href='/docs/mqtt/certificate/'>인증서 </a></li>
+          <li><a  href='/docs/mqtt/discovery/'>발견 </a></li>
+          <li><a  href='/docs/mqtt/service/'>Publish service </a></li>
+          <li>
+            <a  href='/docs/mqtt/birth_will/'>Birth and last will messages
+            </a>
+          </li>
+          <li><a  href='/docs/mqtt/testing/'>테스트 </a></li>
+          <li><a  href='/docs/mqtt/logging/'>Logging </a></li>
+          <li><a  href='/docs/mqtt/processing_json/'>JSON 처리 </a></li>
+        </ul>
+      </li>
+      <li>
+        <b><a  href='/docs/ecosystem/ios/'>iOS </a></b>
+        <ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/notifications/basic/'>Basic
+            notifications </a>
+          </li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/sounds/'>Sounds </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/architecture/'>Architecture </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/privacy_security_rate_limits/'>Privacy, rate limiting and security </a>
+            </li>
+          </ul>
+          <li>Advanced notifications</li>
+          <ul>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/attachments/'>Attachments </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/content_extensions/'>Dynamic
+              content </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/actions/'>Actionable notifications </a>
+            </li>
+            <li>
+              <a  href='/docs/ecosystem/ios/notifications/requesting_location_updates/'>Requesting location updates </a>
+            </li>
+          </ul>
+          <li>
+            <a  href='/docs/ecosystem/ios/location/'>Location Tracking </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/ios/integration/'>Integration with
+            other apps </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a  href='/docs/ecosystem/'>Ecosystem </a>
+        <ul>
+          <li>
+            <a  href='/docs/autostart/'>Autostart </a>
+            <ul>
+              <li>
+                <a  href='/docs/autostart/systemd/'>systemd (Linux) </a>
+              </li>
+              <li>
+                <a  href='/docs/autostart/upstart/'>Upstart (Linux) </a>
+              </li>
+              <li><a  href='/docs/autostart/init.d/'>init.d (Linux) </a></li>
+              <li><a  href='/docs/autostart/macos/'>macOS </a></li>
+              <li><a  href='/docs/autostart/synology/'>Synology NAS </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/appdaemon/'>AppDaemon </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/hadashboard/'>HADashboard </a>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/notebooks/'>Notebooks </a>
+            <ul>
+              <li><a  href='/docs/ecosystem/notebooks/'>Introduction </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/installation/'>Installation </a>
+              </li>
+              <li><a  href='/docs/ecosystem/notebooks/graph/'>Graph </a></li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/api/'>Home Assistant API
+                </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/database/'>Database </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/notebooks/stats/'>Statistics </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Remote access
+            <ul>
+              <li><a  href='/docs/ecosystem/apache/'>Apache </a></li>
+              <li><a  href='/docs/ecosystem/caddy/'>Caddy Server </a></li>
+              <li><a  href='/docs/ecosystem/haproxy/'>HAProxy </a></li>
+              <li><a  href='/docs/ecosystem/nginx/'>NGINX </a></li>
+              <li>
+                <a  href='/docs/ecosystem/nginx_subdomain/'>NGINX with
+                subdomain</a>
+              </li>
+              <li><a  href='/docs/ecosystem/tor/'>Tor Onion Service </a></li>
+            </ul>
+          </li>
+          <li>
+            <a  href='/docs/ecosystem/certificates/'>Certificates </a>
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_self_signed_certificate/'>Self-signed certificate </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/tls_domain_certificate/'>Certificate
+                domain owners </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/certificates/lets_encrypt/'>Let's
+                Encrypt (detailed) </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            백업
+            <ul>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_github/'>GitHub 백업 </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_dropbox/'>Dropbox 백업 </a>
+              </li>
+              <li>
+                <a  href='/docs/ecosystem/backup/backup_usb/'>USB
+                백업 </a>
+              </li>
+            </ul>
+          </li>
+          <li><a  href='/docs/ecosystem/synology/'>시놀로지 </a></li>
+          <li>
+            <a  href='/docs/ecosystem/hass-configurator/'>Configurator
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant"> 홈어시스턴트
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'c762b5632da4220f398f985614f3a1e3',
+  indexName: 'hakorea',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>
