@@ -106,7 +106,7 @@
 <a class="title-link" name="common" href="#common"></a> Common</h2>
 <h3>
 <a class="title-link" name="python-2" href="#python-2"></a> Python 2</h3>
-<p>There will be no support for Python 2.x. Python 2 will be EOL in <a href="https://www.python.org/dev/peps/pep-0373/#id2" rel="external nofollow">2020</a> and it doesn’t make any sense to support a release which was planned to be retired in 2015.</p>
+<p>Python 2.x에 대한 지원은 없을것입니다. Python 2는 <a href="https://www.python.org/dev/peps/pep-0373/#id2" rel="external nofollow">2020</a>년에 EOL되며, 2015년부터 은퇴가 예정된 릴리즈를 지원하는 것은 의미가 없습니다.</p>
 <h3>
 <a class="title-link" name="releases" href="#releases"></a> Releases</h3>
 <p>The current release cycle is three weeks. This allows for two weeks of development time and 1 week of beta testing and fixing. Releases usually occur on a Wednesday. There is no fixed time of day when the release will happen because that depends on the person who is finishing the release, it could therefore be Tuesday or Thursday depending on your timezone when its available for you. If there was no announcement made in the previous release notes or on another communication channel then the release will happen.</p>
@@ -162,11 +162,6 @@ When a beta release is in progress, the release notes for it can be found under 
 <h2>
 <a class="title-link" name="usage" href="#usage"></a> Usage</h2>
 <h3>
-<a class="title-link" name="after-upgrading-your-browser-login-gets-stuck" href="#after-upgrading-your-browser-login-gets-stuck"></a> After upgrading, your browser login gets stuck</h3>
-<p>After upgrading to a new version, you may notice your browser gets stuck at the “loading data” login screen. Close the window/tab and go into your browser settings and delete all the cookies for your URL. You can then log back in and it should work.</p>
-<p>Android Chrome:</p>
-<p>chrome -&gt; settings -&gt; site settings -&gt; storage -&gt; search for your URL for Home Assistant-&gt; “clear &amp; reset”</p>
-<h3>
 <a class="title-link" name="connection-error" href="#connection-error"></a> Connection error</h3>
 <p>It can happen that you get a traceback that notify you about connection issues while running Home Assistant. Eg.</p>
 <pre><code class="language-bash">ConnectionRefusedError: [Errno 111] Connection refused
@@ -176,15 +171,21 @@ When a beta release is in progress, the release notes for it can be found under 
 <a class="title-link" name="dependencies" href="#dependencies"></a> Dependencies</h3>
 <p>The dependencies which are used by Home Assistant are stored in the folder <code>deps</code> of the <a href="/docs/configuration/">configuration folder</a> directory. After an <a href="/docs/installation/updating/">upgrade</a> the dependences will be upgraded as well.</p>
 <h3>
-<a class="title-link" name="frontend-is-acting-weird" href="#frontend-is-acting-weird"></a> Frontend is acting weird</h3>
-<p>Close the windows or tab and clear the cache. The frontend is aggressively caching and clearing the cache ensures that the frontend is reloaded when you access it the next time.</p>
-<h3>
 <a class="title-link" name="problems-with-dependencies" href="#problems-with-dependencies"></a> Problems with dependencies</h3>
 <p>Almost all integrations have external dependencies to communicate with your devices and services. Sometimes Home Assistant is unable to install the necessary dependencies. If this is the case, it should show up in <code>home-assistant.log</code>.</p>
 <p>The first step is trying to restart Home Assistant and see if the problem persists. If it does, look at the log to see what the error is. If you can’t figure it out, please <a href="https://github.com/home-assistant/home-assistant/issues" rel="external nofollow">report it</a> so we can investigate what is going on.</p>
 <h3>
-<a class="title-link" name="found-character--that-cannot-start-any-token" href="#found-character--that-cannot-start-any-token"></a> found character ’	’ that cannot start any token</h3>
-<p>This error means that you used a tab, rather than two spaces. Replace the tab with spaces.</p>
+<a class="title-link" name="---------" href="#---------"></a> 문자 ’	’를 찾았으며, 이 문자로는 어떠한 토큰을 시작할 수 없습니다.</h3>
+<p>이 에러는 당신이 스페이스 2칸 대신 탭을 사용했음을 의미합니다. 탭 대신 스페이스를 사용하십시오.</p>
+<h3>
+<a class="title-link" name="---" href="#---"></a> 업그레이드한 뒤로, 로그인이 안됩니다</h3>
+<p>새로운 버전으로 업그레이드하고, 당신의 브라우저는 “데이터 로딩” 로그인 화면에서 멈출수 있습니다. 윈도우/탭을 닫고 브라우저 설정에 들어가 해당 URL의 쿠키를 제거하십시오. 그러면 다시 로그인할 수 있고, 잘 작동할 겁니다.</p>
+<p>안드로이드 Chrome:</p>
+<p>Chrome -&gt; 설정 -&gt; 사이트 설정 -&gt; 저장소 -&gt; 당신의 홈 어시스턴트 URL 검색 -&gt; “삭제 및 재설정”</p>
+<h3>
+<a class="title-link" name="--" href="#--"></a> 프론트엔드가 이상하게 행동합니다.</h3>
+<p>윈도우나 탭을 닫고 캐시를 삭제하십시오. 프론트엔드는 적극적으로 캐싱하고, 캐시를 지우면 다음에 접속할때 프론트엔드가 다시 로드됩니다.
+Close the windows or tab and clear the cache. The frontend is aggressively caching and clearing the cache ensures that the frontend is reloaded when you access it the next time.</p>
 
 
 </article>
@@ -232,17 +233,17 @@ When a beta release is in progress, the release notes for it can be found under 
     
   
     
-  
-    
-  
-    
-  
-    
 <li><a href='/faq#python-2'>Python 2</a></li>
     
   
     
 <li><a href='/faq#releases'>Releases</a></li>
+    
+  
+    
+  
+    
+  
     
   
     
@@ -253,12 +254,6 @@ When a beta release is in progress, the release notes for it can be found under 
       <li>
         <b>Configuration</b>
         <ul>
-  
-    
-  
-    
-  
-    
   
     
   
@@ -292,14 +287,18 @@ When a beta release is in progress, the release notes for it can be found under 
 <li><a href='/faq#why-are-you-using-yaml-for-the-configuration-file'>Why are you using YAML for the configuration file?</a></li>
     
   
+    
+  
+    
+  
+    
+  
         </ul>
       </li>
 
       <li>
         <b>Documentation</b>
         <ul>
-  
-    
   
     
   
@@ -316,11 +315,13 @@ When a beta release is in progress, the release notes for it can be found under 
     
   
     
-  
-    
-  
-    
 <li><a href='/faq#missing-documentation'>Missing Documentation</a></li>
+    
+  
+    
+  
+    
+  
     
   
     
@@ -349,13 +350,7 @@ When a beta release is in progress, the release notes for it can be found under 
     
   
     
-  
-    
 <li><a href='/faq#distutils-errors-distutilsoptionerror'>distutils.errors.DistutilsOptionError</a></li>
-    
-  
-    
-  
     
   
     
@@ -388,16 +383,18 @@ When a beta release is in progress, the release notes for it can be found under 
   
     
   
+    
+  
+    
+  
+    
+  
         </ul>
       </li>
 
       <li>
         <b>Usage</b>
         <ul>
-  
-    
-<li><a href='/faq#after-upgrading-your-browser-login-gets-stuck'>After upgrading, your browser login gets stuck</a></li>
-    
   
     
 <li><a href='/faq#connection-error'>Connection error</a></li>
@@ -409,14 +406,6 @@ When a beta release is in progress, the release notes for it can be found under 
   
     
   
-    
-  
-    
-<li><a href='/faq#found-character-that-cannot-start-any-token'>found character '	' that cannot start any token</a></li>
-    
-  
-    
-<li><a href='/faq#frontend-is-acting-weird'>Frontend is acting weird</a></li>
     
   
     
@@ -439,6 +428,18 @@ When a beta release is in progress, the release notes for it can be found under 
   
     
   
+    
+  
+    
+<li><a href='/faq#문자-를-찾았으며-이-문자로는-어떠한-토큰을-시작할-수-없습니다'>문자 '	'를 찾았으며, 이 문자로는 어떠한 토큰을 시작할 수 없습니다.</a></li>
+    
+  
+    
+<li><a href='/faq#업그레이드한-뒤로-로그인이-안됩니다'>업그레이드한 뒤로, 로그인이 안됩니다</a></li>
+    
+  
+    
+<li><a href='/faq#프론트엔드가-이상하게-행동합니다'>프론트엔드가 이상하게 행동합니다.</a></li>
     
   
         </ul>
