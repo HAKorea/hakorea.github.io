@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Automation Actions - 홈어시스턴트</title>
+    <title>자동화 액션 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Automations result in action.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/automation/action/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Automation Actions">
+    <meta property="og:title" content="자동화 액션">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/automation/action/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Automation Actions">
+    <meta name="twitter:title" content="자동화 액션">
     <meta name="twitter:description" content="Automations result in action.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Automation Actions
+      자동화 액션
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The action of an automation rule is what is being executed when a rule fires. The action part follows the <a href="/docs/scripts/">script syntax</a> which can be used to interact with anything via services or events. For services you can specify the entity_id that it should apply to and optional service parameters (to specify for example the brightness).</p>
-<p>You can also call the service to activate <a href="/integrations/scene/">a scene</a> which will allow you to define how you want your devices to be and have Home Assistant call the right services.</p>
+  <p>자동화 규칙의 액션은 규칙이 실행될 때 실행되는 것입니다. 액션 부분은 서비스 나 이벤트를 통해 모든 것과 상호 작용하는 데 사용할 수있는 <a href="/docs/scripts/">script syntax</a>을 따릅니다. 서비스의 경우 적용해야 할 entity_id 및 선택적 서비스 매개 변수를 지정할 수 있습니다. (예: 밝기 지정) The action part follows the <a href="/docs/scripts/">script syntax</a> which can be used to interact with anything via services or events. For services you can specify the entity_id that it should apply to and optional service parameters (to specify for example the brightness).</p>
+<p>You can also call the service to activate <a href="/integrations/scene/">a scene</a> which will allow you to define how you want your devices to be and have Home Assistant call the right services.
+또한 서비스를 호출하여 <a href="/integrations/scene/">a scene</a>을 활성화 하여 장치를 원하는 방식을 정의하고 홈 어시스턴트가 올바른 서비스를 호출하도록 할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   # Change the light in the kitchen and living room to 150 brightness and color red.
   trigger:
@@ -134,7 +135,7 @@ automation 2:
       data:
         message: Oh wow you really missed something great.
 </code></pre>
-<p>Conditions can also be part of an action. You can combine multiple service calls and conditions in a single action, and they will be processed in the order you put them in. If the result of a condition is false, the action will stop there so any service calls after that condition will not be executed.</p>
+<p>조건은 액션의 일부일 수도 있습니다. 여러 서비스 호출 및 조건을 단일 액션으로 결합 할 수 있으며, 입력 한 순서대로 처리됩니다, 조건 결과가 거짓이면 액션이 중지되므로 해당 조건 이후의 모든 서비스 호출이 실행되지 않습니다.</p>
 <pre><code class="language-yaml">automation:
 - alias: 'Enciende Despacho'
   trigger:

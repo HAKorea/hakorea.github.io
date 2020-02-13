@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Packages - 홈어시스턴트</title>
+    <title>패키지 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Describes all there is to know about configuration packages in Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/configuration/packages/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Packages">
+    <meta property="og:title" content="패키지">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/configuration/packages/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Packages">
+    <meta name="twitter:title" content="패키지">
     <meta name="twitter:description" content="Describes all there is to know about configuration packages in Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,23 +97,24 @@
   
   <header>
     <h1 class="title indent">
-      Packages
+      패키지
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Packages in Home Assistant provide a way to bundle different component’s configuration together. We already learned about the two configuration styles (specifying platforms entries together or individually) on the <a href="/docs/configuration/devices/">adding devices</a> page. Both of these configuration methods require you to create the integration key in the main <code>configuration.yaml</code> file. With packages we have a way to include different components, or different configuration parts using any of the <code>!include</code> directives introduced in <a href="/docs/configuration/splitting_configuration">splitting the configuration</a>.</p>
-<p>Packages are configured under the core <code>homeassistant/packages</code> in the configuration and take the format of a package name (no spaces, all lower case) followed by a dictionary with the package config. For example, package <code>pack_1</code> would be created as:</p>
+  <p>홈어시스턴트의 패키지는 서로 다른 구성 요소의 설정을 하나로 묶을 수있는 방법을 제공합니다. <a href="/docs/configuration/devices/">장치 추가</a> 페이지에서 두 가지 설정 스타일 (플랫폼 항목을 함께 또는 개별적으로 지정)에 대해 이미 배웠습니다. 이 두 구성 방법 모두 <code>configuration.yaml</code> 파일에서 연동 키를 작성해야 합니다. 패키지를 사용하면 <a href="/docs/configuration/splitting_configuration">설정 나누기</a>에 도입 된 <code>! include</code> 지시문을 사용하여 다른 구성 요소(component) 또는 다른 설정 부분을 포함시킬 수 있습니다.</p>
+<p>Packages are configured under the core <code>homeassistant/packages</code> in the configuration and take the format of a package name (no spaces, all lower case) followed by a dictionary with the package config. For example, package <code>pack_1</code> would be created as:
+패키지 설정의 주요부분은 <code>homeassistant/packages</code> 아래 설정되고, 패키지 설정 따른 (공백없음, 소문자)의 패키지 이름의 형식을 취합니다. 예를 들어 패키지 <code>pack_1</code> 이라고 만들 수 있습니다. :</p>
 <pre><code class="language-yaml">homeassistant:
   ...
   packages: 
     pack_1:
       ...package configuration here...
 </code></pre>
-<p>The package configuration can include: <code>switch</code>, <code>light</code>, <code>automation</code>, <code>groups</code>, or most other Home Assistant integrations including hardware platforms.</p>
-<p>It can be specified inline or in a separate YAML file using <code>!include</code>.</p>
-<p>Inline example, main <code>configuration.yaml</code>:</p>
+<p>패키지 설정은 다음과 같습니다: <code>switch</code>, <code>light</code>, <code>automation</code>, <code>groups</code>, 혹은 하드웨어 플랫폼을 포함한 대부분의 다른 홈어시스턴트 구성요소.</p>
+<p><code>!include</code> 를 사용하여 inline 또는 별도의 YAML 파일로 지정할 수 있습니다.</p>
+<p>inline의 예 <code>configuration.yaml</code>:</p>
 <pre><code class="language-yaml">homeassistant:
   ...
   packages: 
@@ -125,13 +126,13 @@
         - platform: rpi
           ...
 </code></pre>
-<p>Include example, main <code>configuration.yaml</code>:</p>
+<p>Include의 예 <code>configuration.yaml</code>:</p>
 <pre><code class="language-yaml">homeassistant:
   ...
   packages: 
     pack_1: !include my_package.yaml
 </code></pre>
-<p>The file <code>my_package.yaml</code> contains the “top-level” configuration:</p>
+<p><code>my_package.yaml</code> “top-level” 설정이 포함되어 있습니다. :</p>
 <pre><code class="language-yaml">switch:
   - platform: rest
     ...
@@ -139,14 +140,14 @@ light:
   - platform: rpi
     ...
 </code></pre>
-<p>There are some rules for packages that will be merged:</p>
+<p>병합 될 패키지에 대한 몇 가지 규칙이 있습니다. :</p>
 <ol>
 <li>
-<p>Platform based integrations (<code>light</code>, <code>switch</code>, etc) can always be merged.</p>
+<p>플랫폼 기반 통합구성요소는 (<code>light</code>, <code>switch</code>, etc) 로 병할 될 수 있습니다.</p>
 </li>
 <li>
-<p>Components where entities are identified by a key that will represent the entity_id (<code>{key: config}</code>) need to have unique ‘keys’ between packages and the main configuration file.</p>
-<p>For example if we have the following in the main config. You are not allowed to re-use “my_input” again for <code>input_boolean</code> in a package:</p>
+<p>entity_id (<code>{key: config}</code>)를 나타내는 키에 의해 식별되는 entity가 있는 구성 요소(component)는 패키지와 기본 구성 파일간에 고유한 ‘키’가 있어야합니다.</p>
+<p>예를 들어 메인 구성에 다음이 있는 경우. 패키지에서 <code>input_boolean</code> 로 “my_input”을 다시 재사용 할 수 없습니다 :</p>
 <pre><code class="language-yaml">input_boolean:
   my_input:
 </code></pre>
@@ -154,21 +155,30 @@ light:
 <li>
 <p>Any integration that is not a platform [2], or dictionaries with Entity ID keys [3] can only be merged if its keys, except those for lists, are solely defined once.</p>
 </li>
+<li>
+<p>플랫폼이 아닌 통합구성요소 [2] 또는 entity ID 키가 [3] 인 사전은 목록에 대한 키를 제외한 키가 한 번만 정의 된 경우에만 병합 할 수 있습니다.</p>
+</li>
 </ol>
 <div class="note tip">
 Components inside packages can only specify platform entries using configuration style 1, where all the platforms are grouped under the integration name.
+패키지 내부의 구성 요소(component)는 설정 스타일 1을 사용하여 플랫폼 항목만 지정할 수 있으며 모든 플랫폼은 통합 구성요소 이름으로 그룹화됩니다.
 </div>
 <h3>
-<a class="title-link" name="create-a-packages-folder" href="#create-a-packages-folder"></a> Create a packages folder</h3>
-<p>One way to organize packages is to create a folder named “packages” in your Home Assistant configuration directory. In the packages directory you can store any number of packages in a YAML file. This entry in your <code>configuration.yaml</code> will load all packages:</p>
+<a class="title-link" name="--" href="#--"></a> 패키지 폴더 만들기</h3>
+<p>One way to organize packages is to create a folder named “packages” in your Home Assistant configuration directory. In the packages directory you can store any number of packages in a YAML file. This entry in your <code>configuration.yaml</code> will load all packages:
+패키지를 구성하는 한 가지 방법은 홈어시스턴트 구성 디렉토리에 “packages” 라는 폴더를 만드는 것입니다. packages 디렉토리에서 YAML 파일에 원하는 수의 패키지를 저장할 수 있습니다. 이 항목은 <code>configuration.yaml</code> 에서 모든 패키지를 로드합니다.</p>
 <pre><code class="language-yaml">homeassistant:
   packages: !include_dir_named packages
 </code></pre>
 <p>This uses the concept splitting the configuration and will include all files in a directory with the keys representing the filenames.
-See the documentation about <a href="/docs/configuration/splitting_configuration/">splitting the configuration</a> for more information about <code>!include_dir_named</code> and other include statements that might be helpful. The benefit of this approach is to pull all configurations required to integrate a system, into one file, rather than across several.</p>
+이것은 설정 분할 개념을 사용하며 파일 이름을 나타내는 키가 있는 디렉토리의 모든 파일을 포함합니다.
+See the documentation about <a href="/docs/configuration/splitting_configuration/">splitting the configuration</a> for more information about <code>!include_dir_named</code> and other include statements that might be helpful.
+<a href="/docs/configuration/splitting_configuration/">splitting the configuration</a>에 관한 문서를 보면, <code>!include_dir_named</code> 과 다른 명령문들을 포함한 많은 정보들에 관해 도움이 될 것입니다.
+The benefit of this approach is to pull all configurations required to integrate a system, into one file, rather than across several.
+이 방법의 시스템을 하나의 파일이 아닌 여러 파일로 분산 통합하는 장점이 있습니다.</p>
 <h3>
-<a class="title-link" name="customizing-entities-with-packages" href="#customizing-entities-with-packages"></a> Customizing entities with packages</h3>
-<p>It is possible to <a href="/docs/configuration/customizing-devices/">customize entities</a> within packages. Just create your customization entries under:</p>
+<a class="title-link" name="--entity--" href="#--entity--"></a> 패키지를 사용한 entity 사용자 정의</h3>
+<p>패키지 내에서 <a href="/docs/configuration/customizing-devices/">customize entities</a> 를 쓸 수 있습니다. 다음과 같이 사용자 정의 항목을 작성하십시오. :</p>
 <pre><code class="language-yaml">homeassistant:
   customize:
 </code></pre>

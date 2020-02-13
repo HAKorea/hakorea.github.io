@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Automation Trigger - 홈어시스턴트</title>
+    <title>자동화 트리거 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="All the different ways how automations can be triggered.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/automation/trigger/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Automation Trigger">
+    <meta property="og:title" content="자동화 트리거">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/automation/trigger/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Automation Trigger">
+    <meta name="twitter:title" content="자동화 트리거">
     <meta name="twitter:description" content="All the different ways how automations can be triggered.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Automation Trigger
+      자동화 트리거
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Triggers are what starts the processing of an automation rule. It is possible to specify <a href="/docs/automation/trigger/#multiple-triggers">multiple triggers</a> for the same rule - when <em>any</em> of the triggers becomes true then the automation will start. Once a trigger starts, Home Assistant will validate the conditions, if any, and call the action.</p>
+  <p>트리거는 자동화 규칙 처리를 시작하는데 쓰입니다. 동일한 규칙에 대해 <a href="/docs/automation/trigger/#multiple-triggers">multiple triggers</a> 를 지정할 수 있습니다. - 트리거 중 <em>하나 라도</em> 적용되면 자동화가 시작됩니다. 트리거가 시작되면 홈어시스턴트는 조건을 검증하고 해당되는 경우 액션를 호출합니다.</p>
 <h3>
-<a class="title-link" name="event-trigger" href="#event-trigger"></a> Event trigger</h3>
-<p>Triggers when an event is being processed. Events are the raw building blocks of Home Assistant. You can match events on just the event name or also require specific event data to be present.</p>
-<p>Events can be fired by integrations or via the API. There is no limitation to the types. A list of built-in events can be found <a href="/docs/configuration/events/">here</a>.</p>
+<a class="title-link" name="-" href="#-"></a> 이벤트 트리거</h3>
+<p>이벤트가 처리 될 때 트리거됩니다. 이벤트는 홈어시스턴트의 기본 구성 요소입니다. 이벤트 이름만으로 이벤트를 일치 시키거나 특정 이벤트 데이터가 있어야 할 수도 있습니다.</p>
+<p>연동 또는 API를 통해 이벤트를 시작할 수 있습니다. 유형에는 제한이 없습니다. 내장 이벤트 목록은 <a href="/docs/configuration/events/">here</a> 에서 찾을 수 있습니다 .</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: event
@@ -117,11 +117,11 @@
       mood: happy
 </code></pre>
 <div class="note warning">
-<p>Starting 0.42, it is no longer possible to listen for event <code>homeassistant_start</code>. Use the ‘homeassistant’ platform below instead.</p>
+<p>0.42부터는 더 이상 <code>homeassistant_start</code>이벤트를 쓸 수 없습니다. 대신 ‘homeassistant’ 플랫폼을 사용하십시오.</p>
 </div>
 <h3>
-<a class="title-link" name="home-assistant-trigger" href="#home-assistant-trigger"></a> Home Assistant trigger</h3>
-<p>Triggers when Home Assistant starts up or shuts down.</p>
+<a class="title-link" name="-" href="#-"></a> 홈어시스턴트 트리거</h3>
+<p>홈 어시스턴트가 시작되거나 종료 될 때 트리거됩니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: homeassistant
@@ -129,8 +129,8 @@
     event: start
 </code></pre>
 <h3>
-<a class="title-link" name="mqtt-trigger" href="#mqtt-trigger"></a> MQTT trigger</h3>
-<p>Triggers when a specific message is received on given topic. Optionally can match on the payload being sent over the topic. The default payload encoding is ‘utf-8’. For images and other byte payloads use <code>encoding: ''</code> to disable payload decoding completely.</p>
+<a class="title-link" name="mqtt-" href="#mqtt-"></a> MQTT 트리거</h3>
+<p>특정 topic에 대해 특정 message가 수신되면 트리거됩니다. 경우에따라 topic를 통해 전송되는 payload와 일치시킬 수 있습니다. 기본 payload 인코딩은 ‘utf-8’입니다. 이미지 및 기타 바이트 payload들은 payload 디코딩을 완전히 비활성화하기 위해 <code>encoding: ''</code>를 사용합니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: mqtt
@@ -140,8 +140,8 @@
     encoding: "utf-8"
 </code></pre>
 <h3>
-<a class="title-link" name="numeric-state-trigger" href="#numeric-state-trigger"></a> Numeric state trigger</h3>
-<p>Triggers when numeric value of an entity’s state crosses a given threshold. On state change of a specified entity, attempts to parse the state as a number and triggers once if value is changing from above to below or from below to above the given threshold.</p>
+<a class="title-link" name="--" href="#--"></a> 숫자 상태 트리거</h3>
+<p>entity 상태의 숫자 값이 지정된 임계값을 초과 할 때 트리거됩니다. 지정된 entity의 상태 변경시 상태를 숫자로 파싱하려고 시도하고 값이 지정된 임계 값 위에서 아래로 또는 아래에서 아래로 변경되면 한 번 트리거됩니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: numeric_state
@@ -159,10 +159,10 @@
       seconds: 5
 </code></pre>
 <div class="note">
-Listing above and below together means the numeric_state has to be between the two values.
-In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, or 25 or above) would fire this trigger.
+위와 아래를 함께 모두 numeric_state가 두 값 사이에 있어야 함을 의미합니다.
+위의 예에서 17.1-24.9 (17 이하 또는 25 이상) 인 numeric_state는이 트리거를 발생시킵니다.
 </div>
-<p>The <code>for:</code> can also be specified as <code>HH:MM:SS</code> like this:</p>
+<p><code>for:</code> 구문은 <code>HH:MM:SS</code> 와 같이도 지정할 수 있습니다. :</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: numeric_state
@@ -176,7 +176,7 @@ In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, 
     # If given, will trigger when condition has been for X time.
     for: "01:10:05"
 </code></pre>
-<p>You can also use templates in the <code>for</code> option.</p>
+<p><code>for</code> 옵션에서 템플릿을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: numeric_state
@@ -193,10 +193,10 @@ In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, 
       message: &gt;
         {{ trigger.to_state.name }} too high for {{ trigger.for }}!
 </code></pre>
-<p>The <code>for</code> template(s) will be evaluated when an entity changes as specified.</p>
+<p>지정된 entity가 변경된 경우 <code>for</code> 템플릿이 평가하여 계산됩니다.</p>
 <h3>
-<a class="title-link" name="state-trigger" href="#state-trigger"></a> State trigger</h3>
-<p>Triggers when the state of any of given entities changes. If only <code>entity_id</code> is given trigger will activate for all state changes, even if only state attributes change.</p>
+<a class="title-link" name="-" href="#-"></a> 상태 트리거</h3>
+<p>주어진 엔티티의 상태가 변경 될 때 트리거됩니다. 만약 <code>entity_id</code> 만이 주어지면 상태 속성 만 변경 되더라도 모든 상태 변경에 대해 트리거가 활성화됩니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: state
@@ -209,7 +209,7 @@ In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, 
     # If given, will trigger when state has been the to state for X time.
     for: "01:10:05"
 </code></pre>
-<p>You can also use templates in the <code>for</code> option.</p>
+<p><code>for</code> 옵션에서 템플릿을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: state
@@ -222,18 +222,20 @@ In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, 
     service: lock.lock
     entity_id: lock.my_place
 </code></pre>
-<p>The <code>for</code> template(s) will be evaluated when an entity changes as specified.</p>
+<p>특정 entity가 변경된 경우 <code>for</code> 템플릿이 평가하여 계산됩니다.</p>
 <div class="note warning">
-<p>Use quotes around your values for <code>from</code> and <code>to</code> to avoid the YAML parser interpreting values as booleans.</p>
+<p>YAML 파서가 booleans로 값을 해석하여 파싱하는 것을 피하기 위해 <code>from</code>과 <code>to</code> 같이 값에 따옴표를 사용하십시오.</p>
 </div>
 <h3>
-<a class="title-link" name="sun-trigger" href="#sun-trigger"></a> Sun trigger</h3>
+<a class="title-link" name="-" href="#-"></a> 태양 트리거</h3>
 <h4>
-<a class="title-link" name="sunset--sunrise-trigger" href="#sunset--sunrise-trigger"></a> Sunset / Sunrise trigger</h4>
-<p>Triggers when the sun is setting or rising, i.e. when the sun elevation reaches 0°.</p>
-<p>An optional time offset can be given to have it trigger a set time before or after the sun event (e.g. 45 minutes before sunset).</p>
+<a class="title-link" name="---" href="#---"></a> 일몰 / 일출 트리거</h4>
+<p>태양이지고 있거나 뜰 때, 즉 태양 고도가 0 °에 도달하면 트리거됩니다.</p>
+<p>An optional time offset can be given to have it trigger a set time before or after the sun event (e.g. 45 minutes before sunset).
+선택적으로 시간 오프셋은 태양 이벤트 전후에 설정된 시간을 트리거하도록 할 수 있습니다 (예 : 일몰 45 분 전).</p>
 <div class="note">
-<p>Since the duration of twilight is different throughout the year, it is recommended to use <a href="/docs/automation/trigger/#sun-elevation-trigger">sun elevation triggers</a> instead of <code>sunset</code> or <code>sunrise</code> with a time offset to trigger automations during dusk or dawn.</p>
+<p>Since the duration of twilight is different throughout the year, it is recommended to use [sun elevation triggers][sun_elevation_trigger] instead of <code>sunset</code> or <code>sunrise</code> with a time offset to trigger automations during dusk or dawn.
+황혼의 지속 시간은 일년 내내 다르므로, 황혼 또는 새벽 동안 자동화를 트리거하기 위해 시간 오프셋인 <code>sunset</code> ,<code>sunrise</code> 대신 [sun elevation triggers][sun_elevation_trigger] 를 사용하는 것이 좋습니다</p>
 </div>
 <pre><code class="language-yaml">automation:
   trigger:
@@ -244,8 +246,8 @@ In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, 
     offset: "-00:45:00"
 </code></pre>
 <h4>
-<a class="title-link" name="sun-elevation-trigger" href="#sun-elevation-trigger"></a> Sun elevation trigger</h4>
-<p>Sometimes you may want more granular control over an automation than simply sunset or sunrise and specify an exact elevation of the sun. This can be used to layer automations to occur as the sun lowers on the horizon or even after it is below the horizon. This is also useful when the “sunset” event is not dark enough outside and you would like the automation to run later at a precise solar angle instead of the time offset such as turning on exterior lighting. For most things intended to trigger during dusk or dawn, a number between 0° and -6° is suitable; -4° is used in this example:</p>
+<a class="title-link" name="--" href="#--"></a> 태양 고도 트리거</h4>
+<p>때로는 단순히 일몰이나 일출보다 자동화를보다 세밀하게 제어하고 정확한 태양 고도를 지정할 수 있습니다. 이것은 수평선에서 해가 낮아 지거나 수평선 아래로 내려간 후에도 발생하는 자동화를 계층화하는 데 사용할 수 있습니다. 이것은 “일몰” 이벤트가 외부에서 충분히 어두워지지 않을 때 유용하며 외부 조명 켜기와 같은 시간 오프셋 대신 정확한 태양 각도에서 자동화를 나중에 실행하고자 할 때 유용합니다. 황혼이나 새벽에 트리거하려는 대부분의 경우 0 °와 -6 ° 사이의 숫자가 적합합니다. 다음 예에서는 -4 °가 사용됩니다. :</p>
 <pre><code class="language-yaml">automation:
   alias: "Exterior Lighting on when dark outside"
   trigger:
@@ -258,25 +260,25 @@ In the example above, a numeric_state that goes to 17.1-24.9 (from 17 or below, 
     service: switch.turn_on
     entity_id: switch.exterior_lighting
 </code></pre>
-<p>If you want to get more precise, start with the US Naval Observatory <a href="https://aa.usno.navy.mil/data/docs/AltAz.php" rel="external nofollow">tool</a> which will help you estimate what the solar elevation will be at any specific time. Then from this, you can select from the defined twilight numbers.</p>
-<p>Although the actual amount of light depends on weather, topography and land cover, they are defined as:</p>
+<p>If you want to get more precise, start with the US Naval Observatory <a href="https://aa.usno.navy.mil/data/docs/AltAz.php" rel="external nofollow">tool</a> which will help you estimate what the solar elevation will be at any specific time. Then from this, you can select from the defined twilight numbers.
+보다 정확한 정보를 얻으려면 미국 해군 관측소 <a href="https://aa.usno.navy.mil/data/docs/AltAz.php" rel="external nofollow">tool</a>로 시작하십시오. 이 툴은 특정 시간에 태양 고도가 무엇인지 추정하는 데 도움이됩니다. 런 다음 이로부터 정의 된 황혼 번호를 선택할 수 있습니다.</p>
+<p>실제 빛의 양은 날씨, 지형 및 지표면에 따라 다르지만 다음과 같이 정의됩니다. :</p>
 <ul>
 <li>
-<p>Civil twilight: 0° &gt; Solar angle &gt; -6°</p>
-<p>This is what is meant by twilight for the average person: Under clear weather conditions, civil twilight approximates the limit at which solar illumination suffices for the human eye to clearly distinguish terrestrial objects. Enough illumination renders artificial sources unnecessary for most outdoor activities.</p>
+<p>민간 황혼: 0° &gt; 태양 각도 &gt; -6°</p>
+<p>이것은 일반인에게 황혼의 의미입니다. 맑은 날씨 조건에서 민간 황혼은 태양 조명이 사람의 눈으로 지상 물체를 명확하게 구별하기에 충분한 값에 가깝습니다. 충분한 조명은 대부분의 야외 활동에 인공 조명을 불필요하게 만듭니다.</p>
 </li>
 <li>
-<p>Nautical twilight: -6° &gt; Solar angle &gt; -12°</p>
+<p>해상 황혼: -6° &gt; 태양 각도 &gt; -12°</p>
 </li>
 <li>
-<p>Astronomical twilight: -12° &gt; Solar angle &gt; -18°</p>
+<p>천문 황혼: -12° &gt; 태양 각도 &gt; -18°</p>
 </li>
 </ul>
-<p>A very thorough explanation of this is available in the Wikipedia article about the <a href="https://en.wikipedia.org/wiki/Twilight" rel="external nofollow">Twilight</a>.</p>
+<p>이것에 대한 자세한 설명은 Wikipedia <a href="https://en.wikipedia.org/wiki/Twilight" rel="external nofollow">Twilight</a>기사에서 볼 수 있습니다.</p>
 <h3>
-<a class="title-link" name="template-trigger" href="#template-trigger"></a> Template trigger</h3>
-<p>Template triggers work by evaluating a <a href="/docs/configuration/templating/">template</a> on every state change for all of the recognized entities. The trigger will fire if the state change caused the template to render ‘true’. This is achieved by having the template result in a true boolean expression (<code>{{ is_state('device_tracker.paulus', 'home') }}</code>) or by having the template render ‘true’ (example below). Being a boolean expression the template must evaluate to false (or anything other than true) before it will fire again.
-With template triggers you can also evaluate attribute changes by using is_state_attr (<code>{{ is_state_attr('climate.living_room', 'away_mode', 'off') }}</code>)</p>
+<a class="title-link" name="-" href="#-"></a> 템플릿 트리거</h3>
+<p>템플릿 트리거 는 인식 된 모든 entity에 대한 모든 상태(state) 변경에 대한 <a href="/docs/configuration/templating/">template</a>을 측정하여 동작합니다. 상태 변경으로 인해 템플릿이 ‘true’로 렌더링되면 트리거가 발생합니다. 이는 템플릿 결과가 실제 부울식(<code>{{ is_state('device_tracker.paulus', 'home') }}</code>)이 되거나 템플릿이 ‘true’(아래 예)로 렌더링되도록 함으로써 달성됩니다. 부울 표현식이므로 템플리트가 다시 실행되기 전에 false (또는 true 이외의 것)로 판별되어야 합니다. 템플릿 트리거를 쓰면, is_state_attr (<code>{{ is_state_attr('climate.living_room', 'away_mode', 'off') }}</code>)를 사용하여 속성 변경을 판별할 수도 있습니다</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: template
@@ -285,7 +287,7 @@ With template triggers you can also evaluate attribute changes by using is_state
     # If given, will trigger when template remains true for X time.
     for: "00:01:00"
 </code></pre>
-<p>You can also use templates in the <code>for</code> option.</p>
+<p><code>for</code> 옵션에서 템플릿을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: template
@@ -293,20 +295,21 @@ With template triggers you can also evaluate attribute changes by using is_state
     for:
       minutes: "{{ states('input_number.minutes')|int(0) }}"
 </code></pre>
-<p>The <code>for</code> template(s) will be evaluated when the <code>value_template</code> becomes <code>true</code>.</p>
+<p><code>for</code> 템플릿들이 <code>value_template</code> 이 <code>true</code>가 될 때 판별할 것입니다.</p>
 <div class="note warning">
 Rendering templates with time (`now()`) is dangerous as trigger templates only update based on entity state changes.
+트리거 템플릿은 entity 상태 변경에 따라 업데이트되므로 시간 (`now ()`)이있는 렌더링 템플릿은 위험할 수 있습니다.
 </div>
-<p>As an alternative, providing you include the sensor <a href="/integrations/time_date/">time</a> in your configuration, you can use the following template:</p>
+<p>대안으로 설정에 센서의 <a href="/integrations/time_date/">time</a> 을 포함 시키면 다음과 같은 템플릿을 사용할 수 있습니다. :</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: template
     value_template: "{{ (as_timestamp(states.sensor.time.last_changed) - as_timestamp(states.YOUR.ENTITY.last_changed)) &gt; 300 }}"
 </code></pre>
-<p>which will evaluate to <code>True</code> if <code>YOUR.ENTITY</code> changed more than 300 seconds ago.</p>
+<p>만일 <code>YOUR.ENTITY</code> 가 300초 이상이 지나기 전에 변경되었다면, 이는 <code>True</code>로 평가 될 것입니다.</p>
 <h3>
-<a class="title-link" name="time-trigger" href="#time-trigger"></a> Time trigger</h3>
-<p>The time trigger is configured to run once at a specific point in time each day.</p>
+<a class="title-link" name="-" href="#-"></a> 시간 트리거</h3>
+<p>시간 트리거는 매일 특정 시점에 한 번 실행되도록 구성됩니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time
@@ -314,8 +317,8 @@ Rendering templates with time (`now()`) is dangerous as trigger templates only u
     at: "15:32:00"
 </code></pre>
 <h3>
-<a class="title-link" name="time-pattern-trigger" href="#time-pattern-trigger"></a> Time pattern trigger</h3>
-<p>With the time pattern trigger, you can match if the hour, minute or second of the current time matches a specific value. You can prefix the value with a <code>/</code> to match whenever the value is divisible by that number. You can specify <code>*</code> to match any value (when using the web interface this is required, the fields cannot be left empty).</p>
+<a class="title-link" name="--" href="#--"></a> 시간 패턴 트리거</h3>
+<p>시간 패턴 트리거를 사용하면 현재 시간의 시, 분 또는 초가 특정 값과 일치하는 경우 일치시킬 수 있습니다. 값을 해당 숫자로 나눌 수있을 때마다 값 앞에 <code>/</code> 접두사를 붙일 수 있습니다. 모든 값과 일치하도록 <code>*</code>를 지정할 수 있습니다 (웹 인터페이스를 사용하는 경우 필드를 비워 둘 수 없음).</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: time_pattern
@@ -336,20 +339,20 @@ automation 3:
     minutes: "/5"
 </code></pre>
 <div class="note warning">
-<p>Do not prefix numbers with a zero - using <code>'00'</code> instead of ‘0’ for example will result in errors.</p>
+<p>숫자 앞에 0을 붙이지 마십시오 - 예를 들어 <code>'00'</code>대신 <code>0</code>을 사용 하면 오류가 발생합니다.</p>
 </div>
 <h3>
-<a class="title-link" name="webhook-trigger" href="#webhook-trigger"></a> Webhook trigger</h3>
-<p>Webhook triggers are triggered by web requests made to the webhook endpoint: <code>/api/webhook/&lt;webhook_id&gt;</code>. This endpoint does not require authentication besides knowing the webhook id. You can either send encoded form or JSON data, available in the template as either <code>trigger.json</code> or <code>trigger.data</code>. URL query parameters are available in the template as <code>trigger.query</code>.</p>
+<a class="title-link" name="-" href="#-"></a> 웹훅 트리거</h3>
+<p>웹 후크 트리거는 웹 후크 엔드 포인트에 대한 웹 요청에 의해 트리거됩니다 : <code>/api/webhook/&lt;webhook_id&gt;</code>. 이 엔드 포인트는 웹 후크 ID를 아는 것 외에 인증이 필요하지 않습니다. 템플릿에서 <code>trigger.json</code> 혹은 <code>trigger</code>으로 사용 가능한 인코딩 된 양식 또는 JSON 데이터를 보낼 수 있습니다. URL 쿼리 매개 변수는 템플릿에서 <code>trigger.query</code> 로 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: webhook
     webhook_id: some_hook_id
 </code></pre>
-<p>You could test triggering the above automation by sending a POST HTTP request to <code>http://your-home-assistant:8123/api/webhook/some_hook_id</code>. An example with no data sent to a SSL/TLS secured installation and using the command-line curl program is <code>curl -d "" https://your-home-assistant:8123/api/webhook/some_hook_id</code>.</p>
+<p>POST HTTP 요청을 <code>http://your-home-assistant:8123/api/webhook/some_hook_id</code>로 보내 위의 자동화 트리거링을 테스트 할 수 있습니다. SSL / TLS 보안 설치로 전송되지 않고 명령 행 curl 프로그램을 사용하는 데이터가 없는 예는 다음과 같습니다 <code>curl -d "" https://your-home-assistant:8123/api/webhook/some_hook_id</code>.</p>
 <h3>
-<a class="title-link" name="zone-trigger" href="#zone-trigger"></a> Zone trigger</h3>
-<p>Zone triggers can trigger when an entity is entering or leaving the zone. For zone automation to work, you need to have setup a device tracker platform that supports reporting GPS coordinates. This includes <a href="/integrations/gpslogger/">GPS Logger</a>, the <a href="/integrations/owntracks/">OwnTracks platform</a> and the <a href="/integrations/icloud/">iCloud platform</a>.</p>
+<a class="title-link" name="zone-" href="#zone-"></a> 영역(Zone) 트리거</h3>
+<p>영역 트리거는 entity가 영역에 들어 오거나 영역을 벗어날 때 트리거 될 수 있습니다. 영역 자동화가 작동하려면 GPS 좌표보고를 지원하는 장치 추적기 플랫폼을 설정해야합니다. 여기에는 <a href="/integrations/gpslogger/">GPS Logger</a>, <a href="/integrations/owntracks/">OwnTracks platform</a> 그리고 <a href="/integrations/icloud/">iCloud platform</a>이 있습니다 .</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: zone
@@ -359,9 +362,8 @@ automation 3:
     event: enter # or "leave"
 </code></pre>
 <h3>
-<a class="title-link" name="geolocation-trigger" href="#geolocation-trigger"></a> Geolocation trigger</h3>
-<p>Geolocation triggers can trigger when an entity is appearing in or disappearing from a zone. Entities that are created by a <a href="/integrations/geo_location/">Geolocation</a> platform support reporting GPS coordinates.
-Because entities are generated and removed by these platforms automatically, the entity id normally cannot be predicted. Instead, this trigger requires the definition of a <code>source</code> which is directly linked to one of the Geolocation platforms.</p>
+<a class="title-link" name="--" href="#--"></a> 지리적 위치 트리거</h3>
+<p>지리적 위치 트리거는 entity가 영역에 나타나거나 영역에서 사라질 때 트리거 할 수 있습니다. <a href="/integrations/geo_location/">Geolocation</a> 플랫폼 으로 생성 된 entity는 GPS 좌표보고를 지원합니다. entity는 이러한 플랫폼에 의해 자동으로 생성 및 제거되므로 entity ID는 일반적으로 예측할 수 없습니다. 대신 이 트리거에는 Geolocation 플랫폼 중 하나에 직접 연결된 <code>source</code>의 정의가 필요로 합니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: geo_location
@@ -371,8 +373,8 @@ Because entities are generated and removed by these platforms automatically, the
     event: enter # or "leave"
 </code></pre>
 <h3>
-<a class="title-link" name="multiple-triggers" href="#multiple-triggers"></a> Multiple triggers</h3>
-<p>When your want your automation rule to have multiple triggers, just prefix the first line of each trigger with a dash (-) and indent the next lines accordingly. Whenever one of the triggers fires, your rule is executed.</p>
+<a class="title-link" name="-" href="#-"></a> 멀티플 트리거</h3>
+<p>자동화 규칙에 여러 트리거가 포함되도록하려면 각 트리거의 첫 번째 줄 앞에 대시 (-)를 붙이고 그에 따라 다음 줄을 들여 쓰기하면됩니다. 트리거 중 하나가 실행될 때마다 규칙이 실행됩니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     # first trigger

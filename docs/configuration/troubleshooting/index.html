@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Troubleshooting your configuration - 홈어시스턴트</title>
+    <title>설정 문제 해결 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Common problems with tweaking your configuration and their solutions.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/configuration/troubleshooting/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Troubleshooting your configuration">
+    <meta property="og:title" content="설정 문제 해결">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/configuration/troubleshooting/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Troubleshooting your configuration">
+    <meta name="twitter:title" content="설정 문제 해결">
     <meta name="twitter:description" content="Common problems with tweaking your configuration and their solutions.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,62 +97,63 @@
   
   <header>
     <h1 class="title indent">
-      Troubleshooting your configuration
+      설정 문제 해결
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>It can happen that you run into trouble while configuring Home Assistant. Perhaps an integration is not showing up or is acting strangely. This page will discuss a few of the most common problems.</p>
-<p>Before we dive into common issues, make sure you know where your configuration directory is. Home Assistant will print out the configuration directory it is using when starting up.</p>
-<p>Whenever an integration or configuration option results in a warning, it will be stored in <code>home-assistant.log</code> in the configuration directory. This file is reset on start of Home Assistant.</p>
+  <p>홈 어시스턴트를 설정하는 중에 문제가 발생할 수 있습니다. 통합구성요소가 표시되지 않거나 이상하게 작동하는 것 같습니다.  이 페이지에서는 가장 일반적인 몇 가지 문제에 대해 설명합니다.</p>
+<p>일반적인 문제를 다루기 전에 configuaration 디렉토리의 위치를 ​​확인하십시오.  홈어시스턴트는 시작할 때 사용중인 설정 디렉토리를 보여줍니다.</p>
+<p>통합구성요소 또는 설정 옵션이 경고를 보여줄 때마다 , <code>home-assistant.log</code> configuaration 디렉토리에 저장됩니다.  이 파일은 홈어시스턴트 시작시 재설정됩니다.</p>
 <h3>
-<a class="title-link" name="my-integration-does-not-show-up" href="#my-integration-does-not-show-up"></a> My integration does not show up</h3>
-<p>When an integration does not show up, many different things can be the case. Before you try any of these steps, make sure to look at the <code>home-assistant.log</code> file and see if there are any errors related to your integration you are trying to set up.</p>
-<p>If you have incorrect entries in your configuration files you can use the <a href="/docs/tools/check_config/"><code>check_config</code></a> script to assist in identifying them: <code>hass --script check_config</code>. If you need to provide the path for your configuration you can do this using the <code>-c</code> argument like this: <code>hass --script check_config -c /path/to/your/config/dir</code>.</p>
+<a class="title-link" name="--" href="#--"></a> 통합구성요소가 나타나지 않습니다</h3>
+<p>통합구성요소가 나타나지 여러가지 경우의 수를 생각할 수 있습니다. 이러한 단계를 수행하기 전에 <code>home-assistant.log</code>파일을 보고 설정하려는 통합구성요소와 관련된 오류가 있는지 확인하십시오.</p>
+<p>설정 파일에 잘못된 항목이있는 경우 <a href="/docs/tools/check_config/"><code>check_config</code></a> 스크립트를 사용하여 해당 항목 을 식별할 수 있습니다 : <code>hass --script check_config</code>. 설정 경로를 제공해야하는 경우 다음 <code>-c</code>  인수를 사용하여 다음과 같은 명령을 수행 할 수 있습니다 : <code>hass --script check_config -c /path/to/your/config/dir</code>.</p>
 <h4>
-<a class="title-link" name="problems-with-the-configuration" href="#problems-with-the-configuration"></a> Problems with the configuration</h4>
-<p>One of the most common problems with Home Assistant is an invalid <code>configuration.yaml</code> or other configuration file.</p>
+<a class="title-link" name="--" href="#--"></a> 설정에 관한 문제</h4>
+<p>Home Assistant의 가장 일반적인 문제 중 하나는 유효하지 않은 <code>configuration.yaml</code> 설정이거나 configuaration 파일이 다른 것일 경우입니다.</p>
 <ul>
-<li>You can test your configuration using the command line with: <code>hass --script check_config</code>.
+<li>다음과 같은 명령을 사용하여 설정을 테스트 할 수 있습니다: <code>hass --script check_config</code>.
 <ul>
-<li>On Hass.io you can use the <a href="/hassio/commandline/#home-assistant">hassio command</a>: <code>hassio homeassistant check</code>.</li>
-<li>On Docker you can use <code>docker exec home-assistant python -m homeassistant --script check_config --config /config</code> - where <code>home-assistant</code> is the name of the container.</li>
+<li>Hass.io에서 <a href="/hassio/commandline/#home-assistant">hassio command</a> : <code>hassio homeassistant check</code>.</li>
+<li>도커에서 <code>docker exec home-assistant python -m homeassistant --script check_config --config /config</code> - <code>home-assistant</code> 는 컨테이너의 이름입니다.</li>
 </ul>
 </li>
-<li>The configuration files, including <code>configuration.yaml</code> must be UTF-8 encoded. If you see error like <code>'utf-8' codec can't decode byte</code>, edit the offending configuration and re-save it as UTF-8.</li>
-<li>You can verify your configuration’s yaml structure using <a href="http://yaml-online-parser.appspot.com/" rel="external nofollow">this online YAML parser</a> or <a href="http://www.yamllint.com/" rel="external nofollow">YAML Lint</a>.</li>
-<li>To learn more about the quirks of YAML, read <a href="https://docs.saltstack.com/en/latest/topics/troubleshooting/yaml_idiosyncrasies.html" rel="external nofollow">YAML IDIOSYNCRASIES</a> by SaltStack (the examples there are specific to SaltStack, but do explain YAML issues well).</li>
+<li>설정 파일들, <code>configuration.yaml</code> 포함 모두 UTF-8 인코딩을 씁니다. <code>'utf-8' codec can't decode byte</code> 와 같은 오류가 표시되면, 문제가 되는 설정내용을 편집하여  UTF-8로 다시 저장합니다.</li>
+<li>
+<a href="http://yaml-online-parser.appspot.com/" rel="external nofollow">this online YAML parser</a> 혹은 <a href="http://www.yamllint.com/" rel="external nofollow">YAML Lint</a>를 사용하여 설정의 yaml 구조를 확인할 수 있습니다.</li>
+<li>YAML의 특성에 대해 자세히 알아 보려면, SaltStack 사이트에서 <a href="https://docs.saltstack.com/en/latest/topics/troubleshooting/yaml_idiosyncrasies.html" rel="external nofollow">YAML IDIOSYNCRASIES</a>, (SaltStack에서 별도로 분석한 예제이지만 YAML 문제를 잘 설명하고 있습니다).</li>
 </ul>
-<p><code>configuration.yaml</code> does not allow multiple sections to have the same name. If you want to load multiple platforms for one component, you can append a <a href="/getting-started/devices/#style-2-list-each-device-separately">number or string</a> to the name or nest them using <a href="/getting-started/devices/#style-1-collect-every-entity-under-the-parent">this style</a>:</p>
+<p><code>configuration.yaml</code> 파일은 여러 섹션에 동일한 이름을 가질 수 없습니다. 하나의 구성요소에 여러 플랫폼을 로드하려는 경우, 이름에 <a href="/getting-started/devices/#style-2-list-each-device-separately">숫자 혹은 문자열</a>을 추가하거나 <a href="/getting-started/devices/#style-1-collect-every-entity-under-the-parent">스타일</a>을 사용하여 중첩시킬 수 있습니다. :</p>
 <pre><code class="language-yaml">sensor:
   - platform: forecast
     ...
   - platform: bitcoin
     ...
 </code></pre>
-<p>Another common problem is that a required configuration setting is missing. If this is the case, the integration will report this to <code>home-assistant.log</code>. You can have a look at <a href="/integrations/">the various integration pages</a> for instructions on how to setup the components.</p>
-<p>See the <a href="/integrations/logger/">logger</a> integration for instructions on how to define the level of logging you require for specific modules.</p>
-<p>If you find any errors or want to expand the documentation, please <a href="https://github.com/home-assistant/home-assistant.io/issues" rel="external nofollow">let us know</a>.</p>
+<p>또 다른 일반적인 문제는 필요한 설정 세팅이 누락 된 것입니다. 이 경우에 통합구성요소는 이 내용을 <code>home-assistant.log</code>로 보고합니다. 구성 요소 설정 방법에 대한 지시 사항은 <a href="/integrations/">다양한 통합구성요소</a> 를 보면 확인할 수 있습니다.</p>
+<p>특정 모듈에 필요한 로깅 레벨을 정의하는 방법에 대한 지시 사항은 <a href="/integrations/logger/">logger</a> 통합구성요소를 참조하십시오.</p>
+<p>오류가 있거나 설명서를 추가시키고 싶으시면, <a href="https://github.com/home-assistant/home-assistant.io/issues" rel="external nofollow">알려주시기</a> 바랍니다.</p>
 <h4>
-<a class="title-link" name="problems-with-dependencies" href="#problems-with-dependencies"></a> Problems with dependencies</h4>
-<p>Almost all integrations have external dependencies to communicate with your devices and services. Sometimes Home Assistant is unable to install the necessary dependencies. If this is the case, it should show up in <code>home-assistant.log</code>.</p>
-<p>The first step is trying to restart Home Assistant and see if the problem persists. If it does, look at the log to see what the error is. If you can’t figure it out, please <a href="https://github.com/home-assistant/home-assistant/issues" rel="external nofollow">report it</a> so we can investigate what is going on.</p>
+<a class="title-link" name="-" href="#-"></a> 의존성 문제</h4>
+<p>거의 모든 통합구성요소에는 장치 및 서비스와 통신하기위한 외부 종속성이 있습니다. 때로는 홈 어시스턴트가 종속성으로인해 설치할 수 없는 경우가 있습니다. 이 경우에 <code>home-assistant.log</code>에 나타납니다 .</p>
+<p>첫 번째 단계는 홈어시스턴트를 다시 시작하고 문제가 지속되는지 확인해 봅니다. 계속 그렇다면 로그를 보고 오류가 무엇인지 확인하십시오. 파악할 수없는 경우 진행 상황을 조사 할 수 있도록 <a href="https://github.com/home-assistant/home-assistant/issues" rel="external nofollow">report it</a>으로 내용을 전달해주십시오.</p>
 <h4>
-<a class="title-link" name="problems-with-integrations" href="#problems-with-integrations"></a> Problems with integrations</h4>
-<p>It can happen that some integrations either do not work right away or stop working after Home Assistant has been running for a while. If this happens to you, please <a href="https://github.com/home-assistant/home-assistant/issues" rel="external nofollow">report it</a> so that we can have a look.</p>
+<a class="title-link" name="--" href="#--"></a> 통합구성요소 연동 문제</h4>
+<p>홈어시스턴트가 잠시 실행 된 후 일부 통합구성요소가 작동하지 않거나 작동을 멈출 수 있습니다. 이런 일이 발생하면, <a href="https://github.com/home-assistant/home-assistant/issues" rel="external nofollow">report it</a> 로 알려주시길 바랍니다.</p>
 <h4>
-<a class="title-link" name="multiple-files" href="#multiple-files"></a> Multiple files</h4>
-<p>If you are using multiple files for your setup, make sure that the pointers are correct and the format of the files is valid.</p>
+<a class="title-link" name="--" href="#--"></a> 여러 파일 중복</h4>
+<p>설정에 여러 파일을 사용하는 경우 포인터가 올바르게 지정되고 파일 형식이 유효한지 확인하십시오.</p>
 <pre><code class="language-yaml">light: !include devices/lights.yaml
 sensor: !include devices/sensors.yaml
 </code></pre>
-<p>Contents of <code>lights.yaml</code> (notice it does not contain <code>light: </code>):</p>
+<p><code>lights.yaml</code>의 내용 (이럴 경우 <code>light: </code>는 아래와 같이 별도 관리):</p>
 <pre><code class="language-yaml">- platform: hyperion
   host: 192.168.1.98
   ...
 </code></pre>
-<p>Contents of <code>sensors.yaml</code>:</p>
+<p><code>sensors.yaml</code>의 내용:</p>
 <pre><code class="language-yaml">- platform: mqtt
   name: "Room Humidity"
   state_topic: "room/humidity"
@@ -162,17 +163,17 @@ sensor: !include devices/sensors.yaml
   ...
 </code></pre>
 <div class="note">
-Whenever you report an issue, be aware that we are volunteers who do not have access to every single device in the world nor unlimited time to fix every problem out there.
+문제를 보고 할 때마다, 전 세계의 모든 단일 장치에 액세스 할 수 없거나 모든 문제를 해결할 수 있는 시간이 무제한인 자원 봉사자들은 아니라는 건 이해해주십시오.
 </div>
 <h3>
-<a class="title-link" name="entity-names" href="#entity-names"></a> Entity names</h3>
-<p>The only characters valid in entity names are:</p>
+<a class="title-link" name="entity-" href="#entity-"></a> Entity 이름</h3>
+<p>entity 이름에 유효한 문자 형식은 다음과 같습니다. :</p>
 <ul>
-<li>Lowercase letters</li>
-<li>Numbers</li>
-<li>Underscores</li>
+<li>소문자</li>
+<li>번호</li>
+<li>밑줄</li>
 </ul>
-<p>If you create an entity with other characters then Home Assistant may not generate an error for that entity. However you will find that attempts to use that entity will generate errors (or possibly fail silently).</p>
+<p>다른 문자로 entity를 작성하면 홈어시스턴트가 해당 entity에 대한 오류를 생성하지 않을 수 있습니다. 그러나 해당 entity를 사용하려고 하면 오류가 발생하거나 자동으로 실패 할 수 있습니다. (이는 소리없이 제대로된 설정이 안될 수 있습니다.).</p>
 
 
 </article>
