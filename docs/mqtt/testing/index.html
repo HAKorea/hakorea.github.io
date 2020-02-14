@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MQTT Testing - 홈어시스턴트</title>
+    <title>MQTT 테스트 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to test your MQTT setup.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/mqtt/testing/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="MQTT Testing">
+    <meta property="og:title" content="MQTT 테스트">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/mqtt/testing/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="MQTT Testing">
+    <meta name="twitter:title" content="MQTT 테스트">
     <meta name="twitter:description" content="Instructions on how to test your MQTT setup.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      MQTT Testing
+      MQTT 테스트
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mosquitto</code> broker package ships commandline tools (often as <code>*-clients</code> package) to send and receive MQTT messages. As an alternative have a look at <a href="http://hbmqtt.readthedocs.org/en/latest/references/hbmqtt_pub.html" rel="external nofollow">hbmqtt_pub</a> and <a href="http://hbmqtt.readthedocs.org/en/latest/references/hbmqtt_sub.html" rel="external nofollow">hbmqtt_sub</a> which are provided by HBMQTT. For sending test messages to a broker running on localhost check the example below:</p>
+  <p><code>mosquitto</code> 브로커 패키지는 command-line tool들 (<code>*-clients</code> 패키지 등) MQTT 메시지를 보내고 받기 위해 번들로 제공됩니다. 다른 대안으로는 HBMQTT에서 제공하는 <a href="http://hbmqtt.readthedocs.org/en/latest/references/hbmqtt_pub.html" rel="external nofollow">hbmqtt_pub</a> 그리고 <a href="http://hbmqtt.readthedocs.org/en/latest/references/hbmqtt_sub.html" rel="external nofollow">hbmqtt_sub</a> 가 있습니다. localhost에서 실행중인 브로커로 테스트 메시지를 보내려면 아래 예를 확인하십시오 :</p>
 <pre><code class="language-bash">$ mosquitto_pub -h 127.0.0.1 -t home-assistant/switch/1/on -m "Switch is ON"
 </code></pre>
-<p>If you are using the embedded MQTT broker, the command looks a little different because you need to add the MQTT protocol version and your <a href="/docs/mqtt/broker#embedded-broker">broker credentials</a>.</p>
+<p>임베드된 MQTT 브로커를 사용중인 경우, MQTT 프로토콜 버전 및 <a href="/docs/mqtt/broker#embedded-broker">broker credentials</a>을 추가해야하므로 명령이 약간 다르게 보입니다 .</p>
 <pre><code class="language-bash">$ mosquitto_pub -V mqttv311 -u homeassistant -P &lt;broker password&gt; -t "hello" -m world
 </code></pre>
-<p>Another way to send MQTT messages by hand is to use the “Developer Tools” in the Frontend. Choose the “MQTT” tab. Enter something similar to the example below into the “Topic” field.</p>
+<p>MQTT 메시지를 직접 보내는 다른 방법은 프론트 엔드에서 “개발자 도구”를 사용하는 것입니다. “MQTT”탭을 선택하십시오. “topic”필드에 아래 예와 유사한 것을 입력하십시오.</p>
 <pre><code class="language-bash">   home-assistant/switch/1/power
 </code></pre>
-<p>and in the Payload field</p>
+<p>페이로드 필드에</p>
 <pre><code class="language-bash">  ON
 </code></pre>
-<p>In the “Listen to a topic” field, type # to see everything, or “home-assistant/switch/#” to just follow the published topic. Press “Start Listening” and then press “Publish”. The result should appear similar to the text below</p>
+<p>“Listen to a topic”필드에 #를 입력하여 모든 것을 보거나 “home-assistant/switch/#“를 입력하여 게시된 topic을 확인하십시오. “Start Listening”을 누른 다음 “Publish”를 누르십시오. 결과는 아래 텍스트와 유사하게 나타납니다</p>
 <pre><code class="language-bash">Message 23 received on home-assistant/switch/1/power/stat/POWER at 12:16 PM:
 ON
 QoS: 0 - Retain: false
@@ -125,7 +125,7 @@ Message 22 received on home-assistant/switch/1/power/stat/RESULT at 12:16 PM:
 }
 QoS: 0 - Retain: false
 </code></pre>
-<p>For reading all messages sent on the topic <code>home-assistant</code> to a broker running on localhost:</p>
+<p>localhost에서 실행중인 브로커로 <code>home-assistant</code> topic에 전송된 모든 메시지를 읽으려면 다음을 수행하십시오.</p>
 <pre><code class="language-bash">$ mosquitto_sub -h 127.0.0.1 -v -t "home-assistant/#"
 </code></pre>
 <p>For the embedded MQTT broker the command looks like:</p>

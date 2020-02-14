@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Processing JSON - 홈어시스턴트</title>
+    <title>JSON 처리 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to process the MQTT payload.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/mqtt/processing_json/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Processing JSON">
+    <meta property="og:title" content="JSON 처리">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/mqtt/processing_json/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Processing JSON">
+    <meta name="twitter:title" content="JSON 처리">
     <meta name="twitter:description" content="Instructions on how to process the MQTT payload.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,13 +97,13 @@
   
   <header>
     <h1 class="title indent">
-      Processing JSON
+      JSON 처리
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The MQTT <a href="/integrations/switch.mqtt/">switch</a> and <a href="/integrations/sensor.mqtt/">sensor</a> platforms support processing JSON over MQTT messages and parsing them using JSONPath. JSONPath allows you to specify where in the JSON the value resides that you want to use. The following examples will always return the value <code>100</code>.</p>
+  <p>MQTT <a href="/integrations/switch.mqtt/">switch</a> 및 <a href="/integrations/sensor.mqtt/">sensor</a> 플랫폼은 MQTT 메시지를 통한 JSON 처리 및 JSONPath를 사용하여 구문 분석을 지원합니다. JSONPath를 사용하면 JSON에서 사용할 값이 있는 위치를 지정할 수 있습니다. 다음 예제는 항상 <code>100</code> 값을 반환합니다</p>
 <table>
 <thead>
 <tr>
@@ -126,17 +126,17 @@
 </tr>
 </tbody>
 </table>
-<p>To use this, add the following key to your <code>configuration.yaml</code>:</p>
+<p>이를 사용하려면 다음 키를 추가하십시오  <code>configuration.yaml</code>:</p>
 <pre><code class="language-yaml">switch:
   platform: mqtt
   state_format: 'json:somekey[0].value'
 </code></pre>
-<p>It is also possible to extract JSON values by using a value template:</p>
+<p>값 템플릿을 사용하여 JSON 값을 추출 할 수도 있습니다. :</p>
 <pre><code class="language-yaml">switch:
   platform: mqtt
   value_template: '{{ value_json.somekey[0].value }}'
 </code></pre>
-<p>More information about the full JSONPath syntax can be found <a href="https://github.com/kennknowles/python-jsonpath-rw#jsonpath-syntax" rel="external nofollow">in their documentation</a>.</p>
+<p>전체 JSONPath 구문에 대한 자세한 내용은 <a href="https://github.com/kennknowles/python-jsonpath-rw#jsonpath-syntax" rel="external nofollow">in their documentation</a>를 참조.</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Troubleshooting Automations - 홈어시스턴트</title>
+    <title>자동화 문제 해결 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Tips on how to troubleshoot your automations.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/automation/troubleshooting/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Troubleshooting Automations">
+    <meta property="og:title" content="자동화 문제 해결">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/automation/troubleshooting/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Troubleshooting Automations">
+    <meta name="twitter:title" content="자동화 문제 해결">
     <meta name="twitter:description" content="Tips on how to troubleshoot your automations.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,33 +97,35 @@
   
   <header>
     <h1 class="title indent">
-      Troubleshooting Automations
+      자동화 문제 해결
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>You can verify that your automation rules are being initialized correctly by watching both the realtime logs (<code>homeassistant.log</code> in the configuration directory) and also the <a href="/integrations/logbook/">Logbook</a>. The realtime logs will show the rules being initialized (once for each trigger), example:</p>
+  <p>(설정 디렉토리 내의 <code>homeassistant.log</code>)와 <a href="/integrations/logbook/">Logbook</a>을 모두 보고 자동화 규칙이 올바르게 초기화되고 있는지 확인할 수 있습니다. 실시간 로그에는 초기화되는 규칙이 표시됩니다. (각 트리거마다 한 번씩). 예 :</p>
 <pre><code class="language-text">INFO [homeassistant.components.automation] Initialized rule Rainy Day
 INFO [homeassistant.components.automation] Initialized rule Rainy Day
 INFO [homeassistant.components.automation] Initialized rule Rainy Day
 INFO [homeassistant.components.automation] Initialized rule Rain is over
 </code></pre>
-<p>The Logbook integration will show a line entry when an automation is triggered. You can look at the previous entry to determine which trigger in the rule triggered the event.</p>
+<p>자동화가 트리거되면 logbook 통합구성요소에 라인 항목이 표시됩니다. 이전 항목을 보고 규칙에서 어떤 트리거가 이벤트를 트리거했는지 확인할 수 있습니다.</p>
 <p><img src="/images/integrations/automation/logbook.png" alt="Logbook example"></p>
 <h3>
-<a class="title-link" name="testing-your-automation" href="#testing-your-automation"></a> Testing your automation</h3>
-<p>It is generally a difficult task to test an automation, especially if it includes several triggers and some conditions.</p>
-<p>Please note that if you click on <strong>Trigger</strong> of an automation in the frontend, <strong>only the <code>action</code> part will be executed</strong> by Home Assistant. That means you <strong>can’t</strong> test your trigger or condition part that way. It also means that if your automation uses some data from triggers, it won’t work properly as well just because <code>trigger</code> is not defined in this scenario.</p>
-<p>All this makes that Trigger feature pretty limited and nearly useless for debugging purposes so you need to find another way.
-Make sure you check and adapt to your circumstances appropriate examples from Automation Trigger, Conditions and Actions.</p>
-<p>It is also useful to go to <strong>Configuration</strong> -&gt; <strong>Server Control</strong> and click on <strong>Check Config</strong> button in Configuration validation section to make sure there are no syntax errors before restarting Home Assistant. In order for <strong>Check Config</strong> to be visible, you must enable <strong>Advanced Mode</strong> on your user profile.</p>
-<p>If your automation uses templates in any part, you can do the following to make sure it works as expected:</p>
+<a class="title-link" name="-" href="#-"></a> 자동화 테스트</h3>
+<p>자동화를 테스트하는 것은 일반적으로 어려운 작업이며, 특히 여러 트리거와 일부 조건이 포함 된 경우에 특히 그러합니다.</p>
+<p>프론트 엔드에서 자동화 <strong>트리거</strong> 를 클릭하면 홈어시스턴트 가 해당 <strong><code>action</code> 파트 만 실행</strong> 합니다. 즉 , 트리거 또는 조건 부분을 그런 식으로 테스트 <strong>할 수 없습니다</strong>.  자동화에서 트리거의 일부 데이터를 사용하는 t경우, 이 시나리오에서 <code>trigger</code>가 정의되지 않았기 때문에 제대로 작동하지 않는다는 것을 의미합니다.</p>
+<p>이로 인해 트리거 기능이 디버깅 목적으로 매우 제한적이고 거의 쓸모가 없으므로 다른 방법을 찾아야합니다.
+자동화 트리거, 조건 및 액션에서 적절한 예를 확인하고 상황에 맞게 조정하십시오.</p>
+<p>홈어시스턴트를 재시작하기 전에 <strong>Configuration</strong> -&gt; <strong>Server Control</strong> 로 가서 <strong>Check Config</strong> 버튼을 클릭하여 문법상 에러가 없을을 확인하는 것 또한 유용합니다. <strong>Check Config</strong>가 보여지게 하기 위해선, <strong>Advanced Mode</strong>를 유저 프로파일에서 활성화시켜야 합니다.</p>
+<p>자동화가 어느 부분에서든 템플릿을 사용하는 경우 다음을 수행하여 예상대로 작동하는지 확인할 수 있습니다. :</p>
 <ol>
-<li>Go to <strong>Developer tools</strong> -&gt; <strong>Template</strong> tab.</li>
-<li>Create all variables (sources) required for your template as described at the end of <a href="https://www.home-assistant.io/docs/configuration/templating/#processing-incoming-data">this</a> paragraph.</li>
-<li>Copy your template code and paste it in Template editor straight after your variables.</li>
-<li>If necessary, change your sources’ value and check if the template works as you want and does not generate any errors.</li>
+<li>
+<strong>Developer tools</strong> 이동 -&gt; <strong>Template</strong> 탭.</li>
+<li>
+<a href="https://www.home-assistant.io/docs/configuration/templating/#processing-incoming-data">this</a> 단락의 끝에 설명 된대로 템플리트에 필요한 모든 변수 (소스)를 작성하십시오</li>
+<li>템플릿 코드를 복사하여 변수 바로 다음에 템플릿 편집기에 붙여 넣습니다.</li>
+<li>필요한 경우 소스 값을 변경하고 템플릿이 원하는대로 작동하고 오류가 발생하지 않는지 확인하십시오.</li>
 </ol>
 
 

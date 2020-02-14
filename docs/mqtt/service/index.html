@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p>The MQTT integration will register the service <code>mqtt.publish</code> which allows publishing messages to MQTT topics. There are two ways of specifying your payload. You can either use <code>payload</code> to hard-code a payload or use <code>payload_template</code> to specify a <a href="/topics/templating/">template</a> that will be rendered to generate the payload.</p>
+  <p>MQTT 연동은 MQTT topic으로에 메시지를 퍼블리싱하도록 <code>mqtt.publish</code> 서비스를 등록하게 됩니다. 페이로드를 지정하는 두 가지 방법이 있습니다.  하드코딩으로 만든 <code>payload</code>를 사용하던지 <a href="/topics/templating/">template</a>을 사용해서 <code>payload_template</code>를 사용하는 방법으로 페이로드를 생성하여 렌더할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="service-mqttpublish" href="#service-mqttpublish"></a> Service mqtt.publish</h3>
 <table>
@@ -143,7 +143,7 @@
 </tbody>
 </table>
 <div class="note">
-You need to include either payload or payload_template, but not both.
+payload 또는 payload_template 중 하나만 포함해야합니다.
 </div>
 <pre><code class="language-yaml">topic: home-assistant/light/1/command
 payload: on
@@ -151,11 +151,11 @@ payload: on
 <pre><code class="language-yaml">topic: home-assistant/light/1/state
 payload_template: {{ states('device_tracker.paulus') }}
 </code></pre>
-<p><code>payload</code> must be a string. If you want to send JSON then you need to format/escape it properly. Like:</p>
+<p><code>payload</code> 문자열이어야합니다. JSON을 보내려면 다음같이 올바른 포맷/이스케이프를 지켜야합니다.:</p>
 <pre><code class="language-yaml">topic: home-assistant/light/1/state
 payload: "{\"Status\":\"off\", \"Data\":\"something\"}"
 </code></pre>
-<p>Example of how to use <code>qos</code> and <code>retain</code>:</p>
+<p><code>qos</code> 와 <code>retain</code>의 예시:</p>
 <pre><code class="language-yaml">topic: home-assistant/light/1/command
 payload: on
 qos: 2

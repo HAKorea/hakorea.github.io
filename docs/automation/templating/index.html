@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Automation Templating - 홈어시스턴트</title>
+    <title>자동화 템플릿 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Advanced automation documentation using templating.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/automation/templating/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Automation Templating">
+    <meta property="og:title" content="자동화 템플릿">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/automation/templating/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Automation Templating">
+    <meta name="twitter:title" content="자동화 템플릿">
     <meta name="twitter:description" content="Advanced automation documentation using templating.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Automation Templating
+      자동화 템플릿
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>In Home Assistant 0.19 we introduced a new powerful feature: variables in scripts and automations. This makes it possible to adjust your condition and action based on the information of the trigger.</p>
-<p>The trigger data made is available during <a href="/docs/configuration/templating/">template</a> rendering as the <code>trigger</code> variable.</p>
+  <p>홈어시스턴트 0.19에는 변수의 스크립트 처리 및 자동화라는 새로운 강력한 기능이 도입되었습니다. 이를 통해 트리거 정보를 기반으로 조건과 액션을 조정할 수 있습니다.</p>
+<p>The trigger data made is available during <a href="/docs/configuration/templating/">template</a> rendering as the <code>trigger</code> variable.
+트리거 데이터는 <code>trigger</code> 변수로 렌더링하여 <a href="/docs/configuration/templating/">template</a>에서 사용할 수 있습니다 .</p>
 <pre><code class="language-yaml"># Example configuration.yaml entries
 automation:
   trigger:
@@ -153,32 +154,45 @@ automation 3:
         entity_id: "{{ trigger.entity_id }}"
 </code></pre>
 <h2>
-<a class="title-link" name="important-template-rules" href="#important-template-rules"></a> Important Template Rules</h2>
-<p>There are a few very important rules to remember when writing automation templates:</p>
+<a class="title-link" name="--" href="#--"></a> 중요한 템플릿 규칙</h2>
+<p>자동화 템플릿을 작성할 때 기억해야 할 몇 가지 중요한 규칙이 있습니다. :</p>
 <ol>
-<li>You <strong>must</strong> use <code>data_template</code> in place of <code>data</code> when using templates in the <code>data</code> section of a service call.</li>
-<li>You <strong>must</strong> use <code>service_template</code> in place of <code>service</code> when using templates in the <code>service</code> section of a service call.</li>
-<li>You <strong>must</strong> surround single-line templates with double quotes (<code>"</code>) or single quotes (<code>'</code>).</li>
+<li>Service Call의 <code>data</code> 섹션에서 템플릿을 사용할 때는<code>data</code> 대신 <code>data_template</code>을 사용해야합니다.</li>
+<li>Service Call의 <code>service</code> 섹션에서 템플릿을 사용할 때는<code>service</code> 대신 <code>service_template</code>을 사용해야합니다.</li>
+<li>작은 따옴표 (<code>"</code>) 또는 작은 따옴표 (<code>'</code>)로 한 줄로 <strong>묶어야합니다</strong>.</li>
 <li>It is advised that you prepare for undefined variables by using <code>if ... is not none</code> or the <a href="http://jinja.pocoo.org/docs/dev/templates/#default" rel="external nofollow"><code>default</code> filter</a>, or both.</li>
+<li>
+<code>if ... is not none</code> 혹은 <a href="http://jinja.pocoo.org/docs/dev/templates/#default" rel="external nofollow"><code>default</code> filter</a> 를 사용한 정의되지 않은 변수들을 쓸 수 있도록 만들어져 있습니다.</li>
 <li>It is advised that when comparing numbers, you convert the number(s) to a <a href="http://jinja.pocoo.org/docs/dev/templates/#float" rel="external nofollow"><code>float</code></a> or an <a href="http://jinja.pocoo.org/docs/dev/templates/#int" rel="external nofollow"><code>int</code></a> by using the respective <a href="http://jinja.pocoo.org/docs/dev/templates/#list-of-builtin-filters" rel="external nofollow">filter</a>.</li>
+<li>숫자들을 비교할 때 각각의 <a href="http://jinja.pocoo.org/docs/dev/templates/#list-of-builtin-filters" rel="external nofollow">filter</a>를 사용하여 숫자들을 <a href="http://jinja.pocoo.org/docs/dev/templates/#float" rel="external nofollow"><code>float</code></a> 혹은 <a href="http://jinja.pocoo.org/docs/dev/templates/#int" rel="external nofollow"><code>int</code></a>로 변환할 수 있도록 만들어져 있습니다.</li>
 <li>While the <a href="http://jinja.pocoo.org/docs/dev/templates/#float" rel="external nofollow"><code>float</code></a> and <a href="http://jinja.pocoo.org/docs/dev/templates/#int" rel="external nofollow"><code>int</code></a> filters do allow a default fallback value if the conversion is unsuccessful, they do not provide the ability to catch undefined variables.</li>
+<li>
+<a href="http://jinja.pocoo.org/docs/dev/templates/#float" rel="external nofollow"><code>float</code></a> 및 <a href="http://jinja.pocoo.org/docs/dev/templates/#int" rel="external nofollow"><code>int</code></a> 필터는 변환에 실패하면 기본 폴백(fallback) 값을 허용하지만, 정의되지 않은 변수를 잡아내는 기능은 제공하지 않습니다.</li>
 </ol>
-<p>Remembering these simple rules will help save you from many headaches and endless hours of frustration when using automation templates.</p>
-<p>It is possible to use <code>data</code> and <code>data_template</code> concurrently but be aware that <code>data_template</code> will overwrite attributes that are provided in both.</p>
+<p>이 간단한 규칙을 기억하면 자동화 템플릿을 사용할 때 많은 고민과 시간을 절약 할 수 있습니다.</p>
+<p>It is possible to use <code>data</code> and <code>data_template</code> concurrently but be aware that <code>data_template</code> will overwrite attributes that are provided in both.
+<code>data</code>와<code>data_template</code>을 동시에 사용할 수 있지만 <code>data_template</code>은 양쪽에서 제공되는 속성값을 덮어 쓰기합니다.</p>
 <h2>
-<a class="title-link" name="trigger-state-object" href="#trigger-state-object"></a> Trigger State Object</h2>
-<p>Knowing how to access the <a href="/docs/configuration/state_object/">state object</a> of a trigger entity could be one of the more common questions. Here are a few ways for the <a href="#state"><code>state</code></a>, <a href="#numeric_state"><code>numeric_state</code></a> and <a href="#template"><code>template</code></a> triggers:</p>
+<a class="title-link" name="---trigger-state-object" href="#---trigger-state-object"></a> 트리거 상태 객체 (Trigger State Object)</h2>
+<p>Knowing how to access the <a href="/docs/configuration/state_object/">state object</a> of a trigger entity could be one of the more common questions. Here are a few ways for the <a href="#state"><code>state</code></a>, <a href="#numeric_state"><code>numeric_state</code></a> and <a href="#template"><code>template</code></a> triggers:
+트리거 entity의 <a href="/docs/configuration/state_object/">state object</a>에 액세스하는 방법을 아는 것이 가장 일반적인 질문 중 하나 일 수 있습니다. 여기에 <a href="#state"><code>state</code></a>, <a href="#numeric_state"><code>numeric_state</code></a> 그리고 <a href="#template"><code>template</code></a> 트리거를 다루는 방법들을 설명합니다.</p>
 <ul>
 <li>
 <code>trigger.from_state</code> will return the <strong>previous</strong> <a href="/docs/configuration/state_object/">state object</a> of the entity.</li>
 <li>
+<code>trigger.from_state</code> 는 entity의 <strong>이전</strong> <a href="/docs/configuration/state_object/">state object</a> 를 반환합니다.</li>
+<li>
 <code>trigger.to_state</code> will return the <strong>new</strong> <a href="/docs/configuration/state_object/">state object</a> that triggered trigger.</li>
 <li>
+<code>trigger.to_state</code> 는 <strong>새로운</strong> <a href="/docs/configuration/state_object/">state object</a>를 반환합니다.</li>
+<li>
 <code>states[trigger.to_state.domain][trigger.to_state.object_id]</code> will return the <strong>current</strong> <a href="/docs/configuration/state_object/">state object</a> of the entity.</li>
+<li>
+<code>states[trigger.to_state.domain][trigger.to_state.object_id]</code>는 <strong>현재</strong> entity의 <a href="/docs/configuration/state_object/">state object</a>를 반환합니다.</li>
 </ul>
 <h2>
-<a class="title-link" name="available-trigger-data" href="#available-trigger-data"></a> Available Trigger Data</h2>
-<p>The following tables show the available trigger data per platform.</p>
+<a class="title-link" name="--" href="#--"></a> 사용가능한 트리거 데이터</h2>
+<p>다음 표는 플랫폼별로 사용 가능한 트리거 데이터를 보여줍니다.</p>
 <h3>
 <a class="title-link" name="event" href="#event"></a> event</h3>
 <table>

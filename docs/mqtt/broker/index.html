@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MQTT Brokers - 홈어시스턴트</title>
+    <title>MQTT 브로커 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup MQTT brokers for Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/mqtt/broker/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="MQTT Brokers">
+    <meta property="og:title" content="MQTT 브로커">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/mqtt/broker/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="MQTT Brokers">
+    <meta name="twitter:title" content="MQTT 브로커">
     <meta name="twitter:description" content="Instructions on how to setup MQTT brokers for Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      MQTT Brokers
+      MQTT 브로커
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The MQTT integration needs you to run an MQTT broker for Home Assistant to connect to. There are four options, each with various degrees of ease of setup and privacy.</p>
+  <p>MQTT 통합구성요소에서는 홈어시스턴트에서 연결할 MQTT 브로커를 실행해야합니다. 설정 및 개인 정보 보호 수준이 다양한 네 가지 옵션이 있습니다.</p>
 <h3>
-<a class="title-link" name="run-your-own" href="#run-your-own"></a> Run your own</h3>
-<p>This is the most private option, but it requires a little bit of work to setup. There are multiple free and open-source brokers to pick from: e.g., <a href="http://mosquitto.org/" rel="external nofollow">Mosquitto</a>, <a href="https://github.com/emqx/emqx" rel="external nofollow">EMQ</a> or <a href="http://www.mosca.io/" rel="external nofollow">Mosca</a>.
-For Hass.io users, the recommended setup method is to use the <a href="/addons/mosquitto">Mosquitto MQTT broker addon</a>.</p>
+<a class="title-link" name="----run-your-own" href="#----run-your-own"></a> 로컬 시스템에서 직접 운영 (Run your own)</h3>
+<p>For Hass.io users, the recommended setup method is to use the <a href="/addons/mosquitto">Mosquitto MQTT broker addon</a>.
+가장 개인적인 옵션이지만 설정하는 데 약간의 작업이 필요합니다. <a href="http://mosquitto.org/" rel="external nofollow">Mosquitto</a>, <a href="https://github.com/emqx/emqx" rel="external nofollow">EMQ</a> 혹은 <a href="http://www.mosca.io/" rel="external nofollow">Mosca</a> 와 같은 선택할 수있는 무료 및 오픈 소스 브로커가 여러 개 있습니다.<br><br> <strong>Hass.io 사용자의 경우 권장 설정 방법은 <a href="/addons/mosquitto">Mosquitto MQTT broker addon</a></strong> 을 사용하는 것 입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mqtt:
   broker: 192.168.1.100
@@ -118,40 +118,40 @@ mqtt:
   <dl class="">
 <dt>
 <a class="title-link" name="broker" href="#broker"></a> broker</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IP address or hostname of your MQTT broker, e.g., 192.168.1.32.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커의 IP 주소 또는 호스트 이름 (예 192.168.1.32)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The network port to connect to. Default is 1883.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>연결할 네트워크 포트. 기본값은 1883입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="client_id" href="#client_id"></a> client_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The client ID that Home Assistant will use. Has to be unique on the server. Default is a randomly generated one.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트가 사용할 클라이언트 ID. 서버에서 고유해야합니다. 기본값은 임의로 생성 된 것입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="keepalive" href="#keepalive"></a> keepalive</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The time in seconds between sending keep alive messages for this client. Default is 60.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 클라이언트에 대한 연결 유지 메시지를 보내는 데 걸리는 시간 (초)입니다. 기본값은 60입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username to use with your MQTT broker.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커와 함께 사용할 사용자 이름입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The corresponding password for the username to use with your MQTT broker.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커와 함께 사용할 사용자 이름의 해당 비밀번호입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="protocol" href="#protocol"></a> protocol</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Protocol to use: 3.1 or 3.1.1. By default it connects with 3.1.1 and falls back to 3.1 if server does not support 3.1.1.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>3.1 또는 3.1.1. 서버가 3.1.1을 지원하지 않으면 기본적으로 3.1.1로 연결시도하고 3.1로 대체됩니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="certificate" href="#certificate"></a> certificate</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to the certificate file, e.g., <code>/home/user/.homeassistant/server.crt</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증서 파일의 경로입니다 (예 <code>/home/user/.homeassistant/server.crt</code>).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="tls_insecure" href="#tls_insecure"></a> tls_insecure</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the verification of the server hostname in the server certificate.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>서버 인증서에서 서버 호스트 이름의 확인을 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -159,27 +159,27 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="tls_version" href="#tls_version"></a> tls_version</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>TLS/SSL protocol version to use. Available options are: <code>'auto'</code>, <code>'1.0'</code>, <code>'1.1'</code>, <code>'1.2'</code>. Make sure to put quotes around the value. Defaults to <code>'auto'</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 TLS / SSL 프로토콜 버전. 사용 가능한 옵션 : <code>'auto'</code>, <code>'1.0'</code>, <code>'1.1'</code>, <code>'1.2'</code>. 값을 따옴표로 묶어야합니다. 기본값 : <code>'auto'</code>.</p>
 </span></p></dd>
 </dl>
 </div>
 <div class="note warning">
-<p>There is an issue with the Mosquitto package included in Ubuntu 14.04 LTS. Specify <code>protocol: 3.1</code> in your MQTT configuration to work around this issue.</p>
-<p>If you get this error <code>AttributeError: module 'ssl' has no attribute 'PROTOCOL_TLS'</code> then you need to set <code>tls_version: '1.2'</code>.</p>
+<p>Ubuntu 14.04 LTS에 포함 된 Mosquitto 패키지에 문제가 있습니다. 이 문제를 해결하려면 MQTT 설정에서 <code>protocol: 3.1</code>를 명기 하십시오. Specify <code>protocol: 3.1</code> in your MQTT configuration to work around this issue.
+다음 오류가 발생하면 <code>AttributeError: module 'ssl' has no attribute 'PROTOCOL_TLS'</code>, 설정에 <code>tls_version: '1.2'</code>를 넣어야 합니다.</p>
 </div>
 <div class="note">
-<p>If you are running a Mosquitto instance on the same server as Home Assistant then you must ensure that the Mosquitto service starts before Home Assistant. For a Linux instance running Systemd (Raspberry Pi, Debian, Ubuntu and others) then you should edit the file <code>/etc/systemd/system/home-assistant@homeassistant.service</code> as <code>root</code> (e.g., <code>sudo nano /etc/systemd/system/home-assistant@homeassistant.service</code>) and add the Mosquitto service:</p>
+<p>홈어시스턴트와 동일한 서버에서 Mosquitto 인스턴스를 실행중인 경우 홈어시스턴트보다 먼저 Mosquitto 서비스가 시작되는지 확인해야합니다. Systemd (Raspberry Pi, Debian, Ubuntu 및 기타)를 실행하는 Linux 인스턴스의 경우 <code>/etc/systemd/system/home-assistant@homeassistant.service</code>를 <code>root</code>로  (예: <code>sudo nano /etc/systemd/system/home-assistant@homeassistant.service</code>) 명령어를 써서 직접 Mosquitto service를 추가해야 합니다. :</p>
 <pre><code class="language-txt">[Unit]
 Description=Home Assistant
 After=network.target mosquitto.service
 </code></pre>
 </div>
 <div class="note">
-<p>If you are running a Mosquitto instance on a different server with proper SSL encryption using a service like Let’s Encrypt you may have to set the certificate to the operating systems own <code>.crt</code> certificates file. In the instance of Ubuntu this would be <code>certificate: /etc/ssl/certs/ca-certificates.crt</code></p>
+<p>Let ’s Encrypt와 같은 서비스를 사용하여 적절한 SSL 암호화를 사용하여 다른 서버에서 Mosquitto 인스턴스를 실행하는 경우 운영 체제 자체 <code>.crt</code> 인증서 파일로 인증서를 설정해야 할 수 있습니다. 우분투의 경우 <code>certificate: /etc/ssl/certs/ca-certificates.crt</code> 입니다.</p>
 </div>
 <h3>
-<a class="title-link" name="public-broker" href="#public-broker"></a> Public broker</h3>
-<p>The Mosquitto project runs a <a href="http://test.mosquitto.org" rel="external nofollow">public broker</a>. This is the easiest to set up, but there is no privacy as all messages are public. Use this only for testing purposes and not for real tracking of your devices or controlling your home.</p>
+<a class="title-link" name="--public-broker" href="#--public-broker"></a> 공공 브로커 (Public broker)</h3>
+<p>모스키토 프로젝트는 <a href="http://test.mosquitto.org" rel="external nofollow">public broker</a>를 운영합니다. 이것은 설정하기가 가장 쉽지만 모든 메시지가 공개되므로 프라이버시가 없습니다. 테스트 목적으로 만 사용하고 실제 장치 추적 또는 가정 제어에는 사용하지 마십시오.</p>
 <pre><code class="language-yaml">mqtt:
   broker: test.mosquitto.org
   port: 1883 or 8883
@@ -192,24 +192,24 @@ After=network.target mosquitto.service
 </code></pre>
 <h3>
 <a class="title-link" name="cloudmqtt" href="#cloudmqtt"></a> CloudMQTT</h3>
-<p><a href="https://www.cloudmqtt.com" rel="external nofollow">CloudMQTT</a> is a hosted private MQTT instance that is free for up to 10 connected devices. This is enough to get started with for example <a href="/integrations/owntracks/">OwnTracks</a> and give you a taste of what is possible.</p>
+<p><a href="https://www.cloudmqtt.com" rel="external nofollow">CloudMQTT</a> 는 최대 10 개의 연결된 장치를 무료로 제공하는 호스팅 된 프라이빗 MQTT 인스턴스입니다. 예를 들어 <a href="/integrations/owntracks/">OwnTracks</a> 시작하고 가능한 것들을 경험할 수 있습니다.</p>
 <div class="note">
-Home Assistant is not affiliated with CloudMQTT nor will receive any kickbacks.
+홈 어시스턴트는 CloudMQTT와 관련이 없으며 어떤 협찬도 받지 않습니다.
 </div>
 <ol>
 <li>
-<a href="https://customer.cloudmqtt.com/login" rel="external nofollow">Create an account</a> (no payment details needed)</li>
+<a href="https://customer.cloudmqtt.com/login" rel="external nofollow">Create an account</a> (공짜로 가입가능)</li>
 <li>
 <a href="https://customer.cloudmqtt.com/subscription/create" rel="external nofollow">Create a new CloudMQTT instance</a>
-(Cute Cat is the free plan)</li>
-<li>From the control panel, click on the <em>Details</em> button.</li>
-<li>Create unique users for Home Assistant and each phone to connect<br>(CloudMQTT does not allow two connections from the same user)
+(Cute Cat 은 무료플랜)</li>
+<li>제어판에서 <strong>자세히</strong> 버튼을 클릭하십시오</li>
+<li>홈 어시스턴트 및 각 전화기에 연결할 고유 한 사용자 작성<br>(CloudMQTT는 동일한 사용자로부터 두 개의 연결을 허용하지 않음)
 <ol>
-<li>Under manage users, fill in username, password and click add</li>
-<li>Under ACLs, select user, topic <code>#</code>, check ‘read access’ and ‘write access’</li>
+<li>사용자 관리에서 사용자 이름, 비밀번호를 입력하고 추가를 클릭하십시오.</li>
+<li>ACL에서 user, topic <code>#</code>을 선택하고 ‘읽기 액세스’및 ‘쓰기 액세스’를 확인하십시오.</li>
 </ol>
 </li>
-<li>Copy the instance info to your configuration.yaml:</li>
+<li>인스턴스 정보를 configuration.yaml에 복사하십시오. :</li>
 </ol>
 <pre><code class="language-yaml">mqtt:
   broker: CLOUDMQTT_SERVER
@@ -218,68 +218,18 @@ Home Assistant is not affiliated with CloudMQTT nor will receive any kickbacks.
   password: CLOUDMQTT_PASSWORD
 </code></pre>
 <div class="note">
-Home Assistant will automatically load the correct certificate if you connect to an encrypted channel of CloudMQTT (port range 20000-30000).
+암호화 된 CloudMQTT 채널에 연결하면 홈어시스턴트가 자동으로 올바른 인증서를 로드합니다(포트 범위 20000-30000). 
 </div>
 <div class="note">
-<p>If you experience an error message like <code>Failed to connect due to exception: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed</code>, then add <code>certificate: auto</code> to your broker configuration and restart Home Assistant.</p>
-</div>
-<h3>
-<a class="title-link" name="embedded-broker-deprecated" href="#embedded-broker-deprecated"></a> Embedded broker (Deprecated)</h3>
-<p>Home Assistant contains an embedded MQTT broker called <a href="https://pypi.python.org/pypi/hbmqtt" rel="external nofollow">HBMQTT</a>. If you don’t have an MQTT broker, you can configure this one to be used. If configured, Home Assistant will automatically connect to it.</p>
-<table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Host</td>
-<td>localhost</td>
-</tr>
-<tr>
-<td>Port</td>
-<td>1883</td>
-</tr>
-<tr>
-<td>Protocol</td>
-<td>3.1.1</td>
-</tr>
-<tr>
-<td>User</td>
-<td>homeassistant</td>
-</tr>
-<tr>
-<td>Password</td>
-<td><em>password set under mqtt settings</em></td>
-</tr>
-<tr>
-<td>Websocket port</td>
-<td>8080</td>
-</tr>
-</tbody>
-</table>
-<pre><code class="language-yaml"># Example configuration.yaml entry
-mqtt:
-  password: hello
-</code></pre>
-<div class="note warning">
-As of release 0.92, the embedded broker has been marked as deprecated. This means bugs may not be fixed, and the functionality may be removed in a future release.
-</div>
-<div class="note">
-Before release 0.76, the embedded broker would use your API password as a password to the MQTT user. This is no longer the case.
-</div>
-<div class="note warning">
-<p>There is <a href="https://github.com/beerfactory/hbmqtt/issues/62" rel="external nofollow">an issue</a> with the HBMQTT broker and the WebSocket connection that is causing a memory leak. If you experience this issue, consider using another broker like Mosquitto.</p>
+<p><code>Failed to connect due to exception: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed</code> 과 같은 오류 메시지가 표시 되면 <code>certificate: auto</code>를 브로커 설정에 추가 하고 홈어시스턴트를 다시 시작하십시오.</p>
 </div>
 <h4>
 <a class="title-link" name="owntracks" href="#owntracks"></a> Owntracks</h4>
-<p>To use Owntracks with the internal broker a small configuration change must be made in order for the app to use MQTT protocol 3.1.1 (Protocol Level 4).</p>
-<p>In the Owntracks preferences (Android: v1.2.3+, iOS: v9.5.1+) open <strong>Configuration Management</strong>; Find the value named <code>mqttProtocolLevel</code> and set the value to <code>4</code>. The application will now use MQTT 3.1.1 to connect, which is compatible with the embedded broker.</p>
+<p>내부 브로커와 함께 자체 트랙을 사용하려면 앱이 MQTT 프로토콜 3.1.1 (프로토콜 레벨 4)을 사용하도록 구성을 약간 변경해야합니다.</p>
+<p>Owntracks 환경 설정 (Android : v1.2.3 +, iOS : v9.5.1 +)에서 <strong>Configuration Management</strong>를 엽니 다. <code>mqttProtocolLevel</code>를 찾아 <code>4</code>로 변경합니다. 애플리케이션은 이제 MQTT 3.1.1을 사용하여 연결하며 임베드 된 브로커와 호환됩니다.</p>
 <h4>
 <a class="title-link" name="settings" href="#settings"></a> Settings</h4>
-<p>If you want to customize the settings of the embedded broker, use <code>embedded:</code> and the values shown in the <a href="http://hbmqtt.readthedocs.org/en/latest/references/broker.html#broker-configuration" rel="external nofollow">HBMQTT Broker configuration</a>. This will replace the default configuration.</p>
+<p>임베디드 브로커의 설정을 사용자 정의하려면, <code>embedded:</code> 를 사용하여 <a href="http://hbmqtt.readthedocs.org/en/latest/references/broker.html#broker-configuration" rel="external nofollow">HBMQTT Broker configuration</a>대로 설정해 보십시오. 그렇게 하면, 기본 구성이 바뀝니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mqtt:
   embedded:
