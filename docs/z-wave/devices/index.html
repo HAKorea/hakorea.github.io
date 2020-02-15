@@ -108,7 +108,7 @@
 <p><strong>디바이스</strong>는 하드웨어를 뜻합니다. 또한 노드나 노드가 가진 모든 엔티티들을 언급하기도 합니다. 디바이스에는 3가지 종류가 존재합니다:</p>
 <ul>
 <li>
-<a href="/docs/z-wave/controllers">콘트롤러</a> - 모든 지웨이브 네트워크는 하나 또는 두개의 컨트롤러(a primary and a secondary)가 필요합니다.</li>
+<a href="/docs/z-wave/controllers">콘트롤러</a> - 모든 지웨이브 네트워크는 하나 또는 두개의 콘트롤러(a primary and a secondary)가 필요합니다.</li>
 <li>센서 - 주위 환경에 대해 정보를 알려주는 기기입니다. 누수 센서나 모션 센서, 온도 센서 등이 이에 해당합니다.</li>
 <li>액터와 액츄에이터 - 제어를 담당하는 기기입니다. 예를 들어 라이트 스위치, 디머, 온도조절기가 이에 해당합니다. 이들 중 상당수는 센서의 역할도 같이 갖고 있습니다.</li>
 </ul>
@@ -146,6 +146,9 @@
 <p>상태가 바뀌었는데도 기기가 콘트롤러에게 자신의 상태를 업데이트 하지 않으면 폴링(Polling)을 사용하여 개선할 수 있습니다. 폴링은 콘트롤러가 기기에게 센서와 상태를 업데이트하도록 요청하는 것입니다. 이 과정은 네트워크에서 많은 트래픽을 유발할 수 있습니다. 따라서 기기의 상태를 빨리 반영하고 싶은 마음에 너무 많은 요청을 기기들에게 보내면 지웨이브 네트워크 자체가 망가질 수 있습니다. 폴링은 다른 개선방법이 없을 때 사용해야 하며 가능한 요청 인터벌을 길게 설정해야 합니다. 폴링을 사용하기 보다 문제가 있는 기기 자체를 다른 제품으로 바꾸는 것이 보다 이상적입니다.</p>
 <p>예를 들어, <code>polling_interval=60000</code>(기본값)으로 설정하고 10개의 기기가 있다고 가정할 때, 각각의 폴링 응답(request/response)에 1초가 걸린다면 폴링이 끝나기까지 10초가 걸릴 것입니다. 그럼 50초가 남게 되는데 이것은 일반적인 지웨이브 정보를 주고 받는 시간이 됩니다. 많은 장치를 더 짧은 인터벌로 폴링하면 정보를 주고받는 대역폭이 더욱 줄어들게 됩니다.</p>
 <p>폴링은 기기마다 설정할 수 있고 기기의 <em>polling intensity</em>로 작성합니다. 자세한 내용은 <a href="/docs/z-wave/control-panel#z-wave-node-management">노드 관리</a> 문서를 참고하세요.</p>
+<div class="note">
+<p>자세한 폴링 설정은 <a href="https://cafe.naver.com/koreassistant/665" rel="external nofollow">HA네이버카페 하얀가지님 글</a>을 참고하세요</p>
+</div>
 <h2>
 <a class="title-link" name="central-scene-support" href="#central-scene-support"></a> Central Scene support</h2>
 <p>Central Scene command class는 OpenZWave에서 아직 제공하지 않습니다(지금 <a href="https://github.com/OpenZWave/open-zwave/pull/1125" rel="external nofollow">열심히 지원을 준비중</a>입니다 ) 홈어시스턴트는 0.53버전부터 일부 기능을(<a href="https://github.com/home-assistant/home-assistant/pull/9178" rel="external nofollow">change 9178</a>) 제공합니다. 자세한 내용은 <a href="/docs/z-wave/device-specific/#homeseer-switches">문서</a>를 참고하세요.</p>
