@@ -104,55 +104,55 @@
   
 
   <h2>
-<a class="title-link" name="devices-nodes-entities-what" href="#devices-nodes-entities-what"></a> Devices, Nodes, Entities, what?</h2>
-<p>The <em>device</em> is the hardware, and also used when referring to the node and all its entities. There are 3 main types of devices:</p>
+<a class="title-link" name="---" href="#---"></a> 디바이스, 노드, 엔티티가 뭔가요?</h2>
+<p><strong>디바이스</strong>는 하드웨어를 뜻합니다. 또한 노드나 노드가 가진 모든 엔티티들을 언급하기도 합니다. 디바이스에는 3가지 종류가 존재합니다:</p>
 <ul>
 <li>
-<a href="/docs/z-wave/controllers">Controllers</a> - all Z-Wave networks need to have one of these, though some may have two (a primary and a secondary)</li>
-<li>Sensors - devices that tell you about the environment, these could be flood sensors, motion sensors, temperature sensors and so on</li>
-<li>Actors or actuators - devices that change their environment, for example light switches, dimmers, thermostats (many of these will also have a sensor function)</li>
+<a href="/docs/z-wave/controllers">콘트롤러</a> - 모든 지웨이브 네트워크는 하나 또는 두개의 컨트롤러(a primary and a secondary)가 필요합니다.</li>
+<li>센서 - 주위 환경에 대해 정보를 알려주는 기기입니다. 누수 센서나 모션 센서, 온도 센서 등이 이에 해당합니다.</li>
+<li>액터와 액츄에이터 - 제어를 담당하는 기기입니다. 예를 들어 라이트 스위치, 디머, 온도조절기가 이에 해당합니다. 이들 중 상당수는 센서의 역할도 같이 갖고 있습니다.</li>
 </ul>
-<p>Many sensors and actors can directly control other devices through a capability called <em>association</em>, without the use of an automation, these are known as <em>routing slaves</em>. This will be a very simple control, such as turning a light on when a motion sensor is activated, and off when it stops detecting motion.</p>
-<p>The <em>node</em> is the presence of the device on the Z-Wave mesh. Once you’ve added a device to Home Assistant, the node is represented by an <code>entity_id</code> that starts with <code>zwave</code>.</p>
-<p>The <em>entity</em> is an individual integration of the node. It may be a sensor that you read from, or a control that you operate. For any node, there will be at least one entity (for the node itself) and if it exposes any controls or sensors there will be at least one entity per control or sensor. The <a href="/docs/z-wave/entities">entities</a> that are created depend on the Command Class the device supports.</p>
+<p>많은 센서와 액터는 <em>association</em>이란 능력을 통해 다른 기기들을 직접 콘트롤 합니다. 자동화 없이 <em>routing slaves</em>로 간단한 제어들이 가능한데 모션이 감지되면 불을 켠다거나 모션 감지가 끝나면 불을 끄는 등의 동작을 할 수 있습니다.</p>
+<p><strong>노드</strong>는 지웨이브 망에서 나타난 기기를 가리키는 명칭입니다. 기기를 홈어시스턴트에 등록하면 해당 기기는 지웨이브에 연결되며 노드를 <code>entity_id</code>로 표현합니다.</p>
+<p><strong>엔티티</strong>는 노드의 개별 구성요소입니다. 그것은 정보를 받는 센서이거나 동작을 수행하는 제어 기기 일 수 있습니다. 노드는 제어나 센서 기기에 따라 적어도 하나의 엔티티가 있으며 <a href="/docs/z-wave/entities">엔티티</a>는 기기가 제공하는 Command Class에 따라 생성됩니다.</p>
 <h2>
 <a class="title-link" name="z-wave-plus-security-2" href="#z-wave-plus-security-2"></a> Z-Wave, Plus, Security 2</h2>
-<p>There have been 2 extensions to the Z-Wave protocol. Using these requires that your controller supports these extensions, but devices are backwards compatible.</p>
+<p>지웨이브 프로토콜엔 두가지 확장 버전이 있습니다. 콘트롤러가 이들 버전의 방법을 제공하면 사용가능하며 기기는 구버전 호환성을 갖추고 있습니다.</p>
 <h3>
 <a class="title-link" name="z-wave-plus" href="#z-wave-plus"></a> Z-Wave Plus</h3>
-<p>The key improvements are:</p>
+<p>주요 개선 사항:</p>
 <ul>
-<li>Improved battery life (50% increase)</li>
-<li>Improved range (50% increase) if all your devices are Z-Wave Plus</li>
-<li>Higher bandwidth and improved noise immunity if all your devices are Z-Wave Plus</li>
-<li>Improved self-healing and fault tolerance</li>
+<li>배터리 성능 개선(50% 절약)</li>
+<li>모든 기기들이 지웨이브 플러스를 지원하면 접속 범위가 확장됩니(50% 향상)</li>
+<li>모든 기기들이 지웨이브를 지원하면 대역폭 개선과 전파 노이즈가 줄어듭니다.</li>
+<li>자가 정비(self-healing) 능력과 오류 개선(fault tolerance) 향상</li>
 </ul>
 <h3>
 <a class="title-link" name="z-wave-security-2" href="#z-wave-security-2"></a> Z-Wave Security 2</h3>
-<p>From 2 April 2017 all newly approved Z-Wave devices will have to support the Security 2 (S2) framework. At the time of writing this (October 2019) OpenZWave does not support the S2 framework.</p>
+<p>2017년 4월 새롭게 출시하는 모든 지웨이브 기기들은 시큐리티 2(S2) 프레임워크를 적용해야 한다고 공표했습니다. 현재(2019년 10월) 오픈지웨이브 프로토콜은 S2 프레임워크를 지원하지 않습니다(따라서 HA도 지원하지 않습니다).</p>
 <h2>
 <a class="title-link" name="device-power" href="#device-power"></a> Device Power</h2>
-<p>Your Z-Wave mesh network is built with the devices that are mains powered (whether directly, or via a USB adapter), these relay traffic for other nodes, building the network. These devices are always awake and you can query them, or send configuration changes, at any time.</p>
-<p>Battery powered devices spend most of their time asleep, unable to relay traffic, to be queried, or receive changes. Changes sent while a device is asleep will be queued and sent the next time the device wakes. Details of the default wake interval, and how to manually wake the device (if supported) will be detailed in the devices’s manual. Some battery powered devices (primarily locks and thermostats) support beaming (the <em>Beam</em> command class) that allows them to be remotely woken. This does require that all devices in the network responsible for relaying the commands between the controller and the device also support beaming.</p>
+<p>지웨이브 메쉬 네트워크는 상시 전원 기기와 함께 만들어지며 다른 노드들과 통신하며 네트워크를 구성합니다. 이들 기기는 항상 깨어있으며 다른 기기들과 정보와 변경 사항들을 주고받습니다.</p>
+<p>배터리로 동작하는 기기는 대부분의 시간에 잠들어 있고 어떤 정보도 교환하지 않습니다. 하지만 기기가 스스로 변화를 감지하거나 일정 시간이 지나면 특정 인터벌마다 잠에서 깨어 정보를 송신하거나 합니다. 인터벌에 대한 상세 내용이나 기기를 강제로 잠에서 깨우는 방법(기기가 제공한다면)은 각 기기의 매뉴얼을 살펴보세요. 도어락이나 온도조절기 같은 몇몇 배터리 기기들은 원격으로 잠에서 깨우는 beaming 기능(<em>Beam</em> command class)을 제공합니다. 이 경우 콘트롤러와 비밍을 지원하는 기기상의 통신을 중계하는 기기들은 비밍 커맨드를 책임감 있게 전달해줘야 합니다.</p>
 <div class="note">
-<p>The Z-Wave capability <em>routing</em> doesn’t mean the device routes traffic, it actually means that it’s able to control other devices. You’ll see this capability on most remotes and switches.</p>
+<p>지웨이브 기기의 <strong>라우팅</strong> 기능은 통신을 중계한다는 뜻은 아닙니다. 실제로는 리모콘이나 스위치에 이런 라우팅 표시가 있으며 실제로는 다른 기기를 콘트롤 한다는 의미입니다.</p>
 </div>
 <h2>
-<a class="title-link" name="instant-status" href="#instant-status"></a> Instant Status</h2>
-<p>Older designs of Z-Wave devices may not support <em>Instant Status</em> (the <em>Hail</em> command class), because of a patent that was held by Lutron Electronics. Some manufacturers paid to use it, others didn’t and so those devices may not report on changes. That patent expired in 2016, so new designs should support this.</p>
-<p>As long as your device lists Hail or Association in its Controlled Command Classes, then you’ll get instant status updates. Devices that list Central Scene in their Controlled Command Classes in theory will also work this way, once OpenZWave supports the Central Scene class. You can check your device on the <a href="https://products.z-wavealliance.org/" rel="external nofollow">Z-Wave alliance</a> site, looking at the <strong>Command Classes</strong> link, then at the <strong>Controlled Command Classes</strong> section.</p>
+<a class="title-link" name="-" href="#-"></a> 상태 반영</h2>
+<p>구버전의 지웨이브 기기는 Lutron Electronics사의 특허로 인해 <em>Instant Status</em> (상태반영)을 지원하지 못했습니다(<em>Hail</em> command class). 몇몇 제조사들을 이 기능을 사용하기 위해 특허료를 지불했지만 대부분은 현재 기기의 상태를 전달하는 기능을 기기에 적용하지 않았습니다. 이 특허는 2016년에 만료됐고 새로운 기기들은 점차 지원하고 있습니다.</p>
+<p>Hail 또는 그와 비슷한 Controlled Command Class를 다루는 기기 리스트에 있는 제품들은 상태가 바뀌면 즉시 상태 정보를 전달합니다. Controlled Command Class 를 포함한 Central Scene 명단에 등록된 기기들도 이론적으로는 이 기능을 지원하며 OpenZWave 역시 Central Scene class를 제공합니다. 이 기능을 원한다면 <a href="https://products.z-wavealliance.org/" rel="external nofollow">Z-Wave alliance</a> 사이트를 방문하여, <strong>Command Classes</strong> 링크에서  <strong>Controlled Command Classes</strong> 섹션을 참고하세요.</p>
 <h2>
 <a class="title-link" name="polling" href="#polling"></a> Polling</h2>
-<p>Where a device doesn’t send updates on status changes to the controller, you can work around this by using a thing called Polling. That causes the controller to ask the device to provide an update on all its sensors and states. This will cause a lot of traffic on the network, and if you poll too many devices too quickly, you can effectively break your Z-Wave network. Polling should only be used where there is no other choice, and you should use as large a polling interval as possible. Ideally you should replace the device.</p>
-<p>For example, with <code>polling_interval=60000</code> (which is the default) if you have 10 devices that are being polled at every interval, and each polling takes one secound (request/response round trip), then it will take 10 seconds to complete the polling list. This only leaves 50 seconds left for normal traffic. The more devices you poll, and the shorter the interval, the less bandwidth that’s available for normal traffic.</p>
-<p>Polling needs to be enabled per device, you can control this through the <em>polling intensity</em> (interval) of the device. See the <a href="/docs/z-wave/control-panel#z-wave-node-management">Node Management</a> docs for details.</p>
+<p>상태가 바뀌었는데도 기기가 콘트롤러에게 자신의 상태를 업데이트 하지 않으면 폴링(Polling)을 사용하여 개선할 수 있습니다. 폴링은 콘트롤러가 기기에게 센서와 상태를 업데이트하도록 요청하는 것입니다. 이 과정은 네트워크에서 많은 트래픽을 유발할 수 있습니다. 따라서 기기의 상태를 빨리 반영하고 싶은 마음에 너무 많은 요청을 기기들에게 보내면 지웨이브 네트워크 자체가 망가질 수 있습니다. 폴링은 다른 개선방법이 없을 때 사용해야 하며 가능한 요청 인터벌을 길게 설정해야 합니다. 폴링을 사용하기 보다 문제가 있는 기기 자체를 다른 제품으로 바꾸는 것이 보다 이상적입니다.</p>
+<p>예를 들어, <code>polling_interval=60000</code>(기본값)으로 설정하고 10개의 기기가 있다고 가정할 때, 각각의 폴링 응답(request/response)에 1초가 걸린다면 폴링이 끝나기까지 10초가 걸릴 것입니다. 그럼 50초가 남게 되는데 이것은 일반적인 지웨이브 정보를 주고 받는 시간이 됩니다. 많은 장치를 더 짧은 인터벌로 폴링하면 정보를 주고받는 대역폭이 더욱 줄어들게 됩니다.</p>
+<p>폴링은 기기마다 설정할 수 있고 기기의 <em>polling intensity</em>로 작성합니다. 자세한 내용은 <a href="/docs/z-wave/control-panel#z-wave-node-management">노드 관리</a> 문서를 참고하세요.</p>
 <h2>
 <a class="title-link" name="central-scene-support" href="#central-scene-support"></a> Central Scene support</h2>
-<p>The Central Scene command class isn’t yet supported in OpenZWave (there is <a href="https://github.com/OpenZWave/open-zwave/pull/1125" rel="external nofollow">work in progress</a> to provide it it), though Home Assistant has introduced some support with <a href="https://github.com/home-assistant/home-assistant/pull/9178" rel="external nofollow">change 9178</a> which was part of 0.53 and <a href="/docs/z-wave/device-specific/#homeseer-switches">documented here</a>.</p>
+<p>Central Scene command class는 OpenZWave에서 아직 제공하지 않습니다(지금 <a href="https://github.com/OpenZWave/open-zwave/pull/1125" rel="external nofollow">열심히 지원을 준비중</a>입니다 ) 홈어시스턴트는 0.53버전부터 일부 기능을(<a href="https://github.com/home-assistant/home-assistant/pull/9178" rel="external nofollow">change 9178</a>) 제공합니다. 자세한 내용은 <a href="/docs/z-wave/device-specific/#homeseer-switches">문서</a>를 참고하세요.</p>
 <h2>
-<a class="title-link" name="is-my-device-supported" href="#is-my-device-supported"></a> Is my device supported?</h2>
-<p>You can check to see if OpenZWave supports your particular device by looking at the <a href="https://github.com/OpenZWave/open-zwave/tree/1.4/config" rel="external nofollow">OpenZWave 1.4 github</a>. Be aware that being listed here doesn’t mean that it will be supported in Home Assistant, since the version of OpenZWave used by Home Assistant will often lag the github by a few months.</p>
-<p>Even if your device isn’t listed there, it’s likely that it will still work as expected as long as the device complies with the Z-Wave standards. The OpenZWave wiki describes how <a href="https://github.com/OpenZWave/open-zwave/wiki/Adding-Devices" rel="external nofollow">you can add support</a> for your device if it isn’t listed.</p>
+<a class="title-link" name="--" href="#--"></a> 내 기기를 지원하나요?</h2>
+<p>내 기기를 OpenZWave가 지원하는지 확인하려면  <a href="https://github.com/OpenZWave/open-zwave/tree/1.4/config" rel="external nofollow">OpenZWave 1.4 github</a>을 참고하세요. 목록에서 확인하더라도 홈어시스턴트에서 동작한다고 보장할 수는 없습니다. 오픈지웨이브와 홈어시스턴트 사이의 개발 속도가 다르고 몇개월 늦게 홈어시스턴트가 지원할 수도 있습니다.</p>
+<p>목록에 없는 기기라 하더라도 해당 기기가 지웨이브 표준을 지원하도록 제작됐다면 정상 동작할 수도 있습니다. 여러분의 기기가 목록에 없다면 OpenZWave wiki에서 <a href="https://github.com/OpenZWave/open-zwave/wiki/Adding-Devices" rel="external nofollow">you can add support</a>를 통해 기기 등록을 요청해보세요.</p>
 
 
 </article>
