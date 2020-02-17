@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Database - 홈어시스턴트</title>
+    <title>데이터베이스 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Details about the database used by Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/backend/database/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Database">
+    <meta property="og:title" content="데이터베이스">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/backend/database/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Database">
+    <meta name="twitter:title" content="데이터베이스">
     <meta name="twitter:description" content="Details about the database used by Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      Database
+      데이터베이스
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The default database used by Home Assistant is <a href="https://www.sqlite.org/" rel="external nofollow">SQLite</a>, and the database file is stored in your <a href="/getting-started/configuration/">configuration directory</a> (e.g., <code>&lt;path to config dir&gt;/.homeassistant/home-assistant_v2.db</code>). If you prefer to run a database server (e.g. PostgreSQL), use the <a href="/integrations/recorder/"><code>recorder</code> component</a>.</p>
-<p>To work with the SQLite database manually from the command-line, you will need an <a href="http://www.sqlitetutorial.net/download-install-sqlite/" rel="external nofollow">installation</a> of <code>sqlite3</code>. Alternatively <a href="http://sqlitebrowser.org/" rel="external nofollow">DB Browser for SQLite</a> provides a viewer for exploring the database data and an editor for executing SQL commands.
-First load your database with <code>sqlite3</code>:</p>
+  <p>Home Assistant가 사용하는 기본 데이터베이스는 <a href="https://www.sqlite.org/" rel="external nofollow">SQLite</a>, 이며 데이터베이스 파일은 <a href="/getting-started/configuration/">configuration directory</a> 에 저장됩니다. (예: <code>&lt;path to config dir&gt;/.homeassistant/home-assistant_v2.db</code>). 데이터베이스 서버 (예 : PostgreSQL)를 실행하려면 <a href="/integrations/recorder/"><code>recorder</code> component</a>를 사용하십시오.</p>
+<p>command-line에서 수동으로 SQLite 데이터베이스로 작업하려면, <code>sqlite3</code>를 <a href="http://www.sqlitetutorial.net/download-install-sqlite/" rel="external nofollow">설치</a>해야합니다. 또는 <a href="http://sqlitebrowser.org/" rel="external nofollow">DB Browser for SQLite</a>는 데이터를 탐색하기위한 뷰어와 SQL 명령을 실행하기위한 편집기를 제공합니다.
+우선 다음 <code>sqlite3</code>를 사용하여 데이터베이스를 로드하십시오.</p>
 <pre><code class="language-bash">$ sqlite3 home-assistant_v2.db
 SQLite version 3.13.0 2016-05-18 10:57:30
 Enter ".help" for usage hints.
 sqlite&gt;
 </code></pre>
-<p>It helps to set some options to make the output more readable:</p>
+<p>출력을 보다 읽기 쉽게하기 위해 몇 가지 옵션을 설정하는 데 도움이됩니다. :</p>
 <pre><code class="language-bash">sqlite&gt; .header on
 sqlite&gt; .mode column
 </code></pre>
-<p>You could also start <code>sqlite3</code> and attach the database later. Not sure what database you are working with? Check it, especially if you are going to delete data.</p>
+<p><code>sqlite3</code>를 쓰면 데이터베이스에 데이터를 추가할 수도 있습니다. 어떤 데이터베이스를 사용하고 있는지 잘 모르십니까? 특히 데이터를 삭제하려는 경우 확인하십시오.</p>
 <pre><code class="language-bash">sqlite&gt; .databases
 seq  name             file
 ---  ---------------  ----------------------------------------------------------
@@ -123,7 +123,7 @@ seq  name             file
 </code></pre>
 <h3>
 <a class="title-link" name="schema" href="#schema"></a> Schema</h3>
-<p>Get all available tables from your current Home Assistant database:</p>
+<p>현재 홈 어시스턴트 데이터베이스에서 사용 가능한 모든 테이블을 가져 오십시오. :</p>
 <pre><code class="language-bash">sqlite&gt; SELECT sql FROM sqlite_master;
 
 -------------------------------------------------------------------------------------
@@ -163,12 +163,12 @@ CREATE INDEX states__significant_changes ON states (domain, last_updated, entity
 CREATE INDEX states__state_changes ON states (last_changed, last_updated, entity_id)
 CREATE TABLE sqlite_stat1(tbl,idx,stat)
 </code></pre>
-<p>To only show the details about the <code>states</code> table (since we are using that one in the next examples):</p>
+<p><code>states</code> 테이블 에 대한 세부 사항 만 표시하려면 (다음 예제에서 해당 테이블을 사용하므로)</p>
 <pre><code class="language-bash">sqlite&gt; SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'states';
 </code></pre>
 <h3>
-<a class="title-link" name="query" href="#query"></a> Query</h3>
-<p>The identification of the available columns in the table is done and we are now able to create a query. Let’s list your Top 10 entities:</p>
+<a class="title-link" name="-query" href="#-query"></a> 쿼리 (Query)</h3>
+<p>테이블에서 사용 가능한 열을 식별하면 이제 쿼리를 만들 수 있습니다. 상위 10 개 entity를 나열하겠습니다. :</p>
 <pre><code class="language-bash">sqlite&gt; .width 30, 10,
 sqlite&gt; SELECT entity_id, COUNT(*) as count FROM states GROUP BY entity_id ORDER BY count DESC LIMIT 10;
 entity_id                       count
@@ -186,13 +186,13 @@ group.all_switches              8018
 </code></pre>
 <h3>
 <a class="title-link" name="delete" href="#delete"></a> Delete</h3>
-<p>If you don’t want to keep certain entities, you can delete them permanently:</p>
+<p>특정 엔티티를 유지하지 않으려면 영구적으로 삭제할 수 있습니다. :</p>
 <pre><code class="language-bash">sqlite&gt; DELETE FROM states WHERE entity_id="sensor.cpu";
 </code></pre>
-<p>The <code>VACUUM</code> command cleans your database.</p>
+<p><code>VACUUM</code> 명령은 데이터베이스를 정리합니다</p>
 <pre><code class="language-bash">sqlite&gt; VACUUM;
 </code></pre>
-<p>For a more interactive way of working with the database, check the <a href="https://data.home-assistant.io/">Data Science Portal</a>.</p>
+<p>데이터베이스에 대한 대화식 작업 방법은, <a href="https://data.home-assistant.io/">Data Science Portal</a>확인하십시오.</p>
 
 
 </article>

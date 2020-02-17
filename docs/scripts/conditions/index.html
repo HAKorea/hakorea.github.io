@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Conditions - 홈어시스턴트</title>
+    <title>Conditions(조건) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Documentation about all available conditions.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/scripts/conditions/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Conditions">
+    <meta property="og:title" content="Conditions(조건)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/scripts/conditions/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Conditions">
+    <meta name="twitter:title" content="Conditions(조건)">
     <meta name="twitter:description" content="Documentation about all available conditions.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Conditions
+      Conditions(조건)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Conditions can be used within a script or automation to prevent further execution. When a condition does not return true, the script or automation stops executing. A condition will look at the system at that moment. For example, a condition can test if a switch is currently turned on or off.</p>
-<p>Unlike a trigger, which is always <code>or</code>, conditions are <code>and</code> by default - all conditions have to be true.</p>
+  <p>스크립트 또는 자동화 내에서 조건을 사용하여 추가 실행을 방지 할 수 있습니다. 조건이 true를 반환하지 않으면 스크립트 또는 자동화가 실행을 중지합니다. 조건은 그 순간에 시스템을 살펴볼 것입니다. 예를 들어, 스위치가 현재 켜져 있는지 여부를 테스트 할 수 있습니다.</p>
+<p>트리거는 항상 <code>or</code>를 기준으로 동작하는 것과 달리, 조건은 <code>and</code>가 기본입니다. - 기본적으로 모든 조건이 충족되어야합니다.</p>
 <h3>
-<a class="title-link" name="and-condition" href="#and-condition"></a> AND condition</h3>
-<p>Test multiple conditions in one condition statement. Passes if all embedded conditions are valid.</p>
+<a class="title-link" name="and-condition" href="#and-condition"></a> AND condition(조건)</h3>
+<p>하나의 조건문에서 여러 조건을 테스트하십시오. 모든 해당 조건이 유효한 경우 전달합니다.</p>
 <pre><code class="language-yaml">condition:
   condition: and
   conditions:
@@ -118,8 +118,8 @@
       entity_id: 'sensor.temperature'
       below: 20
 </code></pre>
-<p>If you do not want to combine AND and OR conditions, you can list them sequentially.</p>
-<p>The following configuration works the same as the one listed above:</p>
+<p>AND 및 OR 조건을 결합하지 않으려는 경우 순차적으로 나열 할 수 있습니다.</p>
+<p>다음 구성은 위에 나열된 설정과 동일하게 작동합니다. :</p>
 <pre><code class="language-yaml">condition:
   - condition: state
     entity_id: 'device_tracker.paulus'
@@ -128,10 +128,10 @@
     entity_id: 'sensor.temperature'
     below: 20
 </code></pre>
-<p>Currently you need to format your conditions like this to be able to edit them using the <a href="/docs/automation/editor/">automations editor</a>.</p>
+<p>현재 <a href="/docs/automation/editor/">automations editor</a>를 사용하여 조건을 편집 할 수 있도록 조건을 형식화해야합니다.</p>
 <h3>
-<a class="title-link" name="or-condition" href="#or-condition"></a> OR condition</h3>
-<p>Test multiple conditions in one condition statement. Passes if any embedded condition is valid.</p>
+<a class="title-link" name="or-condition" href="#or-condition"></a> OR condition(조건)</h3>
+<p>하나의 조건문에서 여러 조건을 테스트하십시오. 해당 조건이 유효한 경우 전달합니다.</p>
 <pre><code class="language-yaml">condition:
   condition: or
   conditions:
@@ -143,9 +143,8 @@
       below: 20
 </code></pre>
 <h3>
-<a class="title-link" name="mixed-and-and-or-conditions" href="#mixed-and-and-or-conditions"></a> MIXED AND and OR conditions</h3>
-<p>Test multiple AND and OR conditions in one condition statement. Passes if any embedded condition is valid.
-This allows you to mix several AND and OR conditions together.</p>
+<a class="title-link" name="and--or--conditions" href="#and--or--conditions"></a> AND 와 OR의 혼합 conditions(조건)</h3>
+<p>하나의 조건문에서 여러 AND 및 OR 조건을 테스트하십시오. 포함 해당 조건이 유효한 경우 전달합니다. 이를 통해 여러 AND 및 OR 조건을 혼합 할 수 있습니다.</p>
 <pre><code class="language-yaml">condition:
   condition: and
   conditions:
@@ -162,10 +161,11 @@ This allows you to mix several AND and OR conditions together.</p>
           below: 20
 </code></pre>
 <h3>
-<a class="title-link" name="numeric-state-condition" href="#numeric-state-condition"></a> Numeric state condition</h3>
-<p>This type of condition attempts to parse the state of the specified entity as a number, and triggers if the value matches the thresholds.</p>
-<p>If both <code>below</code> and <code>above</code> are specified, both tests have to pass.</p>
-<p>You can optionally use a <code>value_template</code> to process the value of the state before testing it.</p>
+<a class="title-link" name="---numeric-state-condition" href="#---numeric-state-condition"></a> 숫자 상태 조건 (Numeric state condition)</h3>
+<p>이 유형의 조건은 지정된 entity의 상태를 숫자로 구문 분석하려고 시도하고 값이 임계값과 일치하는 경우 트리거합니다.</p>
+<p><code>below</code> 와 <code>above</code>의 두 경우는 해당 두 테스트를 통과해야합니다.</p>
+<p>You can optionally use a <code>value_template</code> to process the value of the state before testing it.
+선택적으로 a <code>value_template</code>를 사용하여 테스트하기 전에 상태 값을 처리 할 수 있습니다.</p>
 <pre><code class="language-yaml">condition:
   condition: numeric_state
   entity_id: sensor.temperature
@@ -175,8 +175,8 @@ This allows you to mix several AND and OR conditions together.</p>
   value_template: '{{ float(state.state) + 2 }}'
 </code></pre>
 <h3>
-<a class="title-link" name="state-condition" href="#state-condition"></a> State condition</h3>
-<p>Tests if an entity is a specified state.</p>
+<a class="title-link" name="--state-condition" href="#--state-condition"></a> 상태 조건 (State condition)</h3>
+<p>entity가 지정된 상태인지 테스트합니다..</p>
 <pre><code class="language-yaml">condition:
   condition: state
   entity_id: device_tracker.paulus
@@ -188,10 +188,10 @@ This allows you to mix several AND and OR conditions together.</p>
     seconds: 5
 </code></pre>
 <h3>
-<a class="title-link" name="sun-condition" href="#sun-condition"></a> Sun condition</h3>
+<a class="title-link" name="--sun-condition" href="#--sun-condition"></a> 태양 조건 (Sun condition)</h3>
 <h4>
-<a class="title-link" name="sun-state-condition" href="#sun-state-condition"></a> Sun state condition</h4>
-<p>The sun state can be used to test if the sun has set or risen.</p>
+<a class="title-link" name="---sun-state-condition" href="#---sun-state-condition"></a> 태양 상태 조건 (Sun state condition)</h4>
+<p>태양 상태는 태양이 졌거나 상승했는지 테스트하는 데 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">condition:
   condition: state  # 'day' condition: from sunrise until sunset
   entity_id: sun.sun
@@ -203,9 +203,8 @@ This allows you to mix several AND and OR conditions together.</p>
   state: 'below_horizon'
 </code></pre>
 <h4>
-<a class="title-link" name="sun-elevation-condition" href="#sun-elevation-condition"></a> Sun elevation condition</h4>
-<p>The sun elevation can be used to test if the sun has set or risen, it is dusk, it is night, etc. when a trigger occurs.
-For an in-depth explanation of sun elevation, see <a href="/docs/automation/trigger/#sun-elevation-trigger">sun elevation trigger</a>.</p>
+<a class="title-link" name="---sun-elevation-condition" href="#---sun-elevation-condition"></a> 태양 고도 조건 (Sun elevation condition)</h4>
+<p>트리거가 발생했을 때 해가 높아지거나 해가 지는지, 밤이되는지, 밤인지 등을 테스트하는 데 태양 고도를 사용할 수 있습니다. 태양 고도에 대한 자세한 설명은 <a href="/docs/automation/trigger/#sun-elevation-trigger">sun elevation trigger</a>를 참조하십시오.</p>
 <pre><code class="language-yaml">condition:
   condition: and  # 'twilight' condition: dusk and dawn, in typical locations
   conditions:
@@ -219,11 +218,11 @@ For an in-depth explanation of sun elevation, see <a href="/docs/automation/trig
   value_template: '{{ state_attr("sun.sun", "elevation") &lt; -6 }}'
 </code></pre>
 <h4>
-<a class="title-link" name="sunsetsunrise-condition" href="#sunsetsunrise-condition"></a> Sunset/sunrise condition</h4>
-<p>The sun condition can also test if the sun has already set or risen when a trigger occurs. The <code>before</code> and <code>after</code> keys can only be set to <code>sunset</code> or <code>sunrise</code>. They have a corresponding optional offset value (<code>before_offset</code>, <code>after_offset</code>) that can be added, similar to the <a href="/docs/automation/trigger/#sun-trigger">sun trigger</a>.</p>
+<a class="title-link" name="--sunsetsunrise-condition" href="#--sunsetsunrise-condition"></a> 일몰/일출 조건 (Sunset/sunrise condition)</h4>
+<p>또한 태양 상태는 트리거가 발생할 때 태양이 이미 졌거나 떴는지 테스트 할 수 있습니다. <code>before</code>와 <code>after</code> key들은 <code>sunset</code> 혹은 <code>sunrise</code>만 설정할 수 있습니다. <a href="/docs/automation/trigger/#sun-trigger">sun trigger</a>와 유사하게 이 키들은 (<code>before_offset</code>, <code>after_offset</code>)라는 선택적인 오프셋값을 갖습니다.</p>
 <div class="note warning">
-The sunset/sunrise conditions do not work in locations inside the polar circles, and also not in locations with a highly skewed local time zone.
-<p>In those cases it is advised to use conditions evaluating the solar elevation instead of the before/after sunset/sunrise conditions.</p>
+일몰 / 일출 조건은 극지방 내의 위치에서는 작동하지 않으며 현지 시간대가 치우친 곳에서는 작동하지 않습니다.
+<p>이러한 경우, 전/후, 일몰/일출 조건 대신 태양 고도를 측정하는 조건을 사용하는 것이 좋습니다.</p>
 </div>
 <pre><code class="language-yaml">condition:
   condition: sun
@@ -247,19 +246,19 @@ The sunset/sunrise conditions do not work in locations inside the polar circles,
     - condition: sun
       after: sunrise
 </code></pre>
-<p>A visual timeline is provided below showing an example of when these conditions are true. In this chart, sunrise is at 6:00, and sunset is at 18:00 (6:00 PM). The green areas of the chart indicate when the specified conditions are true.</p>
+<p>이러한 조건이 참인 경우의 예를 보여주는 시각적 타임 라인이 아래에 제공됩니다. 이 차트에서 일출 시간은 6:00이며 일몰 시간은 18:00 (6:00 PM)입니다. 차트의 녹색 영역은 지정된 조건이 참일 때를 나타냅니다.</p>
 <img src="/images/docs/scripts/sun-conditions.svg" alt="Graphic showing an example of sun conditions">
 <h3>
-<a class="title-link" name="template-condition" href="#template-condition"></a> Template condition</h3>
-<p>The template condition tests if the <a href="/topics/templating/">given template</a> renders a value equal to true. This is achieved by having the template result in a true boolean expression or by having the template render ‘true’.</p>
+<a class="title-link" name="--template-condition" href="#--template-condition"></a> 템플릿 조건 (Template condition)</h3>
+<p>템플릿 조건은 주어진 템플릿 이 true와 같은 값을 렌더링 하는지 테스트 합니다. 이는 템플릿 결과가 실제 boolean 형식이되거나 템플릿이 ‘true’로 렌더링되도록 함으로써 실현됩니다.</p>
 <pre><code class="language-yaml">condition:
   condition: template
   value_template: "{{ (state_attr('device_tracker.iphone', 'battery_level')|int) &gt; 50 }}"
 </code></pre>
-<p>Within an automation, template conditions also have access to the <code>trigger</code> variable as <a href="/getting-started/automation-templating/">described here</a>.</p>
+<p>자동화 내에서 템플릿 조건 <a href="/getting-started/automation-templating/">described here</a>에 설명 된대로 <code>trigger</code> 변수에 액세스 할 수도 있습니다 .</p>
 <h3>
-<a class="title-link" name="time-condition" href="#time-condition"></a> Time condition</h3>
-<p>The time condition can test if it is after a specified time, before a specified time or if it is a certain day of the week.</p>
+<a class="title-link" name="--time-condition" href="#--time-condition"></a> 시간 조건 (Time condition)</h3>
+<p>시간 조건은 지정된 시간 이후, 지정된 시간 전 또는 특정 요일인지 테스트 할 수 있습니다.</p>
 <pre><code class="language-yaml">condition:
   condition: time
   # At least one of the following is required.
@@ -270,21 +269,20 @@ The sunset/sunrise conditions do not work in locations inside the polar circles,
     - wed
     - fri
 </code></pre>
-<p>Valid values for <code>weekday</code> are <code>mon</code>, <code>tue</code>, <code>wed</code>, <code>thu</code>, <code>fri</code>, <code>sat</code>, <code>sun</code>.
-Time condition windows can span across the midnight threshold. In the example above, the condition window is from 3pm to 2am.</p>
+<p>유효한 값은 <code>weekday</code> 는 <code>mon</code>, <code>tue</code>, <code>wed</code>, <code>thu</code>, <code>fri</code>, <code>sat</code>, <code>sun</code> 입니다. 시간 조건 창은 자정 임계값에 걸쳐있을 수 있습니다. 위의 예에서 조건 창은 오후 3 시부 터 오전 2시입니다.</p>
 <div class="note tip">
-<p>A better weekday condition could be by using the <a href="/integrations/workday/">Workday Binary Sensor</a>.</p>
+<p>평일에 더 좋은 조건은 <a href="/integrations/workday/">Workday Binary Sensor</a>를 사용하는 것 입니다.</p>
 </div>
 <h3>
-<a class="title-link" name="zone-condition" href="#zone-condition"></a> Zone condition</h3>
-<p>Zone conditions test if an entity is in a certain zone. For zone automation to work, you need to have set up a device tracker platform that supports reporting GPS coordinates. Currently this is limited to the <a href="/integrations/owntracks/">OwnTracks platform</a> and the <a href="/integrations/icloud/">iCloud platform</a>.</p>
+<a class="title-link" name="--zone-condition" href="#--zone-condition"></a> 영역 조건 (Zone condition)</h3>
+<p>영역 조건은 엔티티가 특정 영역에 있는지 테스트합니다.  영역 자동화가 작동하려면 GPS 좌표보고를 지원하는 장치 추적기 플랫폼을 설정해야합니다. 현재 이는 <a href="/integrations/owntracks/">OwnTracks platform</a> 및 <a href="/integrations/icloud/">iCloud platform</a>으로 제한됩니다.</p>
 <pre><code class="language-yaml">condition:
   condition: zone
   entity_id: device_tracker.paulus
   zone: zone.home
 </code></pre>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
+<a class="title-link" name="-examples" href="#-examples"></a> 사례 (Examples)</h3>
 <pre><code class="language-yaml">condition:
   - condition: numeric_state
     entity_id: sun.sun
