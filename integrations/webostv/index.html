@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LG webOS Smart TV - 홈어시스턴트</title>
+    <title>LG webOS 스마트 TV - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a LG webOS Smart TV within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/webostv/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="LG webOS Smart TV">
+    <meta property="og:title" content="LG webOS 스마트 TV">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/webostv/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="LG webOS Smart TV">
+    <meta name="twitter:title" content="LG webOS 스마트 TV">
     <meta name="twitter:description" content="Instructions on how to integrate a LG webOS Smart TV within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,24 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      LG webOS Smart TV
+      LG webOS 스마트 TV
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>webostv</code> platform allows you to control a <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS Smart TV.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>The <code>webostv</code> platform allows you to control a <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS Smart TV.
+이 webostv플랫폼을 사용하면 <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS 스마트 TV 를 제어 할 수 있습니다 .</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
-<li><a href="#media-player">Media Player</a></li>
-<li><a href="#notifications">Notifications</a></li>
+<li><a href="#media-player">미디어플레이어</a></li>
+<li><a href="#notifications">알림</a></li>
 </ul>
-<p>To begin with enable <em>LG Connect Apps</em> feature in <em>Network</em> settings of the TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a>.</p>
-<p>Once basic configuration is added to your <code>configuration.yaml</code> file. A notification should be visible in the frontend’s <strong>Notification</strong> section. Follow the instructions and accept the pairing request on your TV.</p>
-<p>Pairing information will be saved to a configuration file <code>webostv.conf</code> in the Home Assistant configuration directory. This process is IP address-sensitive, in case the IP address of your TV would change in future.</p>
-<h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To add a TV to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a>의 <em>네트워크</em> 설정 에서 <em>LG Connect 앱</em> 기능 을 활성화해서 시작 하십시오 .</p>
+<p>기본 설정이 configuration.yaml파일에 추가되면 프런트 엔드의 <strong>알림</strong>섹션에 페어링 정보가 표시되어야합니다. 지침에 따라 TV에서 페어링 요청을 수락하십시오.</p>
+<p>페어링 정보는 <code>webostv.conf</code> Home Assistant 구성 디렉토리 의 구성 파일 에 저장됩니다 . 이 과정은 나중에 TV의 IP 주소가 변경 될 경우 IP 주소에 설정에 주의하십시오.</p>
+<h2>
+<a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
+<p>TV를 설치에 추가하려면 <code>configuration.yaml</code>파일에 다음을 추가 하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 webostv:
 </code></pre>
@@ -124,45 +125,35 @@ webostv:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP of the LG webOS Smart TV, e.g., <code>192.168.0.10</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>LG webOS 스마트 TV의 IP 주소 예: <code>192.168.0.10</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name you would like to give to the LG webOS Smart TV.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>LG webOS 스마트 TV에 부여하려는 이름입니다.</p>
 </span></p></dd>
 <dt>
-<a class="title-link" name="standby_connection" href="#standby_connection"></a> standby_connection</dt>
-<dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Keep connection alive when TV is in standby (this should be set to true if and only if the “Standby+” option is enabled in the TV UI.)</p>
-</span></p>
-<p class="default">
-Default value: </p>
-<p>false</p>
-</dd>
-<dt>
 <a class="title-link" name="turn_on_action" href="#turn_on_action"></a> turn_on_action</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an <a href="/docs/automation/action/">action</a> to turn the TV on.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>TV를 켜는 <a href="/docs/automation/action/">action</a>을 정의합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="customize" href="#customize"></a> customize</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of options to customize.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 할 옵션 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="sources" href="#sources"></a> sources</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of hardware and webOS App inputs.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>하드웨어 및 webOS 앱 입력 목록.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="example" href="#example"></a> Example</h3>
-<p>A full configuration example will look like the sample below:</p>
+<a class="title-link" name="---full-configuration-example" href="#---full-configuration-example"></a> 전체 설정 예시 (Full configuration example)</h3>
+<p>전체 설정 예는 아래 샘플과 같습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 webostv:
   host: 192.168.0.10
   name: Living Room TV
-  standby_connection: true
   turn_on_action:
     service: persistent_notification.create
     data:
@@ -173,17 +164,28 @@ webostv:
       - youtube
       - makotv
       - netflix
-        
+
 media_player:
 
 notify:
 </code></pre>
-<p>Avoid using <code>[ ]</code> in the <code>name:</code> of your device.</p>
+<p>장치의 <code>name :</code>에서 <code>[]</code>를 사용하지 마십시오.</p>
 <h3>
-<a class="title-link" name="turn-on-action" href="#turn-on-action"></a> Turn on action</h3>
-<p>Home Assistant is able to turn on a LG webOS Smart TV if you specify an action, like HDMI-CEC or WakeOnLan.</p>
-<p>Common for webOS 3.0 and higher would be to use WakeOnLan feature. To use this feature your TV should be connected to your network via Ethernet rather than Wireless and you should enable <em>LG Connect Apps</em> feature in <em>Network</em> settings of the TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a> (or <em>Mobile App</em> in <em>General</em> settings for older models) (*may vary by version).</p>
-<p>On newer models (2017+), WakeOnLan may need to be enabled in the TV settings by going to Settings &gt; General &gt; Mobile TV On &gt; Turn On Via WiFi <a href="https://support.quanticapps.com/hc/en-us/articles/115005985729-How-to-turn-on-my-LG-Smart-TV-using-the-App-WebOS-" rel="external nofollow">instructions</a>.</p>
+<a class="title-link" name="-tv--using-multiple-tvs" href="#-tv--using-multiple-tvs"></a> 다수의 TV 사용 (Using multiple TVs)</h3>
+<p>이 통합구성요소로 다수의 TV를 사용할 수도 있습니다.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry with multiple TVs
+webostv:
+  - name: Living Room TV
+    host: 192.168.1.100
+  - name: Bedroom TV
+    host: 192.168.1.101
+</code></pre>
+<p>위의 예제는 최소 내용의 샘플이지만 모든 옵션을 각 TV에서 사용할 수 있습니다.</p>
+<h2>
+<a class="title-link" name="--turn-on-action" href="#--turn-on-action"></a> 켜기 동작 (Turn on action)</h2>
+<p>HDMI-CEC 또는 WakeOnLan과 같은 동작을 지정하면 Home Assistant에서 LG webOS 스마트 TV를 켤 수 있습니다.</p>
+<p>webOS 3.0 이상에서는 WakeOnLan 기능을 사용하는 것이 일반적입니다. 이 기능을 사용하려면 TV가 무선이 아닌 이더넷을 통해 네트워크에 연결되어 있어야하며 <em>네트워크</em> TV 설정<a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a>에서 <em>LG Connect Apps</em> 기능을 활성화해야합니다. (구형 모델은 <em>모바일앱</em>에서 <em>일반</em> 설정)</p>
+<p>최신 모델 (2017+)의 경우 설정&gt; 일반&gt; 모바일 TV 켜기&gt; WiFi를 통해 켜기 <a href="https://support.quanticapps.com/hc/en-us/articles/115005985729-How-to-turn-on-my-LG-Smart-TV-using-the-App-WebOS-" rel="external nofollow">instructions</a>로 이동하여 TV 설정에서 WakeOnLan을 활성화해야 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 wake_on_lan: # enables `wake_on_lan` domain
 
@@ -199,19 +201,19 @@ media_player:
 
 notify:
 </code></pre>
-<p>Any other <a href="/docs/automation/action/">actions</a> to power on the device can be configured.</p>
-<h3>
-<a class="title-link" name="sources" href="#sources"></a> Sources</h3>
-<p>To obtain complete list of available sources currently configured on the TV, once the webOS TV is configured and linked, while its powered on head to the <strong>Developer Tools</strong> &gt; <strong>States</strong>, find your <code>media_player.&lt;name&gt;</code> and use the sources listed in <code>source_list:</code> remembering to split them per line into your <code>sources:</code> configuration.</p>
-<h3>
-<a class="title-link" name="change-channel-through-play_media-service" href="#change-channel-through-play_media-service"></a> Change channel through play_media service</h3>
-<p>The <code>play_media</code> service can be used in a script to switch to the specified tv channel. It selects the best matching channel according to the <code>media_content_id</code> parameter:</p>
+<p>장치 전원을 켜기위한 다른 모든 <a href="/docs/automation/action/">actions</a>을 설정 할 수 있습니다.</p>
+<h2>
+<a class="title-link" name="sources" href="#sources"></a> Sources</h2>
+<p>현재 TV에 설정된 사용 가능한 소스의 전체 목록을 얻으려면 webOS TV를 설정하고 전원을 켠 상태에서 <strong>개발자 도구</strong>&gt; <strong>상태</strong>에서 <code>media_player.name</code>을 찾아 <code>source_list :</code>의 각 줄의 나타난 입력(소스)들을 기억해두고 <code>source:</code>에  해당 입력을 배치시켜 사용하십시오.</p>
+<h2>
+<a class="title-link" name="play_media-----change-channel-through-play_media-service" href="#play_media-----change-channel-through-play_media-service"></a> play_media 서비스를 통한 채널 변경 (Change channel through play_media service)</h2>
+<p><code>play_media</code> 서비스는 스크립트에서 지정된 TV 채널로 전환하는 데 사용될 수 있습니다. <code>media_content_id</code> 매개 변수에 따라 가장 일치하는 채널을 선택합니다. :</p>
 <ol>
-<li>Channel number <em>(i.e. ‘1’ or ‘6’)</em>
+<li>채널 번호 <em>(예: ‘1’ or ‘6’)</em>
 </li>
-<li>Exact channel name <em>(i.e. ‘France 2’ or ‘CNN’)</em>
+<li>정확한 채널 이름 <em>(예: ‘France 2’ or ‘CNN’)</em>
 </li>
-<li>Substring in channel name <em>(i.e. ‘BFM’ in ‘BFM TV’)</em>
+<li>채널 이름 하위 문자열 <em>(예: ‘BFM’ in ‘BFM TV’)</em>
 </li>
 </ol>
 <pre><code class="language-yaml"># Example action entry in script to switch to channel number 1
@@ -228,18 +230,19 @@ data:
   media_content_id: "TF1"
   media_content_type: "channel"
 </code></pre>
-<h3>
-<a class="title-link" name="nextprevious-buttons" href="#nextprevious-buttons"></a> Next/Previous buttons</h3>
-<p>The behaviour of the next and previous buttons is different depending on the active source:</p>
+<h2>
+<a class="title-link" name="nextprevious-buttons" href="#nextprevious-buttons"></a> Next/Previous buttons</h2>
+<p>다음 및 이전 버튼의 동작은 활성 입력에 따라 다릅니다. :</p>
 <ul>
-<li>if the source is ‘LiveTV’ (television): next/previous buttons act as channel up/down</li>
-<li>otherwise: next/previous buttons act as next/previous track</li>
+<li>입력이 ‘LiveTV’(텔레비전) 인 경우 : 다음/이전 버튼이 채널 위/아래로 작동</li>
+<li>그렇지 않으면 다음/이전 버튼이 다음/이전 트랙으로 작동합니다.</li>
 </ul>
 <h3>
-<a class="title-link" name="generic-commands-and-buttons" href="#generic-commands-and-buttons"></a> Generic commands and buttons</h3>
-<p>Available services: <code>button</code>, <code>command</code></p>
+<a class="title-link" name="--sound-output" href="#--sound-output"></a> 사운드 출력 (Sound output)</h3>
+<p>TV의 현재 사운드 출력은 상태 속성에서 찾을 수 있습니다.
+사운드 출력을 변경하려면 다음 서비스를 이용할 수 있습니다. :</p>
 <h4>
-<a class="title-link" name="service-webostvbutton" href="#service-webostvbutton"></a> Service webostv.button</h4>
+<a class="title-link" name="webostvselect_sound_output-" href="#webostvselect_sound_output-"></a> webostv.select_sound_output 서비스</h4>
 <table>
 <thead>
 <tr>
@@ -252,18 +255,44 @@ data:
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Target a specific webostv media player.</td>
+<td>특정 webostv 미디어 플레이어를 대상으로합니다.</td>
+</tr>
+<tr>
+<td><code>sound_output</code></td>
+<td>no</td>
+<td>전환 할 사운드 출력의 이름입니다.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="---" href="#---"></a> 일반 명령 및 버튼</h3>
+<p>사용가능한 서비스 : <code>button</code>, <code>command</code></p>
+<h3>
+<a class="title-link" name="webostvbutton-" href="#webostvbutton-"></a> webostv.button 서비스</h3>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>특정 webostv 미디어를 대상</td>
 </tr>
 <tr>
 <td><code>button</code></td>
 <td>no</td>
-<td>Name of the button. Known possible values are <code>LEFT</code>, <code>RIGHT</code>, <code>DOWN</code>, <code>UP</code>, <code>HOME</code>, <code>BACK</code>, <code>ENTER</code>, <code>DASH</code>, <code>INFO</code>, <code>ASTERISK</code>, <code>CC</code>, <code>EXIT</code>, <code>MUTE</code>, <code>RED</code>, <code>GREEN</code>, <code>BLUE</code>, <code>VOLUMEUP</code>, <code>VOLUMEDOWN</code>, <code>CHANNELUP</code>, <code>CHANNELDOWN</code>, <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>
+<td>버튼 이름. 알려진 가능한 값은 <code>LEFT</code>, <code>RIGHT</code>, <code>DOWN</code>, <code>UP</code>, <code>HOME</code>, <code>BACK</code>, <code>ENTER</code>, <code>DASH</code>, <code>INFO</code>, <code>ASTERISK</code>, <code>CC</code>, <code>EXIT</code>, <code>MUTE</code>, <code>RED</code>, <code>GREEN</code>, <code>BLUE</code>, <code>VOLUMEUP</code>, <code>VOLUMEDOWN</code>, <code>CHANNELUP</code>, <code>CHANNELDOWN</code>, <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>
 </td>
 </tr>
 </tbody>
 </table>
-<h4>
-<a class="title-link" name="service-webostvcommand" href="#service-webostvcommand"></a> Service webostv.command</h4>
+<h3>
+<a class="title-link" name="webostvcommand-" href="#webostvcommand-"></a> webostv.command 서비스</h3>
 <table>
 <thead>
 <tr>
@@ -276,18 +305,17 @@ data:
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Target a specific webostv media player.</td>
+<td>특정 webostv 미디어를 대상.</td>
 </tr>
 <tr>
 <td><code>command</code></td>
 <td>no</td>
-<td>Endpoint for the command, e.g. <code>media.controls/rewind</code>.  The full list of known endpoints is available at <a href="https://github.com/bendavid/aiopylgtv/blob/master/aiopylgtv/endpoints.py" rel="external nofollow">https://github.com/bendavid/aiopylgtv/blob/master/aiopylgtv/endpoints.py</a>
-</td>
+<td>엔드포인트 명령  예: <code>media.controls/rewind</code>.   <a href="https://github.com/bendavid/aiopylgtv/blob/master/aiopylgtv/endpoints.py" rel="external nofollow">https://github.com/bendavid/aiopylgtv/blob/master/aiopylgtv/endpoints.py</a>에서 알려진 엔드포인트 명령의 전체 목록을 사용할 수 있습니다</td>
 </tr>
 </tbody>
 </table>
-<h4>
-<a class="title-link" name="example" href="#example"></a> Example</h4>
+<h3>
+<a class="title-link" name="-example" href="#-example"></a> 사례 (Example)</h3>
 <pre><code class="language-yaml">script:
   home_button:
     sequence:
@@ -304,9 +332,9 @@ data:
           command: "media.controls/rewind"
 </code></pre>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The <code>webostv</code> notify platform allows you to send notifications to a LG webOS Smart TV.</p>
-<p>The icon can be overridden for individual notifications by providing a path to an alternative icon image to use:</p>
+<a class="title-link" name="-notifications" href="#-notifications"></a> 알림 (Notifications)</h2>
+<p><code>webostv</code> 알림 플랫폼을 통해 LG webOS 스마트 TV에 알림을 보낼 수 있습니다.</p>
+<p>사용할 대체 아이콘 이미지에 대한 경로를 제공하여 개별 알림에 대해 아이콘을 대체 할 수 있습니다. :</p>
 <pre><code class="language-yaml">automation:
   - alias: Front door motion
     trigger:

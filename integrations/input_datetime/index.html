@@ -103,12 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>input_datetime</code> integration allows the user to define date and time values
-that can be controlled via the frontend and can be used within automations and
-templates.</p>
-<p>To add three datetime inputs to your installation,
-one with both date and time, and one with date or time each,
-add the following lines to your <code>configuration.yaml</code>:</p>
+  <p><code>input_datetime</code> 통합구성요소를 통해 사용자는 날짜 및 시간 값을 정의 할 수 있습니다
+프론트 엔드를 통해 제어 할 수 있으며 자동화 및 템플릿 내에서 사용할 수 있습니다.</p>
+<p>설치에 3 개의 날짜 / 시간 입력을 추가하려면
+하나는 날짜,시간이 있고 다른 하나는 날짜 혹은 시간을 각각 입력 받으려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 input_datetime:
   both_date_and_time:
@@ -130,17 +128,17 @@ input_datetime:
   <dl class="">
 <dt>
 <a class="title-link" name="input_datetime" href="#input_datetime"></a> input_datetime</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Alias for the datetime input. Multiple entries are allowed.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>datetime 입력의 별칭. 여러 항목이 허용됩니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly name of the datetime input.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>datetime 입력의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="has_time" href="#has_time"></a> has_time</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to <code>true</code> if the input should have a time. At least one <code>has_time</code> or <code>has_date</code> must be defined.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>입력에 시간이 필요한 경우 ‘true’로 설정하십시오. 하나 이상의 <code>has_time</code> 또는 <code>has_date</code>가 정의되어 있어야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -149,7 +147,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="has_date" href="#has_date"></a> has_date</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to <code>true</code> if the input should have a date. At least one <code>has_time</code> or <code>has_date</code> must be defined.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>입력에 날짜가 필요한 경우 ‘true’로 설정하십시오. 하나 이상의 <code>has_time</code> 또는 <code>has_date</code>가 정의되어 있어야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -157,12 +155,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Icon to display in front of the input element in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 입력 요소 앞에 표시되는 아이콘.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="initial" href="#initial"></a> initial</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="datetime time date">datetime | time | date</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the initial value of this input, depending on <code>has_time</code> and <code>has_date</code>.</p>
+<p class="desc"><span class="type">(<span class="datetime time date">datetime | time | date</span>)</span><span class="required">(Optional)</span><span class="description"><p>입력의 초기값을 <code>has_time</code> 및 <code>has_date</code>에 맞춰 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -172,9 +170,10 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="attributes" href="#attributes"></a> Attributes</h3>
+<a class="title-link" name="-attributes" href="#-attributes"></a> 속성 (Attributes)</h3>
 <p>A datetime input entity’s state exports several attributes that can be useful in
-automations and templates.</p>
+automations and templates.
+datetime 입력 enttity의 상태는 자동화 및 템플릿에 유용한 여러 속성을 내보냅니다.</p>
 <table>
 <thead>
 <tr>
@@ -186,31 +185,31 @@ automations and templates.</p>
 <tr>
 <td><code>has_time</code></td>
 <td>
-<code>true</code> if this entity has a time.</td>
+<code>true</code> 해당 entity에 시간이 있을 경우.</td>
 </tr>
 <tr>
 <td><code>has_date</code></td>
 <td>
-<code>true</code> if this entity has a date.</td>
+<code>true</code> 해당 entity에 날짜가 있을 경우.</td>
 </tr>
 <tr>
 <td>
 <code>year</code><br><code>month</code><br><code>day</code>
 </td>
-<td>The year, month and day of the date.<br>(only available if <code>has_date: true</code>)</td>
+<td>날짜의 연, 월, 일.<br>(<code>has_date: true</code> 로 설정시 활용 가능)</td>
 </tr>
 <tr>
 <td><code>timestamp</code></td>
-<td>A timestamp representing the time held in the input.<br>(only available if <code>has_time: true</code>)</td>
+<td>입력에 소요된 시간을 나타내는 타임 스탬프입니다.<br>(<code>has_date: true</code> 로 설정시 활용 가능)</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="restore-state" href="#restore-state"></a> Restore State</h3>
-<p>If you set a valid value for <code>initial</code> this integration will start with state set to that value. Otherwise, it will restore the state it had prior to Home Assistant stopping.</p>
+<a class="title-link" name="--restore-state" href="#--restore-state"></a> 상태 복원 (Restore State)</h3>
+<p><code>initial</code>에 유효한 값을 설정하면이 연동은 상태가 해당 값으로 설정된 상태에서 시작됩니다. 그렇지 않으면, 홈어시스턴트 중지 이전의 상태를 복원합니다.</p>
 <h3>
-<a class="title-link" name="services" href="#services"></a> Services</h3>
-<p>Available service: <code>input_datetime.set_datetime</code> and <code>input_datetime.reload</code>.</p>
+<a class="title-link" name="-services" href="#-services"></a> 서비스 (Services)</h3>
+<p>사용가능한 서비스: <code>input_datetime.set_datetime</code> 및 <code>input_datetime.reload</code>.</p>
 <table>
 <thead>
 <tr>
@@ -223,27 +222,25 @@ automations and templates.</p>
 <tr>
 <td><code>date</code></td>
 <td><code>%Y-%m-%d</code></td>
-<td>This can be used to dynamically set the date.</td>
+<td>날짜를 동적으로 설정하는 데 사용할 수 있습니다.</td>
 </tr>
 <tr>
 <td><code>time</code></td>
 <td><code>%H:%M:%S</code></td>
-<td>This can be used to dynamically set the time.</td>
+<td>시간을 동적으로 설정하는 데 사용할 수 있습니다.</td>
 </tr>
 <tr>
 <td><code>datetime</code></td>
 <td><code>%Y-%m-%d %H:%M:%S</code></td>
-<td>This can be used to dynamically set both the date &amp; time.</td>
+<td>날짜와 시간을 모두 동적으로 설정하는 데 사용할 수 있습니다.</td>
 </tr>
 </tbody>
 </table>
-<p>To set both the date and time in the same call, use <code>date</code> and <code>time</code> together, or use <code>datetime</code> by itself. Using <code>datetime</code> has the advantage that both can be set using one template.</p>
-<p><code>input_dateteime.reload</code> service allows one to reload <code>input_datetime</code>’s configuration without restarting Home Assistant itself.</p>
+<p>같은 호출(call)에서 날짜와 시간을 모두 설정하려면 <code>date</code> 와 <code>time</code>을 함께 사용하거나 <code>datetime</code>을 단독으로 사용하십시오.</p>
+<p><code>input_dateteime.reload</code> 서비스를 통해 홈어시스턴트 자체를 다시 시작하지 않고도 <code>input_datetime</code>의 설정을 다시로드 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="automation-examples" href="#automation-examples"></a> Automation Examples</h2>
-<p>The following example shows the usage of the <code>input_datetime</code> as a trigger in an
-automation (note that you will need a
-<a href="/integrations/time_date">time sensor</a> elsewhere in your configuration):</p>
+<a class="title-link" name="--automation-examples" href="#--automation-examples"></a> 자동화 예시 (Automation Examples)</h2>
+<p>다음은 <code>input_datetime</code>을 자동화에서 트리거로 사용하는 예입니다. (<a href="/integrations/time_date">time sensor</a>가 설정에서 꼭 필요하게 될 것입니다. )</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 # Turns on bedroom light at the time specified.
 automation:
@@ -254,10 +251,8 @@ automation:
     service: light.turn_on
     entity_id: light.bedroom
 </code></pre>
-<p>To dynamically set the <code>input_datetime</code> you can call
-<code>input_datetime.set_datetime</code>. The values for <code>date</code> and <code>time</code> must be in a certain format for the call to be successful. (See service description above.)
-If you have a <code>datetime</code> object you can use its <code>strftime</code> method. Of if you have a timestamp you can use the <code>timestamp_custom</code> filter.
-The following example can be used in an automation rule:</p>
+<p><code>input_datetime</code>을 동적으로 설정하기 위해 <code>input_datetime.set_datetime</code>를 호출 할 수 있습니다. 호출이 성공하려면 <code>date</code>및 <code>time</code>의 값이 특정 형식이어야합니다. (위의 서비스 설명을 참조하십시오.)
+만일 <code>datetime</code> 객체가 있다면<code>strftime</code> 메소드를 사용할 수 있습니다. 혹은  타임 스탬프가 있다면 <code>timestamp_custom</code> 필터를 사용할 수 있습니다. 자동화 규칙에서 다음 예제를 사용할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 # Sets input_datetime to '05:30' when an input_boolean is turned on.
 automation:

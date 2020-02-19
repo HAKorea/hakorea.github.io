@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p>The <code>input_number</code> integration allows the user to define values that can be controlled via the frontend and can be used within conditions of automation. The frontend can display a slider, or a numeric input box. Changes to the slider or numeric input box generate state events. These state events can be utilized as <code>automation</code> triggers as well.</p>
-<p>To enable this input number in your installation, add the following lines to your <code>configuration.yaml</code>:</p>
+  <p><code>input_number</code> 통합구성요소를 통해 사용자는 프론트 엔드를 통해 제어할 수 있고 자동화 조건 내에서 사용할 수 있는 값을 정의할 수 있습니다. 프런트 엔드에는 슬라이더 또는 숫자 입력 상자가 표시 될 수 있습니다. 슬라이더 또는 숫자 입력 상자를 변경하면 상태 이벤트가 생성됩니다. 이러한 상태 이벤트는 <code>자동화</code> 트리거로도 사용할 수 있습니다.</p>
+<p>설치시 input number 를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 input_number:
   slider1:
@@ -127,34 +127,34 @@ input_number:
   <dl class="">
 <dt>
 <a class="title-link" name="input_number" href="#input_number"></a> input_number</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Alias for the input. Multiple entries are allowed.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>입력 별칭. 여러 항목이 허용됩니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="min" href="#min"></a> min</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>Minimum value.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>최소값.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max" href="#max"></a> max</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>Maximum value.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>최대값.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly name of the input.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>친숙한 입력 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="initial" href="#initial"></a> initial</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Initial value when Home Assistant starts.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트 시작시 초기 값.</p>
 </span></p>
 <p class="default">
 Default value: </p>
-<p>The value at shutdown</p>
+<p>종료시의 값</p>
 </dd>
 <dt>
 <a class="title-link" name="step" href="#step"></a> step</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Step value for the slider. Smallest value <code>0.001</code>.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>슬라이더의 단계 값. 최소값은 <code>0.001</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -163,7 +163,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="mode" href="#mode"></a> mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Can specify <code>box</code> or <code>slider</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치모드를 <code>box</code> 혹은 <code>slider</code> 로 특정 가능.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -171,19 +171,18 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Unit of measurement in which the value of the slider is expressed in.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>슬라이더 값이 표현되는 측정 단위.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Icon to display in front of the input element in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에서 입력 요소 앞에 표시되는 아이콘입니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h3>
 <a class="title-link" name="services" href="#services"></a> Services</h3>
-<p>This integration provides the following services to modify the state of the <code>input_number</code> and a service to reload the
-configuration without restarting Home Assistant itself.</p>
+<p>이 연동은 홈어시스턴트 자체를 다시 시작하지 않고 <code>input_number</code>의 상태를 수정하기 위해 다음 서비스같이 리로드(reload)할 수 있게 해줍니다.</p>
 <table>
 <thead>
 <tr>
@@ -198,37 +197,36 @@ configuration without restarting Home Assistant itself.</p>
 <td>
 <code>entity_id(s)</code><br><code>area_id(s)</code>
 </td>
-<td>Decrement the value of specific <code>input_number</code> entities by <code>step</code>
-</td>
+<td>특정 <code>input_number</code> 엔티티의 값을 <code>step</code> 만큼 줄입니다.</td>
 </tr>
 <tr>
 <td><code>increment</code></td>
 <td>
 <code>entity_id(s)</code><br><code>area_id(s)</code>
 </td>
-<td>Increment the value of specific <code>input_number</code> entities by <code>step</code>
-</td>
+<td>특정<code>input_number</code> 엔티티의 값을 <code>step</code> 만큼 늘립니다.</td>
 </tr>
 <tr>
 <td><code>reload</code></td>
 <td></td>
-<td>Reload <code>input_number</code> configuration</td>
+<td>
+<code>input_number</code> 설정 리로드(reload)</td>
 </tr>
 <tr>
 <td><code>set_value</code></td>
 <td>
 <code>value</code><br><code>entity_id(s)</code><br><code>area_id(s)</code>
 </td>
-<td>Set the value of specific <code>input_number</code> entities</td>
+<td>특정<code>input_number</code> 엔티티의 값을 설정.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="restore-state" href="#restore-state"></a> Restore State</h3>
-<p>If you set a valid value for <code>initial</code> this integration will start with state set to that value. Otherwise, it will restore the state it had prior to Home Assistant stopping.</p>
+<a class="title-link" name="--restore-state" href="#--restore-state"></a> 상태 복원 (Restore State)</h3>
+<p><code>initial</code>에 유효한 값을 설정하면이 연동은 상태가 해당 값으로 설정된 상태에서 시작됩니다. 그렇지 않으면, 홈어시스턴트 중지 이전의 상태를 복원합니다.</p>
 <h3>
 <a class="title-link" name="scenes" href="#scenes"></a> Scenes</h3>
-<p>To set the value of an input_number in a <a href="/integrations/scene/">Scene</a>:</p>
+<p>[Scene] (/ integrations / scene /)에서 input_number의 값을 설정 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 scene:
   - name: Example Scene
@@ -236,8 +234,8 @@ scene:
       input_number.example_number: 13
 </code></pre>
 <h2>
-<a class="title-link" name="automation-examples" href="#automation-examples"></a> Automation Examples</h2>
-<p>Here’s an example of <code>input_number</code> being used as a trigger in an automation.</p>
+<a class="title-link" name="--automation-examples" href="#--automation-examples"></a> 자동화 샘플 (Automation Examples)</h2>
+<p>다음은 자동화에서 트리거로 사용되는 <code>input_number</code>의 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry using 'input_number' as a trigger in an automation
 input_number:
   bedroom_brightness:
@@ -258,7 +256,7 @@ automation:
           entity_id: light.bedroom
           brightness: "{{ trigger.to_state.state | int }}"
 </code></pre>
-<p>Another code example using <code>input_number</code>, this time being used in an action in an automation.</p>
+<p><code>input_number</code>를 사용하는 또 다른 코드 예제로, 이번에는 자동화 작업에서 사용됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry using 'input_number' in an action in an automation
 input_select:
   scene_bedroom:
@@ -291,7 +289,7 @@ automation:
           entity_id: light.bedroom
           brightness: "{{ states('input_number.bedroom_brightness') | int }}"
 </code></pre>
-<p>Example of <code>input_number</code> being used in a bidirectional manner, both being set by and controlled by an MQTT action in an automation.</p>
+<p><code>input_number</code>가 양방향 방식으로 사용되며, 자동화에서 MQTT action에 의해 설정되고 제어되는 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry using 'input_number' in an action in an automation
 input_number:
   target_temp:
@@ -328,7 +326,7 @@ automation:
         retain: true
         payload: "{{ states('input_number.target_temp') | int }}"
 </code></pre>
-<p>Here’s an example of <code>input_number</code> being used as a delay in an automation.</p>
+<p>다음 <code>input_number</code>은 자동화에서 지연으로 사용되는 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry using 'input_number' as a delay in an automation
 input_number:
   minutes:

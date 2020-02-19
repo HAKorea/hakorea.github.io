@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Google Cloud Platform - 홈어시스턴트</title>
+    <title>구글 클라우드 플랫폼 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Google Cloud Platform integration.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/google_cloud/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Google Cloud Platform">
+    <meta property="og:title" content="구글 클라우드 플랫폼">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/google_cloud/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Google Cloud Platform">
+    <meta name="twitter:title" content="구글 클라우드 플랫폼">
     <meta name="twitter:description" content="Google Cloud Platform integration.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,45 +97,45 @@
   
   <header>
     <h1 class="title indent">
-      Google Cloud Platform
+      구글 클라우드 플랫폼
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>google_cloud</code> platform allows you to use <a href="https://cloud.google.com/" rel="external nofollow">Google Cloud Platform</a> API and integrate them into Home Assistant.</p>
+  <p><code>google_cloud</code> 플랫폼을 사용하면 <a href="https://cloud.google.com/" rel="external nofollow">구글 클라우드 플랫폼</a> API를 사용하여 홈어시스턴트에 통합 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use Google Cloud Platform, you need to provide <code>config</code> directory relative path of <a href="#obtaining-an-api-key"><code>API key</code></a> file you are going to use. Place it under <code>config</code> folder and set <code>key_file</code> parameter in <code>configuration.yaml</code>:</p>
+<a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
+<p>구글 클라우드 플랫폼을 사용하려면 사용할 [<code>API 키</code>] (# acquire-an-api-key) 파일의 <code>config</code> 디렉토리 상대 경로를 제공해야합니다. <code>config</code> 폴더 아래에 놓고 <code>configuration.yaml</code>의 key_file 매개 변수를 설정하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tts:
   - platform: google_cloud
     key_file: googlecloud.json
 </code></pre>
 <h2>
-<a class="title-link" name="obtaining-an-api-key" href="#obtaining-an-api-key"></a> Obtaining an API key</h2>
-<p>API key obtaining process described in corresponding documentation:</p>
+<a class="title-link" name="api--" href="#api--"></a> API 키 발급받기</h2>
+<p>해당 문서에 설명 된 API 키 발급 프로세스 :</p>
 <ul>
 <li><a href="https://cloud.google.com/text-to-speech/docs/quickstart-protocol" rel="external nofollow">Text-to-Speech</a></li>
 <li><a href="https://cloud.google.com/speech-to-text/docs/quickstart-protocol" rel="external nofollow">Speech-to-Text</a></li>
 <li><a href="https://developers.google.com/maps/documentation/geocoding/start" rel="external nofollow">Geocoding</a></li>
 </ul>
-<p>Basic instruction for all APIs:</p>
+<p>모든 API에 대한 기본 지침 :</p>
 <ol>
 <li>
-<p>Visit <a href="https://console.cloud.google.com/cloud-resource-manager" rel="external nofollow">Cloud Resource Manager</a>.</p>
+<p><a href="https://console.cloud.google.com/cloud-resource-manager" rel="external nofollow">Cloud Resource Manager</a> 방문.</p>
 </li>
 <li>
-<p>Click <code>CREATE PROJECT</code> button at the top.</p>
+<p>맨위에 <code>CREATE PROJECT</code> 버튼 클릭</p>
 </li>
 <li>
-<p>Specify convenient <code>Project name</code> and click <code>CREATE</code> button.</p>
+<p><code>Project name</code>을 만들어서 <code>Create</code> 버튼을 클릭하십시오.</p>
 </li>
 <li>
-<p><a href="https://cloud.google.com/billing/docs/how-to/modify-project" rel="external nofollow">Make sure that billing is enabled for your Google Cloud Platform project</a>.</p>
+<p><a href="https://cloud.google.com/billing/docs/how-to/modify-project" rel="external nofollow">Google Cloud Platform 프로젝트에 결제가 사용 설정되어 있는지 확인</a>.</p>
 </li>
 <li>
-<p>Enable needed Cloud API visiting one of the links below or <a href="https://console.cloud.google.com/apis/library" rel="external nofollow">APIs library</a>, selecting your <code>Project</code> from the dropdown list and clicking the <code>Continue</code> button:</p>
+<p>아래 링크 중 하나 <a href="https://console.cloud.google.com/apis/library" rel="external nofollow">API 라이브러리</a>를 방문하여 드롭 다운 목록에서 <code>Project</code>를 선택하고 <code>Continue</code> 버튼을 클릭하여 필요한 Cloud API를 활성화하십시오.</p>
 <ul>
 <li><a href="https://console.cloud.google.com/flows/enableapi?apiid=texttospeech.googleapis.com" rel="external nofollow">Text-to-Speech</a></li>
 <li><a href="https://console.cloud.google.com/flows/enableapi?apiid=speech.googleapis.com" rel="external nofollow">Speech-to-Text</a></li>
@@ -143,27 +143,33 @@ tts:
 </ul>
 </li>
 <li>
-<p>Set up authentication:</p>
+<p>인증 설정 :</p>
 <ol>
-<li>Visit <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">this link</a>
-</li>
+<li>
+<a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">this link</a>를 방문하십시오.</li>
 <li>From the <code>Service account</code> list, select <code>New service account</code>.</li>
+<li>
+<code>Service account</code> 목록에서 <code>New service account</code> 을 선택하십시오.</li>
 <li>In the <code>Service account name</code> field, enter any name.</li>
+<li>
+<code>Service account name</code> 필드에 이름을 입력하십시오.</li>
 </ol>
-<p>If you are requesting Text-to-Speech API key:</p>
+<p>텍스트 음성 변환 API 키를 요청하는 경우 :</p>
 <ol start="4">
-<li>Don’t select a value from the Role list. <strong>No role is required to access this service</strong>.</li>
-<li>Click <code>Create</code>. A note appears, warning that this service account has no role.</li>
-<li>Click <code>Create without role</code>. A JSON file that contains your <code>API key</code> downloads to your computer.</li>
+<li>역할(Role) 목록에서 값을 선택하지 마십시오. <strong>이 서비스에 액세스하는 데 역할(Role)이 필요하지 않습니다</strong>.</li>
+<li>
+<code>Create</code> 를 클릭. 이 서비스 계정에는 역할(Role)이 없다는 경고 메시지가 나타납니다.</li>
+<li>
+<code>Create without role</code>을 클릭. <code>API 키</code>가 포함 된 JSON 파일이 컴퓨터에 다운로드됩니다..</li>
 </ol>
 </li>
 </ol>
 <h2>
-<a class="title-link" name="google-cloud-text-to-speech" href="#google-cloud-text-to-speech"></a> Google Cloud Text-to-Speech</h2>
-<p><a href="https://cloud.google.com/text-to-speech/" rel="external nofollow">Google Cloud Text-to-Speech</a> converts text into human-like speech in more than 100 voices across 20+ languages and variants. It applies groundbreaking research in speech synthesis (WaveNet) and Google’s powerful neural networks to deliver high-fidelity audio. With this easy-to-use API, you can create lifelike interactions with your users that transform customer service, device interaction, and other applications.</p>
+<a class="title-link" name="--text-to-speech" href="#--text-to-speech"></a> 구글 클라우드 Text-to-Speech</h2>
+<p><a href="https://cloud.google.com/text-to-speech/" rel="external nofollow">구글 클라우드 Text-to-Speech</a>는 20 개 이상의 언어 및 변형에서 100 개 이상의 음성으로 텍스트를 사람과 유사한 음성으로 변환합니다. 이 기술은 음성 합성 (WaveNet)과 Google의 강력한 신경망에 대한 혁신적인 연구를 적용하여 고음질 오디오를 제공합니다. 이렇게 사용하기 쉬운 API를 사용하면 고객 서비스, 장치 상호 작용 및 기타 응용 프로그램을 변화시키는 사용자와 활발한 상호 작용을 만들 수 있습니다.</p>
 <h3>
-<a class="title-link" name="pricing" href="#pricing"></a> Pricing</h3>
-<p>The Cloud Text-to-Speech API is priced monthly based on the amount of characters to synthesize into audio sent to the service.</p>
+<a class="title-link" name="-pricing" href="#-pricing"></a> 가격 (Pricing)</h3>
+<p>Cloud Text-to-Speech API는 서비스로 전송되는 오디오로 합성 할 문자 수를 기준으로 매월 가격이 책정됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -175,30 +181,30 @@ tts:
 <tbody>
 <tr>
 <td>Standard (non-WaveNet) voices</td>
-<td>0 to 4 million characters</td>
-<td>$4.00 USD / 1 million characters</td>
+<td>0 to 4 백만글자</td>
+<td>$4.00 USD / 1 백만글자</td>
 </tr>
 <tr>
 <td>WaveNet voices</td>
-<td>0 to 1 million characters</td>
-<td>$16.00 USD / 1 million characters</td>
+<td>0 to 1 백만글자</td>
+<td>$16.00 USD / 1 백만글자</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="text-to-speech-configuration" href="#text-to-speech-configuration"></a> Text-to-Speech configuration</h3>
+<a class="title-link" name="text-to-speech-" href="#text-to-speech-"></a> Text-to-Speech 설정</h3>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="key_file" href="#key_file"></a> key_file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The <a href="#obtaining-an-api-key"><code>API key</code></a> file to use with Google Cloud Platform. If not specified <code>os.environ['GOOGLE_APPLICATION_CREDENTIALS']</code> path will be used.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Google Cloud Platform과 함께 사용할 [<code>API 키</code>](# acquire-an-api-key) 파일입니다. 지정하지 않으면 <code>os.environ['GOOGLE_APPLICATION_CREDENTIALS']</code>경로가 사용됩니다</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="language" href="#language"></a> language</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default language of the voice, e.g. <code>en-US</code>. Supported languages, genders and voices listed <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>. Also there are extra not documented but supported languages (see dropdown <a href="https://cloud.google.com/text-to-speech/#streaming_demo_section" rel="external nofollow">here</a>).</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>음성의 기본 언어는 <code>en-US</code>. 지원되는 언어, 성별 및 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>. 따라서 문서화되지 않았지만 지원되는 언어가 추가로 있습니다. (드롭다운을 <a href="https://cloud.google.com/text-to-speech/#streaming_demo_section" rel="external nofollow">here</a>).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -207,7 +213,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="gender" href="#gender"></a> gender</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default gender of the voice, e.g. <code>male</code>. Supported languages, genders and voices listed <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>음성의 기본 성별은 <code>male</code>. 지원되는 언어, 성별 및 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -215,12 +221,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="voice" href="#voice"></a> voice</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default voice name, e.g. <code>en-US-Wavenet-F</code>. Supported languages, genders and voices listed <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>. <strong>Important! This parameter will override <code>language</code> and <code>gender</code> parameters if set</strong>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 목소리는 <code>en-US-Wavenet-F</code>. 지원되는 언어, 성별 및 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>. <strong>중요! 이 매개 변수는 설정된 경우 <code>language</code> 및 <code>gender</code> 매개 변수를 대체합니다.</strong>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="encoding" href="#encoding"></a> encoding</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default audio encoder. Supported encodings are <code>ogg_opus</code>, <code>mp3</code> and <code>linear16</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 오디오 인코더. 지원되는 인코딩은 <code>ogg_opus</code>, <code>mp3</code> 그리고 <code>linear16</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -229,7 +235,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="speed" href="#speed"></a> speed</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default rate/speed of the voice, in the range [0.25, 4.0]. 1.0 is the normal native speed supported by the specific voice. 2.0 is twice as fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[0.25, 4.0] 범위 내에서 음성의 속도. 1.0은 특정 음성에서 지원되는 기본 고유 속도입니다. 2.0은 두 배 빠르며, 0.5는 반의 속도입니다. unset (0.0) 인 경우 기본적으로 기본 1.0 속도입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -238,7 +244,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="pitch" href="#pitch"></a> pitch</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default pitch of the voice, in the range [-20.0, 20.0]. 20 means increase of 20 semitones from the original pitch. -20 means decrease of 20 semitones from the original pitch.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[-20.0, 20.0] 범위에서 음색의 기본 피치. 20은 원래 피치에서 20 반음이 증가 함을 의미합니다. -20은 원래 피치에서 20 반음의 감소를 의미합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -247,7 +253,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="gain" href="#gain"></a> gain</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default volume gain (in dB) of the voice, in the range [-96.0, 16.0]. If unset, or set to a value of 0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB) will play at approximately half the amplitude of the normal native signal amplitude. A value of +6.0 (dB) will play at approximately twice the amplitude of the normal native signal amplitude. Strongly recommend not to exceed +10 (dB) as there’s usually no effective increase in loudness for any value greater than that.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[-96.0, 16.0] 범위에서 음색의 기본 볼륨 게인 (dB)입니다.설정하지 않거나 0.0 (dB) 값으로 설정하면 정상적인 기본 신호 진폭에서 재생됩니다. -6.0 (dB) 값은 일반 기본 신호 진폭의 진폭의 약 절반에서 재생됩니다. +6.0 (dB) 값은 일반 기본 신호 진폭의 진폭의 약 2 배로 재생됩니다. 일반적으로 이보다 큰 값은 효과적으로 음량이 증가하지 않으므로 +10 (dB)을 초과하지 않는 것이 좋습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -256,7 +262,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="profiles" href="#profiles"></a> profiles</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>An identifier which selects ‘audio effects’ profiles that are applied on (post synthesized) text to speech. Effects are applied on top of each other in the order they are given. Supported profile ids listed <a href="https://cloud.google.com/text-to-speech/docs/audio-profiles" rel="external nofollow">here</a>.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>텍스트에 음성으로 (포스트 합성된) 적용되는 ‘오디오 효과’ 프로파일을 선택하는 식별자입니다. 효과는 주어진 순서대로 서로 그 위에 적용됩니다. 지원되는 프로필 ID는 <a href="https://cloud.google.com/text-to-speech/docs/audio-profiles" rel="external nofollow">here</a>에 나열되어 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -265,8 +271,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="full-configuration-example" href="#full-configuration-example"></a> Full configuration example</h3>
-<p>The Google Cloud Text-to-Speech configuration can look like:</p>
+<a class="title-link" name="---full-configuration-example" href="#---full-configuration-example"></a> 전체 설정의 예 (Full configuration example)</h3>
+<p>Google 클라우드 텍스트 음성 변환 설정은 다음과 같습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tts:
   - platform: google_cloud
