@@ -107,21 +107,20 @@
 <h2>
 <a class="title-link" name="----" href="#----"></a> 홈어시스턴트 클라우드를 통한 자동 설정</h2>
 <p><a href="/cloud/">홈어시스턴트 클라우드</a>를 사용하면, 클릭 몇번만으로 여러분의 홈어시스턴트와 구글 어시스턴트를 연동할 수 있습니다. 홈어시스턴트 클라우스에서는 다이나믹DNS나 SSL인증서 그리고 공유기의 포터 연동에 대해 신경쓰지 않아도 되고, 단지 UI를 통해 로그인하면 클라우드와 보안 접속이 가능합니다. 홈어시스턴트 클라우드는 정기구독료를 내야 하며 30일 무료체험을 해볼 수 있습니다.</p>
-<p>홈어시스턴트 사용자는 이 <a href="https://www.nabucasa.com/config/google_assistant/" rel="external nofollow">문서</a>를 참고하세요.</p>
+<p>홈어시스턴트 클라우드 사용자는 이 <a href="https://www.nabucasa.com/config/google_assistant/" rel="external nofollow">문서</a>를 참고하세요.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 수동으로 설정</h2>
 <p>홈어시스턴트 클라우드가 아닌 구글 어시스턴트 통합구성요소를 수동으로 설정하려면 구글의 요구사항과 어시스턴트 앱 설정 과정에 조금 복잡한 과정을 거쳐야 합니다.</p>
 <div class="note warning">
 <p>구글 어시스턴트를 사용하기 위해서는 홈어시스턴트에 <a href="/docs/configuration/remote/">외부 접속 가능한 도메인명과 SSL 인증서 설치</a>가 필요합니다. 이 설정을 하지 않았다면 먼저 설정해주셔야 합니다. 도메인을 DNS에 설정하고 구글이 여러분의 도메인이 정상적인지 체크하기 위해 보통 48시간 정도 시간이 소요됩니다.</p>
 </div>
-<p>여러분의 기기를 구글 어시스턴트와 연결하기 위해서는 <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">구글 서비스 계정을 생성</a>해야 합니다(<a href="#troubleshooting-the-request_sync-service">아래 참고</a>).
-구글 서비스 계정을 만들지 않으면  <code>google_assistant.request_sync</code> 서비스를 사용할 수 없습니다. 이것은 “오케이 구글, sync my devices”라는 명령으로 여러분의 HA에 연동된 기기를 구글 어시스턴트가 사용하도록 업데이트할 수 있게 합니다. 한번 설정하면 이 명령을 통해 홈어시스턴트에 새로운 기기를 추가하고 구글 어시스턴트가 제어할 수 있게 만듭니다. 이에 대해서는 2번 과정을 참고하세요.</p>
+<p>여러분의 기기를 구글 어시스턴트와 연결하기 위해서는 <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">구글 서비스 계정을 생성</a>해야 합니다(<a href="#troubleshooting-the-request_sync-service">아래 참고</a>). 구글 서비스 계정을 만들지 않으면  <code>google_assistant.request_sync</code> 서비스를 사용할 수 없습니다. 이것은 “오케이 구글, sync my devices”라는 명령으로 여러분의 HA에 연동된 기기를 구글 어시스턴트가 사용하도록 업데이트할 수 있게 합니다. 한번 설정하면 이 명령을 통해 홈어시스턴트에 새로운 기기를 추가하고 구글 어시스턴트가 제어할 수 있게 만듭니다.</p>
 <ol>
 <li>
 <p><a href="https://console.actions.google.com/" rel="external nofollow">Actions on Google console</a>에서 Create a new project를 클릭하여 여러분의 프로젝트를 만드세요.</p>
 <ol>
 <li>
-<p>Add/Import a project 로 프로젝트를 생성하고 적절한 프로젝트명을 입력합니다.</p>
+<p>New Project를 선택하여 새로운 프로젝트를 생성하고 적절한 프로젝트명을 입력합니다.</p>
 </li>
 <li>
 <p>다음 화면에서 <code>Smart Home</code> 카드를 선택합니다.
