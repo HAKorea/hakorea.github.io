@@ -103,15 +103,16 @@
   <hr class="divider">
   
 
-  <p>This integration allows you to track and control various light bulbs. Read the integration documentation for your particular light hardware to learn how to enable it.</p>
+  <p>이 통합구성요소로 다양한 조명을 추적하고 제어 할 수 있습니다. 특정 조명 하드웨어에 대한 설명서를 읽고 이를 활성화하는 방법을 배우십시오.</p>
 <h3>
-<a class="title-link" name="default-turn-on-values" href="#default-turn-on-values"></a> Default turn-on values</h3>
-<p>To set the default color and brightness values when the light is turned on, create a custom <code>light_profiles.csv</code> (as described below in the <code>profile</code> attribute of <code>light.turn_on</code>).</p>
-<p>The <code>.default</code> suffix should be added to the entity identifier of each light to define a default value, e.g., for <code>light.ceiling_2</code> the <code>id</code> field is <code>light.ceiling_2.default</code>. To define a default for all lights, the identifier <code>group.all_lights.default</code> can be used. Individual settings always supercede the <code>all_lights</code> default setting.</p>
+<a class="title-link" name="---default-turn-on-values" href="#---default-turn-on-values"></a> 기본 켜기 값 (Default turn-on values)</h3>
+<p>조명이 켜질 때 기본 색상 및 밝기 값을 설정하려면 사용자정의 light_profiles.csv를 만드십시오. (
+<code>light.turn_on</code>의 <code>profile</code> 속성에서 아래에 설명 된대로)</p>
+<p><code>.default</code> 접미사는 각 조명의 엔티티 식별자에 추가되어 기본값을 정의해야합니다 (예 : <code>light.ceiling_2</code>의 <code>id</code> 필드는<code>light.ceiling_2.default</code>입니다). 모든 조명의 기본값을 정의하기 위해 식별자 <code>group.all_lights.default</code>를 사용할 수 있습니다. 개별 설정은 항상 <code>all_lights</code> 기본 설정보다 우선합니다.</p>
 <h3>
-<a class="title-link" name="service-lightturn_on" href="#service-lightturn_on"></a> Service light.turn_on</h3>
-<p>Turns one light on or multiple lights on using <a href="/integrations/group/">groups</a>.</p>
-<p>Most lights do not support all attributes. You can check the integration documentation of your particular light for hints, but in general, you will have to try things out and see what works.</p>
+<a class="title-link" name="lightturn_on-" href="#lightturn_on-"></a> light.turn_on 서비스</h3>
+<p><a href="/integrations/group/">groups</a>를 사용하여 하나의 조명을 켜거나 여러 개의 조명을 켭니다.</p>
+<p>대부분의 라이트는 모든 속성을 지원하지는 않습니다. 특정 조명의 통합구성요소 문서에서 힌트를 확인할 수 있지만 일반적으로 문제를 해결하고 작동하는 것을 확인해야합니다.</p>
 <table>
 <thead>
 <tr>
@@ -124,77 +125,79 @@
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>String or list of strings that point at <code>entity_id</code>s of lights. To target all the lights use all as <code>entity_id</code>.</td>
+<td>
+<code>entity_id</code>의 조명을 가리키는 문자열 또는 문자열 목록. 모든 조명을 대상으로하려면 <code>entity_id</code>로 모두 사용하십시오.</td>
 </tr>
 <tr>
 <td><code>transition</code></td>
 <td>yes</td>
-<td>Number that represents the time (in seconds) the light should take to transition to the new state.</td>
+<td>조명이 새 상태로 전환되는 데 걸리는 시간 (초)을 나타내는 숫자입니다.</td>
 </tr>
 <tr>
 <td><code>profile</code></td>
 <td>yes</td>
-<td>String with the name of one of the <a href="https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/light/light_profiles.csv" rel="external nofollow">built-in profiles</a> (relax, energize, concentrate, reading) or one of the custom profiles defined in <code>light_profiles.csv</code> in the current working directory.  Light profiles define an xy color and a brightness. If a profile is given and a brightness then the profile brightness will be overwritten.</td>
+<td>
+<a href="https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/light/light_profiles.csv" rel="external nofollow">내장 프로파일</a> 중 하나의 이름을 가진 문자열 (휴식, 활력, 집중력, 읽기) 이거나 현재 작업 디렉토리의 <code>light_profiles.csv</code>에 정의 된 사용자 정의 프로파일 중 하나입니다. 조명 프로파일은 xy 색상과 밝기를 정의합니다. 프로파일이 제공되고 밝기가 설정되면 프로파일 밝기를 덮어 씁니다.</td>
 </tr>
 <tr>
 <td><code>hs_color</code></td>
 <td>yes</td>
-<td>A list containing two floats representing the hue and saturation of the color you want the light to be. Hue is scaled 0-360, and saturation is scaled 0-100.</td>
+<td>빛의 색조와 채도를 나타내는 두 개의 floats을 포함하는 목록입니다. 색조는 0-360으로 조정되고 채도는 0-100으로 조정됩니다.</td>
 </tr>
 <tr>
 <td><code>xy_color</code></td>
 <td>yes</td>
-<td>A list containing two floats representing the xy color you want the light to be. Two comma-separated floats that represent the color in XY. You can find a great chart here: <a href="https://developers.meethue.com/documentation/core-concepts#color_gets_more_complicated" rel="external nofollow">Hue Color Chart</a>.</td>
+<td>빛을 원하는 xy 색상을 나타내는 두 개의 floats을 포함하는 목록입니다. XY의 색상을 나타내는 두 개의 쉼표로 구분 된 floats. 색조 차트는 다음에서 훌륭한 차트를 찾을 수 있습니다. : <a href="https://developers.meethue.com/documentation/core-concepts#color_gets_more_complicated" rel="external nofollow">Hue Color Chart</a>.</td>
 </tr>
 <tr>
 <td><code>rgb_color</code></td>
 <td>yes</td>
-<td>A list containing three integers between 0 and 255 representing the RGB color you want the light to be. Three comma-separated integers that represent the color in RGB, within square brackets. Note that the specified RGB value will not change the light brightness, only the color.</td>
+<td>조명의 RGB 색상을 나타내는 0에서 255 사이의 3 개의 정수를 포함하는 목록입니다. 대괄호 안에 RGB로 색상을 나타내는 세 개의 쉼표로 구분 된 정수. 지정된 RGB 값은 조명의 밝기를 변경하지 않고 색상 만 변경합니다.</td>
 </tr>
 <tr>
 <td><code>white_value</code></td>
 <td>yes</td>
-<td>Integer between 0 and 255 for how bright a dedicated white LED should be.</td>
+<td>전용 백색 LED의 밝기를 나타내는 0에서 255 사이의 정수입니다.</td>
 </tr>
 <tr>
 <td><code>color_temp</code></td>
 <td>yes</td>
-<td>An integer in mireds representing the color temperature you want the light to be.</td>
+<td>빛의 색 온도를 나타내는 mireds의 정수입니다.</td>
 </tr>
 <tr>
 <td><code>kelvin</code></td>
 <td>yes</td>
-<td>Alternatively, you can specify the color temperature in Kelvin.</td>
+<td>또는 색 온도를 켈빈으로 지정할 수 있습니다.</td>
 </tr>
 <tr>
 <td><code>color_name</code></td>
 <td>yes</td>
-<td>A human-readable string of a color name, such as <code>blue</code> or <code>goldenrod</code>. All <a href="https://www.w3.org/TR/css-color-3/#svg-color" rel="external nofollow">CSS3 color names</a> are supported.</td>
+<td>색 이름의 사람이 읽을 수 있는 문자열 색상 이름, <code>blue</code> 또는 <code>goldenrod</code>. <a href="https://www.w3.org/TR/css-color-3/#svg-color" rel="external nofollow">CSS3 color names</a> 지원.</td>
 </tr>
 <tr>
 <td><code>brightness</code></td>
 <td>yes</td>
-<td>Integer between 0 and 255 for how bright the light should be, where 0 means the light is off, 1 is the minimum brightness and 255 is the maximum brightness supported by the light.</td>
+<td>조명의 밝기를 나타내는 0에서 255 사이의 정수입니다. 여기서 0은 조명이 꺼져 있음을 의미하고 1은 최소 밝기이고 255는 조명이 지원하는 최대 밝기입니다.</td>
 </tr>
 <tr>
 <td><code>brightness_pct</code></td>
 <td>yes</td>
-<td>Alternatively, you can specify brightness in percent (a number between 0 and 100), where 0 means the light is off, 1 is the minimum brightness and 100 is the maximum brightness supported by the light.</td>
+<td>또는 밝기를 백분율 (0과 100 사이의 숫자)로 지정할 수 있습니다. 여기서 0은 조명이 꺼져 있음을 의미하고 1은 최소 밝기이고 100은 조명이 지원하는 최대 밝기입니다.</td>
 </tr>
 <tr>
 <td><code>flash</code></td>
 <td>yes</td>
-<td>Tell light to flash, can be either value <code>short</code> or <code>long</code>.</td>
+<td>빛이 깜박이도록 합니다. <code>short</code> 혹은 <code>long</code>.</td>
 </tr>
 <tr>
 <td><code>effect</code></td>
 <td>yes</td>
-<td>Applies an effect such as <code>colorloop</code> or <code>random</code>.</td>
+<td>효과를 적용합니다.  <code>colorloop</code> 혹은 <code>random</code>.</td>
 </tr>
 </tbody>
 </table>
 <div class="note">
-<p>In order to apply attributes to an entity, you will need to add <code>data:</code> to the configuration. See example below</p>
+<p>엔터티에 속성을 적용 하려면, 설정에 <code>data:</code>룰 추가해야 합니다. 아래 예를 참조하십시오</p>
 </div>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 automation:
@@ -225,8 +228,8 @@ automation:
         rgb_color: [255,0,0]
 </code></pre>
 <h3>
-<a class="title-link" name="service-lightturn_off" href="#service-lightturn_off"></a> Service light.turn_off</h3>
-<p>Turns one or multiple lights off.</p>
+<a class="title-link" name="lightturn_off-" href="#lightturn_off-"></a> light.turn_off 서비스</h3>
+<p>하나 또는 여러 개의 조명을 끕니다.</p>
 <table>
 <thead>
 <tr>
@@ -239,20 +242,19 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>String or list of strings that point at <code>entity_id</code>s of lights. To target all the lights use all as <code>entity_id</code>.</td>
+<td>조명의 <code>entity_id</code>를 가리키는 문자열 또는 문자열 목록. 모든 라이트를 대상으로하려면 모두 <code>entity_id</code>로 사용하십시오</td>
 </tr>
 <tr>
 <td><code>transition</code></td>
 <td>yes</td>
-<td>Integer that represents the time the light should take to transition to the new state in seconds.</td>
+<td>조명이 새 상태로 전환하는 데 걸리는 시간을 초 단위로 나타내는 정수입니다.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-lighttoggle" href="#service-lighttoggle"></a> Service light.toggle</h3>
-<p>Toggles the state of one or multiple lights using <a href="/integrations/group/">groups</a>.
-Takes the same arguments as <a href="#service-lightturn_on"><code>turn_on</code></a> service.</p>
-<p><em>Note</em>: If <code>light.toggle</code> is used for a group of lights, it will toggle the individual state of each light.</p>
+<a class="title-link" name="lighttoggle-" href="#lighttoggle-"></a> light.toggle 서비스</h3>
+<p>여러개의 조명 <a href="/integrations/group/">groups</a>혹은 하나 이상의 조명 상태를 토글합니다. <a href="#service-lightturn_on"><code>turn_on</code></a>서비스와 동일한 인수를 취합니다.</p>
+<p><em>참고</em> : <code>light.toggle</code>이 조명 그룹에 사용되는 경우, 각 조명의 개별 상태를 전환합니다</p>
 
 
 </article>

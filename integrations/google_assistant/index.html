@@ -1,0 +1,508 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>구글 어시스턴트 - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Setup for Google Assistant integration">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/google_assistant/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="구글 어시스턴트">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/google_assistant/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Setup for Google Assistant integration">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="구글 어시스턴트">
+    <meta name="twitter:description" content="Setup for Google Assistant integration">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li><a href='#' class='show-search'><i class="icon-search"></i></a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/_integrations/google_assistant.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      구글 어시스턴트
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p><code>google_assistant</code> 통합구성요소는 스마트폰, 태블릿 또는 구글 홈의 구글 어시스턴트를 통해서 장치들을 제어할 수 있게 해줍니다.</p>
+<h2>
+<a class="title-link" name="----" href="#----"></a> 홈어시스턴트 클라우드를 통한 자동 설정</h2>
+<p><a href="/cloud/">홈어시스턴트 클라우드</a>를 사용하면, 클릭 몇번만으로 여러분의 홈어시스턴트와 구글 어시스턴트를 연동할 수 있습니다. 홈어시스턴트 클라우스에서는 다이나믹DNS나 SSL인증서 그리고 공유기의 포터 연동에 대해 신경쓰지 않아도 되고, 단지 UI를 통해 로그인하면 클라우드와 보안 접속이 가능합니다. 홈어시스턴트 클라우드는 정기구독료를 내야 하며 30일 무료체험을 해볼 수 있습니다.</p>
+<p>홈어시스턴트 사용자는 이 <a href="https://www.nabucasa.com/config/google_assistant/" rel="external nofollow">문서</a>를 참고하세요.</p>
+<h2>
+<a class="title-link" name="-" href="#-"></a> 수동으로 설정</h2>
+<p>홈어시스턴트 클라우드가 아닌 구글 어시스턴트 통합구성요소를 수동으로 설정하려면 구글의 요구사항과 어시스턴트 앱 설정 과정에 조금 복잡한 과정을 거쳐야 합니다.</p>
+<div class="note warning">
+<p>구글 어시스턴트를 사용하기 위해서는 홈어시스턴트에 <a href="/docs/configuration/remote/">외부 접속 가능한 도메인명과 SSL 인증서 설치</a>가 필요합니다. 이 설정을 하지 않았다면 먼저 설정해주셔야 합니다. 도메인을 DNS에 설정하고 구글이 여러분의 도메인이 정상적인지 체크하기 위해 보통 48시간 정도 시간이 소요됩니다.</p>
+</div>
+<p>여러분의 기기를 구글 어시스턴트와 연결하기 위해서는 <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">구글 서비스 계정을 생성</a>해야 합니다(<a href="#troubleshooting-the-request_sync-service">아래 참고</a>).
+구글 서비스 계정을 만들지 않으면  <code>google_assistant.request_sync</code> 서비스를 사용할 수 없습니다. 이것은 “오케이 구글, sync my devices”라는 명령으로 여러분의 HA에 연동된 기기를 구글 어시스턴트가 사용하도록 업데이트할 수 있게 합니다. 한번 설정하면 이 명령을 통해 홈어시스턴트에 새로운 기기를 추가하고 구글 어시스턴트가 제어할 수 있게 만듭니다. 이에 대해서는 2번 과정을 참고하세요.</p>
+<ol>
+<li>
+<p><a href="https://console.actions.google.com/" rel="external nofollow">Actions on Google console</a>에서 Create a new project를 클릭하여 여러분의 프로젝트를 만드세요.</p>
+<ol>
+<li>
+<p>Add/Import a project 로 프로젝트를 생성하고 적절한 프로젝트명을 입력합니다.</p>
+</li>
+<li>
+<p>다음 화면에서 <code>Smart Home</code> 카드를 선택합니다.
+<img src="/images/integrations/google_assistant/gha01.png" alt="Screenshot: Smart Home Card"><br><br></p>
+</li>
+<li>
+<p>다음 화면 중간에 <code>Build your Action</code> 에서 <code>Add Action(s)</code>을 클릭합니다. <code>Fulfillment URL</code> 아래 주소입력란에 본인의 홈어시스턴트 외부 접속 도메인을 <code>https://[YOUR HOME ASSISTANT URL:PORT]/api/google_assistant</code> 과 같은 형식으로 입력합니다. 외부포트가 없으면 <code>:PORT</code>는 생략합니다.
+<img src="/images/integrations/google_assistant/gha02.png" alt="Screenshot: Add Actions"><br><br></p>
+</li>
+<li>
+<p>우측 상단 <code>Save</code> 버튼을 누르면 설정이 끝납니다.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>이어지는 과정으로 좌측 메뉴에서 <code>Account linking</code>을 선택합니다. 이것은 홈어시스턴트와 연동하는데 필요한 과정입니다.</p>
+<ol>
+<li>
+<p>Client ID에 <code>https://oauth-redirect.googleusercontent.com/</code>을 복사해서 붙여넣습니다. 마지막에 붙은 슬래시( / )를 제거하면 안됩니다!<img src="/images/integrations/google_assistant/gha04.png" alt="Screenshot: Account Linking"><br><br></p>
+</li>
+<li>
+<p>Client Secret은 아무거나 입력해도 됩니다. 홈어시스턴트에서는 사용하지 않습니다.</p>
+</li>
+<li>
+<p>Authorization URL은 <code>https://[YOUR HOME ASSISTANT URL:PORT]/auth/authorize</code> 와 같이 입력합니다. 본인의 홈어시스턴트 URL을 적용해서 입력합니다.</p>
+</li>
+<li>
+<p>Token URL은 <code>https://[YOUR HOME ASSISTANT URL:PORT]/auth/token</code>와 같은 형식으로 입력고 <code>Next</code> 버튼을 누릅니다.</p>
+</li>
+<li>
+<p>스코프 설정에서 <code>email</code>을 입력하고 <code>Add scope</code>를 눌러 추가된 입력란에 <code>name</code>이라고 씁니다. <img src="/images/integrations/google_assistant/gha05.png" alt="Screenshot: Add Scope"><br><br></p>
+</li>
+<li>
+<p><code>Google to transmit clientID and secret via HTTP basic auth header</code>를 <strong>절대로</strong> 체크하지 마시고 <code>Next</code> 버튼을 누릅니다.</p>
+</li>
+<li>
+<p><code>Save</code> 버튼을 눌러 저장합니다.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>상단의 <code>Test</code> 버튼을 눌러 테스트 앱을 생성합니다. 이때
+Enable Web &amp; App Activity 팝업 화면이 나오면 Visit Activity Controls을 눌러 모든 체크박스를 클릭해서 동의해줍니다. 이것은 구글 어시스턴트를 사용하기 위해 웹과 앱에서 활동 추적기능을 켜두는 것입니다.<img src="/images/integrations/google_assistant/gha06.png" alt="Screenshot: Web &amp; App Activity 설정 1"><br><br><img src="/images/integrations/google_assistant/gha07.png" alt="Screenshot: Web &amp; App Activity 설정 2"><br><br></p>
+</li>
+<li>
+<p><code>google_assistant</code> 통합구성요소를  <code>configuration.yaml</code> 파일에 추가하고 홈어시스턴트를 재시동합니다. 아래 <a href="#configuration">설정 가이드</a>를 참고하세요.</p>
+</li>
+<li>
+<p>(스마트폰 앱의 버전마다 화면이 다를 수 있습니다) 구글홈 앱에서 <code>Settings</code>을 선택합니다.</p>
+</li>
+<li>
+<p>우측 상단에 <code>+</code> 버튼을 누르고 <code>+ 기기 설정(Set up device)</code>를 클릭하면 <code>새 기기 설정</code>, <code>이미 설정된 기기가 있나요?</code>가 나옵니다. <code>이미 설정된 기기가 있나요?</code>를 선택하면 <code>[test] 앞서 설정한 앱 이름</code> 이란 이름이 <code>새로 추가(Add new)</code> 밑에 나타나는지 확인합니다. [test] 앱을 선택하면 홈어시스턴트로 로그인하는 화면에서 계정과 비번을 입력해서 로그인 합니다. 이후 다시 구글홈 앱으로 돌아와서 기기의 집과 룸 이름, 그리고 별명을 설정할 수 있습니다.</p>
+</li>
+</ol>
+<div class="note">
+<p>이전에 홈어시스턴트를 스마트폰의 홈스크린에 단축아이콘으로 저장했다면 홈스크린에서 삭제해야 구글홈 앱에서 홈어시스턴트로 로그인 과정이 실행됩니다. 그렇지 않으면 중간에 로그인하는 과정에서 단축아이콘으로 저장한 홈어시스턴트 HTML5 앱이 동작해서 구글홈앱으로 복귀하지 않습니다.</p>
+</div>
+<ol>
+<li>다른 가족이 집안 기기를 제어할 수 있게 하려면(역자주: 아래 내용은 구글에서 더이상 지원하지 않는 것으로 보입니다. 이 기능은 구글홈 앱에서 구성원 초대로 가족이 제어하게 만들 수 있습니다):
+<ol>
+<li>Go to the settings for the project you created in the <a href="https://console.actions.google.com/" rel="external nofollow">Actions on Google console</a>.</li>
+<li>Click <code>Test -&gt; Simulator</code>, then click <code>Share</code> icon in the right top corner. Follow the on-screen instruction:
+<ol>
+<li>Add team members: Got to <code>Settings -&gt; Permission</code>, click <code>Add</code>, type the new user’s e-mail address and choose <code>Project -&gt; Viewer</code> role.</li>
+<li>Copy and share the link with the new user.</li>
+<li>When the new user opens the link with their own Google account, it will enable your draft test app under their account.</li>
+</ol>
+</li>
+<li>Have the new user go to their <code>Google Assistant</code> app to add <code>[test] your app name</code> to their account.</li>
+</ol>
+</li>
+<li>구글 서버와 실시간으로 상태 정보를 교환하거나(<code>report_state</code> 옵션)  <code>google_assistant.request_sync</code>를 사용하기 위해서는 서비스 계정 키를 발급받아야 합니다.
+<ol>
+<li>
+<p>In the 구글 클라우드 플랫폼(GCP) 콘솔에 Console, go to the <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">Create Service account key</a> page.</p>
+</li>
+<li>
+<p>상단에 +Create Credentials 선택하고 Service account를 클릭합니다. 이때 본인의 프로젝트가 선택되어 있어야 합니다.<img src="/images/integrations/google_assistant/gha10.png" alt="Screenshot: Sevice Account 설정 1"><br><br></p>
+</li>
+<li>
+<p>Service account name 입력란에 적절한 이름을 입력합니다.<img src="/images/integrations/google_assistant/gha11.png" alt="Screenshot: Sevice Account 설정 2"><br><br></p>
+</li>
+<li>
+<p>Service account ID는 자동으로 만들어지는데 원하면 바꿀 수 있습니다.</p>
+</li>
+<li>
+<p>Create 버튼을 누르면 Service Account Permissions을 설정하는 화면이 나옵니다. Select a role에서  Service Accounts &gt; Service Account Token Creator를 선택합니다.<img src="/images/integrations/google_assistant/gha12.png" alt="Screenshot: Sevice Account 설정 3"><br><br><img src="/images/integrations/google_assistant/gha13.png" alt="Screenshot: Sevice Account 설정 4"><br><br></p>
+</li>
+<li>
+<p>CREATE KEY 버튼을 누르고 키 타입을 JSON으로 선택합니다.<img src="/images/integrations/google_assistant/gha14.png" alt="Screenshot: Sevice Account 설정 5"><br><br></p>
+</li>
+<li>
+<p>CREATE 버튼을 눌러 JSON 파일을 다운로드 받습니다. 이 파일의 이름을 service_account.json으로 바꾸고 홈어시스턴트의 <code>/config/</code> 폴더에 업로드 합니다.</p>
+</li>
+<li>
+<p><code>configuration.yaml</code>파일을 편집하여 아래 설정을 참고하여 <code>service_account</code> 항목에 해당 파일을 <code>!include</code>합니다.</p>
+</li>
+<li>
+<p><a href="https://console.cloud.google.com/apis/api/homegraph.googleapis.com/overview" rel="external nofollow">Google API Console</a>로 이동합니다.</p>
+</li>
+<li>
+<p>프로젝트를 선택하고 Enable HomeGraph API를 클릭합니다.<img src="/images/integrations/google_assistant/gha15.png" alt="Screenshot: HomeGraph API"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<p><code>configuration.yaml</code> 파일에서 구글 어시스턴트를 다음과 같이 설정할 수 있습니다 file, such as:</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+google_assistant:
+  project_id: YOUR_PROJECT_ID
+  service_account: !include service_account.json
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+  entity_config:
+    switch.kitchen:
+      name: CUSTOM_NAME_FOR_GOOGLE_ASSISTANT
+      aliases:
+        - BRIGHT_LIGHTS
+        - ENTRY_LIGHTS
+    light.living_room:
+      expose: false
+      room: LIVING_ROOM
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="project_id" href="#project_id"></a> project_id</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Actions on Google console에서 만든 프로젝트 ID (<code>단어-2ab12</code>와 비슷한 형식입니다)</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="secure_devices_pin" href="#secure_devices_pin"></a> secure_devices_pin</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>secure device와 연동하기 위한 pin code</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HomeGraph API key ( <code>google_assistant.request_sync</code> 서비스 연결을 위한). <code>service_account</code>를 설정했다면 불필요합니다.  <strong>홈어시스턴트 0.105 이후 버전에서는 사용하지 않습니다</strong> <code>service_account</code>를 꼭 설정하세요!</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="service_account" href="#service_account"></a> service_account</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service account 정보. JSON 파일을 다운로드 받아서 <code>!include</code>로 파일을 연동하거나 파일안의 내용을 직접 입력할 수 있습니다. 아래 <code>private_key</code>와 <code>client_email</code>은 직접 입력할 때 옵션입니다.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="private_key" href="#private_key"></a> private_key</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Private key in PEM format</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="client_email" href="#client_email"></a> client_email</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Service email address</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="report_state" href="#report_state"></a> report_state</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔티티에 변화가 생길때 실시간 연동. 구글 어시스턴트가 먼저 어떤 상태인지 파악할 수 있게 되므로 여러 엔티티들 사이에 영향을 주는 액션에 대해 응답 속도를 빠르게 만듭니다. 몇몇 visual control 기능을 사용하기 위해서도 필요한 옵션입니다.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="expose_by_default" href="#expose_by_default"></a> expose_by_default</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>지원하는 도메인의 기기들을 구글 어시스턴트와 기본적으로 연동할지 여부를 결정합니다.  <code>exposed_domains</code> 을 설정하면 해당 도메인의 기기들만 연동합니다. <code>expose_by_default</code> 값을 false로 설정하면 기기들을 <code>entity_config</code> 옵션으로 연동 여부를 설정해야 합니다.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="exposed_domains" href="#exposed_domains"></a> exposed_domains</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>구글 어시스턴트와 연동할 도메인을 설정합니다. <code>expose_by_default</code> 값이 true인 경우만 동작하며 <code>expose_by_default</code> 값이 false인 경우 동작하지 않고 <code>entitiy_config</code>으로 개별 기기를 설정해야 합니다.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="entity_config" href="#entity_config"></a> entity_config</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>구글 어시스턴트와 연동할 특정 엔티티를 설정합니다.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="entity_id" href="#entity_id"></a> `<entity_id>`</entity_id>
+</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>하위 옵션</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>구글 어시스턴트와 연동할 엔티티 이름</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="expose" href="#expose"></a> expose</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>연동 여부를 설정</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="aliases" href="#aliases"></a> aliases</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔티티에 대해 별명을 설정</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="room" href="#room"></a> room</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>해당 기기가 연동할 구글 어시스턴트의 룸 설정</p>
+</span></p></dd>
+</dl></dd>
+</dl></dd>
+</dl>
+</div>
+<h3>
+<a class="title-link" name="available-domains" href="#available-domains"></a> Available domains</h3>
+<p>현재 구글 어시스턴트와 연동할 수 있는 도메인과 기본값은 다음과 같습니다:</p>
+<ul>
+<li>camera (streaming, requires compatible camera)</li>
+<li>group (on/off)</li>
+<li>input_boolean (on/off)</li>
+<li>scene (on)</li>
+<li>script (on)</li>
+<li>switch (on/off)</li>
+<li>fan (on/off/speed)</li>
+<li>light (on/off/brightness/rgb color/color temp)</li>
+<li>lock (lock/unlock (to allow assistant to unlock, set the <code>allow_unlock</code> key in configuration))</li>
+<li>cover (on/off/set position)</li>
+<li>media_player (on/off/set volume (via set volume)/source (via set input source))</li>
+<li>climate (temperature setting, hvac_mode)</li>
+<li>vacuum (dock/start/stop/pause)</li>
+<li>sensor (temperature setting for temperature sensors and humidity setting for humidity sensors)</li>
+<li>Alarm Control Panel (arm/disarm)</li>
+</ul>
+<h3>
+<a class="title-link" name="secure-devices" href="#secure-devices"></a> Secure Devices</h3>
+<p><code>lock</code>이나 <code>alarm_control_panel</code> 도메인, <code>garage</code>나  <code>door</code>의 <code>cover</code> 도메인의 특정 기기는 보안이 적용됩니다.</p>
+<p>이들 기기는 기본적으로 <code>secure_devices_pin</code>을 제공하지 않으면 구글 어시스턴트는 열림 제어를 실행하지 않습니다. 해당 기기의 열림을 제어하고 싶다면  <code>secure_devices_pin</code>을 설정하고 이 핀코드를 말하면 기기의 열림 기능을 작동시킬 수 있습니다. 닫거나 잠금 기능을 위해서는 핀코드가 필요없습니다.</p>
+<p>코드를 설정한 Alarm Control Panel은  <code>secure_devices_pin</code>과 동일해야합니다. 만일  <code>code_arm_required</code>를 <code>false</code>로 설정했다면, 핀코드와 상관없이 장비를 실행합니다.</p>
+<h3>
+<a class="title-link" name="--" href="#--"></a> 미디어 플레이어 소스</h3>
+<p>Media Player sources are sent via the Modes trait in Google Assistant.
+There is currently a limitation with this feature that requires a hard-coded set of settings. Because of this, the only sources that will be usable by this feature <a href="https://developers.google.com/actions/reference/smarthome/traits/modes" rel="external nofollow">are listed here</a>.</p>
+<h4>
+<a class="title-link" name="-" href="#-"></a> 명령 예시</h4>
+<p>“Hey Google, change input source to TV on Living Room Receiver”</p>
+<h3>
+<a class="title-link" name="roomarea-support" href="#roomarea-support"></a> Room/Area support</h3>
+<p>Entities that have not been explicitly assigned to rooms but have been placed in Home Assistant areas will return room hints to Google with the devices in those areas.</p>
+<h3>
+<a class="title-link" name="climate-operation-modes" href="#climate-operation-modes"></a> Climate Operation Modes</h3>
+<p>There is not an exact 1-1 match between Home Assistant and Google Assistant for the available operation modes.
+Here are the modes that are currently available:</p>
+<ul>
+<li>off</li>
+<li>heat</li>
+<li>cool</li>
+<li>heatcool (auto)</li>
+<li>fan-only</li>
+<li>dry</li>
+<li>eco</li>
+</ul>
+<h3>
+<a class="title-link" name="troubleshooting-the-request_sync-service" href="#troubleshooting-the-request_sync-service"></a> Troubleshooting the request_sync service</h3>
+<p>특정 기간이 지나서 동기화를 하는 경우(예를 들어 30일 이후) 구글 어시스턴트와 홈어시스턴트 간에 기기 동기화가 실패할 수 있습니다. 이것은 Actions on Google app이 테스트 모드이고 출시를 하지 않았기 때문입니다. 따라서 테스트가 종료됐다고 볼 수 있습니다. 연동한 기기는 계속 사용할 수 있지만 기기 동기화는 동작하지 않습니다. “Ok Google, sync my devices”라고 말하면 구글홈(구글 어시스턴트)은 “Unable to sync Home Assistant”(또는 프로젝트 이름)이라고 대답할 것입니다. 이것을 해결하기 위해서는 <a href="https://console.actions.google.com/" rel="external nofollow">Actions on Google console</a>에서 테스트 앱을 선택하고 <code>TEST</code> 메뉴 아래 <code>Simulator</code>를 클릭하여 앱을 재생성하면 됩니다. Test App을 재생성한 다음 다시 동기화를 시켜보세요. 테스트 앱을 재생성할 수 없다면  Develop 밑에 <code>Action</code> 메뉴로 돌아가서 새로 키를 발급받아야 합니다.</p>
+<p><code>request_sync</code> 서비스는 <code>agent_user_id</code>를 통해 구글과 최초 동기화가 필요합니다. 그렇지 않으면 “Request contains an invalid argument”와 같은 에러 로그가 쌓이게 됩니다. 이 경우 <a href="https://support.google.com/googlenest/answer/7126338" rel="external nofollow">unlink the account</a>를 참고하여 재설정해야 합니다.</p>
+<p><code>request_sync</code> 서비스가 404 에러로 실패할 수 있는데, HomeGraph API의 <code>project_id</code>가 <a href="https://console.actions.google.com" rel="external nofollow">Actions on Google console</a>에 있는 Actions SDK의 <code>project_id</code>와 달라서 발생하는 경우입니다. 이것을 해결하려면:</p>
+<ol>
+<li>
+<a href="https://console.actions.google.com" rel="external nofollow">Actions on Google console</a>에서 프로젝트를 삭제합니다.</li>
+<li>
+<a href="https://console.cloud.google.com" rel="external nofollow">Google Cloud API Console</a>에서 새로 프로젝트를 생성합니다. 여기서 만든 <code>project_id</code>를 사용하세요.</li>
+<li>새로운 프로젝트에서 Enable HomeGraph API 버튼을 클릭하세요.</li>
+<li>새로운 API 키를 생성합니다.</li>
+<li>다시, <a href="https://console.actions.google.com/" rel="external nofollow">Actions on Google console</a>에서 프로젝트를 생성하면서 ‘Build under the Actions SDK box’를 2번에서 생성한 프로젝트로 선택합니다. 이렇게 하면 동일한 <code>project_id</code>를 사용할 수 있습니다.</li>
+</ol>
+<h3>
+<a class="title-link" name="troubleshooting-with-nginx" href="#troubleshooting-with-nginx"></a> Troubleshooting with NGINX</h3>
+<p>NGINX를 사용할 때 <code>proxy_pass</code> 끝이 역슬래시 <code>\</code>로 끝나지 않도록 해야 에러가 발생하지 않습니다. 다음과 같은 형식으로 작성해야합니다:</p>
+<pre><code>proxy_pass http://localhost:8123;
+</code></pre>
+<h3>
+<a class="title-link" name="unlink-and-relink" href="#unlink-and-relink"></a> Unlink and relink</h3>
+<p><em>Account linking failed</em> 문제가 발생하면 서비스를 재연결하세요. 브라우저 히스토리와 캐시도 모두 삭제해보시기 바랍니다.</p>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/gitpages_source/blob/master/source/_integrations/google_assistant.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/google-assistant.png' /></div><div class="section">
+    <kb-alert-link integration="google_assistant"></kb-alert-link>
+  </div><div class='section'>
+      Introduced in release: 0.56
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/google_assistant/'>/components/google_assistant/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#voice'>Voice</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant"> 홈어시스턴트
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'c762b5632da4220f398f985614f3a1e3',
+  indexName: 'hakorea',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>
