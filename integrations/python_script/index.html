@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p>This integration allows you to write Python scripts that are exposed as services in Home Assistant. Each Python file created in the <code>&lt;config&gt;/python_scripts/</code> folder will be exposed as a service. The content is not cached so you can easily develop: edit file, save changes, call service. The scripts are run in a sandboxed environment. The following variables are available in the sandbox:</p>
+  <p>이 통합구성요소를 통해 홈어시스턴트에서 서비스로 노출되는 Python 스크립트를 작성할 수 있습니다. <code>&lt;config&gt;/python_scripts/</code> 폴더에 생성 된 각 파이썬 파일은 서비스로 노출됩니다. 컨텐츠는 캐시되지 않으므로 쉽게 개발 가능합니다. : 파일을 편집하고 변경 사항을 저장하며 서비스를 호출 할 수 있습니다. 스크립트는 샌드 박스 환경에서 실행됩니다. 샌드 박스에서 다음 변수를 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -114,25 +114,25 @@
 <tbody>
 <tr>
 <td><code>hass</code></td>
-<td>The Home Assistant object. Access is only allowed to call services, set/remove states and fire events. <a href="/developers/development_hass_object/">API reference</a>
+<td>홈 어시스턴트 객체. 액세스는 서비스 호출, 상태 설정/제거 및 실행 이벤트만 허용 <a href="/developers/development_hass_object/">API reference</a>
 </td>
 </tr>
 <tr>
 <td><code>data</code></td>
-<td>The data passed to the Python Script service call.</td>
+<td>데이터는 Python Script 서비스 호출로 전달.</td>
 </tr>
 <tr>
 <td><code>logger</code></td>
-<td>A logger to allow you to log messages: <code>logger.info()</code>, <code>logger.warning()</code>, <code>logger.error()</code>. <a href="https://docs.python.org/3.7/library/logging.html#logger-objects" rel="external nofollow">API reference</a>
+<td>로거(logger)는 메시지를 기록 할 수 있도록: <code>logger.info()</code>, <code>logger.warning()</code>, <code>logger.error()</code>. <a href="https://docs.python.org/3.7/library/logging.html#logger-objects" rel="external nofollow">API reference</a>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="note">
-<p>It is not possible to use Python imports with this integration. If you want to do more advanced scripts, you can take a look at <a href="/docs/ecosystem/appdaemon/">AppDaemon</a></p>
+<p>이 통합구성요소로 Python 가져 오기를 사용할 수 없습니다. 고급 스크립트를 원한다면 <a href="/docs/ecosystem/appdaemon/">AppDaemon</a>을 살펴보십시오.</p>
 </div>
 <h2>
-<a class="title-link" name="writing-your-first-script" href="#writing-your-first-script"></a> Writing your first script</h2>
+<a class="title-link" name="---writing-your-first-script" href="#---writing-your-first-script"></a> 첫 스크립트 작성 (Writing your first script)</h2>
 <ul>
 <li>Add to <code>configuration.yaml</code>: <code>python_script:</code>
 </li>
@@ -151,8 +151,9 @@ hass.bus.fire(name, {"wow": "from a Python script!"})
 <pre><code class="language-yaml">name: you
 </code></pre>
 <h2>
-<a class="title-link" name="calling-services" href="#calling-services"></a> Calling Services</h2>
-<p>The following example shows how to call a service from <code>python_script</code>. This script takes two parameters: <code>entity_id</code> (required), <code>rgb_color</code> (optional) and calls <code>light.turn_on</code> service by setting the brightness value to <code>255</code>.</p>
+<a class="title-link" name="--calling-services" href="#--calling-services"></a> 서비스 호출하기 (Calling Services)</h2>
+<p>다음 예제는 <code>python_script</code> 에서 서비스를 호출하는 방법을 보여줍니다. 이 스크립트는 두가지 매개변수를 취함:
+<code>entity_id</code> (필수),<code>rgb_color</code> (선택 사항) 및 밝기 값을 ‘255’로 설정하여 <code>light.turn_on</code> 서비스를 호출합니다.</p>
 <pre><code class="language-python"># turn_on_light.py
 entity_id = data.get("entity_id")
 rgb_color = data.get("rgb_color", [255, 255, 255])
@@ -160,13 +161,13 @@ if entity_id is not None:
     service_data = {"entity_id": entity_id, "rgb_color": rgb_color, "brightness": 255}
     hass.services.call("light", "turn_on", service_data, False)
 </code></pre>
-<p>The above <code>python_script</code> can be called using the following JSON as an input.</p>
+<p>위의 <code>python_script</code>는 다음 JSON으로 입력 사용하여 호출 할 수 있습니다.</p>
 <pre><code class="language-yaml">entity_id: light.bedroom
 rgb_color: [255, 0, 0]
 </code></pre>
 <h2>
-<a class="title-link" name="documenting-your-python-scripts" href="#documenting-your-python-scripts"></a> Documenting your Python scripts</h2>
-<p>You can add descriptions for your Python scripts that will be shown in the Call Services tab of the Developer Options page. To do so, simply create a <code>services.yaml</code> file in your <code>&lt;config&gt;/python_scripts</code> folder. Using the above Python script as an example, the <code>services.yaml</code> file would look like:</p>
+<a class="title-link" name="---documenting-your-python-scripts" href="#---documenting-your-python-scripts"></a> 파이썬 스크립트 문서화 (Documenting your Python scripts)</h2>
+<p>개발자 옵션 페이지의 호출 서비스 탭에 표시될 Python 스크립트에 대한 설명을 추가 할 수 있습니다. 그렇게하려면 <code>&lt;config&gt;/python_scripts</code> 폴더에 <code>services.yaml</code> 파일을 만드십시오. 위의 Python 스크립트를 예로 들면 <code>services.yaml</code> 파일은 다음과 같습니다. :</p>
 <pre><code class="language-yaml"># services.yaml
 turn_on_light:
   description: Turn on a light and set its color. 
@@ -178,7 +179,7 @@ turn_on_light:
       description: The color to which the light will be set.
       example: [255, 0, 0]
 </code></pre>
-<p>For more examples, visit the <a href="https://community.home-assistant.io/c/projects/scripts">Scripts section</a> in our forum.</p>
+<p>더 많은 사례는, <a href="https://community.home-assistant.io/c/projects/scripts">Scripts section</a> 우리 포럼을 방문하세요.</p>
 
 
 </article>

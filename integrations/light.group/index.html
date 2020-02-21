@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p>The group light platform lets you combine multiple lights into one entity. All child lights of a light group can still be used as usual, but controlling the state of the grouped light will forward the command to each child light.</p>
-<p>To enable this platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p>그룹 조명 플랫폼을 사용하면 여러 조명을 하나의 엔티티로 결합 할 수 있습니다. 조명 그룹의 모든 자식 조명은 평소와 같이 계속 사용할 수 있지만 그룹화 된 조명의 상태를 제어하면 명령이 각 자식 조명으로 전달됩니다.</p>
+<p>설치시 이 플랫폼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: group
@@ -121,22 +121,22 @@ light:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the light group. Defaults to “Light Group”.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>조명 그룹의 이름입니다. 기본값은 “Light Group”입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list of entities to be included in the light group.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Required)</span><span class="description"><p>조명 그룹에 포함 할 엔티티 목록입니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <p class="img">
 <img src="/images/integrations/light/group.png">
-Example of the light group "Kitchen Lights".
+조명 그룹 "주방 조명"의 예.
 </p>
-<p>The supported features of all lights will be added together. For example, if you have one RGB light in a group of otherwise brightness-only lights, the light group will be shown with a color picker.</p>
+<p>모든 조명의 지원되는 기능이 함께 추가됩니다. 예를 들어, 밝기 전용 조명 그룹에 RGB 조명이 하나 있으면 조명 그룹에 색상 선택기가 표시됩니다.</p>
 <h2>
-<a class="title-link" name="script-example" href="#script-example"></a> Script Example</h2>
-<p>Here’s an example of a script using the above light group.</p>
+<a class="title-link" name="--script-example" href="#--script-example"></a> 스크립트 사례 (Script Example)</h2>
+<p>위의 조명 그룹을 사용하는 스크립트의 예는 다음과 같습니다.</p>
 <pre><code class="language-yaml">script:
   turn_on_kitchen_lights:
     alias: Kitchen lights on

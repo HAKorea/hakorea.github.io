@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Generic IP Camera - 홈어시스턴트</title>
+    <title>일반(generic) IP Camera - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate IP cameras within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/generic_ip_camera/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Generic IP Camera">
+    <meta property="og:title" content="일반(generic) IP Camera">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/generic_ip_camera/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Generic IP Camera">
+    <meta name="twitter:title" content="일반(generic) IP Camera">
     <meta name="twitter:description" content="Instructions on how to integrate IP cameras within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Generic IP Camera
+      일반(generic) IP Camera
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>generic</code> camera platform allows you to integrate any IP camera or other URL into Home Assistant. Templates can be used to generate the URLs on the fly.</p>
-<p>Home Assistant will serve the images via its server, making it possible to view your IP cameras while outside of your network. The endpoint is <code>/api/camera_proxy/camera.[name]</code>.</p>
+  <p><code>generic</code> 카메라 플랫폼은 홈어시스턴트로 모든 IP 카메라 또는 다른 URL을 연동할 수 있습니다. 템플릿을 사용하여 URL을 즉석에서 생성 할 수 있습니다.</p>
+<p>홈어시스턴트는 서버를 통해 이미지를 제공하므로 네트워크 외부에있는 동안 IP 카메라를 볼 수 있습니다. endpoint는 <code>/api/camera_proxy/camera.[name]</code> 입니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 이 카메라를 활성화하려면 <code>configuration.yaml</code>파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: generic
@@ -119,28 +119,28 @@ camera:
   <dl class="">
 <dt>
 <a class="title-link" name="still_image_url" href="#still_image_url"></a> still_image_url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The URL your camera serves the image on, e.g., <code>http://192.168.1.21:2112/</code>. Can be a <a href="/topics/templating/">template</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>카메라 정지화면을 제공하는 URL, 예: <code>http://192.168.1.21:2112/</code>. <a href="/topics/templating/">template</a>도 가능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="stream_source" href="#stream_source"></a> stream_source</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The URL your camera serves the live stream on, e.g., <code>rtsp://192.168.1.21:554/</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>실시간 스트림을 제공하는 URL, 예: <code>rtsp://192.168.1.21:554/</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>This parameter allows you to override the name of your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 카메라 이름을 무시 가능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username for accessing your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에 액세스하기위한 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The password for accessing your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에 액세스하기위한 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type for authenticating the requests <code>basic</code> or <code>digest</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>요청을 인증하기위한 타입 <code>basic</code> 혹은 <code>digest</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -149,7 +149,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="limit_refetch_to_url_change" href="#limit_refetch_to_url_change"></a> limit_refetch_to_url_change</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Limits re-fetching of the remote image to when the URL changes. Only relevant if using a template to fetch the remote image.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>URL이 변경될 때 원격이미지를 다시 가져 오는 것을 제한. 템플릿을 사용하여 원격 이미지를 가져 오는 경우에만 해당.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -158,7 +158,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="content_type" href="#content_type"></a> content_type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set the content type for the IP camera if it is not a jpg file. Use <code>image/svg+xml</code> to add a dynamic SVG file.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>IP 카메라가 jpg 파일이 아닌 경우 IP 카메라의 컨텐츠 유형을 설정. <code>image/svg+xml</code> 사용시 동적 SVG 파일을 추가 가능</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -166,12 +166,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="framerate" href="#framerate"></a> framerate</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The number of frames-per-second (FPS) of the stream. Can cause heavy traffic on the network and/or heavy load on the camera.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>스트림의 초당 프레임 수 (FPS)입니다. 네트워크에 트래픽이 많거나 카메라에 과부하가 발생 가능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enable or disable SSL certificate verification. Set to false to use an http-only camera, or you have a self-signed SSL certificate and haven’t installed the CA certificate to enable verification.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>SSL 인증서 확인을 활성화 또는 비활성화합니다. http 전용 카메라를 사용하거나 자체 서명 된 SSL 인증서가 있고 활성화하기 위해 CA 인증서를 설치하지 않은 경우 false로 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -182,14 +182,14 @@ Default value: </p>
 <p class="img">
   <a href="/cookbook/google_maps_card/">
     <img src="/images/integrations/camera/generic-google-maps.png" alt="Screenshot showing Google Maps integration in Home Assistant front end.">
-    Example showing the Generic camera platform pointing at a dynamic Google Map image.
+    동적 Google 지도 이미지를 가리키는 일반 카메라 플랫폼을 보여주는 예.
   </a>
 </p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section, you find some real-life examples of how to use this camera platform.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에서는이 카메라 플랫폼을 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
-<a class="title-link" name="weather-graph-from-yrno" href="#weather-graph-from-yrno"></a> Weather graph from yr.no</h3>
+<a class="title-link" name="yrno--" href="#yrno--"></a> yr.no의 날씨 그래프</h3>
 <pre><code class="language-yaml">camera:
   - platform: generic
     name: Weather
@@ -197,8 +197,8 @@ Default value: </p>
     content_type: 'image/svg+xml'
 </code></pre>
 <h3>
-<a class="title-link" name="local-image-with-hassio" href="#local-image-with-hassio"></a> Local image with Hass.io</h3>
-<p>You can show a static image with this platform. Just place the image here: <code>/config/www/your_image.png</code></p>
+<a class="title-link" name="hassio--" href="#hassio--"></a> Hass.io에서의 로컬 이미지</h3>
+<p>이 플랫폼으로 정적 이미지를 표시 할 수 있습니다. 여기에 이미지를 넣으십시오. <code>/config/www/your_image.png</code></p>
 <pre><code class="language-yaml">camera:
   - platform: generic
     name: Some Image
@@ -206,16 +206,16 @@ Default value: </p>
     verify_ssl: false
 </code></pre>
 <h3>
-<a class="title-link" name="sharing-a-camera-feed-from-one-home-assistant-instance-to-another" href="#sharing-a-camera-feed-from-one-home-assistant-instance-to-another"></a> Sharing a camera feed from one Home Assistant instance to another</h3>
-<p>If you are running more than one Home Assistant instance (let’s call them the ‘host’ and ‘receiver’ instances) you may wish to display the camera feed from the host instance on the receiver instance. You can use the <a href="/developers/rest_api/#get-apicamera_proxycameraltentity_id">REST API</a> to access the camera feed on the host (IP address 127.0.0.5) and display it on the receiver instance by configuring the receiver with the following:</p>
+<a class="title-link" name="--------" href="#--------"></a> 한 홈어시스턴트 인스턴스에서 다른 홈어시스턴트 인스턴스로 카메라 피드 공유</h3>
+<p>둘 이상의 홈 어시스턴트 인스턴스를 실행중인 경우 ( ‘호스트’ 및 ‘수신자’ 인스턴스라고 함) 수신자 인스턴스의 호스트 인스턴스에서 카메라 피드를 표시 할 수 있습니다.  <a href="/developer/rest_api/#get-apicamera_proxycameraltentity_id">REST API</a>를 사용하여 다음과 같이 수신기를 구성하여 호스트의 카메라 피드 (IP 주소 127.0.0.5)에 액세스하고 수신기 인스턴스에 표시 할 수 있습니다. :</p>
 <pre><code class="language-yaml">camera:
   - platform: generic
     name: Host instance camera feed
     still_image_url: https://127.0.0.5:8123/api/camera_proxy/camera.live_view
 </code></pre>
 <h3>
-<a class="title-link" name="image-from-http-only-camera" href="#image-from-http-only-camera"></a> Image from HTTP only camera</h3>
-<p>To access a camera which is only available via HTTP, you must turn off SSL verification.</p>
+<a class="title-link" name="http---" href="#http---"></a> HTTP 전용 카메라에서의 이미지</h3>
+<p>HTTP를 통해서만 사용할 수있는 카메라에 액세스하려면 SSL 검증(verification)을 해제해야합니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: generic
     name: Some Image
@@ -223,8 +223,8 @@ Default value: </p>
     verify_ssl: false
 </code></pre>
 <h3>
-<a class="title-link" name="live-stream" href="#live-stream"></a> Live stream</h3>
-<p>To access a camera that has both a snapshot and live stream URL, utilizing the <a href="/integrations/stream/">stream</a> component.</p>
+<a class="title-link" name="-" href="#-"></a> 라이브 스트림</h3>
+<p><a href="/integrations/stream/">stream</a> 구성 요소를 사용하여 스냅 샷 및 라이브 스트림 URL이 모두있는 카메라에 액세스합니다 .</p>
 <pre><code class="language-yaml">camera:
   - platform: generic
     name: Streaming Enabled

@@ -103,18 +103,12 @@
   <hr class="divider">
   
 
-  <p>The <code>alert</code> integration is designed to notify you when problematic issues arise.
-For example, if the garage door is left open, the <code>alert</code> integration can be used
-remind you of this by sending you repeating notifications at customizable
-intervals. This is also used for low battery sensors,
-water leak sensors, or any condition that may need your attention.</p>
-<p>Alerts will add an entity to the front end only when they are firing.
-This entity allows you to silence an alert until it is resolved.</p>
+  <p><code>alert</code> 통합구성요소는 문제되는 이슈가 발생할 때 통지하도록 설계되었습니다. 예를 들어, 차고 문이 열린 상태로 유지되면 <code>alert</code> 통합구성요소를 사용하여 사용자 정의 가능한 간격으로 반복 알림을 보내 이를 상기시켜줍니다.
+또한 배터리 부족 센서, 누수 센서 또는 주의가 필요한 모든 조건에 사용됩니다.</p>
+<p>경고는 엔티티가 시작될 때만 프런트 엔드에 엔티티를 추가합니다. 이 엔티티를 사용하면 해결 될 때까지 경고를 무음으로 설정할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="basic-example" href="#basic-example"></a> Basic Example</h3>
-<p>The <code>alert</code> integration makes use of any of the <code>notifications</code> integrations. To
-setup the <code>alert</code> integration, first, you must setup a <code>notification</code> integration.
-Then, add the following to your configuration file:</p>
+<a class="title-link" name="-" href="#-"></a> 기본 사례</h3>
+<p><code>alert</code> 통합구성요소는 모두 <code>notifications</code> 통합구성요소를 사용합니다. <code>alert</code> 통합구성요소를 설정하려면 먼저 <code>notification</code> 통합구성요소를 설정해야합니다. 그런 다음 설정 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 alert:
   garage_door:
@@ -135,20 +129,20 @@ alert:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The friendly name of the alert.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>친숙한 경고 이름입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The ID of the entity to watch.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>감시할 엔티티 ID입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>A title to be used for the notification if the notifier supports it with <a href="/docs/configuration/templating/">template</a> support.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>알리미가 <a href="/docs/configuration/templating/">template</a>을 지원하는 경우 알림에 사용되는 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state" href="#state"></a> state</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The problem condition for the entity.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔티티의 문제점 조건.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -156,12 +150,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="repeat" href="#repeat"></a> repeat</dt>
-<dd><p class="desc"><span class="type">(<span class="integer list">integer | list</span>)</span><span class="required">(Required)</span><span class="description"><p>Number of minutes before the notification should be repeated. Can be either a number or a list of numbers.</p>
+<dd><p class="desc"><span class="type">(<span class="integer list">integer | list</span>)</span><span class="required">(Required)</span><span class="description"><p>알림을 반복하기까지의 시간 (분)입니다. 숫자 또는 숫자 목록 일 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="can_acknowledge" href="#can_acknowledge"></a> can_acknowledge</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Allows the alert to be unacknowledgeable.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>경고를 승인 할 수 없습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -170,7 +164,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="skip_first" href="#skip_first"></a> skip_first</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Controls whether the notification should be sent immediately or after the first delay.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>알림을 즉시 또는 첫 번째 지연 후에 전송할지 여부를 제어합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -182,31 +176,23 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="done_message" href="#done_message"></a> done_message</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>A message sent after an alert transitions from <code>on</code> to <code>off</code> with <a href="/docs/configuration/templating/">template</a> support. Is only sent if an alert notification was sent for transitioning from <code>off</code> to <code>on</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>A message sent after an alert transitions from <code>on</code> to <code>off</code> with <a href="/docs/configuration/templating/">template</a> support. Is only sent if an alert notification was sent for transitioning from <code>off</code> to <code>on</code>. <a href="/docs/configuration/templating/">template</a>지원을 통해 경고가 <code>on</code>에서 <code>off</code>로 전환된 후 전송 된 메시지입니다.  <code>off</code>에서<code>on</code>으로 전환하기 위해 경고 알림이 전송 된 경우에만 전송됩니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="notifiers" href="#notifiers"></a> notifiers</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of <code>notification</code> integrations to use for alerts.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>경고에 사용할 <code>notifications</code> 통합구성요소 목록입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="data" href="#data"></a> data</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Dictionary of extra parameters to send to the notifier.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>알리미에게 보낼 추가 매개 변수 사전(dictionary)입니다.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>In this example, the garage door status (<code>input_boolean.garage_door</code>) is watched
-and this alert will be triggered when its status is equal to <code>on</code>.
-This indicates that the door has been opened. Because the <code>skip_first</code> option
-was set to <code>true</code>, the first notification will not be delivered immediately.
-However, every 30 minutes, a notification will be delivered until either
-<code>input_boolean.garage_door</code> no longer has a state of <code>on</code> or until the alert is
-acknowledged using the Home Assistant frontend.</p>
-<p>For notifiers that require other parameters (such as <code>twilio_sms</code> which requires
-you specify a <code>target</code> parameter when sending the notification), you can use the
-<code>group</code> notification to wrap them for an alert.
-Simply create a <code>group</code> notification type with a single notification member
-(such as <code>twilio_sms</code>) specifying the required parameters other than <code>message</code>
-provided by the <code>alert</code> component:</p>
+<p>이 예에서는 차 고문 상태 (<code>input_boolean.garage_door</code>)가 감시되고 상태가 <code>on</code>인 경우 이 경고가 트리거됩니다.
+이는 문이 열렸음을 나타냅니다. <code>skip_first</code> 옵션이 <code>true</code>로 설정되었으므로 첫 번째 알림이 즉시 전달되지 않습니다.
+그러나 30 분마다 <code>input_boolean.garage_door</code>가 더 이상 <code>on</code>상태가 아니거나 홈어시스턴트 프론트 엔드를 사용하여 경보가 승인 될 때까지 알림이 전달됩니다.</p>
+<p>다른 매개 변수가 필요한 알리미 (예 : 알림을 보낼 때 <code>target </code>매개 변수를 지정해야하는<code>twilio_sms</code>)의 경우 <code>group</code> 알림을 사용하여 알림에 래핑 할 수 있습니다.</p>
+<p><code>alert</code> 컴포넌트가 제공하는<code>message</code> 이외의 필수 매개 변수를 지정하여 단일 알림 멤버 (예 :<code>twilio_sms</code>)로 <code>group</code> 알림 유형을 작성하십시오.</p>
 <pre><code class="language-yaml">- platform: group
   name: john_phone_sms
   services:
@@ -226,14 +212,12 @@ provided by the <code>alert</code> component:</p>
       - john_phone_sms
 </code></pre>
 <h3>
-<a class="title-link" name="complex-alert-criteria" href="#complex-alert-criteria"></a> Complex Alert Criteria</h3>
+<a class="title-link" name="---complex-alert-criteria" href="#---complex-alert-criteria"></a> 복잡한 경고 기준 (Complex Alert Criteria)</h3>
 <p>By design, the <code>alert</code> integration only handles very simple criteria for firing.
-That is, it only checks if a single entity’s state is equal to a value. At some
-point, it may be desirable to have an alert with a more complex criteria.
-Possibly, when a battery percentage falls below a threshold. Maybe you want to
-disable the alert on certain days. Maybe the alert firing should depend on more
-than one input. For all of these situations, it is best to use the alert in
-conjunction with a <code>Template Binary Sensor</code>. The following example does that.</p>
+That is, it only checks if a single entity’s state is equal to a value. At some point, it may be desirable to have an alert with a more complex criteria.
+Possibly, when a battery percentage falls below a threshold. Maybe you want to disable the alert on certain days. Maybe the alert firing should depend on more than one input. For all of these situations, it is best to use the alert in conjunction with a <code>Template Binary Sensor</code>. The following example does that.
+설계 상 <code>alert</code> 통합구성요소는 매우 간단한 실행 기준 만 처리합니다.
+즉, 단일 엔티티의 상태가 값과 같은지 확인합니다. 일부 더 복잡한 기준을 가진 경고를 갖는 것이 바람직 할 수 있습니다. 배터리 백분율이 임계값 아래로 떨어질 때. 특정 날짜에는 알림을 사용 중지하고자 하는 경우가 있습니다. 경보 발생은 하나 이상의 입력에 의존해야합니다. 이러한 모든 상황에서 <code>Template Binary Sensor</code>와 함께 경고를 사용하는 것이 가장 좋습니다. 다음 예제의 내용입니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: template
     sensors:
@@ -250,15 +234,11 @@ alert:
       - ryans_phone
       - kristens_phone
 </code></pre>
-<p>This example will begin firing as soon as the entity <code>sensor.motion</code>’s <code>battery</code>
-attribute falls below 15. It will continue to fire until the battery attribute
-raises above 15 or the alert is acknowledged on the frontend.</p>
+<p>이 예제는 엔티티<code>sensor.motion</code>의<code>battery</code> 속성이 15 아래로 떨어지자마자 시작됩니다. 배터리 속성이 15를 초과하거나 프론트 엔드에서 경고가 확인 될 때까지 계속 작동합니다.</p>
 <h3>
-<a class="title-link" name="dynamic-notification-delay-times" href="#dynamic-notification-delay-times"></a> Dynamic Notification Delay Times</h3>
-<p>It may be desirable to have the delays between alert notifications dynamically
-change as the alert continues to fire. This can be done by setting the <code>repeat</code>
-configuration key to a list of numbers rather than a single number.
-Altering the first example would look like the following.</p>
+<a class="title-link" name="----dynamic-notification-delay-times" href="#----dynamic-notification-delay-times"></a> 동적 지연 시간 알림 (Dynamic Notification Delay Times)</h3>
+<p>경고가 계속 발생하면 경고 알림 사이의 지연이 동적으로 변경되는 것이 바람직 할 수 있습니다.
+<code>repeat</code> 설정 키를 단일 숫자가 아닌 숫자 목록으로 설정하면됩니다. 첫 번째 예를 변경하면 다음과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 alert:
   garage_door:
@@ -275,18 +255,11 @@ alert:
       - ryans_phone
       - kristens_phone
 </code></pre>
-<p>Now the first message will be sent after a 15 minute delay, the second will be
-sent 30 minutes after that, and a 60 minute delay will fall between every
-following notification.
-For example, if the garage door opens at 2:00, a notification will be
-sent at 2:15, 2:45, 3:45, 4:45, etc., continuing every 60 minutes.</p>
+<p>이제 첫 번째 메시지는 15분 지연 후 전송되고 두 번째 메시지는 30 분 후에 전송되며 60 분 지연은 다음 알림마다 발생합니다.
+예를 들어, 차고 문이 2:00에 열리면 60 분마다 2시 15 분, 2시 45 분, 3시 45 분, 4시 45 분 등으로 알림이 전송됩니다.</p>
 <h3>
 <a class="title-link" name="message-templates" href="#message-templates"></a> Message Templates</h3>
-<p>It may be desirable to have the alert notifications include information
-about the state of the entity. <a href="/docs/configuration/templating/">Templates</a>
-can be used in the message or name of the alert to make it more relevant.
-The following will show for a plant how to include the problem <code>attribute</code>
-of the entity.</p>
+<p>경보 통지에 엔티티의 상태에 관한 정보를 포함시키는 것이 바람직 할 수 있습니다. <a href="/docs/configuration/templating/">Templates</a>은 메시지 또는 경고의 이름에 사용하여 보다 관련성을 높일 수 있습니다. 다음은 식물에서 개체의 ‘속성’을 포함시키는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 alert:
   office_plant:
@@ -302,11 +275,10 @@ alert:
       - ryans_phone
       - kristens_phone
 </code></pre>
-<p>The resulting message could be <code>Plant Officeplant needs help (moisture low)</code>.</p>
+<p>그 결과 메시지는 <code>사무실 식물에 도움이 필요함 (수분 부족)</code>일 수 있습니다.</p>
 <h3>
-<a class="title-link" name="additional-parameters-for-notifiers" href="#additional-parameters-for-notifiers"></a> Additional parameters for notifiers</h3>
-<p>Some notifiers support more parameters (e.g., to set text color or action
-buttons). These can be supplied via the <code>data</code> parameter:</p>
+<a class="title-link" name="-----additional-parameters-for-notifiers" href="#-----additional-parameters-for-notifiers"></a> 알리미에 대한 추가 매개 변수 (Additional parameters for notifiers)</h3>
+<p>일부 알리미는 더 많은 매개 변수를 지원합니다 (예 : 텍스트 색상 또는 동작 버튼 설정). 이들은 <code>data</code> 매개 변수를 통해 제공 될 수 있습니다 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 alert:
   garage_door:
@@ -325,8 +297,7 @@ alert:
     notifiers:
       - frank_telegram
 </code></pre>
-<p>This particular example relies on the <code>inline_keyboard</code> functionality of
-Telegram, where the user is presented with buttons to execute certain actions.</p>
+<p>이 특정 예는 Telegram의 <code>inline_keyboard</code> 기능에 의존합니다. 여기서 사용자에게는 특정 작업을 실행하는 버튼이 표시됩니다</p>
 
 
 </article>

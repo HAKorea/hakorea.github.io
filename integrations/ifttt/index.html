@@ -103,20 +103,21 @@
   <hr class="divider">
   
 
-  <p><a href="https://ifttt.com" rel="external nofollow">IFTTT</a> is a web service that allows users to create chains of simple conditional statements, so-called “Applets”. With the IFTTT component, you can trigger applets through the <strong>“Webhooks”</strong> service (which was previously the <strong>“Maker”</strong> channel).</p>
+  <p><a href="https://ifttt.com" rel="external nofollow">IFTTT</a> 는 사용자가 소위 “애플릿”이라는 간단한 조건문 체인을 만들 수있는 웹 서비스입니다. IFTTT 구성 요소를 사용하면 <strong>Webhooks</strong> 서비스 (이전의 <strong>Maker</strong> 채널)를 통해 애플릿을 트리거 할 수 있습니다</p>
 <h2>
-<a class="title-link" name="sending-events-from-ifttt-to-home-assistant" href="#sending-events-from-ifttt-to-home-assistant"></a> Sending events from IFTTT to Home Assistant</h2>
-<p>To be able to receive events from IFTTT, your Home Assistant instance needs to be accessible from the web (<a href="/addons/duckdns/">Hass.io instructions</a>) and you need to have the <code>base_url</code> configured for the HTTP integration (<a href="/integrations/http/#base_url">docs</a>).</p>
+<a class="title-link" name="ifttt---" href="#ifttt---"></a> IFTTT에서 홈어시스턴트로 이벤트 보내기</h2>
+<p>FTTT에서 이벤트를 수신하려면 웹에서 홈어시스턴트 인스턴스에 액세스 할 수 있어야하고 (<a href="/addons/duckdns/">Hass.io instructions</a>), HTTP 통합을 위해 <code>base_url</code>을 구성해야합니다 (참고 : <a href="/integrations/http/#base_url">docs</a>).</p>
 <h3>
-<a class="title-link" name="setting-up-the-integration" href="#setting-up-the-integration"></a> Setting up the integration</h3>
-<p>To set it up, go to the integrations page in the configuration screen and find IFTTT. Click on configure. Follow the instructions on the screen to configure IFTTT.</p>
+<a class="title-link" name="--setting-up-the-integration" href="#--setting-up-the-integration"></a> 통합 설정 (Setting up the integration)</h3>
+<p>이를 설정하려면 설정 화면의 통합구성요소 페이지로 이동하여 IFTTT를 찾으십시오. 설정을 클릭하십시오. 화면의 지시 사항에 따라 IFTTT를 구성하십시오.</p>
 <h3>
-<a class="title-link" name="using-the-incoming-data" href="#using-the-incoming-data"></a> Using the incoming data</h3>
-<p>Events coming in from IFTTT will be available as events in Home Assistant and are fired as <code>ifttt_webhook_received</code>. The data specified in IFTTT will be available as the event data. You can use this event to trigger automations.</p>
-<p>For example, set the body of the IFTTT webhook to:</p>
+<a class="title-link" name="---using-the-incoming-data" href="#---using-the-incoming-data"></a> 수신 데이터 사용 (Using the incoming data)</h3>
+<p>IFTTT에서 들어오는 이벤트는 홈어시스턴트 이벤트로 사용 가능하며 <code>ifttt_webhook_received</code>로 시작됩니다.
+IFTTT에 지정된 데이터는 이벤트 데이터로 사용 가능합니다. 이 이벤트를 사용하여 자동화를 트리거 할 수 있습니다.</p>
+<p>예를 들어, IFTTT 웹 후크 본문을 다음과 같이 설정하십시오. :</p>
 <pre><code class="language-json">{ "action": "call_service", "service": "light.turn_on", "entity_id": "light.living_room" }
 </code></pre>
-<p>You then need to consume that incoming information with the following automation:</p>
+<p>그런 다음 다음 자동화를 통해 수신 정보를 이용해야합니다. :</p>
 <pre><code class="language-yaml">automation:
 - id: this_is_the_automation_id
   alias: The optional automation alias
@@ -132,23 +133,23 @@
     service_template: '{{ trigger.event.data.service }}'
 </code></pre>
 <h2>
-<a class="title-link" name="sending-events-to-ifttt" href="#sending-events-to-ifttt"></a> Sending events to IFTTT</h2>
+<a class="title-link" name="ifttt---sending-events-to-ifttt" href="#ifttt---sending-events-to-ifttt"></a> IFTTT로 이벤트 보내기 (Sending events to IFTTT)</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 ifttt:
   key: YOUR_API_KEY
 </code></pre>
-<p><code>key</code> is your API key which can be obtained by viewing the <strong>Settings</strong> of the <a href="https://ifttt.com/services/maker_webhooks/settings" rel="external nofollow">Webhooks applet</a>. It’s the last part of the URL (e.g., <a href="https://maker.ifttt.com/use/MYAPIKEY" rel="external nofollow">https://maker.ifttt.com/use/MYAPIKEY</a>) you will find under <strong>My Applets</strong> &gt; <strong>Webhooks</strong> &gt; <strong>Settings</strong>.</p>
+<p><code>key</code>는 <a href="https://ifttt.com/services/maker_webhooks/settings" rel="external nofollow">Webhooks applet</a>의 <strong>Settings</strong>을 확인하여 얻을 수있는 API 키입니다. URL의 마지막 부분 (예 : <a href="https://maker.ifttt.com/use/MYAPIKEY)%EC%9D%80" rel="external nofollow">https://maker.ifttt.com/use/MYAPIKEY)은</a> <strong>My Applets</strong> &gt; <strong>Webhooks</strong> &gt; <strong>Settings</strong>에서 찾을 수 있습니다.</p>
 <p class="img">
 <img src="/images/integrations/ifttt/finding_key.png">
-Property screen of the Maker Channel
+Maker Channel의 property 화면
 </p>
-<p>Once you have added your key to your <code>configuration.yaml</code> file, restart your Home Assistant server. This will load up the IFTTT integration and make a service available to trigger events in IFTTT.</p>
+<p><code>configuration.yaml</code> 파일에 키를 추가하면 홈어시스턴트 서버를 다시 시작하십시오. 그러면 IFTTT 통합구성요소가 로드되고 IFTTT에서 이벤트를 트리거하는 서비스가 제공됩니다.</p>
 <div class="note">
-After restarting the server, be sure to watch the console for any logging errors that show up in red, white or yellow.
+서버를 다시 시작한 후 콘솔에 빨간색, 흰색 또는 노란색으로 나타나는 로깅 오류가 있는지 확인하십시오.
 </div>
 <h3>
-<a class="title-link" name="multiple-ifttt-keys" href="#multiple-ifttt-keys"></a> Multiple IFTTT keys</h3>
-<p>If you have multiple IFTTT users you can specify multiple IFTTT keys with:</p>
+<a class="title-link" name="-ifttt--multiple-ifttt-keys" href="#-ifttt--multiple-ifttt-keys"></a> 여러개의 IFTTT의 키 (Multiple IFTTT keys)</h3>
+<p>여러 IFTTT 사용자가있는 경우 다음을 사용하여 여러 IFTTT 키를 지정할 수 있습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 ifttt:
   key: 
@@ -156,8 +157,8 @@ ifttt:
     YOUR_KEY_NAME2: YOUR_API_KEY2
 </code></pre>
 <h3>
-<a class="title-link" name="testing-your-trigger" href="#testing-your-trigger"></a> Testing your trigger</h3>
-<p>You can use <strong>Developer Tools</strong> to test your <a href="https://ifttt.com/maker_webhooks" rel="external nofollow">Webhooks</a> trigger. To do this, open the Home Assistant sidebar, click on Developer Tools, and then the <strong>Services</strong> tab. Fill in the following values:</p>
+<a class="title-link" name="--testing-your-trigger" href="#--testing-your-trigger"></a> 트리거 테스트 (Testing your trigger)</h3>
+<p><strong>개발자 도구</strong>를 사용하여 <a href="https://ifttt.com/maker_webhooks" rel="external nofollow">Webhooks</a> 트리거를 테스트 할 수 있습니다. 이렇게하려면 홈어시스턴트 사이드 바를 열고 개발자 도구를 클릭 한 다음 <strong>서비스</strong> 탭을 클릭하십시오. 그리고 다음 값을 입력하십시오</p>
 <table>
 <thead>
 <tr>
@@ -182,10 +183,9 @@ ifttt:
 </table>
 <p class="img">
 <img src="/images/integrations/ifttt/testing_service.png">
-When your screen looks like this, click the 'call service' button.
+다음 화면과 같이 'call service' 버튼을 클릭하십시오.
 </p>
-<p>By default the trigger is sent to all the api keys from <code>configuration.yaml</code>. If you
-want to send the trigger to a specific key use the <code>target</code> field:</p>
+<p>기본적으로 트리거는<code>configuration.yaml</code>에서 모든 API 키로 전송됩니다. 트리거를 특정 키로 보내려면 <code>target</code> 필드를 사용하십시오. :</p>
 <table>
 <thead>
 <tr>
@@ -208,17 +208,17 @@ want to send the trigger to a specific key use the <code>target</code> field:</p
 </tr>
 </tbody>
 </table>
-<p>The <code>target</code> field can contain a single key name or a list of key names.</p>
+<p><code>target</code> 필드는 단일키 이름 또는 키 이름 목록을 포함 할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="setting-up-a-recipe" href="#setting-up-a-recipe"></a> Setting up a recipe</h3>
-<p>Press the <em>New applet</em> button and search for <em>Webhooks</em>.</p>
+<a class="title-link" name="--setting-up-a-recipe" href="#--setting-up-a-recipe"></a> 레시피 설정 (Setting up a recipe)</h3>
+<p><em>새 애플릿</em> 단추를 누르고 <em>Webhooks</em>를 검색하십시오.</p>
 <p class="img">
 <img src="/images/integrations/ifttt/setup_service.png">
-Choose "Webhooks" as service.
+"Webhooks"를 서비스로 선택하십시오.
 </p>
 <p class="img">
 <img src="/images/integrations/ifttt/setup_trigger.png">
-You need to setup a unique trigger for each event you sent to IFTTT.
+IFTTT로 보낸 각 이벤트에 대해 고유한 트리거를 설정해야합니다.
 </p>
 <pre><code class="language-yaml"># Example configuration.yaml Automation entry
 automation:
@@ -230,7 +230,7 @@ automation:
     service: ifttt.trigger
     data: {"event":"TestHA_Trigger", "value1":"Hello World!"}
 </code></pre>
-<p>IFTTT can also be used in scripts and with <code>data_template</code>.  Here is the above automation broken into an automation and script using variables and data_templates.</p>
+<p>IFTTT는 스크립트와 <code>data_template</code>에서도 사용할 수 있습니다.  변수와 data_templates를 사용하여 자동화와 스크립트로 나눈 것이 위의 자동화입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml Automation entry
 automation:
   alias: Startup Notification
@@ -251,8 +251,8 @@ ifttt_notify:
       data_template: {"event":"TestHA_Trigger", "value1":"{{ value1 }}", "value2":"{{ value2 }}", "value3":"{{ value3 }}"}
 </code></pre>
 <h3>
-<a class="title-link" name="additional-channel-examples" href="#additional-channel-examples"></a> Additional Channel Examples</h3>
-<p>Additional examples of using IFTTT channels can be found below.</p>
+<a class="title-link" name="---additional-channel-examples" href="#---additional-channel-examples"></a> 추가 채널 사례 (Additional Channel Examples)</h3>
+<p>IFTTT 채널 사용에 대한 추가 예는 아래에서 확인할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -263,7 +263,7 @@ ifttt_notify:
 <tbody>
 <tr>
 <td><a href="/integrations/ifttt.manything/">Manything</a></td>
-<td>Automates turning recording ON and OFF based on Home Assistant AWAY and HOME values.</td>
+<td>홈어시스턴트 AWAY 및 HOME 값을 기반으로 녹화를 켜고 끄는 것을 자동화합니다..</td>
 </tr>
 </tbody>
 </table>

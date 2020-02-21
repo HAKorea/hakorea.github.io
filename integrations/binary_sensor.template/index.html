@@ -103,12 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>template</code> platform supports binary sensors which get their values from
-other entities. The state of a Template Binary Sensor can only be <code>on</code> or
-<code>off</code>.</p>
+  <p><code>template</code> 플랫폼은 다른 엔터티에서 값을 얻는 binary sensors를 지원합니다. 템플릿 바이너리 센서(Template Binary Sensor)의 상태는 ‘켜기’ 또는 ‘끄기’만 될 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Here is an example of adding a Template Binary Sensor to the <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>다음은 템플릿 바이너리 센서를 <code>configuration.yaml</code> 파일 에 추가하는 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: template
@@ -124,26 +122,26 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="sensors" href="#sensors"></a> sensors</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>List of your sensors.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>센서 리스트.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="sensor_name" href="#sensor_name"></a> sensor_name</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>The slug of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>센서의 슬러그(slug).</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 사용할 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of entity IDs so the sensor only reacts to state changes of these entities. This can be used if the automatic analysis fails to find all relevant entities.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서가 이러한 엔티티의 상태 변경에만 반응하도록 엔티티 ID 목록. 자동 분석에서 모든 관련 엔티티를 찾지 못하면 사용할 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 장치 상태 및 아이콘을 변경하여 <a href="/integrations/binary_sensor/">class of the device</a>를 설정합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -151,12 +149,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>The sensor is <code>on</code> if the template evaluates as <code>True</code> and <code>off</code> otherwise. The actual appearance in the frontend (<code>Open</code>/<code>Closed</code>, <code>Detected</code>/<code>Clear</code> etc) depends on the sensor’s device_class value</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>템플릿이 <code>True</code> 로 평가되면 센서가 <code>on</code>이고, 그렇지 않으면 <code>off</code>입니다. 프런트 엔드의 실제 모양 (<code>Open</code>/<code>Closed</code>,<code>Detected</code>/<code>Clear</code> 등)은 센서의 device_class에 따라 다릅니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="availability_template" href="#availability_template"></a> availability_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the <code>available</code> state of the component. If the template returns <code>true</code>, the device is <code>available</code>. If the template returns any other value, the device will be <code>unavailable</code>. If <code>availability_template</code> is not configured, the component will always be <code>available</code>.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>컴포넌트의 <code>available</code> 상태를 가져 오도록 템플리트를 정의합니다. 템플릿이 <code>true</code>를 반환하면 장치는 <code>available</code> 입니다. 템플릿이 다른 값을 반환하면 장치는 <code>unavailable</code>입니다. <code>availability_template</code>이 설정되어 있지 않으면 컴포넌트를 항상 사용할 수 있습니다`</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -164,62 +162,50 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="icon_template" href="#icon_template"></a> icon_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template for the icon of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 아이콘의 템플릿을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_picture_template" href="#entity_picture_template"></a> entity_picture_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template for the entity picture of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 엔티티 이미지에 대한 템플릿을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="attribute_templates" href="#attribute_templates"></a> attribute_templates</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines templates for attributes of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 속성에 대한 템플릿을 정의.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="attribute-template" href="#attribute-template"></a> attribute: template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>The attribute and corresponding template.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>속성과 해당 템플릿.</p>
 </span></p></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="delay_on" href="#delay_on"></a> delay_on</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>The amount of time the template state must be <em><strong>met</strong></em> before this sensor will switch to <code>on</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 센서가 <code>on</code>으로 전환되기 전에 템플릿 상태가 <em><strong>충족되어야</strong></em> 합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="delay_off" href="#delay_off"></a> delay_off</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>The amount of time the template state must be <em><strong>not met</strong></em> before this sensor will switch to <code>off</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 센서가 <code>off</code>로 전환되기 전에 템플릿 상태가 <em><strong>충족되지않아야</strong></em> 합니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="considerations" href="#considerations"></a> Considerations</h2>
+<a class="title-link" name="" href="#"></a> 고려사항</h2>
 <h3>
 <a class="title-link" name="startup" href="#startup"></a> Startup</h3>
-<p>If you are using the state of a platform that takes extra time to load, the
-Template Binary Sensor may get an <code>unknown</code> state during startup. This results
-in error messages in your log file until that platform has completed loading.
-If you use <code>is_state()</code> function in your template, you can avoid this situation.
-For example, you would replace
-<code>{{ states.switch.source.state == 'on' }}</code>
-with this equivalent that returns <code>true</code>/<code>false</code> and never gives an unknown
-result:
-<code>{{ is_state('switch.source', 'on') }}</code></p>
+<p>로드하는데 시간이 더 걸리는 플랫폼의 상태를 사용하는 경우 시작시 템플릿 바이너리 센서가 <code>unknown</code> 상태가 될 수 있습니다. 그러면 해당 플랫폼이로드를 완료 할 때까지 로그 파일에 오류 메시지가 나타납니다.
+템플릿에서 <code>is_state ()</code>함수를 사용하면 이런 상황을 피할 수 있습니다.
+예를 들어, <code>{{ states.switch.source.state == 'on' }}</code>가 <code>true</code> /<code>false</code>를 반환하고 알 수 없는 결과 값을 절대 반환하지 않게 하는 것으로 대체합니다 : <code>{{ is_state('switch.source', 'on') }}</code></p>
 <h3>
 <a class="title-link" name="entity-ids" href="#entity-ids"></a> Entity IDs</h3>
-<p>The template engine will attempt to work out what entities should trigger an
-update of the sensor. This can fail, for example if your template loops over
-the contents of a group. In this case you can use <code>entity_id</code> to provide a
-list of entity IDs that will cause the sensor to update or you can run the
-service <code>homeassistant.update_entity</code> to update the sensor at will.</p>
+<p>템플릿 엔진은 센서 업데이트를 트리거 할 엔티티를 처리하려고 시도합니다. 예를 들어 템플릿이 그룹의 내용을 반복하는 경우 실패 할 수 있습니다. 이 경우<code>entity_id</code>를 사용하여 센서가 업데이트되도록 하는 엔티티 ID 목록 또는 서비스 <code>homeassistant.update_entity</code>를 실행하여 원하는대로 센서를 업데이트 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this sensor.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는 이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
-<a class="title-link" name="sensor-threshold" href="#sensor-threshold"></a> Sensor Threshold</h3>
-<p>This example indicates true if a sensor is above a given threshold. Assuming a
-sensor of <code>furnace</code> that provides a current reading for the fan motor, we can
-determine if the furnace is running by checking that it is over some threshold:</p>
+<a class="title-link" name="--sensor-threshold" href="#--sensor-threshold"></a> 센서 임계값 (Sensor Threshold)</h3>
+<p>이 예는 센서가 지정된 임계 값을 초과하면 <code>true</code>를 나타냅니다. 팬 모터에 전류 판독 값을 제공하는 <code>furnace</code> 센서를 가정하면 furnace(난방용기계)가 일부 임계값을 초과하는지 확인하여 furnace(난방용기계)가 실행 중인지 확인할 수 있습니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: template
     sensors:
@@ -229,11 +215,8 @@ determine if the furnace is running by checking that it is over some threshold:<
         value_template: "{{ states('sensor.furnace')|float &gt; 2.5 }}"
 </code></pre>
 <h3>
-<a class="title-link" name="switch-as-sensor" href="#switch-as-sensor"></a> Switch as Sensor</h3>
-<p>Some movement sensors and door/window sensors will appear as a switch. By using
-a Template Binary Sensor, the switch can be displayed as a binary sensors. The
-original switch can then be hidden by
-<a href="/getting-started/customizing-devices/">customizing</a>.</p>
+<a class="title-link" name="--switch-as-sensor" href="#--switch-as-sensor"></a> 센서 스위치 (Switch as Sensor)</h3>
+<p>일부 이동 센서 및 도어/창 센서가 스위치로 나타납니다. 템플릿 바이너리 센서를 사용하면 스위치를 바이너리 센서로 표시할 수 있습니다. 그런 다음 <a href="/getting-started/customizing-devices/">customizing</a>으로 원래 스위치를 숨길 수 있습니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: template
     sensors:
@@ -245,10 +228,8 @@ original switch can then be hidden by
         value_template: "{{ is_state('switch.door', 'on') }}"
 </code></pre>
 <h3>
-<a class="title-link" name="combining-multiple-sensors" href="#combining-multiple-sensors"></a> Combining Multiple Sensors</h3>
-<p>This example combines multiple CO sensors into a single overall
-status. When using templates with binary sensors, you need to return
-<code>true</code> or <code>false</code> explicitly.</p>
+<a class="title-link" name="---combining-multiple-sensors" href="#---combining-multiple-sensors"></a> 여러 센서 결합 (Combining Multiple Sensors)</h3>
+<p>이 예는 여러 CO 센서를 단일 전체 상태로 결합합니다. binary sensors 템플릿을 사용하는 경우 명시 적으로 <code>true</code> 또는<code>false</code>를 반환해야합니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: template
     sensors:
@@ -261,12 +242,8 @@ status. When using templates with binary sensors, you need to return
              and is_state('sensor.wardrobe_co_status', 'Ok') }}
 </code></pre>
 <h3>
-<a class="title-link" name="washing-machine-running" href="#washing-machine-running"></a> Washing Machine Running</h3>
-<p>This example creates a washing machine “load running” sensor by monitoring an
-energy meter connected to the washer. During the washer’s operation, the energy
-meter will fluctuate wildly, hitting zero frequently even before the load is
-finished. By utilizing <code>delay_off</code>, we can have this sensor only turn off if
-there has been no washer activity for 5 minutes.</p>
+<a class="title-link" name="--washing-machine-running" href="#--washing-machine-running"></a> 세탁기 실행 (Washing Machine Running)</h3>
+<p>이 예에서는 세탁기에 연결된 에너지 미터를 모니터링하여 세탁기 “load running” 센서를 만듭니다. 세탁기가 작동하는 동안 에너지 미터가 급격히 변동하여 부하가 완료되기 전에도 자주 0을 기록합니다. <code>delay_off</code>를 사용하여 5 분 동안 세탁기 작동이 없는 경우에만 이 센서를 끌 수 있습니다.</p>
 <pre><code class="language-yaml"># Determine when the washing machine has a load running.
 binary_sensor:
   - platform: template
@@ -279,12 +256,8 @@ binary_sensor:
           {{ states('sensor.washing_machine_power')|float &gt; 0 }}
 </code></pre>
 <h3>
-<a class="title-link" name="is-anyone-home" href="#is-anyone-home"></a> Is Anyone Home</h3>
-<p>This example is determining if anyone is home based on the combination of device
-tracking and motion sensors. It’s extremely useful if you have kids/baby sitter/
-grand parents who might still be in your house that aren’t represented by a
-trackable device in Home Assistant. This is providing a composite of WiFi based
-device tracking and Z-Wave multisensor presence sensors.</p>
+<a class="title-link" name="--is-anyone-home" href="#--is-anyone-home"></a> 재실 확인 (Is Anyone Home)</h3>
+<p>이 예는 장치 추적 및 모션 센서의 조합을 기반으로 집에 사람이 있는지 확인하는 것입니다. 홈어시스턴트에서 추적 가능한 장치로 표시되지 않는 집에 있을 수 있는 어린이/베이비 시터/할머니할아버지가 있는 경우 매우 유용합니다. 이것은 WiFi 기반 장치 추적 및 Z-Wave 센서와의 다중 재실 센서의 합성(composite)을 제공합니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: template
     sensors:
@@ -299,8 +272,8 @@ device tracking and Z-Wave multisensor presence sensors.</p>
              or is_state('binary_sensor.family_room_144', 'on') }}
 </code></pre>
 <h3>
-<a class="title-link" name="device-tracker-sensor-with-latitude-and-longitude-attributes" href="#device-tracker-sensor-with-latitude-and-longitude-attributes"></a> Device Tracker sensor with Latitude and Longitude Attributes</h3>
-<p>This example shows how to combine a non-GPS (e.g. NMAP) and GPS device tracker while still including latitude and longitude attributes</p>
+<a class="title-link" name="------" href="#------"></a> 위도 및 경도 속성이있는 장치 추적 센서</h3>
+<p>이 예는 위도 및 경도 속성을 계속 포함하면서 non-GPS (예 : NMAP) 및 GPS 장치 추적기를 결합(composite)하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: template
     sensors:
@@ -323,10 +296,8 @@ device tracking and Z-Wave multisensor presence sensors.</p>
             {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="change-the-icon-when-state-changes" href="#change-the-icon-when-state-changes"></a> Change the icon when state changes</h3>
-<p>This example demonstrates how to use <code>icon_template</code> to change the entity’s
-icon as its state changes, it evaluates the state of its own sensor and uses a
-conditional statement to output the appropriate icon.</p>
+<a class="title-link" name="---" href="#---"></a> 상태가 변경시 아이콘 변경</h3>
+<p>이 예제는 <code>icon_template</code>을 사용하여 상태 변화에 따라 엔티티 아이콘을 변경하고 자체 센서의 상태를 평가하고 조건문을 사용하여 적절한 아이콘을 출력하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">sun:
 binary_sensor:
   - platform: template

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Script Syntax - 홈어시스턴트</title>
+    <title>Script 문법 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Documentation for the Home Assistant Script Syntax.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/scripts/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Script Syntax">
+    <meta property="og:title" content="Script 문법">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/scripts/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Script Syntax">
+    <meta name="twitter:title" content="Script 문법">
     <meta name="twitter:description" content="Documentation for the Home Assistant Script Syntax.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Script Syntax
+      Script 문법
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Scripts are a sequence of actions that Home Assistant will execute. Scripts are available as an entity through the standalone <a href="/integrations/script/">Script component</a> but can also be embedded in <a href="/getting-started/automation-action/">automations</a> and <a href="/integrations/alexa/">Alexa/Amazon Echo</a> configurations.</p>
-<p>The script syntax basic structure is a list of key/value maps that contain actions. If a script contains only 1 action, the wrapping list can be omitted.</p>
+  <p>스크립트는 홈어시스턴트가 실행할 일련의 동작(action)입니다. 스크립트는 독립형 <a href="/integrations/script/">Script component</a>를 통해 엔티티로 사용할 수 있지만 <a href="/getting-started/automation-action/">automations</a> 및 <a href="/integrations/alexa/">Alexa/Amazon Echo</a> 설정에 임베드 될 수도 있습니다.</p>
+<p>스크립트 문법 기본 구조는 동작(action)이 포함 된 키/값 맵의 목록입니다. 스크립트에 동작(action)이 하나만 있으면 줄 바꿈 목록을 생략 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example script integration containing script syntax
 script:
   example_script:
@@ -118,8 +118,8 @@ script:
           message: 'Turned on the ceiling light!'
 </code></pre>
 <h3>
-<a class="title-link" name="call-a-service" href="#call-a-service"></a> Call a Service</h3>
-<p>The most important one is the action to call a service. This can be done in various ways. For all the different possibilities, have a look at the <a href="/getting-started/scripts-service-calls/">service calls page</a>.</p>
+<a class="title-link" name="--call-a-service" href="#--call-a-service"></a> 서비스 호출 (Call a Service)</h3>
+<p>가장 중요한 것은 서비스를 호출하는 동작(action)입니다. 이것은 다양한 방법으로 수행 할 수 있습니다. 다양한 가능성에 대해서는 <a href="/getting-started/scripts-service-calls/">service calls page</a>를 살펴보십시오.</p>
 <pre><code class="language-yaml">- alias: Bedroom lights on
   service: light.turn_on
   data:
@@ -127,21 +127,21 @@ script:
     brightness: 100
 </code></pre>
 <h4>
-<a class="title-link" name="activate-a-scene" href="#activate-a-scene"></a> Activate a Scene</h4>
-<p>Scripts may also use a shortcut syntax for activating scenes instead of calling the <code>scene.turn_on</code> service.</p>
+<a class="title-link" name="--activate-a-scene" href="#--activate-a-scene"></a> 장면 활성화 (Activate a Scene)</h4>
+<p>스크립트는 또한 <code>scene.turn_on</code> 서비스를 호출하는 대신 장면(scene)을 활성화하기 위해 단축 구문을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">- scene: scene.morning_living_room
 </code></pre>
 <h3>
-<a class="title-link" name="test-a-condition" href="#test-a-condition"></a> Test a Condition</h3>
-<p>While executing a script you can add a condition to stop further execution. When a condition does not return <code>true</code>, the script will stop executing. There are many different conditions which are documented at the <a href="/getting-started/scripts-conditions/">conditions page</a>.</p>
+<a class="title-link" name="--test-a-condition" href="#--test-a-condition"></a> 조건 테스트 (Test a Condition)</h3>
+<p>스크립트를 실행하는 동안 추가 실행을 중지하기위한 조건을 추가 할 수 있습니다. 조건이 ‘true’를 반환하지 않으면 스크립트 실행이 중지됩니다. <a href="/getting-started/scripts-conditions/">conditions page</a>에는 여러 가지 조건이 문서화되어 있습니다.</p>
 <pre><code class="language-yaml"># If paulus is home, continue to execute the script below these lines
 - condition: state
   entity_id: device_tracker.paulus
   state: 'home'
 </code></pre>
 <h3>
-<a class="title-link" name="delay" href="#delay"></a> Delay</h3>
-<p>Delays are useful for temporarily suspending your script and start it at a later moment. We support different syntaxes for a delay as shown below.</p>
+<a class="title-link" name="-delay" href="#-delay"></a> 지연 (Delay)</h3>
+<p>지연은 스크립트를 일시적으로 일시 중단하고 나중에 시작하는 데 유용합니다. 아래와 같이 지연에 대해 다른 구문을 지원합니다.</p>
 <pre><code class="language-yaml"># Waits 1 hour
 - delay: '01:00'
 </code></pre>
@@ -163,8 +163,8 @@ script:
 - delay: "{{ states('input_number.minute_delay') | multiply(60) | timestamp_custom('%H:%M:%S',False) }}"
 </code></pre>
 <h3>
-<a class="title-link" name="wait" href="#wait"></a> Wait</h3>
-<p>Wait until some things are complete. We support at the moment <code>wait_template</code> for waiting until a condition is <code>true</code>, see also on <a href="/docs/automation/trigger/#template-trigger">Template-Trigger</a>. It is possible to set a timeout after which the script will continue its execution if the condition is not satisfied. Timeout has the same syntax as <code>delay</code>.</p>
+<a class="title-link" name="-wait" href="#-wait"></a> 대기 (Wait)</h3>
+<p>몇 가지 사항이 완료 될 때까지 기다리십시오. 현재 <code>wait_template</code>이 조건이 <code>true</code>가 될 때까지 기다리는 것을 지원합니다. <a href="/docs/automation/trigger/#template-trigger">Template-Trigger</a>도 참조하십시오. 조건이 충족되지 않으면 스크립트가 계속 실행되는 시간 초과를 설정할 수 있습니다. 타임 아웃은 <code>delay</code>와 같은 문법입니다.</p>
 <pre><code class="language-yaml"># Wait until media player have stop the playing
 - wait_template: "{{ is_state('media_player.floor', 'stop') }}"
 </code></pre>
@@ -172,10 +172,10 @@ script:
 - wait_template: "{{ is_state('binary_sensor.entrance', 'on') }}"
   timeout: '00:01:00'
 </code></pre>
-<p>When using <code>wait_template</code> within an automation <code>trigger.entity_id</code> is supported for <code>state</code>, <code>numeric_state</code> and <code>template</code> triggers, see also <a href="/docs/automation/templating/#available-trigger-data">Available-Trigger-Data</a>.</p>
+<p>자동화 내에서 <code>wait_template</code>을 사용할 때 <code>trigger.entity_id</code>는 <code>state</code>, <code>numeric_state</code> 그리고 <code>template</code> 트리거에 대해 지원됩니다.</p>
 <pre><code class="language-yaml">- wait_template: "{{ is_state(trigger.entity_id, 'on') }}"
 </code></pre>
-<p>It is also possible to use dummy variables, e.g., in scripts, when using <code>wait_template</code>.</p>
+<p>더미 변수(dummy variables)를 사용하는 것도 가능합니다. 예를 들어, 스크립트에서<code>wait_template</code>을 사용할 때.</p>
 <pre><code class="language-yaml"># Service call, e.g., from an automation.
 - service: script.do_something
   data_template:
@@ -184,16 +184,16 @@ script:
 # Inside the script
 - wait_template: "{{ is_state(dummy, 'off') }}"
 </code></pre>
-<p>You can also get the script to abort after the timeout by using optional <code>continue_on_timeout</code></p>
+<p>옵션으로 <code>continue_on_timeout</code>을 사용하여 타임 아웃 후에 스크립트가 중단되도록 할 수 도 있습니다.</p>
 <pre><code class="language-yaml"># Wait until a valve is &lt; 10 or abort after 1 minute.
 - wait_template: "{{ state_attr('climate.kitchen', 'valve')|int &lt; 10 }}"
   timeout: '00:01:00'
   continue_on_timeout: 'false'
 </code></pre>
-<p>Without <code>continue_on_timeout</code> the script will always continue.</p>
+<p><code>continue_on_timeout</code>이 없으면 스크립트는 항상 계속됩니다.</p>
 <h3>
-<a class="title-link" name="fire-an-event" href="#fire-an-event"></a> Fire an Event</h3>
-<p>This action allows you to fire an event. Events can be used for many things. It could trigger an automation or indicate to another integration that something is happening. For instance, in the below example it is used to create an entry in the logbook.</p>
+<a class="title-link" name="--fire-an-event" href="#--fire-an-event"></a> 이벤트 발생 (Fire an Event)</h3>
+<p>이 동작(action)은 이벤트를 발생시킬 수 있습니다. 많은 것들에 이벤트가 사용될 수 있습니다. 자동화를 트리거하거나 다른 연동에 문제가 있음을 나타낼 수 있습니다. 예를 들어 아래 예에서는 로그북에 항목을 만드는 데 사용됩니다.</p>
 <pre><code class="language-yaml">- event: LOGBOOK_ENTRY
   event_data:
     name: Paulus
@@ -201,16 +201,15 @@ script:
     entity_id: device_tracker.paulus
     domain: light
 </code></pre>
-<p>You can also use event_data_template to fire an event with custom data. This could be used to pass data to another script awaiting
-an event trigger.</p>
+<p>event_data_template을 사용하여 사용자 정의 데이터로 이벤트를 발생시킬 수도 있습니다. 이벤트 트리거를 기다리는 다른 스크립트로 데이터를 전달하는 데 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">- event: MY_EVENT
   event_data_template:
     name: myEvent
     customData: "{{ myCustomVariable }}"
 </code></pre>
 <h3>
-<a class="title-link" name="raise-and-consume-custom-events" href="#raise-and-consume-custom-events"></a> Raise and Consume Custom Events</h3>
-<p>The following automation shows how to raise a custom event called <code>event_light_state_changed</code> with <code>entity_id</code> as the event data. The action part could be inside a script or an automation.</p>
+<a class="title-link" name="-----raise-and-consume-custom-events" href="#-----raise-and-consume-custom-events"></a> 사용자정의 이벤트 발생 및 소비 (Raise and Consume Custom Events)</h3>
+<p>다음 자동화는 <code>entity_id</code>를 이벤트 데이터로 사용하여 <code>event_light_state_changed</code>라는 사용자 정의 이벤트를 발생시키는 방법을 보여줍니다. 동작 부분은 스크립트 또는 자동화 내부에 있을 수 있습니다.</p>
 <pre><code class="language-yaml">- alias: Fire Event
   trigger:
     - platform: state
@@ -221,7 +220,7 @@ an event trigger.</p>
       event_data:
         state: 'on'
 </code></pre>
-<p>The following automation shows how to capture the custom event <code>event_light_state_changed</code>, and retrieve corresponding <code>entity_id</code> that was passed as the event data.</p>
+<p>다음 자동화는 사용자 정의 이벤트 <code>event_light_state_changed</code>를 캡처하고 이벤트 데이터로 전달된 해당 <code>entity_id</code>를 검색하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">- alias: Capture Event
   trigger:
     - platform: event

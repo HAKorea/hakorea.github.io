@@ -103,25 +103,44 @@
   <hr class="divider">
   
 
-  <p>The <code>tuya</code> integration is the main integration to integrate all <a href="https://www.tuya.com" rel="external nofollow">Tuya Smart</a> related platforms. You will need your Tuya account information (username, password and account country code) to discover and control devices which related to your account.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>Tuya 통합구성요소를 사용하기 전에 Tuya 서비스가 클라우드 폴링 방식을 사용함으로 인해 홈어시스턴트에서 자주 끊기거나 제품이 오동작을 하는 사례가 자주 보고가 되고 있습니다. 이런 문제점이 지속 발생하거나 클라우드보다는 로컬방식의 운영을 원하는 분들은 ESPHOME 혹은 Tasmota으로 노드를 변경시켜 운영하는 방법을 추천합니다.</p>
+<p><strong>1. ESPHOME</strong></p>
 <ul>
 <li>
-<strong>Climate</strong> - The platform supports the air conditioner and heater.</li>
+<p><a href="http://esphome.io" rel="external nofollow">ESPHOME 홈페이지</a></p>
+</li>
 <li>
-<strong>Cover</strong> - The platform supports curtains.</li>
+<p><a href="https://cafe.naver.com/ArticleList.nhn?search.clubid=29860180&amp;search.menuid=14&amp;search.boardtype=L" rel="external nofollow">HA 네이버 카페 ESPHOME 적용 사례</a></p>
+</li>
+</ul>
+<p><strong>2. TASMOTA</strong></p>
+<ul>
 <li>
-<strong>Fan</strong> - The platform supports most kinds of Tuya fans.</li>
+<p><a href="https://templates.blakadder.com/" rel="external nofollow">Tasmota 지원 가능 제품 사이트</a></p>
+</li>
 <li>
-<strong>Light</strong> - The platform supports most kinds of Tuya light.</li>
+<p><a href="https://tasmota.github.io/docs/#/Home" rel="external nofollow">Tasmota 공식 지원 사이트</a></p>
+</li>
+</ul>
+<p><code>tuya</code> 통합구성요소는 모든 <a href="https://www.tuya.com" rel="external nofollow">Tuya Smart</a> 제품을 연동 할 수있는 종합 통합구성요소입니다. 계정과 관련된 장치를 검색하고 제어하려면 Tuya 계정 정보 (사용자 이름, 비밀번호 및 계정 국가 코드)가 필요합니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다:</p>
+<ul>
 <li>
-<strong>Scene</strong> - The device state in frontend panel will not change immediately after you activate a scene.</li>
+<strong>Climate</strong> - 에어컨 및 히터를 지원.</li>
 <li>
-<strong>Switch</strong> - The platform supports switch and socket.</li>
+<strong>Cover</strong> - 커튼을 지원.</li>
+<li>
+<strong>Fan</strong> - 대부분의 Tuya fan(팬이 돌아가는 대부분의 제품)제품 지원.</li>
+<li>
+<strong>Light</strong> - 대부분의 Tuya 라이트를 지원</li>
+<li>
+<strong>Scene</strong> -  scene을 활성화 한 직후 프런트 엔드 패널의 장치 상태가 변경되지 않습니다.</li>
+<li>
+<strong>Switch</strong> - 스위치와 소켓을 지원.</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add your Tuya devices into your Home Assistant installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Tuya 장치를 Home Assistant 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml">tuya:
   username: YOUR_TUYA_USERNAME
   password: YOUR_TUYA_PASSWORD
@@ -133,20 +152,20 @@
   <dl class="">
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your username to log in to Tuya. This may be your phone number which needs to be enquoted as this is a string.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Tuya에 로그인하기위한 사용자 이름. 이 번호는 문자열이므로 따옴표로 묶어야하는 전화 번호 일 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your password to log in to Tuya.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Tuya에 로그인하기위한 비밀번호</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="country_code" href="#country_code"></a> country_code</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your account <a href="https://www.countrycode.org/" rel="external nofollow">country code</a>, e.g., 1 for USA or 86 for China, again enquoted.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>계정 국가 코드 (예 : 미국의 경우 1, 중국의 경우 86)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="platform" href="#platform"></a> platform</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The app where your account register. <code>tuya</code> for Tuya Smart, <code>smart_life</code> for Smart Life, <code>jinvoo_smart</code> for Jinvoo Smart.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>계정이 등록 된 앱. <code>tuya</code>는 Tuya Smart, <code>smart_life</code>는 Smart Life, <code>jinvoo_smart</code>는 Jinvoo Smart.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -155,13 +174,13 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="service" href="#service"></a> Service</h2>
-<p>These services are available for the <code>tuya</code> component:</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>이러한 서비스는 <code>tuya</code> 구성 요소에 사용 가능합니다 .:</p>
 <ul>
 <li>force_update</li>
 <li>pull_devices</li>
 </ul>
-<p>Devices state data and new devices will refresh automatically. If you want to refresh all devices information or get new devices related to your account manually, you can call the <code>force_update</code> or <code>pull_devices</code> service.</p>
+<p>장치 상태 데이터와 새 장치가 자동으로 새로 고쳐집니다. 모든 장치 정보를 새로 고치거나 계정과 관련된 새 장치를 수동으로 얻으려면 <code>force_update</code> 또는 <code>pull_devices</code> 서비스 에 문의하십시오 .</p>
 
 
 </article>

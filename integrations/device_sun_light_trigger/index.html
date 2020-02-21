@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Presence-based Lights - 홈어시스턴트</title>
+    <title>재실 기반 조명 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to automate your lights with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/device_sun_light_trigger/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Presence-based Lights">
+    <meta property="og:title" content="재실 기반 조명">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/device_sun_light_trigger/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Presence-based Lights">
+    <meta name="twitter:title" content="재실 기반 조명">
     <meta name="twitter:description" content="Instructions on how to automate your lights with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Presence-based Lights
+      재실 기반 조명
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Home Assistant has a built-in integration called <code>device_sun_light_trigger</code> to help you automate your lights. The integration will:</p>
+  <p>홈어시스턴트에는 <code>device_sun_light_trigger</code> 조명을 자동화하는 데 도움 이되는 내장 통합구성요소 기능이 있습니다.</p>
 <ul>
-<li>Fade in the lights when the sun is setting and there are people home</li>
-<li>Turn on the lights when people get home after the sun has set</li>
-<li>Turn off the lights when all people leave the house</li>
+<li>해가지고 사람들이 집에있을 때 불빛이 희미 해집니다</li>
+<li>해가 진 후에 사람들이 집에 돌아 오면 불을 켭니다</li>
+<li>모든 사람들이 집을 떠날 때 불을 끄십시오</li>
 </ul>
-<p>This integration requires the integrations <a href="/integrations/sun/">sun</a>, <a href="/integrations/device_tracker/">device_tracker</a>, <a href="/integrations/person/">person</a> and <a href="/integrations/light/">light</a> to be enabled.</p>
-<p>To enable this integration, add the following lines to your <code>configuration.yaml</code> file:</p>
+<p>이 통합구성요소를 위해서는 <a href="/integrations/sun/">sun</a>, <a href="/integrations/device_tracker/">device_tracker</a>, <a href="/integrations/person/">person</a> 그리고 <a href="/integrations/light/">light</a> 통합구성요소가 활성화 되어야합니다.</p>
+<p>이 연동을 가능하게하려면 configuration.yaml파일에 다음 행을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 device_sun_light_trigger:
 </code></pre>
@@ -120,12 +120,12 @@ device_sun_light_trigger:
   <dl class="">
 <dt>
 <a class="title-link" name="light_group" href="#light_group"></a> light_group</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Specify a specific light/group of lights that has to be turned on.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>켜져 야 할 특정 조명/조명 그룹을 지정하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="light_profile" href="#light_profile"></a> light_profile</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Specify which light profile to use when turning lights on.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>조명을 켤 때 사용할 조명 프로파일을 지정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -133,12 +133,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="device_group" href="#device_group"></a> device_group</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Specify which group to track. The group can contain device_trackers or persons.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>추적할 그룹을 지정하십시오. 그룹에는 device_trackers 또는 person이 포함될 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disable_turn_off" href="#disable_turn_off"></a> disable_turn_off</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Disable lights being turned off when everybody leaves the house.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>모두가 집을 떠날 때 조명이 꺼지도록합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -146,7 +146,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>A full configuration example could look like this:</p>
+<p>전체 구성 예는 다음과 같습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 device_sun_light_trigger:
   light_group: group.living_room

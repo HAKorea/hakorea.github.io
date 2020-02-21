@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Timer - 홈어시스턴트</title>
+    <title>타이머 (Timer) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate timers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/timer/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Timer">
+    <meta property="og:title" content="타이머 (Timer)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/timer/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Timer">
+    <meta name="twitter:title" content="타이머 (Timer)">
     <meta name="twitter:description" content="Instructions on how to integrate timers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Timer
+      타이머 (Timer)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>timer</code> integration aims to simplify automations based on (dynamic) durations.</p>
-<p>When a timer finishes or gets canceled the corresponding events are fired. This allows you to differentiate if a timer has switched from <code>active</code> to <code>idle</code> because the given duration has elapsed or it has been canceled. To control timers in your automations you can use the services mentioned below. When calling the <code>start</code> service on a timer that is already running, it resets the duration it will need to finish and restart the timer without triggering a canceled or finished event. This, for example, makes it easy to create timed lights that get triggered by motion. Starting a timer triggers a started event unless the timer is paused, in that case, it triggers a restarted event.</p>
+  <p><code>timer</code> 통합구성요소의 목적은 (동적으로)기간에 따라 자동화를 단순화합니다</p>
+<p>타이머가 끝나거나 취소되면 해당 이벤트가 시작됩니다. 이를 통해 주어진 지속시간이 경과됬거나 취소되었기 때문에 타이머가 <code>active</code>에서 <code>idle</code>로 전환되었는지 구별할 수 있습니다. 자동화에서 타이머를 제어하려면 아래 언급된 서비스를 사용할 수 있습니다. 이미 실행중인 타이머에서 <code>start</code>서비스를 호출하면, 취소되거나 완료된 이벤트를 트리거하지 않고 타이머를 완료하고 다시시작해야하는 시간이 재설정됩니다. 예를 들어 모션센서에 의해 트리거되는 시간이 지정된 조명을 쉽게 만들 수 있습니다. 타이머를 시작하면 타이머가 일시중지되지 않은 경우 시작된 이벤트가 트리거되며, 이 경우 다시시작된 이벤트가 트리거됩니다.</p>
 <div class="note warning">
-  With the current implementation timers don't persist over restarts. After a restart, they will be idle again, together with their initial configuration.
+  현재 구현 타이머에서는 다시시작해도 타이머가 지속되지 않습니다. 다시시작하면 초기설정과 함께 다시 유휴(idle)상태가 됩니다.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add a timer to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
+<p>설치에 타이머를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 timer:
   laundry:
@@ -122,17 +122,17 @@ timer:
   <dl class="">
 <dt>
 <a class="title-link" name="alias" href="#alias"></a> [alias]</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Alias for the timer. Multiple entries are allowed.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>타이머의 별칭. 여러 항목이 허용.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Friendly name of the timer.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>타이머의 친숙한 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="duration" href="#duration"></a> duration</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer time">integer | time</span>)</span><span class="required">(Optional)</span><span class="description"><p>Initial duration in seconds or <code>00:00:00</code> when Home Assistant starts.</p>
+<p class="desc"><span class="type">(<span class="integer time">integer | time</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트 시작시의 초기 지속시간입니다. 예로서 초단위 또는 <code>00:00:00</code></p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -140,14 +140,14 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Set a custom icon for the state card.</p>
+<dd><p class="desc"><span class="type">(<span class="icon"><a href="/docs/configuration/customizing-devices/#icon">icon</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>상태 카드의 사용자 정의 아이콘을 설정.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
-<p>Pick an icon that you can find on <a href="https://materialdesignicons.com/" rel="external nofollow">materialdesignicons.com</a> to use for your timer and prefix the name with <code>mdi:</code>. For example <code>mdi:car</code>, <code>mdi:ambulance</code>, or  <code>mdi:motorbike</code>.</p>
+<p><a href="https://materialdesignicons.com/" rel="external nofollow">materialdesignicons.com</a>에서 타이머에 사용할 아이콘을 선택하고 이름 앞에 <code>mdi :</code>를 붙입니다. 예를 들어 <code>mdi : car</code>,<code>mdi : ambulance</code> 또는 <code>mdi : motorbike</code></p>
 <h2>
-<a class="title-link" name="events" href="#events"></a> Events</h2>
+<a class="title-link" name="-events" href="#-events"></a> 이벤트 (Events)</h2>
 <table>
 <thead>
 <tr>
@@ -158,32 +158,32 @@ Default value: </p>
 <tbody>
 <tr>
 <td>timer.cancelled</td>
-<td>Fired when a timer has been canceled</td>
+<td>타이머가 취소되면 시작</td>
 </tr>
 <tr>
 <td>timer.finished</td>
-<td>Fired when a timer has completed</td>
+<td>타이머가 완료되면 시작</td>
 </tr>
 <tr>
 <td>timer.started</td>
-<td>Fired when a timer has been started</td>
+<td>타이머가 시작되면 시작</td>
 </tr>
 <tr>
 <td>timer.restarted</td>
-<td>Fired when a timer has been restarted</td>
+<td>타이머가 다시 시작되면 시작</td>
 </tr>
 <tr>
 <td>timer.paused</td>
-<td>Fired when a timer has been paused</td>
+<td>타이머가 일시 중지되면 시작</td>
 </tr>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="-services" href="#-services"></a> 서비스 (Services)</h2>
 <h3>
-<a class="title-link" name="service-timerstart" href="#service-timerstart"></a> Service timer.start</h3>
-<p>Starts or restarts a timer with the provided duration. If no duration is given, it will either restart with its initial value, or continue a paused timer with the remaining duration. If a new duration is provided, this will be the new default for the timer until Home Assistant is restarted (which loads your default values). The duration can be specified as a number of seconds or the easier to read <code>01:23:45</code> format.<br>
-You can also use <code>entity_id: all</code> and all active timers will be started.</p>
+<a class="title-link" name="timerstart-" href="#timerstart-"></a> timer.start 서비스</h3>
+<p>제공된 지속시간으로 타이머를 시작하거나 다시시작합니다. 지속시간이 제공되지 않으면 초기값으로 다시시작하거나 남은 지속시간으로 일시중지된 타이머를 계속합니다. 새 지속시간이 제공되면 홈어시스턴트가 다시시작될 때까지(기본값이 로드됨) 타이머의 새 기본값이 됩니다. 지속시간은 초단위 또는 읽기쉬운 <code>01:23:45</code> 형식으로 지정할 수 있습니다.
+<code>entity_id: all</code>을 사용할 수도 있으며 모든 활성 타이머가 시작됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -196,18 +196,57 @@ You can also use <code>entity_id: all</code> and all active timers will be start
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Name of the entity to take action, e.g., <code>timer.timer0</code>.</td>
+<td>활동을 시작할 entitiy 이름, 예: <code>timer.timer0</code>.</td>
 </tr>
 <tr>
 <td><code>duration</code></td>
 <td>yes</td>
-<td>Duration in seconds or <code>00:00:00</code> until the timer finishes.</td>
+<td>타이머가 끝날 때까지 지속되는 시간 (초) 또는 <code>00:00:00</code>
+</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-timerpause" href="#service-timerpause"></a> Service timer.pause</h3>
-<p>Pause a running timer. This will retain the remaining duration for later continuation. You can also use <code>entity_id: all</code> and all active timers will be paused.</p>
+<a class="title-link" name="timerpause-" href="#timerpause-"></a> timer.pause 서비스</h3>
+<p>실행중인 타이머를 일시 중지. 이는 나중에 계속할 수 있도록 남은 지속 시간이 유지됩니다. <code>entity_id: all</code>을 사용할 수도 있으며 모든 활성 타이머가 일시 중지됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>활동을 시작할 entitiy 이름, 예: <code>timer.timer0</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="timercancel-" href="#timercancel-"></a> timer.cancel 서비스</h3>
+<p>활성 타이머를 취소하십시오. <code>timer.finished</code> 이벤트를 발생시키지 않고 지속시간을 마지막으로 알려진 초기값으로 재설정합니다. <code>entity_id: all</code>을 사용할 수도 있으며 모든 활성 타이머가 취소됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>활동을 시작할 entitiy 이름, 예: <code>timer.timer0</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a class="title-link" name="timerfinish-" href="#timerfinish-"></a> timer.finish 서비스</h3>
+<p>예정된 시간보다 빨리 실행중인 타이머를 수동으로 완료하십시오. <code>entity_id: all</code>을 사용할 수도 있으며 모든 활성 타이머가 완료됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -225,63 +264,25 @@ You can also use <code>entity_id: all</code> and all active timers will be start
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-timercancel" href="#service-timercancel"></a> Service timer.cancel</h3>
-<p>Cancel an active timer. This resets the duration to the last known initial value without firing the <code>timer.finished</code> event. You can also use <code>entity_id: all</code> and all active timers will be canceled.</p>
-<table>
-<thead>
-<tr>
-<th>Service data attribute</th>
-<th>Optional</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>entity_id</code></td>
-<td>no</td>
-<td>Name of the entity to take action, e.g., <code>timer.timer0</code>.</td>
-</tr>
-</tbody>
-</table>
+<a class="title-link" name="timerreload-" href="#timerreload-"></a> timer.reload 서비스</h3>
+<p>홈어시스턴트 자체를 다시시작하지 않고 <code>timer</code> 설정을 다시로드하십시오. 이 서비스에는 서비스 데이터 속성이 없습니다.</p>
 <h3>
-<a class="title-link" name="service-timerfinish" href="#service-timerfinish"></a> Service timer.finish</h3>
-<p>Manually finish a running timer earlier than scheduled. You can also use <code>entity_id: all</code> and all active timers will be finished.</p>
-<table>
-<thead>
-<tr>
-<th>Service data attribute</th>
-<th>Optional</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>entity_id</code></td>
-<td>no</td>
-<td>Name of the entity to take action, e.g., <code>timer.timer0</code>.</td>
-</tr>
-</tbody>
-</table>
-<h3>
-<a class="title-link" name="service-timerreload" href="#service-timerreload"></a> Service timer.reload</h3>
-<p>Reload <code>timer</code>’s configuration without restarting Home Assistant itself. This service takes no service data attributes.</p>
-<h3>
-<a class="title-link" name="use-the-service" href="#use-the-service"></a> Use the service</h3>
-<p>Select <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Services</strong> from the <strong>Developer Tools</strong>. Choose <strong>timer</strong> from the list of <strong>Domains</strong>, select the <strong>Service</strong>, enter something like the sample below into the <strong>Service Data</strong> field, and hit <strong>CALL SERVICE</strong>.</p>
+<a class="title-link" name="-" href="#-"></a> 서비스 사용하기</h3>
+<p><strong>Developer Tools</strong> 에서 <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"><strong>Services</strong> 선택하십시오. <strong>domain</strong> 목록에서 <strong>timer</strong>를 선택하고 <strong>service</strong>를 선택한 다음 <strong>service data</strong> 필드에 아래 샘플과 같은 것을 입력하고 <strong>CALL SERVICE</strong>를 누르십시오.</p>
 <pre><code class="language-json">{
   "entity_id": "timer.timer0"
 }
 </code></pre>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>Set a timer called <code>test</code> to a duration of 30 seconds.</p>
+<a class="title-link" name="-examples" href="#-examples"></a> 사례 (Examples)</h2>
+<p>30 초 동안 <code>test</code>라는 타이머를 설정하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 timer:
   test:
     duration: '00:00:30'
 </code></pre>
 <h3>
-<a class="title-link" name="control-a-timer-from-the-frontend" href="#control-a-timer-from-the-frontend"></a> Control a timer from the frontend</h3>
+<a class="title-link" name="---" href="#---"></a> 프론트 엔드에서 타이머 제어</h3>
 <pre><code class="language-yaml"># Example automations.yaml entry
 - alias: Timerswitch
   id: 'Timerstart'
@@ -308,8 +309,8 @@ timer:
       message: "Timer stop"
 </code></pre>
 <h3>
-<a class="title-link" name="control-a-timer-manually" href="#control-a-timer-manually"></a> Control a timer manually</h3>
-<p>With the <a href="/integrations/script/"><code>script</code></a> integration you would be able to control a timer (see above for a <code>timer</code> configuration sample) manually.</p>
+<a class="title-link" name="--" href="#--"></a> 타이머를 수동으로 제어</h3>
+<p><a href="/integrations/script/"><code>script</code></a> 통합구성요소를 사용하면 타이머를 수동으로 제어 할 수 있습니다 (위의 타이머 구성 샘플 참조).</p>
 <pre><code class="language-yaml">script:
   start_timer:
     alias: Start timer

@@ -103,12 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>mjpeg</code> camera platform allows you to integrate IP cameras which are capable
-to stream their video with MJPEG into Home Assistant.</p>
+  <p><code>mjpeg</code> 카메라 플랫폼은 홈어시스턴트로 MJPEG과의 비디오를 스트리밍 할 수있는 IP 카메라를 통합 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this camera in your installation,
-add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 이 카메라를 활성화하려면 <code>configuration.yaml</code>파일에 다음을 추가 하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: mjpeg
@@ -120,28 +118,28 @@ camera:
   <dl class="">
 <dt>
 <a class="title-link" name="mjpeg_url" href="#mjpeg_url"></a> mjpeg_url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The URL your camera serves the video on, e.g., <code>http://192.168.1.21:2112/</code></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>카메라에서 동영상을 제공하는 URL. 예들들면 <code>http://192.168.1.21:2112/</code></p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="still_image_url" href="#still_image_url"></a> still_image_url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The URL for thumbnail picture if camera support that.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라가 지원하는 경우 썸네일 사진의 URL.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>This parameter allows you to override the name of your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 카메라 이름을 무시 가능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username for accessing your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에 액세스하기위한 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The password for accessing your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에 액세스하기위한 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>basic</code> or <code>digest</code> auth for requests.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>basic</code> 또는 <code>digest</code> 요청에 대한 인증.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -150,7 +148,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Validate the ssl certificate for this camera.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 카메라의 SSL 인증서를 확인.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -159,15 +157,15 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>Example of using a DCS-930L Wireless N Network Camera from D-Link:</p>
+<a class="title-link" name="" href="#"></a> 예시</h2>
+<p>D-Link의 DCS-930L Wireless N 네트워크 카메라 사용 예 :</p>
 <pre><code class="language-yaml">camera:
   - platform: mjpeg
     name: Livingroom Camera
     still_image_url: http://IP/image.jpg
     mjpeg_url: http://IP/video/mjpg.cgi
 </code></pre>
-<p>Example of integrating Blue Iris Cameras from a Blue Iris server.</p>
+<p>Blue Iris 서버에서 Blue Iris 카메라를 연동하는 예</p>
 <pre><code class="language-yaml">camera:
   - platform: mjpeg
     name: Livingroom Camera

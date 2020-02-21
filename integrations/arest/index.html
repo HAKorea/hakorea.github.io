@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p>There is currently support for the following device types within Home Assistant:</p>
+  <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다 :</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#sensor">Sensor</a></li>
@@ -111,8 +111,9 @@
 </ul>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>The <code>arest</code> binary sensor platform allows you to get all data from your devices (like Arduinos with an ethernet/wifi connection, the ESP8266, and the Raspberry Pi) running the <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful framework.</p>
-<p>To use your aREST binary sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p><code>arest</code> 바이너리 센서 플랫폼을 사용하면 [aREST] (<a href="https://arest.io/" rel="external nofollow">https://arest.io/</a>) RESTful 프레임 워크를 실행하는 장치
+(이더넷 / Wi-Fi 연결이있는 Arduinos, ESP8266 및 Raspberry Pi와 같은)에서 모든 데이터를 가져올 수 있습니다.</p>
+<p>설치시 aREST 이진 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: arest
@@ -125,23 +126,23 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="resource" href="#resource"></a> resource</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>IP address and schema of the device that is exposing an aREST API, e.g., <code>http://192.168.1.10</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>aREST API를 노출하는 장치의 IP 주소 및 스키마 (예를들면 <code>http://192.168.1.10</code>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="pin" href="#pin"></a> pin</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>Number of the pin to monitor.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터링 할 핀 번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Let you overwrite the name of the device. By default <em>name</em> from the device is used.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어 씁니다. 기본적으로 장치의 <em>이름</em> 이 사용됨.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>Accessing the URL <code>http://IP_ADDRESS/digital/PIN_NUMBER</code> should give you the state of the pin inside a JSON response as <code>return_value</code>.</p>
+<p>URL <code>http://IP_ADDRESS/digital/PIN_NUMBER</code>에 액세스하면 JSON 응답 내부의 핀 상태를 <code>return_value</code>로 제공해야 합니다.</p>
 <pre><code class="language-bash">$ curl -X GET http://192.168.0.5/digital/9
 {"return_value": 0, "id": "office1", "name": "Office", "connected": true}
 </code></pre>
-<p>An example for Pin 9 inspired by the command above could look like this:</p>
+<p>위 명령에서 전달한 핀 9의 예는 다음과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: arest
@@ -150,12 +151,12 @@ binary_sensor:
     name: Office
 </code></pre>
 <div class="note">
-This sensor is not suitable for fast state changes because there is a high possibility that the change took place between two update cycle.
+이 센서는 두 번의 업데이트주기 사이에 변경이 발생할 가능성이 높기 때문에 빠른 상태 변경에는 적합하지 않습니다.
 </div>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>arest</code> sensor platform allows you to get all data from your devices (like Arduinos with a Ethernet/Wifi connection, the ESP8266, and the Raspberry Pi) running the <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful framework.</p>
-<p>To use your aREST enabled device in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p><code>arest</code> 센서 플랫폼을 사용하면 <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful 프레임 워크를 실행하는 장치 (이더넷 / Wi-Fi 연결이있는 Arduino, ESP8266 및 Raspberry Pi 등)에서 모든 데이터를 가져올 수 있습니다.</p>
+<p>설치시 aREST 지원 장치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: arest
@@ -173,12 +174,12 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="resource" href="#resource"></a> resource</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>IP address and schema of the device that is exposing an aREST API, e.g., <code>https://192.168.1.10</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>aREST API를 노출하는 장치의 IP 주소 및 스키마 (예를들어 <code>https : // 192.168.1.10</code>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Let you overwrite the name of the device.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어 씁니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -186,59 +187,59 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="pins" href="#pins"></a> pins</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of pins to monitor. Analog pins need a leading <strong>A</strong> for the pin number.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 핀 목록. 아날로그 핀 은 핀 번호에 선행 <strong>A</strong> 가 필요합니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="pin" href="#pin"></a> pin</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Pin number to use.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>사용할 핀 번호.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name of the variable you wish to monitor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터링하려는 변수의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the unit of measurement of the sensor, if any.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 측정 단위를 정의 (있는 경우).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the payload.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>페이로드에서 값을 추출하기 위해 <a href="/docs/configuration/templating/#processing-incoming-data">template</a>을 정의.</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="monitored_variables" href="#monitored_variables"></a> monitored_variables</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of exposed variables.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>노출 된 변수 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="variable" href="#variable"></a> variable</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the variable to monitor.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터 할 변수의 이름.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name to use for the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 사용할 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the units of measurement of the sensor, if any.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 측정 단위를 정의 (있는 경우).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the payload.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>페이로드에서 값을 추출하기 위해 <a href="/docs/configuration/templating/#processing-incoming-data">template</a>을 정의</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 </dl>
 </div>
-<p>The variables in the <code>monitored_variables</code> array must be available in the response of the device. As a starting point you could use the one of the example sketches (eg.  <a href="https://raw.githubusercontent.com/marcoschwartz/aREST/master/examples/Ethernet/Ethernet.ino" rel="external nofollow">Ethernet</a> for an Arduino with Ethernet shield). In those sketches are two variables (<code>temperature</code> and <code>humidity</code>) available which will act as endpoints.</p>
-<p>Accessing one of the endpoints (eg. <code>http://192.168.1.10/temperature</code>) will give you the value inside a JSON response.</p>
+<p><code>monitored_variables</code> 배열의 변수는 장치의 응답으로 사용 가능해야 합니다. 이더넷 기능이있는 Arduino에 대한 스케치 (예 : <a href="https://raw.githubusercontent.com/marcoschwartz/aREST/master/examples/Ethernet/Ethernet.ino" rel="external nofollow">Ethernet</a>) 중 하나를 사용할 수 있습니다. 이 스케치에서는 endpoint 역할을 하는 두 가지 변수 (<code>온도</code> 및 <code>습도</code>)를 사용할 수 있습니다.</p>
+<p>엔드 포인트 중 하나에 액세스하면 (예를 들면 <code>http://192.168.1.10/temperature</code>) JSON 응답 내부의 값을 제공합니다.</p>
 <pre><code class="language-json">{"temperature": 23, "id": "sensor01", "name": "livingroom", "connected": true}
 </code></pre>
-<p>The root will give you a JSON response that contains all variables and their current values along with some device details.</p>
+<p>루트는 모든 변수 및 현재 값과 일부 장치 세부 정보가 포함 된 JSON 응답을 제공합니다.</p>
 <pre><code class="language-json">{
    "variables" : {
       "temperature" : 23,
@@ -249,13 +250,13 @@ Default value: </p>
    "connected" : true
 }
 </code></pre>
-<p><code>return_value</code> contains the sensor’s data in a JSON response for a given pin (eg. <code>http://192.168.1.10/analog/2/</code> or  <code>http://192.168.1.10/digital/7/</code>).</p>
+<p><code>return_value</code>는 주어진 핀에 대한 JSON 응답의 센서 데이터를 포함합니다. (예: <code>http://192.168.1.10/analog/2/</code> 혹은  <code>http://192.168.1.10/digital/7/</code>).</p>
 <pre><code class="language-json">{"return_value": 34, "id": "sensor02", "name": "livingroom", "connected": true}
 </code></pre>
 <h2>
-<a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>arest</code> switch platform allows you to toggle pins of your devices (like Arduino boards with an Ethernet/Wifi connection, ESP8266 based devices, and the Raspberry Pi) running the <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful framework.</p>
-<p>To use your aREST enabled device with pins in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-switch" href="#-switch"></a> 스위치 (Switch)</h2>
+<p><code>arest</code> 스위치 플랫폼을 사용하면 <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful 프레임 워크를 실행하는 장치(이더넷 / Wi-Fi 연결이있는 Arduino 보드, ESP8266 기반 장치 및 Raspberry Pi와 같은)에서 핀을 토글 할 수 있습니다.</p>
+<p>설치시 핀이있는 aREST 지원 장치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: arest
@@ -267,7 +268,7 @@ switch:
         name: Switch
         invert: true
 </code></pre>
-<p>If you want to use custom functions, then add the following to your <code>configuration.yaml</code> file:</p>
+<p>커스텀 함수를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: arest
@@ -283,25 +284,25 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="resource" href="#resource"></a> resource</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>IP address and schema of the device that is exposing an aREST API, e.g., <code>http://192.168.1.10</code> (no-trailing slash)</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>aREST API를 노출하는 장치의 IP 주소 및 스키마 (예를들어 <code>http://192.168.1.10</code> 슬래시 없음)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Let you overwrite the name of the device. By default <em>name</em> from the device is used.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어 씀. 기본적으로 장치의 <em>name</em>이 사용됨.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="pins" href="#pins"></a> pins</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>An array with all used pins.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용 된 핀이 모두있는 배열.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name of the pin to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>프론트 엔드에서 사용할 핀의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="invert" href="#invert"></a> invert</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>If the logic for on/off should be inverted.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>온/오프 로직이 반전되어야하는 경우.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -310,17 +311,17 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="functions" href="#functions"></a> functions</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>An array with all used functions.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용 된 모든 함수가있는 배열.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>프론트 엔드에서 사용할 이름.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
-<p>You can still switch your pins with a web browser or a command line tool. Use the URL <code>http://192.168.1.10/digital/8/1</code> to set pin 8 to high/on, the JSON response will give you the feedback.</p>
+<p>웹 브라우저 또는 명령 행 도구를 사용하여 핀을 계속 전환 할 수 있습니다. URL <code>http://192.168.1.10/digital/8/1</code>을 사용하여 핀 8을 high/on으로 설정하면 JSON 응답이 피드백을 제공합니다.</p>
 <pre><code class="language-json">{"message": "Pin D8 set to 1", "id": "sensor02", "name": "livingroom", "connected": true}
 </code></pre>
 

@@ -103,12 +103,12 @@
   <hr class="divider">
   
 
-  <p>The <code>tod</code> platform supports binary sensors which get their values by checking if the current time is within defined time ranges.</p>
-<p>The time ranges can be provided as absolute local time or using the <code>sunrise</code> or <code>sunset</code> keyword calculated based on the sun position for location. The location must be provided in the configuration.</p>
-<p>In addition for sun position based ranges, the negative or positive offset can be configured.</p>
+  <p><code>tod</code> 플랫폼은 현재 시간이 정의 된 시간 범위 내에 있는지 확인하여 그 값을 얻을 바이너리 센서를 지원합니다.</p>
+<p>시간 범위는 절대 현지 시간으로 제공되거나 위치의 태양 위치를 기반으로 계산 된 <code>sunrise</code> 또는 <code>sunset</code> 키워드를 사용하여 제공 할 수 있습니다.</p>
+<p>태양 위치기반 범위 외에도 음수 또는 양수 오프셋을 설정할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Here is an example of adding a sensor to the <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>다음은 <code>configuration.yaml</code> 파일에 센서를 추가하는 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: tod
@@ -128,38 +128,38 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>센서 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="before" href="#before"></a> before</dt>
-<dd><p class="desc"><span class="type">(<span class="string time">string | time</span>)</span><span class="required">(Required)</span><span class="description"><p>The absolute local time value or sun event for beginning of the time range.</p>
+<dd><p class="desc"><span class="type">(<span class="string time">string | time</span>)</span><span class="required">(Required)</span><span class="description"><p>시간 범위 시작을 위한 절대 로컬 시간 값 또는 태양 이벤트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="before_offset" href="#before_offset"></a> before_offset</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>The time offset of the beginning time range.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>시작 시간 범위의 시간 오프셋입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="after" href="#after"></a> after</dt>
-<dd><p class="desc"><span class="type">(<span class="string time">string | time</span>)</span><span class="required">(Required)</span><span class="description"><p>The absolute local time value or sun event for ending of the time range.</p>
+<dd><p class="desc"><span class="type">(<span class="string time">string | time</span>)</span><span class="required">(Required)</span><span class="description"><p>시간 범위 종료를위한 절대 로컬 시간 값 또는 태양 이벤트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="after_offset" href="#after_offset"></a> after_offset</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>The time offset of the beginning time range.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>시작 시간 범위의 시간 오프셋입니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="considerations" href="#considerations"></a> Considerations</h2>
-<p>The primary purpose of this sensor is to use a simple time range definition instead of creating a complex template with references to <code>sun.sun</code> integration attributes.</p>
-<p>The sensor state is ON when this condition <code>after</code> + <code>after_offset</code> &lt;= <code>current time</code> &lt; <code>before</code> + <code>before_offset</code>.</p>
-<p>If <code>after</code> time is later than <code>before</code> then the next day is considered, i.e.:</p>
+<a class="title-link" name="-" href="#-"></a> 고려 사항</h2>
+<p>이 센서의 주요 목적은 <code>sun.sun</code> 통합구성요소 속성 을 참조하여 복잡한 템플릿을 생성하는 대신 간단한 시간 범위 정의를 사용하는 것입니다 .</p>
+<p>이 조건에서 센서 상태는 ON입니다 <code>after</code> + <code>after_offset</code> &lt;= <code>current time</code> &lt; <code>before</code> + <code>before_offset</code></p>
+<p>만약 <code>after</code>시간이 <code>before</code>보다 늦으면 다음 날이 고려됩니다. 예:</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: tod
     name: Night
     after: sunset
     before: sunrise
 </code></pre>
-<p>In the above example, the next day <code>sunrise</code> is calculated as a time range end.</p>
+<p>위의 예에서 다음날 <code>sunrise</code>은 시간 범위 끝으로 계산됩니다.</p>
 
 
 </article>

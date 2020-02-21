@@ -103,19 +103,19 @@
   <hr class="divider">
   
 
-  <p>The <code>proximity</code> integration allows you to monitor the proximity of devices to a particular <a href="/integrations/zone/">zone</a> and the direction of travel. The result is an entity created in Home Assistant which maintains the proximity data.</p>
-<p>This integration is useful to reduce the number of automation rules required when wanting to perform automations based on locations outside a particular zone. The <a href="/getting-started/automation-trigger/#zone-trigger">zone</a> and <a href="/getting-started/automation-trigger/#state-trigger">state</a> based triggers allow similar control but the number of rules grows exponentially when factors such as direction of travel need to be taken into account.</p>
-<p>Some examples of its use include:</p>
+  <p><code>proximity</code> 통합구성요소를 통해 특정 <a href="/integrations/zone/">zone</a>에 대한 장치의 근접성과 이동 방향을 모니터링 할 수 있습니다. 결과는 근접 데이터를 유지 보수하는 홈어시스턴트에서 작성된 엔티티입니다.</p>
+<p>이 통합구성요소는 특정 영역(zone) 외부의 위치를 ​​기반으로 자동화를 수행하려는 경우 필요한 자동화 규칙 수를 줄이는 데 유용합니다.<a href="/getting-started/automation-trigger/#zone-trigger">zone</a> 및 <a href="/getting-started/automation-trigger/#state-trigger">state</a> 기반 트리거는 유사한 제어를 허용하지만 규칙 수가 기하 급수적으로 증가합니다. 특히 여행 방향과 같은 요소를 고려해야 할 때.</p>
+<p>사용예는 다음과 같습니다. :</p>
 <ul>
-<li>Increase thermostat temperature as you near home</li>
-<li>Decrease temperature the further away from home you travel</li>
+<li>집 근처에서 온도 조절기 온도를 높이십시오</li>
+<li>여행하는 집에서 멀어 질수록 온도를 낮추십시오</li>
 </ul>
-<p>The Proximity entity which is created has the following values:</p>
+<p>작성된 근접 엔티티의 값은 다음과 같습니다. :</p>
 <ul>
 <li>
-<code>state</code>: Distance from the monitored zone (in km)</li>
+<code>state</code>: 모니터링 영역(zone)으로부터의 거리 (km)</li>
 <li>
-<code>dir_of_travel</code>: Direction of the closest device to the monitored zone. Values are:
+<code>dir_of_travel</code>: 모니터링되는 영역(zone)에 가장 가까운 장치의 방향. 값은 다음과 같습니다. :
 <ul>
 <li>‘not set’</li>
 <li>‘arrived’</li>
@@ -126,9 +126,9 @@
 </ul>
 </li>
 <li>
-<code>dist_to_zone</code>: Distance from the monitored zone (in km)</li>
+<code>dist_to_zone</code>: 모니터링 영역(zone)으로부터의 거리 (km)</li>
 <li>
-<code>unit_of_measurement</code>: Measurement of distance. Values are:
+<code>unit_of_measurement</code>: 거리 측정. 값은 다음과 같습니다. :
 <ul>
 <li>‘km’</li>
 <li>‘m’</li>
@@ -137,9 +137,9 @@
 </ul>
 </li>
 <li>
-<code>nearest</code>: The device which is nearest to the zone</li>
+<code>nearest</code>: 구역(Zone)에 가장 가까운 장치</li>
 </ul>
-<p>To enable this integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치에서 이 통합구성요소를 사용 가능하게 하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 proximity:
   home: 
@@ -156,25 +156,25 @@ proximity:
   <dl class="">
 <dt>
 <a class="title-link" name="zone" href="#zone"></a> zone</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>The zone to which this integration is measuring the distance to. Default is the home zone.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 연동이 거리를 측정하는 영역(zone)입니다. 기본 영역은 홈 영역입니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="ignored_zones" href="#ignored_zones"></a> ignored_zones</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Where proximity is not calculated for a device (either the device being monitored or ones being compared (e.g., work or school).</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치에 대해 근접성이 계산되지 않는 경우 (모니터링되는 장치 또는 비교되는 장치 (예를들어 직장 또는 학교))</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="devices" href="#devices"></a> devices</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of devices to compare location against to check closeness to the configured zone.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>구성된 영역(zone)과의 근접성을 확인하기 위해 위치를 비교할 장치 목록입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="tolerance" href="#tolerance"></a> tolerance</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The tolerance used to calculate the direction of travel in meters (m) to filter out small GPS coordinate changes.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>작은 GPS 좌표 변화를 걸러 내기 위해 이동 방향을 미터 (m) 단위로 계산하는 데 사용되는 오차입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The unit of measurement for distance. Valid values are (km, m, mi, ft) [kilometers, meters, miles and feet respectively].</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>거리 측정 단위입니다. 유효한 값은 (km, m, mi, ft) [각각 킬로미터, 미터, 마일 및 피트]입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -183,7 +183,7 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>To add multiple proximity components, simply use a list in your <code>configuration.yaml</code> file:</p>
+<p>근접 구성 요소를 여러개 추가하려면 <code>configuration.yaml</code> 파일 에서 목록을 사용하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 proximity:
   home:

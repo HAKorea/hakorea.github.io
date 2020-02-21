@@ -103,16 +103,22 @@
   <hr class="divider">
   
 
-  <p>The <code>mqtt</code> binary sensor platform uses an MQTT message payload to set the binary sensor to one of two states: <code>on</code> or <code>off</code>.</p>
-<p>The binary sensor state will be updated only after a new message is published on <code>state_topic</code> matching <code>payload_on</code> or <code>payload_off</code>. If these messages are published with the <code>retain</code> flag set,
-the binary sensor will receive an instant state update after subscription and Home Assistant will display the correct state on startup.
-Otherwise, the initial state displayed in Home Assistant will be <code>unknown</code>.</p>
+  <p>The <code>mqtt</code> binary sensor platform uses an MQTT message payload to set the binary sensor to one of two states: <code>on</code> or <code>off</code>.
+<code>mqtt</code> binary sensor 플랫폼은 MQTT 메시지 페이로드를 사용하여 binary sensor를 두 가지 상태 중 하나로 설정합니다 : <code>on</code> 또는 <code>off</code>.</p>
+<p>The binary sensor state will be updated only after a new message is published on <code>state_topic</code> matching <code>payload_on</code> or <code>payload_off</code>.
+If these messages are published with the <code>retain</code> flag set,the binary sensor will receive an instant state update after subscription and Home Assistant will display the correct state on startup.
+Otherwise, the initial state displayed in Home Assistant will be <code>unknown</code>.
+바이너리 센서 상태는 ’<code>state_topic</code>가 <code>payload_on</code> 또는 <code>payload_off</code>와 일치할 때 새 메시지가 게시(publish)된 후에 만 ​​업데이트됩니다.
+이러한 메시지가 ‘retain’플래그가 설정된 상태로 게시(publish) 된 경우 subscription후 바이너리 센서에 즉시 상태 업데이트가 수신되고 홈어시스턴트는 시작시 올바른 상태를 표시합니다. 그렇지 않으면 홈어시스턴트에 표시되는 초기 상태는 <code>unknown</code> 입니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
 <p>The <code>mqtt</code> binary sensor platform optionally supports an <code>availability_topic</code> to receive online and offline messages (birth and LWT messages) from the MQTT device. During normal operation, if the MQTT sensor device goes offline (i.e., publishes <code>payload_not_available</code> to <code>availability_topic</code>), Home Assistant will display the binary sensor as <code>unavailable</code>. If these messages are published with the <code>retain</code> flag set, the binary sensor will receive an instant update after subscription and Home Assistant will display the correct availability state of the binary sensor when Home Assistant starts up. If the <code>retain</code> flag is not set, Home Assistant will display the binary sensor as <code>unavailable</code> when Home Assistant starts up. If no <code>availability_topic</code>
-is defined, Home Assistant will consider the MQTT device to be available.</p>
+is defined, Home Assistant will consider the MQTT device to be available.
+<code>mqtt</code> binary sensor 플랫폼은 선택적으로 MQTT 장치에서 온라인 및 오프라인 메시지 (birth 및 LWT 메시지)를 수신 할 수있는 <code>availability_topic</code>을 지원합니다. 정상 작동 중에 MQTT 센서 장치가 오프라인 상태가되면 (즉, <code>payload_not_available</code>을 <code>availability_topic</code>에 게시하는 경우) 홈어시스턴트는  binary sensor를 <code>unavailable</code>로 표시합니다. 이러한 메시지가 <code>retain</code> 플래그가 설정된 상태로 게시된 경우 subscription 후  binary sensor는 즉시 업데이트를 수신하고 Home Assistant는 Home Assistant가 시작될 때  binary sensor의 올바른 가용성 상태를 표시합니다. <code>retain</code> 플래그가 설정되지 않은 경우 Home Assistant는 Home Assistant가 시작될 때 binary sensor를 사용할 수 없는 것으로 표시합니다.
+<code>availability_topic</code>이 정의되지 않은 경우 홈 어시스턴트는 MQTT 디바이스를 사용 가능한 것으로 간주합니다.</p>
 <p>To use an MQTT binary sensor in your installation,
-add the following to your <code>configuration.yaml</code> file:</p>
+add the following to your <code>configuration.yaml</code> file:
+설치에서 MQTT 이진 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: mqtt
@@ -124,12 +130,12 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="state_topic" href="#state_topic"></a> state_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The MQTT topic subscribed to receive sensor values.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>MQTT topic은 센서 값을 수신하도록 구독(subscribe).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the binary sensor.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이진 센서의 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -138,7 +144,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="payload_on" href="#payload_on"></a> payload_on</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the on state.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>켜짐 상태를 나타내는 페이로드.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -147,7 +153,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="payload_off" href="#payload_off"></a> payload_off</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the off state.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>오프 상태를 나타내는 페이로드.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -155,7 +161,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="availability_topic" href="#availability_topic"></a> availability_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive birth and LWT messages from the MQTT device. If <code>availability_topic</code> is not defined, the binary sensor availability state will always be <code>available</code>. If <code>availability_topic</code> is defined, the binary sensor availability state will be <code>unavailable</code> by default.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT topic은 MQTT 디바이스에서 birth 및 LWT 메시지를 수신하도록 subscribe. <code>availability_topic</code>이 정의되어 있지 않으면 이진 센서 가용성 상태는 항상 사용 가능. <code>availability_topic</code>이 정의되어 있으면 이진 센서 가용성 상태는 기본적으로 사용할 수 없습니다. If <code>availability_topic</code> is not defined, the binary sensor availability state will always be <code>available</code>. If <code>availability_topic</code> is defined, the binary sensor availability state will be <code>unavailable</code> by default.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="payload_available" href="#payload_available"></a> payload_available</dt>

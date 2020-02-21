@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Mold Indicator - 홈어시스턴트</title>
+    <title>곰팡이 표시기 (Mold Indicator) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="How to use the mold growth indication integration in Home Assistant">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/mold_indicator/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Mold Indicator">
+    <meta property="og:title" content="곰팡이 표시기 (Mold Indicator)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mold_indicator/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Mold Indicator">
+    <meta name="twitter:title" content="곰팡이 표시기 (Mold Indicator)">
     <meta name="twitter:description" content="How to use the mold growth indication integration in Home Assistant">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Mold Indicator
+      곰팡이 표시기 (Mold Indicator)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The Mold Indicator sensor integration consumes information of two temperature sensors and a humidity sensor to give an indication for possible mold growth in your home. In case of bad ventilation and insulation, the indoor humidity may lead to condensation on cold surfaces as the windows or even walls. Condensation or a high relative humidity near those cold surfaces leads to a higher risk for mold growth. This sensor integration estimates the temperature at a pre-calibrated critical point in the room (the coldest surface) and calculates the relative humidity of the air at that point. If the sensor value rises above approximately 70 percent, mold growth might occur and the room should be ventilated. At 100%, the air humidity condensates at the critical point.</p>
-<p>The sensor data may be used e.g., to signal bad air quality (too high air humidity) or to automate operation of indoor air humidifiers to keep the indoor humidity at an optimum.</p>
+  <p>곰팡이 표시기 센서 통합수성요소는 2 개의 온도 센서와 습도 센서의 정보를 조합하여 가정에서 곰팡이가 생길 수 있음을 나타냅니다. 환기 및 단열이 불량한 경우 실내 습도로 인해 창문이나 벽처럼 차가운 표면에 응결이 발생할 수 있습니다. 차가운 표면 근처의 응축 또는 상대 습도가 높으면 곰팡이가 생길 위험이 높아집니다. 이 센서 통합구성요소는 실내에서 사전 교정 된 임계점 (가장 추운 표면)의 온도를 추정하고 해당 지점에서 공기의 상대 습도를 계산합니다. 센서 값이 약 70 % 이상 상승하면 곰팡이가 생길 수 있으며 실내를 환기시켜야합니다. 100 %에서는 공기 습도가 임계점에서 응축됩니다.</p>
+<p>센서 데이터는 예를 들어, 나쁜 공기 질 (너무 높은 습도)을 알리거나 실내 공기 가습기의 작동을 자동화하여 실내 습도를 최적으로 유지하기 위해 사용될 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use the Mold Indicator sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 곰팡이 표시기 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: mold_indicator
@@ -122,31 +122,30 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="indoor_temp_sensor" href="#indoor_temp_sensor"></a> indoor_temp_sensor</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The entity ID of the indoor temperature sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>실내 온도 센서의 엔티티 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="indoor_humidity_sensor" href="#indoor_humidity_sensor"></a> indoor_humidity_sensor</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The entity ID of the indoor humidity sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>실내 습도 센서의 엔티티 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="outdoor_temp_sensor" href="#outdoor_temp_sensor"></a> outdoor_temp_sensor</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The entity ID of the outdoor temperature sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>실외 온도 센서의 엔티티 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="calibration_factor" href="#calibration_factor"></a> calibration_factor</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>Needs to be calibrated to the critical point in the room.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>실내의 임계점까지 교정필요시 사용.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>In this case, the weather forecast temperature sensor is used for the outside temperature.</p>
+<p>이 경우 일기 예보 온도 센서가 외부 온도에 사용됩니다.</p>
 <h2>
 <a class="title-link" name="calibration" href="#calibration"></a> Calibration</h2>
-<p>The Mold Indicator sensor integration needs to be calibrated in order to estimate the temperature at the critical point from the outdoor and indoor temperature. First find the coldest surface in the room (critical point), which is typically near the window frames, but depends on the insulation of your home. For calibration you need to measure the temperature at this critical point and simultaneously write down the values for the indoor- and outdoor temperature sensors used for the Mold Indicator. Be sure that there is a significant indoor to outdoor temperature difference to get the best calibration results.
-With the three measured temperatures (in Celsius or Fahrenheit), the calibration_factor for your configuration file is given by:</p>
+<p>실외 및 실내 온도에서 임계점의 온도를 추정하려면 곰팡이 표시기 센서 연동값을 교정해야합니다. 먼저 방에서 가장 차가운 표면 (임계점)을 찾으십시오.이 지점은 일반적으로 창틀 근처에 있지만 집의 단열재에 따라 다릅니다. 교정을하려면이 임계점에서 온도를 측정하고 금형 표시기에 사용 된 실내 및 실외 온도 센서의 값을 동시에 기록해야합니다. 최상의 교정 결과를 얻으려면 실내와 실외의 온도 차이가 유의해야합니다. 세 가지 측정 온도 (섭씨 또는 화씨)로 구성 파일의 calibration_factor는 다음과 같습니다.</p>
 <pre><code class="language-text">calibration_factor = (temp_indoor - temp_outdoor) / (temp_criticalpoint - temp_outdoor)
 </code></pre>
 
