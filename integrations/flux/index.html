@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Flux - 홈어시스턴트</title>
+    <title>Flux (건강을 위한 조명) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to have switches call command line commands.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/flux/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Flux">
+    <meta property="og:title" content="Flux (건강을 위한 조명)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/flux/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Flux">
+    <meta name="twitter:title" content="Flux (건강을 위한 조명)">
     <meta name="twitter:description" content="Instructions on how to have switches call command line commands.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Flux
+      Flux (건강을 위한 조명)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>flux</code> switch platform will change the temperature of your lights similar to the way flux works on your computer, using circadian rhythm. They will be bright during the day, and gradually fade to a red/orange at night. The <code>flux</code> switch restores its last state after startup.</p>
-<p>The integration will update your lights based on the time of day. It will only affect lights that are turned on and listed in the flux configuration.</p>
-<p>During the day (in between <code>start time</code> and <code>sunset time</code>), it will fade the lights from the <code>start_colortemp</code> to the <code>sunset_colortemp</code>.  After sunset (between <code>sunset_time</code> and <code>stop_time</code>), the lights will fade from the <code>sunset_colortemp</code> to the <code>stop_colortemp</code>. If the lights are still on after the <code>stop_time</code> it will continue to change the light to the <code>stop_colortemp</code> until the light is turned off. The fade effect is created by updating the lights periodically.</p>
-<p>The color temperature is specified kelvin, and accepted values are between 1000 and 40000 kelvin. Lower values will seem more red, while higher will look more white.</p>
-<p>If you want to update at variable intervals, you can leave the switch turned off and use automation rules that call the service <code>switch.&lt;name&gt;_update</code> whenever you want the lights updated, where <code>&lt;name&gt;</code> equals the <code>name:</code> property in the switch configuration.</p>
-<p>To use the Flux switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>flux</code> 스위치 플랫폼은 일주기 리듬(circadian rhythm)을 사용하여 컴퓨터에서 플럭스가 작동하는 방식과 유사한 조명 온도를 변경합니다. 낮에는 밝아지고 밤에는 점차적으로 빨강/주황색으로 희미 해집니다. <code>flux</code> 스위치는 시작 후 마지막 상태를 복원합니다.</p>
+<p>이 통합구성요소는은 시간에 따라 조명을 업데이트합니다. 플럭스 구성에 켜져 있고 나열된 조명에만 영향을 미칩니다.</p>
+<p>낮에는 (<code>start time</code>과 <code>sunset time</code> 사이), <code>start_colortemp</code>에서<code>sunset_colortemp</code>까지 조명이 희미 해집니다. 일몰 후 (<code>sunset_time</code>과<code>stop_time</code> 사이에), 조명은 <code>sunset_colortemp</code>에서 <code>stop_colortemp</code>로 희미(fade)해집니다. <code>stop_time</code>이후에도 표시등이 여전히 켜져 있으면 표시등이 꺼질 때까지 표시등이 <code>stop_colortemp</code>로 계속 변경됩니다. 페이드 효과는 조명을 주기적으로 업데이트하여 생성됩니다.</p>
+<p>색 온도는 켈빈으로 지정되며 허용되는 값은 1000 ~ 40000 켈빈입니다. 값이 낮을수록 더 빨갛게 보이고 값이 높을수록 더 희게 보입니다.</p>
+<p>가변 간격으로 업데이트하려면 스위치를 끄고 조명을 업데이트 할 때마다 서비스  <code>switch.&lt;name&gt;_update</code>를 호출하는 자동화 규칙을 사용할 수 있습니다. 여기서 <code>&lt;name&gt;</code>은 스위치 설정의 <code>&lt;name&gt;</code> 속성과 같습니다.</p>
+<p>설치후 Flux 스위치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: flux
@@ -122,12 +122,12 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="lights" href="#lights"></a> lights</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>array list of light entities.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>조명 엔티티의 배열 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name to use when displaying this switch.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>스위치를 표시 할 때 사용할 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -135,16 +135,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="start_time" href="#start_time"></a> start_time</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>The start time.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>시작 시간.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="stop_time" href="#stop_time"></a> stop_time</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>The stop time.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>중지 시간.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="start_colortemp" href="#start_colortemp"></a> start_colortemp</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The color temperature at the start.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>시작시 색 온도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,7 +153,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="sunset_colortemp" href="#sunset_colortemp"></a> sunset_colortemp</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The sun set color temperature.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>일몰시 색온도를 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -162,7 +162,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="stop_colortemp" href="#stop_colortemp"></a> stop_colortemp</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The color temperature at the end.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>마지막 색 온도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -170,12 +170,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="brightness" href="#brightness"></a> brightness</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The brightness of the lights.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>조명의 밝기.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disable_brightness_adjust" href="#disable_brightness_adjust"></a> disable_brightness_adjust</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>If true, brightness will not be adjusted besides color temperature.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>true이면 색온도 외에 밝기가 조정되지 않습니다..</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -184,7 +184,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="mode" href="#mode"></a> mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Select how color temperature is passed to lights. Valid values are <code>xy</code>, <code>mired</code> and <code>rgb</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>색 온도가 조명으로 전달되는 방법을 선택. 유효한 값은 <code>xy</code>, <code>mired</code>,<code>rgb</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -193,7 +193,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="transition" href="#transition"></a> transition</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Transition time in seconds for the light changes (high values may not be supported by all light models).</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>조명 변경에 대한 전환 시간(초) (높은 값은 일부 조명 모델에서 지원되지 않을 수 있음).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -202,7 +202,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="interval" href="#interval"></a> interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Frequency in seconds at which the lights should be updated.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>조명을 업데이트해야하는 빈도(초).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -210,7 +210,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Full example:</p>
+<p>완전한 사례 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: flux

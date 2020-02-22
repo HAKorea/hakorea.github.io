@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p>Zones allow you to specify certain regions on earth (for now). When a device tracker sees a device to be within a zone, the state will take the name from the zone. Zones can also be used as a <a href="/getting-started/automation-trigger/#zone-trigger">trigger</a> or <a href="/getting-started/automation-condition/#zone-condition">condition</a> inside automation setups.</p>
-<p>The <code>zone</code> integration uses YAML sequences to configure multiple zones:</p>
+  <p>구역(zone)을 사용하면 지구상의 특정 지역을 지정할 수 있습니다 (현재). 장치 추적기가 장치가 구역 내에 있는 것을 발견하면 상태는 해당 구역에서 이름을 가져옵니다. 구역은 자동화 설정 내에서 <a href="/getting-started/automation-trigger/#zone-trigger">trigger</a> 또는 <a href="/getting-started/automation-condition/#zone-condition">condition</a>으로 사용할 수도 있습니다.</p>
+<p><code>zone</code> 통합구성요소는 YAML 시퀀스를 사용하여 여러 구역들을 설정합니다 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 zone:
   - name: School
@@ -130,20 +130,20 @@ zone:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The friendly name of the zone.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>친숙한 구역 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>The latitude of the center point of the zone.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>구역 중심점의 위도.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>The longitude of the center point of the zone.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>구역 중심점의 경도.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="radius" href="#radius"></a> radius</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The radius of the zone in meters.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>영역의 반경 (미터).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -151,12 +151,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The icon to show instead of name.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이름 대신 표시되는 아이콘.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="passive" href="#passive"></a> passive</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>To only use the zone for automation and hide it from the frontend and not use the zone for device tracker name.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>자동화에만 영역을 사용하고 프런트 엔드에서 숨기고 장치 추적기 이름에 영역을 사용하지 않습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -164,19 +164,19 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>To find the latitude/longitude of a certain place you can use <a href="https://www.google.com/maps/" rel="external nofollow">Google Maps</a> or <a href="https://www.bing.com/maps" rel="external nofollow">Bing Maps</a>. Just right click and copy the coordinates from there (Bing) or click on the “What is here?” (Google)</p>
+<p>특정 장소의 위도/경도를 찾으려면 <a href="https://www.google.com/maps/" rel="external nofollow">Google Maps</a> 혹은 <a href="https://www.bing.com/maps" rel="external nofollow">Bing Maps</a>를 사용할 수 있습니다. 마우스 오른쪽 버튼을 클릭하고 거기에서 좌표를 복사하거나 (Bing) “What is here?“를 클릭하십시오. (구글)</p>
 <h2>
-<a class="title-link" name="home-zone" href="#home-zone"></a> Home zone</h2>
-<p>If no configuration is given, the <code>zone</code> integration will create a zone for home. This zone will use location provided in the <code>configuration.yaml</code> file and have a radius of 100 meters. To override this, create a zone configuration and name it <strong>‘Home’</strong>.</p>
+<a class="title-link" name="home--zone" href="#home--zone"></a> Home 구역 (zone)</h2>
+<p>설정이 제공되지 않으면 <code>zone</code> 통합구성요소는 가정용 영역을 생성합니다. 이 구역은 <code>configuration.yaml</code> 파일에 제공된 위치를 사용하며 반경은 100 미터입니다. 이를 무시하려면 구역 설성을 작성하고 이름을 **‘Home’**으로 지정하십시오.</p>
 <div class="note">
-<p>Devices that are in the zone <strong>‘Home’</strong> will not appear on the map in the Home Assistant UI.</p>
+<p><strong>‘Home’</strong> 구역에 있는 장치는 홈어시스턴트 UI의 폴더에 나타나지 않습니다.</p>
 </div>
 <h2>
 <a class="title-link" name="icons" href="#icons"></a> Icons</h2>
-<p>It is preferred to pick an icon to use for your zone. Pick any icon that you can find on <a href="https://materialdesignicons.com/" rel="external nofollow">materialdesignicons.com</a> and prefix the name with <code>mdi:</code>. For example <code>mdi:school</code>, <code>mdi:worker</code>, <code>mdi:home</code>, <code>mdi:cart</code>, or <code>mdi:castle</code>.</p>
+<p>해당 구역에 사용할 아이콘을 선택하는 것이 좋습니다. <a href="https://materialdesignicons.com/" rel="external nofollow">materialdesignicons.com</a>에서 찾을 수있는 아이콘을 선택하고 이름 앞에 <code>mdi :</code>를 붙입니다. 예를 들어, <code>mdi : school</code>,<code>mdi : worker</code>,<code>mdi : home</code>,<code>mdi : cart</code> 또는<code>mdi : castle</code> 입니다.</p>
 <h2>
 <a class="title-link" name="state" href="#state"></a> State</h2>
-<p><code>zoning</code> is the state a <code>zone</code> has when it is configured. A <code>zone</code> doesn’t have another state; all configured zones are <code>zoning</code> all the time.</p>
+<p><code>zoning</code>은 <code>zone</code>이 설정되었을 때의 상태입니다. <code>zone</code>은 다른 상태가 아닙니다. 설정된 모든 구역(zone)들은 은 항상 <code>zoning</code> 상태입니다.</p>
 
 
 </article>

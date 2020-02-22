@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Flash lights when intruder detected - 홈어시스턴트</title>
+    <title>침입자 감지시 플래시 조명켜기 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Detect intruders by checking if the light is turning on while no one is home.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/cookbook/python_component_simple_alarm/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Flash lights when intruder detected">
+    <meta property="og:title" content="침입자 감지시 플래시 조명켜기">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/cookbook/python_component_simple_alarm/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Flash lights when intruder detected">
+    <meta name="twitter:title" content="침입자 감지시 플래시 조명켜기">
     <meta name="twitter:description" content="Detect intruders by checking if the light is turning on while no one is home.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -91,15 +91,15 @@
   
   <header>
     <h1 class="title indent">
-      Flash lights when intruder detected
+      침입자 감지시 플래시 조명켜기
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This example integration will detect intruders. It does so by checking if lights are being turned on while there is no one at home. When this happens it will turn the lights red, flash them for 30 seconds and send a message via <a href="/integrations/notify/">the notify integration</a>. It will also flash a specific light when a known person comes home.</p>
-<p>This integration depends on the integrations <a href="/integrations/device_tracker/">device_tracker</a> and <a href="/integrations/light/">light</a> being setup.</p>
-<p>To set it up, add the following lines to your <code>configuration.yaml</code> file:</p>
+  <p>이 예제는 침입자를 탐지합니다. 집에 사람이 없을 때 조명이 켜져 있는지 확인하면됩니다. 이 경우 표시등이 빨간색으로 바뀌고 30 초 동안 깜박 인 다음 <a href="/integrations/notify/">the notify integration</a>을 통해 메시지를 보냅니다 . 알려진 사람이 집으로 돌아오면 특정 표시등이 깜박입니다.</p>
+<p>이 연동방식은 <a href="/integrations/device_tracker/">device_tracker</a> 및 <a href="/integrations/light/">light</a> 통합구성요소에 따라 다릅니다.</p>
+<p>설정하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 simple_alarm:
   known_light: light.Bowl
@@ -111,15 +111,15 @@ simple_alarm:
   <dl class="">
 <dt>
 <a class="title-link" name="known_light" href="#known_light"></a> known_light</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Which light/light group has to flash when a known device comes home.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알려진 장치가 집으로 돌아 왔을 때 깜박이는 조명/조명그룹.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unknown_light" href="#unknown_light"></a> unknown_light</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Which light/light group has to flash red when light turns on while no one home.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>집에 없을 때 조명이 켜지면 어떤 조명/조명 그룹이 빨간색으로 깜박 여야합니까?</p>
 </span></p></dd>
 </dl>
 </div>
-<p>Create the file <code>&lt;config dir&gt;/custom_components/simple_alarm.py</code> and copy paste the content below:</p>
+<p><code>&lt;config dir&gt;/custom_components/simple_alarm.py</code>파일을 만들고 아래 내용을 복사하여 붙여 넣습니다.</p>
 <pre><code class="language-python">"""Simple alarm component."""
 import logging
 
@@ -250,9 +250,93 @@ def setup(hass, config):
         
       
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
           <li>
             
-              <a href='/cookbook/python_component_automation/'>Automation in Code</a>
+              침입자 감지시 플래시 조명켜기
             
           </li>
         
@@ -260,95 +344,11 @@ def setup(hass, config):
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
           <li>
             
-              Flash lights when intruder detected
+              <a href='/cookbook/python_component_automation/'>파이선 코드로 자동화 사례</a>
             
           </li>
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
       
         

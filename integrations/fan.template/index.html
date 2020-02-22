@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Template Fan - 홈어시스턴트</title>
+    <title>Fan 탬플릿 (Template Fan) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions how to setup the Template fans within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/fan.template/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Template Fan">
+    <meta property="og:title" content="Fan 탬플릿 (Template Fan)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/fan.template/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Template Fan">
+    <meta name="twitter:title" content="Fan 탬플릿 (Template Fan)">
     <meta name="twitter:description" content="Instructions how to setup the Template fans within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Template Fan
+      Fan 탬플릿 (Template Fan)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>template</code> platform creates fans that combine integrations and provides the
-ability to run scripts or invoke services for each of the turn_on, turn_off, set_speed,
-set_oscillating, and set_direction commands of a fan.</p>
-<p>To enable Template Fans in your installation, add the following to your
-<code>configuration.yaml</code> file:</p>
+  <p><code>template</code> 플랫폼은 통합구성요소를 결합하고 팬(fan)의 각 turn_on, turn_off, set_speed, set_oscillating 및 set_direction 명령에 대해 스크립트를 실행하거나 서비스를 호출하는 기능을 제공하는 팬(fan)을 만듭니다</p>
+<p>설치에서 템플릿 팬을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 fan:
   - platform: template
@@ -145,33 +142,33 @@ fan:
   <dl class="">
 <dt>
 <a class="title-link" name="fans" href="#fans"></a> fans</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>List of your fans.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>팬 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 사용할 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines a template to get the state of the fan. Valid value: ‘on’/‘off’</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>팬 상태를 가져 오기위한 템플릿을 정의. 유효한 값 : ‘on’/‘off’</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="speed_template" href="#speed_template"></a> speed_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the speed of the fan.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>팬 속도를 얻을 수있는 템플릿을 정의</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="oscillating_template" href="#oscillating_template"></a> oscillating_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the osc state of the fan. Valid value: true/false</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>팬의 OSC 상태를 가져 오기위한 템플릿을 정의. 유효한 값 : true/false</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="direction_template" href="#direction_template"></a> direction_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the direction of the fan. Valid value: ‘forward’/‘reverse’</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>팬의 방향을 알 수있는 템플릿을 정의합니다. 유효한 값 : ‘forward’/‘reverse’</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="availability_template" href="#availability_template"></a> availability_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the <code>available</code> state of the component. If the template returns <code>true</code>, the device is <code>available</code>. If the template returns any other value, the device will be <code>unavailable</code>. If <code>availability_template</code> is not configured, the component will always be <code>available</code>.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>컴포넌트의 <code>available</code> 상태를 가져오도록 템플리트를 정의합니다. 템플릿이 <code>true</code> 를 반환하면 장치는  <code>available</code>. 템플릿이 다른 값을 반환하면 장치는 <code>unavailable</code>. <code>availability_template</code>이 설정되어 있지 않으면 구성 요소는 항상 <code>available</code>입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -179,28 +176,28 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="turn_on" href="#turn_on"></a> turn_on</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines an action to run when the fan is turned on.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>팬이 켜질 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="turn_off" href="#turn_off"></a> turn_off</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines an action to run when the fan is turned off.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>팬이 꺼질 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="set_speed" href="#set_speed"></a> set_speed</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an action to run when the fan is given a speed command.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>팬에 속도 명령이 제공 될 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="set_oscillating" href="#set_oscillating"></a> set_oscillating</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an action to run when the fan is given an osc state command.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>팬에 osc state 명령이 제공 될 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="set_direction" href="#set_direction"></a> set_direction</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an action to run when the fan is given a direction command.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>팬에 방향 명령이 제공 될 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="speeds" href="#speeds"></a> speeds</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of speeds the fan is capable of running at.</p>
+<p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>팬이 작동 할 수있는 속도 목록.</p>
 </span></p>
 <p class="default">
 Default value: </p>

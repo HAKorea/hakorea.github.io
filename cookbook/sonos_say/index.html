@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Sonos say script to speak with text-to-speech - 홈어시스턴트</title>
+    <title>Sonos로 script를 사용하여 text-to-speech로 말하게하기 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Sonos say script to use text-to-speech with Sonos">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/cookbook/sonos_say/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Sonos say script to speak with text-to-speech">
+    <meta property="og:title" content="Sonos로 script를 사용하여 text-to-speech로 말하게하기">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/cookbook/sonos_say/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Sonos say script to speak with text-to-speech">
+    <meta name="twitter:title" content="Sonos로 script를 사용하여 text-to-speech로 말하게하기">
     <meta name="twitter:description" content="Sonos say script to use text-to-speech with Sonos">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -91,15 +91,15 @@
   
   <header>
     <h1 class="title indent">
-      Sonos say script to speak with text-to-speech
+      Sonos로 script를 사용하여 text-to-speech로 말하게하기
     </h1>
   </header>
   <hr class="divider">
   
 
   <h4>
-<a class="title-link" name="sonos-say-script-to-speak-with-text-to-speech" href="#sonos-say-script-to-speak-with-text-to-speech"></a> Sonos say script to speak with text-to-speech</h4>
-<p>This script allows you to use <a href="/integrations/#text-to-speech">TTS</a> on Sonos.</p>
+<a class="title-link" name="sonos-script--text-to-speech-" href="#sonos-script--text-to-speech-"></a> Sonos로 script를 사용하여 text-to-speech 실행</h4>
+<p>이 스크립트를 사용하면 Sonos에서 <a href="/integrations/#text-to-speech">TTS</a> 를 사용할 수 있습니다 .</p>
 <pre><code class="language-yaml">script:
   sonos_say:
     alias: "Sonos TTS script"
@@ -123,7 +123,7 @@
        data_template:
          entity_id: "{{ sonos_entity }}"
 </code></pre>
-<p>We call this now with:</p>
+<p>이제 다음과 같이 호출이 가능합니다. :</p>
 <pre><code class="language-yaml">automation:
   - alias: 'test'
     trigger:
@@ -137,11 +137,11 @@
           message: 'Your husband coming home!'
           delay: '00:00:05'
 </code></pre>
-<p>Note that this example uses the <code>voicerss</code> text-to-speech platform. There are many platforms that can be used. The one installed by default with Home Assistant is Google TTS. This appears in your <code>configuration.yaml</code> file as:</p>
+<p>이 예제는 <code>voicerss</code> TTS (text-to-speech) 플랫폼을 사용합니다. 사용할 수있는 많은 플랫폼이 있습니다. Home Assistant와 함께 기본적으로 설치되는 것은 Google TTS입니다. <code>configuration.yaml</code> 파일에 다음과 같이 나타냅니다 .</p>
 <pre><code class="language-yaml">tts:
   - platform: google_translate
 </code></pre>
-<p>If you want to use this TTS engine, change the line in the example provided to:</p>
+<p>이 TTS 엔진을 사용하려면 제공된 예제에서 라인을 다음과 같이 변경하십시오. :</p>
 <pre><code class="language-txt">- service: tts.google_translate_say
 </code></pre>
 
@@ -173,16 +173,6 @@
     <ul class='divided'>
       
         
-          <li>
-            
-              <a href='/cookbook/automation_for_rainy_days/'>Automation for rainy days</a>
-            
-          </li>
-        
-      
-        
-      
-        
       
         
       
@@ -229,47 +219,7 @@
         
           <li>
             
-              <a href='/cookbook/dim_and_brighten_lights/'>Dim (and brighten) lights via a remote</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/dim_lights_when_playing_media/'>Dim lights when playing media</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/automation_flashing_lights/'>Examples for flashing lights</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/automation_telegram_presence_alert/'>Examples sending notification depending of the presence</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/automation_first_light/'>Examples using first light</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/automation_sun/'>Examples using the sun</a>
+              <a href='/cookbook/automation_enocean_phue/'>enocean 스위치로 Philips Hue 제어</a>
             
           </li>
         
@@ -281,7 +231,7 @@
         
           <li>
             
-              <a href='/cookbook/foscam_away_mode_PTZ/'>Foscam Recording during Away Mode Only using Pan/Tilt/Zoom Control and Motion Detection</a>
+              <a href='/cookbook/perform_actions_based_on_input_select/'>input_select로 작업 실행시키기</a>
             
           </li>
         
@@ -290,38 +240,6 @@
       
         
       
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/perform_actions_based_on_input_select/'>Perform actions based on input select</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/restart_ha_if_wemo_switch_is_not_detected/'>Restart Home Assistant if Wemo Switch is not detected</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/send_a_reminder/'>Send a reminder</a>
-            
-          </li>
-        
-      
-        
-          <li>
-            
-              <a href='/cookbook/notify_if_over_threshold/'>Send notification based on sensor</a>
-            
-          </li>
         
       
         
@@ -333,11 +251,9 @@
         
       
         
-      
-        
           <li>
             
-              Sonos say script to speak with text-to-speech
+              Sonos로 script를 사용하여 text-to-speech로 말하게하기
             
           </li>
         
@@ -345,7 +261,7 @@
         
           <li>
             
-              <a href='/cookbook/automation_enocean_phue/'>Switch Philips Hue with enocean</a>
+              <a href='/cookbook/restart_ha_if_wemo_switch_is_not_detected/'>Wemo Switch가 감지 안되면 홈어시스턴트 재시작.</a>
             
           </li>
         
@@ -353,7 +269,7 @@
         
           <li>
             
-              <a href='/cookbook/track_battery_level/'>Track your phone battery level</a>
+              <a href='/cookbook/automation_flashing_lights/'>깜빡이는 조명의 예시</a>
             
           </li>
         
@@ -361,7 +277,7 @@
         
           <li>
             
-              <a href='/cookbook/turn_on_light_for_10_minutes_when_motion_detected/'>Turn on lights for 10 minutes after motion detected</a>
+              <a href='/cookbook/dim_and_brighten_lights/'>리모컨으로 조명을 어둡게 혹은 밝게</a>
             
           </li>
         
@@ -369,7 +285,91 @@
         
           <li>
             
-              <a href='/cookbook/automation_using_timeinterval_inputboolean/'>Using time interval and input boolean</a>
+              <a href='/cookbook/turn_on_light_for_10_minutes_when_motion_detected/'>모션 감지 후 10분 동안 조명 켜기</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/dim_lights_when_playing_media/'>미디어를 재생할 때 조명을 희미하게</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_for_rainy_days/'>비오는 날 자동화</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/notify_if_over_threshold/'>센서를 기반으로 알림 보내기</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_using_timeinterval_inputboolean/'>시간간격과 Input_boolean 사용</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_first_light/'>아침시간에 맞춰 조명을 켜주는 예</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/send_a_reminder/'>알림 메시지 보내기</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_telegram_presence_alert/'>재실 여부에 따라 알림을 보내는 예</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/foscam_away_mode_PTZ/'>집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 및 모션감지로 사용</a>
+            
+          </li>
+        
+      
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/automation_sun/'>태양을 사용하는 예시</a>
+            
+          </li>
+        
+      
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/track_battery_level/'>휴대폰 밧데리 잔량 추적</a>
             
           </li>
         

@@ -103,12 +103,12 @@
   <hr class="divider">
   
 
-  <p>The sun integration will use your current location to track if the sun is above or
-below the horizon. The sun can be used within automation as
-<a href="/docs/automation/trigger/#sun-trigger">a trigger with an optional offset to simulate dawn/dusk</a> or as <a href="/docs/scripts/conditions/#sun-condition">a condition with an optional offset to test if the sun has already set or risen</a>.</p>
+  <p>Sun 통합구성요소는 태양이 수평선 위 또는 아래에 있는지 추적하기 위해 현재 위치를 사용합니다.
+태양은 자동화 내에서 다음과 같이 사용될 수 있습니다.
+<a href="/docs/automation/trigger/#sun-trigger">새벽/황혼을 시뮬레이트하기위한 선택적 오프셋이있는 트리거</a> 또는 <a href="/docs/scripts/conditions/#sun-condition">해가 이미 졌는지 혹은 떴는지 테스트하기위한 선택적 오프셋이있는 조건</a>.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>This integration is by default enabled, unless you’ve disabled or removed the <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> line from your configuration. If that is the case, the following example shows you how to enable this integration manually:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 통합구성요소는 설정에서 <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config :</code></a> 행을 비활성화하거나 제거하지 않는 한 기본적으로 활성화됩니다. 다음 예는이 통합구성요소를 수동으로 활성화하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sun:
 </code></pre>
@@ -118,7 +118,7 @@ sun:
   <dl class="">
 <dt>
 <a class="title-link" name="elevation" href="#elevation"></a> elevation</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The (physical) elevation of your location, in meters above sea level. Defaults to the <code>elevation</code> in <code>configuration.yaml</code>, which is retrieved from Google Maps if not set.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>해발 미터로 표시된 위치의 (물리적) 고도입니다. <code>configuration.yaml</code>의 <code>elevation</code>은 기본적으로 설정되어 있지 않으면 Google지도에서 검색됩니다.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -126,11 +126,9 @@ sun:
 <img src="/images/screenshots/more-info-dialog-sun.png">
 </p>
 <h2>
-<a class="title-link" name="implementation-details" href="#implementation-details"></a> Implementation Details</h2>
-<p>The sun’s event listener will call the service when the sun rises or sets with
-an offset.</p>
-<p>The sun event need to have the type ‘sun’, which service to call,
-which event (sunset or sunrise) and the offset.</p>
+<a class="title-link" name="--" href="#--"></a> 구현 세부 사항</h2>
+<p>태양의 이벤트 리스너는 태양이 뜨거나 오프셋으로 설정 될 때 서비스를 호출합니다.</p>
+<p>sun 이벤트에는 ‘sun’ 유형, 호출 할 서비스, 어떤 이벤트 (일몰 또는 일출) 및 오프셋이 있어야합니다.</p>
 <pre><code class="language-json">{
     "type": "sun",
     "service": "switch.turn_on",
@@ -139,7 +137,7 @@ which event (sunset or sunrise) and the offset.</p>
 }
 </code></pre>
 <h3>
-<a class="title-link" name="maintains-entity-sunsun" href="#maintains-entity-sunsun"></a> Maintains entity sun.sun</h3>
+<a class="title-link" name="sunsun---" href="#sunsun---"></a> sun.sun 엔티티의 지원 사항</h3>
 <table>
 <thead>
 <tr>
@@ -150,11 +148,11 @@ which event (sunset or sunrise) and the offset.</p>
 <tbody>
 <tr>
 <td><code>above_horizon</code></td>
-<td>When the sun is above the horizon.</td>
+<td>태양이 수평선 위에 있을 때.</td>
 </tr>
 <tr>
 <td><code>below_horizon</code></td>
-<td>When the sun is below the horizon.</td>
+<td>태양이 수평선 아래에 있을 때.</td>
 </tr>
 </tbody>
 </table>
@@ -168,39 +166,39 @@ which event (sunset or sunrise) and the offset.</p>
 <tbody>
 <tr>
 <td><code>next_rising</code></td>
-<td>Date and time of the next sun rising (in UTC).</td>
+<td>다음 해가 뜨는 날짜와 시간 (UTC).</td>
 </tr>
 <tr>
 <td><code>next_setting</code></td>
-<td>Date and time of the next sun setting (in UTC).</td>
+<td>다음 태양 설정 날짜 및 시간 (UTC).</td>
 </tr>
 <tr>
 <td><code>next_dawn</code></td>
-<td>Date and time of the next dawn (in UTC).</td>
+<td>다음 새벽의 날짜와 시간 (UTC).</td>
 </tr>
 <tr>
 <td><code>next_dusk</code></td>
-<td>Date and time of the next dusk (in UTC).</td>
+<td>다음 황혼의 날짜와 시간 (UTC).</td>
 </tr>
 <tr>
 <td><code>next_noon</code></td>
-<td>Date and time of the next solar noon (in UTC).</td>
+<td>다음 정오의 날짜 및 시간 (UTC).</td>
 </tr>
 <tr>
 <td><code>next_midnight</code></td>
-<td>Date and time of the next solar midnight (in UTC).</td>
+<td>다음 태양 자정의 날짜와 시간 (UTC).</td>
 </tr>
 <tr>
 <td><code>elevation</code></td>
-<td>Solar elevation. This is the angle between the sun and the horizon. Negative values mean the sun is below the horizon.</td>
+<td>태양 고도. 이것은 태양과 수평선 사이의 각도입니다. 음수 값은 태양이 수평선 아래에 있음을 의미.</td>
 </tr>
 <tr>
 <td><code>azimuth</code></td>
-<td>Solar azimuth. The angle is shown clockwise from north.</td>
+<td>태양 방위각. 각도는 북쪽에서 시계 방향으로 표시.</td>
 </tr>
 <tr>
 <td><code>rising</code></td>
-<td>True if the Sun is currently rising, after solar midnight and before solar noon.</td>
+<td>태양이 자정 이후 및 정오 이전에 태양이 현재 상승중인 경우에 해당.</td>
 </tr>
 </tbody>
 </table>
