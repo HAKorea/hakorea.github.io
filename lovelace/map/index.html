@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>A card that allows you to display entities on a map.</p>
+  <p>지도에 엔티티를 표시 할 수있는 카드입니다.</p>
 <p class="img">
 <img src="/images/lovelace/lovelace_map_card.png" alt="Screenshot of the map card">
-Screenshot of the map card.
+지도 카드의 스크린 샷. 
 </p>
 <div class="config-vars">
   <h3>
@@ -118,24 +118,24 @@ Screenshot of the map card.
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of entity IDs. Either this or the <code>geo_location_sources</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>엔터티 ID 목록. 해당 목록 혹은 <code>geo_location_sources</code> 설정 옵션 중 하나는 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="geo_location_sources" href="#geo_location_sources"></a> geo_location_sources</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of geolocation sources. All current entities with that source will be displayed on the map. See <a href="/integrations/geo_location/">Geolocation</a> platform for valid sources. Set to <code>all</code> to use all available sources. Either this or the <code>entities</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>지리적 위치 소스 목록. 해당 소스가 있는 모든 현재 엔티티가 맵에 표시됩니다. 유효한 소스는 <a href="/integrations/geo_location/">Geolocation</a> 플랫폼을 참조하십시오. 사용 가능한 모든 소스를 사용하려면 <code>all</code>로 설정하십시오. <code>geo_location_sources</code> 혹은 <code>entities</code>의 설정 옵션 중 하나는 필요로 합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The card title.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>카드 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="aspect_ratio" href="#aspect_ratio"></a> aspect_ratio</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Forces the height of the image to be a ratio of the width. You may enter a value such as: <code>16x9</code>, <code>16:9</code>, <code>1.78</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지의 높이를 너비의 비율로 강제로 만듭니다. 다음같은 값 입력 가능: <code>16x9</code>, <code>16:9</code>, <code>1.78</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="default_zoom" href="#default_zoom"></a> default_zoom</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The default zoom level of the map.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>지도의 기본 확대/축소 레벨.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -144,7 +144,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="dark_mode" href="#dark_mode"></a> dark_mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enable a dark theme for the map.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>지도에 어두운 테마를 사용하도록 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,15 +153,12 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-  Only entities that have latitude and longitude attributes will be displayed on the map.
-</div>
+  위도 및 경도 속성이있는 엔티티만 맵에 표시됩니다.
 <div class="note">
-<p>The <code>default_zoom</code> value will be ignored if it is set higher than the current zoom level
-after fitting all visible entity markers in the map window. In other words, this can only
-be used to zoom the map <em>out</em> by default.</p>
+<p><code>default_zoom</code> 값은 지도창에서 보이는 모든 엔티티 마커(표시)를 맞춘 후 현재 확대/축소 수준보다 높게 설정된 경우 나타나지 않습니다. 다시 말해, 이는 오직 기본적으로 지도를 <em>상세표현</em> 하는데 사용됩니다.</p>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 사례</h2>
 <pre><code class="language-yaml">type: map
 aspect_ratio: 16:9
 default_zoom: 8
@@ -177,8 +174,8 @@ entities:
 </code></pre>
 
 
-</article>
 
+</div></article>
           
         </div>
 
@@ -217,10 +214,6 @@ entities:
   <div class='section'>
     <h1 class="title delta">Cards</h1>
     <ul class='divided sidebar-menu'>
-      
-        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
-      
-        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
       
         <li><a  href='/lovelace/entities/'>Entities </a></li>
       
@@ -265,6 +258,10 @@ entities:
         <li><a  href='/lovelace/vertical-stack/'>Vertical Stack </a></li>
       
         <li><a  href='/lovelace/weather-forecast/'>Weather Forecast </a></li>
+      
+        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
+      
+        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
       
     </ul>
   </div>

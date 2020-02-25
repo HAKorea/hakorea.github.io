@@ -103,11 +103,10 @@
   <hr class="divider">
   
 
-  <p>To display cards on the UI you have to define them in views. Views sort cards in columns based on their <code>card size</code>. If you want to group some cards you have to use <code>stack</code> cards.
-UI에 카드를 표시하려면 View에서 카드를 정의해야합니다. View는 <code>card size</code> 를 기준으로 열의 카드를 정렬합니다. 일부 카드를 그룹화하려면 <code>stack</code> 카드를 사용해야합니다.</p>
+  <p>UI에 카드를 표시하려면 View에서 카드를 정의해야합니다. View는 <code>card size</code> 를 기준으로 열의 카드를 정렬합니다. 일부 카드를 그룹화하려면 <code>stack</code> 카드를 사용해야합니다.</p>
 <p class="img">
   <img src="/images/lovelace/lovelace_views.png" alt="Views toolbar">
-  제목과 아이콘을 사용하여 View의 내용을 설명하십시오.
+  제목과 아이콘을 사용하여 View의 내용을 나타냅니다.
 </p>
 <div class="config-vars">
   <h3>
@@ -133,7 +132,7 @@ UI에 카드를 표시하려면 View에서 카드를 정의해야합니다. View
 <dt>
 <a class="title-link" name="path" href="#path"></a> path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>경로는 URL에서 사용되며, 자세한 내용은 아래를 참조하십시오.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>경로는 URL로 사용되며, 자세한 내용은 아래를 참조.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -174,8 +173,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="visible-" href="#visible-"></a> Visible의 옵션</h2>
-<p>If you define <code>visible</code> as objects instead of a boolean to specify conditions for displaying the view tab:
-view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대신 객체로 <code>visible</code>을 정의하는 경우 :</p>
+<p>view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대신 객체로 <code>visible</code>을 정의하는 경우 :</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -200,10 +198,9 @@ view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대
 </code></pre>
 <h2>
 <a class="title-link" name="" href="#"></a> 경로</h2>
-<p>You can link to one view from another view by its path. For this use cards that support navigation (<code>navigation_path</code>). Do not use special characters in paths. Do not begin a path with a number. This will cause the parser to read your path as a view index.
-경로를 통해 다른 view에서 또다른 view에 연결할 수 있습니다. 이를 위해 내비게이션 (<code>navigation_path</code>)을 지원하는 카드를 사용하십시오. 경로에 특수 문자를 사용하지 마십시오. 숫자로 경로를 시작하지 마십시오. 그러면 파서가 경로를 뷰인덱스로 읽습니다.</p>
+<p>경로를 통해 다른 view에서 또다른 view에 연결할 수 있습니다. 이를 위해 내비게이션 (<code>navigation_path</code>)을 지원하는 카드를 사용하십시오. 경로에 특수 문자를 사용하지 마십시오. 숫자로 경로를 시작하지 마십시오. 그러면 파서가 경로를 뷰인덱스(view index)로 읽습니다.</p>
 <h3>
-<a class="title-link" name="example" href="#example"></a> Example</h3>
+<a class="title-link" name="" href="#"></a> 사례</h3>
 <p>View config:</p>
 <pre><code class="language-yaml">- title: Living room
   # the final path is /lovelace/living_room
@@ -218,8 +215,7 @@ view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대
 </code></pre>
 <h2>
 <a class="title-link" name="icons" href="#icons"></a> Icons</h2>
-<p>If you define an icon the title will be used as a tool-tip.
-아이콘을 정의하면 제목이 툴팁(tool-tip)으로 사용됩니다.</p>
+<p>아이콘을 정의하면 제목이 툴팁(tool-tip)으로 사용됩니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 사례</h3>
 <pre><code class="language-yaml">- title: Garden
@@ -227,7 +223,7 @@ view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대
 </code></pre>
 <h2>
 <a class="title-link" name="visible" href="#visible"></a> Visible</h2>
-<p>view를 구분해서 전체 또는 사용자별로 지정할 수 있습니다. (참고 : 이것은 탭표시 전용입니다. URL 경로는 여전히 액세스 가능합니다)</p>
+<p>view를 구분해서 전체 또는 사용자별로 지정할 수 있습니다. (참고 : 탭표시 전용. URL 경로는 여전히 액세스 가능)</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 사례</h3>
 <pre><code class="language-yaml">views:
@@ -248,8 +244,7 @@ view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대
 </code></pre>
 <h2>
 <a class="title-link" name="--panel-mode" href="#--panel-mode"></a> 패널 모드 (Panel mode)</h2>
-<p>This renders the first card on full width, other cards in this view will not be rendered. Good for cards like <code>map</code>, <code>stack</code> or <code>picture-elements</code>.
-이렇게하면 첫 번째 카드가 전체 너비로 렌더링되고 이 View의 다른 카드는 렌더링되지 않습니다. <code>map</code>,<code>stack</code> 또는 <code>picture-elements</code>와 같은 카드에 적합합니다.</p>
+<p>이렇게하면 첫 번째 카드가 전체 너비로 렌더링되고 이 View의 다른 카드는 렌더링되지 않습니다. <code>map</code>,<code>stack</code> 또는 <code>picture-elements</code>와 같은 카드에 적합합니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 사례</h3>
 <pre><code class="language-yaml">- title: Map
@@ -262,8 +257,7 @@ view 탭을 표시하기위한 조건을 지정하기 위해 부울(boolean) 대
 </code></pre>
 <h2>
 <a class="title-link" name="" href="#"></a> 테마</h2>
-<p>Set a separate <a href="/integrations/frontend/#themes">theme</a> for the view and its cards.
-View와 해당 카드에 대해 별도의 <a href="/integrations/frontend/#themes">theme</a>를 설정하십시오.</p>
+<p>View와 해당 카드에 대해 별도의 <a href="/integrations/frontend/#themes">theme</a>를 설정하십시오.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 사례</h3>
 <pre><code class="language-yaml">- title: Home
@@ -271,8 +265,7 @@ View와 해당 카드에 대해 별도의 <a href="/integrations/frontend/#theme
 </code></pre>
 <h3>
 <a class="title-link" name="-background" href="#-background"></a> 배경 (Background)</h3>
-<p>You can style the background of your views with a <a href="/integrations/frontend/#themes">theme</a>. You can use the CSS variable <code>lovelace-background</code>. For wallpapers you probably want to use the example below, more options can be found <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background" rel="external nofollow">here</a>.
-<a href="/integrations/frontend/#themes">theme</a>를 사용하여 뷰의 배경 스타일을 지정할 수 있습니다. CSS 변수 <code>lovelace-background</code>를 사용할 수 있습니다. 아래 예를 사용하려는 월페이퍼의 경우 더 많은 옵션을 찾을 수 있습니다. [참고][https://developer.mozilla.org/en-US/docs/Web/CSS/background].</p>
+<p><a href="/integrations/frontend/#themes">theme</a>를 사용하여 뷰의 배경 스타일을 지정할 수 있습니다. CSS 변수 <code>lovelace-background</code>를 사용할 수 있습니다. 아래 예를 사용하려는 월페이퍼의 경우 더 많은 옵션을 찾을 수 있습니다. [참고][https://developer.mozilla.org/en-US/docs/Web/CSS/background].</p>
 <h4>
 <a class="title-link" name="" href="#"></a> 사례</h4>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -285,8 +278,7 @@ frontend:
 <a class="title-link" name="-badges" href="#-badges"></a> 뱃지 (Badges)</h2>
 <h3>
 <a class="title-link" name="--state-label-badge" href="#--state-label-badge"></a> 상태 라벨 벳지(State Label Badge)</h3>
-<p>The State Label badge allows you to dislay a state badge
-상태 라벨 벳지는 벳지 상태를 보여줍니다.</p>
+<p>상태 라벨 벳지는 벳지의 상태를 보여줍니다.</p>
 <pre><code class="language-yaml">type: state-label
 entity: light.living_room
 </code></pre>
@@ -344,13 +336,13 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="tap_action" href="#tap_action"></a> tap_action</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>탭할시 액션.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>탭(tap)할 시 액션.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="action" href="#action"></a> action</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>액션 수행 (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>실행할 액션 (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -359,7 +351,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="navigation_path" href="#navigation_path"></a> navigation_path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>navigate</code>로 정의 된 경우 탐색할 경로 (예 :<code>/lovelace/0/</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>navigate</code>로 정의된 경우 탐색할 경로 (예 :<code>/lovelace/0/</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -368,7 +360,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="url_path" href="#url_path"></a> url_path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이<code>url</code>로 정의 된 경우 탐색 경로 (예 :<code>https : // www.home-assistant.io</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이<code>url</code>로 정의된 경우 탐색 경로 (예 :<code>https : // www.home-assistant.io</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -377,7 +369,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="service" href="#service"></a> service</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>call-service</code>로 정의 된 <code>action</code> 일 때 호출 할 서비스 (예 :<code>media_player.media_play_pause</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>call-service</code>로 정의된 <code>action</code> 일 때 호출할 서비스 (예 :<code>media_player.media_play_pause</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -386,7 +378,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="service_data" href="#service_data"></a> service_data</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code>로 정의될 때 (예: <code>entity_id: media_player.bedroom</code>)을 포함할 서비스 데이터</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code>로 정의될 때 포함할 서비스 데이터 (예: <code>entity_id: media_player.bedroom</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -395,7 +387,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="confirmation" href="#confirmation"></a> confirmation</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>을 컨펌하는 확인 대화 상자를 표시하십시오. 아래의 <code>confirmation</code>개체를 참조하십시오.</p>
+<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>을 컨펌하는 확인 대화 상자를 표시하십시오. 아래의 <code>confirmation</code> 개체를 참조하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -410,7 +402,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="action" href="#action"></a> action</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>액션 수행 (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>실행할 액션 (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -428,7 +420,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="url_path" href="#url_path"></a> url_path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>url</code>로 정의 된 경우 탐색 경로 (예 :<code>https://www.home-assistant.io</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>url</code>로 정의된 경우 탐색 경로 (예 :<code>https://www.home-assistant.io</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -437,7 +429,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="service" href="#service"></a> service</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code>로 정의 된 경우 호출할 서비스 (예 :<code>media_player.media_play_pause</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code>로 정의된 경우 호출할 서비스 (예 :<code>media_player.media_play_pause</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -446,7 +438,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="service_data" href="#service_data"></a> service_data</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code>로 정의 된 경우 포함 할 서비스 데이터 (예 :<code>entity_id : media_player.bedroom</code>). Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code>로 정의된 경우 포함할 서비스 데이터 (예 :<code>entity_id : media_player.bedroom</code>).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -455,7 +447,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="confirmation" href="#confirmation"></a> confirmation</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>작업을 컨펌하는 확인 대화 상자를 표시. 아래 <code>confirmation</code> 객체 참조</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -464,13 +456,13 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="double_tap_action" href="#double_tap_action"></a> double_tap_action</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Action to take on double tap</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>더블 탭에서 액션</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="action" href="#action"></a> action</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Action to perform (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>실행할 액션 (<code>more-info</code>, <code>toggle</code>, <code>call-service</code>, <code>navigate</code>, <code>url</code>, <code>none</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -479,7 +471,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="navigation_path" href="#navigation_path"></a> navigation_path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>/lovelace/0/</code>) when <code>action</code> defined as <code>navigate</code></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>navigate</code>로 정의될 때 (예: <code>/lovelace/0/</code>) 탐색할 경로</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -488,7 +480,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="url_path" href="#url_path"></a> url_path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to navigate to (e.g. <code>https://www.home-assistant.io</code>) when <code>action</code> defined as <code>url</code></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>url</code>로 정의될 때 (예: <code>https://www.home-assistant.io</code>) 탐색할 경로</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -497,7 +489,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="service" href="#service"></a> service</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service to call (e.g. <code>media_player.media_play_pause</code>) when <code>action</code> defined as <code>call-service</code></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code> 로 정의될 때 (예: <code>media_player.media_play_pause</code>) 호출할 서비스</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -506,7 +498,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="service_data" href="#service_data"></a> service_data</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Service data to include (e.g. <code>entity_id: media_player.bedroom</code>) when <code>action</code> defined as <code>call-service</code></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>action</code>이 <code>call-service</code> 로 정의될 때 (예: <code>entity_id: media_player.bedroom</code>) 포함할 서비스 데이터</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -515,7 +507,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="confirmation" href="#confirmation"></a> confirmation</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Present a confirmation dialog to confirm the action. See <code>confirmation</code> object below</p>
+<p class="desc"><span class="type">(<span class="boolean map">boolean | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>작업을 컨펌하는 확인 대화 상자를 표시. 아래 <code>confirmation</code> 객체 참조</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -525,37 +517,37 @@ Default value: </p>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="options-for-confirmation" href="#options-for-confirmation"></a> Options For Confirmation</h4>
-<p>If you define confirmation as an object instead of boolean, you can add more customization and configurations:</p>
+<a class="title-link" name="--options-for-confirmation" href="#--options-for-confirmation"></a> 확인 옵션 (Options For Confirmation)</h4>
+<p>boolean 대신 객체로 확인(confirmation)을 정의하면 더 많은 사용자 정의 및 설정을 추가 할 수 있습니다. :</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="text" href="#text"></a> text</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Text to present in the confirmation dialog.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>확인 대화 상자에 표시 할 텍스트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="exemptions" href="#exemptions"></a> exemptions</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of <code>exemption</code> objects. See below</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>exemption</code> 객체 목록. 아래 참조</p>
 </span></p></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="options-for-exemptions" href="#options-for-exemptions"></a> Options For Exemptions</h4>
+<a class="title-link" name="--options-for-exemptions" href="#--options-for-exemptions"></a> 면제 옵션 (Options For Exemptions)</h4>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="user" href="#user"></a> user</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>User id that can see the view tab.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>보기 탭을 볼 수있는 사용자 ID.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="entity-filter-badge" href="#entity-filter-badge"></a> Entity Filter Badge</h3>
-<p>This badge allows you to define a list of entities that you want to track only when in a certain state. Very useful for showing lights that you forgot to turn off or show a list of people only when they’re at home.</p>
+<a class="title-link" name="---entity-filter-badge" href="#---entity-filter-badge"></a> 엔티티 필터 뱃지 (Entity Filter Badge)</h3>
+<p>이 뱃지를 사용하면 특정 상태에 있을 때만 추적하려는 엔터티 목록을 정의할 수 있습니다. 집에 있을 때만 사람들의 전원을 깜빡하고 못 끈 전등을 끄는데 매우 유용합니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -566,71 +558,71 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list of entity IDs or <code>entity</code> objects, see below.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>엔터티 ID 또는 <code>entity</code>개체 목록은 아래 참조</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state_filter" href="#state_filter"></a> state_filter</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of strings representing states or <code>filter</code> objects, see below.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>상태 또는 <code>filter</code> 객체를 나타내는 문자열 목록은 아래를 참조</p>
 </span></p></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="options-for-entities" href="#options-for-entities"></a> Options For Entities</h4>
-<p>If you define entities as objects instead of strings (by adding <code>entity:</code> before entity ID), you can add more customization and configurations:</p>
+<a class="title-link" name="--options-for-entities" href="#--options-for-entities"></a> 엔티티 옵션 (Options For Entities)</h4>
+<p>엔티티를 문자열 대신 객체로 정의(엔티티 ID 앞에 <code>entity:</code> 추가)하면 더 많은 사용자 정의 및 설정을 추가 할 수 있습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets a custom badge type: <code>custom:my-custom-badge</code></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 뱃지 유형 설정: <code>custom:my-custom-badge</code></p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity" href="#entity"></a> entity</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Home Assistant entity ID.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>홈어시스턴트 엔티티 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites friendly name.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>친숙한 이름을 덮어 씁니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites icon or entity picture.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>아이콘 또는 엔터티 그림을 덮어 씁니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="image" href="#image"></a> image</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The URL of an image.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지의 URL.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state_filter" href="#state_filter"></a> state_filter</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of strings representing states or <code>filter</code> objects, see below.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>상태 또는 <code>filter</code> 객체를 나타내는 문자열 목록 은 아래를 참조.</p>
 </span></p></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="options-for-state_filter" href="#options-for-state_filter"></a> Options For state_filter</h4>
-<p>If you define state_filter as objects instead of strings (by adding <code>value:</code> before your state value), you can add more customization to your filter:</p>
+<a class="title-link" name="state_filter--options-for-state_filter" href="#state_filter--options-for-state_filter"></a> state_filter 옵션 (Options For state_filter)</h4>
+<p>state_filter를 문자열 대신 객체로 정의하면(state value 앞에 <code>value:</code>를 추가) 필터에 더 많은 사용자 정의를 추가 할 수 있습니다. :</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="value" href="#value"></a> value</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>String representing the state.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>상태를 나타내는 문자열.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="operator" href="#operator"></a> operator</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Operator to use in the comparison. Can be <code>==</code>, <code>&lt;=</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>!=</code> or <code>regex</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>비교에 사용할 연산자. (예: <code>==</code>, <code>&lt;=</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>!=</code> or <code>regex</code>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="attribute" href="#attribute"></a> attribute</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Attribute of the entity to use instead of the state.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>상태 대신 사용할 엔티티의 속성.</p>
 </span></p></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h4>
-<p>Show only active switches or lights in the house</p>
+<a class="title-link" name="" href="#"></a> 사례</h4>
+<p>집에 활성된 스위치 또는 전등 만 표시</p>
 <pre><code class="language-yaml">type: entity-filter
 entities:
   - entity: light.bed_light
@@ -640,7 +632,7 @@ entities:
 state_filter:
   - "on"
 </code></pre>
-<p>Specify filter for a single entity</p>
+<p>단일 엔터티에 대한 필터 지정</p>
 <pre><code class="language-yaml">type: entity-filter
 state_filter:
   - "on"
@@ -698,10 +690,6 @@ entities:
     <h1 class="title delta">Cards</h1>
     <ul class='divided sidebar-menu'>
       
-        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
-      
-        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
-      
         <li><a  href='/lovelace/entities/'>Entities </a></li>
       
         <li><a  href='/lovelace/entity-button/'>Entity Button </a></li>
@@ -745,6 +733,10 @@ entities:
         <li><a  href='/lovelace/vertical-stack/'>Vertical Stack </a></li>
       
         <li><a  href='/lovelace/weather-forecast/'>Weather Forecast </a></li>
+      
+        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
+      
+        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
       
     </ul>
   </div>

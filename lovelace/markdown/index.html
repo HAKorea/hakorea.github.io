@@ -103,11 +103,11 @@
   <hr class="divider">
   
 
-  <p>Markdown card is used to render <a href="https://commonmark.org/help/" rel="external nofollow">Markdown</a>.</p>
-<p>The renderer uses <a href="https://marked.js.org" rel="external nofollow">Marked.js</a>, which supports <a href="https://marked.js.org/#/README.md#specifications" rel="external nofollow">several specifications of Markdown</a>, including CommonMark, GitHub Flavored Markdown (GFM) and <code>markdown.pl</code>.</p>
+  <p>마크 다운 카드는 [Markdown] (<a href="https://commonmark.org/help/" rel="external nofollow">https://commonmark.org/help/</a>) 렌더링에 사용됩니다.</p>
+<p>렌더러는 <a href="https://marked.js.org" rel="external nofollow">Marked.js</a>를 사용하며, CommonMark, GitHub Flavored Markdown (GFM) 및 <code>markdown.pl</code>을 포함한 <a href="https://marked.js.org/#/README.md#specifications" rel="external nofollow">Markdown의 여러 스펙</a> 을 지원합니다.</p>
 <p class="img">
 <img src="/images/lovelace/lovelace_markdown.png" alt="Screenshot of the markdown card">
-Screenshot of the markdown card.
+마크 다운 카드의 스크린 샷.
 </p>
 <div class="config-vars">
   <h3>
@@ -119,7 +119,7 @@ Screenshot of the markdown card.
 </span></p></dd>
 <dt>
 <a class="title-link" name="content" href="#content"></a> content</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Content to render as <a href="https://commonmark.org/help/" rel="external nofollow">Markdown</a>. May contain <a href="/docs/configuration/templating/">templates</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p><a href="https://commonmark.org/help/" rel="external nofollow">Markdown</a> 렌더링 할 컨텐츠. <a href="/docs/configuration/templating/">templates</a>을 포함할 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
@@ -133,7 +133,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="card_size" href="#card_size"></a> card_size</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The algorithm for placing cards aesthetically in lovelace may have problems with the markdown card if it contains templates. You can use this value to help it estimate the height of the card in units of 50 pixels (approximately 3 lines of text in default size). (e.g., <code>4</code>)</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>템플릿을 포함하는 경우 심미적으로 카드를 러브레이스에 배치하는 알고리즘에 마크 다운 카드에 문제가 있을 수 있습니다. 이 값을 사용하여 카드 높이를 50 픽셀 단위 (기본 크기의 경우 대략 3 줄의 텍스트)로 추정 할 수 있습니다. (예로서 <code>4</code>).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,7 +142,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of entity IDs so a template in <code>content:</code> only reacts to the state changes of these entities. This can be used if the automatic analysis fails to find all relevant entities.</p>
+<p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>content :</code>의 템플릿이 이러한 엔티티의 상태 변경에만 반응하는 엔티티 ID 목록입니다. 자동 분석에서 모든 관련 엔티티를 찾지 못하면 사용할 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -150,12 +150,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="theme" href="#theme"></a> theme</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to any theme within <code>themes.yaml</code></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>내 테마로 설정 <code>themes.yaml</code></p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="example" href="#example"></a> Example</h2>
+<a class="title-link" name="" href="#"></a> 사례</h2>
 <pre><code class="language-yaml">type: markdown
 content: &gt;
   ## Lovelace
@@ -163,8 +163,8 @@ content: &gt;
   Starting with Home Assistant 0.72, we're experimenting with a new way of defining your interface. We're calling it the **Lovelace UI**.
 </code></pre>
 <h2>
-<a class="title-link" name="template-variables" href="#template-variables"></a> Template variables</h2>
-<p>A special template variable - <code>config</code> is set up for the <code>content</code> of the card. It contains the configuration of the card.</p>
+<a class="title-link" name="-" href="#-"></a> 템플릿 변수</h2>
+<p>특별한 템플릿 변수 - <code>config</code>는 카드의 <code>content</code>에 대해 설정합니다. 여기에 카드 설정이 포함되어 있습니다.</p>
 <p>E.g.</p>
 <pre><code class="language-yaml">type: entity-filter
 entities:
@@ -226,10 +226,6 @@ card:
     <h1 class="title delta">Cards</h1>
     <ul class='divided sidebar-menu'>
       
-        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
-      
-        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
-      
         <li><a  href='/lovelace/entities/'>Entities </a></li>
       
         <li><a  href='/lovelace/entity-button/'>Entity Button </a></li>
@@ -273,6 +269,10 @@ card:
         <li><a  href='/lovelace/vertical-stack/'>Vertical Stack </a></li>
       
         <li><a  href='/lovelace/weather-forecast/'>Weather Forecast </a></li>
+      
+        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
+      
+        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
       
     </ul>
   </div>

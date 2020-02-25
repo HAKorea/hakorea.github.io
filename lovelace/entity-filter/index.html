@@ -103,11 +103,11 @@
   <hr class="divider">
   
 
-  <p>This card allows you to define a list of entities that you want to track only when in a certain state. Very useful for showing lights that you forgot to turn off or show a list of people only when they’re at home.</p>
-<p>This type of card can also be used together with rest of cards that allow multiple entities, allowing you to use <a href="/lovelace/glance/">glance</a> or <a href="/lovelace/picture-glance/">picture-glance</a>. By default it uses <a href="/lovelace/entities/">entities</a> card model.</p>
+  <p>이 카드를 사용하면 특정 상태에 있을 때만 추적하려는 엔티티 목록을 정의할 수 있습니다. 깜빡 잊고 전등을 끄지 않은 상태를 보여주거나, 집안에 있는 사람만 리스트에 나타나게 하고 싶을 때 매우 유용합니다.</p>
+<p>이 유형의 카드는 여러 엔티티를 허용하는 나머지 카드와 함께 사용하는 방법으로 <a href="/lovelace/glance/">glance</a> 혹은 <a href="/lovelace/picture-glance/">picture-glance</a>를 사용할 수 있습니다. 기본적으로 <a href="/lovelace/entities/">entities</a> 카드 모델을 사용합니다.</p>
 <p class="img">
 <img src="/images/lovelace/lovelace_entity_filter.png" alt="Screenshot of the entity filter card">
-Screenshot of the entity filter card.
+엔터티 필터 카드의 스크린 샷.
 </p>
 <div class="config-vars">
   <h3>
@@ -119,16 +119,16 @@ Screenshot of the entity filter card.
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list of entity IDs or <code>entity</code> objects, see below.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>엔터티 ID 또는 <code>entity</code> 개체 목록 은 아래를 참조</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state_filter" href="#state_filter"></a> state_filter</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of strings representing states or <code>filter</code> objects, see below.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>상태 또는 <code>filter</code> 객체를 나타내는 문자열 목록은 아래를 참조</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="card" href="#card"></a> card</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Extra options to pass down to the card rendering the result.</p>
+<p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>결과를 렌더링하는 카드로 전달하는 추가 옵션.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -137,7 +137,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="show_empty" href="#show_empty"></a> show_empty</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Allows hiding of card when no entities returned by filter.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>필터에 의해 반환된 엔티티가 없을 때 카드를 숨길 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -146,8 +146,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="options-for-entities" href="#options-for-entities"></a> Options For Entities</h2>
-<p>If you define entities as objects instead of strings (by adding <code>entity:</code> before entity ID), you can add more customization and configurations:</p>
+<a class="title-link" name="--options-for-entities" href="#--options-for-entities"></a> 엔티티 옵션 (Options For Entities)</h2>
+<p>엔티티를 문자열 대신 객체로 정의하는 경우 (엔티티 ID 앞에 <code>entity :</code>를 추가하여), 더 많은 사용자 정의 및 설정을 추가할 수 있습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -158,54 +158,54 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets a custom card type: <code>custom:my-custom-card</code></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>custom card 유형을 설정 : <code>custom:my-custom-card</code></p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites friendly name.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>친숙한 이름을 덮어 씁니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="icon" href="#icon"></a> icon</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Overwrites icon or entity picture.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>아이콘 또는 엔터티 그림을 덮어 씁니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="secondary_info" href="#secondary_info"></a> secondary_info</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Show additional info. Values: <code>entity-id</code>, <code>last-changed</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가 정보를 표시. 값: <code>entity-id</code>, <code>last-changed</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="format" href="#format"></a> format</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>How the state should be formatted. Currently only used for timestamp sensors. Valid values are: <code>relative</code>, <code>total</code>, <code>date</code>, <code>time</code> and <code>datetime</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>상태의 형식을 지정하는 방법. 현재 타임 스탬프 센서에만 사용. 유효한 값 : <code>relative</code>, <code>total</code>, <code>date</code>, <code>time</code>, <code>datetime</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state_filter" href="#state_filter"></a> state_filter</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of strings representing states or <code>filter</code> objects, see below.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>상태 또는 <code>filter</code> 객체를 나타내는 문자열 목록은 아래를 참조.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="options-for-state_filter" href="#options-for-state_filter"></a> Options For state_filter</h2>
-<p>If you define state_filter as objects instead of strings (by adding <code>value:</code> before your state value), you can add more customization to your filter:</p>
+<a class="title-link" name="state_filter-" href="#state_filter-"></a> state_filter 옵션</h2>
+<p>state_filter를 문자열 대신 객체로 정의(상태 값 앞에 <code>value :</code>를 추가하여)하면 필터에 더 많은 사용자 정의를 추가 할 수 있습니다</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="value" href="#value"></a> value</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>String representing the state.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>상태를 나타내는 문자열.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="operator" href="#operator"></a> operator</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Operator to use in the comparison. Can be <code>==</code>, <code>&lt;=</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>!=</code> or <code>regex</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>비교에 사용할 연산자. <code>==</code>, <code>&lt;=</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>!=</code> 혹은 <code>regex</code> 사용 가능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="attribute" href="#attribute"></a> attribute</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Attribute of the entity to use instead of the state.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>상태 대신 사용할 엔티티의 속성.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
-<p>Show only active switches or lights in the house</p>
+<a class="title-link" name="" href="#"></a> 사례</h3>
+<p>집에 활성화된 스위치 또는 전등 만 표시 :</p>
 <pre><code class="language-yaml">type: entity-filter
 entities:
   - entity: light.bed_light
@@ -215,7 +215,7 @@ entities:
 state_filter:
   - "on"
 </code></pre>
-<p>Show only people that are at home using <a href="/lovelace/glance/">glance</a>:</p>
+<p><a href="/lovelace/glance/">glance</a>로 집에있는 사람만 표시 :</p>
 <pre><code class="language-yaml">type: entity-filter
 entities:
   - device_tracker.demo_paulus
@@ -227,7 +227,7 @@ card:
   type: glance
   title: People at home
 </code></pre>
-<p>Specify filter for a single entity</p>
+<p>단일 엔터티에 대한 필터 지정</p>
 <pre><code class="language-yaml">type: entity-filter
 state_filter:
   - "on"
@@ -244,7 +244,7 @@ entities:
 </code></pre>
 <p class="img">
   <img src="/images/lovelace/lovelace_entity_filter_glance.png" alt="Entity filter combined with glance card">
-  Entity filter combined with glance card.
+  Glance 카드와 결합 된 엔티티 필터.
 </p>
 
 
@@ -289,10 +289,6 @@ entities:
     <h1 class="title delta">Cards</h1>
     <ul class='divided sidebar-menu'>
       
-        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
-      
-        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
-      
         <li><a  href='/lovelace/entities/'>Entities </a></li>
       
         <li><a  href='/lovelace/entity-button/'>Entity Button </a></li>
@@ -336,6 +332,10 @@ entities:
         <li><a  href='/lovelace/vertical-stack/'>Vertical Stack </a></li>
       
         <li><a  href='/lovelace/weather-forecast/'>Weather Forecast </a></li>
+      
+        <li><a  href='/lovelace/alarm-panel/'>Alarm Panel </a></li>
+      
+        <li><a  href='/lovelace/conditional/'>Conditional </a></li>
       
     </ul>
   </div>
