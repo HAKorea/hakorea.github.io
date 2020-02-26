@@ -103,11 +103,8 @@
   <hr class="divider">
   
 
-  <p>The <code>template</code> platform creates lights that combine integrations and provides the
-ability to run scripts or invoke services for each of the on, off, and
-brightness commands of a light.</p>
-<p>To enable Template Lights in your installation, add the following to your
-<code>configuration.yaml</code> file:</p>
+  <p><code>template</code> 플랫폼은 통합구성요소들을 결합한 조명을 만들 수도 있고, 조명의 켜기, 끄기 및 밝기 명령 각각에 대해 스크립트를 실행하거나 서비스를 호출하는 기능을 제공합니다.</p>
+<p>설치에서 템플릿 라이트를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: template
@@ -131,21 +128,21 @@ light:
   <dl class="">
 <dt>
 <a class="title-link" name="lights" href="#lights"></a> lights</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>List of your lights.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>조명 리스트.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 사용할 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of entity IDs so the light only reacts to state changes of these entities. This can be used if the automatic analysis fails to find all relevant entities.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>조명이 엔티티들의 상태 변경에만 반응하는 엔티티 ID 목록. 자동 분석에서 모든 관련 엔티티를 찾지 못한 경우 사용 가능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the state of the light.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>조명의 상태를 얻기 위해 템플릿을 정의.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -154,7 +151,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="level_template" href="#level_template"></a> level_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the brightness of the light.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>조명의 밝기를 얻기 위해 템플릿을 정의.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -162,12 +159,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="icon_template" href="#icon_template"></a> icon_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template for an icon or picture, e.g. showing a different icon for different states.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>아이콘 또는 그림의 템플릿을 정의합니다 (예 : 상태에 따라 다른 아이콘 표시)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="availability_template" href="#availability_template"></a> availability_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the <code>available</code> state of the component. If the template returns <code>true</code>, the device is <code>available</code>. If the template returns any other value, the device will be <code>unavailable</code>. If <code>availability_template</code> is not configured, the component will always be <code>available</code>.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>컴포넌트의 <code>available</code> 상태를 가져 오도록 템플리트를 정의. 템플릿이 <code>true</code>를 반환하면 <code>available</code> 입니다. 템플릿이 다른 값을 반환하면 장치는 <code>unavailable</code>입니다. <code>availability_template</code>이 설정되어 있지 않으면 구성 요소는 항상 <code>available</code> 입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -175,40 +172,33 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="turn_on" href="#turn_on"></a> turn_on</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines an action to run when the light is turned on.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>조명이 켜질 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="turn_off" href="#turn_off"></a> turn_off</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines an action to run when the light is turned off.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Required)</span><span class="description"><p>조명이 꺼질 때 실행할 동작을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="set_level" href="#set_level"></a> set_level</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an action to run when the light is given a brightness command.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>조명에 밝기 명령이 제공될 때 실행할 동작을 정의.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="considerations" href="#considerations"></a> Considerations</h2>
-<p>If you are using the state of a platform that takes extra time to load, the
-Template Light may get an <code>unknown</code> state during startup. This results
-in error messages in your log file until that platform has completed loading.
-If you use <code>is_state()</code> function in your template, you can avoid this situation.
-For example, you would replace
-<code>{{ states.switch.source.state == 'on' }}</code>
-with this equivalent that returns <code>true</code>/<code>false</code> and never gives an unknown
-result:
+<a class="title-link" name="-" href="#-"></a> 고려 사항</h2>
+<p>로드하는 데 추가시간이 더 걸리는 플랫폼의 상태를 사용하는 경우, 시작시 템플릿 표시등이 <code>unknown</code> 상태가 될 수 있습니다. 그러면 해당 플랫폼이 로드를 완료 할 때까지 로그 파일에 오류 메시지가 나타납니다.
+템플릿에서 <code>is_state()</code> 함수를 사용하면 이런 상황을 피할 수 있습니다.
+예를 들어, <code>true</code>/<code>false</code>를 반환하는 동등한 상황으로 <code>{{ states.switch.source.state == 'on' }}</code>로 대체할 경우 절대 uknown을 나타내지 않습니다.</p>
+<p>result:
 <code>{{ is_state('switch.source', 'on') }}</code></p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you will find some real-life examples of how to use this light.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에서는이 조명을 사용하는 방법에 대한 실제 예를 보여줍니다.</p>
 <h3>
-<a class="title-link" name="theater-volume-control" href="#theater-volume-control"></a> Theater Volume Control</h3>
-<p>This example shows a light that is actually a home theater’s volume. This
-component gives you the flexibility to provide whatever you’d like to send as
-the payload to the consumer including any scale conversions you may need to
-make; the <a href="/integrations/media_player/">Media Player component</a> needs a floating
-point percentage value from <code>0.0</code> to <code>1.0</code>.</p>
+<a class="title-link" name="---theater-volume-control" href="#---theater-volume-control"></a> 극장 볼륨 제어 (Theater Volume Control)</h3>
+<p>This example shows a light that is actually a home theater’s volume. This component gives you the flexibility to provide whatever you’d like to send as the payload to the consumer including any scale conversions you may need to make; the <a href="/integrations/media_player/">Media Player component</a> needs a floating point percentage value from <code>0.0</code> to <code>1.0</code>.
+이 예는 실제로 홈 시어터의 볼륨을 조명으로 보여줍니다. 이 구성 요소를 사용하면 필요한 소수점변환(scale conversion)을 포함하여 조명에 페이로드로 보내려는 모든 것을 제공 할 수 있는 유연성이 제공됩니다. <a href="/integrations/media_player/">Media Player component</a> 에는<code>0.0</code>에서<code>1.0</code>의 부동 소수점 백분율 값이 필요합니다.</p>
 <pre><code class="language-yaml">light:
   - platform: template
     lights:
@@ -247,8 +237,8 @@ point percentage value from <code>0.0</code> to <code>1.0</code>.</p>
           {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="change-the-icon" href="#change-the-icon"></a> Change The Icon</h3>
-<p>This example shows how to change the icon based on the light state.</p>
+<a class="title-link" name="-" href="#-"></a> 아이콘 변환</h3>
+<p>이 예는 조명 상태에 따라 아이콘을 변경하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">light:
   - platform: template
     lights:
@@ -286,8 +276,8 @@ point percentage value from <code>0.0</code> to <code>1.0</code>.</p>
             is_volume_muted: true
 </code></pre>
 <h3>
-<a class="title-link" name="change-the-entity-picture" href="#change-the-entity-picture"></a> Change The Entity Picture</h3>
-<p>This example shows how to change the entity picture based on the light state.</p>
+<a class="title-link" name="---change-the-entity-picture" href="#---change-the-entity-picture"></a> 엔티티 사진을 변환 (Change The Entity Picture)</h3>
+<p>이 예는 조명 상태에 따라 엔티티 사진을 변경하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">light:
   - platform: template
     lights:

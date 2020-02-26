@@ -103,13 +103,14 @@
   <hr class="divider">
   
 
-  <p>The <code>persistent_notification</code> integration can be used to show a notification on the frontend that has to be dismissed by the user.</p>
+  <p><code>persistent_notification</code> 통합구성요소는 사용자에 의해 해제해야하는 프론트 엔드에 필수 알림을 표시하는 데 사용할 수 있습니다.</p>
 <p class="img">
   <img src="/images/screenshots/persistent-notification.png">
 </p>
 <h3>
-<a class="title-link" name="service" href="#service"></a> Service</h3>
-<p>The service <code>persistent_notification.create</code> takes in <code>message</code>, <code>title</code>, and <code>notification_id</code>.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h3>
+<p>The service <code>persistent_notification.create</code> takes in <code>message</code>, <code>title</code>, and <code>notification_id</code>.
+<code>persistent_notification.create</code> 서비스는 <code>message</code>, <code>title</code>, <code>notification_id</code>를 받습니다.</p>
 <table>
 <thead>
 <tr>
@@ -122,29 +123,30 @@
 <tr>
 <td><code>message</code></td>
 <td>no</td>
-<td>Body of the notification.</td>
+<td>알림 본문.</td>
 </tr>
 <tr>
 <td><code>title</code></td>
 <td>yes</td>
-<td>Title of the notification.</td>
+<td>알림 제목.</td>
 </tr>
 <tr>
 <td><code>notification_id</code></td>
 <td>yes</td>
-<td>If <code>notification_id</code> is given, it will overwrite the notification if there already was a notification with that ID.</td>
+<td>
+<code>notification_id</code>가 주어지면, 해당 ID를 가진 알림이 이미있는 경우 알림을 덮어 씁니다.</td>
 </tr>
 </tbody>
 </table>
-<p>The <code>persistent_notification</code> integration supports specifying <a href="/topics/templating/">templates</a> for both the <code>message</code> and the <code>title</code>. This will allow you to use the current state of Home Assistant in your notifications.</p>
-<p>In an <a href="/getting-started/automation-action/">action</a> of your <a href="/getting-started/automation/">automation setup</a> it could look like this with a customized subject.</p>
+<p><code>persistent_notification</code> 통합구성요소는 <code>message</code>와 <code>title</code> 모두에 대해 <a href="/topics/templating/">templates</a>에서 특정할 수 있도록 지원합니다. 이를 통해 알림에 현재 홈어시스턴트 상태를 사용할 수 있습니다.</p>
+<p><a href="/getting-started/automation/">automation setup</a>의 <a href="/getting-started/automation-action/">action</a>에서 Custom subject를 사용하면 다음과 같이 진행할 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: persistent_notification.create
   data:
     message: "Your message goes here"
     title: "Custom subject"
 </code></pre>
-<p>The service <code>persistent_notification.dismiss</code> requires a <code>notification_id</code>.</p>
+<p><code>persistent_notification.dismiss</code> 서비스는 <code>notification_id</code>가 필요합니다.</p>
 <table>
 <thead>
 <tr>
@@ -157,17 +159,18 @@
 <tr>
 <td><code>notification_id</code></td>
 <td>no</td>
-<td>the <code>notification_id</code> is required to identify the notification that should be removed.</td>
+<td>
+<code>notification_id</code>는 제거해야 할 알림을 식별하는 데 필요합니다.</td>
 </tr>
 </tbody>
 </table>
-<p>This service allows you to remove a notifications by script or automation.</p>
+<p>이 서비스를 사용하면 스크립트 또는 자동화로 알림을 제거 할 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: persistent_notification.dismiss
   data:
     notification_id: "1234"
 </code></pre>
-<p>This automation example shows a notification when the Z-Wave network is starting and removes it when the network is ready.</p>
+<p>이 자동화 예제는 Z-Wave 네트워크가 시작될 때 알림을 표시하고 네트워크가 준비되면 알림을 제거합니다.</p>
 <pre><code class="language-yaml">- alias: 'Z-Wave network is starting'
   trigger:
     - platform: event
@@ -189,8 +192,8 @@
         notification_id: zwave
 </code></pre>
 <h3>
-<a class="title-link" name="markdown-support" href="#markdown-support"></a> Markdown support</h3>
-<p>The message attribute supports the <a href="https://daringfireball.net/projects/markdown/syntax" rel="external nofollow">Markdown formatting syntax</a>. Some examples are:</p>
+<a class="title-link" name="markdown-" href="#markdown-"></a> Markdown 지원</h3>
+<p>message 속성은 <a href="https://daringfireball.net/projects/markdown/syntax" rel="external nofollow">Markdown formatting syntax</a>을 지원합니다. 샘플들은 다음과 같습니다. :</p>
 <table>
 <thead>
 <tr>
@@ -233,15 +236,15 @@
 <p><code>/local/</code> in this context refers to the <code>.homeassistant/www/</code> folder.</p>
 </div>
 <h3>
-<a class="title-link" name="create-a-persistent-notification" href="#create-a-persistent-notification"></a> Create a persistent notification</h3>
-<p>Choose the <strong>Services</strong> tab from the <strong>Developer Tools</strong> sidebar item, then select the <code>persistent_notification.create</code> service from the “Service” dropdown. Enter something like the sample below into the <strong>Service Data</strong> field and press the <strong>CALL SERVICE</strong> button.</p>
+<a class="title-link" name="persistent-notification-" href="#persistent-notification-"></a> persistent notification 만들기</h3>
+<p><strong>개발자 도구</strong> 사이드 바 항목에서 <strong>Services</strong> 탭을 선택한 다음 “Services” 드롭 다운에서 <code>persistent_notification.create</code> 서비스를 선택하십시오. <strong>Service Data</strong> 필드에 아래 샘플과 같은 것을 입력하고 <strong>CALL SERVICE</strong> 버튼을 누릅니다.</p>
 <pre><code class="language-json">{
   "notification_id": "1234",
   "title": "Sample notification",
   "message": "This is a sample text"
 }
 </code></pre>
-<p>This will create the notification entry shown above.</p>
+<p>위에 표시된 알림 항목이 생성됩니다.</p>
 
 
 </article>

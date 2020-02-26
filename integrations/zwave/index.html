@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p>The <a href="https://www.z-wave.com/" rel="external nofollow">Z-Wave</a> integration for Home Assistant allows you to observe and control connected Z-Wave devices. Please see the <a href="/docs/z-wave/">Z-Wave getting started section</a> for in-depth documentation on how to use and setup the Z-Wave component.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>Home Assistant의 <a href="https://www.z-wave.com/" rel="external nofollow">Z-Wave</a> 통합구성요소를 통해 연결된 Z-Wave 장치를 관찰하고 제어할 수 있습니다. Z-Wave 컴포넌트 사용 및 설정 방법에 대한 자세한 문서는 <a href="/docs/z-wave/">Z-Wave getting started section</a>을 참조하십시오.</p>
+<p>현재 홈 어시스턴트에서 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Binary Sensor</li>
 <li><a href="#climate">Climate</a></li>
@@ -116,32 +116,32 @@
 <li>Switch</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>If you have setup the requirements, then add the following entry <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>요구 사항을 설정 한 경우 다음 항목을 <code>configuration.yaml</code> 파일에 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 zwave:
 </code></pre>
 <h2>
 <a class="title-link" name="climate" href="#climate"></a> Climate</h2>
-<p>To get your Z-Wave thermostat or HVAC unit working with Home Assistant, follow the instructions for the general <a href="/getting-started/z-wave/">Z-Wave component</a>.</p>
+<p>Z-Wave 온도 조절기 또는 HVAC 장치를 Home Assistant와 함께 사용하려면 일반적인 <a href="/getting-started/z-wave/">Z-Wave component</a> 지침을 따르십시오.</p>
 <div class="note">
-<p>Thermostats with support for fan modes or different operating modes, will be handled like a HVAC device and will also be detected as one.</p>
-<p>If the thermostat supports different operating modes, you will get one thermostat entity for each mode. These can be hidden with settings using the customize setting in the <code>configuration.yaml</code> file.</p>
+<p>팬모드 또는 다른 작동 모드를 지원하는 온도 조절 장치는 HVAC 장치처럼 처리되며 하나의 장치로도 감지됩니다.</p>
+<p>온도 조절기가 다른 작동 모드를 지원하는 경우 각 모드마다 하나의 온도 조절기 엔터티가 제공됩니다. <code>configuration.yaml</code> 파일의 사용자 정의 설정을 사용하여 설정으로 숨길 수 있습니다.</p>
 </div>
-<p>To enable the climate integration for your Z-Wave network, add the following to your <code>configuration.yaml</code> file.</p>
+<p>Z-Wave 네트워크의 Climate 통합구성요소를 가능하게 하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml">climate:
   - platform: zwave
 </code></pre>
-<p>Once enabled, any Z-Wave climate devices will be available to Home Assistant. Multiple entities may be created. The following entities are created for a Remotec ZXT-120.</p>
+<p>활성화되면 Z-Wave 기후 장치를 Home Assistant에서 사용할 수 있습니다. 여러 엔티티가 작성 될 수 있습니다. Remotec ZXT-120에 대해 다음 엔티티가 작성됩니다.</p>
 <ul>
 <li>
-<code>climate.remotec_zxt120_heating_1_id</code>: Allows you to control the connected device. See below for examples.</li>
+<code>climate.remotec_zxt120_heating_1_id</code>: 연결된 장치를 제어 할 수 있습니다. 사례는 아래를 참조.</li>
 <li>
-<code>sensor.remotec_zxt120_temperature_38</code>: A sensor which returns the current temperature set on the attached device.</li>
+<code>sensor.remotec_zxt120_temperature_38</code>: 연결된 장치에 설정된 현재 온도를 반환하는 센서.</li>
 </ul>
 <h3>
-<a class="title-link" name="automating-z-wave-climate-devices" href="#automating-z-wave-climate-devices"></a> Automating Z-Wave Climate Devices</h3>
-<p>The following examples will instruct a Remotec ZXT-120 to turn the attached device mode to Heating, and set the temperature at 24 degrees after 8pm. Add it to <code>automation.yaml</code>.</p>
+<a class="title-link" name="z-wave-climate--" href="#z-wave-climate--"></a> Z-Wave Climate 장치 자동화</h3>
+<p>다음 예는 Remotec ZXT-120에 연결된 장치 모드를 Heating으로 설정하고 오후 8시 이후 24도에서 온도를 설정하도록 지시합니다. 다음을 <code>automation.yaml</code>에 추가하십시오.</p>
 <pre><code class="language-yaml">automation:
   - alias: Turn on Heater at 8pm
     trigger:
@@ -157,7 +157,7 @@ zwave:
           entity_id: climate.remotec_zxt120_heating_1_39
           temperature: 24
 </code></pre>
-<p>Generally, in Home Assistant, you can use the <code>homeassistant/turn_off</code> service to turn devices off. For the Remotec ZXT-120, you must instead make a service call like the following.</p>
+<p>일반적으로 Home Assistant에서 <code>homeassistant / turn_off</code> 서비스를 사용하여 장치를 끌 수 있습니다. Remotec ZXT-120의 경우 대신 다음과 같이 서비스를 요청해야합니다.</p>
 <pre><code class="language-yaml">automation:
   - alias: Turn off Heater at 9pm
     trigger:
@@ -169,10 +169,10 @@ zwave:
           entity_id: climate.remotec_zxt120_heating_1_id
           hvac_mode: 'Off'
 </code></pre>
-<p><strong>Note:</strong> In the example above, the word <code>Off</code> is encased in single quotes to be valid YAML.</p>
+<p><strong>Note:</strong> 위의 예에서 단어 <code>Off</code>는 유효한 YAML이 되도록 작은 따옴표로 묶습니다.</p>
 <h3>
-<a class="title-link" name="test-if-it-works" href="#test-if-it-works"></a> Test if it works</h3>
-<p>A simple way to test if your Z-Wave climate device is working is to use <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Services</strong> from the <strong>Developer Tools</strong>. Choose the applicable Climate service from the list of <strong>Available services:</strong> and enter something like the sample below into the <strong>Service Data</strong> field and then press <strong>CALL SERVICE</strong>.</p>
+<a class="title-link" name="-test-if-it-works" href="#-test-if-it-works"></a> 테스트 (Test if it works)</h3>
+<p>Z-Wave Climate 장치가 작동하는지 테스트하는 간단한 방법은 <strong>개발자 도구</strong>의 <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Service</strong>를 사용하는 것입니다. <strong>Available services:</strong> 목록에서 해당 Climate 서비스를 선택하고 <strong>Service Data</strong> 필드에 아래 샘플과 같은 것을 입력한 다음 <strong>CALL SERVICE</strong>를 누릅니다.</p>
 <pre><code class="language-json">{
   "entity_id": "climate.remotec_zxt120_heating_1_id",
   "hvac_mode": "Heat"
@@ -180,9 +180,9 @@ zwave:
 </code></pre>
 <h2>
 <a class="title-link" name="cover" href="#cover"></a> Cover</h2>
-<p>Z-Wave garage doors, blinds, and roller shutters are supported as cover in Home Assistant.</p>
-<p>To get your Z-Wave covers working with Home Assistant, follow the instructions for the general <a href="#configuration">Z-Wave component</a>.</p>
-<p>If you discover that you need to <a href="/docs/z-wave/installation/#invert_openclose_buttons">invert the operation</a> of open/close for a particular device, you may change this behavior in your Z-Wave section of your <code>configuration.yaml</code> file as follows, in addition you can also <a href="/docs/z-wave/installation/#invert_percent">invert percent position</a>:</p>
+<p>Z-Wave 차고 문, 블라인드 및 롤러 셔터는 홈어시스턴트의 Cover로 지원됩니다.</p>
+<p>Z-Wave Cover가 홈어시스턴트와 작동하게 하려면 일반 <a href="#configuration">Z-Wave component</a>에 대한 지시 사항을 따르십시오.</p>
+<p>특정 장치에 대해 닫기/열기의 <a href="/docs/z-wave/installation/#invert_openclose_buttons">invert the operation</a>해야한다는 것을 발견 한 경우, <code>configuration.yaml</code> 파일의 Z-Wave 섹션에서 이 동작을 다음과 같이 변경할 수 있습니다. 또한 <a href="/docs/z-wave/installation/#invert_percent">invert percent position</a>도 추가할 수 있습니다.</p>
 <pre><code class="language-yaml">zwave:
   device_config:
     cover.my_cover:
@@ -191,8 +191,8 @@ zwave:
 </code></pre>
 <h2>
 <a class="title-link" name="lock" href="#lock"></a> Lock</h2>
-<p>To get your Z-Wave locks working with Home Assistant, follow the instructions for the general <a href="#configuration">Z-Wave component</a>.</p>
-<p>Z-Wave locks will expose three services under the lock domain to manage usercodes if the lock supports it:</p>
+<p>Z-Wave Lock이 Home Assistant와 작동하게 하려면 일반 <a href="#configuration">Z-Wave component</a>에 대한 지침을 따르십시오.</p>
+<p>Z-Wave Lock은 Lock 도메인에서 3개의 서비스를 노출하여 Lock이 지원하는 경우 사용자 코드를 관리합니다. :</p>
 <table>
 <thead>
 <tr>
@@ -203,15 +203,15 @@ zwave:
 <tbody>
 <tr>
 <td>clear_usercode</td>
-<td>Clears a usercode at code_slot X. Valid code_slots are 1-254, but max is defined by the lock.</td>
+<td>code_slot X에서 사용자 코드를 지웁니다. 유효한 code_slots는 1-254이지만 max는 lock에 의해 정의됨</td>
 </tr>
 <tr>
 <td>get_usercode</td>
-<td>Get a usercode from the lock at code_slot. Valid code_slots are 1-254, but max is defined by the lock.</td>
+<td>code_slot의 lock에서 사용자 코드를 가져옵니다. Valid code_slots are 1-254이지만 max는 lock에 의해 정의됨.</td>
 </tr>
 <tr>
 <td>set_usercode</td>
-<td>Sets usercode to X at code_slot Y. Valid usercodes are at least 4 digits, and max defined by the lock.</td>
+<td>code_slot Y에서 사용자 코드를 X로 설정합니다. 유효한 사용자 코드는 4자리 이상이며 max lock에 의해 정의됨.</td>
 </tr>
 </tbody>
 </table>

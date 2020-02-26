@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>The <code>rest</code> sensor platform is consuming a given endpoint which is exposed by a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer" rel="external nofollow">RESTful API</a> of a device, an application, or a web service. The sensor has support for GET and POST requests.</p>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file for a GET request:</p>
+  <p><code>rest</code> 센서 플랫폼은 장치, 애플리케이션 또는 웹서비스의 <a href="https://en.wikipedia.org/wiki/Representational_state_transfer" rel="external nofollow">RESTful API</a>에 의해 노출되는 지정된 엔드 포인트를 연결(consuming)해줍니다.</p>
+<p>이 센서를 활성화하려면 GET 요청을 위해 <code>configuration.yaml</code> 파일에 다음 라인을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: rest
     resource: http://IP_ADDRESS/ENDPOINT
 </code></pre>
-<p>or for a POST request:</p>
+<p>또는 POST 요청의 경우 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: rest
@@ -118,7 +118,7 @@ sensor:
     method: POST
     payload: '{ "device" : "heater" }'
 </code></pre>
-<p>or a template based request:</p>
+<p>또는 템플릿 기반 요청 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: rest
@@ -130,16 +130,16 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="resource" href="#resource"></a> resource</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The resource or endpoint that contains the value.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>값이 포함된 자원 또는 엔드 포인트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="resource_template" href="#resource_template"></a> resource_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>The resource or endpoint that contains the value with template support.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>템플리트 지원값이 포함된 자원 또는 엔드 포인트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="method" href="#method"></a> method</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The method of the request. Either <code>POST</code> or <code>GET</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>요청 방법. <code>POST</code> 혹은 <code>GET</code> 둘 중 하나.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -148,7 +148,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the REST sensor.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>REST 센서의 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -156,20 +156,20 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에 표시되는 디바이스 상태 및 아이콘을 변경하여 <a href="/integrations/sensor/">class of the device</a>를 설정.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the value.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>값을 추출 할 <a href="/docs/configuration/templating/#processing-incoming-data">template</a> 을 정의</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="payload" href="#payload"></a> payload</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload to send with a POST request. Depends on the service, but usually formed as JSON.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>POST 요청과 함께 보낼 페이로드. 서비스에 따라 다르지만 일반적으로 JSON으로 구성.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Verify the SSL certificate of the endpoint.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔드 포인트의 SSL 인증서를 확인.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -178,7 +178,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines max time to wait data from the endpoint.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔드 포인트에서 데이터를 기다리는 최대 시간을 정의.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -186,32 +186,32 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the units of measurement of the sensor, if any.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 측정 단위를 정의, 있을 경우.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of the HTTP authentication. <code>basic</code> or <code>digest</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증의 유형. <code>basic</code> 혹은 <code>digest</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username for accessing the REST endpoint.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>REST 엔드 포인트에 액세스하기위한 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The password for accessing the REST endpoint.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>REST 엔드 포인트에 액세스하기위한 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="headers" href="#headers"></a> headers</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The headers for the requests.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>요청에 대한 헤더.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="json_attributes" href="#json_attributes"></a> json_attributes</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="description"><p>A list of keys to extract values from a JSON dictionary result and then set as sensor attributes.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="description"><p>JSON 사전(dictinary) 결과에서 값을 추출한 후 센서 속성으로 설정하는 키 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="force_update" href="#force_update"></a> force_update</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="description"><p>Sends update events even if the value hasn’t changed. Useful if you want to have meaningful value graphs in history.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="description"><p>값이 변경되지 않은 경우에도 업데이트 이벤트를 보냅니다. 히스토리에 유의미한 값들의 그래프를 원할 때 유용합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -220,22 +220,22 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-Make sure that the URL exactly matches your endpoint or resource.
+URL이 엔드 포인트 또는 리소스와 정확히 일치하는지 확인.
 </div>
 <div class="note">
-<p>Use either <code>resource</code> or <code>resource_template</code>.</p>
+<p><code>resource</code> 혹은 <code>resource_template</code> 을 사용하십시오.</p>
 </div>
-<p><code>curl</code> can help you identify the variable you want to display in your Home Assistant frontend. The example below shows the JSON response of a device that is running with <a href="https://arest.io/" rel="external nofollow">aREST</a>.</p>
+<p><code>curl</code>은 홈어시스턴트 프론트 엔드에 표시하려는 변수를 식별하는 데 도움이됩니다. 아래 예는 <a href="https://arest.io/" rel="external nofollow">aREST</a>로 실행중인 장치의 JSON 응답을 보여줍니다.</p>
 <pre><code class="language-bash">$ curl -X GET http://192.168.1.31/temperature/
 {"temperature": 77, "id": "sensor02", "name": "livingroom", "connected": true}
 </code></pre>
-<p>The response is expected to be a dictionary or a list with a dictionary as its 0th element.</p>
+<p>응답은 사전(dictionary)이거나 0 번째 요소 인 사전(dictionary)이 있는 목록 일 것으로 예상됩니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this sensor.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
-<a class="title-link" name="external-ip-address" href="#external-ip-address"></a> External IP address</h3>
-<p>You can find your external IP address using the service <a href="https://www.jsontest.com/" rel="external nofollow">JSON Test</a> at their <a href="http://ip.jsontest.com/" rel="external nofollow">http://ip.jsontest.com/</a> URL.</p>
+<a class="title-link" name="-ip-" href="#-ip-"></a> 외부 IP 주소</h3>
+<p><a href="http://ip.jsontest.com/" rel="external nofollow">http://ip.jsontest.com/</a> URL에서 서비스 <a href="https://www.jsontest.com/" rel="external nofollow">JSON Test</a>를 사용하여 외부 IP 주소를 찾을 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://ip.jsontest.com
@@ -243,8 +243,8 @@ Make sure that the URL exactly matches your endpoint or resource.
     value_template: '{{ value_json.ip }}'
 </code></pre>
 <h3>
-<a class="title-link" name="single-value-from-a-local-glances-instance" href="#single-value-from-a-local-glances-instance"></a> Single value from a local Glances instance</h3>
-<p>The <a href="/integrations/glances">glances</a> sensor is doing the exact same thing for all exposed values.</p>
+<a class="title-link" name="-glances---single-value-from-a-local-glances-instance" href="#-glances---single-value-from-a-local-glances-instance"></a> 로컬 GLANCES 인스턴스의 단일값 (Single value from a local Glances instance)</h3>
+<p><a href="/integrations/glances">glances</a> 센서는 모든 노출 된 값에 대해 똑같은 일을합니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADRRESS:61208/api/2/mem/used
@@ -253,9 +253,9 @@ Make sure that the URL exactly matches your endpoint or resource.
     unit_of_measurement: MB
 </code></pre>
 <h3>
-<a class="title-link" name="value-from-another-home-assistant-instance" href="#value-from-another-home-assistant-instance"></a> Value from another Home Assistant instance</h3>
-<p>The Home Assistant <a href="/developers/rest_api/">API</a> exposes the data from your attached sensors. If you are running multiple Home Assistant instances which are not <a href="/developers/architecture/#multiple-connected-instances">connected</a> you can still get information from them.</p>
-<p>If the Home Assistant instance in the resource variable is protected by an API password, you can append <code>?api_password=YOUR_PASSWORD</code> to the resource URL to authenticate or use <code>headers:</code>.</p>
+<a class="title-link" name="-----value-from-another-home-assistant-instance" href="#-----value-from-another-home-assistant-instance"></a> 다른 홈 어시스턴트 인스턴스의 값 (Value from another Home Assistant instance)</h3>
+<p>홈어시스턴트 <a href="/developers/rest_api/">API</a>는 연결된 센서에서 데이터를 노출합니다. <a href="/developers/architecture/#multiple-connected-instances">connected</a> 가 아닌 여러 Home Assistant 인스턴스를 실행중인 경우에도 해당 정보를 얻을 수 있습니다.</p>
+<p>자원 변수에서 홈어시스턴트 인스턴스가 API 비밀번호로 보호되는 경우, <code>? api_password = YOUR_PASSWORD</code>를 자원 URL에 추가하여 <code>headers:</code>를 인증하거나 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADDRESS:8123/api/states/sensor.weather_temperature
@@ -264,8 +264,8 @@ Make sure that the URL exactly matches your endpoint or resource.
     unit_of_measurement: "°C"
 </code></pre>
 <h3>
-<a class="title-link" name="accessing-an-http-authentication-protected-endpoint" href="#accessing-an-http-authentication-protected-endpoint"></a> Accessing an HTTP authentication protected endpoint</h3>
-<p>The REST sensor supports HTTP authentication and customized headers.</p>
+<a class="title-link" name="http-------accessing-an-http-authentication-protected-endpoint" href="#http-------accessing-an-http-authentication-protected-endpoint"></a> HTTP 인증으로 보호 된 엔드 포인트에 액세스 (Accessing an HTTP authentication protected endpoint)</h3>
+<p>REST 센서는 HTTP 인증 및 사용자 정의된 헤더를 지원.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADDRESS:5000/sensor
@@ -276,7 +276,7 @@ Make sure that the URL exactly matches your endpoint or resource.
       User-Agent: Home Assistant
       Content-Type: application/json
 </code></pre>
-<p>The headers will contain all relevant details. This will also give you the ability to access endpoints that are protected by tokens.</p>
+<p>헤더에는 모든 관련 세부 사항이 포함. 또한 토큰으로 보호되는 엔드 포인트에 액세스 할 수 있습니다.</p>
 <pre><code class="language-bash">Content-Length: 1024
 Host: IP_ADDRESS1:5000
 Authorization: Basic aGExOnRlc3Qx
@@ -284,19 +284,20 @@ Accept-Encoding: identity
 Content-Type: application/json
 User-Agent: Home Assistant
 </code></pre>
-<p>If you are accessing a resource protected by a <code>Bearer</code> token in an <code>Authorization</code> header, you can either put the token in the header field of the sensor configuration (not recommended) or store the token in your <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> file. In that case, be sure to include the word <code>Bearer</code> in the <code>secrets</code> file.</p>
+<p><code>Authorization</code> 헤더의 <code>Bearer</code> 토큰으로 보호되는 리소스에 액세스하는 경우 센서 설정의 헤더 필드에 토큰을 넣거나 (권장하지 않음) <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> 파일에 토큰을 저장할 수 있습니다.
+이 경우,<code>secrets</code> 파일에 <code>Bearer</code>라는 단어를 포함 시키십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADDRESS:5000/sensor
     headers:
       Authorization: !secret my_sensor_secret_token
 </code></pre>
-<p>Example entry for the <code>secrets.yaml</code> file:</p>
+<p><code>secrets.yaml</code>파일 항목 예 :</p>
 <pre><code class="language-yaml">my_sensor_secret_token: Bearer gh_DHQIXKVf6Pr4H8Yqz8uhApk_mnV6Zje6Pr4H8Yqz8A8nCxz6SBghQdS51
 </code></pre>
 <h3>
-<a class="title-link" name="use-github-to-get-the-latest-release-of-home-assistant" href="#use-github-to-get-the-latest-release-of-home-assistant"></a> Use GitHub to get the latest release of Home Assistant</h3>
-<p>This sample is very similar to the <a href="/integrations/updater/"><code>updater</code></a> integration but the information is received from GitHub.</p>
+<a class="title-link" name="github-----" href="#github-----"></a> GITHUB를 사용하여 홈어시스턴트 최신 릴리스 확인</h3>
+<p>이 샘플은 <a href="/integrations/updater/"><code>updater</code></a> 통합구성요소와 매우 유사 하지만 정보는 GitHub에서 수신됩니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: https://api.github.com/repos/home-assistant/home-assistant/releases/latest
@@ -310,8 +311,8 @@ User-Agent: Home Assistant
       User-Agent: Home Assistant REST sensor
 </code></pre>
 <h3>
-<a class="title-link" name="fetch-multiple-json-values-and-present-them-as-attributes" href="#fetch-multiple-json-values-and-present-them-as-attributes"></a> Fetch multiple JSON values and present them as attributes</h3>
-<p><a href="https://www.jsontest.com/" rel="external nofollow">JSON Test</a> returns the current time, date and milliseconds since epoch from <a href="http://date.jsontest.com/" rel="external nofollow">http://date.jsontest.com/</a>.</p>
+<a class="title-link" name="-json-----" href="#-json-----"></a> 여러 JSON 값을 가져 와서 속성으로 표시</h3>
+<p><a href="https://www.jsontest.com/" rel="external nofollow">JSON Test</a> 는 <a href="http://date.jsontest.com/" rel="external nofollow">http://date.jsontest.com/</a> 에서 유닉스시간 이래 현재 시간, 날짜 및 밀리 초를 반환합니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     name: JSON time
@@ -329,7 +330,7 @@ User-Agent: Home Assistant
         friendly_name: 'milliseconds'
         value_template: '{{ states.sensor.json_time.attributes["milliseconds_since_epoch"] }}'
 </code></pre>
-<p>This sample fetches a weather report from <a href="https://openweathermap.org/" rel="external nofollow">OpenWeatherMap</a>, maps the resulting data into attributes of the RESTful sensor and then creates a set of <a href="/integrations/template">template</a> sensors that monitor the attributes and present the values in a usable form.</p>
+<p>이 샘플은 <a href="https://openweathermap.org/" rel="external nofollow">OpenWeatherMap</a>에서 날씨 보고서를 가져 와서 결과 데이터를 RESTful 센서의 속성에 맵핑 한 후 속성을 모니터링하는 <a href="/integrations/template">template</a> 센서 세트를 작성하고 해당 값을 사용 가능한 형식으로 나타냅니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     name: OWM_report
@@ -360,7 +361,7 @@ User-Agent: Home Assistant
         unit_of_measurement: "%"
         entity_id: sensor.owm_report
 </code></pre>
-<p>This config shows how to extract multiple values from a dictionary with <code>json_attributes</code> and <code>template</code>. It helps you to avoid flooding the REST service and only ask once the results and separate them in multiple templates referring to it. (No need for a specific state on the REST sensor and it’s default state will be the full JSON value which will be longer than the 255 max length. It’s why we’ll used a static value)</p>
+<p>이 설정은 <code>json_attributes</code>와<code>template</code>을 사용하여 사전(dictionary)에서 여러 값을 추출하는 방법을 보여줍니다. REST 서비스의 플러딩(flooding)을 피하고 결과를 한 번만 요청하고 이를 참조하는 여러 템플리트로 분리합니다. (REST 센서에서 특정 상태가 필요하지 않으며 기본 상태는 전체 JSON 값이며 최대 255 길이보다 깁니다. 우리가 정적인 값을 사용하는 이유입니다)</p>
 <pre><code class="language-json">{
     "bedroom1": {
         "temperature": 15.79,

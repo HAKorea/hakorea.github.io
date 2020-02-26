@@ -103,17 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>google</code> calendar platform allows you to connect to your
-<a href="https://calendar.google.com" rel="external nofollow">Google Calendars</a> and generate binary sensors.
-The sensors created can trigger based on any event on the calendar or only for
-matching events. When you first setup this integration it will generate a new
-configuration file <code>google_calendars.yaml</code> in your config directory that will contain information about
-all of the calendars you can see.
-It also exposes a service to add an event to one of your Google Calendars.</p>
+  <p><code>google</code> 캘린더 플랫폼을 사용하면 <a href="https://calendar.google.com" rel="external nofollow">Google Calendars</a>에 연결하고 Binary 센서를 생성 할 수 있습니다. 생성된 센서는 캘린더의 이벤트를 기준으로 또는 일치하는 이벤트에 대해서만 트리거 할 수 있습니다. 이 통합구성요소를 처음 설정하면 config 디렉토리에 새 구성 파일 <code>google_calendars.yaml</code>이 생성되며 여기에는 모든 캘린더에 대한 정보가 포함됩니다. 또한 Google 캘린더에서 이벤트를 추가할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="prerequisites" href="#prerequisites"></a> Prerequisites</h2>
-<p>Generate a Client ID and Client Secret on
-<a href="https://console.developers.google.com/start/api?id=calendar" rel="external nofollow">Google Developers Console</a>.</p>
+<a class="title-link" name="-" href="#-"></a> 전제 조건</h2>
+<p><a href="https://console.developers.google.com/start/api?id=calendar" rel="external nofollow">Google Developers Console</a>에서 Client ID 및 Client 비밀번호 생성</p>
 <ol>
 <li>Follow the wizard using the following information.</li>
 <li>When it gets to the point of asking <em>Which API are you using?</em> just click cancel.</li>
@@ -125,11 +118,10 @@ It also exposes a service to add an event to one of your Google Calendars.</p>
 <li>Copy the client ID and client secret from the page that follows into a text editor temporarily as you will need to put these in your <code>configuration.yaml</code> file.</li>
 <li>Click on the menu item, Library, then search for “Google Calendar API” and enable it (if it isn’t already enabled automatically through this process).</li>
 </ol>
-<p>If you will later be adding more scopes than just the “Google Calendar API” to the OAuth for this application, you will need to delete your token file under your Home Assistant Profile. You will lose your refresh token due to the re-authenticating to add more API access. It’s recommended to use different authorizations for different pieces of Google.</p>
+<p>나중에이 애플리케이션의 OAuth에 “Google Calendar API “보다 더 많은 범위(scope)를 추가하려면 홈어시스턴트 프로파일에서 토큰 파일을 삭제해야합니다. 더 많은 API 액세스를 추가하기 위해 다시 인증하면 새로 고침 토큰이 손실됩니다. Google 서비스에 따라 다른 인증을 사용하는 것이 좋습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To integrate Google Calendar in Home Assistant,
-add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>홈어시스턴트에 Google 캘린더를 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 google:
   client_id: YOUR_CLIENT_ID
@@ -141,16 +133,16 @@ google:
   <dl class="">
 <dt>
 <a class="title-link" name="client_id" href="#client_id"></a> client_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Use the client ID you generated in the Prerequisites stage.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>전제조건 단계에서 생성한 Clinet ID를 사용하십시오..</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="client_secret" href="#client_secret"></a> client_secret</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Use the client secret you generated in the Prerequisites stage.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>전제 조건 단계에서 생성 한 Client 비밀번호를 사용하십시오..</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="track_new_calendar" href="#track_new_calendar"></a> track_new_calendar</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Will automatically generate a binary sensor when a new calendar is detected. The system scans for new calendars only on startup.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>새 캘린더가 감지되면 Binary 센서를 자동으로 생성합니다. 시스템은 시작시에만 새 캘린더를 검색합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -158,12 +150,11 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The next time you run or restart Home Assistant, you should find a new notification (the little bell icon in the lower left corner). Click on that notification it will give you a link and an authentication code. Click on that link to open a Google website where you should enter the code found in the notification. This will grant your Home Assistant service read-only access to all the Google Calendars that the account you
-authenticate with can read.</p>
+<p>다음에 Home Assistant를 실행하거나 다시 시작하면 새 알림 (왼쪽 아래 모서리에있는 작은 벨 아이콘)이 나타납니다. 해당 알림을 클릭하면 링크와 인증 코드가 표시됩니다. 해당 링크를 클릭하면 알림에 있는 코드를 입력해야하는 Google 웹 사이트가 열립니다. 그러면 인증된 계정이 읽을 수 있는 모든 Google 캘린더에 홈어시스턴트 서비스에 대한 읽기 전용 액세스 권한이 부여됩니다.</p>
 <h2>
-<a class="title-link" name="calendar-configuration" href="#calendar-configuration"></a> Calendar Configuration</h2>
-<p>Editing the <code>google_calendars.yaml</code> file.</p>
-<p>A basic entry for a single calendar looks like:</p>
+<a class="title-link" name="-" href="#-"></a> 캘린더 설정</h2>
+<p><code>google_calendars.yaml</code> 파일 편집</p>
+<p>단일 캘린더의 기본 항목은 다음과 같습니다. :</p>
 <pre><code class="language-yaml">- cal_id: "*****@group.calendar.google.com"
   entities:
   - device_id: test_everything
@@ -188,7 +179,7 @@ authenticate with can read.</p>
 <dt>
 <a class="title-link" name="cal_id" href="#cal_id"></a> cal_id</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The Google <em>generated</em> unique id for this calendar.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이 캘린더의 Google <em>generated</em> 고유ID</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -196,21 +187,21 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Yes, you can have multiple sensors for a calendar!</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>네, 달력에 여러 개의 센서를 사용할 수 있습니다!</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="device_id" href="#device_id"></a> device_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name that all your automations/scripts will use to reference this device.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>모든 자동화/스크립트의 이름이 장치를 참조하는데 사용합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>What is the name of your sensor that you’ll see in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>프런트 엔드에 표시되는 센서 이름은 무엇입니까.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="track" href="#track"></a> track</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Required)</span><span class="description"><p>Should we create a sensor <code>true</code> or ignore it <code>false</code>?</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Required)</span><span class="description"><p>센서를 생성해야는지(<code>true</code>) 무시해야는지(<code>false</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -218,12 +209,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="search" href="#search"></a> search</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>If set will only trigger for matched events.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>설정시 일치하는 이벤트에 대해서만 트리거</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="offset" href="#offset"></a> offset</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A set of characters that precede a number in the event title for designating a pre-trigger state change on the sensor. This should be in the format of HH:MM or MM.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>“센서에서 사전 트리거(pre-trigger) 상태 변경을 지정하기 위해 이벤트 제목에서 숫자앞에 오는 문자세트입니다. HH:MM 또는 MM 포맷이어야 합니다.”</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -232,7 +223,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="ignore_availability" href="#ignore_availability"></a> ignore_availability</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Should we respect <code>free</code>/<code>busy</code> flags?</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>free</code>/<code>busy</code> 플래그를 고려해야 하는지</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -241,7 +232,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="max_results" href="#max_results"></a> max_results</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Max number of entries to retrieve</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>검색할 최대 항목수</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -250,19 +241,16 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>From this we will end up with the binary sensors <code>calendar.test_unimportant</code> and
-<code>calendar.test_important</code> which will toggle themselves on/off based on events on
-the same calendar that match the search value set for each.
-You’ll also have a sensor <code>calendar.test_everything</code> that will
-not filter events out and always show the next event available.</p>
-<p>But what if you only wanted it to toggle based on all events?
-Just leave out the <em>search</em> parameter.</p>
+<p>이로서 우리는 Binary 센서 <code>calendar.test_unimportant</code> 와 <code>calendar.test_important</code>를 가질수 있습니다. 이 센서는 각각에 대해 설정된 검색 값과 일치하는 동일한 캘린더의 이벤트를 기반으로 자신을 켜거나 끕니다.
+이벤트를 필터링하지 않고 항상 사용가능한 다음 이벤트를 표시하는 센서 <code>calendar.test_everything</code> 이 있습니다.</p>
+<p>그러나 모든 이벤트를 기반으로 전환(toggle)하기를 원한다면 어떻게해야합니까?
+단지 <em>search</em> 매개 변수를 생략하면 됩니다.</p>
 <div class="note warning">
-<p>If you use a <code>#</code> sign for <code>search</code> then wrap the whole search term in quotes.
-Otherwise everything following the hash sign would be considered a YAML comment.</p>
+<p><code>search</code>에 <code>#</code>부호를 사용하는 경우 전체 검색어를 따옴표로 묶으십시오.
+그렇지 않으면 해시 기호 뒤에 오는 모든 것이 YAML 주석으로 간주됩니다.</p>
 </div>
 <h3>
-<a class="title-link" name="sensor-attributes" href="#sensor-attributes"></a> Sensor attributes</h3>
+<a class="title-link" name="-" href="#-"></a> 센서 속성</h3>
 <ul>
 <li>
 <strong>offset_reached</strong>: If set in the event title and parsed out will be <code>on</code>/<code>off</code> once the offset in the title in minutes is reached. So the title <code>Very important meeting #Important !!-10</code> would trigger this attribute to be <code>on</code> 10 minutes before the event starts.</li>
@@ -281,8 +269,8 @@ Otherwise everything following the hash sign would be considered a YAML comment.
 <strong>end_time</strong>: End time of event.</li>
 </ul>
 <h3>
-<a class="title-link" name="service-googleadd_event" href="#service-googleadd_event"></a> Service google.add_event</h3>
-<p>You can use the service <code>google.add_event</code> to create a new calendar event in a calendar. Calendar id’s can be found in the file <code>google_calendars.yaml</code>. All dates and times are in your local time, the integration gets your time zone from your <code>configuration.yaml</code> file.</p>
+<a class="title-link" name="googleadd_event-" href="#googleadd_event-"></a> google.add_event 서비스</h3>
+<p><code>google.add_event</code> 서비스를 사용하여 캘린더에 새 캘린더 이벤트를 만들 수 있습니다. 캘린더 ID는 <code>google_calendars.yaml</code> 파일에서 찾을 수 있습니다. 모든 날짜와 시간은 현지 시간으로, 연동은 <code>configuration.yaml</code> 파일에서 시간대를 가져옵니다.</p>
 <table>
 <thead>
 <tr>
@@ -347,16 +335,16 @@ Otherwise everything following the hash sign would be considered a YAML comment.
 <p>You either use <code>start_date_time</code> and <code>end_date_time</code>, or <code>start_date</code> and <code>end_date</code>, or <code>in</code>.</p>
 </div>
 <h2>
-<a class="title-link" name="using-calendar-in-automations" href="#using-calendar-in-automations"></a> Using calendar in automations</h2>
-<p>A calendar can be used as an external scheduler for special events or reoccurring events instead of hardcoding them in automations.</p>
-<p>Trigger as soon as an event starts:</p>
+<a class="title-link" name="--" href="#--"></a> 자동화에서 캘린더 사용하기</h2>
+<p>자동화에서 캘린더를 하드 코딩하는 대신 캘린더를 특수 이벤트 또는 재발행 이벤트에 대한 외부 스케줄러로 사용할 수 있습니다.</p>
+<p>이벤트가 시작되는 즉시 트리거 :</p>
 <pre><code class="language-yaml">    trigger:
       platform: state
       entity_id: calendar.calendar_name
       to: 'on'
 </code></pre>
-<p>By using specific text in the event title, you can set conditions to initiate particular automation flows on designated events while other events will be ignored.</p>
-<p>For example, the actions following this condition will only be executed for events named ‘vacation’:</p>
+<p>이벤트 제목에 특정 텍스트를 사용하면 지정된 이벤트에서 특정 자동화 흐름(flow)을 시작하는 조건을 설정하고 다른 이벤트는 무시할 수 있습니다.</p>
+<p>예를 들어 이 조건을 따르는 액션은 ‘vacation’ 이라는 이벤트에 대해서만 실행됩니다. :</p>
 <pre><code class="language-yaml">    condition:
         condition: template
         value_template: "{{is_state_attr('calendar.calendar_name', 'message', 'vacation') }}"

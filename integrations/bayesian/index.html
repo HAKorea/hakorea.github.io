@@ -103,11 +103,11 @@
   <hr class="divider">
   
 
-  <p>The <code>bayesian</code> binary sensor platform observes the state from multiple sensors and uses <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" rel="external nofollow">Bayes’ rule</a> to estimate the probability that an event has occurred given the state of the observed sensors. If the estimated posterior probability is above the <code>probability_threshold</code>, the sensor is <code>on</code> otherwise it is <code>off</code>.</p>
-<p>This allows for the detection of complex events that may not be readily observable, e.g., cooking, showering, in bed, the start of a morning routine, etc. It can also be used to gain greater confidence about events that <em>are</em> directly observable, but for which the sensors can be unreliable, e.g., presence.</p>
+  <p><code>Bayesian</code> 이진 센서 플랫폼은 여러 센서의 상태를 관찰하고 <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem" rel="external nofollow">Bayes’ rule</a>을 사용하여 이벤트가 발생한 상황을 예측합니다 관찰 된 센서. 추정 사후 확률이 <code>probability_threshold</code> 보다 높으면 센서가 <code>on</code> 이고, 그렇지 않으면 <code>off</code> 입니다.</p>
+<p>이를 통해 요리, 샤워, 침대에서, 아침 루틴 시작 등과 같이 쉽게 관찰 할 수없는 복잡한 이벤트를 감지 할 수 있습니다. 또한 직접 관찰 할 수 있지만 센서가 존재하지 않는 등 신뢰할 수 없는 이벤트에 대한 신뢰도를 높이는 데 사용할 수도 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the Bayesian sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>베이지안 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: bayesian
@@ -125,12 +125,12 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="prior" href="#prior"></a> prior</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>The prior probability of the event. At any point in time (ignoring all external influences) how likely is this event to occur?</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>이벤트의 사전 확률. 어느 시점에서 (모든 외부 영향 무시)이 사건이 발생할 가능성은 어느 정도입니까?</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="probability_threshold" href="#probability_threshold"></a> probability_threshold</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The probability at which the sensor should trigger to <code>on</code>.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서가 <code>on</code> 으로 트리거해야 할 확률.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -139,7 +139,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the sensor to use in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에서 사용할 센서의 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -147,29 +147,29 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="observations" href="#observations"></a> observations</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The observations which should influence the likelihood that the given event has occurred.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>주어진 사건이 발생했을 가능성에 영향을 미치는 관측.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="platform" href="#platform"></a> platform</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The supported platforms are <code>state</code>, <code>numeric_state</code>, and <code>template</code>. They are modeled after their corresponding triggers for automations, requiring <code>to_state</code> (for <code>state</code>), <code>below</code> and/or <code>above</code> (for <code>numeric_state</code>) and <code>value_template</code> (for <code>template</code>).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>지원 플랫폼들은 <code>state</code>, <code>numeric_state</code>, <code>template</code>. 이들은 해당 자동화 트리거에 따라 모델링됨, requiring <code>to_state</code> (for <code>state</code>), <code>below</code> and/or <code>above</code> (for <code>numeric_state</code>) and <code>value_template</code> (for <code>template</code>).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the entity to monitor. Required for <code>state</code> and <code>numeric_state</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 엔티티의 이름. Required for <code>state</code> and <code>numeric_state</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the template to be used. Required for <code>template</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 템플릿을 정의. Required for <code>template</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="prob_given_true" href="#prob_given_true"></a> prob_given_true</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>The probability of the observation occurring, given the event is <code>true</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>관측이 일어날 확률. <code>true</code> 이벤트가 주어졌을때.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="prob_given_false" href="#prob_given_false"></a> prob_given_false</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The probability of the observation occurring, given the event is <code>false</code> can be set as well.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>관측이 일어날 확률. <code>false</code> 이벤트가 주어졌을때.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -177,14 +177,14 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="to_state" href="#to_state"></a> to_state</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The target state. Required (for <code>state</code>).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>대상의 상태. Required (for <code>state</code>).</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="full-examples" href="#full-examples"></a> Full examples</h2>
-<p>The following is an example for the <code>state</code> observation platform.</p>
+<a class="title-link" name="-" href="#-"></a> 전체 예</h2>
+<p>다음은 <code>state</code> 관측 플랫폼 의 예</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   name: 'in_bed'
@@ -211,8 +211,8 @@ binary_sensor:
       prob_given_true: 0.7
       to_state: 'below_horizon'
 </code></pre>
-<p>Next up an example which targets the <code>numeric_state</code> observation platform,
-as seen in the configuration it requires <code>below</code> and/or <code>above</code> instead of <code>to_state</code>.</p>
+<p>다음은 <code>numeric_state</code> 관측 플랫폼을 대상으로하는 예제입니다.
+설정에서 보듯이 <code>to_state</code> 대신 <code>below</code> 및/혹은 <code>above</code>가 필요합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   name: 'Heat On'
@@ -225,8 +225,8 @@ binary_sensor:
       prob_given_true: 0.95
       below: 50
 </code></pre>
-<p>Finally, here’s an example for <code>template</code> observation platform,
-as seen in the configuration it requires <code>value_template</code> and does not use <code>entity_id</code>.</p>
+<p>마지막으로 <code>template</code> 관측 플랫폼의 예가 있습니다.
+설정에서 보듯이 <code>value_template</code>이 필요하고 <code>entity_id</code>를 사용하지 않습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   name: 'Paulus Home'

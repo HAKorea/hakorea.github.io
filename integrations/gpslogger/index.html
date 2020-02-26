@@ -103,57 +103,60 @@
   <hr class="divider">
   
 
-  <p>This integration sets up integration with <a href="https://gpslogger.app/" rel="external nofollow">GPSLogger</a>. GPSLogger is an open source app for Android that allows users to update your location in Home Assistant.</p>
+  <p>이 통합구성요소는 <a href="https://gpslogger.app/" rel="external nofollow">GPSLogger</a> 와의 연동을 설정합니다. GPSLogger는 사용자가 Home Assistant에서 위치를 업데이트 할 수 있는 Android용 오픈 소스 앱입니다.</p>
+<p>참고사항 : <a href="https://cafe.naver.com/koreassistant/730" rel="external nofollow">네이버 HA 카페 갓북왕님 GPSlogger 설정기</a></p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To configure GPSLogger, you must set it up via the integrations panel in the configuration screen. This will give you the webhook URL to use during mobile device configuration (below).</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>GPSLogger를 설정하려면 설정 화면의 통합 패널을 통해 GPSLogger를 설정해야합니다. 그러면 모바일 장치 설정중 사용할 웹후크 URL이 제공됩니다 (아래).</p>
 <h2>
-<a class="title-link" name="setup-on-your-smartphone" href="#setup-on-your-smartphone"></a> Setup on your smartphone</h2>
-<p>Install <a href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger" rel="external nofollow">GPSLogger for Android</a> on your device.</p>
-<p>After the launch, go to <strong>General Options</strong>. Enable <strong>Start on bootup</strong> and <strong>Start on app launch</strong>.</p>
+<a class="title-link" name="-" href="#-"></a> 스마트폰 셋업</h2>
+<p><a href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger" rel="external nofollow">GPSLogger for Android</a> 를 휴대폰에 설치하십시오.</p>
+<p>앱을 실행시킨 후, <strong>General Options</strong> 으로 이동. <strong>Start on bootup</strong> 과 <strong>Start on app launch</strong> 를 활성화.</p>
 <p class="img">
   <img width="300" src="/images/integrations/gpslogger/settings.png">
-  GPSLogger Settings
+  GPSLogger 설정
 </p>
-<p>Go to <strong>Logging details</strong> and disable <strong>Log to GPX</strong>. Enable <strong>Log to custom URL</strong>.</p>
+<p><strong>Logging details</strong>으로 이동 <strong>Log to GPX</strong>를 사용 안함으로 설정. <strong>Log to custom URL</strong>를 사용.</p>
 <p class="img">
   <img width="300" src="/images/integrations/gpslogger/logging-details.png">
-  Logging Details
+  Logging details
 </p>
-<p>Right after enabling, the app will take you to the <strong>Log to custom URL</strong> settings.</p>
+<p>활성화 한 직후, 앱에서 <strong>Log to custom URL</strong>으로 이동.</p>
 <p class="img">
   <img width="300" src="/images/integrations/gpslogger/custom-url.png">
   Log to custom URL details
 </p>
-<p>The relevant endpoint starts with: <code>/api/webhook/</code> and ends with a unique sequence of characters. This is provided by the integrations panel in the configuration screen (configured above).</p>
+<p>해당 엔드 포인트는<code>/api/webhook/</code>로 시작하고 고유한 문자 시퀀스로 끝납니다. 이는 설정 화면(위와같이)의 통합 패널에서 제공합니다.</p>
 <pre><code class="language-text">https://YOUR.DNS.HOSTNAME:PORT/api/webhook/WEBHOOK_ID
 </code></pre>
 <ul>
-<li>Add the above URL (updating YOUR.DNS.HOSTNAME:PORT to your details) into the <strong>URL</strong> field.</li>
-<li>It’s HIGHLY recommended to use SSL/TLS.</li>
-<li>Use the domain that Home Assistant is available on the internet (or the public IP address if you have a static IP address). This can be a local IP address if you are using an always on VPN from your mobile device to your home network.</li>
-<li>Only remove <code>PORT</code> if your Home Assistant instance is using port 443. Otherwise set it to the port you’re using.</li>
-<li>Add the following to <strong>HTTP Body</strong>
-</li>
+<li>
+<strong>URL</strong> 필드에 위의 URL(your.DNS.HOSTNAME:PORT를 세부사항으로 업데이트)을 추가하십시오 .</li>
+<li>SSL/TLS을 사용을 강력 추천합니다.</li>
+<li>인터넷에서 Home Assistant가 사용 가능한 도메인 (또는 고정 IP 주소가 있는 경우 공용 IP 주소)을 사용하십시오.  모바일 장치에서 홈네트워크로 항상 VPN을 사용하는 경우 로컬 IP 주소가 될 수 있습니다.</li>
+<li>Home Assistant 인스턴스가 포트 443을 사용 하는 경우 <code>PORT</code>만 제거 하십시오. 그렇지 않으면 사용중인 포트로 설정하십시오.</li>
+<li>다음 <strong>HTTP Body</strong>를 추가하십시오.</li>
 </ul>
 <pre><code class="language-text">latitude=%LAT&amp;longitude=%LON&amp;device=%SER&amp;accuracy=%ACC&amp;battery=%BATT&amp;speed=%SPD&amp;direction=%DIR&amp;altitude=%ALT&amp;provider=%PROV&amp;activity=%ACT
 </code></pre>
 <ul>
-<li>You can change the <code>device_id</code> of your phone by replacing <code>&amp;device=%SER</code> with <code>&amp;device=SOME_DEVICE_ID</code>, otherwise your phone’s serial number will be used.</li>
-<li>Check that the <strong>HTTP Headers</strong> setting contains</li>
+<li>
+<code>&amp;device=%SER</code>를 <code>&amp;device=SOME_DEVICE_ID</code>로 바꾼뒤 휴대폰의 <code>device_id</code>를 변경할 수 있습니다. 그렇지 않으면 휴대폰의 <code>device_id</code>가 사용됩니다.</li>
+<li>
+<strong>HTTP Header</strong> 설정에 포함되어 있는지 확인하십시오</li>
 </ul>
 <pre><code class="language-text">Content-Type: application/x-www-form-urlencoded
 </code></pre>
 <ul>
-<li>Make sure that <strong>HTTP Method</strong> is changed to <code>POST</code>
-</li>
+<li>
+<strong>HTTP Method</strong>가 <code>POST</code>로 변경되어 있는지 확인하십시오</li>
 </ul>
-<p>If your battery drains too fast then you can tune the performance of GPSLogger under <strong>Performance</strong>.</p>
+<p>배터리가 너무 빨리 소모되면 <strong>Performance</strong>에서 GPSLogger의 성능을 조정할 수 있습니다.</p>
 <p class="img">
   <img width="300" src="/images/integrations/gpslogger/performance.png">
   Performance
 </p>
-<p>A request can be forced from the app to test if everything is working fine.</p>
+<p>모든 것이 제대로 작동하는지 테스트하도록 앱의 요청을 강제할 수 있습니다.</p>
 
 
 </article>

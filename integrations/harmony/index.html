@@ -103,23 +103,23 @@
   <hr class="divider">
   
 
-  <p>The <code>harmony</code> remote platform allows you to control the state of your <a href="https://www.logitech.com/en-us/product/harmony-hub" rel="external nofollow">Harmony Hub Device</a>.</p>
-<p>Supported units:</p>
+  <p><code>harmony</code> 원격 플랫폼을 사용하면 <a href="https://www.logitech.com/en-us/product/harmony-hub" rel="external nofollow">Harmony Hub Device</a>의 상태를 제어 할 수 있습니다</p>
+<p>지원 유닛들 :</p>
 <ul>
 <li>Harmony Hub</li>
 <li>Harmony Companion</li>
 <li>Harmony Pro</li>
 <li>Harmony Elite</li>
 </ul>
-<p>The preferred way to setup the Harmony remote is by enabling the <a href="/integrations/discovery/">discovery component</a>.</p>
-<p>However, if you want to manually configure the device, you will need to add its settings to your <code>configuration.yaml</code> file:</p>
+<p>Harmony 리모컨을 설정하는 기본 방법은 <a href="/integrations/discovery/">discovery component</a>를 활성화하는 것입니다.</p>
+<p>그러나 장치를 수동으로 설정하려면 <code>configuration.yaml</code> 파일에 해당 설정을 추가해야합니다</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 remote:
   - platform: harmony
     name: Bedroom
     host: 10.168.1.13
 </code></pre>
-<p>You can override some default configuration values on a discovered hub (e.g., the <code>port</code> or <code>activity</code>) by adding a <code>configuration.yaml</code> setting. In this case leave the <code>host</code> setting empty so the platform will discover the host IP automatically, but set the <code>name</code> in the config to match exactly the name you have set for your Hub so the platform knows what Hub you are trying to configure.</p>
+<p><code>configuration.yaml</code> 설정을 추가하여 검색된 허브의 일부 기본 설정 값 (예 : <code>port</code> 또는 <code>activity</code>)을 대체 할 수 있습니다. 이 경우 플랫폼이 호스트 IP를 자동으로 감지하도록 <code>host</code> 설정을 비워 두십시오. 그러나 설정에서 <code>name</code>을 허브에 설정한 이름과 정확히 일치하도록 설정하여 플랫폼이 설정하려는 허브를 플랫폼이 인식하도록 합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry with discovery
   - platform: harmony
     name: Living Room
@@ -131,16 +131,16 @@ remote:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hub’s name to display in the frontend. This name must match the name you have set on the Hub.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>프런트 엔드에 표시할 허브 이름. 이 이름은 허브에서 설정한 이름과 일치해야합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Harmony device’s IP address. Leave empty for the IP to be discovered automatically.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>하모니 장치의 IP주소. IP가 자동으로 검색되도록 하려면 비워두십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Harmony device’s port.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>하모니 장치의 포트.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -148,12 +148,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="activity" href="#activity"></a> activity</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Activity to use when <code>turn_on</code> service is called without any data. Overrides the <code>activity</code> setting for this discovered hub.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>turn_on</code> 서비스가 데이터없이 호출될 때 사용할 activity. 이때 발견된 허브에 대한 <code>activity</code> 세팅으로 덮어씁니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="delay_secs" href="#delay_secs"></a> delay_secs</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default duration in seconds between sending commands to a device.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치에 명령을 보내는 사이의 기본 지속시간(초)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -162,7 +162,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="hold_secs" href="#hold_secs"></a> hold_secs</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default duration in seconds between sending the “press” command and sending the “release” command.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>“press” 명령전송과 “release” 명령전송 사이의 기본 지속시간(초)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -171,17 +171,17 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="configuration-file" href="#configuration-file"></a> Configuration file</h3>
-<p>Upon startup one file will be written to your Home Assistant configuration directory per device in the following format: <code>harmony_REMOTENAME.conf</code>. The file will contain:</p>
+<a class="title-link" name="-" href="#-"></a> 설정 파일</h3>
+<p>시작시 하나의 파일이 다음 형식으로 장치당 홈어시스턴트 설정 디렉토리에 작성됩니다. :  <code>harmony_REMOTENAME.conf</code> 파일은 다음을 포함합니다</p>
 <ul>
-<li>List of all programmed activity names and ID numbers</li>
-<li>List of all programmed device names and ID numbers</li>
-<li>List of all available commands per programmed device</li>
+<li>프로그래밍 된 모든 활동 이름 및 ID 번호 목록</li>
+<li>프로그래밍 된 모든 장치 이름 및 ID 번호 목록</li>
+<li>프로그래밍 된 장치 당 사용 가능한 모든 명령 목록</li>
 </ul>
-<p>This file will be overwritten whenever the Harmony HUB has a new configuration, there is no need to restart Home Assistant.</p>
+<p>Harmony HUB에 새로운 설정이 있을 때마다 이 파일을 덮어 쓰므로 홈어시스턴트를 다시 시작할 필요가 없습니다.</p>
 <h3>
-<a class="title-link" name="service-remoteturn_off" href="#service-remoteturn_off"></a> Service remote.turn_off</h3>
-<p>Turn off all devices that were switched on from the start of the current activity.</p>
+<a class="title-link" name="remoteturn_off-" href="#remoteturn_off-"></a> remote.turn_off 서비스</h3>
+<p>현재 activity 시작부터 스위치를 켠 모든 장치를 끕니다.</p>
 <table>
 <thead>
 <tr>
@@ -194,13 +194,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Entity ID to target.</td>
+<td>대상 엔티티ID</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-remoteturn_on" href="#service-remoteturn_on"></a> Service remote.turn_on</h3>
-<p>Start an activity. Will start the default <code>activity</code> from configuration.yaml if no activity is specified.  The specified activity can either be the activity name or the activity ID from the configuration file written to your <a href="/docs/configuration/">Home Assistant configuration directory</a>.</p>
+<a class="title-link" name="remoteturn_on-" href="#remoteturn_on-"></a> remote.turn_on 서비스</h3>
+<p>activity를 시작하십시오. activity가 지정되지 않은 경우 configuration.yaml에서 기본 <code>activity</code>를 시작합니다. 지정된 activity는 <a href="/docs/configuration/">Home Assistant configuration directory</a>에 기록된 설정 파일의 activity 이름 또는 activity ID 일 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -213,18 +213,18 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Entity ID to target.</td>
+<td>대상 엔티티ID</td>
 </tr>
 <tr>
 <td><code>activity</code></td>
 <td>yes</td>
-<td>Activity ID or Activity Name to start.</td>
+<td>Activity ID 혹은 시작하는 Activity 이름.</td>
 </tr>
 </tbody>
 </table>
 <h5>
-<a class="title-link" name="example" href="#example"></a> Example</h5>
-<p>In the file ‘harmony_REMOTENAME.conf’ you can find the available activities, for example:</p>
+<a class="title-link" name="" href="#"></a> 예시</h5>
+<p>‘harmony_REMOTENAME.conf’ 파일에서 사용 가능한 activities를 찾을 수 있습니다. 예를 들면 다음과 같습니다. :</p>
 <pre><code class="language-text">{
     "Activities": {
         "-1": "PowerOff",
@@ -234,7 +234,7 @@ Default value: </p>
     }
 }
 </code></pre>
-<p>Using the activity name ‘Watch TV’, you can call a service via automation to switch this activity on:</p>
+<p>activity 이름 ‘Watch TV’을 사용하여 자동화를 통해 서비스를 호출하여이 activity를 켤 수 있습니다. :</p>
 <pre><code class="language-yaml">action:
   - service: remote.turn_on
     entity_id: remote.bed_room_hub
@@ -242,8 +242,8 @@ Default value: </p>
        activity: "Watch TV"
 </code></pre>
 <h3>
-<a class="title-link" name="service-remotesend_command" href="#service-remotesend_command"></a> Service remote.send_command</h3>
-<p>Send a single command or a set of commands to one device, device ID and available commands are written to the configuration file at startup. You can optionally specify the number of times you wish to repeat the command(s) and delay you want between repeated command(s).</p>
+<a class="title-link" name="remotesend_command-" href="#remotesend_command-"></a> remote.send_command 서비스</h3>
+<p>단일 명령 또는 일련의 명령을 하나의 장치로 전송하면 장치 ID 및 사용 가능한 명령이 시작시 설정 파일에 기록됩니다. 선택적으로 명령을 반복할 횟수와 반복되는 명령 사이에서 원하는 지연시간을 지정할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -256,31 +256,31 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Entity ID to target.</td>
+<td>대상 엔티티ID.</td>
 </tr>
 <tr>
 <td><code>device</code></td>
 <td>no</td>
-<td>Device ID or Device Name to send the command to.</td>
+<td>명령을 보낼 장치 ID 또는 장치 이름.</td>
 </tr>
 <tr>
 <td><code>command</code></td>
 <td>no</td>
-<td>A single command or a list of commands to send.</td>
+<td>보낼 단일 명령 또는 명령 목록.</td>
 </tr>
 <tr>
 <td><code>num_repeats</code></td>
 <td>yes</td>
-<td>The number of times to repeat the command(s).</td>
+<td>명령을 반복 할 횟수.</td>
 </tr>
 <tr>
 <td><code>delay_secs</code></td>
 <td>yes</td>
-<td>The number of seconds between sending each command.</td>
+<td>각 명령 전송 사이의 시간(초).</td>
 </tr>
 </tbody>
 </table>
-<p>In the file ‘harmony_REMOTENAME.conf’ you can find the available devices and commands, for example:</p>
+<p>‘harmony_REMOTENAME.conf’ 파일에서 사용 가능한 장치 및 명령을 찾을 수 있습니다. 예를 들면 :</p>
 <pre><code class="language-text">{
     "Devices": {
         "TV": {
@@ -303,7 +303,7 @@ Default value: </p>
     }
 }
 </code></pre>
-<p>A typical service call for sending several button presses looks like this:</p>
+<p>몇가지 버튼입력을 통한 일반적인 서비스 요청(service call)은 다음과 같습니다.</p>
 <pre><code class="language-yaml">service: remote.send_command
 data:
   entity_id: remote.tv_room
@@ -313,7 +313,7 @@ data:
   device: Receiver
   delay_secs: 0.6
 </code></pre>
-<p>OR</p>
+<p>혹은</p>
 <pre><code class="language-yaml">service: remote.send_command
 data:
   entity_id: remote.tv_room
@@ -324,8 +324,8 @@ data:
   delay_secs: 0.6
 </code></pre>
 <h3>
-<a class="title-link" name="service-harmonychange_channel" href="#service-harmonychange_channel"></a> Service harmony.change_channel</h3>
-<p>Sends the change channel command to the Harmony HUB</p>
+<a class="title-link" name="harmonychange_channel-" href="#harmonychange_channel-"></a> harmony.change_channel 서비스</h3>
+<p>채널 변경 명령을 하모니 허브로 보냅니다.</p>
 <table>
 <thead>
 <tr>
@@ -347,15 +347,16 @@ data:
 </tr>
 </tbody>
 </table>
-<p>A typical service call for changing the channel would be::</p>
+<p>A typical service call for changing the channel would be::
+채널 변경을위한 일반적인 서비스 요청은 다음과 같습니다.</p>
 <pre><code class="language-yaml">service: harmony.change_channel
 data:
   entity_id: remote.tv_room
   channel: 200
 </code></pre>
 <h3>
-<a class="title-link" name="service-harmonysync" href="#service-harmonysync"></a> Service harmony.sync</h3>
-<p>Force synchronization between the Harmony device and the Harmony cloud.</p>
+<a class="title-link" name="harmonysync-" href="#harmonysync-"></a> harmony.sync 서비스</h3>
+<p>하모니 장치와 하모니 클라우드 간 강제 동기화</p>
 <table>
 <thead>
 <tr>
@@ -373,8 +374,8 @@ data:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
-<p>Template sensors can be utilized to display current activity in the frontend.</p>
+<a class="title-link" name="" href="#"></a> 예시</h3>
+<p>프론트 엔드에서 현재 활동을 표시하기 위해 템플리트 센서를 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:
@@ -385,7 +386,7 @@ data:
         value_template: '{{ state_attr("remote.bedroom", "current_activity") }}'
         friendly_name: 'bedroom'
 </code></pre>
-<p>The example below shows how to control an <code>input_boolean</code> switch using the Harmony remote’s current activity. The switch will turn on when the remote’s state changes and the Kodi activity is started and off when the remote’s state changes and the current activity is “PowerOff”.</p>
+<p>아래 예 <code>input_boolean</code>는 Harmony 리모컨의 현재 활동을 사용하여 스위치를 제어하는 ​​방법을 보여줍니다. 원격 상태가 변경되고 Kodi activity가 시작되면 스위치가 켜지고 원격 상태가 변경되고 현재 activity가 “PowerOff”이면 스위치가 꺼집니다.</p>
 <pre><code class="language-yaml">automation:
   - alias: "Watch TV started from harmony hub"
     trigger:
