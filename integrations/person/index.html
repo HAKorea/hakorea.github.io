@@ -103,33 +103,33 @@
   <hr class="divider">
   
 
-  <p>The person integration allows connecting <a href="/integrations/device_tracker/">device tracker</a> entities to one or more person entities. The state updates of a connected device tracker will set the state of the person. When multiple device trackers are used, the state of person will be determined in this order:</p>
+  <p>Person 통합구성요소를 통해 <a href="/integrations/device_tracker/">device tracker</a> 엔터티를 하나 이상의 Person 엔터티에 연결할 수 있습니다. 연결된 장치 추적기의 상태 업데이트는 Person 상태를 설정합니다. 여러 장치 추적기를 사용하는 경우 Person 상태는 다음 순서로 결정됩니다.</p>
 <ol>
-<li>If there are stationary trackers (non-GPS trackers, i.e., a router or Bluetooth ‘device_trackers’) presenting the status ‘home’, the tracker most recently updated will be used.</li>
-<li>If there are trackers of type ‘gps’, then the most recently updated tracker will be used.</li>
-<li>Otherwise, the latest tracker with status ‘not_home’ will be used.</li>
+<li>‘home’ 상태를 나타내는 고정 추적기 (GPS가 아닌 추적기, 즉 라우터 또는 Bluetooth ‘device_trackers’)가 있는 경우 가장 최근에 업데이트 된 추적기가 사용됩니다.</li>
+<li>‘gps’ 유형의 추적기가 있는 경우 가장 최근에 업데이트 된 추적기가 사용됩니다.</li>
+<li>그렇지 않으면 상태가 ‘not_home’인 최신 추적기가 사용됩니다.</li>
 </ol>
-<p>Let’s say, for example, that you have 3 trackers: ‘tracker_gps’, ‘tracker_router’ and ‘tracker_ble’.</p>
+<p>예를 들어 ‘tracker_gps’, ‘tracker_router’ 및 ‘tracker_ble’ 의 3 가지 추적기가 있다고 가정합니다.</p>
 <ol>
-<li>You’re at home, all 3 devices show status ‘home’ - status of your Person entity will be ‘home’ with source ‘tracker_router’ or ‘tracker_ble’, whichever was most recently updated.</li>
-<li>You just left home. ‘tracker_gps’ shows status ‘not_home’, but the other two trackers show status ‘home’ (they may not have yet updated due to their ‘consider_home’ setting see <a href="/integrations/device_tracker/#configuring-a-device_tracker-platform">device_tracker</a>). Since the stationary trackers have priority, you are considered ‘home’.</li>
-<li>After some time, both stationary trackers show status ‘not_home’. Now your Person entity has status ‘not_home’ with source ‘tracker_gps’.</li>
-<li>While you are away from home, your Home Assistant is restarted. Until ‘tracker_gps’ receives an update, your status will be determined by the stationary trackers, since they will have the most recent update after a restart. Obviously, the status will be ‘not_home’.</li>
-<li>Then you’re going into a zone you have defined as ‘zone1’, ‘tracker_gps’ sends an update, and now your status is ‘zone1’ with source ‘tracker_gps’.</li>
-<li>You’ve returned home and your mobile device has connected to the router, but ‘tracker_gps’ hasn’t updated yet. Your status will be ‘home’ with source ‘tracker_router’.</li>
-<li>After the ‘tracker_gps’ update occurs, your status will still be ‘home’ with source ‘tracker_router’ or ‘tracker_ble’, whichever has the most recent update.</li>
+<li>당신은 집에 있고 3개의 장치 모두 ‘home’ 상태를 표시합니다. Person 엔티티의 상태는 소스 ‘tracker_router’ 또는 ‘tracker_ble’ 중 가장 최근에 업데이트 된 ‘home’ 입니다.</li>
+<li>당신은 방금 집을 떠났습니다. ‘tracker_gps’는 ‘not_home’ 상태를 표시하지만 다른 두 추적기는 ‘home’ 상태를 표시합니다 (‘consider_home’설정으로 인해 아직 업데이트되지 않았을 수 있습니다 <a href="/integrations/device_tracker/#configuring-a-device_tracker-platform">device_tracker</a> 참조). 고정 추적기가 우선하므로 ‘home’ 으로 간주됩니다.</li>
+<li>일정 시간이 지나면 두 고정 추적기 모두 ‘not_home’ 상태를 표시합니다. 이제 Person 엔티티는 소스 ‘tracker_gps’와 함께 ‘not_home’상태입니다.</li>
+<li>집을 떠나있는 동안 홈어시스턴트가 다시 시작됩니다. ‘tracker_gps’가 업데이트를 수신할 때까지는 고정 추적기에 의해 상태가 결정됩니다. 다시 시작한 후 최신 업데이트가 있기 때문입니다. 분명히 상태는 ‘not_home’입니다.</li>
+<li>그런 다음 ‘zone1’로 정의한 영역으로 이동하면 ‘tracker_gps’가 업데이트를 보내고 이제 상태가 ‘tracker_gps’가있는 ‘zone1’입니다.</li>
+<li>집으로 돌아 왔으며 휴대 기기가 라우터에 연결되었지만 ‘tracker_gps’는 아직 업데이트되지 않았습니다. 당신의 상태는 ‘tracker_router’ 소스와 함께 ‘home’이됩니다.</li>
+<li>‘tracker_gps’ 업데이트가 발생한 후에도 소스 ‘tracker_router’ 또는 ‘tracker_ble’ 중 최신 업데이트가 있는 상태로 ‘home’상태가 유지됩니다.</li>
 </ol>
-<p>TL;DR: When you’re at home, your position is determined first by stationary trackers (if any) and then by GPS. When you’re outside your home, your position is determined firstly by GPS and then by stationary trackers.</p>
-<p><strong>Hint</strong>: When you use multiple device trackers together, especially stationary and GPS trackers, it’s advisable to set <code>consider_home</code> for stationary trackers as low as possible see <a href="/integrations/device_tracker/#configuring-a-device_tracker-platform">device_tracker</a>).</p>
-<p>You can manage persons via the UI from the person page inside the configuration panel or via <code>YAML</code> in your <code>configuration.yaml</code> file.</p>
+<p>요약 : 집에 있을 때는 먼저 위치 추적기 (있는 경우)와 GPS로 위치를 결정합니다. 집 밖에있을 때는 먼저 GPS에 의해 위치가 결정된 다음 고정 추적기에 의해 결정됩니다.</p>
+<p><strong>Hint</strong>: 여러 장치 추적기, 특히 고정 및 GPS 추적기를 함께 사용하는 경우 고정 추적기에 대해 <code>consider_home</code>을 가능한 한 낮게 설정하는 것이 좋습니다. <a href="/integrations/device_tracker/#configuring-a-device_tracker-platform">device_tracker</a>참조</p>
+<p>UI를 통해 설정 패널의 Person 페이지 또는 <code>configuration.yaml</code> 파일의 <code>YAML</code>을 통해 Person을 관리할 수 ​​있습니다.</p>
 <h2>
-<a class="title-link" name="configuring-the-person-integration-via-the-home-assistant-configuration-panel" href="#configuring-the-person-integration-via-the-home-assistant-configuration-panel"></a> Configuring the person integration via the Home Assistant configuration panel</h2>
-<p>This integration is by default enabled, unless you’ve disabled or removed the <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> line from your configuration. If that is the case, the following example shows you how to enable this integration manually:</p>
+<a class="title-link" name="----person--" href="#----person--"></a> 홈어시스턴트 설정 패널을 통해 Person 통합구성요소 설정</h2>
+<p>이 통합구성요소는 설정에서 <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> 행을 비활성화하거나 제거하지 않은 한 기본적으로 활성화되어 있습니다. 이 경우 다음 예는 이 통합구성요소를 수동으로 활성화하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">person:
 </code></pre>
 <h2>
-<a class="title-link" name="configuring-the-person-integration-via-yaml" href="#configuring-the-person-integration-via-yaml"></a> Configuring the person integration via YAML</h2>
-<p>If you prefer YAML, you can also configure your persons via <code>configuration.yaml</code>:</p>
+<a class="title-link" name="yaml--person--" href="#yaml--person--"></a> YAML을 통한 person 통합구성요소 설정</h2>
+<p>YAML을 선호하는 경우 <code>configuration.yaml</code> 통해 다음과 같이 Person을 설정할 수도 있습니다</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 person:
   - name: Ada
@@ -143,23 +143,23 @@ person:
   <dl class="">
 <dt>
 <a class="title-link" name="id" href="#id"></a> id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A unique id of the person.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>person의 고유한 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The name of the person.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>person의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="user_id" href="#user_id"></a> user_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The user id of the Home Assistant user account for the person. <em><code>user_id</code> (aka <code>ID</code>) of users can be inspected in the “Users”/“Manage users” screen in the configuration panel.</em></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>person의 홈어시스턴트 사용자 계정의 사용자 ID입니다. <em>설정 패널의 “Users”/“Manage users” 화면에서 사용자의 <code>user_id</code> (일명<code>ID</code>)를 검사할 수 있습니다.</em></p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="device_trackers" href="#device_trackers"></a> device_trackers</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of device tracker entity ids to track. These will represent the state of the person.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>추적 할 장치 추적기 엔티티 ID 목록. 이들은 Person의 상태를 나타냅니다.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>An extended example would look like the following sample:</p>
+<p>확장된 예제는 다음 샘플과 같습니다.:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 person:
   - name: Ada
@@ -173,15 +173,16 @@ person:
       - device_tracker.stacey
       - device_tracker.beacon
 </code></pre>
-<p>If you change the YAML, you can reload it by calling the <code>person.reload</code> service.</p>
+<p>YAML을 변경하면 <code>person.reload</code> 서비스 를 호출하여 YAML을 다시로드 할 수 있습니다</p>
 <h3>
-<a class="title-link" name="customizing-the-picture-for-a-person" href="#customizing-the-picture-for-a-person"></a> Customizing the picture for a person</h3>
-<p>By following the instructions on the <a href="/docs/configuration/customizing-devices#entity_picture">customizing entities</a> page, you can customize the picture used for a person entity in the <code>customize:</code> section of your configuration. For example:</p>
+<a class="title-link" name="person---" href="#person---"></a> Person의 사진 사용자 정의</h3>
+<p><a href="/docs/configuration/customizing-devices#entity_picture">customizing entities</a> 페이지의 지시 사항에따라 <code>customize:</code> 설정 섹션에서 Person 엔티티에 사용되는 그림을 사용자 정의 할 수 있습니다.
+예를 들면 다음과 같습니다. :</p>
 <pre><code class="language-yaml">customize:
   person.ada:
     entity_picture: "/local/ada.jpg"
 </code></pre>
-<p>See the documentation about <a href="/integrations/http/#hosting-files">hosting files</a> for more information about the <code>www</code> folder.</p>
+<p><code>www</code> 폴더에 대한 자세한 내용은 <a href="/integrations/http/#hosting-files">hosting files</a> 설명서를 참조하십시오.</p>
 
 
 </article>

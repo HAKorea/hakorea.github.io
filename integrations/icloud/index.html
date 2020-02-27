@@ -103,29 +103,30 @@
   <hr class="divider">
   
 
-  <p>The <code>icloud</code> integration allows you to detect presence using the <a href="https://www.icloud.com/" rel="external nofollow">iCloud</a> service. iCloud allows users to track their location on iOS devices.</p>
-<p>There is currently support for the following platforms within Home Assistant:</p>
+  <p><code>icloud</code> 통합구성요소를 통해 [iCloud] (<a href="https://www.icloud.com/" rel="external nofollow">https://www.icloud.com/</a>) 서비스를 사용하여 재실 감지를 쓸 수 있습니다.
+iCloud를 통해 사용자는 iOS 장비에서 자신의 위치를 ​​추적 할 수 있습니다.</p>
+<p>현재 홈어시스턴트 내에서 다음 플랫폼을 지원합니다</p>
 <ul>
 <li><a href="#device-tracker">Device Tracker</a></li>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
-<p>It does require that your devices are registered with the <a href="https://www.apple.com/uk/icloud/find-my/" rel="external nofollow">Find My</a> service.</p>
+<p>장치가 <a href="https://www.apple.com/uk/icloud/find-my/" rel="external nofollow">Find My</a> 서비스에 등록되어 있어야 합니다.</p>
 <h2>
-<a class="title-link" name="setup-the-integration" href="#setup-the-integration"></a> Setup the integration</h2>
-<p>There is two ways to integrate iCloud in Home Assistant</p>
+<a class="title-link" name="--setup-the-integration" href="#--setup-the-integration"></a> 연동 셋업 (Setup the integration)</h2>
+<p>Home Assistant에서 iCloud를 통합하는 두 가지 방법이 있습니다</p>
 <h3>
-<a class="title-link" name="via-the-frontend" href="#via-the-frontend"></a> Via the frontend</h3>
-<p>Menu: <em>Configuration</em> -&gt; <em>Integrations</em>. Search for “iCloud”, add your credentials, click submit.</p>
-<p>If you add the integration for the first time for an account:</p>
+<a class="title-link" name="--" href="#--"></a> 프론트엔드를 경유하는 방법</h3>
+<p>메뉴: <em>설정</em> -&gt; <em>통합구성요소</em>. “iCloud” 검색, 개인계정정보 추가한 후 제출 클릭.</p>
+<p>계정에 처음으로 통합구성요소를 추가하는 경우:</p>
 <ol>
-<li>Choose a trusted device from the list and submit.</li>
-<li>It will send you a text message on your trusted device, add the received code to the next form and submit (if you missed the right code, you will be back to the previous step, and retry).</li>
-<li>You are done!</li>
+<li>목록에서 신뢰할 수있는 장치를 선택하고 제출하십시오.</li>
+<li>신뢰할 수있는 장치에 문자 메시지를 보내고 수신 된 코드를 다음 양식에 추가하고 제출합니다 (올바른 코드를 놓친 경우 이전 단계로 돌아가서 다시 시도합니다).</li>
+<li>끝 !</li>
 </ol>
-<p>If you already added the integration before, you are done!</p>
+<p>이미 통합을 추가한 경우 완료된 것입니다!</p>
 <h3>
-<a class="title-link" name="via-the-configuration-file" href="#via-the-configuration-file"></a> Via the configuration file</h3>
-<p>Add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="configuration---" href="#configuration---"></a> configuration 파일에 등록하는 방법</h3>
+<p><code>configuration.yaml</code> 파일에 다음 섹션을 추가 하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 icloud:
   - username: USERNAME
@@ -137,16 +138,16 @@ icloud:
   <dl class="">
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your iCloud account email.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>iCloud 계정 이메일.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your iCloud account password.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>iCloud 계정 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_interval" href="#max_interval"></a> max_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Maximum interval in minutes between subsequent location updates. This tracker uses dynamic intervals for requesting location updates. When the iPhone is stationary, the interval will eventually be set to <code>max_interval</code> to save battery. When the iPhone starts moving again, the interval will be dynamically updated to 1 min. Note that updating interval to 1 min might be delayed by maximum <code>max_interval</code> minutes. Minimum value is 1 min.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>위치 업데이트 사이의 최대간격(분)입니다. 이 추적기는 동적 간격을 사용하여 위치 업데이트를 요청합니다. iPhone이 정지 상태이면 배터리를 절약하기 위해 간격이 <code>max_interval</code>로 설정됩니다. iPhone이 다시 움직이기 시작하면 간격이 1분으로 동적으로 업데이트됩니다. 1분 업데이트 간격은 최대 <code>max_interval</code> 분만큼 지연될 수 있습니다. 최소값은 1 분입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -155,7 +156,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="gps_accuracy_threshold" href="#gps_accuracy_threshold"></a> gps_accuracy_threshold</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>iCloud location updates come with some gps_accuracy varying from 10 to 5000 meters. This setting defines the accuracy threshold in meters for a location update. Less accurate updates will be discarded by this tracker. This allows for more precise location monitoring and fewer false-positive zone changes.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>iCloud 위치 업데이트는 10에서 5000미터까지 다양한 gps_accuracy와 함께 제공됩니다. 이 설정은 위치 업데이트에 대한 정확도 임계값을 미터 단위로 정의합니다. 이 추적기는 정확도가 떨어지는 업데이트를 삭제합니다. 이를 통해 보다 정확한 위치 모니터링이 가능하고 오탐지 영역의 변화가 줄어 듭니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -164,41 +165,42 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-Low `max_interval` may cause battery drainage as it wakes up your device to get the current location.
+'max_interval'이 낮으면 장치가 자주 반응하여 현재 위치를 얻을 때 배터리 소모가 발생할 수 있습니다.
 </div>
 <div class="note warning">
-You may receive an email and a notification from Apple saying that someone has logged into your account.
-<p>For the notification, press “Allow”, then “OK”.</p>
+다른 사람이 귀하의 계정에 로그인했다는 이메일과 알림을 Apple로부터 받을 수 있습니다.
+<p>알림을 받으려면 “허용”을 누른 다음 “확인”을 누르십시오.</p>
 </div>
-<p>If 2 Step Authentication is enabled for your iCloud account, some time after Home Assistant startup the integration will ask which device you want to use as the Trusted Device via a notification in the Home Assistant UI. The integration will send an SMS prompt to that device with the auth code to enter in Home Assistant. The duration of this authentication is determined by Apple, but is currently 2 months, so you will only need to verify your account every two months.</p>
-<p>2 Factor Authentication is the improved version of 2 Step Authentication and is still not supported by the pyicloud library. Therefore it’s not possible to use it with the device_tracker yet.</p>
-<p>To prevent excessive battery drainage, a dynamic interval is used for each individual device instead of a fixed interval for all devices linked to one account. The dynamic interval is based on the current zone of a device, the distance towards home and the battery level of the device.</p>
+<p>iCloud 계정에 2단계 인증이 활성화 된 경우 홈어시스턴트가 시작된 후 어느시점에 통합구성요소는 홈어시스턴트 UI의 알림을 통해 신뢰할 수 있는 장치로 사용할지 묻습니다. 이 과정에서 Home Assistant에 입력 할 인증코드와 함께 SMS 프롬프트를 해당 장치에 보냅니다. 이 인증 기간은 Apple에서 결정하지만 현재 2개월이므로 2개월마다 계정을 확인하면됩니다.</p>
+<p>2단계 인증은 2단계 인증의 개선된 버전이며 여전히 pyicloud 라이브러리에서 지원되지 않습니다. 따라서 아직 device_tracker와 함께 사용할 수 없습니다.</p>
+<p>과도한 배터리 소모를 방지하기 위해 하나의 계정에 연결된 모든 장치에 대해 고정간격 대신 각 개별 장치에 동적간격이 사용됩니다. 동적 간격은 장치의 현재 영역, 집까지의 거리 및 장치의 배터리 수준을 기준으로합니다.</p>
 <h2>
-<a class="title-link" name="in-case-of-troubleshooting" href="#in-case-of-troubleshooting"></a> In case of troubleshooting</h2>
-<p>Go into your Home Assistant configuration <code>.storage</code> folder and delete the “icloud” folder, then retry.</p>
+<a class="title-link" name="--" href="#--"></a> 문제 해결의 경우</h2>
+<p>홈어시스턴트 설정 <code>.storage</code> 폴더로 이동하여 “icloud” 폴더를 삭제한 후 다시 시도하십시오.</p>
 <h2>
-<a class="title-link" name="platforms" href="#platforms"></a> Platforms</h2>
+<a class="title-link" name="" href="#"></a> 플랫폼</h2>
 <h3>
-<a class="title-link" name="device-tracker" href="#device-tracker"></a> Device Tracker</h3>
-<p>The iCloud integration will track available devices on your iCloud account.</p>
+<a class="title-link" name="--device-tracker" href="#--device-tracker"></a> 장치 추적기 (Device Tracker)</h3>
+<p>iCloud 통합구성요소는 iCloud 계정에서 사용 가능한 기기를 추적합니다.</p>
 <h3>
-<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h3>
-<p>The iCloud integration will add a battery sensor for each iCloud devices available on your iCloud account.</p>
+<a class="title-link" name="" href="#"></a> 센서</h3>
+<p>iCloud 통합구성요소는 iCloud 계정에서 사용 가능한 각 iCloud 장비에 배터리 센서를 추가합니다.</p>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>4 services are available:</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>4가지 서비스를 이용할 수 있습니다 :</p>
 <h3>
-<a class="title-link" name="service-icloudupdate" href="#service-icloudupdate"></a> Service icloud.update</h3>
-<p>This service can be used to ask an update of a certain iDevice or all devices linked to an iCloud account. Request will result in new Home Assistant <a href="/docs/configuration/events/#event-state_changed">state_changed</a> event describing current iPhone location. It can be used in automations when a manual location update is needed, e.g., to check if anyone is home when a door been opened.</p>
+<a class="title-link" name="icloudupdate-" href="#icloudupdate-"></a> icloud.update 서비스</h3>
+<p>이 서비스는 특정 iDevice 또는 iCloud 계정에 연결된 모든 장치의 업데이트를 요청하는 데 사용할 수 있습니다. 요청시 현재 iPhone 위치를 설명하는 새로운 홈어시스턴트 <a href="/docs/configuration/events/#event-state_changed">state_changed</a> 이벤트 가 발생 합니다. 예를 들어 문을 열었을때 집에 있는지 확인하기 위해 수동 위치 업데이트가 필요할 때 자동화에 사용할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="service-icloudplay_sound" href="#service-icloudplay_sound"></a> Service icloud.play_sound</h3>
-<p>This service will play the Lost iPhone sound on your iDevice. It will still ring if you are on “Mute” or “Do not disturb” mode.</p>
+<a class="title-link" name="icloudplay_sound-" href="#icloudplay_sound-"></a> icloud.play_sound 서비스</h3>
+<p>이 서비스는 iDevice에서 iPhone 분실 사운드를 재생합니다. “Mute” 또는 “Do not disturb”모드 인 경우에도 계속 울립니다.</p>
 <h3>
-<a class="title-link" name="service-iclouddisplay_message" href="#service-iclouddisplay_message"></a> Service icloud.display_message</h3>
-<p>This service will display a message on your iDevice. It can also ring your device.</p>
+<a class="title-link" name="iclouddisplay_message-" href="#iclouddisplay_message-"></a> icloud.display_message 서비스</h3>
+<p>이 서비스는 iDevice에 메시지를 표시합니다. 장치의 벨이 울릴 수도 있습니다.</p>
 <h3>
-<a class="title-link" name="service-icloudlost_device" href="#service-icloudlost_device"></a> Service icloud.lost_device</h3>
-<p>This service will put your iDevice on “lost” mode (compatible devices only). You have to provide a phone number with a suffixed <a href="https://en.wikipedia.org/wiki/List_of_country_calling_codes" rel="external nofollow">country code</a> and a message.</p>
+<a class="title-link" name="icloudlost_device-" href="#icloudlost_device-"></a> icloud.lost_device 서비스</h3>
+<p>This service will put your iDevice on “lost” mode (compatible devices only). You have to provide a phone number with a suffixed <a href="https://en.wikipedia.org/wiki/List_of_country_calling_codes" rel="external nofollow">country code</a> and a message.
+이 서비스는 iDevice를 “lost”모드로 전환합니다 (호환되는 장비만). 접미사 <a href="https://en.wikipedia.org/wiki/List_of_country_calling_codes" rel="external nofollow">country code</a> 와 메시지가 포함된 전화번호를 제공해야 합니다.</p>
 
 
 </article>
