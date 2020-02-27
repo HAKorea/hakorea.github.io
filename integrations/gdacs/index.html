@@ -1,0 +1,413 @@
+<!doctype html>
+  <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Global Disaster Alert and Coordination System (GDACS) - 홈어시스턴트</title>
+    <meta name="author" content="Home Assistant">
+    <meta name="description" content="Instructions on how to integrate the Global Disaster Alert and Coordination System (GDACS) feed into Home Assistant.">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="https://hakorea.github.io/integrations/gdacs/">
+
+    <meta property="fb:app_id" content="">
+    <meta property="og:title" content="Global Disaster Alert and Coordination System (GDACS)">
+    <meta property="og:site_name" content="홈어시스턴트">
+    <meta property="og:url" content="https://hakorea.github.io/integrations/gdacs/">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Instructions on how to integrate the Global Disaster Alert and Coordination System (GDACS) feed into Home Assistant.">
+    <meta property="og:image" content="https://hakorea.github.io/images/default-social.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    
+    <meta name="twitter:title" content="Global Disaster Alert and Coordination System (GDACS)">
+    <meta name="twitter:description" content="Instructions on how to integrate the Global Disaster Alert and Coordination System (GDACS) feed into Home Assistant.">
+    <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
+
+    <link href="/stylesheets/prism.css?8acb84bc0387c9548a63998fcfea0139" rel="stylesheet">
+    <link href="/stylesheets/screen.css?0a23d70030bf362ca935e76ccc50922c" media="screen, projection, print" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="홈어시스턴트" type="application/atom+xml">
+    <link rel='shortcut icon' href='/images/favicon.ico' />
+    <link rel='icon' type='image/png' href='/images/favicon-192x192.png' sizes='192x192' />
+  </head>
+
+  <body >
+
+    <header class='site-header'>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item three-tenths lap-two-sixths palm-one-whole ha-title">
+      <a href="/" class="site-title">
+        <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant">
+        <span>홈어시스턴트</span>
+      </a>
+    </div>
+
+    <div class="grid__item seven-tenths lap-four-sixths palm-one-whole">
+      <nav>
+        <input type="checkbox" id="toggle">
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+        <ul class="menu pull-right">
+            
+            <li><a href="/getting-started/">시작하기</a></li>
+            <li><a href="/integrations/">통합구성요소</a></li>
+            <li><a href="/docs/">문서</a></li>
+            <li><a href="/cookbook/">예제</a></li>
+            <li><a href='#' class='show-search'><i class="icon-search"></i></a></li>
+            <li>KOREAN(not official)</li>
+        </ul>
+      </nav>
+
+      <div class='search-container' style='display: none'>
+        <div class='search'>
+          <i class="icon-search"></i>
+          <input id='search' placeholder='Search the docs…'>
+          <a href='#' class='close'><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          
+            <article class="page">
+  
+  
+    
+
+<div class="edit-github"><a href="https://github.com/hakorea/gitpages_source/blob/master/source/_integrations/gdacs.markdown" rel="external nofollow">깃허브 편집</a></div>
+
+
+  
+
+  
+  <header>
+    <h1 class="title indent">
+      Global Disaster Alert and Coordination System (GDACS)
+    </h1>
+  </header>
+  <hr class="divider">
+  
+
+  <p>The <code>gdacs</code> integration lets you use a GeoRSS feed provided by
+<a href="https://www.gdacs.org/" rel="external nofollow">GDACS</a> with information
+about major droughts, earthquakes, floods, tropical cyclones, tsunamis and
+volcanic activities worldwide.
+It retrieves alerts from a feed and shows information of those alerts filtered
+by distance to Home Assistant’s location.</p>
+<p>Entities are generated, updated and removed automatically with each update
+from the feed. Each entity defines latitude and longitude and will be shown
+on the default map automatically, or on a map card by defining the source
+<code>gdacs</code>. The distance is available as the state of each entity, and
+converted to the unit (kilometers or miles) configured in Home Assistant.</p>
+<p class="img">
+  <img src="/images/screenshots/gdacs-alerts-feed-map.png">
+</p>
+<p>The data is updated every 5 minutes.</p>
+<div class="note">
+<p>The material used by this integration is provided by the <a href="https://www.gdacs.org/" rel="external nofollow">Global Disaster
+Alert and Coordination System (GDACS)</a> - a cooperation
+framework between the United Nations and the European Commission - under the
+<a href="http://creativecommons.org/licenses/by/4.0/" rel="external nofollow">Creative Commons Attribution 4.0 International (CC BY 4.0) license</a>.
+It has only been modified for the purpose of presenting the material in Home Assistant.
+Please refer to the <a href="https://www.gdacs.org/About/termofuse.aspx" rel="external nofollow">creator’s disclaimer and terms of use notice</a> for more information.</p>
+</div>
+<h2>
+<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<p>To integrate the GDACS feed use the “Integrations” feature
+in the GUI, you find it under Configurations - Integrations, or add the
+following line to your <code>configuration.yaml</code>.</p>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+gdacs:
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="categories" href="#categories"></a> categories</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The categories of alerts to be included. Valid categories are ‘Drought’, ‘Earthquake’, ‘Flood’, ‘Tropical Cyclone’, ‘Tsunami’, ‘Volcano’.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="radius" href="#radius"></a> radius</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The radius around your location to monitor; defaults to 500 km or mi (depending on the unit system defined in your <code>configuration.yaml</code>).</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>500.0</p>
+</dd>
+<dt>
+<a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Latitude of the coordinates around which alerts are considered.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Latitude defined in your configuration.</p>
+</dd>
+<dt>
+<a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Longitude of the coordinates around which alerts are considered.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>Longitude defined in your configuration.</p>
+</dd>
+</dl>
+</div>
+<h2>
+<a class="title-link" name="state-attributes" href="#state-attributes"></a> State Attributes</h2>
+<p>The following state attributes are available for each entity in addition to
+the standard ones:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>latitude</td>
+<td>Latitude of the alert’s location.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>Longitude of the alert’s location.</td>
+</tr>
+<tr>
+<td>source</td>
+<td>
+<code>gdacs</code> to be used in conjunction with <code>geo_location</code> automation trigger.</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>The external ID used in the feed to identify the alert.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Title of this entry.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description of this entry.</td>
+</tr>
+<tr>
+<td>event type</td>
+<td>Type of event this alert is for (Drought, Earthquake, Flood, Tropical Cyclone, Tsunami, Volcano).</td>
+</tr>
+<tr>
+<td>alert level</td>
+<td>Alert level (Red, Orange, Green).</td>
+</tr>
+<tr>
+<td>country</td>
+<td>Country that the alert is applicable to.</td>
+</tr>
+<tr>
+<td>duration in week</td>
+<td>Duration of the alert in full weeks (only shown if more than one week).</td>
+</tr>
+<tr>
+<td>from date</td>
+<td>Date and time this alert started.</td>
+</tr>
+<tr>
+<td>to date</td>
+<td>Date and time this alert ended (or now if ongoing).</td>
+</tr>
+<tr>
+<td>population</td>
+<td>Exposed population.</td>
+</tr>
+<tr>
+<td>severity</td>
+<td>Severity of the alert.</td>
+</tr>
+<tr>
+<td>vulnerability</td>
+<td>Vulnerability score (textual or numerical).</td>
+</tr>
+</tbody>
+</table>
+<p>Please note that some of the attribute values depend on the context and may not
+be comparable between different event types.</p>
+<h2>
+<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
+<p>This integration automatically creates a sensor that shows how many entities
+are currently managed by this integration. In addition to that the sensor has
+some useful attributes that indicate the currentness of the data retrieved
+from the feed.</p>
+<p class="img">
+  <img src="/images/screenshots/gdacs-alerts-sensor.png">
+</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>Status of last update from the feed (“OK” or “ERROR”).</td>
+</tr>
+<tr>
+<td>last update</td>
+<td>Timestamp of the last update from the feed.</td>
+</tr>
+<tr>
+<td>last update successful</td>
+<td>Timestamp of the last successful update from the feed.</td>
+</tr>
+<tr>
+<td>last timestamp</td>
+<td>Timestamp of the latest entry from the feed.</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Number of entities that were created during last update (optional).</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>Number of entities that were updated during last update (optional).</td>
+</tr>
+<tr>
+<td>removed</td>
+<td>Number of entities that were removed during last update (optional).</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full Configuration</h2>
+<pre><code class="language-yaml"># Example configuration.yaml entry
+gdacs:
+  categories:
+    - Drought
+    - Earthquake
+  radius: 1000
+  latitude: -41.2
+  longitude: 174.7
+</code></pre>
+
+
+</article>
+
+          
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+  
+  
+    <section class="aside-module grid__item one-whole lap-one-half">
+
+<div class='edit-github'><a href='https://github.com/hakorea/gitpages_source/blob/master/source/_integrations/gdacs.markdown'>깃허브 편집</a></div>
+
+<div class='brand-logo-container section'><img src='/images/supported_brands/gdacs.jpg' /></div><div class="section">
+    <kb-alert-link integration="gdacs"></kb-alert-link>
+  </div><div class='section'>
+      IoT class<sup><a href='/blog/2016/02/12/classifying-the-internet-of-things/#classifiers'><i class="icon-info-sign"></i></a></sup>: Cloud Polling
+    </div><div class='section'>
+      Quality Scale: <a href='/docs/quality_scale/'>🏆 (platinum)</a>
+    </div><div class='section'>
+      Introduced in release: 0.106
+    </div><div class='section'>
+      This integration is configurable via UI
+    </div><div class='section'>
+    Source: <a href='https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/gdacs/'>/components/gdacs/</a>
+  </div><div class='section'>
+    <h1 class="title delta">카테고리</h1>
+    <ul class='divided'><li>
+        <a href='/integrations/#geolocation'>Geolocation</a>
+      </li></ul>
+    </div></section>
+
+<script src="https://alerts.home-assistant.io/ce-alert-link.js"></script>
+
+  
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <div class="copyright grid">
+        <div class='company grid__item one-third lap-one-half palm-one-whole'>
+          <div class="title">
+            <img src="/images/home-assistant-logo.png" width="36" height="36" alt="Home Assistant"> 홈어시스턴트
+          </div>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          <ul>
+            <li><a href='https://alerts.home-assistant.io'>Home Assistant Alerts</a></li>
+            <li><a href='https://cafe.naver.com/koreassistant'>HA 네이버 카페</a></li>
+          </ul>
+        </div>
+
+        <div class='grid__item one-third lap-one-half palm-one-whole'>
+          이 웹사이트는 <a href='https://jekyllrb.com/'>Jekyll</a>과
+          <a href='https://github.com/coogie/oscailte'>Oscalite 테마</a>를 사용합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <script>
+var _gaq=[['_setAccount',''],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script src="/javascripts/prism.js?5d6619066a1fc5cd819a93c132b539ac" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+docsearch({
+  apiKey: 'c762b5632da4220f398f985614f3a1e3',
+  indexName: 'hakorea',
+  inputSelector: '#search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+});
+document.querySelector('.search .close').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'none';
+});
+document.querySelector('.show-search').addEventListener('click', function(ev) {
+  ev.preventDefault();
+  document.querySelector('.search-container').style.display = 'block';
+  document.getElementById('toggle').checked = false;
+  document.querySelector('.search-container input').focus();
+});
+</script>
+
+  </body>
+</html>
