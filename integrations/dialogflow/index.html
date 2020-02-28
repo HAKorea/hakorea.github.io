@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Dialogflow - 홈어시스턴트</title>
+    <title>대화흐름(Dialogflow) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how integrate Dialogflow with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/dialogflow/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Dialogflow">
+    <meta property="og:title" content="대화흐름(Dialogflow)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/dialogflow/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Dialogflow">
+    <meta name="twitter:title" content="대화흐름(Dialogflow)">
     <meta name="twitter:description" content="Instructions on how integrate Dialogflow with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      Dialogflow
+      대화흐름(Dialogflow)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>dialogflow</code> integration is designed to be used with the <a href="https://dialogflow.com/docs/fulfillment#webhook" rel="external nofollow">webhook</a> integration of <a href="https://dialogflow.com/" rel="external nofollow">Dialogflow</a>. When a conversation ends with a user, Dialogflow sends an action and parameters to the webhook.</p>
-<p>To be able to receive messages from DialogFlow, your Home Assistant instance needs to be accessible from the web (<a href="/addons/duckdns/">Hass.io instructions</a>) and you need to have the <code>base_url</code> configured for the HTTP integration (<a href="/integrations/http/#base_url">docs</a>). Dialogflow will return fallback answers if your server does not answer or takes too long (more than 5 seconds).</p>
-<p>Dialogflow could be <a href="https://dialogflow.com/docs/integrations/" rel="external nofollow">integrated</a> with many popular messaging, virtual assistant and IoT platforms.</p>
-<p>Using Dialogflow will be easy to create conversations like:</p>
+  <p><code>dialogflow</code> 통합구성요소는 <a href="https://dialogflow.com/" rel="external nofollow">Dialogflow</a>의 <a href="https://dialogflow.com/docs/fulfillment#webhook" rel="external nofollow">webhook</a>통합구성요소와 함께 사용되도록 설계되었습니다. 사용자와 대화가 끝나면 Dialogflow는 웹후크에 액션과 매개 변수를 보냅니다.</p>
+<p>DialogFlow에서 메시지를 수신하려면 웹에서 홈어시스턴트 인스턴스에 액세스 할 수 있어야하고 (<a href="/addons/duckdns/">Hass.io instructions</a>) HTTP 통합(<a href="/integrations/http/#base_url">docs</a>)을 위해 <code>base_url</code>을 설정해야합니다. 서버가 응답하지 않거나 너무 오래 걸리면 (5 초 이상) Dialogflow가 대체 응답을 반환합니다.</p>
+<p>Dialogflow는 많은 유명한 messaging, virtual assistant 및 IoT 플랫폼과 <a href="https://dialogflow.com/docs/integrations/" rel="external nofollow">연동</a> 할 수 있습니다.</p>
+<p>Dialogflow를 사용하면 다음과 같은 대화를 쉽게 만들 수 있습니다. :</p>
 <p><em>User: What is the temperature at home?</em></p>
 <p><em>Bot: The temperature is 34 degrees</em></p>
 <p><em>User: Turn on the light</em></p>
 <p><em>Bot: In which room?</em></p>
 <p><em>User: In the kitchen</em></p>
 <p><em>Bot: Turning on kitchen light</em></p>
-<p>To use this integration, you should define a conversation (intent) in Dialogflow, configure Home Assistant with the speech to return and, optionally, the action to execute.</p>
+<p>이 통합구성요소를 사용하려면 Dialogflow에서 대화(의도)를 정의하고 음성으로 홈어시스턴트를 설정하고 선택적으로 실행할 액션를 설정해야합니다.</p>
 <h3>
-<a class="title-link" name="configuring-your-dialogflow-account" href="#configuring-your-dialogflow-account"></a> Configuring your Dialogflow account</h3>
-<p>To get the webhook URL, go to the integrations page in the configuration screen and find “Dialogflow”. Click on “configure”. Follow the instructions on the screen.</p>
+<a class="title-link" name="dialogflow--" href="#dialogflow--"></a> DIALOGFLOW 계정 설정</h3>
+<p>웹후크 URL을 얻으려면 설정 화면의 통합 페이지로 이동하여 “Dialogflow”를 찾으십시오. “configure”를 클릭하십시오. 화면의 지시 사항을 따르십시오.</p>
 <ul>
 <li>
 <a href="https://console.dialogflow.com/" rel="external nofollow">Login</a> with your Google account</li>
@@ -138,15 +138,15 @@
 <li>Dialogflow has send a request to your Home Assistant server</li>
 </ul>
 <div class="note warning">
-<p>The V1 api will be deprecated on October 23, 2019. If you are still using the V1 API, it is recommended to change your settings in Dialogflow to use the V2 API. No changes to your intents yaml configuration need to take place after upgrading to the V2 API. Change to the V2 API by clicking on the cog button <a href="https://console.dialogflow.com/" rel="external nofollow">here</a> and then select the V2 API.</p>
+<p>V1 API는 2019년 10월 23일부터 더 이상 사용되지 않습니다. V1 API를 계속 사용중인 경우 V2 API를 사용하도록 Dialogflow에서 설정을 변경하는 것이 좋습니다. V2 API로 업그레이드 한 후 yaml 설정을 변경할 필요가 없습니다. <a href="https://console.dialogflow.com/" rel="external nofollow">here</a>서 코그 단추를 클릭하여 V2 API로 변경 한 후 V2 API 를 선택하십시오.</p>
 </div>
-<p>Take a look to “Integrations”, in the left menu, to configure third parties.</p>
+<p>왼쪽 메뉴에서 “Integrations”을 살펴보고 third parties를 설정하십시오.</p>
 <h3>
-<a class="title-link" name="configuring-home-assistant" href="#configuring-home-assistant"></a> Configuring Home Assistant</h3>
-<p>When activated, the <a href="/integrations/alexa/"><code>alexa</code> integration</a> will have Home Assistant’s native intent support handle the incoming intents. If you want to run actions based on intents, use the <a href="/integrations/intent_script"><code>intent_script</code></a> integration.</p>
+<a class="title-link" name="-" href="#-"></a> 홈어시스턴트 설정</h3>
+<p>활성화되면 <a href="/integrations/alexa/"><code>alexa</code> integration</a>에 홈어시스턴트의 native intent support가 incoming intents를 처리하게됩니다. intents를 기반으로 액션을 실행하려면 <a href="/integrations/intent_script"><code>intent_script</code></a> 통합구성요소를 사용하십시오.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>Download <a href="https://github.com/home-assistant/home-assistant.io/blob/next/source/assets/HomeAssistant_APIAI.zip" rel="external nofollow">this zip</a> and load it in your Dialogflow agent (<strong>Settings</strong> -&gt; <strong>Export and Import</strong>) for examples intents to use with this configuration:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p><a href="https://github.com/home-assistant/home-assistant.io/blob/next/source/assets/HomeAssistant_APIAI.zip" rel="external nofollow">this zip</a>을 다운로드 하고 이 설정에 사용할 예제를 보려면 Dialogflow 에이전트(<strong>Settings</strong> -&gt; <strong>Export and Import</strong>)에서 로드하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 dialogflow:
 

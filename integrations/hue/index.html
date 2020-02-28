@@ -108,17 +108,17 @@
 <p>zigbee2mqtt의 <a href="https://www.zigbee2mqtt.io/information/supported_devices.html#philips" rel="external nofollow">필립스 Hue 장치들의 지원 목록</a>을 참조하십시오.</p>
 <p>이외에도 Zigbee2mqtt는 2020년 2월 17일 현재 <strong>112개 회사의 584개 장치</strong>들을 공식 지원합니다.</p>
 <hr>
-<p>차후 번역 예정</p>
-<p>Philips Hue support is integrated into Home Assistant as a hub that can drive the light and sensor platforms. The preferred way to set up the Philips Hue platform is by enabling the <a href="/integrations/discovery/">discovery component</a>.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+<p>이하 필립스 Hue 번역</p>
+<p>Philips Hue support는 조명 및 센서 플랫폼을 구동할 수 있는 허브로 Home Assistant에 통합되어 있습니다. Philips Hue 플랫폼을 설정하는 기본 방법은 <a href="/integrations/discovery/">discovery component</a>를 활성화하는 것입니다.</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
-<li>Lights</li>
-<li>Motion sensors (including temperature and light level sensors)</li>
+<li>조명</li>
+<li>모션 센서 (온도 및 조도 센서 포함)</li>
 </ul>
-<p>Once discovered, if you have a custom default view, locate <code>configurator.philips_hue</code> in the States developer tool ( &lt; &gt; ) and add it to a group in <code>configuration.yaml</code>. Restart Home Assistant so that the configurator is visible in the Home Assistant dashboard. Once Home Assistant is restarted, locate and click on <code>configurator.philips_hue</code> to bring up the initiation dialog. This will prompt you to press the Hue button to register the Hue bridge in Home Assistant. Once complete, the configurator entity isn’t needed anymore and can be removed from any visible group in <code>configuration.yaml</code>.</p>
-<p>When you configure the Hue bridge from Home Assistant, it writes a token to a file in your Home Assistant <a href="/docs/configuration/">configuration directory</a>. That token authenticates the communication with the Hue bridge. This token uses the IP address of the bridge. If the IP address for the bridge changes, you will need to register it with Home Assistant again. To avoid this, you may set up a DHCP reservation on your router for your Hue bridge so that it always has the same IP address.</p>
-<p>Once registration is complete you should see the Hue lights listed as <code>light</code> entities, the Hue motion sensors listed as <code>binary_sensor</code> entities, and the Hue temperature and light level sensors (which are built in to the motion sensors) listed as <code>sensor</code> entities. If you don’t, you may have to restart Home Assistant once more.</p>
-<p>If you want to enable the integration without relying on the <a href="/integrations/discovery/">discovery component</a>, add the following lines to your <code>configuration.yaml</code> file:</p>
+<p>일단 사용자 정의 기본 보기가 있는 경우 상태 개발자 도구 ( &lt; &gt; )에서 <code>configurator.philips_hue</code>를 찾아 <code>configuration.yaml</code>의 그룹에 추가하십시오. 홈어시스턴트 대시보드에 설정화면이 표시되도록 홈어시스턴트를 다시 시작하십시오. 홈어시스턴트가 다시 시작되면 <code>configurator.philips_hue</code>를 찾아 클릭하여 시작 대화 상자를 여십시오. 이렇게하면 Hue 버튼을 눌러 홈어시스턴트에 Hue 브리지를 등록하라는 메시지가 표시됩니다. 완료되면 설정 엔터티는 더 이상 필요하지 않으며 <code>configuration.yaml</code>에 나타난 그룹에서 제거 할 수 있습니다.</p>
+<p>Home Assistant에서 Hue 브리지를 설정하면 Home Assistant <a href="/docs/configuration/">configuration directory</a>의 파일에 토큰을 기록합니다. 이 토큰은 Hue 브리지와의 통신을 인증합니다. 브리지의 IP 주소가 변경되면 홈어시스턴트에 다시 등록해야합니다. 이를 방지하기 위해 라우터에서 Hue 브리지의 DHCP 예약을 설정하여 항상 동일한 IP 주소를 갖도록 할 수 있습니다</p>
+<p>등록이 완료되면 Hue 조명이 <code>light</code> 엔티티로, Hue 모션 센서가 <code>binary_sensor</code> 엔티티로, Hue 온도 및 조도 센서(모션 센서에 내장된)가 <code>sensor</code> 엔티티로 표시됩니다. 그렇지 않으면 홈어시스턴트를 다시 한번 더 시작해야 할 수도 있습니다.</p>
+<p><a href="/integrations/discovery/">discovery component</a>에 의존하지 않고 통합구성요소를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 hue:
   bridges:
@@ -130,12 +130,12 @@ hue:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of the bridge (e.g., 192.168.1.10). Required if not using the <code>discovery</code> integration to discover Hue bridges.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>브리지의 IP 주소 (예 : 192.168.1.10). Hue 브리지를 발견하기 위해 <code>discovery</code> 통합구성요소를 사용하지 않는 경우 필요.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="allow_unreachable" href="#allow_unreachable"></a> allow_unreachable</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>This will allow unreachable bulbs to report their state correctly.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>이를 통해 끊어진(unreachable) 조명의 상태를 정확히 보고할 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -144,7 +144,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="allow_hue_groups" href="#allow_hue_groups"></a> allow_hue_groups</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Disable this to stop Home Assistant from importing the groups defined on the Hue bridge.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Hue 브리지에 정의된 그룹을 Home Assistant에서 가져오지 못하게하려면 이 기능을 비활성화.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,7 +153,7 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 예시</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry specifying optional parameters
 hue:
   bridges:
@@ -162,8 +162,8 @@ hue:
       allow_hue_groups: true
 </code></pre>
 <h3>
-<a class="title-link" name="multiple-hue-bridges" href="#multiple-hue-bridges"></a> Multiple Hue bridges</h3>
-<p>Multiple Hue bridges work transparently with discovery, so you don’t have to do anything special to set them up.</p>
+<a class="title-link" name="-hue-" href="#-hue-"></a> 다중 Hue 브릿지</h3>
+<p>다중 Hue 브릿지는 discovery에 명확하게 작동하므로 특별히 설정하지 않아도 됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 hue:
   bridges:
@@ -171,29 +171,29 @@ hue:
     - host: BRIDGE2_IP_ADDRESS
 </code></pre>
 <h3>
-<a class="title-link" name="using-hue-groups-in-home-assistant" href="#using-hue-groups-in-home-assistant"></a> Using Hue Groups in Home Assistant</h3>
-<p>The Hue API allows you to group lights. Home Assistant also supports grouping of entities natively, but sometimes it can be useful to use Hue groups to group light bulbs. By doing so, Home Assistant only needs to send one API call to change the state of all the bulbs in those groups instead of one call for every light in the group. This causes all the bulbs to change state simultaneously.</p>
-<p>These Hue groups can be a <code>Luminaire</code>, <code>Lightsource</code>, <code>LightGroup</code>, or <code>Room</code>. The <code>Luminaire</code> and <code>Lightsource</code> can’t be created manually since the Hue bridge manages these automatically based on the discovered bulbs. The <code>Room</code> and <code>LightGroup</code> can be created manually through the API or the mobile app. A bulb can only exist in one <code>Room</code>, but can exist in more than one <code>LightGroup</code>. The <code>LightGroup</code> can be useful if you want to link certain bulbs together.</p>
-<p>The 2nd generation Hue app only has the ability to create a <code>Room</code>. You need to use the first generation app or the API to create a <code>LightGroup</code>.</p>
-<p>Example:</p>
-<p>To create a <code>LightGroup</code> named <code>Ceiling lights</code> that contains the lights 1, 2, and 3, execute the following command:</p>
+<a class="title-link" name="--hue--" href="#--hue--"></a> 홈 어시스턴트에서 Hue 그룹 사용</h3>
+<p>Hue API를 사용하면 조명을 그룹화 할 수 있습니다. 홈어시스턴트는 기본적으로 엔티티 그룹화를 지원하지만 때때로 Hue 그룹을 사용하여 전구를 그룹화하는 것이 유용할 수 있습니다. 이렇게하면 홈어시스턴트는 그룹의 모든 조명에 대해 한 번의 호출 대신 해당 그룹의 모든 전구 상태를 변경하기 위해 한 번의 API 호출만 보내면됩니다. 이로 인해 모든 전구가 동시에 상태가 변경됩니다.</p>
+<p>이 Hue 그룹은 <code>Luminaire</code>, <code>Lightsource</code>, <code>LightGroup</code> 또는 <code>Room</code>이 될 수 있습니다. Hue 브리지가 감지된 전구를 기반으로 자동으로 관리하기 때문에 <code>Luminaire</code> 와 <code>Lightsource</code>를 수동으로 만들 수 없습니다. <code>Room</code> 및 <code>LightGroup</code>은 API 또는 모바일 앱을 통해 수동으로 생성할 수 있습니다. 전구는 하나의 <code>Room</code>에만 존재할 수 있지만 둘 이상의 <code>LightGroup</code>에 존재할 수도 있습니다. <code>LightGroup</code>은 특정 전구를 서로 연결하려는 경우 유용할 수 있습니다.</p>
+<p>The 2nd generation Hue app only has the ability to create a <code>Room</code>. You need to use the first generation app or the API to create a <code>LightGroup</code>.
+2세대 Hue 앱은 <code>Room</code>만 만들 수 있습니다. <code>LightGroup</code>을 만들려면 1세대 앱 또는 API를 사용해야합니다.</p>
+<p>예시 :</p>
+<p>조명 1,2,3를 포함하는 <code>Ceiling lights</code>라는 <code>LightGroup</code>을 만들려면 다음 명령을 실행하십시오. :</p>
 <pre><code class="language-bash">$ curl -XPOST -d '{"name": "Ceiling lights", "lights": ["1", "2", "3"]}' http://&lt;bridge&gt;/api/&lt;username&gt;/groups
 </code></pre>
-<p>The <code>&lt;username&gt;</code> is the string that is used to register Home Assistant on the bridge. You can find it in the <code>core.config_entries</code> file in your configuration.storage path. <code>&lt;bridge&gt;</code> is the IP address or hostname of your Hue bridge.</p>
-<p>You can find the IDs of your lights by executing the following command:</p>
+<p><code>&lt;username&gt;</code>은 브리지에서 홈어시스턴트를 등록하는 데 사용하는 문자열입니다. configuration.storage 경로의 <code>core.config_entries</code> 파일에서 찾을 수 있습니다. <code>&lt;bridge&gt;</code>는 Hue 브릿지의 IP 주소 또는 호스트 이름입니다.</p>
+<p>다음 명령을 실행하여 조명의 ID를 찾을 수 있습니다 :</p>
 <pre><code class="language-bash">$ curl http://&lt;bridge&gt;/api/&lt;username&gt;/lights
 </code></pre>
-<p>Home Assistant will automatically detect your new <code>LightGroup</code> and add it to the interface.</p>
+<p>홈어시스턴트는 새 <code>LightGroup</code>을 자동으로 감지하여 인터페이스에 추가합니다.</p>
 <div class="note warning">
-  To support Hue light groups, your bridge needs to have at least firmware 1.13 (released on June 3, 2016).
+  Hue 조명 그룹을 지원하려면 브리지에 펌웨어 1.13 이상이 있어야합니다 (2016년 6월 3일 출시).
 </div>
-<p>More information can be found on the <a href="https://www.developers.meethue.com/documentation/groups-api#22_create_group" rel="external nofollow">Philips Hue API documentation</a> website.</p>
+<p>자세한 내용은 <a href="https://www.developers.meethue.com/documentation/groups-api#22_create_group" rel="external nofollow">Philips Hue API documentation</a>에서 확인할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="using-hue-scenes-in-home-assistant" href="#using-hue-scenes-in-home-assistant"></a> Using Hue Scenes in Home Assistant</h3>
-<p>The Hue platform has its own concept of scenes for setting the colors of a group of lights at once. Hue Scenes are very cheap, get created by all kinds of apps (as it is the only way to have 2 or more lights change at the same time), and are rarely deleted. A typical Hue hub might have hundreds of scenes stored in them—many that you’ve never used, and almost all very poorly named.</p>
-<p>To avoid user interface overload, we don’t expose scenes directly. Instead there is a hue.hue_activate_scene service which can be used by <code>automation</code> or <code>script</code> components.
-This will have all the bulbs transitioned at once, instead of one at a time like when using standard scenes in Home Assistant.</p>
-<p>For instance:</p>
+<a class="title-link" name="--hue-scenes-" href="#--hue-scenes-"></a> 홈 어시스턴트에서 Hue 장면(Scenes) 사용</h3>
+<p>Hue 플랫폼에는 조명 그룹의 색상을 한번에 설정하기위한 고유한 장면 개념이 있습니다. Hue 장면은 매우 저렴하고 모든 종류의 앱에서 만들 수 있으며 (동시에 2개이상의 조명을 변경하는 유일한 방법이므로) 거의 삭제되지 않습니다. 전형적인 Hue 허브에는 수백 개의 장면이 저장되어 있을겁니다.</p>
+<p>사용자 인터페이스 과부하를 피하기 위해 장면을 직접 노출시키지 않습니다. 대신 Hue가 있습니다. hue_activate_scene 서비스는 <code>automation</code> 또는 <code>script</code> 구성요소에서 사용할 수 있습니다. 이렇게 하면 Home Assistant에서 표준 장면을 사용할 때와 같이 한 번에 하나씩이 아니라 모든 전구가 한 번에 전환됩니다.</p>
+<p>예시 :</p>
 <pre><code class="language-yaml">script:
   porch_on:
     sequence:
@@ -214,26 +214,26 @@ This will have all the bulbs transitioned at once, instead of one at a time like
 <tr>
 <td><code>group_name</code></td>
 <td>no</td>
-<td>The group/room name of the lights. Find this in the official Hue app.</td>
+<td>라이트의 그룹/룸 이름입니다. 공식 Hue 앱에서 찾으십시오.</td>
 </tr>
 <tr>
 <td><code>scene_name</code></td>
 <td>no</td>
-<td>The name of the scene. Find this in the official Hue app.</td>
+<td>장면의 이름. 공식 Hue 앱에서 찾으십시오.</td>
 </tr>
 </tbody>
 </table>
-<p><em>Note</em>: <code>group_name</code> is not a reference to a Home Assistant group name. It can only be the name of a group/room in the Hue app.</p>
+<p><em>Note</em>: <code>group_name</code>은 홈어시스턴트 그룹 이름에 대한 참조가 아닙니다. Hue 앱에서 그룹/룸의 이름 만 될 수 있습니다.</p>
 <h3>
-<a class="title-link" name="finding-group-and-scene-names" href="#finding-group-and-scene-names"></a> Finding Group and Scene Names</h3>
-<p>How do you find these names?</p>
-<p>The easiest way to do this is to only use the scenes from the 2nd generation Hue app, which is organized by room (group) and scene name. Use the values of room name and scene name that you see in the app. You can test that these work by using the <code>dev-service</code> console of your Home Assistant instance.</p>
-<p>Alternatively, you can dump all rooms and scene names using this <a href="https://gist.github.com/sdague/5479b632e0fce931951c0636c39a9578" rel="external nofollow">gist</a>. This does <strong>not</strong> tell you which groups and scenes work together, but it is sufficient to get values that you can test in the <code>dev-service</code> console.</p>
+<a class="title-link" name="----" href="#----"></a> 그룹 및 장면 이름 찾기</h3>
+<p>이 이름들을 어떻게 찾습니까?</p>
+<p>가장 쉬운 방법은 방(그룹)과 장면 이름으로 구성된 2 세대 Hue 앱의 장면만 사용하는 것입니다. 앱에 표시되는 회의실 이름 및 장면 이름 값을 사용하십시오. Home Assistant 인스턴스의 <code>dev-service</code> 콘솔을 사용하여 이러한 작업이 작동하는지 테스트할 수 있습니다.</p>
+<p>또는이 <a href="https://gist.github.com/sdague/5479b632e0fce931951c0636c39a9578" rel="external nofollow">gist</a>를 사용하여 모든 룸과 장면 이름을 가져올 수 있습니다. 이는 어떤 그룹과 장면이 함께 작동하는지 알려주지는 <strong>않지만</strong> <code>dev-service</code> 콘솔에서 테스트 할 수 있는 값을 얻는 것으로 충분합니다.</p>
 <h3>
-<a class="title-link" name="caveats" href="#caveats"></a> Caveats</h3>
-<p>The Hue API doesn’t activate scenes directly; rather, they must be associated with a Hue group (typically rooms, especially if using the 2nd gen app). But Hue scenes don’t actually reference their group. So heuristic matching is used.</p>
-<p>Neither group names nor scene names are guaranteed unique in Hue. If you are observing unexpected behavior from calling Hue scenes in Home Assistant, make the names of your Hue scenes more specific in the Hue app.</p>
-<p>The Hue hub has limited space for scenes and will delete scenes if new ones get created that would overflow that space. The API docs say this is based on the scenes that are “least recently used.”</p>
+<a class="title-link" name="-caveats" href="#-caveats"></a> 경고 (Caveats)</h3>
+<p>Hue API는 장면을 직접 활성화하지 않습니다. 오히려 Hue 그룹 (일반적으로 방, 특히 2 세대 앱을 사용하는 경우)과 연결되어야 합니다. 그러나 Hue 장면은 실제로 그룹을 참조하지 않습니다. 휴리스틱 매칭(heuristic matching)이 사용됩니다.</p>
+<p>Hue에서 그룹 이름이나 장면 이름이 고유하지는 않습니다. 홈 어시스턴트에서 Hue 장면을 호출하여 예기치 않은 동작이 관찰되는 경우 Hue 앱에서 Hue 장면의 이름을 보다 구체적으로 지정하십시오.</p>
+<p>Hue 허브에는 장면에 대한 공간이 제한되어 있으며 새 장면이 만들어지면 해당 공간을 오버플로하는 장면을 삭제합니다. API 문서에 따르면 이것이 “최근에 사용된” 장면을 기반으로합니다.</p>
 
 
 </article>

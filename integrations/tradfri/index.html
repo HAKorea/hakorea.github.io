@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>IKEA TRÅDFRI (TRADFRI) - 홈어시스턴트</title>
+    <title>이케아 TRÅDFRI (TRADFRI) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Access and control your IKEA Trådfri Gateway and its connected Zigbee-based devices.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/tradfri/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="IKEA TRÅDFRI (TRADFRI)">
+    <meta property="og:title" content="이케아 TRÅDFRI (TRADFRI)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/tradfri/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="IKEA TRÅDFRI (TRADFRI)">
+    <meta name="twitter:title" content="이케아 TRÅDFRI (TRADFRI)">
     <meta name="twitter:description" content="Access and control your IKEA Trådfri Gateway and its connected Zigbee-based devices.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,7 +97,7 @@
   
   <header>
     <h1 class="title indent">
-      IKEA TRÅDFRI (TRADFRI)
+      이케아 TRÅDFRI (TRADFRI)
     </h1>
   </header>
   <hr class="divider">
@@ -107,14 +107,16 @@
 <p>그중에서 <strong>현재 가장 많이 쓰는 통신방식은 Zigbee 제품</strong>임으로 <a href="https://hakorea.github.io/integrations/zha/" rel="external nofollow">Zigbee2mqtt 설치방법</a>를 통해 이케아 TRADFRI 제품군들을 설치하시길 권장합니다.</p>
 <p>zigbee2mqtt의 <a href="https://www.zigbee2mqtt.io/information/supported_devices.html#ikea" rel="external nofollow">이케아 장치들의 지원 목록</a> 을 참조하십시오.</p>
 <p>이외에도 Zigbee2mqtt는 2020년 2월 17일 현재 <strong>112개 회사의 584개 장치</strong>들을 공식 지원합니다.</p>
-<p>The <code>tradfri</code> integration allows you to connect your IKEA Trådfri Gateway to Home Assistant. The gateway can control compatible Zigbee-based lights (certified Zigbee Light Link products) connected to it. Home Assistant will automatically discover the gateway’s presence on your local network if <code>discovery:</code> is present in your <code>configuration.yaml</code> file.</p>
-<p>You will be prompted to configure the gateway through the Home Assistant interface. The configuration process is very simple: when prompted, enter the security key printed on the sticker on the bottom of the IKEA Trådfri Gateway, then click <em>configure</em>.</p>
+<hr>
+<p>이하 IKEA Trådfri Gateway 사용시 내용</p>
+<p><code>tradfri</code> 통합구성요소로 IKEA Trådfri Gateway를 Home Assistant에 연결할 수 있습니다. 게이트웨이는 연결된 지그비 조명(certified Zigbee Light Link products)을 제어 할 수 있습니다. <code>configuration.yaml</code> 파일에 <code>discovery : </code> 가 있는 경우 Home Assistant는 로컬 네트워크에서 게이트웨이의 존재를 자동으로 감지합니다.</p>
+<p>Home Assistant 인터페이스를 통해 게이트웨이를 설정하라는 메시지가 표시됩니다. 설정 과정은 매우 간단합니다. 메시지가 표시되면 IKEA Trådfri Gateway 하단의 스티커에 인쇄된 보안키를 입력한 다음 <em>configure</em> 를 클릭하십시오.</p>
 <div class="note">
-If you see an "Unable to connect" message, restart the gateway and try again. Don't forget to assign a permanent IP address to your IKEA Trådfri Gateway on your router or DHCP server.
+"연결할 수 없음" 메시지가 표시되면 게이트웨이를 다시 시작하고 다시 시도하십시오. 라우터 또는 DHCP 서버의 IKEA Trådfri 게이트웨이에 고정 IP 주소를 할당하는 것을 잊지 마십시오.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>You can add the following to your <code>configuration.yaml</code> file if you are not using the <a href="/integrations/discovery/"><code>discovery:</code></a> component:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>[<code>discovery :</code>](/ integrations/discovery/) 컴포넌트를 사용하지 않는 경우 <code>configuration.yaml</code> 파일에 다음을 추가해서 설치할 수도 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tradfri:
   host: IP_ADDRESS
@@ -125,12 +127,12 @@ tradfri:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address or hostname of your IKEA Trådfri Gateway.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>IKEA Trådfri Gateway의 IP주소 또는 호스트 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="allow_tradfri_groups" href="#allow_tradfri_groups"></a> allow_tradfri_groups</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set this to <code>true</code> to allow Home Assistant to import the groups defined on the IKEA Trådfri Gateway.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트가 IKEA Trådfri Gateway에 정의된 그룹을 가져오려면 이를 <code>true</code>로 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -139,24 +141,24 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h2>
+<a class="title-link" name="-" href="#-"></a> 문제 해결</h2>
 <h3>
-<a class="title-link" name="firmware-updates" href="#firmware-updates"></a> Firmware updates</h3>
-<p>After updating your IKEA Trådfri Gateway firmware it might be necessary to repeat the configuration process. One error you might experience after a firmware update is <code>Fatal DTLS error: code 115</code>. If you encounter problems:</p>
+<a class="title-link" name="-" href="#-"></a> 펌웨어 업데이트</h3>
+<p>IKEA Trådfri Gateway 펌웨어를 업데이트한 후 설정 프로세스를 반복해야 할 수도 있습니다. 펌웨어 업데이트 후 발생할 수있는 한 가지 오류는 <code>Fatal DTLS error: code 115</code> 입니다. 문제가 발생하면 다음으로 해결해보십시오. :</p>
 <ul>
-<li>when configured using the integration: remove the integration through Settings &gt; Integrations &gt; Tradfri &gt; delete (trash can icon)</li>
-<li>with manual configuration: delete the <code>.tradfri_psk.conf</code> file in your <code>/.homeassistant</code> directory (<code>/config</code> directory if using Hass.io or Docker)</li>
+<li>통합구성요소를 사용하여 설정한 경우 : 통합구성요소에서 제거, Settings &gt; 통합구성요소 &gt; Tradfri &gt; 삭제 (휴지통 아이콘)</li>
+<li>수동설정의 경우 : <code>/.homeassistant</code> 디렉토리(<code>/config</code> Hass.io 혹은 Docker 사용시 디렉토리는 <code>/config</code>)에서 <code>.tradfri_psk.conf</code> 파일을 삭제</li>
 </ul>
-<p>Then restart Home Assistant. When prompted, enter the security key and click <em>configure</em>, just like during initial setup.</p>
+<p>그다음 홈어시스턴트를 다시 시작하십시오. 메시지가 표시되면, 초기 설정과 마찬가지로 보안키를 입력하고 <em>configure</em> 를 클릭하십시오 .</p>
 <h3>
-<a class="title-link" name="compilation-issues" href="#compilation-issues"></a> Compilation issues</h3>
+<a class="title-link" name="--compilation-issues" href="#--compilation-issues"></a> 컴파일 문제 (Compilation issues)</h3>
 <div class="note">
-  This does not apply to Hass.io or Docker.
+  Hass.io 또는 Docker에는 적용되지 않습니다.
 </div>
-<p>Please make sure you have <code>autoconf</code> installed (<code>$ sudo apt-get install autoconf</code>) if you want to use this component. Also, installing some dependencies might take considerable time (more than one hour) on slow devices.</p>
+<p>이 구성요소를 사용하려면 <code>autoconf</code>가 설치되어 있는지 확인하십시오 (<code>$ sudo apt-get install autoconf</code>). 또한 일부 종속 항목을 설치하면 느린 장치의 경우 상당한 시간(1시간 이상)이 걸릴 수 있습니다.</p>
 <h3>
-<a class="title-link" name="setting-the-api_key" href="#setting-the-api_key"></a> Setting the api_key</h3>
-<p>Do not use the <code>api_key</code> variable in <code>configuration.yaml</code>. The API key is only needed once at initial setup and will be stored.</p>
+<a class="title-link" name="api_key-" href="#api_key-"></a> api_key 세팅</h3>
+<p><code>configuration.yaml</code>에 <code>api_key</code> 변수를 사용하지 마십시오. API 키는 초기 설정시 한 번만 필요하며 저장됩니다.</p>
 
 
 </article>
