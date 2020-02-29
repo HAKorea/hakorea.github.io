@@ -103,23 +103,23 @@
   <hr class="divider">
   
 
-  <p>The <code>wake_on_lan</code> integration enables the ability to send <em>magic packets</em> to <a href="https://en.wikipedia.org/wiki/Wake-on-LAN" rel="external nofollow">Wake on LAN</a> capable devices to turn them on.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>wake_on_lan</code> 통합구성요소를 통해 <em>magic packet</em> 을 <a href="https://en.wikipedia.org/wiki/Wake-on-LAN" rel="external nofollow">Wake on LAN</a> 지원 장치로 전송하여 장치를 켤 수 있습니다.</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다 :</p>
 <ul>
 <li><a href="#switch">Switch</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use this integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 이 통합구성요소를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 wake_on_lan:
 </code></pre>
 <h3>
-<a class="title-link" name="component-services" href="#component-services"></a> Component services</h3>
-<p>Available services: <code>send_magic_packet</code>.</p>
+<a class="title-link" name="component-" href="#component-"></a> Component 서비스</h3>
+<p>사용가능한 서비스 : <code>send_magic_packet</code>.</p>
 <h4>
-<a class="title-link" name="service-wake_on_lansend_magic_packet" href="#service-wake_on_lansend_magic_packet"></a> Service wake_on_lan/send_magic_packet</h4>
-<p>Send a <em>magic packet</em> to wake up a device with ‘Wake-On-LAN’ capabilities.</p>
+<a class="title-link" name="wake_on_lansend_magic_packet-" href="#wake_on_lansend_magic_packet-"></a> wake_on_lan/send_magic_packet 서비스</h4>
+<p>‘Wake-On-LAN’ 기능이 있는 장치를 깨우려면 <em>magic packet</em> 을 보내십시오.</p>
 <table>
 <thead>
 <tr>
@@ -132,28 +132,28 @@ wake_on_lan:
 <tr>
 <td><code>mac</code></td>
 <td>no</td>
-<td>MAC address of the device to wake up.</td>
+<td>깨울 장치의 MAC 주소.</td>
 </tr>
 <tr>
 <td><code>broadcast_address</code></td>
 <td>yes</td>
-<td>Optional broadcast IP where to send the magic packet.</td>
+<td>매직 패킷을 보낼 선택적 Broadcast IP 주소</td>
 </tr>
 </tbody>
 </table>
-<p>Sample service data:</p>
+<p>샘플 서비스 데이터 :</p>
 <pre><code class="language-json">{
    "mac":"00:40:13:ed:f1:32"
 }
 </code></pre>
 <h2>
-<a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>wake_on_lan</code> (WOL) switch platform allows you to turn on a <a href="https://en.wikipedia.org/wiki/Wake-on-LAN" rel="external nofollow">WOL</a> enabled computer.</p>
+<a class="title-link" name="" href="#"></a> 스위치</h2>
+<p><code>wake_on_lan</code> (WOL) 스위치 플랫폼을 사용하면 <a href="https://en.wikipedia.org/wiki/Wake-on-LAN" rel="external nofollow">WOL</a> 지원 컴퓨터를 켤 수 있습니다.</p>
 <h3>
-<a class="title-link" name="switch-configuration" href="#switch-configuration"></a> Switch configuration</h3>
-<p>The WOL switch can only turn on your computer and monitor the state. There is no universal way to turn off a computer remotely. The <code>turn_off</code> variable is there to help you call a script when you have figured out how to remotely turn off your computer. See below for suggestions on how to do this.</p>
-<p>It’s required that the binary <code>ping</code> is in your <code>$PATH</code>.</p>
-<p>To enable this switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 스위치 설정</h3>
+<p>WOL 스위치는 컴퓨터를 켜고 상태만 모니터링 할 수 있습니다. 컴퓨터를 원격으로 끄는 일반적인 방법은 없습니다. <code>turn_off</code> 변수는 컴퓨터를 원격으로 끄는 방법을 알아냈을 때 스크립트를 호출하는 데 도움이됩니다. 이를 수행하는 방법에 대한 제안 사항은 아래를 참조하십시오.</p>
+<p>바이너리 <code>ping</code>은 <code>$PATH</code>에 있어야합니다.</p>
+<p>설치에서 이 스위치를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: wake_on_lan
@@ -165,12 +165,12 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The MAC address to send the wake up command to, e.g, <code>00:01:02:03:04:05</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>깨우기 명령을 보낼 MAC 주소 (예: <code>00:01:02:03:04:05</code>).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the switch.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>스위치의 이름</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -178,16 +178,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IP address or hostname to check the state of the device (on/off).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 상태를 확인하기 위한 IP 주소 또는 호스트 이름입니다 (켜기/끄기).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="turn_off" href="#turn_off"></a> turn_off</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an <a href="/getting-started/automation/">action</a> to run when the switch is turned off.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>스위치가 꺼질 때 실행할 <a href="/getting-started/automation/">action</a>을 정의합니다 .</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="broadcast_address" href="#broadcast_address"></a> broadcast_address</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IP address of the host to send the magic packet to.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>매직 패킷을 보낼 호스트의 IP 주소</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -196,21 +196,28 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
-<p>Here are some real-life examples of how to use the <strong>turn_off</strong> variable.</p>
+<a class="title-link" name="" href="#"></a> 사례</h3>
+<p>다음은 <strong>turn_off</strong> 변수 를 사용하는 방법에 대한 실제 예입니다.</p>
 <h4>
 <a class="title-link" name="suspending-linux" href="#suspending-linux"></a> Suspending Linux</h4>
-<p>Suggested recipe for letting the <code>turn_off</code> script suspend a Linux computer (the <strong>target</strong>)
-from Home Assistant running on another Linux computer (the <strong>server</strong>).</p>
+<p><code>turn_off</code> 스크립트가 다른 Linux 컴퓨터 (<strong>server</strong>)에서 실행되는 Home Assistant에서 Linux 컴퓨터 (<strong>target</strong>)를 일시 중지시키는 방법 제안</p>
 <ol>
-<li>On the <strong>server</strong>, log in as the user account Home Assistant is running under. In this exampleit’s <code>hass</code>.</li>
-<li>On the <strong>server</strong>, create SSH keys by running <code>ssh-keygen</code>. Just press enter on all questions.</li>
-<li>On the <strong>target</strong>, create a new account that Home Assistant can ssh into: <code>sudo adduser hass</code>. Just press enter on all questions except password. It’s recommended using the same user name as on the server. If you do, you can leave out <code>hass@</code> in the SSH commands below.</li>
-<li>On the <strong>server</strong>, transfer your public SSH key by <code>ssh-copy-id hass@TARGET</code> where TARGET is your target machine’s name or IP address. Enter the password you created in step 3.</li>
-<li>On the <strong>server</strong>, verify that you can reach your target machine without password by <code>ssh TARGET</code>.</li>
-<li>On the <strong>target</strong>, we need to let the <code>hass</code> user execute the program needed to suspend/shut down the target computer. Here is it <code>pm-suspend</code>, use <code>poweroff</code> to turn off the computer. First, get the full path: <code>which pm-suspend</code>. On my system, this is <code>/usr/sbin/pm-suspend</code>.</li>
-<li>On the <strong>target</strong>, using an account with sudo access (typically your main account), <code>sudo visudo</code>. Add this line last in the file: <code>hass ALL=NOPASSWD:/usr/sbin/pm-suspend</code>, where you replace <code>hass</code> with the name of your user on the target, if different, and <code>/usr/sbin/pm-suspend</code> with the command of your choice, if different.</li>
-<li>On the <strong>server</strong>, add the following to your configuration, replacing TARGET with the target’s name:</li>
+<li>
+<strong>server</strong>에서 홈어시스턴트 사용자 계정이 실행중인 상태로 로그인하십시오. 이 예에서는 <code>hass</code>입니다</li>
+<li>
+<strong>server</strong>에서 <code>ssh-keygen</code>을 실행하여 SSH키를 만듭니다. 모든 질문에서 Enter 키를 누르십시오.</li>
+<li>
+<strong>target</strong>에서 Home Assistant가 <code>sudo adduser has</code>로 ssh로 접속할 수있는 새 계정을 만듭니다. 비밀번호를 제외한 모든 질문에서 Enter 키를 누르면됩니다. 서버와 동일한 사용자 이름을 사용하는 것이 좋습니다. 그렇다면, 아래의 SSH 명령에서 <code>hass @</code>를 생략해도됩니다.</li>
+<li>
+<strong>server</strong>에서 <code>ssh-copy-id hass@TARGET</code>으로 공개 SSH키를 전송하십시오. 여기서 TARGET은 대상 컴퓨터의 이름 또는 IP 주소입니다. 3 단계에서 작성한 비밀번호를 입력하십시오.</li>
+<li>
+<strong>server</strong>에서 <code>ssh TARGET</code>을 통해 비밀번호없이 대상 머신에 도달 할 수 있는지 확인하십시오.</li>
+<li>
+<strong>target</strong>에서는 <code>hass</code> 사용자가 대상 컴퓨터를 일시 중지/종료하는 데 필요한 프로그램을 실행하도록 해야합니다. 다음은 <code>pm-suspend</code>입니다. 먼저 전체 경로를 가져옵니다 : <code>which pm-suspend</code>. 내 시스템에서 이는 <code>/usr/sbin/pm-suspend</code> 입니다.</li>
+<li>
+<strong>target</strong>에서 sudo 액세스 권한이있는 계정(일반적으로 주계정)인 <code>sudo visudo</code>를 사용합니다. 이 행을 파일의 마지막 부분에 추가하십시오 :<code>hass ALL=NOPASSWD:/usr/sbin/pm-suspend</code>. 여기서 <code>hass</code>를 다른 대상의 사용자 이름으로 바꾸고 <code>/usr/sbin/pm-suspend</code>를 다른 명령으로 바꾸십시오.</li>
+<li>
+<strong>server</strong>에서 TARGET을 대상 이름으로 바꾸어 설정에 다음을 추가하십시오.</li>
 </ol>
 <pre><code class="language-yaml">switch:
   - platform: wake_on_lan

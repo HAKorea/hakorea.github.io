@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Xiaomi Smart WiFi Socket and Smart Power Strip - 홈어시스턴트</title>
+    <title>샤오미 Smart WiFi Socket and Smart Power Strip - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Xiaomi Smart WiFi Socket aka Plug or Xiaomi Smart Power Strip within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/switch.xiaomi_miio/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Xiaomi Smart WiFi Socket and Smart Power Strip">
+    <meta property="og:title" content="샤오미 Smart WiFi Socket and Smart Power Strip">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/switch.xiaomi_miio/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Xiaomi Smart WiFi Socket and Smart Power Strip">
+    <meta name="twitter:title" content="샤오미 Smart WiFi Socket and Smart Power Strip">
     <meta name="twitter:description" content="Instructions on how to integrate your Xiaomi Smart WiFi Socket aka Plug or Xiaomi Smart Power Strip within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Xiaomi Smart WiFi Socket and Smart Power Strip
+      샤오미 Smart WiFi Socket and Smart Power Strip
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>xiaomi_miio</code> switch platform allows you to control the state of your Xiaomi Smart WiFi Socket aka Plug, Xiaomi Smart Power Strip and Xiaomi Chuangmi Plug V1.</p>
-<p>Please follow the instructions on <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> to get the API token to use in the <code>configuration.yaml</code> file.</p>
+  <p><code>xiaomi_miio</code> 스위치 플랫폼은 플러그 일명 샤오미 스마트 와이파이 소켓, 샤오미 스마트 파워 스트립과 샤오미 Chuangmi 플러그 V1의 상태를 제어할 수 있습니다.</p>
+<p><code>configuration.yaml</code> 파일에서 사용할 API 토큰을 얻으려면 <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a>의 지침을 따르십시오.</p>
 <h2>
-<a class="title-link" name="features" href="#features"></a> Features</h2>
+<a class="title-link" name="features-" href="#features-"></a> Features (특징)</h2>
 <h3>
 <a class="title-link" name="xiaomi-smart-wifi-socket" href="#xiaomi-smart-wifi-socket"></a> Xiaomi Smart WiFi Socket</h3>
 <p>Supported models: <code>chuangmi.plug.m1</code>, <code>chuangmi.plug.m3</code>, <code>chuangmi.plug.v2</code>, <code>chuangmi.plug.hmi205</code></p>
@@ -160,8 +160,8 @@
 </li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add a plug to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에 플러그를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entries
 switch:
   - platform: xiaomi_miio
@@ -174,16 +174,16 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of your miio device.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>miio 장치의 IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="token" href="#token"></a> token</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The API token of your miio device.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>miio 장치의 API 토큰.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of your miio device.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>miio 장치의 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -191,15 +191,15 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="model" href="#model"></a> model</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The model of your miio device. Valid values are <code>chuangmi.plug.v1</code>, <code>qmi.powerstrip.v1</code>, <code>zimi.powerstrip.v2</code>, <code>chuangmi.plug.m1</code>, <code>chuangmi.plug.m3</code>, <code>chuangmi.plug.v2</code>, <code>chuangmi.plug.v3</code> and <code>chuangmi.plug.hmi205</code>. This setting can be used to bypass the device model detection and is recommended if your device isn’t always available.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>miio 장치의 모델. 유효값들은 <code>chuangmi.plug.v1</code>, <code>qmi.powerstrip.v1</code>, <code>zimi.powerstrip.v2</code>, <code>chuangmi.plug.m1</code>, <code>chuangmi.plug.m3</code>, <code>chuangmi.plug.v2</code>, <code>chuangmi.plug.v3</code>, <code>chuangmi.plug.hmi205</code>. 이 세팅은 장치 모델 감지를 우회하는 데 사용할 수 있으며 장치를 항상 사용할 수 없는 경우 권장됩니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="platform-services" href="#platform-services"></a> Platform Services</h2>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 서비스</h2>
 <h3>
-<a class="title-link" name="service-xiaomi_miioswitch_set_wifi_led_on-power-strip-only" href="#service-xiaomi_miioswitch_set_wifi_led_on-power-strip-only"></a> Service xiaomi_miio.switch_set_wifi_led_on (Power Strip only)</h3>
-<p>Turn the wifi led on.</p>
+<a class="title-link" name="xiaomi_miioswitch_set_wifi_led_on-power-strip-only-" href="#xiaomi_miioswitch_set_wifi_led_on-power-strip-only-"></a> xiaomi_miio.switch_set_wifi_led_on (Power Strip only) 서비스</h3>
+<p>Wi-Fi LED 전원을 끕니다.</p>
 <table>
 <thead>
 <tr>
@@ -212,13 +212,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on a specific Xiaomi miIO switch entity.</td>
+<td>특정 Xiaomi miIO 스위치 엔티티에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miioswitch_set_wifi_led_off-power-strip-only" href="#service-xiaomi_miioswitch_set_wifi_led_off-power-strip-only"></a> Service xiaomi_miio.switch_set_wifi_led_off (Power Strip only)</h3>
-<p>Turn the wifi led off.</p>
+<a class="title-link" name="xiaomi_miioswitch_set_wifi_led_off-power-strip-only-" href="#xiaomi_miioswitch_set_wifi_led_off-power-strip-only-"></a> xiaomi_miio.switch_set_wifi_led_off (Power Strip only) 서비스</h3>
+<p>Wi-Fi LED 전원을 끕니다.</p>
 <table>
 <thead>
 <tr>
@@ -231,13 +231,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on a specific Xiaomi miIO switch entity.</td>
+<td>특정 Xiaomi miIO 스위치 엔티티에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miioswitch_set_power_price-power-strip" href="#service-xiaomi_miioswitch_set_power_price-power-strip"></a> Service xiaomi_miio.switch_set_power_price (Power Strip)</h3>
-<p>Set the power price.</p>
+<a class="title-link" name="xiaomi_miioswitch_set_power_price-power-strip-" href="#xiaomi_miioswitch_set_power_price-power-strip-"></a> xiaomi_miio.switch_set_power_price (Power Strip) 서비스</h3>
+<p>전기료를 설정.</p>
 <table>
 <thead>
 <tr>
@@ -250,18 +250,18 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on a specific Xiaomi miIO switch entity.</td>
+<td>특정 Xiaomi miIO 스위치 엔티티에서만 작동.</td>
 </tr>
 <tr>
 <td><code>price</code></td>
 <td>no</td>
-<td>Power price, between 0 and 999.</td>
+<td>전기료 (0-999)</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miioswitch_set_power_mode-power-strip-v1-only" href="#service-xiaomi_miioswitch_set_power_mode-power-strip-v1-only"></a> Service xiaomi_miio.switch_set_power_mode (Power Strip V1 only)</h3>
-<p>Set the power mode.</p>
+<a class="title-link" name="xiaomi_miioswitch_set_power_mode-power-strip-v1-only-" href="#xiaomi_miioswitch_set_power_mode-power-strip-v1-only-"></a> xiaomi_miio.switch_set_power_mode (Power Strip V1 only) 서비스</h3>
+<p>전원모드 설정.</p>
 <table>
 <thead>
 <tr>
@@ -274,12 +274,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on a specific Xiaomi miIO switch entity.</td>
+<td>특정 Xiaomi miIO 스위치 엔티티에서만 작동.</td>
 </tr>
 <tr>
 <td><code>mode</code></td>
 <td>no</td>
-<td>Power mode, valid values are ‘normal’ and ‘green’</td>
+<td>전원 모드, 유효한 값은 ‘normal’ 및 ‘green’</td>
 </tr>
 </tbody>
 </table>

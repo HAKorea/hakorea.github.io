@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>HDMI-CEC - 홈어시스턴트</title>
+    <title>HDMI 원격조정(HDMI-CEC) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to interact with HDMI-CEC via Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/hdmi_cec/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="HDMI-CEC">
+    <meta property="og:title" content="HDMI 원격조정(HDMI-CEC)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/hdmi_cec/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="HDMI-CEC">
+    <meta name="twitter:title" content="HDMI 원격조정(HDMI-CEC)">
     <meta name="twitter:description" content="Instructions on how to interact with HDMI-CEC via Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,56 +97,55 @@
   
   <header>
     <h1 class="title indent">
-      HDMI-CEC
+      HDMI 원격조정(HDMI-CEC)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>hdmi_cec</code> integration provides services that allow selecting the active device, powering on all devices, setting all devices to standby and creates switch entities for HDMI devices. Devices are defined in the configuration file by associating HDMI port number and a device name. Connected devices that provide further HDMI ports, such as sound-bars and AVRs are also supported. Devices are listed from the perspective of the CEC-enabled Home Assistant device. Any connected device can be listed, regardless of whether it supports CEC. Ideally the HDMI port number on your device will map correctly the CEC physical address. If it does not, use <code>cec-client</code> (part of the <code>libcec</code> package) to listen to traffic on the CEC bus and discover the correct numbers.</p>
+  <p><code>hdmi_cec</code> 통합구성요소는 원하는 장치를 선택하고 모든 장치의 전원을 켜고 모든 장치를 대기로 설정하고 HDMI 장치의 스위치 엔티티를 생성 할 수있는 서비스를 제공합니다. 장치는 HDMI 포트 번호와 장치 이름을 연결하여 설정 파일에 정의됩니다. 사운드 바 및 AVR과 같은 추가 HDMI 포트를 제공하는 연결된 장치도 지원됩니다. CEC 지원 Home Assistant 장치의 관점에서 장치가 나열됩니다. CEC 지원 여부에 관계없이 연결된 모든 장치를 나열 할 수 있습니다. 장치의 HDMI 포트 번호가 CEC 실제 주소를 올바르게 매핑하는 것이 이상적입니다. 그렇지 않으면 <code>cec-client</code>(<code>libcec</code>패키지의 일부)를 사용하여 CEC 버스의 트래픽을 듣고 올바른 번호를 찾으십시오.</p>
 <h2>
-<a class="title-link" name="cec-setup" href="#cec-setup"></a> CEC Setup</h2>
+<a class="title-link" name="cec-" href="#cec-"></a> CEC 셋업</h2>
 <h3>
 <a class="title-link" name="adapter" href="#adapter"></a> Adapter</h3>
-<p>The computer running Home Assistant must support CEC, and of course be connected via HDMI to a device also supporting CEC. You can purchase a <a href="https://www.pulse-eight.com/p/104/usb-hdmi-cec-adapter" rel="external nofollow">USB CEC adapter</a> to add support if necessary. Note that all Raspberry Pi models support CEC natively.</p>
+<p>Home Assistant를 실행하는 컴퓨터는 CEC를 지원해야하며 물론 CEC를 지원하는 장치에 HDMI를 통해 연결해야합니다. 필요한 경우 <a href="https://www.pulse-eight.com/p/104/usb-hdmi-cec-adapter" rel="external nofollow">USB CEC adapter</a>를 구입하여 지원을 추가 할 수 있습니다. 모든 Raspberry Pi 모델은 기본적으로 CEC를 지원합니다.</p>
 <h3>
 <a class="title-link" name="libcec" href="#libcec"></a> libcec</h3>
-<p><a href="https://github.com/Pulse-Eight/libcec" rel="external nofollow">libcec</a> must be installed for this integration to work. Follow the installation instructions for your environment, provided at the link. <code>libcec</code> installs Python 3 bindings by default as a system Python module. If you are running Home Assistant in a <a href="/docs/installation/virtualenv/">Python virtual environment</a>, make sure it can access the system module, by either symlinking it or using the <code>--system-site-packages</code> flag.</p>
+<p>이 통합구성요소가 작동하려면 <a href="https://github.com/Pulse-Eight/libcec" rel="external nofollow">libcec</a>가 설치되어 있어야합니다. 링크에 제공된 환경에 맞는 설치 지침을 따르십시오. <code>libcec</code>는 기본적으로 파이썬 3 바인딩을 시스템 파이썬 모듈로 설치합니다. <a href="/docs/installation/virtualenv/">Python virtual environment</a>에서 Home Assistant를 실행중인 경우 시스템 모듈을 심볼릭 링크로 연결하거나<code>--system-site-packages</code> 플래그를 사용하여 시스템 모듈에 액세스 할 수 있는지 확인하십시오.</p>
 <div class="note">
-<p>If you are using <a href="/hassio/">Hass.io</a> then just move forward to the configuration as all requirements are already fulfilled.</p>
+<p><a href="/hassio/">Hass.io</a>를 사용하는 경우 모든 요구 사항이 이미 충족되었으므로 설정으로 이동하십시오.</p>
 </div>
 <h4>
-<a class="title-link" name="symlinking-into-virtual-environment" href="#symlinking-into-virtual-environment"></a> Symlinking into virtual environment</h4>
-<p>Create a symlink to the <code>cec</code> installation including the _cec.so file. Keep in mind different installation methods will result in different locations of cec.</p>
+<a class="title-link" name="---" href="#---"></a> 가상 환경으로의 심볼릭 링크</h4>
+<p>_cec.so 파일을 포함하여<code>cec</code> 설치에 대한 심볼릭 링크를 만듭니다. 설치 방법이 다르면 cec의 위치가 다를 수 있습니다.</p>
 <pre><code class="language-bash">ln -s /path/to/your/installation/of/cec.py /path/to/your/venv/lib/python*/site-packages
 ln -s /path/to/your/installation/of/_cec.so /path/to/your/venv/lib/python*/site-packages
 
 </code></pre>
 <h5>
-<a class="title-link" name="symlinking-examples" href="#symlinking-examples"></a> Symlinking examples:</h5>
-<p>For the default virtual environment of a <a href="/docs/installation/raspberry-pi/">Manual install for Raspberry Pi</a> the command would be as follows.</p>
+<a class="title-link" name="---" href="#---"></a> 심볼릭 링크 예 :</h5>
+<p><a href="/docs/installation/raspberry-pi/">Manual install for Raspberry Pi</a> 기본 가상 환경에서 명령은 다음과 같습니다.</p>
 <pre><code class="language-bash">ln -s /usr/local/lib/python*/dist-packages/cec.py /srv/homeassistant/lib/python*/site-packages
 ln -s /usr/local/lib/python*/dist-packages/_cec.so /srv/homeassistant/lib/python*/site-packages
 </code></pre>
 <div class="note">
-<p>If after symlinking and adding <code>hdmi_cec:</code> to your configuration you are getting the following error in your logs,
-<code>* failed to open vchiq instance</code> you will also need to add the user account Home Assistant runs under, to the <code>video</code> group. To add the Home Assistant user account to the <code>video</code> group, run the following command. <code>$ usermod -a -G video &lt;hass_user_account&gt;</code></p>
+<p><code>hdmi_cec :</code>를 심볼릭 링크하고 설정에 추가 한 후 로그에 다음과 같은 오류가 발생합니다, <code>* failed to open vchiq instance</code> 이럴 경우 Home Assistant가 실행하는 사용자 계정을 <code>video</code> Group에 추가해야합니다. Home Assistant 사용자 계정을 <code>video</code> 그룹에 추가하려면 다음 명령을 실행하십시오. <code>$ usermod -a -G 비디오 &lt;hass_user_account&gt;</code></p>
 </div>
 <h2>
-<a class="title-link" name="testing-your-installation" href="#testing-your-installation"></a> Testing your installation</h2>
+<a class="title-link" name="-" href="#-"></a> 설치 테스트</h2>
 <ul>
-<li>Login to Raspberry Pi</li>
+<li>라즈베리 파이에 로그인</li>
 </ul>
 <pre><code class="language-bash">ssh pi@your_raspberry_pi_ip
 </code></pre>
 <ul>
-<li>at the command line type:</li>
+<li>명령 행에서 :</li>
 </ul>
 <pre><code class="language-bash">echo scan | cec-client -s -d 1
 </code></pre>
-<p>Note: to use this command you have to install cec-utils package. In Debian based should be: <code>sudo apt install cec-utils</code></p>
+<p>Note: 이 명령을 사용하려면 cec-utils 패키지를 설치해야합니다. 데비안 기반의 경우: <code>sudo apt install cec-utils''</code></p>
 <ul>
-<li>This will give you the list of devices that are on the bus</li>
+<li>버스에 있는 장치 목록을 제공합니다.</li>
 </ul>
 <pre><code class="language-bash">opening a connection to the CEC adapter...
 requesting CEC bus information ...
@@ -162,12 +161,12 @@ power status:  on
 language:      ???
 </code></pre>
 <div class="note">
-<p><code>address:</code> entry above this will be used to configure Home Assistant, this address is represented below as 3: BlueRay player.</p>
+<p><code>address:</code> 항목은 홈어시스턴트를 설정하는데 사용되며 이 주소는 아래 3: BlueRay player 로 표시됩니다.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration-example" href="#configuration-example"></a> Configuration Example</h2>
-<p>In the following example, a Pi Zero running Home Assistant is on a TV’s HDMI port 1. HDMI port 2 is attached to a AV receiver. Three devices are attached to the AV receiver on HDMI ports 1 through 3.</p>
-<p>You can use either direct mapping name to physical address of device</p>
+<a class="title-link" name="-" href="#-"></a> 설정 사례</h2>
+<p>다음 예에서 Home Assistant를 실행하는 Pi Zero는 TV의 HDMI 포트 1에 있습니다. HDMI 포트 2는 AV수신기에 연결되어 있습니다. 3개의 장치가 HDMI 포트 1-3의 AV 수신기에 연결되어 있습니다.</p>
+<p>장치의 실제 주소에 직접 매핑 이름을 사용할 수 있습니다</p>
 <pre><code class="language-yaml">hdmi_cec:
   devices:
     TV: 0.0.0.0
@@ -177,7 +176,7 @@ language:      ???
     Another Device: 2.3.0.0
     BlueRay player: 3.0.0.0
 </code></pre>
-<p>or port mapping tree:</p>
+<p>또는 포트 매핑 트리:</p>
 <pre><code class="language-yaml">hdmi_cec:
   devices:
     1: Pi Zero
@@ -187,32 +186,32 @@ language:      ???
       3: Another Device
     3: BlueRay player
 </code></pre>
-<p>Choose just one schema. Mixing both approaches is not possible.</p>
-<p>Another option you can use in config is <code>platform</code> which specifying of default platform of HDMI devices. “switch” and “media_player” are supported. Switch is default.</p>
+<p>하나의 스키마 만 선택하십시오. 두 가지 접근법을 혼합하는 것은 불가능합니다.</p>
+<p>config에서 사용할 수있는 또 다른 옵션 <code>platform</code> 은 HDMI 장치의 기본 플랫폼을 지정하는 것입니다. “switch” 및 “media_player”가 지원됩니다. 스위치가 기본값입니다.</p>
 <pre><code class="language-yaml">hdmi_cec:
   platform: media_player
 </code></pre>
-<p>Then you set individual platform for devices in customizations:</p>
+<p>그런 다음 사용자 정의에서 장치에 대한 개별 플랫폼을 설정하십시오. :</p>
 <pre><code class="language-yaml">hdmi_cec:
   types:
     hdmi_cec.hdmi_5: media_player
 </code></pre>
-<p>And the last option is <code>host</code>. PyCEC supports bridging CEC commands over TCP. When you start pyCEC on machine with HDMI port (<code>python -m pycec</code>), you can then run homeassistant on another machine and connect to CEC over TCP. Specify TCP address of pyCEC server:</p>
+<p>그리고 마지막 옵션은 <code>host</code>입니다. PyCEC는 TCP를 통한 CEC 명령 브리징을 지원합니다. HDMI 포트 (python -m pycec)가 있는 컴퓨터에서 pyCEC를 시작하면 다른 컴퓨터에서 홈어시스턴트를 실행하고 TCP를 통해 CEC에 연결할 수 있습니다. pyCEC 서버의 TCP 주소를 지정하십시오 :</p>
 <pre><code class="language-yaml">hdmi_cec:
   host: 192.168.1.3
 </code></pre>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="select-device" href="#select-device"></a> Select Device</h3>
-<p>Call the <code>hdmi_cec.select_device</code> service with the name of the device from config or entity_id or physical address”to select it, for example:</p>
+<a class="title-link" name="-" href="#-"></a> 장치 선택</h3>
+<p>config 또는 entity_id 또는 물리적 주소에서 장치 이름으로 <code>hdmi_cec.select_device</code> 서비스를 호출하여 선택하십시오. 예를 들면 다음과 같습니다.</p>
 <pre><code class="language-json">{"device": "Chromecast"}
 </code></pre>
 <pre><code class="language-json">{"device": "switch.hdmi_3"}
 </code></pre>
 <pre><code class="language-json">{"device": "1.1.0.0"}
 </code></pre>
-<p>So an Automation action using the example above would look something like this.</p>
+<p>따라서 위 예제를 사용한 자동화 작업은 다음과 같습니다.</p>
 <pre><code class="language-yaml">action:
   service: hdmi_cec.select_device
     data:
@@ -220,51 +219,51 @@ language:      ???
 </code></pre>
 <h3>
 <a class="title-link" name="power-on" href="#power-on"></a> Power On</h3>
-<p>Call the <code>hdmi_cec.power_on</code> service (no arguments) to power on any devices that support this function.</p>
-<p>An Automation action using the example above would look something like this.</p>
+<p>이 기능을 지원하는 모든 장치의 전원을 켜려면 <code>hdmi_cec.power_on</code> 서비스 (인수 없음)를 호출하십시오.</p>
+<p>위 예제를 사용한 자동화 작업은 다음과 같습니다.</p>
 <pre><code class="language-yaml">action:
   service: hdmi_cec.power_on
 </code></pre>
 <h3>
-<a class="title-link" name="standby" href="#standby"></a> Standby</h3>
-<p>Call the <code>hdmi_cec.standby</code> service (no arguments) to place in standby any devices that support this function.</p>
-<p>An Automation action using the example above would look something like this.</p>
+<a class="title-link" name="-" href="#-"></a> 대기 모드</h3>
+<p>이 기능을 지원하는 모든 장치를 대기 모드로 두려면<code>hdmi_cec.standby</code> 서비스 (인수 없음)를 호출하십시오.</p>
+<p>위 예제를 사용한 자동화 작업은 다음과 같습니다.</p>
 <pre><code class="language-yaml">action:
   service: hdmi_cec.standby
 </code></pre>
 <h3>
-<a class="title-link" name="change-volume-level" href="#change-volume-level"></a> Change volume level</h3>
-<p>Call the <code>hdmi_cec.volume</code> service with one of following commands:</p>
+<a class="title-link" name="-" href="#-"></a> 볼륨 조절</h3>
+<p>다음 명령 중 하나를 사용하여 <code>hdmi_cec.volume</code> 서비스를 호출하십시오.</p>
 <h4>
-<a class="title-link" name="volume-up" href="#volume-up"></a> Volume up</h4>
-<p>Increase volume three times:</p>
+<a class="title-link" name="-" href="#-"></a> 볼륨 늘리기</h4>
+<p>볼륨을 세 번 늘리십시오. :</p>
 <pre><code class="language-json">{"up": 3}
 </code></pre>
-<p>Keep increasing volume until release is called:</p>
+<p>릴리스가 호출 될 때까지 볼륨을 계속 늘리십시오. :</p>
 <pre><code class="language-json">{"up": "press"}
 </code></pre>
-<p>Stop increasing volume:</p>
+<p>볼륨 증가를 중지하십시오. :</p>
 <pre><code class="language-json">{"up": "release"}
 </code></pre>
 <h4>
-<a class="title-link" name="volume-down" href="#volume-down"></a> Volume down</h4>
-<p>Decrease volume three times:</p>
+<a class="title-link" name="-" href="#-"></a> 볼륨 줄이기</h4>
+<p>음량을 세 번 줄이십시오. :</p>
 <pre><code class="language-json">{"down": 3}
 </code></pre>
-<p>Keep decreasing volume until release is called:</p>
+<p>릴리스가 호출 될 때까지 볼륨을 줄이십시오.:</p>
 <pre><code class="language-json">{"down": "press"}
 </code></pre>
-<p>Stop decreasing volume:</p>
+<p>볼륨 감소를 중지하십시오 :</p>
 <pre><code class="language-json">{"down": "release"}
 </code></pre>
 <h4>
-<a class="title-link" name="volume-mute" href="#volume-mute"></a> Volume mute</h4>
-<p>Toggle mute:</p>
+<a class="title-link" name="" href="#"></a> 음소거</h4>
+<p>음소거 전환 :</p>
 <pre><code class="language-json">{"mute": ""}
 </code></pre>
-<p>value is ignored.</p>
+<p>값은 무시됩니다.</p>
 <h2>
-<a class="title-link" name="useful-references" href="#useful-references"></a> Useful References</h2>
+<a class="title-link" name="--" href="#--"></a> 유용한 참고 자료</h2>
 <ul>
 <li><a href="http://wiki.kwikwai.com/index.php?title=The_HDMI-CEC_bus" rel="external nofollow">CEC overview</a></li>
 <li><a href="http://www.cec-o-matic.com/" rel="external nofollow">CEC-o-matic</a></li>

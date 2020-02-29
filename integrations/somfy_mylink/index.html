@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Somfy MyLink - 홈어시스턴트</title>
+    <title>솜피 MyLink - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Somfy MyLink devices with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/somfy_mylink/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Somfy MyLink">
+    <meta property="og:title" content="솜피 MyLink">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/somfy_mylink/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Somfy MyLink">
+    <meta name="twitter:title" content="솜피 MyLink">
     <meta name="twitter:description" content="Instructions on how to integrate Somfy MyLink devices with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Somfy MyLink
+      솜피 MyLink
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>Somfy MyLink</code> integration is used as an interface to a compatible Somfy MyLink hub utilizing the <code>Synergy</code> API. It allows the addition of covers from the Somfy MyLink platform to Home Assistant.</p>
-<p>To use your compatible <code>Somfy MyLink</code> devices in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>Somfy MyLink</code> 통합구성요소는 <code>Synergy</code> API를 사용하는 호환 가능한 Somfy MyLink 허브에 대한 인터페이스로 사용됩니다. Somfy MyLink 플랫폼에서 홈 어시스턴트로 Cover를 추가 할 수 있습니다.</p>
+<p>설치시 호환되는 <code>Somfy MyLink</code> 장치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 somfy_mylink:
   host: IP_ADDRESS
@@ -116,16 +116,16 @@ somfy_mylink:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of the Somfy MyLink hub device.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Somfy MyLink 허브 장치의 IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="system_id" href="#system_id"></a> system_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The <code>System ID</code> of the Somfy MyLink hub. This can be found in the <code>Integration</code> menu in the mobile app.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Somfy MyLink 허브의 <code>System ID</code>. 이는 모바일앱의 <code>Integration</code> 메뉴에서 찾을 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="default_reverse" href="#default_reverse"></a> default_reverse</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the default reversal status of the cover. Possible values are <code>true</code> or <code>false</code>. This value can be applied on a per-cover basis (see <code>entity_config</code> below)</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Cover의 기본 reverse 상태를 설정합니다. 가능한 값은 <code>true</code> 또는 <code>false</code>입니다. 이 값은 Cover 단위로 적용 할 수 있습니다 (아래 <code>entity_config</code> 참조).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -133,19 +133,19 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="entity_config" href="#entity_config"></a> entity_config</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Configuration for specific cover entities. All subordinate keys are the corresponding entity ids to the domains, e.g., <code>cover.bedroom_blinds</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>특정 Cover 엔터티에 대한 설정. 모든 하위 키들은 도메인에 해당하는 엔티티 ID입니다 (예 :<code>cover.bedroom_blinds</code>).</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> `<entity_id>`</entity_id>
 </dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Additional options for specific entities.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>특정 엔티티에 대한 추가 옵션.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="reverse" href="#reverse"></a> reverse</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Reverses the direction of the cover. Possible values are <code>true</code> or <code>false</code>.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Cover 방향을 반대로 바꿉니다. 가능한 값은 <code>true</code> 혹은 <code>false</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>

@@ -103,17 +103,17 @@
   <hr class="divider">
   
 
-  <p>The <code>yeelight</code> integration allows you to control your Yeelight Wifi bulbs with Home Assistant. There are two possible methods for configuration of the Yeelight: Manual or Automatic.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>yeelight</code> 통합구성요소로 Home Assistant를 사용하여 Yeelight Wifi 전구를 제어할 수 있습니다. Yeelight 설정 방법에는 수동 또는 자동의 두 가지 방법이 있습니다.</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>
-<strong>Light</strong> - The yeelight platform for supporting lights.</li>
+<strong>Light</strong> - 조명을 지원하기위한 yeelight 플랫폼.</li>
 <li>
-<strong>Sensor</strong> - The yeelight platform for supporting sensors. Currently only nightlight mode sensor, for ceiling lights.</li>
+<strong>Sensor</strong> - 센서 지원을 위한 yeelight 플랫폼. 천장 조명용으로 현재 야간 모드 센서만 있습니다.</li>
 </ul>
 <h3>
-<a class="title-link" name="example-configuration-automatic" href="#example-configuration-automatic"></a> Example configuration (Automatic)</h3>
-<p>After the lights are connected to the WiFi network and have been detected in Home Assistant, the discovered names will be shown in the <code>Light</code> section of the <code>Overview</code> view. Add the following lines to your <code>customize.yaml</code> file:</p>
+<a class="title-link" name="--" href="#--"></a> 설정 사례 (자동)</h3>
+<p>조명이 WiFi 네트워크에 연결되고 홈 어시스턴트에서 감지 된 후, 발견 된 이름은 <code>Overview</code> 보기의 <code>Light</code> 섹션에 표시됩니다. <code>customize.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example customize.yaml entry
 light.yeelight_color1_XXXXXXXXXXXX:
   friendly_name: Living Room
@@ -121,8 +121,8 @@ light.yeelight_color2_XXXXXXXXXXXX:
   friendly_name: Downstairs Toilet
 </code></pre>
 <h3>
-<a class="title-link" name="example-configuration-manual" href="#example-configuration-manual"></a> Example configuration (Manual)</h3>
-<p>To enable those lights, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="--" href="#--"></a> 설정 사례 (수동)</h3>
+<p>이러한 표시등을 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 discovery:
   ignore:
@@ -138,22 +138,22 @@ yeelight:
   <dl class="">
 <dt>
 <a class="title-link" name="devices" href="#devices"></a> devices</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>List of Yeelight devices.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Yeelight 장치 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="ip" href="#ip"></a> ip</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>IP address of the bulb.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>전구의 IP 주소.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A friendly name for the device.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치의 친숙한 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="transition" href="#transition"></a> transition</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Smooth transitions over time (in ms).</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>시간에 따른 부드러운 전환 (ms).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -162,7 +162,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="use_music_mode" href="#use_music_mode"></a> use_music_mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enable music mode.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>음악 모드 활성화.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -171,7 +171,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="save_on_change" href="#save_on_change"></a> save_on_change</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Saves the bulb state in its nonvolatile memory when changed from Home Assistant.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Home Assistant에서 전구 상태를 변경하면 비휘발성 메모리에 전구 상태를 저장합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -179,32 +179,32 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="nightlight_switch_type" href="#nightlight_switch_type"></a> nightlight_switch_type</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Adds another entity, to control nightlight mode (for models that supports it). Currently, only <code>light</code> is supported. It will create 2 light entities, one for normal light mode and second for nightlight mode. They are mutually exclusive.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>야간 모드를 제어하기 위해 다른 엔티티를 추가합니다 (지원하는 모델의 경우). 현재는 <code>light</code> 만 지원됩니다. 일반조명 모드용과 야간조명 모드용으로 각각 2 개의 조명 개체를 만듭니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="model" href="#model"></a> model</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Yeelight model. Possible values are <code>mono1</code>, <code>color1</code>, <code>color2</code>, <code>strip1</code>, <code>bslamp1</code>, <code>ceiling1</code>, <code>ceiling2</code>, <code>ceiling3</code>, <code>ceiling4</code>. The setting is used to enable model specific features f.e. a particular color temperature range.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Yeelight 모델. 가능한 값은 <code>mono1</code>,<code>color1</code>,<code>color2</code>,<code>strip1</code>,<code>bslamp1</code>,<code>ceiling1</code>,<code>ceiling2</code>,<code>ceiling3</code>,<code>ceiling4</code> 입니다. 이 설정은 모델별 기능을 활성화하는 데 사용됩니다. 예: 특정 색온도 범위</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="custom_effects" href="#custom_effects"></a> custom_effects</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of custom effects to add. Check examples below.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가할 사용자 정의 효과 목록. 아래 예를 확인하십시오</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of effect.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>효과의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="flow_params" href="#flow_params"></a> flow_params</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Flow params for effect.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>효과를위한 Flow params.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="count" href="#count"></a> count</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The number of times to run this flow (0 to run forever).</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 flow를 실행하는 횟수 (영원히 실행하려면 0).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -212,28 +212,30 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="transitions" href="#transitions"></a> transitions</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of transitions, for that effect, check <a href="#custom-effects">example</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>해당 효과에 대한 전환 목록은 <a href="#custom-effects">example</a>를 확인하십시오 .</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="music-mode" href="#music-mode"></a> Music mode</h4>
+<a class="title-link" name="-" href="#-"></a> 음악 모드</h4>
 <p>Per default the bulb limits the amount of requests per minute to 60, a limitation which can be bypassed by enabling the music mode. In music mode the bulb is commanded to connect back to a socket provided by the integration and it tries to keep the connection open, which may not be wanted in all use-cases.
-<strong>Also note that bulbs in music mode will not update their state to “unavailable” if they are disconnected, which can cause delays in Home Assistant. Bulbs in music mode may also not react to commands from Home Assistant the first time if the connection is dropped. If you experience this issue, turn the light off and back on again in the frontend and everything will return to normal.</strong></p>
+기본적으로 전구는 분당 요청 수를 60 개로 제한합니다. 이정도 제한은 음악 모드 활성화시 무시할 수 있습니다. 음악 모드에서 전구는 통합구성요소에서 제공하는 소켓에 다시 연결하라는 명령을 받고 연결을 열린 상태로 유지하려고 시도하지만 모든 사용 사례에서 원치 않을 수 있습니다.
+<strong>Also note that bulbs in music mode will not update their state to “unavailable” if they are disconnected, which can cause delays in Home Assistant. Bulbs in music mode may also not react to commands from Home Assistant the first time if the connection is dropped. If you experience this issue, turn the light off and back on again in the frontend and everything will return to normal.</strong>
+<strong>또한 음악 모드의 전구는 연결이 끊어지면 상태를 “사용할 수 없음”으로 업데이트하지 않으므로 Home Assistant에서 지연이 발생할 수 있습니다. 연결이 끊어지면 음악 모드의 전구도 홈어시스턴트의 명령에 반응하지 않을 수 있습니다. 이 문제가 발생하면 프런트 엔드에서 표시등을 껐다가 다시 켜면 모든 것이 정상으로 돌아옵니다.</strong></p>
 <h3>
-<a class="title-link" name="initial-setup" href="#initial-setup"></a> Initial setup</h3>
+<a class="title-link" name="-" href="#-"></a> 초기 셋업</h3>
 <div class="note">
-<p>Before trying to control your light through Home Assistant, you have to setup your bulb using Yeelight app. ( <a href="https://play.google.com/store/apps/details?id=com.yeelight.cherry&amp;hl=fr" rel="external nofollow">Android</a>, <a href="https://itunes.apple.com/us/app/yeelight/id977125608?mt=8" rel="external nofollow">IOS</a> ).
-In the bulb property, you have to enable “LAN Control” (previously called “Developer mode”). LAN Control may only be available with the latest firmware installed on your bulb.  Firmware can be updated in the application after connecting the bulb.
-Determine your bulb IP (using router, software, ping…).
-Information on how to enable “LAN Control” can be found <a href="https://www.yeelight.com/faqs/lan_control" rel="external nofollow">here</a>.</p>
+<p>Home Assistant를 통해 조명을 제어하기 전에 Yeelight 앱(<a href="https://play.google.com/store/apps/details?id=com.yeelight.cherry&amp;hl=fr" rel="external nofollow">Android</a>, <a href="https://itunes.apple.com/us/app/yeelight/id977125608?mt=8" rel="external nofollow">IOS</a> )을 사용하여 전구를 설정해야합니다.
+벌브 속성에서 “LAN Control”(이전의 “개발자 모드”)을 활성화해야합니다. LAN Control은 전구에 최신 펌웨어가 설치된 경우에만 사용할 수 있습니다. 전구를 연결 한 후 응용 프로그램에서 펌웨어를 업데이트 할 수 있습니다.
+전구 IP를 확인하십시오 (라우터, 소프트웨어, 핑 사용).
+“LAN Control”를 활성화하는 방법에 대한 정보는 <a href="https://www.yeelight.com/faqs/lan_control" rel="external nofollow">here</a>에서 찾을 수 있습니다.</p>
 </div>
 <h3>
-<a class="title-link" name="supported-models" href="#supported-models"></a> Supported models</h3>
+<a class="title-link" name="-" href="#-"></a> 지원 모델</h3>
 <div class="note warning">
-This integration is tested to work with the following models. If you have a different model and it is working please let us know.
+이 통합구성요소는 다음 모델에서 작동하도록 테스트되었습니다. 다른 모델이 있고 작동중인 경우 알려주십시오.
 </div>
 <table>
 <thead>
@@ -338,10 +340,10 @@ This integration is tested to work with the following models. If you have a diff
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="platform-services" href="#platform-services"></a> Platform Services</h2>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 서비스</h2>
 <h3>
-<a class="title-link" name="service-yeelightset_mode" href="#service-yeelightset_mode"></a> Service yeelight.set_mode</h3>
-<p>Set an operation mode.</p>
+<a class="title-link" name="yeelightset_mode-" href="#yeelightset_mode-"></a> yeelight.set_mode 서비스</h3>
+<p>작동 모드를 설정하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -354,18 +356,18 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동 lights.</td>
 </tr>
 <tr>
 <td><code>mode</code></td>
 <td>no</td>
-<td>Operation mode. Valid values are ‘last’, ‘normal’, ‘rgb’, ‘hsv’, ‘color_flow’, ‘moonlight’.</td>
+<td>작동 모드. 유효한 값은 ‘last’, ‘normal’, ‘rgb’, ‘hsv’, ‘color_flow’, ‘moonlight’.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-yeelightstart_flow" href="#service-yeelightstart_flow"></a> Service yeelight.start_flow</h3>
-<p>Start flow with specified transitions</p>
+<a class="title-link" name="yeelightstart_flow-" href="#yeelightstart_flow-"></a> yeelight.start_flow 서비스</h3>
+<p>특정 transition으로 flow 시작</p>
 <table>
 <thead>
 <tr>
@@ -378,28 +380,28 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동 lights.</td>
 </tr>
 <tr>
 <td><code>count</code></td>
 <td>yes</td>
-<td>The number of times to run this flow (0 to run forever).</td>
+<td>이 flow을 실행하는 횟수 (영원히 실행하려면 0).</td>
 </tr>
 <tr>
 <td><code>action</code></td>
 <td>yes</td>
-<td>The action to take after the flow stops. Can be ‘recover’, ‘stay’, ‘off’. Default ‘recover’</td>
+<td>flow가 중지된 후 수행할 액션. 예: ‘recover’, ‘stay’, ‘off’. 기본: ‘recover’</td>
 </tr>
 <tr>
 <td><code>transitions</code></td>
 <td>no</td>
-<td>Array of transitions. See <a href="#custom-effects">examples below</a>.</td>
+<td>transitions 배열. <a href="#custom-effects">examples below</a> 참조.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-yeelightset_color_scene" href="#service-yeelightset_color_scene"></a> Service yeelight.set_color_scene</h3>
-<p>Changes the light to the specified RGB color and brightness. If the light is off, it will be turned on.</p>
+<a class="title-link" name="yeelightset_color_scene-" href="#yeelightset_color_scene-"></a> yeelight.set_color_scene 서비스</h3>
+<p>조명을 지정된 RGB 색상 및 밝기로 변경합니다. 조명이 꺼져 있으면 켜집니다.</p>
 <table>
 <thead>
 <tr>
@@ -412,23 +414,23 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동 lights.</td>
 </tr>
 <tr>
 <td><code>rgb_color</code></td>
 <td>no</td>
-<td>A list containing three integers between 0 and 255 representing the RGB color you want the light to be. Three comma-separated integers that represent the color in RGB, within square brackets.</td>
+<td>조명하려는 RGB 색상을 나타내는 0에서 255 사이의 3 개의 정수를 포함하는 목록입니다. 대괄호 안에 RGB로 색상을 나타내는 세 개의 쉼표로 구분 된 정수.</td>
 </tr>
 <tr>
 <td><code>brightness</code></td>
 <td>no</td>
-<td>The brightness value to set (1-100).</td>
+<td>설정할 밝기 값 (1-100)..</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-yeelightset_hsv_scene" href="#service-yeelightset_hsv_scene"></a> Service yeelight.set_hsv_scene</h3>
-<p>Changes the light to the specified HSV color and brightness. If the light is off, it will be turned on.</p>
+<a class="title-link" name="yeelightset_hsv_scene-" href="#yeelightset_hsv_scene-"></a> yeelight.set_hsv_scene 서비스</h3>
+<p>조명을 지정된 HSV 색상 및 밝기로 변경합니다. 조명이 꺼져 있으면 켜집니다.</p>
 <table>
 <thead>
 <tr>
@@ -441,23 +443,23 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동 lights.</td>
 </tr>
 <tr>
 <td><code>hs_color</code></td>
 <td>no</td>
-<td>A list containing two floats representing the hue and saturation of the color you want the light to be. Hue is scaled 0-360, and saturation is scaled 0-100.</td>
+<td>빛의 색조(hue)와 채도(saturation)를 나타내는 두 개의 부동 소수점을 포함하는 목록입니다. 색조는 0-360으로 조정되고 채도는 0-100으로 조정됩니다.</td>
 </tr>
 <tr>
 <td><code>brightness</code></td>
 <td>no</td>
-<td>The brightness value to set (1-100).</td>
+<td>설정할 밝기 값 (1-100).</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-yeelightset_color_temp_scene" href="#service-yeelightset_color_temp_scene"></a> Service yeelight.set_color_temp_scene</h3>
-<p>Changes the light to the specified color temperature. If the light is off, it will be turned on.</p>
+<a class="title-link" name="yeelightset_color_temp_scene-" href="#yeelightset_color_temp_scene-"></a> yeelight.set_color_temp_scene 서비스</h3>
+<p>조명을 지정된 색온도로 변경합니다. 조명이 꺼져 있으면 켜집니다</p>
 <table>
 <thead>
 <tr>
@@ -470,23 +472,23 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동</td>
 </tr>
 <tr>
 <td><code>kelvin</code></td>
 <td>no</td>
-<td>Color temperature in Kelvin.</td>
+<td>캘빈 온도</td>
 </tr>
 <tr>
 <td><code>brightness</code></td>
 <td>no</td>
-<td>The brightness value to set (1-100).</td>
+<td>설정할 밝기 값 (1-100)..</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-yeelightset_color_flow_scene" href="#service-yeelightset_color_flow_scene"></a> Service yeelight.set_color_flow_scene</h3>
-<p>Starts a color flow. Difference between this and <a href="#service-yeelightstart_flow">yeelight.start_flow</a>, this service call uses different Yeelight api call. If the light was off, it will be turned on. There might be some firmware differences, in handling complex flows, etc.</p>
+<a class="title-link" name="yeelightset_color_flow_scene-" href="#yeelightset_color_flow_scene-"></a> yeelight.set_color_flow_scene 서비스</h3>
+<p>색상 flow을 시작합니다. 이 서비스와 [yeelight.start_flow](# service-yeelightstart_flow)의 차이점에 따라 이 서비스 호출은 다른 Yeelight API 호출을 사용합니다. 조명이 꺼져 있으면 켜집니다. 복잡한 flow 처리 등에는 펌웨어 차이가 있을 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -499,28 +501,28 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동.</td>
 </tr>
 <tr>
 <td><code>count</code></td>
 <td>yes</td>
-<td>The number of times to run this flow (0 to run forever).</td>
+<td>이 flow를 실행하는 횟수입니다 (영원히 실행하려면 0)..</td>
 </tr>
 <tr>
 <td><code>action</code></td>
 <td>yes</td>
-<td>The action to take after the flow stops. Can be ‘recover’, ‘stay’, ‘off’. Default ‘recover’</td>
+<td>flow가 중지된 후 수행 할 액션. 예: ‘recover’, ‘stay’, ‘off’. 기본값 ‘recover’</td>
 </tr>
 <tr>
 <td><code>transitions</code></td>
 <td>no</td>
-<td>Array of transitions. See <a href="#custom-effects">examples below</a>.</td>
+<td>transitions 배열. <a href="#custom-effects">아래 예시</a> .</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-yeelightset_auto_delay_off_scene" href="#service-yeelightset_auto_delay_off_scene"></a> Service yeelight.set_auto_delay_off_scene</h3>
-<p>Turns the light on to the specified brightness and sets a timer to turn it back off after the given number of minutes. If the light is off, it will be turned on.</p>
+<a class="title-link" name="yeelightset_auto_delay_off_scene-" href="#yeelightset_auto_delay_off_scene-"></a> yeelight.set_auto_delay_off_scene 서비스</h3>
+<p>지정된 밝기로 조명을 켜고 지정된 시간(분)후에 다시 끄도록 타이머를 설정합니다. 조명이 꺼져 있으면 켜집니다.</p>
 <table>
 <thead>
 <tr>
@@ -533,26 +535,26 @@ This integration is tested to work with the following models. If you have a diff
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>Only act on specific lights.</td>
+<td>특정 조명에서만 작동</td>
 </tr>
 <tr>
 <td><code>minutes</code></td>
 <td>no</td>
-<td>The minutes to wait before automatically turning the light off.</td>
+<td>조명을 자동으로 끄기 전에 대기하는 시간입니다.</td>
 </tr>
 <tr>
 <td><code>brightness</code></td>
 <td>no</td>
-<td>The brightness value to set (1-100).</td>
+<td>설정할 밝기 값 (1-100)..</td>
 </tr>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this light.</p>
+<a class="title-link" name="" href="#"></a> 예시</h2>
+<p>이 섹션에서는이 조명을 사용하는 방법에 대한 실제 예제를 제공합니다.</p>
 <h3>
-<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full configuration</h3>
-<p>This example shows how you can use the optional configuration options.</p>
+<a class="title-link" name="-" href="#-"></a> 전체 설정</h3>
+<p>이 예는 선택적 설정 옵션을 사용하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 yeelight:
   devices:
@@ -563,8 +565,8 @@ yeelight:
       save_on_change: true
 </code></pre>
 <h3>
-<a class="title-link" name="multiple-bulbs" href="#multiple-bulbs"></a> Multiple bulbs</h3>
-<p>This example shows how you can add multiple bulbs in your configuration.</p>
+<a class="title-link" name="--" href="#--"></a> 여러 개의 전구</h3>
+<p>이 예는 설정에 여러 벌브를 추가하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">yeelight:
   devices:
     192.168.1.25:
@@ -573,17 +575,17 @@ yeelight:
       name: Front Door
 </code></pre>
 <h3>
-<a class="title-link" name="custom-effects" href="#custom-effects"></a> Custom effects</h3>
-<p>This example shows how you can add your custom effects in your configuration. To turn on the effect you can use <a href="/integrations/light/#service-lightturn_on">light.turn_on</a> service.</p>
-<p>Possible transitions are <code>RGBTransition</code>, <code>HSVTransition</code>, <code>TemperatureTransition</code>, <code>SleepTransition</code>.</p>
-<p>Where the array values are as per the following:</p>
+<a class="title-link" name="-" href="#-"></a> 커스텀 효과</h3>
+<p>이 예제는 설정에서 사용자 정의 효과를 추가하는 방법을 보여줍니다. 효과를 켜려면 <a href="/integrations/light/#service-lightturn_on">light.turn_on</a> 서비스를 사용할 수 있습니다 .</p>
+<p><code>RGBTransition</code>, <code>HSVTransition</code>, <code>TemperatureTransition</code>, <code>SleepTransition</code>이 가능한 트랜지션입이다.</p>
+<p>배열 값은 다음과 같습니다. :</p>
 <ul>
-<li>RGBTransition: [red, green, blue, duration, brightness] with red / green / blue being an integer between 0 and 255, duration being                                                               in milliseconds (minimum of 50) and final brightness to transition to 0-100                                                             (%)</li>
-<li>HSVTransition: [hue, saturation, duration, brightness]  with hue being an integer between 0 and 359, saturation 0 -100, duration in                                                             milliseconds (minimum 50) and final brightness 0-100 (%)</li>
-<li>TemperatureTransition: [temp, duration, brightness]     with temp being the final color temperature between 1700 and 6500, duration                                                             in milliseconds (minimum 50) and final brightness to transition to 0-100 (%)</li>
-<li>SleepTransition: [duration]                             with duration being in integer for effect time in milliseconds (minimum 50)</li>
+<li>RGBTransition : [빨강, 녹색, 파랑, 지속 시간, 밝기], 빨강 / 녹색 / 파랑이 0에서 255 사이의 정수이고, 지속 시간은 밀리 초 (최소 50)이고 최종 밝기는 0-100 (%)으로 전환됩니다.</li>
+<li>HSV 전환 : [hue, saturation, duration, brightness] 색조는 0에서 359 사이의 정수, 채도 0 -100, 밀리 초 단위의 지속 시간 (최소 50) 및 최종 밝기 0-100 (%)</li>
+<li>온도 전환 : 온도가 1700에서 6500 사이의 최종 색 온도, 밀리 초 단위의 지속 시간 (최소 50) 및 0-100 (%)으로 전환하기위한 최종 밝기와 함께 [온도, 지속 시간, 밝기]</li>
+<li>SleepTransition : 효과 시간 (밀리 초) 동안 지속 시간이 정수인 [duration] (최소 50)</li>
 </ul>
-<p>More info about transitions and their expected parameters can be found in <a href="https://yeelight.readthedocs.io/en/stable/flow.html" rel="external nofollow">python-yeelight documentation</a>.</p>
+<p>전환 및 예상되는 매개 변수에 대한 자세한 내용은 <a href="https://yeelight.readthedocs.io/en/stable/flow.html" rel="external nofollow">python-yeelight documentation</a> 설명서를 참조하십시오.</p>
 <pre><code class="language-yaml">yeelight:
   devices:
     192.168.1.25:

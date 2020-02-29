@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>SynologyDSM - 홈어시스턴트</title>
+    <title>시놀로지DSM - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate the SynologyDSM sensor within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/synologydsm/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="SynologyDSM">
+    <meta property="og:title" content="시놀로지DSM">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/synologydsm/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="SynologyDSM">
+    <meta name="twitter:title" content="시놀로지DSM">
     <meta name="twitter:description" content="Instructions on how to integrate the SynologyDSM sensor within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      SynologyDSM
+      시놀로지DSM
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>synologydsm</code> sensor platform allows getting various statistics from your <a href="https://www.synology.com" rel="external nofollow">Synology NAS</a>.</p>
+  <p><code>synologydsm</code> 센서 플랫폼을 사용하면 <a href="https://www.synology.com" rel="external nofollow">Synology NAS</a>에서 다양한 통계를 얻을 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use the <code>synologydsm</code> sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>synologydsm</code> 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: synologydsm
@@ -125,7 +125,7 @@ sensor:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name to use in the frontend for your Synology device.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Synology 장치의 프런트 엔드에서 사용할 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -133,12 +133,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of the Synology NAS to monitor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터링 할 Synology NAS의 IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port number on which the Synology NAS is reachable.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Synology NAS에 연결할 수 있는 포트 번호.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -146,16 +146,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>An user to connect to the Synology NAS (a separate account is advised, see the Separate User Configuration section below for details).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Synology NAS에 연결하는 사용자 (별도의 계정이 권장됩니다. 자세한 내용은 아래의 별도 사용자 구성 섹션을 참조하십시오).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password of the user to connect to the Synology NAS.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Synology NAS에 연결하기위한 사용자의 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="ssl" href="#ssl"></a> ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Determine if HTTPS should be used.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTPS를 사용해야하는지 결정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -163,153 +163,153 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="volumes" href="#volumes"></a> volumes</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Array of volumes to monitor. Defaults to all volumes. Replace any spaces in the volume name with underscores, e.g., <code>volume 1</code> with <code>volume_1</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링할 볼륨의 배열입니다. 모든 볼륨이 기본값입니다. 볼륨 이름의 공백을 밑줄로 바꿉니다 (예: <code>volume 1</code>을 <code>volume_1</code>로 바꿉니다.)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disks" href="#disks"></a> disks</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Array of disks to monitor. Defaults to all disks. Use only disk names like <code>sda</code>, <code>sdb</code>, etc.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링할 디스크 배열. 모든 디스크가 기본값입니다. <code>sda</code>,<code>sdb</code> 등과 같은 디스크 이름 만 사용하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>Defines a <a href="/topics/templating/">template</a> to extract a value from the payload.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>페이로드에서 값을 추출할 <a href="/topics/templating/">template</a>을 정의합니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="cpu_other_load" href="#cpu_other_load"></a> cpu_other_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays unspecified load in percentage.</p>
+<dd><p class="desc"><span class="description"><p>지정되지 않은 부하를 백분율로 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cpu_user_load" href="#cpu_user_load"></a> cpu_user_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays user load in percentage.</p>
+<dd><p class="desc"><span class="description"><p>사용자부하를 백분율로 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cpu_system_load" href="#cpu_system_load"></a> cpu_system_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays system load in percentage.</p>
+<dd><p class="desc"><span class="description"><p>시스템부하를 백분율로 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cpu_total_load" href="#cpu_total_load"></a> cpu_total_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays combined load in percentage.</p>
+<dd><p class="desc"><span class="description"><p>모든 부하를 백분율로 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cpu_1min_load" href="#cpu_1min_load"></a> cpu_1min_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays maximum load in past minute.</p>
+<dd><p class="desc"><span class="description"><p>지난 1 분의 최대로드를 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cpu_5min_load" href="#cpu_5min_load"></a> cpu_5min_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays maximum load in past 5 minutes.</p>
+<dd><p class="desc"><span class="description"><p>지난 5 분 동안 최대로드를 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cpu_15min_load" href="#cpu_15min_load"></a> cpu_15min_load</dt>
-<dd><p class="desc"><span class="description"><p>Displays maximum load in past 15 minutes.</p>
+<dd><p class="desc"><span class="description"><p>지난 15 분 동안 최대로드를 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_real_usage" href="#memory_real_usage"></a> memory_real_usage</dt>
-<dd><p class="desc"><span class="description"><p>Displays percentage of memory used.</p>
+<dd><p class="desc"><span class="description"><p>사용된 메모리의 백분율을 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_size" href="#memory_size"></a> memory_size</dt>
-<dd><p class="desc"><span class="description"><p>Displays total size of memory in MB.</p>
+<dd><p class="desc"><span class="description"><p>총 메모리 크기 (MB)를 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_cached" href="#memory_cached"></a> memory_cached</dt>
-<dd><p class="desc"><span class="description"><p>Displays total size of cache in MB.</p>
+<dd><p class="desc"><span class="description"><p>총 캐시 크기 (MB)를 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_available_swap" href="#memory_available_swap"></a> memory_available_swap</dt>
-<dd><p class="desc"><span class="description"><p>Displays total size of available swap in MB.</p>
+<dd><p class="desc"><span class="description"><p>사용 가능한 스왑의 총 크기를 MB 단위로 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_available_real" href="#memory_available_real"></a> memory_available_real</dt>
-<dd><p class="desc"><span class="description"><p>Displays total size of memory used (based on real memory) in MB.</p>
+<dd><p class="desc"><span class="description"><p>사용 된 총 메모리 크기 (실제 메모리를 기준으로 함)를 MB 단위로 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_total_swap" href="#memory_total_swap"></a> memory_total_swap</dt>
-<dd><p class="desc"><span class="description"><p>Displays total size of actual memory in MB.</p>
+<dd><p class="desc"><span class="description"><p>실제 메모리의 총 크기를 MB 단위로 표시</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="memory_total_real" href="#memory_total_real"></a> memory_total_real</dt>
-<dd><p class="desc"><span class="description"><p>Displays total size of real memory in MB.</p>
+<dd><p class="desc"><span class="description"><p>실제 메모리의 총 크기 (MB)를 표시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="network_up" href="#network_up"></a> network_up</dt>
-<dd><p class="desc"><span class="description"><p>Displays total up speed of network interfaces (combines all interfaces).</p>
+<dd><p class="desc"><span class="description"><p>네트워크 인터페이스의 전체 속도를 표시 (모든 인터페이스를 결합).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="network_down" href="#network_down"></a> network_down</dt>
-<dd><p class="desc"><span class="description"><p>Displays total down speed of network interfaces (combines all interfaces).</p>
+<dd><p class="desc"><span class="description"><p>네트워크 인터페이스의 전체 다운 속도를 표시 (모든 인터페이스를 결합).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_name" href="#disk_name"></a> disk_name</dt>
-<dd><p class="desc"><span class="description"><p>Displays the name of the hard disk (creates a new entry for each disk).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크의 이름을 표시 (각 디스크에 대한 새 항목을 생성).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_device" href="#disk_device"></a> disk_device</dt>
-<dd><p class="desc"><span class="description"><p>Displays the path of the hard disk (creates a new entry for each disk).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크의 경로를 표시 (각 디스크에 대한 새 항목을 생성).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_smart_status" href="#disk_smart_status"></a> disk_smart_status</dt>
-<dd><p class="desc"><span class="description"><p>Displays the S.M.A.R.T status of the hard disk (creates a new entry for each disk).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크의 S.M.A.R.T 상태를 표시 (각 디스크에 대한 새 항목 생성).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_status" href="#disk_status"></a> disk_status</dt>
-<dd><p class="desc"><span class="description"><p>Displays the status of the hard disk (creates a new entry for each disk).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크의 상태를 표시 (각 디스크에 대한 새 항목 생성).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_exceed_bad_sector_thr" href="#disk_exceed_bad_sector_thr"></a> disk_exceed_bad_sector_thr</dt>
-<dd><p class="desc"><span class="description"><p>Displays true / false to indicate if the hard disk exceeded the maximum bad sector threshold (creates a new entry for each disk).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크가 최대 불량 섹터 임계 값을 초과했는지 표시하기 위해 true / false를 표시합니다 (각 디스크에 대한 새 항목 생성).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_below_remain_life_thr" href="#disk_below_remain_life_thr"></a> disk_below_remain_life_thr</dt>
-<dd><p class="desc"><span class="description"><p>Displays true / false to indicate if the hard disk dropped below the remain life threshold (creates a new entry for each disk).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크가 남은 수명 임계 값 아래로 떨어졌는지 표시하기 위해 true / false를 표시 (각 디스크에 대한 새 항목 생성).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="disk_temp" href="#disk_temp"></a> disk_temp</dt>
-<dd><p class="desc"><span class="description"><p>Displays the temperature of the hard disk (creates a new entry for each disk, uses the unit_system to display in C or F).</p>
+<dd><p class="desc"><span class="description"><p>하드 디스크의 온도를 표시합니다. (각 디스크에 대해 새 항목을 작성하고 unit_system을 사용하여 C 또는 F 로 표시).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_status" href="#volume_status"></a> volume_status</dt>
-<dd><p class="desc"><span class="description"><p>Displays the status of the volume (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨 상태를 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_device_type" href="#volume_device_type"></a> volume_device_type</dt>
-<dd><p class="desc"><span class="description"><p>Displays the volume type (RAID, etc) (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨 유형 (RAID 등)을 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_size_total" href="#volume_size_total"></a> volume_size_total</dt>
-<dd><p class="desc"><span class="description"><p>Displays the total size of the volume in GB’s (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨의 전체 크기를 GB 단위로 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_size_used" href="#volume_size_used"></a> volume_size_used</dt>
-<dd><p class="desc"><span class="description"><p>Displays the used space on this volume in GB’s (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨의 사용된 공간을 GB 단위로 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_percentage_used" href="#volume_percentage_used"></a> volume_percentage_used</dt>
-<dd><p class="desc"><span class="description"><p>Displays the percentage used for this volume in GB’s (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨에 사용 된 백분율을 GB 단위로 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_disk_temp_avg" href="#volume_disk_temp_avg"></a> volume_disk_temp_avg</dt>
-<dd><p class="desc"><span class="description"><p>Displays the average temperature of all disks in the volume (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨에있는 모든 디스크의 평균 온도를 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_disk_temp_max" href="#volume_disk_temp_max"></a> volume_disk_temp_max</dt>
-<dd><p class="desc"><span class="description"><p>Displays the maximum temperature of all disks in the volume (creates a new entry for each volume).</p>
+<dd><p class="desc"><span class="description"><p>볼륨에있는 모든 디스크의 최대 온도를 표시 (각 볼륨에 대한 새 항목을 만듭니다).</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <div class="note">
-After booting Home Assistant it can take up to 15 minutes for the sensors to show up. This is due to the fact that sensors are created after Home Assistant has fully been initialized.
+Home Assistant를 부팅한 후 센서가 표시되는 데 최대 15 분이 걸릴 수 있습니다. 이는 홈어시스턴트가 완전히 초기화 된 후 센서가 생성되기 때문입니다.
 </div>
 <div class="note warning">
-This sensor will wake up your Synology NAS if it's in hibernation mode.
+이 센서는 최대 절전 모드 인 경우 Synology NAS를 깨웁니다.
 </div>
 <div class="note warning">
-<p>If you set <code>ssl:</code> to <code>False</code>, you <em>have</em> to also explicitly set <code>port:</code> to <strong>5000</strong>.</p>
+<p><code>ssl :</code>를 <code>False</code>로 설정하면, <em>port</em> 도 명시적으로 <strong>5000</strong>으로 설정해야합니다.</p>
 </div>
 <h2>
-<a class="title-link" name="separate-user-configuration" href="#separate-user-configuration"></a> Separate User Configuration</h2>
-<p>Due to the nature of the Synology DSM API it is required to grant the user admin rights. This is related to the fact that utilization information is stored in the core module.</p>
-<p>When creating the user it is possible to deny access to all locations and applications. By doing this the user will not be able to login to the web interface or view any of the files on the Synology NAS. It is still able to read the utilization and storage information using the API.</p>
+<a class="title-link" name="--" href="#--"></a> 별도의 사용자 설정</h2>
+<p>Synology DSM API의 특성상 사용자에게 관리자 권한을 부여해야합니다. 이는 활용 정보가 핵심 모듈에 저장되어 있다는 사실과 관련이 있습니다.</p>
+<p>사용자를 만들 때 모든 위치 및 응용 프로그램에 대한 액세스를 거부 할 수 있습니다. 이렇게하면 사용자는 웹 인터페이스에 로그인하거나 Synology NAS의 파일을 볼 수 없습니다. 여전히 API를 사용하여 사용률 및 스토리지 정보를 읽을 수 있습니다.</p>
 
 
 </article>

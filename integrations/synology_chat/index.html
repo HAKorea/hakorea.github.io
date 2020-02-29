@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Synology Chat - 홈어시스턴트</title>
+    <title>시놀로지 Chat - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add a Synology Chat Bot notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/synology_chat/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Synology Chat">
+    <meta property="og:title" content="시놀로지 Chat">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/synology_chat/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Synology Chat">
+    <meta name="twitter:title" content="시놀로지 Chat">
     <meta name="twitter:description" content="Instructions on how to add a Synology Chat Bot notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,15 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Synology Chat
+      시놀로지 Chat
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>synology_chat</code> notification platform allows you to deliver notifications to your <a href="https://www.synology.com/en-us/dsm/feature/chat" rel="external nofollow">Synology Chat</a> install as a Synology Chat bot.</p>
-<p>To configure a Synology Chat bot, first you must create a <a href="https://www.synology.com/en-us/knowledgebase/DSM/tutorial/Collaboration/How_to_configure_webhooks_and_slash_commands_in_Chat_Integration#t2.1" rel="external nofollow">Synology Chat Integration Incoming Webhook</a>. After this is complete, you will have a Webhook URL. This is what will be required in the Home Assistant configuration.</p>
-<p>To enable the Synology Chat notification in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>synology_chat</code> 알림 플랫폼을 사용하면 <a href="https://www.synology.com/en-us/dsm/feature/chat" rel="external nofollow">Synology Chat</a>를 설치해서 Synology Chat 봇으로 알림을 전달할 수 있습니다.</p>
+<p>Synology Chat 봇을 설정하려면 먼저 <a href="https://www.synology.com/en-us/knowledgebase/DSM/tutorial/Collaboration/How_to_configure_webhooks_and_slash_commands_in_Chat_Integration#t2.1" rel="external nofollow">Synology Chat Integration Incoming Webhook</a> 을 만들어야합니다. 이 작업이 완료되면 Webhook URL이 생성됩니다. 이상의 내용이 홈어시스턴트 설정에 필요한 것들입니다.</p>
+<p>설치시 Synology Chat 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: synology_chat
@@ -118,12 +118,12 @@ notify:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Setting the  parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p><code>name</code> 매개 변수를 설정하면 여러 알리미를 작성할 수 있습니다. 알리미는 서비스 <code>notify.NOTIFIER_NAME</code>에 바인딩합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>If SSL/TLS verification for HTTPS resources needs to be turned off (for self-signed certs, etc.).</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTPS resources에 대한 SSL/TLS 검증(verification)을 해제해야 하는 경우 (자체 서명 된 인증서 등).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -131,12 +131,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="resource" href="#resource"></a> resource</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The incoming webhook URL.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>수신 웹 후크 URL</p>
 </span></p></dd>
 </dl>
 </div>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
-<p>A full example of a service call:</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
+<p>Service Call의 예 :</p>
 <pre><code class="language-json">{"message": "This is a test message", 
  "data":{
      "file_url":"https://example.com/wp-content/uploads/sites/14/2011/01/cat.jpg"
