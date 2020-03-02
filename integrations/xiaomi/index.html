@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Xiaomi - 홈어시스턴트</title>
+    <title>샤오미 카메라 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/xiaomi/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Xiaomi">
+    <meta property="og:title" content="샤오미 카메라">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/xiaomi/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Xiaomi">
+    <meta name="twitter:title" content="샤오미 카메라">
     <meta name="twitter:description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,38 +97,38 @@
   
   <header>
     <h1 class="title indent">
-      Xiaomi
+      샤오미 카메라
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>Xiaomi</code> camera platform allows you to utilize Xiaomi Cameras within Home Assistant.</p>
-<p>To successfully implement this platform, the Home Assistant host should be capable of multiple simultaneous reads. For every concurrent Home Assistant user, a connection will be made to the camera every 10 seconds. This should normally not be a problem.</p>
+  <p><code>Xiaomi</code> 카메라 플랫폼은 홈어시스턴트에서 샤오미 카메라를 활용할 수 있습니다</p>
+<p>이 플랫폼을 성공적으로 구현하려면 Home Assistant 호스트가 여러개 카메라를 동시에 읽을 수 있어야합니다. 동시에 접속한 홈 어시스턴트 사용자마다 10 초마다 카메라에 연결됩니다. 이것은 일반적으로 문제가 되진 않습니다.</p>
 <h2>
-<a class="title-link" name="preparing-the-device" href="#preparing-the-device"></a> Preparing the Device</h2>
-<p>In order to integrate the camera with Home Assistant, it is necessary to install a custom firmware on the device. Instructions for doing so can be found for each models.</p>
+<a class="title-link" name="-" href="#-"></a> 장치 준비</h2>
+<p>카메라를 홈어시스턴트와 연동하려면 장치에 사용자 정의 펌웨어를 설치해야합니다. 각 모델에 대한 지침을 찾을 수 있습니다.</p>
 <ul>
 <li><a href="https://github.com/fritz-smh/yi-hack" rel="external nofollow">Yi 720p</a></li>
 <li><a href="https://github.com/shadow-1/yi-hack-v3" rel="external nofollow">Yi Home 17CN / 27US / 47US / 1080p Home / Dome / 1080p Dome</a></li>
 <li><a href="https://github.com/samtap/fang-hacks" rel="external nofollow">Xiaofang 1080p Camera</a></li>
 </ul>
-<p>Once installed, please ensure that you have enabled FTP.</p>
+<p>일단 설치되면 FTP를 활성화했는지 확인하십시오.</p>
 <div class="note warning">
-<p>Currently, version 0.1.4-beta2 of the custom firmware is the highest supported. Firmwares higher than this version use <a href="https://www.pureftpd.org/project/pure-ftpd" rel="external nofollow">Pure-FTPd</a>, which has a bug that prevents FFmpeg from correctly rendering video files.</p>
+<p>현재 사용자 지정 펌웨어 버전 0.1.4-beta2가 가장 많이 지원됩니다. 이 버전보다 높은 펌웨어는 <a href="https://www.pureftpd.org/project/pure-ftpd" rel="external nofollow">Pure-FTPd</a> 를 사용하는데, 이는 FFmpeg가 비디오 파일을 올바르게 렌더링하지 못하게하는 버그가 있습니다.</p>
 </div>
 <div class="note warning">
-<p>Raspbian users: Don’t forget to install <code>ffmpeg</code> support on your platform, otherwise, you’ll not see video.</p>
+<p>Raspbian 사용자 : 플랫폼에 <code>ffmpeg</code> 지원을 설치하는 것을 잊지 마십시오. 그렇지 않으면 비디오가 나오지 않습니다.</p>
 </div>
 <div class="note warning">
-The live stream writing by the camera is not a supported format when the hass reads through FTP for Yi 720p and Xiaofang Cameras, so this platform retrives the video which was saved 1 minute earlier.
+Yi 720p 및 Xiaofang Cameras에서 FTP를 통해 읽은 경우 카메라에서 실시간 스트림 쓰기가 지원되는 형식이 아니므로 이 플랫폼은 1 분 전에 저장된 비디오를 검색합니다.
 </div>
 <div class="note warning">
-If you enabled RTSP server, you can connect to your camera via other Home Assistant camera platforms. However, this RTSP server disables the ability to use the supremely-useful Mi Home app. In order to maintain both Home Assistant compatibility _and_ the native app, this platform retrieves videos via FTP.
+RTSP 서버를 활성화한 경우 다른 Home Assistant 카메라 플랫폼을 통해 카메라에 연결할 수 있습니다. 그러나이 RTSP 서버는 가장 유용한 Mi Home 앱을 사용하는 기능을 비활성화합니다. 홈어시스턴트 호환성과 기본앱을 모두 유지하기 위해이 플랫폼은 FTP를 통해 비디오를 검색합니다.
 </div>
 <h2>
-<a class="title-link" name="configuring-the-platform" href="#configuring-the-platform"></a> Configuring the Platform</h2>
-<p>To enable the platform, add the following lines to your<code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 설정</h2>
+<p>플랫폼을 사용 가능하게하려면 <code>configuration.yaml</code> 파일에 다음 행을 추가 하십시오.</p>
 <pre><code class="language-yaml">camera:
   - platform: xiaomi
     name: Camera
@@ -142,24 +142,24 @@ If you enabled RTSP server, you can connect to your camera via other Home Assist
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A human-friendly name for the camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>친숙한 카메라 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address or hostname of the camera.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>카메라의 IP 주소 또는 호스트 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="model" href="#model"></a> model</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The model of Xiaomi Camera, currently supporting yi and xiaofang.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>현재 yifang과 xiaofang을 지원하는 Xiaomi Camera의 모델</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password to the FTP server on the camera (from above), can be any string as the current firmware doesn’t allow setting ftp passwords.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>현재 펌웨어에서 ftp 비밀번호를 설정할 수 없으므로 카메라의 FTP 서버 비밀번호(위에서)는 임의의 문자열이 될 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="path" href="#path"></a> path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The path to the raw MP4 files.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>raw MP4 파일의 경로</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -168,7 +168,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The user that can access the FTP server.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>FTP 서버에 액세스 할 수있는 사용자</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -176,17 +176,17 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="ffmpeg_arguments" href="#ffmpeg_arguments"></a> ffmpeg_arguments</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Extra options to pass to <code>ffmpeg</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>ffmpeg</code>에 전달할 추가 옵션</p>
 </span></p></dd>
 </dl>
 </div>
 <div class="note">
-<p>The default for <code>path:</code> will not work with all cameras. It may be needed that you add that key with the exact path for your device.</p>
+<p><code>path :</code>의 기본값은 모든 카메라에서 작동하지 않습니다. 장치의 정확한 경로와 함께 해당 키를 추가해야 할 수도 있습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="image-quality" href="#image-quality"></a> Image quality</h2>
-<p>Any option supported by <a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a> can be utilized via the <code>ffmpeg_arguments</code> configuration parameter.</p>
-<p>One particularly useful adjustment deals with video size. Since Yi videos are fairly large (especially on the 1080p cameras), the following configuration will bring them down to a manageable size:</p>
+<a class="title-link" name="" href="#"></a> 화질</h2>
+<p><a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a>가 지원하는 모든 옵션은 <code>ffmpeg_arguments</code> 설정 매개 변수를 통해 활용할 수 있습니다.</p>
+<p>특히 유용한 조정 중 하나는 비디오 크기를 변경하는 기능입니다.  Yi 비디오는 상당히 크기 때문에 (특히 1080p 카메라에서) 다음 설정을 통해 관리 가능한 크기로 줄일 수 있습니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: xiaomi
     name: My Camera
@@ -197,8 +197,8 @@ Default value: </p>
     ffmpeg_arguments: '-vf scale=800:450'
 </code></pre>
 <h2>
-<a class="title-link" name="hostname-template" href="#hostname-template"></a> Hostname template</h2>
-<p>The hostname/IP address can be provided either a value or from the existing entity attributes.</p>
+<a class="title-link" name="-" href="#-"></a> 호스트이름 템플릿</h2>
+<p>호스트 이름/IP 주소는 값 또는 기존 엔티티 속성에서 제공 될 수 있습니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: xiaomi
     name: Front Camera

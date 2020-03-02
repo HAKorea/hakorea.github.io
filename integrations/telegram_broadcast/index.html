@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Telegram broadcast - 홈어시스턴트</title>
+    <title>텔레그램 방송 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Telegram support to send messages only">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/telegram_broadcast/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Telegram broadcast">
+    <meta property="og:title" content="텔레그램 방송">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/telegram_broadcast/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Telegram broadcast">
+    <meta name="twitter:title" content="텔레그램 방송">
     <meta name="twitter:description" content="Telegram support to send messages only">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Telegram broadcast
+      텔레그램 방송
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Telegram implementation to support <strong>sending messages only</strong>. Your Home Assistant instance does not have to be exposed to the Internet and there is no polling to receive messages sent to the bot.</p>
+  <p><strong>메시지 전송만</strong> 지원하는 텔레 그램 구현. 홈어시스턴트 인스턴스는 인터넷에 노출 될 필요가 없으며 봇에게 전송된 메시지를 수신하기 위한 폴링이 없습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To integrate this into Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이를 홈어시스턴트로 통합하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 telegram_bot:
   - platform: broadcast
@@ -121,16 +121,16 @@ telegram_bot:
   <dl class="">
 <dt>
 <a class="title-link" name="allowed_chat_ids" href="#allowed_chat_ids"></a> allowed_chat_ids</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list of users in the <code>user_id</code> Telegram format that are authorized to interact with the webhook.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>웹 후크와 상호 작용할 수있는 권한이 부여된 <code>user_id</code> 텔레그램 형식의 사용자 목록</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The API token of your bot.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>bot의 API 토큰..</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="parse_mode" href="#parse_mode"></a> parse_mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Default parser for messages if not explicit in message data, either <code>html</code> or <code>markdown</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>메시지 데이터에 명시적이지 않은 경우, 메시지의 기본 파서 (<code>html</code> 또는 <code>markdown</code>)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -138,15 +138,15 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="proxy_url" href="#proxy_url"></a> proxy_url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Proxy url if working behind one (<code>socks5://proxy_ip:proxy_port</code>).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프록시 URL 뒤에서 작업하는 경우 (<code>socks5://proxy_ip:proxy_port</code>).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="proxy_params" href="#proxy_params"></a> proxy_params</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Proxy configuration parameters, as dict, if working behind a proxy (<code>username</code>, <code>password</code>, etc.).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프록시 뒤에서 작업 할 경우 프록시 구성 매개 변수 (예: 사용자 이름, 비밀번호 등)</p>
 </span></p></dd>
 </dl>
 </div>
-<p>To get your <code>chat_id</code> and <code>api_key</code> follow the instructions <a href="/integrations/telegram">here</a>.</p>
+<p><code>chat_id</code> 와 <code>api_key</code>를 얻으려면 <a href="/integrations/telegram">here</a>의 지시사항을 따르십시오.</p>
 
 
 </article>

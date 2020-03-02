@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Scrape - 홈어시스턴트</title>
+    <title>스크랩 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Web scrape sensors into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/scrape/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Scrape">
+    <meta property="og:title" content="스크랩">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/scrape/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Scrape">
+    <meta name="twitter:title" content="스크랩">
     <meta name="twitter:description" content="Instructions on how to integrate Web scrape sensors into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Scrape
+      스크랩
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>scrape</code> sensor platform is scraping information from websites. The sensor loads a HTML page and gives you the option to search and split out a value. As this is not a full-blown web scraper like <a href="https://scrapy.org/" rel="external nofollow">scrapy</a>, it will most likely only work with simple web pages and it can be time-consuming to get the right section.</p>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+  <p><code>scrape</code> 센서 플랫폼은 웹사이트에서 정보를 스크랩합니다. 센서는 HTML 페이지를 로드하고 값을 검색하고 분리 할 수 있는 옵션을 제공합니다. 이는 <a href="https://scrapy.org/" rel="external nofollow">scrapy</a>와 같은 본격적인 웹 스크레이퍼가 아니기 때문에 간단한 웹 페이지에서만 작동하며 올바른 섹션을 얻는데 시간이 오래 걸릴 수 있습니다.</p>
+<h3>
+<a class="title-link" name="--" href="#--"></a> 한국형 스크랩 사례</h3>
+<p>HA 네이버카페의 검은별31님이 제작하신 <a href="https://cafe.naver.com/koreassistant/809" rel="external nofollow">우리나라 날씨의 세차센서 이용법</a> 을 참조하십시오.</p>
+<hr>
+<p>이 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape
@@ -117,20 +121,20 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="resource" href="#resource"></a> resource</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The URL to the website that contains the value.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>값이 포함 된 웹 사이트의 URL</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="select" href="#select"></a> select</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Defines the HTML tag to search for. Check Beautifulsoup’s <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#css-selectors" rel="external nofollow">CSS selectors</a> for details.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>검색할 HTML 태그를 정의. Beautifulsoup의 <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#css-selectors" rel="external nofollow">CSS selectors</a>를 상세하게 체크하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="attribute" href="#attribute"></a> attribute</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Get value of an attribute on the selected tag.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택한 태그에서 속성값을 가져옵니다..</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="index" href="#index"></a> index</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines which of the elements returned by the CSS selector to use.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>CSS selector에서 반환한 elements 중 사용할 element를 정의</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -139,7 +143,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the sensor.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -147,20 +151,20 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the state of the sensor.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 상태를 얻기 위한 템플릿을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the units of measurement of the sensor, if any.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 측정 단위를 정의 (있는 경우).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of the HTTP authentication. Either <code>basic</code> or <code>digest</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증의 유형. <code>basic</code> 혹은 <code>digest</code> 중의 하나</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enables/disables verification of SSL-certificate, for example if it is self-signed.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>예를 들어 자체 서명된 경우 SSL 인증서의 검증을 활성화/비활성화 함.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -168,24 +172,24 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username for accessing the website.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>웹 사이트에 액세스하기위한 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The password for accessing the website.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>웹 사이트에 액세스하기위한 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="headers" href="#headers"></a> headers</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Headers to use for the web request.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>웹 요청에 사용할 헤더.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this sensor. There is also a <a href="https://nbviewer.jupyter.org/github/home-assistant/home-assistant-notebooks/blob/master/other/web-scraping.ipynb" rel="external nofollow">Jupyter notebook</a> available for this example to give you a bit more insight.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다. 이 예에서는 <a href="https://nbviewer.jupyter.org/github/home-assistant/home-assistant-notebooks/blob/master/other/web-scraping.ipynb" rel="external nofollow">Jupyter notebook</a>을 사용하여 좀 더 통찰력을 얻을 수 있습니다.</p>
 <h3>
 <a class="title-link" name="home-assistant" href="#home-assistant"></a> Home Assistant</h3>
-<p>The current release Home Assistant is published on <a href="/">https://www.home-assistant.io/</a></p>
+<p>현재 릴리스 Home Assistant는 <a href="/">https://www.home-assistant.io/</a>에 게시되어 있습니다.</p>
 <pre><code class="language-yaml">sensor:
 # Example configuration.yaml entry
   - platform: scrape
@@ -195,8 +199,8 @@ Default value: </p>
     value_template: '{{ value.split(":")[1] }}'
 </code></pre>
 <h3>
-<a class="title-link" name="available-implementations" href="#available-implementations"></a> Available implementations</h3>
-<p>Get the counter for all our implementations from the <a href="/integrations/">Component overview</a> page.</p>
+<a class="title-link" name="-" href="#-"></a> 사용가능한 구현들</h3>
+<p><a href="/integrations/">Component overview</a> 페이지 에서 모든 구현(implementations)에 대한 카운터를 얻으십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape
@@ -206,8 +210,8 @@ sensor:
     value_template: '{{ value.split("(")[1].split(")")[0] }}'
 </code></pre>
 <h3>
-<a class="title-link" name="get-a-value-out-of-a-tag" href="#get-a-value-out-of-a-tag"></a> Get a value out of a tag</h3>
-<p>The German <a href="http://www.bfs.de/" rel="external nofollow">Federal Office for Radiation protection (Bundesamt für Strahlenschutz)</a> is publishing various details about optical radiation including an UV index. This example is getting the index for a region in Germany.</p>
+<a class="title-link" name="--" href="#--"></a> 태그에서 값을 얻으십시오</h3>
+<p>독일의 <a href="http://www.bfs.de/" rel="external nofollow">Federal Office for Radiation protection (방사선관련 국가기관)</a>에서는 UV지수를 포함하여 광학 방사선에 대한 다양한 세부 사항을 발표하고 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape
@@ -218,8 +222,8 @@ sensor:
     unit_of_measurement: 'UV Index'
 </code></pre>
 <h3>
-<a class="title-link" name="ifttt-status" href="#ifttt-status"></a> IFTTT status</h3>
-<p>If you make heavy use of the <a href="/integrations/ifttt/">IFTTT</a> web service for your automations and are curious about the <a href="https://status.ifttt.com/" rel="external nofollow">status of IFTTT</a> then you can display the current state of IFTTT in your frontend.</p>
+<a class="title-link" name="ifttt-" href="#ifttt-"></a> IFTTT 상태</h3>
+<p>자동화를 위해 <a href="/integrations/ifttt/">IFTTT</a> 웹서비스를 많이 사용하고 <a href="https://status.ifttt.com/" rel="external nofollow">IFTTT 상태</a> 에 대해 궁금한 경우 프론트 엔드에서 IFTTT 현재 상태를 표시 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape
@@ -228,8 +232,8 @@ sensor:
     select: '.component-status'
 </code></pre>
 <h3>
-<a class="title-link" name="get-the-latest-podcast-episode-file-url" href="#get-the-latest-podcast-episode-file-url"></a> Get the latest podcast episode file URL</h3>
-<p>If you want to get the file URL for the latest episode of your <a href="https://hasspodcast.io/" rel="external nofollow">favorite podcast</a>, so you can pass it on to a compatible media player.</p>
+<a class="title-link" name="----url-" href="#----url-"></a> 최신 팟캐스트 에피소드 파일 URL 가져오기</h3>
+<p><a href="https://hasspodcast.io/" rel="external nofollow">favorite podcast</a>의 최신 에피소드에 대한 파일 URL을 얻으려면 호환되는 미디어 플레이어로 전달할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape
@@ -240,8 +244,8 @@ sensor:
     attribute: url
 </code></pre>
 <h3>
-<a class="title-link" name="energy-price" href="#energy-price"></a> Energy price</h3>
-<p>This example tries to retrieve the price for electricity.</p>
+<a class="title-link" name="-" href="#-"></a> 에너지 가격</h3>
+<p>이 예는 전기 가격을 검색하려고합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape
@@ -252,8 +256,8 @@ sensor:
     unit_of_measurement: "öre/kWh"
 </code></pre>
 <h3>
-<a class="title-link" name="bom-weather" href="#bom-weather"></a> BOM Weather</h3>
-<p>The Australian Bureau of Meteorology website returns an error if the User Agent header is not sent.</p>
+<a class="title-link" name="bom-" href="#bom-"></a> BOM 날씨</h3>
+<p>사용자 에이전트 헤더(User Agent header)가 전송되지 않은 경우 호주 기상청 웹 사이트에서 오류를 반환합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: scrape

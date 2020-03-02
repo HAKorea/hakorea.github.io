@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Apple Push Notification Service (APNS) - 홈어시스턴트</title>
+    <title>애플 Push Notification Service (APNS) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add APNS notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/apns/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Apple Push Notification Service (APNS)">
+    <meta property="og:title" content="애플 Push Notification Service (APNS)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/apns/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Apple Push Notification Service (APNS)">
+    <meta name="twitter:title" content="애플 Push Notification Service (APNS)">
     <meta name="twitter:description" content="Instructions on how to add APNS notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Apple Push Notification Service (APNS)
+      애플 Push Notification Service (APNS)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>apns</code> platform uses the Apple Push Notification service (APNS) to deliver notifications from Home Assistant.</p>
+  <p><code>apns</code> 플랫폼은 APNS (Apple Push Notification Service)를 사용하여 Home Assistant에서 알림을 전달합니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>To use the APNS service you will need an Apple developer account and you will need to create an app to receive push notifications. For more information, see the Apple developer documentation.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>APNS 서비스를 사용하려면 Apple 개발자 계정이 필요하며 푸시 알림을 수신하려면 앱을 만들어야합니다. 자세한 내용은 Apple 개발자 설명서를 참조하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable APNS notifications, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>APNS 알림을 사용하려면 <code>configuration.yaml</code>에 다음 행을 추가하십시오  :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   name: NOTIFIER_NAME
@@ -123,20 +123,20 @@ notify:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>he name of the notifier. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>알리미의 이름. 알리미는 서비스 <code>notify.NOTIFIER_NAME</code>에 바인딩합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cert_file" href="#cert_file"></a> cert_file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The certificate to use to authenticate with the APNS service.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>APNS 서비스를 인증하는데 사용할 인증서.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="topic" href="#topic"></a> topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The app bundle ID specified in the certificate.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>인증서에 지정된 app bundle ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="sandbox" href="#sandbox"></a> sandbox</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>If true notifications will be sent to the sandbox (test) notification service.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>true일 경우 알림이 sandbox (test) 알림 서비스로 전송</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -144,14 +144,14 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The APNS platform will register two services, <code>notify.NOTIFIER_NAME</code> and <code>apns.apns_NOTIFIER_NAME</code>.</p>
+<p>APNS 플랫폼은 <code>notify.NOTIFIER_NAME</code> 과 <code>apns.apns_NOTIFIER_NAME</code>의 두 가지 서비스를 등록합니다.</p>
 <h3>
 <a class="title-link" name="apnsapns_notifier_name" href="#apnsapns_notifier_name"></a> apns.apns_NOTIFIER_NAME</h3>
-<p>This service will register device IDs with Home Assistant. In order to receive a notification a device must be registered. The app on the device can use this service to send an ID to Home Assistant during startup, the ID will be stored in <code>[NOTIFIER_NAME]_apns.yaml</code>.</p>
-<p>See <code>didRegisterForRemoteNotificationsWithDeviceToken</code> in the <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplicationDelegate_Protocol/#//apple_ref/occ/intfm/UIApplicationDelegate/application:didRegisterForRemoteNotificationsWithDeviceToken:" rel="external nofollow">Apple developer documentation</a> for more information about how to obtain a device ID.</p>
+<p>이 서비스는 홈어시스턴트로 장치 ID를 등록합니다. 알림을 받으려면 장치를 등록해야합니다. 장치의 앱은 이 서비스를 사용하여 시작하는 동안 홈어시스턴트로 ID를 보낼 수 있으며, ID는 <code>[NOTIFIER_NAME]_apns.yaml</code>에 저장됩니다.</p>
+<p>장치 ID를 얻는 방법에 대한 자세한 내용은 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplicationDelegate_Protocol/#//apple_ref/occ/intfm/UIApplicationDelegate/application:didRegisterForRemoteNotificationsWithDeviceToken:" rel="external nofollow">Apple developer documentation</a>에서 <code>didRegisterForRemoteNotificationsWithDeviceToken</code>를 참조하십시오.</p>
 <h3>
 <a class="title-link" name="notifynotifier_name" href="#notifynotifier_name"></a> notify.NOTIFIER_NAME</h3>
-<p>This service will send messages to a registered device. The following parameters can be used:</p>
+<p>이 서비스는 등록된 장치로 메시지를 보냅니다. 다음과 같은 파라미터를 사용할 수 있습니다.</p>
 <ul>
 <li>
 <p><strong>message</strong>: The message to send.</p>

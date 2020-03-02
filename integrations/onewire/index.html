@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>1-Wire - 홈어시스턴트</title>
+    <title>1-와이어 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate One wire (1-wire) sensors into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/onewire/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="1-Wire">
+    <meta property="og:title" content="1-와이어">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/onewire/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="1-Wire">
+    <meta name="twitter:title" content="1-와이어">
     <meta name="twitter:description" content="Instructions on how to integrate One wire (1-wire) sensors into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,55 +97,54 @@
   
   <header>
     <h1 class="title indent">
-      1-Wire
+      1-와이어
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>onewire</code> platform supports sensors which are using the One wire (1-wire) bus for communication.</p>
-<p>Supported devices:</p>
+  <p><code>onewire</code> 플랫폼은 통신을 위해 One wire (1-wire) 버스를 사용하는 센서를 지원합니다.</p>
+<p>지원되는 장치 :</p>
 <ul>
 <li><a href="https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf" rel="external nofollow">DS18B20</a></li>
 <li><a href="https://www.maximintegrated.com/en/products/sensors/DS18S20.html" rel="external nofollow">DS18S20</a></li>
 <li><a href="https://datasheets.maximintegrated.com/en/ds/DS1822.pdf" rel="external nofollow">DS1822</a></li>
 <li><a href="https://datasheets.maximintegrated.com/en/ds/DS1825.pdf" rel="external nofollow">DS1825</a></li>
 <li>
-<a href="https://datasheets.maximintegrated.com/en/ds/DS28EA00.pdf" rel="external nofollow">DS28EA00</a> temperature sensors</li>
+<a href="https://datasheets.maximintegrated.com/en/ds/DS28EA00.pdf" rel="external nofollow">DS28EA00</a> 온도 센서</li>
 <li>
-<a href="https://datasheets.maximintegrated.com/en/ds/DS2406.pdf" rel="external nofollow">DS2406/TAI-8570</a> Temperature and pressure sensor made by AAG</li>
+<a href="https://datasheets.maximintegrated.com/en/ds/DS2406.pdf" rel="external nofollow">DS2406/TAI-8570</a> AAG에서 제조한 온도 및 압력 센서</li>
 <li>
-<a href="https://datasheets.maximintegrated.com/en/ds/DS2438.pdf" rel="external nofollow">DS2438/B1-R1-A</a> Temperature, pressure and humidity sensor by AAG</li>
+<a href="https://datasheets.maximintegrated.com/en/ds/DS2438.pdf" rel="external nofollow">DS2438/B1-R1-A</a> AAG에서 제조한 온도, 압력 및 습도 센서</li>
 </ul>
-<p>The 1-Wire bus can be connected directly to the IO pins of Raspberry Pi or using dedicated interface adapter (e.g <a href="https://datasheets.maximintegrated.com/en/ds/DS9490-DS9490R.pdf" rel="external nofollow">DS9490R</a>).</p>
+<p>1-Wire 버스는 Raspberry Pi의 IO 핀에 직접 연결하거나 전용 인터페이스 어댑터를 사용하여 연결할 수 있습니다 (예: <a href="https://datasheets.maximintegrated.com/en/ds/DS9490-DS9490R.pdf" rel="external nofollow">DS9490R</a>).</p>
 <h2>
-<a class="title-link" name="raspberry-pi-setup" href="#raspberry-pi-setup"></a> Raspberry Pi setup</h2>
-<p>In order to setup 1-Wire support on Raspberry Pi, you’ll need to edit <code>/boot/config.txt</code> following <a href="https://www.waveshare.com/wiki/Raspberry_Pi_Tutorial_Series:_1-Wire_DS18B20_Sensor#Enable_1-Wire" rel="external nofollow">this documentation</a>.
-To edit <code>/boot/config.txt</code> on Hass.io use <a href="https://developers.home-assistant.io/docs/en/hassio_debugging.html">this documentation</a> to enable SSH and edit <code>/mnt/boot/config.txt</code> via <code>vi</code>.</p>
+<a class="title-link" name="-" href="#-"></a> 라즈베리파이 셋업</h2>
+<p>Raspberry Pi에서 1-Wire 지원을 설정하려면 <a href="https://www.waveshare.com/wiki/Raspberry_Pi_Tutorial_Series:_1-Wire_DS18B20_Sensor#Enable_1-Wire" rel="external nofollow">this documentation</a>에 따라 <code>/ boot / config.txt</code>를 편집해야합니다.
+Hass.io에서 <code>/boot/config.txt</code>를 편집하려면 <a href="https://developers.home-assistant.io/docs/en/hassio_debugging.html">this documentation</a>를 사용하여 SSH를 활성화하고 <code>vi</code>를 통해 <code>/mnt/boot/config.txt</code>를 편집하십시오.</p>
 <h2>
-<a class="title-link" name="interface-adapter-setup" href="#interface-adapter-setup"></a> Interface adapter setup</h2>
+<a class="title-link" name="--" href="#--"></a> 인터페이스 어댑터 셋업</h2>
 <h3>
 <a class="title-link" name="owfs" href="#owfs"></a> owfs</h3>
-<p>When an interface adapter is used, sensors can be accessed on Linux hosts via <a href="https://owfs.org/" rel="external nofollow">owfs 1-Wire file system</a>. When using an interface adapter and the owfs, the <code>mount_dir</code> option must be configured to correspond a directory, where owfs device tree has been mounted.</p>
+<p>인터페이스 어댑터를 사용하면 <a href="https://owfs.org/" rel="external nofollow">owfs 1-Wire file system</a>을 통해 Linux 호스트에서 센서에 액세스할 수 있습니다. 인터페이스 어댑터와 owfs를 사용할 때 <code>mount_dir</code> 옵션은 owfs 장치 트리가 마운트 된 디렉토리에 해당하도록 설정되어야합니다.</p>
 <h3>
 <a class="title-link" name="owserver" href="#owserver"></a> owserver</h3>
-<p>When an interface adapter is used, you can also access sensors on a remote or local Linux host that is running owserver.  owserver by default runs on port 4304. Use the <code>host</code> option to specify the host or IP of the remote server, and the optional <code>port</code> option to change the port from the default.</p>
+<p>인터페이스 어댑터를 사용하면 owserver를 실행중인 원격 또는 로컬 Linux 호스트의 센서에 액세스 할 수도 있습니다. owserver는 기본적으로 포트 4304에서 실행됩니다. <code>host</code> 옵션을 사용하여 원격 서버의 호스트 또는 IP를 지정하고 선택적인 <code>port</code> 옵션을 사용하여 포트를 기본값에서 변경하십시오.</p>
 <h3>
-<a class="title-link" name="units-with-multiple-sensors" href="#units-with-multiple-sensors"></a> Units with multiple sensors</h3>
-<p>This platform works with devices with multiple sensors which will cause a discontinuity in recorded values. Existing devices will receive a new ID and therefore show up as new devices.
-If you wish to maintain continuity it can be resolved in the database by renaming the old devices to the new names.</p>
-<p>Connect to your database using the instructions from <a href="/docs/backend/database/">Database section</a>. Check the names of sensors:</p>
+<a class="title-link" name="--unit" href="#--unit"></a> 여러 센서가있는 장치(unit)</h3>
+<p>이 플랫폼은 여러 센서가있는 장치와 함께 작동하여 기록된 값의 불연속성을 유발합니다. 기존 장치는 새 ID를 수신하므로 새 장치로 표시됩니다. 연속성을 유지하려면 기존 장치의 이름을 새 이름으로 바꾸어 데이터베이스에서 해결할 수 있습니다.</p>
+<p><a href="/docs/backend/database/">Database section</a>의 지침을 사용하여 데이터베이스에 연결. 센서 이름을 확인하십시오.</p>
 <pre><code class="language-sql">SELECT entity_id, COUNT(*) as count FROM states GROUP BY entity_id ORDER BY count DESC LIMIT 10;
 </code></pre>
-<p>Alter the names of sensors using the following examples:</p>
+<p>다음 예를 사용하여 센서 이름을 변경하십시오.</p>
 <pre><code class="language-sql">UPDATE states SET entity_id='sensor.&lt;sensor_name&gt;_temperature' WHERE entity_id LIKE 'sensor.&lt;sensor_name&gt;%' AND attributes LIKE '%\u00b0C%';
 UPDATE states SET entity_id='sensor.&lt;sensor_name&gt;_pressure' WHERE entity_id LIKE 'sensor.&lt;sensor_name&gt;%' AND attributes LIKE '%mb%';
 UPDATE states SET entity_id='sensor.&lt;sensor_name&gt;_humidity' WHERE entity_id LIKE 'sensor.&lt;sensor_name&gt;%' AND attributes LIKE '%%%' ESCAPE '';
 </code></pre>
-<p>Remember to replace <code>&lt;sensor_name&gt;</code> with the actual name of the sensor as seen in the <code>SELECT</code> query.</p>
+<p><code>SELECT</code> 쿼리에서 볼 수 있듯이 <code>&lt;sensor_name&gt;</code>을 센서의 실제 이름으로 바꿔야합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable One wire sensors in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>하나의 와이어 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: onewire
@@ -156,20 +155,20 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="names" href="#names"></a> names</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>ID and friendly name of your sensors.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 ID와 친숙한 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mount_dir" href="#mount_dir"></a> mount_dir</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Location of device tree if owfs driver used.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>owfs 드라이버가 사용된 경우 장치 트리(device tree)의 위치</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Remote or local host running owserver.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>owserver를 실행하는 원격 또는 로컬 호스트</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port number of the owserver (requires <code>host</code>).</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port number of the owserver (requires <code>host</code>). owserver의 포트 번호. (<code>host</code> 필수)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -178,8 +177,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="configuration-example" href="#configuration-example"></a> Configuration Example</h3>
-<p>When <code>onewire</code> is added to Home Assistant, it will generate an ID for the sensor. You can specify a friendly name for the sensor with the name configuration option.</p>
+<a class="title-link" name="-" href="#-"></a> 설정 사례</h3>
+<p><code>onewire</code>가 Home Assistant에 추가되면 센서의 ID를 생성합니다. 이름 설정 옵션으로 센서의 이름을 지정할 수 있습니다.</p>
 <pre><code class="language-yaml"># Named sensor configuration.yaml entry
 sensor:
   - platform: onewire

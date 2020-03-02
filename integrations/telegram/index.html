@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Telegram - 홈어시스턴트</title>
+    <title>텔레그램 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add Telegram notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/telegram/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Telegram">
+    <meta property="og:title" content="텔레그램">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/telegram/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Telegram">
+    <meta name="twitter:title" content="텔레그램">
     <meta name="twitter:description" content="Instructions on how to add Telegram notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,24 +97,27 @@
   
   <header>
     <h1 class="title indent">
-      Telegram
+      텔레그램
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>telegram</code> platform uses <a href="https://web.telegram.org" rel="external nofollow">Telegram</a> to deliver notifications from Home Assistant to your Android device, your Windows phone, or your iOS device.</p>
+  <p><code>telegram</code> 플랫폼은 <a href="https://web.telegram.org" rel="external nofollow">Telegram</a>을 사용하여 Home Assistant에서 Android 장치, Windows 전화 또는 iOS 장치로 알림을 전달합니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>The requirements are:</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>요구 사항은 다음과 같습니다.</p>
 <ul>
-<li>You need a <a href="https://core.telegram.org/bots" rel="external nofollow">Telegram bot</a>. Please follow those <a href="https://core.telegram.org/bots#6-botfather" rel="external nofollow">instructions</a> to create one and get the token for your bot. Keep in mind that bots are not allowed to contact users. You need to make the first contact with your user. Meaning that you need to send a message to the bot from your user.</li>
-<li>You need to configure a <a href="/integrations/telegram_chatbot">Telegram bot in Home Assistant</a> and define there your API key and the allowed chat ids to interact with.</li>
-<li>The <code>chat_id</code> of an allowed user.</li>
+<li>
+<a href="https://core.telegram.org/bots" rel="external nofollow">Telegram bot</a>이 필요합니다. 다음 <a href="https://core.telegram.org/bots#6-botfather" rel="external nofollow">instructions</a>에 따라 하나를 생성하고 봇에 대한 토큰을 받으십시오.</li>
+<li>
+<a href="/integrations/telegram_chatbot">Telegram bot in Home Assistant</a>을 설정하고 상호작용할 수있는 API 키 및 허용된 chat ID를 정의해야합니다.</li>
+<li>허용된 사용자의 <code>chat_id</code>
+</li>
 </ul>
-<p><strong>Method 1:</strong> You can get your <code>chat_id</code> by sending any message to the <a href="https://t.me/getidsbot" rel="external nofollow">GetIDs bot</a>.</p>
-<p><strong>Method 2:</strong> To retrieve your <code>chat_id</code> you can visit <code>https://api.telegram.org/botYOUR_API_TOKEN/getUpdates</code> or to use <code>$ curl -X GET https://api.telegram.org/botYOUR_API_TOKEN/getUpdates</code> <strong>after</strong> you have sent the bot a message. Replace <code>YOUR_API_TOKEN</code> with your actual token.</p>
-<p>The result set will include your chat ID as <code>id</code> in the <code>chat</code> section:</p>
+<p><strong>방법 1 :</strong> <a href="https://t.me/getidsbot" rel="external nofollow">GetIDs bot</a>에 메시지를 보내면 <code>chat_id</code>를 얻을 수 있습니다.</p>
+<p><strong>방법 2 :</strong> <code>chat_id</code>를 검색하려면 <code>https://api.telegram.org/botYOUR_API_TOKEN/getUpdates</code>를 방문하거나 봇에게 메시지를 <strong>보낸 후</strong> <code>$ curl -X GET https://api.telegram.org/botYOUR_API_TOKEN/getUpdates</code>를 사용하십시오. <code>YOUR_API_TOKEN</code>을 실제 토큰으로 바꾸십시오.</p>
+<p>결과 집합에는 <code>chat</code> 섹션에 chat ID가 <code>id</code> 로 포함됩니다.</p>
 <pre><code class="language-json">{
 	"ok": true,
 	"result": [{
@@ -140,7 +143,7 @@
 	}]
 }
 </code></pre>
-<p><strong>Method 3:</strong> Another way to get your chat ID directly is described below. Start your Python interpreter from the command-line:</p>
+<p><strong>방법 3 :</strong> chat ID를 직접받는 다른 방법은 아래에 설명되어 있습니다. 명령행에서 Python 인터프리터를 시작하십시오.</p>
 <pre><code class="language-shell">$ python3
 &gt;&gt;&gt; import telegram
 &gt;&gt;&gt; bot = telegram.Bot(token='YOUR_API_TOKEN')
@@ -149,11 +152,11 @@
 123456789
 </code></pre>
 <div class="note">
-If you want to add new chat IDs then you will need to disable the active configuration to actually see the result with the IDs, otherwise you may only get empty results array.
+새 chat ID를 추가하려면 active configuaration을 비활성화하여 실제 ID 결과를 확인해야합니다, 그렇지 않으면 빈 결과 배열 만 표시될 수 있습니다.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable Telegram notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 텔레그램 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for the Telegram Bot
 telegram_bot:
   - platform: polling
@@ -169,9 +172,7 @@ notify:
     platform: telegram
     chat_id: CHAT_ID_2
 </code></pre>
-<p>Refer to the platforms mentioned in the
-<a href="/integrations/telegram_chatbot/">Telegram chatbot page</a> for
-<code>telegram_bot</code> configuration.</p>
+<p><code>telegram_bot</code> 설정에 대해서는 <a href="/integrations/telegram_chatbot/">Telegram chatbot page</a>에 언급된 플랫폼을 참조하십시오.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -179,7 +180,7 @@ notify:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택적 매개 변수 <code>name</code>을 설정하면 여러 알리미를 만들 수 있습니다. 알리미는 ‘notify.NOTIFIER_NAME’ 서비스에 바인딩합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -187,13 +188,13 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="chat_id" href="#chat_id"></a> chat_id</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>The chat ID of your user.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>사용자의 chat ID.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 <h3>
-<a class="title-link" name="text-message" href="#text-message"></a> Text message</h3>
+<a class="title-link" name="-" href="#-"></a> 텍스트 메시지</h3>
 <pre><code class="language-yaml">...
 action:
   service: notify.NOTIFIER_NAME
@@ -211,24 +212,25 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Will be composed as ‘%title\n%message’.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>‘%title
+%message’로 구성됩니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="message" href="#message"></a> message</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Message text.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>메시지 텍스트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom keyboard.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 명령행 목록</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom inline keyboard with buttons with associated callback data.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="photo-support" href="#photo-support"></a> Photo support</h3>
+<a class="title-link" name="-" href="#-"></a> 사진 지원</h3>
 <pre><code class="language-yaml">...
 action:
   service: notify.NOTIFIER_NAME
@@ -251,28 +253,28 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A remote path to an image. Either this or the <code>file</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지의 원격 경로, 혹은 <code>file</code> 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="file" href="#file"></a> file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A local path to an image. Either this or the <code>url</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지의 로컬 경로, 혹은 <code>url</code> 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="caption" href="#caption"></a> caption</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The title of the image.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지의 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Username for a URL which require HTTP authentication.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증이 필요한 URL의 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Password for a URL which require HTTP authentication.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증이 필요한 URL의 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to ‘digest’ to use HTTP digest authentication.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 요약 인증을 사용하려면 ‘digest’로 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -281,7 +283,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to false to skip the validation of the server’s SSL certificate.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>서버의 SSL 인증서 유효성 검증을 건너뛰려면 false로 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -289,16 +291,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom keyboard.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기 위한 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom inline keyboard with buttons with associated callback data.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 </dl>
 </div>
 <div class="note">
-<p>Since Home Assistant version 0.48 you have to <a href="/docs/configuration/basic/">whitelist the source folder</a> of the file you want to include in the notification.</p>
+<p>Home Assistant 버전 0.48부터는 알림에 포함할 파일의 <a href="/docs/configuration/basic/">whitelist the source folder</a>를 추가해야합니다.</p>
 <pre><code class="language-yaml">configuration.yaml
 ...
 homeassistant:
@@ -308,7 +310,7 @@ homeassistant:
 </code></pre>
 </div>
 <h3>
-<a class="title-link" name="video-support" href="#video-support"></a> Video support</h3>
+<a class="title-link" name="-" href="#-"></a> 비디오 지원</h3>
 <pre><code class="language-yaml">...
 action:
   service: notify.NOTIFIER_NAME
@@ -331,28 +333,28 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A remote path to an video. Either this or the <code>file</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>비디오의 원격 경로, 혹은 <code>file</code> 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="file" href="#file"></a> file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A local path to an video. Either this or the <code>url</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>비디오의 로컬 경로, 혹은 <code>url</code> 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="caption" href="#caption"></a> caption</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The title of the video.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>비디오의 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Username for a URL which require HTTP authentication.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증이 필요한 URL의 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Password for a URL which require HTTP authentication.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증이 필요한 URL의 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to ‘digest’ to use HTTP digest authentication.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 요약 인증을 사용하려면 ‘digest’로 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -361,7 +363,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to false to skip the validation of the server’s SSL certificate.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>서버의 SSL 인증서 유효성 검증을 건너뛰려면 false로 설정</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -369,16 +371,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom keyboard.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom inline keyboard with buttons with associated callback data.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="document-support" href="#document-support"></a> Document support</h3>
+<a class="title-link" name="-" href="#-"></a> 문서 지원</h3>
 <pre><code class="language-yaml">...
 action:
   service: notify.NOTIFIER_NAME
@@ -399,28 +401,28 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A remote path to a document. Either this or the <code>file</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>문서의 원격 경로, 혹은 <code>file</code> 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="file" href="#file"></a> file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A local path to a document. Either this or the <code>url</code> configuration option is required.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>문서의 로컬 경로, 혹은 <code>url</code> 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="caption" href="#caption"></a> caption</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The title of the document.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>문서의 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Username for a URL which require HTTP authentication.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증이 필요한 URL의 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Password for a URL which require HTTP authentication.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 인증이 필요한 URL의 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to ‘digest’ to use HTTP digest authentication.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>HTTP 요약 인증을 사용하려면 ‘digest’로 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -429,7 +431,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to false to skip the validation of the server’s SSL certificate.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>서버의 SSL 인증서 유효성 검증을 건너 뛰려면 false로 설정</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -437,16 +439,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom keyboard.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기 위한 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom inline keyboard with buttons with associated callback data.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="location-support" href="#location-support"></a> Location support</h3>
+<a class="title-link" name="-" href="#-"></a> 위치 지원</h3>
 <pre><code class="language-yaml">...
 
 action:
@@ -465,19 +467,19 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>The latitude to send.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>보낼 위도.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>The longitude to send.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Required)</span><span class="description"><p>보낼 경도.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom keyboard.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 명령행 목록</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of rows of commands, comma-separated, to make a custom inline keyboard with buttons with associated callback data.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
 </span></p></dd>
 </dl>
 </div>
