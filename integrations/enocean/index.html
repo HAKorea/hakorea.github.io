@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>EnOcean - 홈어시스턴트</title>
+    <title>EnOcean(무전원무선) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Connect EnOcean devices to Home Assistant">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/enocean/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="EnOcean">
+    <meta property="og:title" content="EnOcean(무전원무선)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/enocean/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="EnOcean">
+    <meta name="twitter:title" content="EnOcean(무전원무선)">
     <meta name="twitter:description" content="Connect EnOcean devices to Home Assistant">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      EnOcean
+      EnOcean(무전원무선)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <a href="https://en.wikipedia.org/wiki/EnOcean" rel="external nofollow">EnOcean</a> standard is supported by many different vendors. There are switches and sensors of many different kinds, and typically they employ energy harvesting to get power such that no batteries are necessary.</p>
-<p>The <code>enocean</code> integration adds support for some of these devices. You will need a controller like the <a href="https://www.enocean.com/en/enocean_modules/usb-300-oem/" rel="external nofollow">USB300</a> in order for it to work.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>[EnOcean] (<a href="https://en.wikipedia.org/wiki/EnOcean" rel="external nofollow">https://en.wikipedia.org/wiki/EnOcean</a>) 표준은 여러 공급 업체에서 지원합니다.
+다양한 종류의 스위치와 센서가 있으며 일반적으로 energy harvesting을 사용하여 배터리가 필요하지 않은 전력을 얻습니다.</p>
+<p><code>enocean</code> 통합구성요소는 이러한 장치 중 일부에 대한 지원을 추가합니다. 작동하려면 <a href="https://www.enocean.com/en/enocean_modules/usb-300-oem/" rel="external nofollow">USB300</a>과 같은 컨트롤러가 필요합니다.</p>
+<p>현재 홈 어시스턴트에서 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li>
-<a href="#binary-sensor">Binary Sensor</a> - Wall switches</li>
+<a href="#binary-sensor">Binary Sensor</a> - 벽 스위치</li>
 <li>
-<a href="#sensor">Sensor</a> - Power meters, temperature sensors, humidity sensors and window handles</li>
+<a href="#sensor">Sensor</a> - 파워 미터, 온도 센서, 습도 센서 및 창 핸들</li>
 <li>
-<a href="#light">Light</a> - Dimmers</li>
+<a href="#light">Light</a> - 디머</li>
 <li><a href="#switch">Switch</a></li>
 </ul>
-<p>However, due to the wide range of message types, not all devices will work without code changes.
-The following devices have been confirmed to work out of the box:</p>
+<p>그러나 광범위한 메시지 유형으로 인해 모든 장치가 코드 변경없이 작동하지는 않습니다. 다음 장치가 기본적으로 작동하는 것으로 확인되었습니다.</p>
 <ul>
 <li>Eltako FUD61 dimmer</li>
 <li>Eltako FT55 battery-less wall switch</li>
@@ -126,13 +126,11 @@ The following devices have been confirmed to work out of the box:</p>
 <li>EnOcean STM-330 temperature sensor</li>
 <li>Hoppe SecuSignal window handle from Somfy</li>
 </ul>
-<p>If you own a device not listed here, please check whether your device can talk in one of the listed <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a> (EEP).
-If it does, it will most likely work.
-The available profiles are usually listed somewhere in the device manual.</p>
-<p>Support for tech-in messages is not implemented.</p>
+<p>여기에 나열되지 않은 장치를 소유한 경우 장치가 리스트된 <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean 장비 프로파일</a> 중 있는지 확인하십시오. 그렇다면 대부분 작동 할 것입니다. 사용 가능한 프로파일은 일반적으로 장치 매뉴얼 어딘가에 리스트되어 있습니다.</p>
+<p>기술 메시지 지원이 모두다 구현되지 않았습니다.</p>
 <h2>
-<a class="title-link" name="hub" href="#hub"></a> Hub</h2>
-<p>To integrate an EnOcean controller with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 허브</h2>
+<p>EnOcean 컨트롤러를 Home Assistant와 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 enocean:
   device: /dev/ttyUSB0
@@ -143,26 +141,26 @@ enocean:
   <dl class="">
 <dt>
 <a class="title-link" name="device" href="#device"></a> device</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The port where your device is connected to your Home Assistant host.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치가 Home Assistant 호스트에 연결된 포트.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>This can typically be one of those batteryless wall switches.
-Tested with:</p>
+<p>이는 일반적으로 배터리없는 벽면 스위치 중 하나 일 수 있습니다
+다음 장치를 테스트하였습니다. :</p>
 <ul>
-<li>Eltako FT55 which uses the EnOcean PTM 215 module</li>
-<li>
-<a href="https://www.trio2sys.fr/index.php/fr/produits-enocean-sans-fil-sans-pile-interoperable/emetteur-sans-fils-sans-pile-interoperable-enocean" rel="external nofollow">TRIO2SYS Wall switches</a> which uses the EnOcean PTM210 DB module</li>
+<li>EnOcean PTM 215 모듈을 사용하는 Eltako FT55</li>
+<li>EnOcean PTM210 DB 모듈을 사용하는 <a href="https://www.trio2sys.fr/index.php/fr/produits-enocean-sans-fil-sans-pile-interoperable/emetteur-sans-fils-sans-pile-interoperable-enocean" rel="external nofollow">TRIO2SYS Wall switches</a>
+</li>
 <li>Omnio WS-CH-102</li>
 </ul>
-<p>The following <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a> are supported:</p>
+<p>다음과 같은 <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a>이 지원됩니다. :</p>
 <ul>
 <li>F6-02-01 (Light and Blind Control - Application Style 2)</li>
 <li>F6-02-02 (Light and Blind Control - Application Style 1)</li>
 </ul>
-<p>To use your EnOcean device, you first have to set up your <a href="#hub">EnOcean hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<p>EnOcean 장치를 사용하려면 먼저 <a href="#hub">EnOcean hub</a>를 셋업한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: enocean
@@ -174,12 +172,12 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="id" href="#id"></a> id</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The ID of the device. This is the 4 bytes long number written on the dimmer.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 ID. 디머에 쓰여진 4 바이트 길이의 숫자.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>An identifier for the switch in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드의 스위치 식별자.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -187,11 +185,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
-<dd><p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 장치 상태 및 아이콘을 변경하여 <a href="/integrations/binary_sensor/">class of the device</a> 를 세팅합니다.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>EnOcean binary sensors have no state, they only generate ‘button_pressed’ events. The event data has following fields:</p>
+<p>EnOcean 바이너리 센서는 상태가 없으며 ‘button_pressed’ 이벤트만 생성합니다. 이벤트 데이터에는 다음 필드가 있습니다.</p>
 <ul>
 <li>
 <strong>id</strong>: The ID of the device (see configuration).</li>
@@ -203,8 +201,8 @@ Default value: </p>
 <strong>onoff</strong>: <code>0</code> or <code>1</code> for either side of the rocket.</li>
 </ul>
 <h2>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h2>
-<p>Sample automation to switch lights on and off:</p>
+<a class="title-link" name="-" href="#-"></a> 자동화 사례</h2>
+<p>조명을 켜고 끄는 자동화 사례 :</p>
 <pre><code class="language-yaml"># Example automation to turn lights on/off on button release
 automation:
   - alias: hall light switches
@@ -221,8 +219,8 @@ automation:
 </code></pre>
 <h2>
 <a class="title-link" name="light" href="#light"></a> Light</h2>
-<p>An EnOcean light can take many forms. Currently only one type has been tested: Eltako FUD61 dimmer.</p>
-<p>To use your EnOcean device, you first have to set up your <a href="#hub">EnOcean hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<p>EnOcean 조명은 여러 형태를 취할 수 있습니다. 현재 한 가지 유형만 테스트되었습니다 : Eltako FUD61 디머.</p>
+<p>EnOcean 장치를 사용하려면 먼저 <a href="#hub">EnOcean hub</a>를 셋업한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: enocean
@@ -235,16 +233,16 @@ light:
   <dl class="">
 <dt>
 <a class="title-link" name="id" href="#id"></a> id</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The ID of the device. This is the 4 bytes long number written on the dimmer.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 ID. 디머에 쓰여진 4 바이트 길이의 숫자.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="sender_id" href="#sender_id"></a> sender_id</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The Sender ID of the device. This is a 4 bytes long number.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 발신자 ID. 이것은 4 바이트 길이.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>An identifier for the Ligh in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에서 Ligh의 식별자.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -254,14 +252,14 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The EnOcean sensor platform currently supports the following device types:</p>
+<p>EnOcean 센서 플랫폼은 현재 다음 장치 유형을 지원합니다.</p>
 <ul>
 <li><a href="#power-sensor">power sensor</a></li>
 <li><a href="#humidity-sensor">humidity sensor</a></li>
 <li><a href="#temperature-sensor">temperature sensor</a></li>
 <li><a href="#window-handle">window handle</a></li>
 </ul>
-<p>To use your EnOcean device, you first have to set up your <a href="#hub">EnOcean hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<p>EnOcean 장치를 사용하려면 먼저 <a href="#hub">EnOcean hub</a>를 셋업한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - name: Television
@@ -274,12 +272,12 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="id" href="#id"></a> id</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The ID of the device. This is the 4 bytes long identifier of your device.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 ID. 이것은 장치의 4 바이트 길이 식별자.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>An identifier for the sensor in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드의 센서 식별자.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -288,7 +286,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/binary_sensor/">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+<p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 장치 상태 및 아이콘을 변경하여 <a href="/integrations/binary_sensor/">class of the device</a> 를 세팅합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -298,8 +296,8 @@ Default value: </p>
 </div>
 <h3>
 <a class="title-link" name="power-sensor" href="#power-sensor"></a> Power sensor</h3>
-<p>This has been tested with a Permundo PSC234 switch, but any device sending EEP <strong>A5-12-01</strong> messages will work.</p>
-<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<p>이는 Permundo PSC234 스위치로 테스트되었지만 EEP <strong>A5-12-01</strong> 메시지를 보내는 모든 장치는 작동합니다.</p>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - name: Television
@@ -309,7 +307,7 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="humidity-sensor" href="#humidity-sensor"></a> Humidity sensor</h3>
-<p>The following <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a> are supported:</p>
+<p>다음 <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a>이 지원됩니다.</p>
 <ul>
 <li>Any profile that contains the humidity value at position <strong>DB2.7</strong> to <strong>DB2.0</strong>
 </li>
@@ -320,7 +318,7 @@ sensor:
 <li>
 <strong>A5-10-10</strong> to <strong>A5-10-14</strong> - Room Operating Panels</li>
 </ul>
-<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - name: Bathroom
@@ -330,8 +328,8 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="temperature-sensor" href="#temperature-sensor"></a> Temperature sensor</h3>
-<p>This sensor has been tested with a generic STM-330 sensor, which is used in most indoor temperature sensor devices.</p>
-<p>The following <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a> are supported:</p>
+<p>이 센서는 대부분의 실내 온도 센서 장치에 사용되는 일반 STM-330 센서로 테스트되었습니다.</p>
+<p>다음 <a href="https://www.enocean-alliance.org/what-is-enocean/specifications/" rel="external nofollow">EnOcean Equipment Profiles</a>이 지원됩니다.</p>
 <ul>
 <li>Any profile that contains an 8-bit temperature at position DB1.7 to DB1.0. 10-bit is not supported.</li>
 <li>
@@ -347,9 +345,9 @@ sensor:
 <li>
 <strong>A5-10-12</strong> - Temp. and Humidity Sensor, Set Point and Occupancy Control</li>
 </ul>
-<p>Check the manual of your temperature sensor to figure out what EEP it uses.
-If you do not know, make an educated guess and check the reported values. It’s easiest to validate the temperature at the boundaries of the range, so maybe put the sensor into the fridge for a while.</p>
-<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<p>사용하는 EEP를 확인하려면 온도 센서 설명서를 확인하십시오.
+모르는 경우, 경험을 토대로 추측을 하고 보고된 값을 확인하십시오. 범위의 경계에서 온도를 확인하는 것이 가장 쉬운 방법이므로 센서를 냉장고에 잠시 동안 두십시오.</p>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - name: Living Room
@@ -357,7 +355,7 @@ sensor:
     id: [0x01,0x90,0x84,0x3C]
     device_class: temperature
 </code></pre>
-<p>The temperature sensor supports these additional configuration properties.</p>
+<p>온도 센서는 이러한 추가 설정 속성을 지원합니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -365,7 +363,7 @@ sensor:
 <dt>
 <a class="title-link" name="min_temp" href="#min_temp"></a> min_temp</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The minimal temperature in °C your sensor supports.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서가 지원하는 최소 온도 (° C)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -374,7 +372,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="max_temp" href="#max_temp"></a> max_temp</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum temperature in °C your sensor supports.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서가 지원하는 최대 온도 (° C)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -383,7 +381,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="range_from" href="#range_from"></a> range_from</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The range value your sensor reports for <code>min_temp</code></p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서가 <code>min_temp</code>에 대해 보고하는 범위 값</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -392,7 +390,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="range_to" href="#range_to"></a> range_to</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The range value your sensor reports for <code>max_temp</code></p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서가 <code>max_temp</code>에 대해 보고하는 범위 값</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -400,8 +398,8 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Note that the default configuration values of <em>range_from</em> and <em>range_to</em> are not typos, the range is backwards for most sensors.
-However, some EEPs have a different, inverted range, which goes from 0 to 250. This includes the following EEPs:</p>
+<p><em>range_from</em> 및 <em>range_to</em> 의 기본 설정값은 오타가 아니며 범위는 대부분의 센서에서 거꾸로입니다.
+그러나 일부 EEP의 반전 범위는 0에서 250 사이입니다. 여기에는 다음 EEP가 포함됩니다.</p>
 <ul>
 <li><strong>A5-04-01</strong></li>
 <li><strong>A5-04-02</strong></li>
@@ -409,7 +407,7 @@ However, some EEPs have a different, inverted range, which goes from 0 to 250. T
 <strong>A5-10-10</strong> to <strong>A5-10-14</strong>
 </li>
 </ul>
-<p>Adapt the <code>configuration.yaml</code> for those sensors:</p>
+<p>해당 센서에 <code>configuration.yaml</code>을 적용하십시오:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for EEP A5-10-10
 sensor:
   - name: Living Room
@@ -421,8 +419,8 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="window-handle" href="#window-handle"></a> Window handle</h3>
-<p>As of now, the Hoppe SecuSignal window handle from Somfy has been successfully tested. However, any mechanical window handle that follows the EnOcean RPS telegram spec F6 10 00 (Hoppe AG) is supported.</p>
-<p>To configure a window handle, add the following code to your <code>configuration.yaml</code>:</p>
+<p>현재 Somfy의 Hoppe SecuSignal 창 핸들(Window handle)이 성공적으로 테스트되었습니다. 그러나 EnOcean RPS telegram 사양 F6 10 00 (Hoppe AG)을 따르는 모든 기계식 창 핸들은 지원됩니다.</p>
+<p>창 핸들을 설정하려면 <code>configuration.yaml</code>에 다음 코드를 추가하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for window handle EEP F6-10-00
 sensor:
   - name: Living Room Window Handle
@@ -430,8 +428,8 @@ sensor:
     id: [0xDE,0xAD,0xBE,0xEF]
     device_class: windowhandle
 </code></pre>
-<p>The configuration does not have any optional parameters.</p>
-<p>The window handle sensor can have the following states:</p>
+<p>설정에 선택적 매개 변수가 없습니다.</p>
+<p>창 핸들 센서는 다음 상태를 가질 수 있습니다.</p>
 <ul>
 <li>
 <strong>closed</strong>: The window handle is in closed position (typically down, or 6 o’clock)</li>
@@ -442,8 +440,8 @@ sensor:
 </ul>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>An EnOcean switch can take many forms. Currently, only a few types have been tested: Permundo PSC234 and Nod On SIN-2-1-01.</p>
-<p>To use your EnOcean device, you first have to set up your <a href="#hub">EnOcean hub</a> and then add the following to your <code>configuration.yaml</code> file:</p>
+<p>EnOcean 스위치는 여러 형태를 취할 수 있습니다. 현재 Permundo PSC234 및 Nod On SIN-2-1-01 유형만 테스트되었습니다.</p>
+<p>EnOcean 장치를 사용하려면 먼저 <a href="#hub">EnOcean hub</a>를 셋업한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: enocean
@@ -455,12 +453,12 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="id" href="#id"></a> id</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The ID of the device. This is a 4 bytes long number.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 ID. 이것은 4 바이트 길이.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>An identifier for the switch.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>스위치의 식별자</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -469,7 +467,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="channel" href="#channel"></a> channel</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The number of the channel (typically 0 or 1) for the output channel to switch.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>출력 채널을 전환할 채널 번호. (일반적으로 0 또는 1)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>dweet.io - 홈어시스턴트</title>
+    <title>dweet.io(로그공유) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Transfer events to Dweet.io.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/dweet/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="dweet.io">
+    <meta property="og:title" content="dweet.io(로그공유)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/dweet/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="dweet.io">
+    <meta name="twitter:title" content="dweet.io(로그공유)">
     <meta name="twitter:description" content="Transfer events to Dweet.io.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      dweet.io
+      dweet.io(로그공유)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>dweet</code> integration makes it possible to transfer details collected with Home Assistant to <a href="https://dweet.io/" rel="external nofollow">Dweet.io</a> and visualize them with <a href="https://freeboard.io" rel="external nofollow">freeboard.io</a>. Keep in mind that your information will be public!</p>
+  <p><code>dweet</code> 통합구성요소를 통해 Home Assistant로 수집한 세부 정보를 [Dweet.io] (<a href="https://dweet.io/)%EB%A1%9C" rel="external nofollow">https://dweet.io/)로</a> 전송하고 <a href="https://freeboard.io" rel="external nofollow">freeboard.io</a>로 시각화 할 수 있습니다. 단, 귀하의 정보는 공개될 것임을 명심하십시오!</p>
 <p class="img">
   <img src="/images/screenshots/dweet-freeboard.png">
 </p>
 <div class="note warning">
-The publishing interval is limited to 1 second. This means that it's possible to miss fast changes.
+게시 간격은 1 초로 제한됩니다. 즉, 빠른 변경 사항을 놓칠 수도 있습니다.
 </div>
-<p>There is currently support for the following device types within Home Assistant:</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use the <code>dweet</code> integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 <code>dweet</code> 통합구성요소를 사용하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 dweet:
   name: YOUR_UNIQUE_IDENTIFIER
@@ -132,20 +132,20 @@ dweet:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A unique identifier for your Home Assistant instance.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Home Assistant 인스턴스의 고유 식별자</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="whitelist" href="#whitelist"></a> whitelist</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of entity IDs you want to publish</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>퍼블리쉬하려는 엔티티 ID 목록</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>dweet</code> sensor platform allows you to get details from your devices which are publishing their values to <a href="https://dweet.io/" rel="external nofollow">Dweet.io</a>.</p>
+<a class="title-link" name="" href="#"></a> 센서</h2>
+<p><code>dweet</code> 센서 플랫폼을 사용하면 <a href="https://dweet.io/" rel="external nofollow">Dweet.io</a>에 값을 게시하는 장치에서 세부 정보를 얻을 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To use Dweet.io sensors in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>설치시 Dweet.io 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: dweet
@@ -158,16 +158,16 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="device" href="#device"></a> device</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Identification of the device (also known as <code>thing</code>).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 식별자 (<code>thing</code>이라고도 함).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>The variable to extract a value from the content.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>컨텐츠에서 값을 추출하는 변수.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Let you overwrite the name of the device in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에서 장치 이름을 덮어 씁니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -175,13 +175,14 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="unit_of_measurement" href="#unit_of_measurement"></a> unit_of_measurement</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the unit of measurement of the sensor, if any.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 측정 단위를 정의합니다 (있는 경우).</p>
 </span></p></dd>
 </dl>
 </div>
+ㄴ
 <h3>
-<a class="title-link" name="full-configuration-sample" href="#full-configuration-sample"></a> Full configuration sample</h3>
-<p>A full configuration entry could look like the sample below.</p>
+<a class="title-link" name="--" href="#--"></a> 전체 설정 사례</h3>
+<p>전체 설정 항목은 아래 샘플과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: dweet
@@ -191,21 +192,21 @@ sensor:
     unit_of_measurement: "°C"
 </code></pre>
 <h3>
-<a class="title-link" name="interacting-with-dweetio" href="#interacting-with-dweetio"></a> Interacting with Dweet.io</h3>
-<p>You can easily send dweets from the command-line to test your sensor with <code>curl</code>.</p>
+<a class="title-link" name="dweetio--" href="#dweetio--"></a> Dweet.io와 상호 작용</h3>
+<p><code>curl</code>로 센서를 테스트하기 위해 명령 행에서 dweets을 쉽게 보낼 수 있습니다.</p>
 <pre><code class="language-bash">$ curl -H 'Content-Type: application/json' -d '{"temperature": 40, "humidity": 65}' https://dweet.io/dweet/for/ha-sensor
 </code></pre>
-<p>will give you a response like the one below:</p>
+<p>다음과 같은 응답을 제공합니다.</p>
 <pre><code class="language-json">{"this":"succeeded","by":"dweeting","the":"dweet","with":{"thing":"ha-sensor","created":"2015-12-10T09:43:31.133Z","content":{"temperature":40,"humidity":65}}}
 </code></pre>
-<p>The <a href="https://github.com/paddycarey/dweepy" rel="external nofollow">dweepy</a> module gives you another option to work with <a href="https://dweet.io/" rel="external nofollow">Dweet.io</a>.</p>
-<p>Send a dweet.</p>
+<p><a href="https://github.com/paddycarey/dweepy" rel="external nofollow">dweepy</a> 모듈은 <a href="https://dweet.io/" rel="external nofollow">Dweet.io</a>와 함께 사용할 수있는 다른 옵션을 제공합니다.</p>
+<p>dweet을 보냅니다.</p>
 <pre><code class="language-bash">$ python3
 &gt;&gt;&gt; import dweepy
 &gt;&gt;&gt; dweepy.dweet_for('ha-sensor', {'temperature': '23', 'humiditiy':'81'})
 {'thing': 'ha-sensor', 'created': '2015-12-10T09:46:08.559Z', 'content': {'humiditiy': 81, 'temperature': 23}}
 </code></pre>
-<p>Receive the latest dweet.</p>
+<p>최신 dweet을 받습니다.</p>
 <pre><code class="language-bash">&gt;&gt;&gt; dweepy.get_latest_dweet_for('ha-sensor')
 [{'thing': 'ha-sensor'', 'created': '2015-12-10T09:43:31.133Z', 'content': {'humidity': 65, 'temperature': 40}}]
 </code></pre>

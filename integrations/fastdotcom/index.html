@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Fast.com - 홈어시스턴트</title>
+    <title>Fast.com(인터넷속도측정) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="How to integrate Fast.com within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/fastdotcom/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Fast.com">
+    <meta property="og:title" content="Fast.com(인터넷속도측정)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/fastdotcom/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Fast.com">
+    <meta name="twitter:title" content="Fast.com(인터넷속도측정)">
     <meta name="twitter:description" content="How to integrate Fast.com within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      Fast.com
+      Fast.com(인터넷속도측정)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>fastdotcom</code> integration uses the <a href="https://fast.com/" rel="external nofollow">Fast.com</a> web service to measure network bandwidth performance.</p>
+  <p><code>fastdotcom</code> 통합구성요소는 <a href="https://fast.com/" rel="external nofollow">Fast.com</a> 웹서비스를 사용하여 네트워크 대역폭 성능을 측정합니다.</p>
 <div class="note">
-<p>Currently fast.com only supports measuring download bandwidth. If you want to measure bandwidth metrics other then download such as ping and upload, utilize the <a href="/integrations/speedtestdotnet">speedtest</a> component.</p>
+<p>현재 fast.com은 다운로드 대역폭 측정 만 지원합니다. Ping 및 업로드와 같은 다른 대역폭 메트릭(Metric)을 측정하려면 <a href="/integrations/speedtestdotnet">speedtest</a> 구성 요소를 사용하십시오.</p>
 </div>
-<p>Enabling this integration will automatically create the Fast.com Sensor.</p>
-<p>By default, a speed test will be run every hour. The user can change the update frequency in the configuration by defining the <code>scan_interval</code> for a speed test to run.</p>
+<p>이 통합구성요소를 활성화하면 Fast.com 센서가 자동으로 생성됩니다.</p>
+<p>기본적으로 속도 테스트는 1 시간마다 실행됩니다. 사용자는 속도 테스트를 실행하기 위해 <code>scan_interval</code>을 정의하여 구성에서 업데이트 빈도를 변경할 수 있습니다</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add Fast.com to your installation, add the following to your <code>configuration.yaml</code> file:</p>
-<p>Once per hour, on the hour (default):</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에 Fast.com을 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>시간당 한 번, 시간 (기본값) :</p>
 <pre><code class="language-yaml">fastdotcom:
 </code></pre>
-<p>Every half hour of every day:</p>
+<p>매일 30 분마다 :</p>
 <pre><code class="language-yaml">fastdotcom:
   scan_interval:
       minutes: 30
@@ -127,7 +127,7 @@
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>Minimum time interval between updates. Supported formats: <code>scan_interval: 'HH:MM:SS'</code>, <code>scan_interval: 'HH:MM'</code> and Time period dictionary (see example below).</p>
+<p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>업데이트 사이의 최소 시간 간격. 지원되는 형식 :<code>scan_interval: 'HH:MM:SS'</code>, <code>scan_interval: 'HH:MM'</code> 및 기간 사전(dictionary) (아래 예 참조)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -136,7 +136,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="manual" href="#manual"></a> manual</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Turn manual mode on or off. Manual mode will disable scheduled speedtests.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>수동 모드를 켜거나 끕니다. 수동 모드는 예약된 속도 테스트를 비활성화합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -145,7 +145,7 @@ Default value: </p>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="time-period-dictionary-example" href="#time-period-dictionary-example"></a> Time period dictionary example</h4>
+<a class="title-link" name="time-period-dictionary-" href="#time-period-dictionary-"></a> Time period dictionary 사례</h4>
 <pre><code class="language-yaml">scan_interval:
   # At least one of these must be specified:
   days: 0
@@ -155,17 +155,17 @@ Default value: </p>
   milliseconds: 0
 </code></pre>
 <h3>
-<a class="title-link" name="service" href="#service"></a> Service</h3>
-<p>Once loaded, the <code>fastdotcom</code> integration will expose a service (<code>fastdotcom.speedtest</code>) that can be called to run a Fast.com speed test on demand. This service takes no parameters. This can be useful if you have enabled manual mode.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h3>
+<p><code>fastdotcom</code> 통합구성요소는 일단 로드되면 요청시 Fast.com 속도 테스트를 실행하기 위해 호출할 수있는 서비스 (<code>fastfastcom.speedtest</code>)를 노출합니다. 이 서비스에는 매개 변수가 없습니다. 수동 모드를 활성화 한 경우 유용할 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: fastdotcom.speedtest
 </code></pre>
 <h2>
 <a class="title-link" name="notes" href="#notes"></a> Notes</h2>
 <ul>
-<li>When running on Raspberry Pi 3 or older, the maximum speed is limited by its 100 Mbit/s LAN adapter.</li>
-<li>The sensor will return the maximum measured speed during a 15-second test.</li>
-<li>Speed tests consume data depending on your internet speed, make sure to consider this if your internet connection has limited bandwidth.</li>
+<li>Raspberry Pi 3 이상에서 실행하는 경우 최대 속도는 100Mbit/s LAN 어댑터에 의해 제한됩니다.</li>
+<li>센서는 15 초 테스트 동안 최대 측정 속도를 반환합니다.</li>
+<li>속도 테스트는 인터넷 속도에 따라 데이터를 소비하므로 인터넷 연결의 대역폭이 제한적인 경우 이를 고려해야합니다.</li>
 </ul>
 
 

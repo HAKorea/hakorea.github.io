@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>FFmpeg - 홈어시스턴트</title>
+    <title>FFmpeg(이미지프로세싱) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate FFmpeg within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/ffmpeg/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="FFmpeg">
+    <meta property="og:title" content="FFmpeg(이미지프로세싱)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/ffmpeg/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="FFmpeg">
+    <meta name="twitter:title" content="FFmpeg(이미지프로세싱)">
     <meta name="twitter:description" content="Instructions on how to integrate FFmpeg within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      FFmpeg
+      FFmpeg(이미지프로세싱)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>ffmpeg</code> integration allows other Home Assistant integrations to process video and audio streams. This integration supports all FFmpeg versions since 3.0.0; if you have an older version, please update.</p>
+  <p><code>ffmpeg</code> 통합구성요소를 통해 다른 Home Assistant 통합구성요소가 비디오 및 오디오 스트림을 처리 할 수 ​​있습니다. 이 통합구성요소는 3.0.0 이후의 모든 FFmpeg 버전을 지원합니다. 이전 버전인 경우 업데이트하십시오.</p>
 <div class="note">
-<p>You need the <code>ffmpeg</code> binary in your system path. On Debian 8 or Raspbian (Jessie) you can install it from <a href="https://backports.debian.org/Instructions/" rel="external nofollow">debian-backports</a>. If you want <a href="https://trac.ffmpeg.org/wiki/HWAccelIntro" rel="external nofollow">hardware acceleration</a> support on a Raspberry Pi, you will need to build from source by yourself. Windows binaries are available on the <a href="http://www.ffmpeg.org/" rel="external nofollow">FFmpeg</a> website.</p>
+<p>시스템 경로에<code>ffmpeg</code> 바이너리가 필요합니다. 데비안 8 또는 Raspbian (Jessie)에서는 <a href="https://backports.debian.org/Instructions/" rel="external nofollow">debian-backports</a>에서 설치할 수 있습니다. Raspberry Pi에서 <a href="https://trac.ffmpeg.org/wiki/HWAccelIntro" rel="external nofollow">hardware acceleration</a> 지원을 원한다면 직접 소스에서 빌드해야합니다. Windows 바이너리는 [FFmpeg] (<a href="http://www.ffmpeg.org/" rel="external nofollow">http://www.ffmpeg.org/</a>) 웹 사이트에서 제공됩니다.</p>
 </div>
 <div class="note">
-<p>If you are using <a href="/hassio/">Hass.io</a> then just move forward to the configuration as all requirements are already fulfilled.</p>
+<p><a href="/hassio/">Hass.io</a>를 사용하는 경우 모든 요구 사항이 이미 충족되었으므로 설정으로 이동하십시오.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설정하려면 <code>configuration.yaml</code> 파일에 다음 정보를 추가하십시오 :</p>
 <pre><code class="language-yaml">ffmpeg:
 </code></pre>
 <div class="config-vars">
@@ -131,23 +131,23 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="raspbian-debian-jessie-lite-installations" href="#raspbian-debian-jessie-lite-installations"></a> Raspbian Debian Jessie Lite Installations</h3>
-<p>To get the binary on Raspbian Debian Jessie Lite on a RPi you need to perform the following:</p>
+<a class="title-link" name="raspbian-debian-jessie-lite-" href="#raspbian-debian-jessie-lite-"></a> Raspbian Debian Jessie Lite 설치</h3>
+<p>RPi의 Raspbian Debian Jessie Lite에서 바이너리를 가져오려면 다음을 수행해야합니다.</p>
 <pre><code class="language-bash">sudo echo "deb http://ftp.debian.org/debian jessie-backports main" &gt;&gt; /etc/apt/sources.list
 sudo apt-get update
 sudo apt-get -t jessie-backports install ffmpeg
 </code></pre>
-<p>We can use now following in the configuration:</p>
+<p>설정에서 다음을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
 </code></pre>
 <h3>
-<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h3>
-<p>In most cases, <code>ffmpeg</code> automatically detects all needed options to read a video or audio stream or file. But it is possible in rare cases that you will need to set options to help <code>ffmpeg</code> out.</p>
-<p>First, check that your stream is playable by <code>ffmpeg</code> outside of Home Assistant with (use option <code>-an</code> or <code>-vn</code> to disable video or audio stream):</p>
+<a class="title-link" name="-" href="#-"></a> 문제 해결</h3>
+<p>대부분의 경우, ffmpeg는 비디오 또는 오디오 스트림 또는 파일을 읽는 데 필요한 모든 옵션을 자동으로 감지합니다. 그러나 드문 경우이지만 <code>ffmpeg</code>를 돕기 위해 옵션을 설정해야 할 수도 있습니다.</p>
+<p>먼저, 홈어시스턴트 외부의 <code>ffmpeg</code>에서 스트림을 재생할 수 있는지 확인하십시오 (비디오 또는 오디오 스트림을 비활성화하려면 <code>-an</code> 또는<code>-vn</code> 옵션 사용).</p>
 <pre><code class="language-bash">ffmpeg -i INPUT -an -f null -
 </code></pre>
-<p>Now you should be able to see what is going wrong. The following list contains some common problems and solutions:</p>
+<p>이제 무엇이 잘못되었는지 확인할 수 있습니다. 다음 목록에는 몇 가지 일반적인 문제와 해결책이 있습니다. :</p>
 <ul>
 <li>
 <code>[rtsp @ ...] UDP timeout, retrying with TCP</code>: You need to set an RTSP transport in the configuration with: <code>input: -rtsp_transport tcp -i INPUT</code>
@@ -156,8 +156,8 @@ sudo apt-get -t jessie-backports install ffmpeg
 <code>[rtsp @ ...] Could not find codec parameters for stream 0 (Video: ..., none): unspecified size</code>: FFmpeg needs more data or time for autodetection (the default is 5 seconds). You can set the <code>analyzeduration</code> and/or <code>probesize</code> options to experiment with giving FFmpeg more leeway. If you find the needed value, you can set it with: <code>input: -analyzeduration xy -probesize xy -i INPUT</code>. More information about this can be found <a href="https://www.ffmpeg.org/ffmpeg-formats.html#Description" rel="external nofollow">here</a>.</li>
 </ul>
 <h4>
-<a class="title-link" name="usb-cameras" href="#usb-cameras"></a> USB cameras</h4>
-<p>For <code>INPUT</code> a valid source is needed. A USB camera is an easy way to test your video setup. To get all available USB cameras connected to the system, e.g., use the v4l2 tools on a Linux machine.</p>
+<a class="title-link" name="usb-" href="#usb-"></a> USB 카메라</h4>
+<p><code>INPUT</code>의 경우 유효한 소스가 필요합니다. USB 카메라를 사용하면 비디오 설정을 쉽게 테스트 할 수 있습니다. 예를 들어, 사용 가능한 모든 USB 카메라를 시스템에 연결하려면 Linux 시스템에서 v4l2 도구를 사용하십시오.</p>
 <pre><code class="language-bash">$ v4l2-ctl --list-devices
 UVC Camera (046d:0825) (usb-0000:00:14.0-1):
   /dev/video1

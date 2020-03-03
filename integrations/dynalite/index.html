@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Philips Dynalite - 홈어시스턴트</title>
+    <title>필립스 Dynalite - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on setting up Philips Dynalite within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/dynalite/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Philips Dynalite">
+    <meta property="og:title" content="필립스 Dynalite">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/dynalite/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Philips Dynalite">
+    <meta name="twitter:title" content="필립스 Dynalite">
     <meta name="twitter:description" content="Instructions on setting up Philips Dynalite within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,24 +97,24 @@
   
   <header>
     <h1 class="title indent">
-      Philips Dynalite
+      필립스 Dynalite
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Philips Dynalite support is integrated into Home Assistant as a hub that can drive the light platforms.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>Philips Dynalite 지원은 라이트 플랫폼을 구동 할 수있는 허브로 Home Assistant에 통합되어 있습니다.</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Lights</li>
 </ul>
-<p>A Philips Dynalite hub connects to the Dynet network, which is composed of areas, channels, and preset.</p>
-<p>A Dynalite area typically (although not necessarily) defines some physical area, such as a room.</p>
-<p>Each area can have one or more channels that correspond to the different devices they control. A channel can relate to a dimmable light, or other devices, such as a cover.</p>
-<p>Additionally, each area can have one or more presets that determine the behavior of all the channels, and sometimes trigger additional actions. Typically, preset 1 in an area means ‘on’, and preset ‘4’ means off. Additional presets could be used for scenes and dimming.</p>
+<p>Philips Dynalite 허브는 areas, channels, 그리고 preset으로 구성된 Dynet 네트워크에 연결됩니다.</p>
+<p>다이나 라이트 area는 일반적으로 (필수는 아니지만) 방과 같은 물리적 영역을 정의합니다.</p>
+<p>각 area에는 제어하는 ​​다른 장치에 해당하는 하나 이상의 채널이있을 수 있습니다. 채널은 조광(dimmable) 가능한 조명 또는 개폐장치(Cover)와 같은 기타 장치와 관련될 수 있습니다.</p>
+<p>또한 각 area에는 모든 채널의 동작을 결정하고 때로는 추가 작업을 트리거하는 하나 이상의 preset이 있을 수 있습니다. 일반적으로 area의 preset 1은 <code>on</code>을 의미하고 preset ‘4’는 <code>off</code>를 의미합니다. scenes과 디밍(dimming)에 추가 preset을 사용할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Since Philips Dynalite has virtually no auto-discover capabilities, it needs to be configured via the <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>필립스 Dynalite에는 자동 검색 기능이 없으므로 <code>configuration.yaml</code> 파일을 통해 설정해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 dynalite:
   bridges:
@@ -126,12 +126,12 @@ dynalite:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of the bridge (e.g., 192.168.1.10).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>브리지의 IP 주소 (예 : 192.168.1.10)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Port number of the bridge.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>브릿지의 포트 번호.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -140,7 +140,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name for the bridge.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>브릿지의 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -149,7 +149,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="active" href="#active"></a> active</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Actively query network. When starting, it will query all devices for their current status, and also will send queries when some changes are in progress (e.g., lights dimming or covers moving). Better experience but creates more load on the Dynalite network.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>적극적으로 네트워크를 쿼리합니다. 시작시 모든 장치의 현재 상태를 쿼리하고 일부 변경이 진행 중일 때 (예 : 조명이 어두워 지거나 이동하는 경우) 쿼리를 보냅니다. 많은 처리를 하긴하겠지만, Dynalite 네트워크에 더 많은 부하가 발생합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -158,7 +158,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="polltimer" href="#polltimer"></a> polltimer</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Polling interval for devices in transition. Value in seconds. When devices are in transition (e.g., a light fading), it will ask for a new state every X seconds until it is at the target level. Only relevant when active is set.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>transition 중인 장치의 폴링 간격. 초 단위의 값입니다. 장치가 transition 중인 경우 (예 : 조명 페이딩) 목표 레벨에 도달 할 때까지 X 초마다 새로운 상태를 요청합니다. 활성화 된 경우에만 관련이 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -167,7 +167,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="autodiscover" href="#autodiscover"></a> autodiscover</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enable auto-discover. As Dynalite does not support autodiscovery, this tracks event on your network, so if you turn on a light, it will be added to Home Assistant.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>자동 검색을 활성화합니다. Dynalite는 자동 검색을 지원하지 않으므로 네트워크의 이벤트를 추적하므로 조명을 켜면 홈어시스턴트에 추가됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -175,7 +175,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="default" href="#default"></a> default</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Global defaults for the system</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>시스템의 전역 기본값</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -185,22 +185,22 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="area" href="#area"></a> area</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Definition for the various Dynalite areas.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>다양한 다이나 라이트 area에 대한 정의.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="area_number" href="#area_number"></a> AREA_NUMBER</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>The Dynalite area number, 1-255.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>다이나 라이트 area 번호, 1-255</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the area.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>area의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="fade" href="#fade"></a> fade</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Fade time for the area, in seconds.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>해당 area의 페이드 시간 (초)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -208,18 +208,18 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="channel" href="#channel"></a> channel</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Map of the channels in this area.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 area의 채널지도.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="channel_number" href="#channel_number"></a> CHANNEL_NUMBER</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>The Dynalite channel number in the area, 1-255.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>해당 area의 다이나 라이트 채널 번호 1-255</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the channel.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>채널 이름</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -228,7 +228,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="fade" href="#fade"></a> fade</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Fade time for the channel, in seconds.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>채널의 페이드 시간 (초)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -241,7 +241,7 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 사례</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry specifying optional parameters
 dynalite:
   bridges:
@@ -262,12 +262,11 @@ dynalite:
               name: Dining Table
 </code></pre>
 <h2>
-<a class="title-link" name="initial-configuration-and-discovery" href="#initial-configuration-and-discovery"></a> Initial configuration and discovery</h2>
-<p>Maybe the most difficult thing about a Dynalite system is finding out the areas and channel mapping. If you have them or have access to the Dynalite software and your configuration files, this could be easy,
-but in the likely case that your system was installed by an integrator, you will have to discover them on your own.</p>
-<p>This is where the <code>autodiscover</code> option comes handy. If it is on, the component will track the Dynet network and every time a device is used, it will be added to Home Assistant. It will initially show as “Area 123 Channel 7”, but you can then add it to your <code>configuration.yaml</code> with the correct configuration.</p>
-<p>For example, you would go to your kitchen light and turn it on. Now you log into Home Assistant and see what the channel was. If there was more than one discovered (e.g., someone turned off the living room lights), you can try one, turn it on and off in Home Assistant and see which light it affects.</p>
-<p>The initial process can be a bit time consuming and tedious, but it only has to be done once. Once you are done configuring, it is better to set <code>autodiscover</code> to <code>false</code>, since there are many “fake” channels and areas that the system uses for internal communication and you do not want to have visible.</p>
+<a class="title-link" name="---" href="#---"></a> 초기 설정 및 검색</h2>
+<p>Dynalite 시스템에서 가장 어려운 점은 area와 채널 매핑을 찾는 것입니다. Dynalite 소프트웨어 및 설정 파일에 액세스 할 수 있거나 액세스 할 수 있는 경우 이 작업은 쉬울 수 있지만 시스템이 통합 설치자에 의해 설치되었을 가능성이 있는 경우 직접 찾아야합니다.</p>
+<p>여기서 <code>autodiscover</code> 옵션이 유용합니다. 켜져 있으면 구성 요소가 Dynet 네트워크를 추적하고 장치를 사용할 때마다 홈어시스턴트에 추가됩니다. 처음에는 “Area 123 Channel 7”로 표시되지만 자신에 맞는 설정으로 <code>configuration.yaml</code>에 추가 할 수 있습니다.</p>
+<p>예를 들어, 주방 조명으로 가서 켜십시오. 이제 홈 어시스턴트로 로그인하여 채널이 무엇인지 확인하십시오. 둘 이상이 발견 된 경우 (예 : 누군가 거실 조명 끄기) 홈어시스턴트에서 조명을 켜고 끄고 어떤 조명이 영향을 받는지 확인할 수 있습니다.</p>
+<p>초기 프로세스는 시간이 많이 걸리고 지루할 수 있지만 한번만 수행하면됩니다. 설정이 완료되면 시스템이 내부 통신에 사용하는 “fake” 채널 및 area이 많고 표시하기를 원하지 않기 때문에 <code>autodiscover</code>를 <code>false</code>로 설정하는 것이 좋습니다.</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Feedreader - 홈어시스턴트</title>
+    <title>Feed 읽어오기 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate RSS feeds into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/feedreader/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Feedreader">
+    <meta property="og:title" content="Feed 읽어오기">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/feedreader/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Feedreader">
+    <meta name="twitter:title" content="Feed 읽어오기">
     <meta name="twitter:description" content="Instructions on how to integrate RSS feeds into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Feedreader
+      Feed 읽어오기
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Add an RSS/Atom feed reader that polls feeds every hour and sends new entries into the event bus.</p>
-<p>To use RSS feeds in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p>매시간 피드를 폴링하고 새로운 항목을 이벤트 버스로 보내는 RSS/Atom 피드 리더를 추가하십시오.</p>
+<p>RSS 피드를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 feedreader:
   urls:
@@ -118,12 +118,12 @@ feedreader:
   <dl class="">
 <dt>
 <a class="title-link" name="urls" href="#urls"></a> urls</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of URLS for your feeds.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>피드의 URL 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the update interval of the feeds.</p>
+<p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>피드의 업데이트 간격을 정의.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -132,7 +132,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="max_entries" href="#max_entries"></a> max_entries</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum number of entries to extract from each feed.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>각 피드에서 추출 할 최대 항목 수.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -140,7 +140,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The following configuration example shows how to configure update interval and maximum number of entries:</p>
+<p>다음 설정 예는 업데이트 간격 및 최대 항목 수를 설정하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry with optional parameters
 feedreader:
   urls:
@@ -151,7 +151,7 @@ feedreader:
     minutes: 30
   max_entries: 5
 </code></pre>
-<p>Feedreader events can be used out of the box to trigger automation actions, e.g.:</p>
+<p>Feedreader 이벤트를 즉시 사용하여 자동화 작업을 트리거 할 수 있습니다. 다음예를 살펴보십시오. :</p>
 <pre><code class="language-yaml">automation:
   - alias: Trigger action when new element(s) in RSS feed
     trigger:
@@ -173,13 +173,13 @@ feedreader:
         message: "New Podcast available - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
         notification_id: "{{ trigger.event.data.title }}"
 </code></pre>
-<p>Any field under the <code>&lt;entry&gt;</code> tag in the feed can be used for example <code>trigger.event.data.content</code> will get the body of the feed entry.</p>
-<p>For more advanced use cases, a custom integration registering to the <code>feedreader</code> event type could be used instead:</p>
+<p>피드에서 <code>&lt;entry&gt;</code> 태그 아래의 모든 필드를 사용할 수 있습니다. 예를 들어 <code>trigger.event.data.content</code>는 피드 항목의 본문을 가져옵니다.</p>
+<p>고급 사용 사례의 경우 <code>feedreader</code> 이벤트 유형에 등록된 사용자 지정 연동을 대신 사용할 수 있습니다.</p>
 <pre><code class="language-python">EVENT_FEEDREADER = "feedreader"
 hass.bus.listen(EVENT_FEEDREADER, event_listener)
 </code></pre>
-<p>To get started developing custom components, please refer to the <a href="/developers">developers</a> documentation</p>
-<p>For a drop in packaged complete example of Feedreader, you can use the <a href="https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/hasspodcast.yaml" rel="external nofollow">PodCast notifier</a>.</p>
+<p>커스텀 컴포넌트 개발을 시작하려면 <a href="/developers">developers</a> 문서를 참조하십시오</p>
+<p>Feedreader의 패키지 전체 예제를 삭제하려면 <a href="https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/hasspodcast.yaml" rel="external nofollow">PodCast notifier</a>를 사용할 수 있습니다.</p>
 
 
 </article>

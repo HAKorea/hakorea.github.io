@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Garadget - 홈어시스턴트</title>
+    <title>Garadget(차고문제어) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Garadget covers within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/garadget/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Garadget">
+    <meta property="og:title" content="Garadget(차고문제어)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/garadget/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Garadget">
+    <meta name="twitter:title" content="Garadget(차고문제어)">
     <meta name="twitter:description" content="Instructions on how to integrate Garadget covers within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Garadget
+      Garadget(차고문제어)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>garadget</code> cover platform lets you control <a href="https://www.garadget.com/" rel="external nofollow">Garadget</a> garage door futurizers through Home Assistant.</p>
+  <p><code>garadget</code> Cover 플랫폼을 사용하면 Home Assistant를 통해 <a href="https://www.garadget.com/" rel="external nofollow">Garadget</a>의 garage door futurizers로 제어 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable Garadget Covers in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Garadget Covers를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 
  cover:
@@ -129,11 +129,11 @@
   <dl class="">
 <dt>
 <a class="title-link" name="covers" href="#covers"></a> covers</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of your doors.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>차고문 목록.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>If provided, the <strong>access_token</strong> will be used, otherwise the <strong>username</strong> and <strong>password</strong> will be used to automatically generate an access token at start time.</p>
+<p>제공되는 경우 <strong>access_token</strong> 이 사용되며, 그렇지 않으면 <strong>username</strong> 및 <strong>password</strong>가 시작시 자동으로 액세스 토큰을 생성하는 데 사용됩니다.</p>
 <h2>
 <a class="title-link" name="example" href="#example"></a> Example</h2>
 <p class="img">
@@ -177,15 +177,15 @@ customize:
   sensor.garage_door_wifi_signal_strength:
     icon: mdi:wifi
 </code></pre>
-<p>Some of the Garadget sensors can create a lot of clutter in the logbook.  Use this section of code in your <code>configuration.yaml</code> to exclude those entries.</p>
+<p>Garadget 센서 중 일부는 로그북에 많은 혼란을 줄 수 있습니다. <code>configuration.yaml</code>에서 이 코드 섹션을 사용하여 해당 항목을 제외하십시오.</p>
 <pre><code class="language-yaml">logbook:
   exclude:
     entities:
       - sensor.garage_door_time_in_state
       - sensor.garage_door_wifi_signal_strength
 </code></pre>
-<p>As of firmware release 1.17 the garadget device has native support for MQTT. The options allow the end-user to configure the device in the following ways ‘cloud only’, ‘cloud and MQTT’ or ‘MQTT only’.</p>
-<p>For configuration of the garadget as a MQTT cover:</p>
+<p>펌웨어 릴리스 1.17부터 garadget 장치는 MQTT를 기본적으로 지원합니다. 이 옵션을 통해 최종 사용자는 ‘클라우드 만’, ‘클라우드 및 MQTT’ 또는 ‘MQTT 만’과 같은 방식으로 장치를 설정할 수 있습니다.</p>
+<p>garadget을 MQTT Cover로 설정하려면 다음을 수행하십시오.</p>
 <pre><code class="language-yaml">cover:
   - platform: mqtt
     name: "Garage Door"

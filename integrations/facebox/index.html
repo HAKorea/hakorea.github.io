@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Facebox - 홈어시스턴트</title>
+    <title>Facebox(페이스박스) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Detect and recognize faces with Facebox.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/facebox/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Facebox">
+    <meta property="og:title" content="Facebox(페이스박스)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/facebox/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Facebox">
+    <meta name="twitter:title" content="Facebox(페이스박스)">
     <meta name="twitter:description" content="Detect and recognize faces with Facebox.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Facebox
+      Facebox(페이스박스)
     </h1>
   </header>
   <hr class="divider">
   
 
   <p>The <code>facebox</code> image processing platform allows you to detect and recognize faces in a camera image using <a href="https://machinebox.io/docs/facebox" rel="external nofollow">Facebox</a>. The state of the entity is the number of faces detected, and recognized faces are listed in the <code>matched_faces</code> attribute. An <code>image_processing.detect_face</code> event is fired for each recognized face, and the event <code>data</code> provides the <code>confidence</code> of recognition, the <code>name</code> of the person, the <code>image_id</code> of the image associated with the match, the <code>bounding_box</code> that contains the face in the image, and the <code>entity_id</code> that processing was performed on.</p>
+<p><code>facebox</code> 이미지 처리 플랫폼을 사용하면 <a href="https://machinebox.io/docs/facebox" rel="external nofollow">Facebox</a>를 사용하여 카메라 이미지에서 얼굴을 감지하고 인식 할 수 있습니다. 엔티티의 상태는 감지 된 얼굴의 수이며 인식된 얼굴은 <code>matched_faces</code> 속성에 나열됩니다. 인식된 각 얼굴에 대해 <code>image_processing.detect_face</code> 이벤트가 발생하며 이벤트 <code>data</code>는 해당 인식의 <code>confidence</code>을 제공하며, 사람의 <code>name</code>, 사진과 매치되어 연관된 <code>image_id</code>, 이미지에 얼굴을 포함한 <code>bounding_box</code>, <code>entity_id</code> 프로세싱이 수행됩니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>Facebox runs in a Docker container and it is recommended that you run this container on a machine with a minimum of 2 GB RAM. On your machine with Docker, run the Facebox container with:</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>Facebox는 Docker 컨테이너에서 실행되며 최소 2GB RAM이있는 시스템에서 이 컨테이너를 실행하는 것이 좋습니다.  Docker가있는 머신에서 다음을 사용하여 Facebox 컨테이너를 실행하십시오.</p>
 <pre><code class="language-bash">MB_KEY="INSERT-YOUR-KEY-HERE"
 
 sudo docker run --name=facebox --restart=always -p 8080:8080 -e "MB_KEY=$MB_KEY"  machinebox/facebox
@@ -124,13 +125,13 @@ services:
       - MB_KEY=${MB_KEY}
       - MB_FACEBOX_DISABLE_RECOGNITION=false
 </code></pre>
-<p>You can run Facebox with a username and password by adding <code>-e "MB_BASICAUTH_USER=my_username" -e "MB_BASICAUTH_PASS=my_password"</code> but bear in mind that the integration does not encrypt these credentials and this approach does not guarantee security on an unsecured network.</p>
-<p>After you created an account at <a href="https://machinebox.io/account" rel="external nofollow">Machinebox</a>, you can grab your <code>MB_KEY</code> at <a href="https://developer.veritone.com/machinebox/overview" rel="external nofollow">your Account page</a>.</p>
-<p>If you only require face detection (number of faces) you can disable face recognition by adding <code>-e "MB_FACEBOX_DISABLE_RECOGNITION=true"</code> in the <code>docker run</code> command.</p>
-<p>If your host machine does not support <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions" rel="external nofollow">AVX</a> and you experience issues running the <code>machinebox/facebox</code> image there is an alternative image without AVX support available at <code>machinebox/facebox_noavx</code>(<em>HINT</em>: This image is currently not supported by machinebox and should only be used if necessary)</p>
+<p><code>-e "MB_BASICAUTH_USER=my_username" -e "MB_BASICAUTH_PASS=my_password"</code>를 추가하여 사용자 이름 및 비밀번호로 Facebox를 실행할 수 있지만 연동시 이러한 신뢰 정보(credentials)가 암호화되지 않으며 보안이 없는 네트워크에서는 보안이 보장되지 않습니다.</p>
+<p><a href="https://machinebox.io/account" rel="external nofollow">Machinebox</a>에서 계정을 생성한 후에는 <a href="https://developer.veritone.com/machinebox/overview" rel="external nofollow">your Account page</a> 에서 <code>MB_KEY</code>를 가져올 수 있습니다.</p>
+<p>얼굴 인식(얼굴 수)만 필요한 경우 <code>docker run</code> 명령에 <code>-e "MB_FACEBOX_DISABLE_RECOGNITION = true"</code>를 추가하여 얼굴 인식을 비활성화 할 수 있습니다.</p>
+<p>호스트 컴퓨터가 <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions" rel="external nofollow">AVX</a>를 지원하지 않고 <code>machinebox/facebox</code> 이미지를 실행하는 데 문제가 있는 경우 <code>machinebox/facebox_noavx</code>에서 AVX 지원이 없는 대체 이미지가 있습니다. (<em>힌트</em> : 이 이미지는 현재 machinebox에서 지원되지 않으며 필요한 경우에만 사용해야 합니다.)</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 플랫폼을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 image_processing:
   - platform: facebox
@@ -146,39 +147,39 @@ image_processing:
   <dl class="">
 <dt>
 <a class="title-link" name="ip_address" href="#ip_address"></a> ip_address</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of your machine hosting Facebox.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Facebox를 호스팅하는 컴퓨터의 IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The port which Facebox is exposed on.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Facebox가 노출된 포트.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Facebox username if you have set one.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Facebox 사용자 이름을 설정한 경우.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The Facebox password if you have set one.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Facebox 비밀번호를 설정한 경우.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="source" href="#source"></a> source</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>The list of image sources.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지 소스 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A camera entity id to get picture from.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>사진을 가져올 카메라 엔티티 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>This parameter allows you to override the name of your <code>image_processing</code> entity.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 <code>image_processing</code> 엔티티 이름을 대체할 수 있습니다</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="automations" href="#automations"></a> Automations</h2>
-<p>Use the <code>image_processing.detect_face</code> events to trigger automations, and breakout the <code>trigger.event.data</code> using a <a href="/docs/automation/templating/">data_template</a>. The following example automation sends a notification when Ringo Star is recognized:</p>
+<a class="title-link" name="" href="#"></a> 자동화</h2>
+<p><code>image_processing.detect_face</code> 이벤트를 사용하여 자동화를 트리거하고 <a href="/docs/automation/templating/">data_template</a>을 사용하여 <code>trigger.event.data</code> 를 분류하십시오. 다음 예제 자동화는 Ringo Star가 인식될 때 알림을 보냅니다.</p>
 <pre><code class="language-yaml">- id: '12345'
   alias: Ringo Starr recognised
   trigger:
@@ -193,8 +194,8 @@ image_processing:
       title: Door-cam notification
 </code></pre>
 <h2>
-<a class="title-link" name="service-faceboxteach_face" href="#service-faceboxteach_face"></a> Service facebox.teach_face</h2>
-<p>The service <code>facebox.teach_face</code> can be used to teach Facebox faces.</p>
+<a class="title-link" name="faceboxteach_face-" href="#faceboxteach_face-"></a> facebox.teach_face 서비스</h2>
+<p><code>facebox.teach_face</code> 서비스는 Facebox 얼굴을 가르치는데 사용될 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -221,14 +222,14 @@ image_processing:
 </tr>
 </tbody>
 </table>
-<p>A valid service data example:</p>
+<p>유효한 서비스 데이터 예시:</p>
 <pre><code class="language-yaml">{
   "entity_id": "image_processing.facebox_local_file",
   "name": "superman",
   "file_path": "/images/superman_1.jpeg"
 }
 </code></pre>
-<p>You can use an automation to receive a notification when you train a face:</p>
+<p>얼굴인식을 훈련시킬 때 자동화를 사용하여 알림을 받을 수 있습니다.</p>
 <pre><code class="language-yaml">- id: '1533703568569'
   alias: Face taught
   trigger:
@@ -244,11 +245,11 @@ image_processing:
       with file {{ trigger.event.data.service_data.file_path }}'
       title: Face taught notification
 </code></pre>
-<p>Any errors on teaching will be reported in the logs. If you enable <a href="/integrations/system_log/">system_log</a> events:</p>
+<p>얼굴을 가르칠때 오류는 로그에 보고됩니다. <a href="/integrations/system_log/">system_log</a> 이벤트를 사용하는 경우 :</p>
 <pre><code class="language-yaml">system_log:
   fire_event: true
 </code></pre>
-<p>you can create an automation to receive notifications on Facebox errors:</p>
+<p>Facebox 오류에 대한 알림을 받도록 자동화를 만들 수 있습니다.</p>
 <pre><code class="language-yaml">- id: '1533703568577'
   alias: Facebox error
   trigger:

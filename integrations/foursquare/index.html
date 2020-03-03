@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Foursquare - 홈어시스턴트</title>
+    <title>포스퀘어(Foursquare) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to the Foursquare API into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/foursquare/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Foursquare">
+    <meta property="og:title" content="포스퀘어(Foursquare)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/foursquare/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Foursquare">
+    <meta name="twitter:title" content="포스퀘어(Foursquare)">
     <meta name="twitter:description" content="Instructions on how to the Foursquare API into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,13 +97,13 @@
   
   <header>
     <h1 class="title indent">
-      Foursquare
+      포스퀘어(Foursquare)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>foursquare</code> integration accepts pushes from the Foursquare <a href="https://developer.foursquare.com/overview/realtime" rel="external nofollow">Real-Time API</a> and a service to check users in on Swarm.</p>
+  <p><code>foursquare</code> 통합구성요소는 Foursquare <a href="https://developer.foursquare.com/overview/realtime" rel="external nofollow">Real-Time API</a>에서 푸시(push)를 받고 Swarm에서 사용자를 체크인하는 서비스를 허용합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 foursquare:
   access_token: "&lt;foursquare access token&gt;"
@@ -115,28 +115,26 @@ foursquare:
   <dl class="">
 <dt>
 <a class="title-link" name="access_token" href="#access_token"></a> access_token</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A Foursquare API access token.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Foursquare API 액세스 토큰.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="push_secret" href="#push_secret"></a> push_secret</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The push secret that Foursquare provides to you in the app dashboard.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Foursquare가 앱 대시 보드에서 제공하는 푸시 비밀정보</p>
 </span></p></dd>
 </dl>
 </div>
 <h4>
-<a class="title-link" name="getting-the-access-token" href="#getting-the-access-token"></a> Getting the access token</h4>
-<p>After you have registered your APP on your <a href="https://foursquare.com/developers/apps" rel="external nofollow">My Apps Page</a> you get a <code>CLIENT_ID</code> and you have specified a
-<code>REDIRECT_URL</code> which can be any URL you like, but since it will get your access token via an HTTP GET request, it should be a URL which will ignore the <code>access_token</code> HTTP GET variable. A good idea is to choose the URL of your Home Assistant.
-Visit the following URL in your browser:</p>
+<a class="title-link" name="--" href="#--"></a> 액세스 토큰 받기</h4>
+<p>After you have registered your APP on your <a href="https://foursquare.com/developers/apps" rel="external nofollow">My Apps Page</a> you get a <code>CLIENT_ID</code> and you have specified a <code>REDIRECT_URL</code> which can be any URL you like, but since it will get your access token via an HTTP GET request, it should be a URL which will ignore the <code>access_token</code> HTTP GET variable. A good idea is to choose the URL of your Home Assistant.
+Visit the following URL in your browser:
+<a href="https://foursquare.com/developers/apps" rel="external nofollow">My Apps Page</a>에 APP를 등록한 후 <code>CLIENT_ID</code>가 표시되고 원하는 URL로 <code>REDIRECT_URL</code>을 지정했을 것입니다. 하지만, HTTP GET 요청을 통해 액세스 토큰을 얻으므로, <code>access_token</code> HTTP GET 변수를 무시하는 URL일 것입니다. 결국 홈어시스턴트의 URL을 선택하는 것이 좋습니다. 브라우저에서 다음 URL을 방문하십시오. :</p>
 <pre><code class="language-txt">https://foursquare.com/oauth2/authenticate?client_id=CLIENT_ID&amp;response_type=token&amp;redirect_uri=YOUR_REGISTERED_REDIRECT_URI
 </code></pre>
-<p>and change the <code>CLIENT_ID</code> and <code>YOUR_REGISTERED_REDIRECT_URL</code> to your actual values.
-You will receive an OAuth request landing page, asking you if you want to connect your Foursquare account to your newly created app. Say “Yes”.
-After that, you will get redirected to your <code>REDIRECT_URL</code> with the <code>access_token</code> as an HTTP GET variable. Copy everything after the = and paste it in your configuration.yaml as the <code>access_token</code>.</p>
+<p><code>CLIENT_ID</code> 및 <code>YOUR_REGISTERED_REDIRECT_URL</code> 을 실제 값으로 변경하십시오. Foursquare 계정을 새로 만든 앱에 연결할지 묻는 OAuth 요청 랜딩 페이지가 나타납니다. “Yes”라고 하십시오. 그 후에는 HTTP GET 변수로 <code>access_token</code>을 사용하여 <code>REDIRECT_URL</code>으로 리디렉션됩니다. = 뒤에 모든 것을 복사하고 configuration.yaml에 <code>access_token</code>으로 붙여 넣으십시오.</p>
 <h3>
-<a class="title-link" name="real-time-api" href="#real-time-api"></a> Real-Time API</h3>
-<p>The integration accepts pushes from Foursquare at <code>/api/foursquare</code>. The route does not require authentication.</p>
-<p>Foursquare check-in events can be used out of the box to trigger automation actions, e.g.:</p>
+<a class="title-link" name="-api" href="#-api"></a> 실시간 API</h3>
+<p>연동 이후 <code>/api/foursquare</code>에서 Foursquare의 푸시를 허용합니다. 경로는 인증이 필요하지 않습니다.</p>
+<p>Foursquare 체크인 이벤트를 즉시 사용하여 자동화 액션을 트리거 할 수 있습니다. 다음예를 보십시오.</p>
 <pre><code class="language-yaml">automation:
   - alias: Trigger action when you check into a venue.
     trigger:
@@ -147,28 +145,28 @@ After that, you will get redirected to your <code>REDIRECT_URL</code> with the <
       entity_id: script.my_action
 </code></pre>
 <h3>
-<a class="title-link" name="check-ins" href="#check-ins"></a> Check ins</h3>
-<p>To check a user in, use the <code>foursquare/checkin</code> service.</p>
+<a class="title-link" name="-check-ins" href="#-check-ins"></a> 체크인 (Check ins)</h3>
+<p>사용자를 체크인하려면 <code>foursquare / checkin</code> 서비스를 사용하십시오.</p>
 <p>Parameters:</p>
 <ul>
 <li>
-<strong>venueId</strong> (<em>Required</em>): The Foursquare venue where the user is checking in.</li>
+<strong>venueId</strong> (<em>Required</em>): 사용자가 체크인하는 Foursquare 장소.</li>
 <li>
-<strong>eventId</strong> (<em>Optional</em>): The event the user is checking in to.</li>
+<strong>eventId</strong> (<em>Optional</em>): 사용자가 체크인하는 이벤트.</li>
 <li>
-<strong>shout</strong> (<em>Optional</em>): A message about your check-in. The maximum length of this field is 140 characters.</li>
+<strong>shout</strong> (<em>Optional</em>): 체크인에 관한 메시지. 이 필드의 최대 길이는 140 자입니다.</li>
 <li>
-<strong>mentions</strong> (<em>Optional</em>): Mentions in your check-in. This parameter is a semicolon-delimited list of mentions. A single mention is of the form “start,end,userid”, where start is the index of the first character in the shout representing the mention, end is the index of the first character in the shout after the mention, and userid is the userid of the user being mentioned. If userid is prefixed with “fbu-”, this indicates a Facebook userid that is being mention. Character indices in shouts are 0-based.</li>
+<strong>mentions</strong> (<em>Optional</em>): 체크인시 멘션. 이 매개 변수는 세미콜론으로 구분된 멘션 목록입니다. 단일 멘션은 “start, end, userid” 형식입니다. 여기서 start는 멘션을 나타내는 shout의 첫 문자 색인이고 end는 멘션 후 shout의 첫 번째 문자 색인이며 userid는 멘션된 사용자의 사용자 ID userid 접두사가 “fbu-”인 경우 멘션중인 Facebook 사용자 ID를 나타냅니다. shout의 문자 색인은 0부터 시작합니다.</li>
 <li>
-<strong>broadcast</strong> (<em>Optional</em>): “Who to broadcast this check-in to. Accepts a comma-delimited list of values: private (off the grid) or public (share with friends), Facebook share on Facebook, twitter share on twitter, followers share with followers (celebrity mode users only), If no valid value is found, the default is public.”</li>
+<strong>broadcast</strong> (<em>Optional</em>): “이 체크인을 브로드 캐스트하는 사람. 쉼표로 구분된 값 목록을 수락합니다 (비공개) 또는 공개 (친구와 공유), Facebook의 Facebook 공유, Twitter의 트위터 공유, Twitter의 팔로워 공유, 팔로워와 공유 (유명인 모드 사용자만), 유효한 값을 찾을 수 없는 경우, 기본값은 공개입니다.”</li>
 <li>
-<strong>ll</strong> (<em>Optional</em>): Latitude and longitude of the user’s location. Only specify this field if you have a GPS or other device reported location for the user at the time of check-in.</li>
+<strong>ll</strong> (<em>Optional</em>): 사용자 위치의 위도 및 경도. 체크인시 사용자의 GPS 또는 기타 장치 보고 위치가 있는 경우에만 이 필드를 지정하십시오.</li>
 <li>
-<strong>llAcc</strong> (<em>Optional</em>): Accuracy of the user’s latitude and longitude, in meters.</li>
+<strong>llAcc</strong> (<em>Optional</em>): 사용자의 위도와 경도의 정확도 ( 미터).</li>
 <li>
-<strong>alt</strong> (<em>Optional</em>): Altitude of the user’s location, in meters.</li>
+<strong>alt</strong> (<em>Optional</em>): 사용자 위치의 고도 (미터)</li>
 <li>
-<strong>altAcc</strong> (<em>Optional</em>): Vertical accuracy of the user’s location, in meters.</li>
+<strong>altAcc</strong> (<em>Optional</em>): 사용자 위치의 수직 정확도 (미터).</li>
 </ul>
 
 

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Discord - 홈어시스턴트</title>
+    <title>Discord(디스코드) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add Discord notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/discord/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Discord">
+    <meta property="og:title" content="Discord(디스코드)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/discord/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Discord">
+    <meta name="twitter:title" content="Discord(디스코드)">
     <meta name="twitter:description" content="Instructions on how to add Discord notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Discord
+      Discord(디스코드)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <a href="https://discordapp.com/" rel="external nofollow">Discord service</a> is a platform for the notify component. This allows integrations to send messages to the user using Discord.</p>
-<p>In order to get a token you need to go to the <a href="https://discordapp.com/developers/applications/me" rel="external nofollow">Discord My Apps page</a> and create a new application. Once the application is ready, create a <a href="https://discordapp.com/developers/docs/topics/oauth2#bots" rel="external nofollow">bot</a> user (<strong>Create a Bot User</strong>).</p>
-<p>Retrieve the <strong>Client ID</strong> from the information section and the (hidden) <strong>Token</strong> of your bot for later.</p>
-<p>When setting up the application you can use this <a href="/images/favicon-192x192-full.png">icon</a>.</p>
-<p>To use Discord notifications, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><a href="https://discordapp.com/" rel="external nofollow">Discord service</a>는 알림 구성 요소를 위한 플랫폼입니다. 이를 통해 통합구성요소는 Discord를 사용하여 사용자에게 메시지를 보낼 수 있습니다.</p>
+<p>토큰을 얻으려면 <a href="https://discordapp.com/developers/applications/me" rel="external nofollow">Discord My Apps page</a>로 이동하여 새 응용 프로그램을 만들어야합니다. 응용 프로그램이 준비되면 <a href="https://discordapp.com/developers/docs/topics/oauth2#bots" rel="external nofollow">bot</a> 사용자(<strong>Create a Bot User</strong>)를 만듭니다.</p>
+<p>정보 섹션에서 <strong>Client ID</strong>와 나중에 봇의 (숨겨진)<strong>Token</strong>을 검색합니다.</p>
+<p>응용 프로그램을 설정할 때 이<a href="/images/favicon-192x192-full.png">icon</a>을 사용할 수 있습니다.</p>
+<p>Discord를 사용하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: discord
@@ -120,7 +120,7 @@ notify:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The notifier will bind to the service <code>notify.NAME</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알리미는 <code>notify.NAME</code> 서비스에 바인딩합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -128,30 +128,30 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="token" href="#token"></a> token</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your bot’s token.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>봇의 토큰.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="setting-up-the-bot" href="#setting-up-the-bot"></a> Setting up the bot</h3>
-<p>Bots can only send messages to servers or attach local available images. To add the bot to a server you are an admin on, get the details of the bot from the <a href="https://discordapp.com/developers/applications/me" rel="external nofollow">Discord My Apps page</a>.</p>
+<a class="title-link" name="-" href="#-"></a> 봇 설정하기</h3>
+<p>봇은 서버로 메시지를 보내거나 사용 가능한 로컬 이미지를 첨부 할 수 있습니다. 봇을 관리자인 서버에 추가하려면 <a href="https://discordapp.com/developers/applications/me" rel="external nofollow">Discord My Apps page</a>에서 봇의 세부 정보를 얻습니다.</p>
 <p class="img">
   <img src="/images/screenshots/discord-bot.png">
 </p>
-<p>Now use the Discord Authorization page with the <strong>Client ID</strong> of your <a href="https://discordapp.com/developers/docs/topics/oauth2#bots" rel="external nofollow">bot</a>.</p>
+<p>이제 <a href="https://discordapp.com/developers/docs/topics/oauth2#bots" rel="external nofollow">bot</a>의 <strong>Client ID</strong>와 함께 Discord Authorization 페이지를 사용하십시오.</p>
 <p><code>https://discordapp.com/api/oauth2/authorize?client_id=[CLIENT_ID]&amp;scope=bot&amp;permissions=0</code></p>
 <p class="img">
   <img src="/images/screenshots/discord-auth.png">
 </p>
-<p>Wait for the confirmation which should say “Authorized”.</p>
-<p>Once the bot has been added to your server, get the channel ID of the channel you want the bot to operate in. In The Discord application go to <strong>Settings</strong> &gt; <strong>Appearance</strong> &gt; <strong>Check developer mode</strong>.</p>
+<p>“Authorized”라는 확인 메시지가 표시 될 때까지 기다립니다.</p>
+<p>봇이 서버에 추가되면 봇을 작동시키려는 채널의 채널 ID를 얻습니다.   Discord 응용 프로그램에서 <strong>Settings</strong> &gt; <strong>Appearance</strong> &gt; <strong>Check developer mode</strong> 으로 이동하십시오.</p>
 <p class="img">
   <img src="/images/screenshots/discord-api.png">
 </p>
-<p>Right click channel name and copy the channel ID (<strong>Copy ID</strong>).</p>
-<p>This channel ID has to be used as the target when calling the notification service. Multiple channel IDs can be specified, across multiple servers.</p>
+<p>채널 이름을 마우스 오른쪽 단추로 클릭하고 채널 ID를 복사하십시오. (<strong>Copy ID</strong>).</p>
+<p>이 채널 ID는 알림 서비스를 호출 할 때 대상으로 사용해야합니다. 여러 서버에서 여러 채널 ID를 지정할 수 있습니다.</p>
 <h4>
-<a class="title-link" name="example-service-call" href="#example-service-call"></a> Example service call</h4>
+<a class="title-link" name="service-call-" href="#service-call-"></a> Service Call 사례</h4>
 <pre><code class="language-yaml">- service: notify.discord
   data:
     message: "A message from Home Assistant"
@@ -163,10 +163,10 @@ Default value: </p>
 </code></pre>
 <h3>
 <a class="title-link" name="notes" href="#notes"></a> Notes</h3>
-<p>You can tag any user inside a channel by using their user ID in the message like so: <code>&lt;@userid&gt;</code> replacing <code>userid</code> with the ID you copied. To get the user ID right click on the user name to copy the ID like you did for the channel ID up above.</p>
-<p>For more information about creating and authorizing bots, visit the <a href="https://discordapp.com/developers/docs/topics/oauth2" rel="external nofollow">OAuth2 information page</a></p>
-<p>To use notifications effectively, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
-<p>Images are uploaded to Discord when a message is sent. As such, a local path to the image is required (i.e. <code>/config/www/garage.jpg</code> as opposed to <code>/local/garage.jpg</code>), and updating an image after sending it in a message will not update the message in Discord.</p>
+<p>메시지에 사용자 ID를 사용하여 채널 내부의 모든 사용자에게 태그를 지정할 수 있습니다. : <code>&lt;@userid&gt;</code>에서 <code>userid</code>를 복사한 ID로 바꾸는 방법으로. 사용자 ID를 얻으려면 사용자 이름을 마우스 오른쪽 버튼으로 클릭하여 위의 채널 ID와 마찬가지로 ID를 복사하십시오.</p>
+<p>봇 생성 및 권한 부여에 대한 자세한 내용은 <a href="https://discordapp.com/developers/docs/topics/oauth2" rel="external nofollow">OAuth2 information page</a>를 방문하십시오.</p>
+<p>알림을 효과적으로 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
+<p>메시지가 전송될 때 이미지가 Discord에 업로드됩니다. 따라서 이미지에 대한 로컬 경로가 필요합니다 (예: <code>/local/garage.jpg</code>가 아닌 <code>/config/www/garage.jpg</code>). 메시지로 보낸 후 이미지를 업데이트해도 Discord의 메시지는 업데이트되지 않습니다.</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Foscam - 홈어시스턴트</title>
+    <title>포스캠(foscam) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Foscam IP cameras within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/foscam/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Foscam">
+    <meta property="og:title" content="포스캠(foscam)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/foscam/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Foscam">
+    <meta name="twitter:title" content="포스캠(foscam)">
     <meta name="twitter:description" content="Instructions on how to integrate Foscam IP cameras within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Foscam
+      포스캠(foscam)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>foscam</code> platform allows you to watch the live stream of your <a href="https://www.foscam.com" rel="external nofollow">Foscam</a> IP camera in Home Assistant.</p>
+  <p><code>foscam</code> 플랫폼을 사용하면 홈어시스턴트에서 <a href="https://www.foscam.com" rel="external nofollow">Foscam</a> IP 카메라의 라이브 스트림을 볼 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable your Foscam IP camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Foscam IP 카메라를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: foscam
@@ -120,12 +120,12 @@ camera:
   <dl class="">
 <dt>
 <a class="title-link" name="ip" href="#ip"></a> ip</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>카메라의 IP 주소</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port that the camera is running on.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라가 실행되는 포트</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -134,7 +134,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="rtsp_port" href="#rtsp_port"></a> rtsp_port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port that the camera uses for RTSP. This is normally auto-discovered but some models may need this set, such as the R2 and R2C.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라가 RTSP에 사용하는 포트.  이는 일반적으로 자동 검색되지만 R2 및 R2C와 같은 일부 모델에는 이 세트가 필요할 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,24 +142,24 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The username for accessing your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>카메라에 액세스하기위한 사용자 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password for accessing your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>카메라에 액세스하기위한 비밀번호</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>This parameter allows you to override the name of your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 카메라 이름을 무시할 수 있습니다</p>
 </span></p></dd>
 </dl>
 </div>
 <div class="note">
-There seems to be some issues within Foscam with lengthy passwords and passwords containing certain symbols. Be sure to check your camera's documentation.
+Foscam 내에서 암호가 길고 특정 기호가 포함된 암호에 문제가 있는것 같습니다. 카메라 설명서를 확인하십시오.
 </div>
 <h3>
-<a class="title-link" name="service-foscamptz" href="#service-foscamptz"></a> Service foscam.ptz</h3>
-<p>If your Foscam camera supports PTZ, you will be able to pan or tilt your camera.</p>
+<a class="title-link" name="foscamptz-" href="#foscamptz-"></a> foscam.ptz 서비스</h3>
+<p>Foscam 카메라가 PTZ를 지원하는 경우 카메라를 이동하거나 기울일 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -184,12 +184,12 @@ There seems to be some issues within Foscam with lengthy passwords and passwords
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="example-card-with-controls" href="#example-card-with-controls"></a> Example card with controls</h3>
+<a class="title-link" name="---" href="#---"></a> 컨트롤이 가능한 예제 카드</h3>
 <p class="img">
   <img src="/images/integrations/foscam/example-card.png" alt="Screenshot showing a foscam camera using a picture-elements with PTZ controls.">
-  Example showing a Foscam camera with controls for Pan and Tilt.
+  팬 및 틸트 컨트롤이있는 Foscam 카메라를 보여주는 예.
 </p>
-<p>Using the following card code you can achieve a card displaying the live video feed from a Foscam camera with controls for moving the camera at the bottom right corner.</p>
+<p>다음 카드 코드를 사용하면 Foscam 카메라의 라이브 비디오 피드를 표시하는 카드를 오른쪽 하단 모서리에서 카메라를 움직일 수 있는 컨트롤과 함께 얻을 수 있습니다.</p>
 <pre><code class="language-yaml">type: picture-elements
 entity: camera.bedroom
 camera_image: camera.bedroom
@@ -293,8 +293,8 @@ elements:
         movement: bottom_right
 </code></pre>
 <h3>
-<a class="title-link" name="extra-cgi-commands" href="#extra-cgi-commands"></a> Extra CGI Commands</h3>
-<p>Foscam Webcams which support CGI Commands can be controlled by Home Assistant (<a href="http://www.ipcamcontrol.net/files/Foscam%20IPCamera%20CGI%20User%20Guide-V1.0.4.pdf" rel="external nofollow">Source</a>). For an example of how this can be done, see the <a href="/cookbook/foscam_away_mode_PTZ/">Foscam IP Camera Pan, Tilt, Zoom Control</a> Cookbook entry.</p>
+<a class="title-link" name="-cgi-" href="#-cgi-"></a> 추가 CGI 명령</h3>
+<p>CGI 명령을 지원하는 oscam 웹캠은 홈어시스턴트 (<a href="http://www.ipcamcontrol.net/files/Foscam%20IPCamera%20CGI%20User%20Guide-V1.0.4.pdf" rel="external nofollow">Source</a>에서 제어 할 수 있습니다). 이 작업을 수행하는 방법에 대한 예는 <a href="/cookbook/foscam_away_mode_PTZ/">Foscam IP Camera Pan, Tilt, Zoom Control</a> Cookbook 항목을 참조하십시오.</p>
 
 
 </article>

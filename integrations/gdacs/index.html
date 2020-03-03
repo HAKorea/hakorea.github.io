@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Global Disaster Alert and Coordination System (GDACS) - 홈어시스턴트</title>
+    <title>글로벌 재난 경보 및 조정 시스템 (GDACS) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate the Global Disaster Alert and Coordination System (GDACS) feed into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/gdacs/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Global Disaster Alert and Coordination System (GDACS)">
+    <meta property="og:title" content="글로벌 재난 경보 및 조정 시스템 (GDACS)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/gdacs/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Global Disaster Alert and Coordination System (GDACS)">
+    <meta name="twitter:title" content="글로벌 재난 경보 및 조정 시스템 (GDACS)">
     <meta name="twitter:description" content="Instructions on how to integrate the Global Disaster Alert and Coordination System (GDACS) feed into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,40 +97,28 @@
   
   <header>
     <h1 class="title indent">
-      Global Disaster Alert and Coordination System (GDACS)
+      글로벌 재난 경보 및 조정 시스템 (GDACS)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>gdacs</code> integration lets you use a GeoRSS feed provided by
-<a href="https://www.gdacs.org/" rel="external nofollow">GDACS</a> with information
-about major droughts, earthquakes, floods, tropical cyclones, tsunamis and
-volcanic activities worldwide.
-It retrieves alerts from a feed and shows information of those alerts filtered
-by distance to Home Assistant’s location.</p>
-<p>Entities are generated, updated and removed automatically with each update
-from the feed. Each entity defines latitude and longitude and will be shown
-on the default map automatically, or on a map card by defining the source
-<code>gdacs</code>. The distance is available as the state of each entity, and
-converted to the unit (kilometers or miles) configured in Home Assistant.</p>
+  <p><code>gdacs</code> 통합구성요소를 통해 <a href="https://www.gdacs.org/" rel="external nofollow">GDACS</a>에서 제공하는 GeoRSS 피드를 전세계 주요 가뭄, 지진, 홍수, 열대 저기압, 쓰나미 및 화산 활동에 대한 정보와 함께 사용할 수 있습니다.
+피드에서 알림을 검색하고 홈어시스턴트 위치까지 거리별로 필터링된 알림 정보를 표시합니다.</p>
+<p>피드에서 업데이트 할 때마다 엔티티가 생성되고, 업데이트 및 자동 제거됩니다.
+각 엔티티는 위도 및 경도를 정의하며 기본맵에 자동으로 표시되거나 소스 <code>gdacs</code> 를 정의하여 맵 카드에 표시됩니다.
+거리는 각 엔티티의 상태로 사용 가능하며 홈어시스턴트에서 설정된 단위 (킬로미터 또는 마일)로 변환됩니다.</p>
 <p class="img">
   <img src="/images/screenshots/gdacs-alerts-feed-map.png">
 </p>
-<p>The data is updated every 5 minutes.</p>
+<p>데이터는 5 분마다 업데이트됩니다.</p>
 <div class="note">
-<p>The material used by this integration is provided by the <a href="https://www.gdacs.org/" rel="external nofollow">Global Disaster
-Alert and Coordination System (GDACS)</a> - a cooperation
-framework between the United Nations and the European Commission - under the
-<a href="http://creativecommons.org/licenses/by/4.0/" rel="external nofollow">Creative Commons Attribution 4.0 International (CC BY 4.0) license</a>.
-It has only been modified for the purpose of presenting the material in Home Assistant.
-Please refer to the <a href="https://www.gdacs.org/About/termofuse.aspx" rel="external nofollow">creator’s disclaimer and terms of use notice</a> for more information.</p>
+<p>이 통합구성요소에 사용된 자료는 <a href="https://www.gdacs.org/" rel="external nofollow">GDACS (Global Disaster Alert and Coordination System)</a>에서 제공합니다. - 유엔과 유럽 연합 집행위원회 간의 협력 체제 -  <a href="http://creativecommons.org/licenses/by/4.0/" rel="external nofollow">Creative Commons Attribution 4.0 International (CC BY 4.0) license</a>에 따라.
+홈어시스턴트에서 자료를 제공할 목적으로만 수정되었습니다. 자세한 내용은 <a href="https://www.gdacs.org/About/termofuse.aspx" rel="external nofollow">creator’s disclaimer and terms of use notice</a>를 참조하십시오.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To integrate the GDACS feed use the “Integrations” feature
-in the GUI, you find it under Configurations - Integrations, or add the
-following line to your <code>configuration.yaml</code>.</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>GDACS 피드를 통합하려면 GUI의 “Integrations” 기능을 사용하거나 Configurations - Integrations에서 찾거나 <code>configuration.yaml</code>에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 gdacs:
 </code></pre>
@@ -140,12 +128,12 @@ gdacs:
   <dl class="">
 <dt>
 <a class="title-link" name="categories" href="#categories"></a> categories</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The categories of alerts to be included. Valid categories are ‘Drought’, ‘Earthquake’, ‘Flood’, ‘Tropical Cyclone’, ‘Tsunami’, ‘Volcano’.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>포함 할 경고의 범주입니다. 유효한 카테고리는 ‘가뭄’, ‘지진’, ‘홍수’, ‘열대 사이클론’, ‘해일’, ‘화산폭발’입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="radius" href="#radius"></a> radius</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The radius around your location to monitor; defaults to 500 km or mi (depending on the unit system defined in your <code>configuration.yaml</code>).</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 위치 주변의 반경입니다. 기본값은 500km 또는 mi입니다 (<code>configuration.yaml</code>에 정의 된 단위 시스템에 따라 다름).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -154,7 +142,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Latitude of the coordinates around which alerts are considered.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>경고가 고려되는 좌표의 위도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -163,7 +151,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Longitude of the coordinates around which alerts are considered.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>경고가 고려되는 좌표의 경도</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -172,9 +160,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="state-attributes" href="#state-attributes"></a> State Attributes</h2>
-<p>The following state attributes are available for each entity in addition to
-the standard ones:</p>
+<a class="title-link" name="-" href="#-"></a> 상태 속성</h2>
+<p>표준 엔티티 외에 각 엔티티에 대해 다음 상태 속성을 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -185,11 +172,11 @@ the standard ones:</p>
 <tbody>
 <tr>
 <td>latitude</td>
-<td>Latitude of the alert’s location.</td>
+<td>경고 위치의 위도.</td>
 </tr>
 <tr>
 <td>longitude</td>
-<td>Longitude of the alert’s location.</td>
+<td>경고 위치의 경도.</td>
 </tr>
 <tr>
 <td>source</td>
@@ -198,62 +185,58 @@ the standard ones:</p>
 </tr>
 <tr>
 <td>external_id</td>
-<td>The external ID used in the feed to identify the alert.</td>
+<td>피드에서 경고를 식별하는 데 사용되는 외부 ID</td>
 </tr>
 <tr>
 <td>title</td>
-<td>Title of this entry.</td>
+<td>이 항목의 제목.</td>
 </tr>
 <tr>
 <td>description</td>
-<td>Description of this entry.</td>
+<td>이 항목에 대한 설명.</td>
 </tr>
 <tr>
 <td>event type</td>
-<td>Type of event this alert is for (Drought, Earthquake, Flood, Tropical Cyclone, Tsunami, Volcano).</td>
+<td>이 경고에 대한 이벤트 유형 (가뭄, 지진, 홍수, 열대 사이클론, 쓰나미, 화산).</td>
 </tr>
 <tr>
 <td>alert level</td>
-<td>Alert level (Red, Orange, Green).</td>
+<td>경고 수준 (빨간색, 주황색, 녹색).</td>
 </tr>
 <tr>
 <td>country</td>
-<td>Country that the alert is applicable to.</td>
+<td>경고가 적용되는 국가</td>
 </tr>
 <tr>
 <td>duration in week</td>
-<td>Duration of the alert in full weeks (only shown if more than one week).</td>
+<td>전체 주 단위의 경고 기간 (1 주 이상인 경우에만 표시).</td>
 </tr>
 <tr>
 <td>from date</td>
-<td>Date and time this alert started.</td>
+<td>이 경고가 시작된 날짜 및 시간.</td>
 </tr>
 <tr>
 <td>to date</td>
-<td>Date and time this alert ended (or now if ongoing).</td>
+<td>이 경고가 종료된 날짜 및 시간 (또는 현재 진행중인 경우).</td>
 </tr>
 <tr>
 <td>population</td>
-<td>Exposed population.</td>
+<td>노출된 인구.</td>
 </tr>
 <tr>
 <td>severity</td>
-<td>Severity of the alert.</td>
+<td>경고의 심각도.</td>
 </tr>
 <tr>
 <td>vulnerability</td>
-<td>Vulnerability score (textual or numerical).</td>
+<td>취약점 점수 (텍스트 또는 숫자).</td>
 </tr>
 </tbody>
 </table>
-<p>Please note that some of the attribute values depend on the context and may not
-be comparable between different event types.</p>
+<p>일부 속성 값은 컨텍스트에 따라 다르며 다른 이벤트 유형간에 비교할 수 없을수 도 있습니다.</p>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>This integration automatically creates a sensor that shows how many entities
-are currently managed by this integration. In addition to that the sensor has
-some useful attributes that indicate the currentness of the data retrieved
-from the feed.</p>
+<p>이 연동은 본 통합구성요소에서 현재 관리되는 엔티티 수를 표시하는 센서를 자동으로 작성합니다. 또한 센서에는 피드에서 검색된 데이터의 현재성을 나타내는 유용한 속성이 있습니다.</p>
 <p class="img">
   <img src="/images/screenshots/gdacs-alerts-sensor.png">
 </p>
@@ -267,36 +250,36 @@ from the feed.</p>
 <tbody>
 <tr>
 <td>status</td>
-<td>Status of last update from the feed (“OK” or “ERROR”).</td>
+<td>피드에서 마지막 업데이트 상태 ( “OK” 또는 “ERROR”).</td>
 </tr>
 <tr>
 <td>last update</td>
-<td>Timestamp of the last update from the feed.</td>
+<td>피드에서 마지막 업데이트의 타임 스탬프</td>
 </tr>
 <tr>
 <td>last update successful</td>
-<td>Timestamp of the last successful update from the feed.</td>
+<td>피드에서 마지막으로 성공한 업데이트의 타임 스탬프</td>
 </tr>
 <tr>
 <td>last timestamp</td>
-<td>Timestamp of the latest entry from the feed.</td>
+<td>피드에서 최근 항목의 타임 스탬프.</td>
 </tr>
 <tr>
 <td>created</td>
-<td>Number of entities that were created during last update (optional).</td>
+<td>마지막 업데이트 중에 작성된 엔티티 수 (선택 사항).</td>
 </tr>
 <tr>
 <td>updated</td>
-<td>Number of entities that were updated during last update (optional).</td>
+<td>마지막 업데이트 중 업데이트 된 엔터티 수 (선택 사항).</td>
 </tr>
 <tr>
 <td>removed</td>
-<td>Number of entities that were removed during last update (optional).</td>
+<td>마지막 업데이트 중에 제거 된 엔티티 수 (선택 사항).</td>
 </tr>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full Configuration</h2>
+<a class="title-link" name="-" href="#-"></a> 전체 설정</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 gdacs:
   categories:

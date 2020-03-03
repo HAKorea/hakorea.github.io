@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Blink - 홈어시스턴트</title>
+    <title>Blink 보안 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions for how to integrate Blink camera/security system within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/blink/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Blink">
+    <meta property="og:title" content="Blink 보안">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/blink/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Blink">
+    <meta name="twitter:title" content="Blink 보안">
     <meta name="twitter:description" content="Instructions for how to integrate Blink camera/security system within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Blink
+      Blink 보안
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>blink</code> integration lets you view camera images and motion events from <a href="https://blinkforhome.com/" rel="external nofollow">Blink</a> camera and security systems.</p>
+  <p><code>blink</code> 통합구성요소를 통해 <a href="https://blinkforhome.com/" rel="external nofollow">Blink</a> 카메라 및 보안 시스템에서 카메라 이미지 및 모션 이벤트를 볼 수 있습니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>You will need your Blink login information (username, which is usually your email address, and password) to use this module.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>이 모듈을 사용하려면 Blink 로그인 정보 (일반적으로 전자메일주소인 사용자 이름 및 암호)가 필요합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable devices linked in your <a href="https://blinkforhome.com" rel="external nofollow">Blink</a> account, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><a href="https://blinkforhome.com" rel="external nofollow">Blink</a> 계정에 연결된 장치를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 blink:
   username: YOUR_USERNAME
@@ -121,25 +121,25 @@ blink:
   <dl class="">
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The username for accessing your Blink account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Blink 계정에 액세스하기위한 사용자 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password for accessing your Blink account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Blink 계정에 액세스하기위한 비밀번호</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>How frequently to query for new data. Defaults to 300 seconds (5 minutes).</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>새 데이터를 쿼리하는 빈도. 기본값은 300 초 (5 분)입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="binary_sensors" href="#binary_sensors"></a> binary_sensors</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Binary sensor configuration options.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>이진 센서 설정 옵션.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The conditions to create sensors from.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 생성 조건.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -148,13 +148,13 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="sensors" href="#sensors"></a> sensors</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sensor configuration options.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 설정 옵션.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The conditions to create sensors from.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 생성 조건.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -181,16 +181,18 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Once Home Assistant starts, the <code>blink</code> integration will create the following platforms:</p>
+<p>Home Assistant가 시작되면 <code>blink</code> 통합구성요소는 다음 플랫폼을 만듭니다. :</p>
 <ul>
-<li>An <code>alarm_control_panel</code> to arm/disarm the whole blink system (note, <code>alarm_arm_home</code> is not implemented and will not actually do anything, despite it being an option in the GUI).</li>
-<li>A <code>camera</code> for each camera linked to your Blink sync module.</li>
-<li>A <code>sensor</code> per camera for every item listed in <code>monitored_conditions</code> (if no items specified in your <code>configuration.yaml</code>, all of them will be added by default).</li>
-<li>A <code>binary_sensor</code> for each item listed in <code>monitored_conditions</code> (if no items specified in your <code>configuration.yaml</code>, all of them will be added by default).</li>
+<li>모든 blink 시스템을 arm/disarm 하는 <code>alarm_control_panel</code>(주의 : <code>arm_arm_home</code>은 GUI의 옵션임에도 불구하고 구현되지 않았으며 실제로 아무것도하지 않습니다.)</li>
+<li>blink 동기화 모듈에 연결된 각 카메라의 <code>camera</code>.</li>
+<li>
+<code>monitored_conditions</code>에 나열된 모든 항목에 대한 카메라마다의 <code>sensor</code> (<code>configuration.yaml</code>에 지정된 항목이 없으면 기본적으로 모든 항목이 추가됩니다. )</li>
+<li>
+<code>monitored_conditions</code>에 나열된 각 항목에 대한 <code>binary_sensor</code> (<code>configuration.yaml</code>에 지정된 항목이 없으면 기본적으로 모든 항목이 추가됩니다.)</li>
 </ul>
-<p>Since the cameras are battery operated, setting the <code>scan_interval</code> must be done with care so as to not drain the battery too quickly, or hammer Blink’s servers with too many API requests.  The cameras can be manually updated via the <code>trigger_camera</code> service which will ignore the throttling caused by <code>scan_interval</code>.  As a note, all of the camera-specific sensors are only polled when a new image is requested from the camera. This means that relying on any of these sensors to provide timely and accurate data is not recommended.</p>
-<p>Please note that each camera reports two different states: one as <code>sensor.blink_&lt;camera_name&gt;_status</code> and the other as <code>binary_sensor.blink_&lt;camera_name&gt;_motion_enabled</code>. The <code>motion_enabled</code> property reports if the <code>camera</code> is ready to detect motion <em>regardless if the system is actually armed</em>*.</p>
-<p>Below is an example showing every possible entry:</p>
+<p>카메라는 배터리로 작동하므로 배터리를 너무 빨리 소모하지 않도록 API를 너무 많이 사용하지 않으면서 Blink의 서버를 혼란스럽게 하지 않도록 <code>scan_interval</code> 설정을 주의해서 수행해야합니다. <code>scan_interval</code>에 의한 조절을 무시하고 <code>trigger_camera</code> 서비스를 통해 카메라를 수동으로 업데이트 할 수 있습니다. 참고로, 모든 카메라 특정 센서는 카메라에서 새 이미지를 요청한 경우에만 폴링됩니다. 즉, 적시에 정확한 데이터를 제공하기 위해 이러한 센서를 사용하지 않는 것이 좋습니다.</p>
+<p>각 카메라는 서로 다른 두 가지 상태를보고합니다. : 하나는 <code>sensor.blink_ &lt;camera_name&gt; _status</code>이고 다른 하나는 <code>binary_sensor.blink_ &lt;camera_name&gt; _motion_enabled</code>입니다. <code>motion_enabled</code> 속성은 <strong>시스템이 실제로 arm되어 있는지에 관계없이</strong> <code>camera</code>가 모션을 감지 할 준비가되었는지 보고합니다.</p>
+<p>아래는 가능한 모든 항목을 보여주는 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 blink:
   username: YOUR_USERNAME
@@ -207,14 +209,14 @@ blink:
       - wifi_strength
 </code></pre>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>Any sequential calls to services relating to blink should have a minimum of a 5 second delay in between them to prevent the calls fro being throttled and ignored.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>blink와 관련된 서비스에 대한 모든 순차적 호출은 호출이 제한되고 무시되는 것을 방지하기 위해 이들 사이에 최소 5 초의 지연이 있어야합니다.</p>
 <h3>
 <a class="title-link" name="blinkblink_update" href="#blinkblink_update"></a> blink.blink_update</h3>
-<p>Force a refresh of the Blink system.</p>
+<p>blink 시스템을 강제로 새로 고침</p>
 <h3>
 <a class="title-link" name="blinktrigger_camera" href="#blinktrigger_camera"></a> blink.trigger_camera</h3>
-<p>Trigger a camera to take a new still image.</p>
+<p>카메라를 트리거하여 새로운 정지(still) 이미지를 만듭니다.</p>
 <table>
 <thead>
 <tr>
@@ -233,7 +235,7 @@ blink:
 </table>
 <h3>
 <a class="title-link" name="blinksave_video" href="#blinksave_video"></a> blink.save_video</h3>
-<p>Save the last recorded video of a camera to a local file. Note that in most cases, Home Assistant will need to know that the directory is writable via the <code>whitelist_external_dirs</code> in your <code>configuration.yaml</code> file (see example below).</p>
+<p>카메라의 마지막 녹화 비디오를 로컬 파일에 저장하십시오. 대부분의 경우 Home Assistant는 디렉토리가 <code>configuration.yaml</code> 파일의 <code>whitelist_external_dirs</code>를 통해 쓰기 가능하다는 것을 알아야합니다 (아래 예 참조).</p>
 <table>
 <thead>
 <tr>
@@ -262,14 +264,15 @@ blink:
         - '/path/to/whitelist'
 </code></pre>
 <h3>
-<a class="title-link" name="other-services" href="#other-services"></a> Other Services</h3>
-<p>In addition to the services mentioned above, there are generic <code>camera</code> and <code>alarm_control_panel</code> services available for use as well. The <code>camera.enable_motion_detection</code> and <code>camera.disable_motion_detection</code> services allow for individual cameras to be enabled and disabled, respectively, within the Blink system. The <code>alarm_control_panel.alarm_arm_away</code> and <code>alarm_control_panel.alarm_disarm</code> services allow for the whole system to be armed and disarmed, respectively.</p>
+<a class="title-link" name="-" href="#-"></a> 다른 서비스들</h3>
+<p>위에서 언급 한 서비스 외에도 일반적인 <code>camera</code> 및 <code>alarm_control_panel</code> 서비스도 사용할 수 있습니다. <code>camera.enable_motion_detection</code> 및 <code>camera.disable_motion_detection</code> 서비스를 통해 Blink 시스템 내에서 개별 카메라를 각각 활성화 및 비활성화 할 수 있습니다. <code>alarm_control_panel.alarm_arm_away</code> 및 <code>alarm_control_panel.alarm_disarm</code> 서비스를 통해 전체 시스템을 각각 arm 및 disarm 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>The following are some examples showing how to correctly make service calls using Blink:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>다음은 Blink를 사용하여 서비스 호출을 올바르게 수행하는 방법을 보여주는 몇 가지 예입니다.</p>
 <h3>
-<a class="title-link" name="snap-picture-and-save-locally" href="#snap-picture-and-save-locally"></a> Snap Picture and Save Locally</h3>
-<p>This example script shows how to take a picture with your camera, named <code>My Camera</code> in your Blink app (this is <strong>not necessarily</strong> the friendly name in home-assistant).  After snapping a picture, the image will then be saved to a local directory called <code>/tmp/my_image.jpg</code>.  Note that this example makes use of services found in the <a href="/integrations/camera#service-snapshot">camera integration</a></p>
+<a class="title-link" name="----" href="#----"></a> 사진 찍기 및 로컬 저장</h3>
+<p>이 예제 스크립트는 Blink 앱에서 <code>My Camera</code> 라는 카메라로 사진을 찍는 방법을 보여줍니다 (
+이것은 반드시 홈어시스턴트의 친숙한 이름(friendly name)은 아닙니다). 사진을 찍은 후 이미지는 <code>/tmp/my_image.jpg</code>라는 로컬 디렉토리에 저장됩니다. 이 예는 <a href="/integrations/camera#service-snapshot">camera integration</a>에 있는 서비스를 사용합니다.</p>
 <pre><code class="language-yaml">alias: Blink Snap Picture
 sequence:
     - service: blink.trigger_camera
@@ -283,9 +286,9 @@ sequence:
           filename: /tmp/my_image.jpg
 </code></pre>
 <h3>
-<a class="title-link" name="arm-blink-when-away" href="#arm-blink-when-away"></a> Arm Blink When Away</h3>
-<p>This example automation will arm your blink sync module to detect motion on any of your blink cameras that have motion detection enabled.  By default, Blink enables motion detection on all cameras so, unless you’ve changed anything in your app, you’re all set.  If you want to manually enable motion detection for individual cameras, you can utilize the <a href="/integrations/camera#service-enable_motion_detection">appropriate camera service</a> but please note that motion will only be captured if the sync module is armed.</p>
-<p>Here, this example assumes your blink module is named <code>My Sync Module</code> and that you have <a href="/integrations/device_tracker">device trackers</a> set up for presence detection.</p>
+<a class="title-link" name="-blink-arm-" href="#-blink-arm-"></a> 부재중 Blink를 Arm 상태로</h3>
+<p>이 예제 자동화는 blink 동기화 모듈을 활성화하여 모션 감지가 활성화 된 blink 카메라에서 움직임을 감지합니다. 기본적으로 Blink는 모든 카메라에서 모션 감지를 활성화하므로 앱에서 아무것도 변경하지 않으면 모든 설정이 완료됩니다. 개별 카메라에 대해 모션 감지를 수동으로 활성화하려면 <a href="/integrations/camera#service-enable_motion_detection">appropriate camera service</a>를 사용할 수 있지만 동기화 모듈이 활성화된 경우에만 모션이 캡처됩니다.</p>
+<p>이 예에서는 blink 모듈의 이름이 <code>My Sync Module</code>이고 재실 감지를 위해 <a href="/integrations/device_tracker">device trackers</a>가 설정되어 있다고 가정합니다.</p>
 <pre><code class="language-yaml">- id: arm_blink_when_away
   alias: Arm Blink When Away
   trigger:
@@ -297,8 +300,8 @@ sequence:
       entity_id: alarm_control_panel.blink_my_sync_module 
 </code></pre>
 <h3>
-<a class="title-link" name="disarm-blink-when-home" href="#disarm-blink-when-home"></a> Disarm Blink When Home</h3>
-<p>Similar to the previous example, this automation will disarm blink when arriving home.</p>
+<a class="title-link" name="-blink-disarm-" href="#-blink-disarm-"></a> 재실시 Blink Disarm 상태로</h3>
+<p>이전 예와 마찬가지로이 자동화는 집에 도착할 때 Blink가 Arm을 해제합니다.</p>
 <pre><code class="language-yaml">- id: disarm_blink_when_home
   alias: Disarm Blink When Home
   trigger:
@@ -310,9 +313,9 @@ sequence:
       entity_id: alarm_control_panel.blink_my_sync_module 
 </code></pre>
 <h3>
-<a class="title-link" name="save-video-locally-when-motion-detected" href="#save-video-locally-when-motion-detected"></a> Save Video Locally When Motion Detected</h3>
-<p>When motion is detected, you can use the Blink Home-Assistant integration to save the last recorded video locally, rather than relying on Blink’s servers to save your data.</p>
-<p>Again, this example assumes your camera’s name (in the blink app) is <code>My Camera</code> and your sync module name is <code>My Sync Module</code>.  The file will be saved to <code>/tmp/videos/blink_video_{YYYMMDD_HHmmSS}.mp4</code> where <code>{YYYYMMDD_HHmmSS}</code> will be a timestamp create via the use of <a href="/docs/configuration/templating/">templating</a>.</p>
+<a class="title-link" name="----" href="#----"></a> 모션 감지시 비디오를 로컬에 저장</h3>
+<p>모션이 감지되면 Blink 홈어시스턴트 통합구성요소를 사용하여 Blink의 서버를 사용하여 데이터를 저장하지 않고 마지막으로 녹화 된 비디오를 로컬로 저장할 수 있습니다.</p>
+<p>다시 이 예에서는 blink 앱에서 카메라 이름이 <code>My Camera</code>이고 동기화 모듈 이름이 <code>My Sync Module</code>이라고 가정합니다. 파일은 <code>/tmp/videos/blink_video_{YYYMMDD_HHmmSS}.mp4</code>에 저장됩니다. 여기서 <code>{YYYYMMDD_HHmmSS}</code>는 <a href="/docs/configuration/templating/">templating</a>을 사용하여 생성된 타임 스탬프입니다.</p>
 <pre><code class="language-yaml">- id: save_blink_video_on_motion
   alias: Save Blink Video on Motion
   trigger:

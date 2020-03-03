@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Conversation - 홈어시스턴트</title>
+    <title>대화(Conversation) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to have conversations with your Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/conversation/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Conversation">
+    <meta property="og:title" content="대화(Conversation)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/conversation/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Conversation">
+    <meta name="twitter:title" content="대화(Conversation)">
     <meta name="twitter:description" content="Instructions on how to have conversations with your Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Conversation
+      대화(Conversation)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The conversation integration allows you to converse with Home Assistant. You can either converse by pressing the microphone in the frontend (supported browsers only (no iOS)) or by calling the <code>conversation/process</code> service with the transcribed text.</p>
+  <p>대화 통합구성요소를 통해 Home Assistant와 대화 할 수 있습니다. 프론트 엔드에서 마이크를 누르거나 (지원되는 브라우저만 (iOS는 아님)), 텍스트를 번역하여 <code>conversation/process</code> 서비스를 호출하여 대화 할 수 있습니다.</p>
 <p class="img">
   <img src="/images/screenshots/voice-commands.png">
-  Screenshot of the conversation interface in Home Assistant.
+  홈어시스턴트의 대화 인터페이스 스크린 샷.
 </p>
 <pre><code class="language-yaml"># Example base configuration.yaml entry
 conversation:
@@ -129,9 +129,9 @@ conversation:
 </dl>
 </div>
 <h2>
-<a class="title-link" name="adding-custom-sentences" href="#adding-custom-sentences"></a> Adding custom sentences</h2>
-<p>By default, it will support turning devices on and off. You can say things like “turn on kitchen lights” or “turn the living room lights off”. You can also configure your own sentences to be processed. This works by mapping sentences to intents and then configure the <a href="/integrations/intent_script/">intent script integration</a> to handle these intents.</p>
-<p>Here is a simple example to be able to ask what the temperature in the living room is.</p>
+<a class="title-link" name="--" href="#--"></a> 사용자정의 문장 추가</h2>
+<p>기본적으로 장치 켜기 및 끄기를 지원합니다. “turn on kitchen lights” 또는 “turn the living room lights off”와 같은 것을 말할 수 있습니다. 자신만의 문장을 처리하도록 설정할 수도 있습니다. 이것은 문장을 의도(intents)에 매핑 한 다음 이러한 의도(intents)를 처리하도록 <a href="/integrations/intent_script/">intent script integration</a>을 설정하여 작동합니다.</p>
+<p>다음은 거실의 온도가 얼마인지 묻는 간단한 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 conversation:
   intents:
@@ -144,9 +144,9 @@ intent_script:
       text: It is currently {{ states.sensor.temperature }} degrees in the living room.
 </code></pre>
 <h2>
-<a class="title-link" name="adding-advanced-custom-sentences" href="#adding-advanced-custom-sentences"></a> Adding advanced custom sentences</h2>
-<p>Sentences can contain slots (marked with curly braces: <code>{name}</code>) and optional words (marked with square brackets: <code>[the]</code>). The values of slots will be passed on to the intent and are available inside the templates.</p>
-<p>The following configuration can handle the following sentences:</p>
+<a class="title-link" name="--" href="#--"></a> 고급사용자정의 문장 추가</h2>
+<p>문장에는 슬롯 (중괄호 :<code>{name}</code>)과 선택적 단어 (대괄호 :<code>[the]</code>)가 포함될 수 있습니다. 슬롯값은 의도(intents)로 전달되며 템플릿 내에서 사용할 수 있습니다.</p>
+<p>다음 설정은 다음 문장을 처리 할 수 ​​있습니다.</p>
 <ul>
 <li>Change the lights to red</li>
 <li>Change the lights to green</li>
@@ -175,7 +175,7 @@ intent_script:
 
 </code></pre>
 <h4>
-<a class="title-link" name="service-conversationprocess" href="#service-conversationprocess"></a> Service conversation.process</h4>
+<a class="title-link" name="conversationprocess-" href="#conversationprocess-"></a> conversation.process 서비스</h4>
 <table>
 <thead>
 <tr>

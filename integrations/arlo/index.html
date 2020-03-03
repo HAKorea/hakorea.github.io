@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Arlo - 홈어시스턴트</title>
+    <title>Arlo 보안 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Netgear Arlo cameras within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/arlo/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Arlo">
+    <meta property="og:title" content="Arlo 보안">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/arlo/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Arlo">
+    <meta name="twitter:title" content="Arlo 보안">
     <meta name="twitter:description" content="Instructions on how to integrate your Netgear Arlo cameras within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Arlo
+      Arlo 보안
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>arlo</code> implementation allows you to integrate your <a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a> devices in Home Assistant.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>이 <code>arlo</code> 구현을 통해 <a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a> 장치를 Home Assistant에 연동할 수 있습니다 .</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
 <li><a href="#alarm">Alarm</a></li>
 <li><a href="#camera">Camera</a></li>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable device linked in your <a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a> account, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a>계정에 연결된 장치를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 arlo:
   username: YOUR_USERNAME
@@ -124,21 +124,21 @@ arlo:
   <dl class="">
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The username for accessing your Arlo account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Arlo 계정에 액세스하기위한 사용자 이름</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password for accessing your Arlo account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Arlo 계정에 액세스하기위한 비밀번호</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>How frequently to query for new data. Defaults to 60 seconds.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>새 데이터를 쿼리하는 빈도. 기본값은 60 초.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>It is recommended to create a dedicated user on Arlo website to be used within Home Assistant and then share your Arlo cameras.</p>
-<p>Finish its configuration by visiting the <a href="/integrations/arlo#sensor">Arlo sensor page</a> or <a href="/integrations/arlo#camera">Arlo camera page</a> or <a href="/integrations/arlo">Arlo control panel page</a>. Arlo also has a service call <code>arlo.update</code> that can be manually called to force an update prior to the regular scheduled interval.</p>
-<p>The Arlo integration also provides a camera service to enable/disable the motion detection sensor. The example below enables the motion detection every time the Home Assistant service starts.</p>
+<p>Arlo 웹사이트에서 Home Assistant 내에서 사용할 전용사용자를 만든 다음 Arlo 카메라를 공유하는 것이 좋습니다</p>
+<p><a href="/integrations/arlo#sensor">Arlo sensor page</a> 또는 <a href="/integrations/arlo#camera">Arlo camera page</a> 또는  <a href="/integrations/arlo">Arlo control panel page</a>를 방문하여 설정을 완료하십시오. Arlo에는 정기적인 예약 간격 업데이트 이외에도 업데이트를 강제로 수동으로 호출할 수 있는 <code>arlo.update</code> Service Call도 있습니다.</p>
+<p>Arlo 통합구성요소는 모션 감지 센서를 활성화/비활성화하는 카메라 서비스도 제공합니다. 아래 예는 홈어시스턴트 서비스가 시작될 때마다 모션 감지를 활성화합니다.</p>
 <pre><code class="language-yaml">#automation.yaml
 - alias: Enable Arlo upon HA start'
   initial_state: 'on'
@@ -150,10 +150,10 @@ arlo:
     entity_id: camera.arlo_frontdoor
 </code></pre>
 <h2>
-<a class="title-link" name="alarm" href="#alarm"></a> Alarm</h2>
+<a class="title-link" name="" href="#"></a> 알람</h2>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>Once you have enabled the <a href="/integrations/arlo">Arlo component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p><a href="/integrations/arlo">Arlo component</a>를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 alarm_control_panel:
   - platform: arlo
@@ -164,12 +164,12 @@ alarm_control_panel:
   <dl class="">
 <dt>
 <a class="title-link" name="home_mode_name" href="#home_mode_name"></a> home_mode_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Arlo base station does not have a built-in home mode. You can map one of your custom modes to Home Assistant’s home mode by setting the name of the custom mode in this configuration variable. The name of the custom mode should match exactly as you set it up in the Arlo app.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Arlo base station에는 내장 홈모드(home mode)가 없습니다. 이 설정 변수에서 사용자 정의 모드의 이름을 세팅하여 사용자 정의 모드 중 하나를 홈어시스턴트의 홈모드(home mode)에 맵핑할 수 있습니다. 사용자 정의 모드의 이름은 Arlo 앱에서 설정한 것과 정확히 일치해야합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="away_mode_name" href="#away_mode_name"></a> away_mode_name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Arlo base station does not have a built-in away mode. You can map one of your custom modes to Home Assistant’s away mode by setting the name of the custom mode in this configuration variable. The name of the custom mode should match eactly as you set it up in the Arlo app.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Arlo base station에는 내장된 부재중모드(away mode)가 없습니다. 이 설정 변수에서 사용자 정의 모드의 이름을 세팅하여 사용자 정의 모드 중 하나를 홈어시스턴트의 부재중모드(away mode)에 맵핑 할 수 있습니다. 사용자 정의 모드의 이름은 Arlo 앱에서 설정한 것과 정확히 일치해야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -178,7 +178,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="night_mode_name" href="#night_mode_name"></a> night_mode_name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Arlo base station does not have a built-in night mode. You can map one of your custom modes to Home Assistant’s night mode by setting the name of the custom mode in this configuration variable. The name of the custom mode should match eactly as you set it up in the Arlo app.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Arlo base station에는 내장 야간모드(night mode)가 없습니다. 이 설정 변수에서 사용자 정의 모드의 이름을 세팅하여 사용자 정의 모드 중 하나를 홈어시스턴트의 야간 모드(night mode)에 맵핑 할 수 있습니다. 사용자 정의 모드의 이름은 Arlo 앱에서 설정한 것과 정확히 일치해야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -187,9 +187,9 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
-<p>These examples are based on an Arlo base station named <code>my_arlo_base_station</code>. Replace this with the name of your base station’s <code>entity_id</code>.</p>
-<p>Arming the Arlo Base Station when leaving.</p>
+<a class="title-link" name="" href="#"></a> 사례</h3>
+<p>이 예제는 <code>my_arlo_base_station</code> 이라는 Arlo base station을 기반으로합니다. 이를 base station의 <code>entity_id</code> 이름으로 바꾸십시오.</p>
+<p>집을 떠날 때 Arlo Base Station arm(집안 지킴이) 모드 전환하기 .</p>
 <pre><code class="language-yaml">- id: arm_arlo_when_leaving
   alias: Arm Arlo cameras when leaving
   trigger:
@@ -201,7 +201,7 @@ Default value: </p>
     service: alarm_control_panel.alarm_arm_away
     entity_id: alarm_control_panel.my_arlo_base_station
 </code></pre>
-<p>Setting Arlo to a custom mode (mapped to <code>home_mode_name</code> in <code>configuration.yaml</code>) when arriving.</p>
+<p>집에 도착시 Arlo를 커스텀 모드(<code>configuration.yaml</code>의 <code>home_mode_name</code>에 매핑) 로 설정합니다.</p>
 <pre><code class="language-yaml">- id: disarm_arlo_when_arriving
   alias: Set Arlo cameras to Home mode when arriving
   trigger:
@@ -213,14 +213,14 @@ Default value: </p>
     service: alarm_control_panel.alarm_arm_home
     entity_id: alarm_control_panel.my_arlo_base_station
 </code></pre>
-<p>You can also completely disarm the Arlo base station by calling the <code>alarm_control_panel.alarm_disarm</code> service, and trigger the alarm by calling the <code>alarm_control_panel.alarm_trigger</code> service.</p>
-<p>More examples and configuration options can be found on the <a href="/integrations/manual#examples">Manual Alarm Control page</a>.</p>
+<p><code>alarm_control_panel.alarm_disarm</code> 서비스를 호출하여 Arlo base station을 완전히 해제(disarm)하고 <code>alarm_control_panel.alarm_trigger</code> 서비스를 호출하여 알람을 트리거 할 수도 있습니다.</p>
+<p>더 많은 예제와 설정 옵션은 <a href="/integrations/manual#examples">Manual Alarm Control page</a>에서 찾을 수 있습니다.</p>
 <h2>
-<a class="title-link" name="camera" href="#camera"></a> Camera</h2>
-<p>This integration is not yet able to live stream from your Arlo camera, but it will be able to playback the last video capture.</p>
+<a class="title-link" name="" href="#"></a> 카메라</h2>
+<p>이 통합구성요소는 아직 Arlo 카메라에서 라이브 스트리밍을 할 수 없지만 마지막 비디오 캡처를 재생할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>Once you have enabled the <a href="/integrations/arlo">Arlo component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p><a href="/integrations/arlo">Arlo component</a>를 활성화하면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: arlo
@@ -232,18 +232,19 @@ camera:
   <dl class="">
 <dt>
 <a class="title-link" name="ffmpeg_arguments" href="#ffmpeg_arguments"></a> ffmpeg_arguments</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Extra options to pass to ffmpeg, e.g., image quality or video filter options.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지 품질 또는 비디오 필터 옵션과 같이 ffmpeg에 전달할 추가 옵션.</p>
 </span></p></dd>
 </dl>
 </div>
-<p><strong>Note:</strong> To be able to playback the last capture, it is required to install the <code>ffmpeg</code> component. Make sure to follow the steps mentioned at <a href="/integrations/ffmpeg/">FFMPEG</a> documentation.</p>
+<p><strong>참고:</strong> 마지막 캡처를 재생하려면 <code>ffmpeg</code> 구성 요소를 설치해야합니다. <a href="/integrations/ffmpeg/">FFMPEG</a> 문서에 언급된 단계를 따르십시오.</p>
 <h2>
-<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>To get your <a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a> sensors working within Home Assistant, please follow the instructions for the general <a href="/integrations/arlo">Arlo component</a>.</p>
-<p>This platform does not support Arlo Q.</p>
+<a class="title-link" name="" href="#"></a> 센서</h2>
+<p>Home Assistant 내에서 <a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a> 센서를 작동시키려면 일반 <a href="/integrations/arlo">Arlo component</a>에 대한 지침을 따르십시오.</p>
+<p>This platform does not support Arlo Q.
+이 플랫폼은 Arlo Q를 지원하지 않습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>Once you have enabled the <a href="/integrations/arlo">Arlo component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p><a href="/integrations/arlo">Arlo component</a>를 활성화하면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: arlo
@@ -254,7 +255,7 @@ sensor:
       - battery_level
       - signal_strength
 </code></pre>
-<p>Additionally, for Arlo Baby cameras that have additional sensors, you can add them to the <code>monitored_conditions</code> collection:</p>
+<p>또한 추가 센서가 있는 Arlo Baby 카메라의 경우 <code>monitored_conditions</code> 컬렉션에 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Additional sensors available for Arlo Baby cameras
 sensor:
   - platform: arlo
@@ -270,45 +271,45 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Conditions to display in the frontend. The following conditions can be monitored.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에 표시 할 조건. 다음과 같은 조건을 모니터링 할 수 있습니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="captured_today" href="#captured_today"></a> captured_today</dt>
-<dd><p class="desc"><span class="description"><p>Return the number of videos captured on the current day.</p>
+<dd><p class="desc"><span class="description"><p>현재 날짜에 캡처 한 비디오 수를 반환.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="last_capture" href="#last_capture"></a> last_capture</dt>
-<dd><p class="desc"><span class="description"><p>Return the timestamp from the last video captured by your Arlo camera.</p>
+<dd><p class="desc"><span class="description"><p>Arlo 카메라에서 마지막으로 캡처 한 비디오의 타임 스탬프를 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="total_cameras" href="#total_cameras"></a> total_cameras</dt>
-<dd><p class="desc"><span class="description"><p>Return the number of recognized and active cameras linked on your Arlo account.</p>
+<dd><p class="desc"><span class="description"><p>Arlo 계정에 연결된 인식 및 활성화 된 카메라 수를 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="battery_level" href="#battery_level"></a> battery_level</dt>
-<dd><p class="desc"><span class="description"><p>Return the battery level of your Arlo camera.</p>
+<dd><p class="desc"><span class="description"><p>Arlo 카메라의 배터리 잔량을 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="signal_strength" href="#signal_strength"></a> signal_strength</dt>
-<dd><p class="desc"><span class="description"><p>Return the wireless signal strength of your Arlo camera.</p>
+<dd><p class="desc"><span class="description"><p>Arlo 카메라의 무선 신호 강도를 반환.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="temperature" href="#temperature"></a> temperature</dt>
-<dd><p class="desc"><span class="description"><p>Return the ambient temperature detected by your Arlo Baby camera.</p>
+<dd><p class="desc"><span class="description"><p>Arlo Baby 카메라가 감지한 주변 온도를 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="humidity" href="#humidity"></a> humidity</dt>
-<dd><p class="desc"><span class="description"><p>Return the ambient relative humidity detected by your Arlo Baby camera.</p>
+<dd><p class="desc"><span class="description"><p>Arlo Baby 카메라가 감지한 주변 상대 습도를 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="air_quality" href="#air_quality"></a> air_quality</dt>
-<dd><p class="desc"><span class="description"><p>Return the ambient air quality (a reading of volatile organic compounds (VOCs) in parts per million) detected by your Arlo Baby camera.</p>
+<dd><p class="desc"><span class="description"><p>Arlo Baby 카메라가 감지 한 주변 대기질 (백만분의 1의 휘발성 유기 화합물(VOC) 판독값)을 반환.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
-<p>If no <strong>monitored_conditions</strong> are specified, all of above will be enabled by default.</p>
+<p><strong>monitor_conditions</strong>를 지정하지 않으면 위의 모든 항목이 기본적으로 사용됩니다.</p>
 
 
 </article>

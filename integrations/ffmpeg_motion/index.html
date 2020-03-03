@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>FFmpeg Motion - 홈어시스턴트</title>
+    <title>FFmpeg 모션 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate an FFmpeg-based motion binary sensor">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/ffmpeg_motion/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="FFmpeg Motion">
+    <meta property="og:title" content="FFmpeg 모션">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/ffmpeg_motion/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="FFmpeg Motion">
+    <meta name="twitter:title" content="FFmpeg 모션">
     <meta name="twitter:description" content="Instructions on how to integrate an FFmpeg-based motion binary sensor">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      FFmpeg Motion
+      FFmpeg 모션
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>ffmpeg</code> platform allows you to use any video feed with <a href="https://www.ffmpeg.org/" rel="external nofollow">FFmpeg</a> for motion sensors in Home Assistant.</p>
+  <p><code>ffmpeg</code> 플랫폼을 사용하면 Home Assistant의 모션 센서에 <a href="https://www.ffmpeg.org/" rel="external nofollow">FFmpeg</a>가 포함된 모든 비디오 피드를 사용할 수 있습니다.</p>
 <div class="note">
-<p>If the <code>ffmpeg</code> process is broken, the sensor will be unavailable. To control the ffmpeg process of sensor, use the service <em>ffmpeg.start</em>, <em>ffmpeg.stop</em>, <em>ffmpeg.restart</em>.</p>
+<p><code>ffmpeg</code> 프로세스가 중단되면 센서를 사용할 수 없습니다. 센서의 ffmpeg 프로세스를 제어하려면 <em>ffmpeg.start</em>, <em>ffmpeg.stop</em>, <em>ffmpeg.restart</em> 서비스를 사용하십시오.</p>
 </div>
 <h2>
-<a class="title-link" name="motion" href="#motion"></a> Motion</h2>
-<p>FFmpeg doesn’t have a motion detection filter, but can use a scene filter to detect a new scene/motion. You can set how much needs to change in order to detect motion with the option ‘changes’, the percent value of change between frames. If you want a really small value for ‘changes’, you can also add a denoise filter.</p>
+<a class="title-link" name="-motion" href="#-motion"></a> 모션 (Motion)</h2>
+<p>FFmpeg에는 동작 감지 필터가 없지만 장면 필터를 사용하여 scene/motion을 감지 할 수 있습니다. 프레임 간 변화의 백분율 값인 ‘changes’ 옵션을 사용하여 움직임을 감지하기 위해 얼마나 많이 변경해야 하는지 설정할 수 있습니다. ‘changes’에 대해 실제로 작은값을 원한다면 노이즈 제거 필터를 추가할 수도 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add FFmpeg with motion detection to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>모션 감지 기능이있는 FFmpeg를 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: ffmpeg_motion
@@ -124,16 +124,16 @@ binary_sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="input" href="#input"></a> input</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>An FFmpeg-compatible input file, stream, or feed.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>FFmpeg 호환 입력 파일. 스트림 또는 피드.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Override the name of your camera for the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드의 카메라 이름을 대체.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="initial_state" href="#initial_state"></a> initial_state</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Start <code>ffmpeg</code> with Home Assistant.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트로 <code>ffmpeg</code>를 시작.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,7 +142,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="changes" href="#changes"></a> changes</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>How much needs to change between two frames to detect it as motion, value in percentage (a lower value is more sensitive).</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>모션으로 감지하기 위해 두 프레임 사이에서 얼마나 많이 변경해야하는지 백분율로 표시합니다 (값이 낮을수록 더 민감합니다).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -151,7 +151,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="reset" href="#reset"></a> reset</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The time to reset the state after no new motion is detected.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>새로운 움직임이 감지되지 않은 후 상태를 재설정하는 시간</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -160,7 +160,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="repeat" href="#repeat"></a> repeat</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>How many events need to be detected in <em>repeat_time</em> in order to trigger a motion, 0 repeats means deactivated.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>모션을 트리거하기 위해 <em>repeat_time</em> 에서 감지해야하는 이벤트, 0번 반복은 비활성화됨을 의미합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -169,7 +169,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="repeat_time" href="#repeat_time"></a> repeat_time</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The span of time <em>repeat</em> events need to occur in before triggering a motion, 0 seconds means deactivated.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>모션을 트리거하기 전에 <em>repeat</em> 이벤트 기간이 필요합니다. 0 초는 비활성화됨을 의미합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -177,18 +177,19 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="extra_arguments" href="#extra_arguments"></a> extra_arguments</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Extra options to pass to <code>ffmpeg</code>, e.g., video denoise filtering.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>비디오 노이즈 필터링과 같은 <code>ffmpeg</code> 에 전달할 수 있는 추가 옵션.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>To experiment with values (changes/100 is the scene value in <code>ffmpeg</code>):</p>
+<p>값을 실험하려면 (changes/100은 <code>ffmpeg</code>의 scene 값입니다) :</p>
 <pre><code class="language-bash">$ ffmpeg -i YOUR_INPUT -an -filter:v select=gt(scene\,0.1) -f framemd5 -
 </code></pre>
-<p>If you are running into trouble with this sensor, please refer to the <a href="/integrations/ffmpeg/#troubleshooting">troubleshooting section</a>.</p>
+<p>이 센서에 문제가있는 경우 <a href="/integrations/ffmpeg/#troubleshooting">troubleshooting section</a>를 참조하십시오.</p>
 <h4>
 <a class="title-link" name="tips" href="#tips"></a> Tips</h4>
 <ul>
-<li>Use motion only in a custom area with <a href="https://ffmpeg.org/ffmpeg-filters.html#crop" rel="external nofollow">crop filter</a>:</li>
+<li>
+<a href="https://ffmpeg.org/ffmpeg-filters.html#crop" rel="external nofollow">crop filter</a>가 있는 사용자 정의 영역에서만 모션을 사용하십시오.</li>
 </ul>
 <pre><code class="language-yaml">extra_arguments: -filter:v "crop=100:100:12:34"
 </code></pre>

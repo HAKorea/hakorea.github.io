@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Fail2Ban - 홈어시스턴트</title>
+    <title>Fail2Ban(로그인감시) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a fail2ban sensor into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/fail2ban/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Fail2Ban">
+    <meta property="og:title" content="Fail2Ban(로그인감시)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/fail2ban/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Fail2Ban">
+    <meta name="twitter:title" content="Fail2Ban(로그인감시)">
     <meta name="twitter:description" content="Instructions on how to integrate a fail2ban sensor into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Fail2Ban
+      Fail2Ban(로그인감시)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>fail2ban</code> sensor allows for IPs banned by <a href="https://www.fail2ban.org/wiki/index.php/Main_Page" rel="external nofollow">fail2ban</a> to be displayed in the Home Assistant frontend.</p>
+  <p><code>fail2ban</code> 센서는 <a href="https://www.fail2ban.org/wiki/index.php/Main_Page" rel="external nofollow">fail2ban</a>에 의해 금지된 IP가 홈 어시스턴트 프론트 엔드에 표시되도록합니다.</p>
 <div class="note">
-<p>Your system must have <code>fail2ban</code> installed and correctly configured for this sensor to work. In addition, Home Assistant must be able to read the <code>fail2ban</code> log file.</p>
+<p>이 센서가 작동하려면 시스템에 <code>fail2ban</code>이 설치되어 있고 올바르게 설정되어 있어야합니다. 또한 홈어시스턴트는 <code>fail2ban</code> 로그 파일을 읽을 수 있어야합니다.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: fail2ban
@@ -123,12 +123,12 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="jails" href="#jails"></a> jails</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of configured jails you want to display.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>표시하려는 설정된 감옥(jail) 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the sensor.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -137,7 +137,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="file_path" href="#file_path"></a> file_path</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Path to the fail2ban log.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>fail2ban 로그의 경로</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -146,25 +146,25 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="set-up-fail2ban" href="#set-up-fail2ban"></a> Set up Fail2Ban</h3>
-<p>For most setups, you can follow <a href="/cookbook/fail2ban/">this tutorial</a> to set up <code>fail2ban</code> on your system. It will walk you through creating jails and filters, allowing you to monitor IP addresses that have been banned for too many failed SSH login attempts, as well as too many failed Home Assistant login attempts.</p>
+<a class="title-link" name="fail2ban-" href="#fail2ban-"></a> Fail2Ban 셋업</h3>
+<p>대부분의 설정에서 <a href="/cookbook/fail2ban/">this tutorial</a>에 따라 시스템에서 <code>fail2ban</code>을 설정할 수 있습니다. 너무 많은 SSH 로그인 시도와 금지된 홈어시스턴트 로그인 시도에 대해 금지된 IP 주소를 모니터 할 수 있도록 감옥(jail)과 필터를 작성하는 과정을 안내합니다.</p>
 <h3>
-<a class="title-link" name="fail2ban-with-docker" href="#fail2ban-with-docker"></a> Fail2Ban with Docker</h3>
+<a class="title-link" name="docker-fail2ban" href="#docker-fail2ban"></a> Docker에서의 Fail2Ban</h3>
 <div class="note">
-<p>These steps assume you already have the Home Assistant docker running behind NGINX and that it is externally accessible. It also assumes the docker is running with the <code>--net='host'</code> flag.</p>
+<p>이 단계에서는 Home Assistant 도커가 이미 NGINX 뒤에서 실행 중이고 외부에서 액세스 할 수 있다고 가정합니다. 또한 도커가 <code>--net='host'</code> 플래그로 실행되고 있다고 가정합니다.</p>
 </div>
-<p>For those of us using Docker, the above tutorial may not be sufficient. The following steps specifically outline how to set up <code>fail2ban</code> and Home Assistant when running Home Assistant within a Docker behind NGINX. The setup this was tested on was an unRAID server using the <a href="https://github.com/linuxserver/docker-letsencrypt" rel="external nofollow">let’s encrypt docker</a> from linuxserver.io.</p>
+<p>Docker를 사용하는 사람들에게는 위의 자습서로 충분하지 않을 수 있습니다. 다음 단계는 NGINX 뒤의 Docker 내에서 홈 어시스턴트를 실행할 때 <code>fail2ban</code> 및 홈어시스턴트를 설정하는 방법을 구체적으로 설명합니다. 이 테스트는 linuxserver.io의 <a href="https://github.com/linuxserver/docker-letsencrypt" rel="external nofollow">let’s encrypt docker</a>를 사용한 unRAID 서버입니다.</p>
 <h4>
-<a class="title-link" name="set-http-logger" href="#set-http-logger"></a> Set http logger</h4>
-<p>In your <code>configuration.yaml</code> file, add the following to the <code>logger</code> integration to ensure that Home Assistant prints failed login attempts to the log.</p>
+<a class="title-link" name="http---set-http-logger" href="#http---set-http-logger"></a> http 로거 셋업 (Set http logger)</h4>
+<p><code>configuration.yaml</code> 파일에서 다음 <code>logger</code> 통합구성요소에 추가하여 홈어시스턴트가 실패한 로그인 시도를 로그에 보이도록하십시오.</p>
 <pre><code class="language-yaml">logger:
   logs:
     homeassistant.components.http.ban: warning
 </code></pre>
 <h4>
-<a class="title-link" name="edit-the-jaillocal-file" href="#edit-the-jaillocal-file"></a> Edit the jail.local file</h4>
-<p>Next, we need to edit the <code>jail.local</code> file that is included with the Let’s Encrypt docker linked above.  Note, for this tutorial, we’ll only be implementing the <code>[hass-iptables]</code> jail from the <a href="/cookbook/fail2ban/">previously linked tutorial</a>.</p>
-<p>Edit <code>/mnt/user/appdata/letsencrypt/fail2ban/jail.local</code> and append the following to the end of the file:</p>
+<a class="title-link" name="jaillocal-" href="#jaillocal-"></a> jail.local 편집하기</h4>
+<p>다음으로, 위의 Let’s Encrypt 도커에 포함된 <code>jail.local</code> 파일을 편집해야합니다. 이 튜토리얼에서는 <a href="/cookbook/fail2ban/">previously linked tutorial</a>에서만 <code>[hass-iptables]</code> 감옥(jail)을 구현할 것입니다.</p>
+<p><code>/mnt/user/appdata/letsencrypt/fail2ban/jail.local</code>을 편집하고 파일의 끝에 다음을 추가하십시오 :</p>
 <pre><code class="language-txt">[hass-iptables]
 enabled = true
 filter = hass
@@ -173,8 +173,8 @@ logpath = /hass/home-assistant.log
 maxretry = 5
 </code></pre>
 <h4>
-<a class="title-link" name="create-a-filter-for-the-home-assistant-jail" href="#create-a-filter-for-the-home-assistant-jail"></a> Create a filter for the Home Assistant jail</h4>
-<p>Now we need to create a filter for <code>fail2ban</code> so that it can properly parse the log.  This is done with a <code>failregex</code>.  Create a file called <code>hass.local</code> within the <code>filter.d</code> directory in <code>/mnt/user/appdata/letsencrypt/fail2ban</code> and add the following:</p>
+<a class="title-link" name="-jail---" href="#-jail---"></a> 홈어시스턴트 감옥(jail)에 대한 필터 만들기</h4>
+<p>이제 로그를 제대로 파싱 할 수 있도록 <code>fail2ban</code>에 대한 필터를 만들어야합니다. 이것은 <code>failregex</code>로 이루어집니다. <code>/mnt/user/appdata/letsencrypt/fail2ban</code>의 <code>filter.d</code> 디렉토리 내에 <code>hass.local</code>이라는 파일을 작성하고 다음을 추가하십시오.</p>
 <pre><code class="language-txt">[INCLUDES]
 before = common.conf
 
@@ -188,21 +188,21 @@ datepattern = ^%%Y-%%m-%%d %%H:%%M:%%S
 </code></pre>
 <h4>
 <a class="title-link" name="map-log-file-directories" href="#map-log-file-directories"></a> Map log file directories</h4>
-<p>First, we need to make sure that fail2ban log can be passed to Home Assistant and that the Home Assistant log can be passed to fail2ban.  When starting the Let’s Encrypt docker, you need to add the following argument (adjust paths based on your setup):</p>
+<p>먼저 fail2ban 로그를 홈어시스턴트로 전달하고 홈어시스턴트 로그를 fail2ban로 전달할 수 있는지 확인해야합니다. Let’s Encrypt 도커를 시작할 때 다음 인수를 추가해야합니다 (설정에 따라 경로 조정)</p>
 <pre><code class="language-txt">/mnt/user/appdata/home-assistant:/hass
 </code></pre>
-<p>This will map the Home Assistant configuration directory to the Let’s Encrypt docker, allowing <code>fail2ban</code> to parse the log for failed login attempts.</p>
-<p>Now do the same for the Home Assistant docker, but this time we’ll be mapping the <code>fail2ban</code> log directory to Home Assistant so that the fail2ban sensor is able to read that log:</p>
+<p>그러면 홈어시스턴트 설정 디렉토리가 Let’s Encrypt 도커에 매핑되어 실패한 로그인 시도에 대해 <code>fail2ban</code>이 로그를 구문 분석 할 수 있습니다.</p>
+<p>이제 홈어시스턴트 도커에 대해 동일한 작업을 수행하지만, 이번에는 fail2ban 센서가 해당 로그를 읽을 수 있도록 <code>fail2ban</code> 로그 디렉토리를 홈어시스턴트에 맵핑합니다.</p>
 <pre><code class="language-txt">/mnt/user/appdata/letsencrypt/log/fail2ban:/fail2ban
 </code></pre>
 <h4>
-<a class="title-link" name="send-client-ip-to-home-assistant" href="#send-client-ip-to-home-assistant"></a> Send client IP to Home Assistant</h4>
-<p>By default, the IP address that Home Assistant sees will be that of the container (something like <code>172.17.0.16</code>).  What this means is that for any failed login attempt, assuming you have correctly configured <code>fail2ban</code>, the Docker IP will be logged as banned, but the originating IP is still allowed to make attempts.  We need <code>fail2ban</code> to recognize the originating IP to properly ban it.</p>
-<p>First, we have to add the following to the nginx configuration file located in <code>/mnt/user/appdata/letsencrypt/nginx/site-confs/default</code>.</p>
+<a class="title-link" name="--ip-" href="#--ip-"></a> 홈어시스턴트로 클라이언트 IP 보내기</h4>
+<p>기본적으로, 홈어시스턴트가 보는 IP 주소는 컨테이너의 주소입니다 (<code>172.17.0.16</code>와 같은 것). 이는 실패한 로그인 시도에 대해 <code>fail2ban</code>을 올바르게 설정했다고 가정하면 Docker IP는 차단된 것으로 기록되지만 원래 IP는 여전히 시도를 할 수 있습니다. IP를 올바르게 차단하기 위해 원래 IP를 인식하는 <code>fail2ban</code> 이 필요합니다.</p>
+<p>먼저 <code>/mnt/user/appdata/letsencrypt/nginx/site-confs/default</code>에 있는 nginx 설정 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-bash">proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 </code></pre>
-<p>This snippet should be added within your Home Assistant server config, so you have something like the following:</p>
+<p>이 스니펫은 홈어시스턴트 서버 설정 내에 추가되어야합니다. 따라서 내용은 다음과 같습니다.</p>
 <pre><code class="language-bash">server {
     ...
     location / {
@@ -227,24 +227,24 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     ...
 }
 </code></pre>
-<p>Once that’s added to the nginx configuration, we need to modify the Home Assistant <code>configuration.yaml</code> such that the <code>X-Forwarded-For</code> header can be parsed.  This is done by adding the following to the <code>http</code> component:</p>
+<p>일단 nginx 설정에 추가되면, <code>X-Forwarded-For</code> 헤더를 파싱 할 수 있도록 Home Assistant <code>configuration.yaml</code>을 수정해야합니다. <code>http</code> 컴포넌트에 다음을 추가하면됩니다 :</p>
 <pre><code class="language-yaml">http:
   use_x_forwarded_for: true
 </code></pre>
-<p>At this point, once the Let’s Encrypt and Home Assistant dockers are restarted, Home Assistant should be correctly logging the originating IP of any failed login attempt.  Once that’s done and verified, we can move onto the final step.</p>
+<p>이 시점에서 Let’s Encrypt 및 Home Assistant 도커가 다시 시작되면 홈어시스턴트는 실패한 로그인 시도의 원래 IP를 올바르게 기록해야합니다. 완료되고 확인되면 마지막 단계로 넘어갈 수 있습니다.</p>
 <h4>
-<a class="title-link" name="add-the-fail2ban-sensor" href="#add-the-fail2ban-sensor"></a> Add the fail2ban sensor</h4>
-<p>Now that we’ve correctly set everything up for Docker, we can add our sensors to <code>configuration.yaml</code> with the following:</p>
+<a class="title-link" name="fail2ban-sensor-" href="#fail2ban-sensor-"></a> fail2ban sensor 추가하기</h4>
+<p>Docker에 대한 모든 것을 올바르게 설정 했으므로 다음과 같이 센서를 <code>configuration.yaml</code> 에 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: fail2ban
     jails:
       - hass-iptables
     file_path: /fail2ban/fail2ban.log
 </code></pre>
-<p>Assuming you’ve followed all of the steps, you should have one fail2ban sensor, <code>sensor.fail2ban_hassiptables</code>, within your front-end.</p>
+<p>모든 단계를 수행했다고 가정하면 프런트 엔드 내에 하나의 fail2ban 센서 <code>sensor.fail2ban_hassiptables</code>가 있어야 합니다.</p>
 <h3>
-<a class="title-link" name="other-debug-tips" href="#other-debug-tips"></a> Other debug tips</h3>
-<p>If, after following these steps, you’re unable to get the <code>fail2ban</code> sensor working, here are some other steps you can take that may help:</p>
+<a class="title-link" name="--" href="#--"></a> 다른 디버그 팁들</h3>
+<p>이 단계를 수행 한 후에도 ‘fail2ban’센서가 작동하지 않는 경우 도움이 될 수있는 다른 단계는 다음과 같습니다.</p>
 <ul>
 <li>Add <code>logencoding = utf-8</code> to the <code>[hass-iptables]</code> entry</li>
 <li>Ensure the <code>failregex</code> you added to <code>filter.d/hass.local</code> matches the output within <code>home-assistant.log</code>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Bluesound - 홈어시스턴트</title>
+    <title>블루사운드(Bluesound) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Bluesound devices into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/bluesound/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Bluesound">
+    <meta property="og:title" content="블루사운드(Bluesound)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/bluesound/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Bluesound">
+    <meta name="twitter:title" content="블루사운드(Bluesound)">
     <meta name="twitter:description" content="Instructions on how to integrate Bluesound devices into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Bluesound
+      블루사운드(Bluesound)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>bluesound</code> platform allows you to control your <a href="https://www.bluesound.com/" rel="external nofollow">Bluesound</a> HiFi wireless speakers and audio integrations from Home Assistant.</p>
-<p>If you want to automatically discover new devices, just make sure you have discovery: in your configuration.yaml file. To manually add a Bluesound device to your installation, add the following to your configuration.yaml file:</p>
+  <p><code>bluesound</code> 플랫폼을 사용하면 Home Assistant의 <a href="https://www.bluesound.com/" rel="external nofollow">Bluesound</a> HiFi 무선 스피커 및 오디오 통합을 제어 할 수 있습니다.</p>
+<p>새 장치를 자동으로 검색하려면 <code>configuration.yaml</code> 파일에서 <code>discovery:</code> 가 있는지 확인하십시오. 설치에 Bluesound 장치를 수동으로 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml
 media_player:
   - platform: bluesound
@@ -117,21 +117,21 @@ media_player:
   <dl class="">
 <dt>
 <a class="title-link" name="hosts" href="#hosts"></a> hosts</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List with your Bluesound devices.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Bluesound 장치 리스트.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address or hostname of the player.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>플레이어의 IP 주소 또는 호스트 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the device used in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 사용 된 장치의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port to communicate with the device.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치와 통신하기위한 포트.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -141,7 +141,7 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="advanced-configuration-example" href="#advanced-configuration-example"></a> Advanced configuration example</h2>
+<a class="title-link" name="--" href="#--"></a> 고급 설정 사례</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry with manually specified addresses
 media_player:
   - platform: bluesound
@@ -152,8 +152,8 @@ media_player:
       - host: 192.168.1.131
 </code></pre>
 <h3>
-<a class="title-link" name="service-bluesoundjoin" href="#service-bluesoundjoin"></a> Service bluesound.join</h3>
-<p>Group players together under a single master speaker. That will make a new group or join an existing group.</p>
+<a class="title-link" name="bluesoundjoin-" href="#bluesoundjoin-"></a> bluesound.join 서비스</h3>
+<p>단일 마스터 스피커로 플레이어를 그룹화하십시오. 새 그룹을 만들거나 기존 그룹에 가입합니다.</p>
 <table>
 <thead>
 <tr>
@@ -176,8 +176,8 @@ media_player:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-bluesoundunjoin" href="#service-bluesoundunjoin"></a> Service bluesound.unjoin</h3>
-<p>Remove one or more speakers from a group of speakers. If no <code>entity_id</code> is provided, all speakers are unjoined.</p>
+<a class="title-link" name="bluesoundunjoin-" href="#bluesoundunjoin-"></a> bluesound.unjoin 서비스</h3>
+<p>스피커 그룹에서 하나 이상의 스피커를 제거합니다. <code>entity_id</code>가 제공되지 않으면 모든 스피커가 연결 해제됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -195,9 +195,8 @@ media_player:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-bluesoundset_sleep_timer" href="#service-bluesoundset_sleep_timer"></a> Service bluesound.set_sleep_timer</h3>
-<p>Sets a timer that will turn off the speaker. For each time you call this it will increase the time by one step. The steps are (in minutes): 15, 30, 45, 60, 90, 0.
-If you increase an ongoing timer of for example 13 minutes, it will increase it to 15. If the timer is set to 90, it will remove the time (hence the 0).</p>
+<a class="title-link" name="bluesoundset_sleep_timer-" href="#bluesoundset_sleep_timer-"></a> bluesound.set_sleep_timer 서비스</h3>
+<p>스피커를 끄는 타이머를 설정합니다. 이를 호출할 때마다 시간이 한 단계씩 증가합니다. 단계는 (분) : 15, 30, 45, 60, 90, 0입니다. 예를 들어 13 분의 진행 타이머를 늘리면 15로 증가합니다. 타이머가 90으로 설정되면 제거됩니다. 시간 (따라서 0).</p>
 <table>
 <thead>
 <tr>
@@ -215,8 +214,8 @@ If you increase an ongoing timer of for example 13 minutes, it will increase it 
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-bluesoundclear_sleep_timer" href="#service-bluesoundclear_sleep_timer"></a> Service bluesound.clear_sleep_timer</h3>
-<p>Clear the sleep timer on a speaker, if one is set.</p>
+<a class="title-link" name="bluesoundclear_sleep_timer-" href="#bluesoundclear_sleep_timer-"></a> bluesound.clear_sleep_timer 서비스</h3>
+<p>스피커에서 슬립 타이머가 설정되어 있으면 삭제합니다.</p>
 <table>
 <thead>
 <tr>

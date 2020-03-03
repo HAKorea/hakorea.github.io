@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>DLNA Digital Media Renderer - 홈어시스턴트</title>
+    <title>DLNA 디지털 미디어 렌더러 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a DLNA DMR device into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/dlna_dmr/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="DLNA Digital Media Renderer">
+    <meta property="og:title" content="DLNA 디지털 미디어 렌더러">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/dlna_dmr/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="DLNA Digital Media Renderer">
+    <meta name="twitter:title" content="DLNA 디지털 미디어 렌더러">
     <meta name="twitter:description" content="Instructions on how to integrate a DLNA DMR device into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      DLNA Digital Media Renderer
+      DLNA 디지털 미디어 렌더러
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>dlna_dmr</code> platform allows you to control a <a href="https://www.dlna.org/" rel="external nofollow">DLNA Digital Media Renderer</a>, such as DLNA enabled TVs or radios.</p>
-<p>Please note that some devices, such as Samsung TVs, are rather picky about the source used to play from. The TTS service might not work in combination with these devices. If the play_media service does not work, please try playing from a DLNA/DMS (such as <a href="https://sourceforge.net/projects/minidlna/" rel="external nofollow">MiniDLNA</a>).</p>
+  <p><code>dlna_dmr</code> 플랫폼을 사용하면 DLNA 지원 TV 또는 라디오와 같은 <a href="https://www.dlna.org/" rel="external nofollow">DLNA Digital Media Renderer</a>를 제어 할 수 있습니다</p>
+<p>삼성 TV와 같은 일부 장치는 재생에 사용되는 소스에 대해 다소 까다롭습니다. TTS 서비스는 이러한 장치와 함께 작동하지 않을 수 있습니다. play_media 서비스가 작동하지 않으면 DLNA/DMS (예: <a href="https://sourceforge.net/projects/minidlna/" rel="external nofollow">MiniDLNA</a>)에서 재생 해보십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add a DLNA DMR device to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>DLNA DMR 장치를 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: dlna_dmr
@@ -119,16 +119,16 @@ media_player:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The URL to the device description .xml file, e.g., <code>http://192.168.0.10:9197/description.xml</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 설명. <code>.xml</code> 파일의 URL입니다 (예 : <code>http://192.168.0.10:9197/description.xml</code>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="listen_ip" href="#listen_ip"></a> listen_ip</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>IP to listen on for events from the device. Only set this when the IP is not detected properly.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치에서 이벤트를 수신하기 위한 IP. IP가 제대로 감지되지 않을 때만 설정하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="listen_port" href="#listen_port"></a> listen_port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Port to listen on for events from the device.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치의 이벤트를 수신 대기하는 포트.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -136,11 +136,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name you would like to give to the device, e.g., <code>TV living room</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기기에 부여하려는 이름입니다. (예: TV living room.)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="callback_url_override" href="#callback_url_override"></a> callback_url_override</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Override the advertised callback URL. In case the Home Assistant instance is not directly reachable (e.g., running in a docker container without bridged-networking), advertise this callback URL for events.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Override the advertised callback URL. 홈어시스턴트 인스턴스에 직접 연결할 수 없는 경우 (예 : 브리지 된 네트워킹없이 도커 컨테이너에서 실행) 이벤트에 대해 이 콜백 URL을 알리십시오.</p>
 </span></p></dd>
 </dl>
 </div>
