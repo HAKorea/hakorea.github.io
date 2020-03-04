@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Template Lock - 홈어시스턴트</title>
+    <title>템플릿 락(Template Lock) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Template Locks into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/lock.template/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Template Lock">
+    <meta property="og:title" content="템플릿 락(Template Lock)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/lock.template/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Template Lock">
+    <meta name="twitter:title" content="템플릿 락(Template Lock)">
     <meta name="twitter:description" content="Instructions on how to integrate Template Locks into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Template Lock
+      템플릿 락(Template Lock)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>template</code> platform creates locks that combines components.</p>
-<p>For example, if you have a garage door with a toggle switch that operates the motor and a sensor that allows you know whether the door is open or closed, you can combine these into a lock that knows whether the garage door is open or closed.</p>
-<p>This can simplify the GUI and make it easier to write automations. You can mark the integrations you have combined as <code>hidden</code> so they don’t appear themselves.</p>
-<p>In optimistic mode, the lock will immediately change state after every command. Otherwise, the lock will wait for state confirmation from the template. Try to enable it, if experiencing incorrect lock operation.</p>
+  <p><code>template</code> 플랫폼은 구성 요소를 결합하는 lock을 만듭니다.</p>
+<p>예를 들어, 모터를 작동하는 토글 스위치가 있는 차고 도어와 도어의 개폐 여부를 알려주는 센서가 있는 경우 차고 도어가 열려 있는지 또는 닫혀 있는지를 알 수 있는 lock 장치로 결합할 수 있습니다.</p>
+<p>이를 통해 GUI를 단순화하고 자동화를 보다 쉽게 ​​작성할 수 있습니다. 결합한 연동장치를 <code>hidden</code> 으로 표시하여 자체적으로 나타나지 않도록 할 수 있습니다.</p>
+<p>optimistic mode에서 lock은 모든 명령 후에 즉시 상태를 변경합니다. 그렇지 않으면 lock은 템플릿에서 상태 확인을 기다립니다. 올바르지 않은 lock 조작이 발생하면 이를 사용 가능하게 하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable Template Locks in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 Template Lock 을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 lock:
   - platform: template
@@ -131,7 +131,7 @@ lock:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name to use in the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 사용할 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -139,12 +139,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Defines a template to set the state of the lock.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Lock 상태를 설정하기위한 템플릿을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="availability_template" href="#availability_template"></a> availability_template</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a template to get the <code>available</code> state of the component. If the template returns <code>true</code>, the device is <code>available</code>. If the template returns any other value, the device will be <code>unavailable</code>. If <code>availability_template</code> is not configured, the component will always be <code>available</code>.</p>
+<p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>구성 요소의 <code>available</code> 상태를 가져 오도록 템플리트를 정의합니다. 템플릿이 <code>true</code>를 반환하면 장치는 <code>available</code>입니다. 템플릿이 다른 값을 반환하면 장치를 사용할 수 없게됩니다. <code>availability_template</code>이 설정되어 있지 않으면 구성 요소는 항상 <code>available</code>입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,14 +153,14 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="considerations" href="#considerations"></a> Considerations</h2>
-<p>If you are using the state of a platform that takes extra time to load, the Template Lock may get an <code>unknown</code> state during startup. This results in error messages in your log file until that platform has completed loading. If you use <code>is_state()</code> function in your template, you can avoid this situation. For example, you would replace <code>{{ is_state('switch.source', 'on') }}</code> with this equivalent that returns <code>true</code>/<code>false</code> and never gives an unknown result: <code>{{ is_state('switch.source', 'on') }}</code></p>
+<a class="title-link" name="-" href="#-"></a> 고려 사항</h2>
+<p>로드하는데 추가 시간이 걸리는 플랫폼 상태를 사용하는 경우 시작하는 동안 템플릿 잠금이 <code>unknown</code> 상태가 될 수 있습니다. 그러면 해당 플랫폼이 로드를 완료할 때까지 로그 파일에 오류 메시지가 나타납니다. 템플릿에서 <code>is_state ()</code> 함수를 사용하면 이런 상황을 피할 수 있습니다. 예를 들어 <code>{{ is_state('switch.source', 'on') }}</code> 대신 <code>true</code>/<code>false</code>를 반환하고 절대로 알 수 없는 결과를 내지 않는 이에 상응하는 <code>{{ is_state('switch.source', 'on') }}</code>를 쓰면 됩니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section, you find some real-life examples of how to use this lock.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에서는이 lock을 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
 <a class="title-link" name="lock-from-switch" href="#lock-from-switch"></a> Lock from Switch</h3>
-<p>This example shows a lock that copies data from a switch.</p>
+<p>이 예는 스위치에서 데이터를 복사하는 lock을 보여줍니다.</p>
 <pre><code class="language-yaml">lock:
   - platform: template
     name: Garage Door
@@ -176,7 +176,7 @@ Default value: </p>
 </code></pre>
 <h3>
 <a class="title-link" name="optimistic-mode" href="#optimistic-mode"></a> Optimistic Mode</h3>
-<p>This example shows a lock in optimistic mode. This lock will immediately change state after command and will not wait for state update from the sensor.</p>
+<p>이 예는 Optimistic Mode에서의 lock을 보여줍니다. 이 lock은 명령 후 즉시 상태를 변경하며 센서의 상태 업데이트를 기다리지 않습니다.</p>
 <pre><code class="language-yaml">lock:
   - platform: template
     name: Garage Door
@@ -192,8 +192,8 @@ Default value: </p>
         entity_id: switch.source
 </code></pre>
 <h3>
-<a class="title-link" name="sensor-and-two-switches" href="#sensor-and-two-switches"></a> Sensor and Two Switches</h3>
-<p>This example shows a lock that takes its state from a sensor, and uses two momentary switches to control a device.</p>
+<a class="title-link" name="-1--2" href="#-1--2"></a> 센서 1개 스위치 2개</h3>
+<p>이 예는 센서에서 상태를 가져오고 두 개의 순간 스위치를 사용하여 장치를 제어하는 ​​잠금을 보여줍니다.</p>
 <pre><code class="language-yaml">lock:
   - platform: template
     name: Garage Door

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Intent Script - 홈어시스턴트</title>
+    <title>Intent Script(의도 스크립트) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup scripts to run on intents.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/intent_script/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Intent Script">
+    <meta property="og:title" content="Intent Script(의도 스크립트)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/intent_script/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Intent Script">
+    <meta name="twitter:title" content="Intent Script(의도 스크립트)">
     <meta name="twitter:description" content="Instructions on how to setup scripts to run on intents.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,13 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Intent Script
+      Intent Script(의도 스크립트)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>intent_script</code> integration allows users to configure actions and responses to intents. Intents can be fired by any integration that supports it. Examples are <a href="/integrations/alexa/">Alexa</a> (Amazon Echo), <a href="/integrations/dialogflow/">Dialogflow</a> (Google Assistant) and <a href="/integrations/snips/">Snips</a>.</p>
+  <p><code>intent_script</code> 통합구성요소를 통해 사용자는 의도(intents)에 대한 액션 및 응답을 설정 할 수 있습니다. 의도(intents)는 이를 지원하는 모든 통합구성요소로 시작될 수 있습니다.
+예로서 <a href="/integrations/alexa/">Alexa</a> (Amazon Echo), <a href="/integrations/dialogflow/">Dialogflow</a> (Google Assistant), <a href="/integrations/snips/">Snips</a>가 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 intent_script:
   GetTemperature:  # Intent type
@@ -114,24 +115,24 @@ intent_script:
       data_template:
         message: Hello from an intent!
 </code></pre>
-<p>Inside an intent we can define these variables:</p>
+<p>의도(intents) 내에서 다음 변수를 정의 할 수 있습니다.:</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="intent" href="#intent"></a> intent</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Name of the intent. Multiple entries are possible.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>의도의 이름. 여러 항목이 가능.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="action" href="#action"></a> action</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines an action to run to intents.</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>의도에 따라 실행할 액션을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="async_action" href="#async_action"></a> async_action</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set to True to have Home Assistant not wait for the script to finish before returning the intent response.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트가 의도 응답을 리턴하기 전에 스크립트가 완료되기를 기다리지 않도록하려면 True로 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -139,13 +140,13 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="card" href="#card"></a> card</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Card to display.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>표시 할 카드.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of card to display.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>표시 할 카드의 유형.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,22 +154,22 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Title of the card to display.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>표시 할 카드의 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="content" href="#content"></a> content</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>Contents of the card to display.</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Required)</span><span class="description"><p>표시 할 카드의 내용.</p>
 </span></p></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="speech" href="#speech"></a> speech</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Text or template to return.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>반환 할 텍스트 또는 템플릿.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of speech.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>speech 유형.</p>
 </span></p>
 <p class="default">
 Default value: </p>

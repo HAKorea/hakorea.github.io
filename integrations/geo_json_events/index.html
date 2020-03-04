@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>GeoJSON - 홈어시스턴트</title>
+    <title>지오제이슨(GeoJSON) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate GeoJSON feeds into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/geo_json_events/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="GeoJSON">
+    <meta property="og:title" content="지오제이슨(GeoJSON)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/geo_json_events/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="GeoJSON">
+    <meta name="twitter:title" content="지오제이슨(GeoJSON)">
     <meta name="twitter:description" content="Instructions on how to integrate GeoJSON feeds into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      GeoJSON
+      지오제이슨(GeoJSON)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>geo_json_events</code> platform lets you integrate GeoJSON feeds. It retrieves events from a feed and shows information of those events filtered by distance to Home Assistant’s location.
-All entries in the GeoJSON feed must define a <code>geometry</code> which typically is a point or polygon with geo coordinates. In addition, this platform will look for a <code>title</code> key in the entry’s <code>properties</code> and use that as the entity’s name.</p>
-<p>Entities are generated, updated and removed automatically with each update from the GeoJSON feed. Each entity defines latitude and longitude and will be shown on the map automatically. The distance in kilometers is available as the state of each entity.</p>
-<p>The data is updated every 5 minutes.</p>
+  <p><code>geo_json_events</code> 플랫폼을 사용하면 GeoJSON 피드를 연동할 수 있습니다. 피드에서 이벤트를 검색하고 홈어시스턴트 위치까지의 거리에 따라 필터링된 이벤트 정보를 표시합니다.
+GeoJSON 피드의 모든 항목은 일반적으로 지리 좌표가 있는 점 또는 다각형 인 <code>geometry</code>를 정의해야합니다. 또한 이 플랫폼은 항목의 <code>properties</code>에서 <code>title</code> 키를 찾아 엔터티 이름으로 사용합니다.</p>
+<p>GeoJSON 피드에서 업데이트 할 때마다 엔티티가 자동으로 생성, 업데이트 및 제거됩니다. 각 엔티티는 위도와 경도를 정의하며지도에 자동으로 표시됩니다. 킬로미터 단위의 거리는 각 엔티티의 상태로 사용 가능합니다.</p>
+<p>데이터는 5 분마다 업데이트됩니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To integrate a GeoJSON feed, add the following lines to your <code>configuration.yaml</code>. This is an example configuration showing <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" rel="external nofollow">earthquake data provided by the U.S. Geological Survey</a>.</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>GeoJSON 피드를 통합하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오. <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" rel="external nofollow">미국 지질 조사에서 제공 한 지진 데이터</a>를 보여주는 설정 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 geo_location:
   - platform: geo_json_events
@@ -121,12 +121,12 @@ geo_location:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Full URL of the GeoJSON feed.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>GeoJSON 피드의 전체 URL.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="radius" href="#radius"></a> radius</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The distance in kilometers around the Home Assistant’s coordinates in which events are considered.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이벤트를 확인하고자하는 홈어시스턴트 좌표 주위의 거리 (킬로미터).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -135,7 +135,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Latitude of the coordinates around which events are considered.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이벤트를 확인하고자하는 좌표의 위도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -144,7 +144,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Longitude of the coordinates around which events are considered.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이벤트를 확인하고자하는 좌표의 경도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -153,8 +153,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="state-attributes" href="#state-attributes"></a> State Attributes</h2>
-<p>The following state attributes are available for each entity in addition to the standard ones:</p>
+<a class="title-link" name="--state-attributes" href="#--state-attributes"></a> 상태 속성 (State Attributes)</h2>
+<p>표준 엔티티 외에 각 엔티티에 대해 다음 상태 속성을 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -165,26 +165,26 @@ Default value: </p>
 <tbody>
 <tr>
 <td>latitude</td>
-<td>Latitude of the event.</td>
+<td>이벤트의 위도.</td>
 </tr>
 <tr>
 <td>longitude</td>
-<td>Longitude of the event.</td>
+<td>이벤트의 경도.</td>
 </tr>
 <tr>
 <td>source</td>
 <td>
-<code>geo_json_events</code> to be used in conjunction with <code>geo_location</code> automation trigger.</td>
+<code>geo_json_events</code>는 <code>geo_location</code> 자동화 트리거와 함께 사용됩니다.</td>
 </tr>
 <tr>
 <td>external_id</td>
-<td>The external ID used in the feed to identify the event in the feed.</td>
+<td>피드에서 이벤트를 식별하기 위해 피드에 사용된 외부 ID입니다.</td>
 </tr>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="advanced-configuration-example" href="#advanced-configuration-example"></a> Advanced Configuration Example</h2>
-<p>When integrating several GeoJSON feeds, it may be useful to distinguish the entities of different feeds. The easiest way to do that is by defining an <a href="/docs/configuration/platform_options/#entity-namespace/"><code>entity_namespace</code></a> for each platform which will prefix each entity ID with the defined value.</p>
+<a class="title-link" name="--" href="#--"></a> 고급 설정 사례</h2>
+<p>여러 GeoJSON 피드를 통합 할 때 다른 피드의 엔티티를 구별하는 것이 유용할 수 있습니다. 가장 쉬운 방법은 각 엔티티 ID에 정의된 값이 붙는 각 플랫폼에 대해 <a href="/docs/configuration/platform_options/#entity-namespace/"><code>entity_namespace</code></a>를 정의하는 것입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 geo_location:
   - platform: geo_json_events

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Habitica - 홈어시스턴트</title>
+    <title>생활을 게임처럼(Habitica) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on enabling Habitica support for your Home Assistant">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/habitica/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Habitica">
+    <meta property="og:title" content="생활을 게임처럼(Habitica)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/habitica/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Habitica">
+    <meta name="twitter:title" content="생활을 게임처럼(Habitica)">
     <meta name="twitter:description" content="Instructions on enabling Habitica support for your Home Assistant">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,44 +97,44 @@
   
   <header>
     <h1 class="title indent">
-      Habitica
+      생활을 게임처럼(Habitica)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This integration allows you to monitor and manage your Habitica profile. This integration exposes the <a href="https://habitica.com/apidoc/" rel="external nofollow">Habitica’s API</a> as a Home Assistant service. It supports multiple users and allows you to automate checking out your habits and daily tasks or casting magics using Home Assistant.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>이 통합구성요소를 통해 Habitica 프로필을 모니터링하고 관리 할 수 ​​있습니다. 이 통합구성요소는 <a href="https://habitica.com/apidoc/" rel="external nofollow">Habitica ’s API</a>를 홈어시스턴트 서비스로 노출시킵니다. 여러 사용자를 지원하며 홈어시스턴트를 사용하여 습관 및 일상적인 작업을 확인하거나 마법을 캐스팅 할 수 있습니다.</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
-<li>Sensor - Allows you to view and monitor your player data from <a href="https://habitica.com/" rel="external nofollow">Habitica</a> in Home Assistant.</li>
+<li>Sensor - 홈어시스턴트의 <a href="https://habitica.com/" rel="external nofollow">Habitica</a>에서 플레이어 데이터를 보고 모니터링 할 수 있습니다.</li>
 </ul>
-<p>The sensors will automatically appear, after setup the Habitica component.</p>
-<p>To use the integration you should use this example configuration:</p>
+<p>Habitica 구성 요소를 설정하면 센서가 자동으로 나타납니다.</p>
+<p>통합구성요소를 사용하려면 다음 예제 설정을 사용해야합니다.</p>
 <pre><code class="language-yaml"># Minimum viable configuration.yaml entry
 habitica:
   - api_user: YOUR_USER_ID
     api_key: YOUR_API_KEY
 </code></pre>
-<p>You can specify several users, providing <code>api_user</code> and <code>api_key</code> for each.
-At runtime you will be able to use API for each respective user by their Habitica’s username.
-You can override this by passing <code>name</code> key, this value will be used instead of the username.
-If you are hosting your own instance of Habitica, you can specify a URL to it in <code>url</code> key.</p>
+<p>각 사용자에 대해 <code>api_user</code> 및 <code>api_key</code>를 제공하여 여러 사용자를 지정할 수 있습니다.
+런타임에 각 사용자에 대해 Habitica의 사용자 이름으로 API를 사용할 수 있습니다.
+<code>name</code> 키를 전달하여 이를 덮어쓸 수 있습니다. 이 값은 사용자 이름 대신 사용됩니다.
+고유한 Habitica 인스턴스를 호스팅하는 경우 <code>url</code> 키로 URL을 지정할 수 있습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="api_user" href="#api_user"></a> api_user</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Habitica’s API user ID. This value can be grabbed from <a href="https://habitica.com/user/settings/api" rel="external nofollow">account setting</a></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Habitica의 API 사용자 ID. 이 값은 <a href="https://habitica.com/user/settings/api" rel="external nofollow">계정 설정</a>에서 가져올 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Habitica’s API password (token). This value can be grabbed from <a href="https://habitica.com/user/settings/api" rel="external nofollow">account setting</a> by pressing ‘Show API token’</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Habitica의 API 비밀번호 (토큰). ‘Show API Token’을 눌러 <a href="https://habitica.com/user/settings/api" rel="external nofollow">계정 설정</a>에서 이 값을 가져올 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Override for Habitica’s username. Will be used for service calls</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Habitica의 사용자 이름을 재정의합니다. 서비스 요청에 사용됩니다</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -143,7 +143,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>URL to your Habitica instance, if you are hosting your own</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>직접 호스팅하는 경우 Habitica 인스턴스의 URL</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -152,7 +152,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="sensors" href="#sensors"></a> sensors</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of sensors to generate for this user. If you don’t specify this entry then the default (all sensors) will be generated. If you specify this entry empty then no sensors will be generated.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 사용자를 위해 생성할 센서 목록. 이 항목을 지정하지 않으면 기본값(모든 센서)이 생성됩니다. 이 항목을 비워두면 센서가 생성되지 않습니다</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -161,8 +161,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="api-service-parameters" href="#api-service-parameters"></a> API Service Parameters</h3>
-<p>The API is exposed to Home Assistant as a service called <code>habitica.api_call</code>. To call it you should specify this keys in service data:</p>
+<a class="title-link" name="api---" href="#api---"></a> API 서비스 매개 변수</h3>
+<p>API는 <code>habitica.api_call</code>이라는 서비스로 Home Assistant에 노출됩니다. 이를 호출하려면 서비스 데이터에서 이 키를 지정해야합니다.</p>
 <table>
 <thead>
 <tr>
@@ -193,7 +193,7 @@ Default value: </p>
 </tr>
 </tbody>
 </table>
-<p>A successful call to this service will fire an event <code>habitica_api_call_success</code>.</p>
+<p>이 서비스를 성공적으로 호출하면 ‘habitica_api_call_success’이벤트가 발생합니다.</p>
 <table>
 <thead>
 <tr>
@@ -221,11 +221,11 @@ Default value: </p>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="lets-consider-some-examples-on-how-to-call-the-service" href="#lets-consider-some-examples-on-how-to-call-the-service"></a> Let’s consider some examples on how to call the service.</h4>
-<p>For example, let’s say that there is a configured <code>habitica</code> platform for user <code>xxxNotAValidNickxxx</code> with their respective <code>api_user</code> and <code>api_key</code>.
-Let’s create a new task (a todo) for this user via Home Assistant. There is an <a href="https://habitica.com/apidoc/#api-Task-CreateUserTasks" rel="external nofollow">API call</a> for this purpose.
-To create a new task one should hit <code>https://habitica.com/api/v3/tasks/user</code> endpoint with <code>POST</code> request with a json object with task properties.
-So let’s call the API on <code>habitica.api_call</code>.</p>
+<a class="title-link" name="--------" href="#--------"></a> 서비스 호출 방법에 대한 몇 가지 예를 살펴 보겠습니다.</h4>
+<p>예를 들어, 사용자 <code>xxxNotAValidNickxxx</code>에 대해 각각 <code>api_user</code> 및 <code>api_key</code>로 구성된 <code>habitica</code> 플랫폼이 있다고 가정 해 봅시다.
+Home Assistant를 통해 이 사용자에 대한 새 작업 (할 일)을 만들어 봅시다. 이를 위해 <a href="https://habitica.com/apidoc/#api-Task-CreateUserTasks" rel="external nofollow">API 호출</a>을 합니다.
+새 작업을 만들려면 작업 속성이있는 json 객체로 POST 요청으로 <code>https://habitica.com/api/v3/tasks/user</code> 끝점(endpoint)에 도달해야합니다.
+<code>habitica.api_call</code>에서 API를 호출해 봅시다.</p>
 <ul>
 <li>The <code>name</code> key becomes <code>xxxNotAValidNickxxx</code>.</li>
 <li>The <code>path</code> key is trickier.
@@ -245,9 +245,9 @@ call <code>habitica.api_call</code> with data</p>
   "args": {"text": "Use API from Home Assistant", "type": "todo"}
 }
 </code></pre>
-<p>This call will create a new todo on <code>xxxNotAValidNickxxx</code>’s account with text <code>Use API from Home Assistant</code> like this:</p>
+<p>이 호출은 <code>xxxNotAValidNickxxx</code>의 계정에 다음과 같이 <code>Use API from Home Assistant</code>이라는 텍스트로 새로운 할 일을 만듭니다.</p>
 <p><img src="/images/screenshots/habitica_new_task.png" alt="example task created"></p>
-<p>Also an event <code>habitica_api_call_success</code> will be fired with the following data:</p>
+<p>또한 <code>habitica_api_call_success</code> 이벤트는 다음 데이터와 함께 시작됩니다.</p>
 <pre><code class="language-json">{
   "name": "xxxNotAValidNickxxx",
   "path": ["tasks", "user", "post"],

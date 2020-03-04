@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LANnouncer - 홈어시스턴트</title>
+    <title>LANnouncer(안드로이드음성알리미) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add Lannouncer notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/lannouncer/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="LANnouncer">
+    <meta property="og:title" content="LANnouncer(안드로이드음성알리미)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/lannouncer/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="LANnouncer">
+    <meta name="twitter:title" content="LANnouncer(안드로이드음성알리미)">
     <meta name="twitter:description" content="Instructions on how to add Lannouncer notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      LANnouncer
+      LANnouncer(안드로이드음성알리미)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>lannouncer</code> notification platform allows you to play spoken messages (TTS) or sounds on an Android device running <a href="https://www.keybounce.com/lannouncer/" rel="external nofollow">Lannouncer</a>. This can be useful when you have a wall mounted Android tablet, or an Android device that is permanently powered and turned on and want to use that to play notifications.</p>
-<p>To enable Lannouncer notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>lannouncer</code> 알림 플랫폼을 사용하면 <a href="https://www.keybounce.com/lannouncer/" rel="external nofollow">Lannouncer</a>를 실행하는 Android 기기에서 음성 메시지 (TTS) 또는 사운드를 재생할 수 있습니다. 벽에 장착 된 Android 태블릿 또는 영구적으로 전원이 켜져 있고 켜져 있고 알림을 재생하는 데 사용하는 Android 장치가있는 경우에 유용합니다.</p>
+<p>최근 유튜버의 영상 설정기를 참조하십시오. <a href="https://www.youtube.com/watch?v=VMA9ZqgLNIA" rel="external nofollow">https://www.youtube.com/watch?v=VMA9ZqgLNIA</a></p>
+<p>설치시 Lannouncer 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NOTIFIER_NAME
@@ -118,7 +119,7 @@ notify:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택적 매개 변수 <code>name</code>을 설정하면 여러 알리미를 만들 수 있습니다. 알리미는 서비스 <code>notify.NOTIFIER_NAME</code> 에 바인딩합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -126,12 +127,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The hostname or IP-address of the Android device that is running Lannouncer.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Lannouncer를 실행하는 Android 장치의 호스트 이름 또는 IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port on which Lannouncer is running.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Lannouncer가 실행중인 포트.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -140,19 +141,19 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="installation" href="#installation"></a> Installation</h3>
-<p>You need to install the Lannouncer app and enable the <em>Network (TCP) Listener</em> and <em>Auto-Start Network Listener</em>. You can disable the <em>GCM (Google Cloud) and WAN Messaging</em> and <em>SMS Listener</em> since this integration doesn’t use them.</p>
-<p>Lannouncer uses the default Android TTS voice. You can tweak that in the Android configuration, or you can install a different TTS engine from the Play Store. You might want to raise the volume in the app settings since that depends on the actual hardware device.</p>
-<p>More information can be found <a href="https://www.keybounce.com/lannouncer/configuring-lannouncer/" rel="external nofollow">here</a>.</p>
+<a class="title-link" name="" href="#"></a> 설치</h3>
+<p>Lannouncer 앱을 설치하고 <em>Network (TCP) Listener</em> 및 <em>Auto-Start Network Listener</em> 를 활성화해야합니다. 이 통합구성요소에서는 <em>GCM (Google Cloud) and WAN Messaging</em> 및 <em>SMS Listener</em>를 사용하지 않을 수 있습니다.</p>
+<p>Lannouncer는 기본 Android TTS 음성을 사용합니다. Android 설정에서 이를 조정하거나 Play 스토어와 다른 TTS 엔진을 설치할 수 있습니다. 실제 하드웨어 장치에 따라 앱 설정에서 볼륨을 높이고 싶을 수 있습니다.</p>
+<p>자세한 내용은 <a href="https://www.keybounce.com/lannouncer/configuring-lannouncer/" rel="external nofollow">here</a>를 참조.</p>
 <h3>
-<a class="title-link" name="sending-messages" href="#sending-messages"></a> Sending messages</h3>
-<p>Lannouncer supports two types of messages.</p>
-<p>Spoken messages is the default method (<code>speak</code>). You just invoke the <code>notify</code> service with the following json and the device will speak out the specified message.</p>
+<a class="title-link" name="-" href="#-"></a> 메시지 보내기</h3>
+<p>Lannouncer는 두 가지 유형의 메시지를 지원합니다.</p>
+<p>음성 메시지가 기본 방법입니다 (<code>speak</code>). 다음 json으로 <code>notify</code> 서비스를 호출하면 장치가 지정된 메시지를 말합니다.</p>
 <pre><code class="language-json">{
   "message": "I'm sorry, I cannot do that Dave."
 }
 </code></pre>
-<p>The second method is to play notifications (<code>alarm</code>). There are 4 build-in sounds (<code>chime</code>, <code>doorbell</code>, <code>alarm</code> and <code>siren</code>).</p>
+<p>두 번째 방법은 알림(<code>alarm</code>)을 재생하는 것입니다. 내장 소리는 4 가지가 있습니다 (<code>chime</code>, <code>doorbell</code>, <code>alarm</code>, <code>siren</code>).</p>
 <pre><code class="language-json">{
   "message": "chime",
   "data": {
@@ -160,7 +161,7 @@ Default value: </p>
   }
 }
 </code></pre>
-<p>You can also request to play a configured additional soundfiles (<code>FILE1</code>, <code>FILE2</code>, <code>FILE3</code>, <code>FILE4</code> or <code>FILE5</code>). You can configure this file in the app settings.</p>
+<p>설정된 추가 사운드 파일 (<code>FILE1</code>,<code>FILE2</code>,<code>FILE3</code>,<code>FILE4</code> 또는 <code>FILE5</code>) 재생을 요청할 수도 있습니다. 앱 설정에서 이 파일을 설정할 수 있습니다.</p>
 <pre><code class="language-json">{
   "message": "FILE1",
   "data": {
@@ -169,9 +170,9 @@ Default value: </p>
 }
 </code></pre>
 <div class="note info">
-The free version only supports one additional soundfile.
+ 무료 버전은 하나의 추가 사운드 파일 만 지원합니다.
 </div>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">자동화 시작 페이지</a>를 참조하십시오.</p>
 
 
 </article>

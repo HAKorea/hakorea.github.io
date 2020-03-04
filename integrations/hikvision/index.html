@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hikvision - 홈어시스턴트</title>
+    <title>하이크비전 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to set up Hikvision camera binary sensors within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/hikvision/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Hikvision">
+    <meta property="og:title" content="하이크비전">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/hikvision/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Hikvision">
+    <meta name="twitter:title" content="하이크비전">
     <meta name="twitter:description" content="Instructions on how to set up Hikvision camera binary sensors within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,43 +97,30 @@
   
   <header>
     <h1 class="title indent">
-      Hikvision
+      하이크비전
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The Hikvision Binary Sensor is a platform that parses the event stream of a
-<a href="https://www.hikvision.com/" rel="external nofollow">Hikvision IP Camera or NVR</a> and presents the
-camera/nvr events to Home Assistant as binary sensors with either an “off” or
-“on” state.</p>
-<p>The platform will automatically add all sensors to Home Assistant that are
-configured within the camera/nvr interface to “Notify the surveillance center”
-as a trigger. If you would like to hide a sensor type you can do so by either
-unchecking “Notify the surveillance center” in the camera configuration or by
-using the “ignored” customize option detailed below.</p>
+  <p>Hikvision 바이너리 센서는 <a href="https://www.hikvision.com/" rel="external nofollow">Hikvision IP Camera or NVR</a>의 이벤트 스트림을 구문 분석하고 카메라/nvr 이벤트를 “off” 또는 “on” 상태로 보여줍니다.</p>
+<p>플랫폼은 카메라/nvr 인터페이스 내에서 트리거로서 “Notify the surveillance center”로 설정된 ​​모든 센서를 Home Assistant에 자동으로 추가합니다.
+센서 유형을 숨기려면 카메라 구성에서 “Notify the surveillance center”을 ​​선택 해제하거나 아래에 설명된 “ignored” 사용자 정의 옵션을 사용하면됩니다.</p>
 <div class="note">
-In order for the sensors to work the hikvision user must have the 'Remote: Notify Surveillance Center/Trigger Alarm Output' permission which can be enabled from the user management section of the web interface.
-Also the 'WEB Authentication' needs to be set to 'digest/basic' in the security/authentication section.
+센서가 작동하려면 웹인터페이스의 사용자 관리 섹션에서 활성화할 수 있는 'Remote: Notify Surveillance Center/Trigger Alarm Output' 권한이 있어야합니다.
+또한 security/authentication 섹션에서 'WEB Authentication'을 'digest/basic'으로 설정해야합니다.
 </div>
-<p>For example, if you configure a camera with the name “Front Porch” that has
-motion detection and line crossing events enabled to notify the surveillance
-center the following binary sensors will be added to Home Assistant:</p>
+<p>예를 들어, surveillance center에 알리기 위해 모션 감지 및 선 교차(line crossing) 이벤트가 활성화된 “Front Porch”라는 이름으로 카메라를 설정하면 다음 이진 센서가 홈어시스턴트에 추가됩니다.</p>
 <pre><code class="language-text">binary_sensor.front_porch_motion
 binary_sensor.front_port_line_crossing
 </code></pre>
-<p>When used with a NVR device the sensors will be appended with the channel number
-they represent. For example,
-if you configure an NVR with the name “Home” that supports 2 cameras with
-motion detection and line crossing events enabled to notify the surveillance
-center the following binary sensors will be added to Home Assistant:</p>
+<p>NVR 장치와 함께 사용하면 센서에 나타내는 채널 번호가 센서에 추가됩니다. 예를 들어, 감시 센터에 알리기 위해 모션 감지 및 라인 교차 이벤트가 있는 카메라 2 대를 지원하는 “Home”이라는 이름으로 NVR을 구성하면 다음 이진 센서가 홈 어시스턴트에 추가됩니다.</p>
 <pre><code class="language-text">binary_sensor.home_motion_1
 binary_sensor.home_motion_2
 binary_sensor.home_line_crossing_1
 binary_sensor.home_line_crossing_2
 </code></pre>
-<p>This platform should work with all Hikvision cameras and nvrs,
-and has been confirmed to work with the following models:</p>
+<p>이 플랫폼은 모든 Hikvision 카메라 및 nvr에서 작동하며 다음 모델에서 작동하는 것으로 확인되었습니다.</p>
 <ul>
 <li>DS-2CD3132-I</li>
 <li>DS-2CD2232-I5</li>
@@ -144,9 +131,8 @@ and has been confirmed to work with the following models:</p>
 <li>IPC-D140H(-M)</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this sensor,
-add the following lines are required in your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 라인을 추가해야합니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: hikvision
     host: IP_ADDRESS
@@ -159,24 +145,24 @@ add the following lines are required in your <code>configuration.yaml</code> fil
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The IP address of the camera you would like to connect to.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결하려는 카메라의 IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The username to authenticate with.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>인증 할 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password to authenticate with.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>인증 할 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name you would like to give the camera in Home Assistant, defaults to name defined in the camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트에 카메라에 부여하려는 이름은 기본적으로 카메라에 정의된 이름입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port to connect to the camera on.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에 연결할 포트.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -185,7 +171,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="ssl" href="#ssl"></a> ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>true</code> if you want to connect with https. Be sure to set the port also.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>https와 연결하려면 <code>true</code>. 포트도 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -193,13 +179,13 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="customize" href="#customize"></a> customize</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>This attribute contains sensor-specific override values. Only sensor name needs defined:</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성에는 센서 별 재정의 값이 포함됩니다. 센서 이름만 정의하면 됩니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="ignored" href="#ignored"></a> ignored</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Ignore this sensor completely. It won’t be shown in the Web Interface and no events are generated for it.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 센서를 완전히 무시하십시오. 웹 인터페이스에 표시되지 않으며 이벤트가 생성되지 않습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -208,7 +194,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="delay" href="#delay"></a> delay</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Specify the delay to wait after a sensor event ends before notifying Home Assistant in seconds. This is useful to catch multiple quick trips in one window without the state toggling on and off.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서 이벤트가 종료 된 후 대기 시간을 지정하여 Home Assistant에 초 단위로 알리십시오. 상태를 켜거나 끄지 않고 한 창에서 여러 빠른 화면 전환을 할 때 유용합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -218,8 +204,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="supported-types" href="#supported-types"></a> Supported types</h3>
-<p>Supported sensor/event types are:</p>
+<a class="title-link" name="-" href="#-"></a> 지원되는 유형</h3>
+<p>지원되는 센서/이벤트 유형들 :</p>
 <ul>
 <li>Motion</li>
 <li>Line Crossing</li>
@@ -239,9 +225,8 @@ Default value: </p>
 <li>Scene Change Detection</li>
 </ul>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>Example of a configuration in your <code>configuration.yaml</code>
-that utilizes the customize options for a camera:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>카메라의 사용자 정의 옵션을 사용하는 <code>configuration.yaml</code> 설정의 예 :</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: hikvision
     host: 192.168.X.X
@@ -255,8 +240,7 @@ that utilizes the customize options for a camera:</p>
       line_crossing:
         ignored: true
 </code></pre>
-<p>Example of a configuration in your <code>configuration.yaml</code>
-that utilizes the customize options for a nvr:</p>
+<p>nvr의 사용자 정의 옵션을 사용하는 <code>configuration.yaml</code>의 설정의 예 :</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: hikvision
     host: 192.168.X.X

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Huawei LTE - 홈어시스턴트</title>
+    <title>Huawei LTE(LTE 라우터) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Huawei LTE router and modem devices with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/huawei_lte/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Huawei LTE">
+    <meta property="og:title" content="Huawei LTE(LTE 라우터)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/huawei_lte/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Huawei LTE">
+    <meta name="twitter:title" content="Huawei LTE(LTE 라우터)">
     <meta name="twitter:description" content="Instructions on how to integrate Huawei LTE router and modem devices with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,97 +97,74 @@
   
   <header>
     <h1 class="title indent">
-      Huawei LTE
+      Huawei LTE(LTE 라우터)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The Huawei LTE router and modem integration for Home Assistant allows you to observe and control <a href="https://consumer.huawei.com/en/smart-home/" rel="external nofollow">Huawei LTE devices</a>.</p>
-<p>There is currently support for the following platforms within Home Assistant:</p>
+  <p>Home Assistant 용 Huawei LTE 라우터 및 모뎀 통합구성요소를 통해 <a href="https://consumer.huawei.com/en/smart-home/" rel="external nofollow">Huawei LTE devices</a> 를 관찰하고 제어 할 수 있습니다</p>
+<p>현재 홈어시스턴트에는 다음 플랫폼이 지원됩니다.</p>
 <ul>
-<li>Presence detection - device tracker for connected devices</li>
-<li>Notifications - via SMS</li>
-<li>Sensors - device, signal, and traffic information</li>
-<li>Switch - mobile data on/off</li>
-<li>Binary sensor - mobile connection status</li>
+<li>Presence detection - 연결된 장치의 장치 추적기</li>
+<li>Notifications - SMS를 통해</li>
+<li>Sensors - 장치, 신호 및 트레픽 정보</li>
+<li>Switch - 모바일 데이터 켜기/끄기</li>
+<li>Binary sensor - 모바일 연결 상태</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>The integration can be enabled in two ways, either using the frontend
-or using YAML. Additionally, if the <a href="../ssdp/">SSDP integration</a> is
-enabled in Home Assistant, automatically discovered Huawei LTE devices
-which support and have UPnP enabled are made available for further
-optional configuration in the frontend.</p>
-<p>The integration can be run with or without
-authentication. Authenticated mode enables all available integration
-features and entities, but may interfere with accessing the device web
-interface from another source such as a browser while the integration
-is active or vice versa. The exact list of features requiring
-authentication to work varies by device and firmware version. The
-integration will try to use all configured ones and fail gracefully if
-it detects one requiring authentication in unauthenticated mode.</p>
-<p>Only a subset of the entities provided by the target device by
-default:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>프론트 엔드 또는 YAML을 사용하여 두 가지 방법으로 통합구성요소를 사용할 수 있습니다. 또한 홈어시스턴트에서 <a href="../ssdp/">SSDP integration</a>이 활성화 된 경우 프런트 엔드에서 추가적인 옵션 설정을 위해 UPnP를 지원하고 활성화 한 Huawei LTE 장치를 자동으로 검색 할 수 있습니다.</p>
+<p>인증을 사용하거나 사용하지 않고도 통합구성요소를 실행할 수 있습니다. 인증 모드는 사용 가능한 모든 연동 기능 및 엔터티를 활성화하지만 통합구성요소가 활성화된 동안 혹은 브라우저와 같은 다른 소스에서 장치 웹인터페이스에 액세스하는 것을 방해 할 수 있습니다. 인증이 필요한 정확한 기능 목록은 장치 및 펌웨어 버전에 따라 다릅니다. 인증되지 않은 모드에서 인증이 필요한 것을 탐지 한 경우 통합구성요소는 설정된 모든 것을 사용하려고 시도하다가 결국 실패합니다</p>
+<p>기본적으로 대상 장치가 제공한 엔티티의 서브 세트만 :</p>
 <ul>
-<li>WAN IP address sensor</li>
-<li>LTE signal sensors RSRQ, RSRP, RSSI, and SINR</li>
-<li>mobile data switch</li>
-<li>mobile connection binary sensor</li>
-<li>device tracker entries</li>
+<li>WAN IP 주소 센서</li>
+<li>LTE 신호 센서 RSRQ, RSRP, RSSI 및 SINR</li>
+<li>모바일 데이터 스위치</li>
+<li>모바일 연결 이진 센서</li>
+<li>장치 추적기 항목</li>
 </ul>
-<p>The rest are added to the entity registry, but disabled by default.</p>
-<p>Support for different categories of information and thus available
-entities varies by device model and firmware version.</p>
+<p>나머지는 엔티티 레지스트리에 추가되지만 기본적으로 사용되지 않습니다.</p>
+<p>다양한 범주의 정보 및 사용 가능한 엔티티에 대한 지원은 장치 모델 및 펌웨어 버전에 따라 다릅니다.</p>
 <h3>
-<a class="title-link" name="configuration-via-the-frontend" href="#configuration-via-the-frontend"></a> Configuration via the frontend</h3>
-<p>Menu: <strong>Configuration</strong> -&gt; <strong>Integrations</strong>.</p>
-<p>Click on the <code>+</code> sign to add an integration and click on <strong>Huawei
-LTE</strong>, and follow the configuration flow. After finishing, the Huawei
-LTE integration will be available.</p>
-<p>To use unauthenticated mode, leave username and password empty. The
-integration will then attempt to first use empty strings to
-authenticate and fall back to unauthenticated mode in case that
-fails. If this process does not yield desired results, the YAML
-configuration (see below) is available for more fine grained control.</p>
-<p>Default list of notification recipient phone numbers can be set using
-the integration’s configuration options.</p>
+<a class="title-link" name="---" href="#---"></a> 프론트 엔드를 통한 설정</h3>
+<p>Menu: <strong>설정</strong> -&gt; <strong>통합구성요소</strong>.</p>
+<p><code>+</code> 부호를 클릭하여 통합구성요소를 추가하고 <strong>Huawei LTE</strong>를 클릭하고 설정 단계를 따르십시오. 완료되면 Huawei LTE 연동이 가능합니다.</p>
+<p>인증되지 않은 모드를 사용하려면 사용자 이름과 비밀번호를 비워 두십시오. 그런 다음 통합구성요소는 먼저 빈 문자열을 사용하여 인증을 시도하고 실패할 경우 인증되지 않은 모드로 돌아갑니다. 이 프로세스로 원하는 결과를 얻지 못하면 YAML 구성 (아래 참조)을 사용하여보다 세밀한 제어를 수행 할 수 있습니다.</p>
+<p>알림 수신자 전화 번호의 기본 목록은 통합구성요소 설정 옵션을 사용하여 설정할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration-via-yaml" href="#configuration-via-yaml"></a> Configuration via YAML</h3>
-<p>To enable the component, add the following lines to your
-<code>configuration.yaml</code> file:</p>
+<a class="title-link" name="yaml-" href="#yaml-"></a> YAML에서의 설정</h3>
+<p>컴포넌트를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 huawei_lte:
   - url: http://192.168.100.1/
 </code></pre>
-<p>For routers configured via the UI, each configuration item for the
-same router in YAML overrides and updates the values set in UI
-whenever the YAML configuration values are introduced or updated.</p>
+<p>UI를 통해 설정된 라우터의 경우 YAML에서 동일한 라우터에 대한 각 설정 항목은 YAML 설정 값이 반영되거나 업데이트 될 때마다 UI에 설정된 값을 무시하고 업데이트합니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>URL of the device web interface. Typically <a href="http://192.168.100.1/" rel="external nofollow">http://192.168.100.1/</a> or <a href="http://192.168.1.1/" rel="external nofollow">http://192.168.1.1/</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 웹인터페이스의 URL입니다. 일반적으로 <a href="http://192.168.100.1/" rel="external nofollow">http://192.168.100.1/</a> 또는 <a href="http://192.168.1.1/" rel="external nofollow">http://192.168.1.1/</a> 입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username used for the device web interface in authenticated mode. Typically <code>admin</code>, or empty string (<code>""</code>) for USB stick modems. To use unauthenticated mode, leave this variable out altogether.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증 모드에서 장치 웹 인터페이스에 사용되는 사용자 이름입니다. USB 스틱 모뎀의 경우 일반적으로 <code>admin</code> 또는 빈 문자열 (<code>""</code>)입니다. 인증되지 않은 모드를 사용하려면 이 변수를 모두 그대로 두십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The password used for the device web interface in authenticated mode. Typically empty string (<code>""</code>) for USB stick modems. To use unauthenticated mode, leave this variable out altogether.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증 모드에서 장치 웹 인터페이스에 사용되는 비밀번호입니다. USB 스틱 모뎀의 경우 일반적으로 빈 문자열 (<code> ""</code>)입니다. 인증되지 않은 모드를 사용하려면이 변수를 모두 그대로 두십시오</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="notify" href="#notify"></a> notify</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Enable notifications using SMS messages. To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>SMS 메시지를 사용하여 알림을 활성화합니다. 알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the notification service.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알림 서비스의 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -195,17 +172,17 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="recipient" href="#recipient"></a> recipient</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>The phone number of a default recipient or a list with multiple recipients.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 수신자의 전화 번호 또는 수신자가 여러 명인 목록.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>The following router action services are available. When invoked by a user, administrator access is required.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>다음과 같은 라우터 동작 서비스가 제공됩니다. 사용자가 호출하면 관리자 액세스가 필요합니다.</p>
 <h3>
-<a class="title-link" name="service-huawei_lteclear_traffic_statistics" href="#service-huawei_lteclear_traffic_statistics"></a> Service huawei_lte.clear_traffic_statistics</h3>
-<p>Clear traffic statistics.</p>
+<a class="title-link" name="huawei_lteclear_traffic_statistics-" href="#huawei_lteclear_traffic_statistics-"></a> huawei_lte.clear_traffic_statistics 서비스</h3>
+<p>트레픽 통계 삭제</p>
 <table>
 <thead>
 <tr>
@@ -224,7 +201,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="service-huawei_ltereboot" href="#service-huawei_ltereboot"></a> Service huawei_lte.reboot</h3>
-<p>Reboot router.</p>
+<p>라우터 재부팅.</p>
 <table>
 <thead>
 <tr>
@@ -242,10 +219,10 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-huawei_ltesuspend_integration" href="#service-huawei_ltesuspend_integration"></a> Service huawei_lte.suspend_integration</h3>
-<p>Suspend integration. Suspending logs the integration out from the router, and stops accessing it.
-Useful e.g. if accessing the router web interface from another source such as a web browser is temporarily required.
-Invoke the <code>huawei_lte.resume_integration</code> service to resume.</p>
+<a class="title-link" name="huawei_ltesuspend_integration-" href="#huawei_ltesuspend_integration-"></a> huawei_lte.suspend_integration 서비스</h3>
+<p>연동을 중단합니다. 일시 중단은 라우터에서 연동을 로그 아웃하고 액세스를 중지합니다.
+유용한 예로는 웹 브라우저와 같은 다른 소스에서 라우터 웹 인터페이스에 액세스해야하는 경우
+<code>huawei_lte.resume_integration</code> 서비스를 호출하여 재개하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -263,8 +240,8 @@ Invoke the <code>huawei_lte.resume_integration</code> service to resume.</p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-huawei_lteresume_integration" href="#service-huawei_lteresume_integration"></a> Service huawei_lte.resume_integration</h3>
-<p>Resume suspended integration.</p>
+<a class="title-link" name="huawei_lteresume_integration-" href="#huawei_lteresume_integration-"></a> huawei_lte.resume_integration 서비스</h3>
+<p>일시중단 된 연동을 재개합니다.</p>
 <table>
 <thead>
 <tr>
@@ -282,15 +259,15 @@ Invoke the <code>huawei_lte.resume_integration</code> service to resume.</p>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="tested-devices" href="#tested-devices"></a> Tested devices</h2>
-<p>Devices we know to be working with this integration based on the <a href="https://github.com/Salamek/huawei-lte-api/#huawei-lte-api" rel="external nofollow">documentation of used libraries</a> and reports by users:</p>
+<a class="title-link" name="-" href="#-"></a> 테스트된 장치</h2>
+<p><a href="https://github.com/Salamek/huawei-lte-api/#huawei-lte-api" rel="external nofollow">documentation of used libraries</a> 및 사용자의 보고서를 기반으로 이 연동 작업이 가능한 것으로 알려져 있는 장치 :</p>
 <ul>
 <li>Huawei B310s-22</li>
 <li>Huawei B525s-23a</li>
 <li>Huawei E5186s-22a</li>
 <li>Huawei B618</li>
 </ul>
-<p>This is not a complete list. The integration can probably connect to other Huawei LTE devices running similar firmware.</p>
+<p>이것은 완전한 목록이 아닙니다. 연동은 아마도 유사한 펌웨어를 실행하는 다른 Huawei LTE 장치에 연결될 수 있습니다.</p>
 
 
 </article>

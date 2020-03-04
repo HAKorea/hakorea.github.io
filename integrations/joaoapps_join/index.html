@@ -103,15 +103,11 @@
   <hr class="divider">
   
 
-  <p>The <code>joaoapps_join</code> integration exposes services from
-<a href="https://joaoapps.com/join" rel="external nofollow">Join</a>. In Home Assistant, the Join features are
-divided up in two locations, the Join component, and the Join notify platform.
-The notify platform allows us to send messages to Join devices, the component
-allows us to access the other special features that Join offers. When in doubt, you can reference the <a href="https://joaoapps.com/join/api/" rel="external nofollow">API documentation</a> this is based on.</p>
-<p>In the <code>configuration.yaml</code> file you need to provide the api key and device id
-or name of the target device. You can find your device id and api key
-<a href="https://joinjoaomgcd.appspot.com/" rel="external nofollow">here</a>.</p>
-<p>To set it up, add the following information to your <code>configuration.yaml</code> file:</p>
+  <p><code>joaoapps_join</code> 통합구성요소는 <a href="https://joaoapps.com/join" rel="external nofollow">Join</a>의 서비스를 노출해 놓았습니다. 홈어시스턴트에서 Join 기능은 Join 구성 요소 및 Join notify 플랫폼의 두가지로 나뉩니다.
+알림 플랫폼을 통해 Join 장치에 메시지를 보낼 수 있으며, 구성 요소를 통해 Join이 제공하는 다른 특수 기능에 액세스 할 수 있습니다. 확실하지 않은 경우에는 이를 기반으로 하는 <a href="https://joaoapps.com/join/api/" rel="external nofollow">API documentation</a>을 참조하십시오.</p>
+<p><code>configuration.yaml</code> 파일에서 API 키와 장치 ID 또는 대상 장치의 이름을 제공해야합니다. 장치 ID와 API 키를 <a href="https://joinjoaomgcd.appspot.com/" rel="external nofollow">here</a>에서 찾을 수 있습니다</p>
+<p><strong>HA 네이버 카페에서 깔롱미니ohminy</strong>님의  <a href="http://blog.naver.com/ohminy11/221468519502" rel="external nofollow">HA와 Joaopps Join 연동 후기</a>를 참조하십시오.</p>
+<p>설정하려면 <code>configuration.yaml</code> 파일에 다음 정보를 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: joaoapps_join
@@ -131,27 +127,27 @@ joaoapps_join:
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The API key for Join.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Join을 위한 API 키.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="device_id" href="#device_id"></a> device_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The id of your device or group</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기기 또는 그룹의 ID</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="device_ids" href="#device_ids"></a> device_ids</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Comma separated list of device ids or groups.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 ID 또는 그룹의 쉼표로 구분 된 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="device_names" href="#device_names"></a> device_names</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Comma separated list of device names.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>쉼표로 구분된 장치 이름 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name parameter is optional but needed if you want to use multiple notification platforms.  The platform will be exposed as service <code>notify.&lt;name&gt;</code>. The name will defailt to <code>notify</code> if not supplied. See the <a href="/integrations/notify">Notifications Component</a> for more details.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>name 매개 변수는 선택 사항이지만 여러 알림 플랫폼을 사용하려는 경우 필요합니다. 플랫폼은 <code>notify.&lt;name&gt;</code> 서비스로 노출됩니다. 제공하지 않으면 이름이 <code>notify</code>으로 기본값이 됩니다. 자세한 내용은 <a href="/integrations/notify">Notifications Component</a>을 참조하십시오.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>Use only one of <code>device_id</code>, <code>device_ids</code>, or <code>device_names</code>, this will determine the notification recipient(s).</p>
+<p><code>device_id</code>,<code>device_ids</code> 또는 <code>device_names</code> 중 하나만 사용하면 알림 수신자가 결정됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: joaoapps_join
@@ -163,8 +159,8 @@ notify:
     device_id: DEVICE_ID2
     name: NAME2
 </code></pre>
-<p>The notify service has several optional parameters: <code>icon</code>, <code>smallicon</code>, <code>image</code>, <code>sound</code>, <code>url</code>, <code>notification_id</code>, <code>tts</code>, <code>tts_language</code> and <code>vibration</code>.
-You can use them like so:</p>
+<p>알림 서비스에는 <code>icon</code>, <code>smallicon</code>, <code>image</code>, <code>sound</code>, <code>url</code>, <code>notification_id</code>, <code>tts</code>, <code>tts_language</code> 및 <code>vibration</code>과 같은 몇 가지 선택적 매개 변수가 있습니다.</p>
+<p>다음과 같이 사용할 수 있습니다.</p>
 <pre><code class="language-json">{
 	"message": "Hello from Home Assistant!",
 	"title": "Home Assistant",
@@ -181,8 +177,7 @@ You can use them like so:</p>
 	}
 }
 </code></pre>
-<p>The services exposed in the <code>joaoapps_join</code> integration can be used with the
-service data described below:</p>
+<p><code>joaoapps_join</code> 통합구성요소에 노출된 서비스는 아래 설명된 서비스 데이터와 함께 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>

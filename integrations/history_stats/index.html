@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>History Stats - 홈어시스턴트</title>
+    <title>히스토리 통계(History Stats) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions about how to integrate historical statistics into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/history_stats/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="History Stats">
+    <meta property="og:title" content="히스토리 통계(History Stats)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/history_stats/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="History Stats">
+    <meta name="twitter:title" content="히스토리 통계(History Stats)">
     <meta name="twitter:description" content="Instructions about how to integrate historical statistics into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,23 +97,23 @@
   
   <header>
     <h1 class="title indent">
-      History Stats
+      히스토리 통계(History Stats)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>history_stats</code> sensor platform provides quick statistics about another integration or platforms, using data from the <a href="/integrations/history/">history</a>.</p>
-<p>It can track how long the integration has been in a specific state, in a custom time period.</p>
-<p>Examples of what you can track:</p>
+  <p><code>history_stats</code> 센서 플랫폼은 <a href="/integrations/history/">history</a>의 데이터를 사용하여 다른 통합구성요소에 대한 빠른 통계를 제공합니다.</p>
+<p>사용자 지정 기간 동안 통합구성요소가 특정 상태에 있었던 시간을 추적 할 수 있습니다.</p>
+<p>추적 할 수 있는 예:</p>
 <ul>
-<li>How long you were at home this week</li>
-<li>How long the lights were ON yesterday</li>
-<li>How long you watched TV today</li>
+<li>이번 주에 집에 있었던 시간</li>
+<li>어제 조명이 켜진 시간</li>
+<li>어제 조명이 켜진 시간</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the history statistics sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>히스토리 통계 센서를 사용하려면 <code>configuration.yaml</code>에 다음 행을 추가하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: history_stats
@@ -130,16 +130,16 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The entity you want to track.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>추적하려는 엔티티</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state" href="#state"></a> state</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The state you want to track.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>추적하려는 상태</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name displayed on the frontend.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 이름</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -148,7 +148,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The type of sensor: <code>time</code>, <code>ratio</code>, or <code>count</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 종류 : <code>time</code>, <code>ratio</code>, 혹은 <code>count</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -156,46 +156,46 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="start" href="#start"></a> start</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>When to start the measure (timestamp or datetime).</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>측정 시작시기 (타임 스탬프 또는 날짜/시간)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="end" href="#end"></a> end</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>When to stop the measure (timestamp or datetime).</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>측정을 중지할 시기 (타임 스탬프 또는 날짜/시간)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="duration" href="#duration"></a> duration</dt>
-<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>Duration of the measure.</p>
+<dd><p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>측정 기간.</p>
 </span></p></dd>
 </dl>
 </div>
 <div class="note">
-<p>You have to provide <strong>exactly 2</strong> of <code>start</code>, <code>end</code> and <code>duration</code>.
+<p><code>start</code>,<code>end</code> 및 <code>duration</code>의 <strong>정확하게 두가지</strong>를 제공해야 합니다.
 <br>
-You can use <a href="/topics/templating/#home-assistant-template-extensions">template extensions</a> such as <code>now()</code> or <code>as_timestamp()</code> to handle dynamic dates, as shown in the examples below.</p>
+<code>now ()</code> 또는 <code>as_timestamp ()</code>와 같은 <a href="/topics/templating/#home-assistant-template-extensions">template extensions</a>를 사용하여 아래 예와 같이 동적 날짜를 처리 할 수 ​​있습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="sensor-type" href="#sensor-type"></a> Sensor type</h2>
-<p>Depending on the sensor type you choose, the <code>history_stats</code> integration can show different values:</p>
+<a class="title-link" name="-" href="#-"></a> 센서 타입</h2>
+<p>선택한 센서 유형에 따라 <code>history_stats</code> 통합구성요소에 다른 값이 표시 될 수 있습니다. :</p>
 <ul>
 <li>
-<strong>time</strong>: The default value, which is the tracked time, in hours</li>
+<strong>time</strong>: 추적 시간인 기본값 (시간)</li>
 <li>
-<strong>ratio</strong>: The tracked time divided by the length of your period, as a percentage</li>
+<strong>ratio</strong>: 추적 시간을 기간의 길이로 나눈 값 (백분율)</li>
 <li>
-<strong>count</strong>: How many times the integration you track was changed to the state you track</li>
+<strong>count</strong>: 추적한 통합구성요소가 추적한 상태로 몇 번이나 변경되었는지</li>
 </ul>
 <h2>
-<a class="title-link" name="time-periods" href="#time-periods"></a> Time periods</h2>
-<p>The <code>history_stats</code> integration will execute a measure within a precise time period. You should always provide 2 of the following :</p>
+<a class="title-link" name="period-" href="#period-"></a> Period (기간)</h2>
+<p><code>history_stats</code> 통합구성요소는 정확한 시간 내에 측정을 실행합니다. 항상 다음 중 2가지를 제공해야합니다.</p>
 <ul>
-<li>When the period starts (<code>start</code> variable)</li>
-<li>When the period ends (<code>end</code> variable)</li>
-<li>How long is the period (<code>duration</code> variable)</li>
+<li>기간이 시작될 때 (<code>start</code> 변수)</li>
+<li>기간이 끝나는 시점  (<code>end</code> 변수)</li>
+<li>기간은 길이 (<code>duration</code> 변수)</li>
 </ul>
-<p>As <code>start</code> and <code>end</code> variables can be either datetimes or timestamps, you can configure almost any period you want.</p>
+<p><code>start</code> 및 <code>end</code> 변수는 날짜 시간 또는 타임 스탬프일 수 있으므로 원하는 기간을 대부분 설정할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="duration" href="#duration"></a> Duration</h3>
-<p>The duration variable is used when the time period is fixed. Different syntaxes for the duration are supported, as shown below.</p>
+<a class="title-link" name="duration--" href="#duration--"></a> Duration (지속 기간)</h3>
+<p>Duration 변수는 고정된 기간에 사용됩니다. 아래에 표시된 것처럼 기간 동안 다른 문법 구문이 지원됩니다.</p>
 <pre><code class="language-yaml"># 6 hours
 duration: 06:00
 </code></pre>
@@ -209,41 +209,41 @@ duration:
   minutes: 30
 </code></pre>
 <div class="note">
-<p>If the duration exceeds the number of days of history stored by the <code>recorder</code> component (<code>purge_keep_days</code>), the history statistics sensor will not have all the information it needs to look at the entire duration. For example, if <code>purge_keep_days</code> is set to 7, a history statistics sensor with a duration of 30 days will only report a value based on the last 7 days of history.</p>
+<p>duration이 <code>recorder</code> 구성 요소에 의해 저장된 기록일 수(<code>purge_keep_days</code>)를 초과하는 경우, 기록 통계 센서는 전체 duration을 보는 데 필요한 모든 정보를 갖지 않습니다. 예를 들어, <code>purge_keep_days</code>가 7로 설정되면 duration이 30 일인 히스토리 통계 센서는 최근 7 일의 히스토리를 기반으로 한 값만 보고합니다.</p>
 </div>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
-<p>Here are some examples of periods you could work with, and what to write in your <code>configuration.yaml</code>:</p>
-<p><strong>Today</strong>: starts at 00:00 of the current day and ends right now.</p>
+<a class="title-link" name="" href="#"></a> 예시</h3>
+<p>다음은 작업 할 수있는 period의 예와 <code>configuration.yaml</code>에 쓸 내용입니다.</p>
+<p><strong>오늘</strong>: 현재 날짜의 00:00에 시작하여 지금 끝납니다.</p>
 <pre><code class="language-yaml">    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
     end: '{{ now() }}'
 </code></pre>
-<p><strong>Yesterday</strong>: ends today at 00:00, lasts 24 hours.</p>
+<p><strong>어제</strong>: 오늘 00:00에 종료되며 24 시간 지속됩니다.</p>
 <pre><code class="language-yaml">    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
     duration:
       hours: 24
 </code></pre>
-<p><strong>This morning (6AM - 11AM)</strong>: starts today at 6, lasts 5 hours.</p>
+<p><strong>오늘 아침 (오전 6시-오전 11시)</strong>: 오늘 6 시에 시작하여 5 시간 지속됩니다.</p>
 <pre><code class="language-yaml">    start: '{{ now().replace(hour=6).replace(minute=0).replace(second=0) }}'
     duration:
       hours: 5
 </code></pre>
-<p><strong>Current week</strong>: starts last Monday at 00:00, ends right now.</p>
-<p>Here, last Monday is <em>today</em> as a timestamp, minus 86400 times the current weekday (86400 is the number of seconds in one day, the weekday is 0 on Monday, 6 on Sunday).</p>
+<p><strong>이번주</strong>: 지난 월요일 00:00에 시작하여 지금 끝납니다.</p>
+<p>여기서 지난 월요일은 오늘 현재 시간을 빼서 현재 요일의 86400 배를 뺀 것입니다 (86400은 하루의 초 수, 월요일은 0, 월요일은 6).</p>
 <pre><code class="language-yaml">    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
     end: '{{ now() }}'
 </code></pre>
-<p><strong>Last 30 days</strong>: ends today at 00:00, lasts 30 days. Easy one.</p>
+<p><strong>지난 30 일</strong>: 오늘 00:00에 종료되며 30 일 지속됩니다.</p>
 <pre><code class="language-yaml">    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
     duration:
       days: 30
 </code></pre>
-<p><strong>All your history</strong> starts at timestamp = 0, and ends right now.</p>
+<p><strong>모든 기록</strong>은 타임 스탬프=0에서 시작하여 지금 끝납니다.</p>
 <pre><code class="language-yaml">    start: '{{ 0 }}'
     end: '{{ now() }}'
 </code></pre>
 <div class="note">
-<p>The <code>/developer-tools/template</code> page of your home-assistant UI can help you check if the values for <code>start</code>, <code>end</code> or <code>duration</code> are correct. If you want to check if your period is right, just click on your component, the <code>from</code> and <code>to</code> attributes will show the start and end of the period, nicely formatted.</p>
+<p>홈어시스턴트 UI의 <code>/developer-tools/template</code> 페이지에서 <code>start</code>, <code>end</code> 또는 <code>duration</code> 값이 올바른지 확인할 수 있습니다. period가 올바른지 확인하려면 구성 요소를 클릭하기만 하면 <code>from</code> 및 <code>to</code> 속성에 기간의 시작과 끝이 멋지게 형식화되어 보입니다.</p>
 </div>
 
 

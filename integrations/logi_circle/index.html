@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Logi Circle - 홈어시스턴트</title>
+    <title>로지 써클 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Logi Circle cameras within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/logi_circle/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Logi Circle">
+    <meta property="og:title" content="로지 써클">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/logi_circle/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Logi Circle">
+    <meta name="twitter:title" content="로지 써클">
     <meta name="twitter:description" content="Instructions on how to integrate your Logi Circle cameras within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,15 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Logi Circle
+      로지 써클
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>logi_circle</code> implementation allows you to integrate your <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> cameras in Home Assistant. To connect Logi Circle, you will have to <a href="#requesting-api-access">sign up for API access</a> and get a <code>client_id</code>, <code>client_secret</code> and <code>api_key</code>.</p>
+  <p><code>logi_circle</code> 구현을 통해 <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> 카메라를 Home Assistant에 연동할 수 있습니다. Logi Circle을 연결하려면 <a href="#requesting-api-access">sign up for API access</a>하고 <code>client_id</code>, <code>client_secret</code>, <code>api_key</code>를 가져와야합니다.</p>
 <h2>
-<a class="title-link" name="requesting-api-access" href="#requesting-api-access"></a> Requesting API access</h2>
+<a class="title-link" name="api--" href="#api--"></a> API 액세스 요청</h2>
 <ol>
 <li>Navigate to the <a href="https://docs.google.com/forms/d/184FUILJ10rVxotyOQR5DAiu6GcCbK31AZszUdzT1ybs" rel="external nofollow">Circle OAuth2 Client Request Form</a>.</li>
 <li>Fill out your contact name and e-mail address.</li>
@@ -130,8 +130,8 @@
 </ul>
 <p>Please note that the turn-around time for API access takes a few business days after which you will be contacted by Logitech using the email address you provided in the form.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To integrate cameras linked with your <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> account, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> 계정에 연결된 카메라를 연동하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 logi_circle:
   client_id: YOUR_CLIENT_ID
@@ -145,30 +145,30 @@ logi_circle:
   <dl class="">
 <dt>
 <a class="title-link" name="client_id" href="#client_id"></a> client_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The client ID issued to you by Logitech.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Logitech이 발행한 클라이언트 ID</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="client_secret" href="#client_secret"></a> client_secret</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The client secret issued to you by Logitech.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Logitech이 고객에게 발급한 클라이언트 암호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The API key issued to you by Logitech.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Logitech이 발행 한 API 키.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="redirect_uri" href="#redirect_uri"></a> redirect_uri</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The redirect URI that corresponds to your Home Assistant instance. It must match one of the redirect URIs specified when you requested API access from Logitech.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Home Assistant 인스턴스에 해당하는 리디렉션 URI입니다. Logitech에서 API 액세스를 요청할 때 지정된 경로 재 지정 URI 중 하나와 일치해야합니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="camera" href="#camera"></a> Camera</h3>
-<p>The <code>logi_circle</code> camera platform allows you to view still frames from your <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> camera’s live stream in Home Assistant.</p>
-<p>Logi Circle cameras support the <code>camera.turn_on</code> and <code>camera.turn_off</code> services. This will set the streaming mode property of your camera accordingly, controlling whether the live stream is available and activity recordings are captured.</p>
+<a class="title-link" name="" href="#"></a> 카메라</h3>
+<p><code>logi_circle</code> 카메라 플랫폼을 사용하면 Home Assistant의 <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> 카메라 라이브 스트림에서 스틸 프레임을 볼 수 있습니다.</p>
+<p>Logi Circle 카메라는 <code>camera.turn_on</code> 및 <code>camera.turn_off</code> 서비스를 지원합니다. 이에 따라 카메라의 스트리밍 모드 속성이 설정되어 라이브 스트림을 사용할 수 있는지 여부와 활동 기록이 캡처되는지 여부를 제어합니다.</p>
 <h3>
-<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h3>
-<p>The <code>logi_circle</code> sensor platform lets you monitor sensors connected to your <a href="https://circle.logi.com" rel="external nofollow">Logi Circle</a> cameras in Home Assistant.</p>
-<p>To customize which sensors are setup, you can extend the Logi Circle integration configuration in your <code>configuration.yaml</code> file with the following settings:</p>
+<a class="title-link" name="" href="#"></a> 센서</h3>
+<p><code>logi_circle</code> 센서 플랫폼을 사용하면 Home Assistant의 <a href="https://circle.logi.com" rel="external nofollow">Logi Circle</a> 카메라에 연결된 센서를 모니터링 할 수 있습니다.</p>
+<p>설정할 센서를 사용자 정의하려면 다음 세팅으로 <code>configuration.yaml</code> 파일에서 Logi Circle 연동 설정으로 확장 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 logi_circle:
   sensors:
@@ -180,7 +180,7 @@ logi_circle:
       - signal_strength_percentage
       - streaming
 </code></pre>
-<p>By default, all sensors available from your Logi Circle devices will be monitored. Leave <code>monitored_conditions</code> blank to disable all sensors for the Logi Circle component. Devices without an internal battery will not expose a <code>battery_level</code> sensor.</p>
+<p>기본적으로 Logi Circle 장치에서 사용 가능한 모든 센서가 모니터링됩니다. Logi Circle 구성 요소에 대한 모든 센서를 비활성화하려면 <code>monitored_conditions</code>를 비워 두십시오. 내장 배터리가 없는 장치는 배터리 레벨 센서를 노출시키지 않습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -229,11 +229,11 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>The <code>logi_circle</code> platform exposes 3 services for interacting with your Logi Circle device. When calling a service with one or more entity IDs, please ensure you target the camera entity (eg. <code>camera.living_room_camera</code>).</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p><code>logi_circle</code> 플랫폼은 Logi Circle 장치와 상호 작용하기 위한 3 가지 서비스를 제공합니다. 하나 이상의 엔티티 ID로 서비스를 호출할 때는 카메라 엔티티를 대상으로 해야합니다 (예 :<code>camera.living_room_camera</code>).</p>
 <h3>
-<a class="title-link" name="service-logi_circlelivestream_record" href="#service-logi_circlelivestream_record"></a> Service logi_circle.livestream_record</h3>
-<p>Initiates a recording of the camera’s live stream.</p>
+<a class="title-link" name="logi_circlelivestream_record-" href="#logi_circlelivestream_record-"></a> logi_circle.livestream_record 서비스</h3>
+<p>카메라의 라이브 스트림 녹화를 시작합니다.</p>
 <table>
 <thead>
 <tr>
@@ -260,11 +260,11 @@ Default value: </p>
 </tr>
 </tbody>
 </table>
-<p>The path part of <code>filename</code> must be an entry in the <code>whitelist_external_dirs</code> in your <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> section of your <code>configuration.yaml</code> file.</p>
+<p><code>filename</code>의 경로 부분은 <code>configuration.yaml</code> 파일의 <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> 섹션에 있는 <code>whitelist_external_dirs</code>의 항목이어야합니다.</p>
 <h3>
-<a class="title-link" name="service-logi_circlelivestream_snapshot" href="#service-logi_circlelivestream_snapshot"></a> Service logi_circle.livestream_snapshot</h3>
-<p>Take a snapshot from a camera’s live stream. This differs from the generic <a href="/integrations/camera/#service-snapshot">snapshot</a> service in that explicitly requests a fresh image from Logi Circle’s API. This will force cameras in a deep sleep state to wake.</p>
-<p>Please note that new snapshots will only be generated if the cached snapshot is older than 30s. Requesting multiple snapshots in quick succession will likely return the same image. Likewise, requesting a snapshot from a camera that is actively streaming (ie. is not in deep sleep) will return a cached image no older than 30s.</p>
+<a class="title-link" name="logi_circlelivestream_snapshot-" href="#logi_circlelivestream_snapshot-"></a> logi_circle.livestream_snapshot 서비스</h3>
+<p>카메라의 라이브 스트림에서 스냅샷을 찍습니다. 이는 Logi Circle의 API에서 새로운 이미지를 명시적으로 요청한다는 점에서 일반적인 <a href="/integrations/camera/#service-snapshot">snapshot</a> 서비스와 다릅니다. 이렇게하면 수면 상태의 카메라가 강제로 깨어납니다.</p>
+<p>캐시된 스냅샷이 30초보다 오래된 경우에만 새 스냅샷이 생성됩니다. 연속해서 여러 스냅샷을 요청하면 동일한 이미지가 반환 될 수 있습니다. 마찬가지로, 적극적으로 스트리밍 중인 카메라에서 스냅샷을 요청하면 (즉, 최대 절전 상태가 아닌) 30초 이전의 캐시 된 이미지를 반환합니다.</p>
 <table>
 <thead>
 <tr>
@@ -286,10 +286,10 @@ Default value: </p>
 </tr>
 </tbody>
 </table>
-<p>The path part of <code>filename</code> must be an entry in the <code>whitelist_external_dirs</code> in your <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> section of your <code>configuration.yaml</code> file.</p>
+<p><code>filename</code>의 경로 부분은 <code>configuration.yaml</code> 파일의 <a href="/docs/configuration/basic/"><code>homeassistant:</code></a> 섹션에 있는 <code>whitelist_external_dirs</code>의 항목이어야합니다.</p>
 <h3>
-<a class="title-link" name="service-logi_circleset_config" href="#service-logi_circleset_config"></a> Service logi_circle.set_config</h3>
-<p>Sets a configuration property for your camera.</p>
+<a class="title-link" name="logi_circleset_config-" href="#logi_circleset_config-"></a> logi_circle.set_config 서비스</h3>
+<p>카메라의 설정 속성을 세팅합니다.</p>
 <table>
 <thead>
 <tr>
