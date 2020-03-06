@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Netgear - 홈어시스턴트</title>
+    <title>넷기어 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Netgear routers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/netgear/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Netgear">
+    <meta property="og:title" content="넷기어">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/netgear/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Netgear">
+    <meta name="twitter:title" content="넷기어">
     <meta name="twitter:description" content="Instructions on how to integrate Netgear routers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Netgear
+      넷기어
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This platform allows you to detect presence by looking at connected devices to a <a href="https://www.netgear.com/" rel="external nofollow">Netgear</a> device.</p>
+  <p>이 플랫폼을 사용하면 연결된 장치를 <a href="https://www.netgear.com/" rel="external nofollow">Netgear</a> 장치로 보고 현재 상태를 감지할 수 있습니다</p>
 <div class="note">
-<p>A recent updates of Orbi APs introduced a bug which takes several hours to detects presence on your local network. The current workaround is to force this integration to use the Orbi’s API v2 by adding the <code>accesspoints:</code> node to your configuration.</p>
+<p>최근 Orbi AP 업데이트에서는 로컬 네트워크의 존재를 감지하는 데 몇 시간이 걸리는 버그가 있었습니다. 현재 해결 방법은 설정에 <code>accesspoints :</code>노드를 추가하여 이 통합구성요소에서 Orbi의 API v2를 사용하도록 하는 것입니다.</p>
 </div>
-<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>이 장치 추적기를 설치에 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 device_tracker:
   - platform: netgear
@@ -123,12 +123,12 @@ device_tracker:
 </span></p></dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IP address of your router, e.g., <code>192.168.1.1</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>라우터의 IP 주소. (예: <code>192.168.1.1</code>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port your router communicates with.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>라우터가 통신하는 포트.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -137,7 +137,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The username of a user with administrative privileges.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>관리 권한이 있는 사용자의 사용자 이름.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -145,30 +145,30 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The password for your given admin account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>주어진 관리자 계정의 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="devices" href="#devices"></a> devices</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>If provided only specified devices will be reported. Can be MAC address or the device name as reported in the Netgear UI.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>제공된 경우 지정된 장치만 보고됩니다. Netgear UI에 보고된 MAC 주소 또는 장치 이름일 수 있습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="exclude" href="#exclude"></a> exclude</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Devices to exclude from the scan.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>스캔에서 제외 할 장치.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="accesspoints" href="#accesspoints"></a> accesspoints</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Also track devices on the specified APs. Only supports MAC address.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>특정 AP들에서 장치를 추적. MAC 주소만 지원합니다.</p>
 </span></p></dd>
 </dl>
 </div>
-<p>When <code>accesspoints</code> is specified an extra device will be reported for each device connected to the APs specified here, as <code>MY-LAPTOP on RBS40</code>. <code>Router</code> will be reported as AP name for the main AP. Only tested with Orbi.</p>
-<p>The use of <code>devices</code> or <code>exclude</code> is recommended when using <code>accesspoints</code> to avoid having a lot of entries.</p>
-<p>List of models that are known to use port 80:</p>
+<p><code>accesspoints</code>가 지정되면 여기에 지정된 AP에 연결된 각 장치에 대한 추가 장치가 <code>MY-LAPTOP on RBS40</code>으로 보고됩니다. <code>Router</code>는 메인 AP의 AP 이름으로 보고됩니다.</p>
+<p><code>accesspoints</code>를 사용하는 경우 항목이 많지 않도록 <code>devices</code> 또는 <code>exclude</code>를 사용하는 것이 좋습니다.</p>
+<p>포트 80을 사용하는 것으로 알려진 모델 목록:</p>
 <ul>
 <li>Nighthawk X4S - AC2600 (R7800)</li>
 <li>Orbi</li>
 </ul>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+<p>추적할 사람을 설정하는 방법에 대한 지침은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오.</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Media Extractor - 홈어시스턴트</title>
+    <title>Media 캡처도구(media extractor) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate the Media Extractor into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/media_extractor/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Media Extractor">
+    <meta property="og:title" content="Media 캡처도구(media extractor)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/media_extractor/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Media Extractor">
+    <meta name="twitter:title" content="Media 캡처도구(media extractor)">
     <meta name="twitter:description" content="Instructions on how to integrate the Media Extractor into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Media Extractor
+      Media 캡처도구(media extractor)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>media_extractor</code> integration gets a stream URL and sends it to a media player entity. This integration can extract entity specific streams if configured accordingly.</p>
+  <p><code>media_extractor</code> 통합구성요소는 스트림 URL을 가져와서 미디어 플레이어 엔티티로 보냅니다. 이 통합구성요소는 적절히 설정된 경우 엔티티의 특정 스트림을 추출할 수 있습니다.</p>
 <div class="note">
-Media extractor doesn't transcode streams, it just tries to find stream that match requested query.
+Media extractor는 스트림을 트랜스 코딩하지 않고 요청된 쿼리와 일치하는 스트림을 찾으려고합니다.
 </div>
-<p>To use the media extractor service in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치에서 Media extractor 서비스를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_extractor:
 </code></pre>
@@ -118,7 +118,7 @@ media_extractor:
 <dt>
 <a class="title-link" name="default_query" href="#default_query"></a> default_query</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set default stream query for all devices.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>모든 장치에 대한 기본 스트림 쿼리를 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -126,7 +126,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="customize" href="#customize"></a> customize</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set entity specific values.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>엔터티 특정 값을 설정.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -138,14 +138,14 @@ media_extractor:
       video: bestvideo
       music: bestaudio[ext=mp3]
 </code></pre>
-<p>This configuration sets query for all service calls like to ‘bestaudio’ with the mp3 extension:</p>
+<p>이 구성은 mp3 확장자를 가진 ‘bestaudio’와 같은 모든 서비스 호출에 대한 쿼리를 설정합니다.</p>
 <pre><code class="language-json">{
   "entity_id": "media_player.my_sonos",
   "media_content_id": "https://soundcloud.com/bruttoband/brutto-11",
   "media_content_type": "music"
 }
 </code></pre>
-<p>Query examples with explanations:</p>
+<p>설명이 포함된 쿼리 예 :</p>
 <ul>
 <li>
 <strong>bestvideo</strong>: Best video only stream</li>
@@ -158,11 +158,11 @@ media_extractor:
 <li>
 <strong>bestaudio[ext=m4a]/bestaudio[ext=ogg]/bestaudio</strong>: Best m4a audio, otherwise best ogg audio and only then any best audio</li>
 </ul>
-<p>More info about queries <a href="https://github.com/rg3/youtube-dl#format-selection" rel="external nofollow">here</a></p>
+<p>검색에 대한 추가 정보는 <a href="https://github.com/rg3/youtube-dl#format-selection" rel="external nofollow">here</a></p>
 <h3>
 <a class="title-link" name="use-the-service" href="#use-the-service"></a> Use the service</h3>
-<p>Use <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Services</strong> from the <strong>Developer Tools</strong>. Choose <code>media_extractor</code> from the dropdown menu <strong>Domain</strong> and <code>play_media</code> from <strong>Service</strong>, enter something like the JSON sample from above into the <strong>Service Data</strong> field, and hit <strong>CALL SERVICE</strong>.</p>
-<p>This will download the file from the given URL.</p>
+<p><strong>개발자 도구</strong>에서 <img src="/images/screenshots/developer-tool-services-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>Services</strong> 항목을 사용하십시오. 드롭 다운 메뉴 <strong>Domain</strong> 및 <strong>Services</strong>에서 <code>play_media</code>에서 <code>media_extractor</code>를 선택하고 위의 JSON 샘플과 같은 것을 <strong>Service Data</strong> 필드에 입력 한 다음 <strong>CALL SERVICE</strong>를 누르십시오.</p>
+<p>주어진 URL에서 파일을 다운로드합니다.</p>
 <table>
 <thead>
 <tr>

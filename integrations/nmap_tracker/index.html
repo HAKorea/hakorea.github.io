@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Nmap Tracker - 홈어시스턴트</title>
+    <title>Nmap 추적기 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Nmap into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/nmap_tracker/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Nmap Tracker">
+    <meta property="og:title" content="Nmap 추적기">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/nmap_tracker/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Nmap Tracker">
+    <meta name="twitter:title" content="Nmap 추적기">
     <meta name="twitter:description" content="Instructions on how to integrate Nmap into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Nmap Tracker
+      Nmap 추적기
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>As an alternative to the router-based device tracking, it is possible to directly scan the network for devices by using Nmap. The IP addresses to scan can be specified in any format that Nmap understands, including the network-prefix notation (<code>192.168.1.1/24</code>) and the range notation (<code>192.168.1.1-255</code>).</p>
+  <p>라우터 기반 장치 추적의 대안으로 Nmap을 사용하여 장치의 네트워크를 직접 검색 할 수 있습니다. 스캔 할 IP 주소는 네트워크 접두사 표기법 (<code>192.168.1.1/24</code>) 및 범위 표기법 (<code>192.168.1.1-255</code>)을 포함하여 Nmap이 이해하는 모든 형식으로 지정할 수 있습니다</p>
 <div class="note">
-  Please keep in mind that modern smart phones will usually turn off WiFi when they are idle. Simple trackers like this may not be reliable on their own.
+  최신 스마트 폰은 일반적으로 유휴 상태 일 때 WiFi를 끕니다. 이와 같은 간단한 추적기는 자체적으로 신뢰할 수 없습니다.
 </div>
-<p>You might have to install the packages for <code>arp</code> and <code>nmap</code>. On Debian based hosts (for example Raspbian) do so by running <code>$ sudo apt-get install net-tools nmap</code>. On a Fedora host run <code>$ sudo dnf -y install nmap</code>.</p>
+<p><code>arp</code> 및 <code>nmap</code> 용 패키지를 설치해야 할 수도 있습니다. 데비안 기반의 호스트 (예: Raspbian)에서는 <code>$ sudo apt-get install net-tools nmap</code>을 실행하십시오. Fedora 호스트에서 <code>$ sudo dnf -y install nmap</code>을 실행하십시오.</p>
 <div class="note">
-<p>If you are using <a href="/hassio/">Hass.io</a> then just move forward to the configuration as all requirements are already fulfilled.</p>
+<p><a href="/hassio/">Hass.io</a>를 사용하는 경우 모든 요구 사항이 이미 충족되었으므로 설정으로 이동하십시오.</p>
 </div>
-<p>Host detection is done via Nmap’s “fast scan” (<code>-F</code>) of the most frequently used 100 ports, with a host timeout of 5 seconds.</p>
-<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>호스트 감지는 가장 자주 사용되는 100 개 포트 중 Nmap의 “fast scan”(<code>-F</code>)을 통해 수행되며 호스트 시간 제한은 5 초입니다.</p>
+<p>이 장치 추적기를 사용하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 device_tracker:
   - platform: nmap_tracker
@@ -146,8 +146,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>A full example for the <code>nmap</code> tracker could look like the following sample:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p><code>nmap</code> 트래커의 전체 예제는 다음 샘플과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for Nmap
 # One whole subnet, and skipping two specific IPs.
 device_tracker:
@@ -167,20 +167,20 @@ device_tracker:
       - 10.0.0.2
       - 10.0.0.15
 </code></pre>
-<p>In the above example, Nmap will be call with the process:
+<p>위의 예에서 Nmap은 다음 프로세스와 같이 호출됩니다.:
 <code>nmap -oX - 192.168.1.1/24 10.0.0.2 10.0.0.15 -F --host-timeout 5s</code></p>
-<p>An example of how the Nmap scanner can be customized:</p>
+<p>Nmap 스캐너를 사용자 정의 할 수 있는 방법의 예 :</p>
 <h3>
-<a class="title-link" name="linux-capabilities" href="#linux-capabilities"></a> Linux capabilities</h3>
-<p>On Linux systems (such as Hass.io) you can extend the functionality of Nmap, without having to run it as root, by using <em>Linux capabilities</em>. Be sure to specify the full path to wherever you installed Nmap:</p>
+<a class="title-link" name="-" href="#-"></a> 리눅스 기능</h3>
+<p>Linux 시스템 (예: Hass.io)에서 <em>Linux 기능</em>을 사용하여 루트로 실행하지 않고도 Nmap의 기능을 확장 할 수 있습니다. Nmap을 설치 한 곳의 전체 경로를 지정하십시오</p>
 <pre><code class="language-bash">$ sudo setcap cap_net_raw,cap_net_admin,cap_net_bind_service+eip /usr/bin/nmap
 </code></pre>
-<p>And you can set up the device tracker as</p>
+<p>장치 추적기를 다음과 같이 설정할 수 있습니다.</p>
 <pre><code class="language-yaml">- platform: nmap_tracker
   hosts: 192.168.1.1-25
   scan_options: " --privileged -sP "
 </code></pre>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+<p>추적할 사람을 설정하는 방법에 대한 지침은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오.</p>
 
 
 </article>

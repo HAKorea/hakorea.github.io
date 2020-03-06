@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>NAD - 홈어시스턴트</title>
+    <title>NAD(명품오디오리시버) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate NAD receivers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/nad/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="NAD">
+    <meta property="og:title" content="NAD(명품오디오리시버)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/nad/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="NAD">
+    <meta name="twitter:title" content="NAD(명품오디오리시버)">
     <meta name="twitter:description" content="Instructions on how to integrate NAD receivers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      NAD
+      NAD(명품오디오리시버)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>nad</code> platform allows you to control a <a href="https://nadelectronics.com/" rel="external nofollow">NAD receiver</a> through RS232, TCP and Telnet from Home Assistant.</p>
-<p>To add an NAD receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>nad</code> 플랫폼을 사용하면 Home Assistant의 RS232, TCP 및 Telnet을 통해 <a href="https://nadelectronics.com/" rel="external nofollow">NAD 수신기</a>를 제어할 수 있습니다.</p>
+<p>설치에 NAD 수신기를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for RS232 configuration
 media_player:
   - platform: nad
@@ -123,7 +123,7 @@ media_player:
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Type of communication. Valid types are <code>RS232</code>, <code>Telnet</code> or <code>TCP</code></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>통신 타입. 유효한 타입은 <code>RS232</code>, <code>Telnet</code> 혹은 <code>TCP</code></p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -132,7 +132,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="serial_port" href="#serial_port"></a> serial_port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The serial port. (for <code>RS232</code> type only)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>시리얼 포트. (<code>RS232</code> 타입만 해당)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -140,12 +140,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The IP address of your amplifier. (for <code>TCP</code> and <code>Telnet</code> types)</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>앰프의 IP 주소. (<code>TCP</code> 및 <code>Telnet</code> 유형)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The port number of the device. (for <code>Telnet</code> type only)</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치의 포트 번호. (<code>Telnet</code>유형만 해당)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -154,7 +154,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the device.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -163,7 +163,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="min_volume" href="#min_volume"></a> min_volume</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Minimum volume in dB to use with the slider.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>슬라이더와 함께 사용할 최소 볼륨 (dB).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -172,7 +172,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="max_volume" href="#max_volume"></a> max_volume</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Maximum volume in dB to use with the slider.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>슬라이더와 함께 사용할 최대 볼륨 (dB).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -180,12 +180,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="sources" href="#sources"></a> sources</dt>
-<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of mappings from source to source name. Valid sources are <code>1 to 10</code>. (for <code>RS232</code> and <code>Telnet</code> types)</p>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p>미디어에서 미디어이름을 매핑한 리스트. 유효한 미디어갯수는 <code>1 ~ 10</code>개 (<code>RS232</code> 및  <code>Telnet</code> 유형)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="volume_step" href="#volume_step"></a> volume_step</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The amount in dB you want to increase the volume with when pressing volume up/down. (for <code>TCP</code> type only)</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>볼륨을 올리거나 내릴 때 볼륨을 높이려는 dB 단위의 양입니다. (<code>TCP</code> 타입 만 해당)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -193,13 +193,13 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The min_volume and max_volume are there to protect you against misclicks on the slider so you will not blow up your speakers when you go from -92dB to +20dB. You can still force it to go higher or lower than the values set with the plus and minus buttons.</p>
+<p>min_volume 및 max_volume은 슬라이더를 잘못 클릭하지 않도록 보호하기 위해 -92dB에서 + 20dB로 이동할 때 스피커가 터지지 않도록합니다. 플러스 및 마이너스 버튼으로 설정한 값보다 높거나 낮게 설정할 수 있습니다.</p>
 <div class="note warning">
-<p>On linux the user running home-assistant needs <code>dialout</code> permissions to access the serial port.
-This can be added to the user by doing <code>sudo usermod -a -G dialout &lt;username&gt;</code>.
-Be aware that the user might need to logout and logon again to activate these permissions.</p>
+<p>리눅스에서 홈어시스턴트를 실행하는 사용자는 시리얼 포트에 액세스하기 위해 <code>dialout</code> 권한이 필요합니다.
+<code>sudo usermod -a -G dialout &lt;username&gt;</code>을 통해 사용자에게 추가 할 수 있습니다.
+이러한 권한을 활성화하려면 사용자가 로그 아웃했다가 다시 로그온해야 할 수도 있습니다.</p>
 </div>
-<p>A full configuration example could look like this:</p>
+<p>전체 설정 예는 다음과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: nad

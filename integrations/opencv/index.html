@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>OpenCV - 홈어시스턴트</title>
+    <title>OpenCV(오픈소스이미지프로세싱) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate OpenCV image processing into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/opencv/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="OpenCV">
+    <meta property="og:title" content="OpenCV(오픈소스이미지프로세싱)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/opencv/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="OpenCV">
+    <meta name="twitter:title" content="OpenCV(오픈소스이미지프로세싱)">
     <meta name="twitter:description" content="Instructions on how to integrate OpenCV image processing into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      OpenCV
+      OpenCV(오픈소스이미지프로세싱)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p><a href="https://www.opencv.org/" rel="external nofollow">OpenCV</a> is an open source computer vision image and video processing library.</p>
-<p>Some pre-defined classifiers can be found <a href="https://github.com/opencv/opencv/tree/master/data" rel="external nofollow">here</a>.</p>
+  <p><a href="https://www.opencv.org/" rel="external nofollow">OpenCV</a>는 오픈 소스 컴퓨터 비전 이미지 및 비디오 처리 라이브러리입니다.</p>
+<p>일부 사전 정의된 classifiers는 <a href="https://github.com/opencv/opencv/tree/master/data" rel="external nofollow">here</a>에서 찾을 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To setup OpenCV with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Home Assistant로 OpenCV를 설정하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 image_processing:
   - platform: opencv
@@ -119,23 +119,23 @@ image_processing:
 </code></pre>
 <ul>
 <li>
-<strong>name</strong> (<em>Required</em>): The name of the OpenCV image processor.</li>
+<strong>name</strong> (<em>Required</em>): OpenCV 이미지 프로세서의 이름.</li>
 <li>
-<strong>source</strong> array (<em>Required</em>): List of image sources.
+<strong>source</strong> array (<em>Required</em>): 이미지 소스 목록.
 <ul>
 <li>
-<strong>entity_id</strong> (<em>Required</em>): A camera entity id to get picture from.
+<strong>entity_id</strong> (<em>Required</em>): 사진을 가져올 카메라 엔티티 ID.
 <ul>
 <li>
-<strong>name</strong> (<em>Optional</em>): This parameter allows you to override the name of your <code>image_processing</code> entity.</li>
+<strong>name</strong> (<em>Optional</em>): 이 매개 변수를 사용하면 <code>image_processing</code> 엔티티 이름을 대체할 수 있습니다 .</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<strong>classifier</strong> (<em>Optional</em>): Dictionary of name to path to the classifier xml file. If this field is not provided, a face classifier will be downloaded from OpenCV’s Github repo.</li>
+<strong>classifier</strong> (<em>Optional</em>): classifier ​​xml 파일에 대한 경로의 이름 사전(dictionary)입니다. 이 필드를 제공하지 않으면 OpenCV의 Github 저장소에서 face classifier가 다운로드됩니다.</li>
 </ul>
-<p><strong>classifier</strong> may also be defined as a dictionary of names to classifier configurations:</p>
+<p><strong>classifier</strong>는 classifier 설정에 대한 이름들의 사전(dictionary)으로 정의될 수도 있습니다.</p>
 <pre><code class="language-yaml">    mom:
       file: /path/to/classifier/xml
       neighbors: 4
@@ -144,11 +144,11 @@ image_processing:
 </code></pre>
 <ul>
 <li>
-<strong>file</strong> (<em>Required</em>): The path to the classifier xml file.</li>
+<strong>file</strong> (<em>Required</em>): classifier ​​xml 파일의 경로입니다.</li>
 <li>
-<strong>scale</strong> (<em>Optional</em>): The scale to perform when processing, this is a <code>float</code> value that must be greater than or equal to <code>1.0</code>, default is <code>1.1</code>.</li>
+<strong>scale</strong> (<em>Optional</em>): 처리시 수행할 스케일로, <code>float</code> 값은 <code>1.0</code>이상 이어야하며 기본값은 <code>1.1</code>입니다.</li>
 <li>
-<strong>neighbors</strong> (<em>Optional</em>): The minimum number of neighbors required for a match, default is <code>4</code>. The higher this number, the more picky the matching will be; lower the number, the more false positives you may experience.</li>
+<strong>neighbors</strong> (<em>Optional</em>): 매치하는데 필요한 최소 neighbor 갯수, 기본값은 <code>4</code>입니다. 이 숫자가 높을수록 일치하는 것이 더 까다 롭습니다. 숫자가 낮을수록 더 많은 오탐지가 발생할 수 있습니다.</li>
 </ul>
 
 

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Nanoleaf - 홈어시스턴트</title>
+    <title>나노리프(Nanoleaf) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions how to integrate Nanoleaf Light Panels into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/nanoleaf/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Nanoleaf">
+    <meta property="og:title" content="나노리프(Nanoleaf)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/nanoleaf/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Nanoleaf">
+    <meta name="twitter:title" content="나노리프(Nanoleaf)">
     <meta name="twitter:description" content="Instructions how to integrate Nanoleaf Light Panels into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Nanoleaf
+      나노리프(Nanoleaf)
     </h1>
   </header>
   <hr class="divider">
   
 
   <h3>
-<a class="title-link" name="configuration-sample" href="#configuration-sample"></a> Configuration Sample</h3>
-<p>The <code>nanoleaf</code> platform allows you to control <a href="https://nanoleaf.me" rel="external nofollow">Nanoleaf Light Panels</a> from Home Assistant.</p>
-<p>The preferred way to set up this platform is by enabling the <a href="/integrations/discovery/">discovery component</a>. Make sure to press and hold the <em>ON</em> button for 5 seconds (the LED will start flashing) on your Nanoleaf Lights while Home Assistant is starting.</p>
-<p>To configure the Nanoleaf lights manually, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 설정 샘플</h3>
+<p><code>nanoleaf</code> 플랫폼을 사용하면 Home Assistant에서 <a href="https://nanoleaf.me" rel="external nofollow">Nanoleaf Light Panels</a>를 제어 할 수 있습니다.</p>
+<p>이 플랫폼을 설정하는 바람직한 방법은 <a href="/integrations/discovery/">discovery component</a>를 활성화하는 것입니다.
+홈어시스턴트가 시작되는 동안 Nanoleaf 표시 등에서 <em>ON</em> 버튼을 5 초 동안 누르고 있습니다 (LED가 깜박이기 시작함).</p>
+<p>Nanoleaf 조명을 수동으로 설정하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: nanoleaf
@@ -120,16 +121,16 @@ light:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>IP address or host-name of the device, e.g., 192.168.1.10.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 IP 주소 또는 호스트 이름 (예 : 192.168.1.10)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="token" href="#token"></a> token</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The <em>auth</em> token that you get via <em>POST</em> to <em>/api/v1/new</em></p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p><em>POST</em>를 통해 <em>/api/v1/new</em>에 제공하는 <em>auth</em> 토큰</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the component, make this unique if you have multiple Light Panels</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>구성 요소 이름, 여러 개의 라이트 패널이있는 경우 고유한 이름으로 지정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -138,7 +139,7 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="getting-the-auth-token" href="#getting-the-auth-token"></a> Getting The Auth Token</h3>
+<a class="title-link" name="--" href="#--"></a> 인증 토큰 받기</h3>
 <ol>
 <li>Make sure that your Nanoleaf Light Panel is fully patched (as of the time of writing the latest version was 3.0.8 for Aurora and 1.2.0 for Canvas)</li>
 <li>Hold down the <em>ON</em> button on the Panel for 5 seconds; the LED will start flashing</li>
@@ -146,7 +147,7 @@ Default value: </p>
 </li>
 <li>The output should include the auth token like <em>{“auth_token”:“xxxxxxxxxxxxxxxxxxxxx”}</em>, copy the resulting token into your configuration</li>
 </ol>
-<p>If you get a 403 Forbidden message, you probably did not press the <em>ON</em> button long enough. The time-frame to get a valid token is only 30 seconds, so you have to be quick to issue the curl request.</p>
+<p>403 Forbidden 메시지가 표시되면 <em>ON</em> 단추를 충분히 길게 누르지 않았을 수 있습니다. 유효한 토큰을 얻는데 걸리는 시간은 30 초에 불과하므로 curl 요청을 신속하게 발행해야합니다.</p>
 
 
 </article>

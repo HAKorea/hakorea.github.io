@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>System Monitor - 홈어시스턴트</title>
+    <title>시스템 모니터(System Monitor) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to monitor the Home Assistant host.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/systemmonitor/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="System Monitor">
+    <meta property="og:title" content="시스템 모니터(System Monitor)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/systemmonitor/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="System Monitor">
+    <meta name="twitter:title" content="시스템 모니터(System Monitor)">
     <meta name="twitter:description" content="Instructions on how to monitor the Home Assistant host.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      System Monitor
+      시스템 모니터(System Monitor)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>systemmonitor</code> sensor platform allows you to monitor disk usage,
-memory usage, CPU usage, and running processes. This platform has superseded the
-process integration which is now considered deprecated.</p>
-<p>To add this platform to your installation,
-add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>systemmonitor</code> 센서 플랫폼을 사용하면 디스크 사용량, 메모리 사용량, CPU 사용량 및 실행중인 프로세스를 모니터링 할 수 있습니다. 이 플랫폼은 더 이상 사용되지 않는 프로세스 통합구성요소를 대체했습니다.</p>
+<p>이 플랫폼을 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: systemmonitor
@@ -136,8 +133,7 @@ sensor:
 </dl></dd>
 </dl>
 </div>
-<p>The table contains types and their argument to use in your <code>configuration.yaml</code>
-file.</p>
+<p>이 테이블에는<code>configuration.yaml</code> 파일에서 사용할 유형과 인수가 포함되어 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -253,29 +249,26 @@ file.</p>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="linux-specific" href="#linux-specific"></a> Linux specific</h2>
-<p>To retrieve all available network interfaces on a Linux System, execute the
-<code>ifconfig</code> command.</p>
+<a class="title-link" name="-" href="#-"></a> 리눅스에 한함</h2>
+<p>Linux 시스템에서 사용 가능한 모든 네트워크 인터페이스를 검색하려면 <code>ifconfig</code> 명령을 실행하십시오.</p>
 <pre><code class="language-bash">ifconfig -a | sed 's/[ \t].*//;/^$/d'
 </code></pre>
 <h2>
-<a class="title-link" name="windows-specific" href="#windows-specific"></a> Windows specific</h2>
-<p>When running this platform on Microsoft Windows, Typically,
-the default interface would be called <code>Local Area Connection</code>,
-so your configuration might look like:</p>
+<a class="title-link" name="-" href="#-"></a> 윈도우에 한함</h2>
+<p>Microsoft Windows에서이 플랫폼을 실행할 때 일반적으로 기본 인터페이스의 이름은 <code>Local Area Connection</code>이며 설정은 다음과 같습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: systemmonitor
     resources:
       - type: network_in
         arg: 'Local Area Connection'
 </code></pre>
-<p>If you need to use some other interface, open a command line prompt and type <code>ipconfig</code> to list all interface names. For example a wireless connection output from <code>ipconfig</code> might look like:</p>
+<p>다른 인터페이스를 사용해야하는 경우 명령 행 프롬프트를 열고 <code>ipconfig</code>를 입력하여 모든 인터페이스 이름을 나열하십시오. 예를 들어 <code>ipconfig</code>의 무선 연결 출력은 다음과 같습니다.</p>
 <pre><code class="language-bash">Wireless LAN adapter Wireless Network Connection:
 
    Media State . . . . . . . . . . . : Media disconnected
    Connection-specific DNS Suffix  . :
 </code></pre>
-<p>Where the name is <code>Wireless Network Connection</code>.</p>
+<p>이름이 <code>Wireless Network Connection</code> 인 경우</p>
 
 
 </article>

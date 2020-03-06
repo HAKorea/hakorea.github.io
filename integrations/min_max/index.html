@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Min/Max - 홈어시스턴트</title>
+    <title>최대값/최소값(min/max) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate min/max sensors into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/min_max/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Min/Max">
+    <meta property="og:title" content="최대값/최소값(min/max)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/min_max/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Min/Max">
+    <meta name="twitter:title" content="최대값/최소값(min/max)">
     <meta name="twitter:description" content="Instructions on how to integrate min/max sensors into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,23 +97,24 @@
   
   <header>
     <h1 class="title indent">
-      Min/Max
+      최대값/최소값(min/max)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>min_max</code> sensor platform consumes the state from other sensors to determine the minimum, maximum, latest (last) and the mean of the collected states. The sensor will always show you the lowest/highest/latest value which was received from all monitored sensors. If you have spikes in your values, it’s recommended to filter/equalize your values with a <a href="/integrations/statistics">statistics sensor</a> first.</p>
-<p>This sensor is an alternative to the <a href="/integrations/template">template sensor</a>’s <code>value_template:</code> to get the average of multiple sensors.</p>
+  <p><code>min_max</code> 센서 플랫폼은 다른 센서의 상태를 사용하여 최소, 최대, 최신 (마지막) 및 수집된 상태의 평균을 결정합니다. 센서는 항상 모든 모니터링 된 센서에서 받은 최저/최고/최신값을 표시합니다. 값이 급등한 경우 먼저 <a href="/integrations/statistics">statistics sensor</a>를 사용하여 값을 필터링(filter)/균등화(equalize)하는 것이 좋습니다.</p>
+<p>이 센서는 <a href="/integrations/template">template sensor</a>의 <code>value_template: </code>에 대한 대안입니다. :  여러 센서의 평균을 얻기 위해</p>
 <pre><code class="language-yaml">{{ ((float(states('sensor.kitchen_temperature')) +
      float(states('sensor.living_room_temperature')) +
      float(states('sensor.office_temperature'))) / 3) | round(2)
 }}
 </code></pre>
-<p>Sensors with an unknown state will be ignored in the calculation. If the unit of measurement of the sensors differs, the <code>min_max</code> sensor will go to an error state where the value is <code>UNKNOWN</code> and unit of measurement is <code>ERR</code>.</p>
+<p>알 수 없는 상태의 센서는 계산에서 무시됩니다. 센서의 측정 단위가 다른 경우 <code>min_max</code> 센서는 값이 <code>UNKNOWN</code> 이고 측정 단위가 <code>ERR</code> 인 오류 상태가 됩니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the <code>min_max</code> sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>To enable the <code>min_max</code> sensor, add the following lines to your <code>configuration.yaml</code>:
+<code>min_max</code> 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: min_max
@@ -128,12 +129,12 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="entity_ids" href="#entity_ids"></a> entity_ids</dt>
-<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Required)</span><span class="description"><p>At least two entities to monitor. The unit of measurement of the first entry will be the one that’s used. All entities must use the same unit of measurement.</p>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터링 할 엔티티가 둘 이상 있습니다. 첫 번째 항목의 측정 단위가 사용됩니다. 모든 엔티티는 동일한 측정 단위를 사용해야합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The type of sensor: <code>min</code>, <code>max</code>, <code>last</code> or <code>mean</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서의 유형 : <code>min</code>, <code>max</code>, <code>last</code> 혹은 <code>mean</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -141,12 +142,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the sensor to use in the frontend.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에서 사용할 센서의 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="round_digits" href="#round_digits"></a> round_digits</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Round mean value to specified number of digits.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>평균값을 지정된 자릿수로 반올림합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>

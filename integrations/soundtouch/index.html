@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Bose Soundtouch - 홈어시스턴트</title>
+    <title>보세 사운드터치(Bose Soundtouch) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Bose Soundtouch devices into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/soundtouch/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Bose Soundtouch">
+    <meta property="og:title" content="보세 사운드터치(Bose Soundtouch)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/soundtouch/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Bose Soundtouch">
+    <meta name="twitter:title" content="보세 사운드터치(Bose Soundtouch)">
     <meta name="twitter:description" content="Instructions on how to integrate Bose Soundtouch devices into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,15 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Bose Soundtouch
+      보세 사운드터치(Bose Soundtouch)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>soundtouch</code> platform allows you to control your <a href="https://www.soundtouch.com/" rel="external nofollow">Bose Soundtouch</a> speakers from Home Assistant.</p>
-<p>By default it supports auto-discovery provided by Home Assistant, and you don’t need to add anything to your <code>configuration.yaml</code>.</p>
-<p>Alternatively, you can add the following to your <code>configuration.yaml</code> file.</p>
+  <p><code>soundtouch</code> 플랫폼을 통해 Home Assistant에서 <a href="https://www.soundtouch.com/" rel="external nofollow">Bose Soundtouch</a> 스피커를 제어 할 수 있습니다 .</p>
+<p>기본적으로 홈 어시스턴트에서 제공하는 자동 검색을 지원하므로 <code>configuration.yaml</code>에 추가할 필요가 없습니다</p>
+<p>또는 <code>configuration.yaml</code> 파일에 다음을 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml
 media_player:
   - platform: soundtouch
@@ -113,7 +113,7 @@ media_player:
     port: 8090
     name: Soundtouch Living Room
 </code></pre>
-<p>Or for multiple hosts</p>
+<p>또는 여러 호스트</p>
 <pre><code class="language-yaml"># Example configuration.yaml with many devices
 media_player:
   - platform: soundtouch
@@ -153,7 +153,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>You can switch between one of your 6 pre-configured presets using <code>media_player.play_media</code></p>
+<p><code>media_player.play_media</code> 을 사용하여 6 개의 사전 설정된 preset들 중 하나를 전환할 수 있습니다.</p>
 <pre><code class="language-yaml"># Play media preset
 - service: media_player.play_media
   data:
@@ -161,7 +161,7 @@ Default value: </p>
     media_content_id: 1..6
     media_content_type: PLAYLIST
 </code></pre>
-<p>You can also play HTTP (not HTTPS) URLs:</p>
+<p>HTTP (HTTPS가 아닌) URL을 재생할 수도 있습니다. :</p>
 <pre><code class="language-yaml"># Play media URL
 - service: media_player.play_media
   data:
@@ -170,13 +170,12 @@ Default value: </p>
     media_content_type: MUSIC
 </code></pre>
 <h3>
-<a class="title-link" name="text-to-speech-services" href="#text-to-speech-services"></a> Text-to-Speech services</h3>
-<p>You can use TTS services like <a href="/integrations/google_translate">Google Text-to-Speech</a> or <a href="/integrations/amazon_polly">Amazon Polly</a> only if your Home Assistant is configured in HTTP and not HTTPS (current device limitation, a firmware upgrade is planned).</p>
-<p>A workaround if you want to publish your Home Assistant installation on Internet in SSL is to configure an HTTPS Web Server as a reverse proxy (<a href="/docs/ecosystem/nginx/">nginx</a> for example) and let your Home Assistant configuration in HTTP on your local network. The Soundtouch devices will be available to access the TTS files in HTTP in local and your configuration will be in HTTPS on the Internet.</p>
+<a class="title-link" name="text-to-speech-" href="#text-to-speech-"></a> Text-to-Speech 서비스</h3>
+<p>홈어시스턴트가 HTTPS가 아닌 HTTP 로 설정된 경우에만 <a href="/integrations/google_translate">Google Text-to-Speech</a> 또는 <a href="/integrations/amazon_polly">Amazon Polly</a>와 같은 TTS services를 사용할 수 있습니다. (현재 장치에 한해, 펌웨어 업그레이드 예정)</p>
+<p>SSL로 인터넷에 Home Assistant 설치를 게시하려는 경우 해결 방법은 HTTPS 웹서버를 리버스 프록시 (예 : <a href="/docs/ecosystem/nginx/">nginx</a>)로 설정하고 Home Assistant 설정을 로컬 네트워크에서 HTTP로 구성하는 것입니다. 이렇게 하면 Soundtouch 장치는 로컬에서 HTTP의 TTS 파일에 액세스 할 수 있으며 인터넷의 설정은 HTTPS입니다.</p>
 <h3>
-<a class="title-link" name="service-play_everywhere" href="#service-play_everywhere"></a> Service play_everywhere</h3>
-<p>Create a multi-room (zone) from a master and play same content on all other
-devices (slaves)</p>
+<a class="title-link" name="play_everywhere-" href="#play_everywhere-"></a> play_everywhere 서비스</h3>
+<p>마스터에서 멀티룸 (zone)을 만들고 다른 모든 장치 (슬레이브)에서 동일한 콘텐츠를 재생합니다</p>
 <table>
 <thead>
 <tr>
@@ -195,8 +194,8 @@ devices (slaves)</p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-create_zone" href="#service-create_zone"></a> Service create_zone</h3>
-<p>Create a multi-room (zone) from a master and play on selected slaves</p>
+<a class="title-link" name="create_zone-" href="#create_zone-"></a> create_zone 서비스</h3>
+<p>마스터에서 멀티룸 (zone)을 만들고 선택한 슬레이브에서 재생</p>
 <table>
 <thead>
 <tr>
@@ -221,8 +220,8 @@ devices (slaves)</p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-add_zone_slave" href="#service-add_zone_slave"></a> Service add_zone_slave</h3>
-<p>Add slave(s) to an existing zone</p>
+<a class="title-link" name="add_zone_slave-" href="#add_zone_slave-"></a> add_zone_slave 서비스</h3>
+<p>기존 영역(zone)에 슬레이브 추가</p>
 <table>
 <thead>
 <tr>
@@ -246,10 +245,9 @@ devices (slaves)</p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-remove_zone_slave" href="#service-remove_zone_slave"></a> Service remove_zone_slave</h3>
-<p>Remove slave(s) from an existing zone.</p>
-<p>Removing the last slave will destroy the zone. You will need to
-create a new zone in order to be able to add slave(s) again</p>
+<a class="title-link" name="remove_zone_slave-" href="#remove_zone_slave-"></a> remove_zone_slave 서비스</h3>
+<p>기존 영역(zone)에서 슬레이브를 제거합니다.</p>
+<p>마지막 슬레이브를 제거하면 영역이 파괴됩니다. 슬레이브를 다시 추가하려면 새로운 영역을 생성해야합니다</p>
 <table>
 <thead>
 <tr>

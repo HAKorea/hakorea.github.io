@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Statistics - 홈어시스턴트</title>
+    <title>통계(Statistics) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate statistical sensors into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/statistics/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Statistics">
+    <meta property="og:title" content="통계(Statistics)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/statistics/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Statistics">
+    <meta name="twitter:title" content="통계(Statistics)">
     <meta name="twitter:description" content="Instructions on how to integrate statistical sensors into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Statistics
+      통계(Statistics)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>statistics</code> sensor platform consumes the state from other sensors. It exports the <code>mean</code> value as state and the following values as attributes: <code>count</code>, <code>mean</code>, <code>median</code>, <code>stdev</code>, <code>variance</code>, <code>total</code>, <code>min_value</code>, <code>max_value</code>, <code>min_age</code>, <code>max_age</code>, <code>change</code>, <code>average_change</code> and <code>change_rate</code>. If it’s a binary sensor then only state changes are counted.</p>
-<p>If you are running the <a href="/integrations/recorder/">recorder</a> component, on startup the data is read from the database. So after a restart of the platform, you will immediately have data available. If you’re using the <a href="/integrations/history/">history</a> component, this will automatically also start the <code>recorder</code> integration on startup.
-If you are <em>not</em> running the <code>recorder</code> component, it can take time till the sensor starts to work because a couple of attributes need more than one value to do the calculation.</p>
+  <p><code>statistics</code> 센서 플랫폼은 다른 센서의 상태를 사용합니다. <code>mean</code> 값을 상태로 내보내고 다음 값을 속성으로 내 보냅니다. : <code>count</code>, <code>mean</code>, <code>median</code>, <code>stdev</code>, <code>variance</code>, <code>total</code>, <code>min_value</code>, <code>max_value</code>, <code>min_age</code>, <code>max_age</code>, <code>change</code>, <code>average_change</code>, <code>change_rate</code>. 이진 센서인 경우 상태 변경만 적용됩니다.</p>
+<p><a href="/integrations/recorder/">recorder</a> 구성 요소를 실행중인 경우 시작시 데이터베이스에서 데이터를 읽습니다. 따라서 플랫폼을 다시 시작하면 즉시 데이터를 사용할 수 있습니다. <a href="/integrations/history/">history</a> 구성 요소를 사용하는 경우 시작시 <code>recorder</code> 통합구성요소도 자동으로 시작됩니다. <code>recorder</code> 구성 요소를 실행하지 <em>않는</em> 경우, 계산을 수행하기 위해 두 개의 속성이 둘 이상의 값을 필요로하기 때문에 센서가 작동하기 시작하는데 시간이 걸릴 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the statistics sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>통계 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># enable the recorder integration (optional)
 recorder:
 

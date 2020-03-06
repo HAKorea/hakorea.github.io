@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Onkyo - 홈어시스턴트</title>
+    <title>온쿄 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Onkyo and some Pioneer receivers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/onkyo/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Onkyo">
+    <meta property="og:title" content="온쿄">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/onkyo/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Onkyo">
+    <meta name="twitter:title" content="온쿄">
     <meta name="twitter:description" content="Instructions on how to integrate Onkyo and some Pioneer receivers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Onkyo
+      온쿄
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>onkyo</code> platform allows you to control a <a href="http://www.onkyo.com/" rel="external nofollow">Onkyo</a>, <a href="http://www.integrahometheater.com/" rel="external nofollow">Integra</a>
-and some recent <a href="http://www.pioneerelectronics.com" rel="external nofollow">Pioneer</a> receivers from Home Assistant.
-Please be aware that you need to enable “Network Standby” for this integration to work in your Hardware.</p>
+  <p><code>onkyo</code> 플랫폼을 사용하면 Home Assistant의 <a href="http://www.onkyo.com/" rel="external nofollow">Onkyo</a>, <a href="http://www.integrahometheater.com/" rel="external nofollow">Integra</a> 및 일부 <a href="http://www.pioneerelectronics.com" rel="external nofollow">Pioneer</a> 리시버를 제어할 수 있습니다.
+이 통합구성요소가 하드웨어에서 작동하려면 “Network Standby”를 활성화해야 합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add an Onkyo or Pioneer receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에 Onkyo 또는 Pioneer 리시버를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: onkyo
@@ -117,23 +116,23 @@ media_player:
     sources:
       pc: 'HTPC'
 </code></pre>
-<p>If your receiver has second or third zone’s available, they are displayed as additional media players with the same functionality as the main zone.</p>
+<p>리시버에 두 번째 또는 세 번째 영역(zone)을 사용할 수 있는 경우 메인 영역과 동일한 기능을 가진 추가 미디어 플레이어로 표시됩니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>IP address of the device. Example:<code>192.168.1.2</code>. If not specified, the platform will load any discovered receivers.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치의 IP 주소. (예 :<code>192.168.1.2</code>). 지정하지 않으면 플랫폼은 자동찾기로 리시버를 로드합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Name of the device. (<em>Required if host is specified</em>)</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름. (<em>호스트가 지정된 경우 필수</em>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_volume" href="#max_volume"></a> max_volume</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Maximum volume as a percentage. Often the maximum volume of the receiver is far too loud. Setting this wil set Home Assistant’s 100% volume to be this setting on the amp. i.e. if you set this to 50% when you set Home Assistant to be 100% then your receiver will be set to 50% of it’s maximum volume.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>백분율로 표시되는 최대 볼륨입니다. 리시버의 최대 볼륨이 너무 큰 경우가 종종 있습니다. 이 설정을 하면 홈어시스턴트의 100 % 음량이 앰프의 설정이됩니다. 즉, 홈어시스턴트를 100 %로 설정할 때, 이 값을 50 %로 설정하면 리시버는 최대 볼륨의 50 %로 설정됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,7 +141,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="receiver_max_volume" href="#receiver_max_volume"></a> receiver_max_volume</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum volume of the receiver. For older Onkyo receivers this was 80, newer Onkyo receivers use 200.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>리시버의 최대 볼륨. 구형 Onkyo 리시버의 경우이 값은 80이고 최신 Onkyo 리시버는 200을 사용합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -150,7 +149,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="sources" href="#sources"></a> sources</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of mappings from source to source name. Valid sources can be found below. A default list will be used if no source mapping is specified.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>소스에서 소스 이름으로의 맵핑 목록. 유효한 소스는 아래에서 찾을 수 있습니다. 소스 맵핑이 지정되지 않은 경우 기본 목록이 사용됩니다.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -183,17 +182,17 @@ Default value: </p>
 <li>xm</li>
 <li>sirius</li>
 </ul>
-<p>If your source is not listed above, and you want to figure out how to format that source name so you can map its entry, you can use the <code>onkyo-eiscp</code> Python module to discover the exact naming needed. First, change your receiver’s source to the one that you need to define, and then run:</p>
+<p>소스가 위에 나열되어 있지 않고 소스 이름의 형식을 지정하여 항목을 매핑할 수 있는 방법을 찾으려면 <code>onkyo-eiscp</code> Python 모듈을 사용하여 필요한 정확한 이름을 찾을 수 있습니다. 먼저 리시버의 소스를 정의해야하는 소스로 변경 한 후 다음을 실행하십시오.</p>
 <pre><code class="language-bash">onkyo --host 192.168.0.100 source=query
 </code></pre>
-<p>To find your receivers max volume use the onkyo-eiscp python module set the receiver to its maximum volume
-(don’t do this whilst playing something!) and run:</p>
+<p>리시버 최대 볼륨을 찾으려면 onkyo-eiscp python 모듈을 사용하여 리시버를 최대 볼륨으로 설정하십시오.
+(뭔가를 하는 동안 이것을 하지 마십시오!) 그리고 다음을 실행합니다. :</p>
 <pre><code class="language-bash">onkyo --host 192.168.0.100 volume=query
 unknown-model: master-volume = 191
 </code></pre>
 <h3>
-<a class="title-link" name="service-onkyo_select_hdmi_output" href="#service-onkyo_select_hdmi_output"></a> Service onkyo_select_hdmi_output</h3>
-<p>Changes HDMI output of your receiver</p>
+<a class="title-link" name="onkyo_select_hdmi_output-" href="#onkyo_select_hdmi_output-"></a> onkyo_select_hdmi_output 서비스</h3>
+<p>수신기의 HDMI 출력을 변경합니다</p>
 <table>
 <thead>
 <tr>
@@ -215,14 +214,12 @@ unknown-model: master-volume = 191
 </tr>
 </tbody>
 </table>
-<p>Accepted values are:
-‘no’, ‘analog’, ‘yes’, ‘out’, ‘out-sub’, ‘sub’, ‘hdbaset’, ‘both’, ‘up’
-which one to use seems to vary depending on model so you will have to try them out.
-( For model TX-NR676E it seems to be ‘out’ for main, ‘out-sub’ for sub, and ‘sub’ for both )</p>
+<p>허용되는 값은 : ‘no’, ‘analog’, ‘yes’, ‘out’, ‘out-sub’, ‘sub’, ‘hdbaset’, ‘both’, ‘up’은 모델에 따라 달라지는 것으로 보입니다, 시도 해봐야합니다.
+(TX-NR676E 모델의 경우 메인의 경우 ‘out’, 서브의 경우 ‘out-sub’, 둘다의 경우 ‘sub’인 것으로 보입니다.)</p>
 <h3>
-<a class="title-link" name="example-play_media-script" href="#example-play_media-script"></a> Example play_media script</h3>
-<p>The <code>play_media</code> function can be used in script to play radio station by preset number.
-Not working for NET radio.</p>
+<a class="title-link" name="play_media--" href="#play_media--"></a> play_media 스크립트 사례</h3>
+<p>스크립트에서 <code>play_media</code> 기능을 사용하여 사전 설정된 번호로 라디오 방송국을 재생할 수 있습니다.
+NET 라디오에서 작동하지 않습니다.</p>
 <pre><code class="language-yaml"># Example play_media script
 #
 script:
@@ -239,7 +236,7 @@ script:
           media_content_id: "1"
 </code></pre>
 <h3>
-<a class="title-link" name="example-onkyo_select_hdmi_output-script" href="#example-onkyo_select_hdmi_output-script"></a> Example onkyo_select_hdmi_output script</h3>
+<a class="title-link" name="onkyo_select_hdmi_output--" href="#onkyo_select_hdmi_output--"></a> onkyo_select_hdmi_output 스크립트 사례</h3>
 <pre><code class="language-yaml"># Example onkyo_select_hdmi_output script
 #
 script:

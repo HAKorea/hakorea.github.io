@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Seven Segments OCR - 홈어시스턴트</title>
+    <title>디지털디스플레이 OCR(7 Segments OCR) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to use OCR for seven segments displays into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/seven_segments/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Seven Segments OCR">
+    <meta property="og:title" content="디지털디스플레이 OCR(7 Segments OCR)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/seven_segments/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Seven Segments OCR">
+    <meta name="twitter:title" content="디지털디스플레이 OCR(7 Segments OCR)">
     <meta name="twitter:description" content="Instructions on how to use OCR for seven segments displays into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/screenshots/ssocr.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Seven Segments OCR
+      디지털디스플레이 OCR(7 Segments OCR)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>seven_segments</code> image processing platform allows you to read physical seven segments displays through Home Assistant. <a href="https://www.unix-ag.uni-kl.de/~auerswal/ssocr/" rel="external nofollow"><code>ssocr</code></a> is used to extract the value shown on the display which is observed by a <a href="/integrations/camera/">camera</a>.</p>
+  <p><code>seven_segments</code> 이미지 처리 플랫폼을 사용하면 Home Assistant를 통해 실제 7 개의 세그먼트 디스플레이를 읽을 수 있습니다. <a href="https://www.unix-ag.uni-kl.de/~auerswal/ssocr/" rel="external nofollow"><code>ssocr</code></a>은 <a href="/integrations/camera/">camera</a>에 의해 관찰되는 디스플레이에 표시된 값을 추출하는데 사용됩니다.</p>
 <div class="note">
-<p>If you are using <a href="/hassio/">Hass.io</a> then just move forward to the configuration as all requirements are already fulfilled.</p>
+<p><a href="/hassio/">Hass.io</a>를 사용하는 경우 모든 요구 사항이 이미 충족되었으므로 설정으로 이동하십시오.</p>
 </div>
-<p><code>ssocr</code> needs to be available on your system. Check the installation instruction below:</p>
+<p>시스템에서 <code>ssocr</code>을 사용할 수 있어야합니다. 아래 설치 지침을 확인하십시오.</p>
 <pre><code class="language-bash">sudo dnf -y install imlib2-devel # Fedora
 sudo apt install libimlib2-dev # Ubuntu
 brew install imlib2 # macOS
@@ -117,7 +117,7 @@ make
 sudo make PREFIX=/usr install # On most systems
 make deb # (Optional) This allows you to make a deb so that you apt is aware of ssocr
 </code></pre>
-<p>To enable the OCR of a seven segment display in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치시 7 세그먼트 디스플레이의 OCR을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 image_processing:
   - platform: seven_segments
@@ -221,8 +221,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="setup-process" href="#setup-process"></a> Setup process</h3>
-<p>It’s suggested that the first attempt to determine the needed parameters is using <code>ssocr</code> directly. This may require a couple of iterations to get the result</p>
+<a class="title-link" name="-" href="#-"></a> 셋업 프로세스</h3>
+<p>필요한 파라미터를 결정하는 첫 번째 시도는 <code>ssocr</code>을 직접 사용하는 것입니다. 결과를 얻으려면 몇 번의 반복이 필요할 수 있습니다.</p>
 <pre><code class="language-bash">$ ssocr -D erosion crop 390 250 490 280 -t 20 -d 4 seven-seg.png
 </code></pre>
 <p>This would lead to the following entry for the <code>configuration.yaml</code> file:</p>
@@ -244,7 +244,7 @@ image_processing:
 <p class="img">
   <img src="/images/screenshots/ssocr.png">
 </p>
-<p>With the help of a <a href="/integrations/template">template sensor</a>, the value can be shown as badge.</p>
+<p><a href="/integrations/template">template sensor</a>의 도움으로 값을 badge로 표시 할 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:

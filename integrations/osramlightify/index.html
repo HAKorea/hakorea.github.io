@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Osramlightify - 홈어시스턴트</title>
+    <title>오스람(Osramlightify) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Osram Lightify into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/osramlightify/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Osramlightify">
+    <meta property="og:title" content="오스람(Osramlightify)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/osramlightify/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Osramlightify">
+    <meta name="twitter:title" content="오스람(Osramlightify)">
     <meta name="twitter:description" content="Instructions on how to integrate Osram Lightify into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,13 +97,13 @@
   
   <header>
     <h1 class="title indent">
-      Osramlightify
+      오스람(Osramlightify)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>osramlightify</code> platform allows you to integrate your <a href="https://www.osram.com/cb/lightify/index.jsp" rel="external nofollow">Osram Lightify</a> into Home Assistant.</p>
+  <p><code>osramlightify</code> 플랫폼을 사용하면 <a href="https://www.osram.com/cb/lightify/index.jsp" rel="external nofollow">Osram Lightify</a>를 Home Assistant에 연동할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: osramlightify
@@ -173,19 +173,13 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>At the moment there is not much functionality for Osram Lightify switches and sensors.
-The only thing that you can do out of the box is to track whether they are available or not.
-Also for sensors a list of raw values is exposed as <code>sensor_values</code> attribute, and you can use them
-in automations, if you know what particular values mean for your sensor.</p>
-<p>It is suggested to make <a href="/docs/configuration/platform_options/#scan-interval">scan_interval</a>
-(30 seconds by default) less or equal to <code>interval_lightify_status</code>, oherwise the latter won’t work
-as expected. Shorter <code>scan_interval</code> may improve synchronization speed between individual lights and
-groups. For example, if you turn on a group, all its lights may be updated to <code>on</code> immediately,
-without querying the bridge.</p>
-<p>Please note that to update all light statuses, only one query to the bridge is actually needed.</p>
-<p>If a group has associated scenes, they will be imported as light effects and visible in <code>Effect</code>
-dropdown on UI. You can apply a scene by clicking an item from the dropdown or by calling
-<code>light.turn_on</code> service:</p>
+<p>현재 Osram Lightify 스위치 및 센서에는 많은 기능이 없습니다.
+사용 가능한 유일한 방법은 사용 가능한지 여부를 추적하는 것입니다.
+또한 센서의 경우 raw 값 목록이 <code>sensor_values</code> 속성으로 노출되며 센서에서 특정값의 의미를 알고있는 경우 이를 자동화에 사용할 수 있습니다.</p>
+<p><a href="/docs/configuration/platform_options/#scan-interval">scan_interval</a>(기본적으로 30 초)을 <code>interval_lightify_status</code>와 같거나 작게 만드는 것이 좋습니다. 그렇지 않으면 예상대로 작동하지 않습니다.
+<code>scan_interval</code>이 짧을수록 개별 조명과 그룹 간의 동기화 속도가 향상 될 수 있습니다. 예를 들어 그룹을 켜면 브리지를 쿼리하지 않고 모든 라이트가 즉시 <code>on</code>으로 업데이트 될 수 있습니다.</p>
+<p>모든 조명 상태를 업데이트하려면 실제로 브리지에 대한 쿼리 하나만 필요합니다.</p>
+<p>그룹에 관련 장면(scene)이 있는 경우, 조명 효과로 가져와서 UI의 <code>Effect</code> 드롭 다운에 표시됩니다. 드롭 다운에서 아이템을 클릭하거나 <code>light.turn_on</code> 서비스를 호출하여 장면을 적용 할 수 있습니다 :</p>
 <pre><code class="language-yaml">  - service: light.turn_on
     entity_id: light.bedroom
     data:

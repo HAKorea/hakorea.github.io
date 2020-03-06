@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Netatmo - 홈어시스턴트</title>
+    <title>네타모(Netatmo) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Netatmo integration into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/netatmo/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Netatmo">
+    <meta property="og:title" content="네타모(Netatmo)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/netatmo/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Netatmo">
+    <meta name="twitter:title" content="네타모(Netatmo)">
     <meta name="twitter:description" content="Instructions on how to integrate Netatmo integration into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Netatmo
+      네타모(Netatmo)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>netatmo</code> integration platform is the main integration to integrate all Netatmo related platforms.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>netatmo</code> 통합 플랫폼은 모든 Netatmo 관련 플랫폼을 연동하는 주요 통합구성요소입니다.</p>
+<p>현재 홈 어시스턴트에는 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#camera">Camera</a></li>
@@ -112,8 +112,8 @@
 <li><a href="#sensor">Sensor</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the Netatmo component, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Netatmo 구성 요소를 활성화하려면 <code>configuration.yaml</code>에 다음 행을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 netatmo:
   client_id: YOUR_CLIENT_ID
@@ -133,37 +133,36 @@ netatmo:
 </span></p></dd>
 </dl>
 </div>
-<p>Once that is configured you can enable it from the integrations page.</p>
+<p>일단 설정되면 통합구성요소 페이지에서 이를 사용할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="get-api-and-secret-key" href="#get-api-and-secret-key"></a> Get API and Secret Key</h3>
-<p>To get your API credentials, you have to declare a new application in the <a href="https://dev.netatmo.com/" rel="external nofollow">Netatmo Developer Page</a>. Sign in using your username and password from your regular Netatmo account.
-Open the <a href="https://dev.netatmo.com/apps/createanapp#form" rel="external nofollow">app creator</a> form.</p>
+<a class="title-link" name="api--secret-key-" href="#api--secret-key-"></a> API 와 Secret Key 받기</h3>
+<p>API 자격 증명을 얻으려면 <a href="https://dev.netatmo.com/" rel="external nofollow">Netatmo Developer Page</a>에서 새 응용 프로그램을 선언해야합니다. 일반 Netatmo 계정에서 사용자 이름과 비밀번호를 사용하여 로그인하십시오.
+<a href="https://dev.netatmo.com/apps/createanapp#form" rel="external nofollow">app creator</a> 양식을 여십시오.</p>
 <p class="img">
 <img src="/images/screenshots/netatmo_create.png">
 </p>
-You have to fill the form, but only two fields are required: Name and Description. It doesn't really matter what you put into those. Just write something that make sense to you. To submit your new app, click on create at the bottom of the form.
+양식을 작성해야하지만 두 개의 필드 만 필요합니다 : 이름과 설명. 무엇을 넣었는지는 중요하지 않습니다. 당신에게 맞는 것을 쓰십시오. 새 앱을 제출하려면 양식 하단에서 작성(create)을 클릭하십시오.
 <p class="img">
 <img src="/images/screenshots/netatmo_app.png">
 </p>
-<p>That’s it. You can copy and paste your new <code>client id</code> and <code>client secret</code> in your Home Assistant configuration file just as described above, in the configuration example.</p>
+<p>설정 예에서 위에 설명한대로 홈어시스턴트 설정 파일에 새 <code>client id</code> 및 <code>client id</code>을 복사하여 붙여넣을 수 있습니다.</p>
 <p class="img">
 <img src="/images/screenshots/netatmo_api.png">
 </p>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>This integration allows you to get the latest event seen by the camera.</p>
-<p>If multiple cameras are available then each monitored condition
-will create a specific sensor for each camera</p>
+<p>이 연동을 통해 카메라에서 가장 최신 이벤트를 볼 수 있습니다.</p>
+<p>여러 대의 카메라를 사용할 수 있는 경우 모니터링 되는 각 조건은 각 카메라에 대한 특정 센서를 생성합니다</p>
 <h2>
 <a class="title-link" name="camera" href="#camera"></a> Camera</h2>
-<p>The <code>netatmo</code> camera platform is consuming the information provided by a <a href="https://www.netatmo.com" rel="external nofollow">Netatmo</a> camera. This integration allows you to view the current live stream created by the Camera.</p>
+<p><code>netatmo</code> 카메라 플랫폼은 <a href="https://www.netatmo.com" rel="external nofollow">Netatmo</a> 카메라가 제공하는 정보를 사용하고 있습니다.
+이 연동을 통해 카메라에서 생성한 현재 라이브 스트림을 볼 수 있습니다.</p>
 <h2>
 <a class="title-link" name="climate" href="#climate"></a> Climate</h2>
-<p>The <code>netatmo</code> thermostat platform is consuming the information provided by a <a href="https://www.netatmo.com/product/energy/thermostat" rel="external nofollow">Netatmo Smart Thermostat</a> thermostat. This integration allows you to view the current temperature and setpoint.</p>
+<p><code>netatmo</code> 온도 조절기 플랫폼은 <a href="https://www.netatmo.com/product/energy/thermostat" rel="external nofollow">Netatmo Smart Thermostat</a> 온도 조절기에서 제공하는 정보를 사용합니다. 이 연동을 통해 현재 온도 및 설정지점(setpoint)을 볼 수 있습니다.</p>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>netatmo</code> sensor platform is consuming the information provided by a <a href="https://www.netatmo.com/en-us/weather/weatherstation" rel="external nofollow">Netatmo Weather Station</a> or a
-<a href="https://www.netatmo.com/en-us/aircare/homecoach" rel="external nofollow">Netatmo Home Coach</a> <a href="https://www.netatmo.com" rel="external nofollow">Netatmo</a> device.</p>
+<p><code>netatmo</code> 센서 플랫폼은 <a href="https://www.netatmo.com/en-us/weather/weatherstation" rel="external nofollow">Netatmo Weather Station</a> 또는 <a href="https://www.netatmo.com/en-us/aircare/homecoach" rel="external nofollow">Netatmo Home Coach</a>, <a href="https://www.netatmo.com" rel="external nofollow">Netatmo</a> 장치에서 제공하는 정보를 사용합니다.</p>
 
 
 </article>

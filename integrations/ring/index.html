@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Ring - 홈어시스턴트</title>
+    <title>링(Ring) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Ring.com devices within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/ring/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Ring">
+    <meta property="og:title" content="링(Ring)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/ring/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Ring">
+    <meta name="twitter:title" content="링(Ring)">
     <meta name="twitter:description" content="Instructions on how to integrate your Ring.com devices within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Ring
+      링(Ring)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>ring</code> implementation allows you to integrate your <a href="https://ring.com/" rel="external nofollow">Ring.com</a> devices in Home Assistant.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>ring</code> 구현을 통해 <a href="https://ring.com/" rel="external nofollow">Ring.com</a> 장치를 Home Assistant에 통합 할 수 있습니다.</p>
+<p>현재 홈 어시스턴트에는 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#camera">Camera</a></li>
@@ -112,15 +112,15 @@
 <li><a href="#switch">Switch</a></li>
 </ul>
 <p class="note">
-This component does NOT allow for live viewing of your Ring camera within Home Assistant.
+이 구성 요소는 Home Assistant 내에서 Ring 카메라를 실시간으로 볼 수 없습니다.
 </p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Go to the integrations page in your config and click on new integration -&gt; Ring.</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설정의 통합구성요소 페이지로 이동하여 새 통합구성요소-&gt; 링을 클릭하십시오.</p>
 <h2>
-<a class="title-link" name="yaml-configuration" href="#yaml-configuration"></a> YAML configuration</h2>
-<p>YAML configuration is around for people that prefer YAML, but it’s not preferred! The YAML method does not work with two-factor authentication and it requires you to store your username/password. The normal method only requires you to enter username/password once.</p>
-<p>To enable device linked in your <a href="https://ring.com/" rel="external nofollow">Ring.com</a> account, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="yaml-" href="#yaml-"></a> YAML 설정</h2>
+<p>YAML 설정은 YAML을 선호하는 사람들을 위한 것이지만 바람직하지 않습니다! YAML 방법은 2번째로 인증에서 작동하지 않으며 사용자 이름/암호를 저장해야합니다. 일반적인 방법은 사용자 이름/암호를 한 번만 입력하면됩니다.</p>
+<p><a href="https://ring.com/" rel="external nofollow">Ring.com</a> 계정에 링크 된 장치를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 ring:
   username: YOUR_USERNAME
@@ -142,20 +142,21 @@ ring:
 </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>Once you have enabled the <a href="/integrations/ring">Ring integration</a>, you can start using a binary sensor. Currently, it supports doorbell, external chimes and stickup cameras.</p>
+<p><a href="/integrations/ring">Ring integration</a>을 활성화하면 이진 센서를 사용할 수 있습니다. 현재이 제품은 초인종, 외부 차임 및 스틱업 카메라를 지원합니다.</p>
 <h2>
 <a class="title-link" name="camera" href="#camera"></a> Camera</h2>
 <div class="note">
-Please note that downloading and playing Ring video will require a Ring Protect plan.
+Ring 비디오를 다운로드하고 재생하려면 Ring Protect 계획이 필요합니다.
 </div>
-<p>Once you have enabled the <a href="/integrations/ring">Ring integration</a>, you can start using the camera platform. Currently, it supports doorbell and stickup cameras.</p>
+<p><a href="/integrations/ring">Ring integration</a>을 활성화하면 카메라 플랫폼 사용을 시작할 수 있습니다. 현재는 초인종 및 스틱 업 카메라를 지원합니다.</p>
 <h2>
-<a class="title-link" name="saving-the-videos-captured-by-your-ring-door-bell" href="#saving-the-videos-captured-by-your-ring-door-bell"></a> Saving the videos captured by your Ring Door Bell</h2>
-<p>You can save locally the latest video captured by your Ring Door Bell using the <a href="/integrations/downloader">downloader</a> along with either an <a href="/integrations/automation">automation</a> or <a href="/integrations/python_script">python_script</a>. First, enable the <a href="/integrations/downloader">downloader</a> integration in your configuration by adding the following to your <code>configuration.yaml</code>.</p>
+<a class="title-link" name="ring-door-bell----" href="#ring-door-bell----"></a> Ring Door Bell에서 캡처 한 비디오 저장</h2>
+<p><a href="/integrations/downloader">downloader</a>와 <a href="/integrations/automation">automation</a> 또는 <a href="/integrations/python_script">python_script</a>를 사용하여 Ring Door Bell에서 캡처한 최신 비디오를 로컬로 저장할 수 있습니다.
+먼저 <code>configuration.yaml</code>에 다음을 추가하여 설정에서 <a href="/integrations/downloader">downloader</a> 통합구성요소를 활성화하십시오.</p>
 <pre><code class="language-yaml">downloader:
   download_dir: downloads
 </code></pre>
-<p>Then you can use the following <code>action</code> in your automation (this will save the video file under <code>&lt;config&gt;/downloads/ring_&lt;camera_name&gt;/</code>):</p>
+<p>그런 다음 자동화에서 다음 <code>action</code>을 사용할 수 있습니다 (<code>&lt;config&gt;/downloads/ring_&lt;camera_name&gt;/</code>에 비디오 파일이 저장 됨). :</p>
 <pre><code class="language-yaml">action:
   - service: downloader.download_file
     data_template:
@@ -163,10 +164,10 @@ Please note that downloading and playing Ring video will require a Ring Protect 
       subdir: "{{state_attr('camera.front_door', 'friendly_name')}}"
       filename: "{{state_attr('camera.front_door', 'friendly_name')}}"
 </code></pre>
-<p>If you want to use <code>python_script</code>, enable it your <code>configuration.yaml</code> file first:</p>
+<p><code>python_script</code>를 사용하려면 먼저 <code>configuration.yaml</code> 파일을 활성화하십시오 :</p>
 <pre><code class="language-yaml">python_script:
 </code></pre>
-<p>You can then use the following <code>python_script</code> to save the video file:</p>
+<p>그런 다음 <code>python_script</code>를 사용하여 비디오 파일을 저장할 수 있습니다.</p>
 <pre><code class="language-python"># obtain ring doorbell camera object
 # replace the camera.front_door by your camera entity
 ring_cam = hass.states.get("camera.front_door")
@@ -185,13 +186,13 @@ hass.services.call("downloader", "download_file", data)
 </code></pre>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>Once you have enabled the <a href="/integrations/ring">Ring integration</a>, you can start using the sensor platform. Currently, it supports doorbell, external chimes and stickup cameras.</p>
+<p><a href="/integrations/ring">Ring integration</a>을 활성화하면 센서 플랫폼 사용을 시작할 수 있습니다. 현재 이 제품은 초인종, 외부 차임 및 스틱업 카메라를 지원합니다.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>Once you have enabled the <a href="/integrations/ring">Ring integration</a>, you can start using the switch platform. This will add a switch for every camera that supports a siren. Note the siren will only turn on for 30 seconds before automatically turning off.</p>
+<p><a href="/integrations/ring">Ring integration</a>을 활성화하면 스위치 플랫폼 사용을 시작할 수 있습니다. 사이렌은 자동으로 꺼지기 전에 30 초 동안만 켜집니다.</p>
 <h2>
 <a class="title-link" name="light" href="#light"></a> Light</h2>
-<p>Once you have enabled the <a href="/integrations/ring">Ring integration</a>, you can start using the light platform. This will add a light for every camera that supports a light (such as a floodlight).</p>
+<p><a href="/integrations/ring">Ring integration</a>을 활성화하면 light 플랫폼 사용을 시작할 수 있습니다. 이렇게하면 조명을 지원하는 모든 카메라 (예 : floodlight)에 조명이 추가됩니다.</p>
 
 
 </article>

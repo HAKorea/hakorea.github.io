@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>myChevrolet - 홈어시스턴트</title>
+    <title>myChevrolet(쉐보레차량관리) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Chevy Bolt car into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/mychevy/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="myChevrolet">
+    <meta property="og:title" content="myChevrolet(쉐보레차량관리)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mychevy/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="myChevrolet">
+    <meta name="twitter:title" content="myChevrolet(쉐보레차량관리)">
     <meta name="twitter:description" content="Instructions on how to integrate Chevy Bolt car into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,21 +97,21 @@
   
   <header>
     <h1 class="title indent">
-      myChevrolet
+      myChevrolet(쉐보레차량관리)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mychevy</code> integration communicates with the <a href="https://my.chevrolet.com" rel="external nofollow">my.chevrolet</a> website using the javascript API that the website uses (as of Dec 2018). The MyChevy website has been known to be both unstable (interfaces changing somewhat willy nilly) and has substantial outages. So be forwarned in using this component.</p>
-<p>This integration provides the following platforms:</p>
+  <p><code>mychevy</code> 통합은 웹 사이트에서 사용하는 자바 스크립트 API (2018 년 12 월 기준)를 사용하여 [my.chevrolet] (<a href="https://my.chevrolet.com" rel="external nofollow">https://my.chevrolet.com</a>) 웹 사이트와 통신합니다. MyChevy 웹 사이트는 불안정하고 (인터페이스가 다소 변경 될 수 있음) 알려져 있으며 상당한 중단이 있습니다. 따라서이 구성 요소 사용에 주의하십시오.</p>
+<p>이 통합구성요소는 다음 플랫폼을 제공합니다.</p>
 <ul>
 <li>Binary sensors: if the car is plugged in</li>
 <li>Sensors: Battery Level, Charge Mode, EST Range, Total Distance Traveled</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use MyChevy in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 MyChevy를 사용하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mychevy:
   username: YOUR_E_MAIL_ADDRESS
@@ -141,7 +141,7 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="limitations" href="#limitations"></a> Limitations</h3>
+<a class="title-link" name="" href="#"></a> 제한사항</h3>
 <p>The architecture of the GM automotive networking imposes some limitations on the functionality of the component.</p>
 <p>The OnStar network link is very slow, and takes 1 - 3 minutes to get information back from the car. As such the <code>mychevy</code> integration only polls every 30 minutes to not overwhelms that connection.</p>
 <p>The OnStar network (or more specifically the gateway used by the my.chevrolet website) appears to suffer more than most networks when the car is a) in a garage, and b) it’s cold outside (like &lt; 15 degrees F). One of the provided sensors is a status sensor which indicates if we got connectivity with the car on the last polling cycle or not.</p>

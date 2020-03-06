@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Pushbullet - 홈어시스턴트</title>
+    <title>푸시불릿(Pushbullet) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to read user pushes in Home Assistant">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/pushbullet/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Pushbullet">
+    <meta property="og:title" content="푸시불릿(Pushbullet)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/pushbullet/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Pushbullet">
+    <meta name="twitter:title" content="푸시불릿(Pushbullet)">
     <meta name="twitter:description" content="Instructions on how to read user pushes in Home Assistant">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,30 +97,30 @@
   
   <header>
     <h1 class="title indent">
-      Pushbullet
+      푸시불릿(Pushbullet)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>There is currently support for the following device types within Home Assistant:</p>
+  <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#sensor">Sensor</a></li>
 <li><a href="#notifications">Notifications</a></li>
 </ul>
 <div class="note">
-<p>The free tier is <a href="https://docs.pushbullet.com/#push-limit" rel="external nofollow">limited</a> to 500 pushes per month.</p>
+<p>프리 티어는 한 달에 500 회의 푸시로 <a href="https://docs.pushbullet.com/#push-limit" rel="external nofollow">limited</a> 됩니다.</p>
 </div>
 <h3>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h3>
-<p>The <code>pushbullet</code> sensor platform reads messages from <a href="https://www.pushbullet.com/" rel="external nofollow">Pushbullet</a>, a free service to send information between your phones, browsers, and friends. This sensor platform provides sensors that show the properties of the latest received Pushbullet notification mirror.</p>
+<p><code>pushbullet</code> 센서 플랫폼은 무료 서비스인 <a href="https://www.pushbullet.com/" rel="external nofollow">Pushbullet</a>에서 휴대전화, 브라우저 및 친구간에 정보를 보내는 메시지를 읽습니다. 이 센서 플랫폼은 최근에 수신된 Pushbullet 알림 미러의 속성을 보여주는 센서를 제공합니다.</p>
 <h3>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h3>
-<p>Notification Mirroring allows users to see their Android device’s notifications on their computer. It must be first enabled in the app and is currently only available on the Android platform. For more information, please see <a href="https://blog.pushbullet.com/2013/11/12/real-time-notification-mirroring-from-android-to-your-computer/" rel="external nofollow">this announcement</a> on the Pushbullet Blog.</p>
-<p>Go to <a href="https://www.pushbullet.com/#settings/account" rel="external nofollow">https://www.pushbullet.com/#settings/account</a> to retrieve your API key/access token.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h3>
+<p>알림 미러링을 사용하면 컴퓨터에서 Android 기기의 알림을 볼 수 있습니다. 앱에서 먼저 활성화해야 하며 현재 Android 플랫폼에서만 사용할 수 있습니다. 자세한 내용은 Pushbullet 블로그의 <a href="https://blog.pushbullet.com/2013/11/12/real-time-notification-mirroring-from-android-to-your-computer/" rel="external nofollow">this announcement</a>를 참조하십시오. .</p>
+<p>API 키/액세스 토큰을 검색하려면 <a href="https://www.pushbullet.com/#settings/account" rel="external nofollow">https://www.pushbullet.com/#settings/account</a>로 이동하십시오.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To enable the Pushbullet sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>설치시 Pushbullet 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: pushbullet
@@ -134,12 +134,12 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your Pushbullet API key.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Pushbullet API 키.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>Properties of the push to monitor.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터한 푸쉬의 속성.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -148,39 +148,39 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="application_name" href="#application_name"></a> application_name</dt>
-<dd><p class="desc"><span class="description"><p>The application sending the push.</p>
+<dd><p class="desc"><span class="description"><p>푸시를 보내는 애플리케이션.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="body" href="#body"></a> body</dt>
-<dd><p class="desc"><span class="description"><p>Body of the message.</p>
+<dd><p class="desc"><span class="description"><p>메시지 본문.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="notification_id" href="#notification_id"></a> notification_id</dt>
-<dd><p class="desc"><span class="description"><p>ID of the notification.</p>
+<dd><p class="desc"><span class="description"><p>알림의 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="notification_tag" href="#notification_tag"></a> notification_tag</dt>
-<dd><p class="desc"><span class="description"><p>Tag (if the application sending supports it).</p>
+<dd><p class="desc"><span class="description"><p>태그 (응용 프로그램에서 지원하는 경우)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="package_name" href="#package_name"></a> package_name</dt>
-<dd><p class="desc"><span class="description"><p>Name of the sender’s package.</p>
+<dd><p class="desc"><span class="description"><p>발신자의 패키지 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="receiver_email" href="#receiver_email"></a> receiver_email</dt>
-<dd><p class="desc"><span class="description"><p>The email of the push’s target.</p>
+<dd><p class="desc"><span class="description"><p>푸시 대상의 이메일.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="sender_email" href="#sender_email"></a> sender_email</dt>
-<dd><p class="desc"><span class="description"><p>The sender of the push.</p>
+<dd><p class="desc"><span class="description"><p>푸시 발신자.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="source_device_iden" href="#source_device_iden"></a> source_device_iden</dt>
-<dd><p class="desc"><span class="description"><p>ID of the sender’s device.</p>
+<dd><p class="desc"><span class="description"><p>발신자 기기의 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
-<dd><p class="desc"><span class="description"><p>Title of the push.</p>
+<dd><p class="desc"><span class="description"><p>푸시의 제목.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
@@ -189,11 +189,11 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>All properties will be displayed as attributes. The properties array are just for logging the sensor readings for multiple properties.</p>
+<p>모든 properties가 attributes으로 표시됩니다. properties 배열은 여러 properties에 대한 센서 판독값을 기록하기 위한 것입니다.</p>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The <code>pushbullet</code> notification platform sends messages to <a href="https://www.pushbullet.com/" rel="external nofollow">Pushbullet</a>, a free service to send information between your phones, browsers, and friends. The free tier is <a href="https://docs.pushbullet.com/#push-limit" rel="external nofollow">limited</a> to 500 pushes per month.</p>
-<p>To enable Pushbullet notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-notifications" href="#-notifications"></a> 알림 (Notifications)</h2>
+<p><code>pushbullet</code> 알림 플랫폼은 <a href="https://www.pushbullet.com/" rel="external nofollow">Pushbullet</a>에 메시지를 보내며, 이 서비스는 휴대 전화, 브라우저 및 친구간에 정보를 무료로 제공합니다. 프리 티어는 <a href="https://docs.pushbullet.com/#push-limit" rel="external nofollow">limited</a>으로 매월 500 회의 푸시로 제한됩니다.</p>
+<p>설치시 Pushbullet 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NOTIFIER_NAME
@@ -206,12 +206,12 @@ notify:
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Enter the API key for Pushbullet. Go to <a href="https://www.pushbullet.com/#settings/account" rel="external nofollow">https://www.pushbullet.com/#settings/account</a> to retrieve your API key/access token.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Pushbullet의 API 키를 입력하십시오. API 키/액세스 토큰을 검색하려면 <a href="https://www.pushbullet.com/#settings/account" rel="external nofollow">https://www.pushbullet.com/#settings/account</a>로 이동하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The default value is <code>notify</code>. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택적 매개 변수 <code>name</code>을 설정하면 여러 알리미(notifier)를 만들 수 있습니다. 기본값은 <code>notify</code> 입니다. 알리미(notifier)는 서비스 <code>notify.NOTIFIER_NAME</code>에 바인딩합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -220,8 +220,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="usage" href="#usage"></a> Usage</h3>
-<p>Pushbullet is a notify platform and thus can be controlled by calling the notify service <a href="/integrations/notify/">as described here</a>. It will send a notification to all devices registered in the Pushbullet account. An optional <strong>target</strong> parameter can be given to Pushbullet to specify specific account’s devices, contacts or channels.</p>
+<a class="title-link" name="" href="#"></a> 사용법</h3>
+<p>Pushbullet은 알림 플랫폼이므로 알림 서비스 <a href="/integrations/notify/">as described here</a>를 호출하여 제어할 수 있습니다. Pushbullet 계정에 등록된 모든 장치에 알림을 보냅니다. 특정 계정의 장치, 연락처 또는 채널을 지정하기 위해 선택적인 <strong>target</strong> 매개 변수를 Pushbullet에 제공할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -252,9 +252,9 @@ Default value: </p>
 </tr>
 </tbody>
 </table>
-<p>If using targets, your own account’s email address functions as ‘send to all devices’. All targets are verified (if exists) before sending, except email.</p>
+<p>대상을 사용하는 경우 자신의 계정의 전자 메일 주소가 ‘send to all devices’로 작동합니다. 이메일을 제외한 모든 대상은 전송전에 확인됩니다 (있는 경우).</p>
 <h4>
-<a class="title-link" name="example-service-payload" href="#example-service-payload"></a> Example service payload</h4>
+<a class="title-link" name="--" href="#--"></a> 서비스 페이로드의 예</h4>
 <pre><code class="language-json">{
   "message": "A message for many people",
   "target": [
@@ -264,9 +264,9 @@ Default value: </p>
   ]
 }
 </code></pre>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 <h3>
-<a class="title-link" name="url-support" href="#url-support"></a> URL support</h3>
+<a class="title-link" name="url-" href="#url-"></a> URL 지원</h3>
 <pre><code class="language-yaml">action:
   service: notify.NOTIFIER_NAME
   data:
@@ -277,10 +277,10 @@ Default value: </p>
 </code></pre>
 <ul>
 <li>
-<strong>url</strong> (<em>Required</em>): Page URL to send with Pushbullet.</li>
+<strong>url</strong> (<em>Required</em>): Pushbullet과 함께 보낼 페이지 URL입니다</li>
 </ul>
 <h3>
-<a class="title-link" name="file-support" href="#file-support"></a> File support</h3>
+<a class="title-link" name="file-" href="#file-"></a> File 지원</h3>
 <pre><code class="language-yaml">action:
   service: notify.NOTIFIER_NAME
   data:
@@ -291,7 +291,7 @@ Default value: </p>
 </code></pre>
 <ul>
 <li>
-<strong>file</strong> (<em>Required</em>): File to send with Pushbullet.</li>
+<strong>file</strong> (<em>Required</em>): Pushbullet과 함께 보낼 파일.</li>
 </ul>
 <h3>
 <a class="title-link" name="file-url-support" href="#file-url-support"></a> File URL support</h3>
@@ -305,10 +305,10 @@ Default value: </p>
 </code></pre>
 <ul>
 <li>
-<strong>file_url</strong> (<em>Required</em>): File to send with Pushbullet.</li>
+<strong>file_url</strong> (<em>Required</em>): Pushbullet과 함께 보낼 파일.</li>
 </ul>
 <h3>
-<a class="title-link" name="single-target" href="#single-target"></a> Single target</h3>
+<a class="title-link" name="-" href="#-"></a> 단일 대상</h3>
 <pre><code class="language-yaml">  action:
     service: notify.NOTIFIER_NAME
     data:
@@ -318,10 +318,10 @@ Default value: </p>
 </code></pre>
 <ul>
 <li>
-<strong>target</strong>: Pushbullet device to receive the notification.</li>
+<strong>target</strong>: 알림을 수신할 Pushbullet 장치.</li>
 </ul>
 <div class="note">
-<p>Don’t forget to <a href="/docs/configuration/basic/">whitelist external directories</a>, so Home Assistant has access to them.</p>
+<p><a href="/docs/configuration/basic/">whitelist external directories</a>을 잊지 마십시오. 그래야 홈어시스턴트가 액세스 할 수 있습니다.</p>
 </div>
 
 

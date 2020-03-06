@@ -229,7 +229,7 @@ duration:
       hours: 5
 </code></pre>
 <p><strong>이번주</strong>: 지난 월요일 00:00에 시작하여 지금 끝납니다.</p>
-<p>여기서 지난 월요일은 오늘 현재 시간을 빼서 현재 요일의 86400 배를 뺀 것입니다 (86400은 하루의 초 수, 월요일은 0, 월요일은 6).</p>
+<p>여기서 지난 월요일은 오늘 현재 시간을 빼서 현재 요일의 86400 배를 뺀 것입니다 (86400은 하루의 초 수, 월요일은 0, 일요일은 6).</p>
 <pre><code class="language-yaml">    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
     end: '{{ now() }}'
 </code></pre>

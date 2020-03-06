@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Notifications for Android TV / FireTV - 홈어시스턴트</title>
+    <title>안드로이드TV/FireTV 알림 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Notifications for Android TV / FireTV">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/nfandroidtv/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Notifications for Android TV / FireTV">
+    <meta property="og:title" content="안드로이드TV/FireTV 알림">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/nfandroidtv/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Notifications for Android TV / FireTV">
+    <meta name="twitter:title" content="안드로이드TV/FireTV 알림">
     <meta name="twitter:description" content="Notifications for Android TV / FireTV">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Notifications for Android TV / FireTV
+      안드로이드TV/FireTV 알림
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>Notification platform for <a href="https://play.google.com/store/apps/details?id=de.cyberdream.androidtv.notifications.google" rel="external nofollow">Notifications for Android TV</a> and <a href="https://play.google.com/store/apps/details?id=de.cyberdream.firenotifications.google" rel="external nofollow">Notifications for FireTV</a>. You can use this plarform to send notifications to your Android TV device. An overlay with the message content will appear for a configurable amount of seconds and then disapper again. Sending images (e.g., security cam) is supported too.</p>
-<p>The notifications are in the global scope of your Android TV device. They will be displayed regardless of which application is running.</p>
-<p>When setting this up be aware, that there are two apps: one for your smartphone to send notifications (not required for this platform) and one for your Android TV device to receive the notifications. The app available in the store of your Android TV device is the one that is needed to display notifications sent from Home Assistant. The In-App purchases only apply to the client for Android smartphones, so there isn’t any limit when pushing notifications from Home Assistant.</p>
-<p>To enable the notification platform, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><a href="https://play.google.com/store/apps/details?id=de.cyberdream.androidtv.notifications.google" rel="external nofollow">Notifications for Android TV</a> 및 <a href="https://play.google.com/store/apps/details?id=de.cyberdream.firenotifications.google" rel="external nofollow">Notifications for FireTV</a> 알림 플랫폼. 이 플랫폼을 사용하여 Android TV 장치에 알림을 보낼 수 있습니다. 메시지 내용이 포함된 오버레이가 설정 가능한 시간 (초) 동안 나타난 다음 다시 사라집니다. 이미지 전송(예 : 보안 캠)도 지원됩니다.</p>
+<p>알림은 Android TV 장치의 전체 범위에 있습니다. 실행중인 응용 프로그램에 관계없이 표시됩니다.</p>
+<p>이를 설정하면 두 가지 앱이 있습니다. 하나는 스마트 폰에서 알림을 보내거나 (이 플랫폼에는 필요하지 않음) 하나는 Android TV 장치에서 알림을 받도록하는 것입니다. Android TV 앱스토어에서 사용 가능한 앱은 Home Assistant에서 보낸 알림을 표시하는 데 필요한 앱입니다. In-App 구매는 Android 스마트폰 클라이언트에만 적용되므로 Home Assistant에서 알림을 푸시 할 때 제한이 없습니다.</p>
+<p>알림 플랫폼을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: nfandroidtv
@@ -120,7 +120,7 @@ notify:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Setting the optional parameter <code>name</code> allows multiple notifiers to be created. The notifier will bind to the service <code>notify.NOTIFIER_NAME</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택적 매개 변수 <code>name</code>을 설정하면 여러 알리미를 만들 수 있습니다. 알리미는 서비스 <code>notify.NOTIFIER_NAME</code> 에 바인딩합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -128,12 +128,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>IP address of the Android TV / FireTV device.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Android TV/FireTV 장치의 IP 주소</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="duration" href="#duration"></a> duration</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The duration in seconds for which the notification will be displayed.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>알림이 표시되는 기간 (초)입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,7 +142,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="fontsize" href="#fontsize"></a> fontsize</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Has to be one of: <code>small</code>, <code>medium</code>, <code>large</code> or <code>max</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>small</code>, <code>medium</code>, <code>large</code>, <code>max</code> 중 하나 여야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -151,7 +151,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="position" href="#position"></a> position</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Has to be one of: <code>bottom-right</code>, <code>bottom-left</code>, <code>top-right</code>, <code>top-left</code> or <code>center</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>bottom-right</code>, <code>bottom-left</code>, <code>top-right</code>, <code>top-left</code>, <code>center</code> 중 하나 여야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -160,7 +160,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="color" href="#color"></a> color</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Has to be one of: <code>grey</code>, <code>black</code>, <code>indigo</code>, <code>green</code>, <code>red</code>, <code>cyan</code>, <code>teal</code>, <code>amber</code> or <code>pink</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>grey</code>, <code>black</code>, <code>indigo</code>, <code>green</code>, <code>red</code>, <code>cyan</code>, <code>teal</code>, <code>amber</code>, <code>pink</code> 중 하나 여야합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -169,7 +169,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="transparency" href="#transparency"></a> transparency</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Has to be one of: <code>0%</code>, <code>25%</code>, <code>50%</code>, <code>75%</code> or <code>100%</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>0%</code>, <code>25%</code>, <code>50%</code>, <code>75%</code>, <code>100%</code> 중 하나여야 합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -178,7 +178,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The timeout in seconds.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>시간 초과.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -187,7 +187,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="interrupt" href="#interrupt"></a> interrupt</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>If set to true, 1, on etc., the notification is interactive and can be dismissed or selected to display more details. Depending on the running app (e.g., Netflix), this may stop playback.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>true로 설정된 경우, 알림은 대화식이며 자세한 내용을 표시하기 위해 해제하거나 선택할 수 있습니다. 실행중인 앱 (예 : Netflix)에 따라 재생이 중지 될 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -195,8 +195,8 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The configuration will be used to configure the default values for the notification for the host specified by the IP. However, you can override most of the settings by passing them with the data-attribute when calling the service.
-This is a fully customized JSON you can use to test how the final notification will look like:</p>
+<p>설정은 IP로 지정된 호스트에 대한 알림의 기본값을 구성하는 데 사용됩니다. 그러나 서비스를 호출할 때 데이터 속성과 함께 전달하여 대부분의 설정을 무시할 수 있습니다.
+다음은 최종 알림의 모양을 테스트하는 데 사용할 수 있는 완전히 사용자 정의된 JSON입니다.</p>
 <pre><code class="language-json">{
 "message": "Messagetext",
 "title": "My Notification",
@@ -211,8 +211,8 @@ This is a fully customized JSON you can use to test how the final notification w
 }
 </code></pre>
 <h3>
-<a class="title-link" name="service-data-for-sending-images" href="#service-data-for-sending-images"></a> Service data for sending images</h3>
-<p>The following attributes can be placed inside <code>data</code> to send images.</p>
+<a class="title-link" name="---" href="#---"></a> 이미지 전송을위한 서비스 데이터</h3>
+<p><code>data</code> 안에 이미지를 보내기 위해 다음 속성을 배치할 수 있습니다 .</p>
 <table>
 <thead>
 <tr>
@@ -254,7 +254,7 @@ This is a fully customized JSON you can use to test how the final notification w
 </tr>
 </tbody>
 </table>
-<p>Example for posting file from URL:</p>
+<p>URL에서 파일을 게시하는 예 :</p>
 <pre><code class="language-json">{
   "message":"Messagetext",
   "title":"My Notification",
@@ -268,7 +268,7 @@ This is a fully customized JSON you can use to test how the final notification w
   }
 }
 </code></pre>
-<p>Example for posting file from local path:</p>
+<p>로컬 경로에서 파일을 게시하는 예 :</p>
 <pre><code class="language-json">{
   "message":"Messagetext",
   "title":"My Notification",
@@ -279,7 +279,7 @@ This is a fully customized JSON you can use to test how the final notification w
   }
 }
 </code></pre>
-<p>Please note that <code>path</code> is validated against the <code>whitelist_external_dirs</code> in the <code>configuration.yaml</code>.</p>
+<p><code>path</code>는 <code>configuration.yaml</code>의 <code>whitelist_external_dirs</code>에 대해 검증된다는 것을 확인하십시오.</p>
 
 
 </article>

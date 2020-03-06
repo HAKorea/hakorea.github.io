@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Neato Botvac - 홈어시스턴트</title>
+    <title>Neato Botvac(로봇청소기) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Neato within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/neato/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Neato Botvac">
+    <meta property="og:title" content="Neato Botvac(로봇청소기)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/neato/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Neato Botvac">
+    <meta name="twitter:title" content="Neato Botvac(로봇청소기)">
     <meta name="twitter:description" content="Instructions on how to integrate your Neato within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Neato Botvac
+      Neato Botvac(로봇청소기)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>neato</code> integration allows you to control your <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/" rel="external nofollow">Neato Botvac Connected Robots</a>.</p>
-<p>To activate <code>neato</code> in your installation, you can set it up from the integration screen or add it to your <code>configuration.yaml</code> file.</p>
+  <p><code>neato</code> 통합구성요소로 <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/" rel="external nofollow">Neato Botvac Connected Robots</a>를 제어할 수 있습니다.</p>
+<p>설치에서 <code>neato</code>를 활성화하려면 통합 화면에서 설정하거나 <code>configuration.yaml</code> 파일에 추가하십시오.</p>
 <h2>
-<a class="title-link" name="setup-the-integration-via-the-integrations-screen" href="#setup-the-integration-via-the-integrations-screen"></a> Setup the integration via the integrations screen</h2>
-<p>Menu: <em>Configuration</em> -&gt; <em>Integrations</em></p>
-<p>Search for or select <strong>Neato</strong> from the list and configure the integration. You will need to enter your username and password and whether you are using a Neato or Vorwerk device.
-After that, all the entities will automatically show up in Home Assistant.</p>
+<a class="title-link" name="----" href="#----"></a> 통합구성요소 화면을 통해 연동 설정</h2>
+<p>Menu: <em>설정</em> -&gt; <em>통합구성요소</em></p>
+<p>목록에서 <strong>Neato</strong>를 검색하거나 선택하고 연동을 설정하십시오. Neato 또는 Vorwerk 장치를 사용하는지 여부와 함께 사용자 이름과 비밀번호를 입력해야합니다.
+그 후 모든 엔티티가 홈어시스턴트에 자동으로 나타납니다.</p>
 <h2>
-<a class="title-link" name="setup-the-integration-via-configurationyaml" href="#setup-the-integration-via-configurationyaml"></a> Setup the integration via configuration.yaml</h2>
-<p>Add the following to your configuration.yaml:</p>
+<a class="title-link" name="configurationyaml---" href="#configurationyaml---"></a> configuration.yaml을 통한 연동 설정</h2>
+<p>configuration.yaml에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 neato:
   username: YOUR_USERNAME
@@ -124,16 +124,16 @@ neato:
   <dl class="">
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Username for the Neato account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Neato 계정의 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Password for the Neato account.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Neato 계정의 비밀번호</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="vendor" href="#vendor"></a> vendor</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Support for additional vendors. Set to <code>vorwerk</code> for Vorwerk robots.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가 공급 업체를 지원합니다. Vorwerk 로봇의 경우 <code>vorwerk</code>로 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,18 +142,17 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>After the update to firmware 4.0 (which adds cleaning maps) there is also support for displaying the maps of the Botvac D3 Connected and Botvac D5 Connected robots. More information on how to update can be found <a href="https://support.neatorobotics.com/hc/en-us/articles/115004320694-Software-Update-4-0-for-Neato-Botvac-Connected-D3-D5-" rel="external nofollow">here</a>.</p>
+<p>펌웨어 4.0으로 업데이트 한 후 (클리닝 맵 추가) Botvac D3 Connected 및 Botvac D5 Connected 로봇의 맵표시도 지원됩니다. 업데이트 방법에 대한 자세한 내용은 <a href="https://support.neatorobotics.com/hc/en-us/articles/115004320694-Software-Update-4-0-for-Neato-Botvac-Connected-D3-D5-" rel="external nofollow">here</a>를 참조하십시오.</p>
 </div>
 <h2>
 <a class="title-link" name="vacuum" href="#vacuum"></a> Vacuum</h2>
-<p>The <code>neato</code> vacuum platform allows you to control your <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/" rel="external nofollow">Neato Botvac Connected</a>.
-The status will contain attributes on the robots last clean session.</p>
+<p><code>neato</code> Vacuum 플랫폼을 사용하면 <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/" rel="external nofollow">Neato Botvac Connected</a>를 제어 할 수 있습니다. 상태에는 로봇청소기의 마지막 청소 세션의 속성이 포함됩니다.</p>
 <div class="note">
-If you notice the robot stops responding to commands check the state to see if the robot is "unavailable". If you see "unavailable" first try to restart the vacuum and wait about 5 minutes to see if it is no longer "unavailable". If you are still having issues check the Neato app and make sure your robot is connected and working. If it is not then follow the steps in the app to reset your robot and give it the same name as before then restart Home Assistant.
+로봇이 명령에 응답하지 않는 경우 로봇이 "unavailable" 상태인지 확인하십시오. "unavailable"이 표시되면 먼저 로봇 청소기를 다시 시작하고 더 이상 "unavailable" 장치가 아닌지 5 분 정도 기다리십시오. 여전히 문제가 발생하면 Neato 앱을 확인하고 로봇이 연결되어 작동하는지 확인하십시오. 그렇지 않은 경우 앱의 단계에 따라 로봇을 재설정하고 이전과 동일한 이름을 지정한 다음 Home Assistant를 다시 시작하십시오.
 </div>
 <h3>
-<a class="title-link" name="services" href="#services"></a> Services</h3>
-<p>Currently supported services are:</p>
+<a class="title-link" name="" href="#"></a> 서비스</h3>
+<p>현재 지원되는 서비스는 다음과 같습니다.</p>
 <ul>
 <li><code>start</code></li>
 <li><code>pause</code></li>
@@ -162,18 +161,18 @@ If you notice the robot stops responding to commands check the state to see if t
 <li><code>locate</code></li>
 <li><code>clean_spot</code></li>
 </ul>
-<p>And a specific Platform Service:</p>
+<p>그리고 특정 플랫폼 서비스 :</p>
 <ul>
 <li><code>neato.custom_cleaning</code></li>
 </ul>
 <h3>
-<a class="title-link" name="platform-services" href="#platform-services"></a> Platform Services</h3>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 서비스</h3>
 <h4>
-<a class="title-link" name="service-neatocustom_cleaning" href="#service-neatocustom_cleaning"></a> Service neato.custom_cleaning</h4>
-<p>Starts a custom cleaning of your house. You can set the various options like in the mobile application (mode, map usage, navigation mode, zone).</p>
+<a class="title-link" name="neatocustom_cleaning-" href="#neatocustom_cleaning-"></a> neato.custom_cleaning 서비스</h4>
+<p>집 청소를 시작합니다. 모바일 애플리케이션과 같은 다양한 옵션 (모드, 지도 사용법, 탐색 모드, 구역)을 설정할 수 있습니다.</p>
 <div class="note">
-<p>Not all Botvac models support all the attributes. Only the Neato Botvac D7 supports the <code>zone</code> attribute.
-Some information about the capabilities might be found on the <a href="https://developers.neatorobotics.com/api/robot-remote-protocol/housecleaning" rel="external nofollow">Neato Developer Portal</a>.</p>
+<p>모든 Botvac 모델이 모든 속성을 지원하는 것은 아닙니다. Neato Botvac D7만이 <code>zone</code> 속성을 지원합니다.
+기능에 대한 일부 정보는 <a href="https://developers.neatorobotics.com/api/robot-remote-protocol/housecleaning" rel="external nofollow">Neato Developer Portal</a>에 있습니다.</p>
 </div>
 <table>
 <thead>
@@ -212,15 +211,15 @@ Some information about the capabilities might be found on the <a href="https://d
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="camera" href="#camera"></a> Camera</h2>
-<p>The <code>neato</code> camera platform allows you to view the latest cleaning map of your <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/botvac-connected/" rel="external nofollow">Neato Botvac Connected</a>.</p>
+<a class="title-link" name="" href="#"></a> 카메라</h2>
+<p><code>neato</code> 카메라 플랫폼을 사용하면 <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/botvac-connected/" rel="external nofollow">Neato Botvac Connected</a>의 최신 클리닝 맵을 볼 수 있습니다</p>
 <h2>
-<a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>neato</code> sensor platform allows you to view the battery level for your <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/botvac-connected/" rel="external nofollow">Neato Botvac Connected</a>.</p>
+<a class="title-link" name="" href="#"></a> 센서</h2>
+<p><code>neato</code> 센서 플랫폼을 사용하면 <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/botvac-connected/" rel="external nofollow">Neato Botvac Connected</a>의 배터리 잔량을 볼 수 있습니다</p>
 <h2>
-<a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>neato</code> switch platform allows you to enable or disable the schedule of your <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/botvac-connected/" rel="external nofollow">Neato Botvac Connected</a>.</p>
-<p>To add <code>neato</code> switch, camera and vacuum to your installation, follow instructions above.</p>
+<a class="title-link" name="" href="#"></a> 스위치</h2>
+<p><code>neato</code> 스위치 플랫폼을 사용하면 <a href="https://www.neatorobotics.com/robot-vacuum/botvac-connected-series/botvac-connected/" rel="external nofollow">Neato Botvac Connected</a>의 스케줄을 활성화 또는 비활성화 할 수 있습니다</p>
+<p>설치시 <code>neato</code> 스위치, 카메라 및 vacuum을 추가하려면 위의 지침을 따르십시오.</p>
 
 
 </article>

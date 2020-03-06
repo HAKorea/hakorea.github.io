@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Notifications - 홈어시스턴트</title>
+    <title>알림(Notifications) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add user notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/notify/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Notifications">
+    <meta property="og:title" content="알림(Notifications)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/notify/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Notifications">
+    <meta name="twitter:title" content="알림(Notifications)">
     <meta name="twitter:description" content="Instructions on how to add user notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Notifications
+      알림(Notifications)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>notify</code> integration makes it possible to send notifications to a wide variety of platforms. To use it you have to setup at least one notification target (notifier), check the <a href="/integrations/#notifications">integrations list</a> for one that fits your use case.</p>
-<p>If you want to send notifications to the Home Assistant web interface, you may use the <a href="/integrations/persistent_notification/">Persistent Notification integration</a>.</p>
+  <p><code>notify</code> 통합구성요소로 다양한 플랫폼에 notification을 보낼 수 있습니다. 이를 사용하려면 하나 이상의 notification 대상인 notify를 설정해야합니다. <a href="/integrations/#notifications">integrations list</a> 사용 사례에 맞는 알림 대상을 확인하십시오.</p>
+<p>Home Assistant 웹 인터페이스에 notification을 보내려면 <a href="/integrations/persistent_notification/">Persistent Notification integration</a>을 사용할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="service" href="#service"></a> Service</h2>
-<p>Once loaded, the <code>notify</code> platform will expose a service that can be called to send notifications.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p><code>notify</code> 플랫폼은 일단 로드되면 알림(notifications)을 보내기 위해 호출할 수있는 서비스를 노출합니다</p>
 <table>
 <thead>
 <tr>
@@ -120,27 +120,28 @@
 <tr>
 <td><code>message</code></td>
 <td>no</td>
-<td>Body of the notification.</td>
+<td>notification 본문.</td>
 </tr>
 <tr>
 <td><code>title</code></td>
 <td>yes</td>
-<td>Title of the notification.</td>
+<td>notification 제목.</td>
 </tr>
 <tr>
 <td><code>target</code></td>
 <td>yes</td>
-<td>Some platforms allow specifying a recipient that will receive the notification. See your platform page if it is supported.</td>
+<td>일부 플랫폼에서는 notification을 받을 수신자를 지정할 수 있습니다. 지원되는 경우 플랫폼 페이지를 참조하십시오.</td>
 </tr>
 <tr>
 <td><code>data</code></td>
 <td>yes</td>
-<td>On platforms who have extended functionality. See your platform page if it is supported.</td>
+<td>기능이 확장된 플랫폼에서. 지원되는 경우 플랫폼 페이지를 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
-<p>The notify integration supports specifying <a href="/topics/templating/">templates</a> with <code>data_template</code>. This will allow you to use the current state of Home Assistant in your notifications.</p>
-<p>In an <a href="/getting-started/automation-action/">action</a> of your <a href="/getting-started/automation/">automation setup</a> it could look like this with a customized subject.</p>
+<p>notify 통합구성요소는 <code>data_template</code>으로 <a href="/topics/templating/">templates</a> 지정을 지원합니다.
+이를 통해 notifications에 현재 홈어시스턴트 상태를 사용할 수 있습니다.</p>
+<p><a href="/getting-started/automation/">automation setup</a>의 <a href="/getting-started/automation-action/">action</a>에서 사용자정의 된 주제를 사용하면 다음과 같이 보일 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: notify.notify
   data:
@@ -148,19 +149,19 @@
     title: "Custom subject"
 </code></pre>
 <h3>
-<a class="title-link" name="test-if-it-works" href="#test-if-it-works"></a> Test if it works</h3>
-<p>After you setup a <a href="/integrations/#notifications">notifier</a> a simple way to test if you have set up your notify platform correctly, is to open <strong>Developer Tools</strong> from the sidebar and then select the  <strong>Services</strong> tab. Choose your service from the <strong>Service</strong> dropdown menu, enter the sample below into the <strong>Service Data</strong> field, and press the <strong>CALL SERVICE</strong> button.</p>
+<a class="title-link" name="-" href="#-"></a> 작동하는지 테스트</h3>
+<p><a href="/integrations/#notifications">notifier</a>를 설정 한 후 notify 플랫폼을 올바르게 설정했는지 테스트하는 간단한 방법은 사이드 바에서 <strong>개발자 도구</strong>를 연 다음 <strong>Service</strong> 탭을 선택하는 것입니다. <strong>Service</strong> 드롭 다운 메뉴에서 서비스를 선택하고 <strong>Service Data</strong> 필드에 아래 샘플을 입력 한 다음 <strong>CALL SERVICE</strong> 버튼을 누릅니다.</p>
 <pre><code class="language-json">{
   "message": "The sun is {% if is_state('sun.sun', 'above_horizon') %}up{% else %}down{% endif %}!"
 }
 </code></pre>
-<p>The automation equivalent would be:</p>
+<p>자동화에 상응하는 내용은 다음과 같습니다. :</p>
 <pre><code class="language-yaml">action:
   service: notify.notify
   data_template:
     message: "The sun is {% if is_state('sun.sun', 'above_horizon') %}up{% else %}down{% endif %}!"
 </code></pre>
-<p>For services which have support for sending images.</p>
+<p>이미지 전송을 지원하는 서비스의 경우.</p>
 <pre><code class="language-json">{ "message": "Test plugin",
   "data": {
     "photo": {
@@ -169,7 +170,7 @@
   }
 }
 </code></pre>
-<p>The automation equivalent would be:</p>
+<p>자동화에 상응하는 내용은 다음과 같습니다.</p>
 <pre><code class="language-yaml">action:
   service: notify.notify
   data:
@@ -178,7 +179,7 @@
       photo:
         url: "http://www.gbsun.de/gbpics/berge/berge106.jpg"
 </code></pre>
-<p>If the service support sending the location, the data from this sample can be used.</p>
+<p>서비스가 위치 전송을 지원하면 이 샘플의 데이터를 사용할 수 있습니다.</p>
 <pre><code class="language-json">{ "message": "Test plugin",
   "data": {
     "location": {
@@ -188,7 +189,7 @@
   }
 }
 </code></pre>
-<p>The automation equivalent would be:</p>
+<p>자동화에 상응하는 내용은 다음과 같습니다.</p>
 <pre><code class="language-yaml">action:
   service: notify.notify
   data:

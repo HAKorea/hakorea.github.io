@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Microsoft Face - 홈어시스턴트</title>
+    <title>Microsoft 페이스 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Microsoft Face integration into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/microsoft_face/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Microsoft Face">
+    <meta property="og:title" content="Microsoft 페이스">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/microsoft_face/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Microsoft Face">
+    <meta name="twitter:title" content="Microsoft 페이스">
     <meta name="twitter:description" content="Instructions on how to integrate Microsoft Face integration into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,29 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Microsoft Face
+      Microsoft 페이스
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>microsoft_face</code> integration platform is the main integration for Microsoft
-Azure Cognitive service
-<a href="https://azure.microsoft.com/en-us/services/cognitive-services/face/" rel="external nofollow">Face</a>.
-All data are stored in your own private instance in the Azure cloud.</p>
+  <p><code>microsoft_face</code> 통합 플랫폼은 Microsoft Azure Cognitive Service <a href="https://azure.microsoft.com/en-us/services/cognitive-services/face/" rel="external nofollow">Face</a>의 주요 통합구성요소입니다. 모든 데이터는 Azure 클라우드의 자체 프라이빗 인스턴스에 저장됩니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>You need an API key, which is free, but requires an
-<a href="https://azure.microsoft.com/en-us/free/" rel="external nofollow">Azure registration</a> using your
-Microsoft ID. The free resource (<em>F0</em>) is limited to 20 requests per minute and
-30k requests in a month. If you don’t want to use the Azure cloud, you can also
-get an API key by registering with
-<a href="https://azure.microsoft.com/en-us/try/cognitive-services/" rel="external nofollow">cognitive-services</a>.
-Please note that all keys on cognitive services must be recreated every 90 days.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>무료인 API 키가 필요하지만 Microsoft ID를 사용하는 <a href="https://azure.microsoft.com/en-us/free/" rel="external nofollow">Azure registration</a>이 필요합니다. 무료 자원 (<em>F0</em>)은 분당 20 개의 요청과 한 달에 30k 요청으로 제한됩니다. Azure 클라우드를 사용하지 않으려는 경우 <a href="https://azure.microsoft.com/en-us/try/cognitive-services/" rel="external nofollow">cognitive-services</a>에 등록하여 API 키를 얻을 수도 있습니다. 인지(cognitive) 서비스의 모든 키는 90 일마다 다시 작성해야합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the Microsoft Face component,
-add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Microsoft Face 구성 요소를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 microsoft_face:
   api_key: YOUR_API_KEY
@@ -131,16 +121,16 @@ microsoft_face:
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The API key for your Cognitive resource.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>인지 자원에 대한 API 키.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="azure_region" href="#azure_region"></a> azure_region</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The region where you instantiated your Microsoft Cognitive services endpoint.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Microsoft Cognitive Services 엔드 포인트를 인스턴스화 한 지역</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="timeout" href="#timeout"></a> timeout</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>Set timeout for the API connection.</p>
+<p class="desc"><span class="type">(<span class="time">time</span>)</span><span class="required">(Optional)</span><span class="description"><p>API 연결 시간 초과 설정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -149,13 +139,9 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="person-and-groups" href="#person-and-groups"></a> Person and Groups</h3>
-<p>For most services, you need to set up a group or a person.
-This limits the processing and detection to elements provided by the group.
-Home Assistant creates an entity for all groups and allows you to show the
-state, person, and IDs directly on the frontend.</p>
-<p>The following services are available for managing this feature and can be called
-via the Frontend, a script, or the REST API.</p>
+<a class="title-link" name="-" href="#-"></a> 사람과 그룹들</h3>
+<p>대부분의 서비스에는 그룹 또는 사람을 설정해야합니다. 이는 처리 및 탐지를 그룹에서 제공한 요소로 제한합니다. 홈어시스턴트는 모든 그룹에 대한 엔티티를 작성하고 프런트 엔드에 state(미국), 사람 및 ID를 직접 표시 할 수 있습니다.</p>
+<p>이 기능을 관리하기 위해 다음 서비스를 사용할 수 있으며 프론트 엔드, 스크립트 또는 REST API를 통해 호출할 수 있습니다.</p>
 <ul>
 <li><em>microsoft_face.create_group</em></li>
 <li><em>microsoft_face.delete_group</em></li>
@@ -173,9 +159,7 @@ data:
   group: family
   name: 'Hans Maier'
 </code></pre>
-<p>You need to add an image of a person. You can add multiple images for every
-person to make the detection better. You can take a picture from a camera or
-send a local image to your Azure resource.</p>
+<p>사람의 이미지를 추가해야합니다. 모든 사람에 대해 여러 이미지를 추가하여 더 나은 탐지를 만들 수 있습니다. 카메라에서 사진을 찍거나 로컬 이미지를 Azure 리소스로 보낼 수 있습니다.</p>
 <ul>
 <li><em>microsoft_face.face_person</em></li>
 </ul>
@@ -185,14 +169,12 @@ data:
   name: 'Hans Maier'
   camera_entity: camera.door
 </code></pre>
-<p>For the local image we need <code>curl</code>.
-The <code>{personId}</code> is present in group entity as attribute.</p>
+<p>로컬 이미지에는 <code>curl</code>이 필요합니다. <code>{personId}</code>는 그룹 엔티티에 속성으로 존재합니다.</p>
 <pre><code class="language-bash">$ curl -v -X POST "https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/{GroupName}/persons/{personId}/persistedFaces" \
   -H "Ocp-Apim-Subscription-Key: YOUR_API_KEY" \
   -H "Content-Type: application/octet-stream" --data-binary "@/tmp/image.jpg"
 </code></pre>
-<p>After we’re done with changes on a group,
-we need train this group to teach the AI how to handle the new data.</p>
+<p>그룹에 대한 변경 작업을 마친후에는 AI에 새 데이터를 처리하는 방법을 가르치도록 이 그룹을 훈련시켜야합니다.</p>
 <ul>
 <li><em>microsoft_face.train_group</em></li>
 </ul>

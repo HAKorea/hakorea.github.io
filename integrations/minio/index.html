@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Minio - 홈어시스턴트</title>
+    <title>미니오(Minio) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Integration for interacting with Minio object storage.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/minio/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Minio">
+    <meta property="og:title" content="미니오(Minio)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/minio/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Minio">
+    <meta name="twitter:title" content="미니오(Minio)">
     <meta name="twitter:description" content="Integration for interacting with Minio object storage.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Minio
+      미니오(Minio)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This integration adds interaction with <a href="https://min.io" rel="external nofollow">Minio</a>.
-Also enables to listen for bucket notifications: <a href="https://docs.min.io/docs/minio-client-complete-guide.html#watch" rel="external nofollow">watch docs</a></p>
-<p>To download or upload files, folders must be added to <a href="/docs/configuration/basic/">whitelist_external_dirs</a>.</p>
+  <p>이 통합구성요소는 <a href="https://min.io" rel="external nofollow">Minio</a>와의 상호 작용을 추가합니다. 버킷 알림을 들을 수도 있습니다: <a href="https://docs.min.io/docs/minio-client-complete-guide.html#watch" rel="external nofollow">watch docs</a></p>
+<p>파일을 다운로드하거나 업로드하려면 <a href="/docs/configuration/basic/">whitelist_external_dirs</a>에 폴더를 추가해야합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the Minio integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 Minio 통합구성요소를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml">minio:
   host: localhost
   port: 9000
@@ -122,24 +121,24 @@ Also enables to listen for bucket notifications: <a href="https://docs.min.io/do
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio server host</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio 서버 호스트</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio server port</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio 서버 포트</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="access_key" href="#access_key"></a> access_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio server access key</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio 서버 액세스 키</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="secret_key" href="#secret_key"></a> secret_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio server secret key</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Minio 서버 비밀 키</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="secure" href="#secure"></a> secure</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Required)</span><span class="description"><p>Whether to use http or https connection</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Required)</span><span class="description"><p>http 또는 https 연결 사용 여부</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -148,7 +147,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="listen" href="#listen"></a> listen</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of configurations to listen for events to</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>이벤트를 청취할 설정 목록</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -185,8 +184,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="automations" href="#automations"></a> Automations</h2>
-<p>Automations can be triggered on new files created on the Minio server using the <code>data_template</code>.</p>
+<a class="title-link" name="" href="#"></a> 자동화</h2>
+<p><code>data_template</code>을 사용하여 Minio 서버의 생성된 새 파일에서 자동화를 트리거 할 수 있습니다.</p>
 <pre><code class="language-yaml">#Automatically upload new local files
 automation:
 - alias: Upload camera snapshot
@@ -221,16 +220,16 @@ automation:
       file_path: "/tmp/{{ trigger.event.data.file_name }}"
 </code></pre>
 <h2>
-<a class="title-link" name="platform-services" href="#platform-services"></a> Platform Services</h2>
-<p>These services are provided:</p>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 서비스</h2>
+<p>다음 서비스들이 제공됩니다. :</p>
 <ul>
 <li><code>get</code></li>
 <li><code>put</code></li>
 <li><code>remove</code></li>
 </ul>
 <h3>
-<a class="title-link" name="service-minioget" href="#service-minioget"></a> Service minio.get</h3>
-<p>Download file.</p>
+<a class="title-link" name="minioget-" href="#minioget-"></a> minio.get 서비스</h3>
+<p>파일 다운로드.</p>
 <table>
 <thead>
 <tr>
@@ -258,8 +257,8 @@ automation:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-minioput" href="#service-minioput"></a> Service minio.put</h3>
-<p>Upload file.</p>
+<a class="title-link" name="minioput-" href="#minioput-"></a> minio.put 서비스</h3>
+<p>파일 업로드.</p>
 <table>
 <thead>
 <tr>
@@ -287,8 +286,8 @@ automation:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-minioremove" href="#service-minioremove"></a> Service minio.remove</h3>
-<p>Delete file.</p>
+<a class="title-link" name="minioremove-" href="#minioremove-"></a> minio.remove 서비스</h3>
+<p>파일 삭제.</p>
 <table>
 <thead>
 <tr>

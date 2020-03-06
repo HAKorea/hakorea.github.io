@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Samsung Smart TV - 홈어시스턴트</title>
+    <title>삼성 스마트 TV - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a Samsung Smart TV into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/samsungtv/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Samsung Smart TV">
+    <meta property="og:title" content="삼성 스마트 TV">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/samsungtv/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Samsung Smart TV">
+    <meta name="twitter:title" content="삼성 스마트 TV">
     <meta name="twitter:description" content="Instructions on how to integrate a Samsung Smart TV into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Samsung Smart TV
+      삼성 스마트 TV
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>samsungtv</code> platform allows you to control a <a href="https://www.samsung.com/uk/tvs/all-tvs/" rel="external nofollow">Samsung Smart TV</a>.</p>
+  <p><code>samsungtv</code> 플랫폼을 사용하면 <a href="https://www.samsung.com/uk/tvs/all-tvs/" rel="external nofollow">Samsung Smart TV</a>를 제어 할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h3>
-<p>When the TV is first connected, you will need to accept Home Assistant on the TV to allow communication.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h3>
+<p>TV가 처음 연결되면 TV에서 홈어시스턴트를 수락하여 통신을 허용해야합니다.</p>
+<p>보통은 <code>discovery</code> 통합구성요소가 동작하는 상태이므로 자동으로 홈어시스턴트에 <code>삼성 TV</code>가 나타납니다.
+하지만 <code>discovery</code>를 비활성화 시킨 상태에서 아래와 같은 UI에서 쉽게 셋업 가능합니다.</p>
+<p>그럴 경우 홈어시스턴트 UI화면에서 <strong>설정</strong> -&gt; <strong>통합구성요소</strong> -&gt; <strong>통합구성요소</strong> <strong><code>+</code></strong> 추가를 선택하면 <code>삼성 TV</code>를 추가할 수 있습니다. 최근에는 별도 아래 설정을 하지 않더라도 한번에 연동할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To add a TV to your installation without relying on the <a href="/integrations/discovery/">discovery component</a>, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p><a href="/integrations/discovery/">discovery component</a>에 의존하지 않고 TV를 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: samsungtv
@@ -161,14 +164,14 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="supported-models" href="#supported-models"></a> Supported models</h3>
-<p>If your model is not on the list then give it a test, if everything works correctly then add it to the list on <a href="https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/samsungtv.markdown" rel="external nofollow">GitHub</a>.</p>
+<a class="title-link" name="-" href="#-"></a> 지원 모델</h3>
+<p>모델이 목록에없는 경우 테스트를 수행하고 모든 것이 올바르게 작동하면 <a href="https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/samsungtv.markdown" rel="external nofollow">GitHub</a>의 목록에 추가하십시오</p>
 <h4>
 <a class="title-link" name="naming" href="#naming"></a> Naming</h4>
-<p>The first letter (U, P, L, H &amp; K) represent the screen type, e.g., LED or Plasma. The second letter represents the region, E is Europe, N is North America and A is Asia &amp; Australia. The two numbers following that represent the screen size. If you add your model remember to remove these first 4 characters before adding to the list.</p>
-<p>For example: for model <code>UN55NU7100</code>, the <code>UN55</code> would mean it’s an LED, North American, 55 inch TV, and the model number listed below would be the remainder: <code>NU7100</code>.</p>
+<p>첫 글자 (U, P, L, H &amp; K)는 화면 유형 (예: LED 또는 플라즈마)을 나타냅니다. 두 번째 문자는 지역을 나타내며 E는 유럽, N은 북미, A는 아시아 및 호주입니다. 다음 두 숫자는 화면 크기를 나타냅니다. 모델을 추가하는 경우 목록에 추가하기 전에 처음 4자를 제거하십시오.</p>
+<p>예를 들어, 모델 <code>UN55NU7100</code>의 경우, <code>UN55</code>는 LED, 북미, 55 인치 TV이며 아래에 나열된 모델 번호는 <code>NU7100</code>입니다.</p>
 <h4>
-<a class="title-link" name="models-tested-and-working" href="#models-tested-and-working"></a> Models tested and working</h4>
+<a class="title-link" name="--" href="#--"></a> 실험완료하고 동작하는 모델들</h4>
 <ul>
 <li>C7700</li>
 <li>D5500</li>
@@ -219,7 +222,7 @@ Default value: </p>
 <li>UE46ES5500 (partially supported, turn on doesn’t work)</li>
 </ul>
 <h4>
-<a class="title-link" name="models-tested-but-not-yet-working" href="#models-tested-but-not-yet-working"></a> Models tested but not yet working</h4>
+<a class="title-link" name="---" href="#---"></a> 테스트했지만 동작하지 않았던 모델들</h4>
 <ul>
 <li>J5200 - Unable to see state and unable to control</li>
 <li>J5500 - State is always “on” and unable to control (but port 8001 <em>is</em> open)</li>
@@ -242,11 +245,10 @@ Default value: </p>
 </ul>
 <p>None of the 2014 (H) and 2015 (J) model series (e.g., J5200) will work, since Samsung have used a different (encrypted) type of interface for these.</p>
 <h3>
-<a class="title-link" name="usage" href="#usage"></a> Usage</h3>
+<a class="title-link" name="" href="#"></a> 사용법</h3>
 <h4>
-<a class="title-link" name="changing-channels" href="#changing-channels"></a> Changing channels</h4>
-<p>Changing channels can be done by calling the <code>media_player.play_media</code> service
-with the following payload:</p>
+<a class="title-link" name="-" href="#-"></a> 채널 전환</h4>
+<p>다음 페이로드로 <code>media_player.play_media</code> 서비스를 호출하여 채널을 변경할 수 있습니다.</p>
 <pre><code class="language-javascript">{
   "entity_id": "media_player.office_tv",
   "media_content_id": "590",
@@ -254,20 +256,20 @@ with the following payload:</p>
 }
 </code></pre>
 <h4>
-<a class="title-link" name="selecting-a-source" href="#selecting-a-source"></a> Selecting a source</h4>
-<p>Source selection is not yet implemented.</p>
+<a class="title-link" name="--selecting-a-source" href="#--selecting-a-source"></a> 소스 선택 (Selecting a source)</h4>
+<p>소스 선택이 아직 구현되지 않았습니다.</p>
 <h3>
 <a class="title-link" name="hassio" href="#hassio"></a> Hass.io</h3>
-<p>No additional actions are required</p>
+<p>추가 조치가 필요하지 않습니다</p>
 <h3>
 <a class="title-link" name="docker" href="#docker"></a> Docker</h3>
-<p>No additional actions are required</p>
+<p>추가 조치가 필요하지 않습니다</p>
 <h3>
-<a class="title-link" name="other-install-methods" href="#other-install-methods"></a> Other install methods</h3>
-<p>You will need to install the <code>websocket-client</code> Python package in your Home Assistant install. This will probably be done with:</p>
+<a class="title-link" name="--" href="#--"></a> 다른 설치 방법</h3>
+<p>홈어시스턴트 설치에 <code>websocket-client</code> Python 패키지를 설치해야합니다. 이는 아마도 다음과 같이 이루어질 것입니다 :</p>
 <pre><code class="language-bash">pip3 install websocket-client
 </code></pre>
-<p>Remembering to activate your venv if you’re using a venv install.</p>
+<p>venv 설치를 사용하는 경우 venv를 활성화하는 것을 기억하십시오.</p>
 
 
 </article>

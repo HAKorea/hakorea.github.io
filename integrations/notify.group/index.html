@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Notify Group - 홈어시스턴트</title>
+    <title>그룹 알림(notify group) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup the notify group platform.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/notify.group/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Notify Group">
+    <meta property="og:title" content="그룹 알림(notify group)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/notify.group/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Notify Group">
+    <meta name="twitter:title" content="그룹 알림(notify group)">
     <meta name="twitter:description" content="Instructions on how to setup the notify group platform.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,15 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Notify Group
+      그룹 알림(notify group)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>group</code> notification platform allows you to combine multiple <code>notify</code> platforms into a single service.</p>
+  <p><code>group</code> 알림 플랫폼을 사용하면 여러 <code>notify</code> 플랫폼을 단일 서비스로 결합 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<a class="title-link" name="" href="#"></a> 설정</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NAME_OF_NOTIFIER_GROUP
@@ -122,27 +122,28 @@ notify:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Setting the parameter <code>name</code> sets the name of the group.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p><code>name</code> 파라미터를 설정하면 그룹의 이름이 설정됩니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="services" href="#services"></a> services</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>A list of all the services to be included in the group.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>그룹에 포함할 모든 서비스 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="service" href="#service"></a> service</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The service part of an entity ID, e.g. if you use <code>notify.html5</code> normally, just put <code>html5</code>. Note that you must put everything in lower case here. Although you might have capitals written in the actual notification services!</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>엔티티 ID의 서비스 부분 (예: <code>notify.html5</code>를 정상적으로 사용하려면 <code>html5</code>를 넣습니다.). 여기에 모든 것을 소문자로 입력해야합니다. 실제 알림 서비스에 대문자를 쓸 수도 있습니다!</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="data" href="#data"></a> data</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A dictionary containing parameters to add to all notify payloads. This can be anything that is valid to use in a payload, such as <code>data</code>, <code>message</code>, <code>target</code> or <code>title</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>모든 notify 페이로드에 추가할 매개 변수가 포함 된 사전(dictionary). 이는 <code>data</code>, <code>message</code>, <code>target</code> 혹은 <code>title</code>과 같이 페이로드에 사용하기에 유효한 모든 것이 될 수 있습니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="example" href="#example"></a> Example</h2>
-<p>An example on how to use it in an automation:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>An example on how to use it in an automation:
+자동화에서 사용하는 방법에 대한 예 :</p>
 <pre><code class="language-yaml">action:
   service: notify.NAME_OF_NOTIFIER_GROUP
   data:

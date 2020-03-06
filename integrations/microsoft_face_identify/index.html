@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Microsoft Face Identify - 홈어시스턴트</title>
+    <title>Microsoft 안면 식별 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Microsoft Face Identify into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/microsoft_face_identify/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Microsoft Face Identify">
+    <meta property="og:title" content="Microsoft 안면 식별">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/microsoft_face_identify/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Microsoft Face Identify">
+    <meta name="twitter:title" content="Microsoft 안면 식별">
     <meta name="twitter:description" content="Instructions on how to integrate Microsoft Face Identify into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Microsoft Face Identify
+      Microsoft 안면 식별
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>microsoft_face_identify</code> image processing platform lets you use
-<a href="https://www.microsoft.com/cognitive-services/en-us/" rel="external nofollow">Microsoft Face identify</a>
-API through Home Assistant. This platform allow you do identify persons on
-camera and fire an event with attributes.</p>
-<p>Please refer to the <a href="/integrations/microsoft_face/">Microsoft Face component</a> configuration on
-how to setup the API key.</p>
-<p>For using the result inside an automation rule,
-take a look at the <a href="/integrations/image_processing/">Image Processing component</a> page.</p>
+  <p><code>microsoft_face_identify</code> 이미지 처리 플랫폼을 사용하면 Home Assistant를 통해 <a href="https://www.microsoft.com/cognitive-services/en-us/" rel="external nofollow">Microsoft Face identify</a> API를 사용할 수 있습니다. 이 플랫폼을 사용하면 카메라의 인물을 식별하고 속성이 있는 이벤트를 실행할 수 있습니다.</p>
+<p>API 키 설정 방법에 대해서는 <a href="/integrations/microsoft_face/">Microsoft Face component</a> 설정을 참조하십시오.</p>
+<p>자동화 규칙 내에서 결과를 사용하려면 <a href="/integrations/image_processing/">Image Processing component</a>페이지 를 보십시오.</p>
 <div class="note">
-<p>The free version of the Microsoft Face identify API limits the number of requests possible per month. Therefore, it is strongly recommended that you limit the <code>scan_interval</code> when setting up an instance of this entity as detailed on the main <a href="/integrations/image_processing/">Image Processing component</a> page.</p>
+<p>무료 버전의 Microsoft Face 식별 API는 한 달에 가능한 요청 수를 제한합니다. 따라서 기본 <a href="/integrations/image_processing/">Image Processing component</a> 페이지에 설명 된대로 이 엔티티의 인스턴스를 설정할 때 <code>scan_interval</code> 을 제한하는 것이 좋습니다.</p>
 </div>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
+<a class="title-link" name="" href="#"></a> 설정</h3>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 image_processing:
   - platform: microsoft_face_identify
@@ -129,12 +124,12 @@ image_processing:
   <dl class="">
 <dt>
 <a class="title-link" name="group" href="#group"></a> group</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Micrsoft face group to detect person from it.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Micrsoft 얼굴 그룹에서 사람을 감지.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="confidence" href="#confidence"></a> confidence</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The minimum of confidence in percent to process with Home Assistant.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트로 처리할 수있는 최소 신뢰 백분율입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -142,16 +137,16 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="source" href="#source"></a> source</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>List of image sources.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지 소스 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>A camera entity id to get picture from.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>사진을 가져 오는 카메라 엔티티 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>This parameter allows you to override the name of your <code>image_processing</code> entity.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 <code>image_processing</code> 엔티티의 이름을 대체 할 수 있습니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl>

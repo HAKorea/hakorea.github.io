@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>OpenSky Network - 홈어시스턴트</title>
+    <title>OpenSky Network(세계항공기추적) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate OpenSky Network into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/opensky/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="OpenSky Network">
+    <meta property="og:title" content="OpenSky Network(세계항공기추적)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/opensky/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="OpenSky Network">
+    <meta name="twitter:title" content="OpenSky Network(세계항공기추적)">
     <meta name="twitter:description" content="Instructions on how to integrate OpenSky Network into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,51 +97,51 @@
   
   <header>
     <h1 class="title indent">
-      OpenSky Network
+      OpenSky Network(세계항공기추적)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>opensky</code> sensor allows one to track overhead flights in a given region. It uses crowd-sourced data from the <a href="https://opensky-network.org/" rel="external nofollow">OpenSky Network</a> public API. It will also fire Home Assistant events when flights enter and exit the defined region.</p>
+  <p><code>opensky</code> 센서를 사용하면 특정 지역의 비행을 추적할 수 있습니다. <a href="https://opensky-network.org/" rel="external nofollow">OpenSky Network</a> 공개 API의 크라우드 소싱 데이터를 사용합니다. 항공편이 정의된 지역으로 들어오고 나갈 때 홈어시스턴트 이벤트도 시작합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: opensky
     radius: 10
 </code></pre>
-<p>Configuration options for the OpenSky Network sensor:</p>
+<p>OpenSky Network 센서의 설정 옵션:</p>
 <ul>
 <li>
-<strong>radius</strong> (<em>Required</em>): Radius of region to monitor, in kilometers.</li>
+<strong>radius</strong> (<em>Required</em>): 모니터링 할 영역의 반경 (킬로미터).</li>
 <li>
-<strong>latitude</strong> (<em>Optional</em>): Region latitude. Defaults to home zone latitude.</li>
+<strong>latitude</strong> (<em>Optional</em>): 지역 위도. Home zone 위도가 기본값.</li>
 <li>
-<strong>longitude</strong> (<em>Optional</em>): Region longitude. Defaults to home zone longitude.</li>
+<strong>longitude</strong> (<em>Optional</em>): 지역 경도. Home zone 경도가 기본값.</li>
 <li>
-<strong>altitude</strong> (<em>Optional</em>): The maximum altitude (in meters) for planes to be detected in, 0 sets it to unlimited. Defaults to 0).</li>
+<strong>altitude</strong> (<em>Optional</em>): 비행기를 감지 할 수있는 최대 고도 (미터), 0은 무제한입니다. 기본값은 0입니다.</li>
 <li>
-<strong>name</strong> (<em>Optional</em>): Sensor name. Defaults to opensky.</li>
+<strong>name</strong> (<em>Optional</em>): 센서 이름. 기본적값은 opensky.</li>
 </ul>
 <h2>
-<a class="title-link" name="events" href="#events"></a> Events</h2>
+<a class="title-link" name="" href="#"></a> 이벤트</h2>
 <ul>
 <li>
-<strong>opensky_entry</strong>: Fired when a flight enters the region.</li>
+<strong>opensky_entry</strong>: 비행이 지역에 들어 오면 시작.</li>
 <li>
-<strong>opensky_exit</strong>: Fired when a flight exits the region.</li>
+<strong>opensky_exit</strong>: 비행기가 지역을 나가면 시작.</li>
 </ul>
-<p>Both events have three attributes:</p>
+<p>두 이벤트 모두 세 가지 속성이 있습니다.</p>
 <ul>
 <li>
-<strong>sensor</strong>: Name of <code>opensky</code> sensor that fired the event.</li>
+<strong>sensor</strong>: 이벤트를 시작한 <code>opensky</code> 센서의 이름</li>
 <li>
-<strong>callsign</strong>: Callsign of the flight.</li>
+<strong>callsign</strong>: 비행기의 Callsign.</li>
 <li>
-<strong>altitude</strong>: Altitude of the flight in meters.</li>
+<strong>altitude</strong>: 미터 단위의 비행 고도.</li>
 </ul>
-<p>To receive notifications of the entering flights using the <a href="https://companion.home-assistant.io/">Home Assistant Companion App</a>, add the following lines to your <code>configuration.yaml</code> file:</p>
+<p><a href="https://companion.home-assistant.io/">Home Assistant Companion App</a>을 사용하여 비행기에 대한 알림을 받으려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml">automation:
   - alias: 'Flight entry notification'
     trigger:

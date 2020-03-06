@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Camera Proxy - 홈어시스턴트</title>
+    <title>카메라 프록시 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a camera proxy within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/proxy/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Camera Proxy">
+    <meta property="og:title" content="카메라 프록시">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/proxy/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Camera Proxy">
+    <meta name="twitter:title" content="카메라 프록시">
     <meta name="twitter:description" content="Instructions on how to integrate a camera proxy within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Camera Proxy
+      카메라 프록시
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>proxy</code> camera platform allows you to pass another camera’s output through post-processing routines and generate a new camera with the post-processed output.</p>
-<p>The current post-processing supports resizing and/or cropping the image/MJPEG as well as limiting the maximum refresh rate.</p>
-<p>The current proxy capabilities are intended to reduce the camera bandwidth for slower internet connections.</p>
+  <p><code>proxy</code> 카메라 플랫폼을 사용하면 사후처리 루틴을 통해 다른 카메라의 출력을 전달하고 사후처리된 출력으로 새 카메라를 생성 할 수 있습니다.</p>
+<p>현재 사후처리는 이미지/MJPEG의 크기조정 및 혹은 자르기를 지원할 뿐만아니라 최대 화면 주사율을 제한합니다.</p>
+<p>현재 프록시 기능은 느린 인터넷 연결을 위해 카메라 대역폭을 줄이기 위한 것입니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this camera in your installation, you must first have an existing working camera configured in Home Assistant.  Next, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시이 카메라를 활성화하려면 먼저 홈어시스턴트에 기존 작동 카메라가 구성되어 있어야합니다. 다음으로 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: proxy
@@ -122,16 +122,16 @@ camera:
   <dl class="">
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The ID of another Home Assistant camera to post-process.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>후 처리 할 다른 홈 어시스턴트 카메라의 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>This parameter allows you to override the name of your camera.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 카메라 이름을 무시할 수 있습니다</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mode" href="#mode"></a> mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The operating mode, either <code>resize</code> or <code>crop</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>작동 모드. <code>resize</code> 혹은 <code>crop</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -139,24 +139,24 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="max_image_width" href="#max_image_width"></a> max_image_width</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum width of single images taken from the camera (aspect ratio will be maintained on resize processing).</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에서 촬영한 단일 이미지의 최대 너비 (가로 세로 크기 조정시 가로 세로 비율이 유지됨)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_image_height" href="#max_image_height"></a> max_image_height</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum height of single images taken from the camera, only used for crop operations. If not provided, the original height is assumed by default.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에서 촬영한 단일 이미지의 최대 높이는 자르기 작업에만 사용됩니다. 제공하지 않으면 기본적으로 원래 높이로 적용합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_stream_width" href="#max_stream_width"></a> max_stream_width</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum width of the MJPEG stream from the camera (aspect ratio will be maintained on resize processing).</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에서 MJPEG 스트림의 최대 너비입니다 (화면 크기 조정시 가로 세로 비율이 유지됨).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_stream_height" href="#max_stream_height"></a> max_stream_height</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The maximum height of the MJPEG stream from the camera, only used for crop operations. If not provided, the original height is assumed by default.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에서 MJPEG 스트림의 최대 높이는 자르기 작업에만 사용됩니다. 제공하지 않으면 기본적으로 원래 높이로 적용합니다</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="image_top" href="#image_top"></a> image_top</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The top (y) coordinate to be used as a starting point for crop operations.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>자르기 작업의 시작점으로 사용되는 상단 (y) 좌표입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -165,7 +165,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="image_left" href="#image_left"></a> image_left</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The left (x) coordinate to be used as a starting point for crop operations.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>자르기 작업의 시작점으로 사용되는 왼쪽 (x) ​​좌표입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -174,7 +174,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="image_quality" href="#image_quality"></a> image_quality</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The quality level used for resulting JPEG for snapshots.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>스냅샷의 JPEG 결과값에 사용되는 품질 수준.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -183,7 +183,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="stream_quality" href="#stream_quality"></a> stream_quality</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The quality level used for resulting MJPEG streams.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>MJPEG 스트림의 결과값에 사용되는 품질 수준.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -191,12 +191,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="image_refresh_rate" href="#image_refresh_rate"></a> image_refresh_rate</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>The minimum time in seconds between generating successive image snapshots.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>연속 이미지 스냅샷 생성 사이의 최소 시간 (초)입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="force_resize" href="#force_resize"></a> force_resize</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Resize the image even if the resulting image would take up more bandwidth than the original.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>결과 이미지가 원본보다 더 많은 대역폭을 차지하더라도 이미지 크기를 조정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -205,7 +205,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="cache_images" href="#cache_images"></a> cache_images</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Preserve the last image and re-send in the case the camera is not responding.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>마지막 이미지를 유지하고 카메라가 응답하지 않는 경우 다시 전송하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -214,8 +214,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>Example of using two Camera proxies along with a Foscam camera:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>Foscam 카메라와 함께 두 개의 카메라 프록시를 사용하는 예 :</p>
 <pre><code class="language-yaml">camera:
   - platform: foscam
     ip: 192.168.1.10

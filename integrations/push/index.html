@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Push - 홈어시스턴트</title>
+    <title>푸시 카메라(push) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions how to use Push Camera within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/push/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Push">
+    <meta property="og:title" content="푸시 카메라(push)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/push/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Push">
+    <meta name="twitter:title" content="푸시 카메라(push)">
     <meta name="twitter:description" content="Instructions how to use Push Camera within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,24 +97,24 @@
   
   <header>
     <h1 class="title indent">
-      Push
+      푸시 카메라(push)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>push</code> camera platform allows you to integrate images sent over HTTP POST to Home Assistant as a camera. External applications/daemons/scripts are therefore able to “stream” images through Home Assistant.</p>
-<p>Optionally the Push Camera can <strong>buffer</strong> a given number of images, creating an animation of the detected motion after the event has been recorded.</p>
-<p>Images are cleared on new events, and events are separated by a soft (configurable) <strong>timeout</strong>.</p>
+  <p><code>push</code> 카메라 플랫폼을 사용하면 HTTP POST를 통해 전송된 이미지를 카메라로 Home Assistant에 연동할 수 있습니다. 따라서 외부 applications/daemons/scripts는 Home Assistant를 통해 이미지를 “stream”할 수 있습니다.</p>
+<p>선택적으로 푸시 카메라는 여러 이미지를 <strong>buffer</strong>하여 이벤트가 기록된 후 감지된 동작의 애니메이션을 만들 수 있습니다.</p>
+<p>새 이벤트에서 이미지가 지워지고 이벤트는 소프트(설정가능한) <strong>timeout</strong>로 분리됩니다.</p>
 <h2>
-<a class="title-link" name="integration-with-motioneye" href="#integration-with-motioneye"></a> Integration with motionEye</h2>
-<p>The <code>push</code> camera can as an example be used with <a href="https://github.com/ccrisan/motioneye/wiki" rel="external nofollow">motionEye</a> a web frontend for the motion daemon. motionEye is usually configured to save/record files <em><strong>only</strong></em> when motion is detected. It provides a hook to run a command whenever an image is saved, which can be used together with cURL to send the motion detected images to the <code>push</code> camera, as shown in this example:</p>
-<p>In motionEye, under <strong>File Storage -&gt; Run A Command</strong> type in:</p>
+<a class="title-link" name="motioneye-" href="#motioneye-"></a> motionEye와 연동</h2>
+<p><code>push</code> 카메라는 모션 데몬의 웹 프론트엔드 <a href="https://github.com/ccrisan/motioneye/wiki" rel="external nofollow">motionEye</a>와 함께 사용할 수 있습니다. motionEye는 일반적으로 움직임이 감지될 때 <em><strong>파일만</strong></em>을 저장/기록하도록 설정됩니다. 이미지를 저장할 때마다 명령을 실행하는 후크를 제공합니다. 이 예제는 cURL과 함께 사용하여 모션 감지 이미지를 <code>push</code> 카메라로 전송합니다 (아래 예 참조).</p>
+<p>motionEye에서, <strong>File Storage -&gt; Run A Command</strong> 아래 다음을 입력합니다. :</p>
 <pre><code class="language-bash">curl -X POST -F "image=@%f" http://my.hass.server.com:8123/api/webhoo\k/my_custom_webhook_id
 # inserting a backslash in the middle of "webhook" stops Motion to move the command to a webhook
 </code></pre>
-<p>Optionally configure motionEye to save only motion triggered images by going into <strong>Still Images -&gt; Capture Mode</strong> and setting <strong>Motion Triggered</strong>. Tune your preferences under <strong>Motion Detection</strong>.</p>
-<p>In this setup, you can configure the push camera to continuously replay the last motion triggered event using a configuration such as:</p>
+<p>선택적으로 <strong>Still Images -&gt; Capture Mode</strong>로 이동하여 <strong>Motion Triggered</strong>를 설정하여 모션 트리거 이미지만 저장하도록 motionEye를 설정하십시오. <strong>Motion Detection</strong>에서 환경 설정을 조정하십시오.</p>
+<p>이 설정에서는 다음과 같은 설정을 사용하여 마지막 모션 트리거 이벤트를 지속적으로 재생하도록 푸시 카메라를 구성 할 수 있습니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: push
     name: MotionEye Outdoor
@@ -123,8 +123,8 @@
     webhook_id: my_custom_webhook_id
 </code></pre>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this camera in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 이 카메라를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: push

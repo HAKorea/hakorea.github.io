@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Serial - 홈어시스턴트</title>
+    <title>시리얼(serial) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate data from serial connected sensors into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/serial/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Serial">
+    <meta property="og:title" content="시리얼(serial)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/serial/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Serial">
+    <meta name="twitter:title" content="시리얼(serial)">
     <meta name="twitter:description" content="Instructions on how to integrate data from serial connected sensors into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Serial
+      시리얼(serial)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>serial</code> sensor platform is using the data provided by a device connected to the serial port of the system where Home Assistant is running. With <a href="http://ser2net.sourceforge.net/" rel="external nofollow"><code>ser2net</code></a> and <a href="http://www.dest-unreach.org/socat/" rel="external nofollow"><code>socat</code></a> would it also work for sensors connected to a remote system.</p>
-<p>To check what kind of data is arriving at your serial port, use a command-line tool like <code>minicom</code> or <code>picocom</code> on Linux, on a macOS you can use <code>screen</code> or on Windows <code>putty</code>.</p>
+  <p><code>serial</code> 센서 플랫폼은 Home Assistant가 실행중인 시스템의 직렬 포트에 연결된 장치가 제공한 데이터를 사용합니다.
+<a href="http://ser2net.sourceforge.net/" rel="external nofollow"><code>ser2net</code></a> 및 <a href="http://www.dest-unreach.org/socat/" rel="external nofollow"><code>socat</code></a>을 사용하면 원격 시스템에 연결된 센서에서도 작동합니다.</p>
+<p>직렬 포트에 어떤 종류의 데이터가 도착하는지 확인하려면 Linux에서 <code>minicom</code> 또는 <code>picocom</code>과 같은 명령 줄 도구를 사용하십시오. macOS에서는 <code>screen</code> 또는 Windows <code>putty</code>를 사용할 수 있습니다.</p>
 <pre><code class="language-bash">sudo minicom -D /dev/ttyACM0
 </code></pre>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To setup a serial sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>시리얼 센서를 설치하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: serial
@@ -143,16 +144,16 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="value_template-for-template-sensor" href="#value_template-for-template-sensor"></a> value_template for Template sensor</h2>
+<a class="title-link" name="---value_template" href="#---value_template"></a> 템플릿 센서를 위한 value_template</h2>
 <h3>
 <a class="title-link" name="tmp36" href="#tmp36"></a> TMP36</h3>
 <pre><code class="language-yaml">"{{ (((states('sensor.serial_sensor') | float * 5 / 1024 ) - 0.5) * 100) | round(1) }}"
 </code></pre>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 사례</h2>
 <h3>
 <a class="title-link" name="arduino" href="#arduino"></a> Arduino</h3>
-<p>For controllers of the Arduino family, a possible sketch to read the temperature and the humidity could look like the sample below.The returned data is in JSON format and can be split into the individual sensor values using a <a href="/docs/configuration/templating/#processing-incoming-data">template</a>.</p>
+<p>Arduino 제품군 컨트롤러의 경우 온도와 습도를 읽을 수있는 스케치는 아래 샘플과 같습니다. 반환된 데이터는 JSON 형식이며 <a href="/docs/configuration/templating/#processing-incoming-data">template</a>을 사용하여 개별 센서 값으로 분할할 수 있습니다.</p>
 <pre><code class="language-c">#include &lt;ArduinoJson.h&gt;
 
 void setup() {
@@ -172,12 +173,12 @@ void loop() {
 }
 </code></pre>
 <h3>
-<a class="title-link" name="devices-returning-multiple-sensors-as-a-text-string" href="#devices-returning-multiple-sensors-as-a-text-string"></a> Devices returning multiple sensors as a text string</h3>
-<p>For devices that return multiple sensors as a concatenated string of values with a delimiter, (i.e., the returned string is not JSON formatted) you can make several template sensors, all using the same serial response. For example, a stream from the <a href="https://www.sparkfun.com/products/retired/9800" rel="external nofollow">Sparkfun USB Weather Board</a> includes temperature, humidity and barometric pressure within it returned text string. Sample returned data:</p>
+<a class="title-link" name="-----" href="#-----"></a> 여러 센서를 텍스트 문자열로 반환하는 장치</h3>
+<p>구분기호(delimiter)를 사용하여 여러 센서를 연결된 값 문자열로 반환하는 장치의 경우 (즉, 반환된 문자열이 JSON 형식이 아님) 모두 동일한 직렬 응답을 사용하여 여러 템플릿 센서를 만들 수 있습니다. 예를 들어 <a href="https://www.sparkfun.com/products/retired/9800" rel="external nofollow">Sparkfun USB Weather Board</a>의 스트림에는 반환된 텍스트 문자열 내에 온도, 습도 및 기압이 포함됩니다. 샘플 반환 데이터 :</p>
 <pre><code class="language-c">$,24.1,50,12.9,1029.83,0.0,0.00,*
 $,24.3,51,12.8,1029.76,0.0,0.00,*
 </code></pre>
-<p>To parse this into individual sensors, split using the comma delimiter and then create a template sensor for each item of interest.</p>
+<p>이를 개별 센서로 구문 분석하려면 쉼표 구분기호(delimiter)를 사용하여 분할한 다음 관심있는 각 항목에 대한 템플리트 센서를 작성하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: serial
@@ -201,7 +202,7 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="digispark-usb-development-board" href="#digispark-usb-development-board"></a> Digispark USB Development Board</h3>
-<p>This <a href="/blog/2017/10/23/simple-analog-sensor/">blog post</a> describes the setup with a Digispark USB Development Board.</p>
+<p>이 <a href="/blog/2017/10/23/simple-analog-sensor/">blog post</a>은 Digispark USB 개발 보드를 사용한 설정에 대해 설명합니다.</p>
 
 
 </article>
