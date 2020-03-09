@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Yamaha Network Receivers - 홈어시스턴트</title>
+    <title>야마하 Network Receivers - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Yamaha Network Receivers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/yamaha/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Yamaha Network Receivers">
+    <meta property="og:title" content="야마하 Network Receivers">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/yamaha/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Yamaha Network Receivers">
+    <meta name="twitter:title" content="야마하 Network Receivers">
     <meta name="twitter:description" content="Instructions on how to integrate Yamaha Network Receivers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,23 +97,23 @@
   
   <header>
     <h1 class="title indent">
-      Yamaha Network Receivers
+      야마하 Network Receivers
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>yamaha</code> platform allows you to control <a href="https://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx" rel="external nofollow">Yamaha Network Receivers</a> from Home Assistant.</p>
-<p>Supported devices:</p>
+  <p><code>yamaha</code> 플랫폼을 사용하면 Home Assistant에서 <a href="https://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx" rel="external nofollow">Yamaha Network Receivers</a>를 제어할 수 있습니다.</p>
+<p>지원 기기들 :</p>
 <ul>
 <li><a href="https://www.yamaha.com/cchtr4065/" rel="external nofollow">HTR-4065</a></li>
 <li><a href="https://ca.yamaha.com/en/products/audio_visual/av_receivers_amps/rx-v473/specs.html" rel="external nofollow">RX-V473</a></li>
 <li><a href="https://ca.yamaha.com/en/products/audio_visual/av_receivers_amps/rx-v573/specs.html" rel="external nofollow">RX-V573</a></li>
 <li><a href="https://ca.yamaha.com/en/products/audio_visual/av_receivers_amps/rx-v673/specs.html" rel="external nofollow">RX-V673</a></li>
 <li><a href="https://ca.yamaha.com/en/products/audio_visual/av_receivers_amps/rx-v773/specs.html" rel="external nofollow">RX-V773</a></li>
-<li>And more</li>
+<li>이외</li>
 </ul>
-<p>To add a Yamaha Network Receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>Yamaha Network Receiver를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: yamaha
@@ -149,34 +149,25 @@ media_player:
 </dl>
 </div>
 <h3>
-<a class="title-link" name="discovery-notes" href="#discovery-notes"></a> Discovery notes</h3>
+<a class="title-link" name="---" href="#---"></a> 장치 검색시 알아둘 점</h3>
 <ul>
-<li>If the <code>discovery</code> integration is enabled, all units on the network
-will be discovered using UPNP.</li>
-<li>For receivers that support more than one zone, Home Assistant will
-add one media player per zone supported by the player, named “$name
-Zone 2” and “$name Zone 3”.</li>
-<li>If you specify <code>host</code> manually, you <strong>must</strong> enable network standby
-on your receiver, or else startup of Home Assistant will hang if you
-have your receiver switched off.</li>
-<li>In some cases, auto-discovery fails due to a known bug in the
-receiver’s firmware. It is possible to manually specify the
-receiver’s IP address or via its hostname (if it is discoverable by
-your DNS) then.</li>
+<li>
+<code>discovery</code> 통합구성요소가 활성화 된 경우 UPNP를 사용하여 네트워크의 모든 장치를 검색합니다.</li>
+<li>둘 이상의 영역(zone)을 지원하는 Receiver의 경우 Home Assistant는 플레이어가 지원하는 영역 당 “$ name Zone 2”, “$ name Zone 3”이라는 하나의 미디어 플레이어를 추가합니다.</li>
+<li>
+<code>host</code>를 수동으로 지정하면 Receiver에서 네트워크 대기를 활성화 <strong>해야합니다</strong>, 그렇지 않으면 Receiver를 끈 경우 Home Assistant 시작이 중단됩니다.</li>
+<li>경우에 따라 Receiver 펌웨어의 알려진 버그로 인해 자동 검색이 실패합니다. Receiver의 IP 주소 또는 호스트 이름 (DNS에서 검색 할 수있는 경우)을 통해 수동으로 지정할 수 있습니다.</li>
 </ul>
 <h3>
-<a class="title-link" name="supported-operations" href="#supported-operations"></a> Supported operations</h3>
+<a class="title-link" name="-" href="#-"></a> 지원 동작</h3>
 <ul>
-<li>Media players created by yamaha support powering on/off, mute,
-volume control and source selection. Playback controls, for instance
-play and stop are available for sources that supports it.</li>
-<li>The <code>play_media</code> service is implemented for <code>NET RADIO</code> source
-only. The <code>media_id</code> is a <code>&gt;</code> separated string of the menu path on
-the vtuner service. For instance <code>Bookmarks&gt;Internet&gt;WAMC 90.3 FM</code>.</li>
+<li>야마하가 만든 미디어 플레이어는 전원 켜기/끄기, 음소거, 볼륨 조절 및 소스 선택을 지원합니다. 재생 및 정지와 같은 재생 컨트롤은 이를 지원하는 소스들에서 사용할 수 있습니다.</li>
+<li>
+<code>play_media</code> 서비스는 <code>NET RADIO</code> 소스에 대해서만 구현됩니다. <code>media_id</code>는 vtuner 서비스에서 메뉴 경로의 <code>&gt;</code>로 구분된 문자열입니다. 예를 들어 <code>Bookmarks&gt;Internet&gt;WAMC 90.3 FM</code>입니다.</li>
 </ul>
 <h3>
-<a class="title-link" name="example-configuration" href="#example-configuration"></a> Example configuration</h3>
-<p>A full configuration example will look like the sample below:</p>
+<a class="title-link" name="-" href="#-"></a> 설정 사례</h3>
+<p>전체 설정 예는 아래 샘플과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: yamaha
@@ -193,10 +184,8 @@ media_player:
       Main_Zone: "Family Room"
 </code></pre>
 <h3>
-<a class="title-link" name="example-play_media-script" href="#example-play_media-script"></a> Example play_media script</h3>
-<p>The <code>play_media</code> function can be used in scripts easily to build media
-player presets. When done in scripts, the sequence will also allow you
-to set volume per source.</p>
+<a class="title-link" name="play_media-script-" href="#play_media-script-"></a> play_media script 예시</h3>
+<p>스크립트에서 <code>play_media</code> 기능을 사용하여 미디어 플레이어 사전 설정을 쉽게 구축 할 수 있습니다. 스크립트에서 완료되면 시퀀스를 통해 소스 마다 볼륨을 설정할 수도 있습니다.</p>
 <pre><code class="language-yaml"># Example play_media script
 #
 # This is for an environment where Zone 2 of the receiver named
@@ -220,8 +209,8 @@ script:
 
 </code></pre>
 <h3>
-<a class="title-link" name="service-enable_output" href="#service-enable_output"></a> Service enable_output</h3>
-<p>Enable or disable an output port (HDMI) on the receiver.</p>
+<a class="title-link" name="enable_output-" href="#enable_output-"></a> enable_output 서비스</h3>
+<p>수신기에서 출력 포트(HDMI)를 활성화 또는 비활성화합니다.</p>
 <table>
 <thead>
 <tr>

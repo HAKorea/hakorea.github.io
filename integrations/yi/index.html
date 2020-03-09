@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Yi Home Cameras - 홈어시스턴트</title>
+    <title>Yi 홈 카메라 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/yi/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Yi Home Cameras">
+    <meta property="og:title" content="Yi 홈 카메라">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/yi/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Yi Home Cameras">
+    <meta name="twitter:title" content="Yi 홈 카메라">
     <meta name="twitter:description" content="Instructions on how to integrate a video feed (via FFmpeg) as a camera within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,52 +97,50 @@
   
   <header>
     <h1 class="title indent">
-      Yi Home Cameras
+      Yi 홈 카메라
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>yi</code> camera platform allows you to utilize <a href="https://www.yitechnology.com/" rel="external nofollow">Yi Home Cameras</a> within Home Assistant. Specifically, this platform supports the line of Yi Home Cameras that are based on the Hi3518e Chipset. This includes:</p>
+  <p><code>yi</code> 카메라 플랫폼을 사용하면 Home Assistant 내에서 <a href="https://www.yitechnology.com/" rel="external nofollow">Yi Home Cameras</a>를 활용할 수 있습니다. 특히 이 플랫폼은 Hi3518e 칩셋을 기반으로하는 Yi Home 카메라 제품군을 지원합니다. 여기에는 다음이 포함됩니다.</p>
 <ul>
 <li>Yi Home 17CN / 27US / 47US</li>
 <li>Yi 1080p Home</li>
 <li>Yi Dome</li>
 <li>Yi 1080p Dome</li>
 </ul>
-<p>To successfully implement this platform, the Home Assistant host should be capable of multiple simultaneous reads. For every concurrent Home Assistant user, a connection will be made to the camera every 10 seconds. This should normally not be a problem.</p>
+<p>이 플랫폼을 성공적으로 구현하려면 Home Assistant 호스트가 여러개의 동시 읽기를 수행 할 수 있어야합니다. 동시 홈어시스턴트 사용자마다 10 초마다 카메라에 연결됩니다. 이는 일반적으로 문제가 되지 않습니다.</p>
 <h2>
-<a class="title-link" name="preparing-the-device" href="#preparing-the-device"></a> Preparing the Device</h2>
+<a class="title-link" name="-" href="#-"></a> 장치 준비</h2>
 <h3>
-<a class="title-link" name="installing-alternative-firmware" href="#installing-alternative-firmware"></a> Installing Alternative Firmware</h3>
-<p>In order to integrate the camera with Home Assistant, it is necessary to install a custom firmware on the device. Instructions for doing so can be found via the <a href="https://github.com/shadow-1/yi-hack-v3" rel="external nofollow">yi-hack-v3 GitHub project</a> or if you have a 2019 version camera <a href="https://github.com/roleoroleo/yi-hack-6FUS_4.5.0" rel="external nofollow">yi-hack-6FUS_4.5.0 GitHub project</a>.</p>
-<p>Once installed, please ensure that you have enabled FTP and Telnet on your device.</p>
+<a class="title-link" name="--" href="#--"></a> 대체 펌웨어 설치</h3>
+<p>카메라를 홈어시스턴트와 연동하려면 장치에 커스텀 펌웨어를 설치해야합니다. 이를 위한 지침은 <a href="https://github.com/shadow-1/yi-hack-v3" rel="external nofollow">yi-hack-v3 GitHub 프로젝트</a> 또는 2019 버전 카메라가있는 경우 <a href="https://github.com/roleoroleo/yi-hack-6FUS_4.5.0" rel="external nofollow">yi-hack- 6FUS_4.5.0 GitHub 프로젝트</a>.</p>
+<p>설치한 후에는 장치에서 FTP 및 Telnet을 활성화했는지 확인하십시오.</p>
 <div class="note warning">
-<p>Currently, version 0.1.4-beta2 of the custom firmware is the highest supported without having to make additional modifications. Firmwares higher than this version use <a href="https://www.pureftpd.org/project/pure-ftpd" rel="external nofollow">Pure-FTPd</a>, which has a bug that prevents FFmpeg from correctly rendering video files. To use higher firmware versions you must also follow <a href="https://github.com/shadow-1/yi-hack-v3/issues/129#issuecomment-361723075" rel="external nofollow">this workaround</a> to revert back to ftpd.</p>
+<p>현재, 커스텀 펌웨어 버전 0.1.4-beta2는 추가 수정없이 지원되는 최고 수준입니다. 이 버전보다 높은 펌웨어는 FFmpeg가 비디오 파일을 올바르게 렌더링하지 못하게하는 버그가 있는데 [Pure-FTPd] (<a href="https://www.pureftpd.org/project/pure-ftpd)%EB%A5%BC" rel="external nofollow">https://www.pureftpd.org/project/pure-ftpd)를</a> 사용합니다. 더 높은 펌웨어 버전을 사용하려면 <a href="https://github.com/shadow-1/yi-hack-v3/issues/129#issuecomment-361723075" rel="external nofollow">this workaround</a>을 따라 ftpd로 되돌려 야합니다.</p>
 </div>
 <div class="note warning">
-<p>If you use a version higher than 0.1.4-beta2, you can simply solve the FTP issue by creating a symlink to <code>/tmp</code> in the <code>/home/yi-hack-v4</code> directory (the directory name can be different depending on the version which you use). For example, access the Yi camera via SSH and type command: <code>ln -s /tmp tmp</code>.</p>
+<p>0.1.4-beta2보다 높은 버전을 사용한다면 <code>/home/yi-hack-v4</code> 디렉토리에 <code>/ tmp</code>에 대한 심볼릭 링크를 만들어 FTP 문제를 간단히 해결할 수 있습니다 (디렉토리 이름은 사용하는 버전). 예를 들어 SSH를 통해 Yi 카메라에 액세스하고 <code>ln -s /tmp tmp</code> 명령을 입력하십시오.</p>
 </div>
 <div class="note warning">
-Raspbian users: don't forget to install ffmpeg support on your platform, otherwise, you'll not see video.
+Raspbian 사용자 : 플랫폼에 ffmpeg 지원을 설치하는 것을 잊지 마십시오. 그렇지 않으면 비디오가 표시되지 않습니다.
 </div>
 <div class="note warning">
-<p>Some alternative Yi firmwares enable an experimental RTSP server, which will allow you to connect to your camera via other Home Assistant camera platforms. However, this RTSP server disables the ability to use the supremely-useful Yi Home app. In order to maintain both Home Assistant compatibility <em>and</em> the native app, this platform retrieves videos via FTP.</p>
+<p>일부 대체 Yi 펌웨어는 실험용 RTSP 서버를 활성화하여 다른 홈어시스턴트 카메라 플랫폼을 통해 카메라에 연결할 수 있습니다. 그러나 이 RTSP 서버는 가장 유용한 Yi Home 앱을 사용하는 기능을 비활성화시킵니다. 홈어시스턴트 호환성과 기본 앱을 모두 유지하기 위해 이 플랫폼은 FTP를 통해 비디오를 검색하는 것이 좋습니다.</p>
 </div>
 <h3>
-<a class="title-link" name="changing-the-ftp-password" href="#changing-the-ftp-password"></a> Changing the FTP Password</h3>
-<p>Once the custom firmware is installed, a password must be added to the FTP
-server. To do so:</p>
+<a class="title-link" name="ftp--" href="#ftp--"></a> FTP 비밀번호 변경</h3>
+<p>커스텀 펌웨어가 설치되면 FTP 서버에 비밀번호를 추가해야합니다. 그렇게 하려면 :</p>
 <ol>
 <li>Telnet into your camera: <code>telnet &lt;IP ADDRESS&gt;</code>.</li>
-<li>Enter <code>root</code> as the username and <code>&lt;blank&gt;</code> as the password.</li>
 <li>Type <code>passwd</code> and hit <code>&lt;Enter&gt;</code>.</li>
 <li>Enter your new password twice.</li>
 <li>Log out of Telnet.</li>
 </ol>
 <h2>
-<a class="title-link" name="configuring-the-platform" href="#configuring-the-platform"></a> Configuring the Platform</h2>
-<p>To enable the platform, add the following lines to your<code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 설정</h2>
+<p>플랫폼을 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml">camera:
   - platform: yi
     name: Camera
@@ -190,9 +188,9 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="image-quality" href="#image-quality"></a> Image quality</h2>
-<p>Any option supported by <a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a> can be utilized via the <code>ffmpeg_arguments</code> configuration parameter.</p>
-<p>One particularly useful adjustment deals with video size. Since Yi videos are fairly large (especially on the 1080p cameras), the following configuration will bring them down to a manageable size:</p>
+<a class="title-link" name="" href="#"></a> 화질</h2>
+<p><a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a>가 지원하는 모든 옵션은 <code>ffmpeg_arguments</code> 설정 매개 변수를 통해 활용할 수 있습니다.</p>
+<p>특히 유용한 조정 중 하나는 비디오 크기를 처리합니다. Yi 비디오는 상당히 크기 때문에 (특히 1080p 카메라에서) 다음 설정을 통해 관리 가능한 크기로 줄일 수 있습니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: yi
     name: My Camera

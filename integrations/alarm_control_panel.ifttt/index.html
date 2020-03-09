@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>IFTTT Alarm Control Panel - 홈어시스턴트</title>
+    <title>IFTTT 경보 제어판 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate IFTTT-controlled security systems into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/alarm_control_panel.ifttt/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="IFTTT Alarm Control Panel">
+    <meta property="og:title" content="IFTTT 경보 제어판">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/alarm_control_panel.ifttt/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="IFTTT Alarm Control Panel">
+    <meta name="twitter:title" content="IFTTT 경보 제어판">
     <meta name="twitter:description" content="Instructions on how to integrate IFTTT-controlled security systems into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      IFTTT Alarm Control Panel
+      IFTTT 경보 제어판
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>ifttt</code> platform allows you to integrate security systems that have no open API but can be controlled through <a href="https://ifttt.com/discover" rel="external nofollow">IFTTT</a>.</p>
-<p>This platform depends on the <a href="/integrations/ifttt/">IFTTT</a> Home Assistant integration. See the integrations documentation to set it up.</p>
+  <p><code>ifttt</code> 플랫폼을 사용하면 공개 API가 없지만 <a href="https://ifttt.com/discover" rel="external nofollow">IFTTT</a>를 통해 제어할 수 있는 보안 시스템을 연동할 수 있습니다.</p>
+<p>이 플랫폼은 <a href="/integrations/ifttt/">IFTTT</a> 홈어시스턴트 통합구성요소에 따라 다릅니다. 해당 문서를 참조하여 설정하십시오.</p>
 <div class="note">
-It is important to note that this platform fully relies on IFTTT to receive updates when the security system's state changes. Therefore, this platform shows an assumed state.
+이 플랫폼은 보안 시스템의 상태가 변경 될 때 IFTTT에 전적으로 의존하여 업데이트를 받습니다. 따라서 이 플랫폼은 가정 된 상태를 보여줍니다.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 ifttt:
   key: YOUR_WEBHOOK_KEY
@@ -184,13 +184,13 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-<p>It is strongly discouraged to use this platform when you don’t use encryption; otherwise, your API password will be send unprotected through the IFTTT Webhooks. It is advised to <a href="https://home-assistant.io/blog/2017/09/27/effortless-encryption-with-lets-encrypt-and-duckdns/">setup encryption using Let’s Encrypt</a>.</p>
+<p>암호화를 사용하지 않을 때는 이 플랫폼을 사용하지 않는 것이 좋습니다. 그렇지 않으면 API 비밀번호가 IFTTT 웹 후크를 통해 보호되지 않은 상태로 전송됩니다. <a href="https://home-assistant.io/blog/2017/09/27/effortless-encryption-with-lets-encrypt-and-duckdns/">Let’s Encrypt를 사용한 암호화 설정</a>을 권장합니다.</p>
 </div>
 <h3>
-<a class="title-link" name="required-ifttt-applets" href="#required-ifttt-applets"></a> Required IFTTT applets</h3>
-<p>Next, you will need to set up the required IFTTT applets as listed below.</p>
-<p>This platform supports the services <code>alarm_disarm</code>, <code>alarm_arm_away</code>, <code>alarm_arm_home</code> and <code>alarm_arm_night</code>. For each of these services, an IFTTT webhook will be triggered.</p>
-<p>For this system to operate correctly, the following IFTTT applets have to be setup. Obviously, if your alarm device does not support some states, no applets have to be provided for those.</p>
+<a class="title-link" name="-ifttt-" href="#-ifttt-"></a> 필요한 IFTTT 애플릿</h3>
+<p>다음으로 필요한 IFTTT 애플릿을 아래와 같이 설정해야합니다.</p>
+<p>이 플랫폼은 <code>alarm_disarm</code>,<code>alarm_arm_away</code>, <code>alarm_arm_home</code>, <code>alarm_arm_night</code> 서비스를 지원합니다. 이러한 각 서비스에 대해 IFTTT 웹 후크가 트리거됩니다.</p>
+<p>이 시스템이 올바르게 작동하려면 다음 IFTTT 애플릿을 설정해야합니다. 알람 장치가 일부 상태를 지원하지 않는 경우에는 애플릿을 제공할 필요가 없습니다.</p>
 <ul>
 <li>
 <strong>IF</strong> Webhook event <code>YOUR_DISARM_EVENT</code> is called, <strong>THEN</strong> disarm the alarm system.</li>

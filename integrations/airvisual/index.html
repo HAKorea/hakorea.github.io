@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>AirVisual - 홈어시스턴트</title>
+    <title>에어비쥬얼(AirVisual) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to use AirVisual data within Home Assistant">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/airvisual/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="AirVisual">
+    <meta property="og:title" content="에어비쥬얼(AirVisual)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/airvisual/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="AirVisual">
+    <meta name="twitter:title" content="에어비쥬얼(AirVisual)">
     <meta name="twitter:description" content="Instructions on how to use AirVisual data within Home Assistant">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,21 +97,21 @@
   
   <header>
     <h1 class="title indent">
-      AirVisual
+      에어비쥬얼(AirVisual)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>airvisual</code> sensor platform queries the <a href="https://airvisual.com/" rel="external nofollow">AirVisual</a> API for air quality data. Data can be collected via latitude/longitude or by city/state/country. The resulting information creates sensors for the Air Quality Index (AQI), the human-friendly air quality level, and the main pollutant of that area. Sensors that conform to either/both the <a href="https://www.clm.com/publication.cfm?ID=366" rel="external nofollow">U.S. and Chinese air quality standards</a> can be created.</p>
-<p>This platform requires an AirVisual API key, which can be obtained <a href="https://airvisual.com/api" rel="external nofollow">here</a>. Note that the platform was designed using the “Community” package; the “Startup” and “Enterprise” package keys should continue to function, but actual results may vary (or not work at all).</p>
-<p>The Community API key is valid for 12 months after which it will expire. You must then go back to the Airvisual website, delete your old key, create a new one following the same steps and update your configuration with the new key.</p>
+  <p><code>airvisual</code> 센서 플랫폼은 대기질 데이터에 대한 <a href="https://airvisual.com/" rel="external nofollow">AirVisual</a> API를 쿼리합니다. 위도/경도 또는 도시/주/국가를 통해 데이터를 수집 할 수 있습니다. 결과 정보는 대기질 지수(AQI), 인간 친화적 대기질 레벨 및 해당 지역의 주요 오염 물질에 대한 센서를 생성합니다. <a href="https://www.clm.com/publication.cfm?ID=366" rel="external nofollow">U.S. and Chinese air quality standards</a> 둘 중 하나에 맞는 센서를 만들 수 있습니다.</p>
+<p>이 플랫폼에는 AirVisual API 키가 필요합니다. <a href="https://airvisual.com/api" rel="external nofollow">here</a> 참조. 플랫폼은 “Community” 패키지를 사용하여 설계되었습니다. “Startup “ 및 “Enterprise” 패키지 키는 계속 작동하지만 실제 결과는 다를 수 있습니다 (또는 전혀 작동하지 않을 수 있음).</p>
+<p>Community API 키는 12 개월 동안 유효하며 이후 만료됩니다. 그런 다음 Airvisual 웹 사이트로 돌아가서 이전 키를 삭제하고 동일한 단계에 따라 새 키를 생성 한 다음 새 키로 설정을 업데이트해야 합니다.</p>
 <div class="note warning">
-<p>The “Community” API key is limited to 10,000 calls per month. In order to leave a buffer, the <code>airvisual</code> platform queries the API every 10 minutes (600 seconds) by default. Modification of this (via the <code>scan_interval</code> key) to a too-low value may result in your API key being deactivated.</p>
+<p>“커뮤니티”API 키는 한 달에 10,000 건으로 제한됩니다. 버퍼를 남기기 위해 <code>airvisual</code> 플랫폼은 기본적으로 10 분(600 초)마다 API를 쿼리합니다. (<code>scan_interval 키</code>)를 통해 이를 너무 낮은 값으로 수정하면 API 키가 비활성화 될 수 있습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the platform and gather data via latitude/longitude, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>플랫폼을 활성화하고 위도/경도를 통해 데이터를 수집하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: airvisual
     api_key: YOUR_AIRVISUAL_API_KEY
@@ -122,12 +122,12 @@
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Your AirVisual API key.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>AirVisual API 키.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>The air quality standard(s) to use (<code>us</code> for U.S., <code>cn</code> for Chinese).</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>사용할 대기질 표준 (<code>us</code>: 미국, <code>cn</code>: 중국).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -136,7 +136,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="show_on_map" href="#show_on_map"></a> show_on_map</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Whether to show a marker on the map at the specified location.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>지정된 위치에서 지도에 마커를 표시할지 여부.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -145,7 +145,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>The rate in seconds at which AirVisual should be polled for new data.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>새 데이터에 대해 AirVisual을 폴링해야 하는 속도 (초)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -154,7 +154,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="latitude" href="#latitude"></a> latitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The latitude of the location to monitor.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 위치의 위도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -163,7 +163,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The longitude of the location to monitor.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 위치의 경도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -171,21 +171,21 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="city" href="#city"></a> city</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The city to monitor.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 도시.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="state" href="#state"></a> state</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The state the city belongs to.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>도시가 속한 주(state).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="country" href="#country"></a> country</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The country the state belongs to.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>주(state)가 속한 국가.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="example-configurations" href="#example-configurations"></a> Example Configurations</h2>
-<p>Configuration using custom Latitude and Longitude:</p>
+<a class="title-link" name="-" href="#-"></a> 설정 사례</h2>
+<p>사용자 지정 위도 및 경도를 사용한 설정 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: airvisual
     api_key: YOUR_AIRVISUAL_API_KEY
@@ -196,7 +196,7 @@ Default value: </p>
     latitude: 42.81212
     longitude: 108.12422
 </code></pre>
-<p>Configuration using city, state, and country:</p>
+<p>도시, 주 및 국가를 사용하여 설정 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: airvisual
     api_key: YOUR_AIRVISUAL_API_KEY
@@ -209,9 +209,9 @@ Default value: </p>
     country: USA
 </code></pre>
 <h2>
-<a class="title-link" name="determining-the-citystatecountry" href="#determining-the-citystatecountry"></a> Determining the City/State/Country</h2>
-<p>To easily determine the proper values for a particular location, use the <a href="https://airvisual.com/world" rel="external nofollow">AirVisual region directory</a>. Once you browse to the particular city you want, take note of the breadcrumb title, which is of the form <code>country &gt; state/region &gt; city</code>. Use this information to fill out <code>configuration.yaml</code>.</p>
-<p>For example, Sao Paulo, Brazil shows a breadcrumb title of <code>Brazil &gt; Sao Paulo &gt; Sao Paulo</code>. Thus, the proper configuration would look like this:</p>
+<a class="title-link" name="-" href="#-"></a> 도시/주/국가 결정</h2>
+<p>특정 위치에 대한 적절한 값을 쉽게 결정하려면 <a href="https://airvisual.com/world" rel="external nofollow">AirVisual 지역 디렉토리</a>를 사용하십시오. 원하는 특정 도시를 탐색 한 후 <code>country &gt; state/region &gt; city</code> 형식의 이동 경로 제목을 기록해 두십시오. 이 정보를 사용하여 <code>configuration.yaml</code>을 작성하십시오.</p>
+<p>예를 들어 브라질의 상파울루에는 <code>Brazil &gt; Sao Paulo &gt; Sao Paulo</code> 라는 이동 경로 제목이 표시됩니다. 따라서 올바른 설정은 다음과 같습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: airvisual
     api_key: abc123
@@ -223,13 +223,13 @@ Default value: </p>
     country: brazil
 </code></pre>
 <h2>
-<a class="title-link" name="sensor-types" href="#sensor-types"></a> Sensor Types</h2>
-<p>When configured, the platform will create three sensors for each configured air quality standard:</p>
+<a class="title-link" name="sensor-" href="#sensor-"></a> Sensor 타입</h2>
+<p>설정이 완료되면, 플랫폼은 설정된 각 대기질 표준에 대해 3 개의 센서를 만듭니다. :</p>
 <h3>
-<a class="title-link" name="air-quality-index" href="#air-quality-index"></a> Air Quality Index</h3>
+<a class="title-link" name="-" href="#-"></a> 대기질 지수</h3>
 <ul>
 <li>
-<strong>Description:</strong> This sensor displays a numeric air quality index (AQI), a metric for the overall “health” of the air.</li>
+<strong>Description:</strong> 이 센서는 공기의 전체 “health”에 대한 지표인 수치 대기질 지수(AQI)를 표시합니다.</li>
 <li>
 <strong>Example Sensor Name:</strong> <code>sensor.chinese_air_quality_index</code>
 </li>
@@ -250,40 +250,40 @@ Default value: </p>
 <tr>
 <td>0 - 50</td>
 <td align="center"><strong>Good</strong></td>
-<td>Air quality is considered satisfactory, and air pollution poses little or no risk</td>
+<td>대기질은 만족스럽고 대기 오염은 거의 또는 전혀 위험하지 않습니다</td>
 </tr>
 <tr>
 <td>51 - 100</td>
 <td align="center"><strong>Moderate</strong></td>
-<td>Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution</td>
+<td>대기질은 적당합니다. 그러나 일부 오염 물질의 경우 대기 오염에 비정상적으로 민감한 소수의 사람들에게 건강에 대한 우려가 약간 있을 수 있습니다</td>
 </tr>
 <tr>
 <td>101 - 150</td>
 <td align="center"><strong>Unhealthy for Sensitive Groups</strong></td>
-<td>Members of sensitive groups may experience health effects. The general public is not likely to be affected</td>
+<td>민감한 그룹의 구성원은 건강에 영향을 줄 수 있습니다. 일반 대중은 영향을 받지 않을 것입니다</td>
 </tr>
 <tr>
 <td>151 - 200</td>
 <td align="center"><strong>Unhealthy</strong></td>
-<td>Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects</td>
+<td>모든 사람이 건강에 영향을 미칠 수 있습니다. 민감한 그룹의 구성원은 더 심각한 건강 영향을 경험할 수 있습니다.</td>
 </tr>
 <tr>
 <td>201 - 300</td>
 <td align="center"><strong>Very unhealthy</strong></td>
-<td>Health warnings of emergency conditions. The entire population is more likely to be affected</td>
+<td>응급 상황에 대한 건강 경고. 전체 인구가 영향을 받을 가능성이 더 큽니다.</td>
 </tr>
 <tr>
 <td>301+</td>
 <td align="center"><strong>Hazardous</strong></td>
-<td>Health alert: everyone may experience more serious health effects</td>
+<td>건강 경고 : 모든 사람이 보다 심각한 건강 영향을 경험할 수 있습니다.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="air-pollution-level" href="#air-pollution-level"></a> Air Pollution Level</h3>
+<a class="title-link" name="--" href="#--"></a> 대기 오염 수준</h3>
 <ul>
 <li>
-<strong>Description:</strong> This sensor displays the associated <code>Status</code> (from the above table) for the current AQI.</li>
+<strong>Description:</strong> 이 센서는 현재 AQI에 대한 관련 <code>Status</code> (위 표에서)를 표시합니다.</li>
 <li>
 <strong>Sample Sensor Name:</strong> <code>sensor.us_air_pollution_level</code>
 </li>
@@ -295,7 +295,7 @@ Default value: </p>
 <a class="title-link" name="main-pollutant" href="#main-pollutant"></a> Main Pollutant</h3>
 <ul>
 <li>
-<strong>Description:</strong> This sensor displays the pollutant whose value is currently highest.</li>
+<strong>Description:</strong> 이 센서는 현재 값이 가장 높은 오염 물질을 표시합니다.</li>
 <li>
 <strong>Sample Sensor Name:</strong> <code>sensor.us_main_pollutant</code>
 </li>
@@ -314,27 +314,27 @@ Default value: </p>
 </thead>
 <tbody>
 <tr>
-<td>Particulate (&lt;= 2.5 μm)</td>
+<td>미세먼지 (&lt;= 2.5 μm)</td>
 <td align="center">PM2.5</td>
 <td><a href="https://www.epa.gov/pm-pollution" rel="external nofollow">EPA: Particulate Matter (PM) Pollution </a></td>
 </tr>
 <tr>
-<td>Particulate (&lt;= 10 μm)</td>
+<td>미세먼지 (&lt;= 10 μm)</td>
 <td align="center">PM10</td>
 <td><a href="https://www.epa.gov/pm-pollution" rel="external nofollow">EPA: Particulate Matter (PM) Pollution </a></td>
 </tr>
 <tr>
-<td>Ozone</td>
+<td>오존</td>
 <td align="center">O</td>
 <td><a href="https://www.epa.gov/ozone-pollution" rel="external nofollow">EPA: Ozone Pollution</a></td>
 </tr>
 <tr>
-<td>Sulpher Dioxide</td>
+<td>이산화황</td>
 <td align="center">SO2</td>
 <td><a href="https://www.epa.gov/so2-pollution" rel="external nofollow">EPA: Sulfur Dioxide (SO2) Pollution</a></td>
 </tr>
 <tr>
-<td>Carbon Monoxide</td>
+<td>일산화탄소</td>
 <td align="center">CO</td>
 <td><a href="https://www.epa.gov/co-pollution" rel="external nofollow">EPA: Carbon Monoxide (CO) Pollution in Outdoor Air</a></td>
 </tr>

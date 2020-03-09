@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Home Assistant/Hass.io porosity - 홈어시스턴트</title>
+    <title>Home Assistant/Hass.io 보안에 대한 고찰 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Use nmap to scan your Home Assistant instance.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/security/porosity/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Home Assistant/Hass.io porosity">
+    <meta property="og:title" content="Home Assistant/Hass.io 보안에 대한 고찰">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/security/porosity/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Home Assistant/Hass.io porosity">
+    <meta name="twitter:title" content="Home Assistant/Hass.io 보안에 대한 고찰">
     <meta name="twitter:description" content="Use nmap to scan your Home Assistant instance.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Home Assistant/Hass.io porosity
+      Home Assistant/Hass.io 보안에 대한 고찰
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>As a large amount of users are running <a href="/hassio/">Hass.io</a>, here we are using a Raspberry Pi 3 B and Hass.io 0.70.0 to show how Home Assistant looks from the network side. This is not a full blown investigation, just a quick overview.</p>
-<p>The IP address of the Home Assistant machine is 192.168.0.215. The system which is the source of the scans is a machine running Fedora 27 and Nmap 7.60 is used to perform the port scans. Both systems are in the same network.</p>
+  <p>많은 사용자가 <a href="/hassio/">Hass.io</a>를 실행함에 따라 여기에서는 Raspberry Pi 3B 및 Hass.io 0.70.0을 사용하여 Home Assistant가 네트워크 쪽에서 어떻게 보이는지 보여줍니다. 이것은 완전한 조사가 아니라 간단한 개요입니다.</p>
+<p>홈어시스턴트 시스템의 IP 주소는 192.168.0.215입니다. 스캔 소스인 시스템은 Fedora 27을 실행하는 시스템이며 Nmap 7.60은 포트 스캔을 수행하는 데 사용됩니다. 두 시스템 모두 동일한 네트워크에 있습니다.</p>
 <h2>
 <a class="title-link" name="ssh-server-add-on" href="#ssh-server-add-on"></a> SSH server Add-on</h2>
-<p>To get access to Hass.io in secure way, SSH is provided by the <a href="/addons/ssh/">SSH server add-on</a>.</p>
+<p>Hass.io에 안전하게 액세스하기 위해 SSH는 <a href="/addons/ssh/">SSH 서버 애드온</a>에 의해 제공됩니다.</p>
 <pre><code class="language-bash">$ sudo nmap -A -n --reason -Pn -T5 -p1-65535 192.168.0.215
 
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-05-29 15:08 CEST
@@ -143,10 +143,10 @@ HOP RTT     ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 726.23 seconds
 </code></pre>
-<p>That port 22 and 8123 are open was expected. On port 22222 is an additional SSH server running. This port is for <a href="https://developers.home-assistant.io/docs/en/hassio_debugging.html">debugging</a> and supports only a login with a key. This means that you would need to remove the SD card from your Raspberry Pi, create an <code>authorized_keys</code> with your SSH public key in it and put the SD Card back in your Pi to get access.</p>
+<p>포트 22와 8123이 열려있을 것으로 예상되었습니다. 포트 22222에는 추가 SSH 서버가 실행 중입니다. 이 포트는 <a href="https://developers.home-assistant.io/docs/en/hassio_debugging.html">debugging</a>용이며 키를 사용한 로그인만 지원합니다. 즉, Raspberry Pi에서 SD 카드를 제거하고 SSH 공개키가 있는 <code>authorized_keys</code>를 만든 다음 SD 카드를 Pi에 다시 넣어 액세스해야합니다.</p>
 <h2>
 <a class="title-link" name="mosquitto-mqtt-broker-add-on" href="#mosquitto-mqtt-broker-add-on"></a> Mosquitto MQTT broker Add-on</h2>
-<p>While setting up the <a href="/addons/mosquitto/">Mosquitto MQTT broker add-on</a> no settings were modified, the add-on was running with the default settings.</p>
+<p><a href="/addons/mosquitto/">Mosquitto MQTT 브로커 애드온</a>을 설정하는 동안 설정이 수정되지 않았으며 애드온이 기본 설정으로 실행되었습니다.</p>
 <pre><code class="language-bash">$ sudo nmap -A -n --reason -Pn -T5 -p1-65535 192.168.0.215
 
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-05-29 15:52 CEST
@@ -184,11 +184,11 @@ HOP RTT     ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 223.76 seconds
 </code></pre>
-<p>To secure MQTT to consider to use certificates and to specify users with password under <code>logins:</code> at least. Use port 1883 only in your local network.</p>
+<p>인증서 사용을 고려하여 MQTT를 보호하고 최소한 <code>logins : </code> 아래에 비밀번호를 가진 사용자를 지정합니다. 로컬 네트워크에서만 포트 1883을 사용하십시오.</p>
 <h2>
 <a class="title-link" name="samba-add-on" href="#samba-add-on"></a> Samba Add-on</h2>
-<p>The <a href="/addons/samba/">Samba add-on</a> enables one to use a Windows system to access the configuration and other shares. Per default there is no user set. To increase your local security we strongly suggest that you set a username and a password and don’t allow guests. A sample configuration could look like the one below.</p>
-<p>A port scan for Hass.io with this add-on will give you the details.</p>
+<p><a href="/addons/samba/">Samba 애드온</a>을 사용하면 Windows 시스템을 사용하여 설정 및 다른 공유에 액세스 할 수 있습니다. 기본적으로 사용자 설정은 없습니다. 로컬 보안을 강화하려면 사용자 이름과 비밀번호를 설정하고 guest를 허용하지 않는 것이 좋습니다. 샘플 설정은 다음과 같습니다.</p>
+<p>이 부가 기능을 사용하여 Hass.io에 대한 포트 스캔으로 세부 정보를 제공합니다.</p>
 <pre><code class="language-bash">$ sudo nmap -A -n --reason -Pn -T5 -p1-65535 192.168.0.215
 
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-05-29 16:29 CEST
@@ -240,7 +240,7 @@ HOP RTT     ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 727.43 seconds
 </code></pre>
-<p>139 and 445 are open and it’s possible to enumerate the shares. With different tools you will get pretty much the same information.</p>
+<p>139와 445는 공개되어 있으며 주식을 열거 할 수 있습니다. 다른 도구를 사용해도 거의 동일한 정보를 얻을 수 있습니다.</p>
 <pre><code class="language-bash">$ smbclient -L //192.168.0.215 -U%
 
 	Sharename       Type      Comment
@@ -260,7 +260,7 @@ Reconnecting with SMB1 for workgroup listing.
 	---------            -------
 	WORKGROUP            HASSIO
 </code></pre>
-<p>But without username and password you can’t get access to the configuration file with the settings shown here.</p>
+<p>그러나 사용자 이름과 비밀번호가 없으면 여기에 표시된 세팅으로 설정 파일에 액세스 할 수 없습니다.</p>
 <pre><code class="language-json">[...]
   "guest": false,
   "username": "homeassistant",

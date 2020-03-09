@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Trend - 홈어시스턴트</title>
+    <title>트렌드(Trend) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Trend binary sensors into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/trend/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Trend">
+    <meta property="og:title" content="트렌드(Trend)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/trend/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Trend">
+    <meta name="twitter:title" content="트렌드(Trend)">
     <meta name="twitter:description" content="Instructions on how to integrate Trend binary sensors into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,21 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      Trend
+      트렌드(Trend)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>trend</code> platform allows you to create sensors which show the trend of
-numeric <code>state</code> or<code>state_attributes</code> from other entities. This sensor requires
-at least two updates of the underlying sensor to establish a trend.
-Thus it can take some time to show an accurate state. It can be useful
-as part of automations, where you want to base an action on a trend.</p>
+  <p><code>trend</code> 플랫폼을 사용하면 다른 엔티티의 숫자 <code>state</code> 또는 <code>state_attributes</code> 경향을 보여주는 센서를 만들 수 있습니다. 이 센서에는 트렌드(경향)를 설정하기 위해 기본 센서의 업데이트가 두 개 이상 필요합니다. 따라서 정확한 상태를 표시하는 데 시간이 걸릴 수 있습니다. 트렌드를 기반으로 작업을 수행하려는 자동화의 일부로 유용할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable Trend binary sensors in your installation,
-add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>트렌드 바이너리 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: trend
@@ -184,21 +179,15 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="using-multiple-samples" href="#using-multiple-samples"></a> Using Multiple Samples</h2>
-<p>If the optional <code>sample_duration</code> and <code>max_samples</code> parameters are specified
-then multiple samples can be stored and used to detect long-term trends.</p>
-<p>Each time the state changes, a new sample is stored along with the sample time.
-Samples older than <code>sample_duration</code> seconds will be discarded.</p>
-<p>A trend line is then fitted to the available samples, and the gradient of this
-line is compared to <code>min_gradient</code> to determine the state of the trend sensor.
-The gradient is measured in sensor units per second - so if you want to know
-when the temperature is falling by 2 degrees per hour,
-use a gradient of (-2) / (60 x 60) = -0.00055</p>
-<p>The current number of stored samples is displayed on the States page.</p>
+<a class="title-link" name="--" href="#--"></a> 여러 샘플 사용하기</h2>
+<p>선택적 <code>sample_duration</code> 및 <code>max_samples</code> 매개 변수를 지정하면 여러 샘플을 저장하고 장기 트렌드를 감지하는 데 사용할 수 있습니다.</p>
+<p>상태가 변경 될 때마다 새로운 샘플이 샘플시간과 함께 저장됩니다. <code>sample_duration</code>시간 보다 오래된 샘플은 폐기됩니다.</p>
+<p>그런 다음 트렌드 라인을 사용 가능한 샘플에 맞추고 이 라인의 gradient를 <code>min_gradient</code>와 비교하여 트렌드 센서의 상태를 결정합니다. gradient는 초당 센서 단위로 측정됩니다. - 온도가 시간당 2 도씩 떨어지는 시점을 알고 싶다면 (-2) / (60 x 60) = -0.00055의 gradient를 사용하십시오.</p>
+<p>저장된 샘플의 현재 수가 상태 페이지에 표시됩니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this sensor.</p>
-<p>This example indicates <code>true</code> if the sun is still rising:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
+<p>이 예는 태양이 여전히 떠오르면 <code>true</code>를 나타냅니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: trend
     sensors:
@@ -206,9 +195,7 @@ use a gradient of (-2) / (60 x 60) = -0.00055</p>
         entity_id: sun.sun
         attribute: elevation
 </code></pre>
-<p>This example creates two sensors to indicate whether the temperature is
-rising or falling at a rate of at least 3 degrees an hour,
-and collects samples over a two hour period:</p>
+<p>이 예에서는 온도가 시간당 최소 3도 이상으로 상승 또는 하강하는지를 나타내는 두 개의 센서를 만들고 2 시간 동안 샘플을 수집합니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: trend
     sensors:

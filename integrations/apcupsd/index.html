@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>APCUPSd - 홈어시스턴트</title>
+    <title>무정전전원장치(APCUPSd) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate APCUPSd status with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/apcupsd/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="APCUPSd">
+    <meta property="og:title" content="무정전전원장치(APCUPSd)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/apcupsd/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="APCUPSd">
+    <meta name="twitter:title" content="무정전전원장치(APCUPSd)">
     <meta name="twitter:description" content="Instructions on how to integrate APCUPSd status with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      APCUPSd
+      무정전전원장치(APCUPSd)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p><a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> status information can be integrated into Home Assistant when the Network Information Server (NIS) <a href="http://www.apcupsd.org/manual/manual.html#nis-server-client-configuration-using-the-net-driver" rel="external nofollow">is configured</a> on the APC device.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> 상태 정보는 APC 장치에 <a href="http://www.apcupsd.org/manual/manual.html#nis-server-client-configuration-using-the-net-driver" rel="external nofollow">NIS(Network Information Server)</a>가 구성된 경우 홈어시스턴트에 연동될 수 있습니다.</p>
+<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
 <h2>
-<a class="title-link" name="hassio-installation" href="#hassio-installation"></a> Hass.io Installation</h2>
-<p>Install this <a href="https://github.com/korylprince/hassio-apcupsd/" rel="external nofollow">unofficial add-on</a> to use this integration with Hass.io. Keep in mind that we can’t give you support for this add-on.</p>
-<p>After installation, follow the instructions on the Github page to configure the plugin. Then continue to follow the integration configurations below.</p>
+<a class="title-link" name="hassio-" href="#hassio-"></a> Hass.io 설치</h2>
+<p>Hass.io와의 연동을 사용하려면 <a href="https://github.com/korylprince/hassio-apcupsd/" rel="external nofollow">unofficial add-on</a>을 설치하십시오. 단, add-on을 공식 지원할 수는 없습니다.</p>
+<p>설치 후 Github 페이지의 지침에 따라 플러그인을 설정하십시오. 그런 다음 아래 통합 설정을 계속 따르십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 apcupsd:
 </code></pre>
@@ -144,14 +144,14 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>If you get <code>ConnectionRefusedError: Connection refused</code> errors in the Home Assistant logs, ensure the <a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> configuration directives used by its Network Information Server is set to permit connections from all addresses <a href="http://www.apcupsd.org/manual/manual.html#configuration-directives-used-by-the-network-information-server" rel="external nofollow">NISIP 0.0.0.0</a>, else non-local addesses will not connect. This includes Hass.io running in Docker, even when hosted on the same machine or a virtual machine.</p>
+<p>Home Assistant 로그에 <code>ConnectionRefusedError: Connection refused</code> 오류가 표시되는 경우, 네트워크 정보 서버가 사용하는 <a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> 설정 지시문이 모든 주소 <a href="http://www.apcupsd.org/manual/manual.html#configuration-directives-used-by-the-network-information-server" rel="external nofollow">NISIP 0.0.0.0</a>에서 연결을 허용하도록 설정되어 있는지 확인하십시오. 그렇지 않을 경우 로컬이 아닌 주소는 연결되지 않습니다. 이는 동일한 컴퓨터 또는 가상 컴퓨터에서 호스팅되는 경우에도 Docker에서 실행되는 Hass.io도 포함됩니다.</p>
  </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary sensor</h2>
-<p>In addition to the <a href="#sensor">APCUPSd Sensor</a> devices, you may also create a device which is simply “on” when the UPS status is online and “off” at all other times.</p>
+<p><a href="#sensor">APCUPSd Sensor</a> 장치 외에도 UPS 상태가 온라인일 때 단순히 “on” 상태이고 다른 시간에는 “off” 상태인 장치를 만들 수도 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To enable this sensor, you first have to set up apcupsd integration (above), and add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>이 센서를 활성화하려면 먼저 위의 apcupsd integration을 설정하고 <code>configuration.yaml</code> 파일에 다음 줄을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: apcupsd
@@ -173,10 +173,10 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>apcupsd</code> sensor platform allows you to monitor a UPS (battery backup) by using data from the <a href="https://linux.die.net/man/8/apcaccess" rel="external nofollow">apcaccess</a> command.</p>
+<p><code>apcupsd</code> 센서 플랫폼을 사용하면 <a href="https://linux.die.net/man/8/apcaccess" rel="external nofollow">apcaccess</a> 명령의 데이터를 사용하여 UPS (배터리 백업)를 모니터링 할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To use this sensor platform, you first have to set up apcupsd integration (above), and add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>이 센서 플랫폼을 사용하려면 먼저 위의 apcupsd 통합구성요소를 설정하고 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: apcupsd
@@ -195,8 +195,8 @@ sensor:
 </dl>
 </div>
 <h3>
-<a class="title-link" name="example" href="#example"></a> Example</h3>
-<p>Given the following output from <code>apcaccess</code>:</p>
+<a class="title-link" name="" href="#"></a> 사례</h3>
+<p><code>apcaccess</code>의 출력은 다음과 같습니다.</p>
 <pre><code class="language-yaml">APC      : 001,051,1149
 DATE     : 2016-02-09 17:13:31 +0000
 HOSTNAME : localhost
@@ -220,8 +220,8 @@ MINLINEV : 244.4 Volts
 OUTPUTV  : 218.4 Volts
 [...]
 </code></pre>
-<p>Use the values from the left hand column (lower case required).</p>
-<p>Full Example Configuration:</p>
+<p>왼쪽 열의 값을 사용하십시오 (소문자 필요).</p>
+<p>전체 설정의 예 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: apcupsd
     resources:

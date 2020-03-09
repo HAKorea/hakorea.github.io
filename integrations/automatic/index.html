@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Automatic - 홈어시스턴트</title>
+    <title>차량관리서비스(Automatic) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions for how to integrate Automatic ODB readers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/automatic/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Automatic">
+    <meta property="og:title" content="차량관리서비스(Automatic)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/automatic/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Automatic">
+    <meta name="twitter:title" content="차량관리서비스(Automatic)">
     <meta name="twitter:description" content="Instructions for how to integrate Automatic ODB readers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Automatic
+      차량관리서비스(Automatic)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>automatic</code> device tracker platform offers presence detection by retrieving your car’s information from the <a href="https://automatic.com/" rel="external nofollow">Automatic</a> cloud service.</p>
+  <p><code>automatic</code> 장치 추적기 플랫폼은 <a href="https://automatic.com/" rel="external nofollow">Automatic</a> 클라우드 서비스에서 차량 정보를 검색하여 현재 상태를 감지합니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>To use Automatic with Home Assistant, first you must <a href="https://developer.automatic.com/" rel="external nofollow">create a free development account</a>. Automatic will generate a Client ID and Secret for you to use in your Home Assistant configuration. You will need to update your Event Delivery preferences to ensure Home Assistant can receive updates. On the developer page, under App Settings / Event Delivery, select “Websocket” for Event Delivery Preference. Next, specify the OAuth Redirect URL in the developer page. This should be configured to <code>&lt;home-assistant-url&gt;/api/automatic/callback</code>. (Example: <code>http://hassio.local:8123/api/automatic/callback</code>) Note that this URL only needs to be accessible from the browser you use to perform the authentication.</p>
-<p>Home Assistant can also take advantage of <code>scope:current_location</code> if available. This will allow Home Assistant to receive periodic location updates during a trip. In order to use this functionality, you must request the scope for your application from Automatic. Once <code>scope:current_location</code> is available, change <code>current_location</code> to <code>true</code> in your configuration.yaml.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>홈어시스턴트에서 Automatic을 사용하려면 먼저 <a href="https://developer.automatic.com/" rel="external nofollow">create a free development account</a>을 수행해야합니다. Automatic은 홈어시스턴트 설정에 사용할 클라이언트 ID 및 비밀정보를 생성합니다. 홈어시스턴트가 업데이트를 수신할 수 있도록 이벤트 전달 환경 설정을 업데이트해야합니다. 개발자 페이지의 App Settings / Event Delivery,에서 이벤트 전달 환경 설정으로 “Websocket”을 선택하십시오.</p>
+<p>홈어시스턴트는 사용 가능한 경우 <code>scope:current_location</code>을 활용할 수도 있습니다. 이렇게하면 홈어시스턴트가 여행중에 주기적으로 위치 업데이트를 받을 수 있습니다. 이 기능을 사용하려면 자동으로 응용 프로그램 범위(scope)를 요청해야합니다. <code>scope:current_location</code>을 사용할 수 있게되면 configuration.yaml에서 <code>current_location</code>을 <code>true</code>로 변경하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Once your developer account is created, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>개발자 계정이 생성되면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 device_tracker:
   - platform: automatic
@@ -148,9 +148,9 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>The device name must be the name given by Automatic automatically. This is typically the model year, make and model. This is <em>not</em> the nickname you have to give the vehicle in the <code>vehicles</code> section of the app’s settings.</p>
+<p>장치 이름은 Automatic로 자동으로 지정된 이름이어야합니다. 이것은 일반적으로 모델 연도, 제조업체 및 모델입니다. 이것은 앱설정의 <code>vehicles</code> 섹션에서 차량에 부여해야하는 닉네임이 아닙니다.</p>
 </div>  
-<p>Home Assistant will also fire events when an update is received from Automatic. These can be used to trigger automations, as shown in the example below. A list of available event types can be found in the <a href="https://developer.automatic.com/api-reference/#real-time-events" rel="external nofollow">Automatic Real-Time Events documentation</a>.</p>
+<p>홈어시스턴트는 Automatic에서 업데이트를 받으면 이벤트를 발생시킵니다. 아래 예와 같이 자동화를 트리거하는데 사용할 수 있습니다. 사용 가능한 이벤트 유형 목록은 <a href="https://developer.automatic.com/api-reference/#real-time-events" rel="external nofollow">Automatic Real-Time Events documentation</a>에서 확인할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example automatic event automation
 automation:
   - trigger:
@@ -164,9 +164,9 @@ automation:
       - service: light.turn_off
 </code></pre>
 <div class="note">
-You can obtain the correct ID for your vehicle from your known_devices.yaml file. Be sure to lower-case any letters contained in your vehicle's ID when using it in an automation trigger.
+known_devices.yaml 파일에서 차량의 정확한 ID를 얻을 수 있습니다. 자동화 트리거에서 vehicle ID를 사용할 때 vehicle ID에 포함 된 문자를 모두 소문자로 입력하십시오.
 </div>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the cars to be tracked.</p>
+<p>차량을 추적하도록 구성하는 방법에 대한 지침은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오.</p>
 
 
 </article>

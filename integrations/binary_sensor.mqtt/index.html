@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MQTT Binary Sensor - 홈어시스턴트</title>
+    <title>MQTT 이진 센서 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate MQTT binary sensors within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/binary_sensor.mqtt/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="MQTT Binary Sensor">
+    <meta property="og:title" content="MQTT 이진 센서">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/binary_sensor.mqtt/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="MQTT Binary Sensor">
+    <meta name="twitter:title" content="MQTT 이진 센서">
     <meta name="twitter:description" content="Instructions on how to integrate MQTT binary sensors within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,28 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      MQTT Binary Sensor
+      MQTT 이진 센서
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mqtt</code> binary sensor platform uses an MQTT message payload to set the binary sensor to one of two states: <code>on</code> or <code>off</code>.
-<code>mqtt</code> binary sensor 플랫폼은 MQTT 메시지 페이로드를 사용하여 binary sensor를 두 가지 상태 중 하나로 설정합니다 : <code>on</code> 또는 <code>off</code>.</p>
-<p>The binary sensor state will be updated only after a new message is published on <code>state_topic</code> matching <code>payload_on</code> or <code>payload_off</code>.
-If these messages are published with the <code>retain</code> flag set,the binary sensor will receive an instant state update after subscription and Home Assistant will display the correct state on startup.
-Otherwise, the initial state displayed in Home Assistant will be <code>unknown</code>.
-바이너리 센서 상태는 ’<code>state_topic</code>가 <code>payload_on</code> 또는 <code>payload_off</code>와 일치할 때 새 메시지가 게시(publish)된 후에 만 ​​업데이트됩니다.
-이러한 메시지가 ‘retain’플래그가 설정된 상태로 게시(publish) 된 경우 subscription후 바이너리 센서에 즉시 상태 업데이트가 수신되고 홈어시스턴트는 시작시 올바른 상태를 표시합니다. 그렇지 않으면 홈어시스턴트에 표시되는 초기 상태는 <code>unknown</code> 입니다.</p>
+  <p><code>mqtt</code> binary sensor 플랫폼은 MQTT 메시지 페이로드를 사용하여 binary sensor를 두 가지 상태 중 하나로 설정합니다 : <code>on</code> 또는 <code>off</code>.</p>
+<p>바이너리 센서 상태는 <code>state_topic</code>가 <code>payload_on</code> 또는 <code>payload_off</code>와 일치할 때 새 메시지가 게시(publish)된 후에 만 ​​업데이트됩니다.
+이러한 메시지가 <code>retain</code> 플래그가 설정된 상태로 게시(publish) 된 경우 subscription후 바이너리 센서에 즉시 상태 업데이트가 수신되고 홈어시스턴트는 시작시 수정된 상태를 표시합니다. 그렇지 않으면 홈어시스턴트에 표시되는 초기 상태는 <code>unknown</code> 입니다.</p>
 <h2>
 <a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
-<p>The <code>mqtt</code> binary sensor platform optionally supports an <code>availability_topic</code> to receive online and offline messages (birth and LWT messages) from the MQTT device. During normal operation, if the MQTT sensor device goes offline (i.e., publishes <code>payload_not_available</code> to <code>availability_topic</code>), Home Assistant will display the binary sensor as <code>unavailable</code>. If these messages are published with the <code>retain</code> flag set, the binary sensor will receive an instant update after subscription and Home Assistant will display the correct availability state of the binary sensor when Home Assistant starts up. If the <code>retain</code> flag is not set, Home Assistant will display the binary sensor as <code>unavailable</code> when Home Assistant starts up. If no <code>availability_topic</code>
-is defined, Home Assistant will consider the MQTT device to be available.
-<code>mqtt</code> binary sensor 플랫폼은 선택적으로 MQTT 장치에서 온라인 및 오프라인 메시지 (birth 및 LWT 메시지)를 수신 할 수있는 <code>availability_topic</code>을 지원합니다. 정상 작동 중에 MQTT 센서 장치가 오프라인 상태가되면 (즉, <code>payload_not_available</code>을 <code>availability_topic</code>에 게시하는 경우) 홈어시스턴트는  binary sensor를 <code>unavailable</code>로 표시합니다. 이러한 메시지가 <code>retain</code> 플래그가 설정된 상태로 게시된 경우 subscription 후  binary sensor는 즉시 업데이트를 수신하고 Home Assistant는 Home Assistant가 시작될 때  binary sensor의 올바른 가용성 상태를 표시합니다. <code>retain</code> 플래그가 설정되지 않은 경우 Home Assistant는 Home Assistant가 시작될 때 binary sensor를 사용할 수 없는 것으로 표시합니다.
+<p><code>mqtt</code> binary sensor 플랫폼은 선택적으로 MQTT 장치에서 온라인 및 오프라인 메시지 (birth 및 LWT 메시지)를 수신 할 수있는 <code>availability_topic</code>을 지원합니다. 정상 작동 중에 MQTT 센서 장치가 오프라인 상태가되면 (즉, <code>payload_not_available</code>을 <code>availability_topic</code>에 게시하는 경우) 홈어시스턴트는  binary sensor를 <code>unavailable</code>로 표시합니다. 이러한 메시지가 <code>retain</code> 플래그가 설정된 상태로 게시된 경우 subscription 후  binary sensor는 즉시 업데이트를 수신하고 Home Assistant는 Home Assistant가 시작될 때  binary sensor의 수정된 가용성 상태를 표시합니다. <code>retain</code> 플래그가 설정되지 않은 경우 Home Assistant는 Home Assistant가 시작될 때 binary sensor를 사용할 수 없는 것으로 표시합니다.
 <code>availability_topic</code>이 정의되지 않은 경우 홈 어시스턴트는 MQTT 디바이스를 사용 가능한 것으로 간주합니다.</p>
-<p>To use an MQTT binary sensor in your installation,
-add the following to your <code>configuration.yaml</code> file:
-설치에서 MQTT 이진 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
+<p>설치에서 MQTT 이진 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: mqtt
@@ -129,39 +121,76 @@ binary_sensor:
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
   <dl class="">
 <dt>
-<a class="title-link" name="state_topic" href="#state_topic"></a> state_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>MQTT topic은 센서 값을 수신하도록 구독(subscribe).</p>
+<a class="title-link" name="availability_topic" href="#availability_topic"></a> availability_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive birth and LWT messages from the MQTT device. If <code>availability_topic</code> is not defined, the binary sensor availability state will always be <code>available</code>. If <code>availability_topic</code> is defined, the binary sensor availability state will be <code>unavailable</code> by default.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="device" href="#device"></a> device</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Information about the device this binary sensor is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="connections" href="#connections"></a> connections</dt>
+<dd><p class="desc"><span class="type">(<span class="list map">list | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>'connections': ['mac', '02:5b:26:a8:dc:12']</code>.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="identifiers" href="#identifiers"></a> identifiers</dt>
+<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="manufacturer" href="#manufacturer"></a> manufacturer</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The manufacturer of the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="model" href="#model"></a> model</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The model of the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="name" href="#name"></a> name</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the device.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="sw_version" href="#sw_version"></a> sw_version</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The firmware version of the device.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/binary_sensor/#device-class">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="expire_after" href="#expire_after"></a> expire_after</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the number of seconds after the value expires if it’s not updated. After expiry, the value is cleared, and the availability is set to false</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="force_update" href="#force_update"></a> force_update</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sends update events even if the value hasn’t changed. Useful if you want to have meaningful value graphs in history.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+<dt>
+<a class="title-link" name="json_attributes_template" href="#json_attributes_template"></a> json_attributes_template</dt>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="json_attributes_topic" href="#json_attributes_topic"></a> json_attributes_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이진 센서의 이름.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the binary sensor.</p>
 </span></p>
 <p class="default">
 Default value: </p>
 <p>MQTT Binary Sensor</p>
 </dd>
 <dt>
-<a class="title-link" name="payload_on" href="#payload_on"></a> payload_on</dt>
-<dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>켜짐 상태를 나타내는 페이로드.</p>
-</span></p>
-<p class="default">
-Default value: </p>
-<p>ON</p>
-</dd>
-<dt>
-<a class="title-link" name="payload_off" href="#payload_off"></a> payload_off</dt>
-<dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>오프 상태를 나타내는 페이로드.</p>
-</span></p>
-<p class="default">
-Default value: </p>
-<p>OFF</p>
-</dd>
-<dt>
-<a class="title-link" name="availability_topic" href="#availability_topic"></a> availability_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT topic은 MQTT 디바이스에서 birth 및 LWT 메시지를 수신하도록 subscribe. <code>availability_topic</code>이 정의되어 있지 않으면 이진 센서 가용성 상태는 항상 사용 가능. <code>availability_topic</code>이 정의되어 있으면 이진 센서 가용성 상태는 기본적으로 사용할 수 없습니다. If <code>availability_topic</code> is not defined, the binary sensor availability state will always be <code>available</code>. If <code>availability_topic</code> is defined, the binary sensor availability state will be <code>unavailable</code> by default.</p>
+<a class="title-link" name="off_delay" href="#off_delay"></a> off_delay</dt>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>For sensors that only sends <code>On</code> state updates, this variable sets a delay in seconds after which the sensor state will be updated back to <code>Off</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="payload_available" href="#payload_available"></a> payload_available</dt>
@@ -182,13 +211,23 @@ Default value: </p>
 <p>offline</p>
 </dd>
 <dt>
-<a class="title-link" name="json_attributes_topic" href="#json_attributes_topic"></a> json_attributes_topic</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-topic-configuration">MQTT sensor</a> documentation.</p>
-</span></p></dd>
+<a class="title-link" name="payload_off" href="#payload_off"></a> payload_off</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the off state.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>OFF</p>
+</dd>
 <dt>
-<a class="title-link" name="json_attributes_template" href="#json_attributes_template"></a> json_attributes_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract the JSON dictionary from messages received on the <code>json_attributes_topic</code>. Usage example can be found in <a href="/integrations/sensor.mqtt/#json-attributes-template-configuration">MQTT sensor</a> documentation.</p>
-</span></p></dd>
+<a class="title-link" name="payload_on" href="#payload_on"></a> payload_on</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The payload that represents the on state.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>ON</p>
+</dd>
 <dt>
 <a class="title-link" name="qos" href="#qos"></a> qos</dt>
 <dd>
@@ -199,76 +238,29 @@ Default value: </p>
 <p>0</p>
 </dd>
 <dt>
+<a class="title-link" name="state_topic" href="#state_topic"></a> state_topic</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The MQTT topic subscribed to receive sensor values.</p>
+</span></p></dd>
+<dt>
 <a class="title-link" name="unique_id" href="#unique_id"></a> unique_id</dt>
 <dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>An ID that uniquely identifies this sensor. If two sensors have the same unique ID, Home Assistant will raise an exception.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sets the <a href="/integrations/binary_sensor/#device-class">class of the device</a>, changing the device state and icon that is displayed on the frontend.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="expire_after" href="#expire_after"></a> expire_after</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines the number of seconds after the value expires if it’s not updated. After expiry, the value is cleared, and the availability is set to false</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
 <dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>Defines a <a href="/docs/configuration/templating/#processing-incoming-data">template</a> to extract a value from the payload. Available variables: <code>entity_id</code>. Remove this option when ‘payload_on’ and ‘payload_off’ are sufficient to match your payloads.</p>
 </span></p></dd>
-<dt>
-<a class="title-link" name="force_update" href="#force_update"></a> force_update</dt>
-<dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Sends update events even if the value hasn’t changed. Useful if you want to have meaningful value graphs in history.</p>
-</span></p>
-<p class="default">
-Default value: </p>
-<p>false</p>
-</dd>
-<dt>
-<a class="title-link" name="off_delay" href="#off_delay"></a> off_delay</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>For sensors that only sends <code>On</code> state updates, this variable sets a delay in seconds after which the sensor state will be updated back to <code>Off</code>.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="device" href="#device"></a> device</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Information about the device this binary sensor is a part of to tie it into the <a href="https://developers.home-assistant.io/docs/en/device_registry_index.html">device registry</a>. Only works through <a href="/docs/mqtt/discovery/">MQTT discovery</a> and when <a href="#unique_id"><code>unique_id</code></a> is set.</p>
-</span></p></dd>
-<dd><dl class="nested">
-<dt>
-<a class="title-link" name="identifiers" href="#identifiers"></a> identifiers</dt>
-<dd><p class="desc"><span class="type">(<span class="list string">list | string</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of IDs that uniquely identify the device. For example a serial number.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="connections" href="#connections"></a> connections</dt>
-<dd><p class="desc"><span class="type">(<span class="list map">list | map</span>)</span><span class="required">(Optional)</span><span class="description"><p>A list of connections of the device to the outside world as a list of tuples <code>[connection_type, connection_identifier]</code>. For example the MAC address of a network interface: <code>'connections': ['mac', '02:5b:26:a8:dc:12']</code>.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="manufacturer" href="#manufacturer"></a> manufacturer</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The manufacturer of the device.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="model" href="#model"></a> model</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The model of the device.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The name of the device.</p>
-</span></p></dd>
-<dt>
-<a class="title-link" name="sw_version" href="#sw_version"></a> sw_version</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The firmware version of the device.</p>
-</span></p></dd>
-</dl></dd>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section, you will find some real-life examples of how to use this sensor.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에서는이 센서를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
-<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full configuration</h3>
-<p>To test, you can use the command line tool <code>mosquitto_pub</code> shipped with <code>mosquitto</code> or the <code>mosquitto-clients</code> package to send MQTT messages.</p>
-<p>To set the state of the binary sensor manually:</p>
+<a class="title-link" name="-" href="#-"></a> 전체 설정</h3>
+<p>테스트하려면 <code>moquitto</code> 또는 <code>mosquitto-clients</code> 패키지와 함께 제공된 command line tool <code>mosquitto_pub</code>을 사용하여 MQTT 메시지를 보낼 수 있습니다.</p>
+<p>이진 센서의 상태를 수동으로 설정하려면 :</p>
 <pre><code class="language-bash">$  mosquitto_pub -h 127.0.0.1 -t home-assistant/window/contact -m "OFF"
 </code></pre>
-<p>The example below shows a full configuration for a binary sensor:</p>
+<p>아래 예는 이진 센서의 전체 구성을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: mqtt
@@ -284,7 +276,7 @@ binary_sensor:
     value_template: '{{ value.x }}'
 </code></pre>
 <h3>
-<a class="title-link" name="toggle-the-binary-sensor-each-time-a-message-is-received-on-state_topic" href="#toggle-the-binary-sensor-each-time-a-message-is-received-on-state_topic"></a> Toggle the binary sensor each time a message is received on state_topic</h3>
+<a class="title-link" name="state_topic------toggle" href="#state_topic------toggle"></a> state_topic에서 메시지가 수신될 때마다 이진 센서 Toggle</h3>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: mqtt
@@ -292,14 +284,14 @@ binary_sensor:
     value_template: "{%if is_state(entity_id,\"on\")-%}OFF{%-else-%}ON{%-endif%}"
 </code></pre>
 <h3>
-<a class="title-link" name="get-the-state-of-a-device-with-espeasy" href="#get-the-state-of-a-device-with-espeasy"></a> Get the state of a device with ESPEasy</h3>
-<p>Assuming that you have flashed your ESP8266 unit with <a href="https://github.com/letscontrolit/ESPEasy" rel="external nofollow">ESPEasy</a>. Under “Config” is a name (“Unit Name:”) set for your device (here it’s “bathroom”). A configuration for a “Controller” for MQTT with the protocol “OpenHAB MQTT” is present and the entries (“Controller Subscribe:” and “Controller Publish:”) are adjusted to match your needs. In this example, the topics are prefixed with “home”. Also, add a “Switch Input” in the “Devices” tap with the name “switch” and “button” as value.</p>
-<p>As soon as the unit is online, you will get the state of the attached button.</p>
+<a class="title-link" name="espeasy----" href="#espeasy----"></a> ESPEasy를 사용하여 장치 상태 확인</h3>
+<p><a href="https://github.com/letscontrolit/ESPEasy" rel="external nofollow">ESPEasy</a>를 사용하여 ESP8266 장치를 만들었다고 가정합니다. “Config” 아래에 장치에 설정된 이름 (“Unit Name:”)이 있습니다 (여기서는 “bathroom”). “OpenHAB MQTT” 프로토콜을 사용하는 MQTT에 대한 “Controller” 설정이 있으며 항목 (“Controller Subscribe:” 및 “Controller Publish:”)이 필요에 맞게 조정합니다. 이 예에서 topic는 “home”으로 시작합니다. 또한 “Devices”탭에서 “switch” 및 “button”이라는 이름을 가진 “Switch Input”을 값으로 추가하십시오.</p>
+<p>장치가 온라인 상태가 되면 바로 연결된 버튼의 상태가 됩니다.</p>
 <pre><code class="language-txt">home/bathroom/status Connected
 ...
 home/bathroom/switch/button 1
 </code></pre>
-<p>The configuration will look like the example below:</p>
+<p>설정은 아래 예와 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: mqtt

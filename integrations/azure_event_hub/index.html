@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Azure Event Hub - 홈어시스턴트</title>
+    <title>Azure 이벤트 허브 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Setup for Azure Event Hub integration">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/azure_event_hub/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Azure Event Hub">
+    <meta property="og:title" content="Azure 이벤트 허브">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/azure_event_hub/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Azure Event Hub">
+    <meta name="twitter:title" content="Azure 이벤트 허브">
     <meta name="twitter:description" content="Setup for Azure Event Hub integration">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Azure Event Hub
+      Azure 이벤트 허브
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>Azure Event Hub</code> integration allows you to hook into the Home Assistant event bus and send events to <a href="https://azure.microsoft.com/en-us/services/event-hubs/" rel="external nofollow">Azure Event Hub</a> or to a <a href="https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-builtin" rel="external nofollow">Azure IoT Hub</a>.</p>
+  <p><code>Azure Event Hub</code> 통합구성요소를 통해 Home Assistant 이벤트 버스에 연결하여 <a href="https://azure.microsoft.com/en-us/services/event-hubs/" rel="external nofollow">Azure Event Hub</a> 또는 <a href="https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-builtin" rel="external nofollow">Azure IoT Hub</a>로 이벤트를 보낼 수 있습니다.</p>
 <h2>
-<a class="title-link" name="first-time-setup" href="#first-time-setup"></a> First time setup</h2>
-<p>This assumes you already have a Azure account. Otherwise create a Free account <a href="https://azure.microsoft.com/en-us/free/" rel="external nofollow">here</a>.</p>
-<p>You need to create a Event Hub namespace and a Event Hub in that namespace, you can follow <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create" rel="external nofollow">this guide</a>. Alternatively you can directly deploy an ARM template with the namespace and the Event Hub <a href="https://github.com/Azure/azure-quickstart-templates/tree/master/201-event-hubs-create-event-hub-and-consumer-group/" rel="external nofollow">from here</a>.</p>
-<p>You must then create a Shared Access Policy for the Event Hub with ‘Send’ claims or use the RootManageAccessKey from your namespace (this key has additional claims, including managing the event hub and listening, which are not needed for this purpose), for more details on the security of Event Hubs <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-authentication-and-security-model-overview" rel="external nofollow">go here</a>.</p>
-<p>Once you have the name of your namespace, instance, Shared Access Policy and the key for that policy, you can setup the integration itself.</p>
+<a class="title-link" name="-" href="#-"></a> 최초 셋업</h2>
+<p>이것은 이미 Azure 계정이 있다고 가정합니다. 그렇지 않으면 무료 계정을 작성하십시오 <a href="https://azure.microsoft.com/en-us/free/" rel="external nofollow">here</a></p>
+<p>해당 네임 스페이스에 Event Hub 네임 스페이스와 Event Hub를 만들어야합니다. <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create" rel="external nofollow">this guide</a>를 참조하십시오. 또는 네임 스페이스와 Event Hub를 사용하여 ARM 템플릿을 직접 배포 할 수 있습니다. <a href="https://github.com/Azure/azure-quickstart-templates/tree/master/201-event-hubs-create-event-hub-and-consumer-group/" rel="external nofollow">from here</a>.</p>
+<p>그런 다음 ‘Send’ 클레임을 사용하여 Event Hub에 대한 공유 액세스 정책을 작성하거나 네임 스페이스에서 RootManageAccessKey(이 키에는 이벤트 허브 관리 및 listening를 포함하여 이 목적에 필요하지 않은 추가 청구(claim)가 있습니다.)를 사용해야합니다. Event Hubs의 보안에 대한 자세한 내용은 <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-authentication-and-security-model-overview" rel="external nofollow">go here</a>를 참조하십시오.</p>
+<p>네임 스페이스, 인스턴스, 공유 액세스 정책의 이름 및 해당 정책의 키가 있으면 통합 자체를 설정할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 azure_event_hub:
   event_hub_namespace: NAMESPACE_NAME
@@ -175,17 +175,17 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-Not filtering domains or entities will send every event to Azure Event Hub, thus taking up a lot of space. 
+도메인 또는 엔터티를 필터링하지 않으면 모든 이벤트가 Azure Event Hub로 전송되므로 많은 공간을 차지합니다.
 </div>
 <div class="note warning">
-Event Hubs have a retention time of at most 7 days, if you do not capture or use the events they are deleted automatically from the Event Hub, the default retention is 1 day.
+이벤트 허브의 보존 시간은 최대 7 일이며, 이벤트 허브에서 자동으로 삭제 된 이벤트를 캡처하거나 사용하지 않으면 기본 보존은 1 일입니다.
 </div>
 <h3>
-<a class="title-link" name="using-the-data-in-azure" href="#using-the-data-in-azure"></a> Using the data in Azure</h3>
-<p>There are a number of ways to stream the data that comes into the Event Hub into storages in Azure, the easiest way is to use the built-in Capture function and this allows you to capture the data in Azure Blob Storage or Azure Data Lake store, <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-capture-overview" rel="external nofollow">details here</a>.</p>
-<p>Other storages in Azure (and outside) are possible with a <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-define-inputs#stream-data-from-event-hubs" rel="external nofollow">Azure Stream Analytics job</a>, for instance for <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-documentdb-output" rel="external nofollow">Cosmos DB</a>, <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-sql-output-perf" rel="external nofollow">Azure SQL DB</a>, <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-define-outputs#table-storage" rel="external nofollow">Azure Table Storage</a>, custom writing to <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-custom-path-patterns-blob-storage-output" rel="external nofollow">Azure Blob Storage</a> and <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal#configure-job-output" rel="external nofollow">Topic and Queues</a>.</p>
-<p>On the analytical side, Event Hub can be directly fed into <a href="https://docs.microsoft.com/en-us/azure/azure-databricks/databricks-stream-from-eventhubs?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fevent-hubs%2FTOC.json&amp;bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json" rel="external nofollow">Azure Databricks Spark</a>, <a href="https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-how-to-add-an-event-source-eventhub" rel="external nofollow">Azure Time Series Insights</a> and <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-tutorial-visualize-anomalies" rel="external nofollow">Microsoft Power BI</a>.</p>
-<p>The final way to use the data in Azure is to connect a Azure Function to the Event Hub using the <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs" rel="external nofollow">Event Hub trigger binding</a>.</p>
+<a class="title-link" name="azure--" href="#azure--"></a> Azure에서 데이터 사용하기</h3>
+<p>Event Hub로 들어오는 데이터를 Azure의 저장소로 스트리밍하는 여러 가지 방법이 있습니다. 가장 쉬운 방법은 기본 제공 Capture 기능을 사용하는 것입니다. 그러면 Azure Blob Storage 또는 Azure Data Lake Store에서 데이터를 캡처 할 수 있습니다. <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-capture-overview" rel="external nofollow">details here</a></p>
+<p>Azure (외부포함)의 다른 저장소는 <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-define-inputs#stream-data-from-event-hubs" rel="external nofollow">Azure Stream Analytics job</a>은 예를들어 <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-documentdb-output" rel="external nofollow">Cosmos DB</a>, <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-sql-output-perf" rel="external nofollow">Azure SQL DB</a>, <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-define-outputs#table-storage" rel="external nofollow">Azure Table Storage</a>, <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-custom-path-patterns-blob-storage-output" rel="external nofollow">Azure Blob Storage</a>에 대한 사용자 지정 작성과 <a href="https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal#configure-job-output" rel="external nofollow">Topic and Queues</a> 등을 사용하여 가능합니다.</p>
+<p>분석 측면에서 Event Hub를 <a href="https://docs.microsoft.com/en-us/azure/azure-databricks/databricks-stream-from-eventhubs?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fevent-hubs%2FTOC.json&amp;bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json" rel="external nofollow">Azure Databricks Spark</a>, <a href="https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-how-to-add-an-event-source-eventhub" rel="external nofollow">Azure Time Series Insights</a> 및 <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-tutorial-visualize-anomalies" rel="external nofollow">Microsoft Power BI</a>에 직접 공급할 수 있습니다.</p>
+<p>Azure에서 데이터를 사용하는 마지막 방법은 <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs" rel="external nofollow">Event Hub trigger binding</a>을 사용하여 Azure Function을 Event Hub에 연결하는 것입니다.</p>
 
 
 </article>

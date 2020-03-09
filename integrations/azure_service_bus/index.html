@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Azure Service Bus - 홈어시스턴트</title>
+    <title>Azure 서비스 버스 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Setup for Azure Service Bus integration">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/azure_service_bus/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Azure Service Bus">
+    <meta property="og:title" content="Azure 서비스 버스">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/azure_service_bus/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Azure Service Bus">
+    <meta name="twitter:title" content="Azure 서비스 버스">
     <meta name="twitter:description" content="Setup for Azure Service Bus integration">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      Azure Service Bus
+      Azure 서비스 버스
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>Azure Service Bus</code> integration allows you to send messages to <a href="https://azure.microsoft.com/en-us/services/service-bus/" rel="external nofollow">Azure Service Bus</a> from within Home Assistant.</p>
+  <p><code>Azure Service Bus</code> 통합구성요소를 통해 Home Assistant 내에서 <a href="https://azure.microsoft.com/en-us/services/service-bus/" rel="external nofollow">Azure Service Bus</a>로 메시지를 보낼 수 있습니다.</p>
 <h2>
-<a class="title-link" name="first-time-setup" href="#first-time-setup"></a> First-time setup</h2>
-<p>This assumes you already have an Azure account. Otherwise, create a free account <a href="https://azure.microsoft.com/en-us/free/" rel="external nofollow">here</a>.</p>
-<p>You need to create a Service Bus namespace; you can follow <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-create-namespace-portal" rel="external nofollow">this guide</a>.</p>
-<p>You must then create a Shared Access Policy for the Service Bus with <code>Send</code> claims or use the RootManageAccessKey from your namespace (this key has additional claims, including managing the event hub and listening, which are not needed for this purpose), for more details on the security of Service Bus <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-authentication-and-authorization#shared-access-signature" rel="external nofollow">go here</a>. Alternatively you can create a dedicated key for only one queue or topic, to restrict access to only that queue or topic.</p>
-<p>Once you have the connection string with <code>Send</code> policy, you can set up the integration itself.</p>
+<a class="title-link" name="-" href="#-"></a> 최초 셋업</h2>
+<p>이는 이미 Azure 계정이 있다고 가정합니다. 그렇지 않으면 무료 계정을 작성하십시오 <a href="https://azure.microsoft.com/en-us/free/" rel="external nofollow">여기</a>.</p>
+<p>Service Bus 네임 스페이스를 만들어야합니다. <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-create-namespace-portal" rel="external nofollow">이 안내서</a>를 따를 수 있습니다.</p>
+<p>그런 다음 <code>Send</code> 클레임을 사용하여 서비스 버스에 대한 공유 액세스 정책을 작성하거나 네임 스페이스에서 RootManageAccessKey를 사용해야합니다 (이 키에는 이벤트 허브 관리 및 청취(listening)를 위해 추가 클레임이 있으며 이 목적에는 필요하지 않음). 서비스 버스의 보안에 대한 세부 사항은 <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-authentication-and-authorization#shared-access-signature" rel="external nofollow">go here</a>에서 확인하십시오. 또는 하나의 queue 또는 topic에 대한 전용 키를 작성하여 해당 queue 또는 topic에만 액세스를 제한 할 수 있습니다.</p>
+<p><code>Send</code> 정책을 가진 연결 문자열이 있으면 통합 자체를 설정할 수 있습니다.</p>
 <div class="note warning">
-<p>The queue or topic that you are sending to needs to exists with the service bus namespace before you use it within Home Assistant. See <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-portal" rel="external nofollow">here</a> for how to set up a queue and <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal" rel="external nofollow">here</a> for setting up a topic and subscriptions.</p>
+<p>Home Assistant 내에서 서비스 버스 네임 스페이스를 사용하려면 보내기 전에 큐 또는 토픽이 있어야합니다.
+대기열 설정 방법은 <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-portal" rel="external nofollow">여기</a>와 topic 및 subscriptions 설정은 <a href="https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-quickstart-topics-subscriptions-portal" rel="external nofollow">여기</a>를 참조하십시오.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: azure_service_bus
@@ -153,12 +154,12 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>If you plan to send all state changes from one or more entities within Home Assistant, you should consider using the <a href="/integrations/azure_event_hub/">Azure Event Hub</a> integration instead.</p>
+<p>Home Assistant 내에서 하나 이상의 엔티티에서 모든 상태 변경을 보내려는 경우 <a href="/integrations/azure_event_hub/">Azure Event Hub</a> 통합구성요소를 대신 사용하는 것이 좋습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="usage" href="#usage"></a> Usage</h2>
-<p>The notification service will translate the data given to a JSON object on the service bus. The <code>message</code> field will always be set, but the fields <code>target</code> and <code>title</code> are optional and are only included in the service bus message if set. Any input given in the <code>data</code> section, will be flattened to the root of the JSON object and follow the structure given. All input given in the data section will be included in the message.</p>
-<p>See the example below for how an automation trigger translates to a message on the service bus.</p>
+<a class="title-link" name="" href="#"></a> 사용법</h2>
+<p>알림 서비스는 서비스 버스의 JSON 오브젝트에 제공된 데이터를 변환합니다. <code>message</code> 필드는 항상 설정되지만 <code>target</code> 및 <code>title</code> 필드는 선택 사항이며 설정된 경우 서비스 버스 메시지에만 포함됩니다. <code>data</code> 섹션에 주어진 모든 입력은 JSON 객체의 루트로 단조로워지고 주어진 구조를 따릅니다. 데이터 섹션에 제공된 모든 입력이 메시지에 포함됩니다.</p>
+<p>자동화 트리거가 서비스 버스의 메시지로 변환되는 방법은 아래 예를 참조하십시오.</p>
 <pre><code class="language-yaml">automation:
   - alias: Sunset Service Bus message
     trigger:
@@ -176,7 +177,7 @@ Default value: </p>
             trigger_more: true
             explain: "Its starting to get dark"
 </code></pre>
-<p>The message that can be retrieved from a queue or topic subscription:</p>
+<p>queue 또는 topic subscription에서 검색 할 수있는 메시지 :</p>
 <pre><code class="language-json">{
   "message": "Sun is going down",
   "title": "Good evening",
