@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MQTT Cover - 홈어시스턴트</title>
+    <title>MQTT 커버(Cover) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate MQTT covers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/cover.mqtt/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="MQTT Cover">
+    <meta property="og:title" content="MQTT 커버(Cover)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/cover.mqtt/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="MQTT Cover">
+    <meta name="twitter:title" content="MQTT 커버(Cover)">
     <meta name="twitter:description" content="Instructions on how to integrate MQTT covers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      MQTT Cover
+      MQTT 커버(Cover)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mqtt</code> cover platform allows you to control an MQTT cover (such as blinds, a rollershutter or a garage door).</p>
+  <p><code>mqtt</code> 커버(Cover) 플랫폼을 사용하면 MQTT 커버(커튼, 블라인드, 롤러 셔터 또는 차고문)를 제어할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>The device state (<code>open</code> or <code>closed</code>) will be updated only after a new message is published on <code>state_topic</code> matching <code>state_open</code> or <code>state_closed</code>. If these messages are published with the <code>retain</code> flag set, the cover will receive an instant state update after subscription and Home Assistant will display the correct state on startup. Otherwise, the initial state displayed in Home Assistant will be <code>unknown</code>.
-<code>state_topic</code> can only manage <code>state_open</code> and <code>state_closed</code>. No percentage positions etc.</p>
-<p>For this purpose is <code>position_topic</code> which can set state of the cover and position.
-Default setting are 0 means the device is <code>closed</code> and all other intermediate positions means the device is <code>open</code>.
-<code>position_topic</code> is managed by <code>position_open</code> and <code>position_closed</code>
-You can set it up in opossite way as well.
-If position topic is defined than state topic is ignored.</p>
-<p>If a state topic and position topic are not defined, the cover will work in optimistic mode. In this mode, the cover will immediately change state (<code>open</code> or <code>closed</code>) after every command sent by Home Assistant. If a state topic/position topic is defined, the cover will wait for a message on <code>state_topic</code> or <code>position_topic</code>.</p>
-<p>Optimistic mode can be forced, even if a <code>state_topic</code> / <code>position_topic</code> is defined. Try to enable it if experiencing incorrect cover operation (Google Assistant gauge may need optimistic mode as it often send request to your Home Assistant immediately after send set_cover_position in which case MQTT could be too slow).</p>
-<p>The <code>mqtt</code> cover platform optionally supports an <code>availability_topic</code> to receive online and offline messages (birth and LWT messages) from the MQTT cover device. During normal operation, if the MQTT cover device goes offline (i.e. publishes <code>payload_not_available</code> to <code>availability_topic</code>), Home Assistant will display the cover as “unavailable”. If these messages are published with the <code>retain</code> flag set, the cover will receive an instant update after subscription and Home Assistant will display correct availability state of the cover when Home Assistant starts up. If the <code>retain</code> flag is not set, Home Assistant will display the cover as “unavailable” when Home Assistant starts up.</p>
-<p>To use your MQTT cover in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>장치 상태(<code>open</code> 또는 <code>closed</code>)는 <code>state_topic</code> 매칭에서 <code>state_open</code> 또는 <code>state_closed</code>의 새 메시지가 게시된 후에만 ​​업데이트됩니다. 이러한 메시지가 <code>retain</code> 플래그가 설정된 상태로 게시된 경우 subscription 후 커버에 즉시 상태 업데이트가 수신되고 홈어시스턴트는 시작시 변경된 상태를 표시합니다. 그렇지 않으면 홈어시스턴트에 표시되는 초기 상태는 <code>unknown</code>입니다.</p>
+<p>이를 위해 커버의 상태와 위치를 설정할 수 있는 <code>position_topic</code>이 있습니다.
+기본 설정은 0이며 장치가 <code>closed</code>를 의미하고 다른 모든 중간 위치는 장치가 <code>open</code>을 의미합니다.
+<code>position_topic</code>은 <code>position_open</code> 및 <code>position_closed</code>로 관리합니다.
+반대 방식으로 설정할 수도 있습니다.
+만일 position topic이 정의되면 state topic은 무시됩니다.</p>
+<p>state topic 및 state topic이 정의되지 않은 경우 cover는 optimistic mode에서 작동합니다. 이 모드에서 커버는 홈어시스턴트가 보낸 모든 명령 후에 즉시 state(<code>open</code> 혹은 <code>closed</code>)를 변경합니다. state topic/position topic이 정의 된 경우, 커버는 <code>state_topic</code> 또는 <code>position_topic</code>에서 메시지를 기다립니다.</p>
+<p><code>state_topic</code>/<code>position_topic</code>이 정의되어 있어도 Optimistic mode를 강제할 수 있습니다. 잘못된 커버 작동이 발생하면 활성화하십시오 (Google Assistant Gauge는 set_cover_position을 보낸 후 즉시 홈어시스턴트로 요청을 보내므로 Optimistic mode가 필요할 수 있습니다. 이 경우 MQTT가 너무 느릴 수 있습니다.)</p>
+<p><code>mqtt</code> 커버 플랫폼은 선택적으로 MQTT 커버 장치로부터 online 및 offline messages (birth 및 LWT messages)를 수신할 수있는 <code>availability_topic</code>을 지원합니다. 정상적인 작동중에 MQTT 커버 장치가 offline state가 되면 (즉, <code>payload_not_available</code>을 <code>availability_topic</code>에 게시하는 경우) 홈어시스턴트는 커버를 “unavailable”으로 표시합니다. 이러한 massage가 <code>retain</code> flag가 설정된 상태로 publish된 경우 subscription후 커버가 즉시 업데이트를 수신하고 Home Assistant는 Home Assistant가 시작될 때 커버의 correct availability state를 표시합니다.</p>
+<p>설치시 MQTT 커버를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: mqtt
@@ -386,11 +385,11 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you will find some real-life examples of how to use this platform.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는 이 플랫폼을 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
-<a class="title-link" name="full-configuration-state-topic-without-tilt" href="#full-configuration-state-topic-without-tilt"></a> Full configuration state topic without tilt</h3>
-<p>The example below shows a full configuration for a cover without tilt with state topic only.</p>
+<a class="title-link" name="tilt----state-topic" href="#tilt----state-topic"></a> 틸트(TILT)가 없는 전체 설정 state topic</h3>
+<p>아래 예는 state topic만 쓰고 tilt가 없는 커버의 전체 설정을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: mqtt
@@ -411,8 +410,8 @@ cover:
     value_template: '{{ value.x }}'
 </code></pre>
 <h3>
-<a class="title-link" name="full-configuration-position-topic-without-tilt" href="#full-configuration-position-topic-without-tilt"></a> Full configuration position topic without tilt</h3>
-<p>The example below shows a full configuration for a cover without tilt with position topic.</p>
+<a class="title-link" name="tilt----position-topic" href="#tilt----position-topic"></a> TILT가 없는 전체 설정 position topic</h3>
+<p>아래 예는 position topic으로 tilt가 없는 커버의 전체 설정을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: mqtt
@@ -434,8 +433,8 @@ cover:
     value_template: '{{ value.x }}'
 </code></pre>
 <h3>
-<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full configuration</h3>
-<p>The example below shows a full configuration for a cover.</p>
+<a class="title-link" name="-" href="#-"></a> 전체 설정</h3>
+<p>아래 예는 커버의 전체 설정을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: mqtt
@@ -462,7 +461,7 @@ cover:
     tilt_closed_value: 70
     tilt_opened_value: 180
 </code></pre>
-<p>To test, you can use the command line tool <code>mosquitto_pub</code> shipped with <code>mosquitto</code> or the <code>mosquitto-clients</code> package to send MQTT messages. This allows you to operate your cover manually:</p>
+<p>테스트하려면 mosquitto와 함께 제공된 <code>mosquitto_pub</code> command line tool 또는 <code>mosquitto-clients</code> 패키지를 사용하여 MQTT 메시지를 보낼 수 있습니다. 이를 통해 커버를 수동으로 조작할 수 있습니다.</p>
 <pre><code class="language-bash">$  mosquitto_pub -h 127.0.0.1 -t home-assistant/cover/set -m "CLOSE"
 </code></pre>
 

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Transmission - 홈어시스턴트</title>
+    <title>트랜스미션(Transmission) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Transmission within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/transmission/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Transmission">
+    <meta property="og:title" content="트랜스미션(Transmission)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/transmission/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Transmission">
+    <meta name="twitter:title" content="트랜스미션(Transmission)">
     <meta name="twitter:description" content="Instructions on how to integrate Transmission within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,27 +97,27 @@
   
   <header>
     <h1 class="title indent">
-      Transmission
+      트랜스미션(Transmission)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>transmission</code> integration allows you to monitor your downloads with <a href="https://www.transmissionbt.com/" rel="external nofollow">Transmission</a> from within Home Assistant and setup automation based on the information.</p>
+  <p><code>transmission</code> 연동을 통해 홈어시스턴트에서  <a href="https://www.transmissionbt.com/" rel="external nofollow">Transmission</a>을 통해 다운로드를 모니터링하고 정보를 기반으로 자동화를 설정할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>To use the monitoring, your transmission client needs to allow remote access. If you are running the graphical transmission client (transmission-gtk) go to <strong>Edit</strong> -&gt; <strong>Preferences</strong> and choose the tab <strong>Remote</strong>. Check <strong>Allow remote access</strong>, enter your username and your password, and uncheck the network restriction as needed.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>모니터링을 사용하려면 전송 클라이언트가 원격 액세스를 허용해야합니다. 그래픽 전송 클라이언트 (transmission-gtk)를 실행중인 경우 <strong>Edit</strong> -&gt; <strong>Preferences</strong> 으로 이동하여 <strong>Remote</strong> 탭을 선택하십시오. <strong>Allow remote access</strong>*을 선택하고 사용자 이름과 비밀번호를 입력한 다음 필요에 따라 네트워크 제한을 해제하십시오.</p>
 <p class="img">
   <img src="/images/integrations/transmission/transmission_perf.png">
 </p>
-<p>If everything is set up correctly, the details will show up in the frontend.</p>
+<p>모든 것이 올바르게 설정되면 세부 정보가 프론트 엔드에 나타납니다.</p>
 <p class="img">
   <img src="/images/integrations/transmission/transmission.png">
 </p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Set up the integration through <strong>Configuration</strong> -&gt; <strong>Integrations</strong> -&gt; <strong>Transmission</strong>. For legacy support old transmission configuration is imported and set up as new integration. Make sure to remove <code>monitored_condiditions</code> as they are now automatically added to Home Assistant</p>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><strong>설정</strong> -&gt; <strong>통합구성요소</strong>-&gt; <strong>Transmission</strong>을 통해 연동을 설정하십시오. 레거시 지원을 위해 이전 전송 설정을 가져 와서 새로운 통합구성요소로 설정합니다. <code>monitored_condiditions</code> 는 이제 홈어시스턴트에 자동으로 추가되므로 제거하십시오</p>
+<p>이 센서를 활성화하려면<code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml">transmission:
   host: 192.168.1.1
 </code></pre>
@@ -157,8 +157,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="integration-entities" href="#integration-entities"></a> Integration Entities</h2>
-<p>The Transmission Integration will add the following sensors and switches.</p>
+<a class="title-link" name="-" href="#-"></a> 통합구성요소 엔티티들</h2>
+<p>Transmission 통합구성요소는 다음 센서 및 스위치를 추가합니다.</p>
 <p>Sensors:</p>
 <ul>
 <li>transmission_current_status: The status of your Transmission daemon.</li>
@@ -176,15 +176,15 @@ Default value: </p>
 <li>transmission_turtle_mode: A switch to enable turtle mode.</li>
 </ul>
 <h2>
-<a class="title-link" name="event-automation" href="#event-automation"></a> Event Automation</h2>
-<p>The Transmission integration is continuously monitoring the status of torrents in the target client. Once a torrent is started or completed, an event is triggered on the Home Assistant Bus, which allows to implement any kind of automation.</p>
-<p>Possible events are:</p>
+<a class="title-link" name="-" href="#-"></a> 이벤트 자동화</h2>
+<p>Transmission 통합구성요소는 대상 클라이언트의 토렌트 상태를 지속적으로 모니터링합니다. 토렌트가 시작되거나 완료되면 홈어시스턴트 버스에서 이벤트가 트리거되어 모든 종류의 자동화를 구현할 수 있습니다.</p>
+<p>가능한 이벤트는 다음과 같습니다. :</p>
 <ul>
 <li>transmission_downloaded_torrent</li>
 <li>transmission_started_torrent</li>
 </ul>
-<p>Inside of the event, there is the name of the torrent that is started or completed, as it is seen in the Transmission User Interface.</p>
-<p>Example of configuration of an automation with completed torrents:</p>
+<p>이벤트 내부에는 전송 사용자 인터페이스에서 볼 수 있듯이 시작되거나 완료된 토렌트 이름이 있습니다.</p>
+<p>토렌트가 완성된 자동화 설정의 예 :</p>
 <pre><code class="language-yaml">- alias: Completed Torrent
   trigger:
     platform: event
@@ -196,10 +196,10 @@ Default value: </p>
       message: "{{trigger.event.data.name}}"
 </code></pre>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="service-add_torrent" href="#service-add_torrent"></a> Service add_torrent</h3>
-<p>Adds a new torrent to download. It can either be a URL (http, https or ftp), magnet link or a local file (make sure that the path is <a href="/docs/configuration/basic/#whitelist_external_dirs">white listed</a>).</p>
+<a class="title-link" name="add_torrent-" href="#add_torrent-"></a> add_torrent 서비스</h3>
+<p>다운로드 할 새 토렌트를 추가합니다. URL (http, https 또는 ftp), magnet 링크 또는 로컬 파일일 수 있습니다 (경로가 <a href="/docs/configuration/basic/#whitelist_external_dirs">white listed</a>인지 확인).</p>
 <table>
 <thead>
 <tr>
@@ -222,10 +222,10 @@ Default value: </p>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="templating" href="#templating"></a> Templating</h2>
+<a class="title-link" name="templating" href="#templating"></a> 템플레이팅(Templating)</h2>
 <h3>
 <a class="title-link" name="sensor-started_torrents" href="#sensor-started_torrents"></a> Sensor started_torrents</h3>
-<p>The state attribute <code>torrent_info</code> contains information about the torrents that are currently downloading. You can see this information in <strong>Developer Tools</strong> -&gt; <strong>States</strong> -&gt; <code>sensor.transmission_started_torrents</code> -&gt; <strong>Attributes</strong>, or by adding a Markdown Card to Lovelace.</p>
+<p>state 속성 <code>torrent_info</code>는 현재 다운로드중인 토렌트에 대한 정보를 포함합니다. <strong>개발자 도구</strong>-&gt; <strong>state</strong> -&gt; <code>sensor.transmission_started_torrents</code> -&gt; <strong>Attributes</strong>에서 혹은 마크 다운 카드를 Lovelace에 추가하여 이 정보를 볼 수 있습니다.</p>
 <pre><code class="language-yaml">content: &gt;
   {% set payload = state_attr('sensor.transmission_started_torrents', 'torrent_info') %}
 

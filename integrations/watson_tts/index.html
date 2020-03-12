@@ -103,21 +103,21 @@
   <hr class="divider">
   
 
-  <p>The <code>watson_tts</code> text-to-speech platform that works with <a href="https://www.ibm.com/watson/services/text-to-speech/" rel="external nofollow">IBM Watson Cloud</a> to create the spoken output.
-Watson is a paid service via IBM Cloud but there is a decent <a href="https://www.ibm.com/cloud/watson-text-to-speech/pricing" rel="external nofollow">free tier</a> which offers 10000 free characters every month.</p>
+  <p><a href="https://www.ibm.com/watson/services/text-to-speech/" rel="external nofollow">IBM Watson Cloud</a>와 함께 작동하여 음성 출력을 작성하는 <code>watson_tts</code> 텍스트 음성 변환 플랫폼입니다.
+Watson은 IBM Cloud를 통한 유료 서비스이지만 매월 10000 개의 무료 문자를 제공하는 적절한 <a href="https://www.ibm.com/cloud/watson-text-to-speech/pricing" rel="external nofollow">free tier</a>가 있습니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>For supported formats and voices please go to <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-about#about" rel="external nofollow">IBM Cloud About section</a>.</p>
-<p>To get started please read the <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-gettingStarted#gettingStarted" rel="external nofollow">Getting started tutorial</a>.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>지원되는 형식 및 음성은 <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-about#about" rel="external nofollow">IBM Cloud About section</a>으로 이동하십시오.</p>
+<p>시작하려면 <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-gettingStarted#gettingStarted" rel="external nofollow">Getting started tutorial</a>를 읽으십시오</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To configure Watson TTS, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Watson TTS를 설정하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tts:
   - platform: watson_tts
     watson_apikey: YOUR_GENERATED_APIKEY
 </code></pre>
-<p>You can get these tokens after you generated the credentials on the IBM Cloud console:</p>
+<p>IBM Cloud 콘솔에서 credentials를 생성한 후 이러한 토큰을 얻을 수 있습니다. :</p>
 <p class="img">
   <img src="/images/screenshots/watson_tts_screen.png">
 </p>
@@ -159,13 +159,13 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="usage" href="#usage"></a> Usage</h2>
-<p>Say to all <code>media_player</code> device entities:</p>
+<a class="title-link" name="" href="#"></a> 사용법</h2>
+<p>모든 <code>media_player</code> 장치 엔티티에게 말하십시오 :</p>
 <pre><code class="language-yaml">- service: tts.watson_tts_say
   data_template:
     message: 'Hello from Watson'
 </code></pre>
-<p>or</p>
+<p>혹은</p>
 <pre><code class="language-yaml">- service: tts.watson_tts_say
   data_template:
     message: &gt;
@@ -173,7 +173,6 @@ Default value: </p>
           Hello from Watson
       &lt;/speak&gt;
 </code></pre>
-<p>Say to the <code>media_player.living_room</code> device entity:</p>
 <pre><code class="language-yaml">- service: tts.watson_tts_say
   data_template:
     entity_id: media_player.living_room
@@ -182,7 +181,7 @@ Default value: </p>
           Hello from Watson
       &lt;/speak&gt;
 </code></pre>
-<p>Say with break:</p>
+<p>쉬고 말하세요. :</p>
 <pre><code class="language-yaml">- service: tts.watson_tts_say
   data_template:
     message: &gt;

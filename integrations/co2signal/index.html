@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>CO2 Signal - 홈어시스턴트</title>
+    <title>세계이산화탄소측정(CO2 Signal) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to use CO2Signal data within Home Assistant">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/co2signal/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="CO2 Signal">
+    <meta property="og:title" content="세계이산화탄소측정(CO2 Signal)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/co2signal/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="CO2 Signal">
+    <meta name="twitter:title" content="세계이산화탄소측정(CO2 Signal)">
     <meta name="twitter:description" content="Instructions on how to use CO2Signal data within Home Assistant">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      CO2 Signal
+      세계이산화탄소측정(CO2 Signal)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>co2signal</code> sensor platform queries the <a href="https://www.co2signal.com/" rel="external nofollow">CO2Signal</a> API for the CO2 intensity of a specific region. Data can be collected via latitude/longitude or by country code. This API uses the same data as <a href="https://www.electricitymap.org" rel="external nofollow">https://www.electricitymap.org</a> Not all countries/regions in the world are supported so please consult this website to check local availability.</p>
-<p>This platform requires a CO2Signal API key, which can be obtained <a href="https://www.co2signal.com/" rel="external nofollow">here</a>. Note that this API key is for personal use only and other options exist when the data is used commercially.</p>
-<p>At the moment, the free CO2Signal API only supports the average carbon intensity of a country and not the marginal carbon intensity.</p>
+  <p><code>co2signal</code> 센서 플랫폼은 <a href="https://www.co2signal.com/" rel="external nofollow">CO2Signal</a> API에 특정 지역의 CO2 강도를 쿼리합니다. 위도/경도 또는 국가 코드를 통해 데이터를 수집할 수 있습니다. 이 API는 <a href="https://www.electricitymap.org" rel="external nofollow">https://www.electricitymap.org</a>와 동일한 데이터를 사용합니다. 전 세계의 모든 국가/지역이 지원되는 것은 아니므로 이 웹사이트를 참조하여 로컬 가용성을 확인하십시오.</p>
+<p>이 플랫폼에는 <a href="https://www.co2signal.com/" rel="external nofollow">여기</a>에서 얻을 수 있는 CO2Signal API 키가 필요합니다. 이 API 키는 개인용이며 데이터가 상업적으로 사용될 때 다른 옵션을 써야합니다.</p>
+<p>현재 무료 CO2Signal API는 한계 탄소 강도가 아닌 국가의 평균 탄소 강도 만 지원합니다.</p>
 <div class="note warning">
-The "free" API key is limited to a limited number of calls. Too many requests can result in data loss.
+"무료" API 키는 제한된 수의 호출로 제한됩니다. 요청이 너무 많으면 데이터가 손실 될 수 있습니다.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To set up this platform, get your <a href="https://www.co2signal.com/" rel="external nofollow">API key</a> and add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 플랫폼을 설정하려면 <a href="https://www.co2signal.com/" rel="external nofollow">API 키</a>를 가져 와서 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: co2signal
     token: YOUR_CO2SIGNAL_API_KEY
 </code></pre>
-<p>By default, the sensor will use your Home Assistant longitude and latitude. More detailed configurations to overwrite this can be found below.</p>
+<p>기본적으로 센서는 홈어시스턴트 경도 및 위도를 사용합니다. 이를 덮어쓰는 보다 자세한 설정은 아래에서 확인할 수 있습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -149,37 +149,37 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>To enable the platform and gather data via a specific latitude/longitude, add the following lines to your <code>configuration.yaml</code> file:</p>
+<p>플랫폼을 활성화하고 특정 위도/경도를 통해 데이터를 수집하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: co2signal
     token: YOUR_CO2SIGNAL_API_KEY
     latitude: YOUR_LATITUDE
     longitude: YOUR_LONGITUDE
 </code></pre>
-<p>A similar result can be achieved by using the country code. In that case, use the following lines in your <code>configuration.yaml</code> file:</p>
+<p>국가 코드를 사용하여 유사한 결과를 얻을 수 있습니다. 이 경우 <code>configuration.yaml</code> 파일에서 다음 줄을 사용하십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: co2signal
     token: YOUR_CO2SIGNAL_API_KEY
     country_code: YOUR_COUNTRY_CODE
 </code></pre>
 <h2>
-<a class="title-link" name="example-configurations" href="#example-configurations"></a> Example Configurations</h2>
-<p>Configuration using custom latitude and longitude:</p>
+<a class="title-link" name="-" href="#-"></a> 설정 사례</h2>
+<p>사용자 지정 위도 및 경도를 사용한 설정 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: co2signal
     token: YOUR_CO2SIGNAL_API_KEY
     latitude: 55.4
     longitude: 5.5
 </code></pre>
-<p>Configuration using a country code:</p>
+<p>국가 코드를 사용한 설정 :</p>
 <pre><code class="language-yaml">sensor:
   - platform: co2signal
     token: YOUR_CO2SIGNAL_API_KEY
     country_code: BE
 </code></pre>
 <h2>
-<a class="title-link" name="sensor-types" href="#sensor-types"></a> Sensor Types</h2>
-<p>When configured, the platform will create one sensor for each configured location.</p>
+<a class="title-link" name="sensor-" href="#sensor-"></a> Sensor 타입들</h2>
+<p>연동된 플랫폼은 설정된 각 위치에 대해 하나의 센서를 만듭니다.</p>
 
 
 </article>

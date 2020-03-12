@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Cisco IOS - 홈어시스턴트</title>
+    <title>시스코 IOS - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Cisco IOS routers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/cisco_ios/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Cisco IOS">
+    <meta property="og:title" content="시스코 IOS">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/cisco_ios/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Cisco IOS">
+    <meta name="twitter:title" content="시스코 IOS">
     <meta name="twitter:description" content="Instructions on how to integrate Cisco IOS routers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Cisco IOS
+      시스코 IOS
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This is a presence detection scanner for <a href="https://www.cisco.com/" rel="external nofollow">Cisco</a> IOS devices.</p>
+  <p><a href="https://www.cisco.com/" rel="external nofollow">Cisco</a> IOS 장치의 재실 감지 스캐너입니다.</p>
 <div class="note warning">
-This device tracker needs SSH to be enabled on the router.
+이 장치 추적기는 라우터에서 SSH를 활성화해야합니다.
 </div>
-<p>Before using this scanner it is recommended that you lower the ARP cache timeout on your router, as Cisco IOS normally comes with a 4 hour default ARP cache timeout.</p>
-<p>For example, the following commands will lower the timeout to 2 minutes on Vlan1:</p>
+<p>Cisco IOS에는 일반적으로 4 시간 기본 ARP 캐시 시간 초과가 제공되므로 이 스캐너를 사용하기 전에 라우터에서 ARP 캐시 시간 초과를 낮추는 것이 좋습니다.</p>
+<p>예를 들어 다음 명령은 Vlan1에서 시간 초과를 2 분으로 줄입니다.</p>
 <pre><code class="language-bash"># 1. use this command to see what Vlan your devices are on
 show ip arp
 
@@ -128,9 +128,9 @@ arp timeout 120
 copy running-config startup-config
 </code></pre>
 <div class="note warning">
-<p>If you have a very large number of devices on your VLan (+1000), then you may want to adjust the ARP cache timeout to suit your needs. See <a href="https://supportforums.cisco.com/discussion/10169296/arp-timeout" rel="external nofollow">this discussion</a> to learn more.</p>
+<p>VLan (+1000)에 매우 많은 수의 장치가 있는 경우 필요에 따라 ARP 캐시 시간 초과를 조정해야 할 수 있습니다. 자세한 내용은 <a href="https://supportforums.cisco.com/discussion/10169296/arp-timeout" rel="external nofollow">this discussion</a>을 참조하십시오.</p>
 </div>
-<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>이 장치 추적기를 설치에 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 device_tracker:
   - platform: cisco_ios
@@ -156,7 +156,7 @@ device_tracker:
 </span></p></dd>
 </dl>
 </div>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+<p>추적할 사람을 설정하는 방법에 대한 지침은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오.</p>
 
 
 </article>

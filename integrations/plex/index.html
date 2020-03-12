@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Plex Media Server - 홈어시스턴트</title>
+    <title>Plex 미디어 서버 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Plex into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/plex/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Plex Media Server">
+    <meta property="og:title" content="Plex 미디어 서버">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/plex/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Plex Media Server">
+    <meta name="twitter:title" content="Plex 미디어 서버">
     <meta name="twitter:description" content="Instructions on how to integrate Plex into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,31 +97,32 @@
   
   <header>
     <h1 class="title indent">
-      Plex Media Server
+      Plex 미디어 서버
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>plex</code> integration allows you to connect to a <a href="https://plex.tv" rel="external nofollow">Plex Media Server</a>. Once connected, <a href="https://www.plex.tv/apps-devices/" rel="external nofollow">Plex Clients</a> playing media from the connected Plex Media Server will show up as <a href="/integrations/media_player/">Media Players</a> and report playback status via a <a href="/integrations/sensor/">Sensor</a> in Home Assistant. The Media Players will allow you to control media playback and see the current playing item.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>plex</code> 통합구성요소로 <a href="https://plex.tv" rel="external nofollow">Plex Media Server</a>에 연결할 수 있습니다.
+연결되면 연결된 Plex Media Server에서 미디어를 재생하는 <a href="https://www.plex.tv/apps-devices/" rel="external nofollow">Plex Clients</a>가 <a href="/integrations/media_player/">Media Players</a>로 표시되고 Home Assistant의 <a href="/integrations/sensor/">Sensor</a>를 통해 재생 상태를 보고합니다. 미디어 플레이어를 사용하면 미디어 재생을 제어하고 현재 재생중인 항목을 볼 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#media-player">Media Player</a></li>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
-<p>If your Plex server has been claimed by a Plex account via the <a href="https://plex.tv/claim" rel="external nofollow">claim interface</a>, Home Assistant will require authentication to connect.</p>
-<p>The preferred way to enable the Plex integration is via <strong>Configuration</strong> -&gt; <strong>Integrations</strong>. You will be redirected to the <a href="https://plex.tv" rel="external nofollow">plex.tv</a> website to sign in with your Plex account. Once access is granted, Home Assistant will connect to the server linked to the associated account. If multiple Plex servers are available on the account, you will be prompted to complete the configuration by selecting the desired server on the Integrations page. Home Assistant will show as an authorized device on the <a href="https://app.plex.tv/web/app" rel="external nofollow">Plex Web</a> interface under <strong>Settings</strong> -&gt; <strong>Authorized Devices</strong>.</p>
+<p><a href="https://plex.tv/claim" rel="external nofollow">claim interface</a>를 통해 Plex 계정에서 Plex 서버를 요청한 경우 홈어시스턴트는 인증을 요구합니다.</p>
+<p>Plex 통합구성요소를 활성화하는 기본 방법은 <strong>설정</strong> -&gt; <strong>통합구성요소</strong>를 사용하는 것입니다. Plex 계정으로 로그인하기 위해 <a href="https://plex.tv" rel="external nofollow">plex.tv</a> 웹사이트로 리디렉션됩니다. 액세스 권한이 부여되면 Home Assistant는 해당 계정으로 링크된 서버에 연결합니다. 계정에서 여러 Plex 서버를 사용할 수 있는 경우 통합구성요소 페이지에서 원하는 서버를 선택하여 설정을 완료하라는 메시지가 표시됩니다. 홈어시스턴트가 <a href="https://app.plex.tv/web/app" rel="external nofollow">Plex Web</a> 인터페이스의 <strong>Settings</strong> -&gt; <strong>Authorized Devices</strong>에서 인증된 장치로 표시됩니다.</p>
 <div class="note info">
-<p>Local and secure connections are preferred when setting up an Integration. After the initial configuration, all connections to your Plex servers are made directly without connecting to Plex’s services.</p>
+<p>연동을 설정할 때 로컬 및 보안 연결이 선호됩니다. 초기 설정 후 Plex 서버에 대한 모든 연결은 Plex 서비스에 연결하지 않고 직접 이루어집니다.</p>
 </div>
-<p>If <a href="/integrations/discovery/">discovery</a> is enabled and a local Plex server is found, a legacy <code>media_player</code> configuration (i.e., a <code>plex.conf</code> file) will be imported. GDM can be enabled via the Plex Web App under <strong>Settings</strong> -&gt; <strong>(Server Name)</strong> -&gt; <strong>Settings</strong> -&gt; <strong>Network</strong> and choosing <strong>Enable local network discovery (GDM)</strong>.</p>
-<p>The <code>plex</code> integration can also be configured via <code>configuration.yaml</code>:</p>
+<p><a href="/integrations/discovery/">discovery</a>가 활성화되고 로컬 Plex 서버가 발견되면 레거시 <code>media_player</code> 설정 (즉, <code>plex.conf</code> 파일)을 가져옵니다. <strong>Settings</strong> -&gt; <strong>(Server Name)</strong> -&gt; <strong>Settings</strong> -&gt; <strong>Network</strong> 에서 Plex Web App을 통해 GDM을 활성화하고 <strong>Enable local network discovery (GDM)</strong> 을 선택할 수 있습니다.</p>
+<p><code>plex</code> 통합구성요소는 <code>configuration.yaml</code>을 통해 설정할 수도 있습니다 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 plex:
   token: MYSECRETTOKEN
 </code></pre>
 <div class="note warning">
-<p>Only one Plex server can be configured when using <code>configuration.yaml</code>. To add more servers, set up via <strong>Configuration</strong> -&gt; <strong>Integrations</strong>.</p>
+<p><code>configuration.yaml</code>을 사용할 때 하나의 Plex 서버만 설정할 수 있습니다. 더 많은 서버를 추가하려면 <strong>설정</strong> -&gt; <strong>통합구성요소</strong> 를 통해 설정하십시오.</p>
 </div>
 <div class="config-vars">
   <h3>
@@ -205,10 +206,10 @@ plex:
 </code></pre>
 <h2>
 <a class="title-link" name="media-player" href="#media-player"></a> Media Player</h2>
-<p>The <code>plex</code> media_player platform will create Media Player entities for each connected client device. These entities will display media information, playback progress, and playback controls if supported by the device.</p>
+<p><code>plex</code> media_player 플랫폼은 연결된 각 클라이언트 장치에 대해 미디어 플레이어 엔티티를 만듭니다. 이 엔티티는 장치에서 지원하는 경우 미디어 정보, 재생 진행률 및 재생 컨트롤을 표시합니다.</p>
 <h3>
-<a class="title-link" name="service-play_media" href="#service-play_media"></a> Service play_media</h3>
-<p>Plays a song, playlist, TV episode, or video on a connected client.</p>
+<a class="title-link" name="play_media-" href="#play_media-"></a> play_media 서비스</h3>
+<p>연결된 클라이언트에서 노래, 재생 목록, TV 에피소드 또는 비디오를 재생합니다.</p>
 <h4>
 <a class="title-link" name="music" href="#music"></a> Music</h4>
 <table>
@@ -393,22 +394,22 @@ plex:
 <a class="title-link" name="notes" href="#notes"></a> Notes</h3>
 <ul>
 <li>
-<p>The <code>plex</code> integration supports multiple Plex servers. Additional connections can be configured under Configuration &gt; Integrations.</p>
+<p><code>plex</code> 통합구성요소는 여러 Plex 서버를 지원합니다. 설정 &gt; 통합구성요소 에서 추가 연결을 설정할 수 있습니다.</p>
 </li>
 <li>
-<p>When setting up a server via <code>configuration.yaml</code>, it is possible to get errors that look like the following.</p>
+<p><code>configuration.yaml</code>을 통해 서버를 설정할 때 다음과 같은 오류가 발생할 수 있습니다.</p>
 <pre><code class="language-txt">ERROR:plexapi:http://192.168.1.10:32400: ('Connection aborted.', BadStatusLine("''",))
 INFO:homeassistant.components.media_player.plex:No server found at: http://192.168.1.10:32400
 </code></pre>
-<p>If this occurs, check the setting <code>Server</code>&gt;<code>Network</code>&gt;<code>Secure connections</code> on your Plex Media Server: if it is set to <code>Preferred</code> or <code>Required</code>, you may need to manually set the <code>ssl</code> and <code>verify_ssl</code> configuration options to, respectively, <code>true</code> and <code>false</code>.</p>
+<p>이 문제가 발생하면 Plex Media 서버에서 <code>Server</code>&gt;<code>Network</code>&gt;<code>Secure connections</code> 설정을 확인하십시오 : <code>Preferred</code> 또는 <code>Required</code>로 설정되어 있으면 <code>ssl</code> 및 <code>verify_ssl</code> 설정 옵션을 각각 <code>true</code> 및 <code>false</code>로 수동 설정해야합니다.</p>
 </li>
 <li>
-<p>Movies must be located under ‘Movies’ section in the Plex library to properly get ‘playing’ state.</p>
+<p>‘playing’ 상태를 제대로 얻으려면 Plex 라이브러리의 ‘Movies’ 섹션 아래에 동영상이 있어야합니다.</p>
 </li>
 </ul>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>plex</code> sensor platform will monitor activity on a given <a href="https://plex.tv/" rel="external nofollow">Plex Media Server</a>. It will create a sensor that shows the number of currently watching users as the state. If you click the sensor for more details, it will show you who is watching what.</p>
+<p><code>plex</code> 센서 플랫폼은 주어진 <a href="https://plex.tv/" rel="external nofollow">Plex Media Server</a>에서의 활동을 모니터링합니다. 현재 보고있는 사용자 수를 상태로 표시하는 센서를 만듭니다. 자세한 내용을 보려면 센서를 클릭하면 누가 무엇을 보고 있는지 표시됩니다.</p>
 
 
 </article>

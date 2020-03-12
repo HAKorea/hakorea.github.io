@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>유틸리티 미터(Utility Meter) - 홈어시스턴트</title>
+    <title>사용자정의 청구서만들기(Utility Meter) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate the Utility Meter into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/utility_meter/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="유틸리티 미터(Utility Meter)">
+    <meta property="og:title" content="사용자정의 청구서만들기(Utility Meter)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/utility_meter/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="유틸리티 미터(Utility Meter)">
+    <meta name="twitter:title" content="사용자정의 청구서만들기(Utility Meter)">
     <meta name="twitter:description" content="Instructions on how to integrate the Utility Meter into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,21 +97,21 @@
   
   <header>
     <h1 class="title indent">
-      유틸리티 미터(Utility Meter)
+      사용자정의 청구서만들기(Utility Meter)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>utility meter</code> integration provides functionality to track consumptions of various utilities (e.g., energy, gas, water, heating).</p>
-<p>From a user perspective, utility meters operate in cycles (usually monthly) for billing purposes. This sensor will track a source sensor values, automatically resetting the meter based on the configured cycle. On reset an attribute will store the previous meter value, providing the means for comparison operations (e.g., “did I spend more or less this month?”) or billing estimation (e.g., through a sensor template that multiplies the metered value per the charged unit amount).</p>
-<p>Some utility providers have different tariffs according to time/resource availability/etc. The utility meter enables you to define the various tariffs supported by your utility provider and accounts your consumptions in accordance. When tariffs are defined a new entity will show up indicating the current tariff. In order to change the tariff, the user must call a service, usually through an automation that can be based in time or other external source (eg. a REST sensor).</p>
+  <p><code>utility meter</code> 통합구성요소는 다양한 유틸리티 (예: 에너지, 가스, 물, 난방)의 소비를 추적하는 기능을 제공합니다.</p>
+<p>사용자 관점에서 유틸리티 미터는 청구 목적으로 주기적(일반적으로 월 단위)으로 작동합니다. 이 센서는 소스 센서값을 추적하여 설정된 주기에 따라 측정값을 자동으로 재설정합니다. 재설정시 속성은 이전 측정값을 저장하여 비교 작업을 위한 운영 비교(예를 들어 “이 달에 더 많거나 적게 썼는가?”) 또는 청구 추정(예를 들어, 과금된 단위량당 계량된 값을 곱하는 센서 템플릿을 통해) 방법을 제공합니다.</p>
+<p>일부 유틸리티 제공 업체는 시간/자원 가용성 등에 따라 요금이 다릅니다. 유틸리티 측정기를 사용하면 유틸리티 공급자가 지원하는 다양한 요금 및 규정에 따른 소비량을 정의할 수 있습니다. 세금이 정의되면 새로운 엔티티가 나타나 현재 세금을 나타냅니다. 세금을 변경하려면 사용자는 일반적으로 시간 또는 기타 외부 소스를 기반으로하는 자동화를 통해 서비스를 호출해야합니다. (예: a REST sensor )</p>
 <div class="note">
-Sensors created with this integration are persistent, so values are retained across restarts of Home Assistant. The first cycle for each sensor, will be incomplete; a sensor tracking daily usage, will start to be accurate the next day after the integration was activated. A sensor tracking monthly usage, will present accurate data starting the first of the next month after being added to Home Assistant.
+이 통합구성요소로 생성된 센서는 지속적이므로 Home Assistant 다시 시작시 값이 유지됩니다. 각 센서의 첫 번째 주기는 불완전합니다. 연동이 활성화 된 후 다음날에는 매일 사용량을 추적하는 센서가 정확하게 시작됩니다. 월별 사용량을 추적하는 센서는 홈어시스턴트에 추가된 후 다음 달 1 일부터 정확한 데이터를 제공합니다.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the Utility Meter Sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설비에서 Utility Meter Sensor를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 utility_meter:
   energy:
@@ -168,10 +168,10 @@ Default value: </p>
   minutes: 0 
 </code></pre>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="service-utility_meterreset" href="#service-utility_meterreset"></a> Service utility_meter.reset</h3>
-<p>Reset the Utility Meter. All sensors tracking tariffs will be reset to 0.</p>
+<a class="title-link" name="utility_meterreset-" href="#utility_meterreset-"></a> utility_meter.reset 서비스</h3>
+<p>유틸리티 측정기를 재설정하십시오. 모든 센서 추적 세금는 0으로 재설정됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -189,9 +189,9 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-utility_meternext_tariff" href="#service-utility_meternext_tariff"></a> Service utility_meter.next_tariff</h3>
-<p>Change the current tariff to the next in the list.
-This service must be called by the user for the tariff switching logic to occur (e.g. using an automation)</p>
+<a class="title-link" name="utility_meternext_tariff-" href="#utility_meternext_tariff-"></a> utility_meter.next_tariff 서비스</h3>
+<p>현재 세금을 목록에서 다음으로 변경하십시오.
+이 서비스는 세금 전환 로직이 발생하도록 사용자에 의해 호출되어야합니다 (예 : 자동화 사용)</p>
 <table>
 <thead>
 <tr>
@@ -209,9 +209,9 @@ This service must be called by the user for the tariff switching logic to occur 
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-utility_meterselect_tariff" href="#service-utility_meterselect_tariff"></a> Service utility_meter.select_tariff</h3>
-<p>Change the current tariff to the given tariff.
-This service must be called by the user for the tariff switching logic to occur (e.g. using an automation)</p>
+<a class="title-link" name="utility_meterselect_tariff-" href="#utility_meterselect_tariff-"></a> utility_meter.select_tariff 서비스</h3>
+<p>현재 세금을 지정된 세금으로 변경합니다.
+이 서비스는 세금 전환 로직이 발생하도록 사용자에 의해 호출되어야합니다 (예 : 자동화 사용)</p>
 <table>
 <thead>
 <tr>
@@ -233,12 +233,12 @@ This service must be called by the user for the tariff switching logic to occur 
 </tr>
 </tbody>
 </table>
-<h1>Advanced Configuration</h1>
-<p>The following configuration shows an example where 2 utility_meters (<code>daily_energy</code> and <code>monthly_energy</code>) track daily and monthly energy consumptions.</p>
-<p>Both track the same sensor (<code>sensor.energy</code>) which continuously monitors the energy consumed.</p>
-<p>4 different sensors will be created, 2 per utility meter and corresponding to each tariff.
-Sensor <code>sensor.daily_energy_peak</code>, <code>sensor.daily_energy_offpeak</code>, <code>sensor.monthly_energy_peak</code> and <code>sensor.monthly_energy_offpeak</code> will automatically be created to track the consumption in each tariff for the given cycle.</p>
-<p><code>utility_meter.daily_energy</code> and <code>utility_meter.monthly_energy</code> entities will track the current tariff and provide a service to change the tariff.</p>
+<h1>고급 설정</h1>
+<p>다음 설정은 2 개의 utility_meters (<code>daily_energy</code> 및 <code>monthly_energy</code>)가 일일 및 월간 에너지 소비를 추적하는 예를 보여줍니다.</p>
+<p>둘 다 동일한 센서 (<code>sensor.energy</code>)를 추적하여 소비되는 에너지를 지속적으로 모니터링합니다.</p>
+<p>유틸리티 미터당 2 개, 각 요금표에 해당하는 4 개의 서로 다른 센서가 생성됩니다.
+센서 <code>sensor.daily_energy_peak</code>, <code>sensor.daily_energy_offpeak</code>, <code>sensor.monthly_energy_peak</code> 및 <code>sensor.monthly_energy_offpeak</code>는 주어진 주기동안 각 요금표의 소비를 추적하기 위해 자동으로 생성됩니다.</p>
+<p><code>utility_meter.daily_energy</code> 및<code>utility_meter.monthly_energy</code> 엔티티는 현재 세금을 추적하고 세금을 변경하는 서비스를 제공합니다.</p>
 <pre><code class="language-yaml">utility_meter:
   daily_energy:
     source: sensor.energy
@@ -253,14 +253,14 @@ Sensor <code>sensor.daily_energy_peak</code>, <code>sensor.daily_energy_offpeak<
       - peak
       - offpeak
 </code></pre>
-<p>Assuming your energy provider tariffs are time based according to:</p>
+<p>에너지 공급자 요금이 시간에 따라 다음과 같다고 가정합니다.</p>
 <ul>
 <li>
-<em>peak</em>: from 9h00 to 21h00</li>
+<em>peak</em>: 9시부터 21시까지</li>
 <li>
-<em>offpeak</em>: from 21h00 to 9h00 next day</li>
+<em>offpeak</em>: 21시부터 다음날 9시까지</li>
 </ul>
-<p>a time based automation can be used:</p>
+<p>다음과 같이 시간 기반 자동화를 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     - platform: time

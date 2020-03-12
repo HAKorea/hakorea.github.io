@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Google Maps Travel Time - 홈어시스턴트</title>
+    <title>구글 지도 이동 시간 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add Google Maps travel time to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/google_travel_time/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Google Maps Travel Time">
+    <meta property="og:title" content="구글 지도 이동 시간">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/google_travel_time/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Google Maps Travel Time">
+    <meta name="twitter:title" content="구글 지도 이동 시간">
     <meta name="twitter:description" content="Instructions on how to add Google Maps travel time to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,21 +97,21 @@
   
   <header>
     <h1 class="title indent">
-      Google Maps Travel Time
+      구글 지도 이동 시간
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>google_travel_time</code> sensor provides travel time from the <a href="https://developers.google.com/maps/documentation/distance-matrix/" rel="external nofollow">Google Distance Matrix API</a>.</p>
+  <p><code>google_travel_time</code> 센서는 <a href="https://developers.google.com/maps/documentation/distance-matrix/" rel="external nofollow">Google Distance Matrix API</a>에서 이동 시간을 제공합니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>You need to register for an API key by following the instructions <a href="https://github.com/googlemaps/google-maps-services-python#api-keys" rel="external nofollow">here</a>. You only need to turn on the Distance Matrix API.</p>
-<p><a href="https://mapsplatform.googleblog.com/2018/05/introducing-google-maps-platform.html" rel="external nofollow">Google now requires billing</a> to be enabled (and a valid credit card loaded) to access Google Maps APIs. The Distance Matrix API is billed at US$10 per 1000 requests, however, a US$200 per month credit is applied (20,000 requests). By default, the sensor will update the travel time every 5 minutes, making approximately 288 calls per day. Note that at this rate, more than 2 sensors will likely exceed the free credit amount. If you need to run more than 2 sensors, consider changing the <a href="/docs/configuration/platform_options/#scan-interval">scan interval</a> to something longer than 5 minutes to stay within the free credit limit or update the sensors on-demand using an automation (see example below).</p>
-<p>A quota can be set against the API to avoid exceeding the free credit amount. Set the ‘Elements per day’ to a limit of 645 or less. Details on how to configure a quota can be found <a href="https://developers.google.com/maps/documentation/distance-matrix/usage-and-billing#set-caps" rel="external nofollow">here</a></p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p><a href="https://github.com/googlemaps/google-maps-services-python#api-keys" rel="external nofollow">여기</a> 지침에 따라 API 키를 등록해야합니다. Distance Matrix API만 켜면됩니다.</p>
+<p>Google Maps API에 액세스하려면 <a href="https://mapsplatform.googleblog.com/2018/05/introducing-google-maps-platform.html" rel="external nofollow">Google Now에 결제가 필요합니다</a>를 활성화하고 유효한 신용 카드를 로드합니다. Distance Matrix API는 요청 1,000 건당 미화 10 달러로 청구되지만 월 200 달러(요청 2만 건당)의 크레딧이 적용됩니다. 기본적으로 센서는 5 분마다 이동 시간을 업데이트하여 하루에 약 288 개의 통화를합니다. 이 속도에서 2개 이상의 센서가 무료 크레딧 금액을 초과 할 가능성이 있습니다. 두 개 이상의 센서를 실행해야하는 경우 여유 크레딧 한도 내에 머무르거나 자동화를 사용하여 주문형 센서를 업데이트하려면 스캔 간격 을 5분 이상으로 변경하십시오. (아래 예 참조).</p>
+<p><strong>무료 크레딧 금액을 초과하지 않도록</strong> API에 대해 할당량을 설정할 수 있습니다. ‘Elements per day’를 645 이하로 설정하십시오. 할당량을 구성하는 방법에 대한 자세한 내용은 <a href="https://developers.google.com/maps/documentation/distance-matrix/usage-and-billing#set-caps" rel="external nofollow">here</a>를 참조하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 라인을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example entry for configuration.yaml
 sensor:
   - platform: google_travel_time
@@ -189,8 +189,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="dynamic-configuration" href="#dynamic-configuration"></a> Dynamic Configuration</h2>
-<p>Tracking can be setup to track entities of type <code>device_tracker</code>, <code>zone</code>, <code>sensor</code> and <code>person</code>. If an entity is placed in the origin or destination then every 5 minutes when the platform updates it will use the latest location of that entity.</p>
+<a class="title-link" name="-" href="#-"></a> 동적 설정</h2>
+<p><code>device_tracker</code>, <code>zone</code>, <code>sensor</code> 및 <code>person</code> 유형의 엔티티를 추적하도록 추적을 설정할 수 있습니다. 엔티티가 출발지 또는 목적지에 배치되면 플랫폼이 업데이트 될 때 5 분마다 해당 엔티티의 최신 위치를 사용합니다.</p>
 <pre><code class="language-yaml"># Example entry for configuration.yaml
 sensor:
   # Tracking entity to entity
@@ -215,38 +215,37 @@ sensor:
       units: imperial    # 'metric' for Metric, 'imperial' for Imperial
 </code></pre>
 <h2>
-<a class="title-link" name="entity-tracking" href="#entity-tracking"></a> Entity Tracking</h2>
+<a class="title-link" name="entity-" href="#entity-"></a> Entity 추적</h2>
 <ul>
 <li>
 <strong>device_tracker</strong>
 <ul>
-<li>If state is a zone then the zone location will be used</li>
-<li>If state is not a zone it will look for the longitude and latitude attributes</li>
+<li>상태가 영역(zone) 인 경우 영역 위치가 사용됩니다</li>
+<li>상태가 영역이 아닌 경우 경도 및 위도 속성을 찾습니다.</li>
 </ul>
 </li>
 <li>
 <strong>zone</strong>
 <ul>
-<li>Uses the longitude and latitude attributes</li>
-<li>Can also be referenced by just the zone’s friendly name found in the attributes.</li>
+<li>경도 및 위도 속성을 사용합니다</li>
+<li>속성에서 찾은 영역의 이름만으로도 참조 할 수 있습니다.</li>
 </ul>
 </li>
 <li>
 <strong>sensor</strong>
 <ul>
-<li>If state is a zone or zone friendly name then will use the zone location</li>
-<li>All other states will be passed directly into the Google API
+<li>상태가 영역 또는 영역 이름 인 경우 영역 위치를 사용합니다</li>
+<li>다른 모든 상태는 Google API로 직접 전달됩니다.
 <ul>
-<li>This includes all valid locations listed in the <em>Configuration Variables</em>
-</li>
+<li>여기에는 <em>설성 변수</em>에 나열된 모든 유효한 위치가 포함됩니다</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <h2>
-<a class="title-link" name="updating-sensors-on-demand-using-automation" href="#updating-sensors-on-demand-using-automation"></a> Updating sensors on-demand using Automation</h2>
-<p>You can also use the <code>homeassistant.update_entity</code> service to update the sensor on-demand. For example, if you want to update <code>sensor.morning_commute</code> every 2 minutes on weekday mornings, you can use the following automation:</p>
+<a class="title-link" name="----" href="#----"></a> 자동화를 사용하여 주문형 센서 업데이트</h2>
+<p><code>homeassistant.update_entity</code> 서비스를 사용하여 주문형 센서를 업데이트 할 수도 있습니다. 예를 들어, 평일 아침 2 분마다 <code>sensor.morning_commute</code>를 업데이트하려는 경우 다음 자동화를 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">- id: update_morning_commute_sensor
   alias: "Commute - Update morning commute sensor"
   initial_state: 'on'

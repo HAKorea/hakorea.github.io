@@ -103,16 +103,16 @@
   <hr class="divider">
   
 
-  <p>The <code>tado</code> integration platform is used as an interface to the <a href="https://my.tado.com/" rel="external nofollow">my.tado.com</a> website.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>tado</code> 통합구성요소 플랫폼은 <a href="https://my.tado.com/" rel="external nofollow">my.tado.com</a> 웹 사이트의 인터페이스로 사용됩니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Climate - for every tado zone.</li>
 <li><a href="#presence-detection">Presence Detection</a></li>
 <li>Sensor - for some additional information of the zones.</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your tado thermostats in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 tado 온도 조절기를 사용하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tado:
   username: YOUR_USERNAME
@@ -141,13 +141,13 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The tado thermostats are internet connected thermostats. There exists an unofficial API at <a href="https://my.tado.com/" rel="external nofollow">my.tado.com</a>, which is used by their website and now by this component.</p>
-<p>It currently supports presenting the current temperature, the setting temperature and the current operation mode. Switching the mode is also supported. If no user is at home anymore, the devices are showing the away-state. Switching to away-mode is not supported.</p>
+<p>tado 온도 조절기는 인터넷 연결 온도 조절기입니다. <a href="https://my.tado.com/" rel="external nofollow">my.tado.com</a>에는 비공식 API가 있으며이 웹 사이트는 현재 이 구성 요소에서 사용합니다.</p>
+<p>현재 온도, 설정 온도 및 현재 작동 모드를 나타내는 것을 지원합니다. 모드 전환도 지원됩니다. 더 이상 집에 사용자가 없으면 장치가 away-state를 표시합니다. away-mode로의 전환은 지원되지 않습니다.</p>
 <h2>
-<a class="title-link" name="presence-detection" href="#presence-detection"></a> Presence Detection</h2>
-<p>The <code>tado</code> device tracker is using the <a href="https://www.tado.com/" rel="external nofollow">Tado Smart Thermostat</a> and its support for person presence detection based on smartphone location by geofencing.</p>
-<p>This tracker uses the Tado API to determine if a mobile device is at home. It tracks all devices in your home that Tado knows about.</p>
-<p>To use the Tado platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 재실 감지</h2>
+<p><code>tado</code> 장치 추적기는 <a href="https://www.tado.com/" rel="external nofollow">Tado Smart Thermostat</a>와 지오펜싱(geofencing)을 통한 스마트폰 기반 위치 감지 지원을 사용하고 있습니다.</p>
+<p>이 추적기는 Tado API를 사용하여 모바일 장치가 집에 있는지 확인합니다. Tado가 알고있는 가정의 모든 장치를 추적합니다.</p>
+<p>설치에서 Tado 플랫폼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for Tado
 device_tracker:
   - platform: tado
@@ -173,12 +173,12 @@ device_tracker:
 </span></p></dd>
 </dl>
 </div>
-<p>After configuration, your device has to be at home at least once before showing up as <em>home</em> or <em>away</em>.
-Polling Tado API for presence information will happen at most once every 30 seconds.</p>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked. Beware that the Tado (v2) API does not provide GPS location of devices, only a bearing, therefore Home Assistant only uses <code>home</code>/<code>not-home</code> status.</p>
+<p>설정 후, 장치는 <em>home</em> 또는 <em>away</em>로 표시되기 전에 최소한 한 번은 집에 있어야합니다.
+Polling Tado Presence API는 최대 30 초마다 한 번씩 발생합니다.</p>
+<p>추적할 사람을 설정하는 방법에 대한 지시 사항은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오. Tado (v2) API가 장치에 GPS 위치를 제공하지 않고 방향만 제공하는 Beado는 홈어시스턴트가 <code>home</code>/<code>not-home</code> 상태만 사용합니다.</p>
 <h3>
-<a class="title-link" name="finding-your-home_id" href="#finding-your-home_id"></a> Finding your home_id</h3>
-<p>Find your <code>home_id</code> by browsing to <code>https://my.tado.com/api/v2/me?username=YOUR_USERNAME&amp;password=YOUR_PASSWORD</code>. There you’ll see something like the following:</p>
+<a class="title-link" name="home_id-" href="#home_id-"></a> home_id 찾기</h3>
+<p><code>https://my.tado.com/api/v2/me?username=YOUR_USERNAME&amp;password=YOUR_PASSWORD</code>로 이동하여 <code>home_id</code>를 찾으십시오. 다음과 같은 것이 있을 것입니다 :</p>
 <pre><code class="language-json">{
   "name": "Mark",
   "email": "your@email.tld",
@@ -193,7 +193,7 @@ Polling Tado API for presence information will happen at most once every 30 seco
   "mobileDevices": []
 }
 </code></pre>
-<p>In this example <code>12345</code> is the <code>home_id</code> you’ll need to configure.</p>
+<p>이 예에서 <code>12345</code>는 설정해야 할 <code>home_id</code>입니다.</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Aurora ABB Solar PV - 홈어시스턴트</title>
+    <title>(태양광인버터)Aurora ABB Solar PV - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate an Aurora ABB Powerone solar inverter within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/aurora_abb_powerone/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Aurora ABB Solar PV">
+    <meta property="og:title" content="(태양광인버터)Aurora ABB Solar PV">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/aurora_abb_powerone/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Aurora ABB Solar PV">
+    <meta name="twitter:title" content="(태양광인버터)Aurora ABB Solar PV">
     <meta name="twitter:description" content="Instructions on how to integrate an Aurora ABB Powerone solar inverter within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,24 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Aurora ABB Solar PV
+      (태양광인버터)Aurora ABB Solar PV
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This implements a direct RS485 connection to a solar inverter in the
-PVI-3.0/3.6/4.2-TL-OUTD ABB series, and may work on others.
-The inverter was formerly made by PowerOne who got taken over by ABB.</p>
-<p>The TCP/IP method of communicating with inverters is supported by the
-Python library, but not by this implementation in this integration.</p>
-<p>This integration provides a single sensor which reports the live power output
-in watts.</p>
-<p>Note the PV inverter will be unresponsive to communications when in darkness,
-so the value ‘unknown’ will be displayed during the night.</p>
+  <p>이는 PVI-3.0/3.6/4.2-TL-OUTD ABB 시리즈에서 태양광 인버터에 대한 직접 RS485 연결을 구현하며 다른 장치에서도 작동할 수 있습니다. 인버터는 이전에 ABB에 의해 인수된 PowerOne에 의해 만들어졌습니다.</p>
+<p>인버터와 통신하는 TCP/IP 방법은 Python 라이브러리에서 지원하지만 이 통합구성요소에서 구현시 지원되지 않습니다.</p>
+<p>이 통합구성요소는 실시간 전력 출력(와트)을 보고하는 단일 센서를 제공합니다.</p>
+<p>어둠 속에서는 PV 인버터가 통신에 응답하지 않으므로 밤 동안 ‘unknown’값이 표시됩니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: aurora_abb_powerone

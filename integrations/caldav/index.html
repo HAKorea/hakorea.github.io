@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>CalDav - 홈어시스턴트</title>
+    <title>캘린더연동(CalDav) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a WebDav calendar into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/caldav/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="CalDav">
+    <meta property="og:title" content="캘린더연동(CalDav)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/caldav/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="CalDav">
+    <meta name="twitter:title" content="캘린더연동(CalDav)">
     <meta name="twitter:description" content="Instructions on how to integrate a WebDav calendar into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,32 +97,23 @@
   
   <header>
     <h1 class="title indent">
-      CalDav
+      캘린더연동(CalDav)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>caldav</code> platform allows you to connect to your WebDav calendar and generate
-binary sensors. A different sensor will be created for each individual calendar,
-or you can specify custom calendars which match a criteria you define (more on
-that below). These sensors will be <code>on</code> if you have an on going event in that
-calendar or <code>off</code> if the event is later in time, or if there is no event at all.
-The WebDav calendar get updated roughly every 15 minutes.</p>
+  <p><code>caldav</code> 플랫폼을 사용하면 WebDav 캘린더에 연결하고 이진 센서를 생성할 수 있습니다. 개별 캘린더마다 다른 센서가 생성되거나 사용자가 정의한 기준과 일치하는 사용자 정의 캘린더를 지정할 수 있습니다 (자세한 내용은 아래 참조). 해당 일정에 진행중인 이벤트가있는 경우이 센서는 <code>on</code>이되고 이벤트가 늦은 시간에 있거나 이벤트가없는 경우 <code>off</code>가 됩니다.
+WebDav 일정은 대략 15 분마다 업데이트됩니다.</p>
 <h3>
-<a class="title-link" name="prerequisites" href="#prerequisites"></a> Prerequisites</h3>
-<p>You need to have a CalDav server and credentials for it. This integration was
-tested against <a href="http://sabre.io/baikal/" rel="external nofollow">Baikal</a> but any integration complying
-with the RFC4791 should work. <a href="https://nextcloud.com/" rel="external nofollow">Nextcloud</a>
-and <a href="https://owncloud.org/" rel="external nofollow">Owncloud</a> work fine.</p>
-<p>You might need some additional system packages to compile the
-Python caldav library. On a Debian based system, install them by:</p>
+<a class="title-link" name="-" href="#-"></a> 전제 조건</h3>
+<p>CalDav 서버 및 credentials이 필요합니다. 이 통합구성요소는 <a href="http://sabre.io/baikal/" rel="external nofollow">Baikal</a>에 대해 테스트되었지만 RFC4791을 준수하는 모든 연동이 작동해야합니다. <a href="https://nextcloud.com/" rel="external nofollow">Nextcloud</a> 및 <a href="https://owncloud.org/" rel="external nofollow">Owncloud</a>가 제대로 작동합니다.</p>
+<p>Python caldav 라이브러리를 컴파일하려면 추가 시스템 패키지가 필요할 수 있습니다. 데비안 기반 시스템에서 다음과 같이 설치하십시오 :</p>
 <pre><code class="language-bash">$ sudo apt-get install libxml2-dev libxslt1-dev zlib1g-dev
 </code></pre>
 <h3>
-<a class="title-link" name="basic-setup" href="#basic-setup"></a> Basic Setup</h3>
-<p>To integrate a WebDav calendar in Home Assistant,
-add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 기본 셋업</h3>
+<p>홈어시스턴트에 WebDav 캘린더를 통합하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for baikal
 calendar:
   - platform: caldav
@@ -137,15 +128,11 @@ calendar:
     password: !secret caldav
     url: https://nextcloud.example.com/remote.php/dav
 </code></pre>
-<p>This example will generate default binary sensors for each calendar you have in
-your account. Those calendars will be <code>on</code> when there is an ongoing event and
-<code>off</code> if not. Events that last a whole day are ignored in those calendars.
-You have to setup custom calendars in order to take them into account or for
-advanced event filtering.</p>
+<p>이 예에서는 계정에 있는 각 캘린더에 대한 기본 이진 센서를 생성합니다. 진행중인 이벤트가있는 경우 해당 캘린더는 <code>on</code> 상태이고 그렇지 않은 경우 <code>off</code> 상태입니다. 하루 종일 지속되는 이벤트는 해당 캘린더에서 무시됩니다.
+이를 고려하거나 고급 이벤트 필터링을 위해 사용자 정의 달력을 설정해야합니다.</p>
 <h3>
-<a class="title-link" name="custom-calendars" href="#custom-calendars"></a> Custom calendars</h3>
-<p>You have the possibility to create multiple binary
-sensors for events that match certain conditions.</p>
+<a class="title-link" name="--" href="#--"></a> 사용자 정의 달력</h3>
+<p>특정 조건과 일치하는 이벤트에 대해 여러 이진 센서를 만들 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 calendar:
   - platform: caldav
@@ -160,12 +147,8 @@ calendar:
         calendar: 'Agenda'
         search: 'Warmup'
 </code></pre>
-<p>This will create two binary sensors for the calendar name Agenda: “HomeOffice”
-and “WarmupFlat”. Those sensors will be <code>on</code> if there is an ongoing event
-matching the regular expression specified in <code>search</code>.
-In custom calendars, events that last a whole day are taken into account.</p>
-<p>Please note that when you configure custom calendars,
-the default ones are not created anymore.</p>
+<p>이렇게하면 켈린더 이름 Agenda에 대해 “HomeOffice” 및 “WarmupFlat”이라는 두 가지 이진 센서가 만들어집니다. <code>search</code>에 지정된 정규식과 일치하는 진행중인 이벤트가있는 경우 해당 센서가 <code>on</code> 상태가됩니다. 사용자 정의 달력에서 하루 종일 지속되는 이벤트가 고려됩니다.</p>
+<p>맞춤 캘린더를 설정할 때 기본 캘린더는 더 이상 생성되지 않습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -207,26 +190,27 @@ the default ones are not created anymore.</p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="sensor-attributes" href="#sensor-attributes"></a> Sensor attributes</h3>
+<a class="title-link" name="sensor-" href="#sensor-"></a> Sensor 속성</h3>
 <ul>
 <li>
-<strong>offset_reached</strong>: If set in the event title and parsed out will be on/off once the offset in the title in minutes is reached. So the title Very important meeting !!-10 would trigger this attribute to be on 10 minutes before the event starts.</li>
+<strong>offset_reached</strong>: 이벤트 제목에 설정되고 파싱된 경우 분 단위의 제목 오프셋에 도달하면 on/off 됩니다. 따라서 매우 중요한 미팅 !!-10이라는 제목은 이벤트가 시작되기 10 분 전에 이 속성이 트리거되도록합니다.</li>
 <li>
-<strong>all_day</strong>: <code>True/False</code> if this is an all day event. Will be <code>False</code> if there is no event found.</li>
+<strong>all_day</strong>: 하루 종일 이벤트 인 경우 <code>True/False</code> 이벤트가 없으면 <code>False</code>가 됩니다.</li>
 <li>
-<strong>message</strong>: The event title with the <code>search</code> values extracted. So in the above example for <code>offset_reached</code> the message would be set to Very important meeting</li>
+<strong>message</strong>: <code>search</code> 값이 추출된 이벤트 제목입니다. 위의 <code>offset_reached</code> 예에서 메시지는 매우 중요한 회의로 설정됩니다.</li>
 <li>
-<strong>description</strong>: The event description.</li>
+<strong>description</strong>: 이벤트 설명.</li>
 <li>
-<strong>location</strong>: The event Location.</li>
+<strong>location</strong>: 이벤트 위치.</li>
 <li>
-<strong>start_time</strong>: Start time of event.</li>
+<strong>start_time</strong>: 이벤트 시작 시간</li>
 <li>
-<strong>end_time</strong>: End time of event.</li>
+<strong>end_time</strong>: 이벤트 종료 시간</li>
 </ul>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
-<p>All events of the calendars “private” and “holidays”. Note that all day events are not included.</p>
+<a class="title-link" name="" href="#"></a> 사례</h3>
+<p>All events of the calendars “private” and “holidays”. Note that all day events are not included.
+캘린더의 모든 이벤트는 “private” 및 “holidays”입니다. 하루 종일 일정은 포함되지 않습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for nextcloud
 calendar:
   - platform: caldav
@@ -237,11 +221,9 @@ calendar:
       - private
       - holidays
 </code></pre>
-<p>Full example with automation to wake up to music if not holiday.
-Prerequisite: you have a calendar named “work” where
-you create calendar entries containing “Holiday”.</p>
-<p>Custom calendar names are built from the
-main calendar + name of the custom calendar.</p>
+<p>휴일이 아닌 경우 음악으로 기상알림을 자동화하는 기능의 전체 예
+전제 조건 : “Holiday”이 포함된 일정 관리 항목을 작성하는 “work”이라는 일정 관리가 있습니다.</p>
+<p>사용자 정의 캘린더 이름은 기본 캘린더 + 사용자 정의 캘린더의 이름으로 구성됩니다.</p>
 <pre><code class="language-yaml"># configuration.yaml
 calendar:
   - platform: caldav

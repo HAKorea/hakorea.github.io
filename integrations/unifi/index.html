@@ -103,19 +103,19 @@
   <hr class="divider">
   
 
-  <p><a href="https://unifi-sdn.ubnt.com/" rel="external nofollow">UniFi</a> by <a href="https://www.ubnt.com/" rel="external nofollow">Ubiquiti Networks, inc.</a> is a software that binds gateways, switches and wireless access points together with one graphical front end.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><a href="https://www.ubnt.com/" rel="external nofollow">Ubiquiti Networks, Inc.</a>의 <a href="https://unifi-sdn.ubnt.com/" rel="external nofollow">UniFi</a>는 게이트웨이, 스위치 및 무선 액세스 포인트를 하나의 그래픽 프론트 엔드와 결합하는 소프트웨어입니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#presence-detection">Presence Detection</a></li>
 <li><a href="#switch">Switch</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Home Assistant offers UniFi integration through <strong>Configuration</strong> -&gt; <strong>Integrations</strong> -&gt; <strong>UniFi Controller</strong>.</p>
-<p>Enter <code>host address</code>, <code>user name</code> and <code>password</code> and then continue to select which <code>site</code> you want to connect to Home Assistant. The user needs administrator privileges in order to control POE switches.</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>Home Assistant는 <strong>설정</strong>-&gt; <strong>통합구성요소</strong>-&gt; <strong>UniFi 컨트롤러</strong>를 통해 UniFi 연동을 제공합니다.</p>
+<p><code>host address</code>, <code>user name</code>, <code>password</code>를 입력한 다음 홈어시스턴트에 연결할 사이트를 계속 선택하십시오. POE 스위치를 제어하려면 사용자에게 관리자 권한이 필요합니다.</p>
 <h3>
-<a class="title-link" name="extra-configuration-for-device-tracker" href="#extra-configuration-for-device-tracker"></a> Extra configuration for device tracker</h3>
-<p>You can augment the behavior of UniFi device tracker by adding</p>
+<a class="title-link" name="---" href="#---"></a> 장치 추적기의 추가 설정</h3>
+<p>다음을 추가하여 UniFi 장치 추적기의 동작을 보강할 수 있습니다</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 unifi:
   controllers:
@@ -204,32 +204,32 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="configuring-users" href="#configuring-users"></a> Configuring Users</h3>
-<p>The UniFi controller allows you to create multiple users on it besides the main administrator. If all you want to use is the device tracker then it is recommended that you create a limited user that has <code>read-only</code> permissions for the Unifi device tracker. If you want blocking of network access or POE control as well you would need to have ‘admin’ permissions.</p>
+<a class="title-link" name="-" href="#-"></a> 사용자들 설정하기</h3>
+<p>UniFi 컨트롤러를 사용하면 기본 관리자 외에 여러 사용자를 만들 수 있습니다. 장치 추적기만 사용하려면 Unifi 장치 추적기에 대해 <code>read-only</code> 권한(permissions)이 있는 제한된 사용자를 만드는 것이 좋습니다. 네트워크 액세스 또는 POE 제어를 차단하려면 ‘admin’ 권한이 있어야합니다.</p>
 <h3>
-<a class="title-link" name="conflicts-with-mqtt" href="#conflicts-with-mqtt"></a> Conflicts with MQTT</h3>
-<p>The Unifi controller can either be a dedicated hardware device (UniFi’s cloud key), or as software any Linux system. If you run the Unifi controller on the same operating system as Home Assistant there may be conflicts in ports if you have the MQTT integration as well.</p>
-<p>It is recommended that you run the Unifi controller in a dedicated virtual machine to avoid that situation.</p>
+<a class="title-link" name="mqtt-" href="#mqtt-"></a> MQTT와의 충돌</h3>
+<p>Unifi 컨트롤러는 전용 하드웨어 장치 (UniFi’s cloud key)이거나 어떤 Linux 시스템의 소프트웨어 일 수 있습니다. Home Assistant와 동일한 운영 체제에서 Unifi 컨트롤러를 실행하는 경우 MQTT 연동이있는 경우 포트에서 충돌이 발생할 수 있습니다.</p>
+<p>이러한 상황을 피하려면 전용 가상 머신에서 Unifi 컨트롤러를 실행하는 것이 좋습니다.</p>
 <h2>
-<a class="title-link" name="presence-detection" href="#presence-detection"></a> Presence detection</h2>
-<p>This platform allows you to detect presence by looking at devices connected to a <a href="https://ubnt.com/" rel="external nofollow">Ubiquiti</a> <a href="https://www.ubnt.com/enterprise/#unifi" rel="external nofollow">UniFi</a> controller.</p>
+<a class="title-link" name="-" href="#-"></a> 재실 감지</h2>
+<p>이 플랫폼을 사용하면 <a href="https://ubnt.com/" rel="external nofollow">Ubiquiti</a> <a href="https://www.ubnt.com/enterprise/#unifi" rel="external nofollow">UniFi</a> 컨트롤러에 연결된 장치를보고 존재를 감지할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="troubleshooting-and-time-synchronization" href="#troubleshooting-and-time-synchronization"></a> Troubleshooting and Time Synchronization</h3>
-<p>Presence detection depends on accurate time configuration between Home Assistant and the UniFi controller.</p>
-<p>If Home Assistant and the UniFi controller are running on separate machines or VMs ensure that all clocks are synchronized. Failing to have synchronized clocks will lead to Home Assistant failing to mark a device as home.</p>
-<p><a href="https://github.com/home-assistant/home-assistant/issues/10507" rel="external nofollow">Related Issue</a></p>
+<a class="title-link" name="----" href="#----"></a> 문제 해결 및 시간 동기화</h3>
+<p>재실 감지는 Home Assistant와 UniFi 컨트롤러 간의 정확한 시간 설정에 따라 다릅니다.</p>
+<p>홈어시스턴트와 UniFi 컨트롤러가 별도의 시스템 또는 VM에서 실행중인 경우 모든 시계가 동기화되었는지 확인하십시오. 시계를 동기화하지 못하면 홈어시스턴트가 장치를 Home으로 표시하지 못하게됩니다.</p>
+<p><a href="https://github.com/home-assistant/home-assistant/issues/10507" rel="external nofollow">관련 이슈</a></p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
 <h3>
-<a class="title-link" name="block-network-access-for-clients" href="#block-network-access-for-clients"></a> Block network access for clients</h3>
-<p>Allow control of network access to clients configured in the <code>configuration.yaml</code> file by adding a list of the MAC addresses. Items in this list will have a Home Assistant switch created, using the Unifi Device name, allowing for blocking and unblocking.</p>
+<a class="title-link" name="---" href="#---"></a> 클라이언트의 네트워크 액세스 차단</h3>
+<p>MAC 주소 목록을 추가하여 <code>configuration.yaml</code> 파일에 설정된 클라이언트에 대한 네트워크 액세스를 제어 할 수 있습니다. 이 목록의 항목에는 Unifi 장치 이름을 사용하여 차단 및 차단해제를 할 수 있는 Home Assistant 스위치가 있습니다.</p>
 <h3>
-<a class="title-link" name="control-clients-powered-by-poe" href="#control-clients-powered-by-poe"></a> Control clients powered by POE</h3>
-<p>Entities appear automatically for each connected POE client. If no POE client device is in operation, no entity will be visible. Note: Unifi infrastructure devices such as access points and other switches are not (yet) supported, even if they are powered over ethernet themselves.</p>
-<p>Note that POE control actually configures the network port of the switch which the client is connected to.</p>
+<a class="title-link" name="poe---" href="#poe---"></a> POE가 제공하는 클라이언트 제어</h3>
+<p>연결된 각 POE 클라이언트에 대해 엔티티가 자동으로 나타납니다. POE 클라이언트 장치가 작동하지 않으면 엔티티가 표시되지 않습니다. 참고 : 액세스 포인트 및 기타 스위치와 같은 Unifi 인프라 장치는 이더넷 자체에서 전원이 공급되더라도 (아직) 지원되지 않습니다.</p>
+<p>POE 제어는 실제로 클라이언트가 연결된 스위치의 네트워크 포트를 설정합니다.</p>
 <h2>
-<a class="title-link" name="debugging-integration" href="#debugging-integration"></a> Debugging integration</h2>
-<p>If you have problems with UniFi or the integration you can add debug prints to the log.</p>
+<a class="title-link" name="-" href="#-"></a> 연동 디버깅</h2>
+<p>UniFi 또는 연동에 문제가있는 경우 로그에 디버그 출력을 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml">logger:
   default: info
   logs:

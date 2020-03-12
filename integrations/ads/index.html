@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>ADS - 홈어시스턴트</title>
+    <title>빌딩자동화시스템(ADS) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Connect Home Assistant to TwinCAT devices via the ADS interface">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/ads/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="ADS">
+    <meta property="og:title" content="빌딩자동화시스템(ADS)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/ads/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="ADS">
+    <meta name="twitter:title" content="빌딩자동화시스템(ADS)">
     <meta name="twitter:description" content="Connect Home Assistant to TwinCAT devices via the ADS interface">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      ADS
+      빌딩자동화시스템(ADS)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The ADS (automation device specification) describes a device-independent and fieldbus independent interface for communication between <a href="https://www.beckhoff.com/" rel="external nofollow">Beckhoff</a> automation devices running <a href="https://www.beckhoff.hu/english.asp?twincat/default.htm" rel="external nofollow">TwinCAT</a> and other devices implementing this interface.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>ADS는 <a href="https://www.beckhoff.hu/english.asp?twincat/default.htm" rel="external nofollow">TwinCAT</a>을 실행하는 <a href="https://www.beckhoff.com/" rel="external nofollow">Beckhoff</a> 자동화 장치와 이 인터페이스를 구현하는 다른 장치 간의 통신을 위한 device-independent이고 fieldbus independent 인터페이스를 말합니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#light">Light</a></li>
@@ -113,8 +113,8 @@
 <li><a href="#cover">Cover</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable ADS, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>ADS를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 ads:
   device: '127.0.0.1.1.1'
@@ -139,29 +139,28 @@ ads:
 </dl>
 </div>
 <h2>
-<a class="title-link" name="service" href="#service"></a> Service</h2>
-<p>The ADS integration will register the service <code>write_by_name</code> allowing you to write a value to a variable on your ADS device.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>ADS 통합구성요소는 <code>write_by_name</code> 서비스를 등록하여 ADS 장치의 변수에 값을 쓸 수 있습니다.</p>
 <pre><code class="language-json">{
     "adsvar": ".myvariable",
     "adstype": "int",
     "value": 123
 }
 </code></pre>
-<p>Service parameters:</p>
+<p>서비스 매개 변수 :</p>
 <ul>
 <li>
-<strong>adsvar</strong>: Name of the variable on the ADS device. To access global variables on <em>TwinCAT2</em> use a prepending dot <code>.myvariable</code>, for TwinCAT3 use <code>GBL.myvariable</code>.</li>
+<strong>adsvar</strong>: ADS 장치의 변수 이름 <em>TwinCAT2</em>에서 전역 변수에 액세스하려면 앞에 붙는 점 <code>.myvariable</code>을 사용하고 TwinCAT3의 경우 <code>GBL.myvariable</code>을 사용하십시오.</li>
 <li>
-<strong>adstype</strong>: Specify the type of the variable. Use one of the following: <code>int</code>, <code>byte</code>, <code>uint</code>, <code>bool</code>
+<strong>adstype</strong>: 변수의 유형을 지정하십시오. 다음 중 하나를 사용하십시오 :<code>int</code>, <code>byte</code>, <code>uint</code>, <code>bool</code>
 </li>
 <li>
-<strong>value</strong>: The value that will be written in the variable.</li>
+<strong>value</strong>: 변수에 쓰여질 값.</li>
 </ul>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>The <code>ads</code> binary sensor platform can be used to monitor a boolean value on your ADS device.</p>
-<p>To use your ADS device, you first have to set up your <a href="#configuration">ADS hub</a> and then add the following to your <code>configuration.yaml</code>
-file:</p>
+<p><code>ads</code> 이진 센서 플랫폼을 사용하여 ADS 장치에서 boolean 값을 모니터링 할 수 있습니다.</p>
+<p>ADS 장치를 사용하려면 먼저 <a href="#configuration">ADS hub</a>를 설정한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: ads
@@ -187,9 +186,8 @@ binary_sensor:
 </div>
 <h2>
 <a class="title-link" name="light" href="#light"></a> Light</h2>
-<p>The <code>ads</code> light platform allows you to control your connecte ADS lights.</p>
-<p>To use your ADS device, you first have to set up your <a href="#configuration">ADS hub</a> and then add the following to your <code>configuration.yaml</code>
-file:</p>
+<p><code>ads</code> 조명 플랫폼을 사용하면 connecte ADS 조명을 제어할 수 있습니다.</p>
+<p>ADS 장치를 사용하려면 먼저 <a href="#configuration">ADS hub</a>를 설정 한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: ads
@@ -216,9 +214,8 @@ light:
 </div>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>ads</code> sensor platform allows reading the value of a numeric variable on your ADS device. The variable can be of type <em>INT</em>, <em>UINT</em>,  <em>BYTE</em>, <em>DINT</em> or <em>UDINT</em>.</p>
-<p>To use your ADS device, you first have to set up your <a href="#configuration">ADS hub</a> and then add the following to your <code>configuration.yaml</code>
-file:</p>
+<p><code>ads</code> 센서 플랫폼을 사용하면 ADS 장치의 숫자 변수 값을 읽을 수 있습니다. 변수는 <em>INT</em>, <em>UINT</em>, <em>BYTE</em>, <em>DINT</em> 또는 <em>UDINT</em> 유형일 수 있습니다.</p>
+<p>ADS 장치를 사용하려면 먼저 <a href="#configuration">ADS hub</a>를 설정한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: ads
@@ -258,12 +255,12 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>The <em>factor</em> can be used to implement fixed decimals. E.g., set <em>factor</em> to 100 if you want to display a fixed decimal value with two decimals. A variable value of <code>123</code> will be displayed as <code>1.23</code>.</p>
+<p>The <em>factor</em> can be used to implement fixed decimals. E.g., set <em>factor</em> to 100 if you want to display a fixed decimal value with two decimals. A variable value of <code>123</code> will be displayed as <code>1.23</code>.
+<em>factor</em>는 고정 소수점을 구현하는 데 사용할 수 있습니다. 예를 들어, 소수점 이하 두 자리로 고정 소수점 값을 표시하려면 <em>factor</em>를 100으로 설정하십시오. <code>123</code>의 변수값은 <code>1.23</code>으로 표시됩니다.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>ads</code> switch platform accesses a boolean variable on the connected ADS device. The variable is identified by its name.</p>
-<p>To use your ADS device, you first have to set up your <a href="#configuration">ADS hub</a> and then add the following to your <code>configuration.yaml</code>
-file:</p>
+<p><code>ads</code> 스위치 플랫폼은 연결된 ADS 장치의 boolean 변수에 액세스합니다. 변수는 이름으로 식별됩니다.</p>
+<p>ADS 장치를 사용하려면 먼저 <a href="#configuration">ADS hub</a>를 설정한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: ads
@@ -285,9 +282,8 @@ switch:
 </div>
 <h2>
 <a class="title-link" name="cover" href="#cover"></a> Cover</h2>
-<p>The <code>ads</code> cover platform allows you to control your connected ADS covers.</p>
-<p>To use your ADS device, you first have to set up your <a href="#configuration">ADS hub</a> and then add the following to your <code>configuration.yaml</code>
-file:</p>
+<p><code>ads</code> 커버 플랫폼을 사용하면 연결된 ADS 커버를 제어할 수 있습니다.</p>
+<p>ADS 장치를 사용하려면 먼저 <a href="#configuration">ADS hub</a>를 설정한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: ads

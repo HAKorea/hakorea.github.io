@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Abode - 홈어시스턴트</title>
+    <title>아보드(Abode) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on integrating Abode home security with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/abode/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Abode">
+    <meta property="og:title" content="아보드(Abode)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/abode/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Abode">
+    <meta name="twitter:title" content="아보드(Abode)">
     <meta name="twitter:description" content="Instructions on integrating Abode home security with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,36 +97,36 @@
   
   <header>
     <h1 class="title indent">
-      Abode
+      아보드(Abode)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>abode</code> integration will allow users to integrate their Abode Home Security systems into Home Assistant and use its alarm system and sensors to automate their homes.</p>
-<p>Please visit the <a href="https://goabode.com/" rel="external nofollow">Abode website</a> for further information about Abode Security.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>abode</code> 통합구성요소를 통해 사용자는 Abode Home Security 시스템을 Home Assistant에 연동하고 경보 시스템과 센서를 사용하여 집안을 자동화 할 수 있습니다.</p>
+<p>Abode Security에 대한 자세한 내용은 <a href="https://goabode.com/" rel="external nofollow">Abode website</a>를 방문하십시오.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>
-<strong>Alarm Control Panel</strong>: Reports on the current alarm status and can be used to arm and disarm the system.</li>
+<strong>Alarm Control Panel</strong>: 현재 경보 상태를 보고하고 시스템을 설정 및 해제하는데 사용할 수 있습니다.</li>
 <li>
-<a href="/integrations/abode/#binary-sensor"><strong>Binary Sensor</strong></a>: Reports on <code>Quick Actions</code>, <code>Door Contacts</code>, <code>Connectivity</code> sensors (remotes, keypads, and status indicators), <code>Moisture</code> sensors, and <code>Motion</code> or <code>Occupancy</code> sensors. Also lists all Abode <code>Quick Actions</code> that are set up. You can trigger these quick actions by passing the <code>entity_id</code> of your quick action binary sensor to the <a href="/integrations/abode/#trigger_quick_action">trigger_quick_action service</a>.</li>
+<a href="/integrations/abode/#binary-sensor"><strong>Binary Sensor</strong></a>: <code>Quick Actions</code>, <code>Door Contacts</code>, <code>Connectivity</code> 센서 (원격조정, 키패드 및 상태 표시기), <code>Moisture</code> 센서 및 <code>Motion</code> 또는 <code>Occupancy</code> 센서에 대해 보고입니다. 또한 세팅된 모든 Abode <code>Quick Actions</code>도 리스트합니다. quick actions 이진 센서의 <code>entity_id</code>를 <a href="/integrations/abode/#trigger_quick_action">trigger_quick_action service</a>에 전달하여 이러한 quick actions를 트리거할 수 있습니다.</li>
 <li>
-<strong>Camera</strong>: Reports on <code>Camera</code> devices and will download and show the latest captured still image.</li>
+<strong>Camera</strong>: <code>Camera</code> 장치에 대해 보고하고 최신 캡처된 스틸 이미지를 다운로드하여 표시합니다.</li>
 <li>
-<strong>Cover</strong>: Reports on <code>Secure Barriers</code> and can be used to open and close the cover.</li>
+<strong>Cover</strong>: <code>Secure Barriers</code>에 대한 보고이며 커버를 열고 닫는 데 사용할 수 있습니다.</li>
 <li>
-<strong>Lock</strong>: Reports on <code>Door Locks</code> and can be used to lock and unlock the door.</li>
+<strong>Lock</strong>: <code>Door Locks</code>에 대한 보고이며 문을 lock/unlock 하는 데 사용할 수 있습니다.</li>
 <li>
-<a href="/integrations/abode/#light"><strong>Light</strong></a>: Reports on <code>Dimmer</code> lights and can be used to dim or turn the light on and off.</li>
+<a href="/integrations/abode/#light"><strong>Light</strong></a>: <code>Dimmer</code> 조명에 대해 보고하며 조명을 켜거나 끄는 데 사용할 수 있습니다.</li>
 <li>
-<a href="/integrations/abode/#switch"><strong>Switch</strong></a>: Reports on <code>Power Switch</code> devices and can be used to turn the power switch on and off. Also reports on <code>Automations</code> set up in the Abode system and allows you to activate or deactivate them (does not work with Abode’s CUE automations).</li>
+<a href="/integrations/abode/#switch"><strong>Switch</strong></a>: <code>Power Switch</code> 장치에 대해 보고하며 전원 스위치를 켜고 끄는 데 사용할 수 있습니다. 또한 Abode 시스템에 설정된 <code>Automations</code>에 대한 보고를 통해 이를 활성화 또는 비활성화 할 수 있습니다 (Abode의 CUE 자동화에서는 작동하지 않음).</li>
 <li>
-<strong>Sensor</strong>: Reports on <code>Temperature</code>, <code>Humidity</code>, and <code>Light</code> sensors.</li>
+<strong>Sensor</strong>: <code>Temperature</code>, <code>Humidity</code>, <code>Light</code>에 대해 보고합니다.</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use Abode devices in your installation, add your Abode account from the integrations page. Two-factor authentication must be disabled on your Abode account. Alternatively, Abode can be configured by adding the following <code>abode</code> section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 Abode 장치를 사용하려면 통합구성요소 페이지에서 Abode 계정을 추가하십시오. Abode 계정에서 2 단계 인증을 비활성화해야합니다. 또는 다음 <code>abode</code> 섹션을<code>configuration.yaml</code> 파일에 추가하여 Abode를 설정할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 abode:
   username: abode_username
@@ -157,8 +157,8 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="events" href="#events"></a> Events</h2>
-<p>There are a number of events that can be triggered from Abode.
-They are grouped into the below events:</p>
+<p>Abode에서 트리거 할 수 있는 많은 이벤트가 있습니다.
+다음과 같은 이벤트로 그룹화됩니다.</p>
 <ul>
 <li>
 <strong>abode_alarm</strong>: Fired when an alarm event is triggered from Abode. This includes Smoke, CO, Panic, and Burglar alarms.</li>
@@ -183,7 +183,7 @@ They are grouped into the below events:</p>
 <li>
 <strong>abode_automation_edit</strong>: Fired for changes to automations.</li>
 </ul>
-<p>All events have the fields:</p>
+<p>모든 이벤트에는 다음과 같은 필드가 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -242,15 +242,13 @@ They are grouped into the below events:</p>
 </tr>
 </tbody>
 </table>
-<p>There is a unique list of known event_codes that can be found
-<a href="https://github.com/MisterWil/abodepy/files/1262019/timeline_events.txt" rel="external nofollow">here</a>.</p>
+<p>알려진 event_codes의 고유 목록이 <a href="https://github.com/MisterWil/abodepy/files/1262019/timeline_events.txt" rel="external nofollow">여기</a>있습니다.</p>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="service-change_setting" href="#service-change_setting"></a> Service change_setting</h3>
-<p>Change settings on your Abode system.
-For a full list of settings and valid values, consult the
-<a href="https://github.com/MisterWil/abodepy/blob/master/README.rst#settings" rel="external nofollow">AbodePy settings section</a>.</p>
+<a class="title-link" name="change_setting-" href="#change_setting-"></a> change_setting 서비스</h3>
+<p>Abode 시스템의 설정을 변경하십시오.
+설정 및 유효한 값의 전체 목록을 보려면 <a href="https://github.com/MisterWil/abodepy/blob/master/README.rst#settings" rel="external nofollow">AbodePy settings section</a>을 참조하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -273,8 +271,8 @@ For a full list of settings and valid values, consult the
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-capture_image" href="#service-capture_image"></a> Service capture_image</h3>
-<p>Request a new still image from your Abode IR camera.</p>
+<a class="title-link" name="capture_image-" href="#capture_image-"></a> capture_image 서비스</h3>
+<p>Abode IR 카메라에 새로운 정지 이미지를 요청하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -292,8 +290,8 @@ For a full list of settings and valid values, consult the
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-trigger_quick_action" href="#service-trigger_quick_action"></a> Service trigger_quick_action</h3>
-<p>Trigger a quick action automation on your Abode system.</p>
+<a class="title-link" name="trigger_quick_action-" href="#trigger_quick_action-"></a> trigger_quick_action 서비스</h3>
+<p>Abode 시스템에서 quick action 자동화를 시작하십시오.</p>
 <table>
 <thead>
 <tr>

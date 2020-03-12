@@ -103,11 +103,11 @@
   <hr class="divider">
   
 
-  <p>The <code>waze_travel_time</code> sensor provides travel time from the <a href="https://www.waze.com/" rel="external nofollow">Waze</a>.</p>
-<p>Unit system is by default set to the metric system.</p>
+  <p><code>waze_travel_time</code> 센서는 <a href="https://www.waze.com/" rel="external nofollow">Waze</a>에서 이동 시간을 제공합니다.</p>
+<p>단위 시스템은 기본적으로 미터법으로 설정되어 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use this sensor in your installation, add the following <code>sensor</code> section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 이 센서를 사용하려면 다음 <code>sensor</code> 섹션을 configuration.yaml 파일에 추가하십시오.</p>
 <pre><code class="language-yaml"># Example entry for configuration.yaml
 sensor:
   - platform: waze_travel_time
@@ -194,11 +194,11 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>When using the <code>avoid_toll_roads</code>, <code>avoid_subscription_roads</code> and <code>avoid_ferries</code> options be aware that Waze will sometimes still route you over toll roads or ferries if a valid vignette/subscription is assumed. Default behaviour is that Waze will route you over roads having subscription options, so best is to set both <code>avoid_toll_roads</code> and <code>avoid_subscription_roads</code> or <code>avoid_ferries</code> if needed and experiment to ensure the desired outcome.</p>
+<p><code>avoid_toll_roads</code>, <code>avoid_subscription_roads</code> 및 <code>avoid_ferries</code> 옵션을 사용할 때 유효한 vignette/subscription을 가정할 경우 Waze가 유료 도로나 페리를 통해 경로를 안내하는 경우가 있습니다. 기본 동작은 Waze가 subscription 옵션으로 도로를 안내하는 것입니다. 가장 좋은 방법은 <code>avoid_toll_roads</code> 와 <code>avoid_subscription_roads</code> 또는 <code>avoid_ferries</code>를 설정하고 원하는 결과를 얻기 위해 실험하는 것입니다.</p>
 <h2>
-<a class="title-link" name="example-using-dynamic-destination" href="#example-using-dynamic-destination"></a> Example using dynamic destination</h2>
-<p>Using the flexible option to set a sensor value to the <code>destination</code>, you can setup a single Waze integration that will calculate travel time to multiple optional locations on demand.</p>
-<p>In the following example, the <code>Input Select</code> is converted into an address which is used to modify the destination for Waze route calculation from <code>device_tracker.myphone</code> location (It takes a few minutes for the value to update due to the interval of Waze data fetching).</p>
+<a class="title-link" name="---" href="#---"></a> 동적 목적지를 사용하는 예</h2>
+<p>유연한 옵션을 사용하여 센서값을 <code>destination</code>로 설정하면 필요에 따라 여러 선택적 위치까지의 이동 시간을 계산하는 단일 Waze 연동을 설정할 수 있습니다.</p>
+<p>다음 예에서 <code>Input Select</code>은 <code>device_tracker.myphone</code> 위치에서 Waze 경로 계산 목적지를 수정하는데 사용되는 주소로 변환됩니다. (Waze 데이터 페치 간격으로 인해 값이 업데이트되는데 몇 분이 걸립니다.)</p>
 <pre><code class="language-yaml">input_select:
   destination:
     name: destination
@@ -254,10 +254,8 @@ sensor:
     avoid_subscription_roads: true  
 </code></pre>
 <h2>
-<a class="title-link" name="using-the-live-map-in-an-iframe" href="#using-the-live-map-in-an-iframe"></a> Using the live map in an iFrame</h2>
-<p>If you plan to use <a href="https://developers.google.com/waze/iframe/" rel="external nofollow">Waze’s live map</a>
-in Lovelace <a href="/lovelace/iframe/">iframe</a> then use
-<a href="https://embed.waze.com/iframe" rel="external nofollow">https://embed.waze.com/iframe</a> and not the live map URL itself.</p>
+<a class="title-link" name="iframe---" href="#iframe---"></a> iFrame에서 라이브 맵 사용</h2>
+<p>Lovelace <a href="/lovelace/iframe/">iframe</a>에서 <a href="https://developers.google.com/waze/iframe/" rel="external nofollow">Waze’s live map</a>을 사용하려면 라이브 맵 URL 자체가 아닌 <a href="https://embed.waze.com/iframe" rel="external nofollow">https://embed.waze.com/iframe</a>를 사용하십시오.</p>
 
 
 </article>

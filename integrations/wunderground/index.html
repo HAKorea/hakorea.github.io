@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Weather Underground (WUnderground) - 홈어시스턴트</title>
+    <title>웨더 언더그라운드 (WUnderground) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Weather Underground (WUnderground) Weather within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/wunderground/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Weather Underground (WUnderground)">
+    <meta property="og:title" content="웨더 언더그라운드 (WUnderground)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/wunderground/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Weather Underground (WUnderground)">
+    <meta name="twitter:title" content="웨더 언더그라운드 (WUnderground)">
     <meta name="twitter:description" content="Instructions on how to integrate Weather Underground (WUnderground) Weather within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Weather Underground (WUnderground)
+      웨더 언더그라운드 (WUnderground)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>wunderground</code> platform uses <a href="https://www.wunderground.com/" rel="external nofollow">Weather Underground</a> as a source for current weather information.</p>
+  <p><code>wunderground</code> 플랫폼은 현재 날씨 정보의 출처로 <a href="https://www.wunderground.com/" rel="external nofollow">Weather Underground</a>를 사용합니다.</p>
 <div class="note warning">
-<p>Obtain a WUnderground API key <a href="https://www.wunderground.com/weather/api" rel="external nofollow">here</a>. They no longer offer free API keys, and all keys must be paid for. At this time existing free keys will continue to work, but will be disabled Dec 31, 2018, except you own a personal weather station and provide your data to WU (PWS Uploader). As of Sept 6, 2018 Weather Underground states they are declaring the <a href="https://apicommunity.wunderground.com/weatherapi/topics/end-of-service-for-the-weather-underground-api" rel="external nofollow">End of Service for the Weather Underground API</a>. They say they will develop new plans for non-commercial users. No timeline for this has been announced.</p>
-<p>Please consider this when using the following information.</p>
+<p>WUnderground API 키 <a href="https://www.wunderground.com/weather/api" rel="external nofollow">here</a>서 받아오십시오. 더 이상 무료 API 키를 제공하지 않으며 모든키는 비용을 지불해야합니다. 현재 기존의 무료키는 계속 작동하지만 개인 기상 관측소를 소유하고 데이터를 WU (PWS 업로더)에 제공하는 경우를 제외하고 2018 년 12 월 31 일에 비활성화됩니다. 2018 년 9 월 6 일 현재 Weather Underground는 <a href="https://apicommunity.wunderground.com/weatherapi/topics/end-of-service-for-the-weather-underground-api" rel="external nofollow">End of Service for the Weather Underground API</a>를 선언한다고 밝혔습니다. 그들은 비상업적 사용자를 위한 새로운 계획을 개발할 것이라고 말합니다. 이에 대한 일정은 발표되지 않았습니다.</p>
+<p>다음 정보를 사용할 때 이를 고려하십시오.</p>
 </div>
-<p>Configuration</p>
-<p>To add Wunderground to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설정</p>
+<p>설치에 Wunderground를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: wunderground
@@ -402,22 +402,20 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>All the conditions listed above will be updated every 5 minutes.</p>
+<p>위에 나열된 모든 조건은 5 분마다 업데이트됩니다.</p>
 <h2>
 <a class="title-link" name="forecasts" href="#forecasts"></a> Forecasts</h2>
 <h3>
 <a class="title-link" name="12-hour-forecasts" href="#12-hour-forecasts"></a> 12 hour forecasts</h3>
-<p>Monitored conditions marked above with <a name="12h">[12h]</a> are 12 hour forecasts. To get a forecast for different period/daytime replace the <code>_1d_</code> part of the sensor name.  e.g., <code>weather_2n</code> will give you forecast for tomorrow night. Valid values for day are <code>1</code> to <code>4</code> and valid values for daytime are <code>d</code> or <code>n</code>.</p>
+<p>위에서 <a name="12h">[12h]</a>로 표시된 모니터링된 상태는 10 시간입니다. 다른 period/daytime에 대한 예측을 얻으려면 센서 이름의 <code>_1d_</code> 부분을 바꾸십시오. 예를 들어 <code>weather_2n</code>은 내일 밤 예보를 제공합니다. day의 유효 값은 <code>1</code>~<code>4</code>이고 daytime의 유효 값은 <code>d</code> 또는 <code>n</code>입니다.</p>
 <h3>
 <a class="title-link" name="daily-forecasts" href="#daily-forecasts"></a> Daily forecasts</h3>
-<p>Conditions above marked with <a name="1d">[1d]</a> are daily forecasts. To get forecast for different day, replace the number
-in <code>_1d_</code> part of the sensor name. Valid values are from <code>1</code> to <code>4</code>.</p>
+<p>위의 <a name="1d">[1d]</a>로 표시된 조건은 일일 예측입니다. 다른 날을 예측하려면 센서 이름의 <code>_1d_</code> 부분에있는 숫자를 바꾸십시오. 유효한 값은 <code>1</code>에서 <code>4</code>입니다.</p>
 <h3>
 <a class="title-link" name="hourly-forecasts" href="#hourly-forecasts"></a> Hourly forecasts</h3>
-<p>Conditions marked with <a name="1h">[1h]</a> are hourly forecasts. To get forecast for different hour, replace the number
-in the <code>_1h_</code> part of the sensor name with <code>1</code> to <code>36</code>. e.g., <code>weather_24h</code> will give you weather in 24 hours.</p>
+<p><a name="1h">[1h]</a>로 표시된 조건은 시간별 예측입니다. 다른 시간을 예측하려면 센서 이름의 <code>_1h_</code> 부분에있는 숫자를 <code>1</code>에서 <code>36</code>으로 바꾸십시오. 예를 들어 <code>weather_24h</code>는 24 시간 안에 날씨를 알려줍니다.</p>
 <h2>
-<a class="title-link" name="additional-examples" href="#additional-examples"></a> Additional examples</h2>
+<a class="title-link" name="-" href="#-"></a> 추가 예시들</h2>
 <h3>
 <a class="title-link" name="daily-forecast" href="#daily-forecast"></a> Daily forecast</h3>
 <pre><code class="language-yaml">sensor:
@@ -482,12 +480,12 @@ group:
 </code></pre>
 <p><img src="/images/screenshots/wunderground_weather_overview.png" alt="Weather overview"></p>
 <div class="note warning">
-Note: While the platform is called “wunderground” the sensors will show up in Home Assistant as “PWS” (eg: sensor.pws_weather).
+Note: 플랫폼을 "Wunderground"라고 부르는 동안 센서는 Home Assistant에서 "PWS"로 표시됩니다 (예 : sensor.pws_weather).
 </div>
-<p>Note that the Weather Underground sensor is added to the entity_registry, so second and subsequent Personal Weather Station ID (pws_id) will have their monitored conditions suffixed with an index number e.g.</p>
+<p>Weather Underground 센서가 entity_registry에 추가되므로 두 번째 이후의 개인 기상 관측소 ID (pws_id)는 모니터링 되는 조건에 색인 번호가 붙습니다. 다음 예 :</p>
 <pre><code class="language-yaml">- sensor.pws_weather_1d_metric_2
 </code></pre>
-<p>Additional details about the API are available <a href="https://www.wunderground.com/weather/api/d/docs" rel="external nofollow">here</a>.</p>
+<p>API에 대한 추가 세부 사항이 있습니다. <a href="https://www.wunderground.com/weather/api/d/docs" rel="external nofollow">여기</a>.</p>
 
 
 </article>

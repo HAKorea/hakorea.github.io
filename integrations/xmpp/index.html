@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>xmpp</code> notification platform allows you to deliver notifications from Home Assistant to a <a href="https://xmpp.org/" rel="external nofollow">Jabber (XMPP)</a> account.</p>
+  <p><code>xmpp</code> 알림 플랫폼을 통해 Home Assistant에서 <a href="https://xmpp.org/" rel="external nofollow">Jabber (XMPP)</a> 계정으로 알림을 전달할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable Jabber notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 Jabber 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NOTIFIER_NAME  # e.g. jabber
@@ -174,16 +174,16 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>Pre Home Assistant 0.81 <code>sleekxmpp</code> was used to connect to XMPP servers. <code>sleekxmpp</code> as of version 1.3.2, does not support &gt; TLS v1. If you are running your own XMPP server (e.g., Prosody, ejabberd) make sure to allow using TLS v1.</p>
-<p>Home Assistant after 0.81 uses <code>slixmpp</code>, which also supports TLS v1.1 and TLS v1.2.</p>
+<p>Pre Home Assistant 0.81 <code>sleekxmpp</code>가 XMPP 서버에 연결하는데 사용되었습니다. 1.3.2 버전의 <code>sleekxmpp</code>는 &gt; TLS v1을 지원하지 않습니다. 자체 XMPP 서버 (예: Prosody, ejabberd)를 실행중인 경우 TLS v1 사용을 허용해야합니다.</p>
+<p>Home Assistant after 0.81 uses <code>slixmpp</code>, which also supports TLS v1.1 and TLS v1.2.
+0.81 이후의 홈어시스턴트는<code>slixmpp</code>를 사용하며 TLS v1.1 및 TLS v1.2도 지원합니다.</p>
 </div>
-<p>All Jabber IDs (JID) must include the domain. Make sure that the password matches the account provided as sender.</p>
-<p>You can send text messages and images as well as other files through Jabber.</p>
+<p>모든 Jabber ID (JID)는 도메인을 포함해야합니다. 비밀번호가 발신자로 제공된 계정과 일치하는지 확인하십시오.</p>
+<p>Jabber를 통해 다른 파일뿐만 아니라 문자 메시지 및 이미지를 보낼 수 있습니다.</p>
 <h3>
-<a class="title-link" name="jabber-text-message" href="#jabber-text-message"></a> Jabber Text Message</h3>
-<p>Here are some examples on how to set up a script, that can be run from an automation.</p>
-<p>Number 1 shows a classical, text-only message. The Title is optional, although if omitted,
-<code>Home-Assistant</code> will be set. To keep it empty set it to <code>""</code>.</p>
+<a class="title-link" name="jabber--" href="#jabber--"></a> Jabber 텍스트 메시지</h3>
+<p>다음은 자동화에서 실행할 수있는 스크립트를 설정하는 방법에 대한 예입니다.</p>
+<p>숫자 1은 고전적인 텍스트 전용 메시지입니다. 제목은 선택 사항이지만 생략하면 <code>Home-Assistant</code>가 설정됩니다. 비워 두려면 <code>""</code>로 설정하십시오.</p>
 <pre><code class="language-yaml"># Example script.yaml entry
 1_send_jabber_message:
   alias: "Text only Jabber message"
@@ -194,15 +194,15 @@ Default value: </p>
         message: "My funny or witty message"
 </code></pre>
 <h3>
-<a class="title-link" name="jabber-image-message" href="#jabber-image-message"></a> Jabber Image Message</h3>
-<p>You can send images or files from locally stored files or remote web locations via Jabber’s HTTP Upload feature.
-To send files and images, your jabber server must support <a href="https://xmpp.org/extensions/xep-0363.html" rel="external nofollow">XEP_0363</a>.</p>
+<a class="title-link" name="jabber--" href="#jabber--"></a> Jabber 이미지 메시지</h3>
+<p>Jabber의 HTTP 업로드 기능을 통해 로컬에 저장된 파일 또는 원격 웹 위치에서 이미지 또는 파일을 보낼 수 있습니다.
+파일 및 이미지를 보내려면 Jabber 서버가 <a href="https://xmpp.org/extensions/xep-0363.html" rel="external nofollow">XEP_0363</a>을 지원해야합니다.</p>
 <div class="note">
-<p>Be aware that images are uploaded onto the Jabber server of your provider. They reside there un-encrypted and could be accessed by the server admins. Usually images are deleted after a few days.<br>
+<p>이미지는 제공 업체의 Jabber 서버에 업로드됩니다. 암호화되지 않은 상태로 상주하며 서버 관리자가 액세스 할 수 있습니다. 일반적으로 이미지는 며칠 후에 삭제됩니다.<br>
 <br>
-Home-Assistant supports TLS encryption to ensure transport encryption. TLS is enforced by default. You can disable it  with the <a href="#tls"><code>tls</code></a> flag – which is not recommended.</p>
+홈 어시스턴트는 전송 암호화를 보장하기 위해 TLS 암호화를 지원합니다. TLS는 기본적으로 적용됩니다. <a href="#tls"><code>tls</code></a> 플래그를 사용하여 비활성화 할 수 있으나 권장하지 않습니다.</p>
 </div>
-<p>Number 2 sends only an image, retrieved from the URL. The TLS connection to get the image is also not verified (use with caution).</p>
+<p>숫자 2는 URL에서 검색한 이미지 만 보냅니다. 이미지를 얻기위한 TLS 연결도 확인되지 않습니다 (주의해서 사용하십시오).</p>
 <pre><code class="language-yaml"># Example script.yaml entry
 2_send_jabber_message_with_image_url:
   alias: "Send Image via Jabber from website"
@@ -215,7 +215,7 @@ Home-Assistant supports TLS encryption to ensure transport encryption. TLS is en
           url: "https://www.graz.at:8443/webcam_neu/getimg.php"
           verify: false
 </code></pre>
-<p>Number 3 sends an image from a local path.</p>
+<p>숫자 3은 로컬 경로에서 이미지를 보냅니다.</p>
 <pre><code class="language-yaml"># Example script.yaml entry
 3_send_jabber_message_with_local_image_path:
   alias: "Send Image via Jabber from local file"
@@ -228,8 +228,8 @@ Home-Assistant supports TLS encryption to ensure transport encryption. TLS is en
           path: "/home/homeassistant/super_view.jpg"
 </code></pre>
 <h3>
-<a class="title-link" name="jabber-file-message" href="#jabber-file-message"></a> Jabber File Message</h3>
-<p>Number 4 sends a text-file, retrieved from Github, renamed to <code>Hass_Cheatsheet.txt</code> to be viewable on a mobile Android device, as most don’t offer any application to view <code>.md</code> files. Optionally you can add a timeout for the HTTP upload in seconds.</p>
+<a class="title-link" name="jabber--" href="#jabber--"></a> Jabber 파일 메시지</h3>
+<p>4 번은 Github에서 가져온 텍스트 파일을 <code>Hass_Cheatsheet.txt</code>로 이름을 바꾸어 모바일 안드로이드 기기에서 볼 수 있도록 이름을 바꿉니다. 대부분 <code>.md</code>파일을 볼 수 있는 응용 프로그램은 없습니다. 선택적으로 HTTP 업로드 시간 초과를 초 단위로 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example script.yaml entry
 4_send_jabber_message_with_file:
   alias: "Send text file via Jabber"
@@ -244,8 +244,8 @@ Home-Assistant supports TLS encryption to ensure transport encryption. TLS is en
           timeout: 10
 </code></pre>
 <h3>
-<a class="title-link" name="templating" href="#templating"></a> Templating</h3>
-<p>Number 5 sends an image retrieved from a URL, and an additional text message with <code>title</code> and <code>message</code>.</p>
+<a class="title-link" name="" href="#"></a> 템플레이팅</h3>
+<p>숫자 5는 URL에서 검색된 이미지와 <code>title</code>과 <code>message</code>가 포함된 추가 문자 메시지를 보냅니다.</p>
 <pre><code class="language-yaml"># Example script.yaml entry
 5_send_jabber_message_with_image_and_text:
   alias: "Send Image and Text via Jabber"
@@ -257,7 +257,7 @@ Home-Assistant supports TLS encryption to ensure transport encryption. TLS is en
         data:
           url: "https://github.com/home-assistant/home-assistant.io/raw/next/source/images/favicon-192x192.png"
 </code></pre>
-<p>Number 6 sends an image from a templated URL.</p>
+<p>번호 6은 템플릿 URL에서 이미지를 보냅니다.</p>
 <pre><code class="language-yaml"># Example script.yaml entry
 6_send_jabber_message_with_image_from_url_template:
   alias: "Send Image from template URL via Jabber"
@@ -269,8 +269,8 @@ Home-Assistant supports TLS encryption to ensure transport encryption. TLS is en
         data:
           url_template: "https://www.foto-webcam.eu/webcam/dornbirn/{{ now().year }}/{{ '%02d' % now().month }}/{{ '%02d' % now().day }}/{{ '%02d' % now().hour }}{{ (now().minute + 58) % 60 // 10}}0_hd.jpg"
 </code></pre>
-<p>The possible source of a file is prioritized and only one will be picked up. <code>url_template</code> has the hightest priority; next is <code>url</code> then <code>path_template</code> and finally if none of them are defined <code>path</code> would be used. <code>path</code> will be used to eliminate file extension guessing for unknown URL downloads. Only the file extension will be left, as Home Assistant changes the filename to a random string for added privacy.</p>
-<p>To find out more about notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>파일의 가능한 소스가 우선 순위를 가지며 하나만 선택됩니다. <code>url_template</code>이 가장 높은 우선 순위를 가지고 있습니다. 다음은 <code>url</code>,<code>path_template</code> 그리고 마지막으로 아무것도 정의되지 않으면 <code>path</code>가 사용됩니다. <code>path</code>는 알 수없는 URL 다운로드에 대한 파일 확장자 추측을 제거하는 데 사용됩니다. 홈 어시스턴트는 추가된 개인 정보 보호를 위해 파일 이름을 임의의 문자열로 변경하므로 파일 확장자만 남습니다.</p>
+<p>알림에 대한 자세한 내용은 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 
 
 </article>

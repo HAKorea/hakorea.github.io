@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Updater - 홈어시스턴트</title>
+    <title>업데이터(Updater) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Detecting when Home Assistant updates are available.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/updater/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Updater">
+    <meta property="og:title" content="업데이터(Updater)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/updater/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Updater">
+    <meta name="twitter:title" content="업데이터(Updater)">
     <meta name="twitter:description" content="Detecting when Home Assistant updates are available.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Updater
+      업데이터(Updater)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>updater</code> binary sensor will check daily for new releases. The state will be “on” when an update is available. Otherwise, the state will be “off”. The newer version, as well as the link to the release notes, are attributes of the updater. As <a href="/hassio/">Hass.io</a> has its own schedule for release it doesn’t make sense to use this binary sensor on Hass.io.</p>
-<p>The updater integration will also collect basic information about the running Home Assistant instance and its environment. The information includes the current Home Assistant version, the time zone, Python version and operating system information. No identifiable information (i.e., IP address, GPS coordinates, etc.) will ever be collected. If you are concerned about your privacy, you are welcome to scrutinize the Python <a href="https://github.com/home-assistant/home-assistant/tree/dev/homeassistant/components/updater" rel="external nofollow">source code</a>.</p>
+  <p><code>updater</code> 바이너리 센서는 매일 새로운 릴리스를 확인합니다. 업데이트가 가능하면 상태가 “on”이 됩니다. 그렇지 않으면 상태가 “off”가 됩니다. 최신 버전과 릴리스 정보에 대한 링크는 Updater의 속성입니다. <a href="/hassio/">Hass.io</a>에는 자체 출시 일정이 있으므로 <strong>Hass.io에서 이 센서를 사용하는 것은 의미가 없습니다.</strong></p>
+<p>updater 통합구성요소는 실행중인 Home Assistant 인스턴스 및 해당 환경에 대한 기본 정보도 수집합니다. 이 정보에는 현재 홈어시스턴트 버전, 시간대, Python 버전 및 운영 체제 정보가 포함됩니다. 식별 가능한 정보 (예: IP 주소, GPS 좌표 등)는 수집되지 않습니다. 개인 정보가 걱정된다면 Python <a href="https://github.com/home-assistant/home-assistant/tree/dev/homeassistant/components/updater" rel="external nofollow">source code</a>를 면밀히 조사해보십시오.</p>
 <div class="note">
-<p>The <code>updater</code> binary sensor will wait one hour after startup until it performs the first update. For this period it will be in the state <code>unavailable</code>. After that it will check once a day for new releases.</p>
+<p><code>updater</code> 바이너리 센서는 시작 후 첫 번째 업데이트를 수행 할 때까지 1 시간 동안 기다립니다. 이 기간 동안 <code>unavailable</code> 상태가됩니다. 그런 다음 하루에 한 번 새로운 릴리스를 확인합니다.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>This integration is by default enabled, unless you’ve disabled or removed the <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> line from your configuration. If that is the case, the following example shows you how to enable this integration manually:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>본 통합구성요소는 설정에서 <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> 행을 비활성화하거나 제거하지 않은 한 기본적으로 활성화되어 있습니다. 이 경우 다음 예는 이 연동을 수동으로 활성화하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">updater:
 </code></pre>
 <div class="config-vars">
@@ -137,8 +137,8 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>For further information about the Updater’s data, please check the <a href="/docs/backend/updater/">detailed overview</a>. If you choose not to share any information when checking for updates, you can set <code>reporting: false</code>.</p>
-<p>It is possible to report the integrations that you are using to the Home Assistant developers. This will help them focus on improving the popular ones. To enable this option, you have to add <code>include_used_components: true</code>.</p>
+<p>Updater의 데이터에 대한 자세한 내용은 <a href="/docs/backend/updater/">detailed overview</a>를 확인하십시오. 업데이트를 확인할 때 정보를 공유하지 않기로 선택한 경우 <code>reporting: false</code>를 설정할 수 있습니다.</p>
+<p>사용중인 연동상황을 Home Assistant 개발자에게보고 할 수 있습니다. 이것은 그들이 관심있는 것들을 개선하는데 집중할 수 있도록 도와 줄 것입니다. 이 옵션을 활성화하려면 <code>include_used_components: true</code>를 추가해야합니다.</p>
 <pre><code class="language-json">"components": [
     "apcupsd",
     "api",
@@ -153,8 +153,8 @@ Default value: </p>
 ]
 </code></pre>
 <h2>
-<a class="title-link" name="notification" href="#notification"></a> Notification</h2>
-<p>For an added bonus, an automation integration can be created to send a message with a notifier when that state of this component’s entity changes.</p>
+<a class="title-link" name="notification" href="#notification"></a> 알림(Notification)</h2>
+<p>보너스를 추가하기 위해 이 구성 요소 엔티티의 상태가 변경될 때 notifier와 함께 메시지를 보내도록 자동화 연동을 작성할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 automation:
   alias: Update Available Notification

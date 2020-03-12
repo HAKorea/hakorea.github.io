@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Cisco Webex Teams - 홈어시스턴트</title>
+    <title>시스코 가상회의(Cisco Webex Teams) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add Cisco Webex Teams notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/cisco_webex_teams/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Cisco Webex Teams">
+    <meta property="og:title" content="시스코 가상회의(Cisco Webex Teams)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/cisco_webex_teams/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Cisco Webex Teams">
+    <meta name="twitter:title" content="시스코 가상회의(Cisco Webex Teams)">
     <meta name="twitter:description" content="Instructions on how to add Cisco Webex Teams notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,18 @@
   
   <header>
     <h1 class="title indent">
-      Cisco Webex Teams
+      시스코 가상회의(Cisco Webex Teams)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>cisco_webex_teams</code> notification platform allows you to deliver rich notifications from Home Assistant to <a href="https://www.webex.com/team-collaboration.html" rel="external nofollow">Cisco Webex Teams</a> (formerly known as Cisco Spark).</p>
-<p>To use this notification platform you will need an app (bot) token. To obtain a token visit <a href="https://developer.webex.com/" rel="external nofollow">Cisco Webex for Developers</a>.</p>
+  <p><code>cisco_webex_teams</code> 알림 플랫폼을 사용하면 홈어시스턴트에서 <a href="https://www.webex.com/team-collaboration.html" rel="external nofollow">Cisco Webex Teams</a>(이전의 Cisco Spark)로 풍부한 알림을 전달할 수 있습니다.</p>
+<p>이 알림 플랫폼을 사용하려면 앱(bot) 토큰이 필요합니다. 토큰을 얻으려면 <a href="https://developer.webex.com/" rel="external nofollow">Cisco Webex for Developers</a>를 방문하십시오.</p>
 <ul>
-<li>Detailed instructions can be found in the section titled <strong>Creating a Webex Teams Bot</strong> on the <a href="https://developer.webex.com/docs/bots" rel="external nofollow">Webex Teams bot documentation</a>.</li>
+<li>자세한 지침은 <a href="https://developer.webex.com/docs/bots" rel="external nofollow">Webex Teams bot documentation</a>에서 <strong>Creating a Webex Teams Bot</strong> 섹션에서 찾을 수 있습니다.</li>
 </ul>
-<p>You also need to specify the <code>room_id</code> that you wish to post messages into. The <code>room_id</code> can be found in one of two ways:</p>
+<p>메시지를 게시할 <code>room_id</code>도 지정해야합니다. <code>room_id</code>는 다음 두 가지 방법 중 하나로 찾을 수 있습니다.</p>
 <ol>
 <li>Logging in at <a href="https://developer.webex.com/" rel="external nofollow">Cisco Webex for Developers</a> and navigate to <code>Documentation</code>&gt;<code>API Reference</code>&gt;<code>Messages</code> and select List Messages, or</li>
 <li>Log into the web client at <a href="https://teams.webex.com/" rel="external nofollow">teams.webex.com</a>,</li>
@@ -117,8 +117,8 @@
 <li>select the room (or create a new room),</li>
 <li>then copying the room ID from the URL.</li>
 </ul>
-<p><strong><strong>Note:</strong> you must add the bot email (in the format <code>mybot@webex.bot</code>) as a participant to the room specified above.</strong></p>
-<p>To enable this platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p><strong><strong>Note:</strong> bot 이메일(<code>mybot@webex.bot</code> 형식)을 위에서 지정한 회의실에 참가자로 추가해야합니다.</strong></p>
+<p>설치에서 이 플랫폼을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NOTIFIER_NAME
@@ -127,14 +127,14 @@ notify:
     room_id: CISCO_WEBEX_TEAMS_ROOMID
 </code></pre>
 <h2>
-<a class="title-link" name="rich-text-formatting" href="#rich-text-formatting"></a> Rich Text Formatting</h2>
-<p>Webex Teams clients can render rich text via a whitelisted set of html tags.</p>
-<p>For example, you could configure automations to display details in an easy to read fashion like so:</p>
+<a class="title-link" name="--" href="#--"></a> 서식있는 텍스트 형식만들기</h2>
+<p>Webex Teams 클라이언트는 허용된 html 태그 세트를 통해 서식있는 텍스트를 렌더링 할 수 있습니다.</p>
+<p>예를 들어 다음과 같이 읽기 쉬운 방식으로 세부 정보를 표시하도록 자동화를 설정할 수 있습니다. :</p>
 <p class="img">
 <img src="/images/integrations/cisco_webex_teams/rich_formatting.png">
-Rich text as displayed in the macOS client.
+Rich text as displayed in the macOS client. macOS 클라이언트에 표시되는 서식있는 텍스트
 </p>
-<p>Here are the automations for the above screenshot:</p>
+<p>위 스크린 샷의 자동화는 다음과 같습니다.</p>
 <pre><code class="language-yaml">
 # Rich Text Example 1.
 # Show a one line message with a red banner
@@ -193,7 +193,7 @@ Rich text as displayed in the macOS client.
       &lt;/ul&gt;
       "
 </code></pre>
-<p>The following is a list of the allowed html tags and attributes:</p>
+<p>다음은 허용되는 html 태그 및 속성 목록입니다.</p>
 <table>
 <thead>
 <tr>
@@ -289,7 +289,7 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>.를 참조하십시오.</p>
 
 
 </article>

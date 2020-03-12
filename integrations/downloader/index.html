@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>다운로더 - 홈어시스턴트</title>
+    <title>다운로더(downloader) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup the downloader integration with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/downloader/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="다운로더">
+    <meta property="og:title" content="다운로더(downloader)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/downloader/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="다운로더">
+    <meta name="twitter:title" content="다운로더(downloader)">
     <meta name="twitter:description" content="Instructions on how to setup the downloader integration with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      다운로더
+      다운로더(downloader)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>downloader</code> integration provides a service to download files. It will raise an error and not continue to set itself up when the download directory does not exist. The directory needs to be writable for the user that is running Home Assistant.</p>
-<p>To enable it, add the following lines to your <code>configuration.yaml</code> file:</p>
+  <p><code>downloader</code> 통합구성요소는 파일을 다운로드하는 서비스를 제공합니다. 다운로드 디렉토리가 존재하지 않으면 오류가 발생하고 자체적으로 설정되지 않습니다. 홈어시스턴트를 실행중인 사용자의 디렉토리는 쓰기 가능해야합니다.</p>
+<p>이를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 downloader:
   download_dir: downloads
@@ -120,8 +120,8 @@ downloader:
 </dl>
 </div>
 <h3>
-<a class="title-link" name="use-the-service" href="#use-the-service"></a> Use the service</h3>
-<p>Go to the “Developer Tools”, then to “Call Service”, and choose <code>downloader/download_file</code> from the list of available services. Fill the “Service Data” field as shown in the example below and hit “CALL SERVICE”.</p>
+<a class="title-link" name="-" href="#-"></a> 서비스 사용</h3>
+<p>“개발자 도구”로 이동한 다음 “Call Service”로 이동하여 사용 가능한 서비스 목록에서 <code>downloader/download_file</code>을 선택하십시오. 아래 예에 표시된대로 “Service Data” 필드를 채우고 “CALL SERVICE”를 누르십시오.</p>
 <pre><code class="language-json">{"url":"http://domain.tld/path/to/file"}
 </code></pre>
 <p>This will download the file from the given URL.</p>
@@ -158,10 +158,10 @@ downloader:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="download-status-events" href="#download-status-events"></a> Download Status Events</h3>
-<p>When a download finished successfully, Home Assistant will emit a ‘downloader_download_completed’ event to the event bus which you can use to write automations against.
-In case download failed another event ‘downloader_download_failed’ is emitted to indicate that the download did not complete successfully.</p>
-<p>Along with the event the following payload parameters are available:</p>
+<a class="title-link" name="download--" href="#download--"></a> Download 상태 이벤트</h3>
+<p>다운로드가 성공적으로 완료되면 Home Assistant는 자동화를 작성하는 데 사용할 수 있는 ‘downloader_download_completed’이벤트를 이벤트 버스로 보냅니다.
+다운로드에 실패한 경우 다운로드가 성공적으로 완료되지 않았음을 나타내는 다른 이벤트 ‘downloader_download_failed’가 발생합니다.</p>
+<p>이벤트와 함께 다음 페이로드 매개 변수를 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -181,7 +181,7 @@ In case download failed another event ‘downloader_download_failed’ is emitte
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="example-automation" href="#example-automation"></a> Example Automation:</h4>
+<a class="title-link" name="--" href="#--"></a> 자동화 사례 :</h4>
 <pre><code class="language-yaml">- alias: Download Failed Notification
   trigger:
     platform: event

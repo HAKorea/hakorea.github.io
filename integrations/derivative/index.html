@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Derivative - 홈어시스턴트</title>
+    <title>변화율(Derivative) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Derivative Sensor into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/derivative/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Derivative">
+    <meta property="og:title" content="변화율(Derivative)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/derivative/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Derivative">
+    <meta name="twitter:title" content="변화율(Derivative)">
     <meta name="twitter:description" content="Instructions on how to integrate Derivative Sensor into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,17 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      Derivative
+      변화율(Derivative)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>derivative</code> platform creates a sensor that estimates the derivative of the values provided by a source sensor.
-Derivative sensors are updated upon changes of the <strong>source</strong>.</p>
+  <p><code>derivative</code> 플랫폼은 source 센서가 제공한 값의 변화율을 추정하는 센서를 생성합니다.
+Derivative 센서는 <strong>source</strong> 변경시 업데이트됩니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable Derivative Sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 Derivative 센서를 ​​활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: derivative
@@ -173,12 +173,12 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="temperature-example" href="#temperature-example"></a> Temperature example</h2>
-<p>For example, you have a temperature sensor <code>sensor.temperature</code> that outputs a value every few seconds, but rounds to the nearest half number.
-That means that two consecutive output values might be the same (so the derivative is <code>Δy/Δx=0</code> because <code>Δy=0</code> !)
-However, the temperature might actually be changing over time.
-In order to capture this, you should use a <code>time_window</code>, such that immediate jumps don’t result in high derivatives and that after the next sensor update, the derivatives doesn’t vanish to zero.
-An example configuration that uses <code>time_window</code> is</p>
+<a class="title-link" name="--" href="#--"></a> 온도 변화율 사례</h2>
+<p>예를 들어, 몇 초마다 값을 출력하지만 가장 가까운 반값으로 반올림하는 온도 센서 <code>sensor.temperature</code>가 있습니다.
+이는 두 개의 연속 출력값이 동일 할 수 있음을 의미합니다 (따라서 미분은 <code>Δy=0</code>이기 때문에 <code>Δy/Δx=0</code>입니다).
+그러나 실제로 온도는 시간이 지남에 따라 변할 수 있습니다.
+이를 캡처하려면 <code>time_window</code>를 사용해야합니다, 즉각적인 피크값들은 높은 변화율의 결과로 나오지 않도록 하게 하고, 다음 센서 업데이트시 변화율이 0으로 나오지 않습니다.</p>
+<p><code>time_window</code>를 사용하는 예제 설정은</p>
 <pre><code class="language-yaml">sensor:
   - platform: derivative
     source: sensor.temperature

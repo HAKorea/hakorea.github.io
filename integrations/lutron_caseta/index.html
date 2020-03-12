@@ -103,9 +103,9 @@
   <hr class="divider">
   
 
-  <p><a href="http://www.lutron.com/" rel="external nofollow">Lutron</a> is an American lighting control company. They have several lines of home automation devices that manage light switches, dimmers, occupancy sensors, HVAC controls, etc. The <code>lutron_caseta</code> integration in Home Assistant is responsible for communicating with the Lutron Caseta Smart Bridge for the <a href="https://www.casetawireless.com/" rel="external nofollow">Caseta</a> product line of dimmers, switches and shades.</p>
-<p>This integration only supports the <a href="https://www.casetawireless.com/" rel="external nofollow">Caseta</a> line of products. Both Smart Bridge (L-BDG2-WH) and Smart Bridge PRO (L-BDGPRO2-WH) models are supported. For the RadioRA 2 product line, see the <a href="/integrations/lutron/">Lutron component</a>.</p>
-<p>The currently supported Caseta devices are:</p>
+  <p><a href="http://www.lutron.com/" rel="external nofollow">Lutron</a>은 미국 조명 제어 회사입니다. 여기에는 light switches, dimmers, occupancy sensors, HVAC controls 등을 관리하는 여러 홈자동화 장치 라인이 있습니다. 홈어시스턴트의 <code>lutron_caseta</code> 통합구성요소는 dimmers, switches, shades의 <a href="https://www.casetawireless.com/" rel="external nofollow">Caseta</a> 제품 라인을 위해 Lutron Caseta Smart Bridge와 통신하는 역할을 합니다.</p>
+<p>이 통합은구성요소는 <a href="https://www.casetawireless.com/" rel="external nofollow">Caseta</a> 제품군만 지원합니다. Smart Bridge (L-BDG2-WH) 및 Smart Bridge PRO (L-BDGPRO2-WH) 모델이 모두 지원됩니다. RadioRA 2 제품군의 경우 <a href="/integrations/lutron/">Lutron component</a>를 참조하십시오.</p>
+<p>현재 지원되는 Caseta 장치는 다음과 같습니다.</p>
 <ul>
 <li>Wall and plug-in dimmers as <a href="#light">lights</a>
 </li>
@@ -117,9 +117,9 @@
 </li>
 <li>Lutron smart <a href="#fan">fan</a> speed control</li>
 </ul>
-<p>When configured, the <code>lutron_caseta</code> integration will automatically discover the currently supported devices as setup in the Lutron Smart Bridge. The name assigned in the Lutron mobile app will be used to form the <code>entity_id</code> used in Home Assistant. e.g., a dimmer called ‘Lamp’ in a room called ‘Bedroom’ becomes <code>light.bedroom_lamp</code> in Home Assistant.</p>
-<p>To use Lutron Caseta devices in your installation, you must first log in to your Lutron account and generate a certificate that allows Home Assistant to connect to your bridge. This can be accomplished by downloading and executing <a href="https://github.com/gurumitts/pylutron-caseta/blob/master/get_lutron_cert.py" rel="external nofollow">get_lutron_cert.py</a>, which will generate three files: caseta.key, caseta.crt, caseta-bridge.crt when you run it. See the instructions at the top of the script for more information.</p>
-<p>Once you have the three necessary files, place them in your configuration directory and add the following to your <code>configuration.yaml</code>:</p>
+<p><code>lutron_caseta</code> 통합구성요소는 Lutron Smart Bridge에서 설정으로 현재 지원되는 장치를 자동으로 검색합니다. Lutron 모바일 앱에 지정된 이름은 홈어시스턴트에서 사용되는 <code>entity_id</code>를 형성하는 데 사용됩니다. 예를 들어 <code>Bedroom</code>이라는 방에 <code>Lamp</code>라는 dimmer는 Home Assistant에서 <code>light.bedroom_lamp</code>가 됩니다.</p>
+<p>설치시 Lutron Caseta 장치를 사용하려면 먼저 Lutron 계정에 로그인하고 Home Assistant가 브리지에 연결할 수 있는 인증서를 생성해야합니다. <a href="https://github.com/gurumitts/pylutron-caseta/blob/master/get_lutron_cert.py" rel="external nofollow">get_lutron_cert.py</a>를 다운로드하여 실행하면 다음 세 가지 파일이 생성됩니다. : caseta.key, caseta.crt, caseta-bridge.crt. 자세한 내용은 스크립트 상단의 지침을 참조하십시오.</p>
+<p>필요한 파일이 3개 생겼으면 설정 디렉토리에 넣고 <code>configuration.yaml</code>에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 lutron_caseta:
     host: IP_ADDRESS
@@ -150,39 +150,39 @@ lutron_caseta:
 </dl>
 </div>
 <div class="note">
-<p>It is recommended to assign a static IP address to your Lutron Smart Bridge. This ensures that it won’t change IP address, so you won’t have to change the <code>host</code> if it reboots and comes up with a different IP address.
+<p>Lutron Smart Bridge에 고정 IP 주소를 할당하는 것이 좋습니다. 이렇게하면 IP 주소가 변경되지 않으므로 호스트가 재부팅되고 다른 IP 주소가 나오는 경우 호스트를 변경할 필요가 없습니다.</p>
 <br>
-Use a DHCP reservation on your router to reserve the address or in the PRO model of the Smart Bridge, set the IP address under Network Settings in the Advanced / Integration menu in the mobile app.</p>
+라우터에서 DHCP 예약을 사용하여 주소를 예약하거나 Smart Bridge의 PRO 모델에서 모바일 앱의 Advanced / Integration 메뉴에 있는 네트워크 설정에서 IP 주소를 설정하십시오.
 </div>
-<p>To get Lutron Caseta roller, honeycomb shades, lights, scene and switch working with Home Assistant. First follow the instructions for the general Lutron Caseta integration above.</p>
+<p>Lutron Caseta roller, honeycomb shades, lights, scene 및 switch를 Home Assistant와 함께 사용하려면, 먼저 위의 일반적인 Lutron Caseta 통합 지침을 따르십시오.</p>
 <h2>
 <a class="title-link" name="cover" href="#cover"></a> Cover</h2>
-<p>After setup, shades will appear in Home Assistant using an <code>entity_id</code> based on the name used in the Lutron mobile app. For example, a shade called ‘Living Room Window’ will appear in Home Assistant as <code>cover.living_room_window</code>.</p>
-<p>For more information on working with shades in Home Assistant, see the <a href="/integrations/cover/">Covers component</a>.</p>
-<p>Available services: <code>cover.open_cover</code>, <code>cover.close_cover</code> and <code>cover.set_cover_position</code>. Cover <code>position</code> ranges from <code>0</code> for fully closed to <code>100</code> for fully open.</p>
+<p>설정 후 Lutron 모바일 앱에 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 shades가 Home Assistant에 나타납니다. 예를 들어, ‘Living Room Window’이라는 shades은 홈어시스턴트에 <code>cover.living_room_window</code>로 나타납니다.</p>
+<p>Home Assistant에서 shades 작업에 대한 자세한 내용은 <a href="/integrations/cover/">Covers component</a>를 참조하십시오.</p>
+<p>사용 가능한 서비스 : <code>cover.open_cover</code>, <code>cover.close_cover</code> 및 <code>cover.set_cover_position</code>. 커버의 위치는 완전 폐쇄의 경우 0, 완전 개방의 경우 100까지입니다.</p>
 <h2>
 <a class="title-link" name="light" href="#light"></a> Light</h2>
-<p>After setup, dimmable lights including wall and plug-in dimmers will appear in Home Assistant using an <code>entity_id</code> based on the name used in the Lutron mobile app. For example, a light called ‘Bedroom Lamp’ will appear in Home Assistant as <code>light.bedroom_lamp</code>.</p>
-<p>For non-dimmable lights or switched loads, see the switch section on this page.</p>
-<p>For more information on working with lights in Home Assistant, see the <a href="/integrations/light/">Lights component</a>.</p>
-<p>Available services: <code>light.turn_on</code>, <code>light.turn_off</code> and <code>light.toggle</code>. The <code>light.turn_on</code> service supports attributes <code>brightness</code> and <code>brightness_pct</code>.</p>
+<p>설정 후 벽 및 플러그인 dimmers를 포함한 디밍 가능 조명이 Lutron 모바일 앱에서 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 ‘Bedroom Lamp’라는 조명은 홈 어시스턴트에 <code>light.bedroom_lamp</code>로 나타납니다.</p>
+<p>디밍 불가능한 조명 또는 스위치로드에 대해서는 이 페이지의 스위치 섹션을 참조하십시오.</p>
+<p>Home Assistant에서 조명 작업에 대한 자세한 내용은 <a href="/integrations/light/">Lights component</a>를 참조하십시오.</p>
+<p>사용 가능한 서비스 : <code>light.turn_on</code>, <code>light.turn_off</code>, <code>light.toggle</code>.  <code>light.turn_on</code> 서비스는 <code>brightness</code> 및 <code>brightness_pct</code> 속성을 지원합니다.</p>
 <h2>
-<a class="title-link" name="scene" href="#scene"></a> Scene</h2>
-<p>The Lutron Caseta scene platform allows you to control your Smart Bridge Scenes that are created in the Lutron mobile app.</p>
-<p>After setup, scenes will appear in Home Assistant using an <code>entity_id</code> based on the name used in the Lutron mobile app. For example, a scene called ‘Entertain’ will appear in Home Assistant as <code>scene.entertain</code>.</p>
-<p>For more information on working with scenes in Home Assistant, see the <a href="/integrations/scene/">Scenes component</a>.</p>
-<p>Available services: <code>scene.turn_on</code>.</p>
+<a class="title-link" name="scene" href="#scene"></a> 장면(Scene)</h2>
+<p>Lutron Caseta 장면 플랫폼을 사용하면 Lutron 모바일 앱에서 생성된 Smart Bridge 장면을 제어 할 수 있습니다.</p>
+<p>설정 후 장면은 Lutron 모바일 앱에서 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 <code>Entertain</code>이라는 장면은 Home Assistant에서 <code>scene.entertain</code>으로 나타납니다.</p>
+<p>Home Assistant에서 장면 작업에 대한 자세한 내용은 <a href="/integrations/scene/">Scenes component</a>를 참조하십시오.</p>
+<p>사용가능한 서비스: <code>scene.turn_on</code>.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>After setup, switches will appear in Home Assistant using an <code>entity_id</code> based on the name used in the Lutron mobile app. For example, a light switch called ‘Master Bathroom Vanity’ will appear in Home Assistant as <code>switch.master_bathroom_vanity</code>.</p>
-<p>For dimmable lights including wall and plug-in dimmers, see the light section on this page.</p>
-<p>For more information on working with switches in Home Assistant, see the <a href="/integrations/switch/">Switches component</a>.</p>
-<p>Available services: <code>switch.turn_on</code> and <code>switch.turn_off</code>.</p>
+<p>설정 후 스위치는 Lutron 모바일 앱에서 사용되는 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 ‘Master Bathroom Vanity’라는 전등 스위치는 홈어시스턴트에 <code>switch.master_bathroom_vanity</code>로 나타납니다.</p>
+<p>벽 및 플러그인 디머를 포함한 디밍 가능 라이트에 대해서는 이 페이지의 라이트 섹션을 참조하십시오.</p>
+<p>Home Assistant에서 스위치 작업에 대한 자세한 내용은 <a href="/integrations/switch/">Switches component</a>를 참조하십시오.</p>
+<p>사용가능한 서비스 : <code>switch.turn_on</code>, <code>switch.turn_off</code>.</p>
 <h2>
 <a class="title-link" name="fan" href="#fan"></a> Fan</h2>
-<p>After setup, fans will appear in Home Assistant using an <code>entity_id</code> based on the name used in the Lutron mobile app. For example, a light switch called ‘Master Bathroom Vanity’ will appear in Home Assistant as <code>fan.master_bedroom_ceiling_fan</code>.</p>
-<p>For more information on working with fans in Home Assistant, see the <a href="/components/fan/">Fans component</a>.</p>
-<p>Available services: <code>fan.turn_on</code>, <code>fan.turn_off</code>, and <code>fan.set_speed</code>.</p>
+<p>설정 후 팬은 Lutron 모바일앱에서 사용되는 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 ‘Master Bathroom Vanity’라는 전등 스위치는 홈어시스턴트에 <code>fan.master_bedroom_ceiling_fan</code>으로 나타납니다.</p>
+<p>홈어시스턴트에서 팬 작업에 대한 자세한 정보는 <a href="/components/fan/">Fans component</a>를 참조하십시오.</p>
+<p>사용가능한 서비스: <code>fan.turn_on</code>, <code>fan.turn_off</code>, <code>fan.set_speed</code>.</p>
 
 
 </article>

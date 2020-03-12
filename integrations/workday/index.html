@@ -103,14 +103,13 @@
   <hr class="divider">
   
 
-  <p>The <code>workday</code> binary sensor indicates, whether the current day is a workday or not. It allows specifying, which days of the week counts as workdays and also
-uses the python module <a href="https://pypi.python.org/pypi/holidays" rel="external nofollow">holidays</a> to incorporate information about region-specific public holidays.</p>
+  <p><code>workday</code> 이진 센서는 현재 일이 근무일인지 여부를 나타냅니다. 요일로 계산할 요일을 지정할 수 있으며 Python 모듈 <a href="https://pypi.python.org/pypi/holidays" rel="external nofollow">holidays</a>을 사용하여 지역별 공휴일에 대한 정보를 연동할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>Check the <a href="https://github.com/dr-prodigy/python-holidays#available-countries" rel="external nofollow">country list</a> for available province.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>사용 가능한 지역에 대해서는 <a href="https://github.com/dr-prodigy/python-holidays#available-countries" rel="external nofollow">country list</a>을 확인하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the <code>workday</code> sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 <code>workday</code> 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: workday
@@ -170,17 +169,17 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>Days are specified as follows: <code>mon</code>, <code>tue</code>, <code>wed</code>, <code>thu</code>, <code>fri</code>, <code>sat</code>, <code>sun</code>.
-The keyword <code>holiday</code> is used for public holidays identified by the holidays module.</p>
+<p>일은 다음과 같이 지정됩니다: <code>mon</code>,<code>tue</code>,<code>wed</code>,<code>thu</code>,<code>fri</code>,<code>sat</code>,<code>sun</code>.
+키워드 <code>holiday</code>은 공휴일 모듈에 의해 식별된 공휴일에 사용됩니다.</p>
 <div class="note warning">
-<p>If you use the sensor for Norway (<code>NO</code>) you need to wrap <code>NO</code> in quotes or write the name in full.
-Otherwise the value is evaluated as <code>false</code>.
-If you use the sensor for Canada (<code>CA</code>) with Ontario (<code>ON</code>) as <code>province:</code> then you need to wrap <code>ON</code> in quotes.
-Otherwise the value is evaluated as <code>true</code> (check the YAML documentation for further details) and the sensor will not work.</p>
+<p>노르웨이 (<code>NO</code>)에 센서를 사용하는 경우 <code>NO</code>를 따옴표로 묶거나 이름을 완전히 써야합니다.
+그렇지 않으면 값은 <code>false</code>로 평가됩니다.
+온타리오 (<code>ON</code>)가 있는 캐나다 (<code>CA</code>) 센서를 <code>province:</code>로 사용하는 경우 <code>ON</code>을 따옴표로 묶어야합니다.
+그렇지 않으면 값이 <code>true</code>로 평가되고 (자세한 내용은 YAML 설명서를 확인하십시오) 센서가 작동하지 않습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="full-example" href="#full-example"></a> Full example</h2>
-<p>This examples excludes Saturdays, Sundays and holiday. Two custom holidays are added.</p>
+<a class="title-link" name="-" href="#-"></a> 전체 예제</h2>
+<p>이 예는 토요일, 일요일 및 공휴일을 제외합니다. 두 개의 사용자 정의 휴일이 추가됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: workday
@@ -192,8 +191,8 @@ binary_sensor:
       - '2018-12-31'
 </code></pre>
 <h2>
-<a class="title-link" name="automation-example" href="#automation-example"></a> Automation example</h2>
-<p>Example usage for automation:</p>
+<a class="title-link" name="-" href="#-"></a> 자동화 예제</h2>
+<p>자동화 사용법 예 :</p>
 <pre><code class="language-yaml">automation:
   alias: Turn on heater on workdays
   trigger:
@@ -208,7 +207,7 @@ binary_sensor:
     entity_id: switch.heater
 </code></pre>
 <div class="note">
-<p>Please remember that <a href="/docs/configuration/devices/">as explained here</a> you can only have a single <code>automation:</code> entry. Add the automation to your existing automations.</p>
+<p><a href="/docs/configuration/devices/">as explained here</a> 하나의 <code>automation:</code>항목만 가질 수 있습니다. 기존 자동화에 자동화를 추가하십시오.</p>
 </div>
 
 

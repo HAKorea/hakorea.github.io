@@ -104,12 +104,12 @@
   
 
   <div class="note">
-<p>The <code>knx</code> integration must be configured correctly to use this integration, see <a href="/integrations/knx">KNX Integration</a>.</p>
+<p>이 통합구성요소를 사용하려면 <code>knx</code> 연동을 올바르게 설정해야합니다. <a href="/integrations/knx">KNX Integration</a>을 참조하십시오.</p>
 </div>
-<p>The <code>knx</code> switch platform is used as an interface to switching actuators.</p>
+<p><code>knx</code> 스위치 플랫폼은 스위칭 액츄에이터(switching actuators)의 인터페이스로 사용됩니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your KNX switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 KNX 스위치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml">switch:
   - platform: knx
     name: Kitchen.Coffee
@@ -138,8 +138,7 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>Some KNX devices can change their state internally without any messages on the KNX bus, e.g., if you configure a timer on a channel. The optional <code>state_address</code> can be used to inform Home Assistant about these state changes. If a KNX message is seen on the bus addressed to the given state address, this will overwrite the state of the switch object.
-For switching actuators that are only controlled by a single group address and can’t change their state internally, you don’t have to configure the state address.</p>
+<p>일부 KNX 장치는 KNX 버스에서 메시지없이 내부적으로 상태를 변경할 수 있습니다 (예: 채널에서 타이머를 설정하는 경우). 선택적 상태인 <code>state_address</code>는 이러한 상태 변경에 대해 홈어시스턴트에게 알리는 데 사용될 수 있습니다. 주어진 상태 주소(state address)로 주소가 지정된 버스에서 KNX 메시지가 표시되면 스위치 객체(switch object)의 상태를 덮어 씁니다. 단일 그룹 주소로만 제어되고 내부적으로 상태를 변경할 수 없는 액추에이터(actuators)를 전환하는 경우 상태 주소를 설정할 필요가 없습니다.</p>
 
 
 </article>

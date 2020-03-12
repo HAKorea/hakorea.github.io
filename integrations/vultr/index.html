@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Vultr - 홈어시스턴트</title>
+    <title>Vultr 서버 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Vultr within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/vultr/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Vultr">
+    <meta property="og:title" content="Vultr 서버">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/vultr/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Vultr">
+    <meta name="twitter:title" content="Vultr 서버">
     <meta name="twitter:description" content="Instructions on how to integrate Vultr within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      Vultr
+      Vultr 서버
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>vultr</code> integration allows you to access information about and interact with your <a href="https://www.vultr.com" rel="external nofollow">Vultr</a> subscriptions (Virtual Private Servers) from Home Assistant.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>vultr</code> 통합구성요소를 통해 Home Assistant에서 <a href="https://www.vultr.com" rel="external nofollow">Vultr</a> 구독 (Virtual Private Servers)에 대한 정보에 액세스하고 상호 작용할 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#sensor">Sensor</a></li>
 <li><a href="#switch">Switch</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Obtain your API key from your <a href="https://my.vultr.com/settings/#settingsapi" rel="external nofollow">Vultr Account</a>.</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><a href="https://my.vultr.com/settings/#settingsapi" rel="external nofollow">Vultr 계정</a>에서 API 키를 얻습니다.</p>
 <div class="note">
-Ensure you allow the public IP of Home Assistant under the Access Control heading.
+액세스 제어 표제(heading) 아래에서 홈어시스턴트의 공용 IP를 허용하십시오.
 </div>
-<p>To integrate your Vultr subscriptions with Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<p>Vultr 구독을 Home Assistant와 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 vultr:
   api_key: YOUR_API_KEY
@@ -133,14 +133,14 @@ vultr:
 </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary sensor</h2>
-<p>The <code>vultr</code> binary sensor platform allows you to monitor your <a href="https://www.vultr.com/" rel="external nofollow">Vultr</a> subscription to see if it is powered on or not.</p>
+<p><code>vultr</code> 이진 센서 플랫폼을 사용하면 <a href="https://www.vultr.com/" rel="external nofollow">Vultr</a> 구독을 모니터링하여 전원이 켜져 있는지 여부를 확인할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>To use this binary sensor, you first have to set up your Vultr hub.</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>이 바이너리 센서를 사용하려면 먼저 Vultr 허브를 설정해야합니다.</p>
 <div class="note">
-<p>The following examples assume a subscription that has an ID of <code>123456</code> and a label of <code>Web Server</code></p>
+<p>다음 예는 ID가 <code>123456</code>이고 레이블이 <code>Web Server</code>인 구독을 가정합니다.</p>
 </div>
-<p>Minimal <code>configuration.yaml</code> (produces <code>binary_sensor.vultr_web_server</code>):</p>
+<p>최소 <code>configuration.yaml</code> (<code>binary_sensor.vultr_web_server</code> 생성) :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: vultr
@@ -166,8 +166,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="full-example" href="#full-example"></a> Full example</h3>
-<p>Full <code>configuration.yaml</code> (produces <code>binary_sensor.totally_awesome_server</code>):</p>
+<a class="title-link" name="-" href="#-"></a> 전체 사례</h3>
+<p>전체 <code>configuration.yaml</code> (<code>binary_sensor.totally_awesome_server</code> 생성):</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: vultr
     name: totally_awesome_server
@@ -175,12 +175,12 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>vultr</code> sensor platform will allow you to view current bandwidth usage and pending charges against your <a href="https://www.vultr.com/" rel="external nofollow">Vultr</a> subscription.</p>
-<p>To use this sensor, you must set up your Vultr hub.</p>
+<p><code>vultr</code> 센서 플랫폼을 사용하면 <a href="https://www.vultr.com/" rel="external nofollow">Vultr</a> 구독에 대한 현재 대역폭 사용량 및  요금을 볼 수 있습니다.</p>
+<p>이 센서를 사용하려면 Vultr 허브를 설정해야합니다.</p>
 <div class="note">
-<p>The following examples assume a subscription that has an ID of <code>123456</code> and a label of <code>Web Server</code></p>
+<p>다음 예는 ID가 <code>123456</code>이고 레이블이 <code>Web Server</code>인 구독을 가정합니다.</p>
 </div>
-<p>Minimal <code>configuration.yaml</code> (produces <code>sensor.vultr_web_server_current_bandwidth_used</code> and <code>sensor.vultr_web_server_pending_charges</code>):</p>
+<p>최소 <code>configuration.yaml</code> (<code>sensor.vultr_web_server_current_bandwidth_used</code> 및 <code>sensor.vultr_web_server_pending_charges</code> 생성):</p>
 <pre><code class="language-yaml">sensor:
   - platform: vultr
     subscription: 123456
@@ -227,7 +227,7 @@ Default value: </p>
       - current_bandwidth_used
       - pending_charges
 </code></pre>
-<p>Custom <code>configuration.yaml</code> with only one condition monitored (produces <code>sensor.web_server_bandwidth</code>):</p>
+<p>사용자정의 <code>configuration.yaml</code> 단 한개의 조건만 모니터 가능 (<code>sensor.web_server_bandwidth</code> 생성):</p>
 <pre><code class="language-yaml">sensor:
   - platform: vultr
     name: Web Server Bandwidth
@@ -237,11 +237,11 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>vultr</code> switch platform allows you to control (start/stop) your <a href="https://www.vultr.com/" rel="external nofollow">Vultr</a> subscription.</p>
-<p>To control your Vultr subscription, you first have to set up your Vultr hub.</p>
+<p><code>vultr</code> 스위치 플랫폼을 사용하면 <a href="https://www.vultr.com/" rel="external nofollow">Vultr</a> 가입을 제어 (시작/중지) 할 수 있습니다.</p>
+<p>Vultr 구독을 제어하려면 먼저 Vultr 허브를 설정해야합니다.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>Minimal <code>configuration.yaml</code> (produces <code>switch.vultr_web_server</code>):</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p>최소 <code>configuration.yaml</code> (<code>switch.vultr_web_server</code> 생성):</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: vultr
@@ -267,8 +267,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="additional-examples" href="#additional-examples"></a> Additional Examples</h3>
-<p>Full example that produces <code>switch.amazing_server</code>, assuming a subscription that has an ID of <code>123456</code> and a label of <code>Web Server</code>:</p>
+<a class="title-link" name="-" href="#-"></a> 추가 사례</h3>
+<p>ID가 <code>123456</code>이고 레이블이 <code>Web Server</code> 인 구독을 가정한 <code>switch.amazing_server</code>를 생성하는 전체 예제 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: vultr

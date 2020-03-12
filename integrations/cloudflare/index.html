@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Cloudflare - 홈어시스턴트</title>
+    <title>클라우드플레어(Cloudflare) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Automatically update your Cloudflare DNS records.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/cloudflare/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Cloudflare">
+    <meta property="og:title" content="클라우드플레어(Cloudflare)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/cloudflare/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Cloudflare">
+    <meta name="twitter:title" content="클라우드플레어(Cloudflare)">
     <meta name="twitter:description" content="Automatically update your Cloudflare DNS records.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Cloudflare
+      클라우드플레어(Cloudflare)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>With the <code>cloudflare</code> integration, you can keep your Cloudflare records up to date.</p>
-<p>The integration runs every hour, but can also be started manually by using the service <code>cloudflare.update_records</code> under services.</p>
+  <p><code>cloudflare</code> 통합구성요소를 사용하면 Cloudflare 레코드를 최신 상태로 유지할 수 있습니다.</p>
+<p>연동은 1 시간마다 실행되지만 서비스 아래의 <code>cloudflare.update_records</code> 서비스를 사용하여 수동으로 시작할 수도 있습니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>You can find your global API key in your Cloudflare account settings.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>Cloudflare 계정 설정에서 글로벌 API 키를 찾을 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use the integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 통합구성요소를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cloudflare:
   email: YOUR_EMAIL_ADDRESS
@@ -143,16 +143,16 @@ cloudflare:
 </dl>
 </div>
 <h2>
-<a class="title-link" name="additional-information" href="#additional-information"></a> Additional information</h2>
+<a class="title-link" name="-" href="#-"></a> 추가 정보</h2>
 <h3>
-<a class="title-link" name="usage-of-external-service" href="#usage-of-external-service"></a> Usage of external service</h3>
-<p>This platform uses the API from <a href="https://www.ipify.org/" rel="external nofollow">ipify.org</a> to set the public IP address.</p>
+<a class="title-link" name="--" href="#--"></a> 외부 서비스 이용법</h3>
+<p>이 플랫폼은 <a href="https://www.ipify.org/" rel="external nofollow">ipify.org</a>의 API를 사용하여 public IP 주소를 설정합니다.</p>
 <h3>
 <a class="title-link" name="api-key" href="#api-key"></a> API Key</h3>
-<p>Please note that the <code>api_key</code> is the <a href="https://support.cloudflare.com/hc/en-us/articles/200167836-Managing-API-Tokens-and-Keys#12345682" rel="external nofollow">global API key</a> of your Cloudflare account (not the API Token).</p>
+<p><code>api_key</code>는 Cloudflare의 계정의 <a href="https://support.cloudflare.com/hc/en-us/articles/200167836-Managing-API-Tokens-and-Keys#12345682" rel="external nofollow">global API key</a>입니다. (API 토큰 아님).</p>
 <h3>
 <a class="title-link" name="home-assistant-companion-app" href="#home-assistant-companion-app"></a> Home Assistant Companion App</h3>
-<p>If you would like to use <a href="https://companion.home-assistant.io/">iOS App</a> via Cloudflare set <strong>Minimum TLS version as 1.2</strong>, in order to do that, do the following:</p>
+<p>Cloudflare를 통해 <a href="https://companion.home-assistant.io/">iOS App</a>을 사용하려면 <strong>최소 TLS 버전을 1.2</strong>로 설정하려면 다음을 수행하십시오.</p>
 <ol>
 <li>Login to your <a href="https://dash.cloudflare.com/" rel="external nofollow">Cloudflare</a> account.</li>
 <li>Choose your domain.</li>
@@ -160,13 +160,13 @@ cloudflare:
 <li>Go to tab <code>Edge Certificates</code>.</li>
 <li>Find <code>Minimum TLS Version</code> and set it to <strong>1.2</strong>.</li>
 </ol>
-<p>Other settings should not cause any issues.</p>
+<p>다른 세팅들은 문제를 일으키지 않아야 합니다.</p>
 <h3>
 <a class="title-link" name="ssh-over-cloudflare" href="#ssh-over-cloudflare"></a> SSH over Cloudflare</h3>
-<p>For SSH usage (according to <a href="https://blog.cloudflare.com/cloudflare-now-supporting-more-ports/" rel="external nofollow">this</a> source), you need to connect directly to your server (bypassing Cloudflare). To do that, create a <code>CNAME</code> DNS record, e.g., <code>ssh.example.com</code>, with proxy status as “DNS only” (to do that click on orange icon, it will change color to gray) and then connect to <code>ssh.example.com</code> using your server SSH port.</p>
+<p>SSH 사용(<a href="https://blog.cloudflare.com/cloudflare-now-supporting-more-ports/" rel="external nofollow">this</a> 소스에 따름)의 경우 Cloudflare를 우회하여 서버에 직접 연결해야합니다. 이렇게하려면 프록시 상태가 “DNS only”(오렌지 아이콘을 클릭하면 색상이 회색으로 바뀝니다)인 CNAME DNS 레코드(예: <code>ssh.example.com</code>)를 만든 다음 서버 SSH 포트를 사용하여 <code>ssh.example.com</code>에 연결하십시오.</p>
 <h3>
-<a class="title-link" name="using-cloudflare-domain-only-for-home-assistant" href="#using-cloudflare-domain-only-for-home-assistant"></a> Using Cloudflare domain only for Home Assistant</h3>
-<p>If you want to update just a main domain, place in the records list only your domain, e.g., <code>example.com</code>. It will update your <code>A</code> DNS record with your IP every hour.</p>
+<a class="title-link" name="home-assistant-cloudflare--" href="#home-assistant-cloudflare--"></a> Home Assistant에만 Cloudflare 도메인 사용</h3>
+<p>기본 도메인만 업데이트하려면 <code>example.com</code>과 같이 도메인만 레코드 목록에 배치하십시오. 매시간마다 IP로 <code>A</code> DNS 레코드를 업데이트합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for one domain
 cloudflare:
   email: YOUR_EMAIL_ADDRESS
@@ -176,19 +176,19 @@ cloudflare:
     - EXAMPLE.COM
 </code></pre>
 <h4>
-<a class="title-link" name="the-minimum-dns-record-settings-are-if-you-have-set-up-https-already" href="#the-minimum-dns-record-settings-are-if-you-have-set-up-https-already"></a> The minimum DNS record settings are (if you have set up https already):</h4>
-<p>To redirect from your domain to the IP address of your Home Assistant server set this DNS record:</p>
+<a class="title-link" name="-dns-----https----" href="#-dns-----https----"></a> 최소 DNS 레코드 설정은 다음과 같습니다 (https를 이미 설정한 경우) :</h4>
+<p>도메인에서 Home Assistant 서버의 IP 주소로 리디렉션하려면 다음 DNS 레코드를 설정하십시오.</p>
 <pre><code class="language-text">Type: A
 Name: @
 IPv4 Address: your.ip.address
 </code></pre>
-<p>You can find your current IP address using <a href="https://api.ipify.org/" rel="external nofollow">this</a> page.</p>
-<p>In order to redirect from <code>https://www</code> to <code>https://</code> you need to set this DNS record:</p>
+<p><a href="https://api.ipify.org/" rel="external nofollow">this</a> 페이지에서 현재 IP 주소를 찾을 수 있습니다.</p>
+<p><code>https://www</code>에서 <code>https://</code>로 리디렉션하려면 다음 DNS 레코드를 설정해야합니다.</p>
 <pre><code class="language-text">Type: CNAME
 Name: @
 Target: example.com (your actual domain)
 </code></pre>
-<p>And also create Page Rule:</p>
+<p>또한 페이지 규칙을 작성하십시오.</p>
 <pre><code class="language-text">If the URL matches: www.example.com*
 Then the settings are: Forwarding URL
 Status: 302 - Temporary redirect

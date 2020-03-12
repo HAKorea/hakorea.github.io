@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>FortiGate - 홈어시스턴트</title>
+    <title>방화벽(FortiGate) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate FortiGate Firewalls into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/fortigate/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="FortiGate">
+    <meta property="og:title" content="방화벽(FortiGate)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/fortigate/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="FortiGate">
+    <meta name="twitter:title" content="방화벽(FortiGate)">
     <meta name="twitter:description" content="Instructions on how to integrate FortiGate Firewalls into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      FortiGate
+      방화벽(FortiGate)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This is a FortiGate presence sensor based on device detection of the FortiGate API</p>
+  <p>FortiGate API의 장치 감지를 기반으로하는 FortiGate 재실 센서입니다.</p>
 <h2>
-<a class="title-link" name="fortigate-set-up" href="#fortigate-set-up"></a> FortiGate set up</h2>
-<p>Configure the FortiGate with a USERNAME API user and assign its minimum rights profile:</p>
+<a class="title-link" name="fortigate-" href="#fortigate-"></a> FortiGate 셋업</h2>
+<p>USERNAME API 사용자로 FortiGate를 설정하고 최소 권한 프로파일을 지정하십시오.</p>
 <pre><code class="language-text">config system accprofile
     edit "homeassistant_profile"
         set authgrp read
@@ -127,8 +127,8 @@ config system api-user
 end
 </code></pre>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 fortigate:
   host: HOST_IP
@@ -158,8 +158,8 @@ fortigate:
 </dl>
 </div>
 <h2>
-<a class="title-link" name="errors" href="#errors"></a> Errors</h2>
-<p>If the rights of the profile are not sufficient, you will get the following error:</p>
+<a class="title-link" name="" href="#"></a> 에러들</h2>
+<p>프로필의 권한이 충분하지 않으면 다음 오류가 발생합니다.</p>
 <pre><code class="language-txt">ERROR (MainThread) [homeassistant.core] Error doing job: Task exception was never retrieved
 </code></pre>
 
