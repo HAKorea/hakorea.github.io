@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LiteJet - 홈어시스턴트</title>
+    <title>라이트젯(LiteJet) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup the LiteJet hub within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/litejet/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="LiteJet">
+    <meta property="og:title" content="라이트젯(LiteJet)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/litejet/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="LiteJet">
+    <meta name="twitter:title" content="라이트젯(LiteJet)">
     <meta name="twitter:description" content="Instructions on how to setup the LiteJet hub within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,21 @@
   
   <header>
     <h1 class="title indent">
-      LiteJet
+      라이트젯(LiteJet)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>LiteJet is a centralized lighting system that predates most home automation technology. All lights and wall switches are wired to a central panel. This central panel has a serial port interface that allows a computer to control the system via LiteJet’s third party protocol.</p>
-<p>Home Assistant integrates the LiteJet 3rd party protocol and allows you to get the status and control the connected lights.</p>
-<p>After connecting the LiteJet’s RS232-2 port to your computer, add the following to your <code>configuration.yaml</code>:</p>
+  <p>LiteJet은 대부분의 홈오토메이션 기술 이전의 중앙 집중식 조명 시스템입니다. 모든 조명 및 벽 스위치는 중앙 패널에 연결되어 있습니다. 이 중앙 패널에는 컴퓨터가 LiteJet의 타사 프로토콜을 통해 시스템을 제어 할 수있는 직렬 포트 인터페이스가 있습니다.</p>
+<p>Home Assistant는 LiteJet 타사 프로토콜을 연동하고 상태를 확인하고 연결된 표시등을 제어 할 수 있습니다.</p>
+<p>LiteJet의 RS232-2 포트를 컴퓨터에 연결 한 후 <code>configuration.yaml</code>에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml">litejet:
   port: /dev/serial/by-id/THE-PATH-OF-YOUR-SERIAL-PORT
 </code></pre>
-<p>Your LiteJet MCP should be configured for 19.2 K baud, 8 data bits, 1 stop bit, no parity, and to transmit a ‘CR’ after each response. These settings can be configured using the <a href="https://www.centralite.com/helpdesk/knowledgebase.php?article=735" rel="external nofollow">LiteJet programming software</a>.</p>
-<p>You can also configure the Home Assistant to ignore lights, scenes, and switches via their name. This is highly recommended since LiteJet has a fixed number of each of these and with most systems many will be unused.</p>
+<p>LiteJet MCP는 19.2 K 보드, 8 데이터 비트, 1 정지 비트, 패리티 없음으로 구성되고 각 응답 후 ‘CR’을 전송해야합니다. 이 설정은 <a href="https://www.centralite.com/helpdesk/knowledgebase.php?article=735" rel="external nofollow">LiteJet programming software</a>를 사용하여 설정할 수 있습니다.</p>
+<p>You can also configure the Home Assistant to ignore lights, scenes, and switches via their name. This is highly recommended since LiteJet has a fixed number of each of these and with most systems many will be unused.
+조명을 통해 조명, 장면 및 스위치 이름을 무시하도록 홈어시스턴트를 설정 할 수도 있습니다. LiteJet에는 각각 고정된 수가 있고 대부분의 시스템에서는 사용하지 않기 때문에 이 방법을 사용하는 것이 좋습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -144,8 +145,8 @@ Default value: </p>
   - 'Fan #'
 </code></pre>
 <h3>
-<a class="title-link" name="trigger" href="#trigger"></a> Trigger</h3>
-<p>LiteJet switches can be used as triggers too to allow those buttons to behave differently based on hold time. For example, automation can distinguish quick tap versus long hold.</p>
+<a class="title-link" name="trigger" href="#trigger"></a> 트리거(Trigger)</h3>
+<p>LiteJet 스위치를 트리거로 사용하여 해당 버튼이 보류 시간에 따라 다르게 작동할 수 있습니다. 예를 들어, 자동화는 quick tap과 long hold를 구별할 수 있습니다.</p>
 <ul>
 <li>
 <strong>platform</strong> (<em>Required</em>): Must be ‘litejet’.</li>
@@ -156,7 +157,7 @@ Default value: </p>
 <li>
 <strong>held_less_than</strong> (<em>Optional</em>): The maximum time the switch can be held for the trigger to activate.</li>
 </ul>
-<p>The trigger will activate at the earliest moment both <code>held_more_than</code> and <code>held_less_than</code> are known to be satisfied. If neither are specified, the trigger activates the moment the switch is pressed. If only <code>held_more_than</code> is specified, the trigger will activate the moment the switch has been held down at least that time. If <code>held_less_than</code> specified, the trigger can only activate when the switch is released.</p>
+<p>트리거는 <code>held_more_than</code> 및 <code>held_less_than</code>이 모두 만족되는 것으로 알려진 가장 빠른 순간에 활성화됩니다. 어느 것도 지정하지 않으면 스위치를 누르는 순간 트리거가 활성화됩니다. <code>held_more_than</code> 만 지정하면 스위치는 최소한 그 시간 동안 스위치를 누른 순간부터 활성화됩니다. <code>held_less_than</code>이 지정되면 스위치를 놓을 때만 트리거가 활성화 될 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
 - trigger:
     platform: litejet

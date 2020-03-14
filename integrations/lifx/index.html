@@ -103,16 +103,17 @@
   <hr class="divider">
   
 
-  <p>The <code>lifx</code> integration allows you to integrate your <a href="https://www.lifx.com" rel="external nofollow">LIFX</a> into Home Assistant.</p>
-<p><em>Please note, the <code>lifx</code> integration does not support Windows. The <code>lifx_legacy</code> light platform (supporting basic functionality) can be used instead.</em></p>
-<p>You can configure the LIFX integration by going to the integrations page inside the config panel.</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/TXjSIOPo9LU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>lifx</code> 통합구성요소를 통해 <a href="https://www.lifx.com" rel="external nofollow">LIFX</a>를 Home Assistant에 연동할 수 있습니다.</p>
+<p><em>lifx 통합은 Windows를 지원하지 않습니다. <code>lifx_legacy</code> 라이트 플랫폼 (기본 기능 지원)을 대신 사용할 수 있습니다 .</em></p>
+<p>설정 패널 내부의 <strong>통합구성요소 페이지</strong>로 이동하여 LIFX 연동을 설정할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="set-state" href="#set-state"></a> Set state</h2>
-<p>The LIFX bulbs allow a change of color and brightness even when they are turned off. This way you can control the light during the day so its settings are correct when events for turning on are received, for example from motion detectors or external buttons.</p>
-<p>The normal <code>light.turn_on</code> call cannot be used for this because it always turns the power on. Thus, LIFX has its own service call that allows color changes without affecting the current power state.</p>
+<p>LIFX 전구는 꺼져 있어도 색상과 밝기를 변경할 수 있습니다. 이렇게하면 낮 동안 조명을 제어하여 동작 탐지기나 외부 버튼 등을 켜는 이벤트가 수신될 때 설정이 정확히 반영됩니다.</p>
+<p>정상적인 <code>light.turn_on</code> 호출은 항상 전원을 켜기 때문에 사용할 수 없습니다. 따라서 LIFX에는 현재 전원 상태에 영향을 주지 않고 색상을 변경할 수 있는 자체 서비스 호출이 있습니다.</p>
 <h3>
-<a class="title-link" name="service-lifxset_state" href="#service-lifxset_state"></a> Service lifx.set_state</h3>
-<p>Change the light to a new state.</p>
+<a class="title-link" name="lifxset_state-" href="#lifxset_state-"></a> lifx.set_state 서비스</h3>
+<p>조명을 새로운 상태로 변경하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -148,8 +149,8 @@
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="light-effects" href="#light-effects"></a> Light effects</h2>
-<p>The LIFX platform supports several light effects. You can start these effects with default options by using the <code>effect</code> attribute of the normal <a href="/integrations/light/#service-lightturn_on"><code>light.turn_on</code></a> service, for example like this:</p>
+<a class="title-link" name="-" href="#-"></a> 조명 효과</h2>
+<p>LIFX 플랫폼은 여러 가지 조명 효과를 지원합니다. 일반 <a href="/integrations/light/#service-lightturn_on"><code>light.turn_on</code></a> 서비스의 <code>effect</code> 속성을 사용하여 기본 옵션으로 이러한 효과를 시작할 수 있습니다. 예를 들면 다음과 같습니다.</p>
 <pre><code class="language-yaml">automation:
   - alias: ...
     trigger:
@@ -160,7 +161,7 @@
           entity_id: light.office, light.kitchen
           effect: lifx_effect_pulse
 </code></pre>
-<p>However, if you want to fully control a light effect, you have to use its dedicated service call, like this:</p>
+<p>그러나 조명 효과를 완전히 제어하려면 다음과 같이 전용 서비스 요청을 사용해야합니다.</p>
 <pre><code class="language-yaml">script:
   colorloop_start:
     alias: 'Start colorloop'
@@ -173,10 +174,10 @@
           spread: 30
           change: 35
 </code></pre>
-<p>The available light effects and their options are listed below.</p>
+<p>사용 가능한 조명 효과 및 옵션은 다음과 같습니다.</p>
 <h3>
-<a class="title-link" name="service-lifxeffect_pulse" href="#service-lifxeffect_pulse"></a> Service lifx.effect_pulse</h3>
-<p>Run a flash effect by changing to a color and then back.</p>
+<a class="title-link" name="lifxeffect_pulse-" href="#lifxeffect_pulse-"></a> lifx.effect_pulse 서비스</h3>
+<p>색상을 변경한 다음 다시 플래시 효과를 실행하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -220,8 +221,8 @@
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-lifxeffect_colorloop" href="#service-lifxeffect_colorloop"></a> Service lifx.effect_colorloop</h3>
-<p>Run an effect with colors looping around the color wheel. All participating lights will coordinate to keep similar (but not identical) colors.</p>
+<a class="title-link" name="lifxeffect_colorloop-" href="#lifxeffect_colorloop-"></a> lifx.effect_colorloop 서비스</h3>
+<p>color wheel 주변으로 색상이 반복되는 효과를 실행합니다. 모든 여기 참가한 라이트는 유사한 (완전히 일치하지 않지만) 색상을 유지하도록 조정됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -261,8 +262,8 @@
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-lifxeffect_stop" href="#service-lifxeffect_stop"></a> Service lifx.effect_stop</h3>
-<p>Run an effect that does nothing, thereby stopping any other effect that might be running.</p>
+<a class="title-link" name="lifxeffect_stop-" href="#lifxeffect_stop-"></a> lifx.effect_stop 서비스</h3>
+<p>아무 것도하지 않는 효과를 실행하면 실행중인 다른 효과가 중지됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -278,8 +279,8 @@
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="advanced-configuration" href="#advanced-configuration"></a> Advanced configuration</h2>
-<p>There are some manual configuration options available. These are only needed with unusual network setups where automatic configuration does not find your LIFX devices.</p>
+<a class="title-link" name="-" href="#-"></a> 고급 설정</h2>
+<p>사용 가능한 일부 수동 설정 옵션이 있습니다. 자동 설정에서 LIFX 장치를 찾지 못하는 비정상적인 네트워크 설정에서만 필요합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 lifx:
   light:

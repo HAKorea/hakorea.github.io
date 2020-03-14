@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Kodi - 홈어시스턴트</title>
+    <title>코디(Kodi) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Kodi into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/kodi/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Kodi">
+    <meta property="og:title" content="코디(Kodi)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/kodi/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Kodi">
+    <meta name="twitter:title" content="코디(Kodi)">
     <meta name="twitter:description" content="Instructions on how to integrate Kodi into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Kodi
+      코디(Kodi)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>kodi</code> platform allows you to control a <a href="https://kodi.tv/" rel="external nofollow">Kodi</a> multimedia system from Home Assistant.</p>
-<p>The preferred way to set up the Kodi platform is by enabling the <a href="/integrations/discovery/">discovery component</a> which requires enabled <a href="https://kodi.wiki/view/Web_interface" rel="external nofollow">web interface</a> on your Kodi installation.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p><code>kodi</code> 플랫폼을 사용하면 Home Assistant에서 <a href="https://kodi.tv/" rel="external nofollow">Kodi</a> 멀티미디어 시스템을 제어할 수 있습니다.</p>
+<p>Kodi 플랫폼을 설정하는 기본 방법은 Kodi 설치에서 활성화된 <a href="https://kodi.wiki/view/Web_interface" rel="external nofollow">web interface</a>가 필요한 <a href="/integrations/discovery/">discovery component</a>를 활성화하는 것입니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#configuration">Media Player</a></li>
 <li><a href="#notifications">Notifications</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>In case the discovery does not work, or you need specific configuration variables, you can add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>검색(discovery이 작동하지 않거나 특정 설정 변수가 필요한 경우 <code>configuration.yaml</code> 파일에 다음을 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: kodi
@@ -194,10 +194,10 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="services" href="#services"></a> Services</h3>
+<a class="title-link" name="" href="#"></a> 서비스</h3>
 <h4>
-<a class="title-link" name="service-kodiadd_to_playlist" href="#service-kodiadd_to_playlist"></a> Service kodi.add_to_playlist</h4>
-<p>Add music to the default playlist (i.e. playlistid=0).</p>
+<a class="title-link" name="kodiadd_to_playlist-" href="#kodiadd_to_playlist-"></a> kodi.add_to_playlist 서비스</h4>
+<p>기본 재생 목록에 음악을 추가합니다 (즉, playlistid=0).</p>
 <table>
 <thead>
 <tr>
@@ -235,8 +235,8 @@ Default value: </p>
 </tbody>
 </table>
 <h4>
-<a class="title-link" name="service-kodicall_method" href="#service-kodicall_method"></a> Service kodi.call_method</h4>
-<p>Call a <a href="https://kodi.wiki/?title=JSON-RPC_API" rel="external nofollow">Kodi JSONRPC API</a> method with optional parameters. Results of the Kodi API call will be redirected in a Home Assistant event: <code>kodi_call_method_result</code>.</p>
+<a class="title-link" name="kodicall_method-" href="#kodicall_method-"></a> kodi.call_method 서비스</h4>
+<p>선택적 매개 변수를 사용하여 <a href="https://kodi.wiki/?title=JSON-RPC_API" rel="external nofollow">Kodi JSONRPC API</a> 메소드를 호출하십시오. Kodi API 호출의 결과는 Home Assistant 이벤트인 <code>kodi_call_method_result</code>에서 리디렉션됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -264,19 +264,19 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="event-triggering" href="#event-triggering"></a> Event triggering</h3>
-<p>When calling the <code>kodi.call_method</code> service, if the Kodi JSONRPC API returns data, when received by Home Assistant it will fire a <code>kodi_call_method_result</code> event on the event bus with the following <code>event_data</code>:</p>
+<a class="title-link" name="-event-triggering" href="#-event-triggering"></a> 이벤트 트리거하기(Event triggering)</h3>
+<p><code>kodi.call_method</code> 서비스를 호출할 때 Kodi JSONRPC API가 데이터를 리턴하면 홈어시스턴트가 수신할 때 다음 <code>event_data</code>와 함께 이벤트 버스에서 <code>kodi_call_method_result</code> 이벤트를 발생시킵니다.</p>
 <pre><code class="language-yaml">entity_id: "&lt;Kodi media_player entity_id&gt;"
 result_ok: &lt;boolean&gt;
 input: &lt;input parameters of the service call&gt;
 result: &lt;data received from the Kodi API&gt;
 </code></pre>
 <h3>
-<a class="title-link" name="kodi-turn-onoff-samples" href="#kodi-turn-onoff-samples"></a> Kodi turn on/off samples</h3>
-<p>With the <code>turn_on_action</code> and <code>turn_off_action</code> parameters you can run any combination of Home Assistant actions to turn on/off your Kodi instance. Here are a few examples of this usage, including the <strong>migration instructions for the old <code>turn_off_action</code> list of options</strong>.</p>
+<a class="title-link" name="kodi-turn-onoff-" href="#kodi-turn-onoff-"></a> Kodi turn on/off 예시</h3>
+<p><code>turn_on_action</code> 및 <code>turn_off_action</code> 매개 변수를 사용하면 홈어시스턴트 작업을 조합하여 Kodi 인스턴스를 켜거나 끌 수 있습니다. <strong>이전의 <code>turn_off_action</code> 옵션 목록에 대한 마이그레이션 지침</strong>을 포함하여 이 사용법의 몇 가지 예가 있습니다.</p>
 <h4>
-<a class="title-link" name="turn-on-kodi-with-wake-on-lan" href="#turn-on-kodi-with-wake-on-lan"></a> Turn on Kodi with Wake on LAN</h4>
-<p>With this configuration, when calling <code>media_player/turn_on</code> on the Kodi device, a <em>magic packet</em> will be sent to the specified MAC address. To use this service, first you need to config the <a href="/integrations/wake_on_lan"><code>wake_on_lan</code></a> integration in Home Assistant, which is achieved simply by adding <code>wake_on_lan:</code> to your <code>configuration.yaml</code>.</p>
+<a class="title-link" name="wake-on-lan-kodi-" href="#wake-on-lan-kodi-"></a> Wake on LAN으로 Kodi 켜기</h4>
+<p>이 설정으로 Kodi 장치에서 <code>media_player/turn_on</code>을 호출하면 <em>magic packet</em> 이 지정된 MAC 주소로 전송됩니다. 이 서비스를 사용하려면 먼저 Home Assistant에서 <a href="/integrations/wake_on_lan"><code>wake_on_lan</code></a> 통합구성요소를 설정해야합니다. 이는 <code>wake_on_lan:</code>을 <code>configuration.yaml</code>에 추가하기 만하면됩니다.</p>
 <pre><code class="language-yaml">media_player:
   - platform: kodi
     host: 192.168.0.123
@@ -287,8 +287,8 @@ result: &lt;data received from the Kodi API&gt;
           broadcast_address: 192.168.255.255
 </code></pre>
 <h4>
-<a class="title-link" name="turn-off-kodi-with-api-calls" href="#turn-off-kodi-with-api-calls"></a> Turn off Kodi with API calls</h4>
-<p>Here are the equivalent ways to configure each of the old options to turn off Kodi (<code>quit</code>, <code>hibernate</code>, <code>suspend</code>, <code>reboot</code>, or <code>shutdown</code>):</p>
+<a class="title-link" name="api--kodi-" href="#api--kodi-"></a> API 호출로 Kodi 끄기</h4>
+<p>다음은 Kodi를 끄도록 각 이전 옵션을 설정하는 동등한 방법입니다 (<code>quit</code>, <code>hibernate</code>, <code>suspend</code>, <code>reboot</code> 또는 <code>shutdown</code>).</p>
 <ul>
 <li>
 <strong>Quit</strong> method (before was <code>turn_off_action: quit</code>)</li>
@@ -355,8 +355,8 @@ result: &lt;data received from the Kodi API&gt;
         method: System.Shutdown
 </code></pre>
 <h4>
-<a class="title-link" name="turn-on-and-off-the-tv-with-the-kodi-json-cec-add-on" href="#turn-on-and-off-the-tv-with-the-kodi-json-cec-add-on"></a> Turn on and off the TV with the Kodi JSON-CEC Add-on</h4>
-<p>For Kodi devices running 24/7 attached to a CEC capable TV (OSMC / OpenElec and systems alike running in Rasperry Pi’s, for example), this configuration enables the optimal way to turn on/off the attached TV from Home Assistant while Kodi is always active and ready:</p>
+<a class="title-link" name="kodi-json-cec--tv--" href="#kodi-json-cec--tv--"></a> Kodi JSON-CEC 애드온으로 TV 켜고 끄기</h4>
+<p>CEC 가능 TV (예: OSMC / OpenElec 및 Rasperry Pi에서 실행되는 시스템과 같은 시스템)에 연중 무휴로 연결된 Kodi 장치의 경우 이 설정을 통해 Kodi는 항상 홈어시스턴트에서 연결된 TV를 켜고 끌 수 있습니다 활성 및 준비 :</p>
 <pre><code class="language-yaml">media_player:
   - platform: kodi
     host: 192.168.0.123
@@ -381,12 +381,12 @@ result: &lt;data received from the Kodi API&gt;
           command: standby
 </code></pre>
 <div class="note">
-<p>This example and the following requires to have the <a href="https://github.com/joshjowen/script.json-cec" rel="external nofollow">script.json-cec</a> plugin installed on your kodi player. It’ll also expose the endpoints standby, toggle and activate without authentication on your kodi player. Use this with caution.</p>
+<p>이 예제와 다음은 kodi 플레이어에 <a href="https://github.com/joshjowen/script.json-cec" rel="external nofollow">script.json-cec</a> 플러그인이 설치되어 있어야합니다. 또한 kodi 플레이어에서 인증없이 ndpoints standby, toggle, activate를 표시합니다. 주의해서 사용하십시오.</p>
 </div>
 <h3>
-<a class="title-link" name="kodi-services-samples" href="#kodi-services-samples"></a> Kodi services samples</h3>
+<a class="title-link" name="kodi--" href="#kodi--"></a> Kodi 서비스 사례</h3>
 <h4>
-<a class="title-link" name="simple-script-to-turn-on-the-pvr-in-some-channel-as-a-time-function" href="#simple-script-to-turn-on-the-pvr-in-some-channel-as-a-time-function"></a> Simple script to turn on the PVR in some channel as a time function</h4>
+<a class="title-link" name="----pvr---" href="#----pvr---"></a> 시간 함수로 일부 채널에서 PVR을 켜는 간단한 스크립트</h4>
 <pre><code class="language-yaml">script:
   play_kodi_pvr:
     alias: Turn on the silly box
@@ -416,7 +416,7 @@ result: &lt;data received from the Kodi API&gt;
             {% endif %}
 </code></pre>
 <h4>
-<a class="title-link" name="simple-script-to-play-a-smart-playlist" href="#simple-script-to-play-a-smart-playlist"></a> Simple script to play a smart playlist</h4>
+<a class="title-link" name="-----" href="#-----"></a> 스마트 재생 목록을 재생하는 간단한 스크립트</h4>
 <pre><code class="language-yaml">script:
   play_kodi_smp:
     alias: Turn on the silly box with random Firefighter Sam episode
@@ -432,7 +432,7 @@ result: &lt;data received from the Kodi API&gt;
           media_content_id: special://profile/playlists/video/feuerwehrmann_sam.xsp
 </code></pre>
 <h4>
-<a class="title-link" name="trigger-a-kodi-video-library-update" href="#trigger-a-kodi-video-library-update"></a> Trigger a Kodi video library update</h4>
+<a class="title-link" name="kodi----" href="#kodi----"></a> Kodi 비디오 라이브러리 업데이트 트리거</h4>
 <pre><code class="language-yaml">script:
   update_library:
     alias: Update Kodi Library
@@ -444,9 +444,9 @@ result: &lt;data received from the Kodi API&gt;
           method: VideoLibrary.Scan
 </code></pre>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The <code>kodi</code> notifications platform allows you to send messages to your <a href="https://kodi.tv/" rel="external nofollow">Kodi</a> multimedia system from Home Assistant.</p>
-<p>To add Kodi to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 알림</h2>
+<p><code>kodi</code> 알림 플랫폼을 사용하면 Home Assistant에서 <a href="https://kodi.tv/" rel="external nofollow">Kodi</a> 멀티미디어 시스템으로 메시지를 보낼 수 있습니다.</p>
+<p>설치에 Kodi를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - platform: kodi
@@ -494,7 +494,7 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="script-example" href="#script-example"></a> Script example</h3>
+<a class="title-link" name="-" href="#-"></a> 스크립트 사례</h3>
 <pre><code class="language-yaml">kodi_notification:
   sequence:
   - service: notify.NOTIFIER_NAME
@@ -506,7 +506,7 @@ Default value: </p>
         icon: "warning"
 </code></pre>
 <h4>
-<a class="title-link" name="message-variables" href="#message-variables"></a> Message variables</h4>
+<a class="title-link" name="-" href="#-"></a> 메시지 변수들</h4>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -545,7 +545,7 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 
 
 </article>

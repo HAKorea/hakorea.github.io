@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LaMetric - 홈어시스턴트</title>
+    <title>고급LED시계(LaMetric) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate LaMetric with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/lametric/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="LaMetric">
+    <meta property="og:title" content="고급LED시계(LaMetric)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/lametric/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="LaMetric">
+    <meta name="twitter:title" content="고급LED시계(LaMetric)">
     <meta name="twitter:description" content="Instructions on how to integrate LaMetric with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,27 +97,29 @@
   
   <header>
     <h1 class="title indent">
-      LaMetric
+      고급LED시계(LaMetric)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p><a href="https://lametric.com/" rel="external nofollow">LaMetric Time</a> is a smart clock that can be used to access applications, listen to web radio and display notifications.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/bsxh-Ow0sNM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><a href="https://lametric.com/" rel="external nofollow">LaMetric Time</a>은 응용 프로그램에 액세스하고 웹 라디오를 듣고 알림을 표시하는 데 사용할 수있는 스마트 시계입니다.</p>
+<iframe width="700" height="437" src="https://www.youtube.com/embed/8J86MIBfAvo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#notifications">Notify</a></li>
 </ul>
-<p>The LaMetric Time can only be accessed by authorized applications. Therefore, each application that wants to access the LaMetric time needs to be registered at the LaMetric Developer web page. Sign Up and login to the developer web page. Click the Create button in the upper right corner, then select Notification App and click Create again. Enter an app name, a description and a redirect URL. Finally, click Save to create the application. For the newly created app you will obtain a client id and a client secret that is required in the following configuration.</p>
+<p>LaMetric Time은 승인된 응용 프로그램에서만 액세스 할 수 있습니다. 따라서 LaMetric 시간에 액세스하려는 각 응용 프로그램은 LaMetric Developer 웹페이지에서 등록해야합니다. 개발자 웹페이지에 가입하고 로그인하십시오. 오른쪽 상단에서 생성 버튼을 클릭한 다음 알림 앱을 선택하고 생성을 다시 클릭하십시오. 앱 이름, 설명 및 리디렉션 URL을 입력하십시오. 마지막으로 저장을 클릭하여 응용 프로그램을 만듭니다. 새로 만든 앱의 경우 다음 설정에 필요한 클라이언트 ID와 클라이언트 암호를 얻습니다.</p>
 <pre><code class="language-yaml"># configuration.yaml example
 lametric:
   client_id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx
   client_secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 </code></pre>
 <h2>
-<a class="title-link" name="setup-steps" href="#setup-steps"></a> Setup Steps</h2>
-<p>LaMetric needs an OAuth2 <code>client_id</code> and <code>client_secret</code> from the LaMetric developer portal to use it with Home Assistant.
-These are the steps to take:</p>
+<a class="title-link" name="-" href="#-"></a> 셋업 단계</h2>
+<p>LaMetric은 Home Assistant와 함께 사용하려면 LaMetric 개발자 포털의 OAuth2 <code>client_id</code> 및 <code>client_secret</code>이 필요합니다.
+다음 단계를 수행하십시오.</p>
 <ol>
 <li>Log in with your LaMetric device account to <a href="https://developer.lametric.com" rel="external nofollow">developer.lametric.com</a>.</li>
 <li>Hit the Create button and choose <a href="https://developer.lametric.com/applications/createsource" rel="external nofollow">Notification</a>.</li>
@@ -137,9 +139,9 @@ These are the steps to take:</p>
 <li>Save all configuration files and restart Home Assistant.</li>
 </ol>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The <code>lametric</code> notification platform allows to send notification to a LaMetric device. It needs the LaMetric platform to be configured first.</p>
-<p>To enable LaMetric notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="notifications" href="#notifications"></a> 알림(Notifications)</h2>
+<p><code>lametric</code> 알림 플랫폼을 통해 LaMetric 장치에 알림을 보낼 수 있습니다. LaMetric 플랫폼을 먼저 설정해야합니다.</p>
+<p>설치에서 LaMetric 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   name: NOTIFIER_NAME
@@ -193,9 +195,9 @@ Default value: </p>
 </div>
 <p>Check out the list of all icons at <a href="https://developer.lametric.com/icons" rel="external nofollow">https://developer.lametric.com/icons</a>. Note that icons always begin with “i” while animations begin with “a”. This is part of the name, you can’t just use the number!</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 사례</h2>
 <h3>
-<a class="title-link" name="full-configuration-example" href="#full-configuration-example"></a> Full configuration example</h3>
+<a class="title-link" name="--" href="#--"></a> 전체 설정 사례</h3>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   name: NOTIFIER_NAME
@@ -206,8 +208,8 @@ notify:
   priority: info
 </code></pre>
 <h3>
-<a class="title-link" name="changing-sounds-and-icons" href="#changing-sounds-and-icons"></a> Changing sounds and icons</h3>
-<p>To add a notification sound, icon, cycles, or priority override, it has to be done via service data.</p>
+<a class="title-link" name="---" href="#---"></a> 소리 및 아이콘 변경</h3>
+<p>알림 sound, icon, cycles 혹은 priority override를 추가하려면 서비스 데이터를 통해 수행해야합니다.</p>
 <pre><code class="language-yaml">- alias: "Send notification on arrival at school"
   trigger:
     platform: state
@@ -225,8 +227,8 @@ notify:
         priority: 'critical'
 </code></pre>
 <h3>
-<a class="title-link" name="only-notify-specific-device" href="#only-notify-specific-device"></a> Only notify specific device</h3>
-<p>If you have more than one La Metric device, you can specify which will receive the message by adding <code>target:</code> to the service data:</p>
+<a class="title-link" name="--" href="#--"></a> 특정 기기에만 알리기</h3>
+<p>La Metric 장치가 둘 이상있는 경우 서비스 데이터에 <code>target :</code>을 추가하여 메시지를 받을 장치를 지정할 수 있습니다. :</p>
 <pre><code class="language-yaml">  action:
     service: notify.lametric
     data:
@@ -236,7 +238,7 @@ notify:
         sound: 'notification'
         icon: 'i51'
 </code></pre>
-<p>If target is not specified, all LaMetric devices will be notified.</p>
+<p>target을 지정하지 않으면 모든 LaMetric 장치에 알립니다.</p>
 
 
 </article>
