@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>With the <code>route53</code> integration can you keep your AWS Route53 DNS records up to date.</p>
-<p>The integration will run every hour, but can also be started manually by using the service <code>route53.update_records</code> under services.</p>
-<p>Please note that this platform uses the API from <a href="https://www.ipify.org/" rel="external nofollow">ipify.org</a> to set the public IP address.</p>
+  <p><code>route53</code> 통합구성요소로 AWS Route53 DNS 레코드를 최신 상태로 유지할 수 있습니다.</p>
+<p>연동은 1 시간마다 실행되지만 서비스들 중에서 <code>route53.update_records</code> 서비스를 사용하여 수동으로 시작할 수도 있습니다.</p>
+<p>이 플랫폼은 <a href="https://www.ipify.org/" rel="external nofollow">ipify.org</a>의 API를 사용하여 공개 IP 주소를 설정합니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>You will need to configure your AWS Account with a suitable IAM policy and API keys for this to function.</p>
-<p>If you are familiar with this process, you can skip the next section and head directly to the configuration section.</p>
-<p>On the AWS side, you need to do the following;</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p>이 기능이 작동하려면 적절한 IAM 정책 및 API 키를 사용하여 AWS 계정을 설정해야합니다.</p>
+<p>이 프로세스에 익숙하면 다음 섹션을 건너 뛰고 설정 섹션으로 직접 이동할 수 있습니다.</p>
+<p>AWS 측에서는 다음을 수행해야합니다.</p>
 <ol>
 <li>
 <p>Create a suitable zone for a domain that you own and manage in Route53, the domain <code>home.yourdomain.com</code> is used as an example.</p>
@@ -122,7 +122,8 @@
 <p>Create an IAM Policy that provides update and query access to this domain explicitly and has no other permissions to the AWS account.</p>
 </li>
 </ol>
-<p>Here is an IAM Policy sample, don’t forget to update your Zone ID on the Resource line.</p>
+<p>Here is an IAM Policy sample, don’t forget to update your Zone ID on the Resource line.
+다음은 IAM 정책 샘플입니다. 리소스(Resource) 라인에서 영역(Zone) ID를 업데이트하는 것을 잊지 마십시오.</p>
 <pre><code class="language-json">{
     "Version": "2012-10-17",
     "Statement": [
@@ -154,8 +155,8 @@
 </li>
 </ol>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use the integration in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 본 통합구성요소를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 route53:
   aws_access_key_id: ABC123
@@ -203,10 +204,10 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="service-route53update_records" href="#service-route53update_records"></a> Service route53.update_records</h3>
-<p>Use this service to manually trigger an update of the DNS records.</p>
+<a class="title-link" name="route53update_records-" href="#route53update_records-"></a> route53.update_records 서비스</h3>
+<p>이 서비스를 사용하여 DNS 레코드 업데이트를 수동으로 트리거하십시오.</p>
 
 
 </article>

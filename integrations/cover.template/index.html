@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Template 커버(Cover) - 홈어시스턴트</title>
+    <title>템플릿 커버(Template Cover) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Template Covers into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/cover.template/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Template 커버(Cover)">
+    <meta property="og:title" content="템플릿 커버(Template Cover)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/cover.template/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Template 커버(Cover)">
+    <meta name="twitter:title" content="템플릿 커버(Template Cover)">
     <meta name="twitter:description" content="Instructions on how to integrate Template Covers into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,13 +97,13 @@
   
   <header>
     <h1 class="title indent">
-      Template 커버(Cover)
+      템플릿 커버(Template Cover)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p><code>template</code> 플랫폼은 통합구성요소들을 결합한 커버를 만들 수 있고, 커버(Cover)의 열기, 닫기, 중지, 위치 및 기울기 명령 각각에 대해 스크립트를 실행하거나 서비스를 호출 할 수 있습니다.</p>
+  <p><code>template</code> 플랫폼은 통합구성요소들을 결합한 커버를 만들 수 있고, 커버(Cover)의 열기, 닫기, 중지, 위치 및 기울기 명령 각각에 대해 스크립트를 실행하거나 서비스를 호출할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>설치에서 템플릿 커버를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
@@ -177,11 +177,11 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="set_cover_position" href="#set_cover_position"></a> set_cover_position</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Cover가 특정값으로 설정 될 때 실행할 동작을 정의합니다. (<code>0</code> 과 <code>100</code> 사이).</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Cover가 특정값으로 설정될 때 실행할 동작을 정의합니다. (<code>0</code> 과 <code>100</code> 사이).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="set_cover_tilt_position" href="#set_cover_tilt_position"></a> set_cover_tilt_position</dt>
-<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Cover 틸트(기울기)가 특정값으로 설정 될 때 실행할 동작을 정의합니다 (<code>0</code> 과 <code>100</code> 사이).</p>
+<dd><p class="desc"><span class="type">(<span class="action"><a href="/docs/scripts/">action</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>Cover 틸트(기울기)가 특정값으로 설정될 때 실행할 동작을 정의합니다 (<code>0</code> 과 <code>100</code> 사이).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="optimistic" href="#optimistic"></a> optimistic</dt>
@@ -210,22 +210,22 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 고려 사항</h2>
-<p>로드하는 데 추가시간이 더 걸리는 플랫폼의 상태를 사용하는 경우, 시작시 템플릿 표시등이 <code>unknown</code> 상태가 될 수 있습니다. 그러면 해당 플랫폼이 로드를 완료 할 때까지 로그 파일에 오류 메시지가 나타납니다.
+<p>로드하는데 추가시간이 더 걸리는 플랫폼의 상태를 사용하는 경우, 시작시 템플릿 표시등이 <code>unknown</code> 상태가 될 수 있습니다. 그러면 해당 플랫폼이 로드를 완료할 때까지 로그 파일에 오류 메시지가 나타납니다.
 템플릿에서 <code>is_state()</code> 함수를 사용하면 이런 상황을 피할 수 있습니다.
 예를 들어, <code>true</code>/<code>false</code>를 반환하는 동등한 상황으로 <code>{{ states.cover.source.state == 'open' }}</code>로 대체할 경우 절대 uknown을 나타내지 않습니다.</p>
-<p>result:
+<p>결과 :
 <code>{{ is_state('cover.source', 'open') }}</code></p>
 <h2>
 <a class="title-link" name="optimistic-" href="#optimistic-"></a> Optimistic 모드</h2>
 <p>optimistic 모드에서는 Cover 위치 상태가 내부적으로 유지됩니다. 이 모드는 <a href="#value_template"><code>value_template</code></a> 또는 <a href="#position_template"><code>position_template</code></a>을 지정하지 않으면 자동으로 활성화됩니다.
 Cover가 제대로 움직이는지 여부를 알 수 있는 방법이 없기 때문에 피드백 메커니즘이 없으면 신뢰성이 떨어질 수 있습니다. <a href="#optimistic"><code>optimistic</code></a> 속성을 사용하여 표지를 optimistic 모드로 강제 설정할 수 있습니다.
-<code>tilt_position</code>에는 <a href="#tilt_template"><code>tilt_template</code></a>이 지정되지 않았거나 [<code>tilt_optimistic</code>](# tilt_optimistic) 속성이 사용될 때 활성화되는 동등한 모드가 있습니다.</p>
+<code>tilt_position</code>에는 <a href="#tilt_template"><code>tilt_template</code></a>이 지정되지 않았거나 <a href="#tilt_optimistic"><code>tilt_optimistic</code></a> 속성이 사용될 때 활성화되는 동등한 모드가 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
 <p>이 섹션에서는 Cover를 사용하는 방법에 대한 실제 예를 보여줍니다.</p>
 <h3>
-<a class="title-link" name="-" href="#-"></a> 차고 문</h3>
-<p>이 예에서는 제어 가능한 스위치 및 위치 센서가있는 차고 문을 Cover로 변환합니다.</p>
+<a class="title-link" name="" href="#"></a> 차고문</h3>
+<p>본 예에서는 제어 가능한 스위치 및 위치 센서가 있는 차고문을 Cover로 변환합니다.</p>
 <pre><code class="language-yaml">cover:
   - platform: template
     covers:
@@ -252,8 +252,8 @@ Cover가 제대로 움직이는지 여부를 알 수 있는 방법이 없기 때
           {% endif %}
 </code></pre>
 <h3>
-<a class="title-link" name="---multiple-covers" href="#---multiple-covers"></a> 여러 개폐 장치 (Multiple Covers)</h3>
-<p>이 예에서는 한 번에 둘 이상의 Cover를 제어 할 수 있습니다.</p>
+<a class="title-link" name="---multiple-covers" href="#---multiple-covers"></a> 여러 커버 장치 (Multiple Covers)</h3>
+<p>본 예에서는 한 번에 둘 이상의 커버를 제어 할 수 있습니다.</p>
 <pre><code class="language-yaml">homeassistant:
   customize:
     cover_group:
@@ -335,7 +335,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 아이콘 변화</h3>
-<p>이 예는 Cover 상태에 따라 아이콘을 변경하는 방법을 보여줍니다.</p>
+<p>본 예는 커버 상태에 따라 아이콘을 변경하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">cover:
   - platform: template
     covers:
@@ -363,7 +363,7 @@ automation:
 </code></pre>
 <h3>
 <a class="title-link" name="---change-the-entity-picture" href="#---change-the-entity-picture"></a> 엔티티 사진 변화 (Change The Entity Picture)</h3>
-<p>이 예는 Cover 상태를 기반으로 엔티티 그림을 변경하는 방법을 보여줍니다</p>
+<p>이 예는 커버 상태를 기반으로 엔티티 사진을 변경하는 방법을 보여줍니다</p>
 <pre><code class="language-yaml">cover:
   - platform: template
     covers:
