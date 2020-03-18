@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>스트림랩스(StreamLabs) - 홈어시스턴트</title>
+    <title>유량관리시스템(StreamLabs) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Streamlabs Water devices with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/streamlabswater/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="스트림랩스(StreamLabs)">
+    <meta property="og:title" content="유량관리시스템(StreamLabs)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/streamlabswater/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="스트림랩스(StreamLabs)">
+    <meta name="twitter:title" content="유량관리시스템(StreamLabs)">
     <meta name="twitter:description" content="Instructions on how to integrate Streamlabs Water devices with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,23 @@
   
   <header>
     <h1 class="title indent">
-      스트림랩스(StreamLabs)
+      유량관리시스템(StreamLabs)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>Streamlabs Water</code> integration platform is used to interact with <a href="https://www.streamlabswater.com/" rel="external nofollow">Streamlabs water monitoring devices</a> in order to retrieve usage information and manage the away mode of the device. The <a href="https://developer.streamlabswater.com" rel="external nofollow">Streamlabs Water API</a> is used to retrieve daily, monthly, and yearly water usage along with the current away mode.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/ZkYEeiv3lHE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>Streamlabs Water</code> 통합구성요소 플랫폼은 사용 정보를 검색하고 장치의 자리 비움 모드를 관리하기 위해 <a href="https://www.streamlabswater.com/" rel="external nofollow">Streamlabs water monitoring devices</a>와 상호작용하는데 사용됩니다. <a href="https://developer.streamlabswater.com" rel="external nofollow">Streamlabs Water API</a>는 현재 자리 비움 모드와 함께 매일, 매월 및 매년 물사용량을 검색하는 데 사용됩니다.</p>
+<p>현재 홈어시스턴트에는 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Binary Sensor</li>
 <li>Sensor</li>
 </ul>
-<p>In preparation for using this integration you will need to request an API key following the instructions in the <a href="https://developer.streamlabswater.com/docs/getting-started.html" rel="external nofollow">Streamlabs API Getting Started Section</a>. Be sure to request an API key and not an OAuth token.</p>
+<p>이 통합구성요소를 사용하려면 <a href="https://developer.streamlabswater.com/docs/getting-started.html" rel="external nofollow">Streamlabs API 시작하기 섹션</a>의 지침에 따라 API 키를 요청해야합니다. OAuth 토큰이 아닌 API 키를 요청하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 streamlabswater:
   api_key: YOUR_API_KEY
@@ -132,8 +133,8 @@ streamlabswater:
 </dl>
 </div>
 <h2>
-<a class="title-link" name="service-set_away_mode" href="#service-set_away_mode"></a> Service set_away_mode</h2>
-<p>You can use the service <code>streamlabswater.set_away_mode</code> to set the mode to <code>home</code> or <code>away</code>. The away mode will only be changed for the configured location.</p>
+<a class="title-link" name="set_away_mode-" href="#set_away_mode-"></a> set_away_mode 서비스</h2>
+<p><code>streamlabswater.set_away_mode</code> 서비스를 사용하여 모드를 <code>home</code> 또는 <code>away</code>로 설정할 수 있습니다. 자리 비움 모드는 설정된 위치에 대해서만 변경됩니다.</p>
 <table>
 <thead>
 <tr>

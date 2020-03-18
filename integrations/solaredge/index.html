@@ -103,16 +103,17 @@
   <hr class="divider">
   
 
-  <p>The <code>solaredge</code> platform uses the <a href="https://www.solaredge.com/sites/default/files/se_monitoring_api.pdf" rel="external nofollow">SolarEdge Monitoring API</a> to allow you to get details from your SolarEdge solar power setup and integrate these in your Home Assistant installation.</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/BjtL_vIkyNg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>solaredge</code> 플랫폼은 <a href="https://www.solaredge.com/sites/default/files/se_monitoring_api.pdf" rel="external nofollow">SolarEdge Monitoring API</a>를 사용하여 SolarEdge 태양광 전력 설정에서 세부 정보를 가져와 Home Assistant 설치시 연동할 수 있습니다.</p>
 <div class="note">
-<p>The SolarEdge Monitoring API has a daily rate limit of 300 requests. In order to stay under this limit, and alow for some additional requests, the <code>solaredge</code> platform will update the site overview every 10 minutes.</p>
+<p>SolarEdge Monitoring API의 일일 요청 속도는 300 회입니다. 이 한계를 지키고 일부 추가 요청을 줄이기 위해 <code>solaredge</code> 플랫폼은 10 분마다 사이트 Overview를 업데이트합니다.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>There are 2 options in configuring the SolarEdge integration:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>SolarEdge 통합구성요소 설정에는 두 가지 옵션이 있습니다.</p>
 <ul>
-<li>Via the Home Assistant user interface where it will let you enter the port string to connect to the Velbus bus.</li>
-<li>Via the Home Assistant <code>configuration.yaml</code> file.</li>
+<li>홈어시스턴트 사용자 인터페이스를 통해 포트 문자열을 입력하여 Velbus 버스에 연결할 수 있습니다.</li>
+<li>홈어시스턴트 <code>configuration.yaml</code> 파일을 통해.</li>
 </ul>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 solaredge:
@@ -143,8 +144,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="full-configuration-example" href="#full-configuration-example"></a> Full configuration example</h2>
-<p>In case you would like to convert the values for example to kWh instead of the default Wh, you can use the <a href="/integrations/template">template platform</a>.</p>
+<a class="title-link" name="--" href="#--"></a> 전체 설정 사례</h2>
+<p>예를 들어 기본값 Wh 대신 kWh로 값을 변환하려는 경우 <a href="/integrations/template">template platform</a>을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for template platform
 sensors:
   platform: template

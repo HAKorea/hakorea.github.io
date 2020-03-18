@@ -103,15 +103,16 @@
   <hr class="divider">
   
 
-  <p>The <code>flic</code> platform allows you to receive click events from <a href="https://flic.io" rel="external nofollow">flic</a> smart buttons.</p>
-<p>The platform does not directly interact with the buttons, <em>but communicates with a flic service</em> that manages the buttons. The service can run on the same instance as Home Assistant or any other reachable machine.</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/-Y7Rm6OcCMY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>flic</code> 플랫폼을 사용하면 <a href="https://flic.io" rel="external nofollow">flic</a> 스마트 버튼에서 클릭 이벤트를 수신할 수 있습니다.</p>
+<p>플랫폼은 버튼과 직접 상호 작용하지 않지만 버튼을 관리하는 <em>flic service와 통신합니다.</em> 이 서비스는 Home Assistant 또는 다른 연결 가능한 컴퓨터와 동일한 인스턴스에서 실행될 수 있습니다.</p>
 <h4>
-<a class="title-link" name="service-setup" href="#service-setup"></a> Service setup</h4>
-<p>If you are using Hass.io, you can run the service locally by <a href="/hassio/installing_third_party_addons/">installing</a> the flicd add-on from <a href="https://github.com/pschmitt/hassio-addons" rel="external nofollow">pschmitt’s repository</a>.</p>
-<p>For instructions on how to install the service manually, visit the GitHub repository of the service for <a href="https://github.com/50ButtonsEach/fliclib-linux-hci" rel="external nofollow">Linux</a>, <a href="https://github.com/50ButtonsEach/flic-service-osx" rel="external nofollow">OS X</a> or <a href="https://github.com/50ButtonsEach/fliclib-windows" rel="external nofollow">Windows</a>.</p>
+<a class="title-link" name="-" href="#-"></a> 서비스 셋업</h4>
+<p>Hass.io를 사용하는 경우 <a href="https://github.com/pschmitt/hassio-addons" rel="external nofollow">pschmitt’s repository</a>에서 flicd 애드온을 <a href="/hassio/installing_third_party_addons/">installing</a>하여 서비스를 로컬로 실행할 수 있습니다.</p>
+<p>서비스를 수동으로 설치하는 방법에 대한 지침은 <a href="https://github.com/50ButtonsEach/fliclib-linux-hci" rel="external nofollow">Linux</a>, <a href="https://github.com/50ButtonsEach/flic-service-osx" rel="external nofollow">OS X</a> 또는 <a href="https://github.com/50ButtonsEach/fliclib-windows" rel="external nofollow">Windows</a> 서비스의 GitHub 저장소를 방문하십시오.</p>
 <h4>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h4>
-<p>To use your flic buttons in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h4>
+<p>설치시 flic 버튼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: flic
@@ -164,13 +165,13 @@ Default value: </p>
 </div>
 <h4>
 <a class="title-link" name="discovery" href="#discovery"></a> Discovery</h4>
-<p>If discovery is enabled, you can add a new button by pressing it for at least 7 seconds. The button will be paired with the flic service and added to Home Assistant. Otherwise, you have to manually pair it with the flic service. The Home Assistant platform will not scan for new buttons and will only connect to buttons already paired.</p>
+<p>검색이 활성화된 경우 새 버튼을 7 초 이상 눌러 추가 할 수 있습니다. 이 버튼은 파일 서비스와 페어링되어 홈어시스턴트에 추가됩니다. 그렇지 않으면 수동으로 파일 서비스와 페어링해야합니다. 홈어시스턴트 플랫폼은 새 버튼을 검색하지 않고 이미 페어링된 버튼에만 연결합니다.</p>
 <h4>
 <a class="title-link" name="timeout" href="#timeout"></a> Timeout</h4>
-<p>When the flic button is triggered while disconnected from flic service, it will queue all events and try to connect and transmit them as soon as possible. The timeout variable can be used to stop events from triggering if too much time passed between the action and the notification in Home Assistant.</p>
+<p>Flic 서비스와의 연결이 끊어진 상태에서 Flic 버튼이 트리거되면 모든 이벤트를 대기열에 넣고 가능한 빨리 연결하고 전송하려고 시도합니다. 제한 시간 변수는 홈어시스턴트의 액션(action)와 ​​알림(notification) 사이에 너무 많은 시간이 경과한 경우 이벤트 트리거를 중지하는데 사용할 수 있습니다.</p>
 <h4>
 <a class="title-link" name="events" href="#events"></a> Events</h4>
-<p>The flic integration fires <code>flic_click</code> events on the bus. You can capture the events and respond to them in automation scripts like this:</p>
+<p>flic 통합구성요소는 버스에서 <code>flic_click</code> 이벤트를 발생시킵니다. 이벤트를 캡처하여 다음과 같은 자동화 스크립트에서 응답할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml automation entry
 automation:
   - alias: Turn on lights in the living room when flic is pressed once
@@ -184,18 +185,18 @@ automation:
       service: homeassistant.turn_on
       entity_id: group.lights_livingroom
 </code></pre>
-<p>Event data:</p>
+<p>이벤트 데이터:</p>
 <ul>
 <li>
-<strong>button_name</strong>: The name of the button, that triggered the event.</li>
+<strong>button_name</strong>: 이벤트를 트리거 한 버튼의 이름.</li>
 <li>
-<strong>button_address</strong>: The Bluetooth address of the button, that triggered the event.</li>
+<strong>button_address</strong>: 이벤트를 트리거한 버튼의 Bluetooth 주소.</li>
 <li>
-<strong>click_type</strong>: The type of click. Possible values are <code>single</code>, <code>double</code> and <code>hold</code>.</li>
+<strong>click_type</strong>: 클릭 유형. 가능한 값은 <code>single</code>,<code>double</code> 및 <code>hold</code>.</li>
 <li>
-<strong>queued_time</strong>: The amount of time this event was queued on the button, in seconds.</li>
+<strong>queued_time</strong>: 이 이벤트가 버튼에서 큐에 대기한 시간(초)입니다.</li>
 </ul>
-<p>To help detect and debug flic button clicks, you can use this automation that send a notification on very click type of every button. This example uses the <a href="/integrations/html5">HTML5 push notification platform</a>. Visit the <a href="/integrations/notify/">notification integration page</a> for more information on setting up notifications.</p>
+<p>버튼 클릭을 감지하고 디버깅하는데 도움이 되도록 이 버튼을 사용하면 모든 버튼의 클릭 유형에 대한 알림을 보내는 자동화 기능을 사용할 수 있습니다. 이 예에서는 <a href="/integrations/html5">HTML5 push notification platform</a>을 사용합니다. 알림 설정에 대한 자세한 내용은 <a href="/integrations/notify/">notification integration page</a>를 방문하십시오.</p>
 <pre><code class="language-yaml">automation:
   - alias: FLIC Html5 notify on every click
     trigger:
@@ -208,8 +209,8 @@ automation:
           message: "flic {{ trigger.event.data.button_name }} was {{ trigger.event.data.click_type }} clicked"
 </code></pre>
 <h5>
-<a class="title-link" name="ignoring-click-types" href="#ignoring-click-types"></a> Ignoring Click Types</h5>
-<p>For some purposes it might make sense to exclude a specific click type from triggering click events. For example when ignoring double clicks, pressing the button twice fast results in two <code>single</code> instead of a <code>double</code> click event. This is very useful for applications where you want to click fast.</p>
+<a class="title-link" name="--" href="#--"></a> 클릭 타입을 무시하기</h5>
+<p>상황에 따라 특정 클릭 유형을 클릭 이벤트 트리거에서 제외하는 것이 좋습니다. 예를 들어 더블 클릭을 무시할 때 버튼을 두 번 빠르게 누르면 <code>double</code> 클릭 이벤트 대신 두 개의 <code>single</code>이 발생합니다. 빠른 클릭을 원하는 응용 프로그램에 매우 유용합니다.</p>
 
 
 </article>

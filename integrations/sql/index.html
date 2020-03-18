@@ -103,12 +103,11 @@
   <hr class="divider">
   
 
-  <p>The <code>sql</code> sensor platform enables you to use values from an <a href="https://en.wikipedia.org/wiki/SQL" rel="external nofollow">SQL</a> database supported by the <a href="https://www.sqlalchemy.org" rel="external nofollow">sqlalchemy</a> library, to populate a sensor state (and attributes).
-This can be used to present statistics about Home Assistant sensors if used with the <code>recorder</code> integration database. It can also be used with an external data source.</p>
+  <p><code>sql</code> 센서 플랫폼을 사용하면 <a href="https://www.sqlalchemy.org" rel="external nofollow">sqlalchemy</a> 라이브러리가 지원하는 <a href="https://en.wikipedia.org/wiki/SQL" rel="external nofollow">SQL</a> 데이터베이스의 값을 사용하여 센서 상태 (및 속성)를 채울 수 있습니다. <code>recorder</code> 통합구성요소 데이터베이스와 함께 사용되는 경우 홈어시스턴트 센서에 대한 통계를 제공하는 데 사용할 수 있습니다. 외부 데이터 소스와 함께 사용할 수도 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To configure this sensor, you need to define the sensor connection variables and a list of queries to your <code>configuration.yaml</code> file. A sensor will be created for each query:</p>
-<p>To enable it, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 센서를 설정하려면 센서 연결 변수와 <code>configuration.yaml</code> 파일에 대한 쿼리 목록을 정의해야합니다. 각 쿼리마다 센서가 생성됩니다. :</p>
+<p>이를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml
 sensor:
   - platform: sql
@@ -159,17 +158,17 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section, you find some real-life examples of how to use this sensor.</p>
+<a class="title-link" name="" href="#"></a> 예시</h2>
+<p>본 섹션에서는 이 센서를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
-<a class="title-link" name="current-state-of-an-entity" href="#current-state-of-an-entity"></a> Current state of an entity</h3>
-<p>This example shows the previously <em>recorded</em> state of the sensor <code>sensor.temperature_in</code>.</p>
+<a class="title-link" name="--" href="#--"></a> 엔터티의 현재 상태</h3>
+<p>이 예제는 센서 <code>sensor.temperature_in</code>의 이전 <em>recorded</em> 상태를 보여줍니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: random
     name: Temperature in
     unit_of_measurement: '°C'
 </code></pre>
-<p>The query will look like this:</p>
+<p>쿼리는 다음과 같습니다. :</p>
 <pre><code class="language-sql">SELECT * FROM states WHERE entity_id = 'sensor.temperature_in' ORDER BY state_id DESC LIMIT 1;
 </code></pre>
 <pre><code class="language-yaml"># Example configuration.yaml
@@ -180,16 +179,16 @@ sensor:
         query: "SELECT * FROM states WHERE entity_id = 'sensor.temperature_in' ORDER BY state_id DESC LIMIT 1;"
         column: 'state'
 </code></pre>
-<p>Note that the SQL sensor state corresponds to the last row of the SQL result set.</p>
+<p>SQL 센서 상태는 SQL result set의 마지막 row에 해당합니다.</p>
 <h3>
-<a class="title-link" name="previous-state-of-an-entity" href="#previous-state-of-an-entity"></a> Previous state of an entity</h3>
-<p>This example only works with <em>binary_sensors</em>:</p>
+<a class="title-link" name="--" href="#--"></a> 엔터티의 이전 상태</h3>
+<p>이 예제는 <em>binary_sensors</em> 에서만 작동합니다.</p>
 <pre><code class="language-sql">SELECT * FROM states WHERE entity_id = 'binary_sensor.xyz789' GROUP BY state ORDER BY last_changed DESC LIMIT 1;
 </code></pre>
 <h3>
-<a class="title-link" name="database-size" href="#database-size"></a> Database size</h3>
+<a class="title-link" name="-" href="#-"></a> 데이터베이스 크기</h3>
 <h4>
-<a class="title-link" name="database-size-in-postgres" href="#database-size-in-postgres"></a> Database size in Postgres</h4>
+<a class="title-link" name="postgres--" href="#postgres--"></a> Postgres의 데이터베이스 크기</h4>
 <pre><code class="language-yaml">sensor:
   - platform: sql
     db_url: postgresql://user:password@host/dbname
@@ -201,7 +200,7 @@ sensor:
 </code></pre>
 <h4>
 <a class="title-link" name="mariadbmysql" href="#mariadbmysql"></a> MariaDB/MySQL</h4>
-<p>Change <code>table_schema="hass"</code> to the name that you use as the database name, to ensure that your sensor will work properly.</p>
+<p>센서가 올바르게 작동하도록 <code>table_schema="hass"</code>를 데이터베이스 이름으로 사용하는 이름으로 변경하십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: sql
     db_url: mysql://user:password@localhost/hass

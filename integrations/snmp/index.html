@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>SNMP - 홈어시스턴트</title>
+    <title>장치상태확인(SNMP) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate SNMP into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/snmp/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="SNMP">
+    <meta property="og:title" content="장치상태확인(SNMP)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/snmp/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="SNMP">
+    <meta name="twitter:title" content="장치상태확인(SNMP)">
     <meta name="twitter:description" content="Instructions on how to integrate SNMP into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      SNMP
+      장치상태확인(SNMP)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>A lot of WiFi access points and WiFi routers support the Simple Network Management Protocol (SNMP). This is a standardized method for monitoring/manageing network connected devices. SNMP uses a tree-like hierarchy where each node is an object. Many of these objects contain (live) lists of instances and metrics, like network interfaces, disks and WiFi registrations.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="692" height="388" src="https://www.youtube.com/embed/II1iu_JSW_U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>많은 WiFi 액세스 포인트와 WiFi 라우터는 SNMP(Simple Network Management Protocol)를 지원합니다. 네트워크 연결 장치를 모니터링/관리하는 표준화 된 방법입니다. SNMP는 각 노드가 객체인 트리와 같은 계층을 사용합니다. 이러한 많은 개체에는 네트워크 인터페이스, 디스크 및 WiFi 등록과 같은 인스턴스(instances) 및 메트릭(metrics) 목록이 포함되어 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#precense-detection">Presence Detection</a></li>
 <li><a href="#sensor">Sensor</a></li>
 <li><a href="#switch">Switch</a></li>
 </ul>
 <div class="note warning">
-This device tracker needs SNMP to be enabled on the router. It could be that you need to install the SNMP support manually.
+이 장치 추적기는 라우터에서 SNMP를 활성화해야합니다. SNMP 지원을 수동으로 설치해야 할 수도 있습니다.
 </div>
 <h2>
-<a class="title-link" name="presence-detection" href="#presence-detection"></a> Presence Detection</h2>
-<p>The following OID examples pull the current MAC Address table from a router. This reflects all recent devices seen on the network. However, since devices are not removed until they time out, this is less effective for <a href="/integrations/device_tracker/">device tracker integration page</a> than desirable. It is recommended to use <a href="/integrations/ping">Ping</a> or <a href="/integrations/nmap_tracker">Nmap</a> instead.</p>
+<a class="title-link" name="-" href="#-"></a> 재실 감지</h2>
+<p>다음 OID 예제는 라우터에서 현재 MAC 주소 테이블을 가져옵니다. 이것은 네트워크에서 본 모든 최근 장치를 반영합니다. 그러나 시간이 초과될 때까지 장치가 제거되지 않기 때문에 <a href="/integrations/device_tracker/">device tracker integration page</a>에는 바람직하지 않습니다. 대신 <a href="/integrations/ping">Ping</a> or <a href="/integrations/nmap_tracker">Nmap</a>를 사용하는 것이 좋습니다.</p>
 <table>
 <thead>
 <tr>
@@ -204,7 +205,7 @@ This device tracker needs SNMP to be enabled on the router. It could be that you
 </tr>
 </tbody>
 </table>
-<p>To use the SNMP version 1 or 2c platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치시 SNMP 버전 1 또는 2c 플랫폼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for SNMP version 1 or 2c
 device_tracker:
   - platform: snmp
@@ -212,7 +213,7 @@ device_tracker:
     community: public
     baseoid: 1.3.6.1.4.1.14988.1.1.1.2.1.1
 </code></pre>
-<p>If you want to use encryption, you must enable SNMP version 3 by adding <code>auth_key</code> and <code>priv_key</code> variables and enabling SNMP version 3 on your router. Currently only SHA1 is supported for authentication and AES for encryption. Example of SNMPv3 configuration:</p>
+<p>암호화를 사용하려면 <code>auth_key</code> 및 <code>priv_key</code> 변수를 추가하고 라우터에서 SNMP 버전 3을 활성화하여 SNMP 버전 3을 활성화해야합니다. 현재 인증에는 SHA1만, 암호화에는 AES만 지원됩니다. SNMPv3 구성의 예 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for SNMP version 3
 device_tracker:
   - platform: snmp
@@ -248,11 +249,11 @@ device_tracker:
 </span></p></dd>
 </dl>
 </div>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions how to configure the people to be tracked.</p>
+<p>추적할 사람을 설정하는 방법에 대한 지침은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오.</p>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>snmp</code> sensor platform displays information available through the <a href="https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol" rel="external nofollow">Simple Network Management Protocol (SNMP)</a>. SNMP uses a tree-like hierarchy where each node is an object, and is mainly supported by network-oriented devices such as routers, modems and printers.</p>
-<p>To enable this sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p><code>snmp</code> 센서 플랫폼은 <a href="https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol" rel="external nofollow">Simple Network Management Protocol (SNMP)</a>를 통해 사용 가능한 정보를 표시합니다. SNMP는 각 노드가 개체인 트리와 같은 계층을 사용하며 주로 라우터, 모뎀 및 프린터와 같은 네트워크 지향 장치에서 지원됩니다.</p>
+<p>설치시 이 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: snmp
@@ -370,7 +371,7 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>Valid values for <code>auth_protocol</code>:</p>
+<p><code>auth_protocol</code>의 유효한 값 :</p>
 <ul>
 <li><strong>none</strong></li>
 <li><strong>hmac-md5</strong></li>
@@ -380,7 +381,7 @@ Default value: </p>
 <li><strong>hmac256-sha384</strong></li>
 <li><strong>hmac384-sha512</strong></li>
 </ul>
-<p>Valid values for <code>priv_protocol</code>:</p>
+<p><code>priv_protocol</code>의 유효한 값 :</p>
 <ul>
 <li><strong>none</strong></li>
 <li><strong>des</strong></li>
@@ -390,8 +391,8 @@ Default value: </p>
 <li><strong>aes-cfb-256</strong></li>
 </ul>
 <h3>
-<a class="title-link" name="finding-oids" href="#finding-oids"></a> Finding OIDs</h3>
-<p>OIDs may vary on different systems because they are vendor-specific. Besides the device’s manual, the <a href="http://www.oid-info.com/" rel="external nofollow">OID Repository</a> is a good place to start if you are looking for OIDs. As an example, the following OIDs are for the load of a Linux system.</p>
+<a class="title-link" name="oids-" href="#oids-"></a> OIDs 찾기</h3>
+<p>OID는 공급 업체별로 다르므로 시스템마다 다를 수 있습니다. 설명서 외에도 <a href="http://www.oid-info.com/" rel="external nofollow">OID Repository</a>는 OID를 찾는 경우 시작하기에 좋은 장소입니다. 예를 들어, 다음 OID는 Linux 시스템로드를 위한 것입니다.</p>
 <ul>
 <li>1 minute Load: <code>1.3.6.1.4.1.2021.10.1.3.1</code>
 </li>
@@ -400,16 +401,16 @@ Default value: </p>
 <li>15 minute Load: <code>1.3.6.1.4.1.2021.10.1.3.3</code>
 </li>
 </ul>
-<p>There is a large amount of tools available to work with SNMP. <code>snmpwalk</code> let you easily retrieve the value of an OID.</p>
+<p>SNMP 작업에 사용할 수있는 많은 도구가 있습니다. <code>snmpwalk</code>를 사용하면 OID 값을 쉽게 검색할 수 있습니다.</p>
 <pre><code class="language-bash">$ snmpwalk -Os -c public -v 2c 192.168.1.32 1.3.6.1.4.1.2021.10.1.3.1
 laLoad.1 = STRING: 0.19
 </code></pre>
 <h3>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h3>
+<a class="title-link" name="" href="#"></a> 사례</h3>
 <h4>
-<a class="title-link" name="printer-uptime-minutes" href="#printer-uptime-minutes"></a> Printer uptime minutes</h4>
-<p>According to the most common SNMP standard, the uptime of a device is accessible under OID <code>1.3.6.1.2.1.1.3.0</code>. The value represented using a format called <code>TimeTicks</code>, in units of hundredths of a second.</p>
-<p>To create a sensor that displays the uptime for your printer in minutes, you can use this configuration:</p>
+<a class="title-link" name="--" href="#--"></a> 프린터 가동 시간</h4>
+<p>가장 일반적인 SNMP 표준에 따르면 장치의 가동 시간은 OID <code>1.3.6.1.2.1.1.3.0</code>에서 액세스 할 수 있습니다. 이 값은 <code>TimeTicks</code>라는 형식을 사용하여 100 분의 1 초 단위로 나타냅니다.</p>
+<p>프린터 가동 시간을 분 단위로 표시하는 센서를 만들려면 다음 설정을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: snmp
@@ -420,13 +421,13 @@ sensor:
     unit_of_measurement: 'minutes'
     value_template: '{{((value | int) / 6000) | int}}'
 </code></pre>
-<p>The <code>accept_errors</code> option will allow the sensor to work even if the printer is not on when Home Assistant is first started: the sensor will just display a <code>-</code> instead of a minute count.</p>
-<p>The <code>value_template</code> option converts the original value to minutes.</p>
+<p><code>accept_errors</code> 옵션은 홈어시스턴트가 처음 시작될 때 프린터가 켜져 있지 않아도 센서가 작동 할 수 있도록합니다. 센서는 분 단위 대신 <code>-</code> 만 표시합니다.</p>
+<p><code>value_template</code> 옵션은 원래 값을 분으로 변환합니다.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>snmp</code> switch platform allows you to control SNMP-enabled equipment.</p>
-<p>Currently, only SNMP OIDs that accept integer values are supported. SNMP v1, v2c and v3 are supported.</p>
-<p>To use an SNMP switch in your installation:</p>
+<p><code>snmp</code> 스위치 플랫폼을 사용하면 SNMP 가능 장비를 제어할 수 있습니다.</p>
+<p>현재 정수값을 허용하는 SNMP OID 만 지원됩니다. SNMP v1, v2c 및 v3이 지원됩니다.</p>
+<p>SNMP 스위치를 사용하려면</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry:
 switch:
   - platform: snmp
@@ -549,8 +550,8 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>You should check with your device’s vendor to find out the correct BaseOID and what values turn the switch on and off.</p>
-<p>Valid values for <code>auth_protocol</code>:</p>
+<p>올바른 BaseOID와 스위치를 켜고 끄는 값은 장치 공급 업체에 문의하십시오.</p>
+<p><code>auth_protocol</code>의 유효한 값 :</p>
 <ul>
 <li><strong>none</strong></li>
 <li><strong>hmac-md5</strong></li>
@@ -560,7 +561,7 @@ Default value: </p>
 <li><strong>hmac256-sha384</strong></li>
 <li><strong>hmac384-sha512</strong></li>
 </ul>
-<p>Valid values for <code>priv_protocol</code>:</p>
+<p><code>priv_protocol</code>의 유효한 값 :</p>
 <ul>
 <li><strong>none</strong></li>
 <li><strong>des</strong></li>
@@ -569,7 +570,7 @@ Default value: </p>
 <li><strong>aes-cfb-192</strong></li>
 <li><strong>aes-cfb-256</strong></li>
 </ul>
-<p>Complete examples:</p>
+<p>완전한 예 :</p>
 <pre><code class="language-yaml">switch:
   - platform: snmp
     name: SNMP v1 switch

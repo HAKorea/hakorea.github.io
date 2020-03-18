@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Solar-Log - 홈어시스턴트</title>
+    <title>태양광관리시스템(Solar-Log) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Solar-Log sensors within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/solarlog/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Solar-Log">
+    <meta property="og:title" content="태양광관리시스템(Solar-Log)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/solarlog/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Solar-Log">
+    <meta name="twitter:title" content="태양광관리시스템(Solar-Log)">
     <meta name="twitter:description" content="Instructions on how to integrate Solar-Log sensors within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,25 @@
   
   <header>
     <h1 class="title indent">
-      Solar-Log
+      태양광관리시스템(Solar-Log)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>solarlog</code> integration uses the open JSON interface on <a href="https://www.solar-log.com/" rel="external nofollow">Solar-Log PV monitoring systems</a> to allow you to get details from your Solar-Log device and integrate these into your Home Assistant installation.</p>
-<p>Before being able to use the integration, you have to activate the open JSON interface on your Solar-Log device. This can be activated from the Configuration | System | Access control menu of your Solar-Log device.
-When activating the interface, a red warning triangle with security information and risks is displayed.</p>
-<p>The <code>solarlog</code> integration uses the default host address “<a href="http://solar-log" rel="external nofollow">http://solar-log</a>” if you don’t specify a host. If your device isn’t accessible on this address, use its IP Address instead.</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/eMXbTN2X4Ek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>solarlog</code> 통합구성요소는 <a href="https://www.solar-log.com/" rel="external nofollow">Solar-Log PV monitoring systems</a>의 개방형 JSON 인터페이스를 사용하여 Solar-Log 장치에서 세부 정보를 가져와 이를 Home Assistant에 연동할 수 있습니다.</p>
+<p>통합구성요소를 사용하기 전에 Solar-Log 장치에서 열린 JSON 인터페이스를 활성화해야합니다. 이는 Solar-Log 장치의 Configuration | System | Access control menu 에서 활성화 할 수 있습니다. 인터페이스를 활성화하면 보안 정보 및 위험 요소가있는 빨간색 경고 삼각형이 표시됩니다.</p>
+<p><code>solarlog</code> 통합구성요소는 호스트를 지정하지 않으면 기본 호스트 주소 “<a href="http://solar-log%22%EB%A5%BC" rel="external nofollow">http://solar-log"를</a> 사용합니다. 이 주소에서 장치에 액세스 할 수 없으면 대신 IP주소를 사용하십시오.</p>
 <div class="note warning">
-The open JSON interface is deactivated by default. To activate the open JSON interface, a user password must first be set. The password isn't needed for accessing the open JSON interface.
+open JSON 인터페이스는 기본적으로 비활성화되어 있습니다. open JSON 인터페이스를 활성화하려면 먼저 사용자 비밀번호를 설정해야합니다. open JSON 인터페이스에 액세스하는데 비밀번호가 필요하지 않습니다.
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>There are 2 options in configuring the <code>solarlog</code> integration:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>solarlog</code> 통합구성요소 설정에는 두 가지 옵션이 있습니다.</p>
 <ul>
-<li>Via the Home Assistant user interface where it will let you enter the name and host to connect to your Solar-Log device.</li>
-<li>Via the Home Assistant <code>configuration.yaml</code> file.</li>
+<li>홈어시스턴트 사용자 인터페이스를 통해 이름과 호스트를 입력하여 Solar-Log 장치에 연결할 수 있습니다.</li>
+<li>홈어시스턴트 <code>configuration.yaml</code> 파일을 통해.</li>
 </ul>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
@@ -146,15 +146,15 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="full-configuration-sample" href="#full-configuration-sample"></a> Full configuration sample</h3>
-<p>A full configuration entry would look like the sample below.</p>
+<a class="title-link" name="--" href="#--"></a> 전체 설정 샘플</h3>
+<p>전체 설정 항목은 아래 샘플과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: solarlog
     name: solarlog
     host: 192.168.1.123
 </code></pre>
-<p>In case you would like to convert the values, for example, to Wh instead of the default kWh, you can use the <a href="/integrations/template/">template platform</a>.</p>
+<p>예를 들어 기본 kWh 대신 Wh로 값을 변환하려는 경우 <a href="/integrations/template/">template platform</a>을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for sensor template platform
 sensor:
   - platform: template
@@ -164,7 +164,7 @@ sensor:
 </code></pre>
 <h2>
 <a class="title-link" name="sensors" href="#sensors"></a> Sensors</h2>
-<p>The following sensors are available in the library:</p>
+<p>라이브러리에서 다음 센서를 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -287,7 +287,7 @@ sensor:
 </tbody>
 </table>
 <div class="note">
-The solarlog integration is using the sunwatcher pypi package to get the data from your Solar-Log device. The last five sensors are not reported by your Solar-Log device directly, but are computed by the sunwatcher package.
+solarlog 통합구성요소는 sunwatcher pypi 패키지를 사용하여 Solar-Log 장치에서 데이터를 가져옵니다. 마지막 5 개의 센서는 Solar-Log 장치에 의해 직접보고되지 않지만 sunwatcher 패키지에 의해 계산됩니다.
 </div>
 
 

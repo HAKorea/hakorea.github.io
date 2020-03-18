@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>Integrates MySensors switches into Home Assistant. See the <a href="/integrations/mysensors/">main component</a> for configuration instructions.</p>
+  <p>MySensors 스위치를 Home Assistant에 연동합니다. 설정 지침은 <a href="/integrations/mysensors/">main component</a>를 참조하십시오.</p>
 <h2>
-<a class="title-link" name="supported-actuator-types" href="#supported-actuator-types"></a> Supported actuator types</h2>
-<p>The following actuator types are supported:</p>
+<a class="title-link" name="--" href="#--"></a> 지원되는 액추에이터 유형</h2>
+<p>다음과 같은 액추에이터 유형이 지원됩니다.</p>
 <h3>
 <a class="title-link" name="mysensors-version-14-and-higher" href="#mysensors-version-14-and-higher"></a> MySensors version 1.4 and higher</h3>
 <table>
@@ -199,11 +199,13 @@
 </tr>
 </tbody>
 </table>
-<p>All V_TYPES for each S_TYPE above are required to activate the actuator for the platform. Use either V_LIGHT or V_STATUS depending on library version for cases where that V_TYPE is required.</p>
-<p>For more information, visit the <a href="https://www.mysensors.org/download" rel="external nofollow">serial api</a> of MySensors.</p>
+<p>플랫폼의 액추에이터를 활성화하려면 위의 각 S_TYPE에 대한 모든 V_TYPES가 필요합니다. 해당 V_TYPE이 필요한 경우 라이브러리 버전에 따라 V_LIGHT 또는 V_STATUS를 사용하십시오.</p>
+<p>For more information, visit the <a href="https://www.mysensors.org/download" rel="external nofollow">serial api</a> of MySensors.
+자세한 내용은 MySensors의 <a href="https://www.mysensors.org/download" rel="external nofollow">serial api</a>를 방문하십시오.</p>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>The MySensors switch platform exposes a service to change an IR code attribute for an IR switch device and turn the switch on. The IR switch will automatically be turned off after being turned on, if <code>optimistic</code> is set to <code>true</code> in the <a href="/integrations/mysensors/#configuration">config</a> for the MySensors component. This will simulate a push button on a remote. If <code>optimistic</code> is <code>false</code>, the MySensors device will have to report its updated state to reset the switch. See the <a href="#ir-switch-sketch">example sketch</a> for the IR switch below.</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>MySensors 스위치 플랫폼은 IR 스위치 장치의 IR 코드 속성을 변경하고 스위치를 켜는 서비스를 제공합니다.
+MySensors 구성 요소의 <a href="/integrations/mysensors/#configuration">config</a>에서 <code>optimistic</code> 이 <code>true</code>로 설정되어 있으면 IR 스위치가 켜진 후 자동으로 꺼집니다. 리모컨의 푸시 버튼을 시뮬레이션합니다. <code>optimistic</code>이 <code>false</code>인 경우 MySensors 장치는 스위치를 재설정하기 위해 업데이트 된 상태를 보고해야합니다. 아래 IR 스위치에 대한  <a href="#ir-switch-sketch">example sketch</a>를 참조하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -218,7 +220,7 @@
 </tr>
 </tbody>
 </table>
-<p>The service can be used as part of an automation script. For example:</p>
+<p>이 서비스는 자동화 스크립트의 일부로 사용할 수 있습니다. 예를 들면 다음과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml automation entry
 automation:
   - alias: Turn HVAC on
@@ -242,7 +244,7 @@ automation:
         V_IR_SEND: '0xC288'  # the IR code to send
 </code></pre>
 <h2>
-<a class="title-link" name="example-sketches" href="#example-sketches"></a> Example sketches</h2>
+<a class="title-link" name="sketches-" href="#sketches-"></a> sketches 예시</h2>
 <h3>
 <a class="title-link" name="switch-sketch" href="#switch-sketch"></a> Switch sketch</h3>
 <pre><code class="language-cpp">/*

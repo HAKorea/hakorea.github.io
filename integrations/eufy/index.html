@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>eufy - 홈어시스턴트</title>
+    <title>이퓨(eufy) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Eufy devices into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/eufy/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="eufy">
+    <meta property="og:title" content="이퓨(eufy)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/eufy/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="eufy">
+    <meta name="twitter:title" content="이퓨(eufy)">
     <meta name="twitter:description" content="Instructions on how to integrate Eufy devices into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,28 @@
   
   <header>
     <h1 class="title indent">
-      eufy
+      이퓨(eufy)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>eufy</code> integration is the main integration to integrate various <a href="https://www.eufylife.com/" rel="external nofollow">eufy</a> devices with Home Assistant.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>우리나라는 <strong>eufy 로봇청소기</strong>만 와디즈에서 펀딩을 받아 판매했습니다.
+해당 로봇청소기를 홈어시스턴트에 연동하려면, <a href="https://github.com/mitchellrj/eufy_robovac" rel="external nofollow">여기</a>를 참조해서 커스텀 컴포넌트를 설치하십시오.</p>
+<iframe width="690" height="437" src="https://www.youtube.com/embed/NYalEpeqJTk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>eufy</code> 통합구성요소는 다양한 <a href="https://www.eufylife.com/" rel="external nofollow">eufy</a> 장치를 Home Assistant와 연동하기위한 메인 통합구성요소입니다.</p>
+<p>현재 홈어시스턴트에는 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Light</li>
 <li>Switch</li>
 </ul>
-<p>Supported devices will be discovered after the <code>eufy</code> integration is configured:</p>
+<p><code>eufy</code> 통합구성요소가 설정된 후 지원되는 장치가 발견됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 eufy:
   username: EMAIL_ADDRESS
   password: PASSWORD
 </code></pre>
-<p>where username and password are the ones configured in the EufyHome app. Alternately, Eufy devices that are not discoverable can be statically configured.</p>
+<p>여기서 username 및 password는 EufyHome 앱에서 설정한 것입니다. 또는 검색할 수 없는 Eufy 장치를 정적으로 설정할 수 있습니다.</p>
 <pre><code class="language-yaml">eufy:
   devices:
     - address: 192.168.1.10
@@ -127,16 +130,16 @@ eufy:
       type: T1201
       name: Smart Switch
 </code></pre>
-<p>`access_token can be obtained by running:</p>
+<p><code>access_token</code>은 다음을 실행하여 얻을 수 있습니다 :</p>
 <pre><code class="language-bash">$ curl -H "Content-Type: application/json" \
    -d '{"client_id":"eufyhome-app", "client_Secret":"GQCpr9dSp3uQpsOMgJ4xQ", "email":"USERNAME", "password":"PASSWORD"}' \
    https://home-api.eufylife.com/v1/user/email/login
 </code></pre>
-<p>replacing USERNAME and PASSWORD with the Eufy username and password. This will give an <code>access_token</code>. Then run:</p>
+<p>USERNAME 및 PASSWORD를 Eufy 사용자 이름 및 비밀번호로 바꿉니다. 이는 <code>access_token</code>을 줄 것입니다. 그런 후 다음을 실행하십시오.</p>
 <pre><code class="language-bash">$ curl -H token:TOKEN -H category:Home \
    https://home-api.eufylife.com/v1/device/list/devices-and-groups
 </code></pre>
-<p>replacing TOKEN with the <code>access_token</code> from the previous command. This will provide the local_code for each device.</p>
+<p>이전 명령에서 TOKEN을 <code>access_token</code>으로 바꿉니다. 이는 각 장치에 대한 local_code를 제공합니다.</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Sony Songpal - 홈어시스턴트</title>
+    <title>소니 오디오제어(Sony Songpal) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Sony Songpal devices into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/songpal/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Sony Songpal">
+    <meta property="og:title" content="소니 오디오제어(Sony Songpal)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/songpal/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Sony Songpal">
+    <meta name="twitter:title" content="소니 오디오제어(Sony Songpal)">
     <meta name="twitter:description" content="Instructions on how to integrate Sony Songpal devices into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      Sony Songpal
+      소니 오디오제어(Sony Songpal)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>songpal</code> platform allows you to control Sony’s Songpal (”<a href="https://developer.sony.com/develop/audio-control-api/" rel="external nofollow">Audio Control API</a>”) compatible devices such as soundbars, AV receivers and wireless speakers from Home Assistant.</p>
-<p>Even when the API officially supports only a few devices (HT-ST5000, HT-MT500, HT-CT800, SRS-ZR5 and STR-DN1080), it has also been confirmed to work on others. <a href="https://vssupport.sony.net/en_ww/device.html" rel="external nofollow">The list of supported devices</a> from Sony’s Songpal website lists devices which are likely to be compatible with this platform.</p>
-<p>If the platform works with your non-listed device, or you encounter bugs, please feel free to <a href="https://github.com/rytilahti/python-songpal" rel="external nofollow">report them upstream</a>.</p>
-<p>A few notes:</p>
+  <iframe width="690" height="437" src="https://www.youtube.com/embed/xtTnFYGyNbc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>songpal</code> 플랫폼을 사용하면 홈어시스턴트의 사운드 바, AV 리시버 및 무선 스피커와 같은 Sony의 Songpal(”<a href="https://developer.sony.com/develop/audio-control-api/" rel="external nofollow">Audio Control API</a>”) 호환 장치를 제어 할 수 있습니다.</p>
+<p>API가 공식적으로 소수의 장치 (HT-ST5000, HT-MT500, HT-CT800, SRS-ZR5 및 STR-DN1080) 만 지원하더라도 다른 장치에서도 작동하는 것으로 확인되었습니다. Sony Songpal 웹 사이트의 <a href="https://vssupport.sony.net/en_ww/device.html" rel="external nofollow">The list of supported devices</a>에는 이 플랫폼과 호환될 수 있는 장치가 나열되어 있습니다.</p>
+<p>플랫폼이 목록에 없는 장치와 작동하거나 버그가 발생하면 <a href="https://github.com/rytilahti/python-songpal" rel="external nofollow">report them upstream</a>로 문의하십시오.</p>
+<p>몇 가지 참고 사항 :</p>
 <ul>
-<li>The quick start-up mode has to be enabled in order to turn the device on.</li>
-<li>Supports currently only one output terminal, i.e. the volume control works only on the first volume controller as reported by the backend library.</li>
-<li>Some devices, e.g., HT-XT3, do not support decreasing the volume step-by-step correctly.</li>
-<li>Feel free to improve the available services!</li>
+<li>장치를 켜려면 quick start-up mode를 활성화해야합니다.</li>
+<li>현재 하나의 출력 터미널만 지원합니다. 즉, 볼륨 컨트롤은 백엔드 라이브러리에서 보고한 첫 번째 볼륨 컨트롤러에서만 작동합니다.</li>
+<li>HT-XT3과 같은 일부 장치는 볼륨을 단계별로 정확하게 감소시키는 기능을 지원하지 않습니다.</li>
+<li>사용 가능한 서비스가 개선될겁니다 !</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>The platform will be loaded automatically by discovery component. If you want to manually configure it, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>discovery 구성 요소가 플랫폼을 자동으로 로드합니다. 수동으로 설정하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml">media_player:
   - platform: songpal
     name: my soundbar
@@ -135,13 +136,13 @@
 </span></p></dd>
 </dl>
 </div>
-<p>See <a href="https://github.com/rytilahti/python-songpal#locating-the-endpoint" rel="external nofollow">python-songpal’s documentation</a> how to get your API endpoint.</p>
+<p>API 엔드 포인트를 얻는 방법은 <a href="https://github.com/rytilahti/python-songpal#locating-the-endpoint" rel="external nofollow">python-songpal’s documentation</a>를 참조하십시오.</p>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
-<p>In addition to the general <a href="/integrations/media_player/#services">media player services</a>, the following services are provided:</p>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
+<p>일반적인 <a href="/integrations/media_player/#services">media player services</a> 외에 다음 서비스가 제공됩니다.</p>
 <h3>
-<a class="title-link" name="service-songpalset_sound_setting" href="#service-songpalset_sound_setting"></a> Service songpal/set_sound_setting</h3>
-<p>For a list of available settings and their values use <a href="https://github.com/rytilahti/python-songpal#sound-settings" rel="external nofollow"><code>songpal sound</code></a> command.</p>
+<a class="title-link" name="songpalset_sound_setting-" href="#songpalset_sound_setting-"></a> songpal/set_sound_setting 서비스</h3>
+<p>사용 가능한 설정 및 값 목록을 보려면 <a href="https://github.com/rytilahti/python-songpal#sound-settings" rel="external nofollow"><code>songpal sound</code></a> 명령을 사용하십시오.</p>
 <table>
 <thead>
 <tr>
