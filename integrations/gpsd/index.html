@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>GPSD - 홈어시스턴트</title>
+    <title>GPS데몬(GPSD) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate GPSD into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/gpsd/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="GPSD">
+    <meta property="og:title" content="GPS데몬(GPSD)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/gpsd/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="GPSD">
+    <meta name="twitter:title" content="GPS데몬(GPSD)">
     <meta name="twitter:description" content="Instructions on how to integrate GPSD into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,16 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      GPSD
+      GPS데몬(GPSD)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>gpsd</code> integration is using the GPS information collected by <a href="http://catb.org/gpsd/" rel="external nofollow">gpsd</a> and a GPS receiver.</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/A1zmhxcUOxw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>gpsd</code> 통합구성요소는 <a href="http://catb.org/gpsd/" rel="external nofollow">gpsd</a>에서 수집한 GPS 정보와 GPS 수신기를 사용합니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p>A requirement is that <code>gpsd</code> is installed (<code>$ sudo apt-get install gpsd</code> or <code>$ sudo dnf -y install gpsd</code>). <code>gpsd</code> uses the socket activation feature of systemd on recent Linux distributions for USB receivers. This means that if you plug your GPS receiver in, <code>gpsd</code> is started. Other GPS device may work too, but this was not tested.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p><code>gpsd</code>가 설치되어 있어야합니다 (<code>$ sudo apt-get install gpsd</code> 또는 <code>$ sudo dnf -y install gpsd</code>). <code>gpsd</code>는 USB 리시버를 위한 최신 Linux 배포판에서 systemd의 소켓 활성화 기능을 사용합니다. 이것은 GPS 수신기를 연결하면 <code>gpsd</code>가 시작됨을 의미합니다. 다른 GPS 장치도 작동 할 수 있지만 이는 테스트되지 않았습니다.</p>
 <pre><code class="language-bash">$ sudo systemctl status gpsdctl@ttyUSB0.service
 ● gpsdctl@ttyUSB0.service - Manage ttyUSB0 for GPS daemon
    Loaded: loaded (/usr/lib/systemd/system/gpsdctl@.service; static; vendor preset: disabled)
@@ -118,7 +119,7 @@ Jul 16 09:30:33 laptop019 systemd[1]: Starting Manage ttyUSB0 for GPS daemon...
 Jul 16 09:30:33 laptop019 gpsdctl[5305]: gpsd_control(action=add, arg=/dev/ttyUSB0)
 Jul 16 09:30:33 laptop019 gpsdctl[5305]: reached a running gpsd
 </code></pre>
-<p>To check if your setup is working, connect to port 2947 on the host where <code>gpsd</code> is running with <code>telnet</code>. This may need adjustments to your firewall.</p>
+<p>설정이 작동하는지 확인하려면 <code>gpsd</code>가 <code>telnet</code>으로 실행되는 호스트의 포트 2947에 연결하십시오. 방화벽을 조정해야 할 수도 있습니다.</p>
 <pre><code class="language-bash">$ telnet localhost 2947
 Trying 127.0.0.1...
 Connected to localhost.
@@ -126,8 +127,8 @@ Escape character is '^]'.
 {"class":"VERSION","release":"3.15","rev":"3.15-2.fc23","proto_major":3,"proto_minor":11}
 </code></pre>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To setup a GPSD sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설비에서 GPSD 센서를 설정하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: gpsd

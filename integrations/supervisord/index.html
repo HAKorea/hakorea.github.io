@@ -103,16 +103,16 @@
   <hr class="divider">
   
 
-  <p>The <code>supervisord</code> platform allows you to track the states of <a href="http://supervisord.org/" rel="external nofollow">Supervisord</a>.</p>
-<p>It required that you enable the HTTP feature in the <code>/etc/supervisord.conf</code> configuration file.</p>
+  <p><code>supervisord</code> 플랫폼을 사용하면 <a href="http://supervisord.org/" rel="external nofollow">Supervisord</a>의 상태를 추적할 수 있습니다.</p>
+<p><code>/etc/supervisord.conf</code> 설정 파일에서 HTTP 기능을 활성화해야 합니다.</p>
 <pre><code class="language-text">[inet_http_server]
 port=127.0.0.1:9001
 </code></pre>
-<p>After a restart of <code>supervisord</code> you should be able to access the web interface. If needed then this could be added as an <a href="/integrations/panel_iframe/">iFrame panel</a>.</p>
+<p><code>supervisord</code>를 다시 시작하면 웹 인터페이스에 액세스 할 수 있어야합니다. 필요한 경우 <a href="/integrations/panel_iframe/">iFrame panel</a>로 추가 할 수 있습니다.</p>
 <p class="img">
   <img src="/images/screenshots/supervisor.png">
 </p>
-<p>To use this sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치시 이 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: supervisord

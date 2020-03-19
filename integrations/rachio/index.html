@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Rachio - 홈어시스턴트</title>
+    <title>라치오(Rachio) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to use Rachio with Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/rachio/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Rachio">
+    <meta property="og:title" content="라치오(Rachio)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/rachio/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Rachio">
+    <meta name="twitter:title" content="라치오(Rachio)">
     <meta name="twitter:description" content="Instructions on how to use Rachio with Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,23 @@
   
   <header>
     <h1 class="title indent">
-      Rachio
+      라치오(Rachio)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>rachio</code> platform allows you to control your <a href="https://rachio.com/" rel="external nofollow">Rachio irrigation system</a>.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/qwYOxToNePM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>rachio</code> 플랫폼을 사용하면 <a href="https://rachio.com/" rel="external nofollow">Rachio irrigation system</a>을 제어 할 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>
-<strong>Binary Sensor</strong> - Allows you to view the status of your <a href="https://rachio.com/" rel="external nofollow">Rachio irrigation system</a>.</li>
+<strong>Binary Sensor</strong> - <a href="https://rachio.com/" rel="external nofollow">Rachio irrigation system</a>의 상태를 볼 수 있습니다.</li>
 <li><a href="#switch"><strong>Switch</strong></a></li>
 </ul>
-<p>They will be automatically added if the Rachio integration integration is loaded.</p>
+<p>Rachio 통합구성요소가 로드되면 자동으로 추가됩니다.</p>
 <h2>
-<a class="title-link" name="getting-your-rachio-api-key" href="#getting-your-rachio-api-key"></a> Getting your Rachio API Key</h2>
+<a class="title-link" name="rachio-api--" href="#rachio-api--"></a> Rachio API 키 얻기</h2>
 <ol>
 <li>Log in at <a href="https://app.rach.io/" rel="external nofollow">https://app.rach.io/</a>.</li>
 <li>Click the “Account Settings” menu item at the bottom of the left sidebar</li>
@@ -120,8 +121,8 @@
 <li>Copy the API key from the dialog that opens.</li>
 </ol>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To add this platform to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 플랫폼을 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 rachio:
   api_key: YOUR_API_KEY
@@ -151,11 +152,11 @@ Default value: </p>
 </div>
 <div class="note">
 <p><strong>Water-saving suggestion:</strong><br>
-Set <code>manual_run_mins</code> to a high maximum failsafe value when using scripts to control zones. If something goes wrong with your script, Home Assistant, or you hit the Rachio API rate limit of 1700 calls per day, the controller will still turn off the zone after this amount of time.</p>
+스크립트를 사용하여 영역을 제어 할 때 <code>manual_run_mins</code>를 최대 안전 장치값으로 설정하십시오. 스크립트, 홈어시스턴트에 문제가 있거나 하루에 1700 건의 Rachio API 속도 제한에 도달한 경우 컨트롤러는 이 시간이 지난 후에도 여전히 영역(zone)을 끄려고 합니다.</p>
 </div>
 <h3>
 <a class="title-link" name="iframe" href="#iframe"></a> iFrame</h3>
-<p>If you would like to see and control more detailed zone information, create an <a href="/integrations/panel_iframe/">iFrame</a> that renders the Rachio web app.</p>
+<p>보다 자세한 영역 정보를보고 제어하려면 Rachio 웹 앱을 렌더링하는 <a href="/integrations/panel_iframe/">iFrame</a>을 만듭니다.</p>
 <pre><code class="language-yaml">panel_iframe:
   rachio:
     title: Rachio
@@ -164,13 +165,13 @@ Set <code>manual_run_mins</code> to a high maximum failsafe value when using scr
 </code></pre>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>rachio</code> switch platform allows you to toggle zones connected to your <a href="https://rachio.com/" rel="external nofollow">Rachio irrigation system</a> on and off.</p>
-<p>Once configured, a switch will be added for every zone that is enabled on every controller in the account provided, as well as a switch to toggle each controller’s standby mode.</p>
+<p><code>rachio</code> 스위치 플랫폼을 사용하면 <a href="https://rachio.com/" rel="external nofollow">Rachio irrigation system</a>에 연결된 구역을 켜고 끌 수 있습니다.</p>
+<p>일단 설정되면 제공된 계정의 모든 컨트롤러에서 활성화된 모든 영역에 대한 스위치와 각 컨트롤러의 대기 모드를 전환하는 스위치가 추가됩니다.</p>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section, you find some real-life examples of how to use this switch.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에서는 이 스위치를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
-<a class="title-link" name="groupsyaml-example" href="#groupsyaml-example"></a> groups.yaml example</h3>
+<a class="title-link" name="groupsyaml-" href="#groupsyaml-"></a> groups.yaml 예제</h3>
 <pre><code class="language-yaml">irrigation:
   name: Irrigation
   icon: mdi:water-pump

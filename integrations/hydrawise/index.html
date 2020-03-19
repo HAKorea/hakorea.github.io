@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hunter Hydrawise - 홈어시스턴트</title>
+    <title>헌터 하이드라와이즈(Hunter Hydrawise) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Hunter Hydrawise Wi-Fi irrigation control system within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/hydrawise/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Hunter Hydrawise">
+    <meta property="og:title" content="헌터 하이드라와이즈(Hunter Hydrawise)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/hydrawise/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Hunter Hydrawise">
+    <meta name="twitter:title" content="헌터 하이드라와이즈(Hunter Hydrawise)">
     <meta name="twitter:description" content="Instructions on how to integrate your Hunter Hydrawise Wi-Fi irrigation control system within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,23 @@
   
   <header>
     <h1 class="title indent">
-      Hunter Hydrawise
+      헌터 하이드라와이즈(Hunter Hydrawise)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>hydrawise</code> integration allows you to integrate your <a href="https://hydrawise.com" rel="external nofollow">Hunter Hydrawise</a> Wi-Fi irrigation controller system in Home Assistant.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/z2UtOoHIzoM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>hydrawise</code> 통합구성요소를 통해 <a href="https://hydrawise.com" rel="external nofollow">Hunter Hydrawise</a> Wi-Fi 관개 컨트롤러 시스템을 Home Assistant에 연동할 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#sensor">Sensor</a></li>
 <li><a href="#switch">Switch</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable it, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 hydrawise:
   access_token: YOUR_API_KEY
@@ -136,10 +137,10 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>To get your API access token log into your <a href="https://app.hydrawise.com/config/login" rel="external nofollow">Hydrawise account</a> and in the ‘My Account Details’ section under Account Settings click ‘Generate API Key’. Enter that key in your configuration file as the <code>API_KEY</code>.</p>
+<p>API 액세스 토큰을 <a href="https://app.hydrawise.com/config/login" rel="external nofollow">Hydrawise account</a>에 로그인하고 계정 설정의 ‘My Account Details’섹션에서 ‘Generate API Key’을 클릭하십시오. 설정 파일에 해당 키를 <code>API_KEY</code>로 입력하십시오.</p>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>Once you have enabled the <code>hydrawise</code> component, add the following to your <code>configuration.yaml</code> file:</p>
+<p>hydrawise 컴포넌트를 활성화 한 후 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: hydrawise
@@ -175,7 +176,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>Once you have enabled the <code>hydrawise</code> component, add the following to your <code>configuration.yaml</code> file:</p>
+<p>hydrawise 컴포넌트를 활성화 한 후 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: hydrawise
@@ -207,7 +208,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>Once you have enabled the <code>hydrawise</code> component, add the following to your <code>configuration.yaml</code> file:</p>
+<p><code>hydrawise</code> 컴포넌트를 활성화 한 후 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: hydrawise
@@ -248,8 +249,8 @@ Default value: </p>
 </div>
 <h3>
 <a class="title-link" name="switch-operation" href="#switch-operation"></a> Switch Operation</h3>
-<p>When <code>auto_watering</code> is <code>on</code> the irrigation zone will follow the Smart Watering schedule set through the Hydrawise <a href="https://www.hydrawise.com" rel="external nofollow">mobile or web app</a>. When the <code>auto_watering</code> switch is <code>off</code> the zone’s Smart Watering schedule is suspended for 1 year.</p>
-<p>When <code>manual_watering</code> is <code>on</code> the zone will run for the amount of time set by <code>watering_minutes</code>.</p>
+<p><code>auto_watering</code>이 <code>on</code>인 경우 관개 구역은 Hydrawise <a href="https://www.hydrawise.com" rel="external nofollow">mobile or web app</a>을 통해 설정된 Smart Watering 일정을 따릅니다. <code>auto_watering</code> 스위치가 <code>off</code>이면 해당 구역의 Smart Watering 일정이 1 년 동안 일시 중지됩니다.</p>
+<p><code>manual_watering</code>이 <code>on</code>인 경우 구역(zone)은 <code>watering_minutes</code>에 설정된 시간 동안 실행됩니다.</p>
 <pre><code class="language-yaml"># An example that enables all the switches, and sets the manual watering time to 20 minutes.
 switch:
   - platform: hydrawise

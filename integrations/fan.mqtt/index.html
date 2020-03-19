@@ -103,13 +103,13 @@
   <hr class="divider">
   
 
-  <p>The <code>mqtt</code> fan platform lets you control your MQTT enabled fans.</p>
+  <p><code>mqtt</code> 팬(fan) 플랫폼을 사용하면 MQTT 지원 팬을 제어할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>In an ideal scenario, the MQTT device will have a <code>state_topic</code> to publish state changes. If these messages are published with a <code>RETAIN</code> flag, the MQTT fan will receive an instant state update after subscription and will start with the correct state. Otherwise, the initial state of the fan will be <code>false</code> / <code>off</code>.</p>
-<p>When a <code>state_topic</code> is not available, the fan will work in optimistic mode. In this mode, the fan will immediately change state after every command. Otherwise, the fan will wait for state confirmation from the device (message from <code>state_topic</code>).</p>
-<p>Optimistic mode can be forced even if a <code>state_topic</code> is available. Try to enable it if you are experiencing incorrect fan operation.</p>
-<p>To enable MQTT fans in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이상적인 시나리오에서 MQTT 디바이스에는 상태 변경 사항을 publish하는 <code>state_topic</code>이 있습니다.  이러한 메시지가 <code>RETAIN</code> 플래그와 함께 공개되면 MQTT 팬은 subscription 후 즉시 상태 업데이트를 수신하고 변경된 상태로 시작합니다. 그렇지 않으면 팬의 초기 상태는 <code>false</code> / <code>off</code>입니다.</p>
+<p><code>state_topic</code>을 사용할 수 없으면 팬은 optimistic 모드에서 작동합니다. 이 모드에서 팬은 모든 명령 후 즉시 상태를 변경합니다. 그렇지 않으면 팬은 장치에서 상태 확인을 기다립니다 (<code>state_topic</code>의 메시지).</p>
+<p><code>state_topic</code>이 사용 가능하더라도 Optimistic 모드를 강제할 수 있습니다. 팬이 잘못 작동하면 활성화하십시오.</p>
+<p>설치에서 MQTT 팬을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 fan:
   - platform: mqtt
@@ -325,14 +325,14 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-<p>Make sure that your topics match exactly. <code>some-topic/</code> and <code>some-topic</code> are different topics.</p>
+<p>topics가 정확히 일치하는지 확인하십시오. <code>some-topic/</code>과 <code>some-topic</code>은 다른 topic입니다.</p>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this fan.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는 이 팬을 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
-<a class="title-link" name="full-configuration" href="#full-configuration"></a> Full configuration</h3>
-<p>The example below shows a full configuration for a MQTT fan.</p>
+<a class="title-link" name="-" href="#-"></a> 전체 설정</h3>
+<p>아래 예는 MQTT 팬의 전체 설정을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 fan:
   - platform: mqtt

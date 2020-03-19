@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>RainMachine - 홈어시스턴트</title>
+    <title>레인머신(RainMachine) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate RainMachine units within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/rainmachine/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="RainMachine">
+    <meta property="og:title" content="레인머신(RainMachine)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/rainmachine/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="RainMachine">
+    <meta name="twitter:title" content="레인머신(RainMachine)">
     <meta name="twitter:description" content="Instructions on how to integrate RainMachine units within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,28 +97,29 @@
   
   <header>
     <h1 class="title indent">
-      RainMachine
+      레인머신(RainMachine)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>rainmachine</code> integration is the main integration to integrate all platforms related to <a href="https://www.rainmachine.com/" rel="external nofollow">RainMachine smart Wi-Fi sprinkler controllers</a>.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/Q0afxjfgPKs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>rainmachine</code> 통합구성요소는 <a href="https://www.rainmachine.com/" rel="external nofollow">RainMachine smart Wi-Fi sprinkler controllers</a>와 관련된 모든 플랫폼을 연동하기 위한 주요 통합구성요소입니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
 <li>Binary Sensor</li>
 <li>Sensor</li>
 <li><a href="#switch">Switch</a></li>
 </ul>
 <h2>
-<a class="title-link" name="base-configuration" href="#base-configuration"></a> Base Configuration</h2>
-<p>To connect to your RainMachine device, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 기본 설정</h2>
+<p>RainMachine 장치에 연결하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml">rainmachine:
   controllers:
     - ip_address: 192.168.1.100
       password: YOUR_PASSWORD
 </code></pre>
-<p>To configure additional functionality, add configuration options beneath a <code>binary_sensor</code>, <code>sensor</code>, and/or <code>switches</code> key within the <code>rainmachine</code> sections of <code>configuration.yaml</code> as below:</p>
+<p>추가 기능을 설정하려면 다음과 같이 <code>configuration.yaml</code>의 <code>rainmachine</code> 섹션에서 <code>binary_sensor</code>, <code>sensor</code> 및/또는 <code>switches</code> 키 아래에 설정 옵션을 추가하십시오.</p>
 <pre><code class="language-yaml">rainmachine:
   controllers:
     - ip_address: 192.168.1.100
@@ -217,11 +218,11 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
 <a class="title-link" name="rainmachinedisable_program" href="#rainmachinedisable_program"></a> rainmachine.disable_program</h3>
-<p>Disable a RainMachine program. This will mark the program switch as
-<code>Unavailable</code> in the UI.</p>
+<p>RainMachine 프로그램을 비활성화하십시오. 이는 프로그램 스위치가
+UI에서 <code>Unavailable</code> 임을 나타냅니다.</p>
 <table>
 <thead>
 <tr>
@@ -240,8 +241,8 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachinedisable_zone" href="#rainmachinedisable_zone"></a> rainmachine.disable_zone</h3>
-<p>Disable a RainMachine zone. This will mark the zone switch as
-<code>Unavailable</code> in the UI.</p>
+<p>RainMachine 영역을 비활성화하십시오. 이는 프로그램 스위치가
+UI에서 <code>Unavailable</code> 임을 나타냅니다.</p>
 <table>
 <thead>
 <tr>
@@ -260,7 +261,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachineenable_program" href="#rainmachineenable_program"></a> rainmachine.enable_program</h3>
-<p>Enable a RainMachine program.</p>
+<p>RainMachine 프로그램을 활성화하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -279,7 +280,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachineenable_zone" href="#rainmachineenable_zone"></a> rainmachine.enable_zone</h3>
-<p>Enable a RainMachine zone.</p>
+<p>RainMachine 영역을 활성화하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -298,7 +299,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachinepause_watering" href="#rainmachinepause_watering"></a> rainmachine.pause_watering</h3>
-<p>Pause all watering activities for a number of seconds.</p>
+<p>몇 초 동안 모든 급수 활동을 일시 중지하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -317,7 +318,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachinestart_program" href="#rainmachinestart_program"></a> rainmachine.start_program</h3>
-<p>Start a RainMachine program.</p>
+<p>RainMachine 프로그램을 시작하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -336,7 +337,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachinestart_zone" href="#rainmachinestart_zone"></a> rainmachine.start_zone</h3>
-<p>Start a RainMachine zone for a set number of seconds.</p>
+<p>RainMachine 영역을 설정된 시간 (초) 동안 시작하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -360,10 +361,10 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachinestop_all" href="#rainmachinestop_all"></a> rainmachine.stop_all</h3>
-<p>Stop all watering activities.</p>
+<p>모든 급수 활동을 중지하십시오.</p>
 <h3>
 <a class="title-link" name="rainmachinestop_program" href="#rainmachinestop_program"></a> rainmachine.stop_program</h3>
-<p>Stop a RainMachine program.</p>
+<p>RainMachine 프로그램을 중지하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -382,7 +383,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachinestop_zone" href="#rainmachinestop_zone"></a> rainmachine.stop_zone</h3>
-<p>Stop a RainMachine zone.</p>
+<p>RainMachine 영역을 중지하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -401,18 +402,18 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="rainmachineunpause_watering" href="#rainmachineunpause_watering"></a> rainmachine.unpause_watering</h3>
-<p>Unpause all watering activities.</p>
+<p>모든 급수 활동을 일시 중지하십시오.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>rainmachine</code> switch platform allows you to control programs and zones within a <a href="https://www.rainmachine.com/" rel="external nofollow">RainMachine smart Wi-Fi sprinkler controller</a>.</p>
+<p><code>rainmachine</code> 스위치 플랫폼을 사용하면 <a href="https://www.rainmachine.com/" rel="external nofollow">RainMachine smart Wi-Fi sprinkler controller</a> 내에서 프로그램 및 구역을 제어할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="controlling-your-device" href="#controlling-your-device"></a> Controlling Your Device</h3>
-<p>After Home Assistant loads, new switches will be added for every enabled program and zone. These work as expected:</p>
+<a class="title-link" name="-" href="#-"></a> 장치 제어하기</h3>
+<p>홈어시스턴트가 로드되면 모든 활성화된 프로그램 및 영역에 대해 새 스위치가 추가됩니다. 이들은 예상대로 작동합니다.</p>
 <ul>
 <li>Program On/Off: starts/stops a program</li>
 <li>Zone On/Off: starts/stops a zone (using the <code>zone_run_time</code> parameter to determine how long to run for)</li>
 </ul>
-<p>Programs and zones are linked. While a program is running, you will see both the program and zone switches turned on; turning either one off will turn the other one off (just like in the web app).</p>
+<p>프로그램과 영역이 연결되어 있습니다. 프로그램이 실행되는 동안 프로그램 및 영역 스위치가 켜져 있습니다. 둘 중 하나를 끄면 다른 하나가 꺼집니다 (웹 앱에서처럼).</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>myStrom - 홈어시스턴트</title>
+    <title>전력선스마트홈플랫폼(myStrom) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate myStrom WiFi Bulbs into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/mystrom/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="myStrom">
+    <meta property="og:title" content="전력선스마트홈플랫폼(myStrom)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mystrom/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="myStrom">
+    <meta name="twitter:title" content="전력선스마트홈플랫폼(myStrom)">
     <meta name="twitter:description" content="Instructions on how to integrate myStrom WiFi Bulbs into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      myStrom
+      전력선스마트홈플랫폼(myStrom)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mystrom</code> light platform allows you to control your <a href="https://mystrom.ch/en/" rel="external nofollow">myStrom</a> WiFi Bulbs.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/M-Wr8bX12WM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>mystrom</code> 라이트 플랫폼을 사용하면 <a href="https://mystrom.ch/en/" rel="external nofollow">myStrom</a> WiFi 전구를 제어 할 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#light">Light</a></li>
 <li>
@@ -123,7 +124,7 @@
 </ul>
 <h2>
 <a class="title-link" name="light" href="#light"></a> Light</h2>
-<p>To use your myStrom WiFi Bulb in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치시 myStrom WiFi Bulb를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: mystrom
@@ -153,7 +154,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Check if you are able to access the light located at <code>IP_ADRRESS</code>. The details about your light is provided as a JSON response.</p>
+<p><code>IP_ADRRESS</code>에 있는 조명에 액세스 할 수 있는지 확인하십시오. 조명에 대한 세부 사항은 JSON 응답으로 제공됩니다.</p>
 <pre><code class="language-bash">$ curl http://[IP_ADDRESS]/api/v1/device/[MAC_ADDRESS]
 
 {
@@ -173,7 +174,7 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>The <code>mystrom</code> binary sensor platform allows you to use <a href="https://mystrom.ch/wifi-button/" rel="external nofollow">myStrom Wifi Buttons</a> with Home Assistant. The myStrom Wifi Buttons support three and the myStrom WiFi Button + four different push pattern:</p>
+<p><code>mystrom</code> 바이너리 센서 플랫폼을 사용하면 <a href="https://mystrom.ch/wifi-button/" rel="external nofollow">myStrom Wifi Buttons</a>을 홈어시스턴트와 함께 사용할 수 있습니다. myStrom Wifi 버튼은 세개의 버튼을 지원하고, myStrom WiFi 버튼까지 포함하여 네 가지 푸시 패턴을 지원합니다.</p>
 <ul>
 <li>
 <code>single</code>: Short push (approx. 1/2 seconds)</li>
@@ -184,29 +185,29 @@ Default value: </p>
 <li>
 <code>touch</code>: Touch of the button’s surface (only affective for WiFi Button +)</li>
 </ul>
-<p>The first usage of the pattern will create the binary sensor for the pattern. If the WiFi Button is pushed one time then a binary sensor for the <code>single</code> pattern will be created. The same applies for the other patterns. With the second usage of the pattern the binary sensors become fully functional.</p>
-<p>The buttons will give you feedback with its built-in LED:</p>
+<p>패턴을 처음 사용하면 패턴에 대한 이진 센서가 생성됩니다. WiFi 버튼을 한 번 누르면 <code>single</code> 패턴에 대한 이진 센서가 생성됩니다. 다른 패턴에도 동일하게 적용됩니다. 패턴을 두 번째로 사용하면 이진 센서가 완전히 작동합니다.</p>
+<p>버튼은 내장 LED에 대한 피드백을 제공합니다. :</p>
 <ul>
-<li>white then green: Pattern was submitted successfully</li>
-<li>white then red: There is a problem with the communication</li>
+<li>white then green: 패턴이 성공적으로 제출되었습니다</li>
+<li>white then red: 통신에 문제가 있습니다</li>
 </ul>
-<p>To use your myStrom WiFi Button in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치시 myStrom WiFi 버튼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: mystrom
 </code></pre>
 <div class="note">
-The firmware version 2.56 doesn't support TLS/SSL. This means that you are only able to use the WiFi Buttons if you are using plain-text communication between Home Assistant and the clients/entities.
+펌웨어 버전 2.56은 TLS/SSL을 지원하지 않습니다. 즉, 홈 어시스턴트와 클라이언트/엔터티 간에 일반 텍스트 통신을 사용하는 경우에만 WiFi 버튼을 사용할 수 있습니다.
 </div>
 <h3>
-<a class="title-link" name="setup-of-mystrom-buttons" href="#setup-of-mystrom-buttons"></a> Setup of myStrom Buttons</h3>
-<p>You need to configure every button to make it work with Home Assistant. First connect the Wifi Buttons to your wireless network. Once a button is connected you have three minutes to set the actions for the push patterns if the button is not charging. The fastest way is to use <code>curl</code>. Check the <a href="https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt" rel="external nofollow">documentation</a> of the WiFi Button for further details about the implementation (<code>http://</code> is replaced by <code>get://</code> or <code>post://</code>). <code>action</code> is the name of the corresponding push pattern (see above).</p>
-<p>The endpoint that is receiving the data is <code>http://[IP address Home Assistant]:8123/api/mystrom</code>. If you have set an <a href="/integrations/http/"><code>api_password</code></a> then this needs to be included in the URL.</p>
-<p>With <code>api_password:</code></p>
+<a class="title-link" name="mystrom--" href="#mystrom--"></a> myStrom 버튼 설정</h3>
+<p>Home Assistant에서 작동하도록 모든 버튼을 설정해야합니다. 먼저 Wi-Fi 버튼을 무선 네트워크에 연결하십시오. 버튼이 연결되면 버튼이 충전되지 않은 경우 3 분 동안 푸시 패턴의 동작을 설정할 수 있습니다. 가장 빠른 방법은 <code>curl</code>을 사용하는 것입니다. 구현에 대한 자세한 내용은 WiFi 버튼의 <a href="https://mystrom.ch/wp-content/uploads/REST_API_WBP.txt" rel="external nofollow">documentation</a>을 확인하십시오 (<code>http://</code>는 <code>get://</code> 또는 <code>post://</code>로 대체됨). <code>action</code>은 해당 푸시 패턴의 이름입니다 (위 참조).</p>
+<p>데이터를받는 엔드 포인트는 <code>http://[IP address Home Assistant]:8123/api/mystrom</code>입니다. <a href="/integrations/http/"><code>api_password</code></a>를 설정한 경우 URL에 포함해야합니다.</p>
+<p><code>api_password:</code>를 사용할 경우 :</p>
 <pre><code class="language-bash">$ curl -d "[action]=get://[IP address Home Assistant]:8123/api/mystrom?api_password%3D[api_password]%26[action]%3D[ID of the button]" \
     http://[IP address of the button]/api/v1/device/[MAC address of the button]
 </code></pre>
-<p>Without <code>api_password</code>:</p>
+<p><code>api_password</code>를 사용 안할 경우:</p>
 <pre><code class="language-bash">$ curl -d "[action]=get://[IP address Home Assistant]:8123/api/mystrom?[action]%3D[ID of the button]" \
     http://[IP address of the button]/api/v1/device/[MAC address of the button]
 {
@@ -225,24 +226,24 @@ The firmware version 2.56 doesn't support TLS/SSL. This means that you are only 
   }
 }
 </code></pre>
-<p>A complete command to set the URL for a double click could look like the example below:</p>
+<p>두 번 클릭으로 URL을 설정하는 전체 명령은 다음 예와 같습니다. :</p>
 <pre><code class="language-bash">$ curl -d "double=get://192.168.1.3:8123/api/mystrom?double%3DButton1" http://192.168.1.12/api/v1/device/4D5F5D5CD553
 </code></pre>
-<p>With an <code>api_password</code>:</p>
+<p><code>api_password</code> 사용할 경우 :</p>
 <pre><code class="language-bash">curl -d "double=get://192.168.1.3:8123/api/mystrom?api_password%3Dapi_password%26double%3DButton1" http://192.168.1.12/api/v1/device/4D5F5D5CD553
 </code></pre>
-<p>The command-line tool <a href="https://github.com/fabaff/python-mystrom" rel="external nofollow"><code>mystrom</code></a> is a helper to configure myStrom buttons.</p>
-<p>If you have set <a href="/integrations/http/"><code>login_attempts_threshold</code></a> and forget to include the <code>api_password</code> for an action and that action is triggered then after the threshold is reached will the button no longer work because it is banned. See <a href="/integrations/http/#ip-filtering-and-banning">IP filtering and banning</a> about how to revert the banning.</p>
+<p>command-line tool <a href="https://github.com/fabaff/python-mystrom" rel="external nofollow"><code>mystrom</code></a>은 myStrom 버튼을 설정하는 도우미입니다.</p>
+<p><a href="/integrations/http/"><code>login_attempts_threshold</code></a>를 설정하고 액션에 대해 <code>api_password</code>를 포함시키지 않고 액션이 트리거 된 경우 임계값에 도달 한 후에는 버튼동작인 차단되어 더 이상 작동하지 않습니다. 차단을 되돌리는 방법에 대해서는 <a href="/integrations/http/#ip-filtering-and-banning">IP filtering and banning</a>을 참조하십시오.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p>The <code>mystrom</code> switch platform allows you to control the state of your <a href="https://mystrom.ch/en/" rel="external nofollow">myStrom</a> switches. The built-in sensor is measuring the power consumption while the switch is on.</p>
+<p><code>mystrom</code> 스위치 플랫폼을 사용하면 <a href="https://mystrom.ch/en/" rel="external nofollow">myStrom</a> 스위치의 상태를 제어할 수 있습니다. 내장 센서가 스위치가 켜져있는 동안 전력 소비를 측정하고 있습니다.</p>
 <h3>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h3>
-<p>Make sure that you have enabled the REST API under <strong>Advanced</strong> in the web frontend of the switch.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h3>
+<p>스위치의 웹 프런트 엔드에서 <strong>Advanced</strong>에서 REST API를 사용하도록 설정했는지 확인하십시오.</p>
 <p class="img">
   <img src="/images/integrations/mystrom/switch-advanced.png">
 </p>
-<p>To use your myStrom switch in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>설치시 myStrom 스위치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: mystrom
@@ -267,19 +268,20 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Check if you are able to access the device located at <code>http://IP_ADRRESS</code>. The details about your switch is provided as a JSON response.</p>
+<p>Check if you are able to access the device located at <code>http://IP_ADRRESS</code>. The details about your switch is provided as a JSON response.
+<code>http://IP_ADRRESS</code>에있는 장치에 액세스 할 수 있는지 확인하십시오. 스위치에 대한 세부 사항은 JSON 응답으로 제공됩니다.</p>
 <pre><code class="language-bash">$ curl -X GET -H "Content-Type: application/json" http://IP_ADDRESS/report
 {
   "power": 0,
   "relay": false
 }
 </code></pre>
-<p>or change its state:</p>
+<p>또는 상태를 변경하십시오. :</p>
 <pre><code class="language-bash">curl -G -X GET http://IP_ADDRESS/relay -d 'state=1'
 </code></pre>
 <h3>
-<a class="title-link" name="get-the-current-power-consumption" href="#get-the-current-power-consumption"></a> Get the current power consumption</h3>
-<p>The switch is measuring the current power consumption. To expose this as a sensor use a <a href="/integrations/template"><code>template</code> sensor</a>.</p>
+<a class="title-link" name="---" href="#---"></a> 현재 전력 소비량 확인하기</h3>
+<p>스위치가 현재 전력 소비를 측정하고 있습니다. 이를 센서로 노출 시키려면 <a href="/integrations/template"><code>template</code> sensor</a>를 사용하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: template
