@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Mailgun - 홈어시스턴트</title>
+    <title>메일건(Mailgun) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to add Mailgun mail notifications to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/mailgun/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Mailgun">
+    <meta property="og:title" content="메일건(Mailgun)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mailgun/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Mailgun">
+    <meta name="twitter:title" content="메일건(Mailgun)">
     <meta name="twitter:description" content="Instructions on how to add Mailgun mail notifications to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,24 @@
   
   <header>
     <h1 class="title indent">
-      Mailgun
+      메일건(Mailgun)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>To be able to receive webhooks from Mailgun, your Home Assistant instance needs to be accessible from the web (<a href="/addons/duckdns/">Hass.io instructions</a>) and you need to have the <code>base_url</code> configured for the HTTP integration (<a href="/integrations/http/#base_url">docs</a>).</p>
-<p>To set it up, go to the integrations page in the configuration screen and find Mailgun. Click on configure. Follow the instructions on the screen to configure Mailgun.</p>
-<p>You will get a URL of the following format: <code>https://&lt;home-assistant-domain&gt;/api/webhook/9940e99a26fae4dcf6fe0a478124b6b58b578ea4c55c9a584beb1c9f5057bb91</code>. To receive webhooks from Mailgun, you need to provide that url as a callback URL in the Webhooks tab of the Mailgun Control Panel.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/BmEj3EBo0vg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>Mailgun에서 웹 후크를 수신하려면 웹에서 홈어시스턴트 인스턴스에 액세스할 수 있어야하고 (<a href="/addons/duckdns/">Hass.io instructions</a>) HTTP 연동(<a href="/integrations/http/#base_url">docs</a>)을 위해 <code>base_url</code>을 설정해야합니다.</p>
+<p>설정하려면 설정 화면의 통합구성요소 페이지로 이동하여 Mailgun을 찾으십시오. 설정을 클릭하십시오. 화면의 지시 사항에 따라 Mailgun을 설정하십시오.</p>
+<p>다음 형식의 URL이 제공됩니다.: <code>https://&lt;home-assistant-domain&gt;/api/webhook/9940e99a26fae4dcf6fe0a478124b6b58b578ea4c55c9a584beb1c9f5057bb91</code>.
+Mailgun에서 웹 후크를 수신하려면 Mailgun 제어판의 Webhook 탭에서 해당 URL을 콜백 URL로 제공해야합니다.</p>
+<p>현재홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>
 <a href="#notifications">Notifications</a>.</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<a class="title-link" name="" href="#"></a> 설정</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mailgun:
   domain: EXAMPLE.COM
@@ -141,8 +143,8 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Events coming in from Mailgun will be available as events in Home Assistant and are fired as <code>mailgun_message_received</code>. The <a href="https://documentation.mailgun.com/en/latest/api-events.html#event-structure" rel="external nofollow">data specified by Mailgun</a> will be available as the event data. You can use this event to trigger automations.</p>
-<p>You can then consume that information with the following automation:</p>
+<p>Mailgun에서 들어오는 이벤트는 Home Assistant에서 이벤트로 사용할 수 있으며 <code>mailgun_message_received</code> 로 시작됩니다. <a href="https://documentation.mailgun.com/en/latest/api-events.html#event-structure" rel="external nofollow">Mailgun에서 지정한 데이터</a>가 이벤트 데이터로 사용 가능합니다. 이 이벤트를 사용하여 자동화를 트리거 할 수 있습니다.</p>
+<p>그런 후 다음 자동화를 통해 해당 정보를 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
   trigger:
     platform: event
@@ -154,10 +156,10 @@ Default value: </p>
     entity_id: light.office
 </code></pre>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The Mailgun notification service allows you to send emails via Mailgun’s REST API. It requires the <a href="#configuration">Mailgun component</a> to be set up.</p>
+<a class="title-link" name="notifications" href="#notifications"></a> 알림(Notifications)</h2>
+<p>Mailgun 알림 서비스를 사용하면 Mailgun의 REST API를 통해 이메일을 보낼 수 있습니다. <a href="#configuration">Mailgun 구성 요소</a>를 설정해야합니다.</p>
 <h3>
-<a class="title-link" name="notifications-configuration" href="#notifications-configuration"></a> Notifications configuration</h3>
+<a class="title-link" name="-" href="#-"></a> 알림 설정</h3>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: mailgun
@@ -201,8 +203,8 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="example-automation" href="#example-automation"></a> Example automation</h3>
-<p>The following automation reacts to an event by sending out an email with two attachments.</p>
+<a class="title-link" name="-" href="#-"></a> 자동화 사례</h3>
+<p>다음 자동화는 두 개의 첨부 파일이 포함된 이메일을 발송하여 이벤트에 반응합니다.</p>
 <pre><code class="language-yaml"># Example automation using Mailgun notifications
 automation:
   trigger:

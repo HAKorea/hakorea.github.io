@@ -103,10 +103,11 @@
   <hr class="divider">
   
 
-  <p>The <code>mqtt_room</code> sensor platform allows you to detect the indoor location of devices using MQTT clients.</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/A57jFYDzOto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>mqtt_room</code> 센서 플랫폼을 사용하면 MQTT 클라이언트를 사용하여 장치의 실내 위치를 감지 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use this device tracker in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 장치 추적기를 설치에 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: mqtt_room
@@ -154,8 +155,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="usage" href="#usage"></a> Usage</h2>
-<p>Example JSON that should be published to the room topics:</p>
+<a class="title-link" name="" href="#"></a> 사용법</h2>
+<p>room topics에 publish해야하는 JSON 예 :</p>
 <pre><code class="language-json">{
   "id": "123testid",
   "name": "Test Device",
@@ -163,16 +164,15 @@ Default value: </p>
 }
 </code></pre>
 <h3>
-<a class="title-link" name="setting-up-clients" href="#setting-up-clients"></a> Setting up clients</h3>
-<p>This integration works with any software that is sending data in the given format. Each client should post the discovered devices in its own subtopic of the configured topic.
-Instead of developing your own application, you can also use any of these already existing clients:</p>
+<a class="title-link" name="-" href="#-"></a> 클라이언트 세팅하기</h3>
+<p>이 연동은 주어진 형식으로 데이터를 전송하는 모든 소프트웨어와 작동합니다. 각 클라이언트는 검색된 장치를 설정된 topic의 자체 하위 topic에 게시(post)해야합니다. :</p>
 <ul>
 <li>
-<a href="https://github.com/mKeRix/room-assistant" rel="external nofollow"><strong>room-assistant</strong></a>: looks for Bluetooth LE beacons, based on Node.js</li>
+<a href="https://github.com/mKeRix/room-assistant" rel="external nofollow"><strong>room-assistant</strong></a>: Node.js를 기반으로 블루투스 LE 비콘을 찾습니다.</li>
 <li>
-<a href="https://github.com/happy-bubbles/presence" rel="external nofollow"><strong>Happy Bubbles Presence Server</strong></a>: presence detection server for Happy Bubbles BLE-scanning devices, based on Go</li>
+<a href="https://github.com/happy-bubbles/presence" rel="external nofollow"><strong>Happy Bubbles Presence Server</strong></a>: Go를 기반으로하는 Happy Bubbles BLE 스캔 장치의 재실 감지 서버</li>
 <li>
-<a href="https://jptrsn.github.io/ESP32-mqtt-room/" rel="external nofollow"><strong>ESP32-MQTT-room</strong></a>: runs on an ESP32, and looks for Bluetooth LE devices, based on C++/Arduino</li>
+<a href="https://jptrsn.github.io/ESP32-mqtt-room/" rel="external nofollow"><strong>ESP32-MQTT-room</strong></a>: ESP32에서 실행되며 C ++/Arduino를 기반으로 Bluetooth LE 장치를 찾습니다.</li>
 </ul>
 
 

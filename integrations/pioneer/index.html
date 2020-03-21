@@ -103,8 +103,9 @@
   <hr class="divider">
   
 
-  <p>The <code>pioneer</code> platform allows you to control Pioneer Network Receivers. Please note, however, that the more recent Pioneer models work with <a href="/integrations/onkyo">Onkyo</a> platform instead.</p>
-<p>To add a Pioneer receiver to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/SyHCDhrr70g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>pioneer</code> 플랫폼을 사용하면 Pioneer 네트워크 리시버를 제어할 수 있습니다. 그러나 최신 Pioneer 모델은 <a href="/integrations/onkyo">Onkyo</a> 플랫폼과 함께 작동합니다.</p>
+<p>Pioneer 리시버를 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: pioneer
@@ -151,16 +152,16 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Notes:</p>
+<p>참고 :</p>
 <ul>
-<li>Some Pioneer AVRs use the port 23 default and some are reported to use 8102.</li>
+<li>일부 파이오니어 AVR은 기본 포트 23을 사용하고 일부는 8102를 사용하는 것으로 보고됩니다.</li>
 <li>
-<code>timeout</code> is a socket level option and should only be configured if you know what you are doing.</li>
+<code>timeout</code>은 소켓 레벨 옵션이며 무엇을 하고 있는지 아는 경우에만 설정해야합니다.</li>
 </ul>
 <h3>
-<a class="title-link" name="source-codes" href="#source-codes"></a> Source codes</h3>
-<p>Under these lines, you can find some sample <code>sources</code> lists per receiver model. Here we use the source names as shown on the remote as key for each code. However these are for display purposes only, so you could rename inputs to better match your set-up (e.g. <code>HDMI: '19'</code> to <code>Kodi: '19'</code>.</p>
-<p>Codes must be defined as strings (between single or double quotation marks) so that <code>05</code> is not implicitly transformed to <code>5</code>, which wouldn’t be valid source code.</p>
+<a class="title-link" name="-source-codes" href="#-source-codes"></a> 입력 코드들(Source codes)</h3>
+<p>이 라인들 아래에서, 리시버 모델당 샘플 <code>sources</code> 목록을 찾을 수 있습니다. 여기서는 각 코드의 키(key)로 리모컨에 표시된 입력 이름을 사용합니다. 그러나 이는 표시 목적으로만 사용되므로 설정에 더 잘 맞도록 입력의 이름을 바꿀 수 있습니다 (예: <code>HDMI: '19'</code>~ <code>Kodi: '19'</code>).</p>
+<p><code>05</code>가 절대적으로 <code>5</code>로 변환되지 않도록 유효한 소스 코드가 아닌 코드는 문자열 (작은 따옴표 또는 큰 따옴표 사이)로 정의되어야합니다.</p>
 <h4>
 <a class="title-link" name="vsx-921" href="#vsx-921"></a> VSX-921</h4>
 <pre><code class="language-yaml">sources:

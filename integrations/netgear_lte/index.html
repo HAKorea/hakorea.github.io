@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Netgear LTE - 홈어시스턴트</title>
+    <title>넷기어 LTE(Netgear LTE) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate your Netgear LTE modem within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/netgear_lte/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Netgear LTE">
+    <meta property="og:title" content="넷기어 LTE(Netgear LTE)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/netgear_lte/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Netgear LTE">
+    <meta name="twitter:title" content="넷기어 LTE(Netgear LTE)">
     <meta name="twitter:description" content="Instructions on how to integrate your Netgear LTE modem within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,27 @@
   
   <header>
     <h1 class="title indent">
-      Netgear LTE
+      넷기어 LTE(Netgear LTE)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The Netgear LTE integration for Home Assistant allows you to observe and control <a href="https://www.netgear.com/home/products/mobile-broadband/lte-modems/default.aspx" rel="external nofollow">Netgear LTE modems</a>.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/KCrGikV9w3g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>Home Assistant 용 Netgear LTE 통합구성요소로 <a href="https://www.netgear.com/home/products/mobile-broadband/lte-modems/default.aspx" rel="external nofollow">Netgear LTE 모뎀</a>을 관찰하고 제어할 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
 <li>Notifications</li>
 <li>Sensors</li>
 <li>Binary Sensors</li>
 </ul>
-<p>The integration supports sending notifications with SMS, reporting incoming SMS with events and reporting the modem and connection state in a number of sensors and binary sensors.</p>
+<p>이 통합구성요소는 SMS로 알림 전송, 이벤트로 수신 SMS보고 및 여러 센서 및 이진 센서에서 모뎀 및 연결 상태보고를 지원합니다.</p>
 <div class="note">
-<p>Splitting of long SMS messages is not supported so notifications can contain a maximum of 70 characters. Simple messages using the reduced GSM-7 alphabet can contain up to 160 characters. Most emojis are not supported.</p>
+<p>긴 SMS 메시지 분할은 지원되지 않으므로 알림에 최대 70자를 사용할 수 있습니다. 축소된 GSM-7 알파벳을 사용하는 간단한 메시지는 최대 160자를 포함 할 수 있습니다. 대부분의 이모티콘이 지원되지 않습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable the integration, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>연동을 가능하게하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 netgear_lte:
   - host: IP_ADDRESS
@@ -265,10 +266,10 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="events" href="#events"></a> Events</h2>
+<a class="title-link" name="" href="#"></a> 이벤트</h2>
 <h3>
-<a class="title-link" name="event-netgear_lte_sms" href="#event-netgear_lte_sms"></a> Event netgear_lte_sms</h3>
-<p>Messages arriving in the modem inbox are sent as events of type <code>netgear_lte_sms</code> with the following content.</p>
+<a class="title-link" name="netgear_lte_sms-" href="#netgear_lte_sms-"></a> netgear_lte_sms 이벤트</h3>
+<p>모뎀의 inbox에 도착한 메시지는 다음 내용과 함께 ‘netgear_lte_sms’ 유형의 이벤트로 전송됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -296,10 +297,10 @@ Default value: </p>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="service-netgear_lteconnect_lte" href="#service-netgear_lteconnect_lte"></a> Service netgear_lte.connect_lte</h3>
-<p>This service asks the modem to establish its LTE connection, useful if the modem does not autoconnect.</p>
+<a class="title-link" name="netgear_lteconnect_lte-" href="#netgear_lteconnect_lte-"></a> netgear_lte.connect_lte 서비스</h3>
+<p>이 서비스는 모뎀이 자동 연결되지 않은 경우 유용한 LTE 연결 설정을 모뎀에 요청합니다.</p>
 <table>
 <thead>
 <tr>
@@ -317,8 +318,8 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-netgear_ltedisconnect_lte" href="#service-netgear_ltedisconnect_lte"></a> Service netgear_lte.disconnect_lte</h3>
-<p>This service asks the modem to close its LTE connection.</p>
+<a class="title-link" name="netgear_ltedisconnect_lte-" href="#netgear_ltedisconnect_lte-"></a> netgear_lte.disconnect_lte 서비스</h3>
+<p>이 서비스는 모뎀이 LTE 연결을 닫도록 요청합니다.</p>
 <table>
 <thead>
 <tr>
@@ -336,8 +337,8 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-netgear_ltedelete_sms" href="#service-netgear_ltedelete_sms"></a> Service netgear_lte.delete_sms</h3>
-<p>The integration makes a service available to delete messages from the modem inbox. This can be used to clean up after incoming SMS events.</p>
+<a class="title-link" name="netgear_ltedelete_sms-" href="#netgear_ltedelete_sms-"></a> netgear_lte.delete_sms 서비스</h3>
+<p>통합구성요소는 모뎀의 inbox에서 메시지를 삭제하는 서비스를 제공합니다. 수신 SMS 이벤트 후 정리하는데 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -360,8 +361,8 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-netgear_lteset_option" href="#service-netgear_lteset_option"></a> Service netgear_lte.set_option</h3>
-<p>This service can set modem configuration options (otherwise available in the modem web UI).</p>
+<a class="title-link" name="netgear_lteset_option-" href="#netgear_lteset_option-"></a> netgear_lte.set_option 서비스</h3>
+<p>이 서비스는 모뎀 설정 옵션 (모뎀 웹 UI에서 사용 가능)을 설정할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -389,8 +390,8 @@ Default value: </p>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>The following automation example processes incoming SMS messages with the <a href="/integrations/conversation/">Conversation</a> integration and then deletes the message from the inbox.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>다음 자동화 예제는 <a href="/integrations/conversation/">Conversation</a> 연동으로 수신 SMS 메시지를 처리​​한 다음 받은 편지함(inbox)에서 메시지를 삭제합니다.</p>
 <pre><code class="language-yaml">automation:
   - alias: SMS conversation
     trigger:

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Matrix - 홈어시스턴트</title>
+    <title>메트릭스(Matrix) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Matrix chatbot support">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/matrix/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Matrix">
+    <meta property="og:title" content="메트릭스(Matrix)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/matrix/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Matrix">
+    <meta name="twitter:title" content="메트릭스(Matrix)">
     <meta name="twitter:description" content="Matrix chatbot support">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Matrix
+      메트릭스(Matrix)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This integration allows you to send messages to matrix rooms, as well as to react to messages in matrix rooms. Reacting to commands is accomplished by firing an event when one of the configured commands is triggered.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/jr2mXSKq3B4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>이 통합구성요소를 통해 매트릭스 rooms에 메시지를 보낼뿐만 아니라 매트릭스 rooms에 메시지를 보낼 수 있습니다. 설정된 명령 중 하나가 트리거 될 때 이벤트를 발생시켜 명령에 반응합니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#notifications">Notifications</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<a class="title-link" name="" href="#"></a> 설정</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 matrix:
   homeserver: https://matrix.org
@@ -190,12 +191,12 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="event-data" href="#event-data"></a> Event Data</h3>
-<p>If a command is triggered, a <code>matrix_command</code> event is fired. The event contains the name of the command in the <code>name</code> field.</p>
-<p>If the command is a word command, the <code>data</code> field contains a list of the command’s arguments, i.e., everything that stood behind the word, split at spaces. If the command is an expression command, the <code>data</code> field contains the <a href="https://docs.python.org/3.6/library/re.html?highlight=re#re.match.groupdict" rel="external nofollow">group dictionary</a> of the regular expression that matched the message.</p>
+<a class="title-link" name="-" href="#-"></a> 이벤트 데이터</h3>
+<p>명령이 트리거되면 <code>matrix_command</code> 이벤트가 시작됩니다. 이벤트는 <code>name</code> 필드에 명령 이름을 포함합니다.</p>
+<p>명령어가 단어(word) 명령어인 경우 <code>data</code> 필드에는 명령어의 인수 목록, 즉 단어 뒤에 있는 모든 항목이 공백으로 나뉩니다. 명령이 표현식(expression) 명령인 경우, <code>data</code> 필드는 메시지와 일치하는 정규식의 <a href="https://docs.python.org/3.6/library/re.html?highlight=re#re.match.groupdict" rel="external nofollow">group dictionary</a>를 포함합니다.</p>
 <h3>
-<a class="title-link" name="comprehensive-configuration-example" href="#comprehensive-configuration-example"></a> Comprehensive Configuration Example</h3>
-<p>This example also uses the <a href="#notifications">matrix <code>notify</code> platform</a>.</p>
+<a class="title-link" name="--" href="#--"></a> 종합적인 설정 예</h3>
+<p>이 예제는 <a href="#notifications">matrix <code>notify</code> platform</a>도 사용합니다.</p>
 <pre><code class="language-yaml"># The Matrix component
 matrix:
   homeserver: https://matrix.org
@@ -239,16 +240,16 @@ automation:
       data_template:
         message: "Hello {{trigger.event.data.args['name']}}"
 </code></pre>
-<p>This configuration will:</p>
+<p>이 설정은 다음과 같습니다. :</p>
 <ul>
-<li>Listen for “!testword” in the room “#someothertest:matrix.org” (and <em>only</em>) there. If such a message is encountered, it will answer with “It looks like you wrote !testword” into the “#hasstest:matrix.org” channel.</li>
-<li>Listen in both rooms for any message matching “My name is <any string>” and answer with “Hello <the string>” into “#hasstest:matrix.org”.</the></any>
+<li>“#someothertest:matrix.org”(<em>이것만</em>) room에서 “!testword”를 들어보십시오. 이러한 메시지가 나타나면 “#hasstest:matrix.org” 채널에 “It looks like you wrote !testword” 라는 메시지가 표시됩니다.</li>
+<li>“My name is <any string>“과 일치하는 메시지가 있는지 두 room에서 듣고 “Hello <the string>“으로 “#hasstest:matrix.org”로 응답하십시오.</the></any>
 </li>
 </ul>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The <code>matrix</code> platform allows you to deliver notifications from Home Assistant to a <a href="https://matrix.org/" rel="external nofollow">Matrix</a> room. Rooms can be both direct as well as group chats.</p>
-<p>To enable Matrix notifications in your installation, you first need to configure the <a href="#configuration">Matrix component</a>. Then, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="notifications" href="#notifications"></a> 알림(Notifications)</h2>
+<p><code>matrix</code> 플랫폼을 사용하면 Home Assistant에서 <a href="https://matrix.org/" rel="external nofollow">Matrix</a> Rooms로 알림을 전달할 수 있습니다. Rooms은 그룹 채팅뿐만 아니라 직접 대화도 가능합니다.</p>
+<p>설치에서 매트릭스 알림을 사용하려면 먼저 <a href="#configuration">Matrix component</a>를 설정해야합니다. 그런 다음 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NOTIFIER_NAME
@@ -274,8 +275,8 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>The target room has to be precreated, the room id can be obtained from the rooms settings dialog. Rooms by default have a canonical id of the form <code>"!&lt;randomid&gt;:homeserver.tld"</code>, but can also be allocated aliases like <code>"#roomname:homeserver.tld"</code>. Make sure to use quotes around the room id or alias to escape special characters (<code>!</code>, and <code>#</code>) in YAML. The notifying account may need to be invited to the room, depending on the individual rooms policies.</p>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>대상(Target) room을 미리 만들어야하며, room 설정 대화 상자에서 room ID를 얻을 수 있습니다. 기본적으로 room은 <code>"!&lt;randomid&gt;:homeserver.tld"</code> 형식의 canonical ID를 갖지만 <code>"#roomname:homeserver.tld"</code>와 같은 별칭(aliases)을 할당할 수도 있습니다. YAML에서 특수 문자 (<code>!</code>,<code>#</code>)를 이스케이프하려면 room ID 또는 별명(aliases)을 따옴표로 묶어야합니다. 개별 rooms 정책에 따라 알림 계정을 rooms에 초대해야 할 수도 있습니다.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 
 
 </article>

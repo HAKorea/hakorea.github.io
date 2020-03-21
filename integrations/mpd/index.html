@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Music Player Daemon (MPD) - 홈어시스턴트</title>
+    <title>뮤직 플레이어 데몬(MPD) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate Music Player Daemon into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/mpd/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Music Player Daemon (MPD)">
+    <meta property="og:title" content="뮤직 플레이어 데몬(MPD)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mpd/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Music Player Daemon (MPD)">
+    <meta name="twitter:title" content="뮤직 플레이어 데몬(MPD)">
     <meta name="twitter:description" content="Instructions on how to integrate Music Player Daemon into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,15 +97,15 @@
   
   <header>
     <h1 class="title indent">
-      Music Player Daemon (MPD)
+      뮤직 플레이어 데몬(MPD)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mpd</code> platform allows you to control a <a href="https://www.musicpd.org/" rel="external nofollow">Music Player Daemon</a> from Home Assistant. Unfortunately you will not be able to manipulate the playlist (add or delete songs) or add transitions between the songs.</p>
-<p>Even though no playlist manipulation is possible, it is possible to use the play_media service to load an existing saved playlist as part of an automation or scene.</p>
-<p>To add MPD to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>mpd</code> 플랫폼을 사용하면 Home Assistant에서 <a href="https://www.musicpd.org/" rel="external nofollow">Music Player Daemon</a>을 제어할 수 있습니다. 안타깝게도 재생 목록을 조작하거나 (노래 추가 또는 삭제) 노래간에 전환을 추가 할 수 없습니다.</p>
+<p>재생 목록 조작이 불가능하더라도 play_media 서비스를 사용하여 기존 저장된 재생 목록을 자동화 또는 장면(scene)의 일부로 로드 할 수 있습니다.</p>
+<p>설치에 MPD를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
   - platform: mpd
@@ -143,7 +143,7 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-<p>Example script to load a saved playlist called “DeckMusic” and set the volume:</p>
+<p>“DeckMusic”이라는 저장된 재생 목록을 로드하고 볼륨을 설정하는 스크립트 예 :</p>
 <pre><code class="language-yaml">relaxdeck:
     sequence:
     - service: media_player.play_media
@@ -157,7 +157,7 @@ Default value: </p>
         entity_id: media_player.main
         volume_level: 0.60
 </code></pre>
-<p>This platform works with <a href="https://www.musicpd.org/" rel="external nofollow">Music Player Daemon</a> and <a href="https://www.mopidy.com/" rel="external nofollow">mopidy</a> with <a href="https://docs.mopidy.com/en/latest/ext/mpd/" rel="external nofollow">Mopidy-MPD</a> as used by <a href="https://www.pimusicbox.com/" rel="external nofollow">Pi MusicBox</a>.</p>
+<p>이 플랫폼은 <a href="https://www.pimusicbox.com/" rel="external nofollow">Pi MusicBox</a>에서 사용하는 <a href="https://docs.mopidy.com/en/latest/ext/mpd/" rel="external nofollow">Mopidy-MPD</a>와 더불어 <a href="https://docs.mopidy.com/en/latest/ext/mpd/" rel="external nofollow">Music Player Daemon</a>과 <a href="https://www.mopidy.com/" rel="external nofollow">mopidy</a>이 다같이 작동합니다</p>
 
 
 </article>

@@ -104,10 +104,10 @@
   
 
   <iframe width="690" height="437" src="https://www.youtube.com/embed/JCjzEKdlezk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>The <code>twilio_call</code> notification platform enables sending notifications via Voice, powered by <a href="https://twilio.com" rel="external nofollow">Twilio</a>.
-Passed message will be read by Text-To-Speech service.</p>
-<p>The requirement is that you have setup <a href="/integrations/twilio/">Twilio</a>.</p>
-<p>To use this notification platform in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p><code>twilio_call</code> 알림 플랫폼은 <a href="https://twilio.com" rel="external nofollow">Twilio</a>에서 제공하는 음성을 통해 알림을 보낼 수 있습니다.
+전달된 메시지는 TTS (텍스트 음성 변환) 서비스에서 읽습니다.</p>
+<p>요구 사항은 <a href="/integrations/twilio/">Twilio</a>를 설정해야합니다.</p>
+<p>설치시 이 알림 플랫폼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 notify:
   - name: NOTIFIER_NAME
@@ -135,7 +135,7 @@ Default value: </p>
 </div>
 <h3>
 <a class="title-link" name="usage" href="#usage"></a> Usage</h3>
-<p>Twilio is a notify platform and thus can be controlled by calling the notify service <a href="/integrations/notify/">as described here</a>. It will send a notification to all E.164 phone numbers in the notification <strong>target</strong>. See the notes above regarding the <code>from_number</code> configuration variable for information about formatting phone numbers.</p>
+<p>Twilio는 알림 플랫폼이므로 알림 서비스 <a href="/integrations/notify/">as described here</a>를 호출하여 제어 할 수 있습니다. 알림 <strong>target</strong>의 모든 E.164 전화 번호로 알림을 보냅니다. <code>from_number</code>에 대해서는 위의 참고 사항을 참조하십시오</p>
 <pre><code class="language-yaml"># Example automation notification entry
 automation:
   - alias: The sun has set

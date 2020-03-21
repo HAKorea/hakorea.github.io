@@ -103,20 +103,19 @@
   <hr class="divider">
   
 
-  <p>The <code>rfxtrx</code> platform support sensors that communicate in the frequency range of 433.92 MHz.</p>
-<p>First you have to set up your <a href="/integrations/rfxtrx/">rfxtrx hub</a>.
-The easiest way to find your sensors is to add this to your <code>configuration.yaml</code>:</p>
+  <p><code>rfxtrx</code> 플랫폼은 433.92 MHz의 주파수 범위에서 통신하는 센서를 지원합니다.</p>
+<p>먼저 <a href="/integrations/rfxtrx/">rfxtrx hub</a>를 설정해야합니다.
+센서를 찾는 가장 쉬운 방법은 이를 <code>configuration.yaml</code>에 추가하는 것입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   platform: rfxtrx
   automatic_add: true
 </code></pre>
-<p>Then when the sensor emits a signal it will be automatically added:</p>
+<p>그런 다음 센서가 신호를 방출하면 자동으로 추가됩니다. :</p>
 <p class="img">
 <img src="/images/integrations/rfxtrx/sensor.png">
 </p>
-<p>Here the name is <code>0a52080000301004d240259</code> or <code>0a52080000301004d240259_temperature</code> and you can verify that it works from the frontend.
-Then you should update your configuration to (_temperature is not needed):</p>
+<p>여기서 이름은 <code>0a52080000301004d240259</code> 또는 <code>0a52080000301004d240259_temperature</code>이며 프런트 엔드에서 작동하는지 확인할 수 있습니다. 그런 다음 설정을 다음과 같이(_temperature가 필요하지 않음)으로 업데이트해야합니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   platform: rfxtrx
@@ -124,7 +123,7 @@ sensor:
     0a52080000301004d240259:
       name: device_name
 </code></pre>
-<p>If you want to display several data types from one sensor:</p>
+<p>하나의 센서에서 여러 데이터 유형을 표시하려는 경우 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   platform: rfxtrx
@@ -135,7 +134,7 @@ sensor:
        - Humidity
        - Temperature
 </code></pre>
-<p>Only these data_type are valid:</p>
+<p>이 data_type들만 유효합니다. :</p>
 <ul>
 <li>
 <em>Temperature</em>, <em>Temperature2</em>
@@ -162,7 +161,7 @@ sensor:
 <li><em>Battery numeric</em></li>
 <li><em>Rssi numeric</em></li>
 </ul>
-<p>Example configuration:</p>
+<p>설정 사례 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   platform: rfxtrx
@@ -216,8 +215,8 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-If a device ID consists of only numbers, please make sure to surround it with quotes.
-This is a known limitation in YAML, because the device ID will be interpreted as a number otherwise.
+device ID가 숫자로만 구성되어 있으면 따옴표로 묶어야합니다.
+device ID는 숫자로 해석되므로 YAML의 알려진 제한 사항입니다.
 </div>
 
 

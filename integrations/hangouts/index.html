@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Google Hangouts - 홈어시스턴트</title>
+    <title>구글 행아웃(Google Hangouts) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Hangouts chatbot support">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/hangouts/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Google Hangouts">
+    <meta property="og:title" content="구글 행아웃(Google Hangouts)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/hangouts/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Google Hangouts">
+    <meta name="twitter:title" content="구글 행아웃(Google Hangouts)">
     <meta name="twitter:description" content="Hangouts chatbot support">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,20 +97,20 @@
   
   <header>
     <h1 class="title indent">
-      Google Hangouts
+      구글 행아웃(Google Hangouts)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>This integration allows you to send messages to <a href="https://hangouts.google.com" rel="external nofollow">Google Hangouts</a> conversations, as well as to react to messages in conversations. Reacting to commands is accomplished by firing an event when one of the configured commands is triggered. Home Assistant will impersonate a Smartisan YQ603 phone which will then show up in your Google devices.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <p>이 연동을 통해 <a href="https://hangouts.google.com" rel="external nofollow">Google 행 아웃</a> 대화에 메시지를 보내고 대화의 메시지에 반응 할 수 있습니다. 설정된 명령중 하나가 트리거될 때 이벤트를 발생시켜 명령에 반응합니다. 홈어시스턴트는 Smartisan YQ603 전화를 가장하여 Google 기기에 표시됩니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#notifications">Notifications</a></li>
 </ul>
 <h2>
-<a class="title-link" name="setup-the-integration-via-the-frontend" href="#setup-the-integration-via-the-frontend"></a> Setup the integration via the frontend</h2>
-<p>Menu: <em>Configuration</em> -&gt; <em>Integrations</em></p>
+<a class="title-link" name="----" href="#----"></a> 프론트 엔드를 통한 연동 설정</h2>
+<p>Menu: <em>설정</em> -&gt; <em>통합구성요소</em></p>
 <p>Configure the integration:</p>
 <ul>
 <li>Enter your <strong>Google Mail Address</strong> and <strong>Password</strong>
@@ -119,12 +119,12 @@
 <li>If you secured your account with 2-factor authentication you will be asked for a 2-factor authentication token.</li>
 </ul>
 <h2>
-<a class="title-link" name="manual-authentication" href="#manual-authentication"></a> Manual Authentication</h2>
-<p>If you are sure your email and password are correct, but the integration says the login is invalid then you would need to use the manual authentication method.</p>
-<p>To use the manual method, first you would need to obtain an authorization code (see <a href="#steps-to-obtain-authorization-code">instructions below</a> for details).</p>
-<p>Once the code is obtained fill in the form with your email, password and the authorization code to complete authentication.</p>
+<a class="title-link" name="-" href="#-"></a> 수동 인증</h2>
+<p>이메일과 비밀번호가 정확하지만 통합구성요소에서 로그인이 유효하지 않다고 표시되면 수동 인증 방법을 사용해야합니다.</p>
+<p>수동 방법을 사용하려면 먼저 인증 코드를 얻어야합니다 (자세한 내용은 <a href="#steps-to-obtain-authorization-code">instructions below</a> 참조).</p>
+<p>코드를 받으면 이메일, 비밀번호 및 인증 코드로 양식을 작성하여 인증을 완료하십시오.</p>
 <h3>
-<a class="title-link" name="steps-to-obtain-authorization-code" href="#steps-to-obtain-authorization-code"></a> Steps to obtain Authorization Code:</h3>
+<a class="title-link" name="----" href="#----"></a> 인증 코드를 얻는 단계 :</h3>
 <ol>
 <li>To obtain your authorization code, open <a href="https://accounts.google.com/o/oauth2/programmatic_auth?scope=https%3A%2F%2Fwww.google.com%2Faccounts%2FOAuthLogin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&amp;client_id=936475272427.apps.googleusercontent.com&amp;device_name=hangups" rel="external nofollow">this URL</a> in your browser.</li>
 <li>Log into your Google account normally.</li>
@@ -139,13 +139,13 @@
 <li>In the cookie list, double click on the value for the <code>oauth_code</code> cookie to select it, and copy the value. This is the authorization code</li>
 </ul>
 <div class="note">
-You can't write messages to yourself or get notifications in a group, if "you" write the message. The best way is to create a new Google Hangouts account for this integration.<br>
+"you" 메시지를 작성하면 자신에게 메시지를 쓰거나 그룹에서 알림을 받을 수 없습니다. 가장 좋은 방법은 이 연동을 위해 새 Google 행아웃 계정을 만드는 것입니다.<br>
 <br>
-If you secured your account with 2-factor authentication: Only verification by app or SMS are supported. There is no support for verification by prompt on your phone.<br>
+2 단계 인증으로 계정을 보호한 경우 : 앱 또는 SMS를 통한 인증만 지원됩니다. 휴대 전화에서 프롬프트로 확인을 지원하지 않습니다.<br>
 <br>
-The manual authentication work-around is a result of unofficial support for using bots in hangouts from Google.
+수동 인증 해결 방법은 Google 행아웃에서 봇을 비공식적으로 지원한 결과입니다.
 </div>
-<p>The authentication token will be generated and stored internally.</p>
+<p>인증 토큰이 생성되어 내부적으로 저장됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 hangouts:
   intents:
@@ -236,10 +236,10 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>The conversations has to be precreated, the conversation id can be obtained from the <code>hangouts.conversations</code> entity. Make sure to use quotes around the conversation id or alias to escape special characters (<code>!</code>, and <code>#</code>) in YAML.</p>
-<p>The intent <code>HangoutsHelp</code> is part of the integration and return a list of all sentences the integration unterstand in this conversation.</p>
+<p>대화(conversations)는 미리 작성해야하며, conversation ID는 <code>hangouts.conversations</code> 엔티티에서 얻을 수 있습니다. conversations ID 또는 별명(alias)을 따옴표로 묶어 YAML에서 특수 문자 (<code>!</code>, <code>#</code>)를 이스케이프하십시오.</p>
+<p><code>HangoutsHelp</code> 의도(intent)는 연동작업의 일부이며 연동작업에서 이해할 수 없는 모든 문장의 목록을 이 대화에서 반환합니다.</p>
 <h2>
-<a class="title-link" name="adding-sentences" href="#adding-sentences"></a> Adding sentences</h2>
+<a class="title-link" name="-" href="#-"></a> 문장 추가</h2>
 <pre><code class="language-yaml"># The Hangouts component
 hangouts:
   intents:
@@ -259,15 +259,15 @@ intent_script:
     speech:
       text: I know {{ states('hangouts.conversations') }} conversations
 </code></pre>
-<p>This configuration will:</p>
+<p>이 설정은 다음과 같습니다. :</p>
 <ul>
-<li>Toggle the light in the given location in a specific conversation.</li>
-<li>Return the conversations the bot know.</li>
+<li>특정 대화에서 특정 위치의 조명을 토글합니다.</li>
+<li>봇이 알고 있는 대화를 반환하십시오.</li>
 </ul>
 <h2>
-<a class="title-link" name="adding-advanced-custom-sentences" href="#adding-advanced-custom-sentences"></a> Adding advanced custom sentences</h2>
-<p>Sentences can contain slots (marked with curly braces: <code>{name}</code>) and optional words (marked with square brackets: <code>[the]</code>). The values of slots will be passed on to the intent and are available inside the templates.</p>
-<p>The following configuration can handle the following sentences:</p>
+<a class="title-link" name="----" href="#----"></a> 고급 사용자 정의 문장 추가</h2>
+<p>문장에는 슬롯 (중괄호: <code>{name}</code>)과 선택적 단어 (대괄호: <code>[the]</code>)가 포함될 수 있습니다. 슬롯값은 의도(intent)로 전달되며 템플릿 내에서 사용할 수 있습니다.</p>
+<p>다음 설정은 다음 문장을 처리 할 수 ​​있습니다.</p>
 <ul>
 <li>Change the lights to red</li>
 <li>Change the lights to green</li>
@@ -296,10 +296,10 @@ intent_script:
           - "{% if color == 'blue' %}255{% else %}0{% endif %}"
 </code></pre>
 <h2>
-<a class="title-link" name="services" href="#services"></a> Services</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
-<a class="title-link" name="service-hangoutsupdate" href="#service-hangoutsupdate"></a> Service hangouts.update</h3>
-<p>Updates the list of conversations.</p>
+<a class="title-link" name="hangoutsupdate-" href="#hangoutsupdate-"></a> hangouts.update 서비스</h3>
+<p>대화 목록을 업데이트합니다.</p>
 <table>
 <thead>
 <tr>
@@ -317,8 +317,8 @@ intent_script:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-hangoutssend_message" href="#service-hangoutssend_message"></a> Service hangouts.send_message</h3>
-<p>Sends a message to the given conversations.</p>
+<a class="title-link" name="hangoutssend_message-" href="#hangoutssend_message-"></a> hangouts.send_message 서비스</h3>
+<p>주어진 대화에 메시지를 보냅니다.</p>
 <table>
 <thead>
 <tr>
@@ -346,8 +346,8 @@ intent_script:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-hangoutsreconnect" href="#service-hangoutsreconnect"></a> Service hangouts.reconnect</h3>
-<p>Reconnects the hangouts bot.</p>
+<a class="title-link" name="hangoutsreconnect-" href="#hangoutsreconnect-"></a> hangouts.reconnect 서비스</h3>
+<p>행아웃 봇을 다시 연결합니다.</p>
 <table>
 <thead>
 <tr>
@@ -365,10 +365,10 @@ intent_script:
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="advanced" href="#advanced"></a> Advanced</h2>
+<a class="title-link" name="" href="#"></a> 고급</h2>
 <h3>
-<a class="title-link" name="automatic-reconnect-after-ip-change" href="#automatic-reconnect-after-ip-change"></a> Automatic reconnect after IP change</h3>
-<p>The hangouts integration can’t detect if your IP address changes, so it can’t automatic reconnect to the Google servers. This is a workaround for this problem.</p>
+<a class="title-link" name="ip---" href="#ip---"></a> IP 변경후 자동 재연결</h3>
+<p>행아웃 연동에서 IP 주소 변경 여부를 감지할 수 없으므로 Google 서버에 자동으로 다시 연결할 수 없습니다. 이 문제에 대한 해결 방법입니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: https://api.ipify.org/?format=json
@@ -390,9 +390,9 @@ automation:
       - service: hangouts.reconnect
 </code></pre>
 <h2>
-<a class="title-link" name="notifications" href="#notifications"></a> Notifications</h2>
-<p>The <code>hangouts</code> platform allows you to deliver notifications from Home Assistant to <a href="https://hangouts.google.com/" rel="external nofollow">Google Hangouts</a> conversations. Conversations can be both direct as well as group chats.</p>
-<p>To enable Hangouts notifications in your installation, you first need to configure the Hangouts component. Then, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="notifications" href="#notifications"></a> 알림(Notifications)</h2>
+<p><code>hangouts</code> 플랫폼을 사용하면 홈어시스턴트에서 <a href="https://hangouts.google.com/" rel="external nofollow">Google Hangouts</a> 대화에 알림을 전달할 수 있습니다. 대화는 그룹 채팅뿐만 아니라 직접 대화도 가능합니다.</p>
+<p>설치에서 행아웃 알림을 사용하려면 먼저 행아웃 구성 요소를 설정해야합니다. 그런 다음 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry  
 notify:
   - name: NOTIFIER_NAME
@@ -422,8 +422,8 @@ notify:
 </dl>
 </div>
 <h3>
-<a class="title-link" name="finding-the-conversation-id" href="#finding-the-conversation-id"></a> Finding the conversation ID</h3>
-<p>The conversations has to be precreated, the conversation id can be obtained from the <code>hangouts.conversations</code> entity, this can be found in with the states developer tool that is shown as this icon <img src="/images/screenshots/developer-tool-states-icon.png" class="no-shadow" height="38"> in the side bar. Using your web browsers search tool to find the <code>hangouts.conversations</code> entity. You will find something like below.</p>
+<a class="title-link" name="conversation-id-" href="#conversation-id-"></a> conversation ID 찾기</h3>
+<p>대화(conversation)는 미리 작성해야하며, conversation ID는 <code>hangouts.conversations</code> 엔티티에서 얻을 수 있으며, 사이드 바에서 이 아이콘 <img src="/images/screenshots/developer-tool-states-icon.png" class="no-shadow" height="38">로 표시되는 상태 개발자 도구에서 찾을 수 있습니다. 웹 브라우저 검색 도구를 사용하여 <code>hangouts.conversations</code> 엔티티를 찾으십시오. 아래와 같은 것을 찾을 수 있습니다.</p>
 <pre><code class="language-json">0: {
   "id": "&lt;Hangout ID&gt;",
   "name": "A simple hangout",
@@ -433,8 +433,8 @@ notify:
   ]
 }
 </code></pre>
-<p>This may have more if the account is in multiple hangout conversations, for configuring the bot to be in a conversation you will need the ID that would be where <code>&lt;Hangout ID&gt;</code> is in that example. Make sure to use quotes around the conversation id or alias to escape special characters (<code>!</code>, and <code>#</code>) in YAML.</p>
-<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>계정이 여러 행아웃 대화에 있는 경우 더 많을 수 있습니다. 봇이 대화에 있도록 설정하려면 예에서 <code>&lt;Hangout ID&gt;</code>가 있는 ID가 필요합니다. conversation ID 또는 별명(alias)을 따옴표로 묶어 YAML에서 특수 문자 (<code>!</code>, <code>#</code>)를 이스케이프하십시오.</p>
+<p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>
 
 
 </article>

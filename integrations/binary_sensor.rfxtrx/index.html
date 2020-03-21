@@ -103,29 +103,21 @@
   <hr class="divider">
   
 
-  <p>The <code>rfxtrx</code> platform support binary sensors that
-communicate in the frequency range of 433.92 MHz.
-The rfxtrx binary sensor integration provides support for them.</p>
-<p>Many cheap sensors available on the web today are based on a particular RF chip
-called <em>PT-2262</em>. Depending on the running firmware on the RFXcom box, some of
-them may be recognized under the X10 protocol but most of them are recognized
-under the <em>Lighting4</em> protocol. The rfxtrx binary sensor integration provides
-some special options for them, while other rfxtrx protocols should work too.</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/zcjNvSMG-hg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>rfxtrx</code> 플랫폼은 433.92 MHz의 주파수 범위에서 통신하는 이진 센서를 지원합니다.
+rfxtrx 이진 센서 통합구성요소는 이를 지원합니다.</p>
+<p>오늘날 웹에서 사용할 수 있는 많은 저렴한 센서는 <em>PT-2262</em> 라는 특정 RF 칩을 기반으로합니다. RFXcom box에서 실행중인 펌웨어에 따라 일부는 X10 프로토콜에서 인식될 수 있지만 대부분은 <em>Lighting4</em> 프로토콜에서 인식됩니다. rfxtrx 이진 센서 통합구성요소는 특별한 옵션을 제공하는 반면 다른 rfxtrx 프로토콜들도 작동해야합니다.</p>
 <h2>
-<a class="title-link" name="setting-up-your-devices" href="#setting-up-your-devices"></a> Setting up your devices</h2>
-<p>Once you have set up your <a href="/integrations/rfxtrx/">rfxtrx hub</a>, the easiest way
-to find your binary sensors is to add this to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="-" href="#-"></a> 장치 셋업</h2>
+<p><a href="/integrations/rfxtrx/">rfxtrx hub</a>를 설정하면 바이너리 센서를 찾는 가장 쉬운 방법은 이것을 <code>configuration.yaml</code>에 추가하는 것입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   platform: rfxtrx
   automatic_add: true
 </code></pre>
-<p>Open your Home Assistant frontend and go to the “states” page.
-Then make sure to trigger your sensor. You should see a new entity
-appear in the <em>Current entities</em> list, starting with “binary_sensor.”
-and some hexadecimal digits. Those hexadecimal digits are your device id.</p>
-<p>For example: “binary_sensor.0913000022670e013b70”. Here your device id
-is <code>0913000022670e013b70</code>. Then you should update your configuration to:</p>
+<p>홈어시스턴트 프론트 엔드를 열고 “states” 페이지로 이동하십시오.
+그런 다음 센서를 트리거하십시오. “binary_sensor”로 시작하여 <em>Current entities</em> 목록에 새 엔티티가 나타납니다. 16 진수입니다. 16 진수는 Device ID입니다.</p>
+<p>예: “binary_sensor.0913000022670e013b70” 여기서  Device ID는 <code>0913000022670e013b70</code>입니다. 그런후 설정을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   platform: rfxtrx
@@ -188,27 +180,23 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-<p>This integration and the <a href="/integrations/switch.rfxtrx/">rfxtrx switch</a> can steal each other’s devices when setting the <code>automatic_add</code> configuration parameter to <code>true</code>.
-Set <code>automatic_add</code> only when you have some devices to add to your installation, otherwise leave it to <code>false</code>.</p>
+<p>이 통합구성요소 및 <a href="/integrations/switch.rfxtrx/">rfxtrx 스위치</a>는 <code>automatic_add</code> 설정 매개 변수를 <code>true</code>로 설정할 때 서로의 장치를 가져가버릴 수 있습니다.
+설치시 추가할 장치가 있는 경우에만 <code>automatic_add</code>를 설정하고 그렇지 않으면 <code>false</code>로 두십시오.</p>
 </div>
 <div class="note warning">
-<p>If a device ID consists of only numbers, please make sure to surround it with quotes.
-This is a known limitation in YAML, because the device ID will be interpreted as a number otherwise.</p>
+<p>device ID가 숫자로만 구성되어 있으면 따옴표로 묶어야합니다.
+device ID는 숫자로 해석되므로 YAML의 제한 사항입니다.</p>
 </div>
-<p>Binary sensors have only two states - “on” and “off”. Many door or window
-opening sensors will send a signal each time the door/window is open or closed.
-However, depending on their hardware or on their purpose,
-some sensors are only able to signal their “on” state:</p>
+<p>이진 센서는 “on”과 “off”의 두 가지 상태만 있습니다. 많은 문 또는 창 열기 센서는 문/창이 열리거나 닫힐 때마다 신호를 보냅니다.
+그러나 하드웨어 또는 목적에 따라 일부 센서는 “on” 상태만 신호를 보낼 수 있습니다.</p>
 <ul>
-<li>Most motion sensors send a signal each time they detect motion. They stay “on” for a few seconds and go back to sleep, ready to signal other motion events. Usually, they do not send a signal when they go back to sleep.</li>
-<li>Some doorbells may also only send “on” signals when their toggle switch is pressed, but no “off” signal when the switch is released.</li>
+<li>대부분의 모션 센서는 모션을 감지할 때마다 신호를 보냅니다. 그들은 몇 초 동안 “on” 이고 다른 동작 이벤트를 알리기 위해 다시 잠들게됩니다. 일반적으로 그들은 다시 잠들 때 신호를 보내지 않습니다.</li>
+<li>일부 초인종은 토글 스위치를 눌렀을 때 “on” 신호만 보낼 수 있지만 스위치를 놓을 때 “off” 신호는 나타나지 않습니다.</li>
 </ul>
-<p>For those devices, use the <em>off_delay</em> parameter.
-It defines a delay after which a device will go back to an “Off” state.
-That “Off” state will be fired internally by Home Assistant, just as if
-the device fired it by itself. If a motion sensor can only send signals
-once every 5 seconds, sets the <em>off_delay</em> parameter to <em>seconds: 5</em>.</p>
-<p>Example configuration:</p>
+<p>해당 장치의 경우 <em>off_delay</em> 매개 변수를 사용하십시오.
+장치가 “off” 상태로 돌아가는 지연을 정의합니다.
+“off” 상태는 마치 장치가 자체적으로 작동하는 것처럼 홈어시스턴트에 의해 내부적으로 실행됩니다. 모션 센서가 5 초마다 한 번만 신호를 보낼 수 있는 경우 <em>off_delay</em> 매개 변수를 <em>seconds: 5</em>로 설정하십시오.</p>
+<p>설정 예시 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   platform: rfxtrx
@@ -221,13 +209,10 @@ binary_sensor:
       seconds: 5
 </code></pre>
 <h3>
-<a class="title-link" name="options-for-pt-2262-devices-under-the-lighting4-protocol" href="#options-for-pt-2262-devices-under-the-lighting4-protocol"></a> Options for PT-2262 devices under the Lighting4 protocol</h3>
-<p>When a data packet is transmitted by a PT-2262 device using the Lighting4
-protocol, there is no way to automatically extract the device identifier and the
-command from the packet. Each device has its own id/command length combination
-and the fields lengths are not included in the data. One device that sends 2
-different commands will be seen as 2 devices on Home Assistant. For such cases,
-the following options are available in order to circumvent the problem:</p>
+<a class="title-link" name="lighting4---pt-2262--" href="#lighting4---pt-2262--"></a> Lighting4 프로토콜 하의 PT-2262 장치 옵션</h3>
+<p>Lighting4 프로토콜을 사용하여 PT-2262 장치에서 데이터 패킷을 전송하면 패킷에서 장치 식별자와 명령을 자동으로 추출할 방법이 없습니다.
+각 장치에는 고유한 ID/command length 조합이 있으며 필드 길이는 데이터에 포함되지 않습니다. 2 개의 다른 명령을 보내는 하나의 장치는 Home Assistant에서 2 개의 장치로 표시됩니다.
+이러한 경우 문제를 피하기 위해 다음 옵션을 사용할 수 있습니다.</p>
 <ul>
 <li>
 <strong>data_bits</strong> (<em>Optional</em>)</li>
@@ -236,25 +221,19 @@ the following options are available in order to circumvent the problem:</p>
 <li>
 <strong>command_off</strong> (<em>Optional</em>)</li>
 </ul>
-<p>Let’s try to add a new PT-2262 sensor using the “automatic_add”
-option and have a look at Home Assistant system log.</p>
-<p>Have your sensor trigger the “On” state for the first time.
-Some messages will appear:</p>
+<p>“automatic_add” 옵션을 사용하여 새 PT-2262 센서를 추가하고 Home Assistant 시스템 로그를 살펴 보겠습니다.</p>
+<p>센서가 처음에 “on” 상태를 트리거하도록 하십시오.
+일부 메시지가 나타납니다. :</p>
 <pre><code class="language-text">INFO (Thread-6) [homeassistant.components.binary_sensor.rfxtrx] Added binary sensor 0913000022670e013970 (Device_id: 22670e Class: LightingDevice Sub: 0)
 </code></pre>
-<p>Here the sensor has the id <em>22670e</em>.</p>
-<p>Now have your sensor trigger the “Off” state and look for the following
-message in the Home Assistant log. You should see that your device
-has been detected as a <em>new</em> device when triggering its “Off” state:</p>
+<p>Here the sensor has the id <em>22670e</em>.
+센서의 ID는 <em>22670e</em>입니다.</p>
+<p>이제 센서가 “Off” 상태를 트리거하고 홈어시스턴트 로그에서 다음 메시지를 찾으십시오. “Off” 상태를 트리거 할 때 장치가 <em>new</em> 장치로 감지된 것을 확인할 수 있습니다.</p>
 <pre><code class="language-text">INFO (Thread-6) [homeassistant.components.binary_sensor.rfxtrx] Added binary sensor 09130000226707013d70 (Device_id: 226707 Class: LightingDevice Sub: 0)
 </code></pre>
-<p>Here the device id is <em>226707</em>, which is almost similar to
-the <em>22670e</em> we had on the “On” event a few seconds ago.</p>
-<p>From those two values, you can guess that the actual id of your device is
-<em>22670</em>, and that <em>e</em> and <em>7</em> are commands for “On” and “Off” states
-respectively. As one hexadecimal digit uses 4 bits,
-we can conclude that the device is using 4 data bits.</p>
-<p>So here is the actual configuration section for the binary sensor:</p>
+<p>여기서 device ID는 <em>226707</em>이며 이는 몇 초 전에 “On” 이벤트에 있었던 <em>22670e</em>와 거의 비슷합니다.</p>
+<p>이 두 값에서 장치의 실제 ID는 <em>22670</em>이고 <em>e</em> 및 <em>7</em>은 각각 “On”, “Off” 상태에 대한 명령이라고 추측할 수 있습니다. 하나의 16 진수가 4 비트를 사용하므로 장치가 4 데이터 비트를 사용하고 있다고 결론 지을 수 있습니다.</p>
+<p>바이너리 센서의 실제 설정 섹션은 다음과 같습니다. :</p>
 <pre><code class="language-yaml">platform: rfxtrx
 automatic_add: true
 devices:
@@ -265,21 +244,18 @@ devices:
     command_on: 0xe
     command_off: 0x7
 </code></pre>
-<p>The <em>automatic_add</em> option makes the rfxtrx binary sensor integration calculate
-and display the configuration options for you in the Home Assistant logs:</p>
+<p><em>automatic_add</em> 옵션은 rfxtrx 이진 센서 통합구성요소가 홈어시스턴트 프로그램 로그에서 설정 옵션을 계산하고 표시하게합니다.</p>
 <pre><code class="language-text">INFO (Thread-6) [homeassistant.components.rfxtrx] rfxtrx: found possible device 226707 for 22670e with the following configuration:
 data_bits=4
 command_on=0xe
 command_off=0x7
 INFO (Thread-6) [homeassistant.components.binary_sensor.rfxtrx] Found possible matching deviceid 22670e.
 </code></pre>
-<p>This automatic guess should work most of the time but there is
-no guarantee on that. You should activate it only when you
-want to configure your new devices and leave it off otherwise.</p>
+<p>이 자동 추측은 대부분 작동하지만 그에 대한 보장은 없습니다. 새 장치를 설정하려는 경우에만 활성화하고 그렇지 않으면 끄십시오.</p>
 <h3>
-<a class="title-link" name="known-working-devices" href="#known-working-devices"></a> Known working devices</h3>
-<p>The following devices are known to work with the rfxtrx binary sensor component.
-There are too many other to list.</p>
+<a class="title-link" name="--" href="#--"></a> 알려진 작동 장치</h3>
+<p>다음 장치는 rfxtrx 이진 센서 구성 요소와 작동하는 것으로 알려져 있습니다.
+나열할 다른 항목이 너무 많습니다.</p>
 <ul>
 <li>
 <p>Motion detectors:</p>

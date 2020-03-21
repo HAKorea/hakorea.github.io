@@ -103,12 +103,13 @@
   <hr class="divider">
   
 
-  <p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
-<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
-<p>The RFLink integration does not know the difference between a <code>binary_sensor</code>, a <code>switch</code> and a <code>light</code>. Therefore all switchable devices are automatically added as <code>light</code> by default.</p>
-<p>RFLink binary_sensor/switch/light ID’s are composed of: protocol, id, switch/channel. For example: <code>newkaku_0000c6c2_1</code>.</p>
-<p>Once the ID of a binary sensor is known, it can be used to configure it as a binary sensor type in Home Assistant, for example, to hide it or configure a nice name.</p>
-<p>Configuring a device as a binary sensor:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/yR_o82oZADQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>rflink</code> 통합구성요소는 <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink 게이트웨이 펌웨어</a>를 사용하는 장치, 예를 들어 <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>. RFLink 게이트웨이는 저렴한 하드웨어 (Arduino + 트랜시버)를 사용하여 여러 RF 무선 장치와 양방향 통신을 가능하게하는 Arduino 펌웨어입니다.</p>
+<p>먼저 <a href="/integrations/rflink/">RFLink 허브</a>를 설정해야합니다.</p>
+<p>RFLink 통합구성요소는 <code>binary_sensor</code>, <code>switch</code>, <code>light</code>의 차이점을 모릅니다. 따라서 모든 전환 가능한 장치는 기본적으로 자동으로 <code>light</code>으로 추가됩니다.</p>
+<p>RFLink binary_sensor/switch/light ID는 protocol, id, switch/channel로 구성됩니다. 예: <code>newkaku_0000c6c2_1</code>.</p>
+<p>이진 센서의 ID를 알고 나면 Home Assistant에서 이진 센서 유형으로 설정하여 이를 숨기거나 더 좋은 이름을 설정할 수 있습니다.</p>
+<p>이진 센서로 장치 설정 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
    - platform: rflink
@@ -164,14 +165,15 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="sensor-state" href="#sensor-state"></a> Sensor state</h3>
-<p>Initially, the state of a binary sensor is unknown. When a sensor update is received, the state is known and will be shown in the frontend.</p>
+<a class="title-link" name="-" href="#-"></a> 센서 상태</h3>
+<p>처음에는 이진 센서의 상태를 알 수 없습니다. 센서 업데이트가 수신되면 상태를 알 수 있으며 프런트 엔드에 표시됩니다.</p>
 <h3>
-<a class="title-link" name="device-support" href="#device-support"></a> Device support</h3>
-<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<a class="title-link" name="-" href="#-"></a> 장치 지원</h3>
+<p>See <a href="/integrations/rflink/#device-support">device support</a>
+<a href="/integrations/rflink/#device-support">device support</a> 참조</p>
 <h3>
-<a class="title-link" name="additional-configuration-examples" href="#additional-configuration-examples"></a> Additional configuration examples</h3>
-<p>Multiple sensors with custom name and device class and set off_delay</p>
+<a class="title-link" name="--" href="#--"></a> 추가 설정 사례</h3>
+<p>사용자 정의 이름 및 장치 클래스(Device Class)와 off_delay를 가진 다중 센서</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
    - platform: rflink

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MikroTik - 홈어시스턴트</title>
+    <title>네트워크회사(MikroTik) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate MikroTik/RouterOS based devices into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/mikrotik/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="MikroTik">
+    <meta property="og:title" content="네트워크회사(MikroTik)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/mikrotik/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="MikroTik">
+    <meta name="twitter:title" content="네트워크회사(MikroTik)">
     <meta name="twitter:description" content="Instructions on how to integrate MikroTik/RouterOS based devices into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,28 +97,29 @@
   
   <header>
     <h1 class="title indent">
-      MikroTik
+      네트워크회사(MikroTik)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>mikrotik</code> platform offers presence detection by looking at connected devices to a <a href="https://mikrotik.com" rel="external nofollow">MikroTik RouterOS</a> based router.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <iframe width="690" height="388" src="https://www.youtube.com/embed/4qP0gO8mi6k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><code>mikrotik</code> 플랫폼은 연결된 장치를 <a href="https://mikrotik.com" rel="external nofollow">MikroTik RouterOS</a> 기반 라우터로 보고 재실 감지 기능을 제공합니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Presence Detection</li>
 </ul>
 <h2>
-<a class="title-link" name="configuring-mikrotik-hub" href="#configuring-mikrotik-hub"></a> Configuring mikrotik hub</h2>
-<p>You have to enable accessing the RouterOS API on your router to use this platform.</p>
-<p>Terminal:</p>
+<a class="title-link" name="mikrotik--" href="#mikrotik--"></a> mikrotik 허브 설정</h2>
+<p>이 플랫폼을 사용하려면 라우터에서 RouterOS API에 액세스 할 수 있어야합니다.</p>
+<p>터미널 :</p>
 <pre><code class="language-bash">/ip service
 set api disabled=no port=8728
 </code></pre>
-<p>Web Frontend:</p>
+<p>웹프론트엔드:</p>
 <p>Go to <strong>IP</strong> -&gt; <strong>Services</strong> -&gt; <strong>api</strong> and enable it.</p>
-<p>Make sure that port 8728 or the port you choose is accessible from your network.</p>
-<p>To use a MikroTik router in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<p>네트워크에서 포트 8728 또는 선택한 포트에 액세스 할 수 있는지 확인하십시오.</p>
+<p>설비에서 MikroTik 라우터를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mikrotik:
   - host: IP_ADDRESS
@@ -184,30 +185,30 @@ Default value: </p>
 </dl>
 </div>
 <div class="note info">
-<p>As of version 6.43 of RouterOS Mikrotik introduced a new login method (<code>plain</code>) in addition to the old login method (<code>token</code>). With Version 6.45.1 the old <code>token</code> login method got deprecated.
-In order to support both login mechanisms, the new config option <code>login_method</code> has been introduced.</p>
+<p>RouterOS의 버전 6.43부터 Mikrotik은 이전 로그인 방법 (<code>token</code>) 외에 새로운 로그인 방법 (<code>plain</code>)을 도입했습니다. 버전 6.45.1에서는 이전 <code>token</code> 로그인 방법이 더 이상 사용되지 않습니다.
+  두 로그인 메커니즘을 모두 지원하기 위해 새로운 설정 옵션인 <code>login_method</code>가 도입되었습니다.</p>
 </div>
 <h2>
-<a class="title-link" name="use-a-certificate" href="#use-a-certificate"></a> Use a certificate</h2>
-<p>To use SSL to connect to the API (via <code>api-ssl</code> instead of <code>api</code> service) further configuration is required at RouterOS side. You have to upload or generate a certificate and configure <code>api-ssl</code> service to use it. Here is an example of a self-signed certificate:</p>
+<a class="title-link" name="-" href="#-"></a> 인증서 사용</h2>
+<p>SSL을 사용하여 API에 연결하려면 (<code>api</code> 서비스 대신 <code>api-ssl</code> 을 통해) RouterOS 측에서 추가 설정이 필요합니다. 인증서를 업로드하거나 생성하고 이를 사용하려면 <code>api-ssl</code> 서비스를 설정해야합니다. 다음은 자체 서명 인증서의 예입니다.</p>
 <pre><code class="language-bash">/certificate add common-name="Self signed demo certificate for API" days-valid=3650 name="Self signed demo certificate for API" key-usage=digital-signature,key-encipherment,tls-server,key-cert-sign,crl-sign
 /certificate sign "Self signed demo certificate for API"
 /ip service set api-ssl certificate="Self signed demo certificate for API"
 /ip service enable api-ssl
 </code></pre>
-<p>Then add <code>ssl: true</code> to <code>mikrotik</code> device tracker entry in your <code>configuration.yaml</code> file.</p>
-<p>If everything is working fine you can disable the pure <code>api</code> service in RouterOS:</p>
+<p>그런 다음 <code>configuration.yaml</code> 파일의 <code>mikrotik</code> 장치 추적기 항목에 <code>ssl: true</code>를 추가하십시오.</p>
+<p>모든 것이 제대로 작동하면 RouterOS에서 순수한 <code>api</code> 서비스를 비활성화 할 수 있습니다 :</p>
 <pre><code class="language-bash">/ip service disable api
 </code></pre>
 <h2>
-<a class="title-link" name="the-user-privileges-in-routeros" href="#the-user-privileges-in-routeros"></a> The user privileges in RouterOS</h2>
-<p>To use this device tracker you need restricted privileges only. To enhance the security of your MikroTik device create a “read only” user who is able to connect to API  and perform ping test only:</p>
+<a class="title-link" name="routeros--" href="#routeros--"></a> RouterOS의 사용자 권한</h2>
+<p>이 장치 추적기를 사용하려면 제한된 권한만 필요합니다. MikroTik 장치의 보안을 강화하려면 API에 연결하고 ping 테스트만 수행 할 수 있는 “read only”사용자를 작성하십시오.</p>
 <pre><code class="language-bash">/user group add name=homeassistant policy=read,api,!local,!telnet,!ssh,!ftp,!reboot,!write,!policy,test,!winbox,!password,!web,!sniff,!sensitive,!romon,!dude,!tikapp
 /user add group=homeassistant name=homeassistant
 /user set password="YOUR_PASSWORD" homeassistant
 </code></pre>
 <h2>
-<a class="title-link" name="using-the-additional-configuration-to-the-mikrotik-entry-in-your-configurationyaml-file" href="#using-the-additional-configuration-to-the-mikrotik-entry-in-your-configurationyaml-file"></a> Using the additional configuration to the mikrotik entry in your configuration.yaml file:</h2>
+<a class="title-link" name="configurationyaml--mikrotik-----" href="#configurationyaml--mikrotik-----"></a> configuration.yaml 파일의 mikrotik 항목에 추가 설정 사용 :</h2>
 <pre><code class="language-yaml">mikrotik:
   - host: 192.168.88.1
     username: homeassistant
@@ -225,7 +226,7 @@ In order to support both login mechanisms, the new config option <code>login_met
     method: capsman
     track_devices: true
 </code></pre>
-<p>See the <a href="/integrations/device_tracker/">device tracker integration page</a> for instructions on how to configure the people to be tracked.</p>
+<p>추적할 사람을 설정하는 방법에 대한 지침은 <a href="/integrations/device_tracker/">device tracker integration page</a>를 참조하십시오.</p>
 
 
 </article>

@@ -103,23 +103,23 @@
   <hr class="divider">
   
 
-  <p>The <code>rfxtrx</code> platform support switches that communicate in the frequency range of 433.92 MHz.</p>
+  <p><code>rfxtrx</code> 플랫폼은 433.92 MHz의 주파수 범위에서 통신하는 스위치를 지원합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>First you have to set up your <a href="/integrations/rfxtrx/">rfxtrx hub</a>.
-The easiest way to find your switches is to add this to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>먼저 <a href="/integrations/rfxtrx/">rfxtrx hub</a>를 설정해야합니다.
+스위치를 찾는 가장 쉬운 방법은 이것을 <code>configuration.yaml</code>에 추가하는 것입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   platform: rfxtrx
   automatic_add: true
 </code></pre>
-<p>Launch your Home Assistant and go to the website.
-Push your remote and your device should be added:</p>
+<p>홈어시스턴트를 시작하고 웹 사이트로 이동하십시오.
+리모컨을 누르면 장치가 추가되어야합니다.</p>
 <p class="img">
 <img src="/images/integrations/rfxtrx/switch.png">
 </p>
-<p>Here the name is <code>0b11000102ef9f210010f70</code> and you can verify that it works from the frontend.
-Then you should update your configuration to:</p>
+<p>여기서 이름은 <code>0b11000102ef9f210010f70</code>이며 프런트 엔드에서 작동하는지 확인할 수 있습니다.
+그런 다음 설정을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   platform: rfxtrx
@@ -166,14 +166,14 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-<p>This integration and the <a href="/integrations/binary_sensor.rfxtrx/">rfxtrx binary sensor</a> can steal each other’s devices when setting the <code>automatic_add</code> configuration parameter to <code>true</code>. Set <code>automatic_add</code> only when you have some devices to add to your installation, otherwise leave it to <code>false</code>.</p>
+<p>이 통합구성요소 및 <a href="/integrations/binary_sensor.rfxtrx/">rfxtrx 이진 센서</a>는 <code>automatic_add</code> 설정 매개 변수를 <code>true</code>로 설정할 때 서로의 장치를 가져갈 수 있습니다. 설치에 추가할 장치가 있는 경우에만 <code>automatic_add</code>를 설정하고 그렇지 않으면 <code>false</code>로 두십시오.</p>
 </div>
 <div class="note warning">
-If a device ID consists of only numbers, please make sure to surround it with quotes.
-This is a known limitation in YAML, because the device ID will be interpreted as a number otherwise.
+device ID가 숫자로만 구성되어 있으면 따옴표로 묶어야합니다.
+device ID는 숫자로 해석되므로 YAML의 알려진 제한 사항입니다.
 </div>
-<p>Generate codes:</p>
-<p>If you need to generate codes for switches you can use a template (useful for example COCO switches).</p>
+<p>코드 생성 :</p>
+<p>스위치 코드(switch code)를 생성해야하는 경우 템플릿을 사용할 수 있습니다 (COCO 스위치의 경우 유용합니다.).</p>
 <ul>
 <li>Go to home-assistant-IP:8123/dev-template</li>
 <li>Use this code to generate a code:</li>
@@ -181,14 +181,14 @@ This is a known limitation in YAML, because the device ID will be interpreted as
 <pre><code class="language-yaml">0b11000{{ range(100,700) | random | int }}bc0cfe0{{ range(0,10) | random | int }}010f70
 </code></pre>
 <ul>
-<li>Use this code to add a new switch in your configuration.yaml</li>
-<li>Launch your Home Assistant and go to the website.</li>
-<li>Enable learning mode on your switch (i.e. push learn button or plug it in a wall socket)</li>
-<li>Toggle your new switch in the Home Assistant interface</li>
+<li>이 코드를 사용하여 설정에 새 스위치를 추가하십시오.</li>
+<li>홈어시스턴트를 시작하고 웹 사이트로 이동하십시오.</li>
+<li>스위치에서 학습 모드를 활성화합니다 (예: 학습 버튼을 누르거나 벽면 콘센트에 연결)</li>
+<li>홈어시스턴트 인터페이스에서 새 스위치 토글</li>
 </ul>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>Basic configuration with 3 devices:</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>3 개의 장치를 사용한 기본 설정 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   platform: rfxtrx
@@ -203,7 +203,7 @@ switch:
       name: Door
       fire_event: true
 </code></pre>
-<p>Light hallway if doorbell is pressed (when is sun down):</p>
+<p>초인종을 눌렀을 때의 hallway에 조명을 켜십시오. (햇빛이 비칠 때) :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   platform: rfxtrx
@@ -234,7 +234,7 @@ automation:
       - service: switch.turn_on
         entity_id: switch.hall
 </code></pre>
-<p>Use remote to enable scene (using event_data):</p>
+<p>리모컨을 사용하여 장면을 활성화하십시오 (event_data 사용) :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   platform: rfxtrx

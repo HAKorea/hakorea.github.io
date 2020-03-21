@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>imap</code> integration is observing your <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol" rel="external nofollow">IMAP server</a> and reporting the amount of unread emails.</p>
+  <p><code>imap</code> 통합구성요소는 <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol" rel="external nofollow">IMAP server</a>를 관찰하고 읽지 않은 이메일의 양을 보고합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this sensor, add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: imap
@@ -173,18 +173,18 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="configuring-imap-searches" href="#configuring-imap-searches"></a> Configuring IMAP Searches</h3>
-<p>By default, this integration will count unread emails. By configuring the search string, you can count other results, for example:</p>
+<a class="title-link" name="imap--" href="#imap--"></a> IMAP 검색 설정</h3>
+<p>기본적으로 이 통구성요소는 읽지 않은 이메일을 계산합니다. 검색 문자열을 설정하면 다음과 같은 다른 결과를 계산할 수 있습니다.</p>
 <ul>
 <li>
-<code>ALL</code> to count all emails in a folder</li>
+<code>ALL</code> 폴더의 모든 이메일을 계산</li>
 <li>
-<code>FROM</code>, <code>TO</code>, <code>SUBJECT</code> to find emails in a folder (see <a href="https://tools.ietf.org/html/rfc3501#section-6.4.4" rel="external nofollow">IMAP RFC for all standard options</a>)</li>
+<code>FROM</code>, <code>TO</code>, <code>SUBJECT</code> 폴더에서 이메일을 찾기 (<a href="https://tools.ietf.org/html/rfc3501#section-6.4.4" rel="external nofollow">IMAP RFC for all standard options</a> 참조)</li>
 <li>
-<a href="https://developers.google.com/gmail/imap/imap-extensions" rel="external nofollow">Gmail’s IMAP extensions</a> allow raw Gmail searches, like <code>X-GM-RAW "in: inbox older_than:7d"</code> to show emails older than one week in your inbox. Note that raw Gmail searches will ignore your folder configuration and search all emails in your account!</li>
+<a href="https://developers.google.com/gmail/imap/imap-extensions" rel="external nofollow">Gmail’s IMAP extensions</a>은 <code>X-GM-RAW "in: inbox older_than:7d"</code> 와 같은 raw Gmail 검색을 통해 받은 편지함에 1 주일이 지난 이메일을 표시할 수 있습니다. raw Gmail 검색은 폴더 설정을 무시하고 계정의 모든 이메일을 검색합니다. !</li>
 </ul>
 <h4>
-<a class="title-link" name="full-configuration-sample-with-search" href="#full-configuration-sample-with-search"></a> Full configuration sample with search</h4>
+<a class="title-link" name="----" href="#----"></a> 검색이 가능한 전체 설정 샘플</h4>
 <pre><code class="language-yaml"># Example configuration.yaml entry for gmail
 sensor:
   - platform: imap
