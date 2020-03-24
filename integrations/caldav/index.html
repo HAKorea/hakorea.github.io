@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p><code>caldav</code> 플랫폼을 사용하면 WebDav 캘린더에 연결하고 이진 센서를 생성할 수 있습니다. 개별 캘린더마다 다른 센서가 생성되거나 사용자가 정의한 기준과 일치하는 사용자 정의 캘린더를 지정할 수 있습니다 (자세한 내용은 아래 참조). 해당 일정에 진행중인 이벤트가있는 경우이 센서는 <code>on</code>이되고 이벤트가 늦은 시간에 있거나 이벤트가없는 경우 <code>off</code>가 됩니다.
+  <p><code>caldav</code> 플랫폼을 사용하면 WebDav 캘린더에 연결하고 이진 센서를 생성할 수 있습니다. 개별 캘린더마다 다른 센서가 생성되거나 사용자가 정의한 기준과 일치하는 사용자 정의 캘린더를 지정할 수 있습니다 (자세한 내용은 아래 참조). 해당 일정에 진행중인 이벤트가 있는 경우이 센서는 <code>on</code>이 되고 이벤트가 늦은 시간에 있거나 이벤트가 없는 경우 <code>off</code>가 됩니다.
 WebDav 일정은 대략 15 분마다 업데이트됩니다.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 전제 조건</h3>
@@ -113,7 +113,7 @@ WebDav 일정은 대략 15 분마다 업데이트됩니다.</p>
 </code></pre>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 기본 셋업</h3>
-<p>홈어시스턴트에 WebDav 캘린더를 통합하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
+<p>홈어시스턴트에 WebDav 캘린더를 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for baikal
 calendar:
   - platform: caldav
@@ -147,7 +147,7 @@ calendar:
         calendar: 'Agenda'
         search: 'Warmup'
 </code></pre>
-<p>이렇게하면 켈린더 이름 Agenda에 대해 “HomeOffice” 및 “WarmupFlat”이라는 두 가지 이진 센서가 만들어집니다. <code>search</code>에 지정된 정규식과 일치하는 진행중인 이벤트가있는 경우 해당 센서가 <code>on</code> 상태가됩니다. 사용자 정의 달력에서 하루 종일 지속되는 이벤트가 고려됩니다.</p>
+<p>이렇게하면 켈린더 이름 Agenda에 대해 “HomeOffice” 및 “WarmupFlat”이라는 두 가지 이진 센서가 만들어집니다. <code>search</code>에 지정된 정규식과 일치하는 진행중인 이벤트가 있는 경우 해당 센서가 <code>on</code> 상태가 됩니다. 사용자 정의 달력에서 하루 종일 지속되는 이벤트가 고려됩니다.</p>
 <p>맞춤 캘린더를 설정할 때 기본 캘린더는 더 이상 생성되지 않습니다.</p>
 <div class="config-vars">
   <h3>
@@ -195,7 +195,7 @@ calendar:
 <li>
 <strong>offset_reached</strong>: 이벤트 제목에 설정되고 파싱된 경우 분 단위의 제목 오프셋에 도달하면 on/off 됩니다. 따라서 매우 중요한 미팅 !!-10이라는 제목은 이벤트가 시작되기 10 분 전에 이 속성이 트리거되도록합니다.</li>
 <li>
-<strong>all_day</strong>: 하루 종일 이벤트 인 경우 <code>True/False</code> 이벤트가 없으면 <code>False</code>가 됩니다.</li>
+<strong>all_day</strong>: 하루 종일 이벤트인 경우 <code>True/False</code> 이벤트가 없으면 <code>False</code>가 됩니다.</li>
 <li>
 <strong>message</strong>: <code>search</code> 값이 추출된 이벤트 제목입니다. 위의 <code>offset_reached</code> 예에서 메시지는 매우 중요한 회의로 설정됩니다.</li>
 <li>
@@ -209,8 +209,7 @@ calendar:
 </ul>
 <h3>
 <a class="title-link" name="" href="#"></a> 사례</h3>
-<p>All events of the calendars “private” and “holidays”. Note that all day events are not included.
-캘린더의 모든 이벤트는 “private” 및 “holidays”입니다. 하루 종일 일정은 포함되지 않습니다.</p>
+<p>캘린더의 모든 이벤트는 “private” 및 “holidays”입니다. 하루 종일 일정은 포함되지 않습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for nextcloud
 calendar:
   - platform: caldav
@@ -221,7 +220,7 @@ calendar:
       - private
       - holidays
 </code></pre>
-<p>휴일이 아닌 경우 음악으로 기상알림을 자동화하는 기능의 전체 예
+<p>휴일이 아닌 경우 음악으로 기상알림을 자동화하는 기능의 전체 예시
 전제 조건 : “Holiday”이 포함된 일정 관리 항목을 작성하는 “work”이라는 일정 관리가 있습니다.</p>
 <p>사용자 정의 캘린더 이름은 기본 캘린더 + 사용자 정의 캘린더의 이름으로 구성됩니다.</p>
 <pre><code class="language-yaml"># configuration.yaml

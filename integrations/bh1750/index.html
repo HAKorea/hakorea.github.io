@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>The <code>bh1750</code> sensor platform allows you to read the ambient light level in Lux from a <a href="https://www.mouser.com/ds/2/348/bh1750fvi-e-186247.pdf" rel="external nofollow">BH1750FVI sensor</a> connected via <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2c</a> bus (SDA, SCL pins). It allows you to use all the resolution modes of the sensor described in its datasheet.</p>
-<p>Tested devices:</p>
+  <p><code>bh1750</code> 센서 플랫폼을 사용하면 <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2c</a> 버스 (SDA, SCL 핀)를 통해 연결된 <a href="https://www.mouser.com/ds/2/348/bh1750fvi-e-186247.pdf" rel="external nofollow">BH1750FVI 센서</a>에서 Lux의 주변 조도를 읽을 수 있습니다. 데이터 시트에 설명된 센서의 모든 해상도(resolution) 모드를 사용할 수 있습니다.</p>
+<p>테스트 된 장치 :</p>
 <ul>
 <li><a href="https://www.raspberrypi.org/" rel="external nofollow">Raspberry Pi</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your BH1750 sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설비에서 BH1750 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: bh1750
@@ -185,8 +185,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="full-examples" href="#full-examples"></a> Full Examples</h2>
-<p>If you want to specify the resolution mode of the digital sensor or need to change the default I2c address (which is 0x23), add more details to the <code>configuration.yaml</code> file.</p>
+<a class="title-link" name="-" href="#-"></a> 전체 사례</h2>
+<p>디지털 센서의 해상도 모드를 지정하거나 기본 I2c 주소 (0x23)를 변경해야하는 경우 <code>configuration.yaml</code> 파일에 세부 정보를 추가하십시오.</p>
 <p>The sensor can work with resolutions of 0.5 lx (high res mode 1), 1 lx (high res mode 2) or 4 lx (low res mode), and make measurements continuously or one time each call. To set any of these operation modes, select one of these combinations: <code>continuous_low_res_mode</code>, <code>continuous_high_res_mode_2</code>, <code>continuous_high_res_mode_1</code>, <code>one_time_high_res_mode_1</code>, <code>one_time_high_res_mode_2</code>, <code>one_time_low_res_mode</code>.</p>
 <pre><code class="language-yaml"># Example of customized configuration.yaml entry
 sensor:
@@ -199,8 +199,8 @@ sensor:
     scan_interval: 25
 </code></pre>
 <h2>
-<a class="title-link" name="directions-for-installing-smbus-support-on-raspberry-pi" href="#directions-for-installing-smbus-support-on-raspberry-pi"></a> Directions for installing smbus support on Raspberry Pi</h2>
-<p>Enable I2c interface with the Raspberry Pi configuration utility:</p>
+<a class="title-link" name="raspberry-pi-smbus---" href="#raspberry-pi-smbus---"></a> Raspberry Pi의 smbus 지원 설치 방법</h2>
+<p>Raspberry Pi 설정 유틸리티를 사용하여 I2c 인터페이스를 활성화하십시오.</p>
 <pre><code class="language-bash"># pi user environment: Enable i2c interface
 $ sudo raspi-config
 </code></pre>
@@ -216,11 +216,11 @@ $ sudo addgroup homeassistant i2c
 $ sudo reboot
 </code></pre>
 <h3>
-<a class="title-link" name="check-the-i2c-address-of-the-sensor" href="#check-the-i2c-address-of-the-sensor"></a> Check the i2c address of the sensor</h3>
-<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors:</p>
+<a class="title-link" name="-i2c--" href="#-i2c--"></a> 센서의 i2c 주소 확인</h3>
+<p><code>i2c-tools</code>를 설치한 후, 연결된 센서의 주소를 스캔하기 위해 새로운 유틸리티를 사용할 수 있습니다 :</p>
 <pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
 </code></pre>
-<p>It will output a table like this:</p>
+<p>다음과 같은 테이블이 출력됩니다. :</p>
 <pre><code class="language-text">     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:          -- -- -- -- -- -- -- -- -- -- -- -- --
 10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -231,7 +231,7 @@ $ sudo reboot
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- 77
 </code></pre>
-<p>So you can see the sensor address what you are looking for is <strong>0x23</strong> (there are more i2c sensors in that Raspberry Pi).</p>
+<p>따라서 찾고있는 센서 주소가 <strong>0x23</strong>임을 알 수 있습니다 (해당 라즈베리 파이에는 i2c 센서가 더 있습니다).</p>
 
 
 </article>

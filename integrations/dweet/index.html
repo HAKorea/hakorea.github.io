@@ -103,14 +103,17 @@
   <hr class="divider">
   
 
-  <p><code>dweet</code> 통합구성요소를 통해 Home Assistant로 수집한 세부 정보를 [Dweet.io] (<a href="https://dweet.io/)%EB%A1%9C" rel="external nofollow">https://dweet.io/)로</a> 전송하고 <a href="https://freeboard.io" rel="external nofollow">freeboard.io</a>로 시각화 할 수 있습니다. 단, 귀하의 정보는 공개될 것임을 명심하십시오!</p>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/Bb_HznYrShc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>dweet</code> 통합구성요소를 통해 Home Assistant로 수집한 세부 정보를 [Dweet.io] (<a href="https://dweet.io/)%EB%A1%9C" rel="external nofollow">https://dweet.io/)로</a> 전송하고 <a href="https://freeboard.io" rel="external nofollow">freeboard.io</a>로 시각화 할 수 있습니다. 단, 귀하의 정보는 공개될 것임을 명심하십시오!</p>
 <p class="img">
   <img src="/images/screenshots/dweet-freeboard.png">
 </p>
 <div class="note warning">
 게시 간격은 1 초로 제한됩니다. 즉, 빠른 변경 사항을 놓칠 수도 있습니다.
 </div>
-<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
@@ -179,7 +182,6 @@ Default value: </p>
 </span></p></dd>
 </dl>
 </div>
-ㄴ
 <h3>
 <a class="title-link" name="--" href="#--"></a> 전체 설정 사례</h3>
 <p>전체 설정 항목은 아래 샘플과 같습니다.</p>
@@ -193,7 +195,7 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="dweetio--" href="#dweetio--"></a> Dweet.io와 상호 작용</h3>
-<p><code>curl</code>로 센서를 테스트하기 위해 명령 행에서 dweets을 쉽게 보낼 수 있습니다.</p>
+<p><code>curl</code>로 센서를 테스트하기 위해 command line에서 dweets을 쉽게 보낼 수 있습니다.</p>
 <pre><code class="language-bash">$ curl -H 'Content-Type: application/json' -d '{"temperature": 40, "humidity": 65}' https://dweet.io/dweet/for/ha-sensor
 </code></pre>
 <p>다음과 같은 응답을 제공합니다.</p>

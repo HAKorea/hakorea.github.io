@@ -438,7 +438,7 @@ Default value: </p>
 <p>속성이 <em>optimistic mode</em>에서 작동하는 경우 (해당 state topic이 설정되지 않은 경우) 홈어시스턴트는 command topic에 게시된 모든 상태 변경이 작동한 것으로 가정하고 command topic에 게시한 직후 엔티티의 내부 상태를 변경합니다. optimistic mode에서 작동하지 않으면 요청된 업데이트가 state topic를 통해 장치에 의해 확인된 경우에만 엔티티의 내부 상태가 업데이트됩니다.</p>
 <h4>
 <a class="title-link" name="-" href="#-"></a> 템플릿 사용하기</h4>
-<p>모든 <code>*_state_topic</code>의 경우, 이 topic에서 들어오는 페이로드를 렌더링하는데 사용될 템플리트를 지정할 수 있습니다. 또한 모든 state topic에 적용되는 기본 템플릿은 <code>value_template</code>으로 지정할 수 있습니다. payload를 받은 경우 (예: JSON 형식)에 유용합니다. JSON에서 따옴표 붙은 문자열 (예: <code>"foo"</code>)은 문자열 일 뿐이므로 따옴표를 없에도 사용할 수 있습니다.</p>
+<p>모든 <code>*_state_topic</code>의 경우, 이 topic에서 들어오는 페이로드를 렌더링하는데 사용될 템플릿을 지정할 수 있습니다. 또한 모든 state topic에 적용되는 기본 템플릿은 <code>value_template</code>으로 지정할 수 있습니다. 페이로드를 받은 경우 (예: JSON 형식)에 유용합니다. JSON에서 따옴표 붙은 문자열 (예: <code>"foo"</code>)은 문자열 일 뿐이므로 따옴표를 없에도 사용할 수 있습니다.</p>
 <p><code>mode_state_topic</code>을 통해 operation 모드 <code>"auto"</code>를 받았지만 실제로 모드는 그냥 auto라고합니다. 여기서 수행할 수 있는 작업은 다음과 같습니다.</p>
 <pre><code class="language-yaml">climate:
   - platform: mqtt
@@ -451,7 +451,7 @@ Default value: </p>
     mode_state_topic: "study/ac/mode/state"
     mode_state_template: "{{ value_json }}"
 </code></pre>
-<p>들어오는 <code>"auto"</code>를 JSON으로 파싱하여 <code>auto</code>가됩니다. 분명히 이 경우  <code>value_template: "{{ value_json }}"</code>를 설정할 수도 있습니다.</p>
+<p>들어오는 <code>"auto"</code>를 JSON으로 파싱하여 <code>auto</code>가 됩니다. 분명히 이 경우  <code>value_template: "{{ value_json }}"</code>를 설정할 수도 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 사례</h3>
 <p>전체 설정 예는 다음과 같습니다.</p>

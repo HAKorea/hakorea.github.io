@@ -103,8 +103,10 @@
   <hr class="divider">
   
 
-  <p><code>google</code> 캘린더 플랫폼을 사용하면 <a href="https://calendar.google.com" rel="external nofollow">Google Calendars</a>에 연결하고 Binary 센서를 생성 할 수 있습니다. 생성된 센서는 캘린더의 이벤트를 기준으로 또는 일치하는 이벤트에 대해서만 트리거 할 수 있습니다. 이 통합구성요소를 처음 설정하면 config 디렉토리에 새 구성 파일 <code>google_calendars.yaml</code>이 생성되며 여기에는 모든 캘린더에 대한 정보가 포함됩니다. 또한 Google 캘린더에서 이벤트를 추가할 수 있습니다.</p>
-<iframe width="690" height="437" src="https://www.youtube.com/embed/OEzpG-iDDlA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/OEzpG-iDDlA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>google</code> 캘린더 플랫폼을 사용하면 <a href="https://calendar.google.com" rel="external nofollow">Google Calendars</a>에 연결하고 Binary 센서를 생성할 수 있습니다. 생성된 센서는 캘린더의 이벤트를 기준으로 또는 일치하는 이벤트에 대해서만 트리거 할 수 있습니다. 이 통합구성요소를 처음 설정하면 config 디렉토리에 새 설정 파일 <code>google_calendars.yaml</code>이 생성되며 여기에는 모든 캘린더에 대한 정보가 포함됩니다. 또한 Google 캘린더에서 이벤트를 추가할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 전제 조건</h2>
 <p><a href="https://console.developers.google.com/start/api?id=calendar" rel="external nofollow">Google Developers Console</a>에서 Client ID 및 Client 비밀번호 생성</p>
@@ -119,7 +121,7 @@
 <li>Copy the client ID and client secret from the page that follows into a text editor temporarily as you will need to put these in your <code>configuration.yaml</code> file.</li>
 <li>Click on the menu item, Library, then search for “Google Calendar API” and enable it (if it isn’t already enabled automatically through this process).</li>
 </ol>
-<p>나중에이 애플리케이션의 OAuth에 “Google Calendar API “보다 더 많은 범위(scope)를 추가하려면 홈어시스턴트 프로파일에서 토큰 파일을 삭제해야합니다. 더 많은 API 액세스를 추가하기 위해 다시 인증하면 새로 고침 토큰이 손실됩니다. Google 서비스에 따라 다른 인증을 사용하는 것이 좋습니다.</p>
+<p>나중에 이 애플리케이션의 OAuth에 “Google Calendar API” 보다 더 많은 범위(scope)를 추가하려면 홈어시스턴트 프로파일에서 토큰 파일을 삭제해야합니다. 더 많은 API 액세스를 추가하기 위해 다시 인증하면 새로 고침 토큰이 손실됩니다. Google 서비스에 따라 다른 인증을 사용하는 것이 좋습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>홈어시스턴트에 Google 캘린더를 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오 :</p>
@@ -134,11 +136,11 @@ google:
   <dl class="">
 <dt>
 <a class="title-link" name="client_id" href="#client_id"></a> client_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>전제조건 단계에서 생성한 Clinet ID를 사용하십시오..</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>전제조건 단계에서 생성한 Clinet ID를 사용하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="client_secret" href="#client_secret"></a> client_secret</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>전제 조건 단계에서 생성 한 Client 비밀번호를 사용하십시오..</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>전제조건 단계에서 생성한 Client 비밀번호를 사용하십시오.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="track_new_calendar" href="#track_new_calendar"></a> track_new_calendar</dt>
@@ -151,7 +153,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>다음에 Home Assistant를 실행하거나 다시 시작하면 새 알림 (왼쪽 아래 모서리에있는 작은 벨 아이콘)이 나타납니다. 해당 알림을 클릭하면 링크와 인증 코드가 표시됩니다. 해당 링크를 클릭하면 알림에 있는 코드를 입력해야하는 Google 웹 사이트가 열립니다. 그러면 인증된 계정이 읽을 수 있는 모든 Google 캘린더에 홈어시스턴트 서비스에 대한 읽기 전용 액세스 권한이 부여됩니다.</p>
+<p>다음에 Home Assistant를 실행하거나 다시 시작하면 새 알림 (왼쪽 아래 모서리에있는 작은벨 아이콘)이 나타납니다. 해당 알림을 클릭하면 링크와 인증 코드가 표시됩니다. 해당 링크를 클릭하면 알림에 있는 코드를 입력해야하는 Google 웹 사이트가 열립니다. 그러면 인증된 계정이 읽을 수 있는 모든 Google 캘린더에 홈어시스턴트 서비스에 대한 읽기 전용 액세스 권한이 부여됩니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 캘린더 설정</h2>
 <p><code>google_calendars.yaml</code> 파일 편집</p>
@@ -188,7 +190,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>네, 달력에 여러 개의 센서를 사용할 수 있습니다!</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>달력에 여러개의 센서를 사용할 수 있습니다!</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -244,7 +246,7 @@ Default value: </p>
 </div>
 <p>이로서 우리는 Binary 센서 <code>calendar.test_unimportant</code> 와 <code>calendar.test_important</code>를 가질수 있습니다. 이 센서는 각각에 대해 설정된 검색 값과 일치하는 동일한 캘린더의 이벤트를 기반으로 자신을 켜거나 끕니다.
 이벤트를 필터링하지 않고 항상 사용가능한 다음 이벤트를 표시하는 센서 <code>calendar.test_everything</code> 이 있습니다.</p>
-<p>그러나 모든 이벤트를 기반으로 전환(toggle)하기를 원한다면 어떻게해야합니까?
+<p>그러나 모든 이벤트를 기반으로 토글하기를 원한다면 어떻게해야합니까?
 단지 <em>search</em> 매개 변수를 생략하면 됩니다.</p>
 <div class="note warning">
 <p><code>search</code>에 <code>#</code>부호를 사용하는 경우 전체 검색어를 따옴표로 묶으십시오.

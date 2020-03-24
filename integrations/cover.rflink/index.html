@@ -103,17 +103,17 @@
   <hr class="divider">
   
 
-  <p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
-<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
-<p>After configuring the RFLink hub, covers will be automatically discovered and added. Except the Somfy RTS devices.</p>
+  <p><code>rflink</code> 통합구성요소는 <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink 게이트웨이 펌웨어</a>를 사용하는 장치 (예: <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink 게이트웨이</a>)를 지원합니다. RFLink 게이트웨이는 저렴한 하드웨어 (Arduino + 트랜시버)를 사용하여 여러 RF 무선 장치와 양방향 통신을 가능하게하는 Arduino 펌웨어입니다.</p>
+<p>먼저 <a href="/integrations/rflink/">RFLink hub</a>를 설정해야합니다.</p>
+<p>RFLink 허브를 구성하면 커버가 자동으로 검색되어 추가됩니다. Somfy RTS 장치는 제외합니다.</p>
 <h3>
-<a class="title-link" name="setting-up-a-somfy-rts-device" href="#setting-up-a-somfy-rts-device"></a> Setting up a Somfy RTS device</h3>
-<p>You have to add the Somfy RTS manually with the supplied RFlinkLoader (Windows only).</p>
-<p>Press the Learn button on the original Somfy remote enter the following code within 3 seconds. Your blinds will go up and down shortly:</p>
+<a class="title-link" name="somfy-rts--" href="#somfy-rts--"></a> Somfy RTS 장치 설정</h3>
+<p>제공된 RFlinkLoader를 사용하여 Somfy RTS를 수동으로 추가해야합니다 (Windows 만 해당).</p>
+<p>원래 Somfy 리모컨의 Learn 버튼을 3 초 이내에 다음 코드를 입력하십시오. 블라인드는 곧 위아래로 움직입니다.</p>
 <pre><code class="language-text">10;RTS;02FFFF;0412;3;PAIR;
 </code></pre>
-<p>Your blinds will go up and down again. This means your RFLink is now paired with your RTS motor.
-To check this enter the following code again and see if there is a record.</p>
+<p>블라인드가 다시 위아래로 움직입니다. 이는 RFLink가 RTS 모터와 페어링되었음을 의미합니다.
+이를 확인하려면 다음 코드를 다시 입력하고 레코드가 있는지 확인하십시오.</p>
 <pre><code class="language-text">10;RTSSHOW;
 </code></pre>
 <pre><code class="language-text">RTS Record: 0 Address: FFFFFF RC: FFFF
@@ -133,10 +133,10 @@ RTS Record: 13 Address: FFFFFF RC: FFFF
 RTS Record: 14 Address: FFFFFF RC: FFFF
 RTS Record: 15 Address: FFFFFF RC: FFFF
 </code></pre>
-<p>After configuring the RFLink Somfy RTS you have to add the cover to the <code>configuration.yaml</code> file like any other RFlink device.</p>
-<p>RFLink cover ID’s are composed of: protocol, id, and gateway. For example: <code>RTS_0100F2_0</code>.</p>
-<p>Once the ID of a cover is known, it can be used to configure the cover in Home Assistant, for example, to add it to a different group, hide it or set a nice name.</p>
-<p>Configuring devices as a cover:</p>
+<p>RFLink Somfy RTS를 설정한 후에는 다른 RFlink 장치와 마찬가지로 <code>configuration.yaml</code> 파일에 커버를 추가해야합니다.</p>
+<p>RFLink 커버 ID는 프로토콜, ID, 게이트웨이로 설정됩니다. 예를 들면 다음과 같습니다. : <code>RTS_0100F2_0</code>.</p>
+<p>커버의 ID를 알고 나면 홈어시스턴트에서 커버를 설정하는데 사용할 수 있습니다 (예 : 다른 그룹에 추가하거나 숨기거나 익숙한 이름을 설정).</p>
+<p>장치를 커버로 설정 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: rflink
@@ -234,16 +234,16 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="setting-up-a-kaku-asun-650-device" href="#setting-up-a-kaku-asun-650-device"></a> Setting up a KAKU ASUN-650 device</h3>
-<p>In RFLink, the ON and DOWN command are used to close the cover and the OFF and UP command are used to open the cover. The KAKU (COCO) ASUN-650 works the other way around, it uses the ON command to open the cover and the OFF command to close the cover.</p>
-<p>The RFLink cover device has a property named <code>type</code> that takes 2 values:</p>
+<a class="title-link" name="kaku-asun-650--" href="#kaku-asun-650--"></a> KAKU ASUN-650 장치 설정</h3>
+<p>RFLink에서 ON 및 DOWN 명령은 커버를 닫고 OFF 및 UP 명령은 커버를 열 때 사용됩니다. KAKU (COCO) ASUN-650은 반대로 작동하며, ON 명령을 사용하여 커버를 열고 OFF 명령을 사용하여 커버를 닫습니다.</p>
+<p>RFLink 커버 장치에는 2 가지 값을 갖는 <code>type</code> 이라는 속성이 있습니다. :</p>
 <ul>
 <li>
 <code>standard</code>: Do not invert the on/off commands sent to the RFLink device.</li>
 <li>
 <code>inverted</code>: Invert the on/off commands sent to the RFLink device.</li>
 </ul>
-<p>The following configuration example shows how to use the <code>type</code> property:</p>
+<p>다음 설정 예제는 <code>type</code> 속성을 사용하는 방법을 보여줍니다 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry that shows how to
 # use the type property.
 cover:
@@ -266,13 +266,13 @@ cover:
       nonkaku_yyyyyyyy_z:
         name: non_kaku_not_inverted_by_default
 </code></pre>
-<p>The configuration above shows that the <code>type</code> property may be omitted. When the ID starts with <code>newkaku</code>, the component will make sure that the on and off commands are inverted. When the ID does not start with <code>newkaku</code>, the on and off commands are not inverted.</p>
+<p>위의 설정은 <code>type</code> 속성이 생략될 수 있음을 보여줍니다. ID가 <code>newkaku</code>로 시작하면 구성 요소는 on 및 off 명령이 반전되도록합니다. ID가 <code>newkaku</code>로 시작하지 않으면 on 및 off 명령이 반전되지 않습니다.</p>
 <h3>
-<a class="title-link" name="device-support" href="#device-support"></a> Device support</h3>
-<p>See <a href="/integrations/rflink/#device-support">device support</a>.</p>
+<a class="title-link" name="-" href="#-"></a> 지원 장치</h3>
+<p><a href="/integrations/rflink/#device-support">device support</a> 참조하십시오.</p>
 <h3>
-<a class="title-link" name="additional-configuration-examples" href="#additional-configuration-examples"></a> Additional configuration examples</h3>
-<p>Multiple covers with custom names and aliases</p>
+<a class="title-link" name="--" href="#--"></a> 추가 설정 사례</h3>
+<p>사용자 정의 이름 및 별명을 가진 여러 커버</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cover:
   - platform: rflink

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Orangepi GPIO - 홈어시스턴트</title>
+    <title>오렌지파이 GPIO(Orangepi GPIO) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate the GPIO capability of a Orange Pi into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/orangepi_gpio/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Orangepi GPIO">
+    <meta property="og:title" content="오렌지파이 GPIO(Orangepi GPIO)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/orangepi_gpio/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Orangepi GPIO">
+    <meta name="twitter:title" content="오렌지파이 GPIO(Orangepi GPIO)">
     <meta name="twitter:description" content="Instructions on how to integrate the GPIO capability of a Orange Pi into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,19 +97,19 @@
   
   <header>
     <h1 class="title indent">
-      Orangepi GPIO
+      오렌지파이 GPIO(Orangepi GPIO)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>orangepi_gpio</code> integration is the base for all related GPIO platforms in Home Assistant. There is no setup needed for the integration itself, for the platforms please check their corresponding pages.</p>
+  <p>orangepi_gpio 통합구성요소는 Home Assistant의 모든 관련 GPIO 플랫폼 기반입니다. 연동 자체에 필요한 설정이 없습니다. 플랫폼의 경우 해당 페이지를 확인하십시오.</p>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>The <code>orangepi_gpio</code> binary sensor platform allows you to read sensor values of the GPIOs of your Orange Pi or NanoPi.</p>
+<p>orangepi_gpio 바이너리 센서 플랫폼을 사용하면 Orange Pi 또는 NanoPi의 GPIO 센서값을 읽을 수 있습니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your Orange Pi’s GPIO in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치에서 Orange Pi의 GPIO를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: orangepi_gpio
@@ -147,10 +147,10 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>Compared to the <a href="/integrations/rpi_gpio/">Raspberry Pi GPIO</a> component, this integration does not support pull-up resistors or port debouncing. Use external pull-ups and external port-debouncing.</p>
+<p><a href="/integrations/rpi_gpio/">Raspberry Pi GPIO</a> 구성 요소와 비교하여 이 통합구성요소는 풀업 저항(pull-up resistors) 또는 포트 디바운싱(port debouncing)을 지원하지 않습니다. 외부 풀업 및 외부 포트 디바운싱을 사용하십시오.</p>
 <h2>
 <a class="title-link" name="pin-modes" href="#pin-modes"></a> Pin modes</h2>
-<p>As this platform supports different types of GPIO pinouts for difference Orange Pi or Nano Pi devices, we use the <code>pin_mode</code> value to specify which one to use. Enabled values are:</p>
+<p>이 플랫폼은 다른 Orange Pi 또는 Nano Pi 장치에 대해 다양한 유형의 GPIO 핀아웃을 지원하므로 <code>pin_mode</code> 값을 사용하여 사용할 것을 지정합니다. 사용 가능한 값은 다음과 같습니다.</p>
 <table>
 <thead>
 <tr>
@@ -230,14 +230,14 @@ Default value: </p>
 </tbody>
 </table>
 <h2>
-<a class="title-link" name="additional-steps" href="#additional-steps"></a> Additional steps</h2>
-<p>This integration uses the <code>SYSFS</code> filesystem to get control of the GPIOs. Therefore an operating system with <code>CONFIG_GPIO_SYSFS</code> is required. As far as I know, most out-of-the-box distributions still enable this by default.</p>
-<p>As of Linux 4.8 sysfs-gpio is marked as obsolete. However as of today, the alternative GPIO character device is not widely used. Therefore we will use this until the new character device is more widely supported.</p>
-<p>Normally the <code>/sys/class/gpio</code> path is owned by root, so Home Assistant does not have access. As we don’t want to run Home Assistant as root, we will add the group <code>gpio</code> to have control over this path. I will assume you added the <code>homeassistant</code> user already to the <code>gpio</code> group as recommended in the <a href="/docs/installation/raspberry-pi/">Manual installation guide</a></p>
-<p>Create a new file in <code>/etc/udev/rules.d/</code> named <code>10-gpio.rules</code> with the following contents:</p>
+<a class="title-link" name="--additional-steps" href="#--additional-steps"></a> 추가 단계 (Additional steps)</h2>
+<p>이 통합구성요소는 <code>SYSFS</code> 파일 시스템을 사용하여 GPIO를 제어합니다. 따라서 <code>CONFIG_GPIO_SYSFS</code>가 있는 운영 체제가 필요합니다. 내가 아는 한 대부분의 기본 배포판은 ​​기본적으로 이를 활성화합니다.</p>
+<p>Linux 4.8부터 sysfs-gpio는 더이상 사용되지 않는 것으로 표시됩니다. 그러나 현재로서는 대체 GPIO 문자 장치가 널리 사용되지 않습니다. 따라서 우리는 새로운 캐릭터 장치가 더 널리 지원 될 때까지 이것을 사용할 것입니다.</p>
+<p>일반적으로 <code>/sys/class/gpio</code> 경로는 루트가 소유하므로 Home Assistant는 액세스 할 수 없습니다. 우리는 루트로 홈어시스턴트를 실행하고 싶지 않기 때문에이 경로를 제어 할 수 있도록 <code>gpio</code> 그룹을 추가 할 것이다. <a href="/docs/installation/raspberry-pi/">Manual installation guide</a>에서 권장하는대로 <code>homeassistant</code> 사용자를 <code>gpio</code> 그룹에 이미 추가했다고 가정합니다.</p>
+<p><code>/etc/udev/rules.d/</code>에 <code>10-gpio.rules</code>라는 새 파일을 다음 내용으로 작성하십시오.</p>
 <pre><code class="language-txt">SUBSYSTEM=="gpio*", PROGRAM="/bin/sh -c 'find -L /sys/class/gpio/ -maxdepth 2 -exec chown root:gpio {} \; -exec chmod 770 {} \; || true'"
 </code></pre>
-<p>Home Assistant will now be able to control your GPIO pins.</p>
+<p>홈어시스턴트는 이제 GPIO 핀을 제어 할 수 있습니다.</p>
 
 
 </article>

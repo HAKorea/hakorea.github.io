@@ -103,11 +103,11 @@
   <hr class="divider">
   
 
-  <p>The <code>rpi_gpio_pwm</code> platform allows to control multiple lights using pulse-width modulation, for example led strips. It supports one-color, RGB and RGBW LEDs driven by GPIOs of a Raspberry Pi or a PCA9685 controller.</p>
-<p>For controlling the GPIOs, the platform connects to the <a href="http://abyz.me.uk/rpi/pigpio/pigpiod.html" rel="external nofollow">pigpio-daemon</a>, which must be running. On Raspbian Jessie 2016-05-10 or newer the <code>pigpio</code> library is already included. On other operating systems it needs to be installed first (see <a href="https://github.com/soldag/python-pwmled#installation" rel="external nofollow">installation instructions</a>).</p>
+  <p><code>rpi_gpio_pwm</code> 플랫폼은 pulse-width 변조 (예: LED 스트립)를 사용하여 여러 조명을 제어할 수 있습니다. Raspberry Pi의 GPIO 또는 PCA9685 컨트롤러로 구동되는 단색, RGB 및 RGBW LED를 지원합니다.</p>
+<p>GPIO를 제어하기 위해 플랫폼은 실행중인 <a href="http://abyz.me.uk/rpi/pigpio/pigpiod.html" rel="external nofollow">pigpio-daemon</a>에 연결됩니다. Raspbian Jessie 2016-05-10 이상에는 <code>pigpio</code> 라이브러리가 이미 포함되어 있습니다. 다른 운영 체제에서는 먼저 설치해야합니다 (<a href="https://github.com/soldag/python-pwmled#installation" rel="external nofollow">installation instructions</a> 참조).</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable this platform, add the following lines to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>이 플랫폼을 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: rpi_gpio_pwm
@@ -164,11 +164,12 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
-<p>In this section you find some real-life examples of how to use this sensor.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
-<a class="title-link" name="rgb-led-connected-to-pca9685-controller" href="#rgb-led-connected-to-pca9685-controller"></a> RGB LED connected to PCA9685 controller</h3>
-<p>This example uses a <a href="https://www.nxp.com/products/interfaces/ic-bus-portfolio/ic-led-display-control/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685" rel="external nofollow">PCA9685 controller</a> to control a RGB LED.</p>
+<a class="title-link" name="pca9685---rgb-led" href="#pca9685---rgb-led"></a> PCA9685 컨트롤러에 연결된 RGB LED</h3>
+<p>This example uses a <a href="https://www.nxp.com/products/interfaces/ic-bus-portfolio/ic-led-display-control/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685" rel="external nofollow">PCA9685 controller</a> to control a RGB LED.
+이 예에서는 <a href="https://www.nxp.com/products/interfaces/ic-bus-portfolio/ic-led-display-control/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685" rel="external nofollow">PCA9685 controller</a>를 사용하여 RGB LED를 제어합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: rpi_gpio_pwm
@@ -179,8 +180,8 @@ light:
         type: rgb
 </code></pre>
 <h3>
-<a class="title-link" name="rgbw-led-connected-to-pca9685-controller" href="#rgbw-led-connected-to-pca9685-controller"></a> RGBW LED connected to PCA9685 controller</h3>
-<p>This example uses a <a href="https://www.nxp.com/products/interfaces/ic-bus-portfolio/ic-led-display-control/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685" rel="external nofollow">PCA9685 controller</a> to interact with a RGBW LED.</p>
+<a class="title-link" name="pca9685---rgbw-led" href="#pca9685---rgbw-led"></a> PCA9685 컨트롤러에 연결된 RGBW LED</h3>
+<p>이 예는 <a href="https://www.nxp.com/products/interfaces/ic-bus-portfolio/ic-led-display-control/16-channel-12-bit-pwm-fm-plus-ic-bus-led-controller:PCA9685" rel="external nofollow">PCA9685 controller</a>를 사용하여 RGBW LED와 상호 작용합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: rpi_gpio_pwm

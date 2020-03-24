@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>The <code>bme680</code> sensor platform allows you to read temperature, humidity, pressure and gas resistance values of a <a href="https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf" rel="external nofollow">Bosch BME680 Environmental sensor</a> connected via an <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2C</a> bus (SDA, SCL pins). It allows you to use all the operation modes of the sensor described in its datasheet. In addition, it includes a basic air quality calculation that uses gas resistance and humidity measurements to calculate a percentage based air quality measurement.</p>
-<p>Tested devices:</p>
+  <p><code>bme680</code> 센서 플랫폼을 사용하면 <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2C</a> 버스 (SDA, SCL 핀)를 통해 연결된 <a href="https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf" rel="external nofollow">Bosch BME680 Environmental sensor</a>의 온도, 습도, 압력 및 가스 저항 값을 읽을 수 있습니다. 데이터 시트에 설명된 센서의 모든 작동 모드를 사용할 수 있습니다. 또한 가스 저항 및 습도 측정을 사용하여 백분율 기반 대기질 측정을 계산하는 기본 대기질 계산이 포함됩니다.</p>
+<p>테스트 된 장치 :</p>
 <ul>
 <li><a href="https://www.raspberrypi.org/" rel="external nofollow">Raspberry Pi</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your BME680 sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>BME680 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: bme680
@@ -270,8 +270,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="full-examples" href="#full-examples"></a> Full Examples</h2>
-<p>If you want to specify the working mode of the digital sensor or need to change the default I2C address (which is 0x77), add more details to the <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="-" href="#-"></a> 전체 사례</h2>
+<p>디지털 센서의 작동 모드를 지정하거나 기본 I2C 주소 (0x77)를 변경해야하는 경우 <code>configuration.yaml</code> 파일에 세부 사항을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example of customized configuration.yaml entry
 sensor:
   - platform: bme680
@@ -296,8 +296,8 @@ sensor:
     temp_offset: -5.5
 </code></pre>
 <h2>
-<a class="title-link" name="customizing-the-sensor-data" href="#customizing-the-sensor-data"></a> Customizing the sensor data</h2>
-<p>Give the values friendly names and icons, add the following to your <code>customize:</code> section.</p>
+<a class="title-link" name="---" href="#---"></a> 사용자 정의 센서 데이터</h2>
+<p>값에 친숙한 이름과 아이콘을 지정하고 <code>customize:</code> 섹션에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 customize:
   sensor.bme680_sensor_temperature:
@@ -317,7 +317,7 @@ customize:
     device_class: pm25
     unit_of_measurement: "%"
 </code></pre>
-<p>To create a group, add the following to your <code>group</code> section.</p>
+<p>그룹을 만들려면 <code>group</code> 섹션에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 group:
   climate:
@@ -329,11 +329,11 @@ group:
       - sensor.bme680_sensor_air_quality
 </code></pre>
 <h2>
-<a class="title-link" name="directions-for-enabling-i2c-interface-on-hassio" href="#directions-for-enabling-i2c-interface-on-hassio"></a> Directions for enabling I2C interface on Hass.io</h2>
-<p>Follow the instructions here to <a href="/hassio/enable_i2c/">enable I2C on Hass.io.</a>.</p>
+<a class="title-link" name="hassio-i2c----" href="#hassio-i2c----"></a> Hass.io에서 I2C 인터페이스를 활성화하기 위한 지침</h2>
+<p><a href="/hassio/enable_i2c/">enable I2C on Hass.io</a>지침을 따르십시오.</p>
 <h2>
-<a class="title-link" name="directions-for-installing-smbus-support-on-raspberry-pi" href="#directions-for-installing-smbus-support-on-raspberry-pi"></a> Directions for installing SMBus support on Raspberry Pi</h2>
-<p>Enable I2C interface with the Raspberry Pi configuration utility:</p>
+<a class="title-link" name="raspberry-pi-smbus--" href="#raspberry-pi-smbus--"></a> Raspberry Pi에 SMBus 설치 지침</h2>
+<p>Raspberry Pi 설정 유틸리티를 사용하여 I2C 인터페이스를 활성화하십시오.</p>
 <pre><code class="language-bash"># pi user environment: Enable I2C interface
 $ sudo raspi-config
 </code></pre>
@@ -349,8 +349,8 @@ $ sudo addgroup homeassistant i2c
 $ sudo reboot
 </code></pre>
 <h3>
-<a class="title-link" name="check-the-i2c-address-of-the-sensor" href="#check-the-i2c-address-of-the-sensor"></a> Check the I2C address of the sensor</h3>
-<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors:</p>
+<a class="title-link" name="-i2c--" href="#-i2c--"></a> 센서의 I2C 주소 확인</h3>
+<p><code>i2c-tools</code>를 설치한 후, 연결된 센서의 주소를 스캔하기 위해 새로운 유틸리티를 사용할 수 있습니다 :</p>
 <pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
 </code></pre>
 <p>It will output a table like this:</p>
@@ -364,7 +364,7 @@ $ sudo reboot
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- 76
 </code></pre>
-<p>So you can see the sensor address that you are looking for is <strong>0x76</strong> (there is another I2C device on that Raspberry Pi).</p>
+<p>따라서 찾고있는 센서 주소가 <strong>0x76</strong>임을 알 수 있습니다. (해당 Raspberry Pi에 다른 I2C 장치가 있음).</p>
 
 
 </article>

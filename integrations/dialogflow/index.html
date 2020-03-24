@@ -103,10 +103,12 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/fcL4fPhlVVc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/fcL4fPhlVVc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>dialogflow</code> 통합구성요소는 <a href="https://dialogflow.com/" rel="external nofollow">Dialogflow</a>의 <a href="https://dialogflow.com/docs/fulfillment#webhook" rel="external nofollow">webhook</a>통합구성요소와 함께 사용되도록 설계되었습니다. 사용자와 대화가 끝나면 Dialogflow는 웹후크에 액션과 매개 변수를 보냅니다.</p>
-<p>DialogFlow에서 메시지를 수신하려면 웹에서 홈어시스턴트 인스턴스에 액세스 할 수 있어야하고 (<a href="/addons/duckdns/">Hass.io instructions</a>) HTTP 통합(<a href="/integrations/http/#base_url">docs</a>)을 위해 <code>base_url</code>을 설정해야합니다. 서버가 응답하지 않거나 너무 오래 걸리면 (5 초 이상) Dialogflow가 대체 응답을 반환합니다.</p>
-<p>Dialogflow는 많은 유명한 messaging, virtual assistant 및 IoT 플랫폼과 <a href="https://dialogflow.com/docs/integrations/" rel="external nofollow">연동</a> 할 수 있습니다.</p>
+<p>DialogFlow에서 메시지를 수신하려면 웹에서 홈어시스턴트 인스턴스에 액세스 할 수 있어야하고 (<a href="/addons/duckdns/">Hass.io instructions</a>)으로 HTTP 연동(<a href="/integrations/http/#base_url">docs</a>)을 위해 <code>base_url</code>을 설정해야합니다. 서버가 응답하지 않거나 너무 오래 걸리면 (5 초 이상) Dialogflow가 대체 응답을 반환합니다.</p>
+<p>Dialogflow는 많은 유명한 messaging, virtual assistant 및 IoT 플랫폼과 <a href="https://dialogflow.com/docs/integrations/" rel="external nofollow">연동</a>할 수 있습니다.</p>
 <p>Dialogflow를 사용하면 다음과 같은 대화를 쉽게 만들 수 있습니다. :</p>
 <p><em>User: What is the temperature at home?</em></p>
 <p><em>Bot: The temperature is 34 degrees</em></p>
@@ -139,7 +141,7 @@
 <li>Dialogflow has send a request to your Home Assistant server</li>
 </ul>
 <div class="note warning">
-<p>V1 API는 2019년 10월 23일부터 더 이상 사용되지 않습니다. V1 API를 계속 사용중인 경우 V2 API를 사용하도록 Dialogflow에서 설정을 변경하는 것이 좋습니다. V2 API로 업그레이드 한 후 yaml 설정을 변경할 필요가 없습니다. <a href="https://console.dialogflow.com/" rel="external nofollow">here</a>서 코그 단추를 클릭하여 V2 API로 변경 한 후 V2 API 를 선택하십시오.</p>
+<p>V1 API는 2019년 10월 23일부터 더 이상 사용되지 않습니다. V1 API를 계속 사용중인 경우 V2 API를 사용하도록 Dialogflow에서 설정을 변경하는 것이 좋습니다. V2 API로 업그레이드 한 후 yaml 설정을 변경할 필요가 없습니다. <a href="https://console.dialogflow.com/" rel="external nofollow">here</a>서 코그 단추를 클릭하여 V2 API로 변경한 후 V2 API 를 선택하십시오.</p>
 </div>
 <p>왼쪽 메뉴에서 “Integrations”을 살펴보고 third parties를 설정하십시오.</p>
 <h3>

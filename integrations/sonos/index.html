@@ -104,11 +104,11 @@
   
 
   <iframe width="690" height="437" src="https://www.youtube.com/embed/H2qIRgzLwDU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>sonos</code> 통합구성요소를 통해 Home Assistant에서 <a href="https://www.sonos.com" rel="external nofollow">Sonos</a> 무선 스피커를 제어 할 수 있습니다. IKEA Symfonisk 스피커와도 작동합니다.</p>
+<p><code>sonos</code> 통합구성요소를 통해 Home Assistant에서 <a href="https://www.sonos.com" rel="external nofollow">Sonos</a> 무선 스피커를 제어할 수 있습니다. IKEA Symfonisk 스피커와도 작동합니다.</p>
 <p>설정 패널 내부의 통합구성요소 페이지로 이동하여 Sonos 통합구성요소를 설정할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 서비스</h2>
-<p>Sonos 통합은 다양한 맞춤형 서비스를 제공합니다.</p>
+<p>Sonos 통합구성요소는 다양한 맞춤형 서비스를 제공합니다.</p>
 <h3>
 <a class="title-link" name="sonossnapshot-" href="#sonossnapshot-"></a> sonos.snapshot 서비스</h3>
 <p>하나 이상의 스피커에서 현재 재생중인 내용의 스냅샷을 만듭니다. 이 서비스와 다음 서비스는 초인종 또는 알림음을 재생하고 나중에 재생을 다시 시작하려는 경우에 유용합니다. <code>entity_id</code> 가 제공되지 않으면 모든 스피커가 스냅샷됩니다.</p>
@@ -211,7 +211,7 @@
 </table>
 <h3>
 <a class="title-link" name="sonosset_sleep_timer-" href="#sonosset_sleep_timer-"></a> sonos.set_sleep_timer 서비스</h3>
-<p>일정 시간이 지나면 볼륨을 0으로 줄임으로써 스피커를 끄는 타이머를 설정합니다. 팁 : sleep_time 값을 0으로 설정하면 스피커가 즉시 볼륨을 낮추기 시작합니다.</p>
+<p>일정 시간이 지나면 볼륨을 0으로 줄임으로써 스피커를 끄는 타이머를 설정합니다. 팁: sleep_time 값을 0으로 설정하면 스피커가 즉시 볼륨을 낮추기 시작합니다.</p>
 <table>
 <thead>
 <tr>
@@ -329,7 +329,7 @@
 <h3>
 <a class="title-link" name="sonosplay_queue-" href="#sonosplay_queue-"></a> sonos.play_queue 서비스</h3>
 <p>Sonos 대기열 재생을 시작합니다.</p>
-<p>대기열 재생을 강제로 시작하면 다른 스트림 (예 : 라디오)에서 대기열 재생으로 전환 할 수 있습니다.</p>
+<p>대기열 재생을 강제로 시작하면 다른 스트림 (예: 라디오)에서 대기열 재생으로 전환할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -353,8 +353,8 @@
 </table>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 고급 사용</h2>
-<p>고급 사용을 위해 사용 가능한 일부 수동 설정 옵션이 있습니다. 이들은 일반적으로 Home Assistant와 Sonos가 동일한 서브넷에 있지 않은 복잡한 네트워크 설정이있는 경우에만 필요합니다.</p>
-<p>Sonos IP 주소를 지정하여 자동 검색을 비활성화 할 수 있습니다. :</p>
+<p>고급 사용을 위해 사용 가능한 일부 수동 설정 옵션이 있습니다. 이들은 일반적으로 Home Assistant와 Sonos가 동일한 서브넷에 있지 않은 복잡한 네트워크 설정이 있는 경우에만 필요합니다.</p>
+<p>Sonos IP 주소를 지정하여 자동 검색을 비활성화할 수 있습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry with manually specified Sonos IP addresses
 sonos:
   media_player:
@@ -363,13 +363,13 @@ sonos:
       - 192.0.2.26
       - 192.0.2.27
 </code></pre>
-<p>Home Assistant 서버에 여러 IP 주소가 있는 경우 Sonos 자동 검색에 사용해야 하는 IP 주소를 제공 할 수 있습니다. 기본적으로 모든 주소를 시도해야 하므로 이는 거의 필요하지 않습니다.</p>
+<p>Home Assistant 서버에 여러 IP 주소가 있는 경우 Sonos 자동 검색에 사용해야 하는 IP 주소를 제공할 수 있습니다. 기본적으로 모든 주소를 시도해야 하므로 이는 거의 필요하지 않습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry using Sonos discovery on a specific interface
 sonos:
   media_player:
     interface_addr: 192.0.2.1
 </code></pre>
-<p>Sonos 스피커는 (TCP 포트 1400을 사용하여) 변경 이벤트를 전달하기 위해 홈어시스턴트에 다시 연결을 시도합니다. Docker 옵션 <code>--net=host</code>를 사용하는 <em>not</em> 와 같은 NAT 시나리오에서 도움이 될 수 있습니다.</p>
+<p>Sonos 스피커는 (TCP 포트 1400을 사용하여) 변경 이벤트를 전달하기 위해 홈어시스턴트에 다시 연결을 시도합니다. Docker 옵션 <code>--net=host</code> 를 사용하지 <em>않는</em> 경우의 NAT 시나리오에서 도움이 될 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry modifying the advertised host address
 sonos:
   media_player:

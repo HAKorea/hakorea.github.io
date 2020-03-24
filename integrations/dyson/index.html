@@ -103,9 +103,11 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/8HT_W28OzaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/8HT_W28OzaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>dyson</code> 통합구성요소는 모든 <a href="https://www.dyson.com" rel="external nofollow">Dyson</a> 관련 플랫폼을 연동하기위한 주요 통합구성요소입니다.</p>
-<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Climate</li>
 <li>Fan</li>
@@ -145,7 +147,7 @@ dyson:
 </span></p></dd>
 <dt>
 <a class="title-link" name="devices" href="#devices"></a> devices</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 목록..</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -159,7 +161,7 @@ dyson:
 </dl></dd>
 </dl>
 </div>
-<p><code>devices</code> 목록은 선택 사항이지만 검색이 작동하지 않을 경우 제공해야합니다. (로그의 경고 및 Home Assistant 웹 인터페이스에서 장치를 사용할 수 없음).</p>
+<p><code>devices</code> 목록은 선택사항이지만 검색이 작동하지 않을 경우 제공해야합니다. (로그의 경고 및 Home Assistant 웹 인터페이스에서 장치를 사용할 수 없음).</p>
 <div class="note warning">
 <p>로봇 청소기 모델 (Dyson 360 Eye)에서는 아직 검색이 지원되지 않습니다. 이 장치들에 대해서는 <code>devices</code> 목록에 제공해야합니다.</p>
 </div>
@@ -178,7 +180,7 @@ dyson:
 </code></pre>
 <h2>
 <a class="title-link" name="vacumm" href="#vacumm"></a> vacumm</h2>
-<p><code>dyson</code> vacumm 플랫폼을 사용하면 Dyson 360 Eye 로봇 진공을 제어 할 수 있습니다.</p>
+<p><code>dyson</code> vacumm 플랫폼을 사용하면 Dyson 360 Eye 로봇청소기를 제어할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="component-" href="#component-"></a> Component 서비스</h3>
 <p>이 연동은 다음 서비스를 지원합니다 (<a href="/integrations/vacuum/">Vacuum Cleaner Robots</a> 참조).</p>
@@ -198,7 +200,7 @@ dyson:
 </ul>
 <h2>
 <a class="title-link" name="climate" href="#climate"></a> Climate</h2>
-<p><code>dyson</code> Climate 플랫폼을 사용하면 Dyson Pure Hot+Cool Fan thermal를 제어 할 수 있습니다. 팬(fan) 기능을 제어하려면 이 페이지의 Dyson 팬 부분을 참조하십시오.</p>
+<p><code>dyson</code> Climate 플랫폼을 사용하면 Dyson Pure Hot+Cool Fan thermal를 제어할 수 있습니다. 팬(fan) 기능을 제어하려면 이 페이지의 Dyson 팬 부분을 참조하십시오.</p>
 <h3>
 <a class="title-link" name="component-" href="#component-"></a> Component 서비스</h3>
 <p>이 연동은 다음 서비스를 지원합니다 (<a href="/integrations/climate/">Climate</a> 참고):</p>
@@ -269,7 +271,7 @@ dyson:
 <p><code>dyson</code> 센서 플랫폼은 온도 및 습도 센서를 제공합니다.</p>
 <h2>
 <a class="title-link" name="air-quality" href="#air-quality"></a> Air Quality</h2>
-<p><code>dyson</code> 대기 질 플랫폼은 다음과 같은 레벨을 제공합니다.</p>
+<p><code>dyson</code> Air Quality 플랫폼은 다음과 같은 Level을 제공합니다.</p>
 <ul>
 <li>Particulate matter 2.5 (&lt;= 2.5 μm) level.</li>
 <li>Particulate matter 10 (&lt;= 10 μm) level.</li>
@@ -277,7 +279,7 @@ dyson:
 <li>NO2 (이산화질소) level.</li>
 <li>VOC (휘발성 유기 화합물) level.</li>
 </ul>
-<p>참고 : 현재 2018 년 다이슨 팬만 지원됩니다 (TP04 및 DP04).</p>
+<p>참고: 현재 2018 년 다이슨 팬만 지원됩니다 (TP04 및 DP04).</p>
 <h3>
 <a class="title-link" name="--" href="#--"></a> 지원되는 팬 장치</h3>
 <ul>

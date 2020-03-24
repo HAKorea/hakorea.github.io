@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/vHZLCahai4Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/vHZLCahai4Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>digital_ocean</code> 통합구성요소를 통해 Home Assistant에서 <a href="https://www.digitalocean.com/" rel="external nofollow">Digital Ocean</a> droplets 정보에 액세스 할 수 있습니다.</p>
 <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
@@ -115,7 +117,7 @@
 <p><a href="https://cloud.digitalocean.com/settings/api/tokens" rel="external nofollow">Digital Ocean dashboard</a>에서 API 키를 얻습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>Digital Ocean droplets을 Home Assistant와 통합하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
+<p>Digital Ocean droplets을 Home Assistant와 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 digital_ocean:
   access_token: YOUR_API_KEY
@@ -135,7 +137,7 @@ digital_ocean:
 <p><code>digital_ocean</code> 이진 센서 플랫폼을 통해 Digital Ocean droplets을 모니터링 할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
-<p>Digital Ocean droplets을 사용하려면 먼저 <a href="/integrations/digital_ocean/">Digital Ocean hub</a>를 설정 한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
+<p>Digital Ocean droplets을 사용하려면 먼저 <a href="/integrations/digital_ocean/">Digital Ocean hub</a>를 설정한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: digital_ocean
@@ -158,7 +160,7 @@ binary_sensor:
 <p><code>digital_ocean</code> 스위치 플랫폼을 사용하면 Digital Ocean droplets을 제어(start/stop)할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
-<p>Digital Ocean droplets을 사용하려면 먼저 <a href="/integrations/digital_ocean/">Digital Ocean hub</a>를 설정 한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
+<p>Digital Ocean droplets을 사용하려면 먼저 <a href="/integrations/digital_ocean/">Digital Ocean hub</a>를 설정한 다음 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: digital_ocean

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Google Pub/Sub - 홈어시스턴트</title>
+    <title>구글 퍼브서브(Google Pub/Sub) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Setup for Google Pub/Sub integration">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/google_pubsub/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Google Pub/Sub">
+    <meta property="og:title" content="구글 퍼브서브(Google Pub/Sub)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/google_pubsub/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Google Pub/Sub">
+    <meta name="twitter:title" content="구글 퍼브서브(Google Pub/Sub)">
     <meta name="twitter:description" content="Setup for Google Pub/Sub integration">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,26 +97,26 @@
   
   <header>
     <h1 class="title indent">
-      Google Pub/Sub
+      구글 퍼브서브(Google Pub/Sub)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The <code>google_pubsub</code> integration allows you to hook into the Home Assistant event bus and send events to <a href="https://cloud.google.com/pubsub/docs/overview" rel="external nofollow">Google Cloud Pub/Sub</a>. The current <a href="https://cloud.google.com/free/" rel="external nofollow">free tier</a> of GCP should allow you to sync about 1 event every 2 seconds on average (2 million invocations per month).</p>
+  <p><code>google_pubsub</code> 통합구성요소를 통해 홈어시스턴트 이벤트 버스에 연결하여 <a href="https://cloud.google.com/pubsub/docs/overview" rel="external nofollow">Google Cloud Pub/Sub</a>로 이벤트를 보낼 수 있습니다. GCP의 현재 <a href="https://cloud.google.com/free/" rel="external nofollow">free tier</a>을 사용하면 평균 2 초마다 약 1 개의 이벤트를 동기화 할 수 있습니다 (한 달에 2백만 회 호출).</p>
 <h2>
-<a class="title-link" name="first-time-setup" href="#first-time-setup"></a> First time setup</h2>
-<p>This assumes you already have a Google Cloud project. If you don’t, please create one in the <a href="https://console.cloud.google.com/projectcreate" rel="external nofollow">Google Cloud Console</a></p>
-<p>You need to create a Service Account key in the <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">Google Cloud API Console</a></p>
+<a class="title-link" name="-" href="#-"></a> 최초 셋업</h2>
+<p>이미 Google Cloud 프로젝트가 있다고 가정합니다. 그렇지 않은 경우 <a href="https://console.cloud.google.com/projectcreate" rel="external nofollow">Google Cloud Console</a>에서 계정을 만드십시오.</p>
+<p><a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">Google Cloud API Console</a>에서 서비스 계정 키를 만들어야합니다.</p>
 <ul>
 <li>Choose a new “New Service Account”, give it a name and leave the key type as JSON</li>
 <li>Select the role: Pub/Sub Publisher</li>
 </ul>
-<p>This will download the Service Account JSON key to your machine. Do NOT share this with anyone. Place this file in your Home Assistant config folder.</p>
-<p>Next, create a Google Pub/Sub topic in the <a href="https://console.cloud.google.com/cloudpubsub/topicList" rel="external nofollow">Google Cloud API Console</a>. The topic name will become something like <code>projects/project-198373/topics/topic-name</code>. Note the last part only (the name you chose): <code>topic-name</code>.</p>
+<p>서비스 계정 JSON 키가 컴퓨터에 다운로드 됩니다. 이것을 다른 사람과 공유하지 마십시오. 이 파일을 Home Assistant 설정 폴더에 넣으십시오.</p>
+<p>그런 다음 <a href="https://console.cloud.google.com/cloudpubsub/topicList" rel="external nofollow">Google Cloud API Console</a>에서 Google Pub/Sub topic을 만듭니다. topic 이름은 <code>projects/project-198373/topics/topic-name</code>과 같은 이름이 됩니다. 마지막 부분(선택한 이름)인 <code>topic-name</code>만 주목하십시오.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>Add the following lines to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 google_pubsub:
   project_id: YOUR_PROJECT_ID
@@ -164,11 +164,11 @@ google_pubsub:
 </dl>
 </div>
 <div class="note warning">
-  Not filtering domains or entities will send every event to Google PubSub, thus hitting the free tier limit very fast. Be sure to fill in this configuration parameter or have a paid subscription for Google Cloud.
+  도메인이나 엔티티를 필터링하지 않으면 모든 이벤트가 Google PubSub로 전송되므로 프리 티어 한도에 매우 빠르게 도달합니다. 이 설정 매개 변수를 작성하거나 Google Cloud에 유료 구독을 해야합니다.
 </div>
 <h3>
-<a class="title-link" name="saving-the-data-using-a-google-cloud-function" href="#saving-the-data-using-a-google-cloud-function"></a> Saving the data using a Google Cloud Function</h3>
-<p>To save your data automatically to BigQuery, follow the <a href="https://github.com/timvancann/home-assistant-pubsub-cloud-function" rel="external nofollow">instructions here</a>. The current <a href="https://cloud.google.com/free/" rel="external nofollow">free tier</a> of GCP should allow to store up to 10GB of data.</p>
+<a class="title-link" name="google-cloud-function---" href="#google-cloud-function---"></a> Google Cloud Function을 사용하여 데이터 저장</h3>
+<p>BigQuery에 자동으로 데이터를 저장하려면 <a href="https://github.com/timvancann/home-assistant-pubsub-cloud-function" rel="external nofollow">instructions here</a>을 따르십시오. GCP의 현재 <a href="https://cloud.google.com/free/" rel="external nofollow">free tier</a>는 최대 10GB의 데이터를 저장할 수 있어야합니다.</p>
 
 
 </article>

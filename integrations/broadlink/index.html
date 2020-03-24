@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/CEwuMh80CSA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/CEwuMh80CSA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.:</p>
 <ul>
 <li><a href="#remote">Remote</a></li>
@@ -169,12 +171,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>리모컨의 ID입니다.</td>
+<td>리모컨의 ID.</td>
 </tr>
 <tr>
 <td><code>device</code></td>
 <td>no</td>
-<td>제어 할 장치의 이름입니다.</td>
+<td>제어할 장치의 이름.</td>
 </tr>
 <tr>
 <td><code>command</code></td>
@@ -184,7 +186,7 @@ Default value: </p>
 <tr>
 <td><code>alternative</code></td>
 <td>yes</td>
-<td>명령을 토글 여부.</td>
+<td>명령의 토글 여부.</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
@@ -193,7 +195,7 @@ Default value: </p>
 </tr>
 </tbody>
 </table>
-<p>예 1 : 단일 명령 배우기</p>
+<p>예 1: 단일 명령 배우기</p>
 <pre><code class="language-yaml">script:
   learn_mute_tv:
     sequence:
@@ -203,7 +205,7 @@ Default value: </p>
           device: television
           command: mute
 </code></pre>
-<p>예 2 : 일련 명령 학습</p>
+<p>예 2: 일련 명령 학습</p>
 <pre><code class="language-yaml">script:
   learn_tv_commands:
     sequence:
@@ -217,8 +219,8 @@ Default value: </p>
             - volume up
             - volume down
 </code></pre>
-<p>예 3 : 토글 명령 배우기</p>
-<p><code>alternative</code> 플래그는 TV를 켜고 끌 수 있는 전원 버튼과 같은 여러 버튼에 동일한 버튼을 사용하는 명령을 캡처하는 데 유용합니다.</p>
+<p>예 3: 토글 명령 배우기</p>
+<p><code>alternative</code> 플래그는 TV를 켜고 끌 수 있는 전원 버튼과 같은 여러 버튼에 동일한 버튼을 사용하는 명령을 캡처하는데 유용합니다.</p>
 <pre><code class="language-yaml">script:
   learn_tv_power_button:
     sequence:
@@ -229,7 +231,7 @@ Default value: </p>
           command: power
           alternative: True
 </code></pre>
-<p>위의 예에서 power 명령에 대해 두 개의 코드가 캡처되며 명령이 호출 될 때마다 교차로 전송됩니다.</p>
+<p>위의 예에서 power 명령에 대해 두 개의 코드가 캡처되며 명령이 호출될 때마다 교차로 전송됩니다.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 명령어 전송</h3>
 <p><code>remote.send_command</code> 서비스를 사용하여 명령을 보냅니다.</p>
@@ -245,12 +247,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>리모컨의 ID입니다.</td>
+<td>리모컨의 ID.</td>
 </tr>
 <tr>
 <td><code>device</code></td>
 <td>no</td>
-<td>제어 할 장치의 이름입니다.</td>
+<td>제어할 장치의 이름.</td>
 </tr>
 <tr>
 <td><code>command</code></td>
@@ -260,7 +262,7 @@ Default value: </p>
 <tr>
 <td><code>num_repeats</code></td>
 <td>yes</td>
-<td>명령을 반복 할 횟수입니다.</td>
+<td>명령을 반복할 횟수.</td>
 </tr>
 <tr>
 <td><code>delay_secs</code></td>
@@ -269,7 +271,7 @@ Default value: </p>
 </tr>
 </tbody>
 </table>
-<p>예 1 : 단일 명령 보내기</p>
+<p>예 1: 단일 명령 보내기</p>
 <pre><code class="language-yaml">script:
   mute_tv:
     sequence:
@@ -279,7 +281,7 @@ Default value: </p>
           device: television
           command: mute
 </code></pre>
-<p>예 2 : 명령을 반복적으로 전송</p>
+<p>예 2: 명령을 반복적으로 전송</p>
 <pre><code class="language-yaml">script:
   turn_up_tv_volume_20:
     sequence:
@@ -290,7 +292,7 @@ Default value: </p>
           command: volume up
           num_repeats: 20
 </code></pre>
-<p>예 3 : 명령 시퀀스 전송</p>
+<p>예 3: 명령 시퀀스 전송</p>
 <pre><code class="language-yaml">script:
   turn_on_ac:
     sequence:
@@ -304,7 +306,7 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p>The <code>broadlink</code> 센서 플랫폼은 브로드링크 RM2와 A1 E-air 제품에서 데이터를 모니터링 할 수 있습니다. 현재 클라우드 API는 지원되지 않습니다.</p>
+<p><code>broadlink</code> 센서 플랫폼은 브로드링크 RM2와 A1 E-air 제품에서 데이터를 모니터링 할 수 있습니다. 현재 클라우드 API는 지원되지 않습니다.</p>
 <p>활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
@@ -320,11 +322,11 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치 MAC 주소. 다음 형식을 사용하십시오: <code>AA:BB:CC:DD:EE:FF</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 MAC 주소. 다음 형식을 사용하십시오: <code>AA:BB:CC:DD:EE:FF</code>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
@@ -338,7 +340,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서에서 데이터를 가져 오는 시간 (초)입니다.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서에서 데이터를 가져 오는 시간 (초).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -409,12 +411,12 @@ Default value: </p>
 <p>pycrypto 라이브러리를 사용할 수 있어야합니다.  일반적인 Windows <code>pip install pycrypto</code> 명령으로는 동작하지 않습니다. 컴파일러를 먼저 설치해야 합니다.</p>
 </div>
 <p>이 문제를 해결하는 가장 빠른 방법은 <a href="https://github.com/sfbahr/PyCrypto-Wheels" rel="external nofollow">https://github.com/sfbahr/PyCrypto-Wheels</a>에서 사전 빌드 된 바이너리를 사용하는 방법입니다.</p>
-<p>시스템에 맞는 64 비트 또는 32 비트 바이너리를 가져 오십시오. 전체 명령 행은 64 비트 시스템의 경우 다음 샘플과 유사합니다.:</p>
+<p>시스템에 맞는 64 비트 또는 32 비트 바이너리를 가져오십시오. 전체 명령 행은 64 비트 시스템의 경우 다음 샘플과 유사합니다.:</p>
 <pre><code class="language-bash">pip install --use-wheel --no-index --find-links=https://github.com/sfbahr/PyCrypto-Wheels/raw/master/pycrypto-2.6.1-cp35-none-win_amd64.whl pycrypto
 </code></pre>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
-<p><code>Broadlink</code> 스위치 플랫폼을 사용하면 Broadlink <a href="https://www.ibroadlink.com/" rel="external nofollow">devices</a>.를 제어할 수 있습니다.</p>
+<p><code>Broadlink</code> 스위치 플랫폼을 사용하면 Broadlink <a href="https://www.ibroadlink.com/" rel="external nofollow">devices</a>를 제어할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
 <p>활성화하려면 <code>configuration.yaml</code> 파일에 다음 행을 추가하십시오:</p>
@@ -430,7 +432,7 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소입니다..</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>연결할 호스트 이름 / IP 주소.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="mac" href="#mac"></a> mac</dt>
@@ -451,7 +453,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 스위치를 표시하는데 사용되는 이름입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 스위치를 표시하는데 사용되는 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="type" href="#type"></a> type</dt>
@@ -459,7 +461,7 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="switches" href="#switches"></a> switches</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>모든 스위치를 포함하는 배열입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>모든 스위치를 포함하는 배열.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -477,13 +479,13 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="friendly_name" href="#friendly_name"></a> friendly_name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 스위치를 표시하는 데 사용되는 이름입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 스위치를 표시하는데 사용되는 이름.</p>
 </span></p></dd>
 </dl></dd>
 </dl></dd>
 <dt>
 <a class="title-link" name="slots" href="#slots"></a> slots</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>MP1 파워 스트립의 4 개 슬롯의 이름. 별도로 설정하지 않은 경우 슬롯 이름은 <code>switch's friendly_name + 'slot {slot_index}'</code>. 입니다.  예) ‘MP1 slot 1’</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>MP1 파워 스트립의 4 개 슬롯의 이름. 별도로 설정하지 않은 경우 슬롯 이름은 <code>switch's friendly_name + 'slot {slot_index}'</code>. 입니다.  예: ‘MP1 slot 1’</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -505,7 +507,7 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>Windows에 설치하는 방법에 대한 정보는 <a href="/integrations/broadlink#sensor#microsoft-windows-installation">here</a>를 참조하십시오.</p>
+<p>Windows에 설치하는 방법에 대한 정보는 <a href="/integrations/broadlink#sensor#microsoft-windows-installation">여기</a>를 참조하십시오.</p>
 <h3>
 <a class="title-link" name="irrf---" href="#irrf---"></a> IR/RF 패킷을 습득하는 방법</h3>
 <p>**Available services:**에서 broadlink.learn Service를 선택하고 “host”: “your_broadlink_IP” , “Service Data” JSON 스크립트를 작성하고 <strong>CALL SERVICE</strong>를 누르십시오 . 20 초 안에 리모컨의 버튼을 누르십시오. 패킷은 웹의 States (상태) 페이지에 지속적인 알림으로 표시됩니다.</p>
@@ -563,7 +565,7 @@ Default value: </p>
     retry: 5
     friendly_name: 'Humidifier'
 </code></pre>
-<p><code>mp1</code>의 설정예:</p>
+<p><code>mp1</code>의 설정 예:</p>
 <pre><code class="language-yaml">switch:
   - platform: broadlink
     host: IP_ADDRESS
@@ -579,8 +581,8 @@ Default value: </p>
       slot_4: 'Speaker slot'
 </code></pre>
 <h3>
-<a class="title-link" name="service-broadlinksend" href="#service-broadlinksend"></a> Service broadlink.send</h3>
-<p><code>broadlink.send</code> 를 사용하면 각 명령에 스위치 엔터티를 할당 할 필요없이 IR 패킷을 직접 보낼 수 있습니다 .</p>
+<a class="title-link" name="broadlinksend-" href="#broadlinksend-"></a> broadlink.send 서비스</h3>
+<p><code>broadlink.send</code> 를 사용하면 각 명령에 스위치 엔터티를 할당할 필요없이 IR 패킷을 직접 보낼 수 있습니다 .</p>
 <table>
 <thead>
 <tr>
@@ -615,31 +617,31 @@ Default value: </p>
 </code></pre>
 <h3>
 <a class="title-link" name="e-control-remotes-" href="#e-control-remotes-"></a> E-Control remotes 사용시</h3>
-<p>E-Control 앱에서 리모컨을 이미 익힌 경우, 이 방법을 사용하여 홈 어시스턴트로 원격복사 할 수 있습니다.</p>
-<p>먼저 E-Control의 홈 어시스턴트에 추가하려는 모든 리모컨을 얻거나 배우십시오.</p>
+<p>E-Control 앱에서 리모컨을 이미 익힌 경우, 이 방법을 사용하여 홈어시스턴트로 원격복사 할 수 있습니다.</p>
+<p>먼저 E-Control의 홈어시스턴트에 추가하려는 모든 리모컨을 얻거나 배우십시오.</p>
 <ol>
 <li>
 <p>다운로드</p>
-<p><a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">여기</a>서 스크립트를 다운로드 받으세요.</p>
+<p><a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">여기</a>서 스크립트를 다운로드 받으십시오.</p>
 </li>
 <li>
 <p>앱에서 데이터를 가져오기</p>
-<p>모바일 장치에서 E-Control 앱을 엽니 다. 왼쪽 메뉴에서 “공유”를 선택한 다음 “WLAN의 다른 전화기와 공유”를 선택하십시오. 스크립트에 필요한 파일을 생성합니다.</p>
+<p>모바일 장치에서 E-Control 앱을 엽니다. 왼쪽 메뉴에서 “공유”를 선택한 다음 “WLAN의 다른 전화기와 공유”를 선택하십시오. 스크립트에 필요한 파일을 생성합니다.</p>
 </li>
 <li>
-<p>Android 기기에서 데이터 가져 오기</p>
-<p>Android 기기를 컴퓨터에 연결하고 SD 카드 / 외부 저장 폴더“/ broadlink / newremote / SharedData /”를 찾습니다. 다음 파일을 가져 와서이 스크립트와 같은 폴더에 넣어야합니다.:</p>
+<p>Android 기기에서 데이터 가져오기</p>
+<p>Android 기기를 컴퓨터에 연결하고 SD card/External Storage folder의 “/broadlink/newremote/SharedData/”를 찾습니다. 다음 파일을 가져와서 이 스크립트와 같은 폴더에 넣어야합니다.:</p>
 <p>jsonSubIr
 jsonButton
 jsonIrCode</p>
 </li>
 <li>
 <p>설치 요구 사항</p>
-<p><code>pip install simplejson</code> 실행. 스크립트를 실행하는 데 사용할 동일한 Python 버전으로 simplejson을 설치해야합니다. 다시 설치를 시도하고 “요구 사항이 이미 충족되었습니다” 라는 메시지가 표시되면 현재 버전이 설치되어 있는지 확인할 수 있습니다.</p>
+<p><code>pip install simplejson</code> 실행. 스크립트를 실행하는 데 사용할 동일한 Python 버전으로 simplejson을 설치해야합니다. 다시 설치를 시도하고 “Requirement already satisfied” 라는 메시지가 표시되면 현재 버전이 설치되어 있는지 확인할 수 있습니다.</p>
 </li>
 <li>
 <p>장치에서 데이터를 가져 오기</p>
-<p>다운로드 한 폴더로 이동하여 <code>python getBroadlinkSharedData.py</code>를 실행하십시오. 화면의 단계를 따르십시오. 참고 :이 스크립트는 Python 2.7에서만 테스트되었습니다.</p>
+<p>다운로드한 폴더로 이동하여 <code>python getBroadlinkSharedData.py</code>를 실행하십시오. 화면의 단계를 따르십시오. 참고: 이 스크립트는 Python 2.7에서만 테스트되었습니다.</p>
 </li>
 <li>
 <p>python-broadlink 라이브러리를 설치:</p>
@@ -650,42 +652,42 @@ sudo python setup.py install
 </li>
 <li>
 <p>코드 테스트 하기</p>
-<p>테스트 장치에서 얻은 코드를 테스트하려면 이미 다운로드 한 <code>sendcode</code> 스크립트를 사용하십시오.
+<p>테스트 장치에서 얻은 코드를 테스트하려면 이미 다운로드한 <code>sendcode</code> 스크립트를 사용하십시오.
 RM Pro IP 주소 및 MAC 주소와 HEX 형식의 코드를 사용하여 스크립트를 편집해야합니다.
-스크립트를 실행할 때 메시지를받을 때 코드가 작동한다는 것을 알게됩니다.
+스크립트를 실행할 때 메시지를 받을 때 코드가 작동한다는 것을 알게됩니다.
 코드가 전송되었습니다… 모든 코드가 작동하는 것은 아닙니다.</p>
 </li>
 <li>
 <p>16 진수 코드를 base64로 변환</p>
-<p><a href="https://tomeko.net/online_tools/hex_to_base64.php?lang=en1" rel="external nofollow">이것</a>의 도구를 사용 하여 16 진 코드를 base64로 변환하여 Home Assistant와 함께 사용하십시오.</p>
+<p><a href="https://tomeko.net/online_tools/hex_to_base64.php?lang=en1" rel="external nofollow">이것</a>의 도구를 사용하여 16 진 코드를 base64로 변환하여 Home Assistant와 함께 사용하십시오.</p>
 </li>
 </ol>
 <h3>
 <a class="title-link" name="ios-windows---" href="#ios-windows---"></a> IOS와 WINDOWS를 사용하여 코드 얻기</h3>
 <ol>
 <li>
-<p>E-Control 앱을 사용하여 모든 적합한 리모콘에서 코드를 학습하십시오.  리모컨에 따라 버튼 및 / 또는 리모컨에 유용한 이름을 추가하십시오. 결국 이 프로세스를 한 번만 실행하면 Home Assistant로 빠르게 가져갈 수 있습니다. 햄버거 아이콘으로 이동하여 앱에서 파일을 덤프하고 <code>share and select</code>를 선택한 후 <code>Share to other phones on WLAN</code>을 선택하십시오.</p>
+<p>E-Control 앱을 사용하여 모든 적합한 리모콘에서 코드를 학습하십시오.  리모컨에 따라 버튼 및/또는 리모컨에 유용한 이름을 추가하십시오. 결국 이 프로세스를 한 번만 실행하면 Home Assistant로 빠르게 가져갈 수 있습니다. 햄버거 아이콘으로 이동하여 앱에서 파일을 덤프하고 <code>share and select</code>를 선택한 후 <code>Share to other phones on WLAN</code>을 선택하십시오.</p>
 </li>
 <li>
 <p>설치 요구 사항</p>
 <ul>
 <li>Windows PC에 Python 2.7을 다운로드하여 설치하십시오.</li>
 <li>
-<code>pip install simplejson</code> 실행. 스크립트를 실행하는 데 사용할 동일한 Python 버전으로 simplejson을 설치해야합니다. 다시 설치를 시도하고“요구 사항이 이미 충족되었습니다”라는 메시지가 표시되면 현재 버전이 설치되어 있는지 확인할 수 있습니다.</li>
+<code>pip install simplejson</code> 실행. 스크립트를 실행하는데 사용할 동일한 Python 버전으로 simplejson을 설치해야합니다. 다시 설치를 시도하고 “Requirement already satisfied” 라는 메시지가 표시되면 현재 버전이 설치되어 있는지 확인할 수 있습니다.</li>
 <li>
-<a href="https://www.imactools.com/iphonebackupviewer/" rel="external nofollow">iBackup Viewer</a>를 다운로드하여 설치하십시오 ..</li>
+<a href="https://www.imactools.com/iphonebackupviewer/" rel="external nofollow">iBackup Viewer</a>를 다운로드하여 설치하십시오.</li>
 <li>
-<a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">이것</a>을 github에서 다운로드하십시오. Windows의 \ Python27 경로에 배치하십시오. 다운로드의 getBroadlinkSharedData.py가이 디렉토리에 있는지 확인하십시오.</li>
+<a href="https://github.com/NightRang3r/Broadlink-e-control-db-dump" rel="external nofollow">이것</a>을 github에서 다운로드하십시오. Windows의 \Python27 경로에 배치하십시오. 다운로드의 getBroadlinkSharedData.py가 이 디렉토리에 있는지 확인하십시오.</li>
 </ul>
 </li>
 <li>
 <p>iPhone을 Windows PC에 연결하고 iTunes를 열고 암호화되지 않은 장치 백업을 만듭니다.</p>
 </li>
 <li>
-<p>iBackup 뷰어를 열고 작성한 iOS 백업을 선택하십시오. 앱 아이콘으로 이동 한 다음 e-control.app를 찾을 때까지 스크롤하여 선택하십시오.  jsonButton, jsonIrCode 및 jsonSublr 파일을 선택하고 추출하십시오. 그것들은 Documents/SharedData 섹션에 있습니다. 이것을 getBroadlinkSharedData.py와 같은 위치에 두십시오.</p>
+<p>iBackup 뷰어를 열고 작성한 iOS 백업을 선택하십시오. 앱 아이콘으로 이동한 다음 e-control.app를 찾을 때까지 스크롤하여 선택하십시오.  jsonButton, jsonIrCode 및 jsonSublr 파일을 선택하고 추출하십시오. 그것들은 Documents/SharedData 섹션에 있습니다. 이것을 getBroadlinkSharedData.py와 같은 위치에 두십시오.</p>
 </li>
 <li>
-<p>이제 명령 프롬프트를 열고 위에서 언급한 파일이있는 디렉토리 (예 : C:\Python27)로 이동하십시오. 이제 python getBroadlinkSharedData.py 명령을 실행하면 다음과 같은 내용이 표시됩니다.:</p>
+<p>이제 명령 프롬프트를 열고 위에서 언급한 파일이있는 디렉토리 (예: C:\Python27)로 이동하십시오. 이제 python getBroadlinkSharedData.py 명령을 실행하면 다음과 같은 내용이 표시됩니다.:</p>
 <pre><code class="language-bash">C:\Python27&gt;python getBroadlinkSharedData.py
 ID: 1 | Name: TV
 ID: 2 | Name: Upstairs
@@ -705,14 +707,14 @@ ID: 15 | Name: SONY SoundBar
 ID: 16 | Name: Fire TV
 ID: 17 | Name: New RF Remote
 </code></pre>
-<p>추출하려는 원격 ID를 선택하십시오.:</p>
+<p>추출하려는 원격ID를 선택하십시오.:</p>
 <pre><code class="language-bash">Select accessory ID: 5
 [+] You selected:  TV
 [+] Dumping codes to TV.txt
 </code></pre>
 </li>
 <li>
-<p>이제 같은 디렉토리에서 선택한 <code>.txt</code>의 리모콘의 이름을 가진 파일이 있어야합니다. 이를 열어 보면 Home Assistant에 필요한 Base64 코드가 있습니다. 이러한 코드가 올바르게 작동하도록하려면 config.yaml 파일의 코드 끝에 <code>==</code>를 추가해야 합니다. (또는 스위치가있는 위치에).</p>
+<p>이제 같은 디렉토리에서 선택한 <code>.txt</code>의 리모콘의 이름을 가진 파일이 있어야합니다. 이를 열어 보면 Home Assistant에 필요한 Base64 코드가 있습니다. 이러한 코드가 올바르게 작동하도록하려면 config.yaml 파일의 코드 끝에 <code>==</code>를 추가해야 합니다. (또는 스위치가 있는 위치에).</p>
 </li>
 </ol>
 <h3>
@@ -720,9 +722,9 @@ ID: 17 | Name: New RF Remote
 <ol>
 <li>
 <a href="https://sourceforge.net/projects/broadlink-manager/" rel="external nofollow">여기</a> SourceForge 링크에서 Broadlink Manager를 설치.</li>
-<li>응용 프로그램을 열고 “스캔” 을 눌러 broadlink 장치를 활성화하십시오.</li>
+<li>응용 프로그램을 열고 “scan” 을 눌러 broadlink 장치를 활성화하십시오.</li>
 <li>“Learn New Command”를 누르고 화면의 지시 사항을 따르십시오.</li>
-<li>“OnRawData Base64”는 홈 어시스턴트와 함께 사용되는 값입니다.</li>
+<li>“OnRawData Base64”는 홈어시스턴트와 함께 사용되는 값입니다.</li>
 </ol>
 <h3>
 <a class="title-link" name="node-red---" href="#node-red---"></a> NODE-RED를 사용하여 코드 얻기</h3>

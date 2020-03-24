@@ -136,7 +136,7 @@
 <p>Google Chromecast 및 Belkin WeMo 스위치를 자동으로 추가 할 수 있습니다.
 Philips Hue의 경우 사용자의 일부 설정이 필요합니다.</p>
 <div class="note">
-<p>Zeroconf 검색 가능 통합구성요소 <a href="/integrations/axis/">Axis</a>/<a href="/integrations/esphome/">ESPHome</a>/<a href="/integrations/homekit_controller/">HomeKit</a>/<a href="/integrations/tradfri/">Tradfri</a>는 <a href="/integrations/zeroconf">zeroconf</a> 통합구성요소를 사용 하여 검색을 하도록 마이그레이션되었습니다.</p>
+<p>Zeroconf 검색 가능 통합구성요소 <a href="/integrations/axis/">Axis</a>/<a href="/integrations/esphome/">ESPHome</a>/<a href="/integrations/homekit_controller/">HomeKit</a>/<a href="/integrations/tradfri/">Tradfri</a>는 <a href="/integrations/zeroconf">zeroconf</a> 통합구성요소를 사용하여 검색을 하도록 마이그레이션되었습니다.</p>
 </div>
 <p>이 통합구성요소를 사용하려면, <code>configuration.yaml</code> 파일에 다음 행을 추가하세요:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -153,11 +153,11 @@ discovery:
   <dl class="">
 <dt>
 <a class="title-link" name="ignore" href="#ignore"></a> ignore</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용하지 않는 기기. <code>discovery</code> 로 자동 설정되지 못하게하는 기능입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용하지 않는 기기. <code>discovery</code> 로 자동 설정되지 못하게하는 기능.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="enable" href="#enable"></a> enable</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가할 기기. <code>discovery</code>로 기본검색이 되게하고 해당 리스트만 플랫폼에서 나타나지 않도록 설정하는 기능입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가할 기기. <code>discovery</code>로 기본검색이 되게하고 해당 리스트만 플랫폼에서 나타나지 않도록 설정하는 기능.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -228,19 +228,19 @@ discovery:
 <code>dlna_dmr</code>: DLNA DMR 지원 장치</li>
 </ul>
 <h2>
-<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h2>
+<a class="title-link" name="-" href="#-"></a> 문제 해결</h2>
 <h3>
 <a class="title-link" name="upnp" href="#upnp"></a> UPnP</h3>
-<p>홈 어시스턴트는 uPnP 검색이 작동하도록 장치와 동일한 네트워크에 있어야합니다.
+<p>홈어시스턴트는 uPnP 검색이 작동하도록 장치와 동일한 네트워크에 있어야합니다.
 Home Assistant가 <a href="/docs/installation/docker/">Docker container</a>에서 실행되는 경우 <code>--net=host</code>를 사용하여 해당 호스트를 네트워크에 배치하십시오.</p>
 <h3>
 <a class="title-link" name="windows" href="#windows"></a> Windows</h3>
 <h4>
 <a class="title-link" name="64-bit-python" href="#64-bit-python"></a> 64-bit Python</h4>
-<p>현재 64 비트 버전의 Python 및 Windows에서이 통합을 실행 하는 데 <a href="https://bitbucket.org/al45tair/netifaces/issues/17/dll-fails-to-load-windows-81-64bit" rel="external nofollow">known issue</a>가 있습니다.</p>
+<p>현재 64 비트 버전의 Python 및 Windows에서 이 통합을 실행하는 데 <a href="https://bitbucket.org/al45tair/netifaces/issues/17/dll-fails-to-load-windows-81-64bit" rel="external nofollow">known issue</a>가 있습니다.</p>
 <h3>
 <a class="title-link" name="could-not-install-dependency-netdisco" href="#could-not-install-dependency-netdisco"></a> could not install dependency netdisco</h3>
-<p><code>Not initializing discovery because could not install dependency netdisco==0.6.1</code>를 로그에서 확인했다면, <code>python3-dev</code> 혹은 <code>python3-devel</code> 패키지를 시스템에 수동을 설치해야합니다. 예) <code>sudo apt-get install python3-dev</code> 혹은 <code>sudo dnf -y install python3-devel</code>. 이후 Home Assistant를 다시 시작하면 discovery가 작동합니다. 여전히 오류가 발생하면 gcc시스템에서 사용 가능한 컴파일러 (<code>gcc</code>) 가 있는지 확인하십시오.</p>
+<p><code>Not initializing discovery because could not install dependency netdisco==0.6.1</code>를 로그에서 확인했다면, <code>python3-dev</code> 혹은 <code>python3-devel</code> 패키지를 시스템에 수동을 설치해야합니다. 예: <code>sudo apt-get install python3-dev</code> 혹은 <code>sudo dnf -y install python3-devel</code>. 이후 Home Assistant를 다시 시작하면 discovery가 작동합니다. 여전히 오류가 발생하면 gcc시스템에서 사용 가능한 컴파일러 (<code>gcc</code>) 가 있는지 확인하십시오.</p>
 <h3>
 <a class="title-link" name="dsm-and-synology" href="#dsm-and-synology"></a> DSM and Synology</h3>
 <p>DSM/Synology 경우, debian-chroot를 통해 설치하려면 <a href="https://community.home-assistant.io/t/error-starting-home-assistant-on-synology-for-first-time/917/15">이 포럼의 게시물</a>을 참조하세요.</p>
