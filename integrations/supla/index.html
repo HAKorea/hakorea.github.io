@@ -103,13 +103,15 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="440" src="https://www.youtube.com/embed/LrV9-Q2ha-o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="440" src="https://www.youtube.com/embed/LrV9-Q2ha-o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><a href="https://supla.org/" rel="external nofollow">Supla</a>는 ESP8266 기반 장치를 위한 오픈 소스 홈오토메이션 시스템입니다. 자체 프로토콜 세트, 자체 펌웨어 및 <a href="https://supla.zamel.pl/" rel="external nofollow">Zamel</a>과 같은 상용 장치를 가지고 있습니다.</p>
-<p>현재는 Cover(Supla의 링고의 셔터)만 지원하고 스위치는 지원되지만 포괄적이고 보편적인 REST API 덕분에 더 쉽게 추가 할 수 있습니다.</p>
-<p>지금은 단일 장치를 추가 할 수 없습니다. – 모든 장치는 Supla Cloud 서버 또는 귀하의 장치에서 발견됩니다.</p>
+<p>현재 커버(Supla’s lingo의 셔터), 게이트 및 스위치만 지원되지만 포괄적이고 보편적인 REST API 덕분에 더 쉽게 추가할 수 있습니다.</p>
+<p>당장은 단일 장치를 추가할 수 없습니다. - Supla Cloud 서버 또는 당신의 서버에서 모두 발견됩니다. Supla Cloud에서 비활성화된 장치는 Home Assistant에 로드되지 않습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>설비에서 Supla 장치를 사용하려면 <code>configuration.yaml</code>에 다음을 추가하십시오.</p>
+<p>Supla 장치를 사용하려면 <code>configuration.yaml</code>에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml">supla:
   servers:
     - server: svr1.supla.org

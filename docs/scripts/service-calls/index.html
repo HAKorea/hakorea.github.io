@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Service Calls - 홈어시스턴트</title>
+    <title>서비스 호출(Service Calls) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to call services in Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/scripts/service-calls/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Service Calls">
+    <meta property="og:title" content="서비스 호출(Service Calls)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/scripts/service-calls/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Service Calls">
+    <meta name="twitter:title" content="서비스 호출(Service Calls)">
     <meta name="twitter:description" content="Instructions on how to call services in Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,21 +97,21 @@
   
   <header>
     <h1 class="title indent">
-      Service Calls
+      서비스 호출(Service Calls)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>특정 이벤트가 발생할 때 다양한 통합구성요소를 통해 서비스 호출이 가능합니다. 가장 일반적인 것은 자동화 트리거가 발생할 때 서비스를 호출하는 것입니다. 그러나 스크립트 또는 Amazon Echo를 통해 서비스를 호출 할 수도 있습니다.</p>
+  <p>특정 이벤트가 발생할 때 다양한 통합구성요소를 통해 서비스 호출이 가능합니다. 가장 일반적인 것은 자동화 트리거가 발생할 때 서비스를 호출하는 것입니다. 그러나 스크립트 또는 Amazon Echo를 통해 서비스를 호출할 수도 있습니다.</p>
 <p>config를 호출하는 설정 옵션은 모든 통합구성요소 간에 동일하며 이 페이지에 설명되어 있습니다.</p>
-<p>이 페이지의 예는 자동화 연동 설정의 일부로 제공되지만 다른 연동에도 다른 접근 방식을 사용할 수 있습니다.</p>
+<p>이 페이지의 예는 자동화 연동 설정의 일부로 제공되지만 다른 연동에도 다른 접근방식을 사용할 수 있습니다.</p>
 <div class="note">
 사용 가능한 서비스를 찾으려면 개발자 도구 아래의 "서비스"탭을 사용하십시오.
 </div>
 <h3>
 <a class="title-link" name="-the-basics" href="#-the-basics"></a> 기본 (The basics)</h3>
-<p><code>group.living_room</code> entity에서 <code>homeassistant.turn_on</code> 서비스를 호출하십시오. 모든 <code>group.living_room</code> 이 켜집니다. <code>entity_id: all</code>를 사용할 수 있으며 이 또한 모든 해당 entity를 켭니다.</p>
+<p><code>group.living_room</code> entity에서 <code>homeassistant.turn_on</code> 서비스를 호출하십시오. 모든 <code>group.living_room</code>이 켜집니다. <code>entity_id: all</code>를 사용할 수 있으며 이 또한 모든 해당 entity를 켭니다.</p>
 <pre><code class="language-yaml">service: homeassistant.turn_on
 entity_id: group.living_room
 </code></pre>
@@ -124,10 +124,10 @@ data:
   brightness: 120
   rgb_color: [255, 0, 0]
 </code></pre>
-<p>서비스에 대한 전체 매개 변수 목록은 각 구성 요소(component)의 설명서 페이지에서 찾을 수 있습니다, 동일한 방식으로  <code>light.turn_on</code> <a href="/integrations/light/#service-lightturn_on">service</a>로 같은 방법을 쓸 수 있습니다.</p>
+<p>서비스에 대한 전체 매개 변수 목록은 각 구성요소의 설명서 페이지에서 찾을 수 있습니다, 동일한 방식으로  <code>light.turn_on</code> <a href="/integrations/light/#service-lightturn_on">서비스</a>로 같은 방법을 쓸 수 있습니다.</p>
 <h3>
 <a class="title-link" name="----" href="#----"></a> 템플릿을 사용한 서비스 호출 방법</h3>
-<p><a href="/topics/templating/">templating</a> 지원을 사용 하여 호출 할 서비스를 동적으로 선택할 수 있습니다 . 예를 들어 표시등이 켜져 있는지에 따라 특정 서비스를 호출 할 수 있습니다.</p>
+<p><a href="/topics/templating/">templating</a> 지원을 사용하여 호출할 서비스를 동적으로 선택할 수 있습니다 . 예를 들어 조명이 켜져 있는지에 따라 특정 서비스를 호출할 수 있습니다.</p>
 <pre><code class="language-yaml">service_template: &gt;
   {% if states('sensor.temperature') | float &gt; 15 %}
     switch.turn_on
@@ -138,7 +138,7 @@ entity_id: switch.ac
 </code></pre>
 <h3>
 <a class="title-link" name="---" href="#---"></a> 서비스 개발자 도구 사용</h3>
-<p>서비스 개발자 도구를 사용하여 서비스 요청에 전달할 데이터를 테스트 할 수 있습니다. 예를 들어 ‘group’을 켜거나 끄는 테스트를 할 수 있습니다 (자세한 내용은 [group] 참조).</p>
+<p>서비스 개발자 도구를 사용하여 서비스 요청에 전달할 데이터를 테스트할 수 있습니다. 예를 들어 ‘group’을 켜거나 끄는 테스트를 할 수 있습니다 (자세한 내용은 [group] 참조).</p>
 <p>그룹을 켜거나 끄려면 다음 정보를 전달하십시오.:</p>
 <ul>
 <li>Domain: <code>homeassistant</code>
@@ -161,7 +161,7 @@ data_template:
     {% endif %}
   temperature: {{ 22 - distance(states.device_tracker.paulus) }}
 </code></pre>
-<p><code>data</code> 와 <code>data_template</code>를 동시에 사용할 수도 있지만 <code>data_template</code>가 두 가지 모두에 제공되는 속성을 덮어 쓰게됩니다.</p>
+<p><code>data</code>와 <code>data_template</code>를 동시에 사용할 수도 있지만 <code>data_template</code>이 두 가지 모두에 제공되는 속성을 덮어쓰게됩니다.</p>
 <pre><code class="language-yaml">service: thermostat.set_temperature
 data:
   entity_id: thermostat.upstairs
@@ -169,19 +169,19 @@ data_template:
   temperature: {{ 22 - distance(states.device_tracker.paulus) }}
 </code></pre>
 <h3>
-<a class="title-link" name="--homeassistant" href="#--homeassistant"></a> 홈어시스턴트 서비스 (homeassistant)</h3>
+<a class="title-link" name="-" href="#-"></a> 홈어시스턴트 서비스</h3>
 <p>단일 도메인에 연결되지 않은 <code>homeassistant</code>의 4 가지 서비스는 다음과 같습니다.:</p>
 <ul>
 <li>
-<code>homeassistant.turn_on</code> - entity를 켜라 (켜기를 지원할 경우) 예: <code>automation</code>, <code>switch</code>, etc</li>
+<code>homeassistant.turn_on</code> - entity를 켜라 (켜기를 지원할 경우) 예: <code>automation</code>, <code>switch</code>, 등</li>
 <li>
-<code>homeassistant.turn_off</code> - - entity를 꺼라 (끄기를 지원할 경우) 예: <code>automation</code>, <code>switch</code>, etc</li>
+<code>homeassistant.turn_off</code> - - entity를 꺼라 (끄기를 지원할 경우) 예: <code>automation</code>, <code>switch</code>, 등</li>
 <li>
 <code>homeassistant.toggle</code> - 켜져있는 entity를 끄거나 꺼진 entity를 켜거나 끕니다. (ON/OFF 지원)</li>
 <li>
-<code>homeassistant.update_entity</code> - <a href="/integrations/google_travel_time/">google travel time</a> 센서, a [template 센서], 혹은 <a href="/integrations/light/">light</a>와 같이 다음 예약 업데이트를 기다리지 않고 entity 업데이트를 바로 요청합니다.</li>
+<code>homeassistant.update_entity</code> - <a href="/integrations/google_travel_time/">google travel time</a> 센서, <a href="/integrations/template/">template sensor</a>, 혹은 <a href="/integrations/light/">light</a>와 같이 다음 예약 업데이트를 기다리지 않고 entity 업데이트를 바로 요청합니다.</li>
 </ul>
-<p>전체 서비스 세부 사항 및 예는 <a href="/integrations/homeassistant#services">homeassistant-integration-services</a> 에서 찾을 수 있습니다.</p>
+<p>전체 서비스 세부 사항과 예시는 <a href="/integrations/homeassistant#services">homeassistant-integration-services</a> 에서 찾을 수 있습니다.</p>
 
 
 </article>

@@ -103,12 +103,12 @@
   <hr class="divider">
   
 
-  <p>이 통합구성요소로 다양한 조명을 추적하고 제어 할 수 있습니다. 특정 조명 하드웨어에 대한 설명서를 읽고 이를 활성화하는 방법을 배우십시오.</p>
+  <p>이 통합구성요소로 다양한 조명을 추적하고 제어할 수 있습니다. 특정 조명 하드웨어에 대한 설명서를 읽고 이를 활성화하는 방법을 배우십시오.</p>
 <h3>
 <a class="title-link" name="---default-turn-on-values" href="#---default-turn-on-values"></a> 기본 켜기 값 (Default turn-on values)</h3>
-<p>조명이 켜질 때 기본 색상 및 밝기 값을 설정하려면 사용자정의 light_profiles.csv를 만드십시오. (
-<code>light.turn_on</code>의 <code>profile</code> 속성에서 아래에 설명 된대로)</p>
-<p><code>.default</code> 접미사는 각 조명의 엔티티 식별자에 추가되어 기본값을 정의해야합니다 (예 : <code>light.ceiling_2</code>의 <code>id</code> 필드는<code>light.ceiling_2.default</code>입니다). 모든 조명의 기본값을 정의하기 위해 식별자 <code>group.all_lights.default</code>를 사용할 수 있습니다. 개별 설정은 항상 <code>all_lights</code> 기본 설정보다 우선합니다.</p>
+<p>조명이 켜질 때 기본 색상과 밝기값을 설정하려면 사용자정의 light_profiles.csv를 만드십시오. (
+<code>light.turn_on</code>의 <code>profile</code> 속성에서 아래에 설명된대로)</p>
+<p><code>.default</code> 접미사는 각 조명의 엔티티 식별자에 추가되어 기본값을 정의해야합니다 (예: <code>light.ceiling_2</code>의 <code>id</code> 필드는 <code>light.ceiling_2.default</code>입니다). 모든 조명의 기본값을 정의하기 위해 식별자 <code>group.all_lights.default</code>를 사용할 수 있습니다. 개별 설정은 항상 <code>all_lights</code> 기본 설정보다 우선합니다.</p>
 <h3>
 <a class="title-link" name="lightturn_on-" href="#lightturn_on-"></a> light.turn_on 서비스</h3>
 <p><a href="/integrations/group/">groups</a>를 사용하여 하나의 조명을 켜거나 여러 개의 조명을 켭니다.</p>
@@ -131,13 +131,13 @@
 <tr>
 <td><code>transition</code></td>
 <td>yes</td>
-<td>조명이 새 상태로 전환되는 데 걸리는 시간 (초)을 나타내는 숫자입니다.</td>
+<td>조명이 새 상태로 전환되는데 걸리는 시간 (초)을 나타내는 숫자입니다.</td>
 </tr>
 <tr>
 <td><code>profile</code></td>
 <td>yes</td>
 <td>
-<a href="https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/light/light_profiles.csv" rel="external nofollow">내장 프로파일</a> 중 하나의 이름을 가진 문자열 (휴식, 활력, 집중력, 읽기) 이거나 현재 작업 디렉토리의 <code>light_profiles.csv</code>에 정의 된 사용자 정의 프로파일 중 하나입니다. 조명 프로파일은 xy 색상과 밝기를 정의합니다. 프로파일이 제공되고 밝기가 설정되면 프로파일 밝기를 덮어 씁니다.</td>
+<a href="https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/light/light_profiles.csv" rel="external nofollow">내장 프로파일</a> 중 하나의 이름을 가진 문자열 (휴식, 활력, 집중력, 읽기) 이거나 현재 작업 디렉토리의 <code>light_profiles.csv</code>에 정의된 사용자 정의 프로파일 중 하나입니다. 조명 프로파일은 xy 색상과 밝기를 정의합니다. 프로파일이 제공되고 밝기가 설정되면 프로파일 밝기를 덮어 씁니다.</td>
 </tr>
 <tr>
 <td><code>hs_color</code></td>
@@ -147,27 +147,27 @@
 <tr>
 <td><code>xy_color</code></td>
 <td>yes</td>
-<td>빛을 원하는 xy 색상을 나타내는 두 개의 floats을 포함하는 목록입니다. XY의 색상을 나타내는 두 개의 쉼표로 구분 된 floats. 색조 차트는 다음에서 훌륭한 차트를 찾을 수 있습니다. : <a href="https://developers.meethue.com/documentation/core-concepts#color_gets_more_complicated" rel="external nofollow">Hue Color Chart</a>.</td>
+<td>빛을 원하는 xy 색상을 나타내는 두 개의 floats을 포함하는 목록입니다. XY의 색상을 나타내는 두 개의 쉼표로 구분된 floats. 색조 차트는 다음에서 훌륭한 차트를 찾을 수 있습니다. : <a href="https://developers.meethue.com/documentation/core-concepts#color_gets_more_complicated" rel="external nofollow">Hue Color Chart</a>.</td>
 </tr>
 <tr>
 <td><code>rgb_color</code></td>
 <td>yes</td>
-<td>조명의 RGB 색상을 나타내는 0에서 255 사이의 3 개의 정수를 포함하는 목록입니다. 대괄호 안에 RGB로 색상을 나타내는 세 개의 쉼표로 구분 된 정수. 지정된 RGB 값은 조명의 밝기를 변경하지 않고 색상 만 변경합니다.</td>
+<td>조명의 RGB 색상을 나타내는 0에서 255 사이의 3 개의 정수를 포함하는 목록입니다. 대괄호 안에 RGB로 색상을 나타내는 세 개의 쉼표로 구분된 정수. 지정된 RGB 값은 조명의 밝기를 변경하지 않고 색상만 변경합니다.</td>
 </tr>
 <tr>
 <td><code>white_value</code></td>
 <td>yes</td>
-<td>전용 백색 LED의 밝기를 나타내는 0에서 255 사이의 정수입니다.</td>
+<td>전용 백색 LED의 밝기를 나타내는 0에서 255 사이의 정수.</td>
 </tr>
 <tr>
 <td><code>color_temp</code></td>
 <td>yes</td>
-<td>빛의 색 온도를 나타내는 mireds의 정수입니다.</td>
+<td>빛의 색온도를 나타내는 mireds의 정수.</td>
 </tr>
 <tr>
 <td><code>kelvin</code></td>
 <td>yes</td>
-<td>또는 색 온도를 켈빈으로 지정할 수 있습니다.</td>
+<td>또는 색온도를 켈빈으로 지정할 수 있습니다.</td>
 </tr>
 <tr>
 <td><code>color_name</code></td>
@@ -197,7 +197,7 @@
 </tbody>
 </table>
 <div class="note">
-<p>엔터티에 속성을 적용 하려면, 설정에 <code>data:</code>룰 추가해야 합니다. 아래 예를 참조하십시오</p>
+<p>엔터티에 속성을 적용하려면, 설정에 <code>data:</code>룰 추가해야 합니다. 아래 예를 참조하십시오</p>
 </div>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 automation:
@@ -242,12 +242,12 @@ automation:
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>조명의 <code>entity_id</code>를 가리키는 문자열 또는 문자열 목록. 모든 라이트를 대상으로하려면 모두 <code>entity_id</code>로 사용하십시오</td>
+<td>조명의 <code>entity_id</code>를 가리키는 문자열 또는 문자열 목록. 모든 조명를 대상으로하려면 모두 <code>entity_id</code>로 사용하십시오</td>
 </tr>
 <tr>
 <td><code>transition</code></td>
 <td>yes</td>
-<td>조명이 새 상태로 전환하는 데 걸리는 시간을 초 단위로 나타내는 정수입니다.</td>
+<td>조명이 새 상태로 전환하는데 걸리는 시간을 초 단위로 나타내는 정수입니다.</td>
 </tr>
 </tbody>
 </table>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>TP-Link 카사 스마트 - 홈어시스턴트</title>
+    <title>스마트홈플랫폼(TP-Link Casa Smart) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on integrating TP-Link Smart Home Devices to Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/tplink/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="TP-Link 카사 스마트">
+    <meta property="og:title" content="스마트홈플랫폼(TP-Link Casa Smart)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/tplink/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="TP-Link 카사 스마트">
+    <meta name="twitter:title" content="스마트홈플랫폼(TP-Link Casa Smart)">
     <meta name="twitter:description" content="Instructions on integrating TP-Link Smart Home Devices to Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,25 +97,27 @@
   
   <header>
     <h1 class="title indent">
-      TP-Link 카사 스마트
+      스마트홈플랫폼(TP-Link Casa Smart)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/9ViLqLne7-4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>The <code>tplink</code> integration allows you to control your <a href="https://www.tp-link.com/kasa-smart/" rel="external nofollow">TP-Link Smart Home Devices</a> such as smart plugs and smart bulbs.</p>
-<p>There is currently support for the following device types within Home Assistant:</p>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/9ViLqLne7-4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>tplink</code> 통합구성요소를 통해 스마트 플러그 및 스마트 전구와 같은 <a href="https://www.tp-link.com/kasa-smart/" rel="external nofollow">TP-Link Smart Home Devices</a>를 제어할 수 있습니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><strong>Light</strong></li>
 <li><strong>Switch</strong></li>
 </ul>
-<p>In order to activate the support, you will have to enable the integration inside the config panel.
-The supported devices in your network are automatically discovered, but if you want to control devices residing in other networks you will need to configure them manually as shown below.</p>
+<p>지원을 활성화하려면 설정 패널 내부의 통합구성요소를 활성화해야합니다.
+네트워크에서 지원되는 장치는 자동으로 검색되지만 다른 네트워크에 상주하는 장치를 제어하려면 아래와 같이 수동으로 설정해야합니다.</p>
 <h2>
-<a class="title-link" name="supported-devices" href="#supported-devices"></a> Supported Devices</h2>
-<p>This integration supports devices that are controllable with the <a href="https://www.tp-link.com/us/kasa-smart/kasa.html" rel="external nofollow">KASA app</a>.
-The following devices are known to work with this component.</p>
+<a class="title-link" name="-" href="#-"></a> 지원 장치</h2>
+<p>이 통합구성요소는 <a href="https://www.tp-link.com/us/kasa-smart/kasa.html" rel="external nofollow">KASA app</a>으로 제어 가능한 장치를 지원합니다.
+다음 장치가 이 구성 요소와 동작하는 것으로 알려져 있습니다.</p>
 <h3>
 <a class="title-link" name="plugs" href="#plugs"></a> Plugs</h3>
 <ul>
@@ -153,7 +155,7 @@ The following devices are known to work with this component.</p>
 <li>KL130</li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
+<a class="title-link" name="" href="#"></a> 설정</h2>
 <pre><code class="language-yaml"># Example configuration.yaml
 tplink:
 </code></pre>
@@ -213,7 +215,7 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="manual-configuration-example" href="#manual-configuration-example"></a> Manual configuration example</h2>
+<a class="title-link" name="--" href="#--"></a> 수동 설정 사례</h2>
 <pre><code class="language-yaml"># Example configuration.yaml entry with manually specified addresses
 tplink:
   discovery: false
@@ -231,9 +233,9 @@ tplink:
     - host: 192.168.200.8
 </code></pre>
 <h2>
-<a class="title-link" name="extracting-energy-sensor-data" href="#extracting-energy-sensor-data"></a> Extracting Energy Sensor data</h2>
-<p>In order to get the power consumption readings from a TP-Link HS110 device, you’ll have to create a <a href="/integrations/switch.template/">template sensor</a>.
-In the example below, change all of the <code>my_tp_switch</code>‘s to match your device’s entity ID.</p>
+<a class="title-link" name="---" href="#---"></a> 에너지 센서 데이터 추출</h2>
+<p>TP-Link HS110 장치에서 전력 소비량 판독값을 얻으려면 <a href="/integrations/switch.template/">템플릿 센서</a>를 만들어야합니다.
+아래 예에서 모든 <code>my_tp_switch</code>를 장치의 엔티티 ID와 일치하도록 변경하십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: template
     sensors:

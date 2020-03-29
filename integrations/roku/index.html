@@ -103,14 +103,16 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/iEveqz6br3Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/iEveqz6br3Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><a href="https://www.roku.com/" rel="external nofollow">Roku</a> 통합구성요소는 Roku 연동을 허용하며, <a href="/integrations/discovery/">discovery component</a>를 활성화하면 자동으로 검색됩니다.</p>
 <p>현재 홈어시스턴트에는 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Media Player</li>
 <li>Remote</li>
 </ul>
-<p><code>roku</code> 통합구성요소는 <code>configuration.yaml</code>에 다음 줄을 추가하여 강제로 로드 할 수도 있습니다</p>
+<p><code>roku</code> 통합구성요소는 <code>configuration.yaml</code>에 다음 줄을 추가하여 강제로 로드할 수도 있습니다</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 roku:
   - host: IP_ADDRESS
@@ -129,7 +131,7 @@ roku:
 <a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
 <a class="title-link" name="roku_scan-" href="#roku_scan-"></a> roku_scan 서비스</h3>
-<p>로컬 네트워크에서 Roku를 검색합니다. 발견된 모든 장치는 지속적 알림으로 표시됩니다.</p>
+<p>로컬 네트워크에서 Roku를 검색합니다. 발견된 모든 장치는 지속적 알림(persistent notification)으로 표시됩니다.</p>
 <h2>
 <a class="title-link" name="remote" href="#remote"></a> Remote</h2>
 <p><code>roku</code> 원격 플랫폼을 사용하면 리모컨 버튼을 Roku 장치로 보낼 수 있습니다. Roku가 구성되면 자동으로 설정됩니다.</p>
@@ -185,7 +187,7 @@ YouTube 예시 :
 POST http://YOUR_ROKU_IP:8060/launch/837?contentID=YOUR_YOUTUBE_VIDEOS_CONTENT_ID&amp;MediaType=live
 </code></pre>
 <p>자세한 내용은 <a href="https://developer.roku.com/docs/developer-program/discovery/external-control-api.md" rel="external nofollow">Roku dev 페이지</a>에서 확인할 수 있습니다.</p>
-<p>홈어시스턴트 (예 : 자동화)에서 이를 사용하려면 형식은 다음과 같습니다. <code>source :</code>는 API 호출에서 발견한 appID 입니다.</p>
+<p>홈어시스턴트(예: 자동화)에서 이를 사용하려면 형식은 다음과 같습니다. <code>source :</code>는 API 호출에서 발견한 appID 입니다.</p>
 <pre><code class="language-yaml">action:
 - data:
     entity_id: media_player.roku

@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p>이 통합구성요소를 통해 홈어시스턴트에서 서비스로 노출되는 Python 스크립트를 작성할 수 있습니다. <code>&lt;config&gt;/python_scripts/</code> 폴더에 생성 된 각 파이썬 파일은 서비스로 노출됩니다. 컨텐츠는 캐시되지 않으므로 쉽게 개발 가능합니다. : 파일을 편집하고 변경 사항을 저장하며 서비스를 호출 할 수 있습니다. 스크립트는 샌드 박스 환경에서 실행됩니다. 샌드 박스에서 다음 변수를 사용할 수 있습니다.</p>
+  <p>이 통합구성요소를 통해 홈어시스턴트에서 서비스로 노출되는 Python 스크립트를 작성할 수 있습니다. <code>&lt;config&gt;/python_scripts/</code> 폴더에 생 된 각 파이썬 파일은 서비스로 노출됩니다. 컨텐츠는 캐시되지 않으므로 쉽게 개발 가능합니다. : 파일을 편집하고 변경 사항을 저장하며 서비스를 호출할 수 있습니다. 스크립트는 샌드박스 환경에서 실행됩니다. 샌드박스에서 다음 변수를 사용할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -114,7 +114,7 @@
 <tbody>
 <tr>
 <td><code>hass</code></td>
-<td>홈 어시스턴트 객체. 액세스는 서비스 호출, 상태 설정/제거 및 실행 이벤트만 허용 <a href="/developers/development_hass_object/">API reference</a>
+<td>홈어시스턴트 객체. 액세스는 서비스 호출, 상태 설정/제거 및 실행 이벤트만 허용 <a href="/developers/development_hass_object/">API reference</a>
 </td>
 </tr>
 <tr>
@@ -123,7 +123,7 @@
 </tr>
 <tr>
 <td><code>logger</code></td>
-<td>로거(logger)는 메시지를 기록 할 수 있도록: <code>logger.info()</code>, <code>logger.warning()</code>, <code>logger.error()</code>. <a href="https://docs.python.org/3.7/library/logging.html#logger-objects" rel="external nofollow">API reference</a>
+<td>로거(logger)는 메시지를 기록할 수 있도록: <code>logger.info()</code>, <code>logger.warning()</code>, <code>logger.error()</code>. <a href="https://docs.python.org/3.7/library/logging.html#logger-objects" rel="external nofollow">API reference</a>
 </td>
 </tr>
 </tbody>
@@ -153,7 +153,7 @@ hass.bus.fire(name, {"wow": "from a Python script!"})
 <h2>
 <a class="title-link" name="--calling-services" href="#--calling-services"></a> 서비스 호출하기 (Calling Services)</h2>
 <p>다음 예제는 <code>python_script</code> 에서 서비스를 호출하는 방법을 보여줍니다. 이 스크립트는 두가지 매개변수를 취함:
-<code>entity_id</code> (필수),<code>rgb_color</code> (선택 사항) 및 밝기 값을 ‘255’로 설정하여 <code>light.turn_on</code> 서비스를 호출합니다.</p>
+<code>entity_id</code>(필수), <code>rgb_color</code>(선택 사항) 및 밝기값을 ‘255’로 설정하여 <code>light.turn_on</code> 서비스를 호출합니다.</p>
 <pre><code class="language-python"># turn_on_light.py
 entity_id = data.get("entity_id")
 rgb_color = data.get("rgb_color", [255, 255, 255])

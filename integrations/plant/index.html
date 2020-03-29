@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>This<code>plant</code>component lets you merge moisture, conductivity, light intensity, temperature and battery level for a plant into a single UI element. It also supports setting minimum and maximum values for each measurement and will change its state to “problem” if it is not within those limits.</p>
+  <p>이 <code>plant</code> 구성 요소를 사용하면 식물의 수분, 전도도, 광도, 온도 및 배터리 수준을 단일 UI 요소로 병합할 수 있습니다. 또한 각 측정에 대한 최소값과 최대 값 설정을 지원하며 해당 한계 내에 있지 않은 경우 상태를 “problem”로 변경합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your <code>plant</code> sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p><code>plant</code> 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 plant:
   name_of_your_plant:
@@ -227,16 +227,16 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="examples" href="#examples"></a> Examples</h2>
+<a class="title-link" name="" href="#"></a> 사례</h2>
 <h3>
-<a class="title-link" name="using-plain-mqtt-sensor-to-get-the-data" href="#using-plain-mqtt-sensor-to-get-the-data"></a> Using plain MQTT sensor to get the data</h3>
-<p>This is a practical example that uses a multiple of <code>MQTT sensors</code> to supply the readings used by the <code>plant</code> sensor.
-Another good source of this data would be the <a href="/integrations/miflora">Mi Flora</a> component.</p>
-<p>If the sensor data is within the min/max values the status will be <code>ok</code>, if not the status will be <code>problem</code>. You can use this to trigger a notification, if there is a problem with your plant. Of course you can only monitor attributes of your plant, where the sensor is configured and is providing the data.</p>
+<a class="title-link" name="-mqtt-----" href="#-mqtt-----"></a> 일반 MQTT 센서를 사용하여 데이터 가져 오기</h3>
+<p>이는 <code>plant</code> 센서가 사용하는 판독값을 제공하기 위해 다수의 <code>MQTT sensors</code>를 사용하는 실제 예입니다.
+이 데이터의 또 다른 좋은 소스는 <a href="/integrations/miflora">Mi Flora</a> 구성 요소입니다.</p>
+<p>센서 데이터가 최소/최대값 내에있는 경우 상태는 <code>ok</code>이며, 그렇지 않으면 상태는 <code>problem</code>입니다. plant에 문제가있는 경우 이를 사용하여 알림을 트리거 할 수 있습니다. 물론 센서가 설정되고 데이터를 제공하는 시스템의 속성만 모니터링 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="data-source" href="#data-source"></a> Data Source</h2>
-<p>The main sources of the data will usually be a <a href="/integrations/miflora">MiFlora sensor</a> or a <a href="/integrations/sensor.mqtt/">MQTT sensor</a> receiving the data from a <a href="https://github.com/ChristianKuehnel/plantgateway" rel="external nofollow">PlantGateway</a>.</p>
-<p>If you want to get the date via a PlantGateway, this is a typical configuration for the MQTT sensors:</p>
+<a class="title-link" name="-" href="#-"></a> 데이터 소스</h2>
+<p>데이터의 주요 소스는 일반적으로 <a href="https://github.com/ChristianKuehnel/plantgateway" rel="external nofollow">PlantGateway</a>에서 데이터를 수신하는 <a href="/integrations/miflora">MiFlora sensor</a> 또는 <a href="/integrations/sensor.mqtt/">MQTT sensor</a>입니다.</p>
+<p>PlantGateway를 통해 데이터를 얻기위한 MQTT 센서의 일반적인 설정입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 plant:
   simulated_plant:
@@ -279,7 +279,7 @@ sensor:
     value_template: '{{ value_json.brightness | int }}'
     unit_of_measurement: 'Lux'
 </code></pre>
-<p>You have to replace the <code>state_topic</code> with the value that you configured in the PlantGateway. It also depends on the global configuration of your MQTT server.</p>
+<p><code>state_topic</code>을 PlantGateway에서 설정한 값으로 바꿔야합니다. 또한 MQTT 서버의 글로벌 설정에 따라 다릅니다.</p>
 
 
 </article>

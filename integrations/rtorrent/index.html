@@ -104,7 +104,7 @@
   
 
   <p><code>rtorrent</code> 플랫폼을 사용하면 Home Assistant 내에서 <a href="https://rakshasa.github.io/rtorrent/" rel="external nofollow">rtorrent</a> 및 정보를 기반으로 설정 자동화를 통해 다운로드를 모니터링 할 수 있습니다.</p>
-<p>이 센서를 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
+<p>이 센서를 사용하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: rtorrent
@@ -114,10 +114,9 @@ sensor:
       - 'download_speed'
       - 'upload_speed'
 </code></pre>
-<p>이 센서에는 HTTP 인터페이스에 노출 된 rtorrent XMLRPC API가 필요합니다.
-보안상의 이유로 rtorrent의 SCGI 인터페이스 (기본 <code>localhost:5000</code>)를 사용하는 것만으로는 작동하지 않습니다.</p>
-<p>Alternatively, the <a href="https://github.com/binhex/arch-rtorrentvpn" rel="external nofollow">arch-rtorrentvpn</a> container can be used with <code>url</code> set to <code>http://admin:rutorrent@127.0.0.1:9080/RPC2</code>.
-<a href="https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC" rel="external nofollow">official reference</a>는 해당 HTTP 인터페이스를 설정하는 방법을 설명합니다.</p>
+<p>이 센서에는 HTTP 인터페이스에 노출된 rtorrent XMLRPC API가 필요합니다.
+보안상의 이유로 rtorrent의 SCGI 인터페이스 (기본 <code>localhost:5000</code>)를 사용하는 것만으로는 작동하지 않습니다. <a href="https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC" rel="external nofollow">official reference</a>는 해당 HTTP 인터페이스를 설정하는 방법을 설명합니다.</p>
+<p>또는 <a href="https://github.com/binhex/arch-rtorrentvpn" rel="external nofollow">arch-rtorrentvpn</a> 컨테이너는 <code>url</code>을 <code>http://admin:rutorrent@127.0.0.1:9080/RPC2</code>로 설정하여 사용할 수 있습니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>

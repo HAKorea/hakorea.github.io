@@ -160,7 +160,7 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="value_template" href="#value_template"></a> value_template</dt>
-<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>값을 추출 할 <a href="/docs/configuration/templating/#processing-incoming-data">template</a> 을 정의</p>
+<dd><p class="desc"><span class="type">(<span class="template"><a href="/docs/configuration/templating/">template</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>값을 추출할 <a href="/docs/configuration/templating/#processing-incoming-data">template</a>을 정의</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="payload" href="#payload"></a> payload</dt>
@@ -225,14 +225,14 @@ URL이 엔드 포인트 또는 리소스와 정확히 일치하는지 확인.
 <div class="note">
 <p><code>resource</code> 혹은 <code>resource_template</code> 을 사용하십시오.</p>
 </div>
-<p><code>curl</code>은 홈어시스턴트 프론트 엔드에 표시하려는 변수를 식별하는 데 도움이됩니다. 아래 예는 <a href="https://arest.io/" rel="external nofollow">aREST</a>로 실행중인 장치의 JSON 응답을 보여줍니다.</p>
+<p><code>curl</code>은 홈어시스턴트 프론트 엔드에 표시하려는 변수를 식별하는데 도움이 됩니다. 아래 예는 <a href="https://arest.io/" rel="external nofollow">aREST</a>로 실행중인 장치의 JSON 응답을 보여줍니다.</p>
 <pre><code class="language-bash">$ curl -X GET http://192.168.1.31/temperature/
 {"temperature": 77, "id": "sensor02", "name": "livingroom", "connected": true}
 </code></pre>
-<p>응답은 사전(dictionary)이거나 0 번째 요소 인 사전(dictionary)이 있는 목록 일 것으로 예상됩니다.</p>
+<p>응답은 사전(dictionary)이거나 0 번째 요소인 사전(dictionary)이 있는 목록 일 것으로 예상됩니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
-<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
+<p>본 섹션에는 이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
 <a class="title-link" name="-ip-" href="#-ip-"></a> 외부 IP 주소</h3>
 <p><a href="http://ip.jsontest.com/" rel="external nofollow">http://ip.jsontest.com/</a> URL에서 서비스 <a href="https://www.jsontest.com/" rel="external nofollow">JSON Test</a>를 사용하여 외부 IP 주소를 찾을 수 있습니다.</p>
@@ -243,8 +243,8 @@ URL이 엔드 포인트 또는 리소스와 정확히 일치하는지 확인.
     value_template: '{{ value_json.ip }}'
 </code></pre>
 <h3>
-<a class="title-link" name="-glances---single-value-from-a-local-glances-instance" href="#-glances---single-value-from-a-local-glances-instance"></a> 로컬 GLANCES 인스턴스의 단일값 (Single value from a local Glances instance)</h3>
-<p><a href="/integrations/glances">glances</a> 센서는 모든 노출 된 값에 대해 똑같은 일을합니다.</p>
+<a class="title-link" name="-glances--" href="#-glances--"></a> 로컬 GLANCES 인스턴스의 단일값</h3>
+<p><a href="/integrations/glances">glances</a> 센서는 모든 노출된 값에 대해 똑같은 일을합니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADRRESS:61208/api/2/mem/used
@@ -253,8 +253,8 @@ URL이 엔드 포인트 또는 리소스와 정확히 일치하는지 확인.
     unit_of_measurement: MB
 </code></pre>
 <h3>
-<a class="title-link" name="-----value-from-another-home-assistant-instance" href="#-----value-from-another-home-assistant-instance"></a> 다른 홈 어시스턴트 인스턴스의 값 (Value from another Home Assistant instance)</h3>
-<p>홈어시스턴트 <a href="/developers/rest_api/">API</a>는 연결된 센서에서 데이터를 노출합니다. <a href="/developers/architecture/#multiple-connected-instances">connected</a> 가 아닌 여러 Home Assistant 인스턴스를 실행중인 경우에도 해당 정보를 얻을 수 있습니다.</p>
+<a class="title-link" name="---" href="#---"></a> 다른 홈어시스턴트 인스턴스 값</h3>
+<p>홈어시스턴트 <a href="/developers/rest_api/">API</a>는 연결된 센서에서 데이터를 노출합니다. <a href="/developers/architecture/#multiple-connected-instances">connected</a>가 아닌 여러 Home Assistant 인스턴스를 실행중인 경우에도 해당 정보를 얻을 수 있습니다.</p>
 <p>자원 변수에서 홈어시스턴트 인스턴스가 API 비밀번호로 보호되는 경우, <code>? api_password = YOUR_PASSWORD</code>를 자원 URL에 추가하여 <code>headers:</code>를 인증하거나 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
@@ -264,7 +264,7 @@ URL이 엔드 포인트 또는 리소스와 정확히 일치하는지 확인.
     unit_of_measurement: "°C"
 </code></pre>
 <h3>
-<a class="title-link" name="http-------accessing-an-http-authentication-protected-endpoint" href="#http-------accessing-an-http-authentication-protected-endpoint"></a> HTTP 인증으로 보호 된 엔드 포인트에 액세스 (Accessing an HTTP authentication protected endpoint)</h3>
+<a class="title-link" name="http-----" href="#http-----"></a> HTTP 인증으로 보호된 엔드 포인트에 액세스</h3>
 <p>REST 센서는 HTTP 인증 및 사용자 정의된 헤더를 지원.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
@@ -276,7 +276,7 @@ URL이 엔드 포인트 또는 리소스와 정확히 일치하는지 확인.
       User-Agent: Home Assistant
       Content-Type: application/json
 </code></pre>
-<p>헤더에는 모든 관련 세부 사항이 포함. 또한 토큰으로 보호되는 엔드 포인트에 액세스 할 수 있습니다.</p>
+<p>헤더에는 모든 관련 세부 사항이 포함. 또한 토큰으로 보호되는 엔드 포인트에 액세스할 수 있습니다.</p>
 <pre><code class="language-bash">Content-Length: 1024
 Host: IP_ADDRESS1:5000
 Authorization: Basic aGExOnRlc3Qx
@@ -285,7 +285,7 @@ Content-Type: application/json
 User-Agent: Home Assistant
 </code></pre>
 <p><code>Authorization</code> 헤더의 <code>Bearer</code> 토큰으로 보호되는 리소스에 액세스하는 경우 센서 설정의 헤더 필드에 토큰을 넣거나 (권장하지 않음) <a href="/docs/configuration/secrets/"><code>secrets.yaml</code></a> 파일에 토큰을 저장할 수 있습니다.
-이 경우,<code>secrets</code> 파일에 <code>Bearer</code>라는 단어를 포함 시키십시오.</p>
+이 경우, <code>secrets</code> 파일에 <code>Bearer</code>라는 단어를 포함시키십시오.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADDRESS:5000/sensor
@@ -330,7 +330,7 @@ User-Agent: Home Assistant
         friendly_name: 'milliseconds'
         value_template: '{{ states.sensor.json_time.attributes["milliseconds_since_epoch"] }}'
 </code></pre>
-<p>이 샘플은 <a href="https://openweathermap.org/" rel="external nofollow">OpenWeatherMap</a>에서 날씨 보고서를 가져 와서 결과 데이터를 RESTful 센서의 속성에 맵핑 한 후 속성을 모니터링하는 <a href="/integrations/template">template</a> 센서 세트를 작성하고 해당 값을 사용 가능한 형식으로 나타냅니다.</p>
+<p>이 샘플은 <a href="https://openweathermap.org/" rel="external nofollow">OpenWeatherMap</a>에서 날씨 보고서를 가져 와서 결과 데이터를 RESTful 센서의 속성에 맵핑한 후 속성을 모니터링하는 <a href="/integrations/template">template</a> 센서 세트를 작성하고 해당 값을 사용 가능한 형식으로 나타냅니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     name: OWM_report

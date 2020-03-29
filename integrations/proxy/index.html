@@ -103,12 +103,12 @@
   <hr class="divider">
   
 
-  <p><code>proxy</code> 카메라 플랫폼을 사용하면 사후처리 루틴을 통해 다른 카메라의 출력을 전달하고 사후처리된 출력으로 새 카메라를 생성 할 수 있습니다.</p>
-<p>현재 사후처리는 이미지/MJPEG의 크기조정 및 혹은 자르기를 지원할 뿐만아니라 최대 화면 주사율을 제한합니다.</p>
+  <p><code>proxy</code> 카메라 플랫폼을 사용하면 사후처리 루틴을 통해 다른 카메라의 출력을 전달하고 사후처리된 출력으로 새 카메라를 생성할 수 있습니다.</p>
+<p>현재 사후처리는 이미지/MJPEG의 크기조정과 자르기를 지원할 뿐만아니라 최대 화면 주사율을 제한합니다.</p>
 <p>현재 프록시 기능은 느린 인터넷 연결을 위해 카메라 대역폭을 줄이기 위한 것입니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>설치시이 카메라를 활성화하려면 먼저 홈어시스턴트에 기존 작동 카메라가 구성되어 있어야합니다. 다음으로 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
+<p>설치시 이 카메라를 활성화하려면 먼저 홈어시스턴트에 기존 작동 카메라가 설정되어 있어야합니다. 다음으로 <code>configuration.yaml</code> 파일에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: proxy
@@ -122,7 +122,7 @@ camera:
   <dl class="">
 <dt>
 <a class="title-link" name="entity_id" href="#entity_id"></a> entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>후 처리 할 다른 홈 어시스턴트 카메라의 ID.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>후처리할 다른 홈어시스턴트 카메라의 ID.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
@@ -139,7 +139,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="max_image_width" href="#max_image_width"></a> max_image_width</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에서 촬영한 단일 이미지의 최대 너비 (가로 세로 크기 조정시 가로 세로 비율이 유지됨)</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>카메라에서 촬영한 단일 이미지의 최대 너비(가로 세로 크기 조정시 가로 세로 비율이 유지됨)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_image_height" href="#max_image_height"></a> max_image_height</dt>

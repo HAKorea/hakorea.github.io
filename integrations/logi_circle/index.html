@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/gLuCCAnr34A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/gLuCCAnr34A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>logi_circle</code> 구현을 통해 <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> 카메라를 Home Assistant에 연동할 수 있습니다. Logi Circle을 연결하려면 <a href="#requesting-api-access">sign up for API access</a>하고 <code>client_id</code>, <code>client_secret</code>, <code>api_key</code>를 가져와야합니다.</p>
 <h2>
 <a class="title-link" name="api--" href="#api--"></a> API 액세스 요청</h2>
@@ -154,22 +156,22 @@ logi_circle:
 </span></p></dd>
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Logitech이 발행 한 API 키.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Logitech이 발행한 API 키.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="redirect_uri" href="#redirect_uri"></a> redirect_uri</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Home Assistant 인스턴스에 해당하는 리디렉션 URI입니다. Logitech에서 API 액세스를 요청할 때 지정된 경로 재 지정 URI 중 하나와 일치해야합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>Home Assistant 인스턴스에 해당하는 리디렉션 URI입니다. Logitech에서 API 액세스를 요청할 때 지정된 경로 재지정 URI 중 하나와 일치해야합니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <h3>
 <a class="title-link" name="" href="#"></a> 카메라</h3>
 <p><code>logi_circle</code> 카메라 플랫폼을 사용하면 Home Assistant의 <a href="https://circle.logi.com/" rel="external nofollow">Logi Circle</a> 카메라 라이브 스트림에서 스틸 프레임을 볼 수 있습니다.</p>
-<p>Logi Circle 카메라는 <code>camera.turn_on</code> 및 <code>camera.turn_off</code> 서비스를 지원합니다. 이에 따라 카메라의 스트리밍 모드 속성이 설정되어 라이브 스트림을 사용할 수 있는지 여부와 활동 기록이 캡처되는지 여부를 제어합니다.</p>
+<p>Logi Circle 카메라는 <code>camera.turn_on</code>, <code>camera.turn_off</code> 서비스를 지원합니다. 이에 따라 카메라의 스트리밍 모드 속성이 설정되어 라이브 스트림을 사용할 수 있는지 여부와 활동 기록이 캡처되는지 여부를 제어합니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 센서</h3>
-<p><code>logi_circle</code> 센서 플랫폼을 사용하면 Home Assistant의 <a href="https://circle.logi.com" rel="external nofollow">Logi Circle</a> 카메라에 연결된 센서를 모니터링 할 수 있습니다.</p>
-<p>설정할 센서를 사용자 정의하려면 다음 세팅으로 <code>configuration.yaml</code> 파일에서 Logi Circle 연동 설정으로 확장 할 수 있습니다.</p>
+<p><code>logi_circle</code> 센서 플랫폼을 사용하면 Home Assistant의 <a href="https://circle.logi.com" rel="external nofollow">Logi Circle</a> 카메라에 연결된 센서를 모니터링할 수 있습니다.</p>
+<p>설정할 센서를 사용자 정의하려면 다음 세팅으로 <code>configuration.yaml</code> 파일에서 Logi Circle 연동 설정으로 확장할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 logi_circle:
   sensors:
@@ -231,7 +233,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 서비스</h2>
-<p><code>logi_circle</code> 플랫폼은 Logi Circle 장치와 상호 작용하기 위한 3 가지 서비스를 제공합니다. 하나 이상의 엔티티 ID로 서비스를 호출할 때는 카메라 엔티티를 대상으로 해야합니다 (예 :<code>camera.living_room_camera</code>).</p>
+<p><code>logi_circle</code> 플랫폼은 Logi Circle 장치와 상호 작용하기 위한 3 가지 서비스를 제공합니다. 하나 이상의 엔티티 ID로 서비스를 호출할 때는 카메라 엔티티를 대상으로 해야합니다 (예: <code>camera.living_room_camera</code>).</p>
 <h3>
 <a class="title-link" name="logi_circlelivestream_record-" href="#logi_circlelivestream_record-"></a> logi_circle.livestream_record 서비스</h3>
 <p>카메라의 라이브 스트림 녹화를 시작합니다.</p>
@@ -265,7 +267,7 @@ Default value: </p>
 <h3>
 <a class="title-link" name="logi_circlelivestream_snapshot-" href="#logi_circlelivestream_snapshot-"></a> logi_circle.livestream_snapshot 서비스</h3>
 <p>카메라의 라이브 스트림에서 스냅샷을 찍습니다. 이는 Logi Circle의 API에서 새로운 이미지를 명시적으로 요청한다는 점에서 일반적인 <a href="/integrations/camera/#service-snapshot">snapshot</a> 서비스와 다릅니다. 이렇게하면 수면 상태의 카메라가 강제로 깨어납니다.</p>
-<p>캐시된 스냅샷이 30초보다 오래된 경우에만 새 스냅샷이 생성됩니다. 연속해서 여러 스냅샷을 요청하면 동일한 이미지가 반환 될 수 있습니다. 마찬가지로, 적극적으로 스트리밍 중인 카메라에서 스냅샷을 요청하면 (즉, 최대 절전 상태가 아닌) 30초 이전의 캐시 된 이미지를 반환합니다.</p>
+<p>캐시된 스냅샷이 30초보다 오래된 경우에만 새 스냅샷이 생성됩니다. 연속해서 여러 스냅샷을 요청하면 동일한 이미지가 반환될 수 있습니다. 마찬가지로, 적극적으로 스트리밍 중인 카메라에서 스냅샷을 요청하면 (즉, 최대 절전 상태가 아닌) 30초 이전의 캐시된 이미지를 반환합니다.</p>
 <table>
 <thead>
 <tr>

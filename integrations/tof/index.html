@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Time of Flight - 홈어시스턴트</title>
+    <title>거리측정센서(Time of Flight) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to integrate a VL53L1X ToF sensor into Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/tof/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Time of Flight">
+    <meta property="og:title" content="거리측정센서(Time of Flight)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/tof/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Time of Flight">
+    <meta name="twitter:title" content="거리측정센서(Time of Flight)">
     <meta name="twitter:description" content="Instructions on how to integrate a VL53L1X ToF sensor into Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,22 +97,22 @@
   
   <header>
     <h1 class="title indent">
-      Time of Flight
+      거리측정센서(Time of Flight)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The Time of Flight sensor uses an invisible laser to measure distance with millimeter resolution.</p>
-<p>Tested devices:</p>
+  <p>Time of Flight 센서는 보이지 않는 레이저를 사용하여 밀리미터 해상도로 거리를 측정합니다.</p>
+<p>테스트된 장치 :</p>
 <ul>
 <li><a href="https://www.raspberrypi.org/" rel="external nofollow">Raspberry Pi</a></li>
 <li><a href="https://www.st.com/en/imaging-and-photonics-solutions/vl53l1x.html" rel="external nofollow">VL53L1X</a></li>
 <li><a href="https://cdn.sparkfun.com/assets/3/5/c/e/2/Qwiic_Distance_Sensor_-_VL53L1X.pdf" rel="external nofollow">Schematic</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use the VL53L1X sensor in your installation, add to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>VL53L1X 센서를 사용하려면 <code>configuration.yaml</code>에 다음을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: tof
@@ -160,8 +160,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="example" href="#example"></a> Example</h2>
-<p>The distance is measured in millimeters, according to the VL53L1X specifications.</p>
+<a class="title-link" name="" href="#"></a> 사례</h2>
+<p>거리는 VL53L1X 사양에 따라 밀리미터 단위로 측정됩니다.</p>
 <pre><code class="language-yaml"># Example of customized configuration.yaml entry
 sensor:
   - platform: tof
@@ -169,10 +169,10 @@ sensor:
     i2c_address: 0x29
     xshut: 16
 </code></pre>
-<p>Several devices may be attached and a GPIO port from RPI is used for reset. XSHUT signal is generated pulsing LOW at initialization and after that, it is kept HIGH all time. This version uses VL53L1X long-range mode that may reach up to 4 meters.</p>
+<p>여러 장치가 연결되어 있고 RPI의 GPIO 포트가 재설정에 사용됩니다. 초기화시 XSHUT 신호가 펄스 LOW로 생성된 후 항상 HIGH로 유지됩니다. 이 버전은 VL53L1X 장거리 모드를 사용하며 최대 4 미터에 이를 수 있습니다.</p>
 <h2>
-<a class="title-link" name="directions-for-installing-i2c-on-raspberry-pi" href="#directions-for-installing-i2c-on-raspberry-pi"></a> Directions for installing i2c on Raspberry Pi</h2>
-<p>Enable the I2c interface with the Raspberry Pi configuration utility:</p>
+<a class="title-link" name="raspberry-pi-i2c--" href="#raspberry-pi-i2c--"></a> Raspberry Pi에 i2c 설치 지침</h2>
+<p>Raspberry Pi 설정 유틸리티를 사용하여 I2c 인터페이스를 활성화하십시오.</p>
 <pre><code class="language-bash"># pi user environment: Enable i2c interface
 $ sudo raspi-config
 </code></pre>
@@ -188,8 +188,8 @@ $ sudo addgroup homeassistant i2c
 $ sudo reboot
 </code></pre>
 <h3>
-<a class="title-link" name="check-the-i2c-address-of-the-sensor" href="#check-the-i2c-address-of-the-sensor"></a> Check the i2c address of the sensor</h3>
-<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors:</p>
+<a class="title-link" name="-i2c--" href="#-i2c--"></a> 센서의 i2c 주소 확인</h3>
+<p><code>i2c-tools</code>를 설치한 후, 연결된 센서의 주소를 스캔할 수 있는 새로운 유틸리티가 제공됩니다 :</p>
 <pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
 </code></pre>
 <p>It will output a table like this:</p>
@@ -203,7 +203,7 @@ $ sudo reboot
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 </code></pre>
-<p>So you can see the sensor address what you are looking for is <strong>0x29</strong> (there are more i2c sensors in this Raspberry Pi).</p>
+<p>따라서 찾고있는 센서 주소가 <strong>0x29</strong>임을 알 수 있습니다 (이 라즈베리 파이에는 i2c 센서가 더 있습니다).</p>
 
 
 </article>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 및 모션감지로 사용 - 홈어시스턴트</title>
+    <title>집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 그리고 모션감지로 사용 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Example of how to set Foscam to only have Motion Detection Recording while no one is home. When users are home the Foscam will indicate it is not recording b...">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/cookbook/foscam_away_mode_PTZ/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 및 모션감지로 사용">
+    <meta property="og:title" content="집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 그리고 모션감지로 사용">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/cookbook/foscam_away_mode_PTZ/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 및 모션감지로 사용">
+    <meta name="twitter:title" content="집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 그리고 모션감지로 사용">
     <meta name="twitter:description" content="Example of how to set Foscam to only have Motion Detection Recording while no one is home. When users are home the Foscam will indicate it is not recording by pointing down and away from users">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -91,15 +91,15 @@
   
   <header>
     <h1 class="title indent">
-      집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 및 모션감지로 사용
+      집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 그리고 모션감지로 사용
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>이를 위해서는 PTZ (팬, 틸트, 줌) 및 CGI 기능이있는 <a href="/integrations/foscam">Foscam IP Camera</a> 카메라 (<a href="https://www.foscam.es/descarga/Foscam-IPCamera-CGI-User-Guide-AllPlatforms-2015.11.06.pdf" rel="external nofollow">Source</a>)가 필요합니다.</p>
-<p>Foscam 카메라는 여러 CGI 명령을 통해 Home Assistant에서 제어 할 수 있습니다. 다음은 동작 감지를 제어하는 ​​동안 2개의 사전 설정 대상간에 이동하는 데 필요한 스위치, 서비스 및 스크립트의 예를 간략히 설명하지만 위에 링크 된 Foscam CGI 사용 설명서에 다른 많은 이동 옵션이 ​​제공됩니다.</p>
-<p><code>switch.foscam_motion</code> 은 모션 감지의 켜짐 또는 꺼짐을 제어합니다. 이 스위치는 현재 동작 감지 상태를 확인하는 <code>statecmd</code>를 지원합니다.</p>
+  <p>이를 위해서 PTZ (팬, 틸트, 줌)과 CGI 기능이있는 <a href="/integrations/foscam">Foscam IP Camera</a> 카메라 (<a href="https://www.foscam.es/descarga/Foscam-IPCamera-CGI-User-Guide-AllPlatforms-2015.11.06.pdf" rel="external nofollow">Source</a>)가 필요합니다.</p>
+<p>Foscam 카메라는 여러 CGI 명령을 통해 Home Assistant에서 제어할 수 있습니다. 다음은 모션 감지를 제어하는 ​​동안 2개의 사전 설정 대상간에 이동하는데 필요한 스위치, 서비스 그리고 스크립트의 예를 간략히 설명하지만 위에 링크된 Foscam CGI 사용 설명서에 다른 많은 동작 옵션이 ​​제공됩니다.</p>
+<p><code>switch.foscam_motion</code>은 모션 감지의 켜짐 또는 꺼짐을 제어합니다. 이 스위치는 현재 모션 감지 상태를 확인하는 <code>statecmd</code>를 지원합니다.</p>
 <pre><code class="language-yaml"># Replace admin and password with an "Admin" privileged Foscam user
 # Replace ipaddress with the local IP address of your Foscam
 switch:
@@ -119,7 +119,7 @@ switch:
   #Created a preset point in Foscam Web Interface named Main which points in the direction I would like to record
   foscam_turn_on: 'curl -k "https://ipaddress:443/cgi-bin/CGIProxy.fcgi?cmd=ptzGotoPresetPoint&amp;name=Main&amp;usr=admin&amp;pwd=password"'
 </code></pre>
-<p><code>script.foscam_off</code> 및 <code>script.foscam_on</code>을 사용하여 모션 감지를 적절하게 설정한 다음 카메라를 이동할 수 있습니다. 이 스크립트는 Foscam에 대해 <code>home</code> 및 <code>not_home</code>모드를 설정하고 <code>home</code> 일때 모션 감지 녹화를 비활성화하는 <code>device_tracker</code> 트리거를 사용하여 자동화의 일부로 호출 할 수 있습니다.</p>
+<p><code>script.foscam_off</code>, <code>script.foscam_on</code>을 사용하여 모션 감지를 적절하게 설정한 다음 카메라를 이동할 수 있습니다. 이 스크립트는 Foscam에 대해 <code>home</code>, <code>not_home</code>모드를 설정하고 <code>home</code>일때 모션 감지 녹화를 비활성화하는 <code>device_tracker</code> 트리거를 사용하여 자동화의 일부로 호출할 수 있습니다.</p>
 <pre><code class="language-yaml">script:
  foscam_off:
    sequence:
@@ -137,7 +137,7 @@ switch:
      data:
        entity_id: switch.foscam_motion
 </code></pre>
-<p>Foscam이 “on”으로 설정되도록 (모션센서가 켜진 상태에서 올바른 방향으로) 자동화하기 위해 다음과 같은 간단한 자동화를 사용했습니다. :</p>
+<p>Foscam이 “on”으로 설정되도록(모션센서가 켜진 상태에서 정면으로) 자동화하기 위해 다음과 같은 간단한 자동화를 사용했습니다. :</p>
 <pre><code class="language-yaml">automation:
   - alias: Set Foscam to Away Mode when I leave home
     trigger:
@@ -359,7 +359,7 @@ switch:
         
           <li>
             
-              집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 및 모션감지로 사용
+              집에 아무도 없을때 Foscam 카메라를 팬/틸트/줌 제어 그리고 모션감지로 사용
             
           </li>
         

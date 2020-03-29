@@ -111,8 +111,7 @@
 </ul>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p><code>arest</code> 바이너리 센서 플랫폼을 사용하면 [aREST] (<a href="https://arest.io/" rel="external nofollow">https://arest.io/</a>) RESTful 프레임 워크를 실행하는 장치
-(이더넷 / Wi-Fi 연결이있는 Arduinos, ESP8266 및 Raspberry Pi와 같은)에서 모든 데이터를 가져올 수 있습니다.</p>
+<p><code>arest</code> 바이너리 센서 플랫폼을 사용하면 <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful 프레임워크를 실행하는 장치 (이더넷 / Wi-Fi 연결이있는 Arduinos, ESP8266 및 Raspberry Pi와 같은)에서 모든 데이터를 가져올 수 있습니다.</p>
 <p>설치시 aREST 이진 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가 하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
@@ -179,7 +178,7 @@ sensor:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어 씁니다.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어씁니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -187,7 +186,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="pins" href="#pins"></a> pins</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 핀 목록. 아날로그 핀 은 핀 번호에 선행 <strong>A</strong> 가 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링할 핀 목록. 아날로그 핀 은 핀 번호에 선행 <strong>A</strong> 가 필요합니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -211,12 +210,12 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="monitored_variables" href="#monitored_variables"></a> monitored_variables</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>노출 된 변수 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>노출된 변수 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="variable" href="#variable"></a> variable</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터 할 변수의 이름.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>모니터할 변수의 이름.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -235,11 +234,11 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p><code>monitored_variables</code> 배열의 변수는 장치의 응답으로 사용 가능해야 합니다. 이더넷 기능이있는 Arduino에 대한 스케치 (예 : <a href="https://raw.githubusercontent.com/marcoschwartz/aREST/master/examples/Ethernet/Ethernet.ino" rel="external nofollow">Ethernet</a>) 중 하나를 사용할 수 있습니다. 이 스케치에서는 endpoint 역할을 하는 두 가지 변수 (<code>온도</code> 및 <code>습도</code>)를 사용할 수 있습니다.</p>
+<p><code>monitored_variables</code> 배열의 변수는 장치의 응답으로 사용 가능해야 합니다. 이더넷 기능이있는 Arduino에 대한 스케치 (예: <a href="https://raw.githubusercontent.com/marcoschwartz/aREST/master/examples/Ethernet/Ethernet.ino" rel="external nofollow">Ethernet</a>) 중 하나를 사용할 수 있습니다. 이 스케치에서는 endpoint 역할을 하는 두 가지 변수 (<code>온도</code>, <code>습도</code>)를 사용할 수 있습니다.</p>
 <p>엔드 포인트 중 하나에 액세스하면 (예를 들면 <code>http://192.168.1.10/temperature</code>) JSON 응답 내부의 값을 제공합니다.</p>
 <pre><code class="language-json">{"temperature": 23, "id": "sensor01", "name": "livingroom", "connected": true}
 </code></pre>
-<p>루트는 모든 변수 및 현재 값과 일부 장치 세부 정보가 포함 된 JSON 응답을 제공합니다.</p>
+<p>루트는 모든 변수 및 현재 값과 일부 장치 세부 정보가 포함된 JSON 응답을 제공합니다.</p>
 <pre><code class="language-json">{
    "variables" : {
       "temperature" : 23,
@@ -255,8 +254,8 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="-switch" href="#-switch"></a> 스위치 (Switch)</h2>
-<p><code>arest</code> 스위치 플랫폼을 사용하면 <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful 프레임 워크를 실행하는 장치(이더넷 / Wi-Fi 연결이있는 Arduino 보드, ESP8266 기반 장치 및 Raspberry Pi와 같은)에서 핀을 토글 할 수 있습니다.</p>
-<p>설치시 핀이있는 aREST 지원 장치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
+<p><code>arest</code> 스위치 플랫폼을 사용하면 <a href="https://arest.io/" rel="external nofollow">aREST</a> RESTful 프레임 워크를 실행하는 장치(이더넷 / Wi-Fi 연결이있는 Arduino 보드, ESP8266 기반 장치 및 Raspberry Pi와 같은)에서 핀을 토글할 수 있습니다.</p>
+<p>설치시 핀이 있는 aREST 지원 장치를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: arest
@@ -288,11 +287,11 @@ switch:
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어 씀. 기본적으로 장치의 <em>name</em>이 사용됨.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 이름을 덮어씀. 기본적으로 장치의 <em>name</em>이 사용됨.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="pins" href="#pins"></a> pins</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용 된 핀이 모두있는 배열.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용된 핀이 모두있는 배열.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -311,7 +310,7 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="functions" href="#functions"></a> functions</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용 된 모든 함수가있는 배열.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용된 모든 함수가있는 배열.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -321,7 +320,7 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p>웹 브라우저 또는 명령 행 도구를 사용하여 핀을 계속 전환 할 수 있습니다. URL <code>http://192.168.1.10/digital/8/1</code>을 사용하여 핀 8을 high/on으로 설정하면 JSON 응답이 피드백을 제공합니다.</p>
+<p>웹 브라우저 또는 Command line 도구를 사용하여 핀을 계속 전환할 수 있습니다. URL <code>http://192.168.1.10/digital/8/1</code>을 사용하여 핀 8을 high/on으로 설정하면 JSON 응답이 피드백을 제공합니다.</p>
 <pre><code class="language-json">{"message": "Pin D8 set to 1", "id": "sensor02", "name": "livingroom", "connected": true}
 </code></pre>
 

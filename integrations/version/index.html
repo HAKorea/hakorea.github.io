@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p>현재 홈어시스턴트 버전을 표시할 수있는 <code>version</code> 센서 플랫폼.</p>
+  <p>현재 홈어시스턴트 버전을 표시할 수 있는 <code>version</code> 센서 플랫폼.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>이 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
@@ -158,7 +158,7 @@ Default value: </p>
 <p><code>default</code>, <code>qemux86</code>, <code>qemux86-64</code>, <code>qemuarm</code>, <code>qemuarm-64</code>, <code>intel-nuc</code>, <code>raspberrypi</code>, <code>raspberrypi2</code>, <code>raspberrypi3</code>, <code>raspberrypi3-64</code>, <code>raspberrypi4</code>, <code>raspberrypi4-64</code>, <code>tinker</code>, <code>odroid-c2</code>, <code>odroid-xu</code></p>
 <h2>
 <a class="title-link" name="---" href="#---"></a> 로컬 버전을 표시하기위한 대안</h2>
-<p>이 센서는 다양한 솔루션을 통해 동일한 결과를 얻기 위한 기존 솔루션의 대안입니다. 컴맨드 라인에서 설치된 버전을 쉽게 얻을 수 있습니다.</p>
+<p>이 센서는 다양한 솔루션을 통해 동일한 결과를 얻기 위한 기존 솔루션의 대안입니다. command line에서 설치된 버전을 쉽게 얻을 수 있습니다.</p>
 <pre><code class="language-bash">hass --version
 </code></pre>
 <p>또는 <strong>개발자 도구</strong>의 <img src="/images/screenshots/developer-tool-about-icon.png" alt="service developer tool icon" class="no-shadow" height="38"> <strong>정보</strong> 섹션으로 이동하십시오.</p>
@@ -174,8 +174,7 @@ Default value: </p>
     name: Version
     command: "cat /home/homeassistant/.homeassistant/.HA_VERSION"
 </code></pre>
-<p><em>번역 재검토 필요</em></p>
-<p>You might think that a <a href="/integrations/rest"><code>rest</code> sensor</a> could work, too , but it will not as Home Assistant is not ready when the sensor gets initialized.</p>
+<p><a href="/integrations/rest"><code>rest</code> sensor</a>도 작동할 수 있다고 생각할 수도 있지만 센서가 초기화 될 때 Home Assistant가 준비되지 않은 것은 아닙니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: rest
     resource: http://IP_ADDRESS:8123/api/config

@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p><code>trend</code> 플랫폼을 사용하면 다른 엔티티의 숫자 <code>state</code> 또는 <code>state_attributes</code> 경향을 보여주는 센서를 만들 수 있습니다. 이 센서에는 트렌드(경향)를 설정하기 위해 기본 센서의 업데이트가 두 개 이상 필요합니다. 따라서 정확한 상태를 표시하는 데 시간이 걸릴 수 있습니다. 트렌드를 기반으로 작업을 수행하려는 자동화의 일부로 유용할 수 있습니다.</p>
+  <p><code>trend</code> 플랫폼을 사용하면 다른 엔티티의 숫자 <code>state</code> 또는 <code>state_attributes</code> 트렌드(trend)를 보여주는 센서를 만들 수 있습니다. 이 센서에는 트렌드를 설정하기 위해 기본 센서의 업데이트가 두 개 이상 필요합니다. 따라서 정확한 상태를 표시하는데 시간이 걸릴 수 있습니다. 트렌드를 기반으로 작업을 수행하려는 자동화의 일부로 유용할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>트렌드 바이너리 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>트렌드 이진 센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: trend
@@ -180,13 +180,13 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="--" href="#--"></a> 여러 샘플 사용하기</h2>
-<p>선택적 <code>sample_duration</code> 및 <code>max_samples</code> 매개 변수를 지정하면 여러 샘플을 저장하고 장기 트렌드를 감지하는 데 사용할 수 있습니다.</p>
-<p>상태가 변경 될 때마다 새로운 샘플이 샘플시간과 함께 저장됩니다. <code>sample_duration</code>시간 보다 오래된 샘플은 폐기됩니다.</p>
+<p>선택적으로 <code>sample_duration</code>, <code>max_samples</code> 매개 변수를 지정하면 여러 샘플을 저장하고 장기간 트렌드를 감지하는데 사용할 수 있습니다.</p>
+<p>상태가 변경될 때마다 새로운 샘플이 샘플시간과 함께 저장됩니다. <code>sample_duration</code>시간 보다 오래된 샘플은 폐기됩니다.</p>
 <p>그런 다음 트렌드 라인을 사용 가능한 샘플에 맞추고 이 라인의 gradient를 <code>min_gradient</code>와 비교하여 트렌드 센서의 상태를 결정합니다. gradient는 초당 센서 단위로 측정됩니다. - 온도가 시간당 2 도씩 떨어지는 시점을 알고 싶다면 (-2) / (60 x 60) = -0.00055의 gradient를 사용하십시오.</p>
 <p>저장된 샘플의 현재 수가 상태 페이지에 표시됩니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
-<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
+<p>본 섹션에는 이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <p>이 예는 태양이 여전히 떠오르면 <code>true</code>를 나타냅니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: trend
@@ -195,7 +195,7 @@ Default value: </p>
         entity_id: sun.sun
         attribute: elevation
 </code></pre>
-<p>이 예에서는 온도가 시간당 최소 3도 이상으로 상승 또는 하강하는지를 나타내는 두 개의 센서를 만들고 2 시간 동안 샘플을 수집합니다.</p>
+<p>이 예에서는 온도가 시간당 최소 3도 이상으로 오르는지 혹은 내리는지를 나타내는 두 개의 센서를 만들고 2 시간 동안 샘플을 수집합니다.</p>
 <pre><code class="language-yaml">binary_sensor:
   - platform: trend
     sensors:

@@ -103,18 +103,20 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="485" src="https://www.youtube.com/embed/m9qIqq104as" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/m9qIqq104as" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>influxdb</code> 통합구성요소를 통해 모든 상태 변경을 외부 <a href="https://influxdb.com/" rel="external nofollow">InfluxDB</a> 데이터베이스로 전송할 수 있습니다. nfluxDB 데이터베이스 설정 방법은 <a href="https://docs.influxdata.com/influxdb/v1.7/introduction/installation/" rel="external nofollow">공식 설치 문서</a>를 참조하십시오. 혹은 Hass.io를 사용하는 경우 <a href="https://community.home-assistant.io/t/community-hass-io-add-on-influxdb/54491">Add-on 추가 기능</a>이 있습니다. 가장 쉬운 방법으로 Add-on 추가를 추천합니다.</p>
-<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
 <li><a href="#sensor">Sensor</a></li>
 </ul>
 <div class="note">
-<p><code>influxdb</code> 데이터베이스 통합은 Home Assistant 데이터베이스와 병렬로 실행됩니다. 대체하지는 않습니다.</p>
+<p><code>influxdb</code> 데이터베이스 연동은 Home Assistant 데이터베이스와 병렬로 실행됩니다. 대체하지는 않습니다.</p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>기본 InfluxDB 설정은 인증을 강제하지 않습니다. Home Assistant가 실행중인 동일한 호스트에 InfluxDB를 설치했으며 설정을 변경하지 않은 경우<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>기본 InfluxDB 설정은 인증을 강제하지 않습니다. Home Assistant가 실행중인 동일한 호스트에 InfluxDB를 설치했으며 설정을 변경하지 않은 경우 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 influxdb:
 </code></pre>
@@ -143,7 +145,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터베이스 사용자의 사용자 이름. 사용자는 데이터베이스에 대한 읽기 / 쓰기 권한이 필요합니다</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터베이스 사용자의 사용자 이름. 사용자는 데이터베이스에 대한 읽기/쓰기 권한이 필요합니다</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
@@ -179,7 +181,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="max_retries" href="#max_retries"></a> max_retries</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터를 전송할 때 네트워크 오류가 있는 경우 연동이 재시도되도록 하려면 이 값을 설정하십시오..</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터를 전송할 때 네트워크 오류가 있는 경우 연동이 재시도되도록 하려면 이 값을 설정하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -200,16 +202,16 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="exclude" href="#exclude"></a> exclude</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>nfluxDB에 기록에서 제외 할 통합구성요소를 설정.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록에서 제외할 통합구성요소를 설정.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록에서 제외 할 엔티티 ID 목록</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록에서 제외할 엔티티 ID 목록</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="domains" href="#domains"></a> domains</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록에서 제외 할 도메인 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록에서 제외할 도메인 목록.</p>
 </span></p></dd>
 </dl></dd>
 <dt>
@@ -219,11 +221,11 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록하는 데 포함될 엔티티 ID 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록하는데 포함될 엔티티 ID 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="domains" href="#domains"></a> domains</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록하는 데 포함될 도메인 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 기록하는데 포함될 도메인 목록.</p>
 </span></p></dd>
 </dl></dd>
 <dt>
@@ -238,7 +240,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="tags_attributes" href="#tags_attributes"></a> tags_attributes</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 필드가 아닌 태그로 보고되어야하는 속성 이름 목록. 예를 들어 <code>friendly_name</code> 으로 설정하면 ID뿐만 아니라 엔티티의 이름으로도 그룹화 할 수 있습니다.</p>
+<p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>InfluxDB에 필드가 아닌 태그로 보고되어야하는 속성 이름 목록. 예를 들어 <code>friendly_name</code>으로 설정하면 ID뿐만 아니라 엔티티의 이름으로도 그룹화할 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -246,7 +248,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="component_config" href="#component_config"></a> component_config</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성은 구성 요소 특정 대체 값을 포함합니다. 형식은 <a href="/getting-started/customizing-devices/">Customizing devices and services</a>를 참조하십시오.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성은 구성 요소 특정 대체값을 포함합니다. 형식은 <a href="/getting-started/customizing-devices/">Customizing devices and services</a>를 참조하십시오.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -256,7 +258,7 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="component_config_domain" href="#component_config_domain"></a> component_config_domain</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성에는 도메인 별 통합구성요소 대체값이 포함됩니다. 형식은 <a href="/getting-started/customizing-devices/">Customizing devices and services</a>를 참조하십시오.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성에는 도메인별 통합구성요소 대체값이 포함됩니다. 형식은 <a href="/getting-started/customizing-devices/">Customizing devices and services</a>를 참조하십시오.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -266,7 +268,7 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="component_config_glob" href="#component_config_glob"></a> component_config_glob</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성은 구성 요소 특정 대체 값을 포함합니다. 형식은 <a href="/getting-started/customizing-devices/">Customizing devices and services</a>를 참조하십시오.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 속성은 구성 요소 특정 대체값을 포함합니다. 형식은 <a href="/getting-started/customizing-devices/">Customizing devices and services</a>를 참조하십시오.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -307,8 +309,8 @@ Default value: </p>
 <h2>
 <a class="title-link" name="" href="#"></a> 센서</h2>
 <p><code>influxdb</code> 센서를 사용하면 <a href="https://influxdb.com/" rel="external nofollow">InfluxDB</a> 데이터베이스의 값을 사용하여 센서 상태를 채울 수 있습니다.
-<code>influxdb</code> 히스토리 구성 요소와 함께 사용되는 경우 home_assistant 센서에 대한 통계를 제공하는 데 사용할 수 있습니다. 외부 데이터 소스와 함께 사용할 수도 있습니다.</p>
-<p>이 센서를 구성하려면 센서 연결 변수와 <code>configuration.yaml</code> 파일에 대한 쿼리 목록을 정의해야합니다. 각 쿼리마다 센서가 생성됩니다. :</p>
+<code>influxdb</code> 히스토리 구성 요소와 함께 사용되는 경우 home_assistant 센서에 대한 통계를 제공하는데 사용할 수 있습니다. 외부 데이터 소스와 함께 사용할 수도 있습니다.</p>
+<p>이 센서를 설정하려면 센서 연결 변수와 <code>configuration.yaml</code> 파일에 대한 쿼리 목록을 정의해야합니다. 각 쿼리마다 센서가 생성됩니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: influxdb
@@ -324,7 +326,7 @@ sensor:
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터베이스 호스트의 IP 주소 (예 : 192.168.1.10)</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터베이스 호스트의 IP 주소 (예: 192.168.1.10)</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -424,7 +426,7 @@ Default value: </p>
 <a class="title-link" name="" href="#"></a> 사례</h2>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 전체 설정</h3>
-<p>아래 예제 구성 항목은 로컬 InfluxDB 인스턴스에 대한 두 가지 요청을 만듭니다. 하나는 데이터베이스<code>db1</code>에, 다른 하나는<code>db2</code>에 :</p>
+<p>아래 예제 설정 항목은 로컬 InfluxDB 인스턴스에 대한 두 가지 요청을 만듭니다. 하나는 데이터베이스 <code>db1</code>에, 다른 하나는 <code>db2</code>에 :</p>
 <ul>
 <li><code>select last(value) as value from "°C" where "name" = "foo"</code></li>
 <li><code>select min(tmp) as value from "%" where "entity_id" = ''salon'' and time &gt; now() - 1h</code></li>

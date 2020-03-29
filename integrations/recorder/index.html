@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p><code>recorder</code> 통합구성요소는 데이터베이스에 세부 사항을 저장하는 역할을 하며, 그런 다음 <a href="/integrations/history/"><code>history</code> 통합구성요소</a>.에 의해 처리됩니다.</p>
-<p>홈어시스턴트는 ORM (Object Relational Mapper)인 <a href="https://www.sqlalchemy.org/" rel="external nofollow">SQLAlchemy</a> 를 사용합니다. 이는 <a href="https://www.mysql.com/" rel="external nofollow">MySQL</a>, <a href="https://mariadb.org/" rel="external nofollow">MariaDB</a>, <a href="https://www.postgresql.org/" rel="external nofollow">PostgreSQL</a>, 혹은 <a href="https://www.microsoft.com/en-us/sql-server/" rel="external nofollow">MS SQL Server</a>와 같이 SQLAlchemy가 지원하는 레코더에 <strong>모든</strong> SQL 백엔드를 사용할 수 있습니다.</p>
+  <p><code>recorder</code> 통합구성요소는 데이터베이스에 세부 사항을 저장하는 역할을 하며, 그런 다음 <a href="/integrations/history/"><code>history</code> 통합구성요소</a>에 의해 처리됩니다.</p>
+<p>홈어시스턴트는 ORM (Object Relational Mapper)인 <a href="https://www.sqlalchemy.org/" rel="external nofollow">SQLAlchemy</a>를 사용합니다. 이는 <a href="https://www.mysql.com/" rel="external nofollow">MySQL</a>, <a href="https://mariadb.org/" rel="external nofollow">MariaDB</a>, <a href="https://www.postgresql.org/" rel="external nofollow">PostgreSQL</a>, 혹은 <a href="https://www.microsoft.com/en-us/sql-server/" rel="external nofollow">MS SQL Server</a>와 같이 SQLAlchemy가 지원하는 레코더에 <strong>모든</strong> SQL 백엔드를 사용할 수 있습니다.</p>
 <p>기본 데이터베이스 엔진은 <a href="https://www.sqlite.org/" rel="external nofollow">SQLite</a> 이며 설정이 필요하지 않습니다. 데이터베이스는 Home Assistant 설정 디렉토리(<code>.homeassistant</code> 혹은 ‘/config/’ Hass.io 경우)에 <code>home-assistant_v2.db</code>이름으로 저장됩니다.</p>
 <p>설치시 <code>recorder</code> 통합구성요소의 기본값을 변경하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -126,7 +126,7 @@ recorder:
 <dt>
 <a class="title-link" name="purge_keep_days" href="#purge_keep_days"></a> purge_keep_days</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터기 제거된 후 레코드 데이터베이스에 보관할 히스토리 날짜수(기간)를 지정</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>데이터가 제거된 후 레코드 데이터베이스에 보관할 히스토리 날짜수(기간)를 지정</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -135,7 +135,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="purge_interval" href="#purge_interval"></a> purge_interval</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>제거 작업이 실행되는 빈도(기간). 예약된 제거가 누락 된 경우 (예 : 홈어시스턴트가 실행 중이 아닌 경우) 홈어시스턴트가 다시 시작된 후 일정이 재개됩니다. 제거 일정에 영향을 주지 않고 필요할 때 <a href="#service-purge">service</a> 호출 <code>purge</code>를 사용할 수 있습니다. 이것이 ‘0’으로 설정되면 자동 제거(purge)가 비활성화됩니다.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>제거 작업이 실행되는 빈도(기간). 예약된 제거가 누락된 경우 (예: 홈어시스턴트가 실행 중이 아닌 경우) 홈어시스턴트가 다시 시작된 후 일정이 재개됩니다. 제거 일정에 영향을 주지 않고 필요할 때 <a href="#service-purge">service</a> 호출 <code>purge</code>를 사용할 수 있습니다. 이것이 ‘0’으로 설정되면 자동 제거(purge)가 비활성화됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -157,7 +157,7 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="include" href="#include"></a> include</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>레코딩에 포함할 통합구성요소 설정. 설정사 다른 모든 항목이 기록되지 않습니다..</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>레코딩에 포함할 통합구성요소 설정. 설정시 다른 모든 항목이 기록되지 않습니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -209,7 +209,7 @@ recorder:
      - sensor.last_boot
      - sensor.date
 </code></pre>
-<p>히스토리에서 이벤트만 숨기려면 <a href="/integrations/history/"><code>history</code> integration</a>을 살펴보십시오. <a href="/integrations/logbook/">logbook</a>도 마찬가지입니다. 그러나 특정 이벤트에 대한 개인 정보 보호 문제가 있거나 기록이나 로그북에서 이벤트를 원하지 않는 경우 <code>recorder</code> 통합구성요소의 <code>exclude</code>/<code>include</code>옵션을 사용해야합니다. 이런 방식으로 데이터베이스에 조차 없는 경우에도 자주 기록되는 특정 이벤트 (예 :<code>sensor.last_boot</code>)를 제외하여 스토리지를 줄이고 데이터베이스를 작게 유지할 수 있습니다.</p>
+<p>히스토리에서 이벤트만 숨기려면 <a href="/integrations/history/"><code>history</code> integration</a>을 살펴보십시오. <a href="/integrations/logbook/">logbook</a>도 마찬가지입니다. 그러나 특정 이벤트에 대한 개인 정보 보호 문제가 있거나 기록이나 로그북에서 이벤트를 원하지 않는 경우 <code>recorder</code> 통합구성요소의 <code>exclude</code>/<code>include</code> 옵션을 사용해야합니다. 이런 방식으로 데이터베이스에 조차 없는 경우에도 자주 기록되는 특정 이벤트 (예: <code>sensor.last_boot</code>)를 제외하여 스토리지를 줄이고 데이터베이스를 작게 유지할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="purge-" href="#purge-"></a> purge 서비스</h3>
 <p><code>keep_days</code> 서비스 데이터에 따라 <code>recorder.purge</code>서비스를 호출하여 X일보다 오래된 이벤트 및 상태를 삭제하는 제거 작업을 시작합니다.</p>
@@ -287,13 +287,13 @@ recorder:
 </tbody>
 </table>
 <div class="note">
-<p>MariaDB/MySQL을 설치하려면 ALTERNATE_PORT (타사 호스팅 제공 업체 또는 병렬 설치)를 SERVER_IP에 추가해야합니다 (예 : <code>mysql://user:password@SERVER_IP:ALTERNATE_PORT/DB_NAME?charset=utf8</code>).</p>
+<p>MariaDB/MySQL을 설치하려면 ALTERNATE_PORT (타사 호스팅 제공 업체 또는 병렬 설치)를 SERVER_IP에 추가해야합니다 (예: <code>mysql://user:password@SERVER_IP:ALTERNATE_PORT/DB_NAME?charset=utf8</code>).</p>
 </div>
 <div class="note">
 <p>홈어시스턴트로 외부 MariaDB 백엔드 (예: 별도의 NAS에서 실행)를 사용하는 경우 URL에서 <code>pymysql</code>을 생략해야합니다. <code>pymysql</code>은 기본 도커 이미지에 포함되어 있지 않으며 이것이 작동하는 데 필요하지 않습니다.</p>
 </div>
 <div class="note">
-<p>데이터베이스가 <code>recorder</code> 인스턴스 (예 : <code>localhost</code>)와 동일한 호스트에 있는 경우 Unix Socket 연결은 항상 TCP보다 성능이 더 좋습니다.</p>
+<p>데이터베이스가 <code>recorder</code> 인스턴스 (예: <code>localhost</code>)와 동일한 호스트에 있는 경우 Unix Socket 연결은 항상 TCP보다 성능이 더 좋습니다.</p>
 </div>
 <div class="note warning">
 <p>PostgreSQL에 유닉스 소켓을 사용하려면 <code>pg_hba.conf</code>를 수정해야합니다. <a href="#postgresql">PostgreSQL</a> 참조</p>
@@ -333,7 +333,7 @@ pip3 install mysqlclient
 <pre><code class="language-bash">sudo apt-get install default-libmysqlclient-dev libssl-dev
 pip3 install mysqlclient
 </code></pre>
-<p>종속성을 설치 한 후 데이터베이스를 수동으로 작성해야합니다. 시작하는 동안 Home Assistant는 <code>db_url</code>에 지정된 데이터베이스를 찾습니다. 데이터베이스가 존재하지 않으면 데이터베이스가 자동으로 작성되지 않습니다.</p>
+<p>종속성을 설치한 후 데이터베이스를 수동으로 작성해야합니다. 시작하는 동안 Home Assistant는 <code>db_url</code>에 지정된 데이터베이스를 찾습니다. 데이터베이스가 존재하지 않으면 데이터베이스가 자동으로 작성되지 않습니다.</p>
 <p>홈어시스턴트가 올바른 권한 레벨로 데이터베이스를 찾으면 모든 필수 테이블이 자동으로 작성되고 그에 따라 데이터가 채워집니다.</p>
 <h3>
 <a class="title-link" name="postgresql" href="#postgresql"></a> PostgreSQL</h3>

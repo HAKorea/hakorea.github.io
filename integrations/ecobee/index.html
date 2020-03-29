@@ -103,11 +103,13 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/wMT4TABxa7Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/wMT4TABxa7Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>ecobee</code> 통합구성요소를 통해 <a href="https://ecobee.com" rel="external nofollow">ecobee</a>온도 조절기의 센서 데이터를 제어하고 볼 수 있습니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 예비 단계</h2>
-<p>이 통합구성요소를 사용하려면 ecobee의 <a href="https://www.ecobee.com/developers/" rel="external nofollow">개발자 사이트</a>에서 API 키를 얻어야합니다. 열쇠를 얻으려면 온도조절기가 ecobee 웹 사이트에 등록되어 있어야합니다 (온도조절기를 설치하는 동안 이미했을 것입니다). 완료 한 후 다음 단계를 수행하십시오.</p>
+<p>이 통합구성요소를 사용하려면 ecobee의 <a href="https://www.ecobee.com/developers/" rel="external nofollow">개발자 사이트</a>에서 API 키를 얻어야합니다. 키(Key)를 얻으려면 온도조절기가 ecobee 웹 사이트에 등록되어 있어야합니다. (온도조절기를 설치하는 동안 이미했을 것입니다). 완료한 후 다음 단계를 수행하십시오.</p>
 <ol>
 <li>Click on the <strong>Become a developer</strong> link on the <a href="https://www.ecobee.com/developers/" rel="external nofollow">developer site</a>.</li>
 <li>Log in with your ecobee credentials.</li>
@@ -124,23 +126,22 @@
 <li>You don’t need an Application Icon or Detailed Description.</li>
 <li>Click <strong>Create</strong>.</li>
 </ol>
-<p>이름 및 요약 섹션 아래에 API 키가 있습니다. 이 키를 복사하여 아래 설정 섹션에서 사용하십시오. <strong>X</strong>를 클릭하여 개발자 섹션을 닫습니다</p>
+<p>이름과 요약 섹션 아래에 API 키가 있습니다. 이 키를 복사하여 아래 설정 섹션에서 사용하십시오. <strong>X</strong>를 클릭하여 개발자 섹션을 닫습니다</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 통합구성요소 설정</h2>
-<p>Home Assistant에서 에코비 통합구성요소를 설정하려면 <strong>설정</strong>&gt; <strong>통합구성요소</strong> 메뉴를 사용하거나 <code>configuration.yaml</code>에 항목을 추가하십시오.</p>
+<p>Home Assistant에서 에코비 통합구성요소를 설정하려면 <strong>설정</strong> &gt; <strong>통합구성요소</strong> 메뉴를 사용하거나 <code>configuration.yaml</code>에 항목을 추가하십시오.</p>
 <h3>
 <a class="title-link" name="---" href="#---"></a> 통합구성요소 메뉴를 통한 설정</h3>
 <ol>
 <li>
-<strong>설정</strong> &gt; <strong>통합구성요소</strong> 메뉴에서 **+**를 클릭한 다음 팝업 메뉴에서 <code>ecobee</code>를 선택하십시오.</li>
+<strong>설정</strong> &gt; <strong>통합구성요소</strong> 메뉴에서 <strong>+</strong> 를 클릭한 다음 팝업 메뉴에서 <code>ecobee</code>를 선택하십시오.</li>
 <li>팝업 상자에 ecobee.com에서 얻은 API 키를 입력하십시오.</li>
 <li>다음 팝업 상자에 <a href="https://www.ecobee.com/consumerportal/index.html" rel="external nofollow">ecobee consumer portal</a>에서 승인해야 하는 고유한 4자리 PIN 코드가 표시됩니다. 로그인하여 햄버거 메뉴에서 <strong>My Apps</strong> 을 선택하고 왼쪽에서<strong>Add Application</strong> 를 클릭하고 홈어시스턴트에서 PIN 코드를 입력한 다음 <strong>Validate</strong> 을 클릭한 다음 오른쪽 하단에 <strong>Add Application</strong> 을 클릭하십시오.</li>
-<li>ecobee.com에서 앱을 승인한 후 홈어시스턴트로 돌아가서 <strong>Submit</strong>을 누르십시오. 인증에 성공하면 설정 항목이 작성되고 자동 온도 조절기 및 센서를 Home Assistant에서 사용할 수 있습니다.</li>
+<li>ecobee.com에서 앱을 승인한 후 홈어시스턴트로 돌아가서 <strong>Submit</strong>을 누르십시오. 인증에 성공하면 설정 항목이 작성되고 자동 온도조절기와 센서를 Home Assistant에서 사용할 수 있습니다.</li>
 </ol>
 <h3>
 <a class="title-link" name="configurationyaml-" href="#configurationyaml-"></a> configuration.yaml에서 설정</h3>
-<p><a href="/docs/configuration/"><code>configuration.yaml</code></a>에서 이 통합구성요소를 초기에 설정하려면 다음과 같이 API 키
-(선택적 매개 변수 포함)를 추가하면됩니다.  (그러나 여전히 <strong>통합구성요소</strong> 메뉴를 통해 인증을 완료해야합니다.)</p>
+<p><a href="/docs/configuration/"><code>configuration.yaml</code></a>에서 이 통합구성요소를 초기에 설정하려면 다음과 같이 API 키 (선택적 매개 변수 포함)를 추가하면됩니다.  (그러나 여전히 <strong>통합구성요소</strong> 메뉴를 통해 인증을 완료해야합니다.)</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 ecobee:
   api_key: YOUR_API_KEY
@@ -151,7 +152,7 @@ ecobee:
   <dl class="">
 <dt>
 <a class="title-link" name="api_key" href="#api_key"></a> api_key</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>에코비 API 키. 연동 초기 설정에만 필요합니다. 등록되면 제거 할 수 있습니다. ecobee 포털에서 키를 취소하면 <strong>통합구성요소</strong> 메뉴에서 기존 <code>ecobee</code> 설정을 제거해야합니다, 이를 업데이트 한 다음, 통합구성요소를 다시 설정하십시오.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>에코비 API 키. 연동 초기 설정에만 필요합니다. 등록되면 제거할 수 있습니다. ecobee 포털에서 키를 취소하면 <strong>통합구성요소</strong> 메뉴에서 기존 <code>ecobee</code> 설정을 제거해야합니다, 이를 업데이트한 다음, 통합구성요소를 다시 설정하십시오.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -159,16 +160,16 @@ ecobee:
   <img src="/images/screenshots/ecobee-sensor-badges.png">
   <img src="/images/screenshots/ecobee-thermostat-card.png">
 </p>
-<p>변경 사항을 적용하려면 <a href="/docs/configuration/#reloading-changes">Home Assistant 다시 시작</a>합니다.
-<strong>설정</strong> &gt; <strong>통합구성요소</strong> 메뉴에서 검색된 <code>ecobee</code>항목 옆에 있는 <strong>Configure</strong>를 누르고 위의 통합구성요소 메뉴 지침에 따라 앱을 계속 승인합니다.</p>
+<p>변경 사항을 적용하려면 <a href="/docs/configuration/#reloading-changes">Home Assistant를 다시 시작</a>합니다.
+<strong>설정</strong> &gt; <strong>통합구성요소</strong> 메뉴에서 검색된 <code>ecobee</code> 항목 옆에 있는 <strong>Configure</strong>를 누르고 위의 통합구성요소 메뉴 지침에 따라 앱을 계속 승인합니다.</p>
 <p>이 통합구성요소로 Home Assistant를 처음 다시 실행하면 <a href="https://www.ecobee.com/consumerportal/index.html" rel="external nofollow">ecobee consumer portal</a>에서 인증해야 하는 PIN 코드가 제공됩니다. 사이드 바의 <strong>My Apps</strong> 섹션에서 <strong>Add Application</strong>를 클릭하면됩니다.</p>
-<p>PIN은 Ecobee 카드의 홈 어시스턴트 포털에서 찾을 수 있거나 States developer tool의 <strong>configurator.ecobee</strong> 에서 찾을 수 있습니다.</p>
+<p>PIN은 Ecobee 카드의 홈어시스턴트 포털에서 찾을 수 있거나 개발자도구의 상태에서 <strong>configurator.ecobee</strong> 를  찾을 수 있습니다.</p>
 <ul>
-<li>에코비 카드가 없다면, 카드가 보이지 않는 <code>default_view</code> 그룹을 사용하고 있을 수 있습니다. 이 문제를 해결하려면 <code>default_view</code> 섹션을 일시적으로 주석 처리하거나 <code>default_view</code>에 <code>configurator.ecobee</code> 통합구성요소를 추가하고 홈 어시스턴트를 다시 시작할 수 있습니다.</li>
+<li>에코비 카드가 없다면, 카드가 보이지 않는 <code>default_view</code> 그룹을 사용하고 있을 수 있습니다. 이 문제를 해결하려면 <code>default_view</code> 섹션을 일시적으로 주석 처리하거나 <code>default_view</code>에 <code>configurator.ecobee</code> 통합구성요소를 추가하고 홈어시스턴트를 다시 시작할 수 있습니다.</li>
 </ul>
-<p>에코비 사이트에서 PIN을 입력한 후 약 5분 정도 기다렸다가 에코비 팝업창의 맨 아래에있는 <strong>I have authorized the app</strong> 링크를 클릭하십시오. 모든 것이 올바르게 작동하면 Home Assistant를 다시 시작하여 모든 센서가 채워진 전체 에코비 카드를 보거나 개발자 도구의 센서 목록을 볼 수 있습니다. 이제 <code>default_view</code>를 다시 활성화하고 (비활성화해야 할 경우) 에코비 센서를 group 혹은/그리고 view 로 추가할 수 있습니다.</p>
+<p>에코비 사이트에서 PIN을 입력한 후 약 5분 정도 기다렸다가 에코비 팝업창의 맨 아래에있는 <strong>I have authorized the app</strong> 링크를 클릭하십시오. 모든 것이 올바르게 작동하면 Home Assistant를 다시 시작하여 모든 센서가 채워진 전체 에코비 카드를 보거나 개발자 도구의 센서 목록을 볼 수 있습니다. 이제 <code>default_view</code>를 다시 활성화하고 (비활성화해야 할 경우) 에코비 센서를 group이나 view로 추가할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="" href="#"></a> 알림</h2>
+<a class="title-link" name="notification" href="#notification"></a> 알림(notification)</h2>
 <p>에코비 알림이 Home Assistant와 작동하게 하려면 먼저 기본 에코비 통합구성요소를 로드하고 실행해야합니다. 설정이 완료되면 에코비 장치로 메시지를 보내도록 이 통합구성요소를 설정할 수 있습니다.</p>
 <p>설치시 이 알림 플랫폼을 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -183,7 +184,7 @@ notify:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택적 매개 변수 <code>name</code>을 설정하면 여러 알리미를 만들 수 있습니다. 알리미는 서비스 <code>notify.NOTIFIER_NAME</code>에 바인딩합니다.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>선택적 매개 변수 <code>name</code>을 설정하면 여러 알리미(notifier)를 만들 수 있습니다. 알리미는 서비스 <code>notify.NOTIFIER_NAME</code>에 바인딩합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -197,15 +198,15 @@ Default value: </p>
 <h3>
 <a class="title-link" name="" href="#"></a> 개념</h3>
 <p>에코비 온도 조절기는 다음과 같은 주요 개념을 지원합니다.</p>
-<p><em>target temperature</em> 는 장치가 목표하고자하는 온도입니다. 목표 온도는 현재 활성화된 climate에 의해 결정되거나 대기상태에 의해 무시 될 수 있습니다. 온도 조절기가 자동 모드가 아닌 경우 단순한 목표 온도가 있습니다. 온도 조절기가 자동 HVAC 모드인 경우 한 쌍의 목표 온도가 있습니다. 목표 온도가 낮을수록 원하는 최저 온도가 결정되고 목표 온도가 높을수록 원하는 최고 온도가 결정됩니다. (온도조절장치는 가열과 냉각 사이를 전환하여 온도를 이 한계 내로 유지합니다).</p>
-<p><em>climate</em> 는 온도조절장치가 목표로 하는 사전정의된 또는 사용자정의된 사전설정세트입니다.
-ecobee 온도조절기는 세 가지 사전 정의 된 climate들을 제공합니다. : Home, Away, Sleep. Ecobee는 이를 <em>comfort settings</em> 이라고합니다. 사용자는 추가 climate를 정의 할 수 있습니다.</p>
-<p><em>preset</em> 은 현재 활성화된 climate에 정의된 목표 온도를 덮어씁니다. 사전설정모드를 목표로 하는 온도는 사용자가 원하는 값으로 설정할 수 있고 (온도사전설정), 참조 climate(home, away, sleep, etc.)로 쓰거나, 온도 조절기에 의해 정의된 휴가시 사용하는 값으로 쓸 수도 있습니다. 모든 유지기간은 기간이 정해져있습니다. 온도 조절기가 프로그램에 정의된 다음 climate로 전환할 때, 온도 및 climate 유지 기간이 만료됩니다. 휴가유지기간은 정의된 휴가 기간이 시작될 때 동작하고 휴가 기간이 끝나면 만료됩니다.</p>
+<p><em>target temperature</em> 는 장치가 목표하고자하는 온도입니다. 목표온도는 현재 활성화된 climate에 의해 결정되거나 대기상태에 의해 무시될 수 있습니다. 온도 조절기가 자동 모드가 아닌 경우 단순한 목표온도가 있습니다. 온도조절기가 자동 HVAC 모드인 경우 한 쌍의 목표온도가 있습니다. 목표온도가 낮을수록 원하는 최저온도가 결정되고 목표온도가 높을수록 원하는 최고온도가 결정됩니다. (온도조절장치는 가열과 냉각 사이를 전환하여 온도를 이 한계 내로 유지합니다).</p>
+<p><em>climate</em> 는 온도조절장치가 목표로 하는 사전정의된 또는 사용자정의 사전설정세트입니다.
+ecobee 온도조절기는 세 가지 사전 정의된 climate들을 제공합니다. : Home, Away, Sleep. Ecobee는 이를 <em>comfort settings</em> 이라고합니다. 사용자는 추가 climate를 정의할 수 있습니다.</p>
+<p><em>preset</em> 은 현재 활성화된 climate에 정의된 목표온도를 덮어씁니다. 사전설정모드를 목표로 하는 온도는 사용자가 원하는 값(climate 참조(home, away, sleep, etc.)에서 파생된 온도사전설정)으로 설정해서 쓰거나, 온도조절기에 의해 정의된 휴가시 사용하는 값으로 쓸 수도 있습니다. 모든 유지기간은 기간이 정해져 있습니다. 온도 조절기가 프로그램에 정의된 다음 climate로 전환할 때, 온도와 climate 유지 기간이 만료됩니다. 휴가유지기간은 정의된 휴가 기간이 시작될 때 동작하고 휴가 기간이 끝나면 만료됩니다.</p>
 <p><em>away preset</em> 에 있을 때, 목표 온도는 away climate에 대해 정의된 목표 온도에 의해 완전히 무시됩니다. away preset은 휴가 모드를 에뮬레이트하는 간단한 방법입니다.</p>
-<p><em>HVAC mode</em> 는 에코비 온도조절기가 제공하는 현재 활성화된 작동모드입니다 : heat, auxHeatOnly, cool, auto, and off.</p>
+<p><em>HVAC mode</em> 는 에코비 온도조절기가 제공하는 현재 활성화된 작동모드입니다 : heat, auxHeatOnly, cool, auto, off.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 속성</h2>
-<p>에코비 climate 엔티티에는 온도 조절기의 상태를 나타내는 몇 가지 추가 속성이 있습니다.</p>
+<p>에코비 climate 엔티티에는 온도조절기의 상태를 나타내는 몇 가지 추가 속성이 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -224,7 +225,7 @@ ecobee 온도조절기는 세 가지 사전 정의 된 climate들을 제공합�
 </tr>
 <tr>
 <td><code>equipment_running</code></td>
-<td>현재 실행중인 장비를 쉼표로 구분 한 목록입니다.</td>
+<td>현재 실행중인 장비를 쉼표로 구분한 목록입니다.</td>
 </tr>
 <tr>
 <td><code>fan_min_on_time</code></td>
@@ -256,7 +257,7 @@ ecobee 온도조절기는 세 가지 사전 정의 된 climate들을 제공합�
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>휴가를 만들 에코비 온도 조절기</td>
+<td>휴가중 만들 에코비 온도 조절기</td>
 </tr>
 <tr>
 <td><code>vacation_name</code></td>
@@ -281,7 +282,7 @@ ecobee 온도조절기는 세 가지 사전 정의 된 climate들을 제공합�
 <tr>
 <td><code>start_time</code></td>
 <td>yes</td>
-<td>현지 시간대로 휴가가 시작되는 시간입니다. 24시간 형식이어야합니다 (HH:MM:SS)</td>
+<td>현지 시간대로 휴가가 시작되는 시간. 24시간 형식 (HH:MM:SS)</td>
 </tr>
 <tr>
 <td><code>end_date</code></td>
@@ -307,7 +308,7 @@ ecobee 온도조절기는 세 가지 사전 정의 된 climate들을 제공합�
 </table>
 <h3>
 <a class="title-link" name="ecobeedelete_vacation-" href="#ecobeedelete_vacation-"></a> ecobee.delete_vacation 서비스</h3>
-<p>선택한 ecobee 온도 조절기에서 휴가를 삭제하십시오.</p>
+<p>선택한 ecobee 온도 조절기에서 휴가(vacation)를 삭제하십시오.</p>
 <table>
 <thead>
 <tr>

@@ -106,14 +106,14 @@
   <p><code>logger</code> 통합구성요소는 홈어시스턴트 활동 로깅 레벨을 정의할 수 있습니다.</p>
 <pre><code class="language-yaml">logger:
 </code></pre>
-<p>모든 메시지를 기록하고 특정 구성 요소에 대한 위험보다 낮은 이벤트를 무시하려면 :</p>
+<p>모든 메시지를 기록하고 특정 구성요소에 대한 위험도보다 낮은 이벤트를 무시하려면 :</p>
 <pre><code class="language-yaml">logger:
   default: info
   logs:
     homeassistant.components.yamaha: critical
     custom_components.my_integration: critical
 </code></pre>
-<p>특정 구성 요소에 대해 위험 및 로그 이벤트보다 낮은 모든 메시지를 무시하려면 다음을 수행하십시오. :</p>
+<p>특정 구성요소에 대해 위험도와 로그 이벤트가 낮은 모든 메시지를 무시하려면 다음을 수행하십시오. :</p>
 <pre><code class="language-yaml">logger:
   default: critical
   logs:
@@ -142,8 +142,7 @@
     homeassistant.components.glances: fatal
     glances_api: fatal
 </code></pre>
-<p>The log entries are in the form  <em>timestamp</em> <em>log-level</em> <em>thread</em> [<strong>namespace</strong>] <em>message</em>  where <strong>namespace</strong> is the <em>&lt;component_namespace&gt;</em> currently logging.
-로그 항목은 <em>timestamp</em> <em>log-level</em> <em>thread</em> [<strong>namespace</strong>] <em>메시지</em> 여기서 <strong>namespace</strong>는 <em>&lt;component_namespace&gt;</em> 현재 로깅입니다.</p>
+<p>로그 항목은 <em>timestamp</em> <em>log-level</em> <em>thread</em> [<strong>namespace</strong>] <em>메시지</em> 여기서 <strong>namespace</strong>는 <em>&lt;component_namespace&gt;</em> 현재 로깅입니다.</p>
 <div class="config-vars">
   <h3>
 <a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
@@ -164,7 +163,7 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="ltcomponent_namespacegt" href="#ltcomponent_namespacegt"></a> &lt;component_namespace&gt;</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="description"><p>구성 요소의 로거 네임 스페이스. <a href="#log-levels">log_level</a> 참고.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="description"><p>구성요소의 로거 네임 스페이스. <a href="#log-levels">log_level</a> 참고.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
@@ -172,8 +171,8 @@ Default value: </p>
 <p>이 예에서 ‘glances_api’와 ‘homeassistant.components.glances’ 네임스페이스의 차이점에 주목하십시오.
 다른 API에 의해 기록됩니다.</p>
 <p>자신의 환경에서 네임스페이스를 알고 싶다면 시작시 로그 파일을 확인하십시오.
-homeassistant.loader에서 <code>loaded &lt;component&gt; from &lt;namespace&gt;</code>의 상태를 확인했다는 INFO log가 메시지가 표시됩니다.
-이것들이 <code>log level</code>을 설정할 수있는 네임 스페이스입니다.</p>
+homeassistant.loader에서 <code>loaded &lt;component&gt; from &lt;namespace&gt;</code>의 상태를 확인했다는 INFO log 메시지가 표시됩니다.
+이들이 <code>log level</code>을 설정할 수 있는 네임스페이스입니다.</p>
 <h3>
 <a class="title-link" name="--log-levels" href="#--log-levels"></a> 로그 레벨 (Log Levels)</h3>
 <p>가장 문제있는 것부터 덜 문제있는 것까지 순서대로 나열된 가능한 로그 문제 수준(severity levels)은 다음과 같습니다.</p>
@@ -188,7 +187,7 @@ homeassistant.loader에서 <code>loaded &lt;component&gt; from &lt;namespace&gt;
 <li>notset</li>
 </ul>
 <h2>
-<a class="title-link" name="-services" href="#-services"></a> 서비스 (Services)</h2>
+<a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
 <a class="title-link" name="set_default_level-" href="#set_default_level-"></a> set_default_level 서비스</h3>
 <p><code>logger.set_default_level</code> 서비스를 사용하여 기본 로그 수준으로 변경할 수 있습니다. (지정된 로그 레벨이 없는 연동의 경우).</p>
@@ -209,10 +208,10 @@ data:
   custom_components.my_integration: debug
   aiohttp: error
 </code></pre>
-<p>Hass.io 사용자 인 경우 [SSH 애드온] (/ addons / ssh /)을 통해 로그인 할 때 아래 예를 사용할 수 있습니다. :</p>
+<p>Hass.io 사용자인 경우 <a href="/addons/ssh/">SSH 애드온</a>을 통해 로그인할 때 아래 예를 사용할 수 있습니다. :</p>
 <pre><code class="language-bash">$ tail -f /config/home-assistant.log
 </code></pre>
-<p>Docker에서는 호스트 명령 줄을 직접 사용할 수 있습니다. - 동적으로 로그를 확인합니다 :</p>
+<p>Docker에서는 호스트 command line을 직접 사용할 수 있습니다. - 동적으로 로그를 확인합니다 :</p>
 <pre><code class="language-bash"># follow the log dynamically
 docker logs --follow  MY_CONTAINER_ID
 </code></pre>

@@ -204,7 +204,7 @@ Default value: </p>
     service: alarm_control_panel.alarm_arm_away
     entity_id: alarm_control_panel.my_arlo_base_station
 </code></pre>
-<p>집에 도착시 Arlo를 커스텀 모드(<code>configuration.yaml</code>의 <code>home_mode_name</code>에 매핑) 로 설정합니다.</p>
+<p>집에 도착시 Arlo를 커스텀 모드(<code>configuration.yaml</code>의 <code>home_mode_name</code>에 매핑)로 설정합니다.</p>
 <pre><code class="language-yaml">- id: disarm_arlo_when_arriving
   alias: Set Arlo cameras to Home mode when arriving
   trigger:
@@ -223,7 +223,7 @@ Default value: </p>
 <p>이 통합구성요소는 아직 Arlo 카메라에서 라이브 스트리밍을 할 수 없지만 마지막 비디오 캡처를 재생할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
-<p><a href="/integrations/arlo">Arlo component</a>를 활성화하면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p><a href="/integrations/arlo">Arlo component</a>를 활성화하고 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 camera:
   - platform: arlo
@@ -243,11 +243,10 @@ camera:
 <h2>
 <a class="title-link" name="" href="#"></a> 센서</h2>
 <p>Home Assistant 내에서 <a href="https://arlo.netgear.com/" rel="external nofollow">Arlo</a> 센서를 작동시키려면 일반 <a href="/integrations/arlo">Arlo component</a>에 대한 지침을 따르십시오.</p>
-<p>This platform does not support Arlo Q.
-이 플랫폼은 Arlo Q를 지원하지 않습니다.</p>
+<p>이 플랫폼은 Arlo Q를 지원하지 않습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
-<p><a href="/integrations/arlo">Arlo component</a>를 활성화하면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
+<p><a href="/integrations/arlo">Arlo component</a>를 활성화하고 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: arlo
@@ -258,7 +257,7 @@ sensor:
       - battery_level
       - signal_strength
 </code></pre>
-<p>또한 추가 센서가 있는 Arlo Baby 카메라의 경우 <code>monitored_conditions</code> 컬렉션에 추가 할 수 있습니다.</p>
+<p>또한 추가 센서가 있는 Arlo Baby 카메라의 경우 <code>monitored_conditions</code> 컬렉션에 추가할 수 있습니다.</p>
 <pre><code class="language-yaml"># Additional sensors available for Arlo Baby cameras
 sensor:
   - platform: arlo
@@ -274,20 +273,20 @@ sensor:
   <dl class="">
 <dt>
 <a class="title-link" name="monitored_conditions" href="#monitored_conditions"></a> monitored_conditions</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에 표시 할 조건. 다음과 같은 조건을 모니터링 할 수 있습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>프론트 엔드에 표시할 조건. 다음과 같은 조건을 모니터링 할 수 있습니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="captured_today" href="#captured_today"></a> captured_today</dt>
-<dd><p class="desc"><span class="description"><p>현재 날짜에 캡처 한 비디오 수를 반환.</p>
+<dd><p class="desc"><span class="description"><p>현재 날짜에 캡처한 비디오 수를 반환.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="last_capture" href="#last_capture"></a> last_capture</dt>
-<dd><p class="desc"><span class="description"><p>Arlo 카메라에서 마지막으로 캡처 한 비디오의 타임 스탬프를 반환</p>
+<dd><p class="desc"><span class="description"><p>Arlo 카메라에서 마지막으로 캡처한 비디오의 타임 스탬프를 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="total_cameras" href="#total_cameras"></a> total_cameras</dt>
-<dd><p class="desc"><span class="description"><p>Arlo 계정에 연결된 인식 및 활성화 된 카메라 수를 반환</p>
+<dd><p class="desc"><span class="description"><p>Arlo 계정에 연결된 인식 및 활성화된 카메라 수를 반환</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="battery_level" href="#battery_level"></a> battery_level</dt>
@@ -307,7 +306,7 @@ sensor:
 </span></p></dd>
 <dt>
 <a class="title-link" name="air_quality" href="#air_quality"></a> air_quality</dt>
-<dd><p class="desc"><span class="description"><p>Arlo Baby 카메라가 감지 한 주변 대기질 (백만분의 1의 휘발성 유기 화합물(VOC) 판독값)을 반환.</p>
+<dd><p class="desc"><span class="description"><p>Arlo Baby 카메라가 감지한 주변 대기질 (백만분의 1의 휘발성 유기 화합물(VOC) 판독값)을 반환.</p>
 </span></p></dd>
 </dl></dd>
 </dl>

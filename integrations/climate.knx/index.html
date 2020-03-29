@@ -107,10 +107,10 @@
 <iframe width="776" height="437" src="https://www.youtube.com/embed/1DZnTB49w64" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <div class="note">
-<p>이 통합구성요소를 사용하려면 <code>knx</code> 연동을 올바르게 설정해야합니다. <a href="/integrations/knx">KNX Integration</a>을 참조하십시오.</p>
+<p>이 통합구성요소를 사용하려면 <code>knx</code> 연동을 올바르게 설정해야합니다. <a href="/integrations/knx">KNX 통합구성요소</a>을 참조하십시오.</p>
 </div>
-<p><code>knx</code> climate 플랫폼은 KNX 온도 조절기 및 실내 컨트롤러에 대한 인터페이스로 사용됩니다.</p>
-<p>KNX 온도 조절기를 사용하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오.</p>
+<p><code>knx</code> climate 플랫폼은 KNX 온도조절기, 실내 컨트롤러에 대한 인터페이스로 사용됩니다.</p>
+<p>KNX 온도조절기를 사용하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 climate:
    - platform: knx
@@ -136,7 +136,7 @@ climate:
     operation_mode_comfort_address: '5/1/7'
     operation_mode_state_address: '5/1/8'
 </code></pre>
-<p>장치가 setpoint_shift 계산을 지원하지 않는 경우 (즉, <code>setpoint_shift_address</code> 값을 제공하지 않는 경우) Climate 장치의 <code>min_temp</code> 및 <code>max_temp</code> 속성을 설정하여 프런트 엔드에서 유효한 온도값을 초과하는 문제를 피하십시오. 이 경우에도 <code>target_temperature_address</code>를 설정에 추가하십시오 :</p>
+<p>장치가 setpoint_shift 계산을 지원하지 않는 경우 (즉, <code>setpoint_shift_address</code> 값을 제공하지 않는 경우) Climate 장치의 <code>min_temp</code>, <code>max_temp</code> 속성을 설정하여 프런트 엔드에서 유효한 온도값을 초과하는 문제를 피하십시오. 이 경우에도 <code>target_temperature_address</code>를 설정에 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 climate:
   - platform: knx
@@ -151,7 +151,7 @@ climate:
     min_temp: 7.0
     max_temp: 32.0
 </code></pre>
-<p><code>operation_mode_frost_protection_address</code> / <code>operation_mode_night_address</code> / <code>operation_mode_comfort_address</code>는 <code>operation_mode_address</code>가 지정된 경우 필요하지 않습니다.
+<p><code>operation_mode_frost_protection_address</code>/<code>operation_mode_night_address</code>/<code>operation_mode_comfort_address</code>는 <code>operation_mode_address</code>가 지정된 경우 필요하지 않습니다.
 actor가 명시적 상태 통신 오브젝트(explicit state communication objects)를 지원하지 않는 경우 *_state_address는 쓰기 가능한 *_address와 동일한 그룹 주소로 설정될 수 있습니다. 초기 읽기를 지원하기 위해 *_state_address 통신 객체(communication object)에 대한 읽기플래그(Read-Flag)가 ETS에 설정되어야 합니다. 예를들어 홈어시스턴트를 시작할 때.</p>
 <p>다음 값은 <code>hvac_mode</code> 속성에 유효합니다.</p>
 <ul>

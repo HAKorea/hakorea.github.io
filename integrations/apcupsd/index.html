@@ -106,7 +106,7 @@
   <div class="videoWrapper">
 <iframe width="776" height="437" src="https://www.youtube.com/embed/rIK2U8I3cxk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<p><a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> 상태 정보는 APC 장치에 <a href="http://www.apcupsd.org/manual/manual.html#nis-server-client-configuration-using-the-net-driver" rel="external nofollow">NIS(Network Information Server)</a>가 구성된 경우 홈어시스턴트에 연동될 수 있습니다.</p>
+<p><a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> 상태 정보는 APC 장치에 <a href="http://www.apcupsd.org/manual/manual.html#nis-server-client-configuration-using-the-net-driver" rel="external nofollow">NIS(Network Information Server)</a>가 설정된 경우 홈어시스턴트에 연동될 수 있습니다.</p>
 <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
@@ -115,7 +115,7 @@
 <h2>
 <a class="title-link" name="hassio-" href="#hassio-"></a> Hass.io 설치</h2>
 <p>Hass.io와의 연동을 사용하려면 <a href="https://github.com/korylprince/hassio-apcupsd/" rel="external nofollow">unofficial add-on</a>을 설치하십시오. 단, add-on을 공식 지원할 수는 없습니다.</p>
-<p>설치 후 Github 페이지의 지침에 따라 플러그인을 설정하십시오. 그런 다음 아래 통합 설정을 계속 따르십시오.</p>
+<p>설치후 Github 페이지의 지침에 따라 플러그인을 설정하십시오. 그런 다음 아래 연동 설정을 계속 따르십시오.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>이 센서를 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오 :</p>
@@ -147,14 +147,14 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p>Home Assistant 로그에 <code>ConnectionRefusedError: Connection refused</code> 오류가 표시되는 경우, 네트워크 정보 서버가 사용하는 <a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> 설정 지시문이 모든 주소 <a href="http://www.apcupsd.org/manual/manual.html#configuration-directives-used-by-the-network-information-server" rel="external nofollow">NISIP 0.0.0.0</a>에서 연결을 허용하도록 설정되어 있는지 확인하십시오. 그렇지 않을 경우 로컬이 아닌 주소는 연결되지 않습니다. 이는 동일한 컴퓨터 또는 가상 컴퓨터에서 호스팅되는 경우에도 Docker에서 실행되는 Hass.io도 포함됩니다.</p>
+<p><code>ConnectionRefusedError:Home Assistant</code> 로그에 Connection 거부 오류가 발생하면 Network Information Server에서 사용하는 <a href="http://www.apcupsd.org/" rel="external nofollow">APCUPSd</a> 설정 지시문이 모든 주소 <a href="http://www.apcupsd.org/manual/manual.html#configuration-directives-used-by-the-network-information-server" rel="external nofollow">NISIP 0.0.0.0</a>에서 연결을 허용하도록 설정되어 있는지 확인하십시오. 그렇지 않으면 로컬이 아닌 주소는 연결되지 않습니다.</p>
  </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary sensor</h2>
 <p><a href="#sensor">APCUPSd Sensor</a> 장치 외에도 UPS 상태가 온라인일 때 단순히 “on” 상태이고 다른 시간에는 “off” 상태인 장치를 만들 수도 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
-<p>이 센서를 활성화하려면 먼저 위의 apcupsd integration을 설정하고 <code>configuration.yaml</code> 파일에 다음 줄을 추가해야합니다.</p>
+<p>이 센서를 활성화하려면 먼저 위의 apcupsd 통합구성요소를 설정하고 <code>configuration.yaml</code> 파일에 다음 줄을 추가해야합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: apcupsd
@@ -176,7 +176,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="sensor" href="#sensor"></a> Sensor</h2>
-<p><code>apcupsd</code> 센서 플랫폼을 사용하면 <a href="https://linux.die.net/man/8/apcaccess" rel="external nofollow">apcaccess</a> 명령의 데이터를 사용하여 UPS (배터리 백업)를 모니터링 할 수 있습니다.</p>
+<p><code>apcupsd</code> 센서 플랫폼을 사용하면 <a href="https://linux.die.net/man/8/apcaccess" rel="external nofollow">apcaccess</a> 명령의 데이터를 사용하여 UPS (배터리 백업)를 모니터링할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="" href="#"></a> 설정</h3>
 <p>이 센서 플랫폼을 사용하려면 먼저 위의 apcupsd 통합구성요소를 설정하고 <code>configuration.yaml</code> 파일에 다음을 추가해야합니다.</p>

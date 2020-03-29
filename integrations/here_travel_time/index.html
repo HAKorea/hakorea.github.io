@@ -103,17 +103,19 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/fSkMLiTlQWc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/fSkMLiTlQWc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>here_travel_time</code> 센서는 <a href="https://developer.here.com/documentation/routing/topics/introduction.html" rel="external nofollow">HERE Routing API</a>에서 이동 시간을 제공합니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 셋업</h2>
 <p><a href="https://developer.here.com/documentation/routing/topics/introduction.html?create=Freemium-Basic&amp;keepState=true&amp;step=account" rel="external nofollow">here</a> 지침에 따라 API 키 (REST &amp; XYZ HUB API/CLI)를 등록해야합니다.</p>
-<p>HERE는 한 달에 250,000 건의 무료 거래가 포함 된 프리미엄 플랜을 제공합니다. 라우팅 API의 경우 하나의 트랜잭션은 하나의 요청과 하나의 시작점 (멀티 stop 없음)과 같습니다. 자세한 내용은 <a href="https://developer.here.com/faqs#payment-subscription" rel="external nofollow">here</a>를 참조하십시오.</p>
+<p>HERE는 한 달에 250,000 건의 무료 거래가 포함된 프리미엄 플랜을 제공합니다. 라우팅 API의 경우 하나의 트랜잭션은 하나의 요청과 하나의 시작점 (멀티 stop 없음)과 같습니다. 자세한 내용은 <a href="https://developer.here.com/faqs#payment-subscription" rel="external nofollow">여기</a>를 참조하십시오.</p>
 <p>해당 월의 무료 거래 한도를 초과하면 기본적으로 여기에서 계정이 비활성화됩니다.
-<a href="https://developer.here.com/faqs" rel="external nofollow">here</a>에 설명 된대로 결제 세부 정보를 추가하여 계정을 다시 활성화 할 수 있습니다</p>
+<a href="https://developer.here.com/faqs" rel="external nofollow">여기</a>에 설명된대로 결제 세부 정보를 추가하여 계정을 다시 활성화할 수 있습니다</p>
 <h3>
 <a class="title-link" name="app_code-api_key-" href="#app_code-api_key-"></a> app_code에서 api_key로 마이그레이션</h3>
-<p>HERE의 인증 메커니즘이 변경되었습니다. 더 이상 <code>app_id</code>와 <code>app_code</code>를 사용할 수 없습니다. 현재 필요한 <code>api_key</code>를 검색하려면 기존 사용자가 <a href="https://developer.here.com/documentation/authentication/dev_guide/topics/api-key-credentials.html" rel="external nofollow">migration guide</a>를 따라야합니다.</p>
+<p>HERE의 인증 메커니즘이 변경되었습니다. 더이상 <code>app_id</code>와 <code>app_code</code>를 사용할 수 없습니다. 현재 필요한 <code>api_key</code>를 검색하려면 기존 사용자가 <a href="https://developer.here.com/documentation/authentication/dev_guide/topics/api-key-credentials.html" rel="external nofollow">migration guide</a>를 따라야합니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>센서를 활성화하려면 <code>configuration.yaml</code> 파일에 다음 라인을 추가하십시오 :</p>
@@ -136,32 +138,32 @@ sensor:
 </span></p></dd>
 <dt>
 <a class="title-link" name="origin_latitude" href="#origin_latitude"></a> origin_latitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리 및 시간을 계산하기 위한 시작 위도입니다. origin_longitude와 함께 사용해야합니다. <code>origin_entity_id</code>와 함께 사용할 수 없습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리와 시간을 계산하기 위한 시작 위도입니다. origin_longitude와 함께 사용해야합니다. <code>origin_entity_id</code>와 함께 사용할 수 없습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="origin_longitude" href="#origin_longitude"></a> origin_longitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리 및 시간을 계산하기위한 시작 경도. origin_latitude와 함께 사용해야합니다. <code>origin_entity_id</code>와 함께 사용할 수 없습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리와 시간을 계산하기 위한 시작 경도. origin_latitude와 함께 사용해야합니다. <code>origin_entity_id</code>와 함께 사용할 수 없습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="destination_latitude" href="#destination_latitude"></a> destination_latitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리 및 시간 계산을 위한 최종 위도. destination_longitude와 함께 사용해야합니다. <code>destination_entity_id</code>와 함께 사용할 수 없습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리와 시간 계산을 위한 최종 위도. destination_longitude와 함께 사용해야합니다. <code>destination_entity_id</code>와 함께 사용할 수 없습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="destination_longitude" href="#destination_longitude"></a> destination_longitude</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리 및 시간 계산을 위한 최종 경도. destination_latitude와 함께 사용해야합니다. <code>destination_entity_id</code>와 함께 사용할 수 없습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리와 시간 계산을 위한 최종 경도. destination_latitude와 함께 사용해야합니다. <code>destination_entity_id</code>와 함께 사용할 수 없습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="origin_entity_id" href="#origin_entity_id"></a> origin_entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리 및 시간을 계산하기 위한 시작점을 보유한 entity_id. <code>origin_latitude</code>/<code>origin_longitude</code>와 함께 사용할 수 없습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리와 시간을 계산하기 위한 시작점을 보유한 entity_id. <code>origin_latitude</code>/<code>origin_longitude</code>와 함께 사용할 수 없습니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="destination_entity_id" href="#destination_entity_id"></a> destination_entity_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리 및 시간을 계산하기 위한 최종 지점을 보유한 entity_id. <code>destination_latitude</code>/<code>destination_longitude</code>와 함께 사용할 수 없습니다</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Exclusive)</span><span class="description"><p>이동 거리와 시간을 계산하기 위한 최종 지점을 보유한 entity_id. <code>destination_latitude</code>/<code>destination_longitude</code>와 함께 사용할 수 없습니다</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서에 표시 할 이름입니다. 기본값은 “HERE Travel Time” 입니다..</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>센서에 표시할 이름입니다. 기본값은 “HERE Travel Time” 입니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -170,7 +172,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="mode" href="#mode"></a> mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>bicycle</code>, <code>car</code>, <code>pedestrian</code>, <code>publicTransport</code>, <code>publicTransportTimeTable</code> 혹은 <code>truck</code> 중에서 선택할 수 있습니다. 디폴트는 <code>car</code>입니다. 대중 교통의 경우 <code>publicTransportTimeTable</code>이 권장됩니다. 일반 모드 <a href="https://developer.here.com/documentation/routing/topics/transport-modes.html" rel="external nofollow">here</a> 및 공개 모드 <a href="https://developer.here.com/documentation/routing/topics/public-transport-routing.html" rel="external nofollow">here</a>에 대한 자세한 정보를 찾을 수 있습니다.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>bicycle</code>, <code>car</code>, <code>pedestrian</code>, <code>publicTransport</code>, <code>publicTransportTimeTable</code> 혹은 <code>truck</code> 중에서 선택할 수 있습니다. 기본값은 <code>car</code>입니다. 대중 교통의 경우 <code>publicTransportTimeTable</code>이 권장됩니다. 일반 모드 <a href="https://developer.here.com/documentation/routing/topics/transport-modes.html" rel="external nofollow">여기참조</a>와 공개 모드 <a href="https://developer.here.com/documentation/routing/topics/public-transport-routing.html" rel="external nofollow">여기참조</a>에 대한 자세한 정보를 찾을 수 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -179,7 +181,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="route_mode" href="#route_mode"></a> route_mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>fastest</code> 또는 <code>shortest</code> 중에서 선택할 수 있습니다. 이것은 경로가 현재 교통 정보에 따라 가장 짧고 완전히 무시되는 트래픽 및 속도 제한인지 또는 가장 빠른 경로인지를 결정합니다. 기본값은 <code>fastest</code> 입니다</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>fastest</code> 또는 <code>shortest</code> 중에서 선택할 수 있습니다. 이는 경로가 현재 교통 정보에 따라 가장 짧고 완전히 무시되는 트래픽과 속도 제한인지 혹은 가장 빠른 경로인지를 결정합니다. 기본값은 <code>fastest</code>입니다</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -188,7 +190,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="traffic_mode" href="#traffic_mode"></a> traffic_mode</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>true</code> 또는 <code>false</code> 중에서 선택할 수 있습니다. 현재 교통 상황을 고려할지 여부를 결정하십시오. 기본값은 <code>false</code> 입니다</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>true</code> 또는 <code>false</code> 중에서 선택할 수 있습니다. 현재 교통 상황을 고려할지 여부를 결정하십시오. 기본값은 <code>false</code>입니다</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -197,7 +199,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="unit_system" href="#unit_system"></a> unit_system</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>metric</code> 혹은 <code>imperial</code>중에서 선택할 수 있습니다</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>metric</code> 혹은 <code>imperial</code> 중에서 선택할 수 있습니다</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -216,7 +218,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="--dynamic-configuration" href="#--dynamic-configuration"></a> 동적 설정 (Dynamic Configuration)</h2>
-<p><code>device_tracker</code>, <code>zone</code>, <code>sensor</code> 및 <code>person</code> 유형의 엔티티를 추적하도록 추적을 설정할 수 있습니다. 엔티티가 출발지 또는 목적지에 배치되면 플랫폼이 업데이트 될 때 5 분마다 해당 엔티티의 최신 위치를 사용합니다.</p>
+<p><code>device_tracker</code>, <code>zone</code>, <code>sensor</code>, <code>person</code> 유형의 엔티티를 추적하도록 추적을 설정할 수 있습니다. 엔티티가 출발지 혹은 목적지에 배치되면 플랫폼이 업데이트될 때 5 분마다 해당 엔티티의 최신 위치를 사용합니다.</p>
 <pre><code class="language-yaml"># Example entry for configuration.yaml
 sensor:
   # Tracking entity to entity
@@ -246,20 +248,20 @@ sensor:
 <li>
 <strong>device_tracker</strong>
 <ul>
-<li>상태가 영역(zone) 인 경우 영역 위치가 사용됩니다</li>
-<li>상태가 영역이 아닌 경우 경도 및 위도 속성을 찾습니다.</li>
+<li>상태가 영역(zone)인 경우 영역 위치가 사용됩니다</li>
+<li>상태가 영역이 아닌 경우 경도와 위도 속성을 찾습니다.</li>
 </ul>
 </li>
 <li>
 <strong>zone</strong>
 <ul>
-<li>경도 및 위도 속성을 사용합니다</li>
+<li>경도와 위도 속성을 사용합니다</li>
 </ul>
 </li>
 <li>
 <strong>sensor</strong>
 <ul>
-<li>상태가 영역 인 경우 영역 위치를 사용합니다</li>
+<li>상태가 영역인 경우 영역 위치를 사용합니다</li>
 <li>다른 모든 상태는 HERE API로 직접 전달됩니다
 <ul>
 <li>여기에는 <em>설정 변수</em> 에 나열된 모든 유효한 위치가 포함됩니다</li>
@@ -270,7 +272,7 @@ sensor:
 </ul>
 <h2>
 <a class="title-link" name="----" href="#----"></a> 자동화를 사용한 주문형 센서 업데이트</h2>
-<p><code>homeassistant.update_entity</code> 서비스를 사용하여 주문형 센서를 업데이트 할 수도 있습니다. 예를 들어, 평일 아침 2 분마다 <code>sensor.morning_commute</code>를 업데이트하려는 경우 다음 자동화를 사용할 수 있습니다.</p>
+<p><code>homeassistant.update_entity</code> 서비스를 사용하여 주문형 센서를 업데이트할 수도 있습니다. 예를 들어, 평일 아침 2 분마다 <code>sensor.morning_commute</code>를 업데이트하려는 경우 다음 자동화를 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">automation:
 - id: update_morning_commute_sensor
   alias: "Commute - Update morning commute sensor"

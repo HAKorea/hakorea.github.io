@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/qskqdjUZcRY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/qskqdjUZcRY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>telegram</code> 플랫폼은 <a href="https://web.telegram.org" rel="external nofollow">Telegram</a>을 사용하여 Home Assistant에서 Android 장치, Windows 전화 또는 iOS 장치로 알림을 전달합니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 셋업</h2>
@@ -112,13 +114,13 @@
 <li>
 <a href="https://core.telegram.org/bots" rel="external nofollow">Telegram bot</a>이 필요합니다. 다음 <a href="https://core.telegram.org/bots#6-botfather" rel="external nofollow">instructions</a>에 따라 하나를 생성하고 봇에 대한 토큰을 받으십시오.</li>
 <li>
-<a href="/integrations/telegram_chatbot">Telegram bot in Home Assistant</a>을 설정하고 상호작용할 수있는 API 키 및 허용된 chat ID를 정의해야합니다.</li>
+<a href="/integrations/telegram_chatbot">Telegram bot in Home Assistant</a>을 설정하고 상호작용할 수 있는 API 키 및 허용된 chat ID를 정의해야합니다.</li>
 <li>허용된 사용자의 <code>chat_id</code>
 </li>
 </ul>
 <p><strong>방법 1 :</strong> <a href="https://t.me/getidsbot" rel="external nofollow">GetIDs bot</a>에 메시지를 보내면 <code>chat_id</code>를 얻을 수 있습니다.</p>
 <p><strong>방법 2 :</strong> <code>chat_id</code>를 검색하려면 <code>https://api.telegram.org/botYOUR_API_TOKEN/getUpdates</code>를 방문하거나 봇에게 메시지를 <strong>보낸 후</strong> <code>$ curl -X GET https://api.telegram.org/botYOUR_API_TOKEN/getUpdates</code>를 사용하십시오. <code>YOUR_API_TOKEN</code>을 실제 토큰으로 바꾸십시오.</p>
-<p>결과 집합에는 <code>chat</code> 섹션에 chat ID가 <code>id</code> 로 포함됩니다.</p>
+<p>결과 집합에는 <code>chat</code> 섹션에 chat ID가 <code>id</code>로 포함됩니다.</p>
 <pre><code class="language-json">{
 	"ok": true,
 	"result": [{
@@ -144,7 +146,7 @@
 	}]
 }
 </code></pre>
-<p><strong>방법 3 :</strong> chat ID를 직접받는 다른 방법은 아래에 설명되어 있습니다. 명령행에서 Python 인터프리터를 시작하십시오.</p>
+<p><strong>방법 3 :</strong> chat ID를 직접받는 다른 방법은 아래에 설명되어 있습니다. Command line에서 Python 인터프리터를 시작하십시오.</p>
 <pre><code class="language-shell">$ python3
 &gt;&gt;&gt; import telegram
 &gt;&gt;&gt; bot = telegram.Bot(token='YOUR_API_TOKEN')
@@ -153,11 +155,11 @@
 123456789
 </code></pre>
 <div class="note">
-새 chat ID를 추가하려면 active configuaration을 비활성화하여 실제 ID 결과를 확인해야합니다, 그렇지 않으면 빈 결과 배열 만 표시될 수 있습니다.
+새 chat ID를 추가하려면 active configuaration을 비활성화하여 실제 ID 결과를 확인해야합니다, 그렇지 않으면 빈 결과 배열만 표시될 수 있습니다.
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>설치에서 텔레그램 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>설치시 텔레그램 알림을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for the Telegram Bot
 telegram_bot:
   - platform: polling
@@ -214,7 +216,7 @@ action:
 <dt>
 <a class="title-link" name="title" href="#title"></a> title</dt>
 <dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>‘%title
-%message’로 구성됩니다.</p>
+%message’로 설정됩니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="message" href="#message"></a> message</dt>
@@ -222,11 +224,11 @@ action:
 </span></p></dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 명령행 목록</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 command line 목록</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -254,11 +256,11 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지의 원격 경로, 혹은 <code>file</code> 설정 옵션이 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지의 원격 경로, 혹은 <code>file</code>. 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="file" href="#file"></a> file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지의 로컬 경로, 혹은 <code>url</code> 설정 옵션이 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>이미지의 로컬 경로, 혹은 <code>url</code>. 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="caption" href="#caption"></a> caption</dt>
@@ -292,11 +294,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기 위한 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기 위한 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -334,11 +336,11 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>비디오의 원격 경로, 혹은 <code>file</code> 설정 옵션이 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>비디오의 원격 경로, 혹은 <code>file</code>. 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="file" href="#file"></a> file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>비디오의 로컬 경로, 혹은 <code>url</code> 설정 옵션이 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>비디오의 로컬 경로, 혹은 <code>url</code>. 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="caption" href="#caption"></a> caption</dt>
@@ -372,11 +374,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -402,11 +404,11 @@ action:
   <dl class="">
 <dt>
 <a class="title-link" name="url" href="#url"></a> url</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>문서의 원격 경로, 혹은 <code>file</code> 설정 옵션이 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>문서의 원격 경로, 혹은 <code>file</code>. 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="file" href="#file"></a> file</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>문서의 로컬 경로, 혹은 <code>url</code> 설정 옵션이 필요합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>문서의 로컬 경로, 혹은 <code>url</code>. 설정 옵션이 필요합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="caption" href="#caption"></a> caption</dt>
@@ -432,7 +434,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="verify_ssl" href="#verify_ssl"></a> verify_ssl</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>서버의 SSL 인증서 유효성 검증을 건너 뛰려면 false로 설정</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>서버의 SSL 인증서 유효성 검증을 건너뛰려면 false로 설정</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -440,11 +442,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기 위한 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기 위한 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -476,11 +478,11 @@ action:
 </span></p></dd>
 <dt>
 <a class="title-link" name="keyboard" href="#keyboard"></a> keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 명령행 목록</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 키보드를 만들기위한 쉼표로 구분된 command line 목록</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="inline_keyboard" href="#inline_keyboard"></a> inline_keyboard</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 명령행 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>콜백 데이터가 연결된 버튼이 있는 사용자 지정 인라인 키보드를 만들기 위해 쉼표로 구분된 command line 목록.</p>
 </span></p></dd>
 </dl>
 </div>

@@ -103,14 +103,17 @@
   <hr class="divider">
   
 
-  <p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>, for example the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/oYfbEyzT-Gs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>rflink</code> 통합구성요소는 <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>를 사용하는 장치 (예: <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>)를 지원합니다. RFLink 게이트웨이는 저렴한 하드웨어 (Arduino + 트랜시버)를 사용하여 여러 RF 무선 장치와 양방향 통신을 가능하게하는 Arduino 펌웨어입니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
-<p>After configuring the RFLink hub, sensors will be automatically discovered and added.</p>
-<p>RFLink sensor ID’s are composed of: protocol, id and type (optional). For example: <code>alectov1_0334_temp</code>. Some sensors emit multiple types of data. Each will be created as its own.</p>
-<p>Once the ID of a sensor is known, it can be used to configure the sensor in Home Assistant, for example to add it to a different group, hide it or configure a nice name.</p>
-<p>Configuring a device as a sensor:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>먼저 <a href="/integrations/rflink/">RFLink 허브</a>를 설정해야합니다.</p>
+<p>RFLink 허브를 설정하면 센서가 자동으로 감지되어 추가됩니다.</p>
+<p>RFLink 센서 ID는 protocol, ID 및 type(옵션)으로 구성됩니다 (예: <code>alectov1_0334_temp</code>). 일부 센서는 여러 유형의 데이터를 내보냅니다. 각각 자체적으로 생성됩니다.</p>
+<p>센서의 ID를 알고 나면 Home Assistant에서 센서를 설정하는데 사용할 수 있습니다 (예: 다른 그룹에 추가하거나 숨기거나 익숙한 이름을 설정하는 등).</p>
+<p>장치를 센서로 설정 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: rflink
@@ -166,8 +169,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="sensor-types" href="#sensor-types"></a> Sensor types</h2>
-<p>Sensor type values:</p>
+<a class="title-link" name="-" href="#-"></a> 센서 타입</h2>
+<p>센서 타입 값들 :</p>
 <ul>
 <li>average_windspeed</li>
 <li>barometric_pressure</li>
@@ -203,20 +206,21 @@ Default value: </p>
 <li>windtemp</li>
 </ul>
 <h2>
-<a class="title-link" name="hidingignoring-sensors" href="#hidingignoring-sensors"></a> Hiding/ignoring sensors</h2>
-<p>Sensors are added automatically when the RFLink gateway intercepts a wireless command in the ether. To prevent cluttering the frontend use any of these methods:</p>
+<a class="title-link" name="-" href="#-"></a> 센서 숨기기/무시하기</h2>
+<p>Sensors are added automatically when the RFLink gateway intercepts a wireless command in the ether. To prevent cluttering the frontend use any of these methods:
+RFLink 게이트웨이가 이더넷에서 무선 명령을 가로 채면 센서가 자동으로 추가됩니다. 프론트 엔드가 복잡해지지 않게하려면 다음 방법 중 하나를 사용하십시오.</p>
 <ul>
-<li>Disable automatically adding of unconfigured new sensors (set <code>automatic_add</code> to <code>false</code>).</li>
-<li>Hide unwanted devices using <a href="/getting-started/customizing-devices/">customizations</a>
-</li>
+<li>설정되지 않은 새 센서 자동 추가를 비활성화합니다 (<code>auto_add</code>를 <code>false</code>로 설정).</li>
+<li>
+<a href="/getting-started/customizing-devices/">customizations</a>를 사용하여 원치 않는 장치 숨기기</li>
 <li><a href="/integrations/rflink/#ignoring-devices">Ignore devices on a platform level</a></li>
 </ul>
 <h2>
-<a class="title-link" name="device-support" href="#device-support"></a> Device support</h2>
-<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<a class="title-link" name="-" href="#-"></a> 지원 장치</h2>
+<p><a href="/integrations/rflink/#device-support">device support</a> 참조.</p>
 <h2>
-<a class="title-link" name="additional-configuration-examples" href="#additional-configuration-examples"></a> Additional configuration examples</h2>
-<p>Multiple sensors with <code>automatic_add</code> disabled and <code>aliases</code></p>
+<a class="title-link" name="--" href="#--"></a> 추가 설정 사례</h2>
+<p><code>automatic_add</code>가 비활성화되고 <code>aliases</code>가 있는 다중 센서</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: rflink

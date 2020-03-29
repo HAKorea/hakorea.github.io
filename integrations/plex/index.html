@@ -104,7 +104,7 @@
   
 
   <p><code>plex</code> 통합구성요소로 <a href="https://plex.tv" rel="external nofollow">Plex Media Server</a>에 연결할 수 있습니다.
-연결되면 연결된 Plex Media Server에서 미디어를 재생하는 <a href="https://www.plex.tv/apps-devices/" rel="external nofollow">Plex Clients</a>가 <a href="/integrations/media_player/">Media Players</a>로 표시되고 Home Assistant의 <a href="/integrations/sensor/">Sensor</a>를 통해 재생 상태를 보고합니다. 미디어 플레이어를 사용하면 미디어 재생을 제어하고 현재 재생중인 항목을 볼 수 있습니다.</p>
+한번 연결되면 연결된 Plex Media Server에서 미디어를 재생하는 <a href="https://www.plex.tv/apps-devices/" rel="external nofollow">Plex Clients</a>가 <a href="/integrations/media_player/">Media Players</a>로 표시되고 Home Assistant의 <a href="/integrations/sensor/">Sensor</a>를 통해 재생 상태를 보고합니다. 미디어 플레이어를 사용하면 미디어 재생을 제어하고 현재 재생중인 항목을 볼 수 있습니다.</p>
 <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li><a href="#media-player">Media Player</a></li>
@@ -113,7 +113,7 @@
 <p><a href="https://plex.tv/claim" rel="external nofollow">claim interface</a>를 통해 Plex 계정에서 Plex 서버를 요청한 경우 홈어시스턴트는 인증을 요구합니다.</p>
 <p>Plex 통합구성요소를 활성화하는 기본 방법은 <strong>설정</strong> -&gt; <strong>통합구성요소</strong>를 사용하는 것입니다. Plex 계정으로 로그인하기 위해 <a href="https://plex.tv" rel="external nofollow">plex.tv</a> 웹사이트로 리디렉션됩니다. 액세스 권한이 부여되면 Home Assistant는 해당 계정으로 링크된 서버에 연결합니다. 계정에서 여러 Plex 서버를 사용할 수 있는 경우 통합구성요소 페이지에서 원하는 서버를 선택하여 설정을 완료하라는 메시지가 표시됩니다. 홈어시스턴트가 <a href="https://app.plex.tv/web/app" rel="external nofollow">Plex Web</a> 인터페이스의 <strong>Settings</strong> -&gt; <strong>Authorized Devices</strong>에서 인증된 장치로 표시됩니다.</p>
 <div class="note info">
-<p>연동을 설정할 때 로컬 및 보안 연결이 선호됩니다. 초기 설정 후 Plex 서버에 대한 모든 연결은 Plex 서비스에 연결하지 않고 직접 이루어집니다.</p>
+<p>연동을 설정할 때 로컬과 보안 연결이 선호됩니다. 초기 설정 후 Plex 서버에 대한 모든 연결은 Plex 서비스에 연결하지 않고 직접 이루어집니다.</p>
 </div>
 <p><a href="/integrations/discovery/">discovery</a>가 활성화되고 로컬 Plex 서버가 발견되면 레거시 <code>media_player</code> 설정 (즉, <code>plex.conf</code> 파일)을 가져옵니다. <strong>Settings</strong> -&gt; <strong>(Server Name)</strong> -&gt; <strong>Settings</strong> -&gt; <strong>Network</strong> 에서 Plex Web App을 통해 GDM을 활성화하고 <strong>Enable local network discovery (GDM)</strong> 을 선택할 수 있습니다.</p>
 <p><code>plex</code> 통합구성요소는 <code>configuration.yaml</code>을 통해 설정할 수도 있습니다 :</p>
@@ -206,7 +206,7 @@ plex:
 </code></pre>
 <h2>
 <a class="title-link" name="media-player" href="#media-player"></a> Media Player</h2>
-<p><code>plex</code> media_player 플랫폼은 연결된 각 클라이언트 장치에 대해 미디어 플레이어 엔티티를 만듭니다. 이 엔티티는 장치에서 지원하는 경우 미디어 정보, 재생 진행률 및 재생 컨트롤을 표시합니다.</p>
+<p><code>plex</code> media_player 플랫폼은 연결된 각 클라이언트 장치에 대해 미디어 플레이어 엔티티를 만듭니다. 이 엔티티는 장치에서 지원하는 경우 미디어 정보, 재생 진행률과 재생 컨트롤을 표시합니다.</p>
 <h3>
 <a class="title-link" name="play_media-" href="#play_media-"></a> play_media 서비스</h3>
 <p>연결된 클라이언트에서 노래, 재생 목록, TV 에피소드 또는 비디오를 재생합니다.</p>
@@ -391,7 +391,7 @@ plex:
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="notes" href="#notes"></a> Notes</h3>
+<a class="title-link" name="-" href="#-"></a> 참고 사항</h3>
 <ul>
 <li>
 <p><code>plex</code> 통합구성요소는 여러 Plex 서버를 지원합니다. 설정 &gt; 통합구성요소 에서 추가 연결을 설정할 수 있습니다.</p>
@@ -401,7 +401,7 @@ plex:
 <pre><code class="language-txt">ERROR:plexapi:http://192.168.1.10:32400: ('Connection aborted.', BadStatusLine("''",))
 INFO:homeassistant.components.media_player.plex:No server found at: http://192.168.1.10:32400
 </code></pre>
-<p>이 문제가 발생하면 Plex Media 서버에서 <code>Server</code>&gt;<code>Network</code>&gt;<code>Secure connections</code> 설정을 확인하십시오 : <code>Preferred</code> 또는 <code>Required</code>로 설정되어 있으면 <code>ssl</code> 및 <code>verify_ssl</code> 설정 옵션을 각각 <code>true</code> 및 <code>false</code>로 수동 설정해야합니다.</p>
+<p>이 문제가 발생하면 Plex Media 서버에서 <code>Server</code>&gt;<code>Network</code>&gt;<code>Secure connections</code> 설정을 확인하십시오 : <code>Preferred</code> 또는 <code>Required</code>로 설정되어 있으면 <code>ssl</code>과 <code>verify_ssl</code> 설정 옵션을 각각 <code>true</code>와 <code>false</code>로 수동 설정해야합니다.</p>
 </li>
 <li>
 <p>‘playing’ 상태를 제대로 얻으려면 Plex 라이브러리의 ‘Movies’ 섹션 아래에 동영상이 있어야합니다.</p>

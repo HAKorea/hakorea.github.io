@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="399" src="https://www.youtube.com/embed/I3des9ver1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="399" src="https://www.youtube.com/embed/I3des9ver1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>pi_hole</code> 통합구성요소를 통해 통계를 검색하고 <a href="https://pi-hole.net/" rel="external nofollow">Pi-hole</a> 시스템과 상호 작용할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
@@ -118,13 +120,13 @@ pi_hole:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>“호스트 이름 (및 포트) (예 : Pi-hole이 실행중인 호스트의 ‘192.168.0.3:4865’) Hass.io 애드온 사용자는 반드시<code>4865</code> 포트를 지정해야합니다.”</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>“호스트 이름(및 포트) (예: Pi-hole이 실행중인 호스트의 ‘192.168.0.3:4865’) Hass.io 애드온 사용자는 반드시 <code>4865</code> 포트를 지정해야합니다.”</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>“Pi-hole의 이름입니다. 이 이름은 생성된 센서의 일부입니다 (예 : <code>name: My Awesome Pi-hole</code>은 센서 이름이 <code>sensor.my_awesome_pi_hole_</code>로 시작합니다.)”
-<strong>Note:</strong> 여러 Pi-Holes를 구성하는 경우 각각의 고유한 이름이 <em>있어야합니다.</em></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>“Pi-hole의 이름. 이 이름은 생성된 센서의 일부입니다 (예: <code>name: My Awesome Pi-hole</code>은 센서 이름이 <code>sensor.my_awesome_pi_hole_</code>로 시작합니다.)”
+<strong>Note:</strong> 여러 Pi-Holes를 설정하는 경우 각각의 고유한 이름이 <em>있어야합니다.</em></p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -180,13 +182,13 @@ Default value: </p>
   - host: '192.168.0.3'
     name: 'Secondary Pi-Hole'
 </code></pre>
-<p>자체 서명 인증서가있는 Pi-hole :</p>
+<p>자체 서명 인증서가 있는 Pi-hole :</p>
 <pre><code class="language-yaml">pi_hole:
   - host: 'pi.hole'
     ssl: true
     verify_ssl: false
 </code></pre>
-<p>활성화 또는 비활성화 할 수있는 <code>api_key</code>가 있는 Pi-hole:</p>
+<p>활성화 또는 비활성화할 수 있는 <code>api_key</code>가 있는 Pi-hole:</p>
 <pre><code class="language-yaml">pi_hole:
   - host: 'pi.hole'
     api_key: !secret pi_hole_api_key
@@ -244,7 +246,7 @@ Default value: </p>
 </tbody>
 </table>
 <p><em>Note: 이 서비스는 설정에 <code>api_key</code>를 지정해야합니다.</em></p>
-<p>이 통합은 Pi-hole LLC 또는 Pi-hole 커뮤니티가 수행하지 않았습니다. 그들은 창조, 지원, 피드백, 테스트 또는 다른 도움을 제공하지 않았습니다. Pi-hole이 이후 릴리스에서 API를 변경하면 중단 될 수 있는 타사 플랫폼입니다. 공식적이거나 개발되지 않았으며 지원되지 않으며 Pi-hole LLC 또는 Pi-hole 커뮤니티를 보증하지 않습니다. 플랫폼 <code>Pi-hole</code>과 로고는 여기에서 플랫폼을 설명하는 데 사용됩니다. <code>Pi-hole</code>은 Pi-hole LLC의 등록 상표입니다.</p>
+<p>이 통합구성요소는 Pi-hole LLC 또는 Pi-hole 커뮤니티가 수행하지 않았습니다. 그들은 창조, 지원, 피드백, 테스트 또는 다른 도움을 제공하지 않았습니다. Pi-hole이 이후 릴리스에서 API를 변경하면 중단될 수 있는 타사 플랫폼입니다. 공식적이거나 개발되지 않았으며 지원되지 않으며 Pi-hole LLC 또는 Pi-hole 커뮤니티를 보증하지 않습니다. 플랫폼 <code>Pi-hole</code>과 로고는 여기에서 플랫폼을 설명하는데 사용됩니다. <code>Pi-hole</code>은 Pi-hole LLC의 등록 상표입니다.</p>
 
 
 </article>

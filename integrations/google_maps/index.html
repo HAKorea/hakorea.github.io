@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>이 <code>google_maps</code> 플랫폼을 사용하면 비공식 <a href="https://myaccount.google.com/locationsharing" rel="external nofollow">Google Maps Location Sharing</a> 를 사용하여 현재 상태를 감지 할 수 있습니다 .</p>
+  <p><code>google_maps</code> 플랫폼을 사용하면 비공식 <a href="https://myaccount.google.com/locationsharing" rel="external nofollow">Google Maps Location Sharing</a>를 사용하여 현재 상태를 감지할 수 있습니다 .</p>
 <h2>
 <a class="title-link" name="-setup" href="#-setup"></a> 셋업 (Setup)</h2>
 <p>먼저 추가 Google 계정을 만들고 위치를 해당 계정과 공유해야합니다. 이 통합구성요소는 해당 계정을 사용하여 장치의 위치를 ​​가져옵니다.</p>
 <ol>
-<li>휴대 전화에서 Google지도 앱을 통해 공유를 설정해야합니다. 내용은 <a href="https://support.google.com/accounts?p=location_sharing" rel="external nofollow">here</a> 를 참조 하십시오.</li>
-<li>올바르게 인증 한 후 해당 계정의 쿠키를 사용해야합니다. 이 쿠키는 Firefox(“접두사 HttpOnly 쿠키”가 선택 해제되어 있는지 꼭 확인) 용 <a href="https://addons.mozilla.org/en-US/firefox/addon/export-cookies-txt/?src=search" rel="external nofollow">Export cookies</a> 또는 Chrome / Chromium 용 <a href="https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg?hl=en-US" rel="external nofollow">cookies.txt</a>로 검색할 수 있습니다.</li>
-<li>쿠키 파일을 다음 이름으로 Home Assistant 설정 디렉토리에 저장하십시오. : 새 Google 계정의 간략 사용자 이름이 포함된 <code>.google_maps_location_sharing.cookies.</code> <code>.com</code> TLD (예 : maps.google.com)를 사용해야합니다. 그렇지 않으면 쿠키에서 유효한 세션을 제공할 수 없습니다.
+<li>휴대 전화에서 Google지도 앱을 통해 공유를 설정해야합니다. 내용은 <a href="https://support.google.com/accounts?p=location_sharing" rel="external nofollow">여기</a>를 참조하십시오.</li>
+<li>올바르게 인증한 후 해당 계정의 쿠키를 사용해야합니다. 이 쿠키는 Firefox(“접두사 HttpOnly 쿠키”가 선택 해제되어 있는지 꼭 확인)용 <a href="https://addons.mozilla.org/en-US/firefox/addon/export-cookies-txt/?src=search" rel="external nofollow">Export cookies</a> 또는 Chrome/Chromium 용 <a href="https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg?hl=en-US" rel="external nofollow">cookies.txt</a>로 검색할 수 있습니다.</li>
+<li>쿠키 파일을 다음 이름으로 Home Assistant 설정 디렉토리에 저장하십시오. : 새 Google 계정의 간략 사용자 이름이 포함된 <code>.google_maps_location_sharing.cookies.</code> <code>.com</code> TLD (예: maps.google.com)를 사용해야합니다. 그렇지 않으면 쿠키에서 유효한 세션을 제공할 수 없습니다.
 <ul>
 <li>예를 들면: 이메일 주소가 <code>location.tracker@gmail.com</code>이면 파일이름은 : <code>.google_maps_location_sharing.cookies.location_tracker_gmail_com</code>.</li>
 </ul>
@@ -124,7 +124,7 @@ device_tracker:
   - platform: google_maps
     username: YOUR_USERNAME
 </code></pre>
-<p>이 통합구성요소를 통해 검색된 장치를 활성화하고 재부팅 한 후에는 설정 디렉토리의 <code>known_devices.yaml</code> 파일에 리스트로 들어갑니다.</p>
+<p>이 통합구성요소를 통해 검색된 장치를 활성화하고 재부팅한 후에는 설정 디렉토리의 <code>known_devices.yaml</code> 파일에 리스트로 들어갑니다.</p>
 <p>이 리스트들은 <code>google_maps_ &lt;numeric_id&gt;</code>와 같은 식별자로 만들어집니다. 엔티티를 올바르게 추적하려면 <code>track</code> 속성을 <code>true</code>로 설정해야합니다.</p>
 <div class="config-vars">
   <h3>
@@ -132,11 +132,11 @@ device_tracker:
   <dl class="">
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>공유 위치에 액세스 할 수있는 Google 계정의 이메일 주소입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>공유 위치에 액세스할 수 있는 Google 계정의 이메일 주소입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="max_gps_accuracy" href="#max_gps_accuracy"></a> max_gps_accuracy</dt>
-<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>때때로 Google지도는 매우 낮은 정확도 (몇 킬로미터)로 GPS 위치를보고 할 수 있습니다. 이는 잘못된 구역 보고를 유발할 수 있습니다. 이 매개 변수를 사용하면 이러한 잘못된 GPS 보고서를 필터링 할 수 있습니다. 숫자는 미터 단위 여야합니다. 예를 들어 200을 입력하면 200 미만의 정확도를 가진 GPS 보고서 만 고려됩니다. - 지정하지 않으면 기본값은 100km입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>때때로 Google지도는 매우 낮은 정확도(몇 킬로미터)로 GPS 위치를 보고할 수 있습니다. 이는 잘못된 구역 보고를 유발할 수 있습니다. 이 매개 변수를 사용하면 이러한 잘못된 GPS 보고서를 필터링할 수 있습니다. 숫자는 미터 단위여야합니다. 예를 들어 200을 입력하면 200 미만의 정확도를 가진 GPS 보고서만 고려됩니다. - 지정하지 않으면 기본값은 100km입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="scan_interval" href="#scan_interval"></a> scan_interval</dt>
@@ -150,7 +150,7 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-0.97 릴리스부터는 더 이상 설정에 Google 비밀번호가 필요하지 않습니다. 이전 릴리스의 사용자는 설정 파일에서 비밀번호 항목 만 제거하고 (사용자 이름은 여전히 ​​필요함) 홈어시스턴트를 다시 시작해야합니다. 이전에 생성 된 쿠키 파일은 여전히 ​​유효해야 하며 쿠키가 유효하지 않을 때까지 추적기(tracker)가 정상적으로 작동 할 수 있습니다.
+0.97 릴리스부터는 더 이상 설정에 Google 비밀번호가 필요하지 않습니다. 이전 릴리스의 사용자는 설정 파일에서 비밀번호 항목만 제거하고 (사용자 이름은 여전히 ​​필요함) 홈어시스턴트를 다시 시작해야합니다. 이전에 생성된 쿠키 파일은 여전히 ​​유효해야 하며 쿠키가 유효하지 않을 때까지 추적기(tracker)가 정상적으로 작동할 수 있습니다.
 </div>
 
 

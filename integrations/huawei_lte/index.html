@@ -103,19 +103,19 @@
   <hr class="divider">
   
 
-  <p>Home Assistant 용 Huawei LTE 라우터 및 모뎀 통합구성요소를 통해 <a href="https://consumer.huawei.com/en/smart-home/" rel="external nofollow">Huawei LTE devices</a> 를 관찰하고 제어 할 수 있습니다</p>
+  <p>Home Assistant 용 Huawei LTE 라우터 및 모뎀 통합구성요소를 통해 <a href="https://consumer.huawei.com/en/smart-home/" rel="external nofollow">Huawei LTE devices</a>를 관찰하고 제어할 수 있습니다</p>
 <p>현재 홈어시스턴트에는 다음 플랫폼이 지원됩니다.</p>
 <ul>
 <li>Presence detection - 연결된 장치의 장치 추적기</li>
 <li>Notifications - SMS를 통해</li>
-<li>Sensors - 장치, 신호 및 트레픽 정보</li>
+<li>Sensors - 장치, 신호, 트레픽 정보</li>
 <li>Switch - 모바일 데이터 켜기/끄기</li>
 <li>Binary sensor - 모바일 연결 상태</li>
 </ul>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>프론트 엔드 또는 YAML을 사용하여 두 가지 방법으로 통합구성요소를 사용할 수 있습니다. 또한 홈어시스턴트에서 <a href="../ssdp/">SSDP integration</a>이 활성화 된 경우 프런트 엔드에서 추가적인 옵션 설정을 위해 UPnP를 지원하고 활성화 한 Huawei LTE 장치를 자동으로 검색 할 수 있습니다.</p>
-<p>인증을 사용하거나 사용하지 않고도 통합구성요소를 실행할 수 있습니다. 인증 모드는 사용 가능한 모든 연동 기능 및 엔터티를 활성화하지만 통합구성요소가 활성화된 동안 혹은 브라우저와 같은 다른 소스에서 장치 웹인터페이스에 액세스하는 것을 방해 할 수 있습니다. 인증이 필요한 정확한 기능 목록은 장치 및 펌웨어 버전에 따라 다릅니다. 인증되지 않은 모드에서 인증이 필요한 것을 탐지 한 경우 통합구성요소는 설정된 모든 것을 사용하려고 시도하다가 결국 실패합니다</p>
+<p>프론트 엔드 또는 YAML을 사용하여 두 가지 방법으로 통합구성요소를 사용할 수 있습니다. 또한 홈어시스턴트에서 <a href="../ssdp/">SSDP integration</a>이 활성화된 경우 프런트 엔드에서 추가적인 옵션 설정을 위해 UPnP를 지원하고 활성화한 Huawei LTE 장치를 자동으로 검색할 수 있습니다.</p>
+<p>인증을 사용하거나 사용하지 않고도 통합구성요소를 실행할 수 있습니다. 인증 모드는 사용 가능한 모든 연동 기능 및 엔터티를 활성화하지만 통합구성요소가 활성화된 동안 혹은 브라우저와 같은 다른 소스에서 장치 웹인터페이스에 액세스하는 것을 방해할 수 있습니다. 인증이 필요한 정확한 기능 목록은 장치 및 펌웨어 버전에 따라 다릅니다. 인증되지 않은 모드에서 인증이 필요한 것을 탐지한 경우 통합구성요소는 설정된 모든 것을 사용하려고 시도하다가 결국 실패합니다</p>
 <p>기본적으로 대상 장치가 제공한 엔티티의 서브 세트만 :</p>
 <ul>
 <li>WAN IP 주소 센서</li>
@@ -130,7 +130,7 @@
 <a class="title-link" name="---" href="#---"></a> 프론트 엔드를 통한 설정</h3>
 <p>Menu: <strong>설정</strong> -&gt; <strong>통합구성요소</strong>.</p>
 <p><code>+</code> 부호를 클릭하여 통합구성요소를 추가하고 <strong>Huawei LTE</strong>를 클릭하고 설정 단계를 따르십시오. 완료되면 Huawei LTE 연동이 가능합니다.</p>
-<p>인증되지 않은 모드를 사용하려면 사용자 이름과 비밀번호를 비워 두십시오. 그런 다음 통합구성요소는 먼저 빈 문자열을 사용하여 인증을 시도하고 실패할 경우 인증되지 않은 모드로 돌아갑니다. 이 프로세스로 원하는 결과를 얻지 못하면 YAML 구성 (아래 참조)을 사용하여보다 세밀한 제어를 수행 할 수 있습니다.</p>
+<p>인증되지 않은 모드를 사용하려면 사용자 이름과 비밀번호를 비워 두십시오. 그런 다음 통합구성요소는 먼저 빈 문자열을 사용하여 인증을 시도하고 실패할 경우 인증되지 않은 모드로 돌아갑니다. 이 프로세스로 원하는 결과를 얻지 못하면 YAML 설정(아래 참조)을 사용하여 보다 세밀한 제어를 수행할 수 있습니다.</p>
 <p>알림 수신자 전화 번호의 기본 목록은 통합구성요소 설정 옵션을 사용하여 설정할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="yaml-" href="#yaml-"></a> YAML에서의 설정</h3>
@@ -154,7 +154,7 @@ huawei_lte:
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증 모드에서 장치 웹 인터페이스에 사용되는 비밀번호입니다. USB 스틱 모뎀의 경우 일반적으로 빈 문자열 (<code> ""</code>)입니다. 인증되지 않은 모드를 사용하려면이 변수를 모두 그대로 두십시오</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증 모드에서 장치 웹 인터페이스에 사용되는 비밀번호입니다. USB 스틱 모뎀의 경우 일반적으로 빈 문자열 (<code>""</code>)입니다. 인증되지 않은 모드를 사용하려면 이 변수를 모두 그대로 두십시오</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="notify" href="#notify"></a> notify</dt>
@@ -241,7 +241,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="huawei_lteresume_integration-" href="#huawei_lteresume_integration-"></a> huawei_lte.resume_integration 서비스</h3>
-<p>일시중단 된 연동을 재개합니다.</p>
+<p>일시중단된 연동을 재개합니다.</p>
 <table>
 <thead>
 <tr>
@@ -267,7 +267,7 @@ Default value: </p>
 <li>Huawei E5186s-22a</li>
 <li>Huawei B618</li>
 </ul>
-<p>이것은 완전한 목록이 아닙니다. 연동은 아마도 유사한 펌웨어를 실행하는 다른 Huawei LTE 장치에 연결될 수 있습니다.</p>
+<p>이는 완전한 목록이 아닙니다. 아마도 유사한 펌웨어를 실행하는 다른 Huawei LTE 장치에 연동될 수 있을 겁니다.</p>
 
 
 </article>

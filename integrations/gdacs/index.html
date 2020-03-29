@@ -103,9 +103,12 @@
   <hr class="divider">
   
 
-  <p><code>gdacs</code> 통합구성요소를 통해 <a href="https://www.gdacs.org/" rel="external nofollow">GDACS</a>에서 제공하는 GeoRSS 피드를 전세계 주요 가뭄, 지진, 홍수, 열대 저기압, 쓰나미 및 화산 활동에 대한 정보와 함께 사용할 수 있습니다.
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/2zX03PJ6-xE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>gdacs</code> 통합구성요소를 통해 <a href="https://www.gdacs.org/" rel="external nofollow">GDACS</a>에서 제공하는 GeoRSS 피드를 전세계 주요 가뭄, 지진, 홍수, 열대 저기압, 쓰나미 및 화산 활동에 대한 정보와 함께 사용할 수 있습니다.
 피드에서 알림을 검색하고 홈어시스턴트 위치까지 거리별로 필터링된 알림 정보를 표시합니다.</p>
-<p>피드에서 업데이트 할 때마다 엔티티가 생성되고, 업데이트 및 자동 제거됩니다.
+<p>피드에서 업데이트할 때마다 엔티티가 생성되고, 업데이트 및 자동 제거됩니다.
 각 엔티티는 위도 및 경도를 정의하며 기본맵에 자동으로 표시되거나 소스 <code>gdacs</code> 를 정의하여 맵 카드에 표시됩니다.
 거리는 각 엔티티의 상태로 사용 가능하며 홈어시스턴트에서 설정된 단위 (킬로미터 또는 마일)로 변환됩니다.</p>
 <p class="img">
@@ -113,12 +116,11 @@
 </p>
 <p>데이터는 5 분마다 업데이트됩니다.</p>
 <div class="note">
-<p>이 통합구성요소에 사용된 자료는 <a href="https://www.gdacs.org/" rel="external nofollow">GDACS (Global Disaster Alert and Coordination System)</a>에서 제공합니다. - 유엔과 유럽 연합 집행위원회 간의 협력 체제 -  <a href="http://creativecommons.org/licenses/by/4.0/" rel="external nofollow">Creative Commons Attribution 4.0 International (CC BY 4.0) license</a>에 따라.
-홈어시스턴트에서 자료를 제공할 목적으로만 수정되었습니다. 자세한 내용은 <a href="https://www.gdacs.org/About/termofuse.aspx" rel="external nofollow">creator’s disclaimer and terms of use notice</a>를 참조하십시오.</p>
+<p>이 통합구성요소에 사용된 자료는 <a href="https://www.gdacs.org/" rel="external nofollow">GDACS (Global Disaster Alert and Coordination System)</a>에서 제공합니다. - 유엔과 유럽 연합 집행위원회 간의 협력 체제 -  <a href="http://creativecommons.org/licenses/by/4.0/" rel="external nofollow">Creative Commons Attribution 4.0 International (CC BY 4.0) license</a>에 따라 홈어시스턴트에서 자료를 제공할 목적으로만 수정되었습니다. 자세한 내용은 <a href="https://www.gdacs.org/About/termofuse.aspx" rel="external nofollow">creator’s disclaimer and terms of use notice</a>를 참조하십시오.</p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>GDACS 피드를 통합하려면 GUI의 “Integrations” 기능을 사용하거나 Configurations - Integrations에서 찾거나 <code>configuration.yaml</code>에 다음 줄을 추가하십시오.</p>
+<p>GDACS 피드를 통합하려면 GUI의 “통합구성요소” 기능을 사용하거나 설정 - 통합구성요소에서 찾거나 <code>configuration.yaml</code>에 다음 줄을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 gdacs:
 </code></pre>
@@ -128,12 +130,12 @@ gdacs:
   <dl class="">
 <dt>
 <a class="title-link" name="categories" href="#categories"></a> categories</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>포함 할 경고의 범주입니다. 유효한 카테고리는 ‘가뭄’, ‘지진’, ‘홍수’, ‘열대 사이클론’, ‘해일’, ‘화산폭발’입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>포함할 경고의 범주입니다. 유효한 카테고리는 ‘가뭄’, ‘지진’, ‘홍수’, ‘열대 사이클론’, ‘해일’, ‘화산폭발’입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="radius" href="#radius"></a> radius</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링 할 위치 주변의 반경입니다. 기본값은 500km 또는 mi입니다 (<code>configuration.yaml</code>에 정의 된 단위 시스템에 따라 다름).</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>모니터링할 위치 주변의 반경입니다. 기본값은 500km 또는 mi입니다 (<code>configuration.yaml</code>에 정의 된 단위 시스템에 따라 다름).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -151,7 +153,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="longitude" href="#longitude"></a> longitude</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>경고가 고려되는 좌표의 경도</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>경고가 고려되는 좌표의 경도.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -270,11 +272,11 @@ Default value: </p>
 </tr>
 <tr>
 <td>updated</td>
-<td>마지막 업데이트 중 업데이트 된 엔터티 수 (선택 사항).</td>
+<td>마지막 업데이트 중 업데이트된 엔터티 수 (선택 사항).</td>
 </tr>
 <tr>
 <td>removed</td>
-<td>마지막 업데이트 중에 제거 된 엔티티 수 (선택 사항).</td>
+<td>마지막 업데이트 중에 제거된 엔티티 수 (선택 사항).</td>
 </tr>
 </tbody>
 </table>

@@ -103,9 +103,11 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/OqUI1GHc4As" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/OqUI1GHc4As" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>Xiaomi</code> 카메라 플랫폼은 홈어시스턴트에서 샤오미 카메라를 활용할 수 있습니다</p>
-<p>이 플랫폼을 성공적으로 구현하려면 Home Assistant 호스트가 여러개 카메라를 동시에 읽을 수 있어야합니다. 동시에 접속한 홈 어시스턴트 사용자마다 10 초마다 카메라에 연결됩니다. 이것은 일반적으로 문제가 되진 않습니다.</p>
+<p>이 플랫폼을 성공적으로 구현하려면 Home Assistant 호스트가 여러개 카메라를 동시에 읽을 수 있어야합니다. 동시에 접속한 홈어시스턴트 사용자마다 10 초간격으로 카메라에 연결됩니다. 이는 일반적으로 문제가 되진 않습니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 장치 준비</h2>
 <p>카메라를 홈어시스턴트와 연동하려면 장치에 사용자 정의 펌웨어를 설치해야합니다. 각 모델에 대한 지침을 찾을 수 있습니다.</p>
@@ -116,7 +118,7 @@
 </ul>
 <p>일단 설치되면 FTP를 활성화했는지 확인하십시오.</p>
 <div class="note warning">
-<p>현재 사용자 지정 펌웨어 버전 0.1.4-beta2가 가장 많이 지원됩니다. 이 버전보다 높은 펌웨어는 <a href="https://www.pureftpd.org/project/pure-ftpd" rel="external nofollow">Pure-FTPd</a> 를 사용하는데, 이는 FFmpeg가 비디오 파일을 올바르게 렌더링하지 못하게하는 버그가 있습니다.</p>
+<p>현재 사용자 지정 펌웨어 버전 0.1.4-beta2가 가장 많이 지원됩니다. 이 버전보다 높은 펌웨어는 <a href="https://www.pureftpd.org/project/pure-ftpd" rel="external nofollow">Pure-FTPd</a>를 사용하는데, 이는 FFmpeg가 비디오 파일을 올바르게 렌더링하지 못하게하는 버그가 있습니다.</p>
 </div>
 <div class="note warning">
 <p>Raspbian 사용자 : 플랫폼에 <code>ffmpeg</code> 지원을 설치하는 것을 잊지 마십시오. 그렇지 않으면 비디오가 나오지 않습니다.</p>
@@ -125,7 +127,7 @@
 Yi 720p 및 Xiaofang Cameras에서 FTP를 통해 읽은 경우 카메라에서 실시간 스트림 쓰기가 지원되는 형식이 아니므로 이 플랫폼은 1 분 전에 저장된 비디오를 검색합니다.
 </div>
 <div class="note warning">
-RTSP 서버를 활성화한 경우 다른 Home Assistant 카메라 플랫폼을 통해 카메라에 연결할 수 있습니다. 그러나이 RTSP 서버는 가장 유용한 Mi Home 앱을 사용하는 기능을 비활성화합니다. 홈어시스턴트 호환성과 기본앱을 모두 유지하기 위해이 플랫폼은 FTP를 통해 비디오를 검색합니다.
+RTSP 서버를 활성화한 경우 다른 Home Assistant 카메라 플랫폼을 통해 카메라에 연결할 수 있습니다. 그러나 이 RTSP 서버는 가장 유용한 Mi Home 앱을 사용하는 기능을 비활성화합니다. 홈어시스턴트 호환성과 기본앱을 모두 유지하기 위해 이 플랫폼은 FTP를 통해 비디오를 검색합니다.
 </div>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 플랫폼 설정</h2>
@@ -169,7 +171,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>FTP 서버에 액세스 할 수있는 사용자</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>FTP 서버에 액세스할 수 있는 사용자</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -182,12 +184,12 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p><code>path :</code>의 기본값은 모든 카메라에서 작동하지 않습니다. 장치의 정확한 경로와 함께 해당 키를 추가해야 할 수도 있습니다.</p>
+<p><code>path:</code>의 기본값은 모든 카메라에서 작동하지 않습니다. 장치의 정확한 경로와 함께 해당 키를 추가해야 할 수도 있습니다.</p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 화질</h2>
 <p><a href="/integrations/camera.ffmpeg/"><code>ffmpeg</code> camera</a>가 지원하는 모든 옵션은 <code>ffmpeg_arguments</code> 설정 매개 변수를 통해 활용할 수 있습니다.</p>
-<p>특히 유용한 조정 중 하나는 비디오 크기를 변경하는 기능입니다.  Yi 비디오는 상당히 크기 때문에 (특히 1080p 카메라에서) 다음 설정을 통해 관리 가능한 크기로 줄일 수 있습니다.</p>
+<p>특히 유용한 조정중 하나는 비디오 크기를 변경하는 기능입니다. Yi 비디오는 상당히 크기 때문에 (특히 1080p 카메라에서) 다음 설정을 통해 관리 가능한 크기로 줄일 수 있습니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: xiaomi
     name: My Camera
@@ -198,8 +200,8 @@ Default value: </p>
     ffmpeg_arguments: '-vf scale=800:450'
 </code></pre>
 <h2>
-<a class="title-link" name="-" href="#-"></a> 호스트이름 템플릿</h2>
-<p>호스트 이름/IP 주소는 값 또는 기존 엔티티 속성에서 제공 될 수 있습니다.</p>
+<a class="title-link" name="--" href="#--"></a> 호스트 이름 템플릿</h2>
+<p>호스트 이름/IP 주소는 값 또는 기존 엔티티 속성에서 제공될 수 있습니다.</p>
 <pre><code class="language-yaml">camera:
   - platform: xiaomi
     name: Front Camera

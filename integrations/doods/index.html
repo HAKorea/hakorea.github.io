@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>DOODS - 분산형 이미지처리 서비스 - 홈어시스턴트</title>
+    <title>분산형 이미지처리 서비스(DOODS) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Detect and recognize objects with DOODS.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/doods/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="DOODS - 분산형 이미지처리 서비스">
+    <meta property="og:title" content="분산형 이미지처리 서비스(DOODS)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/doods/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="DOODS - 분산형 이미지처리 서비스">
+    <meta name="twitter:title" content="분산형 이미지처리 서비스(DOODS)">
     <meta name="twitter:description" content="Detect and recognize objects with DOODS.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,18 +97,17 @@
   
   <header>
     <h1 class="title indent">
-      DOODS - 분산형 이미지처리 서비스
+      분산형 이미지처리 서비스(DOODS)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p><code>doods</code> 이미지 처리 플랫폼을 사용하면 <a href="https://github.com/snowzach/doods/" rel="external nofollow">DOODS</a>를 사용하여 카메라 이미지에서 물체를 감지하고 인식 할 수 있습니다. 개체의 상태는 감지된 개체의 수이며 인식된 개체는 수량과 함께 <code>summary</code> 속성에 나열됩니다.
+  <p><code>doods</code> 이미지 처리 플랫폼을 사용하면 <a href="https://github.com/snowzach/doods/" rel="external nofollow">DOODS</a>를 사용하여 카메라 이미지에서 물체를 감지하고 인식할 수 있습니다. 개체의 상태는 감지된 개체의 수이며 인식된 개체는 수량과 함께 <code>summary</code> 속성에 나열됩니다.
 <code>matches</code> 속성은 인식에 대한 신뢰도 <code>score</code>와 각 탐지 범주에 대한 객체의 경계 <code>box</code>를 제공합니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 셋업</h2>
-<p><a href="https://hub.docker.com/r/snowzach/doods" rel="external nofollow">DOODS - Docker</a>
-DOODS를 어딘가에서 실행해야 합니다. 도커 컨테이너로 실행하는 것이 가장 쉽고 배포는 도커 허브 <a href="https://hub.docker.com/r/snowzach/doods" rel="external nofollow">DOODS - Docker</a> 에 설명되어 있습니다.</p>
+<p>DOODS를 어딘가에서 실행해야 합니다. 도커 컨테이너로 실행하는 것이 가장 쉽고 배포는 도커 허브 <a href="https://hub.docker.com/r/snowzach/doods" rel="external nofollow">DOODS - Docker</a>에 설명되어 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>설정은 텐서플로우(Tensorflow) 설정을 비슷하게 따릅니다. 설치시 이 플랫폼을 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오</p>
@@ -203,7 +202,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="covers" href="#covers"></a> covers</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>True이면이 상자(box)에 탐지가 완전히 완료되어야합니다. False인 경우 상자의 감지 부분이 트리거됩니다.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>True이면 이 상자(box)에 탐지가 완전히 완료되어야합니다. False인 경우 상자의 감지 부분이 트리거됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -212,7 +211,7 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="file_out" href="#file_out"></a> file_out</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>바운딩 박스(bounding box) 를 포함하여 처리된 이미지를 저장할 연동을 위한 <a href="/docs/configuration/templating/#processing-incoming-data">템플릿</a>. <code>camera_entity</code>는 트리거 된 소스 카메라의 <code>entity_id</code> 문자열로 사용 가능합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>바운딩 박스(bounding box) 를 포함하여 처리된 이미지를 저장할 연동을 위한 <a href="/docs/configuration/templating/#processing-incoming-data">템플릿</a>. <code>camera_entity</code>는 트리거된 소스 카메라의 <code>entity_id</code> 문자열로 사용 가능합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="labels" href="#labels"></a> labels</dt>
@@ -229,13 +228,13 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="area" href="#area"></a> area</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Custom detection area. Only objects fully in this box will be reported. Top of image is 0, bottom is 1.  Same left to right. 사용자정의 감지 영역. 이 상자(box)에 완전하게 있는 개체만 보고됩니다. 이미지의 상단은 0, 하단은 1입니다. 왼쪽에서 오른쪽으로 동일합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자정의 감지 영역. 이 상자(box)에 완전하게 있는 개체만 보고됩니다. 이미지의 상단은 0, 하단은 1입니다. 왼쪽에서 오른쪽으로 동일합니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="top" href="#top"></a> top</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Top line defined as % from top of image. 이미지 상단에서 %로 정의된 상단 라인</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지 상단에서 %로 정의된 상단 라인</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -244,7 +243,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="left" href="#left"></a> left</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Left line defined as % from left of image. 이미지 좌측에서 %로 정의된 좌측 라인</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지 좌측에서 %로 정의된 좌측 라인</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -253,7 +252,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="bottom" href="#bottom"></a> bottom</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Bottom line defined as % from top of image. 이미지 상단에서 %로 정의된 하단 라인</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지 상단에서 %로 정의된 하단 라인</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -262,7 +261,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="right" href="#right"></a> right</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>Right line defined as % from left of image. 이미지 좌측에서 %로 정의된 우측 라인</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이미지 좌측에서 %로 정의된 우측 라인</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -271,7 +270,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="covers" href="#covers"></a> covers</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>True이면 상자(box)에 탐지가 완전히 완료되어야합니다. False 인 경우 상자의 감지 부분이 트리거됩니다.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>True이면 상자(box)에 탐지가 완전히 완료되어야합니다. False인 경우 상자의 감지 부분이 트리거됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -318,7 +317,7 @@ image_processing:
 </code></pre>
 <h2>
 <a class="title-link" name="--optimizing-resources" href="#--optimizing-resources"></a> 자원의 최적화 (Optimizing resources)</h2>
-<p><a href="/components/image_processing/">Image processing components</a>는 <code>scan_interval</code>에 의해 지정된 기간 동안 카메라에서 이미지를 처리합니다. 기본 <code>scan_interval</code> 이 10 초이므로 카메라의 이미지가 변경되지 않은 경우 과도한 처리가 발생합니다. 설정에 <code>scan_interval: 10000</code> (간격을 10,000초로 세팅)을 추가한 다음 실제로 처리를 수행하려는 경우 <code>image_processing.scan</code> 서비스를 호출하여 이를 무시할 수 있습니다.</p>
+<p><a href="/components/image_processing/">Image processing components</a>는 <code>scan_interval</code>에 의해 지정된 기간 동안 카메라에서 이미지를 처리합니다. 기본 <code>scan_interval</code> 이 10초이므로 카메라의 이미지가 변경되지 않은 경우 과도한 처리가 발생합니다. 설정에 <code>scan_interval: 10000</code> (간격을 10,000초로 세팅)을 추가한 다음 실제로 처리를 수행하려는 경우 <code>image_processing.scan</code> 서비스를 호출하여 이를 무시할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example advanced configuration.yaml entry
 image_processing:
   - platform: doods

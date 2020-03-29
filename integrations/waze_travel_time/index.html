@@ -103,12 +103,14 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="388" src="https://www.youtube.com/embed/DdMmEbKp4_o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="388" src="https://www.youtube.com/embed/DdMmEbKp4_o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>waze_travel_time</code> 센서는 <a href="https://www.waze.com/" rel="external nofollow">Waze</a>에서 이동 시간을 제공합니다.</p>
 <p>단위 시스템은 기본적으로 미터법으로 설정되어 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>설치시 이 센서를 사용하려면 다음 <code>sensor</code> 섹션을 configuration.yaml 파일에 추가하십시오.</p>
+<p>설치시 이 센서를 사용하려면 다음 <code>sensor</code>섹션을 configuration.yaml 파일에 추가하십시오.</p>
 <pre><code class="language-yaml"># Example entry for configuration.yaml
 sensor:
   - platform: waze_travel_time
@@ -195,7 +197,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p><code>avoid_toll_roads</code>, <code>avoid_subscription_roads</code> 및 <code>avoid_ferries</code> 옵션을 사용할 때 유효한 vignette/subscription을 가정할 경우 Waze가 유료 도로나 페리를 통해 경로를 안내하는 경우가 있습니다. 기본 동작은 Waze가 subscription 옵션으로 도로를 안내하는 것입니다. 가장 좋은 방법은 <code>avoid_toll_roads</code> 와 <code>avoid_subscription_roads</code> 또는 <code>avoid_ferries</code>를 설정하고 원하는 결과를 얻기 위해 실험하는 것입니다.</p>
+<p><code>avoid_toll_roads</code>, <code>avoid_subscription_roads</code>, <code>avoid_ferries</code> 옵션을 사용할 때 유효한 vignette/subscription을 가정할 경우 Waze가 유료도로나 페리(배)를 통해 경로를 안내하는 경우가 있습니다. 기본 동작은 Waze가 subscription 옵션으로 도로를 안내하는 것입니다. 가장 좋은 방법은 <code>avoid_toll_roads</code>와 <code>avoid_subscription_roads</code> 혹은 <code>avoid_ferries</code>를 설정하고 원하는 결과를 얻기 위해 실험하는 것입니다.</p>
 <h2>
 <a class="title-link" name="---" href="#---"></a> 동적 목적지를 사용하는 예</h2>
 <p>유연한 옵션을 사용하여 센서값을 <code>destination</code>로 설정하면 필요에 따라 여러 선택적 위치까지의 이동 시간을 계산하는 단일 Waze 연동을 설정할 수 있습니다.</p>

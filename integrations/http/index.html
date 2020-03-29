@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p><code>http</code> 통합구성요소는 홈 어시스턴트 프론트 엔드에 필요한 모든 파일과 데이터를 제공합니다. 기본 설정을 변경하려는 경우 설정 파일에만 추가하면됩니다.</p>
-<p>현재 홈 어시스턴트에서 다음 장치 유형이 지원됩니다. :</p>
+  <p><code>http</code> 통합구성요소는 홈어시스턴트 프론트 엔드에 필요한 모든 파일과 데이터를 제공합니다. 기본 설정을 변경하려는 경우 설정 파일에만 추가하면됩니다.</p>
+<p>현재 홈어시스턴트에서 다음 장치 유형이 지원됩니다. :</p>
 <ul>
 <li><a href="#binary-sensor">Binary Sensor</a></li>
 <li><a href="#sensor">Sensor</a></li>
@@ -122,7 +122,7 @@ http:
 <dt>
 <a class="title-link" name="server_host" href="#server_host"></a> server_host</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>특정 IP/호스트에서 들어오는 요청만 듣습니다. 기본적으로 모든 IPv4 연결을 수락합니다. IPv6을 듣고 싶다면 <code>server_host : :: 0</code>을 사용하십시오.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>특정 IP/호스트에서 들어오는 요청만 듣습니다. 기본적으로 모든 IPv4 연결을 수락합니다. IPv6을 듣고 싶다면 <code>server_host: ::0</code>을 사용하십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -140,7 +140,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="base_url" href="#base_url"></a> base_url</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인터넷에서 홈 어시스턴트를 사용할 수있는 URL. 예: <code>https://hass-example.duckdns.org:8123</code>. iOS 앱은 로컬 설치를 찾습니다. 외부 URL이 있는 경우 이를 사용하여 앱에서 발견 될 때 자동으로 채울 수 있습니다. 이 설정에는 프로토콜, 호스트 이름 및 포트만 포함될 수 있습니다. 경로를 사용하는 것은 현재 <em>지원되지 않습니다.</em></p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인터넷에서 홈어시스턴트를 사용할 수 있는 URL. (예: <code>https://hass-example.duckdns.org:8123</code>). iOS 앱은 로컬 설치를 찾습니다. 외부 URL이 있는 경우 이를 사용하여 앱에서 발견될 때 자동으로 채울 수 있습니다. 이 설정에는 프로토콜, 호스트 이름 및 포트만 포함될 수 있습니다. 경로를 사용하는 것은 현재 <em>지원되지 않습니다.</em></p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -152,7 +152,7 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="ssl_peer_certificate" href="#ssl_peer_certificate"></a> ssl_peer_certificate</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>보안 연결을 수락 할 클라이언트/피어 TLS/SSL 인증서의 경로.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>보안 연결을 수락할 클라이언트/피어 TLS/SSL 인증서의 경로.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="ssl_key" href="#ssl_key"></a> ssl_key</dt>
@@ -160,12 +160,12 @@ Default value: </p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="cors_allowed_origins" href="#cors_allowed_origins"></a> cors_allowed_origins</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p>[CORS] (<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" rel="external nofollow">https://en.wikipedia.org/wiki/Cross-origin_resource_sharing</a>) 요청을 허용하는 원래 도메인 이름 목록입니다. 이를 활성화하면 목록에 있는 경우 <code>Access-Control-Allow-Origin</code> 헤더가 Origin 헤더로 설정되고 <code>Access-Control-Allow-Headers</code>헤더는 <code>Origin, Accept, X-Requested-With Content-type, Authorization</code>로 설정됩니다. 정확한 출발지(Origin)를 제공해야합니다. 예로서 <code>https : // www.home-assistant.io</code>는 <code>https://www.home-assistant.io</code>의 요청을 허용하지만 <code>http://www.home-assistant.io</code>의 요청을 허용하지 <strong>않습니다</strong>.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p><a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" rel="external nofollow">CORS</a> 요청을 허용하는 Origin 도메인 이름 목록입니다. 이를 활성화하면 목록에 있는 경우 <code>Access-Control-Allow-Origin</code> 헤더가 Origin 헤더로 설정되고 <code>Access-Control-Allow-Headers</code> 헤더는 <code>Origin, Accept, X-Requested-With Content-type, Authorization</code>로 설정됩니다. 정확한 Origin을 제공해야합니다. 예로서 <code>https://www.home-assistant.io</code>는 <code>https://www.home-assistant.io</code>의 요청을 허용하지만 <code>http://www.home-assistant.io</code>의 요청을 허용하지 <strong>않습니다</strong>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="use_x_forwarded_for" href="#use_x_forwarded_for"></a> use_x_forwarded_for</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>프록시 설정에서 클라이언트의 올바른 IP 주소를 전달하여 <code>X-Forwarded-For</code> 헤더의 구문 분석을 활성화하십시오. 이 작업을 수행하려면 <code>trusted_proxies</code>’설정을 사용하여 신뢰할 수 있는 프록시를 허용 <strong>해야합니다.</strong> 이 헤더가 있지만 화이트리스트에 없는 요청은 IP 스푸핑 공격으로 간주되므로 헤더가 무시됩니다.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>프록시 설정에서 클라이언트의 올바른 IP 주소를 전달하여 <code>X-Forwarded-For</code> 헤더의 구문 분석을 활성화하십시오. 이 작업을 수행하려면 <code>trusted_proxies</code> 설정을 사용하여 신뢰할 수 있는 프록시를 허용 <strong>해야합니다.</strong> 이 헤더가 있지만 화이트리스트에 없는 요청은 IP 스푸핑 공격으로 간주되므로 헤더가 무시됩니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -173,7 +173,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="trusted_proxies" href="#trusted_proxies"></a> trusted_proxies</dt>
-<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>X-Forwarded-For</code> 헤더를 설정할 수 있는 IP주소 또는 네트워크로 구성된 신뢰할 수있는 프록시 목록.<code>use_x_forwarded_for</code>를 사용할 때는 소스에 관계없이 홈어시스턴트에 대한 모든 요청이 리버스 프록시 IP주소에서 도착하기 때문에 필요합니다. 따라서 리버스 프록시 시나리오에서이 옵션은주의해서 설정해야합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string list">string | list</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>X-Forwarded-For</code> 헤더를 설정할 수 있는 IP주소 또는 네트워크로 설정된 신뢰할 수 있는 프록시 목록. <code>use_x_forwarded_for</code>를 사용할 때는 소스에 관계없이 홈어시스턴트에 대한 모든 요청이 리버스 프록시 IP주소에서 도착하기 때문에 필요합니다. 따라서 리버스 프록시 시나리오에서 이 옵션은 주의해서 설정해야합니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="trusted_networks" href="#trusted_networks"></a> trusted_networks</dt>
@@ -182,7 +182,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="ip_ban_enabled" href="#ip_ban_enabled"></a> ip_ban_enabled</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가 IP필터링 사용 여부를 나타내는 플래그입니다.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>추가 IP필터링 사용 여부를 나타내는 플래그.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -191,7 +191,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="login_attempts_threshold" href="#login_attempts_threshold"></a> login_attempts_threshold</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>ip_ban_enabled</code>가 <code>true</code> 인 경우 단일 IP에서 실패한 로그인 시도 횟수입니다. -1로 설정하면 새로운 자동 금지가 추가되지 않습니다.</p>
+<p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p><code>ip_ban_enabled</code>가 <code>true</code>인 경우 단일 IP에서 실패한 로그인 시도 횟수입니다. -1로 설정하면 새로운 자동 차단이 추가되지 않습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -200,7 +200,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="ssl_profile" href="#ssl_profile"></a> ssl_profile</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 <a href="https://wiki.mozilla.org/Security/Server_Side_TLS" rel="external nofollow">Mozilla SSL 프로파일</a>. The <a href="https://wiki.mozilla.org/Security/Server_Side_TLS" rel="external nofollow">Mozilla SSL profile</a> to use. SSL 핸드 셰이크 오류를 일으키는 연동이 발생하는 경우에만 써보십시오.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 <a href="https://wiki.mozilla.org/Security/Server_Side_TLS" rel="external nofollow">Mozilla SSL 프로파일</a>. SSL hand shake 오류를 일으키는 연동이 발생하는 경우에만 써보십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -209,7 +209,7 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-<p><code>http</code> 통합구성요소를 통한 trusted_networks 구성은 더 이상 사용되지 않으며 대신 <code>auth_providers</code>로 이동합니다. 예로서 <a href="/docs/authentication/providers/#trusted-networks">trusted networks</a>를 참조하세요.</p>
+<p><code>http</code> 통합구성요소를 통한 trusted_networks 설정은 더 이상 사용되지 않으며 대신 <code>auth_providers</code>로 이동합니다. 예로서 <a href="/docs/authentication/providers/#trusted-networks">trusted networks</a>를 참조하세요.</p>
 </div>
 <p>아래 샘플은 가능한 값을 가진 설정 항목을 보여줍니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -226,50 +226,50 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 5
 </code></pre>
-<p><a href="/%EB%B8%94%EB%A1%9C%EA%B7%B8/2015/12/13/setup-encryption-using-lets-encrypt/">Let’s Encrypt를 사용하여 암호화 설정</a> 블로그 게시물은 <a href="https://letsencrypt.org/" rel="external nofollow">Let’s Encrypt</a>의 무료 인증서를 사용하여 트래픽 암호화에 대한 세부 정보를 제공합니다.</p>
-<p>또는 여기 지침에 따라 자체 서명 된 인증서를 사용하십시오. <a href="/docs/ecosystem/certificates/tls_self_signed_certificate/">SSL/TLS 용 자체 서명 인증서</a>.</p>
+<p><a href="/blog/2015/12/13/setup-encryption-using-lets-encrypt/">Let’s Encrypt를 사용하여 암호화 설정</a> 블로그 게시물은 <a href="https://letsencrypt.org/" rel="external nofollow">Let’s Encrypt</a>의 무료 인증서를 사용하여 트래픽 암호화에 대한 세부 정보를 제공합니다.</p>
+<p>또는 여기 지침에 따라 자체 서명된 인증서를 사용하십시오. <a href="/docs/ecosystem/certificates/tls_self_signed_certificate/">SSL/TLS용 자체 서명 인증서</a>.</p>
 <h2>
 <a class="title-link" name="apis" href="#apis"></a> APIs</h2>
-<p><code>http</code> 통합구성요소 외에도 <a href="/developer/rest_api/">REST API</a>, <a href="/developer/python_api/">Python API</a> 및 <a href="/developer/websocket_api/">WebSocket API</a>를 사용할 수 있습니다.</p>
-<p><code>http</code> 플랫폼은 홈어시스턴트 주변에서 사용되는 용어의 의미 내에서 실제 플랫폼이 아닙니다. 홈어시스턴트의 <a href="/developer/rest_api/">REST API</a>는 HTTP를 통해 메시지를 보내고 받습니다.</p>
+<p><code>http</code> 통합구성요소 외에도 <a href="/developer/rest_api/">REST API</a>, <a href="/developer/python_api/">Python API</a>, <a href="/developer/websocket_api/">WebSocket API</a>를 사용할 수 있습니다.</p>
+<p><code>http</code> 플랫폼은 홈어시스턴트에선 엄밀한 용어의 의미에선 실제 플랫폼이 아닙니다. 홈어시스턴트의 <a href="/developer/rest_api/">REST API</a>는 HTTP를 통해 메시지를 보내고 받습니다.</p>
 <h2>
 <a class="title-link" name="http-sensors" href="#http-sensors"></a> HTTP sensors</h2>
-<p>설치에서 이러한 종류의 <a href="#sensor">sensors</a> 또는 <a href="#binary-sensor">binary sensors</a>를 사용하려면 Home Assistant에서 설정 할 필요가 없습니다. 즉, 대상 URL 또는 엔드포인트 및 페이로드를 편집 할 수 있어야합니다. 첫 번째 메시지가 도착하면 엔티티가 작성됩니다.</p>
+<p>설치시 이러한 종류의 <a href="#sensor">sensors</a> 또는 <a href="#binary-sensor">binary sensors</a>를 사용하려면 Home Assistant에서 설정할 필요가 없습니다. 즉, 대상(Target) URL 또는 엔드포인트 및 페이로드를 편집할 수 있어야합니다. 첫 번째 메시지가 도착하면 엔티티가 작성됩니다.</p>
 <p>HTTP 센서를 사용하려면 프로파일 맨 아래의 Home Assistant UI에서 <a href="https://developers.home-assistant.io/docs/en/auth_api.html#long-lived-access-token">Long-Lived Access Tokens</a>을 작성하십시오.</p>
 <p>모든 <a href="/developers/rest_api/#post-apistatesltentity_id">requests</a>은 장치의 엔드 포인트로 전송되어야 하며 <strong>POST</strong> 여야합니다.</p>
 <h2>
 <a class="title-link" name="ip---ip-filtering-and-banning" href="#ip---ip-filtering-and-banning"></a> IP 필터링과 추방 (IP filtering and banning)</h2>
-<p>추가 IP 필터링을 적용하고 무차별 강제 시도를 자동으로 금지하려면 <code>ip_ban_enabled</code>를 <code>true</code>로 설정하고 최대 시도 횟수를 설정하십시오. 첫 번째 추방 후에 루트 설정 폴더에<code>ip_bans.yaml</code> 파일이 생성됩니다. 추방된 IP 주소와 시간이 추가 될 때 UTC로 표시됩니다.</p>
+<p>추가 IP 필터링을 적용하고 무차별 강제 시도를 자동으로 차단시키려면 <code>ip_ban_enabled</code>를 <code>true</code>로 설정하고 최대 시도 횟수를 설정하십시오. 첫 번째 차단 후에 루트 설정 폴더에 <code>ip_bans.yaml</code> 파일이 생성됩니다. 차단된 IP 주소와 시간이 추가될 때 UTC로 표시됩니다.</p>
 <pre><code class="language-yaml">127.0.0.1:
   banned_at: '2016-11-16T19:20:03'
 </code></pre>
-<p>추방이 추가 된 후 홈 어시스턴트 프론트 엔드에 지속적 알림(Persistent Notification)이 채워집니다.</p>
+<p>차단이 추가된 후 홈어시스턴트 프론트 엔드에 Persistent Notification이 채워집니다.</p>
 <div class="note warning">
-<p>‘trusted_networks’의 소스는 자동으로 추방당하지 않습니다.</p>
+<p>‘trusted_networks’의 소스는 자동으로 차단당하지 않습니다.</p>
 </div>
 <h2>
 <a class="title-link" name="--hosting-files" href="#--hosting-files"></a> 파일 호스팅 (Hosting files)</h2>
-<p>Home Assistant를 사용하여 정적 파일을 호스트하거나 제공하려면 설정 경로 아래에 <code>www</code>라는 디렉토리를 작성하십시오 (Hass.io의<code>/ config</code>, 이외는 <code>.homeassistant</code>). <code>www /</code>의 정적 파일은 다음 URL<code>http://your.domain: 8123/local/</code>에서 액세스 할 수 있습니다. 예를 들어 <code>audio.mp3</code>은 <code>http://your.domain:8123/local/audio.mp3</code>로 액세스합니다.</p>
+<p>Home Assistant를 사용하여 정적 파일을 호스트하거나 제공하려면 설정 경로 아래에 <code>www</code>라는 디렉토리를 작성하십시오 (Hass.io의 <code>/config</code>, 이외는 <code>.homeassistant</code>). <code>www/</code>의 정적 파일은 다음 URL <code>http://your.domain: 8123/local/</code>에서 액세스할 수 있습니다. 예를 들어 <code>audio.mp3</code>은 <code>http://your.domain:8123/local/audio.mp3</code>로 액세스합니다.</p>
 <div class="note">
-<p><code>www /</code>폴더를 처음으로 만들어야한다면 Home Assistant를 다시 시작해야합니다.</p>
+<p><code>www/</code>폴더를 처음으로 만들어야한다면 Home Assistant를 다시 시작해야합니다.</p>
 </div>
 <div class="note warning">
-<p><code>www</code> /<code>local</code> 폴더에서 제공되는 파일은 Home Assistant 인증으로 보호되지 않습니다. 이 폴더에 저장된 파일은 URL을 알고있는 경우 인증없이 누구나 액세스 할 수 있습니다.</p>
+<p><code>www</code>/<code>local</code> 폴더에서 제공되는 파일은 Home Assistant 인증으로 보호되지 않습니다. 이 폴더에 저장된 파일은 URL을 알고있는 경우 인증없이 누구나 액세스할 수 있습니다.</p>
 </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
 <p>HTTP binary sensor는 URL에 대한 첫 번째 요청으로 동적으로 생성됩니다. 먼저 설정에서 정의하지 않아도됩니다.</p>
-<p>그러면 홈어시스턴트가 실행되는 한 센서가 존재합니다. Home Assistant를 다시 시작하면 센서가 다시 트리거 될 때까지는 센서가 사라집니다.</p>
+<p>그러면 홈어시스턴트가 실행되는한 센서가 존재합니다. Home Assistant를 다시 시작하면 센서가 다시 트리거될 때까지 센서가 사라집니다.</p>
 <p>binary sensor의 URL은 아래 예와 같습니다. :</p>
 <pre><code class="language-bash">http://IP_ADDRESS:8123/api/states/binary_sensor.DEVICE_NAME
 </code></pre>
 <div class="note">
-다른 장치와의 충돌을 피하려면 고유 한 장치 이름 (DEVICE_NAME)을 선택해야합니다.
+다른 장치와의 충돌을 피하려면 고유한 장치 이름(DEVICE_NAME)을 선택해야합니다.
 </div>
-<p>JSON 페이로드에는 새로운 상태가 포함되어야하며 친숙한 이름을 가질 수 있습니다. 친숙한 이름은 프런트 엔드에서 센서 이름을 지정하는 데 사용됩니다.</p>
+<p>JSON 페이로드에는 새로운 상태가 포함되어야하며 친숙한 이름을 가질 수 있습니다. 친숙한 이름은 프런트 엔드에서 센서 이름을 지정하는데 사용됩니다.</p>
 <pre><code class="language-json">{"state": "on", "attributes": {"friendly_name": "Radio"}}
 </code></pre>
-<p>빠른 테스트를 위해<code>curl</code>은 “장치를 시뮬레이션”하는 데 유용 할 수 있습니다.</p>
+<p>빠른 테스트를 위해 <code>curl</code>은 장치를 “simulate”하는데 유용할 수 있습니다.</p>
 <pre><code class="language-bash">$ curl -X POST -H "Authorization: Bearer LONG_LIVED_ACCESS_TOKEN" \
     -H "Content-Type: application/json" \
     -d '{"state": "off", "attributes": {"friendly_name": "Radio"}}' \
@@ -306,32 +306,32 @@ http:
 print(response.text)
 </code></pre>
 <h4>
-<a class="title-link" name="httpie--using-httpie" href="#httpie--using-httpie"></a> httpie 사용하기 (Using httpie)</h4>
-<p>[<code>httpie</code>] (<a href="https://github.com/jkbrzt/httpie)%EB%8A%94" rel="external nofollow">https://github.com/jkbrzt/httpie)는</a> 사용자 친화적 인 CLI HTTP 클라이언트입니다.</p>
+<a class="title-link" name="httpie-" href="#httpie-"></a> httpie 사용하기</h4>
+<p><a href="https://github.com/jkbrzt/httpie" rel="external nofollow"><code>httpie</code></a>는 사용자 친화적인 CLI HTTP 클라이언트입니다.</p>
 <pre><code class="language-bash">$ http -v POST http://localhost:8123/api/states/binary_sensor.radio \
       'Authorization:Bearer LONG_LIVED_ACCESS_TOKEN' content-type:application/json state=off \
       attributes:='{"friendly_name": "Radio"}'
 </code></pre>
 <h2>
-<a class="title-link" name="-sensor" href="#-sensor"></a> 센서 (Sensor)</h2>
+<a class="title-link" name="" href="#"></a> 센서</h2>
 <p>HTTP 센서는 URL에 대한 첫 번째 요청으로 동적으로 작성됩니다. 먼저 설정에서 정의하지 않아도 됩니다.</p>
-<p>그러면 홈어시스턴트가 실행되는 한 센서가 존재합니다. 홈어시스턴트를 다시 시작하면 센서가 다시 트리거 될 때까지 센서가 나타나지 않습니다.</p>
+<p>그러면 홈어시스턴트가 실행되는한 센서가 존재합니다. 홈어시스턴트를 다시 시작하면 센서가 다시 트리거될 때까지 센서가 나타나지 않습니다.</p>
 <p>센서의 URL은 아래 예와 같습니다.</p>
 <pre><code class="language-bash">http://IP_ADDRESS:8123/api/states/sensor.DEVICE_NAME
 </code></pre>
 <div class="note">
-다른 장치와의 충돌을 피하려면 고유 한 장치 이름 (DEVICE_NAME)을 선택해야합니다.
+다른 장치와의 충돌을 피하려면 고유한 장치 이름 (DEVICE_NAME)을 선택해야합니다.
 </div>
 <p>JSON 페이로드에는 새로운 상태가 포함되어야하며 측정 단위와 이름이 포함되어야합니다. 친숙한 이름은 프런트 엔드에서 센서 이름을 지정하는 데 사용됩니다.</p>
 <pre><code class="language-json">{"state": "20", "attributes": {"unit_of_measurement": "°C", "friendly_name": "Bathroom Temperature"}}
 </code></pre>
-<p>빠른 테스트를 위해<code>curl</code>은 “장치를 시뮬레이션”하는 데 유용 할 수 있습니다.</p>
+<p>빠른 테스트를 위해 <code>curl</code>은 장치를 “simulate”하는데 유용할 수 있습니다.</p>
 <pre><code class="language-bash">$ curl -X POST -H "Authorization: Bearer LONG_LIVED_ACCESS_TOKEN" \
        -H "Content-Type: application/json" \
        -d '{"state": "20", "attributes": {"unit_of_measurement": "°C", "friendly_name": "Bathroom Temp"}}' \
        http://localhost:8123/api/states/sensor.bathroom_temperature
 </code></pre>
-<p>그런 다음<code>curl</code>을 다시 사용하여 <a href="/developers/rest_api/#get-apistatesltentity_id">current sensor state</a>를 검색하고 센서가 작동하는지 확인할 수 있습니다.</p>
+<p>그런 다음 <code>curl</code>을 다시 사용하여 <a href="/developers/rest_api/#get-apistatesltentity_id">current sensor state</a>를 검색하고 센서가 작동하는지 확인할 수 있습니다.</p>
 <pre><code class="language-bash">$ curl -X GET -H "Authorization: Bearer LONG_LIVED_ACCESS_TOKEN" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/states/sensor.bathroom_temperature

@@ -103,8 +103,10 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/iKQC4oCvSXU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>tensorflow</code> 이미지 처리 플랫폼을 사용하면 <a href="https://www.tensorflow.org/" rel="external nofollow">TensorFlow</a>를 사용하여 카메라 이미지의 객체를 감지하고 인식 할 수 있습니다. 개체의 상태는 감지된 개체의 수이며 인식된 개체는 수량과 함께 <code>summary</code> 속성에 나열됩니다. <code>matches</code> 속성은 인식에 대한 신뢰도 <code>score</code>와 각 탐지 범주에 대한 객체의 경계 <code>box</code>를 제공합니다.</p>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/iKQC4oCvSXU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>tensorflow</code> 이미지 처리 플랫폼을 사용하면 <a href="https://www.tensorflow.org/" rel="external nofollow">TensorFlow</a>를 사용하여 카메라 이미지의 객체를 감지하고 인식할 수 있습니다. 개체의 상태는 감지된 개체의 수이며 인식된 개체는 수량과 함께 <code>summary</code> 속성에 나열됩니다. <code>matches</code> 속성은 인식에 대한 신뢰도 <code>score</code>와 각 탐지 범주에 대한 객체의 경계 <code>box</code>를 제공합니다.</p>
 <div class="note warning">
 <p>통합구성요소가 작동하려면 설정을 수행하기 전에 다음 패키지를 Raspbian에 설치해야합니다.
 <code>sudo apt-get install libatlas-base-dev libopenjp2-7 libtiff5</code></p>
@@ -112,7 +114,7 @@
 <h2>
 <a class="title-link" name="" href="#"></a> 셋업</h2>
 <p><code>tensorflow</code> Python 패키지를 설치해야합니다. : <code>$ pip3 install tensorflow==1.13.2</code>. wheel이 모든 플랫폼에서 사용 가능한 것은 아닙니다. 다른 옵션에 대해서는 <a href="https://www.tensorflow.org/install/" rel="external nofollow">the official install guide</a>를 참조하십시오. Hass.io는 아직 지원되지 않지만 애드온이 개발중입니다.</p>
-<p>이 통합구성요소를 위해서는 파일을 컴퓨터에서 다운로드하고 컴파일 한 후 홈어시스턴트 설정 디렉토리에 추가해야합니다. 이 단계는 <a href="https://gist.github.com/hunterjm/6f9332f92b60c3d5e448ad936d7353c3" rel="external nofollow">this gist</a>의 샘플 스크립트를 사용하여 수행 할 수 있습니다. 또는 프로세스를 수동으로 수행하려는 경우 프로세스는 다음과 같습니다.</p>
+<p>이 통합구성요소를 위해서는 파일을 컴퓨터에서 다운로드하고 컴파일 한 후 홈어시스턴트 설정 디렉토리에 추가해야합니다. 이 단계는 <a href="https://gist.github.com/hunterjm/6f9332f92b60c3d5e448ad936d7353c3" rel="external nofollow">this gist</a>의 샘플 스크립트를 사용하여 수행할 수 있습니다. 또는 프로세스를 수동으로 수행하려는 경우 프로세스는 다음과 같습니다.</p>
 <ul>
 <li>Clone <a href="https://github.com/tensorflow/models/tree/master/research/object_detection" rel="external nofollow">tensorflow/models</a>
 </li>
@@ -142,7 +144,7 @@
 <p>어떤 모델을 선택하든, 다운로드하여 <code>frozen_inference_graph.pb</code> 파일을 설정 디렉토리의 <code>tensorflow</code> 폴더에 저장하십시오.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>설치에서이 플랫폼을 활성화하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>설치시 이 플랫폼을 활성화하려면<code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 image_processing:
   - platform: tensorflow
@@ -166,7 +168,7 @@ image_processing:
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면<code>image_processing</code> 엔티티의 이름을 대체 할 수 있습니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면<code>image_processing</code> 엔티티의 이름을 대체할 수 있습니다.</p>
 </span></p></dd>
 </dl></dd>
 <dt>
@@ -249,7 +251,7 @@ Default value: </p>
 </dl></dd>
 </dl>
 </div>
-<p><code>categories</code>는 아래 고급 설정에서 볼 수 있듯 각 카데고리에 대한 영역을 제공하는 사전(dictionary)으로 정의 할 수도 있습니다.</p>
+<p><code>categories</code>는 아래 고급 설정에서 볼 수 있듯 각 카데고리에 대한 영역을 제공하는 사전(dictionary)으로 정의할 수도 있습니다.</p>
 <pre><code class="language-yaml"># Example advanced configuration.yaml entry
 image_processing:
   - platform: tensorflow
@@ -273,7 +275,7 @@ image_processing:
 </code></pre>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 자원 최적화</h2>
-<p><a href="/integrations/image_processing/">Image processing components</a>는 <code>scan_interval</code>에 의해 주어진 일정한 주기로 카메라로부터 이미지를 처리합니다. 기본 <code>scan_interval</code>이  10 초이므로 카메라의 이미지가 변경되지 않은 경우 과도한 처리가 발생합니다. <code>scan_interval : 10000</code>(간격을 10,000초로 세팅)을 설정에 추가하여 이를 무시할 수 있습니다, 그렇게 한 후 실제로 처리를 수행하고자 할 때 <code>image_processing.scan</code> 서비스를 호출합니다.</p>
+<p><a href="/integrations/image_processing/">Image processing components</a>는 <code>scan_interval</code>에 의해 주어진 일정한 주기로 카메라로부터 이미지를 처리합니다. 기본 <code>scan_interval</code>이 10 초이므로 카메라의 이미지가 변경되지 않은 경우 과도한 처리가 발생합니다. <code>scan_interval : 10000</code>(간격을 10,000초로 세팅)을 설정에 추가하여 이를 무시할 수 있습니다, 그렇게 한 후 실제로 처리를 수행하고자 할 때 <code>image_processing.scan</code> 서비스를 호출합니다.</p>
 <pre><code class="language-yaml"># Example advanced configuration.yaml entry
 image_processing:
   - platform: tensorflow

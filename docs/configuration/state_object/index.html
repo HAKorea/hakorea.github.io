@@ -103,10 +103,9 @@
   <hr class="divider">
   
 
-  <p>장치는 홈어시스턴트에서 entity로 표시됩니다. entity는 다른 entity / 템플릿 / 프론트 엔드가 액세스 할 수 있도록 현재 상태를 상태 머신에 기록합니다. 상태는 현재 entity를 나타냅니다.</p>
-<p>If you overwrite a state via the states dev tool or the API, it will not impact the actual device. If the device state is being polled, it will overwrite the state in the state machine the next polling.
-dev 도구 또는 API를 통해 상태를 덮어 쓰면 실제 장치에 영향을 미치지 않습니다. 장치 상태가 폴링되는 경우 다음 폴링을 상태머신에 덮어 씁니다.</p>
-<p>모든 상태는 항상 마지막으로 업데이트되고 마지막으로 변경되었을 때 항상 entity ID, 상태 및 타임 스탬프를 갖습니다.</p>
+  <p>장치는 홈어시스턴트에서 entity로 표시됩니다. entity는 다른 entities/templates/frontend가 액세스할 수 있도록 현재 상태를 상태 머신에 기록합니다. 상태는 현재 entity를 나타냅니다.</p>
+<p>dev 도구 또는 API를 통해 상태를 덮어 쓰면 실제 장치에 영향을 미치지 않습니다. 장치 상태가 폴링되는 경우 다음 폴링을 상태머신에 덮어 씁니다.</p>
+<p>모든 상태는 항상 마지막으로 업데이트되고 마지막으로 변경되었을 때 항상 entity ID, 상태, 타임 스탬프를 갖습니다.</p>
 <table>
 <thead>
 <tr>
@@ -121,7 +120,7 @@ dev 도구 또는 API를 통해 상태를 덮어 쓰면 실제 장치에 영향�
 </tr>
 <tr>
 <td><code>state.entity_id</code></td>
-<td>엔터티 ID. 형식 : <code>&lt;domain&gt;.&lt;object_id&gt;</code>. 예: <code>light.kitchen</code>.</td>
+<td>엔터티 ID. 형식: <code>&lt;domain&gt;.&lt;object_id&gt;</code>. 예: <code>light.kitchen</code>.</td>
 </tr>
 <tr>
 <td><code>state.domain</code></td>
@@ -129,7 +128,7 @@ dev 도구 또는 API를 통해 상태를 덮어 쓰면 실제 장치에 영향�
 </tr>
 <tr>
 <td><code>state.object_id</code></td>
-<td>엔터티의 개체 ID입니다. 예 : <code>kitchen</code>.</td>
+<td>엔터티의 개체 ID입니다. 예: <code>kitchen</code>.</td>
 </tr>
 <tr>
 <td><code>state.name</code></td>
@@ -141,15 +140,15 @@ dev 도구 또는 API를 통해 상태를 덮어 쓰면 실제 장치에 영향�
 </tr>
 <tr>
 <td><code>state.last_changed</code></td>
-<td>상태 머신에서 상태가 UTC 시간으로 변경된 시간입니다. 업데이트 된 속성 만있는 경우 업데이트되지 않습니다. 예 : <code>2017-10-28 08:13:36.715874+00:00</code>.</td>
+<td>상태 머신에서 상태가 UTC 시간으로 변경된 시간입니다. 업데이트된 속성만 있는 경우 업데이트되지 않습니다. 예: <code>2017-10-28 08:13:36.715874+00:00</code>.</td>
 </tr>
 <tr>
 <td><code>state.attributes</code></td>
-<td>현재 상태와 관련된 추가 속성이있는 상세정보입니다.</td>
+<td>현재 상태와 관련된 추가 속성이 있는 상세정보입니다.</td>
 </tr>
 </tbody>
 </table>
-<p>entity의 속성을 조정 선택할 수 있습니다. 특정 방식으로 entity를 표시하기 위해 홈어시스턴트가 사용하는 몇 가지 속성이 있습니다. 각 통합구성요소에는 entity에 대한 추가 상태 데이터를 나타내는 고유 한 특성도 있습니다. 예를 들어, 조명 통합에는 현재 밝기 및 조명 색상에 대한 속성이 있습니다. 속성을 사용할 수 없으면 홈어시스턴트는 해당 속성을 상태에 쓰지 않습니다.</p>
+<p>entity의 속성을 조정 선택할 수 있습니다. 특정 방식으로 entity를 표시하기 위해 홈어시스턴트가 사용하는 몇가지 속성이 있습니다. 각 통합구성요소에는 entity에 대한 추가 상태 데이터를 나타내는 고유한 특성도 있습니다. 예를 들어, 조명 통합구성요소에는 현재 밝기, 조명 색상에 대한 속성이 있습니다. 속성을 사용할 수 없으면 홈어시스턴트는 해당 속성을 상태에 쓰지 않습니다.</p>
 <p>템플릿을 사용할 때 이름별로 속성을 사용할 수 있습니다. 예: <code>state.attributes.sassumed_state</code>.</p>
 <table>
 <thead>
@@ -161,27 +160,27 @@ dev 도구 또는 API를 통해 상태를 덮어 쓰면 실제 장치에 영향�
 <tbody>
 <tr>
 <td><code>friendly_name</code></td>
-<td>엔터티의 이름입니다. 예 : <code>Kitchen Ceiling</code>.</td>
+<td>엔터티의 이름. 예: <code>Kitchen Ceiling</code>.</td>
 </tr>
 <tr>
 <td><code>icon</code></td>
-<td>프론트 엔드에서 entity에 사용할 아이콘입니다. 예 : <code>mdi:home</code>.</td>
+<td>프론트 엔드에서 entity에 사용할 아이콘. 예: <code>mdi:home</code>.</td>
 </tr>
 <tr>
 <td><code>entity_picture</code></td>
-<td>도메인 아이콘을 표시하는 대신 사용해야하는 그림의 URL입니다. 예 : <code>http://example.com/picture.jpg</code>.</td>
+<td>도메인 아이콘을 표시하는 대신 사용해야하는 그림의 URL. 예: <code>http://example.com/picture.jpg</code>.</td>
 </tr>
 <tr>
 <td><code>assumed_state</code></td>
-<td>현재 상태가 가정 인 경우 boolean입니다. <a href="/blog/2016/02/12/classifying-the-internet-of-things/#classifiers">More info</a> 예: <code>True</code>.</td>
+<td>현재 상태가 가정인 경우 boolean. <a href="/blog/2016/02/12/classifying-the-internet-of-things/#classifiers">More info</a> 예: <code>True</code>.</td>
 </tr>
 <tr>
 <td><code>unit_of_measurement</code></td>
-<td>상태를 나타내는 측정 단위입니다. 그래프를 그룹화하거나 엔터티를 이해하는 데 사용됩니다. 예 :  <code>°C</code>.</td>
+<td>상태를 나타내는 측정 단위. 그래프를 그룹화하거나 엔터티를 이해하는데 사용. 예: <code>°C</code>.</td>
 </tr>
 <tr>
 <td><code>hidden</code></td>
-<td>entity가 프론트 엔드에 표시되지 않아야하는 경우 boolean입니다. 예 : <code>true</code>. 이는 Lovelace UI에는 적용되지 않으며 이전 <code>states</code> UI 에만 관련이 있습니다.</td>
+<td>entity가 프론트 엔드에 표시되지 않아야하는 경우 boolean. 예: <code>true</code>. 이는 Lovelace UI에는 적용되지 않으며 이전 <code>states</code> UI 에만 관련이 있습니다.</td>
 </tr>
 </tbody>
 </table>

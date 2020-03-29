@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>장면(씬,Scenes) - 홈어시스턴트</title>
+    <title>씬(장면,Scenes) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup scenes within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/integrations/scene/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="장면(씬,Scenes)">
+    <meta property="og:title" content="씬(장면,Scenes)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/integrations/scene/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="장면(씬,Scenes)">
+    <meta name="twitter:title" content="씬(장면,Scenes)">
     <meta name="twitter:description" content="Instructions on how to setup scenes within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,16 @@
   
   <header>
     <h1 class="title indent">
-      장면(씬,Scenes)
+      씬(장면,Scenes)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/U3_b7GAsh3Y?start=1538" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>특정 엔티티가 원하는 상태를 설정하는 장면(scene)을 만들 수 있습니다. 예를 들어 장면에서 조명 A를 켜고 조명 B를 밝게 빨간색으로 지정하도록 할 수 있습니다.</p>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/U3_b7GAsh3Y?start=1538" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p>특정 엔티티가 원하는 상태를 설정하는 씬(장면,scene)을 만들 수 있습니다. 예를 들어 씬에서 조명 A를 켜고 조명 B를 밝게 빨간색으로 지정하도록 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 scene:
   - name: Romantic
@@ -131,11 +133,11 @@ scene:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>친숙한 장면 이름.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>친숙한 씬 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>제어 할 엔티티 및 원하는 상태.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>제어할 엔티티 및 원하는 상태.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -144,7 +146,7 @@ scene:
 <li>엔티티와 직접 <code>state</code>를 정의하십시오. 반드시 <code>state</code>를 정의해야합니다.</li>
 <li>속성으로 복잡한 상태를 정의하십시오. <code>developer-tools-&gt; state</code> 에서 특정 엔티티에 사용 가능한 모든 속성을 볼 수 있습니다.</li>
 </ul>
-<p><code>scene.turn_on</code> 서비스를 사용하지 않고 장면을 활성화 할 수 있습니다 (scene.turn_off ‘서비스 없음’).</p>
+<p><code>scene.turn_on</code> 서비스를 사용하지 않고 씬을 활성화 할 수 있습니다 (scene.turn_off ‘서비스 없음’).</p>
 <pre><code class="language-yaml"># Example automation
 automation:
   trigger:
@@ -157,8 +159,8 @@ automation:
     entity_id: scene.romantic
 </code></pre>
 <h2>
-<a class="title-link" name="---" href="#---"></a> 장면을 정의하지 않고 적용</h2>
-<p><code>scene.apply</code> 서비스를 사용하면 설정을 통해 먼저 장면을 정의하지 않고도 장면을 적용 할 수 있습니다. 대신 서비스 데이터의 일부로 상태를 전달합니다. 데이터의 형식은 설정에서 <code>entities</code> 필드와 동일합니다.</p>
+<a class="title-link" name="---" href="#---"></a> 씬을 정의하지 않고 적용</h2>
+<p><code>scene.apply</code> 서비스를 사용하면 설정을 통해 먼저 씬을 정의하지 않고도 씬을 적용 할 수 있습니다. 대신 서비스 데이터의 일부로 상태를 전달합니다. 데이터의 형식은 설정에서 <code>entities</code> 필드와 동일합니다.</p>
 <pre><code class="language-yaml"># Example automation
 automation:
   trigger:
@@ -179,13 +181,13 @@ automation:
           source: HDMI 1
 </code></pre>
 <h2>
-<a class="title-link" name="-" href="#-"></a> 장면 새로고침</h2>
-<p>장면 구성을 변경할 때마다 <code>scene.reload</code> 서비스를 호출 하여 장면을 다시로드 할 수 있습니다.</p>
+<a class="title-link" name="-" href="#-"></a> 씬 새로고침</h2>
+<p>씬 설정을 변경할 때마다 <code>scene.reload</code> 서비스를 호출하여 씬을 다시로드 할 수 있습니다.</p>
 <h2>
-<a class="title-link" name="--" href="#--"></a> 즉석에서 장면 만들기</h2>
-<p><code>scene.create</code>서비스 를 호출하여 별도 설정할 필요없이 새 장면을 만듭니다. 이 장면은 설정을 다시로드 한 후에 삭제됩니다.</p>
-<p>공백 대신 밑줄로 소문자로 <code>scene_id</code>를 전달해야합니다. 장면을 구성 할 때와 같은 형식으로 엔티티를 지정할 수도 있습니다. <code>snapshot_entities</code> 매개 변수를 사용하여 현재 상태의 스냅샷을 작성할 수도 있습니다. 이 경우 스냅샷을 만들려는 모든 엔터티의 <code>entity_id</code>를 지정해야합니다. <code>entities</code>와 <code>snapshot_entities</code>는 결합 할 수 있지만 적어도 둘 중 하나를 사용해야합니다.</p>
-<p>장면이 이전에 <code>scene.create</code>에 의해 생성 된 경우 덮어 씁니다. YAML에서 장면을 만든 경우 로그 파일에 경고 만 표시됩니다.</p>
+<a class="title-link" name="--" href="#--"></a> 즉석에서 씬 만들기</h2>
+<p><code>scene.create</code> 서비스를 호출하여 별도 설정할 필요없이 새 씬을 만듭니다. 이 씬은 설정을 다시로드한 후에 삭제됩니다.</p>
+<p>공백 대신 밑줄로 소문자로 <code>scene_id</code>를 전달해야합니다. 씬을 설정할 때와 같은 형식으로 엔티티를 지정할 수도 있습니다. <code>snapshot_entities</code> 매개 변수를 사용하여 현재 상태의 스냅샷을 작성할 수도 있습니다. 이 경우 스냅샷을 만들려는 모든 엔터티의 <code>entity_id</code>를 지정해야합니다. <code>entities</code>와 <code>snapshot_entities</code>는 결합할 수 있지만 적어도 둘 중 하나를 사용해야합니다.</p>
+<p>씬이 이전에 <code>scene.create</code>에 의해 생성된 경우 덮어 씁니다. YAML에서 씬을 만든 경우 로그 파일에 경고만 표시됩니다.</p>
 <pre><code class="language-yaml"># Example automation using entities
 automation:
   trigger:

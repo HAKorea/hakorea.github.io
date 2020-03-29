@@ -106,15 +106,15 @@
   <div class="videoWrapper">
 <iframe width="776" height="437" src="https://www.youtube.com/embed/odgOY0Rt1sE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<p>Philips Dynalite 지원은 라이트 플랫폼을 구동 할 수있는 허브로 Home Assistant에 통합되어 있습니다.</p>
+<p>Philips Dynalite 지원은 라이트 플랫폼을 구동할 수있는 허브로 Home Assistant에 준비되어 있습니다.</p>
 <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Lights</li>
 </ul>
 <p>Philips Dynalite 허브는 areas, channels, 그리고 preset으로 구성된 Dynet 네트워크에 연결됩니다.</p>
-<p>다이나 라이트 area는 일반적으로 (필수는 아니지만) 방과 같은 물리적 영역을 정의합니다.</p>
-<p>각 area에는 제어하는 ​​다른 장치에 해당하는 하나 이상의 채널이있을 수 있습니다. 채널은 조광(dimmable) 가능한 조명 또는 개폐장치(Cover)와 같은 기타 장치와 관련될 수 있습니다.</p>
-<p>또한 각 area에는 모든 채널의 동작을 결정하고 때로는 추가 작업을 트리거하는 하나 이상의 preset이 있을 수 있습니다. 일반적으로 area의 preset 1은 <code>on</code>을 의미하고 preset ‘4’는 <code>off</code>를 의미합니다. scenes과 디밍(dimming)에 추가 preset을 사용할 수 있습니다.</p>
+<p>Dynalite area는 일반적으로 (필수는 아니지만) 방과 같은 물리적 영역을 정의합니다.</p>
+<p>각 area에는 제어하는 ​​다른 장치에 해당하는 하나 이상의 채널이있을 수 있습니다. 채널은 조광(dimmable) 가능한 조명 또는 커버(Cover)와 같은 기타 장치와 관련될 수 있습니다.</p>
+<p>또한 각 area에는 모든 채널의 동작을 결정하고 때로는 추가 작업을 트리거하는 하나 이상의 preset이 있을 수 있습니다. 일반적으로 area의 preset 1은 <code>on</code>을 의미하고 preset ‘4’는 <code>off</code>를 의미합니다. scenes과 조광(dimming)에 추가 preset을 사용할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>필립스 Dynalite에는 자동 검색 기능이 없으므로 <code>configuration.yaml</code> 파일을 통해 설정해야합니다.</p>
@@ -152,7 +152,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="active" href="#active"></a> active</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>적극적으로 네트워크를 쿼리합니다. 시작시 모든 장치의 현재 상태를 쿼리하고 일부 변경이 진행 중일 때 (예 : 조명이 어두워 지거나 이동하는 경우) 쿼리를 보냅니다. 많은 처리를 하긴하겠지만, Dynalite 네트워크에 더 많은 부하가 발생합니다.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>적극적으로 네트워크를 쿼리합니다. 시작시 모든 장치의 현재 상태를 쿼리하고 일부 변경이 진행 중일 때 (예: 조명이 어두워 지거나 이동하는 경우) 쿼리를 보냅니다. 많은 처리를 하긴하겠지만, Dynalite 네트워크에 더 많은 부하가 발생합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -161,7 +161,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="polltimer" href="#polltimer"></a> polltimer</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>transition 중인 장치의 폴링 간격. 초 단위의 값입니다. 장치가 transition 중인 경우 (예 : 조명 페이딩) 목표 레벨에 도달 할 때까지 X 초마다 새로운 상태를 요청합니다. 활성화 된 경우에만 관련이 있습니다.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>transition 중인 장치의 폴링 간격. 초 단위의 값입니다. 장치가 transition 중인 경우 (예: 조명 페이딩) 목표 레벨에 도달 할 때까지 X 초마다 새로운 상태를 요청합니다. 활성화 된 경우에만 관련이 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -188,12 +188,12 @@ Default value: </p>
 </dl></dd>
 <dt>
 <a class="title-link" name="area" href="#area"></a> area</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>다양한 다이나 라이트 area에 대한 정의.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>다양한 Dynalite area에 대한 정의.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="area_number" href="#area_number"></a> AREA_NUMBER</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>다이나 라이트 area 번호, 1-255</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>Dynalite area 번호, 1-255</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -216,7 +216,7 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="channel_number" href="#channel_number"></a> CHANNEL_NUMBER</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>해당 area의 다이나 라이트 채널 번호 1-255</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Required)</span><span class="description"><p>해당 area의 Dynalite 채널 번호 1-255</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -266,10 +266,10 @@ dynalite:
 </code></pre>
 <h2>
 <a class="title-link" name="---" href="#---"></a> 초기 설정 및 검색</h2>
-<p>Dynalite 시스템에서 가장 어려운 점은 area와 채널 매핑을 찾는 것입니다. Dynalite 소프트웨어 및 설정 파일에 액세스 할 수 있거나 액세스 할 수 있는 경우 이 작업은 쉬울 수 있지만 시스템이 통합 설치자에 의해 설치되었을 가능성이 있는 경우 직접 찾아야합니다.</p>
-<p>여기서 <code>autodiscover</code> 옵션이 유용합니다. 켜져 있으면 구성 요소가 Dynet 네트워크를 추적하고 장치를 사용할 때마다 홈어시스턴트에 추가됩니다. 처음에는 “Area 123 Channel 7”로 표시되지만 자신에 맞는 설정으로 <code>configuration.yaml</code>에 추가 할 수 있습니다.</p>
-<p>예를 들어, 주방 조명으로 가서 켜십시오. 이제 홈 어시스턴트로 로그인하여 채널이 무엇인지 확인하십시오. 둘 이상이 발견 된 경우 (예 : 누군가 거실 조명 끄기) 홈어시스턴트에서 조명을 켜고 끄고 어떤 조명이 영향을 받는지 확인할 수 있습니다.</p>
-<p>초기 프로세스는 시간이 많이 걸리고 지루할 수 있지만 한번만 수행하면됩니다. 설정이 완료되면 시스템이 내부 통신에 사용하는 “fake” 채널 및 area이 많고 표시하기를 원하지 않기 때문에 <code>autodiscover</code>를 <code>false</code>로 설정하는 것이 좋습니다.</p>
+<p>Dynalite 시스템에서 가장 어려운 점은 area와 채널 매핑을 찾는 것입니다. 소프트웨어가 있거나 Dynalite 소프트웨어 및 설정 파일에 액세스할 수 있으면 이 작업이 쉬울 수 있지만 시스템이 사업자에 의해 설치되었을 가능성이 있는 경우 직접 찾아야합니다.</p>
+<p>여기서 <code>autodiscover</code> 옵션이 유용합니다. 켜져 있으면 구성 요소가 Dynet 네트워크를 추적하고 장치를 사용할 때마다 홈어시스턴트에 추가됩니다. 처음에는 “Area 123 Channel 7”로 표시되지만 자신에 맞는 설정으로 <code>configuration.yaml</code>에 추가할 수 있습니다.</p>
+<p>예를 들어, 주방 조명으로 가서 켜십시오. 이제 홈어시스턴트로 로그인하여 채널이 무엇인지 확인하십시오. 둘 이상이 발견 된 경우 (예: 누군가 거실 조명 끄기) 홈어시스턴트에서 조명을 켜고 끄고 어떤 조명이 영향을 받는지 확인할 수 있습니다.</p>
+<p>초기 프로세스는 시간이 많이 걸리고 지루할 수 있지만 한번만 수행하면됩니다. 시스템이 내부 통신에 사용하는 많은 “fake” 채널 및 영역(area)이 있으며 사용자가 보지 않기를 원하기 때문에 설정이 끝나면 자동 검색을 false로 설정하는 것이 좋습니다.</p>
 
 
 </article>

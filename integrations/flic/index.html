@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/-Y7Rm6OcCMY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/-Y7Rm6OcCMY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>flic</code> 플랫폼을 사용하면 <a href="https://flic.io" rel="external nofollow">flic</a> 스마트 버튼에서 클릭 이벤트를 수신할 수 있습니다.</p>
 <p>플랫폼은 버튼과 직접 상호 작용하지 않지만 버튼을 관리하는 <em>flic service와 통신합니다.</em> 이 서비스는 Home Assistant 또는 다른 연결 가능한 컴퓨터와 동일한 인스턴스에서 실행될 수 있습니다.</p>
 <h4>
@@ -165,7 +167,7 @@ Default value: </p>
 </div>
 <h4>
 <a class="title-link" name="discovery" href="#discovery"></a> Discovery</h4>
-<p>검색이 활성화된 경우 새 버튼을 7 초 이상 눌러 추가 할 수 있습니다. 이 버튼은 파일 서비스와 페어링되어 홈어시스턴트에 추가됩니다. 그렇지 않으면 수동으로 파일 서비스와 페어링해야합니다. 홈어시스턴트 플랫폼은 새 버튼을 검색하지 않고 이미 페어링된 버튼에만 연결합니다.</p>
+<p>검색이 활성화된 경우 새 버튼을 7 초 이상 눌러 추가할 수 있습니다. 이 버튼은 파일 서비스와 페어링되어 홈어시스턴트에 추가됩니다. 그렇지 않으면 수동으로 파일 서비스와 페어링해야합니다. 홈어시스턴트 플랫폼은 새 버튼을 검색하지 않고 이미 페어링된 버튼에만 연결합니다.</p>
 <h4>
 <a class="title-link" name="timeout" href="#timeout"></a> Timeout</h4>
 <p>Flic 서비스와의 연결이 끊어진 상태에서 Flic 버튼이 트리거되면 모든 이벤트를 대기열에 넣고 가능한 빨리 연결하고 전송하려고 시도합니다. 제한 시간 변수는 홈어시스턴트의 액션(action)와 ​​알림(notification) 사이에 너무 많은 시간이 경과한 경우 이벤트 트리거를 중지하는데 사용할 수 있습니다.</p>
@@ -188,11 +190,11 @@ automation:
 <p>이벤트 데이터:</p>
 <ul>
 <li>
-<strong>button_name</strong>: 이벤트를 트리거 한 버튼의 이름.</li>
+<strong>button_name</strong>: 이벤트를 트리거한 버튼의 이름.</li>
 <li>
 <strong>button_address</strong>: 이벤트를 트리거한 버튼의 Bluetooth 주소.</li>
 <li>
-<strong>click_type</strong>: 클릭 유형. 가능한 값은 <code>single</code>,<code>double</code> 및 <code>hold</code>.</li>
+<strong>click_type</strong>: 클릭 유형. 가능한 값은 <code>single</code>, <code>double</code>, <code>hold</code>.</li>
 <li>
 <strong>queued_time</strong>: 이 이벤트가 버튼에서 큐에 대기한 시간(초)입니다.</li>
 </ul>

@@ -103,19 +103,20 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/f0i2R1cMWBg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>The <code>webostv</code> platform allows you to control a <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS Smart TV.
-이 webostv플랫폼을 사용하면 <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS 스마트 TV 를 제어 할 수 있습니다 .</p>
-<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/f0i2R1cMWBg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p>webostv플랫폼을 사용하면 <a href="https://www.lg.com/" rel="external nofollow">LG</a> webOS 스마트 TV 를 제어할 수 있습니다 .</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다. :</p>
 <ul>
 <li><a href="#media-player">미디어플레이어</a></li>
 <li><a href="#notifications">알림</a></li>
 </ul>
-<p>TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a>의 <em>네트워크</em> 설정 에서 <em>LG Connect 앱</em> 기능 을 활성화해서 시작 하십시오 .</p>
+<p>TV <a href="https://www.lg.com/uk/support/product-help/CT00008334-1437131798537-others" rel="external nofollow">instructions</a>의 <em>네트워크</em> 설정 에서 <em>LG Connect 앱</em> 기능을 활성화해서 시작하십시오 .</p>
 <p>기본 설정이 configuration.yaml파일에 추가되면 프런트 엔드의 <strong>알림</strong>섹션에 페어링 정보가 표시되어야합니다. 지침에 따라 TV에서 페어링 요청을 수락하십시오.</p>
-<p>페어링 정보는 <code>webostv.conf</code> Home Assistant 구성 디렉토리 의 구성 파일 에 저장됩니다 . 이 과정은 나중에 TV의 IP 주소가 변경 될 경우 IP 주소에 설정에 주의하십시오.</p>
+<p>페어링 정보는 <code>webostv.conf</code> Home Assistant 설정 디렉토리의 설정 파일에 저장됩니다 . 이 과정은 나중에 TV의 IP 주소가 변경될 경우 IP 주소에 설정에 주의하십시오.</p>
 <h2>
-<a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
+<a class="title-link" name="" href="#"></a> 설정</h2>
 <p>TV를 설치에 추가하려면 <code>configuration.yaml</code>파일에 다음을 추가 하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 webostv:
@@ -126,19 +127,19 @@ webostv:
   <dl class="">
 <dt>
 <a class="title-link" name="host" href="#host"></a> host</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>LG webOS 스마트 TV의 IP 주소 예: <code>192.168.0.10</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>LG webOS 스마트 TV의 IP 주소 (예: <code>192.168.0.10</code>)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>LG webOS 스마트 TV에 부여하려는 이름입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>LG webOS 스마트 TV에 부여하려는 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="turn_on_action" href="#turn_on_action"></a> turn_on_action</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>TV를 켜는 <a href="/docs/automation/action/">action</a>을 정의합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>TV를 켜는 <a href="/docs/automation/action/">action</a>을 정의.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="customize" href="#customize"></a> customize</dt>
-<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의 할 옵션 목록.</p>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용자 정의할 옵션 목록.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>
@@ -149,7 +150,7 @@ webostv:
 </dl>
 </div>
 <h3>
-<a class="title-link" name="---full-configuration-example" href="#---full-configuration-example"></a> 전체 설정 예시 (Full configuration example)</h3>
+<a class="title-link" name="--" href="#--"></a> 전체 설정 예시</h3>
 <p>전체 설정 예는 아래 샘플과 같습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 webostv:
@@ -172,7 +173,7 @@ notify:
 </code></pre>
 <p>장치의 <code>name :</code>에서 <code>[]</code>를 사용하지 마십시오.</p>
 <h3>
-<a class="title-link" name="-tv--using-multiple-tvs" href="#-tv--using-multiple-tvs"></a> 다수의 TV 사용 (Using multiple TVs)</h3>
+<a class="title-link" name="-tv-" href="#-tv-"></a> 다수의 TV 사용</h3>
 <p>이 통합구성요소로 다수의 TV를 사용할 수도 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry with multiple TVs
 webostv:
@@ -202,12 +203,12 @@ media_player:
 
 notify:
 </code></pre>
-<p>장치 전원을 켜기위한 다른 모든 <a href="/docs/automation/action/">actions</a>을 설정 할 수 있습니다.</p>
+<p>장치 전원을 켜기위한 다른 모든 <a href="/docs/automation/action/">actions</a>을 설정할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="sources" href="#sources"></a> Sources</h2>
 <p>현재 TV에 설정된 사용 가능한 소스의 전체 목록을 얻으려면 webOS TV를 설정하고 전원을 켠 상태에서 <strong>개발자 도구</strong>&gt; <strong>상태</strong>에서 <code>media_player.name</code>을 찾아 <code>source_list :</code>의 각 줄의 나타난 입력(소스)들을 기억해두고 <code>source:</code>에  해당 입력을 배치시켜 사용하십시오.</p>
 <h2>
-<a class="title-link" name="play_media-----change-channel-through-play_media-service" href="#play_media-----change-channel-through-play_media-service"></a> play_media 서비스를 통한 채널 변경 (Change channel through play_media service)</h2>
+<a class="title-link" name="play_media----" href="#play_media----"></a> play_media 서비스를 통한 채널 변경</h2>
 <p><code>play_media</code> 서비스는 스크립트에서 지정된 TV 채널로 전환하는 데 사용될 수 있습니다. <code>media_content_id</code> 매개 변수에 따라 가장 일치하는 채널을 선택합니다. :</p>
 <ol>
 <li>채널 번호 <em>(예: ‘1’ or ‘6’)</em>

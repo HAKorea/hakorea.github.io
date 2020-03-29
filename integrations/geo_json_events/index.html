@@ -104,12 +104,12 @@
   
 
   <p><code>geo_json_events</code> 플랫폼을 사용하면 GeoJSON 피드를 연동할 수 있습니다. 피드에서 이벤트를 검색하고 홈어시스턴트 위치까지의 거리에 따라 필터링된 이벤트 정보를 표시합니다.
-GeoJSON 피드의 모든 항목은 일반적으로 지리 좌표가 있는 점 또는 다각형 인 <code>geometry</code>를 정의해야합니다. 또한 이 플랫폼은 항목의 <code>properties</code>에서 <code>title</code> 키를 찾아 엔터티 이름으로 사용합니다.</p>
-<p>GeoJSON 피드에서 업데이트 할 때마다 엔티티가 자동으로 생성, 업데이트 및 제거됩니다. 각 엔티티는 위도와 경도를 정의하며지도에 자동으로 표시됩니다. 킬로미터 단위의 거리는 각 엔티티의 상태로 사용 가능합니다.</p>
+GeoJSON 피드의 모든 항목은 일반적으로 지리 좌표가 있는 점 또는 다각형인 <code>geometry</code>를 정의해야합니다. 또한 이 플랫폼은 항목의 <code>properties</code>에서 <code>title</code> 키를 찾아 엔터티 이름으로 사용합니다.</p>
+<p>GeoJSON 피드에서 업데이트할 때마다 엔티티가 자동으로 생성, 업데이트 그리고 제거됩니다. 각 엔티티는 위도와 경도를 정의하며 지도에 자동으로 표시됩니다. 킬로미터 단위의 거리는 각 엔티티의 상태로 사용 가능합니다.</p>
 <p>데이터는 5 분마다 업데이트됩니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>GeoJSON 피드를 통합하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오. <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" rel="external nofollow">미국 지질 조사에서 제공 한 지진 데이터</a>를 보여주는 설정 예입니다.</p>
+<p>GeoJSON 피드를 연동하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오. <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" rel="external nofollow">미국 지질 조사에서 제공 한 지진 데이터</a>를 보여주는 설정 예입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 geo_location:
   - platform: geo_json_events
@@ -126,7 +126,7 @@ geo_location:
 <dt>
 <a class="title-link" name="radius" href="#radius"></a> radius</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이벤트를 확인하고자하는 홈어시스턴트 좌표 주위의 거리 (킬로미터).</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>이벤트를 확인하고자하는 홈어시스턴트의 좌표 주위의 거리 (킬로미터).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -184,7 +184,7 @@ Default value: </p>
 </table>
 <h2>
 <a class="title-link" name="--" href="#--"></a> 고급 설정 사례</h2>
-<p>여러 GeoJSON 피드를 통합 할 때 다른 피드의 엔티티를 구별하는 것이 유용할 수 있습니다. 가장 쉬운 방법은 각 엔티티 ID에 정의된 값이 붙는 각 플랫폼에 대해 <a href="/docs/configuration/platform_options/#entity-namespace/"><code>entity_namespace</code></a>를 정의하는 것입니다.</p>
+<p>여러 GeoJSON 피드를 연동할 때 다른 피드의 엔티티를 구별하는 것이 유용할 수 있습니다. 가장 쉬운 방법은 각 엔티티 ID에 정의된 값이 붙는 각 플랫폼에 대해 <a href="/docs/configuration/platform_options/#entity-namespace/"><code>entity_namespace</code></a>를 정의하는 것입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 geo_location:
   - platform: geo_json_events

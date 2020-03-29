@@ -103,11 +103,12 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/GxePiWUQHy8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-유튜브 자막을 영어 혹은 한글을 추천합니다.  
-이 통합구성요소는 에뮬레이트 된 Roku API를 Home Assistant에 연동하므로 Harmony 및 Android 앱과 같은 원격 장치는 마치 Roku 플레이어인 것처럼 WiFi를 통해 연결할 수 있습니다.
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/GxePiWUQHy8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p>이 통합구성요소는 에뮬레이트 된 Roku API를 Home Assistant에 연동하므로 Harmony 및 Android 앱과 같은 원격 장치는 마치 Roku 플레이어인 것처럼 WiFi를 통해 연결할 수 있습니다.
 홈어시스턴트는 키의 눌림(presses) 및 앱실행을 이벤트로 보고 자동화의 트리거로 사용할 수 있습니다.
-여러 서버 항목을 지정하여 단추(buttons)가 부족하면 여러 Roku 서버가 시작될 수 있습니다.
+여러 서버 항목을 지정하여 버튼(buttons)이 부족하면 여러 Roku 서버가 시작될 수 있습니다.</p>
 <div class="note">
 <p>홈어시스턴트는 UDP 소켓을 지원하지 않는 <code>ProactorEventLoop</code>을 사용하므로 Windows가 지원되지 않습니다.</p>
 </div>
@@ -117,8 +118,8 @@
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>프런트 엔드를 통해 통합구성요소를 설정할 수 있습니다. (<strong>설정</strong>-&gt; <strong>통합구성요소</strong>-&gt; <strong>Emulated Roku</strong>)</p>
-<p>고급 옵션을 구성하려면 <code>configuration.yaml</code>에 다음 항목을 추가 할 수 있습니다.</p>
+<p>프런트 엔드를 통해 통합구성요소를 설정할 수 있습니다. (<strong>설정</strong> -&gt; <strong>통합구성요소</strong> -&gt; <strong>Emulated Roku</strong>)</p>
+<p>고급 옵션을 설정하려면 <code>configuration.yaml</code>에 다음 항목을 추가 할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 emulated_roku:
   servers:
@@ -160,7 +161,7 @@ Default value: </p>
 </dd>
 </dl>
 </div>
-<p>시작한 후 에뮬레이트 된 Roku가 Home Assistant 인스턴스의 지정된 포트에 도달 할 수 있는지 확인할 수 있습니다 (예: <code>http://192.168.1.101:8060/</code>).</p>
+<p>시작한 후 에뮬레이트 된 Roku가 Home Assistant 인스턴스의 지정된 포트에 도달할 수 있는지 확인할 수 있습니다 (예: <code>http://192.168.1.101:8060/</code>).</p>
 <h2>
 <a class="title-link" name="events" href="#events"></a> Events</h2>
 <h3>
@@ -265,7 +266,7 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 문제 해결</h2>
-<p>광고된 IP 또는 포트를 변경하면 앱에서 에뮬레이트 된 Roku를 다시 추가해야합니다.
+<p>이미 알려진 IP 또는 포트를 변경하면 앱에서 에뮬레이트된 Roku를 다시 추가해야합니다.
 하모니를 사용할 때 장치에 도달할 수 없는 것으로 감지되면 앱은 UPnP 검색(<code>name</code>이 변경되지 않은 경우)을 통해 변경 사항을 자동으로 검색해야합니다. 또는 앱에서 연결할 수 없는 장치의 리모컨에 있는 버튼을 눌러 ‘Fix’ 페이지를 트리거하고 10 초 정도 기다린 다음 ‘Fix it’을 클릭하십시오.</p>
 <p>Known limitations:</p>
 <ul>

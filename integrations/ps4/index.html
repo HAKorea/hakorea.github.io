@@ -103,8 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/Yl_xymBz_6c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-유튜브 시청시 자막을 한글로 변환해서 보시길 권장합니다. 
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/Yl_xymBz_6c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>ps4</code> 통합구성요소로 <a href="https://www.playstation.com/en-us/explore/ps4/" rel="external nofollow">Sony PlayStation 4 console</a>을 제어할 수 있습니다</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 요구사항</h2>
@@ -133,17 +134,17 @@
 </ol>
 <ul>
 <li>
-<strong>Note:</strong> 올바른 지역을 찾으려면 <a href="#regions">Regions</a> 섹션을 참조하십시오.</li>
+<strong>Note:</strong> 자신의 지역을 찾으려면 <a href="#regions">Regions</a> 섹션을 참조하십시오.</li>
 </ul>
 <h2>
 <a class="title-link" name="---" href="#---"></a> 포트 액세스 권한 부여</h2>
-<p>PlayStation 4 연동을 위해서는 특권 포트, 특히 UDP 포트 987 및 TCP 포트 997이 올바르게 작동해야합니다. 홈어시스턴트 인스턴스의 OS에 따라 특권 포트의 수동 사용을 허용해야 할 수도 있습니다.</p>
+<p>PlayStation 4 연동을 위해서는 privilege 포트, 특히 UDP 포트 987 및 TCP 포트 997이 올바르게 작동해야합니다. 홈어시스턴트 인스턴스의 OS에 따라 privilege 포트의 수동 사용을 허용해야 할 수도 있습니다.</p>
 <div class="note warning">
-  이를 수행하기 위해 <b>Home Assistant</b> 인스턴스 자체를 <b>root</b> 또는 <b>root/sudo 권한</b>으로 실행하지 마십시오 . 이로 인해 호스트 시스템에 보안 위험이 발생합니다.
+  이를 수행하기 위해 <b>Home Assistant</b> 인스턴스 자체를 <b>root</b> 또는 <b>root/sudo 권한</b>으로 실행하지 마십시오. 이로 인해 호스트 시스템에 보안 위험이 발생합니다.
 </div>
 <p>Home Assistant를 실행하는 OS에 따라 이를 수행하는 다양한 방법이 있습니다. 특히 Home Assistant 인스턴스를 실행하는 <em>Python Interpreter</em> 는 언급된 포트에 액세스해야합니다.</p>
 <div class="note">
-<p>Home Assistant 장치가 <strong>HassOS</strong>에서 <strong>Hass.io</strong>를 실행 중인 경우 추가 설정이 필요하지 않습니다.</p>
+<p>Home Assistant 장치가 <strong>HassOS</strong>에서 <strong>Hass.io</strong>를 실행중인 경우 추가 설정이 필요하지 않습니다.</p>
 </div>
 <h3>
 <a class="title-link" name="debian-based" href="#debian-based"></a> Debian-based</h3>
@@ -185,7 +186,7 @@
 </ul>
 <h3>
 <a class="title-link" name="" href="#"></a> 도커</h3>
-<p>When running Home Assistant using Docker, make sure that the Home Assistant container is discoverable by the PS4. This can be achieved by ensuring that the Home Assistant container uses the <code>host</code> network driver (by passing <code>--net=host</code> to the container when creating, or adding <code>network_mode: "host"</code> to your compose file when using <code>docker-compose</code>).</p>
+<p>Docker를 사용하여 Home Assistant를 실행중인 경우 PS4에서 Home Assistant 컨테이너를 검색할 수 있는지 확인하십시오. 이는 Home Assistant 컨테이너가 <code>host</code> 네트워크 드라이버를 사용하도록함으로써 달성될 수 있습니다. (docker-compose를 사용할 때 <code>--net=host</code>를 컨테이너에 전달하거나 <code>network_mode: "host"</code>를 compose 파일에 추가)</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <div class="note">
@@ -249,8 +250,8 @@
 <p>PlayStation 4 통합구성요소는 현재 해당 지역의 <a href="https://store.playstation.com" rel="external nofollow">PlayStation Store</a> 데이터베이스에서 실행 중인 게임 또는 앱에 대한 정보를 가져옵니다.</p>
 <p>때때로 통합구성요소가 데이터를 전혀 얻지 못하거나 잘못된 데이터를 얻을 수 있습니다. 이 문제를 해결하기 위해 통합구성요소를 통한 텍스트 편집기를 통한 수동 편집이 가능합니다.</p>
 <h3>
-<a class="title-link" name="-formatting" href="#-formatting"></a> 서식 (Formatting)</h3>
-<p>통합구성요소는 PlayStation Store에서 데이터를 검색 할 때 <code>configuration.yaml</code> 파일이 있는 디렉토리와 동일한 디렉토리에 <code>.ps4-games.json</code> 이라는 JSON 파일에 저장합니다. 파일의 첫 번째 줄은 <code>{</code>이고 마지막 줄은 <code>}</code>입니다. 이 줄 사이에는 통합구성요소가 찾은 각 게임이나 앱에 대해 들여쓰기 된 항목이 있습니다. 다음 예와 표를 참조하십시오</p>
+<a class="title-link" name="formatting" href="#formatting"></a> Formatting</h3>
+<p>통합구성요소는 PlayStation Store에서 데이터를 검색할 때 <code>configuration.yaml</code> 파일이 있는 디렉토리와 동일한 디렉토리에 <code>.ps4-games.json</code> 이라는 JSON 파일에 저장합니다. 파일의 첫 번째 줄은 <code>{</code>이고 마지막 줄은 <code>}</code>입니다. 이 줄 사이에는 통합구성요소가 찾은 각 게임이나 앱에 대해 들여쓰기된 항목이 있습니다. 다음 예와 표를 참조하십시오</p>
 <pre><code class="language-json">{
     "CUSA00129": {
         "locked": true,
@@ -300,14 +301,14 @@
 </tbody>
 </table>
 <p>예제의 데이터는 2 개의 항목을 보여줍니다.</p>
-<p>각 항목은 제목의 SKU ID (예: <code>CUSA00000</code>)로 시작하며 값이 <code>true</code> 또는 <code>false</code> 인 <code>locked</code>라는 필드를 갖습니다. 각 항목의 기본값은 <code>false</code> 입니다. <code>locked</code>가 <code>true</code>인 경우 통합구성요소는 해당 게임 또는 앱과 관련된 데이터를 덮어 쓰지 않습니다.</p>
+<p>각 항목은 제목의 SKU ID (예: <code>CUSA00000</code>)로 시작하며 값이 <code>true</code> 또는 <code>false</code>인 <code>locked</code>라는 필드를 갖습니다. 각 항목의 기본값은 <code>false</code>입니다. <code>locked</code>가 <code>true</code>인 경우 통합구성요소는 해당 게임 또는 앱과 관련된 데이터를 덮어쓰지 않습니다.</p>
 <p><code>media_image_url</code> 값은 유효한 URL일 수 있습니다. 여기에는 홈어시스턴트 인스턴스의 <code>local directory</code>가 포함됩니다. 예제의 첫 번째 항목은 <code>config/www/</code> 디렉토리에 있는 <code>image.jpg</code>라는 파일로 연결됩니다.</p>
 <h3>
 <a class="title-link" name="--" href="#--"></a> 텍스트 편집기로 편집</h3>
 <div class="note">
-  계속하기 전에 <b>.ps4-games.json</b> 파일의 복사본을 백업하십시오. 포맷에 오류가 있으면 파일이 삭제 될 수 있습니다.
+  계속하기 전에 <b>.ps4-games.json</b> 파일의 복사본을 백업하십시오. 포맷에 오류가 있으면 파일이 삭제될 수 있습니다.
 </div>
-<p>편집하려면 텍스트 편집기에서 파일을 열고 편집하려는 게임이나 앱을 찾은 다음 변경하려는 값을 편집 한 다음 파일을 저장하십시오. 다음에 콘솔에서 게임이나 앱을 플레이 할 때 변경 사항이 나타납니다.</p>
+<p>편집하려면 텍스트 편집기에서 파일을 열고 편집하려는 게임이나 앱을 찾은 다음 변경하려는 값을 편집한 다음 파일을 저장하십시오. 다음에 콘솔에서 게임이나 앱을 플레이할 때 변경 사항이 나타납니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
@@ -341,7 +342,7 @@
 </table>
 <h3>
 <a class="title-link" name="send_command-" href="#send_command-"></a> send_command 서비스</h3>
-<p>PlayStation 4에서 버튼 누르기 에뮬레이션. PS4 Second Screen App에서 사용할 수있는 명령을 에뮬레이트합니다. 이것은 DualShock 4 컨트롤러 버튼과 혼동되지 않습니다.</p>
+<p>PlayStation 4에서 버튼 누르기 에뮬레이션. PS4 Second Screen App에서 사용할 수 있는 명령을 에뮬레이트합니다. 이것은 DualShock 4 컨트롤러 버튼과 혼동되지 않습니다.</p>
 <table>
 <thead>
 <tr>
@@ -415,7 +416,7 @@
 <a class="title-link" name="-" href="#-"></a> 문제 해결</h2>
 <h3>
 <a class="title-link" name="cover-art-" href="#cover-art-"></a> Cover Art 문제</h3>
-<p>PS4에서 표지를 표시하지 않거나 잘못된 표지를 표시하는 게임/제목을 실행중인 경우 <a href="https://github.com/ktnrg45/pyps4-2ndscreen/issues" rel="external nofollow">here</a> 에 문제를 게시하십시오 .</p>
+<p>PS4에서 표지를 표시하지 않거나 잘못된 표지를 표시하는 게임/제목을 실행중인 경우 <a href="https://github.com/ktnrg45/pyps4-2ndscreen/issues" rel="external nofollow">여기</a>에 문제를 게시하십시오 .</p>
 <p>다음 정보를 반드시 포함하십시오 :</p>
 <ul>
 <li>국가정보</li>

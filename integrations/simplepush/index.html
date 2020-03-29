@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/hZ671C1VSB4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/hZ671C1VSB4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>simplepush</code> 플랫폼은 <a href="https://simplepush.io/" rel="external nofollow">Simplepush</a>를 사용하여 Home Assistant에서 Android 장치로 알림을 전달합니다. 유사한 앱과 달리 Simplepush 앱은 등록이 필요하지 않습니다.</p>
 <p>설치에 Simplepush를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -138,7 +140,7 @@ notify:
 </span></p></dd>
 </dl>
 </div>
-<p>서비스가 작동하는지 테스트하려면 명령 줄에서 <code>curl</code> 메시지를 보내십시오.</p>
+<p>서비스가 작동하는지 테스트하려면 command line에서 <code>curl</code> 메시지를 보내십시오.</p>
 <pre><code class="language-bash">$ curl 'https://api.simplepush.io/send/device_key/title/message'
 </code></pre>
 <p>알림을 사용하려면 <a href="/getting-started/automation/">getting started with automation page</a>를 참조하십시오.</p>

@@ -103,8 +103,10 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/vKUJs1IOnTk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>The <code>xiaomi_miio</code> fan 플랫폼을 사용하면 샤오미 공기 청정기, 공기 가습기와 공기 정화기를 제어 할 수 있습니다.</p>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/vKUJs1IOnTk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>xiaomi_miio</code> fan 플랫폼을 사용하면 샤오미 공기청정기, 가습기와 공기 정화기를 제어할 수 있습니다.</p>
 <p>지원되는 장치:</p>
 <table>
 <thead>
@@ -504,8 +506,8 @@
 </ul>
 </li>
 </ul>
-<p>API 토큰을 파일 에서 사용하기 위해 <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a> 에 대한 지시사항을 따르십시오 <code>configuration.yaml</code>.</p>
-<p>Xiaomi 공기 청정기를 추가하려면, <code>configuration.yaml</code> 에 다음을 추가 하십시오.:</p>
+<p><code>configuration.yaml</code> 파일에서 API 토큰을 사용하려면 <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">Retrieving the Access Token</a>에 대한 지시 사항을 따르십시오.</p>
+<p>Xiaomi 공기청정기를 추가하려면 <code>configuration.yaml</code> 에 다음을 추가 하십시오.:</p>
 <pre><code class="language-yaml">fan:
 # Example configuration.yaml entry
   - platform: xiaomi_miio
@@ -535,15 +537,15 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="model" href="#model"></a> model</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>miio fan의 모델입니다. 해당 기기의 값을 위의 표를 참조하여 찾으세요. ( 예) <code>zhimi.airpurifier.v2</code>). 이 설정은 장치 모델 감지를 자동으로 찾는 것을 피하는 데 사용할 수 있으며 장치를 사용할 수없는 경우에 상세설정으로 권장합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>miio fan의 모델입니다. 해당 기기의 값을 위의 표를 참조하여 찾으세요. (예: <code>zhimi.airpurifier.v2</code>). 이 설정은 장치 모델 감지를 자동으로 찾는 것을 피하는데 사용할 수 있으며 장치를 사용할 수 없는 경우에 상세설정으로 권장합니다.</p>
 </span></p></dd>
 </dl>
 </div>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 플랫폼 서비스</h2>
 <h3>
-<a class="title-link" name="service-fanset_speed" href="#service-fanset_speed"></a> Service fan.set_speed</h3>
-<p>팬 속도 / 작동 모드를 설정하십시오.</p>
+<a class="title-link" name="fanset_speed-" href="#fanset_speed-"></a> fan.set_speed 서비스</h3>
+<p>팬 속도/작동 모드를 설정하십시오.</p>
 <table>
 <thead>
 <tr>
@@ -556,17 +558,17 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 <tr>
 <td><code>speed</code></td>
 <td>no</td>
-<td>fan 속도. 유효한 값은 ‘Auto’, ‘Silent’, ‘Favorite’및 ‘Idle’입니다.</td>
+<td>fan 속도. 유효한 값은 ‘Auto’, ‘Silent’, ‘Favorite’, ‘Idle’입니다.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_buzzer_on-air-purifier-pro-" href="#service-xiaomi_miiofan_set_buzzer_on-air-purifier-pro-"></a> Service xiaomi_miio.fan_set_buzzer_on (Air Purifier Pro 제외)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_buzzer_on--air-purifier-pro-" href="#xiaomi_miiofan_set_buzzer_on--air-purifier-pro-"></a> xiaomi_miio.fan_set_buzzer_on 서비스 (Air Purifier Pro 제외)</h3>
 <p>부저를 켭니다.</p>
 <table>
 <thead>
@@ -580,12 +582,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_buzzer_off-air-purifier-pro-" href="#service-xiaomi_miiofan_set_buzzer_off-air-purifier-pro-"></a> Service xiaomi_miio.fan_set_buzzer_off (Air Purifier Pro 제외)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_buzzer_off--air-purifier-pro-" href="#xiaomi_miiofan_set_buzzer_off--air-purifier-pro-"></a> xiaomi_miio.fan_set_buzzer_off 서비스 (Air Purifier Pro 제외)</h3>
 <p>부저를 끕니다.</p>
 <table>
 <thead>
@@ -599,12 +601,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_led_on-air-purifiers--" href="#service-xiaomi_miiofan_set_led_on-air-purifiers--"></a> Service xiaomi_miio.fan_set_led_on (Air Purifiers 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_led_on--air-purifiers-" href="#xiaomi_miiofan_set_led_on--air-purifiers-"></a> xiaomi_miio.fan_set_led_on 서비스 (Air Purifiers만 해당)</h3>
 <p>LED를 켭니다.</p>
 <table>
 <thead>
@@ -618,12 +620,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_led_off-air-purifiers--" href="#service-xiaomi_miiofan_set_led_off-air-purifiers--"></a> Service xiaomi_miio.fan_set_led_off (Air Purifiers 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_led_off--air-purifiers-" href="#xiaomi_miiofan_set_led_off--air-purifiers-"></a> xiaomi_miio.fan_set_led_off 서비스 (Air Purifiers만 해당)</h3>
 <p>LED를 끕니다.</p>
 <table>
 <thead>
@@ -637,12 +639,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_child_lock_on" href="#service-xiaomi_miiofan_set_child_lock_on"></a> Service xiaomi_miio.fan_set_child_lock_on</h3>
+<a class="title-link" name="xiaomi_miiofan_set_child_lock_on-" href="#xiaomi_miiofan_set_child_lock_on-"></a> xiaomi_miio.fan_set_child_lock_on 서비스</h3>
 <p>아동용 잠금 장치를 켭니다.</p>
 <table>
 <thead>
@@ -656,12 +658,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_child_lock_off" href="#service-xiaomi_miiofan_set_child_lock_off"></a> Service xiaomi_miio.fan_set_child_lock_off</h3>
+<a class="title-link" name="xiaomi_miiofan_set_child_lock_off-" href="#xiaomi_miiofan_set_child_lock_off-"></a> xiaomi_miio.fan_set_child_lock_off 서비스</h3>
 <p>아동용 잠금 장치를 끕니다.</p>
 <table>
 <thead>
@@ -675,12 +677,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_led_brightness-air-purifier-2s-air-purifier-pro-" href="#service-xiaomi_miiofan_set_led_brightness-air-purifier-2s-air-purifier-pro-"></a> Service xiaomi_miio.fan_set_led_brightness (Air Purifier 2S, Air Purifier Pro 제외)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_led_brightness--air-purifier-2s-air-purifier-pro-" href="#xiaomi_miiofan_set_led_brightness--air-purifier-2s-air-purifier-pro-"></a> xiaomi_miio.fan_set_led_brightness 서비스 (Air Purifier 2S, Air Purifier Pro 제외)</h3>
 <p>LED 밝기를 설정하십시오. 지원되는 값은 0 (Bright), 1 (Dim), 2 (Off)입니다.</p>
 <table>
 <thead>
@@ -694,7 +696,7 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 <tr>
 <td><code>brightness</code></td>
@@ -704,7 +706,7 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_favorite_level-air-purifiers--" href="#service-xiaomi_miiofan_set_favorite_level-air-purifiers--"></a> Service xiaomi_miio.fan_set_favorite_level (Air Purifiers 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_favorite_level--air-purifiers--" href="#xiaomi_miiofan_set_favorite_level--air-purifiers--"></a> xiaomi_miio.fan_set_favorite_level 서비스 (Air Purifiers 만 해당)</h3>
 <p>작동 모드의 즐겨찾기를 단계별 “favorite”로 설정하십시오.</p>
 <table>
 <thead>
@@ -728,7 +730,7 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_auto_detect_on-air-purifier-2s-and-air-purifier-pro--" href="#service-xiaomi_miiofan_set_auto_detect_on-air-purifier-2s-and-air-purifier-pro--"></a> Service xiaomi_miio.fan_set_auto_detect_on (Air Purifier 2S and Air Purifier Pro 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_auto_detect_on--air-purifier-2s-air-purifier-pro-" href="#xiaomi_miiofan_set_auto_detect_on--air-purifier-2s-air-purifier-pro-"></a> xiaomi_miio.fan_set_auto_detect_on 서비스 (Air Purifier 2S, Air Purifier Pro만 해당)</h3>
 <p>자동 감지를 켭니다.</p>
 <table>
 <thead>
@@ -742,12 +744,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_auto_detect_off-air-purifier-2s-and-air-purifier-pro--" href="#service-xiaomi_miiofan_set_auto_detect_off-air-purifier-2s-and-air-purifier-pro--"></a> Service xiaomi_miio.fan_set_auto_detect_off (Air Purifier 2S and Air Purifier Pro 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_auto_detect_off--air-purifier-2s-and-air-purifier-pro-" href="#xiaomi_miiofan_set_auto_detect_off--air-purifier-2s-and-air-purifier-pro-"></a> xiaomi_miio.fan_set_auto_detect_off 서비스 (Air Purifier 2S and Air Purifier Pro만 해당)</h3>
 <p>자동 감지를 끕니다.</p>
 <table>
 <thead>
@@ -761,12 +763,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_learn_mode_on-air-purifier-2--" href="#service-xiaomi_miiofan_set_learn_mode_on-air-purifier-2--"></a> Service xiaomi_miio.fan_set_learn_mode_on (Air Purifier 2 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_learn_mode_on--air-purifier-2-" href="#xiaomi_miiofan_set_learn_mode_on--air-purifier-2-"></a> xiaomi_miio.fan_set_learn_mode_on 서비스 (Air Purifier 2만 해당)</h3>
 <p>학습 모드를 켭니다.</p>
 <table>
 <thead>
@@ -780,12 +782,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_learn_mode_off-air-purifier-2--" href="#service-xiaomi_miiofan_set_learn_mode_off-air-purifier-2--"></a> Service xiaomi_miio.fan_set_learn_mode_off (Air Purifier 2 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_learn_mode_off--air-purifier-2-" href="#xiaomi_miiofan_set_learn_mode_off--air-purifier-2-"></a> xiaomi_miio.fan_set_learn_mode_off 서비스 (Air Purifier 2만 해당)</h3>
 <p>학습 모드를 끕니다.</p>
 <table>
 <thead>
@@ -799,12 +801,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_volume-air-purifier-pro--" href="#service-xiaomi_miiofan_set_volume-air-purifier-pro--"></a> Service xiaomi_miio.fan_set_volume (Air Purifier Pro 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_volume--air-purifier-pro-" href="#xiaomi_miiofan_set_volume--air-purifier-pro-"></a> xiaomi_miio.fan_set_volume 서비스 (Air Purifier Pro만 해당)</h3>
 <p>음량을 설정하십시오.</p>
 <table>
 <thead>
@@ -823,12 +825,12 @@ Default value: </p>
 <tr>
 <td><code>volume</code></td>
 <td>no</td>
-<td>Volume, between 0 and 100.</td>
+<td>볼륨, 0 ~ 100</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_reset_filter-air-purifier-2--" href="#service-xiaomi_miiofan_reset_filter-air-purifier-2--"></a> Service xiaomi_miio.fan_reset_filter (Air Purifier 2 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_reset_filter--air-purifier-2-" href="#xiaomi_miiofan_reset_filter--air-purifier-2-"></a> xiaomi_miio.fan_reset_filter 서비스 (Air Purifier 2만 해당)</h3>
 <p>필터 수명과 사용량을 재설정하십시오.</p>
 <table>
 <thead>
@@ -842,12 +844,12 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_extra_features-air-purifier--" href="#service-xiaomi_miiofan_set_extra_features-air-purifier--"></a> Service xiaomi_miio.fan_set_extra_features (Air Purifier 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_extra_features--air-purifier-" href="#xiaomi_miiofan_set_extra_features--air-purifier-"></a> xiaomi_miio.fan_set_extra_features 서비스 (Air Purifier만 해당)</h3>
 <p>추가 기능을 설정하십시오.</p>
 <table>
 <thead>
@@ -871,7 +873,7 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-xiaomi_miiofan_set_target_humidity-air-humidifier--" href="#service-xiaomi_miiofan_set_target_humidity-air-humidifier--"></a> Service xiaomi_miio.fan_set_target_humidity (Air Humidifier 만 해당)</h3>
+<a class="title-link" name="xiaomi_miiofan_set_target_humidity--air-humidifier-" href="#xiaomi_miiofan_set_target_humidity--air-humidifier-"></a> xiaomi_miio.fan_set_target_humidity 서비스 (Air Humidifier만 해당)</h3>
 <p>목표 습도를 설정하십시오.</p>
 <table>
 <thead>
@@ -885,17 +887,17 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 <tr>
 <td><code>humidity</code></td>
 <td>no</td>
-<td>목표습도. 설정 허용값은 30, 40, 50, 60, 70 및 80입니다.</td>
+<td>목표습도. 설정 허용값은 30, 40, 50, 60, 70 ,80.</td>
 </tr>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-fanxiaomi_miio_set_dry_on-air-humidifier-ca-and-cb" href="#service-fanxiaomi_miio_set_dry_on-air-humidifier-ca-and-cb"></a> Service fan.xiaomi_miio_set_dry_on (Air Humidifier CA and CB)</h3>
+<a class="title-link" name="fanxiaomi_miio_set_dry_on--air-humidifier-ca-cb" href="#fanxiaomi_miio_set_dry_on--air-humidifier-ca-cb"></a> fan.xiaomi_miio_set_dry_on 서비스 (Air Humidifier CA, CB)</h3>
 <p>건조 모드를 켭니다.</p>
 <table>
 <thead>
@@ -914,7 +916,7 @@ Default value: </p>
 </tbody>
 </table>
 <h3>
-<a class="title-link" name="service-fanxiaomi_miio_set_dry_off-air-humidifier-ca-and-cb" href="#service-fanxiaomi_miio_set_dry_off-air-humidifier-ca-and-cb"></a> Service fan.xiaomi_miio_set_dry_off (Air Humidifier CA and CB)</h3>
+<a class="title-link" name="fanxiaomi_miio_set_dry_off--air-humidifier-ca-cb" href="#fanxiaomi_miio_set_dry_off--air-humidifier-ca-cb"></a> fan.xiaomi_miio_set_dry_off 서비스 (Air Humidifier CA, CB)</h3>
 <p>건조 모드를 끄십시오.</p>
 <table>
 <thead>
@@ -928,7 +930,7 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>특정 Xiaomi miIO fan entity에서만 작동합니다.</td>
+<td>특정 Xiaomi miIO fan entity에서만 작동.</td>
 </tr>
 </tbody>
 </table>

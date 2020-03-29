@@ -103,11 +103,9 @@
   <hr class="divider">
   
 
-  <p>The <code>w800rf32</code> integration supports W800RF32 devices by <a href="http://www.wgldesigns.com/w800.html" rel="external nofollow">WGL Designs</a> which
-communicate in the frequency range of 310MHz or if you are outside Canada or the U.S., 433.92 MHz.</p>
-<p>The W800 family of RF receivers are designed to receive X10 RF signals generated from X10 products: Palm Pad
-remotes, key chain remotes, Hawkeye motion detectors, and many, many other X10 RF devices.</p>
-<p>To enable W800rf32 in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <p><code>w800rf32</code> 통합구성요소는 <a href="http://www.wgldesigns.com/w800.html" rel="external nofollow">WGL Designs</a>에 의해 W800RF32 장치를 지원하며 310MHz의 주파수 범위에서 통신하거나 캐나다 또는 미국 이외의 지역 인 경우 433.92 MHz입니다.</p>
+<p>W800 RF 수신기 제품군은 X10 제품에서 생성된 X10 RF 신호를 수신하도록 설계되었습니다 : Palm Pad remotes, key chain remotes, Hawkeye motion detector 및 기타 여러 X10 RF 장치.</p>
+<p>설치시 W800rf32를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 w800rf32:
   device: PATH_TO_DEVICE
@@ -124,10 +122,10 @@ w800rf32:
 </div>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>The <code>w800rf32</code> platform supports X10 RF binary sensors such as Palm Pad remotes, key chain remotes, Hawkeye motion detectors, and many, many other X10 RF devices. Some that have specifically been used with this are the KR19A keychain, MS16A motion detector and the RSS18 four button wall mount keypad.</p>
+<p><code>w800rf32</code> 플랫폼은 Palm Pad remotes, key chain remotes, Hawkeye motion detectors 및 기타 많은 X10 RF 장치와 같은 X10 RF 이진 센서를 지원합니다. 여기에 특별히 사용된 일부는 KR19A 키 체인, MS16A 동작 감지기 및 RSS18 4 버튼 월마운트 키패드입니다.</p>
 <h2>
-<a class="title-link" name="setting-up-your-devices" href="#setting-up-your-devices"></a> Setting up your devices</h2>
-<p>Once you have set up your <a href="/integrations/w800rf32/">w800rf32 hub</a>, add the binary sensors to your <code>configuration.yaml</code>:</p>
+<a class="title-link" name="-" href="#-"></a> 장치 설정</h2>
+<p><a href="/integrations/w800rf32/">w800rf32 hub</a>를 설정한 후에 바이너리 센서를 <code>configuration.yaml</code>에 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 binary_sensor:
   - platform: w800rf32
@@ -161,11 +159,11 @@ binary_sensor:
 </dl></dd>
 </dl>
 </div>
-<p>Binary sensors have only two states, “on” and “off”. Many door or window opening sensors will send a signal each time the door/window is open or closed. However, depending on their hardware or on their purpose, some sensors are only able to signal their “on” state:</p>
+<p>이진 센서는 “on”과 “off”의 두 가지 상태만 있습니다. 많은 door 또는 window opening sensors는 door/window이 열리거나 닫힐 때마다 신호를 보냅니다. 그러나 하드웨어 또는 목적에 따라 일부 센서는 “on”상태만 신호를 보낼 수 있습니다. :</p>
 <ul>
-<li>Most motion sensors send a signal each time they detect motion. They stay “on” for a few seconds and go back to sleep, ready to signal other motion events. Usually, they do not send a signal when they go back to sleep.</li>
+<li>대부분의 모션 센서는 모션을 감지할 때마다 신호를 보냅니다. 이 센서는 몇 초 동안 “on”하고 있고 다른 동작 이벤트를 알리기 위해 다시 잠들게됩니다. 일반적으로 다시 잠들때 신호를 보내지 않습니다.</li>
 </ul>
-<p>For those devices, use the <em>off_delay</em> parameter. It defines a delay after which a device will go back to an “Off” state. That “Off” state will be fired internally by Home Assistant, just as if the device fired it by itself. If a motion sensor can only send signals once every 5 seconds, sets the <em>off_delay</em> parameter to <em>seconds: 5</em>.</p>
+<p>해당 장치의 경우 <em>off_delay</em> 매개 변수를 사용합니다. 장치가 “Off” 상태로 돌아가는 지연(delay)을 정의합니다. “Off” 상태는 마치 장치가 자체적으로 작동하는 것처럼 홈어시스턴트에 의해 내부적으로 실행됩니다. 모션 센서가 5 초마다 한 번만 신호를 보낼 수 있는 경우 <em>off_delay</em> 매개 변수를 <em>seconds: 5</em>로 설정하십시오.</p>
 
 
 </article>

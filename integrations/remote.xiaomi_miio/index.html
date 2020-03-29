@@ -103,14 +103,16 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="388" src="https://www.youtube.com/embed/Y1rg0tXAqbI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>xiaomi miio</code> 원격 플랫폼을 사용하면 Xiaomi IR Remote 에서 적외선 리모콘 신호을 보낼 수 있습니다.</p>
+  <div class="videoWrapper">
+<iframe width="690" height="388" src="https://www.youtube.com/embed/Y1rg0tXAqbI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>xiaomi miio</code> 원격 플랫폼을 사용하면 Xiaomi IR Remote 에서 적외선 리모콘 신호를 보낼 수 있습니다.</p>
 <h2>
-<a class="title-link" name="setup" href="#setup"></a> Setup</h2>
-<p><code>configuration.yaml</code> 에서 사용할 API 토큰을 찾으려면 [액세스 토큰 검색] (/ integrations / vacuum.xiaomi_miio / # retrieving-the-access-token)의 지침을 따르십시오.</p>
+<a class="title-link" name="" href="#"></a> 셋업</h2>
+<p><code>configuration.yaml</code> 에서 사용할 API 토큰을 찾으려면 <a href="/integrations/vacuum.xiaomi_miio/#retrieving-the-access-token">액세스 토큰 검색</a>의 지침을 따르십시오.</p>
 <h2>
-<a class="title-link" name="configuring-the-platform" href="#configuring-the-platform"></a> Configuring the Platform</h2>
-<p>Xiaomi IR Remote를 추가하려면<code>configuration.yaml</code> 에 다음을 추가하십시오:</p>
+<a class="title-link" name="-" href="#-"></a> 플랫폼 설정하기</h2>
+<p>Xiaomi IR Remote를 추가하려면 <code>configuration.yaml</code> 에 다음을 추가하십시오:</p>
 <pre><code class="language-yaml">remote:
   - platform: xiaomi_miio
     host: 192.168.42.42
@@ -157,7 +159,7 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="command" href="#command"></a> command</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>명령어 리스트는 <a href="/integrations/remote.xiaomi_miio/#raw">raw (learned command)</a> or <a href="/integrations/remote.xiaomi_miio/#pronto-hex-code">pronto hex code</a>로 표현 가능합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>명령어 리스트는 <a href="/integrations/remote.xiaomi_miio/#raw">raw (learned command)</a> 혹은 <a href="/integrations/remote.xiaomi_miio/#pronto-hex-code">pronto hex code</a>로 표현 가능합니다.</p>
 </span></p></dd>
 </dl></dd>
 </dl>
@@ -200,7 +202,7 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="--" href="#--"></a> 명령어 타입 종류</h2>
-<p>The Xiaomi IR Remote Platform currently supports two different formats for IR codes.</p>
+<p>Xiaomi IR Remote Platform은 현재 IR 코드에 대해 서로 다른 두 가지 형식을 지원합니다.</p>
 <h3>
 <a class="title-link" name="raw" href="#raw"></a> Raw</h3>
 <p>raw 명령어는 <a href="/integrations/remote.xiaomi_miio/#xiaomi_miioremote_learn_command"><code>xiaomi_miio.remote_learn_command</code></a>를 통해서 배웁니다.</p>
@@ -232,13 +234,13 @@ Default value: </p>
 <p>Xiaomi IR Remote Platform은 두 가지 서비스가 등록 가능 합니다.</p>
 <h3>
 <a class="title-link" name="remotesend_command" href="#remotesend_command"></a> remote.send_command</h3>
-<p>식별자를 사용하여 명명 된 명령을 보내거나 [명령 유형] (/ integrations / remote.xiaomi_miio / # command-types)에 정의 된 두 가지 유형 중 하나로 명령을 보낼 수 있습니다.</p>
+<p>식별자를 사용하여 명명된 명령을 보내거나 <a href="/integrations/remote.xiaomi_miio/#command-types">명령 유형</a>에 정의된 두 가지 유형 중 하나로 명령을 보낼 수 있습니다.</p>
 <h3>
 <a class="title-link" name="xiaomi_miioremote_learn_command" href="#xiaomi_miioremote_learn_command"></a> xiaomi_miio.remote_learn_command</h3>
 <p>새로운 명령을 배우는 데 사용됩니다.</p>
 <p>학습 프로세스를 시작하려면 Xiaomi IR Remote의 entity_id를 사용하십시오.</p>
-<p><code>slot</code> 및 <code>timeout</code> 을 지정할 수 있지만 동일한 슬롯에 대해 학습 된 여러 명령을 덮어 쓰더라도 <a href="/integrations/remote.xiaomi_miio/#remotesend_command"><code>remote.send_command</code></a> 를 사용하여 계속 보낼 수 있습니다.</p>
-<p>명령을 학습 한 후 Overview에서 base64 명령문자열을 notification으로 찾을 수 있습니다. 명령문자열을 마우스 왼쪽 버튼으로 클릭하고 복사 옵션을 선택하여 해당 명령문자열을 복사 할 수 있습니다.</p>
+<p><code>slot</code> 및 <code>timeout</code> 을 지정할 수 있지만 동일한 슬롯에 대해 학습된 여러 명령을 덮어 쓰더라도 <a href="/integrations/remote.xiaomi_miio/#remotesend_command"><code>remote.send_command</code></a> 를 사용하여 계속 보낼 수 있습니다.</p>
+<p>명령을 학습한 후 Overview에서 base64 명령문자열을 notification으로 찾을 수 있습니다. 명령문자열을 마우스 왼쪽 버튼으로 클릭하고 복사 옵션을 선택하여 해당 명령문자열을 복사할 수 있습니다.</p>
 
 
 </article>

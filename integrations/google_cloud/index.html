@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p><code>google_cloud</code> 플랫폼을 사용하면 <a href="https://cloud.google.com/" rel="external nofollow">구글 클라우드 플랫폼</a> API를 사용하여 홈어시스턴트에 통합 할 수 있습니다.</p>
+  <p><code>google_cloud</code> 플랫폼을 사용하면 <a href="https://cloud.google.com/" rel="external nofollow">구글 클라우드 플랫폼</a> API를 사용하여 홈어시스턴트에 연동할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="-configuration" href="#-configuration"></a> 설정 (Configuration)</h2>
-<p>구글 클라우드 플랫폼을 사용하려면 사용할 [<code>API 키</code>] (# acquire-an-api-key) 파일의 <code>config</code> 디렉토리 상대 경로를 제공해야합니다. <code>config</code> 폴더 아래에 놓고 <code>configuration.yaml</code>의 key_file 매개 변수를 설정하십시오</p>
+<p>구글 클라우드 플랫폼을 사용하려면 사용할 <a href="#acquire-an-api-key"><code>API 키</code></a> 파일의 <code>config</code> 디렉토리 상대 경로를 제공해야합니다. <code>config</code> 폴더 아래에 놓고 <code>configuration.yaml</code>의 key_file 매개 변수를 설정하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tts:
   - platform: google_cloud
@@ -114,7 +114,7 @@ tts:
 </code></pre>
 <h2>
 <a class="title-link" name="api--" href="#api--"></a> API 키 발급받기</h2>
-<p>해당 문서에 설명 된 API 키 발급 프로세스 :</p>
+<p>해당 문서에 설명된 API 키 발급 프로세스 :</p>
 <ul>
 <li><a href="https://cloud.google.com/text-to-speech/docs/quickstart-protocol" rel="external nofollow">Text-to-Speech</a></li>
 <li><a href="https://cloud.google.com/speech-to-text/docs/quickstart-protocol" rel="external nofollow">Speech-to-Text</a></li>
@@ -147,18 +147,16 @@ tts:
 <ol>
 <li>
 <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey" rel="external nofollow">this link</a>를 방문하십시오.</li>
-<li>From the <code>Service account</code> list, select <code>New service account</code>.</li>
 <li>
 <code>Service account</code> 목록에서 <code>New service account</code> 을 선택하십시오.</li>
-<li>In the <code>Service account name</code> field, enter any name.</li>
 <li>
 <code>Service account name</code> 필드에 이름을 입력하십시오.</li>
 </ol>
 <p>텍스트 음성 변환 API 키를 요청하는 경우 :</p>
 <ol start="4">
-<li>역할(Role) 목록에서 값을 선택하지 마십시오. <strong>이 서비스에 액세스하는 데 역할(Role)이 필요하지 않습니다</strong>.</li>
+<li>Role 목록에서 값을 선택하지 마십시오. <strong>이 서비스에 액세스하는데 Role이 필요하지 않습니다</strong>.</li>
 <li>
-<code>Create</code> 를 클릭. 이 서비스 계정에는 역할(Role)이 없다는 경고 메시지가 나타납니다.</li>
+<code>Create</code>를 클릭. 이 서비스 계정에는 Role이 없다는 경고 메시지가 나타납니다.</li>
 <li>
 <code>Create without role</code>을 클릭. <code>API 키</code>가 포함 된 JSON 파일이 컴퓨터에 다운로드됩니다..</li>
 </ol>
@@ -169,7 +167,7 @@ tts:
 <p><a href="https://cloud.google.com/text-to-speech/" rel="external nofollow">구글 클라우드 Text-to-Speech</a>는 20 개 이상의 언어 및 변형에서 100 개 이상의 음성으로 텍스트를 사람과 유사한 음성으로 변환합니다. 이 기술은 음성 합성 (WaveNet)과 Google의 강력한 신경망에 대한 혁신적인 연구를 적용하여 고음질 오디오를 제공합니다. 이렇게 사용하기 쉬운 API를 사용하면 고객 서비스, 장치 상호 작용 및 기타 응용 프로그램을 변화시키는 사용자와 활발한 상호 작용을 만들 수 있습니다.</p>
 <h3>
 <a class="title-link" name="-pricing" href="#-pricing"></a> 가격 (Pricing)</h3>
-<p>Cloud Text-to-Speech API는 서비스로 전송되는 오디오로 합성 할 문자 수를 기준으로 매월 가격이 책정됩니다.</p>
+<p>Cloud Text-to-Speech API는 서비스로 전송되는 오디오로 합성할 문자 수를 기준으로 매월 가격이 책정됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -204,7 +202,7 @@ tts:
 <dt>
 <a class="title-link" name="language" href="#language"></a> language</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>음성의 기본 언어는 <code>en-US</code>. 지원되는 언어, 성별 및 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>. 따라서 문서화되지 않았지만 지원되는 언어가 추가로 있습니다. (드롭다운을 <a href="https://cloud.google.com/text-to-speech/#streaming_demo_section" rel="external nofollow">here</a>).</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>음성의 기본 언어는 <code>en-US</code>. 지원되는 언어, 성별, 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">여기</a>를 참조. 따라서 문서화되지 않았지만 지원되는 언어가 추가로 있습니다. (<a href="https://cloud.google.com/text-to-speech/#streaming_demo_section" rel="external nofollow">여기</a>드롭다운을 참조).</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -213,7 +211,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="gender" href="#gender"></a> gender</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>음성의 기본 성별은 <code>male</code>. 지원되는 언어, 성별 및 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>음성의 기본 성별은 <code>male</code>. 지원되는 언어, 성별, 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">여기</a>를 참조.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -221,12 +219,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="voice" href="#voice"></a> voice</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 목소리는 <code>en-US-Wavenet-F</code>. 지원되는 언어, 성별 및 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">here</a>. <strong>중요! 이 매개 변수는 설정된 경우 <code>language</code> 및 <code>gender</code> 매개 변수를 대체합니다.</strong>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 목소리는 <code>en-US-Wavenet-F</code>. 지원되는 언어, 성별, 음성은 <a href="https://cloud.google.com/text-to-speech/docs/voices" rel="external nofollow">여기</a>를 참조. <strong>중요! 이 매개 변수는 설정된 경우 <code>language</code>, <code>gender</code> 매개 변수를 대체합니다.</strong>.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="encoding" href="#encoding"></a> encoding</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 오디오 인코더. 지원되는 인코딩은 <code>ogg_opus</code>, <code>mp3</code> 그리고 <code>linear16</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 오디오 인코더. 지원되는 인코딩은 <code>ogg_opus</code>, <code>mp3</code>, <code>linear16</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -244,7 +242,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="pitch" href="#pitch"></a> pitch</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[-20.0, 20.0] 범위에서 음색의 기본 피치. 20은 원래 피치에서 20 반음이 증가 함을 의미합니다. -20은 원래 피치에서 20 반음의 감소를 의미합니다.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[-20.0, 20.0] 범위에서 음색의 기본 피치. 20은 원래 피치에서 20 반음이 증가함을 의미합니다. -20은 원래 피치에서 20 반음의 감소를 의미합니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -253,7 +251,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="gain" href="#gain"></a> gain</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[-96.0, 16.0] 범위에서 음색의 기본 볼륨 게인 (dB)입니다.설정하지 않거나 0.0 (dB) 값으로 설정하면 정상적인 기본 신호 진폭에서 재생됩니다. -6.0 (dB) 값은 일반 기본 신호 진폭의 진폭의 약 절반에서 재생됩니다. +6.0 (dB) 값은 일반 기본 신호 진폭의 진폭의 약 2 배로 재생됩니다. 일반적으로 이보다 큰 값은 효과적으로 음량이 증가하지 않으므로 +10 (dB)을 초과하지 않는 것이 좋습니다.</p>
+<p class="desc"><span class="type">(<span class="float">float</span>)</span><span class="required">(Optional)</span><span class="description"><p>[-96.0, 16.0] 범위에서 음색의 기본 볼륨 게인 (dB)입니다.설정하지 않거나 0.0 (dB) 값으로 설정하면 정상적인 기본 신호 진폭에서 재생됩니다. -6.0 (dB) 값은 일반 기본 신호 진폭의 약 절반에서 재생됩니다. +6.0 (dB) 값은 일반 기본 신호 진폭의 약 2 배로 재생됩니다. 일반적으로 이보다 큰 값은 효과적으로 음량이 증가하지 않으므로 +10 (dB)을 초과하지 않는 것이 좋습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -262,7 +260,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="profiles" href="#profiles"></a> profiles</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>텍스트에 음성으로 (포스트 합성된) 적용되는 ‘오디오 효과’ 프로파일을 선택하는 식별자입니다. 효과는 주어진 순서대로 서로 그 위에 적용됩니다. 지원되는 프로필 ID는 <a href="https://cloud.google.com/text-to-speech/docs/audio-profiles" rel="external nofollow">here</a>에 나열되어 있습니다.</p>
+<p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>텍스트에 음성으로 (포스트 합성된) 적용되는 ‘오디오 효과’ 프로파일을 선택하는 식별자입니다. 효과는 주어진 순서대로 서로 그 위에 적용됩니다. 지원되는 프로필 ID는 <a href="https://cloud.google.com/text-to-speech/docs/audio-profiles" rel="external nofollow">여기</a>에 나열되어 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -271,7 +269,7 @@ Default value: </p>
 </dl>
 </div>
 <h3>
-<a class="title-link" name="---full-configuration-example" href="#---full-configuration-example"></a> 전체 설정의 예 (Full configuration example)</h3>
+<a class="title-link" name="--" href="#--"></a> 전체 설정의 예</h3>
 <p>Google 클라우드 텍스트 음성 변환 설정은 다음과 같습니다. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 tts:

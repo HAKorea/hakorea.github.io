@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/ck6UGL8G7Cs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/ck6UGL8G7Cs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p>HEOS 통합구성요소는 스피커, 앰프 및 수신기 (Denon 및 Marantz)와 같은 <a href="http://heosbydenon.denon.com" rel="external nofollow">HEOS</a> 가능 제품에 대한 지원을 Home Assistant에 추가합니다. 현재 기능은 다음과 같습니다.</p>
 <ul>
 <li>각 장치는 미디어 플레이어 엔티티로 표시됩니다</li>
@@ -114,7 +116,7 @@
 </ul>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p><a href="/integrations/discovery">discovery</a> 통합구성요소가 활성화 되면 HEOS 장치가 자동으로 검색되고 설정됩니다 . 또는 프론트 엔드 제어판 통합 페이지를 통해 또는 <code>configuration.yaml</code> 파일에 다음을 추가하여 수동으로 연동을 설정할 수 있습니다 .</p>
+<p><a href="/integrations/discovery">discovery</a> 통합구성요소가 활성화 되면 HEOS 장치가 자동으로 검색되고 설정됩니다. 또는 프론트 엔드 제어판 통합구성요소 페이지를 통해 또는 <code>configuration.yaml</code> 파일에 다음을 추가하여 수동으로 연동을 설정할 수 있습니다 .</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 heos:
   host: IP_ADDRESS
@@ -200,7 +202,7 @@ heos:
 </table>
 <h4>
 <a class="title-link" name="--" href="#--"></a> 플레이 리스트 재생</h4>
-<p><code>media_player.play_media</code> 서비스를 통해 HEOS 플레이 리스트를 재생할 수 있습니다 . 서비스 데이터 페이로드 예 :</p>
+<p><code>media_player.play_media</code> 서비스를 통해 HEOS 플레이 리스트를 재생할 수 있습니다. 서비스 데이터 페이로드 예 :</p>
 <pre><code class="language-json">{
   "entity_id": "media_player.office",
   "media_content_type": "playlist",
@@ -233,7 +235,7 @@ heos:
 </table>
 <h4>
 <a class="title-link" name="--" href="#--"></a> 빠른 선택 재생</h4>
-<p><code>media_player.play_media</code> 서비스를 통해 nubmer 또는 이름으로 HEOS Quick Select를 재생할 수 있습니다 . 서비스 데이터 페이로드 예 :</p>
+<p><code>media_player.play_media</code> 서비스를 통해 nubmer 또는 이름으로 HEOS Quick Select를 재생할 수 있습니다. 서비스 데이터 페이로드 예 :</p>
 <pre><code class="language-json">{
   "entity_id": "media_player.office",
   "media_content_type": "quick_select",
@@ -318,9 +320,9 @@ heos:
 <a class="title-link" name="-" href="#-"></a> 즐겨찾기 누락</h3>
 <p>HEOS 컨트롤러가 HEOS 계정에 로그인하지 않으면 HEOS 즐겨찾기가 미디어 플레이어 소스 선택에 채워지지 않고 <code>favorite</code> 및 <code>playlist</code>에 대한 <code>media_player.play_media</code> 서비스가 실패합니다. 또한 시작시 다음 경고가 기록됩니다. :</p>
 <blockquote>
-<p>IP_ADDRESS가 HEOS 계정에 로그인되어 있지 않으며 HEOS 즐겨 찾기를 검색 할 수 없습니다. ‘heos.sign_in’ 서비스를 사용하여 HEOS 계정에 로그인하십시오.</p>
+<p>IP_ADDRESS가 HEOS 계정에 로그인되어 있지 않으며 HEOS 즐겨 찾기를 검색할 수 없습니다. ‘heos.sign_in’ 서비스를 사용하여 HEOS 계정에 로그인하십시오.</p>
 </blockquote>
-<p>이 문제를 해결하려면 <code>heos.sign_in</code> 서비스를 사용하여 위에서 설명한대로 계정에 컨트롤러에 서명하십시오. 계정 자격 증명이 유효한 동안 컨트롤러는 로그인 상태를 유지하므로이 작업은 한 번만 수행하면됩니다.</p>
+<p>이 문제를 해결하려면 <code>heos.sign_in</code> 서비스를 사용하여 위에서 설명한대로 계정에 컨트롤러에 서명하십시오. 계정 자격 증명이 유효한 동안 컨트롤러는 로그인 상태를 유지하므로 이 작업은 한 번만 수행하면됩니다.</p>
 
 
 </article>

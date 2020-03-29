@@ -106,11 +106,11 @@
   <p><code>updater</code> 바이너리 센서는 매일 새로운 릴리스를 확인합니다. 업데이트가 가능하면 상태가 “on”이 됩니다. 그렇지 않으면 상태가 “off”가 됩니다. 최신 버전과 릴리스 정보에 대한 링크는 Updater의 속성입니다. <a href="/hassio/">Hass.io</a>에는 자체 출시 일정이 있으므로 <strong>Hass.io에서 이 센서를 사용하는 것은 의미가 없습니다.</strong></p>
 <p>updater 통합구성요소는 실행중인 Home Assistant 인스턴스 및 해당 환경에 대한 기본 정보도 수집합니다. 이 정보에는 현재 홈어시스턴트 버전, 시간대, Python 버전 및 운영 체제 정보가 포함됩니다. 식별 가능한 정보 (예: IP 주소, GPS 좌표 등)는 수집되지 않습니다. 개인 정보가 걱정된다면 Python <a href="https://github.com/home-assistant/home-assistant/tree/dev/homeassistant/components/updater" rel="external nofollow">source code</a>를 면밀히 조사해보십시오.</p>
 <div class="note">
-<p><code>updater</code> 바이너리 센서는 시작 후 첫 번째 업데이트를 수행 할 때까지 1 시간 동안 기다립니다. 이 기간 동안 <code>unavailable</code> 상태가됩니다. 그런 다음 하루에 한 번 새로운 릴리스를 확인합니다.</p>
+<p><code>updater</code> 바이너리 센서는 시작 후 첫 번째 업데이트를 수행할 때까지 1 시간 동안 기다립니다. 이 기간 동안 <code>unavailable</code> 상태가 됩니다. 그런 다음 하루에 한 번 새로운 릴리스를 확인합니다.</p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>본 통합구성요소는 설정에서 <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> 행을 비활성화하거나 제거하지 않은 한 기본적으로 활성화되어 있습니다. 이 경우 다음 예는 이 연동을 수동으로 활성화하는 방법을 보여줍니다.</p>
+<p>본 통합구성요소는 설정에서 <a href="https://www.home-assistant.io/integrations/default_config/"><code>default_config:</code></a> 행을 비활성화하거나 제거하지 않은 한 기본적으로 활성화되어 있습니다. 이 경우 다음예는 이 연동을 수동으로 활성화하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml">updater:
 </code></pre>
 <div class="config-vars">
@@ -138,7 +138,7 @@ Default value: </p>
 </dl>
 </div>
 <p>Updater의 데이터에 대한 자세한 내용은 <a href="/docs/backend/updater/">detailed overview</a>를 확인하십시오. 업데이트를 확인할 때 정보를 공유하지 않기로 선택한 경우 <code>reporting: false</code>를 설정할 수 있습니다.</p>
-<p>사용중인 연동상황을 Home Assistant 개발자에게보고 할 수 있습니다. 이것은 그들이 관심있는 것들을 개선하는데 집중할 수 있도록 도와 줄 것입니다. 이 옵션을 활성화하려면 <code>include_used_components: true</code>를 추가해야합니다.</p>
+<p>사용중인 연동상황을 Home Assistant 개발자에게 보고할 수 있습니다. 이는 그들이 관심있는 것들을 개선하는데 집중할 수 있도록 도와 줄 것입니다. 이 옵션을 활성화하려면 <code>include_used_components: true</code>를 추가해야합니다.</p>
 <pre><code class="language-json">"components": [
     "apcupsd",
     "api",

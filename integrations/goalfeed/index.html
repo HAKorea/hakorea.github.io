@@ -103,10 +103,12 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="438" src="https://www.youtube.com/embed/lp-hJwIQoKg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>goalfeed</code> 통합구성요소를 통해 Goalfeed 계정을 사용하여 NHL 또는 MLB 팀이 득점할 때마다 홈어시스턴트에서 이벤트를 트리거 할 수 있습니다.</p>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/lp-hJwIQoKg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>goalfeed</code> 통합구성요소를 통해 Goalfeed 계정을 사용하여 NHL 또는 MLB 팀이 득점할 때마다 홈어시스턴트에서 이벤트를 트리거할 수 있습니다.</p>
 <p>최근에는 영국 프리미어 리그도 베타로 지원하고 있습니다. 응원하는 팀을 등록해서 사용하실 수 있습니다.
-손흥민같은 우리나라 선수 골도 따로 자동화하면 더 재밌겠네요 :)</p>
+손흥민같은 우리나라 선수의 골도 따로 자동화하면 더 재밌겠네요 :)</p>
 <p><a href="https://goalfeed.ca/home-assistant" rel="external nofollow">직접 등록하러가기</a></p>
 <p>이 구성 요소를 사용하려면 <code>configuration.yaml</code> 파일에 goalfeed.ca 계정의 이메일 주소와 비밀번호를 입력하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
@@ -139,15 +141,15 @@ goalfeed:
 <p>목표 이벤트에는 다음과 같은 이벤트 데이터가 있습니다. :</p>
 <ul>
 <li>
-<strong>team</strong>: 팀을 나타내는 세 글자 코드. 이는 리그 내에서 고유하지만 리그 전체에서 고유하지는 않습니다 (예 : ‘WPG’ 또는 ‘TOR’).</li>
+<strong>team</strong>: 팀을 나타내는 세 글자 코드. 이는 리그 내에서 고유하지만 리그 전체에서 고유하지는 않습니다 (예: ‘WPG’ 또는 ‘TOR’).</li>
 <li>
-<strong>team_name</strong>: 득점 한 팀 (예 : ‘Winnipeg Jets’또는 ‘Toronto Blue Jays’).</li>
+<strong>team_name</strong>: 득점 한 팀 (예: ‘Winnipeg Jets’ 또는 ‘Toronto Blue Jays’).</li>
 <li>
 <strong>team_hash</strong>: 팀을 위한 고유한 해시 (이 값은 <a href="https://goalfeed.ca/get-teams" rel="external nofollow">https://goalfeed.ca/get-teams</a> 에서 찾을 수 있습니다.).</li>
 <li>
 <strong>league_id</strong>: 리그의 고유 번호입니다.</li>
 <li>
-<strong>league_name</strong>: 리그의 짧은 이름 (예 : ‘NHL’, ‘MLB’).</li>
+<strong>league_name</strong>: 리그의 짧은 이름 (예: ‘NHL’, ‘MLB’).</li>
 </ul>
 
 

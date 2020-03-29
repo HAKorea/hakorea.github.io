@@ -103,14 +103,16 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/b390o1Qj-I8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/b390o1Qj-I8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p>이 플랫폼을 사용하면 <a href="https://todoist.com" rel="external nofollow">Todoist Projects</a>에 연결하고 이진 센서를 생성할 수 있습니다. 각 개별 프로젝트마다 다른 센서가 생성되거나 설정한 기준과 일치하는 “custom” 프로젝트를 지정할 수 있습니다 (아래에서 자세히 설명). 이 센서는 해당 프로젝트로 인해 작업이 있는 경우 <code>on</code> 또는 프로젝트의 모든 작업이 완료되었거나 프로젝트에 전혀 작업이 없는 경우 <code>off</code>가 됩니다.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 전제 조건</h3>
 <p>Todoist API 토큰을 결정해야합니다. 이는 매우 간단합니다. <a href="https://todoist.com/Users/viewPrefs?page=authorizations" rel="external nofollow">Todoist 설정 페이지의 통합 섹션</a>으로 이동하여 페이지 하단에서 “API token”이라는 섹션을 찾으십시오. 해당 토큰을 복사하여 설정 파일에서 사용하십시오.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 기본 설정</h3>
-<p>홈어시스턴트에 Todoist를 통합하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
+<p>홈어시스턴트에 Todoist를 연동하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 calendar:
   - platform: todoist
@@ -150,7 +152,7 @@ calendar:
 </div>
 <h3>
 <a class="title-link" name="custom-" href="#custom-"></a> Custom 프로젝트</h3>
-<p>사용자 정의 프로젝트를 만드는 것은 매우 쉽고 강력합니다. 기본 Todoist 프로젝트를 실행하기 위해서는 API 토큰 만 있으면 되지만 원하는 경우 더 깊이 갈 수 있습니다. 예를 들면 다음과 같습니다.</p>
+<p>사용자 정의 프로젝트를 만드는 것은 매우 쉽고 강력합니다. 기본 Todoist 프로젝트를 실행하기 위해서는 API 토큰만 있으면 되지만 원하는 경우 더 깊이 갈 수 있습니다. 예를 들면 다음과 같습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 calendar:
   - platform: todoist
@@ -168,7 +170,7 @@ calendar:
           - Mathematical Structures II
           - Calculus II
 </code></pre>
-<p>(<code>!secret</code>의 기능에 대한 자세한 내용은 <a href="/docs/configuration/secrets/">here</a>를 참조하십시오. – Todoist에만 해당되는 것이 아니며 API 키와 암호를 좀 더 안전하게 유지할 수 있습니다!)</p>
+<p>(<code>!secret</code>의 기능에 대한 자세한 내용은 <a href="/docs/configuration/secrets/">여기</a>를 참조하십시오. – Todoist에만 해당되는 것이 아니며 API 키와 암호를 좀 더 안전하게 유지할 수 있습니다!)</p>
 <p>보시다시피, 여기 4 개의 커스텀 프로젝트가 있습니다 :</p>
 <ul>
 <li>
@@ -181,11 +183,11 @@ calendar:
 <p>다음주 내에 이 계정의 <em>모든</em> 작업을 포함하는 프로젝트 .</p>
 </li>
 <li>
-<p>2개의 프로젝트 만 고려하여 “Homework”이라는 레이블이 있는 모든 것을 포함하는 프로젝트.</p>
+<p>2개의 프로젝트만 고려하여 “Homework”이라는 레이블이 있는 모든 것을 포함하는 프로젝트.</p>
 </li>
 </ul>
 <p>이러한 속성을 혼합하여 일치시켜 모든 종류의 사용자 정의 프로젝트를 만들 수 있습니다. <a href="https://ifttt.com/todoist" rel="external nofollow">IFTTT</a>를 사용하여 특정 레이블이 있는 작업을 만든 다음 해당 레이블이 있는 작업이 발생할 때 홈어시스턴트가 일종의 자동화를 수행하도록 할 수도 있습니다.</p>
-<p>홈어시스턴트는 <a href="https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/todoist/calendar.py" rel="external nofollow">각 프로젝트에서 어떤 작업이 “가장 중요한” 지 결정하기 위해 최선을 다 하며</a>, 그 상태가 보고된 작업입니다. <code>all_tasks</code> 배열을 통해 곧 다른 작업에 액세스 할 수 있습니다 (아래 참조).</p>
+<p>홈어시스턴트는 <a href="https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/todoist/calendar.py" rel="external nofollow">각 프로젝트에서 어떤 작업이 “가장 중요한” 지 결정하기 위해 최선을 다 하며</a>, 그 상태가 보고된 작업입니다. <code>all_tasks</code> 배열을 통해 곧 다른 작업에 액세스할 수 있습니다 (아래 참조).</p>
 <h3>
 <a class="title-link" name="sensor-" href="#sensor-"></a> Sensor 속성</h3>
 <ul>
@@ -193,7 +195,7 @@ calendar:
 <p><strong>offset_reached</strong>: 사용되지 않습니다.</p>
 </li>
 <li>
-<p><strong>all_day</strong>: <code>True</code> if the reported task doesn’t have a due date. <code>False</code> if there is a due date set. 보고 된 작업에 기한이없는 경우 <code>True</code>. 기한이 설정되어 있으면 <code>False</code>.</p>
+<p><strong>all_day</strong>: 보고된 작업에 기한이없는 경우 <code>True</code>. 기한이 설정되어 있으면 <code>False</code>.</p>
 </li>
 <li>
 <p><strong>message</strong>: 이 프로젝트에서 “가장 중요한” 과제의 제목.</p>
@@ -205,7 +207,7 @@ calendar:
 <p><strong>location</strong>: 사용되지 않습니다.</p>
 </li>
 <li>
-<p><strong>start_time</strong>: Todoist 통합이 마지막으로 업데이트 된 시간입니다. 일반적으로 지난 15 분 이내</p>
+<p><strong>start_time</strong>: Todoist 연동이 마지막으로 업데이트된 시간입니다. 일반적으로 지난 15 분 이내</p>
 </li>
 <li>
 <p><strong>end_time</strong>: 작업 마감일.</p>
@@ -214,7 +216,7 @@ calendar:
 <p><strong>all_tasks</strong>: 이 프로젝트의 모든 작업 목록은 가장 중요한 것부터 가장 중요하지 않은 것으로 정렬됩니다.</p>
 </li>
 <li>
-<p><strong>priority</strong>: 우선 순위 Todoist는 이 작업을 가지고 있다고 보고합니다. 1은 가장 낮은 우선 순위를 의미하고 4는 가장 높은 우선 순위를 의미합니다. 이것이 Todoist 앱에 표시되는 방식의 <strong>반대</strong>입니다!</p>
+<p><strong>priority</strong>: 우선 순위 Todoist는 이 작업을 가지고 있다고 보고합니다. 1은 가장 낮은 우선 순위를 의미하고 4는 가장 높은 우선 순위를 의미합니다. 이는 Todoist 앱에 표시되는 방식의 <strong>반대</strong>입니다!</p>
 </li>
 <li>
 <p><strong>task_comments</strong>: 이 작업에 추가된 의견.</p>
@@ -231,7 +233,7 @@ calendar:
 </ul>
 <h3>
 <a class="title-link" name="" href="#"></a> 서비스</h3>
-<p>Todoist에는 서비스에 대한 액세스도 제공됩니다. <code>todoist.new_task</code>. 이 서비스는 새로운 Todoist 작업을 만드는 데 사용할 수 있습니다. 레이블과 프로젝트를 지정하거나 비워둘 수 있으며 작업은 “Inbox” 프로젝트로 이동합니다.</p>
+<p>Todoist에는 서비스에 대한 액세스도 제공됩니다(<code>todoist.new_task</code>). 이 서비스는 새로운 Todoist 작업을 만드는데 사용할 수 있습니다. 레이블과 프로젝트를 지정하거나 비워둘 수 있으며 작업은 “Inbox” 프로젝트로 이동합니다.</p>
 <p>다음은 동일한 작업을 수행하는 두 개의 JSON 페이로드 예제입니다.</p>
 <pre><code class="language-json">{
     "content": "Pick up the mail",
@@ -264,13 +266,13 @@ calendar:
 <p><strong>priority</strong> (<em>Optional</em>): 1-4의 태스크 우선 순위. 다시 말하지만 1은 가장 중요하지 않으며 4는 가장 중요합니다.</p>
 </li>
 <li>
-<p><strong>due_date_string</strong> (<em>Optional</em>): <a href="https://support.todoist.com/hc/en-us/articles/205325931-Dates-and-Times" rel="external nofollow">natural language</a>로 과제가 예정된 시점. <code>due_date</code>와 상호 배타적</p>
+<p><strong>due_date_string</strong> (<em>Optional</em>): <a href="https://support.todoist.com/hc/en-us/articles/205325931-Dates-and-Times" rel="external nofollow">natural language</a>로 과제가 예정된 시점. <code>due_date</code>와 상호배타적</p>
 </li>
 <li>
 <p><strong>due_date_lang</strong> (<em>Optional</em>): <code>due_date_string</code>이 설정되면 언어를 설정할 수 있습니다. 사용가능한 언어들 : <code>en</code>, <code>da</code>, <code>pl</code>, <code>zh</code>, <code>ko</code>, <code>de</code>, <code>pt</code>, <code>ja</code>, <code>it</code>, <code>fr</code>, <code>sv</code>, <code>ru</code>, <code>es</code>, <code>nl</code></p>
 </li>
 <li>
-<p><strong>due_date</strong> (<em>Optional</em>): 작업 기한이 YYYY-MM-DD 형식 또는 YYYY-MM-DD HH:MM 형식이어야합니다. <code>due_date_string</code>과 상호 배타적입니다.</p>
+<p><strong>due_date</strong> (<em>Optional</em>): 작업 기한이 YYYY-MM-DD 포맷 또는 YYYY-MM-DD HH:MM 포맷이어야합니다. <code>due_date_string</code>과 상호배타적입니다.</p>
 </li>
 </ul>
 <p>(현재) 홈어시스턴트를 통해 수행한 작업을 표시할 수있는 방법이 없습니다. 작업 이름은 반드시 고유하지 않아도 되므로 잘못된 작업을 닫는 상황에 처할 수 있습니다.</p>

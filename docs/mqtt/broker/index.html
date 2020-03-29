@@ -103,11 +103,11 @@
   <hr class="divider">
   
 
-  <p>MQTT 통합구성요소에서는 홈어시스턴트에서 연결할 MQTT 브로커를 실행해야합니다. 설정 및 개인 정보 보호 수준이 다양한 네 가지 옵션이 있습니다.</p>
+  <p>MQTT 통합구성요소에서는 홈어시스턴트에서 연결할 MQTT 브로커를 실행해야합니다. 설정과 개인 정보 보호 수준이 다양한 네 가지 옵션이 있습니다.</p>
 <h3>
-<a class="title-link" name="----run-your-own" href="#----run-your-own"></a> 로컬 시스템에서 직접 운영 (Run your own)</h3>
-<p>For Hass.io users, the recommended setup method is to use the <a href="/addons/mosquitto">Mosquitto MQTT broker addon</a>.
-가장 개인적인 옵션이지만 설정하는 데 약간의 작업이 필요합니다. <a href="http://mosquitto.org/" rel="external nofollow">Mosquitto</a>, <a href="https://github.com/emqx/emqx" rel="external nofollow">EMQ</a> 혹은 <a href="http://www.mosca.io/" rel="external nofollow">Mosca</a> 와 같은 선택할 수있는 무료 및 오픈 소스 브로커가 여러 개 있습니다.<br><br> <strong>Hass.io 사용자의 경우 권장 설정 방법은 <a href="/addons/mosquitto">Mosquitto MQTT broker addon</a></strong> 을 사용하는 것 입니다.</p>
+<a class="title-link" name="---" href="#---"></a> 로컬 시스템에서 직접 운영</h3>
+<p>이는 가장 개인적인 옵션이며 자체 MQTT 브로커를 실행하는 것입니다.</p>
+<p>권장 설정 방법은 <a href="/addons/mosquitto">Mosquitto MQTT 브로커 애드온</a>을 사용하는 것입니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mqtt:
   broker: 192.168.1.100
@@ -118,27 +118,27 @@ mqtt:
   <dl class="">
 <dt>
 <a class="title-link" name="broker" href="#broker"></a> broker</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커의 IP 주소 또는 호스트 이름 (예 192.168.1.32)</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커의 IP 주소 또는 호스트 이름 (예: 192.168.1.32)</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="port" href="#port"></a> port</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>연결할 네트워크 포트. 기본값은 1883입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>연결할 네트워크 포트. 기본값은 1883.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="client_id" href="#client_id"></a> client_id</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트가 사용할 클라이언트 ID. 서버에서 고유해야합니다. 기본값은 임의로 생성 된 것입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>홈어시스턴트가 사용할 클라이언트 ID. 서버에서 고유해야합니다. 기본값은 임의로 생성된 것입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="keepalive" href="#keepalive"></a> keepalive</dt>
-<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 클라이언트에 대한 연결 유지 메시지를 보내는 데 걸리는 시간 (초)입니다. 기본값은 60입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="integer">integer</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 클라이언트에 대한 연결 유지 메시지를 보내는데 걸리는 시간 (초)입니다. 기본값은 60입니다.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="username" href="#username"></a> username</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커와 함께 사용할 사용자 이름입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커와 함께 사용할 사용자 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="password" href="#password"></a> password</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커와 함께 사용할 사용자 이름의 해당 비밀번호입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>MQTT 브로커와 함께 사용할 사용자 이름의 해당 비밀번호.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="protocol" href="#protocol"></a> protocol</dt>
@@ -146,7 +146,7 @@ mqtt:
 </span></p></dd>
 <dt>
 <a class="title-link" name="certificate" href="#certificate"></a> certificate</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증서 파일의 경로입니다 (예 <code>/home/user/.homeassistant/server.crt</code>).</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>인증서 파일의 경로 (예: <code>/home/user/.homeassistant/server.crt</code>).</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="tls_insecure" href="#tls_insecure"></a> tls_insecure</dt>
@@ -159,12 +159,12 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="tls_version" href="#tls_version"></a> tls_version</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 TLS / SSL 프로토콜 버전. 사용 가능한 옵션 : <code>'auto'</code>, <code>'1.0'</code>, <code>'1.1'</code>, <code>'1.2'</code>. 값을 따옴표로 묶어야합니다. 기본값 : <code>'auto'</code>.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>사용할 TLS/SSL 프로토콜 버전. 사용 가능한 옵션 : <code>'auto'</code>, <code>'1.0'</code>, <code>'1.1'</code>, <code>'1.2'</code>. 값을 따옴표로 묶어야합니다. 기본값: <code>'auto'</code>.</p>
 </span></p></dd>
 </dl>
 </div>
 <div class="note warning">
-<p>Ubuntu 14.04 LTS에 포함 된 Mosquitto 패키지에 문제가 있습니다. 이 문제를 해결하려면 MQTT 설정에서 <code>protocol: 3.1</code>를 명기 하십시오. Specify <code>protocol: 3.1</code> in your MQTT configuration to work around this issue.
+<p>Ubuntu 14.04 LTS에 포함된 Mosquitto 패키지에 문제가 있습니다. 이 문제를 해결하려면 MQTT 설정에서 <code>protocol: 3.1</code>를 명기하십시오.
 다음 오류가 발생하면 <code>AttributeError: module 'ssl' has no attribute 'PROTOCOL_TLS'</code>, 설정에 <code>tls_version: '1.2'</code>를 넣어야 합니다.</p>
 </div>
 <div class="note">
@@ -179,7 +179,7 @@ After=network.target mosquitto.service
 </div>
 <h3>
 <a class="title-link" name="--public-broker" href="#--public-broker"></a> 공공 브로커 (Public broker)</h3>
-<p>모스키토 프로젝트는 <a href="http://test.mosquitto.org" rel="external nofollow">public broker</a>를 운영합니다. 이것은 설정하기가 가장 쉽지만 모든 메시지가 공개되므로 프라이버시가 없습니다. 테스트 목적으로 만 사용하고 실제 장치 추적 또는 가정 제어에는 사용하지 마십시오.</p>
+<p>Mosquitto 프로젝트는 <a href="http://test.mosquitto.org" rel="external nofollow">public broker</a>를 운영합니다. 이는 설정하기가 가장 쉽지만 모든 메시지가 공개되므로 프라이버시가 없습니다. 테스트 목적으로만 사용하고 실제 장치 추적 또는 가정 제어에는 사용하지 마십시오.</p>
 <pre><code class="language-yaml">mqtt:
   broker: test.mosquitto.org
   port: 1883 or 8883
@@ -192,21 +192,21 @@ After=network.target mosquitto.service
 </code></pre>
 <h3>
 <a class="title-link" name="cloudmqtt" href="#cloudmqtt"></a> CloudMQTT</h3>
-<p><a href="https://www.cloudmqtt.com" rel="external nofollow">CloudMQTT</a> 는 최대 10 개의 연결된 장치를 무료로 제공하는 호스팅 된 프라이빗 MQTT 인스턴스입니다. 예를 들어 <a href="/integrations/owntracks/">OwnTracks</a> 시작하고 가능한 것들을 경험할 수 있습니다.</p>
+<p><a href="https://www.cloudmqtt.com" rel="external nofollow">CloudMQTT</a> 는 최대 10 개의 연결된 장치를 무료로 제공하는 호스팅된 프라이빗 MQTT 인스턴스입니다. 예를 들어 <a href="/integrations/owntracks/">OwnTracks</a>를 시작하고 가능한 것들을 경험할 수 있습니다.</p>
 <div class="note">
-홈 어시스턴트는 CloudMQTT와 관련이 없으며 어떤 협찬도 받지 않습니다.
+홈어시스턴트는 CloudMQTT와 관련이 없으며 어떤 협찬도 받지 않습니다.
 </div>
 <ol>
 <li>
 <a href="https://customer.cloudmqtt.com/login" rel="external nofollow">Create an account</a> (공짜로 가입가능)</li>
 <li>
 <a href="https://customer.cloudmqtt.com/subscription/create" rel="external nofollow">Create a new CloudMQTT instance</a>
-(Cute Cat 은 무료플랜)</li>
+(Cute Cat은 무료플랜)</li>
 <li>제어판에서 <strong>자세히</strong> 버튼을 클릭하십시오</li>
-<li>홈 어시스턴트 및 각 전화기에 연결할 고유 한 사용자 작성<br>(CloudMQTT는 동일한 사용자로부터 두 개의 연결을 허용하지 않음)
+<li>홈어시스턴트와 각 전화기에 연결할 고유한 사용자 작성<br>(CloudMQTT는 동일한 사용자로부터 두 개의 연결을 허용하지 않음)
 <ol>
 <li>사용자 관리에서 사용자 이름, 비밀번호를 입력하고 추가를 클릭하십시오.</li>
-<li>ACL에서 user, topic <code>#</code>을 선택하고 ‘읽기 액세스’및 ‘쓰기 액세스’를 확인하십시오.</li>
+<li>ACL에서 user, topic <code>#</code>을 선택하고 ‘‘read access’와 ‘write access’를 확인하십시오.</li>
 </ol>
 </li>
 <li>인스턴스 정보를 configuration.yaml에 복사하십시오. :</li>
@@ -218,18 +218,18 @@ After=network.target mosquitto.service
   password: CLOUDMQTT_PASSWORD
 </code></pre>
 <div class="note">
-암호화 된 CloudMQTT 채널에 연결하면 홈어시스턴트가 자동으로 올바른 인증서를 로드합니다(포트 범위 20000-30000). 
+암호화된 CloudMQTT 채널에 연결하면 홈어시스턴트가 자동으로 올바른 인증서를 로드합니다(포트 범위 20000-30000). 
 </div>
 <div class="note">
-<p><code>Failed to connect due to exception: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed</code> 과 같은 오류 메시지가 표시 되면 <code>certificate: auto</code>를 브로커 설정에 추가 하고 홈어시스턴트를 다시 시작하십시오.</p>
+<p><code>Failed to connect due to exception: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed</code> 과 같은 오류 메시지가 표시 되면 <code>certificate: auto</code>를 브로커 설정에 추가하고 홈어시스턴트를 다시 시작하십시오.</p>
 </div>
 <h4>
 <a class="title-link" name="owntracks" href="#owntracks"></a> Owntracks</h4>
-<p>내부 브로커와 함께 자체 트랙을 사용하려면 앱이 MQTT 프로토콜 3.1.1 (프로토콜 레벨 4)을 사용하도록 구성을 약간 변경해야합니다.</p>
-<p>Owntracks 환경 설정 (Android : v1.2.3 +, iOS : v9.5.1 +)에서 <strong>Configuration Management</strong>를 엽니 다. <code>mqttProtocolLevel</code>를 찾아 <code>4</code>로 변경합니다. 애플리케이션은 이제 MQTT 3.1.1을 사용하여 연결하며 임베드 된 브로커와 호환됩니다.</p>
+<p>내부 브로커와 함께 자체 트랙을 사용하려면 앱이 MQTT 프로토콜 3.1.1 (프로토콜 레벨 4)을 사용하도록 설정을 약간 변경해야합니다.</p>
+<p>Owntracks 환경 설정 (Android: v1.2.3 +, iOS: v9.5.1 +)에서 <strong>Configuration Management</strong>를 엽니다. <code>mqttProtocolLevel</code>를 찾아 <code>4</code>로 변경합니다. 애플리케이션은 이제 MQTT 3.1.1을 사용하여 연결하며 임베드된 브로커와 호환됩니다.</p>
 <h4>
 <a class="title-link" name="settings" href="#settings"></a> Settings</h4>
-<p>임베디드 브로커의 설정을 사용자 정의하려면, <code>embedded:</code> 를 사용하여 <a href="http://hbmqtt.readthedocs.org/en/latest/references/broker.html#broker-configuration" rel="external nofollow">HBMQTT Broker configuration</a>대로 설정해 보십시오. 그렇게 하면, 기본 구성이 바뀝니다.</p>
+<p>임베디드 브로커의 설정을 사용자 정의하려면, <code>embedded:</code> 를 사용하여 <a href="http://hbmqtt.readthedocs.org/en/latest/references/broker.html#broker-configuration" rel="external nofollow">HBMQTT Broker configuration</a>대로 설정해 보십시오. 그렇게 하면, 기본 설정이 바뀝니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mqtt:
   embedded:

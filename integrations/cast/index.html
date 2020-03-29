@@ -109,16 +109,16 @@
 <p>홈어시스턴트에서 설정 - 통합구성요소로 이동하여 Cast 통합구성요소를 추가하여 사용할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="home-assistant-cast" href="#home-assistant-cast"></a> Home Assistant Cast</h2>
-<p>홈어시스턴트에는 Chromecast 기기에 홈 어시스턴트 UI를 표시하는 고유한 전송 애플리케이션이 있습니다.  <a href="/lovelace/entities/#cast">Cast entity row</a>를 Lovelace UI에 추가하여 사용하거나 <code>cast.show_lovelace_view</code> service 를 호출해서 사용할 수 있습니다. 해당 service 는 Cast 장치의 entity 와 Lovelace 화면의 경로를 통해서 view로 화면에 노출 시킬 수 있습니다. <a href="/lovelace/views/#path">views documentation</a>에서 제시하였듯이 <code>path</code>는 각 view 화면을 위한 Lovelace YAML에서 정의되어야 합니다.</p>
+<p>홈어시스턴트에는 Chromecast 기기에 홈어시스턴트 UI를 표시하는 고유한 전송 애플리케이션이 있습니다. <a href="/lovelace/entities/#cast">Cast entity row</a>를 Lovelace UI에 추가하여 사용하거나 <code>cast.show_lovelace_view</code> 서비스를 호출해서 사용할 수 있습니다. 해당 서비스는 Cast 장치의 entity와 Lovelace 화면의 경로를 통해서 view로 화면에 노출시킬 수 있습니다. <a href="/lovelace/views/#path">views documentation</a>에서 제시하였듯이 <code>path</code>는 각 view 화면을 위한 Lovelace YAML에서 정의되어야 합니다.</p>
 <pre><code class="language-json">{
   "entity_id": "media_player.office_display_4",
   "view_path": "lights"
 }
 </code></pre>
-<p>홈 어시스턴트 설치가 <code>https://</code>를 경유하여 설치되어야 홈어시스턴트 캐스트를 통해 액세스 할 수 있습니다.  홈어시스턴트 Cloud를 사용하는 경우 별도의 작업을 수행 할 필요가 없습니다. 그렇지 않으면 확실히 <a href="/integrations/http/">the <code>http</code> integration</a>위한 <code>base_url</code>로 설정되어있는지 확인해야합니다.</p>
+<p>홈어시스턴트 설치가 <code>https://</code> 를 경유하여 설치되어야 홈어시스턴트 캐스트를 통해 액세스할 수 있습니다.  홈어시스턴트 Cloud를 사용하는 경우 별도의 작업을 수행할 필요가 없습니다. 그렇지 않으면 확실히 <a href="/integrations/http/"><code>http</code> 통합구성요소</a>를 위한 <code>base_url</code>로 설정되어있는지 확인해야합니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 고급 사용</h2>
-<p>Cast 장치는 홈어시트턴트와 동일한 서브넷에있는 경우에만 검색 할 수 있습니다. 그렇지 않은 경우 Cast 장치의 IP 주소를 직접 설정해야합니다:</p>
+<p>Cast 장치는 홈어시트턴트와 동일한 서브넷에 있는 경우에만 검색할 수 있습니다. 그렇지 않은 경우 Cast 장치의 IP 주소를 직접 설정해야합니다:</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 cast:
   media_player:
@@ -130,7 +130,7 @@ cast:
   <dl class="">
 <dt>
 <a class="title-link" name="media_player" href="#media_player"></a> media_player</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>모든 Cast 장치가 포함 된 목록입니다.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>모든 Cast 장치가 포함된 목록입니다.</p>
 </span></p></dd>
 <dd><dl class="nested">
 <dt>

@@ -112,11 +112,11 @@ stream:
 </code></pre>
 <h3>
 <a class="title-link" name="" href="#"></a> 서비스</h3>
-<p><code>stream</code> 플랫폼은 일단 로드되면 다양한 작업을 수행하기 위해 호출 할 수있는 서비스를 노출합니다.</p>
+<p><code>stream</code> 플랫폼은 일단 로드되면 다양한 작업을 수행하기 위해 호출할 수있는 서비스를 노출합니다.</p>
 <h4>
 <a class="title-link" name="record-" href="#record-"></a> record 서비스</h4>
-<p>제공된 스트림에서<code>.mp4</code> 녹화를 만듭니다. 이 서비스는 직접 호출 할 수 있지만 <a href="/integrations/camera#service-record"><code>camera.record</code></a> 서비스에서 내부적으로 사용됩니다.</p>
-<p><code>duration</code> 및 <code>lookback</code> 옵션은 모두 제안이지만 스트림 별로 일치해야합니다. 실제 녹음 길이는 다를 수 있습니다. 필요에 따라 이러한 설정을 조정하는 것이 좋습니다.</p>
+<p>제공된 스트림에서 <code>.mp4</code> record를 만듭니다. 이 서비스는 직접 호출할 수 있지만 <a href="/integrations/camera#service-record"><code>camera.record</code></a> 서비스에서 내부적으로 사용됩니다.</p>
+<p><code>duration</code>, <code>lookback</code> 옵션은 모두 제안사항이지만 스트림 별로 일치해야합니다. 실제 녹음 길이는 다를 수 있습니다. 필요에 따라 이러한 설정을 조정하는 것이 좋습니다.</p>
 <table>
 <thead>
 <tr>
@@ -129,22 +129,22 @@ stream:
 <tr>
 <td><code>stream_source</code></td>
 <td>no</td>
-<td>스트림의 입력 소스 (예 :<code>rtsp://my.stream.feed:554</code>).</td>
+<td>스트림의 입력 소스 (예: <code>rtsp://my.stream.feed:554</code>).</td>
 </tr>
 <tr>
 <td><code>filename</code></td>
 <td>no</td>
-<td>파일 이름 문자열 (예 :<code>/tmp/my_stream.mp4</code>).</td>
+<td>파일 이름 문자열 (예: <code>/tmp/my_stream.mp4</code>).</td>
 </tr>
 <tr>
 <td><code>duration</code></td>
 <td>yes</td>
-<td>대상 녹화 길이 (초) , 기본값 : 30</td>
+<td>대상 녹화 길이 (초) , 기본값: 30</td>
 </tr>
 <tr>
 <td><code>lookback</code></td>
 <td>yes</td>
-<td>기간과 함께 포함할 대상 전환 기간 (초)입니다. 현재 <code>stream_source</code>에 대한 활성 HLS 스트림이있는 경우에만 사용할 수 있습니다, 기본값 : 0</td>
+<td>duration과 함께 포함할 lookback 기간(초)입니다. 현재 <code>stream_source</code>에 대한 활성 HLS 스트림이 있는 경우에만 사용할 수 있습니다, 기본값: 0</td>
 </tr>
 </tbody>
 </table>
@@ -159,15 +159,15 @@ stream:
 </code></pre>
 <h2>
 <a class="title-link" name="lovelace-" href="#lovelace-"></a> Lovelace에서 스트리밍</h2>
-<p>Homeassistant 버전 0.92부터는 이제 카메라 피드를 lovelace로 직접 라이브 스트리밍 할 수 있습니다. 이렇게 하려면 <a href="/lovelace/picture-entity/">picture-entity</a>, <a href="/lovelace/picture-glance/">picture-glance</a> 혹은 <a href="/lovelace/picture-elements/">picture-elements</a>들 중 하나를 추가하고,  <code>camera_image</code>를 스트림 준비 카메라 엔티티로 설정하고 <code>camera_view</code>를 lovelace view 중 하나에 <code>live</code>로 설정하십시오.</p>
+<p>Homeassistant 버전 0.92부터는 이제 카메라 피드를 lovelace로 직접 라이브 스트리밍할 수 있습니다. 이렇게 하려면 <a href="/lovelace/picture-entity/">picture-entity</a>, <a href="/lovelace/picture-glance/">picture-glance</a> 혹은 <a href="/lovelace/picture-elements/">picture-elements</a>들 중 하나를 추가하고,  <code>camera_image</code>를 stream-ready 카메라 엔티티로 설정하고 <code>camera_view</code>를 lovelace view 중 하나에 <code>live</code>로 설정하십시오.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 문제 해결</h2>
-<p>수동 설치의 일부 사용자는 다시 시작한 후 로그에 다음 오류가 표시 될 수 있습니다 :</p>
+<p>수동 설치의 일부 사용자는 다시시작한 후 로그에 다음 오류가 표시될 수 있습니다 :</p>
 <pre><code class="language-text">2019-03-12 08:49:59 ERROR (SyncWorker_5) [homeassistant.util.package] Unable to install package av==6.1.2: Command "/home/pi/home-assistant/bin/python3 -u -c "import setuptools, tokenize;__file__='/tmp/pip-install-udfl2b3t/av/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-record-ftn5zmh2/install-record.txt --single-version-externally-managed --compile --install-headers /home/pi/home-assistant/include/site/python3.6/av" failed with error code 1 in /tmp/pip-install-udfl2b3t/av/
 2019-03-12 08:49:59 ERROR (MainThread) [homeassistant.requirements] Not initializing stream because could not install requirement av==6.1.2
 2019-03-12 08:49:59 ERROR (MainThread) [homeassistant.setup] Setup failed for stream: Could not install all requirements.
 </code></pre>
-<p>이 오류가 표시되면 다음 명령을 실행하고 Home Assistant를 다시 시작하여이 오류를 해결할 수 있습니다 (명령은 <code>homeassistant</code> 사용자로 실행할 필요는 없습니다).</p>
+<p>이 오류가 표시되면 다음 명령을 실행하고 Home Assistant를 다시시작하여 이 오류를 해결할 수 있습니다 (명령은 <code>homeassistant</code> 사용자로 실행할 필요는 없습니다).</p>
 <pre><code class="language-text">sudo apt-get install -y python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 </code></pre>
 

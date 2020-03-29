@@ -106,10 +106,10 @@
   <div class="videoWrapper">
 <iframe width="776" height="437" src="https://www.youtube.com/embed/C_JTPwKuLX0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<p><code>aws</code> 통합구성요소는 <a href="https://aws.amazon.com/" rel="external nofollow">Amazon Web Services</a>와 상호 작용할 수있는 단일 장소를 제공합니다. 현재 <a href="https://aws.amazon.com/sqs/" rel="external nofollow">AWS SQS</a>, <a href="https://aws.amazon.com/sns/" rel="external nofollow">AWS SNS</a>로 메시지를 보낼 수있는 알림 플랫폼을 제공합니다. 또는 <a href="https://aws.amazon.com/lambda/" rel="external nofollow">AWS Lambda</a> 함수를 호출하십시오.</p>
+<p><code>aws</code> 통합구성요소는 <a href="https://aws.amazon.com/" rel="external nofollow">Amazon Web Services</a>와 상호 작용할 수 있는 단일 장소를 제공합니다. 현재 <a href="https://aws.amazon.com/sqs/" rel="external nofollow">AWS SQS</a>, <a href="https://aws.amazon.com/sns/" rel="external nofollow">AWS SNS</a>로 메시지를 보낼 수 있는 알림 플랫폼을 제공합니다. 또는 <a href="https://aws.amazon.com/lambda/" rel="external nofollow">AWS Lambda</a> 함수를 호출하십시오.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 셋업</h2>
-<p>Amazon Web Services를 사용하려면 AWS 계정이 있어야합니다. 12 개월의 프리 티어 혜택으로 <a href="https://aws.amazon.com/free/" rel="external nofollow">여기</a>를 만드십시오. 첫 12 개월 동안에도 프리 티어에서 제공되는 것보다 더 많은 리소스를 사용하면 요금이 청구될 수 있습니다.</p>
+<p>Amazon Web Services를 사용하려면 AWS 계정이 있어야합니다. 12 개월의 프리 티어 혜택으로 <a href="https://aws.amazon.com/free/" rel="external nofollow">여기</a>서 만드십시오. 첫 12 개월 동안에도 프리 티어에서 제공되는 것보다 더 많은 리소스를 사용하면 요금이 청구될 수 있습니다.</p>
 <p><code>aws</code> 컴포넌트에서 사용되는 <code>lambda</code>, <code>sns</code> 및 <code>sqs</code> 서비스는 모두 12 개월이 지난 후에도 모든 사용자에게 <strong>Always Free</strong> 등급을 제공합니다. 홈오토메이션의 일반적인 사용은 프리 티어 한도에 도달하지 않을 가능성이 높습니다. <a href="https://aws.amazon.com/lambda/pricing/" rel="external nofollow">Lambda 요금</a>, <a href="https://aws.amazon.com/sns/pricing/" rel="external nofollow">SNS 요금</a> 및 [SQS 요금]<a href="https://aws.amazon.com/sqs/pricing/" rel="external nofollow">SQS Pricing</a>에서 자세한 내용은 확인하십시오.</p>
 <p><code>aws</code> 통합구성요소는 <a href="https://botocore.amazonaws.com/v1/documentation/api/latest/index.html" rel="external nofollow">botocore</a>를 사용하여 Amazon Web Services와 통신하며 <a href="https://aws.amazon.com/cli/" rel="external nofollow">AWS Command Client Interface</a> 도구에서도 사용됩니다. 따라서 <code>aws</code>는 <code>awscli</code> 도구와 동일한 credential 및 profiles을 공유합니다. 액세스 키를 얻는 방법과 로컬에서 액세스 키를 관리하는 방법은 <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html" rel="external nofollow">Configuring the AWS CLI</a>을 참조하십시오.</p>
 <h2>
@@ -206,7 +206,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="lambda-notify-" href="#lambda-notify-"></a> Lambda Notify 사용법</h2>
-<p>AWS Lambda는 알림 플랫폼이므로 <code>notify</code> 서비스 <a href="/integrations/notify/">as described here</a>를 호출하여 제어 할 수 있습니다. 알림(notification) 페이로드에 지정된 모든 대상에 대해 Lambda를 호출합니다. 대상은 함수 이름, 전체 ARN (<a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html" rel="external nofollow">Amazon Resource Name</a>) 또는 일부분의 ARN으로 형식을 지정할 수 있습니다. 자세한 내용은 <a href="https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.invoke" rel="external nofollow">botocore docs</a>를 참조하십시오.</p>
+<p>AWS Lambda는 알림 플랫폼이므로 <code>notify</code> 서비스 <a href="/integrations/notify/">as described here</a>를 호출하여 제어할 수 있습니다. 알림(notification) 페이로드에 지정된 모든 대상에 대해 Lambda를 호출합니다. 대상은 함수 이름, 전체 ARN (<a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html" rel="external nofollow">Amazon Resource Name</a>) 또는 일부분의 ARN으로 형식을 지정할 수 있습니다. 자세한 내용은 <a href="https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.invoke" rel="external nofollow">botocore docs</a>를 참조하십시오.</p>
 <p>Lambda 이벤트 페이로드에는 서비스 호출 페이로드에 전달된 모든 것이 포함됩니다. 다음은 Lambda로 전송 될 페이로드의 예입니다.</p>
 <pre><code class="language-json">{
   "title": "Test message!",
@@ -217,8 +217,7 @@ Default value: </p>
   "message": "Hello world!"
 }
 </code></pre>
-<p>The context will look like this:
-컨텍스트는 다음과 같습니다.</p>
+<p>컨텍스트는 다음과 같습니다.</p>
 <pre><code class="language-json">{
   "custom": {
     "two": "three",
@@ -229,13 +228,13 @@ Default value: </p>
 <h2>
 <a class="title-link" name="sns-notify-" href="#sns-notify-"></a> SNS Notify 사용법</h2>
 <p>AWS SNS는 알림 플랫폼이므로 <code>notify</code> 서비스<a href="/integrations/notify/">as described here</a>를 호출하여 제어 할 수 있습니다. 알림 페이로드에 지정된 모든 대상에 메시지를 게시합니다. 대상은 SNS topic 또는 endpoint ARN(<a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html" rel="external nofollow">Amazon Resource Name</a>)이어야합니다. 자세한 내용은 <a href="https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.publish" rel="external nofollow">botocore docs</a>를 참조하십시오.</p>
-<p>존재하는 경우 SNS 주제(Subject)가 제목(title)으로 설정됩니다. 메시지를 제외한 페이로드의 모든 속성은 문자열화 된 메시지 속성으로 전송됩니다.</p>
+<p>존재하는 경우 SNS 주제(Subject)가 제목(title)으로 설정됩니다. 메시지를 제외한 페이로드의 모든 속성은 문자열화된 메시지 속성으로 전송됩니다.</p>
 <h3>
 <a class="title-link" name="sns-within-aws-" href="#sns-within-aws-"></a> SNS within AWS 셋업하기</h3>
 <ul>
 <li>AWS 콘솔에 로그인하고 “Security and Identity”에서 “Identity &amp; Access Management”를 선택하십시오.</li>
 <li>왼쪽에서 “Users”를 선택한 다음 “Create New Users”를 클릭하십시오. 여기에 이름을 입력 한 다음 “Create”를 클릭하십시오.</li>
-<li>credentials를 다운로드하거나 화살표를 클릭하여 한 번 표시 할 수 있습니다.</li>
+<li>credentials를 다운로드하거나 화살표를 클릭하여 한 번 표시할 수 있습니다.</li>
 </ul>
 <div class="note warning">
 다운로드하지 않으면 파일을 잃어 버리고 새 사용자를 다시 만들어야합니다.

@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p><code>input_boolean</code>통합구성요소를 통해 사용자는 프론트 엔드에서 제어 할 수 있고 자동화 조건 내에서 사용할 수있는 boolean 값을 정의 할 수 있습니다. 예를 들어 특정 자동화를 비활성화하거나 활성화하는 데 사용할 수 있습니다.</p>
-<p>설치에서 input boolean을 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오</p>
+  <p><code>input_boolean</code> 통합구성요소를 통해 사용자는 프론트 엔드에서 제어할 수 있고 자동화 조건 내에서 사용할 수있는 boolean 값을 정의할 수 있습니다. 예를 들어 특정 자동화를 비활성화하거나 활성화하는데 사용할 수 있습니다.</p>
+<p>input boolean을 활성화하려면 <code>configuration.yaml</code>에 다음 줄을 추가하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 input_boolean:
   notify_home:
@@ -184,7 +184,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="restore-state" href="#restore-state"></a> Restore State</h3>
-<p><code>initial</code> 에 유효한 값을 설정하면이 통합구성요소는 해당 값으로 설정된 상태로 시작됩니다. 그렇지 않으면, 홈어시스턴트 중지 이전의 상태를 복원합니다.</p>
+<p><code>initial</code> 에 유효한 값을 설정하면 이 통합구성요소는 해당 값으로 설정된 상태로 시작됩니다. 그렇지 않으면, 홈어시스턴트 중지 이전의 상태를 복원합니다.</p>
 <h2>
 <a class="title-link" name="automation-examples" href="#automation-examples"></a> Automation Examples</h2>
 <p>위의 <code>input_boolean</code>을 사용한 자동화의 예는 다음과 같습니다. 이 동작은 스위치가 켜져있는 경우에만 발생합니다.</p>
@@ -204,7 +204,7 @@ Default value: </p>
       title: ""
       message: "Honey, I'm home!"
 </code></pre>
-<p>자동화에서 <code>input_boolean.turn_on</code>,<code>input_boolean.turn_off</code> 또는 <code>input_boolean.toggle</code>을 사용하여 <code>input_boolean</code>의 상태를 설정하거나 변경할 수도 있습니다.</p>
+<p>자동화에서 <code>input_boolean.turn_on</code>, <code>input_boolean.turn_off</code> 또는 <code>input_boolean.toggle</code>을 사용하여 <code>input_boolean</code>의 상태를 설정하거나 변경할 수도 있습니다.</p>
 <pre><code class="language-yaml">    - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.notify_home

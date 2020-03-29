@@ -107,7 +107,7 @@
 <iframe width="776" height="437" src="https://www.youtube.com/embed/DHH0S2j6uBU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <p><code>amcrest</code> 카메라 플랫폼을 사용하면 <a href="https://amcrest.com/" rel="external nofollow">Amcrest</a> IP 카메라를 Home Assistant에 연동할 수 있습니다.</p>
-<p>현재 홈 어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
+<p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
 <li>Binary Sensor</li>
 <li>Camera</li>
@@ -160,7 +160,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="resolution" href="#resolution"></a> resolution</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 카메라 해상도를 지정할 수 있습니다. 고해상도 (1080 / 720p)의 경우, <code>high</code> 옵션 지정. VGA 해상도 (640x480p)의 경우, <code>low</code> 옵션 지정.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>이 매개 변수를 사용하면 카메라 해상도를 지정할 수 있습니다. 고해상도 (1080/720p)의 경우, <code>high</code> 옵션 지정. VGA해상도 (640x480p)의 경우, <code>low</code> 옵션 지정.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -169,7 +169,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="stream_source" href="#stream_source"></a> stream_source</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>라이브 스트림의 데이터 소스. <code>mjpeg</code>는 카메라의 기본 MJPEG 스트림을 사용하고 <code>snapshot</code>은 카메라의 스냅샷 API를 사용하여 스틸 이미지에서 스트림을 만듭니다. RTSP 프로토콜을 통해 스트리밍을 생성하도록<code> rtsp</code> 옵션을 설정할 수도 있습니다.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>라이브 스트림의 데이터 소스. <code>mjpeg</code>는 카메라의 기본 MJPEG 스트림을 사용하고 <code>snapshot</code>은 카메라의 스냅샷 API를 사용하여 스틸 이미지에서 스트림을 만듭니다. RTSP 프로토콜을 통해 스트리밍을 생성하도록 <code>rtsp</code> 옵션을 설정할 수도 있습니다.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -187,7 +187,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="authentication" href="#authentication"></a> authentication</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><strong>stream_source</strong> 가 <strong>mjpeg</strong> 인 경우에만 사용할 인증 방법을 정의. 현재 <em>aiohttp</em>는 <em>basic</em> 만 지원.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p><strong>stream_source</strong>가 <strong>mjpeg</strong>인 경우에만 사용할 인증 방법을 정의. 현재 <em>aiohttp</em>는 <em>basic</em> 만 지원.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -233,7 +233,7 @@ Default value: </p>
 <dd><dl class="nested">
 <dt>
 <a class="title-link" name="sdcard" href="#sdcard"></a> sdcard</dt>
-<dd><p class="desc"><span class="description"><p>총공간과 사용된 공간을 보고하여 SD카드 사용량을 반환.</p>
+<dd><p class="desc"><span class="description"><p>총용량과 사용된 용량을 보고하여 SD카드 사용량을 반환.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="ptz_preset" href="#ptz_preset"></a> ptz_preset</dt>
@@ -243,7 +243,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="control_light" href="#control_light"></a> control_light</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>오디오 또는 비디오 스트림이 활성화 된 경우 카메라의 라이트를 자동으로 제어하고 두 스트림 모두 비활성화된 경우 끄십시오.</p>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>오디오 또는 비디오 스트림이 활성화된 경우 카메라의 라이트를 자동으로 제어하고 두 스트림 모두 비활성화된 경우 끄십시오.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -252,7 +252,7 @@ Default value: </p>
 </dl>
 </div>
 <p>최신 펌웨어의 Amcrest 카메라는 더 이상 MJPEG 인코딩으로 고화질(<code>high</code>) 비디오를 스트리밍 할 수 없습니다. 대신 저해상도(<code>low</code>) 스트림 또는 <code>snapshot</code> 스트림 소스를 사용해야 할 수도 있습니다. 품질이 너무 좋지 않으면 카메라 관리자에서 카메라의 <code>Frame Rate (FPS)</code>를 낮추고 <code>Bit Rate</code> 설정을 최대로 설정하십시오. <em>stream_source</em>를 <strong>mjpeg</strong>로 정의한 경우 카메라가 <em>Basic</em> HTTP 인증을 지원하는지 확인하십시오. 최신 Amcrest 펌웨어가 작동하지 않을 수 있으며 대신 <strong>rtsp</strong>가 권장됩니다.</p>
-<p><strong>Note:</strong> <code>stream_source</code> 옵션을 <code>rtsp</code>로 설정 한 경우, <a href="/integrations/ffmpeg/">ffMPEG</a> 문서에 언급된 단계를 따라 <code>ffmpeg</code>를 설치하십시오.</p>
+<p><strong>Note:</strong> <code>stream_source</code> 옵션을 <code>rtsp</code>로 설정한 경우, <a href="/integrations/ffmpeg/">ffMPEG</a> 문서에 언급된 단계를 따라 <code>ffmpeg</code>를 설치하십시오.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 서비스</h2>
 <p><code>amcrest</code> 통합구성요소는 일단 로드되면 다양한 작업을 수행하기 위해 호출할 수있는 서비스를 노출합니다. <code>entity_id</code> 서비스 속성은 하나 이상의 특정 카메라를 지정하거나 <code>all</code>을 사용하여 설정된 모든 Amcrest 카메라를 지정할 수 있습니다.</p>
@@ -261,7 +261,7 @@ Default value: </p>
 <code>enable_motion_recording</code>, <code>disable_motion_recording</code>,
 <code>enable_recording</code>, <code>disable_recording</code>,
 <code>goto_preset</code>, <code>set_color_bw</code>,
-<code>start_tour</code> and <code>stop_tour</code></p>
+<code>start_tour</code>, <code>stop_tour</code></p>
 <h4>
 <a class="title-link" name="enable_audiodisable_audio-" href="#enable_audiodisable_audio-"></a> enable_audio/disable_audio 서비스</h4>
 <p>이 서비스는 카메라의 오디오 스트림을 활성화 또는 비활성화합니다.</p>
@@ -277,7 +277,7 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>엔티티의 이름, 예 :<code>camera.living_room_camera</code>
+<td>엔티티의 이름, 예: <code>camera.living_room_camera</code>
 </td>
 </tr>
 </tbody>
@@ -297,13 +297,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>엔티티의 이름, 예 :<code>camera.living_room_camera</code>.</td>
+<td>엔티티의 이름, 예: <code>camera.living_room_camera</code>.</td>
 </tr>
 </tbody>
 </table>
 <h4>
 <a class="title-link" name="enable_recordingdisable_recording-" href="#enable_recordingdisable_recording-"></a> enable_recording/disable_recording 서비스</h4>
-<p>이러한 서비스를 통해 카메라가 설정된 저장 위치에 지속적으로 녹화 할 수 있습니다.</p>
+<p>이러한 서비스를 통해 카메라가 설정된 저장 위치에 지속적으로 녹화할 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -316,7 +316,7 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>엔티티의 이름, 예 :<code>camera.living_room_camera</code>.</td>
+<td>엔티티의 이름, 예: <code>camera.living_room_camera</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -335,7 +335,7 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>엔티티의 이름, 예 :<code>camera.living_room_camera</code>.</td>
+<td>엔티티의 이름, 예: <code>camera.living_room_camera</code>.</td>
 </tr>
 <tr>
 <td><code>preset</code></td>
@@ -359,12 +359,13 @@ Default value: </p>
 <tr>
 <td><code>entity_id</code></td>
 <td>no</td>
-<td>엔티티의 이름, 예 :<code>camera.living_room_camera</code>.</td>
+<td>엔티티의 이름, 예: <code>camera.living_room_camera</code>.</td>
 </tr>
 <tr>
 <td><code>color_bw</code></td>
 <td>no</td>
-<td>One of <code>auto</code>, <code>bw</code> or <code>color</code>.</td>
+<td>
+<code>auto</code>, <code>bw</code> 혹은 <code>color</code> 중 하나.</td>
 </tr>
 </tbody>
 </table>

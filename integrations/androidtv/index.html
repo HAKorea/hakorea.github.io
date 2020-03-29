@@ -205,7 +205,7 @@ Default value: </p>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 유형: <code>auto</code> (Android TV 또는 Fire TV 장치인지 감지), <code>androidtv</code> 또는<code>firetv</code>.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>장치 유형: <code>auto</code> (Android TV 또는 Fire TV 장치인지 감지), <code>androidtv</code> 또는 <code>firetv</code>.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -222,11 +222,11 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="turn_on_command" href="#turn_on_command"></a> turn_on_command</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 <code>turn_on</code> 명령을 대체 할 ADB 쉘 명령.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 <code>turn_on</code> 명령을 대체할 ADB 쉘 명령.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="turn_off_command" href="#turn_off_command"></a> turn_off_command</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 <code>turn_off</code> 명령을 대체 할 ADB 쉘 명령.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>기본 <code>turn_off</code> 명령을 대체할 ADB 쉘 명령.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -293,7 +293,7 @@ media_player:
 <h3>
 <a class="title-link" name="2-adb-" href="#2-adb-"></a> 2. ADB 서버</h3>
 <p>두 번째 옵션은 ADB 서버를 사용하여 Android TV 및 Fire TV 장치에 연결하는 것입니다.</p>
-<p>Hass.io 사용자의 경우 <a href="https://github.com/hassio-addons/addon-adb/blob/master/README.md" rel="external nofollow">Android Debug Bridge</a> 애드온을 설치할 수 있습니다. 이 방법을 사용하면 Home Assistant는 ADB 명령을 서버로 전송한 다음 Android TV / Fire TV 장치로 전송하여 Home Assistant에 다시 보고합니다. 이 옵션을 사용하려면 <code>adb_server_ip</code> 옵션을 설정에 추가하십시오. 홈 어시스턴트와 동일한 머신에서 서버를 실행중인 경우이 값으로 <code>127.0.0.1</code>을 사용할 수 있습니다.</p>
+<p>Hass.io 사용자의 경우 <a href="https://github.com/hassio-addons/addon-adb/blob/master/README.md" rel="external nofollow">Android Debug Bridge</a> 애드온을 설치할 수 있습니다. 이 방법을 사용하면 Home Assistant는 ADB 명령을 서버로 전송한 다음 Android TV / Fire TV 장치로 전송하여 Home Assistant에 다시 보고합니다. 이 옵션을 사용하려면 <code>adb_server_ip</code> 옵션을 설정에 추가하십시오. 홈어시스턴트와 동일한 머신에서 서버를 실행중인 경우 이 값으로 <code>127.0.0.1</code>을 사용할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="adb--" href="#adb--"></a> ADB 문제 해결</h2>
 <p>Android TV 또는 Fire TV 장치 설정에 실패하면 ADB 연결에 문제가 있을 수 있습니다. 가능한 원인은 다음과 같습니다.</p>
@@ -305,26 +305,26 @@ media_player:
 <p>장치에서 ADB를 사용할 수 없습니다.</p>
 </li>
 <li>
-<p>다른 기기에서 ADB를 통해 Android TV / Fire TV에 ​​이미 연결되어 있습니다. 하나의 장치 만 연결할 수 있으므로 다른 장치의 연결을 끊고 Android TV / Fire TV를 다시 시작한 다음 (가정용) 홈어시스턴트를 다시 시작하십시오.</p>
+<p>다른 기기에서 ADB를 통해 Android TV / Fire TV에 ​​이미 연결되어 있습니다. 하나의 장치만 연결할 수 있으므로 다른 장치의 연결을 끊고 Android TV / Fire TV를 다시 시작한 다음 정확한 동작을 위해 홈어시스턴트를 다시 시작하십시오.</p>
 </li>
 <li>
-<p>ADB 연결을 승인해야합니다. 위의 <a href="#adb-setup">ADB Setup</a> 섹션에있는 참고 사항을 참조하십시오.</p>
+<p>ADB 연결을 승인해야합니다. 위의 <a href="#adb-setup">ADB Setup</a> 섹션에 있는 참고 사항을 참조하십시오.</p>
 </li>
 <li>
-<p>일부 Android TV 장치 (예: Android TV를 실행하는 Philips TV)는 Wi-Fi 인터페이스를 통한 초기 ADB 연결 요청만 수락합니다. TV가 유선 인 경우 WiFi에 연결하고 초기 연결을 다시 시도해야합니다. Wi-Fi를 통해 인증이 승인되면 유선 인터페이스를 통해 TV에 연결할 수도 있습니다.</p>
+<p>일부 Android TV 장치 (예: Android TV를 실행하는 Philips TV)는 Wi-Fi 인터페이스를 통한 초기 ADB 연결 요청만 수락합니다. TV가 유선인 경우 WiFi에 연결하고 초기 연결을 다시 시도해야합니다. Wi-Fi를 통해 인증이 승인되면 유선 인터페이스를 통해 TV에 연결할 수도 있습니다.</p>
 </li>
 <li>
-<p>장치가 WiFi를 끊어 ADB 연결을 끊고 Home Assistant에서 엔터티를 사용할 수 없는 경우 깨우기 잠금 유틸리티(such as <a href="https://github.com/d4rken/wakelock-revamp" rel="external nofollow">Wakelock</a>)를 설치하여 이 문제가 발생하지 않도록 할 수 있습니다. 일부 사용자는 Xiaomi Mi Box 장치에서이 문제를 보고했습니다.</p>
+<p>장치가 WiFi를 끊어 ADB 연결을 끊고 Home Assistant에서 엔터티를 사용할 수 없는 경우 깨우기 잠금 유틸리티(<a href="https://github.com/d4rken/wakelock-revamp" rel="external nofollow">Wakelock</a>같은 유틸)를 설치하여 이 문제가 발생하지 않도록 할 수 있습니다. 일부 사용자는 Xiaomi Mi Box 장치에서 이 문제를 보고했습니다.</p>
 </li>
 <li>
-<p>위에서 언급한 <a href="#1-python-adb-implementation">Python ADB implementation</a> 접근 방식을 사용하는 경우 최신 장치에 문제가있을 수 있습니다. 이 경우 <a href="#2-adb-server">ADB 서버</a> 방법을 대신 사용해야합니다.</p>
+<p>위에서 언급한 <a href="#1-python-adb-implementation">Python ADB implementation</a> 접근 방식을 사용하는 경우 최신 장치에 문제가 있을 수 있습니다. 이 경우 <a href="#2-adb-server">ADB 서버</a> 방법을 대신 사용해야합니다.</p>
 </li>
 </ol>
 <h2>
 <a class="title-link" name="" href="#"></a> 서비스</h2>
 <h3>
 <a class="title-link" name="media_playerselect_source" href="#media_playerselect_source"></a> media_player.select_source</h3>
-<p><code>media_player.select_source</code> 명령을 사용하여 장치에서 앱을 시작할 수 있습니다. 간단히 앱 ID를 <code>source</code> 로 제공하십시오. 앱 ID 앞에 <code>!</code>를 붙여서 앱을 중지 할 수도 있습니다. 예를 들어 다음과 같이 Netflix를 시작 및 중지하도록 <a href="/docs/scripts">scripts</a>를 정의 할 수 있습니다.</p>
+<p><code>media_player.select_source</code> 명령을 사용하여 장치에서 앱을 시작할 수 있습니다. 간단히 앱 ID를 <code>source</code> 로 제공하십시오. 앱 ID 앞에 <code>!</code>를 붙여서 앱을 중지할 수도 있습니다. 예를 들어 다음과 같이 Netflix를 시작 및 중지하도록 <a href="/docs/scripts">scripts</a>를 정의 할 수 있습니다.</p>
 <pre><code class="language-yaml">start_netflix:
   sequence:
   - service: media_player.select_source
@@ -363,7 +363,7 @@ stop_netflix:
 </tr>
 </tbody>
 </table>
-<p><a href="/getting-started/automation/">automation setup</a> 의 <a href="/getting-started/automation-action/">action</a>에서 다음과 같이 보일 수 있습니다.</p>
+<p><a href="/getting-started/automation/">automation setup</a>의 <a href="/getting-started/automation-action/">action</a>에서 다음과 같이 보이게 할 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: androidtv.adb_command
   data:
@@ -383,9 +383,9 @@ stop_netflix:
 <li><code>BACK</code></li>
 <li><code>MENU</code></li>
 </ul>
-<p>주요 명령의 전체 목록은 <a href="https://github.com/JeffLIrion/python-androidtv/blob/bf1058a2f746535921b3f5247801469c4567e51a/androidtv/constants.py#L143-L186" rel="external nofollow">here</a>에서 찾을 수 있습니다 .</p>
-<p><code>GET_PROPERTIES</code> 명령을 사용하여 홈어시스턴트가 장치의 상태를 업데이트하는데 사용하는 속성을 검색 할 수도 있습니다. 이들은 미디어 플레이어의 <code>'adb_response'</code> 속성에 저장되고 INFO 레벨에서 기록됩니다. 이 정보는 백엔드 <a href="https://github.com/JeffLIrion/python-androidtv" rel="external nofollow">androidtv</a> 패키지에서 상태 감지를 개선하고 고유한 <a href="#custom-state-detection">custom state detection</a> 규칙을 정의하는 데 사용될 수 있습니다.</p>
-<p>다양한 의도(intents) 목록은 <a href="https://gist.github.com/mcfrojd/9e6875e1db5c089b1e3ddeb7dba0f304" rel="external nofollow">here</a>에서 찾을 수 있습니다</p>
+<p>주요 명령의 전체 목록은 <a href="https://github.com/JeffLIrion/python-androidtv/blob/bf1058a2f746535921b3f5247801469c4567e51a/androidtv/constants.py#L143-L186" rel="external nofollow">여기</a>에서 찾을 수 있습니다 .</p>
+<p><code>GET_PROPERTIES</code> 명령을 사용하여 홈어시스턴트가 장치의 상태를 업데이트하는데 사용하는 속성을 검색할 수도 있습니다. 이들은 미디어 플레이어의 <code>'adb_response'</code> 속성에 저장되고 INFO 레벨에서 기록됩니다. 이 정보는 백엔드 <a href="https://github.com/JeffLIrion/python-androidtv" rel="external nofollow">androidtv</a> 패키지에서 상태 감지를 개선하고 고유한 <a href="#custom-state-detection">custom state detection</a> 규칙을 정의하는 데 사용될 수 있습니다.</p>
+<p>다양한 의도(intents) 목록은 <a href="https://gist.github.com/mcfrojd/9e6875e1db5c089b1e3ddeb7dba0f304" rel="external nofollow">여기</a>에서 찾을 수 있습니다</p>
 <h3>
 <a class="title-link" name="androidtvdownload--androidtvupload" href="#androidtvdownload--androidtvupload"></a> androidtv.download 및 androidtv.upload</h3>
 <p><code>androidtv.download</code> 서비스를 사용하여 Android TV / Fire TV 장치에서 홈어시스턴트 인스턴스로 파일을 다운로드 할 수 있습니다.</p>
@@ -444,7 +444,7 @@ stop_netflix:
 </table>
 <h2>
 <a class="title-link" name="----custom-state-detection" href="#----custom-state-detection"></a> 사용자 정의 상태 감지 (Custom State Detection)</h2>
-<p>Android TV 통합은 Android TV / Fire TV 장치를 정기적으로 폴링하고 소수의 속성을 수집하여 작동합니다. 불행히도 모든 앱이 준수하는 기기의 상태를 결정하기 위한 표준 API는 없습니다. 대신, 백엔드 <code>androidtv</code> 패키지는 상태를 판별하기 위해 수집하는 세 가지 특성을 사용합니다. : <code>audio_state</code>, <code>media_session_state</code>, <code>wake_lock_size</code>. 상태를 결정하는 올바른 로직은 현재 앱에 따라 다르며 백엔드 <code>androidtv</code> 패키지는 소수의 앱에 대해 앱별 상태 감지 로직을 구현합니다. 물론, <code>androidtv</code> 패키지의 각 앱마다 맞춤형 로직을 구현하는 것은 불가능합니다. 또한 올바른 상태 감지 로직은 장치 및 장치 설정에 따라 다를 수 있습니다.</p>
+<p>Android TV 통합구성요소는 Android TV / Fire TV 장치를 정기적으로 폴링하고 몇가지 속성을 수집하여 작동합니다. 불행히도 모든 앱이 준수하는 기기의 상태를 결정하기 위한 표준 API는 없습니다. 대신, 백엔드 <code>androidtv</code> 패키지는 상태를 판별하기 위해 수집하는 세 가지 특성을 사용합니다. : <code>audio_state</code>, <code>media_session_state</code>, <code>wake_lock_size</code>. 상태를 결정하는 올바른 로직은 현재 앱에 따라 다르며 백엔드 <code>androidtv</code> 패키지는 몇가지 앱에 대해 앱별 상태 감지 로직을 구현합니다. 물론, <code>androidtv</code> 패키지의 각 앱마다 맞춤형 로직을 구현하는 것은 불가능합니다. 또한 올바른 상태 감지 로직은 장치 및 장치 설정에 따라 다를 수 있습니다.</p>
 <p>이 문제에 대한 해결책은 <code>state_detection_rules</code> 설정 매개 변수로, 상태 감지에 대한 고유한 규칙을 제공할 수 있습니다. 키는 앱ID이고 값은 순서대로 평가되는 규칙 목록입니다. 유효한 규칙은 다음과 같습니다. :</p>
 <ul>
 <li>

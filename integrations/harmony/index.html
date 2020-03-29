@@ -103,8 +103,10 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="394" src="https://www.youtube.com/embed/CoFgTYq7VKA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>harmony</code> 원격 플랫폼을 사용하면 <a href="https://www.logitech.com/en-us/product/harmony-hub" rel="external nofollow">Harmony Hub Device</a>의 상태를 제어 할 수 있습니다</p>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/CoFgTYq7VKA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>harmony</code> 원격 플랫폼을 사용하면 <a href="https://www.logitech.com/en-us/product/harmony-hub" rel="external nofollow">Harmony Hub Device</a>의 상태를 제어할 수 있습니다</p>
 <p>지원 유닛들 :</p>
 <ul>
 <li>Harmony Hub</li>
@@ -120,7 +122,7 @@ remote:
     name: Bedroom
     host: 10.168.1.13
 </code></pre>
-<p><code>configuration.yaml</code> 설정을 추가하여 검색된 허브의 일부 기본 설정 값 (예 : <code>port</code> 또는 <code>activity</code>)을 대체 할 수 있습니다. 이 경우 플랫폼이 호스트 IP를 자동으로 감지하도록 <code>host</code> 설정을 비워 두십시오. 그러나 설정에서 <code>name</code>을 허브에 설정한 이름과 정확히 일치하도록 설정하여 플랫폼이 설정하려는 허브를 플랫폼이 인식하도록 합니다.</p>
+<p><code>configuration.yaml</code> 설정을 추가하여 검색된 허브의 일부 기본 설정값 (예: <code>port</code> 또는 <code>activity</code>)을 대체할 수 있습니다. 이 경우 플랫폼이 호스트 IP를 자동으로 감지하도록 <code>host</code> 설정을 비워두십시오. 그러나 설정에서 <code>name</code>을 허브에 설정한 이름과 정확히 일치하도록 설정하여 플랫폼이 설정하려는 허브를 플랫폼이 인식하도록 합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry with discovery
   - platform: harmony
     name: Living Room
@@ -173,13 +175,13 @@ Default value: </p>
 </div>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 설정 파일</h3>
-<p>시작시 하나의 파일이 다음 형식으로 장치당 홈어시스턴트 설정 디렉토리에 작성됩니다. :  <code>harmony_REMOTENAME.conf</code> 파일은 다음을 포함합니다</p>
+<p>시작시 하나의 파일이 다음 형식으로 장치당 홈어시스턴트 설정 디렉토리에 작성됩니다. : <code>harmony_REMOTENAME.conf</code> 파일은 다음을 포함합니다</p>
 <ul>
-<li>프로그래밍 된 모든 활동 이름 및 ID 번호 목록</li>
-<li>프로그래밍 된 모든 장치 이름 및 ID 번호 목록</li>
-<li>프로그래밍 된 장치 당 사용 가능한 모든 명령 목록</li>
+<li>프로그래밍된 모든 활동이름 및 ID 번호 목록</li>
+<li>프로그래밍된 모든 장치이름 및 ID 번호 목록</li>
+<li>프로그래밍된 장치당 사용 가능한 모든 명령 목록</li>
 </ul>
-<p>Harmony HUB에 새로운 설정이 있을 때마다 이 파일을 덮어 쓰므로 홈어시스턴트를 다시 시작할 필요가 없습니다.</p>
+<p>Harmony HUB에 새로운 설정이 있을 때마다 이 파일을 덮어쓰므로 홈어시스턴트를 다시 시작할 필요가 없습니다.</p>
 <h3>
 <a class="title-link" name="remoteturn_off-" href="#remoteturn_off-"></a> remote.turn_off 서비스</h3>
 <p>현재 activity 시작부터 스위치를 켠 모든 장치를 끕니다.</p>
@@ -201,7 +203,7 @@ Default value: </p>
 </table>
 <h3>
 <a class="title-link" name="remoteturn_on-" href="#remoteturn_on-"></a> remote.turn_on 서비스</h3>
-<p>activity를 시작하십시오. activity가 지정되지 않은 경우 configuration.yaml에서 기본 <code>activity</code>를 시작합니다. 지정된 activity는 <a href="/docs/configuration/">Home Assistant configuration directory</a>에 기록된 설정 파일의 activity 이름 또는 activity ID 일 수 있습니다.</p>
+<p>activity를 시작하십시오. activity가 지정되지 않은 경우 configuration.yaml에서 기본 <code>activity</code>를 시작합니다. 지정된 activity는 <a href="/docs/configuration/">Home Assistant configuration directory</a>에 기록된 설정 파일의 activity이름 또는 activity ID일 수 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -235,7 +237,7 @@ Default value: </p>
     }
 }
 </code></pre>
-<p>activity 이름 ‘Watch TV’을 사용하여 자동화를 통해 서비스를 호출하여이 activity를 켤 수 있습니다. :</p>
+<p>activity이름 ‘Watch TV’을 사용하여 자동화를 통해 서비스를 호출하여 이 activity를 켤 수 있습니다. :</p>
 <pre><code class="language-yaml">action:
   - service: remote.turn_on
     entity_id: remote.bed_room_hub
@@ -272,7 +274,7 @@ Default value: </p>
 <tr>
 <td><code>num_repeats</code></td>
 <td>yes</td>
-<td>명령을 반복 할 횟수.</td>
+<td>명령을 반복할 횟수.</td>
 </tr>
 <tr>
 <td><code>delay_secs</code></td>
@@ -348,8 +350,7 @@ data:
 </tr>
 </tbody>
 </table>
-<p>A typical service call for changing the channel would be::
-채널 변경을위한 일반적인 서비스 요청은 다음과 같습니다.</p>
+<p>채널 변경을 위한 일반적인 서비스 요청은 다음과 같습니다.</p>
 <pre><code class="language-yaml">service: harmony.change_channel
 data:
   entity_id: remote.tv_room
@@ -357,7 +358,7 @@ data:
 </code></pre>
 <h3>
 <a class="title-link" name="harmonysync-" href="#harmonysync-"></a> harmony.sync 서비스</h3>
-<p>하모니 장치와 하모니 클라우드 간 강제 동기화</p>
+<p>하모니 장치와 하모니 클라우드간 강제 동기화</p>
 <table>
 <thead>
 <tr>

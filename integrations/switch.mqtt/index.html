@@ -109,7 +109,7 @@
 <p>이상적인 시나리오에서 MQTT 디바이스에는 상태 변경 사항을 공개하기 위한 <code>state_topic</code>이 있습니다. 이러한 메시지가 <code>RETAIN</code> 플래그와 함께 공개되면 MQTT 스위치는 구독(subscription) 후 즉시 상태 업데이트를 수신하고 변경된 상태로 시작합니다. 그렇지 않으면 스위치의 초기 상태는 <code>false</code>/<code>off</code>입니다.</p>
 <p><code>state_topic</code>을 사용할 수 없으면 스위치는 optimistic 모드에서 작동합니다. 이 모드에서 스위치는 모든 명령 후에 즉시 상태를 변경합니다. 그렇지 않으면 스위치는 장치의 상태 확인을 기다립니다 (<code>state_topic</code>의 메시지).</p>
 <p><code>state_topic</code>이 사용 가능하더라도 Optimistic 모드를 강제할 수 있습니다. 잘못된 스위치 작동이 발생하면 활성화하십시오.</p>
-<p>설치에서이 스위치를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>설치시 이 스위치를 활성화하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: mqtt
@@ -274,7 +274,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
-<p>이 섹션에서는 이 센서를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
+<p>본 섹션에서는 이 센서를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 전체 설정</h3>
 <p>아래 예는 스위치의 전체 설정을 보여줍니다.</p>
@@ -298,7 +298,7 @@ switch:
 </code></pre>
 <h3>
 <a class="title-link" name="espeasy----" href="#espeasy----"></a> ESPEasy를 사용하여 장치 상태 설정</h3>
-<p><a href="https://github.com/letscontrolit/ESPEasy" rel="external nofollow">ESPEasy</a>를 사용하여 ESP8266 장치를 플래시했다고 가정합니다. “Config”아래에 장치의 이름 ( “Unit Name:”)이 있습니다 (여기서는 “bathroom”). “OpenHAB MQTT” 프로토콜을 사용하는 MQTT에 대한 “Controller”에 대한 설정이 있으며 항목 ( “Controller Subscribe:“및 “Controller Publish:”)이 필요에 맞게 조정됩니다. 이 예에서 topic은 “home”으로 시작합니다. <a href="https://www.letscontrolit.com/wiki/index.php/GPIO" rel="external nofollow">GPIO</a>를 MQTT로 직접 제어할 수 있으므로 추가 설정이 필요하지 않습니다.</p>
+<p><a href="https://github.com/letscontrolit/ESPEasy" rel="external nofollow">ESPEasy</a>를 사용하여 ESP8266 장치를 플래시했다고 가정합니다. “Config”아래에 장치의 이름 (“Unit Name:”)이 있습니다 (여기서는 “bathroom”). “OpenHAB MQTT” 프로토콜을 사용하는 MQTT에 대한 “Controller”에 대한 설정이 있으며 항목(“Controller Subscribe:” 및 “Controller Publish:”)이 필요에 맞게 조정됩니다. 이 예에서 topic은 “home”으로 시작합니다. <a href="https://www.letscontrolit.com/wiki/index.php/GPIO" rel="external nofollow">GPIO</a>를 MQTT로 직접 제어할 수 있으므로 추가설정이 필요하지 않습니다.</p>
 <p><code>mosquitto_pub</code> 또는 다른 MQTT 도구를 사용하여 pin 13을 수동으로 HIGH로 설정할 수 있습니다.</p>
 <pre><code class="language-bash">mosquitto_pub -h 127.0.0.1 -t home/bathroom/gpio/13 -m "1"
 </code></pre>

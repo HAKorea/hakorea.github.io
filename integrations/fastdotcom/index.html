@@ -103,16 +103,18 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/qtNoo4W5dSc?list=PLWlpiQXaMerTyzl_Pe1PEloZTj9MoU5cl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/qtNoo4W5dSc?list=PLWlpiQXaMerTyzl_Pe1PEloZTj9MoU5cl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><code>fastdotcom</code> 통합구성요소는 <a href="https://fast.com/" rel="external nofollow">Fast.com</a> 웹서비스를 사용하여 네트워크 대역폭 성능을 측정합니다.</p>
 <div class="note">
-<p>현재 fast.com은 다운로드 대역폭 측정 만 지원합니다. Ping 및 업로드와 같은 다른 대역폭 메트릭(Metric)을 측정하려면 <a href="/integrations/speedtestdotnet">speedtest</a> 구성 요소를 사용하십시오.</p>
+<p>현재 fast.com은 다운로드 대역폭 측정만 지원합니다. Ping 및 업로드와 같은 다른 대역폭 메트릭(Metric)을 측정하려면 <a href="/integrations/speedtestdotnet">speedtest</a> 구성 요소를 사용하십시오.</p>
 </div>
 <p>이 통합구성요소를 활성화하면 Fast.com 센서가 자동으로 생성됩니다.</p>
-<p>기본적으로 속도 테스트는 1 시간마다 실행됩니다. 사용자는 속도 테스트를 실행하기 위해 <code>scan_interval</code>을 정의하여 구성에서 업데이트 빈도를 변경할 수 있습니다</p>
+<p>기본적으로 속도 테스트는 1 시간마다 실행됩니다. 사용자는 속도 테스트를 실행하기 위해 <code>scan_interval</code>을 정의하여 설정에서 업데이트 빈도를 변경할 수 있습니다</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>설치에 Fast.com을 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>Fast.com을 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <p>시간당 한 번, 시간 (기본값) :</p>
 <pre><code class="language-yaml">fastdotcom:
 </code></pre>
@@ -157,12 +159,12 @@ Default value: </p>
 </code></pre>
 <h3>
 <a class="title-link" name="" href="#"></a> 서비스</h3>
-<p><code>fastdotcom</code> 통합구성요소는 일단 로드되면 요청시 Fast.com 속도 테스트를 실행하기 위해 호출할 수있는 서비스 (<code>fastfastcom.speedtest</code>)를 노출합니다. 이 서비스에는 매개 변수가 없습니다. 수동 모드를 활성화 한 경우 유용할 수 있습니다.</p>
+<p><code>fastdotcom</code> 통합구성요소는 일단 로드되면 요청시 Fast.com 속도 테스트를 실행하기 위해 호출할 수 있는 서비스 (<code>fastfastcom.speedtest</code>)를 노출합니다. 이 서비스에는 매개 변수가 없습니다. 수동 모드를 활성화한 경우 유용할 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: fastdotcom.speedtest
 </code></pre>
 <h2>
-<a class="title-link" name="notes" href="#notes"></a> Notes</h2>
+<a class="title-link" name="" href="#"></a> 참고사항</h2>
 <ul>
 <li>Raspberry Pi 3 이상에서 실행하는 경우 최대 속도는 100Mbit/s LAN 어댑터에 의해 제한됩니다.</li>
 <li>센서는 15 초 테스트 동안 최대 측정 속도를 반환합니다.</li>

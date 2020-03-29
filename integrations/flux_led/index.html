@@ -103,10 +103,12 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/EqZtinzD6yM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>flux_led</code>는 라이트 플랫폼으로서 홈어시스턴트에 연동됩니다. 전구와 컨트롤러의 여러 브랜드는 동일한 프로토콜을 사용하며 HF-LPB100 칩셋을 공통으로 사용합니다. MagicHome 앱으로 장치를 제어 할 수 있으면 전구나 컨트롤러 (예: WiFi LED 컨트롤러)가 작동 할 가능성이 높습니다.
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/EqZtinzD6yM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>flux_led</code>는 라이트 플랫폼으로서 홈어시스턴트에 연동됩니다. 전구와 컨트롤러의 여러 브랜드는 동일한 프로토콜을 사용하며 HF-LPB100 칩셋을 공통으로 사용합니다. MagicHome 앱으로 장치를 제어 할 수 있으면 전구나 컨트롤러 (예: WiFi LED 컨트롤러)가 작동할 가능성이 높습니다.
 전구의 예:</p>
-<p><em>Note</em> : 해당 제품들의 일부 Wifi 제품들은 <a href="https://hakorea.github.io/integrations/esphome/" rel="external nofollow">ESPHOME</a>, <a href="https://tasmota.github.io/docs/#/installation/" rel="external nofollow">TASMOTA</a>와 같은 방식으로 변환시 좀 더 다양한 기능을 활용할 수 있습니다.</p>
+<p><em>Note</em> : 해당 제품들의 일부 Wifi 제품들은 <a href="https://hakorea.github.io/integrations/esphome/" rel="external nofollow">ESPHOME</a>, <a href="https://tasmota.github.io/docs/#/installation/" rel="external nofollow">TASMOTA</a>와 같은 방식으로 변환시 훨씬 다양한 기능을 활용할 수 있습니다.</p>
 <ul>
 <li><a href="https://www.fluxsmartlighting.com/" rel="external nofollow">Flux Smart Lighting</a></li>
 <li><a href="https://amzn.to/2X0dVwu" rel="external nofollow">Flux WiFi Smart LED Light Bulb4</a></li>
@@ -196,8 +198,7 @@ Default value: </p>
 </div>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 설정 예시</h3>
-<p>Will automatically search and add all lights on start up:
-시작시 모든 조명을 자동으로 검색하고 추가합니다.</p>
+<p>시작시 모든 조명을 자동으로 검색하고 추가합니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 light:
   - platform: flux_led
@@ -234,7 +235,7 @@ automation:
       name: NAME
       mode: "rgbw"
 </code></pre>
-<p>white 모드의 조명만 추가합니다. W 채널만 RGBW 컨트롤러에 연결되어 있고 밝기 값을 통해 화이트 레벨을 제어할 수있는 경우에 유용합니다.</p>
+<p>white 모드의 조명만 추가합니다. W 채널만 RGBW 컨트롤러에 연결되어 있고 밝기 값을 통해 화이트 레벨을 제어할 수 있는 경우에 유용합니다.</p>
 <pre><code class="language-yaml">    192.168.1.10:
       name: NAME
       mode: "w"

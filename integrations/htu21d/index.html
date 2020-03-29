@@ -103,14 +103,14 @@
   <hr class="divider">
   
 
-  <p>The <code>htu21d</code> sensor platform allows you to read the temperature and humidity from a <a href="https://cdn-shop.adafruit.com/datasheets/1899_HTU21D.pdf" rel="external nofollow">HTU21D sensor</a> connected via <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2c</a> bus (SDA, SCL pins).</p>
-<p>Tested devices:</p>
+  <p>htu21d 센서 플랫폼을 사용하면 <a href="https://en.wikipedia.org/wiki/I%C2%B2C" rel="external nofollow">I2c</a> 버스 (SDA, SCL 핀)를 통해 연결된 <a href="https://cdn-shop.adafruit.com/datasheets/1899_HTU21D.pdf" rel="external nofollow">HTU21D 센서</a>에서 온도와 습도를 읽을 수 있습니다.</p>
+<p>테스트된 장치 :</p>
 <ul>
 <li><a href="https://www.raspberrypi.org/" rel="external nofollow">Raspberry Pi</a></li>
 </ul>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To use your HTU21D sensor in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>설치시 HTU21D 센서를 사용하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: htu21d
@@ -140,8 +140,8 @@ Default value: </p>
 </dl>
 </div>
 <h2>
-<a class="title-link" name="customizing-the-sensor-data" href="#customizing-the-sensor-data"></a> Customizing the sensor data</h2>
-<p>Give the values friendly names and icons, add the following to your <code>customize:</code> section.</p>
+<a class="title-link" name="---" href="#---"></a> 사용자 정의 센서 데이터</h2>
+<p>값에 친숙한 이름과 아이콘을 지정하고 <code>customize:</code> 섹션에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 customize:
   sensor.htu21d_sensor_temperature:
@@ -151,7 +151,7 @@ customize:
     icon: mdi:weather-rainy
     friendly_name: "Humidity"
 </code></pre>
-<p>To create a group, add the following to your <code>groups</code> section.</p>
+<p>그룹을 만들려면 <code>groups</code> 섹션에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 group:
   ambient_sensor:
@@ -161,8 +161,8 @@ group:
       - sensor.htu21d_sensor_humidity
 </code></pre>
 <h2>
-<a class="title-link" name="directions-for-installing-smbus-support-on-raspberry-pi" href="#directions-for-installing-smbus-support-on-raspberry-pi"></a> Directions for installing smbus support on Raspberry Pi</h2>
-<p>Enable I2c interface with the Raspberry Pi configuration utility:</p>
+<a class="title-link" name="raspberry-pi-smbus---" href="#raspberry-pi-smbus---"></a> Raspberry Pi에 smbus 지원 설치 지침</h2>
+<p>Raspberry Pi 설정 유틸리티를 사용하여 I2c 인터페이스를 활성화하십시오.</p>
 <pre><code class="language-bash"># pi user environment: Enable i2c interface
 $ sudo raspi-config
 </code></pre>
@@ -178,8 +178,8 @@ $ sudo addgroup homeassistant i2c
 $ sudo reboot
 </code></pre>
 <h3>
-<a class="title-link" name="check-the-i2c-address-of-the-sensor" href="#check-the-i2c-address-of-the-sensor"></a> Check the i2c address of the sensor</h3>
-<p>After installing <code>i2c-tools</code>, a new utility is available to scan the addresses of the connected sensors:</p>
+<a class="title-link" name="-i2c--" href="#-i2c--"></a> 센서의 i2c 주소 확인</h3>
+<p><code>i2c-tools</code>를 설치한 후, 연결된 센서의 주소를 스캔할 수 있는 새로운 유틸리티가 제공됩니다 :</p>
 <pre><code class="language-bash">$ /usr/sbin/i2cdetect -y 1
 </code></pre>
 <p>It will output a table like this:</p>
@@ -193,7 +193,7 @@ $ sudo reboot
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- 77
 </code></pre>
-<p>So you can see the sensor is present at the <strong>0x40</strong> address (there are more i2c sensors in that Raspberry Pi).</p>
+<p>따라서 센서가 <strong>0x40</strong> 주소에 있음을 알 수 있습니다 (해당 라즈베리파이에는 i2c 센서가 더 있습니다).</p>
 
 
 </article>

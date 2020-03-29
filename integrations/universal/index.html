@@ -103,8 +103,8 @@
   <hr class="divider">
   
 
-  <p>Universal Media Player는 Home Assistant의 여러 기존 엔티티를 하나의 미디어 플레이어 엔티티로 결합합니다. 전체 미디어 센터를 제어하는 ​​단일 엔터티를 만드는 데 사용됩니다.</p>
-<p>Universal 미디어 플레이어에서 여러 미디어 플레이어 개체를 제어할 수 있습니다. 또한 Universal 미디어 플레이어를 사용하면 볼륨 및 전원 명령을 홈어시스턴트의 다른 엔티티로 다시 라우팅 할 수 있습니다. 이를 통해 전원 및 볼륨이 있는 텔레비전 또는 오디오 수신기와 같은 외부 장치를 제어 할 수 있습니다.</p>
+  <p>Universal Media Player는 Home Assistant의 여러 기존 엔티티를 하나의 Media Player 엔티티로 결합합니다. 전체 미디어 센터를 제어하는 ​​단일 엔터티를 만드는데 사용됩니다.</p>
+<p>Universal Media Player에서 여러 Media Player 개체를 제어할 수 있습니다. 또한 Universal Media Player를 사용하면 볼륨 및 전원 명령을 홈어시스턴트의 다른 엔티티로 다시 라우팅할 수 있습니다. 이를 통해 전원 및 볼륨이 있는 텔레비전 또는 오디오 수신기와 같은 외부 장치를 제어할 수 있습니다.</p>
 <p><code>configuration.yaml</code>에서 다음과 같이 Universal Media Player가 생성됩니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 media_player:
@@ -159,8 +159,8 @@ media_player:
 </span></p></dd>
 </dl>
 </div>
-<p>Universal Media Player는 주로 <code>children</code> 중 하나를 모방합니다. Universal Media Player는 활성화 된 (not idle/off) 목록의 첫 번째 child을 제어합니다. 유니버설 미디어 플레이어는 또한 <code>state_template</code>이 제공되지 않으면 첫 번째 활성 child에서 상태를 상속합니다. <code>children:</code> 목록의 엔티티는 미디어 플레이어 여야하지만 상태 템플릿은 어떤 엔티티도 포함할 수 있습니다.</p>
-<p><code>turn_on</code> 명령, <code>turn_off</code> 명령 및 <code>state</code> 속성은 모두 함께 제공하는 것이 좋습니다. <code>state</code> 속성은 미디어 플레이어가 켜져 있는지 꺼져 있는지를 나타냅니다. <code>state</code>는 미디어 플레이어가 꺼져 있음을 나타내는 경우, 이 상태는 child의 상태보다 우선합니다. 모든 child가 idle/off 이고 상태가 켜져 있으면 Universal Media Player의 상태가 켜집니다.</p>
+<p>Universal Media Player는 주로 <code>children</code> 중 하나를 모방합니다. Universal Media Player는 활성화된 (not idle/off) 목록의 첫 번째 child을 제어합니다. Universal Media Player는 또한 <code>state_template</code>이 제공되지 않으면 첫 번째 활성 child에서 상태를 상속합니다. <code>children:</code> 목록의 엔티티는 Media Player여야하지만 상태 템플릿은 어떤 엔티티도 포함할 수 있습니다.</p>
+<p><code>turn_on</code> 명령, <code>turn_off</code> 명령 및 <code>state</code> 속성은 모두 함께 제공하는 것이 좋습니다. <code>state</code> 속성은 Media Player가 켜져 있는지 꺼져 있는지를 나타냅니다. <code>state</code>는 Media Player가 꺼져 있음을 나타내는 경우, 이 상태는 child의 상태보다 우선합니다. 모든 child가 idle/off 이고 상태가 켜져 있으면 Universal Media Player의 상태가 켜집니다.</p>
 <p><code>volume_up</code> 명령, <code>vol_down</code> 명령, <code>volume_mute</code> 명령 및 <code>_is_volume_muted</code> 속성을 모두 함께 제공하는 것이 좋습니다. <code>is_volume_muted</code> 속성은 볼륨이 음소거되면 True 또는 on 상태를 반환해야합니다. <code>volume_mute</code> 서비스는 음소거 설정을 토글합니다.</p>
 <p><code>select_source</code>를 명령으로 제공할 때, <code>source</code> 및 <code>source_list</code> 속성도 제공하는 것이 좋습니다. <code>source</code> 속성은 현재 선택된 소스이고, <code>source_list</code> 속성은 사용 가능한 모든 소스의 목록입니다.</p>
 <h2>
@@ -217,8 +217,8 @@ media_player:
 <h4>
 <a class="title-link" name="kodi-cec-tv-control" href="#kodi-cec-tv-control"></a> Kodi CEC-TV control</h4>
 <p>이 예에서 <a href="/integrations/kodi">Kodi Media Player</a>는 CEC 가능 장치 (예: Raspberry Pi 24/7에서 실행되는 OSMC/OpenElec)에서 실행되며 JSON-CEC Kodi 애드온이 설치된 연결된 TV를 켜고 끌 수 있습니다.</p>
-<p>연결된 TV의 상태를 숨겨진 <a href="/integrations/input_boolean/">input boolean</a>에 저장하므로 Kodi가 항상 ‘idle’인 동안 TV를 켜거나 끄고 universal 미디어 플레이어를 사용하여 상태를 템플릿으로 렌더링합니다.  Kodi Media Player도 숨길 수 있으며 universal만 표시합니다. 이제는 ‘idle’상태와 ‘off’상태를 구분할 수 있습니다. (몇 초가 지나가면 idle일 때 TV는 꺼집니다).</p>
-<p>TV 상태를 저장하는데 사용되는 input boolean은 홈어시스턴트 <code>turn_on</code> 및 <code>turn_off</code> 액션을 사용할 때만 변경되므로 Kodi는 여러 가지 방법으로 제어 할 수 있으므로 필요할 때 이 input boolean을 업데이트하기 위한 자동화도 정의합니다.</p>
+<p>연결된 TV의 상태를 숨겨진 <a href="/integrations/input_boolean/">input boolean</a>에 저장하므로 Kodi가 항상 ‘idle’인 동안 TV를 켜거나 끄고 universal Media Player를 사용하여 상태를 템플릿으로 렌더링합니다.  Kodi Media Player도 숨길 수 있으며 universal만 표시합니다. 이제는 ‘idle’상태와 ‘off’상태를 구분할 수 있습니다. (몇 초가 지나가면 idle일 때 TV는 꺼집니다).</p>
+<p>TV 상태를 저장하는데 사용되는 input boolean은 홈어시스턴트 <code>turn_on</code> 및 <code>turn_off</code> 액션을 사용할 때만 변경되므로 Kodi는 여러 가지 방법으로 제어할 수 있으므로 필요할 때 이 input boolean을 업데이트하기 위한 자동화도 정의합니다.</p>
 <p>완전한 설정은 다음과 같습니다. :</p>
 <pre><code class="language-yaml">homeassistant:
   customize:

@@ -103,12 +103,12 @@
   <hr class="divider">
   
 
-  <p>The <code>rflink</code> integration supports devices that use <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>, for example, the <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink Gateway</a>. RFLink gateway is an Arduino firmware that allows two-way communication with a multitude of RF wireless devices using cheap hardware (Arduino + transceiver).</p>
-<p>First, you have to set up your <a href="/integrations/rflink/">RFLink hub</a>.</p>
-<p>The RFLink integration does not know the difference between a <code>switch</code>, a <code>binary_sensor</code> and a <code>light</code>. Therefore all switchable devices are automatically added as <code>light</code> by default.</p>
-<p>RFLink binary_sensor/switch/light ID’s are composed of: protocol, id, switch/channel. For example: <code>newkaku_0000c6c2_1</code>.</p>
-<p>Once the ID of a switch is known, it can be used to configure it as a switch type in HA and, for example, to add it to a different group, hide it or configure a nice name.</p>
-<p>Configuring devices as switch :</p>
+  <p><code>rflink</code> 통합구성요소는 <a href="http://www.nemcon.nl/blog2/" rel="external nofollow">RFLink gateway firmware</a>를 사용하는 장치 (예: <a href="https://www.nodo-shop.nl/nl/21-rflink-gateway" rel="external nofollow">Nodo RFLink 게이트웨이</a>)를 지원합니다. RFLink 게이트웨이는 저렴한 하드웨어 (Arduino + 트랜시버)를 사용하여 여러 RF 무선 장치와 양방향 통신을 가능하게하는 Arduino 펌웨어입니다.</p>
+<p>먼저 <a href="/integrations/rflink/">RFLink hub</a>를 설정해야합니다.</p>
+<p>RFLink 통합구성요소는 <code>switch</code>, <code>binary_sensor</code> 및 <code>light</code>의 차이점을 모릅니다. 따라서 모든 전환 가능한 장치는 기본적으로 자동으로 <code>light</code>로 추가됩니다.</p>
+<p>RFLink binary_sensor/switch/light ID는 protocol, id, switch/channel로 구성됩니다. (예: <code>newkaku_0000c6c2_1</code>)</p>
+<p>스위치의 ID를 알면 HA에서 스위치 유형으로 설정하고 예를 들어 다른 그룹에 추가하거나 숨기거나 멋진 이름을 설정하는데 사용할 수 있습니다.</p>
+<p>장치를 스위치로 설정 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: rflink
@@ -208,8 +208,8 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="switch-state" href="#switch-state"></a> Switch state</h2>
-<p>Initially, the state of a switch is unknown. When the switch is turned on or off (via frontend or wireless remote) the state is known and will be shown in the frontend.</p>
-<p>Sometimes a switch is controlled by multiple wireless remotes, each remote has its own code programmed in the switch. To allow tracking of the state when switched via other remotes add the corresponding remote codes as aliases:</p>
+<p>처음에는 스위치 상태를 알 수 없습니다. 스위치가 켜지거나 꺼질 때 (프론트 엔드 또는 무선 리모트를 통해) 상태가 알려져 있으며 프론트 엔드에 표시됩니다.</p>
+<p>때때로 스위치는 여러 무선 리모컨으로 제어되며 각 리모컨에는 스위치에 자체 코드가 프로그래밍되어 있습니다. 다른 리모컨을 통해 스위치를 제어했을때 상태를 추적하려면 해당하는 원격 코드를 별명(aliases)으로 추가하십시오. :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: rflink
@@ -220,13 +220,13 @@ switch:
           - newkaku_000000001_2
           - kaku_000001_a
 </code></pre>
-<p>Any on/off command from any alias ID updates the current state of the switch. However, when sending a command through the frontend only the primary ID is used.</p>
+<p>alias ID의 모든 on/off 명령은 스위치의 현재 상태를 업데이트합니다. 그러나 프런트 엔드를 통해 명령을 보낼 때는 primary ID 만 사용됩니다.</p>
 <h2>
-<a class="title-link" name="device-support" href="#device-support"></a> Device support</h2>
-<p>See <a href="/integrations/rflink/#device-support">device support</a></p>
+<a class="title-link" name="-" href="#-"></a> 장치 지원</h2>
+<p><a href="/integrations/rflink/#device-support">장치 지원</a> 참조하십시오.</p>
 <h3>
-<a class="title-link" name="additional-configuration-examples" href="#additional-configuration-examples"></a> Additional configuration examples</h3>
-<p>Multiple switches with signal repetitions and custom names</p>
+<a class="title-link" name="--" href="#--"></a> 추가 설정 사례</h3>
+<p>신호 반복 및 사용자 정의 이름을 가진 여러 스위치</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 switch:
   - platform: rflink

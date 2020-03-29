@@ -103,7 +103,9 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/Z_6eDtWumsA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/dqjH8SUkfFQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <p><a href="https://www.ubnt.com/" rel="external nofollow">Ubiquiti Networks, Inc.</a>의 <a href="https://unifi-sdn.ubnt.com/" rel="external nofollow">UniFi</a>는 게이트웨이, 스위치 및 무선 액세스 포인트를 하나의 그래픽 프론트 엔드와 결합하는 소프트웨어입니다.</p>
 <p>현재 홈어시스턴트에는 다음과 같은 장치 유형이 지원됩니다.</p>
 <ul>
@@ -112,7 +114,7 @@
 </ul>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
-<p>Home Assistant는 <strong>설정</strong>-&gt; <strong>통합구성요소</strong>-&gt; <strong>UniFi 컨트롤러</strong>를 통해 UniFi 연동을 제공합니다.</p>
+<p>Home Assistant는 <strong>설정</strong> -&gt; <strong>통합구성요소</strong> -&gt; <strong>UniFi 컨트롤러</strong>를 통해 UniFi 연동을 제공합니다.</p>
 <p><code>host address</code>, <code>user name</code>, <code>password</code>를 입력한 다음 홈어시스턴트에 연결할 사이트를 계속 선택하십시오. POE 스위치를 제어하려면 사용자에게 관리자 권한이 필요합니다.</p>
 <h3>
 <a class="title-link" name="---" href="#---"></a> 장치 추적기의 추가 설정</h3>
@@ -209,11 +211,11 @@ Default value: </p>
 <p>UniFi 컨트롤러를 사용하면 기본 관리자 외에 여러 사용자를 만들 수 있습니다. 장치 추적기만 사용하려면 Unifi 장치 추적기에 대해 <code>read-only</code> 권한(permissions)이 있는 제한된 사용자를 만드는 것이 좋습니다. 네트워크 액세스 또는 POE 제어를 차단하려면 ‘admin’ 권한이 있어야합니다.</p>
 <h3>
 <a class="title-link" name="mqtt-" href="#mqtt-"></a> MQTT와의 충돌</h3>
-<p>Unifi 컨트롤러는 전용 하드웨어 장치 (UniFi’s cloud key)이거나 어떤 Linux 시스템의 소프트웨어 일 수 있습니다. Home Assistant와 동일한 운영 체제에서 Unifi 컨트롤러를 실행하는 경우 MQTT 연동이있는 경우 포트에서 충돌이 발생할 수 있습니다.</p>
+<p>Unifi 컨트롤러는 전용 하드웨어 장치 (UniFi’s cloud key)이거나 어떤 Linux 시스템의 소프트웨어 일 수 있습니다. Home Assistant와 동일한 운영 체제에서 Unifi 컨트롤러를 실행하는 경우 MQTT 연동이 있는 경우 포트에서 충돌이 발생할 수 있습니다.</p>
 <p>이러한 상황을 피하려면 전용 가상 머신에서 Unifi 컨트롤러를 실행하는 것이 좋습니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 재실 감지</h2>
-<p>이 플랫폼을 사용하면 <a href="https://ubnt.com/" rel="external nofollow">Ubiquiti</a> <a href="https://www.ubnt.com/enterprise/#unifi" rel="external nofollow">UniFi</a> 컨트롤러에 연결된 장치를보고 존재를 감지할 수 있습니다.</p>
+<p>이 플랫폼을 사용하면 <a href="https://ubnt.com/" rel="external nofollow">Ubiquiti</a> <a href="https://www.ubnt.com/enterprise/#unifi" rel="external nofollow">UniFi</a> 컨트롤러에 연결된 장치를 보고 재실을 감지할 수 있습니다.</p>
 <h3>
 <a class="title-link" name="----" href="#----"></a> 문제 해결 및 시간 동기화</h3>
 <p>재실 감지는 Home Assistant와 UniFi 컨트롤러 간의 정확한 시간 설정에 따라 다릅니다.</p>
@@ -223,14 +225,14 @@ Default value: </p>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
 <h3>
 <a class="title-link" name="---" href="#---"></a> 클라이언트의 네트워크 액세스 차단</h3>
-<p>MAC 주소 목록을 추가하여 <code>configuration.yaml</code> 파일에 설정된 클라이언트에 대한 네트워크 액세스를 제어 할 수 있습니다. 이 목록의 항목에는 Unifi 장치 이름을 사용하여 차단 및 차단해제를 할 수 있는 Home Assistant 스위치가 있습니다.</p>
+<p>MAC 주소 목록을 추가하여 <code>configuration.yaml</code> 파일에 설정된 클라이언트에 대한 네트워크 액세스를 제어할 수 있습니다. 이 목록의 항목에는 Unifi 장치 이름을 사용하여 차단 및 차단해제를 할 수 있는 Home Assistant 스위치가 있습니다.</p>
 <h3>
 <a class="title-link" name="poe---" href="#poe---"></a> POE가 제공하는 클라이언트 제어</h3>
-<p>연결된 각 POE 클라이언트에 대해 엔티티가 자동으로 나타납니다. POE 클라이언트 장치가 작동하지 않으면 엔티티가 표시되지 않습니다. 참고 : 액세스 포인트 및 기타 스위치와 같은 Unifi 인프라 장치는 이더넷 자체에서 전원이 공급되더라도 (아직) 지원되지 않습니다.</p>
+<p>연결된 각 POE 클라이언트에 대해 엔티티가 자동으로 나타납니다. POE 클라이언트 장치가 작동하지 않으면 엔티티가 표시되지 않습니다. 참고: 액세스 포인트 및 기타 스위치와 같은 Unifi 인프라 장치는 이더넷 자체에서 전원이 공급되더라도 (아직) 지원되지 않습니다.</p>
 <p>POE 제어는 실제로 클라이언트가 연결된 스위치의 네트워크 포트를 설정합니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 연동 디버깅</h2>
-<p>UniFi 또는 연동에 문제가있는 경우 로그에 디버그 출력을 추가 할 수 있습니다.</p>
+<p>UniFi 또는 연동에 문제가 있는 경우 로그에 디버그 출력을 추가할 수 있습니다.</p>
 <pre><code class="language-yaml">logger:
   default: info
   logs:

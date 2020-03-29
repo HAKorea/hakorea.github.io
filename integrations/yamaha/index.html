@@ -152,18 +152,18 @@ media_player:
 <a class="title-link" name="---" href="#---"></a> 장치 검색시 알아둘 점</h3>
 <ul>
 <li>
-<code>discovery</code> 통합구성요소가 활성화 된 경우 UPNP를 사용하여 네트워크의 모든 장치를 검색합니다.</li>
+<code>discovery</code> 통합구성요소가 활성화된 경우 UPNP를 사용하여 네트워크의 모든 장치를 검색합니다.</li>
 <li>둘 이상의 영역(zone)을 지원하는 Receiver의 경우 Home Assistant는 플레이어가 지원하는 영역 당 “$ name Zone 2”, “$ name Zone 3”이라는 하나의 미디어 플레이어를 추가합니다.</li>
 <li>
 <code>host</code>를 수동으로 지정하면 Receiver에서 네트워크 대기를 활성화 <strong>해야합니다</strong>, 그렇지 않으면 Receiver를 끈 경우 Home Assistant 시작이 중단됩니다.</li>
-<li>경우에 따라 Receiver 펌웨어의 알려진 버그로 인해 자동 검색이 실패합니다. Receiver의 IP 주소 또는 호스트 이름 (DNS에서 검색 할 수있는 경우)을 통해 수동으로 지정할 수 있습니다.</li>
+<li>경우에 따라 Receiver 펌웨어의 알려진 버그로 인해 자동 검색이 실패합니다. Receiver의 IP 주소 또는 호스트 이름 (DNS에서 검색할 수있는 경우)을 통해 수동으로 지정할 수 있습니다.</li>
 </ul>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 지원 동작</h3>
 <ul>
-<li>야마하가 만든 미디어 플레이어는 전원 켜기/끄기, 음소거, 볼륨 조절 및 소스 선택을 지원합니다. 재생 및 정지와 같은 재생 컨트롤은 이를 지원하는 소스들에서 사용할 수 있습니다.</li>
+<li>야마하가 만든 미디어 플레이어는 전원 켜기/끄기, 음소거, 볼륨 조절 및 입력 선택을 지원합니다. 재생 및 정지와 같은 재생 컨트롤은 이를 지원하는 입력들에서 사용할 수 있습니다.</li>
 <li>
-<code>play_media</code> 서비스는 <code>NET RADIO</code> 소스에 대해서만 구현됩니다. <code>media_id</code>는 vtuner 서비스에서 메뉴 경로의 <code>&gt;</code>로 구분된 문자열입니다. 예를 들어 <code>Bookmarks&gt;Internet&gt;WAMC 90.3 FM</code>입니다.</li>
+<code>play_media</code> 서비스는 <code>NET RADIO</code> 입력에 대해서만 구현됩니다. <code>media_id</code>는 vtuner 서비스에서 메뉴 경로의 <code>&gt;</code>로 구분된 문자열입니다. 예를 들어 <code>Bookmarks&gt;Internet&gt;WAMC 90.3 FM</code>입니다.</li>
 </ul>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 설정 사례</h3>
@@ -185,7 +185,7 @@ media_player:
 </code></pre>
 <h3>
 <a class="title-link" name="play_media-script-" href="#play_media-script-"></a> play_media script 예시</h3>
-<p>스크립트에서 <code>play_media</code> 기능을 사용하여 미디어 플레이어 사전 설정을 쉽게 구축 할 수 있습니다. 스크립트에서 완료되면 시퀀스를 통해 소스 마다 볼륨을 설정할 수도 있습니다.</p>
+<p>스크립트에서 <code>play_media</code> 기능을 사용하여 미디어 플레이어 사전 설정을 쉽게 구축 할 수 있습니다. 스크립트에서 완료되면 시퀀스를 통해 입력 마다 볼륨을 설정할 수도 있습니다.</p>
 <pre><code class="language-yaml"># Example play_media script
 #
 # This is for an environment where Zone 2 of the receiver named
@@ -210,7 +210,7 @@ script:
 </code></pre>
 <h3>
 <a class="title-link" name="enable_output-" href="#enable_output-"></a> enable_output 서비스</h3>
-<p>수신기에서 출력 포트(HDMI)를 활성화 또는 비활성화합니다.</p>
+<p>리시버에서 출력 포트(HDMI)를 활성화 또는 비활성화합니다.</p>
 <table>
 <thead>
 <tr>

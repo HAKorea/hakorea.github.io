@@ -103,15 +103,17 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="437" src="https://www.youtube.com/embed/kV3NBzz2Afw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><code>speedtestdotnet</code> 통합구성요소는 <a href="https://speedtest.net/" rel="external nofollow">Speedtest.net</a> 웹 서비스를 사용하여 네트워크 대역폭 성능을 측정합니다.</p>
+  <div class="videoWrapper">
+<iframe width="690" height="437" src="https://www.youtube.com/embed/kV3NBzz2Afw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>speedtestdotnet</code> 통합구성요소는 <a href="https://speedtest.net/" rel="external nofollow">Speedtest.net</a> 웹서비스를 사용하여 네트워크 대역폭 성능을 측정합니다.</p>
 <p>이 통합구성요소를 활성화하면 모니터링된 조건(아래)에 대한 Speedtest.net 센서가 자동으로 생성됩니다.</p>
 <p>기본적으로 속도 테스트는 1시간마다 실행됩니다. 사용자는 속도 테스트를 실행하기 위해 <code>scan_interval</code>을 정의하여 설정에서 업데이트 빈도를 변경할 수 있습니다.</p>
 <p>대부분의 Speedtest.net 서버가 작동하려면 TCP 포트 8080 아웃 바운드가 필요합니다. 이 포트를 열지 않으면 상당한 지연이 발생하거나 결과가 전혀 나타나지 않을 수 있습니다. <a href="https://www.speedtest.net/help" rel="external nofollow">help page</a>에 있는 참고 사항을 참조하십시오.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p><code>server_id</code>의 경우 <a href="http://www.speedtestserver.com" rel="external nofollow">available servers</a>목록을 확인하십시오.</p>
-<p>Speedtest.net 센서를 설치에 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
+<p>Speedtest.net 센서를 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <p>시간당 한 번 (기본값) :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 speedtestdotnet:
@@ -179,16 +181,16 @@ Default value: </p>
 </code></pre>
 <h3>
 <a class="title-link" name="" href="#"></a> 서비스</h3>
-<p>일단 <code>speedtestdotnet</code> 통합구성요소는 필요할 때 Speedtest.net 속도 테스트를 실행하기 위해 호출  수있는 서비스 (<code>speedtestdotnet.speedtest</code>)를 노출합니다. 이 서비스에는 매개 변수가 없습니다. 수동 모드를 활성화한 경우 활용할 수 있습니다.</p>
+<p>일단 <code>speedtestdotnet</code> 통합구성요소는 필요할 때 Speedtest.net 속도 테스트를 실행하기 위해 호출될 수 있는 서비스(<code>speedtestdotnet.speedtest</code>)를 노출합니다. 이 서비스에는 매개 변수가 없습니다. 수동 모드를 활성화한 경우 활용할 수 있습니다.</p>
 <pre><code class="language-yaml">action:
   service: speedtestdotnet.speedtest
 </code></pre>
 <p>이 통합구성요소는 <a href="https://github.com/sivel/speedtest-cli" rel="external nofollow">speedtest-cli</a>를 사용하여 Speedtest.net에서 네트워크 성능 데이터를 수집합니다.
-이 통합구성요소가 표시할 수있는 잠재적인 <a href="https://github.com/sivel/speedtest-cli#inconsistency" rel="external nofollow">inconsistencies</a>에 유의하십시오.
-홈어시스턴트가 처음 시작되면 속도 테스트 센서의 값이 <code>Unknown</code> 으로 표시됩니다. <code>speedtestdotnet.speedtest</code> 서비스를 사용하여 수동 속도 테스트를 실행하고 데이터를 채우거나 정기적으로 예약된 다음 테스트를 기다릴 수 있습니다. 수동 모드를 켜서 예약된 속도 테스트를 비활성화 할 수 있습니다.</p>
+이 통합구성요소가 표시할 수 있는 잠재적인 <a href="https://github.com/sivel/speedtest-cli#inconsistency" rel="external nofollow">inconsistencies</a>에 유의하십시오.
+홈어시스턴트가 처음 시작되면 속도 테스트 센서의 값이 <code>Unknown</code>으로 표시됩니다. <code>speedtestdotnet.speedtest</code> 서비스를 사용하여 수동 속도 테스트를 실행하고 데이터를 채우거나 정기적으로 예약된 다음 테스트를 기다릴 수 있습니다. 수동 모드를 켜서 예약된 속도 테스트를 비활성화할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
-<p>이 섹션에서는이 구성 요소를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
+<p>본 섹션에서는 이 구성 요소를 사용하는 방법에 대한 실제 예를 제공합니다.</p>
 <h3>
 <a class="title-link" name="-" href="#-"></a> 주기적으로 실행</h3>
 <p>매일 30 분마다 :</p>
@@ -222,10 +224,10 @@ automation:
 <h2>
 <a class="title-link" name="" href="#"></a> 참고사항</h2>
 <ul>
-<li>Raspberry Pi에서 실행할 때 최대 속도는 LAN 어댑터에 의해 제한됩니다. Raspberry Pi 3+ 모델은 300Mbit/s의 <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/" rel="external nofollow">maximum throughput</a>을 지원하는 기가비트 LAN 어댑터와 함께 제공됩니다.</li>
+<li>Raspberry Pi에서 실행할 때 최대속도는 LAN 어댑터에 의해 제한됩니다. Raspberry Pi 3+ 모델은 300Mbit/s의 <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/" rel="external nofollow">maximum throughput</a>을 지원하는 기가비트 LAN 어댑터와 함께 제공됩니다.</li>
 <li>이 통합구성요소를 실행하면 상당한 양의 메모리가 필요하므로 시스템 성능에 부정적인 영향을 줄 수 있습니다.</li>
 <li>
-<code>monitored_conditions</code> 아래의 항목은 Home Assistant에서 사용할 수있는 엔티티 만 제어하며 실행시 조건들을 비활성화하지 않습니다.</li>
+<code>monitored_conditions</code> 아래의 항목은 Home Assistant에서 사용할 수 있는 엔티티만 제어하며 실행시 조건들을 비활성화하지 않습니다.</li>
 <li>자주 실행하는 경우이 통합구성요소에는 상당한 양의 데이터를 사용할 수 있습니다. 대역폭 제한 연결시엔 자주 업데이트하지 않아야합니다.</li>
 <li>속도 테스트가 실행되는 동안 네트워크 용량이 전부 활용됩니다. 이는 게임 콘솔이나 스트리밍 박스와 같은 네트워크를 사용하는 다른 장치에 부정적인 영향을 줄 수 있습니다.</li>
 </ul>

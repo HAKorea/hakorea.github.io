@@ -103,7 +103,7 @@
   <hr class="divider">
   
 
-  <p><code>system_log</code> 통합구성요소는 기록된 모든 오류 및 경고에 대한 정보를 Home Assistant에 저장합니다. 수집된 모든 정보는 프론트 엔드에서 직접 액세스 할 수 있으며 <code>개발자 도구</code> 아래의 <code>info</code> 섹션으로 이동하십시오. 로그 데이터로 Home Assistant에 과부하를 주지 않기 위해 마지막 50 개의 오류 및 경고만 저장됩니다. 이전 항목은 자동으로 로그에서 삭제됩니다. <code>max_entries</code> 매개 변수를 사용하여 저장된 로그 항목 수를 변경할 수 있습니다.</p>
+  <p><code>system_log</code> 통합구성요소는 기록된 모든 오류, 경고에 대한 정보를 Home Assistant에 저장합니다. 수집된 모든 정보는 프론트 엔드에서 직접 액세스할 수 있으며 <code>개발자 도구</code> 아래의 <code>info</code> 섹션으로 이동하십시오. 로그 데이터로 Home Assistant에 과부하를 주지 않기 위해 마지막 50 개의 오류, 경고만 저장됩니다. 이전 항목은 자동으로 로그에서 삭제됩니다. <code>max_entries</code> 매개 변수를 사용하여 저장된 로그 항목 수를 변경할 수 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 설정</h2>
 <p>이 통합구성요소는 <code>프론트 엔드</code>에 의해 자동으로 로드됩니다. (프런트 엔드를 사용하는 경우 아무 것도 할 필요가 없습니다.) 그렇게하지 않거나 매개 변수를 변경하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
@@ -170,7 +170,7 @@ Default value: </p>
 </table>
 <h2>
 <a class="title-link" name="" href="#"></a> 이벤트</h2>
-<p>오류 및 경고는 이벤트 <code>system_log_event</code>로 게시되므로 경고 또는 오류가 발생할 때마다 트리거되는 자동화를 작성할 수 있습니다. 각 이벤트에는 다음 정보가 포함됩니다.</p>
+<p>오류, 경고는 이벤트 <code>system_log_event</code>로 게시되므로 경고 또는 오류가 발생할 때마다 트리거되는 자동화를 작성할 수 있습니다. 각 이벤트에는 다음 정보가 포함됩니다.</p>
 <table>
 <thead>
 <tr>
@@ -208,7 +208,7 @@ Traceback (most recent call last):
   File "/home/fab/Documents/repos/ha/home-assistant/homeassistant/integrations/device_tracker/__init__.py", line 184, in
 [...]
 </code></pre>
-<p>메시지 ( “Unable to find integration system_healt”), source (<code>homeassistant.loader</code>) 및 level (<code>ERROR</code>)을 로그에서 쉽게 추출할 수 있습니다.  정확한 타임 스탬프가 나오고, stack trace가 있을 경우 또한 출력됩니다. 추가 출력이 존재하는 <code>google_map</code> 통합구성요소로 인한 또 다른 오류가 있습니다.</p>
+<p>메시지 (“Unable to find integration system_healt”), source (<code>homeassistant.loader</code>), level (<code>ERROR</code>)을 로그에서 쉽게 추출할 수 있습니다.  정확한 타임 스탬프가 나오고, stack trace가 있을 경우 또한 출력됩니다. 추가 출력이 존재하는 <code>google_map</code> 통합구성요소로 인한 또 다른 오류가 있습니다.</p>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
 <p>다음은 <code>system_log</code>에 의해 게시된 이벤트를 사용하는 몇 가지 예입니다. 이것이 작동하려면 <code>fire_event</code>를 <code>true</code>로 설정해야합니다.</p>

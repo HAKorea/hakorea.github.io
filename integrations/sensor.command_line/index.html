@@ -158,7 +158,7 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="" href="#"></a> 사례</h2>
-<p>이 섹션에는이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
+<p>본 섹션에는 이 센서를 사용하는 방법에 대한 실제 예가 나와 있습니다.</p>
 <h3>
 <a class="title-link" name="--" href="#--"></a> 하드 드라이브 온도</h3>
 <p>하드 드라이브의 온도를 얻는 방법에는 여러 가지가 있습니다. 간단한 해결책은 <a href="https://savannah.nongnu.org/projects/hddtemp/" rel="external nofollow">hddtemp</a>를 사용하는 것입니다.</p>
@@ -175,7 +175,7 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="cpu-" href="#cpu-"></a> CPU 온도</h3>
-<p><a href="https://en.wikipedia.org/wiki/Procfs" rel="external nofollow"><code>proc</code></a> 파일 시스템 덕분에 시스템에 대한 다양한 세부 정보를 검색 할 수 있습니다. 여기서 CPU 온도가 중요합니다. <code>configuration.yaml</code> 파일과 비슷한 것을 추가하십시오 :</p>
+<p><a href="https://en.wikipedia.org/wiki/Procfs" rel="external nofollow"><code>proc</code></a> 파일 시스템 덕분에 시스템에 대한 다양한 세부 정보를 검색할 수 있습니다. 여기서 CPU 온도가 중요합니다. <code>configuration.yaml</code> 파일과 비슷한 것을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: command_line
@@ -211,7 +211,7 @@ logger:
 </code></pre>
 <h3>
 <a class="title-link" name="----" href="#----"></a> 원격 텍스트 파일에서 값 읽기</h3>
-<p>HTTP를 통해 액세스 할 수 있는 텍스트 파일에 값을 저장하는 장치를 소유한 경우 이전 섹션에 표시된 것과 동일한 방법을 사용할 수 있습니다. JSON 응답을 보는 대신 센서 값을 직접 가져옵니다.</p>
+<p>HTTP를 통해 액세스할 수 있는 텍스트 파일에 값을 저장하는 장치를 소유한 경우 이전 섹션에 표시된 것과 동일한 방법을 사용할 수 있습니다. JSON 응답을 보는 대신 센서값을 직접 가져옵니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: command_line
     command: python3 -c "import requests; print(requests.get('http://remote-host/sensor_data.txt').text)"
@@ -220,7 +220,7 @@ logger:
 <h3>
 <a class="title-link" name="--" href="#--"></a> 외부 스크립트 사용</h3>
 <p>예는 <a href="/integrations/arest#sensor">aREST sensor</a>와 동일하지만 외부 Python 스크립트를 사용합니다. RESTful API를 노출하는 장치와의 인터페이스에 대한 아이디어를 제공해야합니다.</p>
-<p>값을 검색하는 한 줄 스크립트는 다음과 같습니다. 물론 <code>configuration.yaml</code> 파일에서 직접 사용할 수도 있지만 따옴표에 대해서는 특별한 주의가 필요합니다.</p>
+<p>값을 검색하는 한 줄짜리 스크립트는 다음과 같습니다. 물론 <code>configuration.yaml</code> 파일에서 직접 사용할 수도 있지만 따옴표에 대해서는 특별한 주의가 필요합니다.</p>
 <pre><code class="language-bash">$ python3 -c "import requests; print(requests.get('http://10.0.0.48/analog/2').json()['return_value'])"
 </code></pre>
 <p>사용되는 스크립트(<code>arest-value.py</code>로 저장)는 아래 예제와 같습니다.</p>
@@ -249,7 +249,7 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="command-output-json--" href="#command-output-json--"></a> command output에서 ​​JSON 속성 사용</h3>
-<p>이 예는 <code>value_json</code> 및 <code>json_attributes</code>를 사용하여 하나의 센서(추가가 속성 인 경우)로 여러 값을 검색하는 방법을 보여줍니다.</p>
+<p>이 예는 <code>value_json</code> 및 <code>json_attributes</code>를 사용하여 하나의 센서(추가가 속성인 경우)로 여러 값을 검색하는 방법을 보여줍니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: command_line

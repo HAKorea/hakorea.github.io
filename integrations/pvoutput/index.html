@@ -103,9 +103,11 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="388" src="https://www.youtube.com/embed/DCOrwp_48TA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>The <code>pvoutput</code> sensor platform consumes information from <a href="https://pvoutput.org/" rel="external nofollow">PVOutput</a> which were uploaded by your solar photovoltaic (PV) system.</p>
-<p>To add PVOutput details to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+  <div class="videoWrapper">
+<iframe width="690" height="388" src="https://www.youtube.com/embed/DCOrwp_48TA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><code>pvoutput</code> 센서 플랫폼은 태양광 발전(PV) 시스템에 의해 업로드된 <a href="https://pvoutput.org/" rel="external nofollow">PVOutput</a>의 정보를 소비합니다.</p>
+<p>설치에 PVOutput 세부 사항을 추가하려면 <code>configuration.yaml</code> 파일에 다음을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 sensor:
   - platform: pvoutput
@@ -137,9 +139,9 @@ Default value: </p>
 </dl>
 </div>
 <div class="note warning">
-<p>It’s recommended to set <code>scan_interval:</code> according to a value greater than 60 seconds. The service only allows 60 requests per hour but the sensor’s default is 30 seconds.</p>
+<p><code>scan_interval:</code>을 60 초보다 큰 값에 따라 설정하는 것이 좋습니다. 이 서비스는 시간당 60 개의 요청만 허용하지만 센서의 기본값은 30 초입니다.</p>
 </div>
-<p>To format the PVoutput sensor it’s recommended to use the <a href="/topics/templating/">template component</a>. For example:</p>
+<p>PV 출력 센서를 포맷하려면 <a href="/topics/templating/">template component</a>를 사용하는 것이 좋습니다. 예를 들면 다음과 같습니다.</p>
 <pre><code class="language-yaml">sensor:
   - platform: pvoutput
     system_id: YOUR_SYSTEM_ID

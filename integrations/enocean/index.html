@@ -103,11 +103,13 @@
   <hr class="divider">
   
 
-  <iframe width="690" height="388" src="https://www.youtube.com/embed/YKYo6ns1i4o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p>[EnOcean] (<a href="https://en.wikipedia.org/wiki/EnOcean" rel="external nofollow">https://en.wikipedia.org/wiki/EnOcean</a>) 표준은 여러 공급 업체에서 지원합니다.
+  <div class="videoWrapper">
+<iframe width="776" height="437" src="https://www.youtube.com/embed/O1skGq6ui6c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/EnOcean" rel="external nofollow">EnOcean</a> 표준은 여러 공급 업체에서 지원합니다.
 다양한 종류의 스위치와 센서가 있으며 일반적으로 energy harvesting을 사용하여 배터리가 필요하지 않은 전력을 얻습니다.</p>
 <p><code>enocean</code> 통합구성요소는 이러한 장치 중 일부에 대한 지원을 추가합니다. 작동하려면 <a href="https://www.enocean.com/en/enocean_modules/usb-300-oem/" rel="external nofollow">USB300</a>과 같은 컨트롤러가 필요합니다.</p>
-<p>현재 홈 어시스턴트에서 다음 장치 유형이 지원됩니다.</p>
+<p>현재 홈어시스턴트에서 다음 장치 유형이 지원됩니다.</p>
 <ul>
 <li>
 <a href="#binary-sensor">Binary Sensor</a> - 벽 스위치</li>
@@ -186,7 +188,7 @@ Default value: </p>
 </dd>
 <dt>
 <a class="title-link" name="device_class" href="#device_class"></a> device_class</dt>
-<dd><p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 장치 상태 및 아이콘을 변경하여 <a href="/integrations/binary_sensor/">class of the device</a> 를 세팅합니다.</p>
+<dd><p class="desc"><span class="type">(<span class="device_class"><a href="/docs/configuration/customizing-devices/#device-class">device_class</a></span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에 표시되는 장치 상태 및 아이콘을 변경하여 <a href="/integrations/binary_sensor/">class of the device</a>를 세팅합니다.</p>
 </span></p></dd>
 </dl>
 </div>
@@ -243,7 +245,7 @@ light:
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
 <dd>
-<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에서 Ligh의 식별자.</p>
+<p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>프런트 엔드에서 Light의 식별자.</p>
 </span></p>
 <p class="default">
 Default value: </p>
@@ -420,8 +422,8 @@ sensor:
 </code></pre>
 <h3>
 <a class="title-link" name="window-handle" href="#window-handle"></a> Window handle</h3>
-<p>현재 Somfy의 Hoppe SecuSignal 창 핸들(Window handle)이 성공적으로 테스트되었습니다. 그러나 EnOcean RPS telegram 사양 F6 10 00 (Hoppe AG)을 따르는 모든 기계식 창 핸들은 지원됩니다.</p>
-<p>창 핸들을 설정하려면 <code>configuration.yaml</code>에 다음 코드를 추가하십시오</p>
+<p>현재 Somfy의 Hoppe SecuSignal Window handle이 성공적으로 테스트되었습니다. 한편 EnOcean RPS telegram spec F6 10 00 (Hoppe AG)을 따르는 모든 기계식 Window handle은 지원됩니다.</p>
+<p>Window handle을 설정하려면 <code>configuration.yaml</code>에 다음 코드를 추가하십시오</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry for window handle EEP F6-10-00
 sensor:
   - name: Living Room Window Handle
@@ -430,7 +432,7 @@ sensor:
     device_class: windowhandle
 </code></pre>
 <p>설정에 선택적 매개 변수가 없습니다.</p>
-<p>창 핸들 센서는 다음 상태를 가질 수 있습니다.</p>
+<p>Window handle 센서는 다음 상태를 가질 수 있습니다.</p>
 <ul>
 <li>
 <strong>closed</strong>: The window handle is in closed position (typically down, or 6 o’clock)</li>
@@ -454,7 +456,7 @@ switch:
   <dl class="">
 <dt>
 <a class="title-link" name="id" href="#id"></a> id</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 ID. 이것은 4 바이트 길이.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>장치의 ID. 이는 4 바이트 길이.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
