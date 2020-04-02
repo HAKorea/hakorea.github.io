@@ -98,10 +98,11 @@
   
 
   <div class="note">
-<p>This example requires you to have the <a href="/integrations/mqtt/">MQTT integration</a> up and running.</p>
+<p>이 예에서는 <a href="/integrations/mqtt/">MQTT 통합구성요소</a>이 시작되어 실행중 이어야합니다.</p>
 </div>
-<p>This is a simple hello world example to show the basics of using MQTT in a custom integration. To use this example, create the file <code>&lt;config dir&gt;/custom_components/hello_mqtt.py</code> and copy the below example code.</p>
-<p>This example follows a topic on MQTT and updates the state of an entity to the last message received on that topic. It will also register a service ‘set_state’ that will publish a message to the MQTT topic that we’re listening to.</p>
+<p>이는 사용자 정의 통합구성요소에서 MQTT 사용의 기초를 보여주는 간단한 hello world 예제입니다.
+이 예제를 사용하려면 <code>&lt;config dir&gt;/custom_components/hello_mqtt.py</code> 파일을 작성하고 아래 예제 코드를 복사하십시오.</p>
+<p>이 예는 MQTT의 topic을 따르고 엔티티의 상태를 해당 topic에서 수신된 마지막 메시지로 업데이트합니다. 또한 수신중인 MQTT topic에 메시지를 공개하는 ‘set_state’ 서비스를 등록합니다.</p>
 <pre><code class="language-python">import homeassistant.loader as loader
 
 # The domain of your component. Should be equal to the name of your component.
@@ -145,12 +146,12 @@ def setup(hass, config):
     # Return boolean to indicate that initialization was successfully.
     return True
 </code></pre>
-<p>Load the integration by adding the following to your <code>configuration.yaml</code>. When your integration is loaded, a new entity should popup and there should be a new service available to call.</p>
+<p><code>configuration.yaml</code>에 다음을 추가하여 통합구성요소를 로드하십시오. 통합구성요소가 로드되면 새 엔티티가 팝업되고 호출할 수있는 새 서비스가 있어야합니다.</p>
 <pre><code class="language-yaml"># configuration.yaml entry
 hello_mqtt:
   topic: some_mqtt/topic/here
 </code></pre>
-<p>You can call the service with example payload:</p>
+<p>페이로드를 예로 들어 서비스를 호출할 수 있습니다. :</p>
 <pre><code class="language-json">{
   "new_state": "some new state"
 }
@@ -184,15 +185,15 @@ hello_mqtt:
     <ul class='divided'>
       
         
-      
-        
-      
-        
           <li>
             
               Basic MQTT Example
             
           </li>
+        
+      
+        
+      
         
       
         

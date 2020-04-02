@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Z-Wave Device Specific Settings - 홈어시스턴트</title>
+    <title>Z-Wave 장치별 설정 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Notes for specific Z-Wave devices.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/z-wave/device-specific/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Z-Wave Device Specific Settings">
+    <meta property="og:title" content="Z-Wave 장치별 설정">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/z-wave/device-specific/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Z-Wave Device Specific Settings">
+    <meta name="twitter:title" content="Z-Wave 장치별 설정">
     <meta name="twitter:description" content="Notes for specific Z-Wave devices.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,63 +97,63 @@
   
   <header>
     <h1 class="title indent">
-      Z-Wave Device Specific Settings
+      Z-Wave 장치별 설정
     </h1>
   </header>
   <hr class="divider">
   
 
   <h2>
-<a class="title-link" name="device-categories" href="#device-categories"></a> Device Categories</h2>
+<a class="title-link" name="-" href="#-"></a> 장치 카테고리</h2>
 <h3>
-<a class="title-link" name="motion-or-alarm-sensors" href="#motion-or-alarm-sensors"></a> Motion or alarm sensors</h3>
-<p>In order for Home Assistant to recognize the sensor properly, you will need to change its configuration from <code>Basic Set (default)</code> to <code>Binary Sensor report</code> or <code>Alarm report</code>.
-These devices will either show as a binary sensor or a sensor called <code>Alarm xxxx</code> and will report a numeric value. Test to see what value is what. Sometimes this is noted in the device manual.</p>
-<p>You can set the settings of the Z-Wave device through the Z-Wave control panel.</p>
+<a class="title-link" name="---" href="#---"></a> 모션 또는 알람 센서</h3>
+<p>홈어시스턴트가 센서를 올바르게 인식하려면 설정을 <code>Basic Set (default)</code>에서 <code>Binary Sensor report</code> 또는 <code>Alarm report</code>로 변경해야합니다.
+이러한 장치는 이진 센서 또는 <code>Alarm xxxx</code>라는 센서로 표시되며 숫자값을 보고합니다. 어떤 값이 무엇인지 테스트하십시오. 때로는 장치 설명서에 나와 있습니다.</p>
+<p>Z-Wave 제어판을 통해 Z-Wave 장치의 설정을 지정할 수 있습니다.</p>
 <h3>
-<a class="title-link" name="locks-and-other-secure-devices" href="#locks-and-other-secure-devices"></a> Locks and other secure devices</h3>
-<p>These devices require a network key to be set for the Z-Wave network before they are paired, using the <strong>Add Node Secure</strong> option.</p>
-<p>Home Assistant stores logs from Z-Wave in <code>OZW_log.txt</code> in the Home Assistant config directory, when you pair a secure device you should see communication from the node with lines starting with <code>info: NONCES</code> in <code>OZW_log.txt</code> when the device is paired successfully with a secure connection.</p>
+<a class="title-link" name="-----locks-and-other-secure-devices" href="#-----locks-and-other-secure-devices"></a> 잠금 장치와 기타 보안 장치 (Locks and other secure devices)</h3>
+<p>이러한 장치는 <strong>Add Node Secure</strong> 옵션을 사용하여 Z-Wave 네트워크에 대해 네트워크 키를 설정해야합니다.</p>
+<p>홈어시스턴트는 홈어시스턴트 설정 디렉토리의 OZW_log.txt에 Z-Wave의 로그를 저장합니다. 보안 장치를 페어링할 때 장치가 보안 연결과 성공적으로 페어링되면 <code>OZW_log.txt</code>의 <code>info: NONCES</code>로 시작하는 라인으로 노드와 통신하는 것이 보일 것입니다.</p>
 <h3>
-<a class="title-link" name="specific-devices" href="#specific-devices"></a> Specific Devices</h3>
+<a class="title-link" name="-" href="#-"></a> 특정 장치들</h3>
 <h3>
 <a class="title-link" name="aeotec-z-stick" href="#aeotec-z-stick"></a> Aeotec Z-Stick</h3>
-<p>It’s totally normal for your Z-Wave stick to cycle through its LEDs (Yellow, Blue and Red) while plugged into your system. If you don’t like this behavior it can be turned off.</p>
-<p>Use the following example commands from a terminal session on your Pi where your Z-Wave stick is connected.</p>
-<p><strong>Note:</strong> You should only do this when Home Assistant has been stopped.</p>
-<p>Turn off “Disco lights”:</p>
+<p>Z-Wave 스틱이 시스템에 연결되어있는 동안 LED(노란색, 파란색 및 빨간색)가 순환하는 것은 완전히 정상입니다. 이 동작이 마음에 들지 않으면 끌 수 있습니다.</p>
+<p>Z-Wave 스틱이 연결된 Pi의 터미널 세션에서 다음 예제 명령을 사용하십시오.</p>
+<p><strong>참고:</strong> 홈어시스턴트가 중지된 경우에만 이 작업을 수행해야합니다.</p>
+<p>“Disco 조명”을 끕니다. :</p>
 <pre><code class="language-bash">$ echo -e -n "\x01\x08\x00\xF2\x51\x01\x00\x05\x01\x51" &gt; /dev/serial/by-id/usb-0658_0200-if00
 </code></pre>
 <p>Turn on “Disco lights”:</p>
 <pre><code class="language-bash">$ echo -e -n "\x01\x08\x00\xF2\x51\x01\x01\x05\x01\x50" &gt; /dev/serial/by-id/usb-0658_0200-if00
 </code></pre>
-<p>If the above two commands give errors about not having that device, you should try replacing the <code>/dev/serial/by-id/usb-0658_0200-if00</code> with <code>/dev/ttyACM0</code> or <code>/dev/ttyACM1</code> (depending on which tty your Aeotec stick is addressed to).</p>
-<p>On some systems, such as macOS, you need to pipe the output of the <code>echo</code> command, rather than redirecting to the serial device, to something like <code>cu</code> (replacing <code>/dev/zstick</code> acccordingly) to properly set the baud rate to 115200 bps:</p>
+<p>위의 두 명령으로 해당 장치가 없는 오류가 발생하면 <code>/dev/serial/by-id/usb-0658_0200-if00</code>를 <code>/dev/ttyACM0</code> 혹은 <code>/dev/ttyACM1</code>로 바꿔보십시오.((Aeotec 스틱이 어느 tty에 연결되어 있는지에 따라.)</p>
+<p>macOS와 같은 일부 시스템에서는 보드를 올바르게 설정하기 위해 serial 장치로 리디렉션하는 대신 <code>echo</code> 명령의 출력을 <code>cu</code>(<code>/dev/zstick</code> 대체)로 연결하고 baud rate를 115200bps 속도로 적당히 세팅해줘야합니다. :</p>
 <pre><code class="language-bash">echo -e -n "...turn on/off string from examples above..." | cu -l /dev/zstick -s 115200
 </code></pre>
 <h3>
 <a class="title-link" name="razberry-board" href="#razberry-board"></a> Razberry Board</h3>
-<p>You need to disable the on-board Bluetooth since the board requires the use of the hardware UART (and there’s only one on the Pi3). You do this by adding the following to the end of <code>/boot/config.txt</code>:</p>
+<p>보드에 하드웨어 UART를 사용해야하고 Pi3에는 하드웨어가 하나만 있기 때문에 온보드 Bluetooth를 비활성화해야합니다. <code>/boot/config.txt</code>의 끝에 다음을 추가하면됩니다 :</p>
 <pre><code class="language-text">dtoverlay=pi3-disable-bt
 </code></pre>
-<p>Then disable the Bluetooth modem service:</p>
+<p>그런 다음 Bluetooth 모뎀 서비스를 비활성화하십시오. :</p>
 <pre><code class="language-bash">$ sudo systemctl disable hciuart
 </code></pre>
-<p>Once Bluetooth is off, enable the serial interface via the <code>raspi-config</code> tool. After reboot run:</p>
+<p>Bluetooth가 꺼지면 <code>raspi-config</code> 도구를 통해 serial 인터페이스를 활성화하십시오. 재부팅 후 :</p>
 <pre><code class="language-bash">$ sudo systemctl mask serial-getty@ttyAMA0.service
 </code></pre>
-<p>so that your serial interface looks like:</p>
+<p>serial 인터페이스는 다음과 같습니다.</p>
 <pre><code class="language-text">crw-rw---- 1 root dialout 204, 64 Sep  2 14:38 /dev/ttyAMA0
 </code></pre>
-<p>at this point simply add your user (homeassistant) to the dialout group:</p>
+<p>이 시점에서 간단히 사용자 (homeassistant)를 dialout 그룹에 추가하십시오.</p>
 <pre><code class="language-bash">$ sudo usermod -a -G dialout homeassistant
 </code></pre>
 <div class="note">
-<p>If you’ve installed the Z-Way software, you’ll need to ensure you disable it before you install Home Assistant or you won’t be able to access the board. Do this with <code>sudo /etc/init.d/z-way-server stop; sudo update-rc.d z-way-server disable</code>.</p>
+<p>Z-Way 소프트웨어를 설치한 경우 Home Assistant를 설치하기 전에 소프트웨어를 비활성화해야합니다. 그렇지 않으면 보드에 액세스할 수 없습니다. <code>sudo /etc/init.d/z-way-server stop; sudo update-rc.d z-way-server disable</code>를 실행하십시오.</p>
 </div>
 <h3>
 <a class="title-link" name="aeon-minimote" href="#aeon-minimote"></a> Aeon Minimote</h3>
-<p>Here’s a handy configuration for the Aeon Labs Minimote that defines all possible button presses. Put it into <code>automation.yaml</code>.</p>
+<p>다음은 가능한 모든 버튼 누름을 정의하는 Aeon Labs Minimote의 편리한 설정입니다. <code>automation.yaml</code>에 넣으십시오.</p>
 <pre><code class="language-yaml">  - id: mini_1_pressed
     alias: 'Minimote Button 1 Pressed'
     trigger:
@@ -221,13 +221,13 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </code></pre>
 <h3>
 <a class="title-link" name="zooz-toggle-switches" href="#zooz-toggle-switches"></a> Zooz Toggle Switches</h3>
-<p>Some models of the Zooz Toggle switches ship with an instruction manual with incorrect instruction for Z-Wave inclusion/exclusion. The instructions say that the switch should be quickly switched on-off-on for inclusion and off-on-off for exclusion. However, the correct method is on-on-on for inclusion and off-off-off for exclusion.</p>
+<p>Zooz 토글 스위치의 일부 모델에는 Z-Wave 포함/제외에 대한 지침이 잘못된 사용 설명서가 함께 제공됩니다. 지침에 따르면 스위치를 신속하게 on-off-on를 누르면 포함되고 off-on-off를 누르면 제외하도록 되어 있습니다. 그러나 올바른 방법은 포함을 위해 on-on-on이고 제외를 위해 off-off-off 입니다.</p>
 <h2>
 <a class="title-link" name="central-scene-configuration" href="#central-scene-configuration"></a> Central Scene configuration</h2>
-<p>To provide Central Scene support you need to <strong>shutdown Home Assistant</strong> and modify your <code>zwcfg_*.xml</code> file according to the following guides.</p>
+<p>Central Scene을 지원하려면 <strong>shutdown Home Assistant</strong> 를 종료하고 다음 안내서에 따라 <code>zwcfg_*.xml</code> 파일을 수정해야합니다.</p>
 <h3>
 <a class="title-link" name="inovelli-scene-capable-onoff-and-dimmer-wall-switches" href="#inovelli-scene-capable-onoff-and-dimmer-wall-switches"></a> Inovelli Scene Capable On/Off and Dimmer Wall Switches</h3>
-<p>For Inovelli switches, you’ll need to update (or possibly add) the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>Inovelli 스위치의 경우, 다음과 같이 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 업데이트하거나 추가해야합니다.</p>
 <pre><code class="language-xml">			&lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0"&gt;
 				&lt;Instance index="1" /&gt;
 				&lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" /&gt;
@@ -235,7 +235,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 				&lt;Value type="int" genre="user" instance="1" index="2" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" /&gt;
 			&lt;/CommandClass&gt;
 </code></pre>
-<p>Once this is complete, you should see the follow <code>zwave.scene_activated</code> events:</p>
+<p>이것이 완료되면 다음과 같은 <code>zwave.scene_activated</code> 이벤트가 나타납니다.</p>
 <table>
 <thead>
 <tr>
@@ -289,8 +289,8 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </table>
 <h3>
 <a class="title-link" name="zooz-scene-capable-onoff-and-dimmer-wall-switches-zen26--zen27---firmware-20" href="#zooz-scene-capable-onoff-and-dimmer-wall-switches-zen26--zen27---firmware-20"></a> Zooz Scene Capable On/Off and Dimmer Wall Switches (Zen26 &amp; Zen27 - Firmware 2.0+)</h3>
-<p>Many Zooz Zen26/27 switches that have been sold do not have firmware 2.0+. Contact Zooz to obtain the over the air firmware update instructions and new user manual for the switches.</p>
-<p>Once the firmware is updated, the the new configuration parameters will have to be added to the <code>zwcfg</code> file. Replace the existing <code>COMMAND_CLASS_CONFIGURATION</code> with the one of the following options (depending on your model of switch):</p>
+<p>판매된 많은 Zooz Zen26/27 스위치에는 펌웨어 2.0 이상이 없습니다. 무선 펌웨어 업데이트 지침과 스위치에 대한 새로운 사용 설명서를 얻으려면 Zooz에 문의하십시오.</p>
+<p>펌웨어가 업데이트되면 새로운 구성 매개 변수를 <code>zwcfg</code> 파일에 추가해야합니다. 기존 <code>COMMAND_CLASS_CONFIGURATION</code>을 다음 옵션 중 하나로 바꿉니다 (스위치 모델에 따라 다름). :</p>
 <p>Zen26 (On/Off Switch):</p>
 <pre><code class="language-xml">&lt;CommandClass id="112" name="COMMAND_CLASS_CONFIGURATION" version="1" request_flags="4" innif="true"&gt;
 	&lt;Instance index="1" /&gt;
@@ -409,7 +409,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 	&lt;/Value&gt;
 &lt;/CommandClass&gt;
 </code></pre>
-<p>For Zooz switches, you’ll need to update (or possibly add) the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>Zooz 스위치의 경우 다음과 같이 <code>zwcfg</code>파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 업데이트(또는 추가)해야합니다.</p>
 <pre><code class="language-xml">&lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0"&gt;
 	&lt;Instance index="1" /&gt;
 	&lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" /&gt;
@@ -417,8 +417,8 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 	&lt;Value type="int" genre="user" instance="1" index="2" label="Top Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" /&gt;
 &lt;/CommandClass&gt;
 </code></pre>
-<p>Go to the Z-Wave Network Management section in the Home Assistant Configuration, select the node which has just been updated and enable the scene support configuration parameter.</p>
-<p>Once this is complete, you should see the following <code>zwave.scene_activated</code> events:</p>
+<p>홈어시스턴트 설정의 Z-Wave 네트워크 관리 섹션으로 이동하여 방금 업데이트된 노드를 선택하고 씬(scene) 지원 설정 매개 변수를 활성화하십시오.</p>
+<p>이것이 완료되면 다음과 같은 <code>zwave.scene_activated</code> 이벤트가 나타납니다 :</p>
 <table>
 <thead>
 <tr>
@@ -482,7 +482,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </table>
 <h3>
 <a class="title-link" name="homeseer-switches" href="#homeseer-switches"></a> HomeSeer Switches</h3>
-<p>For the HomeSeer devices specifically, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>특히 HomeSeer 장치의 경우 다음과 같이 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 업데이트해야합니다.</p>
 <pre><code class="language-xml">&lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0"&gt;
   &lt;Instance index="1" /&gt;
   &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false"   verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="2" /&gt;
@@ -490,7 +490,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
   &lt;Value type="int" genre="user" instance="1" index="2" label="Bottom Button Scene" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
 &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the HomeSeer devices (as a reference for other similar devices):</p>
+<p>아래는 HomeSeer 장치의 액션/씬 표입니다 (다른 유사한 장치에 대한 참조).</p>
 <table>
 <thead>
 <tr>
@@ -542,7 +542,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </tr>
 </tbody>
 </table>
-<p>Some installations will see those details:</p>
+<p>일부 설치에는 다음 세부 정보가 표시됩니다. :</p>
 <p><strong>Top button ID: 1, Bottom ID: 2</strong></p>
 <table>
 <thead>
@@ -581,14 +581,14 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 <h3>
 <a class="title-link" name="fibaro-button-fgpb-101-6-v32" href="#fibaro-button-fgpb-101-6-v32"></a> Fibaro Button FGPB-101-6 v3.2</h3>
 <!-- from https://hastebin.com/esodiweduq.cs -->
-<p>For the Button, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>Button의 경우 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 다음과 같이 업데이트해야합니다. :</p>
 <pre><code class="language-xml">      &lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0"&gt;
         &lt;Instance index="1" /&gt;
           &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
           &lt;Value type="int" genre="system" instance="1" index="1" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="3" /&gt;
       &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the Button (as a reference for other similar devices):</p>
+<p>아래는 버튼의 액션/씬 표입니다(다른 유사한 장치에 대한 참조).</p>
 <table>
 <thead>
 <tr>
@@ -615,10 +615,10 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </tr>
 </tbody>
 </table>
-<p>Tap and hold wakes up the Button.</p>
+<p>길게 누르면 버튼이 깨어납니다.</p>
 <h3>
 <a class="title-link" name="fibaro-keyfob-fgkf-601" href="#fibaro-keyfob-fgkf-601"></a> Fibaro Keyfob FGKF-601</h3>
-<p>For the Fibaro Keyfob, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>Fibaro Keyfob의 경우 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-xml">      &lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="6"&gt;
 	&lt;Instance index="1" /&gt;
 	&lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="6" /&gt;
@@ -630,7 +630,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 	&lt;Value type="int" genre="user" instance="1" index="6" label="Plus" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
 &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the Keyfob (as a reference for other similar devices):</p>
+<p>아래는 Keyfob의 액션/씬 표입니다 (다른 유사한 장치에 대한 참조).</p>
 <table>
 <thead>
 <tr>
@@ -732,11 +732,11 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </tr>
 </tbody>
 </table>
-<p>Press circle and plus simultaneously to wake up the device.</p>
+<p>서클과 플러스를 동시에 눌러 기기를 깨웁니다.</p>
 <h3>
 <a class="title-link" name="aeotec-nanomote-quad" href="#aeotec-nanomote-quad"></a> Aeotec NanoMote Quad</h3>
 <!-- from https://products.z-wavealliance.org/products/2817 -->
-<p>Once you’ve added the NanoMote to your z-wave network, you’ll need to update your zwcfg_*.xml file with the below xml data. Stop Home Assistant and open your zwcfg_*.xml file (located in your config folder). Find the NanoMote device section and then its corresponding <code>CommandClass</code> section with id=“91”. Replace the entire CommandClass section with the below xml data. Save the file and restart Home Assistant.</p>
+<p>z-wave 네트워크에 NanoMote를 추가한 후에는 아래 xml 데이터로 zwcfg_*.xml 파일을 업데이트해야합니다. 홈어시스턴트를 중지하고 zwcfg_*.xml 파일(config 폴더에 있음)을 여십시오. NanoMote 장치 섹션을 찾은 다음 id=“91”로 해당하는 <code>CommandClass</code> 섹션을 찾으십시오. 전체 CommandClass 섹션을 아래 xml 데이터로 바꾸십시오. 파일을 저장하고 Home Assistant를 다시 시작하십시오.</p>
 <pre><code class="language-xml">    &lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="4" innif="true" scenecount="0"&gt;
         &lt;Instance index="1" /&gt;
         &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
@@ -746,7 +746,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
         &lt;Value type="int" genre="system" instance="1" index="4" label="Button Four" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
     &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the NanoMote Quad:</p>
+<p>아래는 NanoMote Quad의 액션/씬 표입니다.</p>
 <table>
 <thead>
 <tr>
@@ -818,7 +818,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </tr>
 </tbody>
 </table>
-<p>Example Event:</p>
+<p>Event 예시 :</p>
 <pre><code class="language-yaml">    "event_type": "zwave.scene_activated",
     "data": {
         "entity_id": "zwave.nanomote",
@@ -829,7 +829,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 <h3>
 <a class="title-link" name="aeotec-wallmote" href="#aeotec-wallmote"></a> Aeotec Wallmote</h3>
 <!-- from https://hastebin.com/esodiweduq.cs -->
-<p>For the Aeotec Wallmote, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>Aeotec Wallmote의 경우 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-xml">      &lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="5" innif="true" scenecount="0"&gt;
         &lt;Instance index="1" /&gt;
           &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
@@ -840,7 +840,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
           &lt;Value type="int" genre="system" instance="1" index="5" label="Other" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
       &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the Wallmote (as a reference for other similar devices):</p>
+<p>다음은 Wallmote의 액션/씬 표입니다 (다른 유사한 장치에 대한 참조).</p>
 <table>
 <thead>
 <tr>
@@ -914,17 +914,17 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </table>
 <h3>
 <a class="title-link" name="wallc-s-switch" href="#wallc-s-switch"></a> WallC-S Switch</h3>
-<p>Use the same configuration as for the Aeotec Wallmote.</p>
+<p>Aeotec Wallmote와 동일한 설정을 사용하십시오.</p>
 <h3>
 <a class="title-link" name="hank-one-key-scene-controller-hkzn-scn01hkzw-scn01" href="#hank-one-key-scene-controller-hkzn-scn01hkzw-scn01"></a> HANK One-key Scene Controller HKZN-SCN01/HKZW-SCN01</h3>
-<p>For the HANK One-key Scene Controller, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>HANK One-key Scene Controller의 경우 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-xml">      &lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="1" innif="true" scenecount="0"&gt;
         &lt;Instance index="1" /&gt;
         &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
         &lt;Value type="int" genre="system" instance="1" index="1" label="Button One" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
       &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the Button (as a reference for other similar devices):</p>
+<p>아래는 버튼의 액션/씬 표입니다 (다른 유사한 장치에 대한 참조).</p>
 <table>
 <thead>
 <tr>
@@ -953,7 +953,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </table>
 <h3>
 <a class="title-link" name="hank-four-key-scene-controller-hkzn-scn04" href="#hank-four-key-scene-controller-hkzn-scn04"></a> HANK Four-key Scene Controller HKZN-SCN04</h3>
-<p>For the HANK Four-key Scene Controller, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>HANK 4 키 씬 컨트롤러의 경우 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-xml">      &lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="5" innif="true" scenecount="0"&gt;
         &lt;Instance index="1" /&gt;
         &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
@@ -964,7 +964,7 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
         &lt;Value type="int" genre="system" instance="1" index="5" label="Other" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
       &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the Buttons and associated Pictogram:</p>
+<p>아래는 버튼과 관련 픽토그램(Pictogram)의 액션/씬 표입니다.</p>
 <table>
 <thead>
 <tr>
@@ -1051,22 +1051,22 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </table>
 <h3>
 <a class="title-link" name="remotec-zrc-90-scene-master" href="#remotec-zrc-90-scene-master"></a> Remotec ZRC-90 Scene Master</h3>
-<p>To get the ZRC-90 Scene Master working in Home Assistant, you must first edit the <code>COMMAND_CLASS_CENTRAL_SCENE</code> in your <code>zwcfg</code> file.</p>
+<p>ZRC-90 Scene Master가 Home Assistant에서 작동하게 하려면 먼저 <code>zwcfg</code> 파일에 서<code>COMMAND_CLASS_CENTRAL_SCENE</code>을 편집해야합니다.</p>
 <ol>
 <li>
-<p>Go the Z-Wave control panel in Home Assistant and make a note of the node number your ZRC-90 has been assigned.</p>
+<p>홈어시스턴트의 Z-Wave 제어판으로 이동하여 ZRC-90이 할당된 노드 번호를 기록하십시오.</p>
 </li>
 <li>
-<p><em>Stop</em> Home Assistant.</p>
+<p>홈어시스턴트 <em>Stop</em>.</p>
 </li>
 <li>
-<p>Make a backup of your <code>zwfcg</code> file, just in case.</p>
+<p>만일을 대비하여 <code>zwfcg</code> 파일을 백업하십시오.</p>
 </li>
 <li>
-<p>In the <code>zwcfg</code> file, find the <code>Node id</code> that corresponds to the number you noted in the first step.</p>
+<p><code>zwcfg</code> 파일에서 첫 번째 단계에서 적어둔 번호에 해당하는 <code>Node id</code>를 찾으십시오.</p>
 </li>
 <li>
-<p>Within the <code>Node id</code> you identified, highlight everything between <code>&lt;CommandClass id="91"</code> and <code>&lt;/CommandClass&gt;</code> (inclusive) and paste in the following:</p>
+<p>식별한 <code>Node id</code>에서<code>&lt;CommandClass id="91"</code>와 <code>&lt;/CommandClass&gt;</code>사이의 모든 항목을 강조 표시하고 다음을 붙여넣습니다. :</p>
 <pre><code class="language-xml">&lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="5" innif="true" scenecount="0"&gt;
   &lt;Instance index="1" /&gt;
   &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
@@ -1083,10 +1083,10 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 </code></pre>
 </li>
 <li>
-<p>Save the changes you made the <code>zwcfg</code> file and start Home Assistant back up.</p>
+<p><code>zwcfg</code> 파일의 변경 사항을 저장하고 Home Assistant 백업을 시작하십시오.</p>
 </li>
 </ol>
-<p>Button presses will trigger <code>zwave.scene_activated</code> with the following:</p>
+<p>버튼을 누르면 다음과 같이 <code>zwave.scene_activated</code>가 트리거됩니다.</p>
 <ul>
 <li>
 <code>node_id</code>: the node of your Scene Master (useful if you have more than one)</li>
@@ -1095,8 +1095,8 @@ These devices will either show as a binary sensor or a sensor called <code>Alarm
 <li>
 <code>scene_data</code>: the type of press registered (see below)</li>
 </ul>
-<p>The Scene Master has eight buttons which can send four actions.
-The type of action is reflected in the <code>scene_data</code> parameter:</p>
+<p>Scene Master에는 4 개의 액션을 보낼 수있는 8 개의 버튼이 있습니다.
+액션 유형은 <code>scene_data</code> 매개 변수에 반영됩니다. :</p>
 <table>
 <thead>
 <tr>
@@ -1123,7 +1123,7 @@ The type of action is reflected in the <code>scene_data</code> parameter:</p>
 </tr>
 </tbody>
 </table>
-<p>Let’s see how this works in an automation for a Scene Master that’s assigned as Node 7:</p>
+<p>노드 7로 지정된 Scene Master의 자동화에서 이것이 어떻게 작동하는지 봅시다. :</p>
 <pre><code class="language-yaml">- id: '1234567890'
   alias: Double-press Button 2 to toggle all lights
   trigger:
@@ -1141,7 +1141,7 @@ The type of action is reflected in the <code>scene_data</code> parameter:</p>
 </code></pre>
 <h3>
 <a class="title-link" name="rfwdc-cooper-5-button-scene-control-keypad" href="#rfwdc-cooper-5-button-scene-control-keypad"></a> RFWDC Cooper 5-button Scene Control Keypad</h3>
-<p>For the RFWDC Cooper 5-button Scene Control Keypad, you may need to update the <code>COMMAND_CLASS_CENTRAL_SCENE</code> for each node in your <code>zwcfg</code> file with the following:</p>
+<p>RFWDC Cooper 5 버튼 씬 제어 키패드의 경우 <code>zwcfg</code> 파일의 각 노드에 대해 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 다음과 같이 업데이트해야합니다.</p>
 <pre><code class="language-xml">&lt;CommandClass id="91" name="COMMAND_CLASS_CENTRAL_SCENE" version="1" request_flags="5" innif="true" scenecount="0"&gt;
   &lt;Instance index="1" /&gt;
   &lt;Value type="int" genre="system" instance="1" index="0" label="Scene Count" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
@@ -1152,7 +1152,7 @@ The type of action is reflected in the <code>scene_data</code> parameter:</p>
   &lt;Value type="int" genre="system" instance="1" index="5" label="Button Five" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="-2147483648" max="2147483647" value="0" /&gt;
 &lt;/CommandClass&gt;
 </code></pre>
-<p>Below is a table of the action/scenes for the Buttons:</p>
+<p>아래는 버튼의 액션/씬의 표입니다.</p>
 <table>
 <thead>
 <tr>
@@ -1183,8 +1183,8 @@ The type of action is reflected in the <code>scene_data</code> parameter:</p>
 </tr>
 </tbody>
 </table>
-<p>When a button turns off, the controller sends <code>basic_set</code> in a generic <code>node_event</code> and does not specify which button was pressed. The status of the buttons is encoded into the <code>indicator</code> value, so in order to determine the status of each button, you need to refresh the indicator value. You can also control the LEDs for each button by setting the indicator value. For responsiveness, automations should be triggered with <code>zwave.scene_activated</code> events rather than the switch status.</p>
-<p>Here is an example configuration needed for the scene controller:</p>
+<p>버튼이 꺼지면 컨트롤러는 일반 <code>node_event</code>에서 <code>basic_set</code>을 보내고 어떤 버튼을 눌렀는지 지정하지 않습니다. 버튼의 상태는 <code>indicator</code> 값으로 인코딩되므로 각 버튼의 상태를 확인하려면 indicator 값을 새로 고쳐야합니다. indicator 값을 설정하여 각 버튼의 LED를 제어할 수도 있습니다. 응답성을 위해서는 스위치 상태가 아닌 <code>zwave.scene_activated</code> 이벤트로 자동화를 트리거해야합니다.</p>
+<p>씬 컨트롤러에 필요한 설정 예는 다음과 같습니다.</p>
 <pre><code class="language-yaml">automation:
   - alias: Sync the indicator value on button events
     trigger:
@@ -1277,22 +1277,22 @@ switch:
 </code></pre>
 <h3>
 <a class="title-link" name="heatitthermofloor-z-push-button-28-wall-switch" href="#heatitthermofloor-z-push-button-28-wall-switch"></a> HeatIt/ThermoFloor Z-Push Button 2/8 Wall Switch</h3>
-<p>To get the Z-Push Button 2 or the Z-Push Button 8 working in Home Assistant, you must first edit the <code>COMMAND_CLASS_CENTRAL_SCENE</code> in your <code>zwcfg</code> file.</p>
+<p>Z-Push Button 2 또는 Z-Push Button 8을 Home Assistant에서 작동시키려면 먼저 <code>zwcfg</code> 파일에서 <code>COMMAND_CLASS_CENTRAL_SCENE</code>을 편집해야합니다.</p>
 <ol>
 <li>
-<p>Go the Z-Wave control panel in Home Assistant and make a note of the node number your wall switch has been assigned.</p>
+<p>홈어시스턴트의 Z-Wave 제어판으로 이동하여 벽 스위치에 할당된 노드 번호를 기록하십시오.</p>
 </li>
 <li>
-<p><em>Stop</em> Home Assistant.</p>
+<p>홈어시스턴트 <em>Stop</em>.</p>
 </li>
 <li>
-<p>Make a backup of your <code>zwfcg</code> file, just in case.</p>
+<p>만일을 대비하여 <code>zwfcg</code> 파일을 백업하십시오.</p>
 </li>
 <li>
-<p>In the <code>zwcfg</code> file, find the <code>Node id</code> that corresponds to the number you noted in the first step.</p>
+<p><code>zwcfg</code> 파일에서 첫 번째 단계에서 적어둔 번호에 해당하는 <code>Node id</code>를 찾으십시오.</p>
 </li>
 <li>
-<p>Within the <code>Node id</code> you identified, highlight everything between <code>&lt;CommandClass id="91"</code> and <code>&lt;/CommandClass&gt;</code> (inclusive) and paste in the following:</p>
+<p>식별한 <code>Node id</code>에서 <code>&lt;CommandClass id="91"</code>와 <code>&lt;/CommandClass&gt;</code> 사이의 모든 항목을 강조 표시하고 다음을 붙여 넣습니다. :</p>
 <ul>
 <li>5.1 For the Z-Push Button 2:</li>
 </ul>
@@ -1319,13 +1319,13 @@ switch:
 </code></pre>
 </li>
 <li>
-<p>Save the changes you made the <code>zwcfg</code> file and start Home Assistant back up.</p>
+<p><code>zwcfg</code> 파일의 변경 사항을 저장하고 Home Assistant 백업을 시작하십시오.</p>
 </li>
 </ol>
-<p>Button presses will trigger <code>zwave.scene_activated</code> with the following:</p>
+<p>버튼을 누르면 다음과 같이 <code>zwave.scene_activated</code>가 트리거됩니다.</p>
 <ul>
 <li>
-<code>scene_id</code>: the number of the button you press from top left (1) to bottom right (8)</li>
+<code>scene_id</code>: 왼쪽 위(1)에서 오른쪽 아래(8)까지 누르는 버튼의 수</li>
 </ul>
 
 
@@ -1350,7 +1350,7 @@ switch:
       <li>
         <b><a  href='/docs/installation/'>설치 </a></b>
         <ul>
-          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/hassio/'>홈어시스턴트 </a></li>
           <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
           <li>
             <a  href='/docs/installation/troubleshooting/'>문제해결

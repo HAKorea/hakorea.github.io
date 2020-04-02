@@ -97,8 +97,8 @@
   <hr class="divider">
   
 
-  <p>이 예제는 침입자를 탐지합니다. 집에 사람이 없을 때 조명이 켜져 있는지 확인하면됩니다. 이 경우 표시등이 빨간색으로 바뀌고 30 초 동안 깜박 인 다음 <a href="/integrations/notify/">the notify integration</a>을 통해 메시지를 보냅니다 . 알려진 사람이 집으로 돌아오면 특정 표시등이 깜박입니다.</p>
-<p>이 연동방식은 <a href="/integrations/device_tracker/">device_tracker</a> 및 <a href="/integrations/light/">light</a> 통합구성요소에 따라 다릅니다.</p>
+  <p>이 예제는 침입자를 탐지합니다. 집에 사람이 없을 때 조명이 켜져 있는지 확인하면 됩니다. 이 경우 조명이 빨간색으로 바뀌고 30 초 동안 깜박인 다음 <a href="/integrations/notify/">notify 통합구성요소</a>를 통해 메시지를 보냅니다. 아는 사람이 집으로 돌아오면 특정 조명이 깜박입니다.</p>
+<p>이 연동방식은 <a href="/integrations/device_tracker/">device_tracker</a>와 <a href="/integrations/light/">light</a> 통합구성요소에 따라 다릅니다.</p>
 <p>설정하려면 <code>configuration.yaml</code> 파일에 다음 줄을 추가하십시오 :</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 simple_alarm:
@@ -111,15 +111,15 @@ simple_alarm:
   <dl class="">
 <dt>
 <a class="title-link" name="known_light" href="#known_light"></a> known_light</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알려진 장치가 집으로 돌아 왔을 때 깜박이는 조명/조명그룹.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>알려진 장치(예: 휴대폰)가 집으로 돌아왔을 때 깜박이는 조명/조명그룹.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="unknown_light" href="#unknown_light"></a> unknown_light</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>집에 없을 때 조명이 켜지면 어떤 조명/조명 그룹이 빨간색으로 깜박 여야합니까?</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>집에 없을 때 조명이 켜지면 어떤 조명/조명그룹이 빨간색으로 깜박여야합니까?</p>
 </span></p></dd>
 </dl>
 </div>
-<p><code>&lt;config dir&gt;/custom_components/simple_alarm.py</code>파일을 만들고 아래 내용을 복사하여 붙여 넣습니다.</p>
+<p><code>&lt;config dir&gt;/custom_components/simple_alarm.py</code> 파일을 만들고 아래 내용을 복사하여 붙여넣습니다.</p>
 <pre><code class="language-python">"""Simple alarm component."""
 import logging
 

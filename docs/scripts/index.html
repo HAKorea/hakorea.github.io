@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Script 문법 - 홈어시스턴트</title>
+    <title>스크립트 문법 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Documentation for the Home Assistant Script Syntax.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/scripts/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Script 문법">
+    <meta property="og:title" content="스크립트 문법">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/scripts/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Script 문법">
+    <meta name="twitter:title" content="스크립트 문법">
     <meta name="twitter:description" content="Documentation for the Home Assistant Script Syntax.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,14 +97,14 @@
   
   <header>
     <h1 class="title indent">
-      Script 문법
+      스크립트 문법
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>스크립트는 홈어시스턴트가 실행할 일련의 동작(action)입니다. 스크립트는 독립형 <a href="/integrations/script/">Script component</a>를 통해 엔티티로 사용할 수 있지만 <a href="/getting-started/automation-action/">automations</a> 및 <a href="/integrations/alexa/">Alexa/Amazon Echo</a> 설정에 임베드 될 수도 있습니다.</p>
-<p>스크립트 문법 기본 구조는 동작(action)이 포함 된 키/값 맵의 목록입니다. 스크립트에 동작(action)이 하나만 있으면 줄 바꿈 목록을 생략 할 수 있습니다.</p>
+  <p>스크립트는 홈어시스턴트가 실행할 일련의 액션(action)입니다. 스크립트는 독립형 <a href="/integrations/script/">Script component</a>를 통해 엔티티로 사용할 수 있지만 <a href="/getting-started/automation-action/">automations</a>과 <a href="/integrations/alexa/">Alexa/Amazon Echo</a> 설정에 임베드될 수도 있습니다.</p>
+<p>스크립트 문법 기본 구조는 액션이 포함 된 키/값 맵의 목록입니다. 스크립트에 액션이 하나만 있으면 줄 바꿈 목록을 생략할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example script integration containing script syntax
 script:
   example_script:
@@ -118,8 +118,8 @@ script:
           message: 'Turned on the ceiling light!'
 </code></pre>
 <h3>
-<a class="title-link" name="--call-a-service" href="#--call-a-service"></a> 서비스 호출 (Call a Service)</h3>
-<p>가장 중요한 것은 서비스를 호출하는 동작(action)입니다. 이것은 다양한 방법으로 수행 할 수 있습니다. 다양한 가능성에 대해서는 <a href="/getting-started/scripts-service-calls/">service calls page</a>를 살펴보십시오.</p>
+<a class="title-link" name="--service-call" href="#--service-call"></a> 서비스 호출 (Service Call)</h3>
+<p>가장 중요한 것은 서비스를 호출하는 액션입니다. 이는 다양한 방법으로 수행할 수 있습니다. 다양한 가능성에 대해서는 <a href="/getting-started/scripts-service-calls/">service calls page</a>를 살펴보십시오.</p>
 <pre><code class="language-yaml">- alias: Bedroom lights on
   service: light.turn_on
   data:
@@ -127,13 +127,13 @@ script:
     brightness: 100
 </code></pre>
 <h4>
-<a class="title-link" name="--activate-a-scene" href="#--activate-a-scene"></a> 장면 활성화 (Activate a Scene)</h4>
-<p>스크립트는 또한 <code>scene.turn_on</code> 서비스를 호출하는 대신 장면(scene)을 활성화하기 위해 단축 구문을 사용할 수 있습니다.</p>
+<a class="title-link" name="--activate-a-scene" href="#--activate-a-scene"></a> 씬 활성화 (Activate a Scene)</h4>
+<p>스크립트는 또한 <code>scene.turn_on</code> 서비스를 호출하는 대신 씬(scene)을 활성화하기 위해 단축 구문을 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">- scene: scene.morning_living_room
 </code></pre>
 <h3>
 <a class="title-link" name="--test-a-condition" href="#--test-a-condition"></a> 조건 테스트 (Test a Condition)</h3>
-<p>스크립트를 실행하는 동안 추가 실행을 중지하기위한 조건을 추가 할 수 있습니다. 조건이 ‘true’를 반환하지 않으면 스크립트 실행이 중지됩니다. <a href="/getting-started/scripts-conditions/">conditions page</a>에는 여러 가지 조건이 문서화되어 있습니다.</p>
+<p>스크립트를 실행하는 동안 추가 실행을 중지하기위한 조건을 추가할 수 있습니다. 조건이 ‘true’를 반환하지 않으면 스크립트 실행이 중지됩니다. <a href="/getting-started/scripts-conditions/">conditions page</a>에는 여러 가지 조건이 문서화되어 있습니다.</p>
 <pre><code class="language-yaml"># If paulus is home, continue to execute the script below these lines
 - condition: state
   entity_id: device_tracker.paulus
@@ -164,7 +164,7 @@ script:
 </code></pre>
 <h3>
 <a class="title-link" name="-wait" href="#-wait"></a> 대기 (Wait)</h3>
-<p>몇 가지 사항이 완료 될 때까지 기다리십시오. 현재 <code>wait_template</code>이 조건이 <code>true</code>가 될 때까지 기다리는 것을 지원합니다. <a href="/docs/automation/trigger/#template-trigger">Template-Trigger</a>도 참조하십시오. 조건이 충족되지 않으면 스크립트가 계속 실행되는 시간 초과를 설정할 수 있습니다. 타임 아웃은 <code>delay</code>와 같은 문법입니다.</p>
+<p>몇 가지 사항이 완료될 때까지 기다리십시오. 현재 <code>wait_template</code>이 조건이 <code>true</code>가 될 때까지 기다리는 것을 지원합니다. <a href="/docs/automation/trigger/#template-trigger">Template-Trigger</a>도 참조하십시오. 조건이 충족되지 않으면 스크립트가 계속 실행되는 시간 초과를 설정할 수 있습니다. 타임 아웃은 <code>delay</code>와 같은 문법입니다.</p>
 <pre><code class="language-yaml"># Wait until media player have stop the playing
 - wait_template: "{{ is_state('media_player.floor', 'stop') }}"
 </code></pre>
@@ -175,7 +175,7 @@ script:
 <p>자동화 내에서 <code>wait_template</code>을 사용할 때 <code>trigger.entity_id</code>는 <code>state</code>, <code>numeric_state</code> 그리고 <code>template</code> 트리거에 대해 지원됩니다.</p>
 <pre><code class="language-yaml">- wait_template: "{{ is_state(trigger.entity_id, 'on') }}"
 </code></pre>
-<p>더미 변수(dummy variables)를 사용하는 것도 가능합니다. 예를 들어, 스크립트에서<code>wait_template</code>을 사용할 때.</p>
+<p>더미 변수(dummy variables)를 사용하는 것도 가능합니다. 예를 들어, 스크립트에서 <code>wait_template</code>을 사용할 때.</p>
 <pre><code class="language-yaml"># Service call, e.g., from an automation.
 - service: script.do_something
   data_template:
@@ -193,7 +193,7 @@ script:
 <p><code>continue_on_timeout</code>이 없으면 스크립트는 항상 계속됩니다.</p>
 <h3>
 <a class="title-link" name="--fire-an-event" href="#--fire-an-event"></a> 이벤트 발생 (Fire an Event)</h3>
-<p>이 동작(action)은 이벤트를 발생시킬 수 있습니다. 많은 것들에 이벤트가 사용될 수 있습니다. 자동화를 트리거하거나 다른 연동에 문제가 있음을 나타낼 수 있습니다. 예를 들어 아래 예에서는 로그북에 항목을 만드는 데 사용됩니다.</p>
+<p>이 액션은 이벤트를 발생시킬 수 있습니다. 많은 것들에 이벤트가 사용될 수 있습니다. 자동화를 트리거하거나 다른 연동에 문제가 있음을 나타낼 수 있습니다. 예를 들어 아래 예에서는 로그북에 항목을 만드는데 사용됩니다.</p>
 <pre><code class="language-yaml">- event: LOGBOOK_ENTRY
   event_data:
     name: Paulus
@@ -201,15 +201,15 @@ script:
     entity_id: device_tracker.paulus
     domain: light
 </code></pre>
-<p>event_data_template을 사용하여 사용자 정의 데이터로 이벤트를 발생시킬 수도 있습니다. 이벤트 트리거를 기다리는 다른 스크립트로 데이터를 전달하는 데 사용할 수 있습니다.</p>
+<p>event_data_template을 사용하여 사용자 정의 데이터로 이벤트를 발생시킬 수도 있습니다. 이벤트 트리거를 기다리는 다른 스크립트로 데이터를 전달하는데 사용할 수 있습니다.</p>
 <pre><code class="language-yaml">- event: MY_EVENT
   event_data_template:
     name: myEvent
     customData: "{{ myCustomVariable }}"
 </code></pre>
 <h3>
-<a class="title-link" name="-----raise-and-consume-custom-events" href="#-----raise-and-consume-custom-events"></a> 사용자정의 이벤트 발생 및 소비 (Raise and Consume Custom Events)</h3>
-<p>다음 자동화는 <code>entity_id</code>를 이벤트 데이터로 사용하여 <code>event_light_state_changed</code>라는 사용자 정의 이벤트를 발생시키는 방법을 보여줍니다. 동작 부분은 스크립트 또는 자동화 내부에 있을 수 있습니다.</p>
+<a class="title-link" name="----raise-and-consume-custom-events" href="#----raise-and-consume-custom-events"></a> 사용자정의 이벤트 발생과 소비 (Raise and Consume Custom Events)</h3>
+<p>다음 자동화는 <code>entity_id</code>를 이벤트 데이터로 사용하여 <code>event_light_state_changed</code>라는 사용자 정의 이벤트를 발생시키는 방법을 보여줍니다. 액션 부분은 스크립트 또는 자동화 내부에 있을 수 있습니다.</p>
 <pre><code class="language-yaml">- alias: Fire Event
   trigger:
     - platform: state
@@ -253,7 +253,7 @@ script:
       <li>
         <b><a  href='/docs/installation/'>설치 </a></b>
         <ul>
-          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/hassio/'>홈어시스턴트 </a></li>
           <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
           <li>
             <a  href='/docs/installation/troubleshooting/'>문제해결

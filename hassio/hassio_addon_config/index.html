@@ -137,7 +137,7 @@ TARGET="$(jq --raw-output '.target' $CONFIG_PATH)"
 <p><code>TARGET</code>에는 <code>beer</code> 가 저장되어 이후 bash 스크립트로 사용할 수 있게 됩니다.</p>
 <h2>
 <a class="title-link" name="-" href="#-"></a> 애드온 도커파일</h2>
-<p>모든 애드온은 알파인 리눅스 최신 버전을 기초로 만듭니다. Hass.io는 컴퓨터(machine architecture)에 따라 적당한 알파인 리눅스의 베이스 이미지를 사용합니다. 타임존의 경우 필요에 따라 <code>tzdata</code>를 설정할 수도 있으며 HA가 제공하는 베이스 이미지에는 타임존에 따라 미리 설정되어있습니다.</p>
+<p>모든 애드온은 알파인 리눅스 최신 버전을 기초로 만듭니다. 홈어시스턴트는 컴퓨터(machine architecture)에 따라 적당한 알파인 리눅스의 베이스 이미지를 사용합니다. 타임존의 경우 필요에 따라 <code>tzdata</code>를 설정할 수도 있으며 HA가 제공하는 베이스 이미지에는 타임존에 따라 미리 설정되어있습니다.</p>
 <pre><code class="language-dockerfile">ARG BUILD_FROM
 FROM $BUILD_FROM
 
@@ -152,7 +152,7 @@ RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
 </code></pre>
-<p>만일 Hass.io가 설치된 기기에서 빌드를 하지 않거나 제공된 빌드 스크립트를 사용하지 않는다면(다른 컴퓨터에서 애드온을 만든다면), Dockerfile 안에는 다음과 같은 레이블을 포함시켜야 합니다:</p>
+<p>만일 홈어시스턴트가 설치된 기기에서 빌드를 하지 않거나 제공된 빌드 스크립트를 사용하지 않는다면(다른 컴퓨터에서 애드온을 만든다면), Dockerfile 안에는 다음과 같은 레이블을 포함시켜야 합니다:</p>
 <pre><code>LABEL io.hass.version="VERSION" io.hass.type="addon" io.hass.arch="armhf|aarch64|i386|amd64"
 </code></pre>
 <p><code>build.json</code> 파일을 통해 직접 베이스 이미지를 사용할 수도 있고 다양한 아키텍쳐에 대한 지원이 필요없다면 토커파일의 <code>FROM</code>에 베이스 이미지에 대한 명칭을 바로 적용할 수도 있습니다.</p>
@@ -564,7 +564,7 @@ CMD [ "/run.sh" ]
 </ul>
 <h2>
 <a class="title-link" name="add-on-extended-build" href="#add-on-extended-build"></a> Add-on extended build</h2>
-<p>애드온의 추가적인 빌드옵션은 <code>build.json</code> 파일에 설정합니다. 이 파일은 해쇼의 빌드 시스템이 확인하고 빌드시 사용합니다. 제공하는 기본 이미지가 아닌 다른 베이스 이미지를 사용한다면 아래와 같이 설정하세요.</p>
+<p>애드온의 추가적인 빌드옵션은 <code>build.json</code> 파일에 설정합니다. 이 파일은 홈어시스턴트의 빌드 시스템이 확인하고 빌드시 사용합니다. 제공하는 기본 이미지가 아닌 다른 베이스 이미지를 사용한다면 아래와 같이 설정하세요.</p>
 <pre><code class="language-json">{
   "build_from": {
     "armhf": "mycustom/base-image:latest"
@@ -601,7 +601,7 @@ CMD [ "/run.sh" ]
 </tr>
 </tbody>
 </table>
-<p>해쇼가 제공하는 <a href="https://github.com/home-assistant/hassio-base" rel="external nofollow">베이스 이미지</a>는 다양한 기능을 포함하고 있으며, 만일 다른 알파인 리눅스 버전을 쓰고 싶거나 특정 이미지를 사용하려면 <code>build_from</code> 옵션에 명시적으로 작성하면 됩니다.</p>
+<p>홈어시스턴트가 제공하는 <a href="https://github.com/home-assistant/hassio-base" rel="external nofollow">베이스 이미지</a>는 다양한 기능을 포함하고 있으며, 만일 다른 알파인 리눅스 버전을 쓰고 싶거나 특정 이미지를 사용하려면 <code>build_from</code> 옵션에 명시적으로 작성하면 됩니다.</p>
 <h3><a href="/hassio/hassio_addon_communication/">다음 과정: 통신 방법 »</a></h3>
 
 
@@ -620,7 +620,7 @@ CMD [ "/run.sh" ]
     <h1 class="title delta">목차</h1>
     <ul class='divided sidebar-menu'>
       <li>
-        <a  href='/hassio/'>Hass.io </a>
+        <a  href='/hassio/'>홈어시스턴트 </a>
         <ul>
           <li><a  href='/hassio/installation/'>설치 </a></li>
           <li><a  href='/addons/'>애드온 </a></li>

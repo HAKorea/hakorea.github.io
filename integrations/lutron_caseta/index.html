@@ -157,28 +157,28 @@ lutron_caseta:
 <br>
 라우터에서 DHCP 예약을 사용하여 주소를 예약하거나 Smart Bridge의 PRO 모델에서 모바일 앱의 Advanced / Integration 메뉴에 있는 네트워크 설정에서 IP 주소를 설정하십시오.
 </div>
-<p>Lutron Caseta roller, honeycomb shades, lights, scene 및 switch를 Home Assistant와 함께 사용하려면, 먼저 위의 일반적인 Lutron Caseta 통합 지침을 따르십시오.</p>
+<p>Lutron Caseta roller, honeycomb shades, lights, scene, switch를 Home Assistant와 함께 사용하려면, 먼저 위의 일반적인 Lutron Caseta 연동 지침을 따르십시오.</p>
 <h2>
 <a class="title-link" name="cover" href="#cover"></a> Cover</h2>
 <p>설정 후 Lutron 모바일 앱에 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 shades가 Home Assistant에 나타납니다. 예를 들어, ‘Living Room Window’이라는 shades은 홈어시스턴트에 <code>cover.living_room_window</code>로 나타납니다.</p>
 <p>Home Assistant에서 shades 작업에 대한 자세한 내용은 <a href="/integrations/cover/">Covers component</a>를 참조하십시오.</p>
-<p>사용 가능한 서비스 : <code>cover.open_cover</code>, <code>cover.close_cover</code> 및 <code>cover.set_cover_position</code>. 커버의 위치는 완전 폐쇄의 경우 0, 완전 개방의 경우 100까지입니다.</p>
+<p>사용 가능한 서비스 : <code>cover.open_cover</code>, <code>cover.close_cover</code>, <code>cover.set_cover_position</code>. 커버의 위치는 완전 닫힘의 경우 0, 완전 개방의 경우 100까지입니다.</p>
 <h2>
 <a class="title-link" name="light" href="#light"></a> Light</h2>
-<p>설정 후 벽 및 플러그인 dimmers를 포함한 디밍 가능 조명이 Lutron 모바일 앱에서 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 ‘Bedroom Lamp’라는 조명은 홈 어시스턴트에 <code>light.bedroom_lamp</code>로 나타납니다.</p>
+<p>설정 후 벽과 플러그인 dimmers를 포함한 디밍 가능 조명이 Lutron 모바일 앱에서 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 ‘Bedroom Lamp’라는 조명은 홈어시스턴트에 <code>light.bedroom_lamp</code>로 나타납니다.</p>
 <p>디밍 불가능한 조명 또는 스위치로드에 대해서는 이 페이지의 스위치 섹션을 참조하십시오.</p>
 <p>Home Assistant에서 조명 작업에 대한 자세한 내용은 <a href="/integrations/light/">Lights component</a>를 참조하십시오.</p>
-<p>사용 가능한 서비스 : <code>light.turn_on</code>, <code>light.turn_off</code>, <code>light.toggle</code>.  <code>light.turn_on</code> 서비스는 <code>brightness</code> 및 <code>brightness_pct</code> 속성을 지원합니다.</p>
+<p>사용 가능한 서비스 : <code>light.turn_on</code>, <code>light.turn_off</code>, <code>light.toggle</code>.  <code>light.turn_on</code> 서비스는 <code>brightness</code>, <code>brightness_pct</code> 속성을 지원합니다.</p>
 <h2>
-<a class="title-link" name="scene" href="#scene"></a> 장면(Scene)</h2>
-<p>Lutron Caseta 장면 플랫폼을 사용하면 Lutron 모바일 앱에서 생성된 Smart Bridge 장면을 제어 할 수 있습니다.</p>
-<p>설정 후 장면은 Lutron 모바일 앱에서 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 <code>Entertain</code>이라는 장면은 Home Assistant에서 <code>scene.entertain</code>으로 나타납니다.</p>
-<p>Home Assistant에서 장면 작업에 대한 자세한 내용은 <a href="/integrations/scene/">Scenes component</a>를 참조하십시오.</p>
+<a class="title-link" name="scene" href="#scene"></a> 씬(Scene)</h2>
+<p>Lutron Caseta 씬 플랫폼을 사용하면 Lutron 모바일 앱에서 생성된 Smart Bridge 씬을 제어할 수 있습니다.</p>
+<p>설정 후 씬은 Lutron 모바일 앱에서 사용된 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 <code>Entertain</code>이라는 장면은 Home Assistant에서 <code>scene.entertain</code>으로 나타납니다.</p>
+<p>Home Assistant에서 씬 작업에 대한 자세한 내용은 <a href="/integrations/scene/">Scenes component</a>를 참조하십시오.</p>
 <p>사용가능한 서비스: <code>scene.turn_on</code>.</p>
 <h2>
 <a class="title-link" name="switch" href="#switch"></a> Switch</h2>
 <p>설정 후 스위치는 Lutron 모바일 앱에서 사용되는 이름을 기반으로 <code>entity_id</code>를 사용하여 Home Assistant에 나타납니다. 예를 들어 ‘Master Bathroom Vanity’라는 전등 스위치는 홈어시스턴트에 <code>switch.master_bathroom_vanity</code>로 나타납니다.</p>
-<p>벽 및 플러그인 디머를 포함한 디밍 가능 라이트에 대해서는 이 페이지의 라이트 섹션을 참조하십시오.</p>
+<p>벽과 플러그인 디머를 포함한 디밍 가능 라이트에 대해서는 이 페이지의 라이트 섹션을 참조하십시오.</p>
 <p>Home Assistant에서 스위치 작업에 대한 자세한 내용은 <a href="/integrations/switch/">Switches component</a>를 참조하십시오.</p>
 <p>사용가능한 서비스 : <code>switch.turn_on</code>, <code>switch.turn_off</code>.</p>
 <h2>

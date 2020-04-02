@@ -97,7 +97,7 @@
   <hr class="divider">
   
 
-  <p>이를 위해서 PTZ (팬, 틸트, 줌)과 CGI 기능이있는 <a href="/integrations/foscam">Foscam IP Camera</a> 카메라 (<a href="https://www.foscam.es/descarga/Foscam-IPCamera-CGI-User-Guide-AllPlatforms-2015.11.06.pdf" rel="external nofollow">Source</a>)가 필요합니다.</p>
+  <p>이를 위해서 PTZ (팬, 틸트, 줌)과 CGI 기능이 있는 <a href="/integrations/foscam">Foscam IP Camera</a> 카메라 (<a href="https://www.foscam.es/descarga/Foscam-IPCamera-CGI-User-Guide-AllPlatforms-2015.11.06.pdf" rel="external nofollow">Source</a>)가 필요합니다.</p>
 <p>Foscam 카메라는 여러 CGI 명령을 통해 Home Assistant에서 제어할 수 있습니다. 다음은 모션 감지를 제어하는 ​​동안 2개의 사전 설정 대상간에 이동하는데 필요한 스위치, 서비스 그리고 스크립트의 예를 간략히 설명하지만 위에 링크된 Foscam CGI 사용 설명서에 다른 많은 동작 옵션이 ​​제공됩니다.</p>
 <p><code>switch.foscam_motion</code>은 모션 감지의 켜짐 또는 꺼짐을 제어합니다. 이 스위치는 현재 모션 감지 상태를 확인하는 <code>statecmd</code>를 지원합니다.</p>
 <pre><code class="language-yaml"># Replace admin and password with an "Admin" privileged Foscam user
@@ -119,7 +119,7 @@ switch:
   #Created a preset point in Foscam Web Interface named Main which points in the direction I would like to record
   foscam_turn_on: 'curl -k "https://ipaddress:443/cgi-bin/CGIProxy.fcgi?cmd=ptzGotoPresetPoint&amp;name=Main&amp;usr=admin&amp;pwd=password"'
 </code></pre>
-<p><code>script.foscam_off</code>, <code>script.foscam_on</code>을 사용하여 모션 감지를 적절하게 설정한 다음 카메라를 이동할 수 있습니다. 이 스크립트는 Foscam에 대해 <code>home</code>, <code>not_home</code>모드를 설정하고 <code>home</code>일때 모션 감지 녹화를 비활성화하는 <code>device_tracker</code> 트리거를 사용하여 자동화의 일부로 호출할 수 있습니다.</p>
+<p><code>script.foscam_off</code>, <code>script.foscam_on</code>을 사용하여 모션 감지를 적절하게 설정한 다음 카메라를 이동할 수 있습니다. 이 스크립트는 Foscam에 대해 <code>home</code>, <code>not_home</code> 모드를 설정하고 <code>home</code>일때 모션 감지 녹화를 비활성화하는 <code>device_tracker</code> 트리거를 사용하여 자동화의 일부로 호출할 수 있습니다.</p>
 <pre><code class="language-yaml">script:
  foscam_off:
    sequence:
@@ -225,8 +225,6 @@ switch:
         
       
         
-      
-        
           <li>
             
               <a href='/cookbook/automation_enocean_phue/'>enocean 스위치로 Philips Hue 제어</a>
@@ -252,12 +250,6 @@ switch:
       
         
       
-        
-          <li>
-            
-              <a href='/cookbook/notify_if__new_ha_release/'>Send notification if new Home Assistant release</a>
-            
-          </li>
         
       
         
@@ -312,6 +304,14 @@ switch:
           <li>
             
               <a href='/cookbook/automation_for_rainy_days/'>비오는 날 자동화</a>
+            
+          </li>
+        
+      
+        
+          <li>
+            
+              <a href='/cookbook/notify_if__new_ha_release/'>새로운 홈어시스턴트가 출시되면 알림 보내기</a>
             
           </li>
         

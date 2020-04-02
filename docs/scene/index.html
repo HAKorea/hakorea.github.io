@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Scenes - 홈어시스턴트</title>
+    <title>씬(Scenes) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Instructions on how to setup scenes within Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/scene/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Scenes">
+    <meta property="og:title" content="씬(Scenes)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/scene/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Scenes">
+    <meta name="twitter:title" content="씬(Scenes)">
     <meta name="twitter:description" content="Instructions on how to setup scenes within Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,13 +97,13 @@
   
   <header>
     <h1 class="title indent">
-      Scenes
+      씬(Scenes)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>특정 엔티티가 원하는 상태를 캡처하는 장면(scene)을 만들 수 있습니다. 예를 들어 장면(scene)에서 조명 A를 켜고 조명 B를 밝게 빨간색으로 지정하도록 지정할 수 있습니다.</p>
+  <p>특정 엔티티가 원하는 상태를 캡처하는 씬(scene)을 만들 수 있습니다. 예를 들어 씬(scene)에서 조명 A를 켜고 조명 B를 밝게 빨간색으로 지정하도록 지정할 수 있습니다.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 scene:
   - name: Romantic
@@ -130,20 +130,20 @@ scene:
   <dl class="">
 <dt>
 <a class="title-link" name="name" href="#name"></a> name</dt>
-<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>친숙한 장면 이름.</p>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>친숙한 씬 이름.</p>
 </span></p></dd>
 <dt>
 <a class="title-link" name="entities" href="#entities"></a> entities</dt>
-<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>제어 할 엔티티 및 원하는 상태.</p>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Required)</span><span class="description"><p>제어할 엔티티와 원하는 상태.</p>
 </span></p></dd>
 </dl>
 </div>
 <p>보다시피, 각 <code>entity_id</code>의 상태를 정의하는 두 가지 방법이 있습니다 :</p>
 <ul>
 <li>엔티티와 직접 <code>state</code>를 정의하십시오. <code>state</code>는 반드시 정의해야합니다.</li>
-<li>속성으로 복잡한 상태를 정의하십시오. <code>developer-tools-&gt; state</code>에서 특정 엔티티에 사용 가능한 모든 속성을 볼 수 있습니다.</li>
+<li>속성으로 복잡한 상태를 정의하십시오. <code>개발자도구 -&gt; 상태</code>에서 특정 엔티티에 사용 가능한 모든 속성을 볼 수 있습니다.</li>
 </ul>
-<p><code>scene.turn_on</code> 서비스를 사용하지 않고 장면(scene)을 활성화 할 수 있습니다 (‘scene.turn_off’ 서비스 없음).</p>
+<p><code>scene.turn_on</code> 서비스를 사용하지 않고 씬(scene)을 활성화할 수 있습니다 (‘scene.turn_off’ 서비스 없음).</p>
 <pre><code class="language-yaml"># Example automation
 automation:
   trigger:
@@ -156,8 +156,8 @@ automation:
     entity_id: scene.romantic
 </code></pre>
 <h2>
-<a class="title-link" name="----applying-a-scene-without-defining-it" href="#----applying-a-scene-without-defining-it"></a> 장면을 정의하지 않고 적용 (Applying a scene without defining it)</h2>
-<p><code>scene.apply</code> 서비스를 사용하면 설정을 통해 먼저 장면을 정의하지 않고도 장면을 적용 할 수 있습니다. 대신 서비스 데이터의 일부로 상태를 전달합니다. 데이터의 형식은 설정의 <code>entities</code>필드와 동일합니다.</p>
+<a class="title-link" name="----applying-a-scene-without-defining-it" href="#----applying-a-scene-without-defining-it"></a> 씬을 정의하지 않고 적용 (Applying a scene without defining it)</h2>
+<p><code>scene.apply</code> 서비스를 사용하면 설정을 통해 먼저 씬을 정의하지 않고도 씬을 적용할 수 있습니다. 대신 서비스 데이터의 일부로 상태를 전달합니다. 데이터의 형식은 설정의 <code>entities</code>필드와 동일합니다.</p>
 <pre><code class="language-yaml"># Example automation
 automation:
   trigger:
@@ -178,8 +178,8 @@ automation:
           source: HDMI 1
 </code></pre>
 <h2>
-<a class="title-link" name="--reloading-scenes" href="#--reloading-scenes"></a> 장면 새로고침 (Reloading scenes)</h2>
-<p>장면 설정을 변경할 때마다 <code>scene.reload</code> 서비스를 호출하여 장면을 다시로드 할 수 있습니다.</p>
+<a class="title-link" name="--reloading-scenes" href="#--reloading-scenes"></a> 씬 새로고침 (Reloading scenes)</h2>
+<p>씬 설정을 변경할 때마다 <code>scene.reload</code> 서비스를 호출하여 씬을 리로드할 수 있습니다.</p>
 
 
 </article>
@@ -203,7 +203,7 @@ automation:
       <li>
         <b><a  href='/docs/installation/'>설치 </a></b>
         <ul>
-          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/hassio/'>홈어시스턴트 </a></li>
           <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
           <li>
             <a  href='/docs/installation/troubleshooting/'>문제해결

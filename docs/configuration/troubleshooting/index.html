@@ -114,16 +114,23 @@
 <a class="title-link" name="--" href="#--"></a> 설정에 관한 문제</h4>
 <p>Home Assistant의 가장 일반적인 문제중 하나는 유효하지 않은 <code>configuration.yaml</code> 설정이거나 configuaration 파일이 다른 것일 경우입니다.</p>
 <ul>
-<li>다음과 같은 명령을 사용하여 설정을 테스트 할 수 있습니다: <code>hass --script check_config</code>.
+<li>
+<p>홈어시스턴트로 <a href="/hassio/commandline/#home-assistant"><code>ha</code> command</a> 사용 가능합니다. : <code>ha core check</code>.</p>
 <ul>
-<li>Hass.io에서 <a href="/hassio/commandline/#home-assistant">hassio command</a> : <code>hassio homeassistant check</code>.</li>
-<li>도커에서 <code>docker exec home-assistant python -m homeassistant --script check_config --config /config</code> - <code>home-assistant</code>는 컨테이너의 이름입니다.</li>
+<li>
+<code>hass --script check_config</code> command line을 사용하여 Home Assistant Core로 설정을 테스트할 수 있습니다.</li>
+<li>Docker에서는 <code>docker exec home-assistant python -m homeassistant --script check_config --config /config</code>를 사용할 수 있습니다. 여기서 <code>home-assistant</code>는 컨테이너의 이름입니다.</li>
 </ul>
 </li>
-<li>설정 파일들, <code>configuration.yaml</code> 포함 모두 UTF-8 인코딩을 씁니다. <code>'utf-8' codec can't decode byte</code> 와 같은 오류가 표시되면, 문제가 되는 설정내용을 편집하여 UTF-8로 다시 저장합니다.</li>
 <li>
-<a href="http://yaml-online-parser.appspot.com/" rel="external nofollow">this online YAML parser</a> 혹은 <a href="http://www.yamllint.com/" rel="external nofollow">YAML Lint</a>를 사용하여 설정의 yaml 구조를 확인할 수 있습니다.</li>
-<li>YAML의 특성에 대해 자세히 알아보려면, SaltStack 사이트에서 <a href="https://docs.saltstack.com/en/latest/topics/troubleshooting/yaml_idiosyncrasies.html" rel="external nofollow">YAML IDIOSYNCRASIES</a>, (SaltStack에서 별도로 분석한 예제이지만 YAML 문제를 잘 설명하고 있습니다).</li>
+<p>설정 파일들, <code>configuration.yaml</code> 포함 모두 UTF-8 인코딩을 씁니다. <code>'utf-8' codec can't decode byte</code> 와 같은 오류가 표시되면, 문제가 되는 설정내용을 편집하여 UTF-8로 다시 저장합니다.</p>
+</li>
+<li>
+<p><a href="http://yaml-online-parser.appspot.com/" rel="external nofollow">this online YAML parser</a> 혹은 <a href="http://www.yamllint.com/" rel="external nofollow">YAML Lint</a>를 사용하여 설정의 yaml 구조를 확인할 수 있습니다.</p>
+</li>
+<li>
+<p>YAML의 특성에 대해 자세히 알아보려면, SaltStack 사이트에서 <a href="https://docs.saltstack.com/en/latest/topics/troubleshooting/yaml_idiosyncrasies.html" rel="external nofollow">YAML IDIOSYNCRASIES</a>, (SaltStack에서 별도로 분석한 예제이지만 YAML 문제를 잘 설명하고 있습니다).</p>
+</li>
 </ul>
 <p><code>configuration.yaml</code> 파일은 여러 섹션에 동일한 이름을 가질 수 없습니다. 하나의 구성요소에 여러 플랫폼을 로드하려는 경우, 이름에 <a href="/getting-started/devices/#style-2-list-each-device-separately">숫자 혹은 문자열</a>을 추가하거나 <a href="/getting-started/devices/#style-1-collect-every-entity-under-the-parent">스타일</a>을 사용하여 중첩시킬 수 있습니다. :</p>
 <pre><code class="language-yaml">sensor:
@@ -197,7 +204,7 @@ sensor: !include devices/sensors.yaml
       <li>
         <b><a  href='/docs/installation/'>설치 </a></b>
         <ul>
-          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/hassio/'>홈어시스턴트 </a></li>
           <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
           <li>
             <a  href='/docs/installation/troubleshooting/'>문제해결

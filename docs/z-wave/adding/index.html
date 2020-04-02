@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Z-Wave Devices - Adding and Removing - 홈어시스턴트</title>
+    <title>Z-Wave 장치 - 추가/삭제하기 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="How to add and remove Z-Wave devices.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/z-wave/adding/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Z-Wave Devices - Adding and Removing">
+    <meta property="og:title" content="Z-Wave 장치 - 추가/삭제하기">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/z-wave/adding/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Z-Wave Devices - Adding and Removing">
+    <meta name="twitter:title" content="Z-Wave 장치 - 추가/삭제하기">
     <meta name="twitter:description" content="How to add and remove Z-Wave devices.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,108 +97,109 @@
   
   <header>
     <h1 class="title indent">
-      Z-Wave Devices - Adding and Removing
+      Z-Wave 장치 - 추가/삭제하기
     </h1>
   </header>
   <hr class="divider">
   
 
   <h2>
-<a class="title-link" name="adding-non-secure-devices" href="#adding-non-secure-devices"></a> Adding Non-Secure Devices</h2>
-<p>To add (include) a non-secure Z-Wave <a href="/docs/z-wave/devices/">device</a> to your system:</p>
+<a class="title-link" name="--" href="#--"></a> 비보안 장치 추가</h2>
+<p>비보안 Z-Wave <a href="/docs/z-wave/devices/">device</a>를 시스템에 추가(포함)하려면 :</p>
 <ol>
-<li>Go to the <a href="/docs/z-wave/control-panel/">Z-Wave control panel</a> in the Home Assistant frontend</li>
-<li>Click the <strong>Add Node</strong> button in the <em>Z-Wave Network Management</em> card - this will place the controller in inclusion mode</li>
-<li>Activate your device to be included by following the instructions provided with the device</li>
-<li>With the device in its final location, run a <em>Heal Network</em>
-</li>
+<li>홈어시스턴트 프론트엔드의 <a href="/docs/z-wave/control-panel/">Z-Wave 제어판</a>으로 이동하십시오.</li>
+<li>
+<em>Z-Wave Network Management</em> 카드에서 <strong>Add Node</strong> 버튼을 클릭하십시오. - 컨트롤러가 포함(inclusion) 모드에 있게됩니다.</li>
+<li>장치와 함께 제공된 지침에 따라 장치가 포함되도록 활성화하십시오.</li>
+<li>장치를 최종 위치에 두고 <em>Heal Network</em>를 실행하십시오.</li>
 </ol>
-<p>Don’t use this for <a href="/docs/z-wave/adding/#adding-secure-devices">secure devices</a>, since this is likely to limit the features the device supports.</p>
+<p><a href="/docs/z-wave/adding/#adding-secure-devices">보안 장치</a>에는 이 기능을 사용하지 마십시오. 장치가 지원하는 기능이 제한될 수 있습니다.</p>
 <div class="note warning">
-<p>Don’t use the OpenZWave control panel (OZWCP), <strong>or the physical button on a controller</strong>, to add or remove devices. Many devices will only send the information about their capabilities at the time you include them. If you use the OpenZWave control panel, or the button on a device, then Home Assistant won’t have that information. Using the physical button on a controller will also result in a non-security inclusion being performed, which may limit the features the device supports.</p>
+<p>장치를 추가하거나 제거하기 위해 OpenZWave 제어판 (OZWCP) <strong>또는 컨트롤러의 물리적 버튼</strong>을 사용하지 마십시오. 많은 장치는 장치를 포함할 때 해당 기능에 대한 정보만 보냅니다. OpenZWave 제어판이나 장치의 버튼을 사용하면 홈어시스턴트에 해당 정보가 없습니다. 컨트롤러에서 물리적 버튼을 사용하면 비보안 포함이 수행되어 장치가 지원하는 기능이 제한될 수 있습니다.</p>
 </div>
-<p>When you add a device, it may initially appear without a specific entity ID (e.g., <code>zwave.__</code>) and without other identifying information. Running a <em>Heal</em> should help speed this process up, and you’ll need to run a <em>Heal</em> anyway so that all the devices in your Z-Wave network learn about the new device. You <em>might</em> need to restart Home Assistant (not reboot the system) to have the entity ID fully visible.</p>
+<p>장치를 추가하면 처음에 특정 엔티티 ID(예: <code>zwave .__</code>)와 다른 식별정보 없이 나타날 수 있습니다. <em>Heal</em>을 실행하면 이 프로세스 속도가 빨라지므로 Z-Wave 네트워크의 모든 장치가 새 장치에 대해 알 수 있도록 <em>Heal</em>을 실행해야합니다. 엔티티 ID가 완전히 표시되도록 Home Assistant를 다시 시작해야 <em>할 수도</em> 있습니다(시스템을 재부팅하지 않음).</p>
 <h2>
-<a class="title-link" name="network-key" href="#network-key"></a> Network Key</h2>
-<p>Security Z-Wave devices require a network key. Some devices only expose their full capabilities when included this way. You should always read the manual for your device to find out the recommended inclusion method. Note, secure devices that had been connected to another hub/network in the past may have a “theft protection” feature which requires to first exclude the device successfully from the previous hub using the previous hub/Software setup before it can be enrolled in a new hub/network.</p>
-<p>A valid network key will be a 16 byte value, defined in the zwave section of your configuration, such as the following example:</p>
+<a class="title-link" name="-" href="#-"></a> 네트워크 키</h2>
+<p>보안 Z-Wave 장치에는 네트워크 키가 필요합니다. 일부 장치는 이러한 방식으로 포함된 경우 전체 기능만 노출합니다. 권장되는 포함 방법을 찾으려면 항상 장치 설명서를 읽으십시오. 과거에 다른 허브/네트워크에 연결된 보안 장치에는 “이전 보호” 기능이 있을 수 있습니다. 새로운 허브/네트워크에 등록하기 전에 이 기능은 먼저 이전 허브/소프트웨어 설정을 사용하여 이전 허브에서 장치를 성공적으로 제외해야합니다.</p>
+<p>유효한 네트워크 키는 다음 예제와 같이 설정의 zwave 섹션에 정의된 16 바이트 값입니다. :</p>
 <pre><code class="language-yaml">zwave:
   usb_path: /dev/ttyACM0
   network_key: "0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10"
 </code></pre>
-<p>Each individual value in the defined key can be anywhere from 0x00 to 0xFF. Define your own key by making changes to the above example key or for additional security try one of the two scripts mentioned below.</p>
+<p>정의된 키의 각 개별 값은 0x00에서 0xFF 사이에 있을 수 있습니다. 위의 예제 키를 변경하거나 추가 보안을 위해 아래에 언급된 두 스크립트 중 하나를 시도하여 자신의 키를 정의하십시오.</p>
 <h3>
-<a class="title-link" name="network-key" href="#network-key"></a> Network Key</h3>
-<p>An easy script to generate a random key:</p>
+<a class="title-link" name="-" href="#-"></a> 네트워크 키</h3>
+<p>임의의 키를 생성하는 쉬운 스크립트 :</p>
 <pre><code class="language-bash">$ cat /dev/urandom | tr -dc '0-9A-F' | fold -w 32 | head -n 1 | sed -e 's/\(..\)/0x\1, /g' -e 's/, $//'
 </code></pre>
-<p>On macOS, this script will generate a random key:</p>
+<p>macOS에서 이 스크립트는 임의의 키를 생성합니다. :</p>
 <pre><code class="language-bash">$ cat /dev/urandom | LC_CTYPE=C tr -dc '0-9A-F' | fold -w 32 | head -n 1 | sed -e 's/\(..\)/0x\1, /g' -e 's/, $//'
 </code></pre>
-<p>If the above command doesn’t work then replace <code>LC_CTYPE=C</code> with <code>LC_ALL=C</code>:</p>
+<p>위의 명령이 작동하지 않으면 <code>LC_CTYPE=C</code>를 <code>LC_ALL=C</code>로 바꾸십시오 :</p>
 <pre><code class="language-bash">$ cat /dev/urandom | LC_ALL=C tr -dc '0-9A-F' | fold -w 32 | head -n 1 | sed -e 's/\(..\)/0x\1, /g' -e 's/, $//'
 </code></pre>
 <div class="note warning">
-Ensure you keep a backup of this key. If you have to rebuild your system and don't have a backup of this key, you won't be able to reconnect to any security devices. This may mean you have to do a factory reset on those devices, and your controller, before rebuilding your Z-Wave network.
+이 키의 백업을 유지하십시오. 시스템을 재구축해야하고 이 키의 백업이 없는 경우 보안 장치에 다시 연결할 수 없습니다. 이는 Z-Wave 네트워크를 재구축하기 전에 해당 장치와 컨트롤러에서 공장 초기화를 수행해야 함을 의미할 수 있습니다.
 </div>
 <h2>
-<a class="title-link" name="adding-secure-devices" href="#adding-secure-devices"></a> Adding Secure Devices</h2>
-<p>After defining your network key, follow these steps to add (include) a secure Z-Wave device:</p>
+<a class="title-link" name="--" href="#--"></a> 보안 장치 추가</h2>
+<p>네트워크 키를 정의한 후 다음 단계에 따라 보안 Z-Wave 장치를 추가(포함)하십시오. :</p>
 <ol>
-<li>Go to the <a href="/docs/z-wave/control-panel/">Z-Wave control panel</a> in the Home Assistant frontend</li>
-<li>Click the <strong>Add Node Secure</strong> button in the <em>Z-Wave Network Management</em> card - this will place the controller in inclusion mode</li>
-<li>Activate your device to be included by following the instructions provided with the device</li>
-<li>With the device in its final location, run a <em>Heal Network</em>
-</li>
+<li>홈어시스턴트 프론트엔드의 <a href="/docs/z-wave/control-panel/">Z-Wave 제어판</a>으로 이동하십시오.</li>
+<li>
+<em>Z-Wave Network Management</em> 카드에서 <strong>Add Node Secure</strong> 버튼을 클릭하십시오. - 컨트롤러가 포함 모드에 있게됩니다</li>
+<li>장치와 함께 제공된 지침에 따라 장치가 포함되도록 활성화하십시오.</li>
+<li>장치를 최종 위치에두고 <em>Heal Network</em>를 실행하십시오.</li>
 </ol>
 <div class="note warning">
-Secure devices require additional bandwidth, and too many secure devices can slow down your Z-Wave network. We recommend only using secure inclusion for devices that require it, such as locks.
+보안 장치에는 추가 대역폭이 필요하며 보안 장치가 너무 많으면 Z-Wave 네트워크 속도가 느려질 수 있습니다. 잠금 장치와 같이 필요한 장치에만 보안 포함을 사용하는 것이 좋습니다. 
 </div>
 <h2>
-<a class="title-link" name="removing-devices" href="#removing-devices"></a> Removing Devices</h2>
-<p>To remove (exclude) a Z-Wave device from your system:</p>
+<a class="title-link" name="-" href="#-"></a> 장치 제거</h2>
+<p>시스템에서 Z-Wave 장치를 제거(제외)하려면 :</p>
 <ol>
-<li>Go to the Z-Wave control panel in the Home Assistant frontend</li>
-<li>Click the <strong>Remove Node</strong> button in the <em>Z-Wave Network Management</em> card - this will place the controller in exclusion mode</li>
-<li>Activate your device to be excluded by following the instructions provided with the device</li>
-<li>The device will now be removed, but that won’t show until you restart Home Assistant</li>
-<li>Run a <em>Heal Network</em> so all the other nodes learn about its removal</li>
+<li>홈어시스턴트 프론트 엔드의 Z-Wave 제어판으로 이동하십시오.</li>
+<li>
+<em>Z-Wave Network Management</em> 카드에서 <strong>Remove Node</strong> 버튼을 클릭하십시오. - 컨트롤러를 제외 모드로 설정합니다</li>
+<li>장치와 함께 제공된 지침에 따라 장치가 제외되도록 활성화하십시오.</li>
+<li>이제 장치가 제거되지만 홈어시스턴트를 다시 시작할 때까지 표시되지 않습니다</li>
+<li>다른 모든 노드가 제거에 대해 배울 수 있도록 <em>Heal Network</em>를 실행하십시오.</li>
 </ol>
-<p>If your device isn’t responding to this process, possibly because you’ve factory reset it or it has failed, you can remove it using <strong>Remove Failed Node</strong>. This only works for devices marked as <code>"is_failed": true</code>, but you can trick the system into thinking that this the case:</p>
+<p>기기가이 프로세스에 응답하지 않는 경우(초기화했거나 실패했기 때문에) <strong>Remove Failed Node</strong>를 사용하여 제거할 수 있습니다. 이는 <code>"is_failed": true</code>로 표시된 장치에서만 작동하지만 시스템이 다음과 같은 경우를 생각하도록 속일 수 있습니다.</p>
 <ol>
 <li>
-<p>Go to the <em>States</em> menu under <em>Developer tools</em> in the Home Assistant frontend</p>
+<p>홈어시스턴트 프론트 엔드의 <em>개발자 도구</em> 아래에 있는 <em>상태</em> 메뉴로 이동하십시오.</p>
 </li>
 <li>
-<p>Click on the name of the <code>zwave.</code> entity you want to remove</p>
+<p>제거할 <code>zwave</code> 엔티티의 이름을 클릭하십시오.</p>
 </li>
 <li>
-<p>Make note of the entity’s “node_id” value as you will need to re-add the “node_id” attribute and value in step 4.</p>
+<p>4 단계에서 “node_id” 속성과 값을 다시 추가해야하므로 엔티티의 “node_id”값을 기록하십시오.</p>
 </li>
 <li>
-<p>At the top, edit the JSON attributes to replace <code>false</code> with <code>true</code> for <code>"is_failed": false,</code> so that it reads <code>"is_failed": true.</code> Also add the “node_id” value to the number listed in the entity’s attribute. The JSON attributes should look something like below:</p>
+<p>맨 위에서 JSON 속성을 편집하여 <code>"is_failed": false</code>에 대해 <code>false</code>를 <code>true</code>로 바꾸고<code> </code>“is_failed”: true`를 읽습니다. 또한 “node_id”값을 엔티티 속성에 나열된 숫자에 추가하십시오. JSON 속성은 다음과 같아야합니다. :</p>
 <pre><code class="language-yaml">{"node_id":6, "is_failed":true}
 </code></pre>
 </li>
 <li>
-<p>Click <strong>Set State</strong></p>
+<p><strong>Set State</strong>를 클릭하십시오.</p>
 </li>
 <li>
-<p>Go to the Z-Wave control panel in the Home Assistant frontend</p>
+<p>홈어시스턴트 프론트엔드의 Z-Wave 제어판으로 이동하십시오.</p>
 </li>
 <li>
-<p>Click the <strong>Remove Failed Node</strong> button in the <em>Z-Wave Node Management</em> card</p>
+<p><em>Z-Wave Node Management</em> 카드에서 <strong>Remove Failed Node</strong> 버튼을 클릭하십시오.</p>
 </li>
 <li>
-<p>The device will now be removed, but that won’t show until you restart Home Assistant</p>
+<p>이제 장치가 제거되지만 홈어시스턴트를 다시 시작할 때까지 표시되지 않습니다</p>
 </li>
 </ol>
 <h2>
-<a class="title-link" name="troubleshooting" href="#troubleshooting"></a> Troubleshooting</h2>
-<p>Sometimes devices won’t add to Home Assistant. There are a couple of possible problems.</p>
+<a class="title-link" name="-" href="#-"></a> 문제 해결</h2>
+<p>장치가 홈어시스턴트에 추가되지 않는 경우가 있습니다. 몇 가지 가능한 문제가 있습니다.</p>
 <ol>
-<li>You’re not using all Z-Wave Plus devices, in which case the device can’t use the mesh to be added, and must be in the same room as your controller.</li>
-<li>The device was previously added to another controller, and not removed. You’ll need to follow the process above for removing devices first, then try adding it again.</li>
+<li>모든 Z-Wave Plus 장치를 사용하지는 않습니다. 이 경우 장치는 메쉬를 추가할 수 없으며 컨트롤러와 같은 방에 있어야합니다.</li>
+<li>장치가 이전에 다른 컨트롤러에 추가되었지만 제거되지 않았습니다. 먼저 장치를 제거하려면 위의 프로세스를 따라야합니다. 그런 다음 다시 추가하십시오.</li>
 </ol>
 
 
@@ -223,7 +224,7 @@ Secure devices require additional bandwidth, and too many secure devices can slo
       <li>
         <b><a  href='/docs/installation/'>설치 </a></b>
         <ul>
-          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/hassio/'>홈어시스턴트 </a></li>
           <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
           <li>
             <a  href='/docs/installation/troubleshooting/'>문제해결

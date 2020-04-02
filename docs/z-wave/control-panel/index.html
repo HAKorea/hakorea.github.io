@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Z-Wave Control Panel - 홈어시스턴트</title>
+    <title>Z-Wave 제어판 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="How to use the Z-Wave control panel.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/z-wave/control-panel/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Z-Wave Control Panel">
+    <meta property="og:title" content="Z-Wave 제어판">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/z-wave/control-panel/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Z-Wave Control Panel">
+    <meta name="twitter:title" content="Z-Wave 제어판">
     <meta name="twitter:description" content="How to use the Z-Wave control panel.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,201 +97,201 @@
   
   <header>
     <h1 class="title indent">
-      Z-Wave Control Panel
+      Z-Wave 제어판
     </h1>
   </header>
   <hr class="divider">
   
 
   <div class="note">
-<p>If you don’t see the <strong>Configuration</strong> menu on the menubar, where you’ll find the Z-Wave menu, <a href="/integrations/config/">see here</a>.</p>
+<p>메뉴바에 <strong>설정</strong> 메뉴가 표시되지 않으면 Z-Wave 메뉴를 찾을 수 있습니다 (<a href="/integrations/config/">여기 참조</a>).</p>
 </div>
-<p>Renaming Z-Wave entities is now done using the same <a href="/docs/configuration/customizing-devices/">customization options</a> as for any other entity.</p>
+<p>Z-Wave 엔티티의 이름 바꾸기는 이제 다른 엔티티와 동일한 <a href="/docs/configuration/customizing-devices/">사용자 정의 옵션</a>을 사용하여 수행됩니다.</p>
 <h2>
-<a class="title-link" name="z-wave-network-management" href="#z-wave-network-management"></a> Z-Wave Network Management</h2>
-<p>Here is where you <a href="/docs/z-wave/adding/">include and exclude</a> Z-Wave devices from your network.</p>
+<a class="title-link" name="z-wave--" href="#z-wave--"></a> Z-Wave 네트워크 관리</h2>
+<p>네트워크에서 Z-Wave 장치를 <a href="/docs/z-wave/adding/">포함하기와 제외하기</a>위한 곳입니다.</p>
 <ul>
 <li>
-<p><strong>Add Node</strong> puts the controller into inclusion mode, so you can include (add) a device to your Z-Wave network</p>
+<p><strong>Add Node</strong> 컨트롤러를 포함 모드로 전환하여 장치를 Z-Wave 네트워크에 포함(추가)할 수 있습니다</p>
 </li>
 <li>
-<p><strong>Add Node Secure</strong> puts the controller into secure inclusion mode (this requires that you’ve created a <a href="/docs/z-wave/adding#sdding-security-devices">security key</a>)</p>
+<p><strong>Add Node Secure</strong> 컨트롤러를 보안 포함 모드로 전환합니다 (<a href="/docs/z-wave/adding#sdding-security-devices">보안 키</a>를 생성해야합니다)</p>
 </li>
 <li>
-<p><strong>Remove Node</strong> puts the controller into exclusion mode, so you can exclude (remove) a device. Note that you can exclude a non-secure device that’s been added to another network</p>
+<p><strong>Remove Node</strong> 컨트롤러를 제외 모드로 전환하므로 장치를 제외(제거)할 수 있습니다. 다른 네트워크에 추가된 비보안 장치를 제외할 수 있습니다.</p>
 </li>
 <li>
-<p><strong>Cancel Command</strong> cancels any of the above</p>
+<p><strong>Cancel Command</strong> 위의 중 하나를 취소</p>
 </li>
 <li>
-<p><strong>Heal Network</strong> tells the controller to “heal” the Z-Wave network. Basically asks the nodes to tell the controller all of their neighbors so the controller can recompute optimal routing.</p>
+<p><strong>Heal Network</strong> 컨트롤러가 Z-Wave 네트워크를 “heal”하도록 지시합니다. 기본적으로 노드에게 컨트롤러에게 모든 인접 항목을 알려주도록하여 컨트롤러가 최적의 라우팅을 재계산할 수 있도록합니다.</p>
 </li>
 <li>
-<p><strong>Start Network</strong> starts the Z-Wave network</p>
+<p><strong>Start Network</strong> Z-Wave 네트워크를 시작합니다.</p>
 </li>
 <li>
-<p><strong>Stop Network</strong> stops the Z-Wave network</p>
+<p><strong>Stop Network</strong> Z-Wave 네트워크를 중지합니다.</p>
 </li>
 <li>
-<p><strong>Soft Reset</strong> tells the controller to do a “soft reset.” This is not supposed to lose any data, but different controllers can behave differently to a “soft reset” command, and may cause the Z-Wave network to hang.</p>
+<p><strong>Soft Reset</strong> “soft reset”을 컨트롤러에 지시합니다. 데이터가 손실되지는 않지만 다른 컨트롤러는 “soft reset” 명령과 다르게 동작할 수 있으며 Z-Wave 네트워크가 중단될 수 있습니다.</p>
 </li>
 <li>
-<p><strong>Test Network</strong> tells the controller to send no-op commands to each node and measure the time for a response. In theory, this can also bring back nodes which have been marked “presumed dead”.</p>
+<p><strong>Test Network</strong> 컨트롤러가 no-op 명령을 각 노드에 보내고 응답 시간을 측정하도록 지시합니다. 이론적으로 이는 “사망한 것으로 추정된” 노드를 다시 가져올 수도 있습니다.</p>
 </li>
 <li>
-<p><strong>Save Config</strong> Saves the current cache of the network to zwcfg_[home_id].xml</p>
+<p><strong>Save Config</strong> 네트워크의 현재 캐시를 zwcfg_[home_id].xml에 저장합니다.</p>
 </li>
 </ul>
 <h2>
-<a class="title-link" name="z-wave-node-management" href="#z-wave-node-management"></a> Z-Wave Node Management</h2>
+<a class="title-link" name="z-wave--" href="#z-wave--"></a> Z-Wave 노드 관리</h2>
 <ul>
 <li>
-<p><strong>Refresh Node</strong> refreshes the information on the node and its entities. If used on a battery powered device, the device will first need to wake for this to work.</p>
+<p><strong>Refresh Node</strong> 노드와 해당 엔티티에 대한 정보를 새로 고칩니다. 배터리 구동 장치에서 사용하는 경우 장치가 작동하려면 먼저 깨워야합니다.</p>
 </li>
 <li>
-<p><strong>Remove Failed Node</strong> will remove a failed node from the network. The node needs to be on the controller’s Failed Node List (marked as <code>is_failed: true</code>), otherwise this command will fail. You can trick OpenZWave into thinking the node is failed by selecting the <code>zwave</code> entity in the <em>States</em> menu, under <em>Developer tools</em>, and changing <code>"is_failed": false,</code> to <code>"is_failed": true,</code> then selecting <em>Set State</em>.</p>
+<p><strong>Remove Failed Node</strong> 이는 네트워크에서 실패한 노드를 제거합니다. 노드는 컨트롤러의 Failed Node List ( <code>is_failed: true</code>로 표시)에 있어야합니다. 그렇지 않으면이 명령이 실패합니다. <em>개발자 도구</em> 아래 <em>상태</em> 메뉴에서 <code>zwave</code> 엔티티를 선택하고 <code>"is_failed": false,</code>를 <code>"is_failed": true,</code>로 변경하여 OpenZWave가 노드가 실패했다고 생각하도록 속일 수 있습니다. <em>상태 설정</em>을 선택하십시오.</p>
 </li>
 <li>
-<p><strong>Replace Failed Node</strong> will replace a failed device with another. If the node is not in the controller’s Failed Node List, or the node responds, this command will fail.</p>
+<p><strong>Replace Failed Node</strong> 이는 고장난 장치를 다른 장치로 교체합니다. 노드가 컨트롤러의 실패한 노드 목록에 없거나 노드가 응답하면 이 명령이 실패합니다.</p>
 </li>
 <li>
-<p><strong>Print Node</strong> prints all state of Z-Wave node to the console log</p>
+<p><strong>Print Node</strong> Z-Wave 노드의 모든 상태를 콘솔 로그에 출력합니다</p>
 </li>
 <li>
-<p><strong>Heal Node</strong> starts healing of the node.(Update neighbor list and update return routes)</p>
+<p><strong>Heal Node</strong> 노드 복구 시작. (인접 목록 업데이트와 반환 경로 업데이트)</p>
 </li>
 <li>
-<p><strong>Test Node</strong> sends no_op test messages to the node. This could in theory bring back a dead node.</p>
+<p><strong>Test Node</strong> no_op 테스트 메시지를 노드로 보냅니다. 이는 이론적으로 죽은 노드를 다시 가져올 수 있습니다.</p>
 </li>
 <li>
-<p><strong>Node Information</strong> this will display the Z-Wave entity card with information about the node:</p>
+<p><strong>Node Information</strong> 이는 노드에 대한 정보가 있는 Z-Wave 엔티티 카드가 표시됩니다. :</p>
 </li>
 <li>
-<p><strong>averageRequestRTT</strong> The average Round Trip Time (RTT) of requests sent to the node, in milliseconds. A value of 250, for example, is a quarter of a second.</p>
+<p><strong>averageRequestRTT</strong> 노드로 전송된 요청의 평균 왕복시간(RTT)(밀리 초)입니다. 예를들어 250의 값은 1/4입니다.</p>
 </li>
 <li>
-<p><strong>averageResponseRTT</strong> The average Round Trip Time of responses to requests</p>
+<p><strong>averageResponseRTT</strong> 요청에 대한 응답의 평균 왕복시간</p>
 </li>
 <li>
-<p><strong>battery_level</strong> <em>Battery powered devices only</em> - the battery level, which may be rounded to the nearest 10</p>
+<p><strong>battery_level</strong> <em>Battery powered devices only</em> - 배터리 잔량 (가장 가까운 10 자리로 반올림될 수 있음)</p>
 </li>
 <li>
-<p><strong>capabilities</strong> A comma separated list of the capabilities of the device</p>
+<p><strong>capabilities</strong> 장치 기능의 쉼표로 구분된 목록</p>
 </li>
 <li>
-<p><strong>friendly_name</strong> The name you specified to be displayed</p>
+<p><strong>friendly_name</strong> 표시하도록 지정한 이름</p>
 </li>
 <li>
-<p><strong>is_awake</strong> Whether the device is awake or not</p>
+<p><strong>is_awake</strong> 장치가 깨어 있는지 여부</p>
 </li>
 <li>
-<p><strong>is_failed</strong> Whether the device has been marked as failed. The controller won’t try to contact failed devices.</p>
+<p><strong>is_failed</strong> 장치가 실패한 것으로 표시되어 있는지 여부. 컨트롤러는 고장난 장치에 연결을 시도하지 않습니다.</p>
 </li>
 <li>
-<p><strong>is_info_received</strong> True once the controller has received the node information from the node.</p>
+<p><strong>is_info_received</strong> 컨트롤러가 노드로부터 노드 정보를 수신하면 True입니다.</p>
 </li>
 <li>
-<p><strong>is_ready</strong> When you start the network (or Home Assistant) it will take a short while before all devices are ready, this shows which aren’t yet ready.</p>
+<p><strong>is_ready</strong> 네트워크(또는 홈 어시스턴트)를 시작하면 모든 장치가 준비되기까지 약간의 시간이 걸리며 아직 준비되지 않은 장치가 표시됩니다.</p>
 </li>
 <li>
-<p><strong>is_zwave_plus</strong> True for any Z-Wave Plus devices (note that controllers always report <em>false</em>, regardless of whether they are Plus devices or not)</p>
+<p><strong>is_zwave_plus</strong> 모든 Z-Wave Plus 장치에 해당 (컨트롤러는 Plus 장치인지 여부에 상관없이 항상 <em>false</em>를 보고함)</p>
 </li>
 <li>
-<p><strong>lastRequestRTT</strong> The Round Trip Time of the last request</p>
+<p><strong>lastRequestRTT</strong> 마지막 요청의 왕복 시간</p>
 </li>
 <li>
-<p><strong>lastResponseRTT</strong> The Round Trip Time of the response to the last request</p>
+<p><strong>lastResponseRTT</strong> 마지막 요청에 대한 응답의 왕복 시간</p>
 </li>
 <li>
-<p><strong>manufacturer_name</strong> The name of the manufacturer, as supplied by OpenZWave</p>
+<p><strong>manufacturer_name</strong> OpenZWave에서 제공한 제조업체 이름</p>
 </li>
 <li>
-<p><strong>max_baud_rate</strong> The maximum bandwidth the device supports, most modern devices will support 40,000 or higher</p>
+<p><strong>max_baud_rate</strong> 장치가 지원하는 최대 대역폭, 대부분의 최신 장치는 40,000 이상을 지원합니다</p>
 </li>
 <li>
-<p><strong>node_id</strong> The unique node ID of this node</p>
+<p><strong>node_id</strong> 이 노드의 고유 노드 ID</p>
 </li>
 <li>
-<p><strong>node_name</strong> The base name of this node, this is used to build the entity ID of all entities of this node</p>
+<p><strong>node_name</strong> 이 노드의 기본 이름으로, 이 노드의 모든 엔티티의 엔티티 ID를 빌드하는데 사용됩니다.</p>
 </li>
 <li>
-<p><strong>product_name</strong> The product name of the device, as supplied by OpenZWave</p>
+<p><strong>product_name</strong> OpenZWave에서 제공한 장치의 제품 이름</p>
 </li>
 <li>
-<p><strong>query_stage</strong> The query stage for this device (see <a href="/docs/z-wave/query-stage/">here</a> for details)</p>
+<p><strong>query_stage</strong> 이 장치의 쿼리 단계 (자세한 내용은 <a href="/docs/z-wave/query-stage/">여기</a> 참조)</p>
 </li>
 <li>
-<p><strong>receivedCnt</strong> The number of messages received from the device</p>
+<p><strong>receivedCnt</strong> 장치에서 받은 메시지 수</p>
 </li>
 <li>
-<p><strong>receivedDups</strong> The number of duplicate messages received from the device</p>
+<p><strong>receivedDups</strong> 장치에서 받은 중복 메시지 수</p>
 </li>
 <li>
-<p><strong>receivedTS</strong> The date and time the last message was received from the devices</p>
+<p><strong>receivedTS</strong> 장치에서 마지막 메시지를 받은 날짜와 시간</p>
 </li>
 <li>
-<p><strong>receivedUnsolicited</strong> How many unsolicited messages were received</p>
+<p><strong>receivedUnsolicited</strong> 요청하지 않은 메시지 수</p>
 </li>
 <li>
-<p><strong>retries</strong> How many retries have been made to send messages to this node</p>
+<p><strong>retries</strong> 이 노드로 메시지를 보내려고 재시도한 횟수</p>
 </li>
 <li>
-<p><strong>sentCnt</strong> How many messages have been sent to the node</p>
+<p><strong>sentCnt</strong> 노드로 전송된 메시지 수</p>
 </li>
 <li>
-<p><strong>sentFailed</strong> How many messages that were sent weren’t acknowledged</p>
+<p><strong>sentFailed</strong> 전송되지 않은 메시지 수</p>
 </li>
 <li>
-<p><strong>sentTS</strong> The date and time the last message was sent to the node</p>
+<p><strong>sentTS</strong> 마지막 메시지가 노드로 전송된 날짜와 시간</p>
 </li>
 <li>
-<p><strong>wake_up_interval</strong> <em>Battery powered devices only</em> - the wakeup interval of the device, in seconds</p>
+<p><strong>wake_up_interval</strong> <em>Battery powered devices only</em> - 장치의 웨이크업 간격 (초)</p>
 </li>
 </ul>
 <div class="note">
-Battery powered devices need to be awake before you can use the Z-Wave control panel to update their settings. How to wake your device is device specific, and some devices will stay awake for only a couple of seconds. Please refer to the manual of your device for more details.
+Z-Wave 제어판을 사용하여 설정을 업데이트하려면 배터리로 작동하는 장치를 깨워야합니다. 장치를 깨우는 방법은 장치마다 다르며 일부 장치는 몇 초 동안만 깨어 있습니다. 자세한 내용은 장치 설명서를 참조하십시오.
 </div>
 <h4>
-<a class="title-link" name="entities-of-this-node" href="#entities-of-this-node"></a> Entities of this node</h4>
-<p>This is a dropdown where you can select all the entities of this node. Once selected you can then use:</p>
+<a class="title-link" name="-" href="#-"></a> 노드의 엔티티들</h4>
+<p>이 노드의 모든 엔티티를 선택할 수 있는 드롭 다운입니다. 선택하면 다음을 사용할 수 있습니다.</p>
 <ul>
 <li>
-<strong>Refresh Entity</strong> to refresh just that entity’s values</li>
+<strong>Refresh Entity</strong> 해당 엔티티의 값만 새로 고침</li>
 <li>
-<strong>Entity Information</strong> to display the attributes of that entity (e.g., its friendly name, the ID of the node, etc)</li>
+<strong>Entity Information</strong> 해당 엔티티의 속성(예: 이름, 노드의 ID 등)을 표시.</li>
 </ul>
-<p>Here you can mark a device as requiring polling so the controller is aware of changes because the device doesn’t send updates itself. Do see the information on <a href="/docs/z-wave/devices/#polling">polling here</a>, since excessive polling can break your Z-Wave network.</p>
-<p>The <strong>Polling intensity</strong> says how many poll intervals this device is polled on. For example, if you set 2 then it’s polled on every second interval.</p>
-<p>You can also exclude a Z-Wave devices from Home Assistant. You can do that if you have a device that you need to have on the Z-Wave network, but you don’t want it to appear in Home Assistant, or if you’ve got a device that’s failed and you’re unable to exclude it.</p>
+<p>여기서 장치가 업데이트 자체를 보내지 않기 때문에 컨트롤러가 변경 사항을 인식하도록 장치를 폴링이 필요한 것으로 표시할 수 있습니다. 과도한 폴링은 Z-Wave 네트워크를 손상시킬 수 있으므로 <a href="/docs/z-wave/devices/#polling">polling</a>에 대한 정보를 참조하십시오.</p>
+<p><strong>Polling intensity</strong>는 이 장치가 폴링되는 폴링 간격수를 나타냅니다. 예를 들어, 2를 설정하면 매 2 초 간격으로 폴링됩니다.</p>
+<p>Home Assistant에서 Z-Wave 장치를 제외할 수도 있습니다. Z-Wave 네트워크에 있어야하는 장치가 있지만 Home Assistant에 표시하지 않으려는 경우 이를 수행 할 수 있습니다. 혹은 실패한 장치가 있으면 이를 제외할 수 없습니다.</p>
 <h3>
-<a class="title-link" name="node-values" href="#node-values"></a> Node Values</h3>
-<p>Contains a list of available values of the selected node, and it’s instances.</p>
+<a class="title-link" name="-" href="#-"></a> 노드 값들</h3>
+<p>선택한 노드의 사용 가능한 값 목록과 인스턴스를 포함합니다.</p>
 <h3>
-<a class="title-link" name="node-group-associations" href="#node-group-associations"></a> Node group associations</h3>
-<p>Where the device supports the <em>Association</em> command class, this will allow you to associate the device with another. OpenZWave will automatically associate the device with the controller, to provide instant updates when the device doesn’t support the <em>Hail</em> command class.</p>
-<p>You can use this to enable one device to directly control another. This is primarily useful for remote controls that operate lights or switches, or where you want to have multiple devices operate as one.</p>
-<p>There may be multiple groups, that are used for different purposes. The manual of your device will explain what each group is for.</p>
+<a class="title-link" name="---node-group-associations" href="#---node-group-associations"></a> 노드 그룹 연결 (Node group associations)</h3>
+<p>장치가 <em>Association</em> 명령 클래스를 지원하는 경우 장치를 다른 장치와 연결할 수 있습니다. OpenZWave는 장치가 컨트롤러와 자동으로 연결되어 장치가 <em>Hail</em> 명령 클래스를 지원하지 않을 때 즉시 업데이트를 제공합니다.</p>
+<p>이를 사용하여 한 장치가 다른 장치를 직접 제어할 수 있습니다. 이 기능은 주로 조명이나 스위치를 작동 시키거나 여러 장치를 하나로 작동시키려는 리모컨에 유용합니다.</p>
+<p>다른 목적으로 사용되는 여러 그룹이 있을 수 있습니다. 장치 설명서에 각 그룹의 용도가 설명되어 있습니다.</p>
 <h4>
-<a class="title-link" name="broadcast-group" href="#broadcast-group"></a> Broadcast group</h4>
-<p>Some Z-Wave devices may associate themselves with the broadcast node (node 255). You’ll be able to tell if this has happened if opening a door (or triggering a motion sensor) causes lights to come on, and closing the door (or the motion sensor going clear) causes lights to run off. You can get rid of this by selecting any target node. If the group has node 255 in it, a <em>Remove broadcast</em> button will appear. You can also use the <code>zwave.change_association</code> service:</p>
+<a class="title-link" name="--broadcast-group" href="#--broadcast-group"></a> 방송 그룹 (Broadcast group)</h4>
+<p>일부 Z-Wave 장치는 방송 노드 (노드 255)와 연결될 수 있습니다. 도어를 열거나 (또는 ​​모션 센서를 트리거하여) 조명이 켜지고 도어를 닫거나 (또는 ​​모션 센서가 깨끗해지면) 조명이 꺼지는 경우 이러한 상황이 발생했는지 알 수 있습니다. 대상 노드를 선택하여 이를 제거할 수 있습니다. 그룹에 노드 255가 있으면 <em>Remove broadcast</em> 단추가 나타납니다. <code>zwave.change_association</code> 서비스를 사용할 수도 있습니다 :</p>
 <pre><code class="language-json">{"association": "remove", "node_id": 3, "group": 1, "target_node_id": 255}
 </code></pre>
-<p>That would remove the broadcast group from association group 1 of the device with node_id 3.</p>
+<p>그러면 node_id 3과 장치의 연결 그룹 1에서 브로드 캐스트 그룹이 제거됩니다.</p>
 <h3>
-<a class="title-link" name="node-config-options" href="#node-config-options"></a> Node config options</h3>
-<p>You can set the <em>wakeup</em> interval (in seconds) of the device, this is shown for all devices that can be battery powered, even if they are currently mains powered. The wakeup interval only applies when those devices are battery powered.</p>
+<a class="title-link" name="---node-config-options" href="#---node-config-options"></a> 노드 설정 옵션 (Node config options)</h3>
+<p>장치의 <em>wakeup</em> 간격 (초)을 설정할 수 있습니다. 이는 현재 주 전원이 공급 되더라도 배터리로 작동할 수 있는 모든 장치에 대해 표시됩니다. 웨이크업 간격은 해당 장치에 배터리 전원이 공급되는 경우에만 적용됩니다.</p>
 <div class="note">
-The wakeup interval has no impact on the device's ability to report sensor changes. This is purely for how often the Z-Wave chip will check in with the controller. That activity consumes a lot of battery power compared to reporting sensor changes and if you reduce it you'll be reducing the battery life of your device.
+웨이크업 간격은 장치의 센서 변경보고 기능에 영향을 미치지 않습니다. 이는 Z-Wave 칩이 컨트롤러와 얼마나 자주 체크인 하는지를 나타냅니다. 이 활동은 센서 변경보고와 비교할 때 많은 배터리 전력을 소비하며,이를 줄이면 장치의 배터리 수명이 단축됩니다.
 </div>
-<p>Underneath that you can select any supported configuration parameter to see the current setting. You can then change this and select <strong>Set Config Parameter</strong> to updated it. Battery powered devices will be updated the next time they wake.</p>
+<p>그 아래에서 현재 설정을 확인하기 위해 지원되는 설정 매개 변수를 선택할 수 있습니다. 그런 다음 이를 변경하고 <strong>Set Config Parameter</strong>을 선택하여 업데이트하십시오. 배터리 전원 장치는 다음에 깨어날 때 업데이트됩니다.</p>
 <h3>
-<a class="title-link" name="node-protection" href="#node-protection"></a> Node protection</h3>
-<p>If your node has the protection commandclass, you can change the protection level of the node.
-Check your device manual on how to use this setting, as it is different between manufacturers.
-Set the new selection by pressing the <strong>Set Protection</strong> button.</p>
+<a class="title-link" name="--node-protection" href="#--node-protection"></a> 노드 보호 (Node protection)</h3>
+<p>노드에 보호 명령 클래스가 있는 경우 노드의 보호 수준을 변경할 수 있습니다.
+이 설정의 사용 방법은 제조업체마다 다르므로 장치 설명서를 확인하십시오.
+<strong>Set Protection</strong> 버튼을 눌러 새로운 선택을 설정하십시오.</p>
 <h2>
-<a class="title-link" name="node-user-codes" href="#node-user-codes"></a> Node user codes</h2>
-<p>If your node has user codes, you can set and delete them. The format is raw hex ASCII code. Below the input you will see your actual code. For normal nodes this is as follows:</p>
+<a class="title-link" name="---node-user-codes" href="#---node-user-codes"></a> 노드 사용자 코드 (Node user codes)</h2>
+<p>노드에 사용자 코드가 있는 경우 이를 설정하고 삭제할 수 있습니다. 형식은 raw 16 진 ASCII 코드입니다. 입력 아래에 실제 코드가 표시됩니다. 일반 노드의 경우 다음과 같습니다.</p>
 <pre><code class="language-yaml">\x30 = 0
 \x31 = 1
 \x32 = 2
@@ -303,9 +303,9 @@ Set the new selection by pressing the <strong>Set Protection</strong> button.</p
 \x38 = 8
 \x39 = 9
 </code></pre>
-<p>Some non compliant device like tag readers, have implemented to use raw hex code.
-Please refer to a hex ASCII table to set your code. Example: <a href="http://www.asciitable.com/" rel="external nofollow">http://www.asciitable.com/</a></p>
-<p>Here is a small Python program than will take numbers on the command line and print the correct sequence for compliant devices:</p>
+<p>태그 리더와 같은 일부 비호환 장치는 원시 16 진 코드를 사용하도록 구현되었습니다.
+16 진수 ASCII 표를 참조하여 코드를 설정하십시오. 예: <a href="http://www.asciitable.com/" rel="external nofollow">http://www.asciitable.com/</a></p>
+<p>다음은 command line에서 숫자를 취하는 것보다 작은 Python 프로그램입니다. 그리고 호환 장치에 맞는 올바른 순서를 출력합니다. :</p>
 <pre><code class="language-python">#! /usr/bin/python3
 import sys
 
@@ -319,9 +319,9 @@ for c in sys.argv[1]:
 </code></pre>
 <h2>
 <a class="title-link" name="ozw-log" href="#ozw-log"></a> OZW Log</h2>
-<p>If you want to only retrieve some lines at the end of the log, you can specify that with the selection field. Max is the last 1000 lines and minimum is 0 which equals the whole log. If this is not specified, you will retrieve the whole log.
-Select <strong>Load</strong> to open a new window with the static log.
-Select <strong>Tail</strong> to open a new window with a tailing log with the last specified lines of the log. This is a self updating window.</p>
+<p>로그 끝에서 일부 행만 검색하려는 경우 선택 필드를 사용하여 해당 행을 지정할 수 있습니다. 최대값은 마지막 1000 줄이고 최소값은 0이며 전체 로그와 같습니다. 이를 지정하지 않으면 전체 로그를 검색합니다.
+정적 로그가 있는 새 창을 열려면 <strong>Load</strong>를 선택하십시오.
+새 창을 열려면 로그의 마지막 지정된 행이있는 테일링 로그와 함께 <strong>tail</strong>를 선택하십시오. 이는 자체 업데이트 창입니다.</p>
 
 
 </article>
@@ -345,7 +345,7 @@ Select <strong>Tail</strong> to open a new window with a tailing log with the la
       <li>
         <b><a  href='/docs/installation/'>설치 </a></b>
         <ul>
-          <li><a  href='/hassio/'>Hass.io </a></li>
+          <li><a  href='/hassio/'>홈어시스턴트 </a></li>
           <li><a  href='/docs/installation/updating/'>업데이트 </a></li>
           <li>
             <a  href='/docs/installation/troubleshooting/'>문제해결

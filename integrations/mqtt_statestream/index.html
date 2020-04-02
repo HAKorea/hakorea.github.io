@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <code>mqtt_statestream</code> integration publishes state changes in Home Assistant to individual MQTT topics.</p>
+  <p><code>mqtt_statestream</code> 통합구성요소는 홈어시스턴트의 state 변경 사항을 개별 MQTT topic에 publish합니다.</p>
 <h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<p>To enable MQTT Statestream in Home Assistant, add the following section to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<p>홈어시스턴트에서 MQTT Statestream을 사용하려면 <code>configuration.yaml</code> 파일에 다음 섹션을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mqtt_statestream:
   base_topic: homeassistant
@@ -171,18 +171,18 @@ Default value: </p>
 </div>
 <h2>
 <a class="title-link" name="operation" href="#operation"></a> Operation</h2>
-<p>When any Home Assistant entity changes, this integration will publish that change to MQTT.</p>
-<p>The topic for each entity is different, so you can easily subscribe other systems to just the entities you are interested in.
-The topic will be in the form <code>base_topic/domain/entity/state</code>.</p>
-<p>For example, with the example configuration above, if an entity called ‘light.master_bedroom_dimmer’ is turned on, this integration will publish <code>on</code> to <code>homeassistant/light/master_bedroom_dimmer/state</code>.</p>
-<p>If that entity also has an attribute called <code>brightness</code>, the integration will also publish the value of that attribute to <code>homeassistant/light/master_bedroom_dimmer/brightness</code>.</p>
-<p>All states and attributes are passed through JSON serialization before publishing. <strong>Please note</strong> that this causes strings to be quoted (e.g., the string ‘on’ will be published as ‘“on”’). You can access the JSON deserialized values (as well as unquoted strings) at many places by using <code>value_json</code> instead of <code>value</code>.</p>
-<p>The last_updated and last_changed values for the entity will be published to <code>homeassistant/light/master_bedroom_dimmer/last_updated</code> and <code>homeassistant/light/master_bedroom_dimmer/last_changed</code>, respectively. The timestamps are in ISO 8601 format - for example, <code>2017-10-01T23:20:30.920969+00:00</code>.</p>
+<p>홈어시스턴트 엔티티가 변경되면 이 통합구성요소는 해당 변경사항을 MQTT에 publish합니다.</p>
+<p>각 엔티티에 대한 topic이 다르므로 관심있는 엔티티에만 다른 시스템을 쉽게 subscribe할 수 있습니다.
+topic은 <code>base_topic/domain/entity/state</code> 형식입니다.</p>
+<p>예를 들어 위 설정 사례에서 ‘light.master_bedroom_dimmer’라는 엔티티가 켜져 있으면 이 통합구성요소는 <code>on</code>을 <code>homeassistant/light/master_bedroom_dimmer/state</code>에 publish합니다.</p>
+<p>해당 엔티티도 <code>brightness</code>라는 속성이 있는 경우, 통합구성요소는 해당 속성의 값도 <code>homeassistant/light/master_bedroom_dimmer/brightness</code>에 publish합니다.</p>
+<p>모든 상태와 속성은 publishing 하기 전에 JSON 직렬화(serialization)를 통해 전달됩니다. 이로 인해 문자열이 인용된다는 것을 <strong>참고하세요</strong>(예를 들어 문자열 ‘on’은 ’“on”’으로 publish됩니다). <code>value</code> 대신 <code>value_json</code>을 사용하여 여러 위치에서 JSON 역직렬화된(deserialized) 값(인용되지 않은 문자열)에 액세스할 수 있습니다.</p>
+<p>엔터티의 last_updated과 last_changed 값은 각각 <code>homeassistant/light/master_bedroom_dimmer/last_updated</code>과 <code>homeassistant/light/master_bedroom_dimmer/last_changed</code>에 publish됩니다. 타임 스탬프는 ISO 8601 형식입니다 - 예: <code>2017-10-01T23:20:30.920969+00:00</code></p>
 <h2>
 <a class="title-link" name="includeexclude" href="#includeexclude"></a> Include/exclude</h2>
-<p>The <strong>exclude</strong> and <strong>include</strong> configuration variables can be used to filter the items that are published to MQTT.</p>
-<p>1. If neither <strong>exclude</strong> or <strong>include</strong> are specified, all entities are published.</p>
-<p>2. If only <strong>exclude</strong> is specified, then all entities except the ones listed are published.</p>
+<p><strong>exclude</strong>와 <strong>include</strong> 설정변수를 사용하여 MQTT에 publish된 항목을 필터링할 수 있습니다.</p>
+<p>1. <strong>exclude</strong> 혹은 <strong>include</strong>를 지정하지 않으면 모든 엔터티가 publish됩니다.</p>
+<p>2. <strong>exclude</strong>만 지정하면 나열된 항목을 제외한 모든 항목이 publish됩니다.</p>
 <pre><code class="language-yaml"># Example of excluding entities
 mqtt_statestream:
   base_topic: homeassistant
@@ -192,8 +192,8 @@ mqtt_statestream:
     entities:
       - sensor.nopublish
 </code></pre>
-<p>In the above example, all entities except for <em>switch.x</em> and <em>sensor.nopublish</em> will be published to MQTT.</p>
-<p>3. If only <strong>include</strong> is specified, then only the specified entries are published.</p>
+<p>위 예에서 <em>switch.x</em>와 <em>sensor.nopublish</em>를 제외한 모든 엔티티가 MQTT에 publish됩니다.</p>
+<p>3. <strong>include</strong> 만 지정하면 지정된 항목만 publish됩니다.</p>
 <pre><code class="language-yaml"># Example of excluding entities
 mqtt_statestream:
   base_topic: homeassistant
@@ -203,9 +203,8 @@ mqtt_statestream:
     entities:
       - lock.important
 </code></pre>
-<p>In this example, only <em>sensor.x</em> and <em>lock.important</em> will be published.</p>
-<p>4. If both <strong>include</strong> and <strong>exclude</strong> are specified then all entities specified by <strong>include</strong> are published except for the ones
-specified by <strong>exclude</strong>.</p>
+<p>이 예에서는 <em>sensor.x</em>와 <em>lock.important</em>만 publish됩니다.</p>
+<p>4. <strong>include</strong>와 <strong>exclude</strong>가 모두 지정된 경우 <strong>exclude</strong>로 지정된 엔티티를 제외하고 <strong>include</strong>로 지정된 모든 엔티티가 publish됩니다.</p>
 <pre><code class="language-yaml"># Example of excluding entities
 mqtt_statestream:
   base_topic: homeassistant
@@ -216,7 +215,7 @@ mqtt_statestream:
     entities:
       - sensor.noshow
 </code></pre>
-<p>In this example, all sensors except for <em>sensor.noshow</em> will be published.</p>
+<p>이 예에서는 <em>sensor.noshow</em>를 제외한 모든 센서가 publish됩니다.</p>
 
 
 </article>
