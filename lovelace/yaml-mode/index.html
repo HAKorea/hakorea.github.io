@@ -121,7 +121,110 @@
 <p>YAML을 통해 UI를 제어하면 수정을 위한 홈어시스턴트 인터페이스를 더이상 사용할 수 없으며 새 엔티티가 자동으로 UI에 추가되지 않습니다.</p>
 <p><code>ui-lovelace.yaml</code>을 변경하면 홈어시스턴트를 다시시작하거나 페이지를 새로 고칠 필요가 없습니다. UI 상단의 메뉴에서 새로 고침 버튼을 누르기만 하면됩니다.</p>
 <p>UI를 사용하여 Lovelace 인터페이스를 편집하도록 되돌리려면 <code>configuration.yaml</code>에서 <code>lovelace</code> 섹션을 제거하고 <code>ui-lovelace.yaml</code>의 내용을 Home Assistant의 구성 코드 섹션에 복사한 후 다시 시작하십시오.</p>
-<p>아주 최소한의 예로서, 이를 동작시키는데 필요한 최소값은 다음과 같습니다.</p>
+<h3>
+<a class="title-link" name="-" href="#-"></a> 고급 설정</h3>
+<p>모두 고유한 YAML 파일이 있는 여러 대시 보드를 정의하고 모든 대시 보드에서 공유하는 사용자 지정 리소스를 추가할 수 있습니다.</p>
+<p>대시 보드의 키는 URL로 사용되며 하이픈 (<code>-</code>)을 포함해야합니다.</p>
+<pre><code class="language-yaml">lovelace:
+  mode: yaml
+  # Include external resources only add when mode is yaml, otherwise manage in the resources in the lovelace configuration panel.
+  resources:
+    - url: /local/my-custom-card.js
+      type: module
+    - url: /local/my-webfont.css
+      type: css
+  # Add more dashboards
+  dashboards:
+    lovelace-generated: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: notexist.yaml
+      title: Generated
+      icon: mdi:tools
+      show_in_sidebar: true
+      require_admin: true
+    lovelace-hidden:
+      mode: yaml
+      title: hidden
+      show_in_sidebar: false
+      filename: hidden.yaml
+</code></pre>
+<p>기본 대시 보드가 UI 구성되어있을 때 YAML 대시 보드를 추가할 수도 있습니다.</p>
+<pre><code class="language-yaml">lovelace:
+  mode: storage
+  # Add yaml dashboards
+  dashboards:
+    lovelace-yaml:
+      mode: yaml
+      title: YAML
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: lovelace.yaml
+</code></pre>
+<div class="config-vars">
+  <h3>
+<a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class="">
+<dt>
+<a class="title-link" name="mode" href="#mode"></a> mode</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>In what mode should the main Lovelace panel be, <code>yaml</code> or <code>storage</code> (UI managed).</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="resources" href="#resources"></a> resources</dt>
+<dd><p class="desc"><span class="type">(<span class="list">list</span>)</span><span class="required">(Optional)</span><span class="description"><p>List of resources that should be loaded when you use Lovelace. Only use this when mode is <code>yaml</code>.</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="url" href="#url"></a> url</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The URL of the resource to load.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="type" href="#type"></a> type</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The type of resource, this should be either <code>module</code> for a JavaScript module or <code>css</code> for a StyleSheet.</p>
+</span></p></dd>
+</dl></dd>
+<dt>
+<a class="title-link" name="dashboards" href="#dashboards"></a> dashboards</dt>
+<dd><p class="desc"><span class="type">(<span class="map">map</span>)</span><span class="required">(Optional)</span><span class="description"><p>Additional Lovelace YAML dashboards. The key is used for the URL and should contain a hyphen (<code>-</code>)</p>
+</span></p></dd>
+<dd><dl class="nested">
+<dt>
+<a class="title-link" name="mode" href="#mode"></a> mode</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The mode of the dashboard, this should always be <code>yaml</code>. Dashboards in <code>storage</code> mode can be created in the Lovelace configuration panel.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="filename" href="#filename"></a> filename</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The file in your <code>config</code> directory where the Lovelace configuration for this panel is.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="title" href="#title"></a> title</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Required)</span><span class="description"><p>The title of the dashboard, will be used in the sidebar.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="icon" href="#icon"></a> icon</dt>
+<dd><p class="desc"><span class="type">(<span class="string">string</span>)</span><span class="required">(Optional)</span><span class="description"><p>The icon to show in the sidebar.</p>
+</span></p></dd>
+<dt>
+<a class="title-link" name="show_in_sidebar" href="#show_in_sidebar"></a> show_in_sidebar</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Should this view be shown in the sidebar.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>true</p>
+</dd>
+<dt>
+<a class="title-link" name="require_admin" href="#require_admin"></a> require_admin</dt>
+<dd>
+<p class="desc"><span class="type">(<span class="boolean">boolean</span>)</span><span class="required">(Optional)</span><span class="description"><p>Should this view be only accessible for admin users.</p>
+</span></p>
+<p class="default">
+Default value: </p>
+<p>false</p>
+</dd>
+</dl></dd>
+</dl>
+</div>
+<p>Lovelace 대시 보드 구성의 최소 단위 예를 들면 다음과 같습니다. :</p>
 <pre><code class="language-yaml">title: My Awesome Home
 views:
     # View tab title.
@@ -133,15 +236,8 @@ views:
         content: &gt;
           Welcome to your **Lovelace UI**.
 </code></pre>
-<p>약간 더 발전된 예는 프런트엔드를 커스텀 제작하는데 사용할 수 있는 추가 요소를 보여줍니다.</p>
+<p>약간 더 발전된 예 :</p>
 <pre><code class="language-yaml">title: My Awesome Home
-# Include external resources
-resources:
-  - url: /local/my-custom-card.js
-    type: js
-  - url: /local/my-webfont.css
-    type: css
-
 views:
     # View tab title.
   - title: Example
