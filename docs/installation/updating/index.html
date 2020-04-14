@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Updating Home Assistant - 홈어시스턴트</title>
+    <title>홈어시스턴트 업데이트 - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Step to update Home Assistant.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/installation/updating/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Updating Home Assistant">
+    <meta property="og:title" content="홈어시스턴트 업데이트">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/installation/updating/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Updating Home Assistant">
+    <meta name="twitter:title" content="홈어시스턴트 업데이트">
     <meta name="twitter:description" content="Step to update Home Assistant.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,57 +97,60 @@
   
   <header>
     <h1 class="title indent">
-      Updating Home Assistant
+      홈어시스턴트 업데이트
     </h1>
   </header>
   <hr class="divider">
   
 
   <div class="note warning">
-<p>The upgrade process differs depending on the installation you have, so please review the documentation that is specific to your install <a href="/hassio/">Hass.io</a> or <a href="/docs/installation/virtualenv/#upgrading-home-assistant">Virtualenv</a>.</p>
+<p>업그레이드 프로세스는 설치에 따라 다르므로 설치 관련 설명서 (<a href="/hassio/">Home Assistant</a> 또는 <a href="/docs/installation/virtualenv/#upgrading-home-assistant">Home Assistant Core</a>) 를 검토하십시오 .</p>
 </div>
-<p>Check what’s new in the latest version and potentially impacts your system in <a href="https://github.com/home-assistant/home-assistant/releases" rel="external nofollow">Home Assistant release notes</a>. It is good practice to review these release notes and pay close attention to the <strong>Breaking Changes</strong> that are listed there. If you haven’t done an update for a while, you should also check previous release notes as they can also contain relevant <strong>Breaking Changes</strong>. <strong>Breaking Changes</strong> may require configuration updates for your components. If you missed this and Home Assistant refuses to start, check the log file in the <a href="/docs/configuration/">configuration</a> directory, e.g., <code>.homeassistant/home-assistant.log</code>, for details about broken components.</p>
+<p>최신 버전의 새로운 기능을 확인하고 <a href="https://github.com/home-assistant/home-assistant/releases" rel="external nofollow">Home Assistant 릴리즈 노트</a> 에서 시스템에 영향을 줄 수 있습니다. 이 릴리스 노트를 검토하고 여기에 나열된 <strong>Breaking Changes</strong>에 주의를 기울이는 것이 좋습니다. 한동안 업데이트를 수행하지 않은 경우 이전 릴리스 노트에도 관련 <strong>Breaking Changes</strong>이 포함될 수 있으므로 확인해야합니다 . 이러한 <strong>Breaking Changes</strong>에는 구성 요소에 대한 설정 업데이트가 필요할 수 있습니다. 이를 놓치고 홈어시스턴트가 시작을 거부하면 <a href="/docs/configuration/">configuration</a> 디렉토리 (예: <code>.homeassistant/home-assistant.log</code>)의 로그 파일에서 깨진 구성 요소에 대한 세부사항을 확인하십시오.</p>
 <div class="note">
-<p>To avoid permission errors, the upgrade must be run as the same user as the installation was completed, again review the documentation specific to your install <a href="/hassio/">Hass.io</a> or <a href="/docs/installation/virtualenv">Virtualenv</a>.</p>
+<p>권한 오류를 피하려면 초기설치 중에 사용한 것과 동일한 사용자로 업그레이드를 실행해야합니다. <a href="/hassio/">Home Assistant</a> 또는 <a href="/docs/installation/virtualenv">Home Assistant Core</a> 설치와 관련된 설명서를 다시 검토하십시오.</p>
 </div>
-<p>The default way to update Home Assistant to the latest release, when available, is:</p>
-<pre><code class="language-bash">$ pip3 install --upgrade homeassistant
+<p>사용 가능한 경우 Home Assistant를 최신 릴리스로 업데이트하는 기본 방법은 다음과 같습니다.</p>
+<pre><code class="language-bash">pip3 install --upgrade homeassistant
 </code></pre>
 <p>For a Docker container, simply pull the latest one:</p>
-<pre><code class="language-bash">$ sudo docker pull homeassistant/home-assistant:latest
+<pre><code class="language-bash">sudo docker pull homeassistant/home-assistant:latest
 </code></pre>
-<p>For a Raspberry Pi Docker container, simply pull the latest one:</p>
-<pre><code class="language-bash">$ sudo docker pull homeassistant/raspberrypi3-homeassistant:latest
+<p>For a Raspberry Pi Docker container, simply pull the latest one:
+Raspberry Pi Docker 컨테이너의 경우 최신 컨테이너를 pull 하십시오. :</p>
+<pre><code class="language-bash">sudo docker pull homeassistant/raspberrypi3-homeassistant:latest
 </code></pre>
-<p>After updating, you must start/restart Home Assistant for the changes to take effect. This means that you will have to restart <code>hass</code> itself or the <a href="/docs/autostart/">autostarting</a> daemon (if applicable). Startup can take considerable amount of time (i.e. minutes) depending on your device. This is because all requirements are updated as well.</p>
-<p><a href="https://www.bruhautomation.io/" rel="external nofollow">BRUH automation</a> has created <a href="https://www.youtube.com/watch?v=tuG2rs1Cl2Y" rel="external nofollow">a tutorial video</a> explaining how to upgrade Home Assistant.</p>
+<p>업데이트 후 변경사항을 적용하려면 Home Assistant를 시작/다시시작 해야합니다. 즉, <code>hass</code> 자체 또는 <a href="/docs/autostart/">autostarting</a> 데몬(해당되는 경우)을 다시 시작해야합니다. 장치에 따라 시작하는데 상당한 시간(예: 분)이 걸릴 수 있습니다. 모든 요구사항도 업데이트되기 때문입니다.</p>
+<p><a href="https://www.bruhautomation.io/" rel="external nofollow">BRUH 자동화</a>가 Home Assistant 업그레이드 방법을 설명하는 <a href="https://www.youtube.com/watch?v=tuG2rs1Cl2Y" rel="external nofollow">튜토리얼 비디오</a>를 만들었습니다.</p>
 <h4>
-<a class="title-link" name="run-a-specific-version" href="#run-a-specific-version"></a> Run a specific version</h4>
-<p>In the event that a Home Assistant version doesn’t play well with your hardware setup, you can downgrade to a previous release:</p>
-<pre><code class="language-bash">$ pip3 install homeassistant==0.XX.X
-</code></pre>
-<h4>
-<a class="title-link" name="run-the-beta-version" href="#run-the-beta-version"></a> Run the beta version</h4>
-<p>If you would like to test next release before anyone else, you can install the beta version released every two weeks:</p>
-<pre><code class="language-bash">$ pip3 install --pre --upgrade homeassistant
+<a class="title-link" name="--" href="#--"></a> 특정 버전을 실행</h4>
+<p>Home Assistant 버전이 하드웨어 설정에서 제대로 작동하지 않는 경우 이전 릴리스로 다운그레이드 할 수 있습니다.</p>
+<pre><code class="language-bash">pip3 install homeassistant==0.XX.X
 </code></pre>
 <h4>
-<a class="title-link" name="run-the-development-version" href="#run-the-development-version"></a> Run the development version</h4>
-<p>If you want to stay on the bleeding-edge Home Assistant development branch, you can upgrade to <code>dev</code>.</p>
+<a class="title-link" name="--" href="#--"></a> 베타 버전을 실행</h4>
+<p>다른 사람보다 먼저 다음 릴리스를 테스트하려면 2 주마다 릴리스된 베타 버전을 설치할 수 있습니다.</p>
+<pre><code class="language-bash">pip3 install --pre --upgrade homeassistant
+</code></pre>
+<h4>
+<a class="title-link" name="--" href="#--"></a> 개발 버전을 실행</h4>
+<p>최첨단 홈어시스턴트 개발 브랜치를 유지하려면 <code>dev</code>로 업그레이드하면됩니다.</p>
 <div class="note warning">
-  The "dev" branch is likely to be unstable. Potential consequences include loss of data and instance corruption.
+  "dev" 브랜치가 불안정할 수 있습니다. 데이터 손실과 인스턴스 손상이 발생할 수 있습니다.
 </div>
 <pre><code class="language-bash">$ pip3 install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
 </code></pre>
 <h3>
-<a class="title-link" name="update-hassio-installation" href="#update-hassio-installation"></a> Update Hass.io installation</h3>
-<p>Best practice for updating a Hass.io installation:</p>
+<a class="title-link" name="home-assistant--" href="#home-assistant--"></a> HOME ASSISTANT 설치 업데이트</h3>
+<p>Home Assistant 설치 업데이트 모범 사례 :</p>
 <ol>
-<li>Backup your installation, using the snapshot functionality Hass.io offers.</li>
-<li>Check the release notes for breaking changes on <a href="https://github.com/home-assistant/home-assistant/releases" rel="external nofollow">Home Assistant release notes</a>. Be sure to check all release notes between the version you are running and the one you are upgrading to. Use the search function in your browser (<code>CTRL + f</code>) and search for <strong>Breaking Changes</strong>.</li>
-<li>Check your configuration using the <a href="/addons/check_config/">Check Home Assistant configuration</a> add-on.</li>
-<li>If the check passes, you can safely update. If not, update your configuration accordingly.</li>
-<li>Update Home Assistant.</li>
+<li>Home Assistant가 제공하는 스냅샷 기능을 사용하여 설치를 백업하십시오.</li>
+<li>
+<a href="https://github.com/home-assistant/home-assistant/releases" rel="external nofollow">Home Assistant 릴리스 정보</a>의 변경 사항을 해제하려면 릴리스 정보를 확인하십시오. 실행중인 버전과 업그레이드하려는 버전 사이의 모든 릴리스 정보를 확인하십시오. 브라우저에서 검색 기능 (<code>CTRL + f</code>)을 사용하고 <strong>Breaking Changes</strong>을 검색하십시오.</li>
+<li>
+<a href="/addons/check_config/">Home Assistant 설정 확인</a> 애드온을 사용하여 설정을 확인하십시오.</li>
+<li>확인이 통과되면 안전하게 업데이트할 수 있습니다. 그렇지 않은 경우 적절하게 설정을 업데이트하십시오.</li>
+<li>홈어시스턴트를 업데이트하십시오.</li>
 </ol>
 
 

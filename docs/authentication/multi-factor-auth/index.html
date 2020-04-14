@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Multi-factor authentication - 홈어시스턴트</title>
+    <title>다단계 인증(Multi-factor authentication) - 홈어시스턴트</title>
     <meta name="author" content="Home Assistant">
     <meta name="description" content="Guide on configuring different multi-factor authentication modules.">
     
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://hakorea.github.io/docs/authentication/multi-factor-auth/">
 
     <meta property="fb:app_id" content="">
-    <meta property="og:title" content="Multi-factor authentication">
+    <meta property="og:title" content="다단계 인증(Multi-factor authentication)">
     <meta property="og:site_name" content="홈어시스턴트">
     <meta property="og:url" content="https://hakorea.github.io/docs/authentication/multi-factor-auth/">
     <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
     
-    <meta name="twitter:title" content="Multi-factor authentication">
+    <meta name="twitter:title" content="다단계 인증(Multi-factor authentication)">
     <meta name="twitter:description" content="Guide on configuring different multi-factor authentication modules.">
     <meta name="twitter:image" content="https://hakorea.github.io/images/default-social.png">
 
@@ -97,54 +97,54 @@
   
   <header>
     <h1 class="title indent">
-      Multi-factor authentication
+      다단계 인증(Multi-factor authentication)
     </h1>
   </header>
   <hr class="divider">
   
 
-  <p>The Multi-factor Authentication (MFA) modules require you to solve a second challenge after you provide your password.</p>
-<p>A password can be compromised in a number of ways, for example, it can be guessed if it is a simple password. MFA provides a second level of defense by requiring:</p>
+  <p>MFA (Multi-factor Authentication) 모듈에서는 암호를 제공한 후 두 번째 도전을 해결해야합니다.</p>
+<p>비밀번호는 여러 가지 방법으로 손상될 수 있습니다. 예를 들어 비밀번호가 단순한 비밀번호인지 추측할 수 있습니다. MFA는 다음을 요구하여 두 번째 수준의 방어를 제공합니다.</p>
 <ul>
-<li>something you know, like your username and password, and</li>
-<li>something you have, like a one-time password sent to your phone.</li>
+<li>사용자 이름와 비밀번호와 같이 알고있는 것</li>
+<li>휴대 전화로 보낸 일회용 비밀번호와 같은 정보</li>
 </ul>
-<p>You can use MFA with any of the other authentication providers. If more than one MFA module is enabled, you can choose one when you log in.</p>
-<p>You can turn MFA on and off in the <a href="/docs/authentication/#your-account-profile">profile page</a> for your user account.</p>
+<p>다른 인증 공급자와 함께 MFA를 사용할 수 있습니다. 둘 이상의 MFA 모듈이 활성화된 경우 로그인할 때 하나를 선택할 수 있습니다.</p>
+<p>사용자 계정의 <a href="/docs/authentication/#your-account-profile">프로필 페이지</a>에서 MFA를 켜거나 끌 수 있습니다 .</p>
 <h2>
-<a class="title-link" name="available-mfa-modules" href="#available-mfa-modules"></a> Available MFA modules</h2>
+<a class="title-link" name="--mfa-" href="#--mfa-"></a> 사용 가능한 MFA 모듈</h2>
 <h3>
-<a class="title-link" name="time-based-one-time-password-mfa-module" href="#time-based-one-time-password-mfa-module"></a> Time-based One-Time Password MFA module</h3>
-<p><a href="https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm" rel="external nofollow">Time-based One-Time Password</a> (TOTP) is widely adopted in modern authentication systems.</p>
-<p>Home Assistant generates a secret key which is synchronized with an app on your phone. Every thirty seconds or so the phone app generates a random six digit number. Because Home Assistant knows the secret key, it knows which number will be generated. If you enter the correct digits, then you’re in.</p>
+<a class="title-link" name="----mfa-" href="#----mfa-"></a> 시간 기반 일회용 암호 MFA 모듈</h3>
+<p><a href="https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm" rel="external nofollow">시간 기반 일회용 암호</a>는 최신 인증 시스템에서 널리 채택됩니다.</p>
+<p>홈어시스턴트는 휴대폰앱과 동기화되는 비밀키를 생성합니다. 30 초마다 휴대폰앱은 임의의 6 자리 숫자를 생성합니다. 홈어시스턴트는 비밀키를 알고 있기 때문에 생성될 번호를 알고 있습니다. 정확한 숫자를 입력하면, 로그인할 수 있습니다.</p>
 <h4>
-<a class="title-link" name="setting-up-totp" href="#setting-up-totp"></a> Setting up TOTP</h4>
-<p>Enable TOTP in your <code>configuration.yaml</code> like this:</p>
+<a class="title-link" name="totp-" href="#totp-"></a> TOTP 설정하기</h4>
+<p><code>configuration.yaml</code>에서 다음과 같이 TOTP를 활성화하십시오 :</p>
 <pre><code class="language-yaml">homeassistant:
   auth_mfa_modules:
     - type: totp
 </code></pre>
-<p>If no <code>auth_mfa_modules</code> config section is defined in <code>configuration.yaml</code> a TOTP module named “Authenticator app” will be autoloaded.</p>
-<p>You will need an authenticator app on your phone. We recommend either <a href="https://support.google.com/accounts/answer/1066447" rel="external nofollow">Google Authenticator</a> or <a href="https://authy.com/" rel="external nofollow">Authy</a>. Both are available for iOS or Android.</p>
-<p>After restarting Home Assistant, go to your <a href="/docs/authentication/#your-account-profile">profile page</a> and there should be a “Multi-factor Authentication Modules” section.</p>
-<p>Click <em>Enable</em> and a new secret key will be generated. Go to your phone app and enter the key, either by scanning the QR code or typing in the key below the QR code manually.</p>
+<p><code>auth_mfa_modules</code> 설정 섹션이 <code>configuration.yaml</code>에 정의되어있지 않으면 “Authenticator app”이라는 TOTP 모듈이 자동으로 로드됩니다.</p>
+<p>휴대전화에 인증앱이 필요합니다. <a href="https://support.google.com/accounts/answer/1066447" rel="external nofollow">Google Authenticator</a> 또는 <a href="https://authy.com/" rel="external nofollow">Authy</a>를 권장합니다. 둘 다 iOS 또는 Android에서 사용할 수 있습니다.</p>
+<p>홈어시스턴트를 다시 시작한 후 <a href="/docs/authentication/#your-account-profile">프로필 페이지</a>로 이동하여 “다단계 인증 모듈” 섹션이 있어야합니다.</p>
+<p><em>Enable</em> 을 클릭하면 새로운 비밀키가 생성됩니다. QR 코드를 스캔하거나 QR 코드 아래의 키를 수동으로 입력하여 휴대폰앱으로 이동하여 키를 입력하십시오.</p>
 <img src="/images/docs/authentication/mfa.png" alt="Screenshot of setting up multi-factor authentication" style="border: 0;box-shadow: none;">
 <div class="note warning">
-Please treat the secret key like a password - never expose it to others.
+비밀키를 암호처럼 취급하십시오. - 다른 사람에게 노출시키지 마십시오.
 </div>
-<p>Your phone app will now start generating a different six-digit code every thirty seconds or so. Enter one of these into Home Assistant under the QR code where it asks for a <em>Code</em>. Home Assistant and your phone app are now in sync and you can now use the code displayed in the app to log in.</p>
+<p>이제 휴대폰앱이 30 초마다 다른 6 자리 코드를 생성하기 시작합니다. QR 코드 아래에서 <em>Code</em> 를 요청하는 홈어시스턴트로 이들 중 하나를 입력하십시오. 홈어시스턴트와 휴대폰앱이 동기화되었으며 이제 앱에 표시된 코드를 사용하여 로그인할 수 있습니다.</p>
 <h4>
-<a class="title-link" name="using-totp" href="#using-totp"></a> Using TOTP</h4>
-<p>Once TOTP is enabled, Home Assistant requires the latest code from your phone app before you can log in.</p>
+<a class="title-link" name="totp-" href="#totp-"></a> TOTP 사용하기</h4>
+<p>TOTP가 활성화되면 홈어시스턴트는 휴대폰앱의 최신 코드가 있어야 로그인할 수 있습니다.</p>
 <div class="note">
-<p>TOTP is <em>time based</em> so it relies on your Home Assistant clock being accurate. If the verification keeps failing, make sure the clock on Home Assistant is correct.</p>
+<p>TOTP는 <em>시간 기반</em> 이므로 홈어시스턴트 시계가 정확해야합니다. 확인이 계속 실패하면 홈어시스턴트의 시계가 올바른지 확인하십시오.</p>
 </div>
 <h3>
-<a class="title-link" name="notify-multi-factor-authentication-module" href="#notify-multi-factor-authentication-module"></a> Notify multi-factor authentication module</h3>
-<p>The Notify MFA module uses the <a href="/integrations/notify/">notify component</a> to send you an <a href="https://en.wikipedia.org/wiki/HMAC-based_One-time_Password_algorithm" rel="external nofollow">HMAC-based One-Time Password</a>. It is typically sent to your phone, but can be sent to any destination supported by a <code>notify</code> service. You use this password to log in.</p>
+<a class="title-link" name="----notify-multi-factor-authentication-module" href="#----notify-multi-factor-authentication-module"></a> 다단계 인증 모듈 알림 (Notify multi-factor authentication module)</h3>
+<p>Notify MFA 모듈은 <a href="/integrations/notify/">notify 구성요소</a>를 사용하여 <a href="https://en.wikipedia.org/wiki/HMAC-based_One-time_Password_algorithm" rel="external nofollow">HMAC 기반 일회성 비밀번호</a>를 보냅니다. 일반적으로 휴대전화로 전송되지만 <code>notify</code> 서비스가 지원하는 모든 대상으로 전송될 수 있습니다. 이 비밀번호를 사용하여 로그인하십시오.</p>
 <h4>
-<a class="title-link" name="setting-up-totp" href="#setting-up-totp"></a> Setting up TOTP</h4>
-<p>Add Notify MFA to your <code>configuration.yaml</code> file like this:</p>
+<a class="title-link" name="totp-" href="#totp-"></a> TOTP 설정</h4>
+<p>다음과 같이 <code>configuration.yaml</code> 파일에 Notify MFA를 추가하십시오 :</p>
 <pre><code class="language-yaml">homeassistant:
   auth_mfa_modules:
     - type: notify
@@ -177,12 +177,12 @@ homeassistant:
     - type: notify
       message: 'I almost forget, to get into my clubhouse, you need to say {}'
 </code></pre>
-<p>After restarting Home Assistant, go to your <a href="/docs/authentication/#your-account-profile">profile page</a> and there should be a “Multi-factor Authentication Modules” section. Click <em>Enable</em> on the <em>Notify One-Time Password</em> option.</p>
-<p>Try logging out, then logging in again. You will be asked for the six-digit one-time password that was sent to your notify service. Enter the password to log in.</p>
-<p>If the validation failed, a new one-time password will be sent again.</p>
+<p>홈어시스턴트를 다시 시작한 후 <a href="/docs/authentication/#your-account-profile">프로필 페이지</a>로 이동하여 “다단계 인증 모듈” 섹션이 있어야합니다. <em>Notify One-Time Password</em> 옵션에서 <em>Enable</em> 을 클릭하십시오.</p>
+<p>로그아웃한 다음 다시 로그인하십시오. 통지(notify) 서비스에 전송된 6 자리 일회성 비밀번호를 입력하라는 메시지가 표시됩니다. 로그인 비밀번호를 입력하십시오.</p>
+<p>유효성 검사에 실패하면 새로운 일회용 암호가 다시 전송됩니다.</p>
 <div class="note">
-<p>The Notify MFA module can’t tell if the one-time password was delivered successfully. If you don’t get the notification, you won’t be able to log in.</p>
-<p>You can disable the Notify MFA module by editing or removing the file <code>[your_config_dir]/.storage/auth_module.notify</code>.</p>
+<p>Notify MFA 모듈은 일회용 암호가 성공적으로 전달되었는지 알 수 없습니다. 알림을 받지 못하면 로그인할 수 없습니다.</p>
+<p><code>[your_config_dir]/.storage/auth_module.notify</code> 파일을 편집하거나 제거하여 Notify MFA 모듈을 비활성화할 수 있습니다.</p>
 </div>
 
 

@@ -103,10 +103,10 @@
   <hr class="divider">
   
 
-  <p>The <a href="https://www.mysensors.org" rel="external nofollow">MySensors</a> project combines devices like Arduino, ESP8266, Raspberry Pi, NRF24L01+ and RFM69 to build affordable sensor networks. This integration will automatically add all available devices to Home Assistant, after <a href="#presentation">presentation</a> is done. That is, you do not need to add anything to your configuration for the devices for them to be added. Go to the <strong>states</strong> section of the developer tools to find the devices that have been identified.</p>
+  <p><a href="https://www.mysensors.org" rel="external nofollow">MySensors</a> 프로젝트는 Arduino, ESP8266, Raspberry Pi, NRF24L01+, RFM69와 같은 장치를 결합하여 저렴한 센서 네트워크를 구축합니다. 이 통합구성요소는 <a href="#presentation">presentation</a>이 완료된 후 사용 가능한 모든 장치를 Home Assistant에 자동으로 추가합니다. 즉, 장치를 추가하기 위해 설정에 아무것도 추가하지 않아도됩니다. 식별된 장치를 찾으려면 개발자 도구의 <strong>상태</strong> 섹션으로 이동하십시오.</p>
 <h3>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h3>
-<p>Integrate your Serial, Ethernet (LAN) or MQTT MySensors Gateway by adding the following to your <code>configuration.yaml</code> file:</p>
+<a class="title-link" name="" href="#"></a> 설정</h3>
+<p><code>configuration.yaml</code> 파일에 다음을 추가하여 직렬(Serial), 이더넷(LAN) 또는 MQTT MySensors 게이트웨이를 연동하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mysensors:
   gateways:
@@ -210,20 +210,20 @@ Default value: </p>
 </dl>
 </div>
 <div class="note">
-Not all features of MySensors 2.x are supported by Home Assistant yet. As more features are added, they will be described here in the documentation. Go to the MySensors platform pages under "related components" to see what message types are currently supported.
+MySensors 2.x의 모든 기능이 아직 Home Assistant에서 지원되는 것은 아닙니다. 더 많은 기능이 추가되면 여기에서 설명서에 설명되어 있습니다. 현재 지원되는 메시지 유형을 보려면 "related components" 아래의 MySensors 플랫폼 페이지로 이동하십시오.
 </div>
-<p>If you are using an original Arduino as a serial gateway, the port will be named <code>ttyACM*</code>. The exact number can be determined with the command shown below.</p>
+<p>원래 Arduino를 직렬(Serial) 게이트웨이로 사용하는 경우 포트 이름은 ttyACM*입니다. 정확한 숫자는 아래 표시된 명령으로 확인할 수 있습니다.</p>
 <pre><code class="language-bash">$ ls /dev/ttyACM*
 </code></pre>
-<p>If you are using the MQTT gateway, you also need to have the <a href="/integrations/mqtt/">MQTT component</a> configured in Home Assistant. See below for a minimum MQTT configuration:</p>
+<p>MQTT 게이트웨이를 사용하는 경우 홈어시스턴트에서 <a href="/integrations/mqtt/">MQTT 구성 요소</a>도 설정해야합니다. 최소 MQTT 설정은 아래를 참조하십시오.</p>
 <pre><code class="language-yaml">mqtt:
   client_id: home-assistant-1
 </code></pre>
 <div class="note">
-The MQTT gateway requires MySensors version 2.0+ and only the MQTT client gateway is supported.
+MQTT 게이트웨이에는 MySensors 버전 2.0 이상이 필요하며 MQTT 클라이언트 게이트웨이만 지원됩니다.
 </div>
 <h3>
-<a class="title-link" name="extended-configuration-example" href="#extended-configuration-example"></a> Extended configuration example</h3>
+<a class="title-link" name="--" href="#--"></a> 확장 설정 예시</h3>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 mysensors:
   gateways:
@@ -252,19 +252,21 @@ mysensors:
 </code></pre>
 <h3>
 <a class="title-link" name="presentation" href="#presentation"></a> Presentation</h3>
-<p>Present a MySensors sensor or actuator, by following these steps:</p>
+<p>다음 단계에 따라 MySensors 센서 또는 액추에이터를 제시하십시오. :</p>
 <ol>
-<li>Connect the serial gateway to your computer or the Ethernet or MQTT gateway to your network.</li>
-<li>Configure the MySensors integration in <code>configuration.yaml</code>.</li>
-<li>Start Home Assistant.</li>
-<li>Write and upload your MySensors sketch to the sensor. Make sure you:
+<li>직렬(serial) 게이트웨이를 컴퓨터에 연결하거나 이더넷 또는 MQTT 게이트웨이를 네트워크에 연결하십시오.</li>
+<li>
+<code>configuration.yaml</code>에서 MySensors 통합구성요소를 설정하십시오.</li>
+<li>홈어시스턴트를 시작하십시오.</li>
+<li>MySensors 스케치를 작성하여 센서에 업로드하십시오. 다음을 확인하십시오. :
 <ul>
-<li>Send sketch name.</li>
-<li>Present the sensor’s <code>S_TYPE</code>.</li>
-<li>Send at least one initial value per <code>V_TYPE</code>. In version 2.x of MySensors, this has to be done in the loop function. See below for an example in 2.0 of how to make sure the initial value has been received by the controller.</li>
+<li>sketch 이름을 보내십시오.</li>
+<li>센서의 <code>S_TYPE</code>을 제시하십시오.</li>
+<li>
+<code>V_TYPE</code>당 하나 이상의 초기값을 보냅니다. MySensors 버전 2.x에서는 loop function에서 수행해야합니다. 컨트롤러가 초기값을 받았는지 확인하는 방법에 대한 2.0 예제는 아래를 참조하십시오.</li>
 </ul>
 </li>
-<li>Start the sensor.</li>
+<li>센서를 시작시킵니다.</li>
 </ol>
 <pre><code class="language-cpp">/*
  * Documentation: https://www.mysensors.org
@@ -346,23 +348,23 @@ void receive(const MyMessage &amp;message) {
 </code></pre>
 <h3>
 <a class="title-link" name="smartsleep" href="#smartsleep"></a> SmartSleep</h3>
-<p>Sending a heartbeat, <code>I_HEARTBEAT_RESPONSE</code>, from the MySensors device to Home Assistant, using MySensors version 2.0 - 2.1, activates the SmartSleep functionality in Home Assistant. This means that messages are buffered and only sent to the device upon receiving a heartbeat from the device. State changes are stored so that only the last requested state change is sent to the device. Other types of messages are queued in a FIFO queue. SmartSleep is useful for battery powered actuators that are waiting for commands. See the MySensors library API for information on how to send heartbeats and sleep the device.</p>
-<p>In MySensors version 2.2 the serial API changed from using <code>I_HEARTBEAT_RESPONSE</code> to signal SmartSleep, to using <code>I_PRE_SLEEP_NOTIFICATION</code> and <code>I_POST_SLEEP_NOTIFICATION</code>. Home Assistant has been upgraded to support the new message types and will activate SmartSleep when receiving a message of type <code>I_PRE_SLEEP_NOTIFICATION</code>, if using MySensors version 2.2.x or higher. If Home Assistant is configured to use MySensors version 2.0 - 2.1 the old SmartSleep behavior is retained.</p>
+<p>MySensors 버전 2.0-2.1을 사용하여 MySensors 장치에서 Home Assistant로 하트비트(heartbeat) <code>I_HEARTBEAT_RESPONSE</code>를 보내면 Home Assistant에서 SmartSleep 기능이 활성화됩니다. 이는 메시지가 버퍼링되고 장치에서 하트비트를 수신할 때만 장치로 전송됨을 의미합니다. 마지막으로 요청된 상태 변경만 장치로 전송되도록 상태 변경이 저장됩니다. 다른 유형의 메시지는 FIFO 대기열에 대기합니다. SmartSleep은 명령을 기다리는 배터리 구동식 액추에이터에 유용합니다. 하트비트를 전송하고 장치를 절전 모드로 전환하는 방법에 대한 정보는 MySensors 라이브러리 API를 참조하십시오.</p>
+<p>MySensors 버전 2.2에서 직렬 API는 SmartSleep 신호로 <code>I_HEARTBEAT_RESPONSE</code>를 사용하는 방식에서, <code>I_PRE_SLEEP_NOTIFICATION</code> 및 <code>I_POST_SLEEP_NOTIFICATION</code> 사용으로 변경되었습니다. MySensors 버전 2.2.x 이상을 사용하는 경우 Home Assistant는 새 메시지 유형을 지원하도록 업그레이드되었으며 <code>I_PRE_SLEEP_NOTIFICATION</code> 타입의 메시지를 수신할 때 SmartSleep을 활성화합니다. Home Assistant가 MySensors 버전 2.0-2.1을 사용하도록 설정된 경우 이전 SmartSleep 동작이 유지됩니다.</p>
 <h3>
-<a class="title-link" name="message-validation" href="#message-validation"></a> Message validation</h3>
-<p>Messages sent to or from Home Assistant from or to a MySensors device will be validated according to the MySensors <a href="https://www.mysensors.org/download/serial_api_20" rel="external nofollow">serial API</a>. If a message doesn’t pass validation, it will be dropped and not be passed forward either to or from Home Assistant. Make sure you follow the serial API for your version of MySensors when writing your Arduino sketch.</p>
-<p>The log should warn you of messages that failed validation or if a child value is missing that is required for a certain child type. Home Assistant will log failed validations of child values at warning level if e.g. one required value type for a platform has been received, but other required value types are missing.</p>
-<p>Message validation was introduced in version 0.52 of Home Assistant.</p>
+<a class="title-link" name="--message-validation" href="#--message-validation"></a> 메시지 검증 (Message validation)</h3>
+<p>홈어시스턴트와 MySensors 디바이스간에주고받는 메시지는 MySensors <a href="https://www.mysensors.org/download/serial_api_20" rel="external nofollow">직렬 API</a>에 따라 유효성이 검사됩니다. 메시지가 유효성 검사를 통과하지 못하면 메시지가 삭제되고 Home Assistant에 전달되지 않습니다. Arduino 스케치를 작성할 때 사용중인 MySensor 버전의 직렬 API를 따르십시오.</p>
+<p>로그는 유효성 검사에 실패했거나 특정 하위 유형에 필요한 하위값이 누락된 메시지를 경고합니다. 홈어시스턴트는 경고 레벨에서 실패한 하위값의 유효성 검사를 기록합니다. 예를들어 플랫폼에 필요한 하나의 필수값 유형이 수신되었지만 다른 필수값 유형이 누락된 경우입니다.</p>
+<p>메시지 검증은 Home Assistant 버전 0.52에서 도입되었습니다.</p>
 <h3>
 <a class="title-link" name="debug-logging" href="#debug-logging"></a> Debug logging</h3>
-<p>If you experience dropped messages or that a device is not added to Home Assistant, please turn on debug logging for the <code>mysensors</code> integration and the <code>mysensors</code> package. This will help you see what is going on. Make sure you use these logging settings to collect a log sample if you report an issue about the <code>mysensors</code> integration in our github issue tracker.</p>
+<p>메시지가 끊어지거나 장치가 Home Assistant에 추가되지 않은 경우 <code>mysensors</code> 통합구성요소와 <code>mysensors</code> 패키지에 대한 디버그 로깅을 켜십시오. 그러면 무슨 일이 일어나고 있는지 알 수 있습니다. github 이슈 트래커에서 <code>mysensors</code> 통합구성요소에 대한 이슈를 보고하는 경우 이 로깅 설정을 사용하여 로그 샘플을 수집하십시오.</p>
 <pre><code class="language-yaml">logger:
   default: info
   logs:
     homeassistant.components.mysensors: debug
     mysensors: debug
 </code></pre>
-<p>Visit the <a href="https://www.mysensors.org/download" rel="external nofollow">library API</a> of MySensors for more information.</p>
+<p>자세한 내용은 MySensors의 <a href="https://www.mysensors.org/download" rel="external nofollow">library API</a>를 방문하십시오.</p>
 
 
 </article>
