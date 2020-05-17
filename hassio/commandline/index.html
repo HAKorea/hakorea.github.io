@@ -105,21 +105,22 @@
 
   <p class="img">
 <img src="/images/hassio/screenshots/ssh-upgrade.png">
-SSH로 접속하여 명령어로 Home Assistant로 업그레이드 실행 화면 hassio대신 ha로 바뀌었습니다.
+SSH로 접속하여 명령어로 Home Assistant로 업그레이드 실행 화면 hassio대신 ha로 바뀌었습니다.<br>
+또한 ha homeassistant 명령어는 ha code 로 변경되었습니다.
 </p>
 <p>SSH로 접속하면 <code>ha</code> 명령어로 로그를 보거나 사용중인 하드웨어 정보 등을 살펴볼 수 있습니다.</p>
 <h2>
-<a class="title-link" name="home-assistant" href="#home-assistant"></a> Home Assistant</h2>
-<pre><code class="language-bash">ha homeassistant check
-ha homeassistant info
-ha homeassistant logs
-ha homeassistant options
-ha homeassistant rebuild
-ha homeassistant restart
-ha homeassistant start
-ha homeassistant stats
-ha homeassistant stop
-ha homeassistant update
+<a class="title-link" name="core" href="#core"></a> Core</h2>
+<pre><code class="language-bash">ha core check
+ha core info
+ha core logs
+ha core options
+ha core rebuild
+ha core restart
+ha core start
+ha core stats
+ha core stop
+ha core update
 </code></pre>
 <h2>
 <a class="title-link" name="supervisor" href="#supervisor"></a> Supervisor</h2>
@@ -142,29 +143,36 @@ ha hardware audio
 <h2>
 <a class="title-link" name="-" href="#-"></a> 사용 예제</h2>
 <p>홈어시스턴트를 특정 버전으로 설치하고 싶다면 다음 명령어를 실행하세요:</p>
-<pre><code class="language-bash">ha homeassistant update --version=x.y.z
+<pre><code class="language-bash">ha core update --version=x.y.z
 </code></pre>
 <p>x.y.z 를 버전 숫자로 바꾸세요 <code>--version=0.74.2</code></p>
 <p>명령어의 상세한 옵션을 알고 싶다면 <code>ha help</code>라고 쳐보세요:</p>
-<pre><code class="language-bash">Usage:
+<pre><code class="language-bash">The Home Assistant CLI is a small and simple command line utility that allows
+you to control and configure different aspects of Home Assistant
+
+Usage:
   ha [command]
 
 Available Commands:
-  addons        Install, update, remove and configure Hass.io add-ons
-  dns           Get information, update or configure the Hass.io DNS server
-  hardware      Provides hardware information about your system
-  hassos        HassOS specific for updating, info and configuration imports
-  help          Help about any command
-  homeassistant Provides control of Home Assistant running on Hass.io
-  host          Control the host/system that Hass.io is running on
-  info          Provides a general Home Assistant information overview
-  snapshots     Create, restore and remove snapshot backups
-  supervisor    Monitor, control and configure the Hass.io Supervisor
+  addons         Install, update, remove and configure Home Assistant add-ons
+  audio          Audio device handling.
+  authentication Authentication for Home Assistant users.
+  cli            Get information, update or configure the Home Assistant cli backend
+  core           Provides control of the Home Assistant Core
+  dns            Get information, update or configure the Home Assistant DNS server
+  hardware       Provides hardware information about your system
+  help           Help about any command
+  host           Control the host/system that Home Assistant is running on
+  info           Provides a general Home Assistant information overview
+  multicast      Get information, update or configure the Home Assistant Multicast
+  os             Operating System specific for updating, info and configuration imports
+  snapshots      Create, restore and remove snapshot backups
+  supervisor     Monitor, control and configure the Home Assistant Supervisor
 
 Flags:
-      --api-token string   Hass.io API token
+      --api-token string   Home Assistant Supervisor API token
       --config string      Optional config file (default is $HOME/.homeassistant.yaml)
-      --endpoint string    Endpoint for Home Assistant Supervisor ( default is 'supervisor' )
+      --endpoint string    Endpoint for Home Assistant Supervisor (default is 'supervisor')
   -h, --help               help for ha
       --log-level string   Log level (defaults to Warn)
       --no-progress        Disable the progress spinner
