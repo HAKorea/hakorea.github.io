@@ -103,14 +103,17 @@
   <hr class="divider">
   
 
-  <p><a href="https://www.proxmox.com/en/" rel="external nofollow">Proxmox VE</a> is an open-source server virtualization environment. This integration allows you to poll various data from your instance.</p>
-<p>After configuring this component, the binary sensors automatically appear.</p>
-<h2>
-<a class="title-link" name="configuration" href="#configuration"></a> Configuration</h2>
-<div class="note">
-You should have at least one VM or container entry configured, else this integration won't do anything.
+  <div class="videoWrapper">
+<iframe width="775" height="436" src="https://www.youtube.com/embed/LlxTPLnM3zw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<p>To use the <code>proxmoxve</code> component, add the following config to your <code>configuration.yaml</code> file:</p>
+<p><a href="https://www.proxmox.com/en/" rel="external nofollow">Proxmox VE</a>는 오픈 소스 서버 가상화 환경입니다. 이 통합구성요소를 통해 인스턴스에서 다양한 데이터를 불러올 수 있습니다.</p>
+<p>이 구성 요소를 구성하면 이진 센서가 자동으로 나타납니다.</p>
+<h2>
+<a class="title-link" name="" href="#"></a> 설정</h2>
+<div class="note">
+하나 이상의 VM 또는 컨테이너 항목이 구성되어 있어야합니다. 그렇지 않으면 이 통합구성요소로 아무 작업도 수행하지 않습니다.
+</div>
+<p><code>proxmoxve</code> 컴포넌트를 사용하려면 <code>configuration.yaml</code> 파일에 다음 설정을 추가하십시오.</p>
 <pre><code class="language-yaml"># Example configuration.yaml entry
 proxmoxve:
   - host: IP_ADDRESS
@@ -199,14 +202,14 @@ Default value: </p>
 </code></pre>
 <h2>
 <a class="title-link" name="binary-sensor" href="#binary-sensor"></a> Binary Sensor</h2>
-<p>The integration will automatically create a binary sensor for each tracked virtual machine or container. The binary sensor will either be on if the VM’s state is running or off if the VM’s state is different.</p>
-<p>The created sensor will be called <code>binary_sensor.NODE_NAME_VMNAME_running</code>.</p>
+<p>본 통합구성요소는 추적된 각 가상 머신 또는 컨테이너에 대한 이진 센서가 자동으로 생성됩니다. 이진 센서는 VM의 상태가 실행중인 경우 켜져 있거나 VM의 상태가 다른 경우 꺼져 있습니다.</p>
+<p>생성된 센서는 <code>binary_sensor.NODE_NAME_VMNAME_running</code>입니다.</p>
 <h2>
 <a class="title-link" name="proxmox-permissions" href="#proxmox-permissions"></a> Proxmox Permissions</h2>
-<p>To be able to retrieve the status of VMs and containers, the user used to connect must minimally have the <code>VM.Audit</code> privilege. Below is a guide to how to configure a new user with the minimum required permissions.</p>
+<p>VM과 컨테이너의 상태를 확인하려면 연결에 사용된 사용자는 최소한 VM.Audit 권한을 가져야합니다. 다음은 최소 필수 권한으로 새 사용자를 구성하는 방법에 대한 안내서입니다.</p>
 <h3>
 <a class="title-link" name="create-home-assistant-role" href="#create-home-assistant-role"></a> Create Home Assistant Role</h3>
-<p>Before creating the user, we need to create a permissions role for the user.</p>
+<p>사용자를 만들기 전에 사용자에 대한 권한 역할을 만들어야합니다.</p>
 <ul>
 <li>Click <code>Datacenter</code>
 </li>
@@ -220,7 +223,7 @@ Default value: </p>
 </ul>
 <h3>
 <a class="title-link" name="create-home-assistant-user" href="#create-home-assistant-user"></a> Create Home Assistant User</h3>
-<p>Creating a dedicated user for home assistant limited to only the role just created is the most secure method. These instructions use the <code>pve</code> realm for the user. This allows a connection, but ensures that the user is not authenticated for SSH connections. If you use the <code>pve</code> realm, just be sure to add <code>realm: pve</code> to your config.</p>
+<p>방금 만든 역할로만 제한된 홈어시스턴트 전용 사용자를 작성하는 것이 가장 안전한 방법입니다. 이 명령어들은 사용자를 위해 <code>pve</code> 영역을 사용합니다. 이렇게하면 연결이 가능하지만 사용자는 SSH 연결에 대해 인증되지 않습니다. <code>pve</code> 영역을 사용한다면, 설정에 <code>realm: pve</code>를 추가하십시오.</p>
 <ul>
 <li>Click <code>Datacenter</code>
 </li>
@@ -237,7 +240,7 @@ Default value: </p>
 </ul>
 <h3>
 <a class="title-link" name="add-user-permissions-to-assets" href="#add-user-permissions-to-assets"></a> Add User Permissions to Assets</h3>
-<p>To apply the user and role just created, we need to give it permissions</p>
+<p>방금 생성한 사용자와 역할을 적용하려면 권한을 부여해야합니다.</p>
 <ul>
 <li>Click <code>Datacenter</code>
 </li>
